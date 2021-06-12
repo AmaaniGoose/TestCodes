@@ -1,0 +1,121 @@
+None
+
+
+  STDOUT:
+
+  This appears to be a Unix system.
+
+  Testing ASCII environment values
+
+  Testing directory .
+
+  Testing directory ..
+
+  Testing directory /
+
+  Testing directory /bin
+
+  cmdp
+
+  cmdp 0: /home/jenkins/workspace/Test_openjdk17_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image/bin/java
+
+  cmdp 1: -XX:+DisplayVMOutputToStderr
+
+  cmdp 2: -classpath
+
+  cmdp 3: /home/jenkins/workspace/Test_openjdk17_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/output_16187510734160/jdk_lang_0/work/classes/0/java/lang/ProcessBuilder/Basic_id1.d:/home/jenkins/workspace/Test_openjdk17_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/ProcessBuilder:/home/jenkins/workspace/Test_openjdk17_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/output_16187510734160/jdk_lang_0/work/classes/0/test/lib:/home/jenkins/workspace/Test_openjdk17_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib:/home/jenkins/workspace/Test_openjdk17_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk17_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar
+
+  cmdp 4: Basic$JavaChild
+
+  cmdp 5: System.getenv()
+
+  envp
+
+  envp 0: LC_ALL=C
+
+  envp 1: FO=BR
+
+  Unexpected child output:
+
+  JVMJ9VM007W Command-line option unrecognised: -Xlog:all=warning:stdout
+
+
+
+  <?xml version="1.0" ?>
+
+
+
+  <verbosegc xmlns="http://www.ibm.com/j9/verbosegc" version="0f967b721_CMPRSS">
+
+
+
+
+
+  END Child output.
+
+  Unexpected child output:
+
+  JVMJ9VM007W Command-line option unrecognised: -Xlog:all=warning:stdout
+
+
+
+  <?xml version="1.0" ?>
+
+
+
+  <verbosegc xmlns="http://www.ibm.com/j9/verbosegc" version="0f967b721_CMPRSS">
+
+
+
+
+
+  END Child output.
+
+   waitFor process: delta: 40958
+
+
+
+  Passed = 8971, failed = 2
+
+
+
+  STDERR:
+
+  JVMJ9VM007W Command-line option unrecognised: -Xlog:all=warning:stderr
+
+
+
+        # Check if TESTDIR exists and points to openjdk-tests
+
+        if [[ ! -d "$TESTDIR" || "$TESTDIR" != *"openjdk-tests"* ]]; then
+
+                echo "TESTDIR: $TESTDIR is invalid. Please use --testdir|-t to set valid TESTDIR under openjdk-tests. Default value current dir (pwd) is used if not provided."
+
+                exit 1
+
+        fi
+
+None
+None
+
+
++ curl -knOs -u ****:**** https://na.artifactory.*********.com:443/artifactory/sys-rt-generic-local/UploadFile/56/R29_fjeremic@ca.ibm.com-xz6480-401051.zip
+
+```
+
+
+
+On the particular machine I was uploading to the upload was kind of slow so I wasn't sure progress is being made. In addition I wasn't sure if `curl` reported any issues. This is because `-s` flag is used, which according to [1] will not show errors or the progress bar.
+
+
+
+I suggest we update the `curl` command and at the very least use `-sS` which will not show the progress bar but it will report errors. If possible I would even remove the `-s` to show progress but if it's too verbose I suggest using `--progress-bar` option which reports progress on a single line which is not verbose at all. Here is an example:
+
+
+
+```
+
+laptop:/tmp # curl -knO --progress-bar -u ****** http://bla.com/some-large-file.zip
+
+######################################################                    76.1%
+

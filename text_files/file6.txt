@@ -1,0 +1,32 @@
+
+When uploading custom builds to the Artifactory it seems the following `curl` command is used:
+
+
+
+```
+
++ curl -knOs -u ****:**** https://na.artifactory.*********.com:443/artifactory/sys-rt-generic-local/UploadFile/56/R29_fjeremic@ca.ibm.com-xz6480-401051.zip
+
+```
+
+
+
+On the particular machine I was uploading to the upload was kind of slow so I wasn't sure progress is being made. In addition I wasn't sure if `curl` reported any issues. This is because `-s` flag is used, which according to [1] will not show errors or the progress bar.
+
+
+
+I suggest we update the `curl` command and at the very least use `-sS` which will not show the progress bar but it will report errors. If possible I would even remove the `-s` to show progress but if it's too verbose I suggest using `--progress-bar` option which reports progress on a single line which is not verbose at all. Here is an example:
+
+
+
+```
+
+laptop:/tmp # curl -knO --progress-bar -u ****** http://bla.com/some-large-file.zip
+
+######################################################                    76.1%
+
+```
+
+
+
+[1] https://curl.haxx.se/docs/manpage.html
