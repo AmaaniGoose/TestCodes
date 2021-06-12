@@ -29,7 +29,7 @@ def regexify(s):
     result=''.join(substring)
     if result:
         try:
-            return result
+            return remove_time_stamp(result)
         except:
             return ' '
 

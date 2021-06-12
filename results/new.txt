@@ -1,10 +1,10 @@
 
 
-14:10:02  STDOUT:
+  STDOUT:
 
-14:10:02  This appears to be a Unix system.
+  This appears to be a Unix system.
 
-14:10:02  Testing ASCII environment values
+  Testing ASCII environment values
 
 
 
