@@ -1,0 +1,17 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.openjdk_ppc64le_linux_xl_Nightly/162
+sun/util/logging/PlatformLoggerTest.java
+cent7-ppcle-2
+```
+Oct 01, 2020 2:51:13 AM PlatformLoggerTest testLogMethods
+INFO: Test info(String)
+java.lang.RuntimeException: Retrieved backing PlatformLogger level null is not the expected WARNING
+	at PlatformLoggerTest.checkJavaLoggerLevel(PlatformLoggerTest.java:237)
+	at PlatformLoggerTest.checkPlatformLoggerLevels(PlatformLoggerTest.java:175)
+	at PlatformLoggerTest.main(PlatformLoggerTest.java:84)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:836)
+```

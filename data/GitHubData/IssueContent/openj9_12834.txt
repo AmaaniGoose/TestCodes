@@ -1,0 +1,107 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk16_j9_extended.functional_aarch64_linux/21/`:
+```
+openjdk version "16.0.1" 2021-04-20
+OpenJDK Runtime Environment Temurin-16.0.1+9-202106021901 (build 16.0.1+9-202106021901)
+Eclipse OpenJ9 VM Temurin-16.0.1+9-202106021901 (build master-5530af2e1, JRE 16 Linux aarch64-64-Bit Compressed References 20210602_40 (JIT enabled, AOT enabled)
+OpenJ9   - 5530af2e1
+OMR      - 76bff2099
+JCL      - 9fcf6fbf01 based on jdk-16.0.1+9)
+```
+[Rerun in Grinder](https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?TARGET=VmArgumentTests_0&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=functional&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;PLATFORM=aarch64_linux&amp;KEEP_REPORTDIR=false&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk16u%2Fjdk16u-linux-aarch64-openj9%2F40%2FOpenJDK16U-jre_aarch64_linux_openj9_2021-06-01-03-59.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk16u%2Fjdk16u-linux-aarch64-openj9%2F40%2FOpenJDK16U-testimage_aarch64_linux_openj9_2021-06-01-03-59.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk16u%2Fjdk16u-linux-aarch64-openj9%2F40%2FOpenJDK16U-jdk_aarch64_linux_openj9_2021-06-01-03-59.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk16u%2Fjdk16u-linux-aarch64-openj9%2F40%2FOpenJDK16U-debugimage_aarch64_linux_openj9_2021-06-01-03-59.tar.gz&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;LIGHT_WEIGHT_CHECKOUT=true&amp;ARTIFACTORY_SERVER=na.artifactory.swg-devops&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=16&amp;USER_CREDENTIALS_ID=83181e25-eea4-4f55-8b3e-e79615733226&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=git%40github.ibm.com%3Aruntimes%2Ftest.git&amp;JDK_REPO=https%3A%2F%2Fgithub.com%2Fibmruntimes%2Fopenj9-openjdk-jdk16&amp;RELEASE_TAG=&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=master&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;UPSTREAM_JOB_NAME=&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=openj9&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=openj9&amp;SSH_AGENT_CREDENTIAL=83181e25-eea4-4f55-8b3e-e79615733226&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=4e18ffe7-b1b1-4272-9979-99769b68bcc2&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=functional&amp;UPSTREAM_JOB_NUMBER=&amp;TIME_LIMIT=10&amp;JVM_OPTIONS=&amp;PARALLEL=)
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+[2021-06-03T01:59:56.835Z] Running test VmArgumentTests_0 ...
+[2021-06-03T01:59:56.835Z] ===============================================
+[2021-06-03T01:59:56.835Z] VmArgumentTests_0 Start Time: Wed Jun  2 21:59:55 2021 Epoch Time (ms): 1622685595205
+[2021-06-03T01:59:56.835Z] "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+[2021-06-03T01:59:56.835Z] JVMSHRC005I No shared class caches available
+[2021-06-03T01:59:56.835Z] JVMSHRC005I No shared class caches available
+[2021-06-03T01:59:56.835Z] cache cleanup done
+[2021-06-03T01:59:56.835Z] variation: NoOptions
+[2021-06-03T01:59:56.835Z] JVM_OPTIONS:  
+
+[2021-06-03T02:04:19.496Z] FAILED: testEnvironmentVariableOrdering
+[2021-06-03T02:04:19.496Z] java.lang.AssertionError: missing argument: -Dtest.name2=javaOptionsArg
+[2021-06-03T02:04:19.496Z] 	at org.testng.AssertJUnit.fail(AssertJUnit.java:59)
+[2021-06-03T02:04:19.496Z] 	at org.testng.AssertJUnit.assertTrue(AssertJUnit.java:24)
+[2021-06-03T02:04:19.496Z] 	at org.openj9.test.vmArguments.VmArgumentTests.testEnvironmentVariableOrdering(VmArgumentTests.java:710)
+[2021-06-03T02:04:19.496Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-06-03T02:04:19.496Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+[2021-06-03T02:04:19.496Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-06-03T02:04:19.496Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+[2021-06-03T02:04:19.496Z] 	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+[2021-06-03T02:04:19.496Z] 	at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+[2021-06-03T02:04:19.496Z] 	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+[2021-06-03T02:04:19.496Z] 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+[2021-06-03T02:04:19.496Z] 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+[2021-06-03T02:04:19.496Z] 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+[2021-06-03T02:04:19.497Z] 	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+[2021-06-03T02:04:19.497Z] 	at org.testng.TestRunner.run(TestRunner.java:505)
+[2021-06-03T02:04:19.497Z] 	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+[2021-06-03T02:04:19.497Z] 	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+[2021-06-03T02:04:19.497Z] 	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+[2021-06-03T02:04:19.497Z] 	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+[2021-06-03T02:04:19.497Z] 	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+[2021-06-03T02:04:19.497Z] 	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+[2021-06-03T02:04:19.497Z] 	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+[2021-06-03T02:04:19.497Z] 	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+[2021-06-03T02:04:19.497Z] 	at org.testng.TestNG.runSuites(TestNG.java:1049)
+[2021-06-03T02:04:19.497Z] 	at org.testng.TestNG.run(TestNG.java:1017)
+[2021-06-03T02:04:19.497Z] 	at org.testng.TestNG.privateMain(TestNG.java:1354)
+[2021-06-03T02:04:19.497Z] 	at org.testng.TestNG.main(TestNG.java:1323)
+[2021-06-03T02:04:19.497Z] 
+[2021-06-03T02:04:19.497Z] FAILED: testJavaOptions
+[2021-06-03T02:04:19.497Z] java.lang.AssertionError: missing argument: -Dtest.name=testJavaOptions
+[2021-06-03T02:04:19.497Z] 	at org.testng.AssertJUnit.fail(AssertJUnit.java:59)
+[2021-06-03T02:04:19.497Z] 	at org.testng.AssertJUnit.assertTrue(AssertJUnit.java:24)
+[2021-06-03T02:04:19.497Z] 	at org.openj9.test.vmArguments.VmArgumentTests.testJavaOptions(VmArgumentTests.java:351)
+[2021-06-03T02:04:19.497Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-06-03T02:04:19.497Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+[2021-06-03T02:04:19.497Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-06-03T02:04:19.497Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+[2021-06-03T02:04:19.497Z] 	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+[2021-06-03T02:04:19.497Z] 	at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+[2021-06-03T02:04:19.497Z] 	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+[2021-06-03T02:04:19.497Z] 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+[2021-06-03T02:04:19.497Z] 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+[2021-06-03T02:04:19.497Z] 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+[2021-06-03T02:04:19.497Z] 	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+[2021-06-03T02:04:19.497Z] 	at org.testng.TestRunner.run(TestRunner.java:505)
+[2021-06-03T02:04:19.497Z] 	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+[2021-06-03T02:04:19.497Z] 	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+[2021-06-03T02:04:19.497Z] 	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+[2021-06-03T02:04:19.497Z] 	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+[2021-06-03T02:04:19.497Z] 	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+[2021-06-03T02:04:19.497Z] 	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+[2021-06-03T02:04:19.497Z] 	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+[2021-06-03T02:04:19.497Z] 	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+[2021-06-03T02:04:19.497Z] 	at org.testng.TestNG.runSuites(TestNG.java:1049)
+[2021-06-03T02:04:19.497Z] 	at org.testng.TestNG.run(TestNG.java:1017)
+[2021-06-03T02:04:19.497Z] 	at org.testng.TestNG.privateMain(TestNG.java:1354)
+[2021-06-03T02:04:19.497Z] 	at org.testng.TestNG.main(TestNG.java:1323)
+[2021-06-03T02:04:19.497Z] 
+[2021-06-03T02:04:19.497Z] 
+[2021-06-03T02:04:19.497Z] ===============================================
+[2021-06-03T02:04:19.497Z]     VmArgumentTests
+[2021-06-03T02:04:19.497Z]     Tests run: 54, Failures: 2, Skips: 0
+[2021-06-03T02:04:19.497Z] ===============================================
+[2021-06-03T02:04:19.497Z] 
+[2021-06-03T02:04:19.497Z] 
+[2021-06-03T02:04:19.497Z] ===============================================
+[2021-06-03T02:04:19.497Z] GeneralTest suite
+[2021-06-03T02:04:19.497Z] Total tests run: 54, Failures: 2, Skips: 0
+[2021-06-03T02:04:19.497Z] ===============================================
+[2021-06-03T02:04:19.497Z] 
+[2021-06-03T02:04:19.497Z] 
+[2021-06-03T02:04:19.497Z] VmArgumentTests_0_FAILED
+```
+fyi @knn-k 

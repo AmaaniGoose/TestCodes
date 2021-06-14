@@ -1,0 +1,154 @@
+Threads are waiting at `sun.misc.Unsafe.park(Native Method)`.
+
+Failure link
+------------
+
+The latest JDK 8 sanity.openjdk test on aarch64
+https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_sanity.openjdk_aarch64_linux/170/
+
+Optional info
+-------------
+
+- intermittent failure: yes
+- regression or new test: regression
+- if regression, what are the last passing / first failing public SHAs (OpenJ9, OMR, JCL) : unknown
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+[2021-01-27T19:07:42.287Z] messages:
+[2021-01-27T19:07:42.287Z] command: main -Xmx32m FJExceptionTableLeak
+[2021-01-27T19:07:42.287Z] reason: User specified action: run main/othervm -Xmx32m FJExceptionTableLeak 
+[2021-01-27T19:07:42.287Z] Mode: othervm [/othervm specified]
+[2021-01-27T19:07:42.287Z] Timeout information:
+[2021-01-27T19:07:42.287Z] Running jcmd on process 41510
+[2021-01-27T19:07:42.287Z] Dump written to /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_aarch64_linux/openjdk-tests/TKG/output_16117724382057/jdk_util_0/work/scratch/14/core.20210127.190717.41510.0001.dmp
+[2021-01-27T19:07:42.287Z] Running jstack on process 41510
+[2021-01-27T19:07:42.287Z] 2021-01-27T19:07:25.735
+[2021-01-27T19:07:42.287Z] Virtual machine: 41510 JVM information:
+[2021-01-27T19:07:42.287Z] JRE 1.8.0 Linux aarch64-64-Bit Compressed References 20210127_200 (JIT enabled, AOT enabled)
+[2021-01-27T19:07:42.287Z] OpenJ9   - 8935eedfd
+[2021-01-27T19:07:42.287Z] OMR      - 5ad82738f
+[2021-01-27T19:07:42.287Z] JCL      - 122910008b based on jdk8u282-b08
+[2021-01-27T19:07:42.287Z] 
+[2021-01-27T19:07:42.287Z] "main" Id=1 WAITING
+[2021-01-27T19:07:42.287Z] 	at java.lang.Object.wait(Native Method)
+[2021-01-27T19:07:42.287Z] 	at java.lang.Object.wait(Object.java:218)
+[2021-01-27T19:07:42.287Z] 	at java.lang.Thread.join(Thread.java:703)
+[2021-01-27T19:07:42.287Z] 	at com.sun.javatest.regtest.agent.MainWrapper.main(MainWrapper.java:74)
+[2021-01-27T19:07:42.287Z] 
+[2021-01-27T19:07:42.287Z] "JIT Compilation Thread-000" Id=2 RUNNABLE
+[2021-01-27T19:07:42.287Z] 
+[2021-01-27T19:07:42.287Z] "JIT Compilation Thread-001 Suspended" Id=3 RUNNABLE
+[2021-01-27T19:07:42.287Z] 
+[2021-01-27T19:07:42.287Z] "JIT Compilation Thread-002 Suspended" Id=4 RUNNABLE
+[2021-01-27T19:07:42.287Z] 
+[2021-01-27T19:07:42.287Z] "JIT Compilation Thread-003 Suspended" Id=5 RUNNABLE
+[2021-01-27T19:07:42.287Z] 
+[2021-01-27T19:07:42.287Z] "JIT Compilation Thread-004 Suspended" Id=6 RUNNABLE
+[2021-01-27T19:07:42.287Z] 
+[2021-01-27T19:07:42.287Z] "JIT Compilation Thread-005 Suspended" Id=7 RUNNABLE
+[2021-01-27T19:07:42.287Z] 
+[2021-01-27T19:07:42.287Z] "JIT Compilation Thread-006 Suspended" Id=8 RUNNABLE
+[2021-01-27T19:07:42.287Z] 
+[2021-01-27T19:07:42.287Z] "JIT Diagnostic Compilation Thread-007 Suspended" Id=9 RUNNABLE
+[2021-01-27T19:07:42.287Z] 
+[2021-01-27T19:07:42.287Z] "JIT-SamplerThread" Id=10 TIMED_WAITING
+[2021-01-27T19:07:42.287Z] 
+[2021-01-27T19:07:42.287Z] "IProfiler" Id=11 RUNNABLE
+[2021-01-27T19:07:42.287Z] 
+[2021-01-27T19:07:42.287Z] "VM Runtime State Listener" Id=12 RUNNABLE
+[2021-01-27T19:07:42.287Z] 
+[2021-01-27T19:07:42.287Z] "Concurrent Mark Helper" Id=13 RUNNABLE
+[2021-01-27T19:07:42.287Z] 
+[2021-01-27T19:07:42.287Z] "GC Worker" Id=14 RUNNABLE
+[2021-01-27T19:07:42.287Z] 
+[2021-01-27T19:07:42.287Z] "GC Worker" Id=15 RUNNABLE
+[2021-01-27T19:07:42.287Z] 
+[2021-01-27T19:07:42.288Z] "GC Worker" Id=16 RUNNABLE
+[2021-01-27T19:07:42.288Z] 
+[2021-01-27T19:07:42.288Z] "GC Worker" Id=17 RUNNABLE
+[2021-01-27T19:07:42.288Z] 
+[2021-01-27T19:07:42.288Z] "GC Worker" Id=18 RUNNABLE
+[2021-01-27T19:07:42.288Z] 
+[2021-01-27T19:07:42.288Z] "GC Worker" Id=19 RUNNABLE
+[2021-01-27T19:07:42.288Z] 
+[2021-01-27T19:07:42.288Z] "GC Worker" Id=20 RUNNABLE
+[2021-01-27T19:07:42.288Z] 
+[2021-01-27T19:07:42.288Z] "Attach API wait loop" Id=23 RUNNABLE
+[2021-01-27T19:07:42.288Z] 	at openj9.internal.tools.attach.target.IPC.waitSemaphore(Native Method)
+[2021-01-27T19:07:42.288Z] 	at openj9.internal.tools.attach.target.CommonDirectory.waitSemaphore(CommonDirectory.java:259)
+[2021-01-27T19:07:42.288Z] 	at openj9.internal.tools.attach.target.WaitLoop.waitForNotification(WaitLoop.java:66)
+[2021-01-27T19:07:42.288Z] 	at openj9.internal.tools.attach.target.WaitLoop.run(WaitLoop.java:154)
+[2021-01-27T19:07:42.288Z] 
+[2021-01-27T19:07:42.288Z] "MainThread" Id=25 WAITING
+[2021-01-27T19:07:42.288Z] 	at sun.misc.Unsafe.park(Native Method)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.locks.AbstractQueuedSynchronizer.parkAndCheckInterrupt(AbstractQueuedSynchronizer.java:836)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.locks.AbstractQueuedSynchronizer.acquireQueued(AbstractQueuedSynchronizer.java:870)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.locks.AbstractQueuedSynchronizer.acquire(AbstractQueuedSynchronizer.java:1199)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.locks.ReentrantLock$NonfairSync.lock(ReentrantLock.java:209)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.locks.ReentrantLock.lock(ReentrantLock.java:285)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.ForkJoinTask.getThrowableException(ForkJoinTask.java:569)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.ForkJoinTask.reportException(ForkJoinTask.java:677)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.ForkJoinTask.join(ForkJoinTask.java:720)
+[2021-01-27T19:07:42.288Z] 	at FJExceptionTableLeak.main(FJExceptionTableLeak.java:67)
+[2021-01-27T19:07:42.288Z] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-01-27T19:07:42.288Z] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2021-01-27T19:07:42.288Z] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-01-27T19:07:42.288Z] 	at java.lang.reflect.Method.invoke(Method.java:498)
+[2021-01-27T19:07:42.288Z] 	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+[2021-01-27T19:07:42.288Z] 	at java.lang.Thread.run(Thread.java:823)
+[2021-01-27T19:07:42.288Z] 
+[2021-01-27T19:07:42.288Z] "ForkJoinPool-1-worker-1" Id=26 RUNNABLE
+[2021-01-27T19:07:42.288Z] 	at sun.misc.Unsafe.park(Native Method)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.locks.AbstractQueuedSynchronizer.parkAndCheckInterrupt(AbstractQueuedSynchronizer.java:836)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.locks.AbstractQueuedSynchronizer.acquireQueued(AbstractQueuedSynchronizer.java:870)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.locks.AbstractQueuedSynchronizer.acquire(AbstractQueuedSynchronizer.java:1199)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.locks.ReentrantLock$NonfairSync.lock(ReentrantLock.java:209)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.locks.ReentrantLock.lock(ReentrantLock.java:285)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.ForkJoinTask.recordExceptionalCompletion(ForkJoinTask.java:464)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.ForkJoinTask.setExceptionalCompletion(ForkJoinTask.java:491)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:291)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:175)
+[2021-01-27T19:07:42.288Z] 
+[2021-01-27T19:07:42.288Z] "ForkJoinPool-1-worker-2" Id=27 RUNNABLE
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.ForkJoinTask.recordExceptionalCompletion(ForkJoinTask.java:469)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.ForkJoinTask.setExceptionalCompletion(ForkJoinTask.java:491)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:291)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:175)
+[2021-01-27T19:07:42.288Z] 
+[2021-01-27T19:07:42.288Z] "ForkJoinPool-1-worker-0" Id=29 RUNNABLE
+[2021-01-27T19:07:42.288Z] 	at sun.misc.Unsafe.park(Native Method)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.ForkJoinPool.awaitWork(ForkJoinPool.java:1824)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1693)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:175)
+[2021-01-27T19:07:42.288Z] 
+[2021-01-27T19:07:42.288Z] "Finalizer thread" Id=30 RUNNABLE
+[2021-01-27T19:07:42.288Z] 
+[2021-01-27T19:07:42.288Z] "ForkJoinPool-1-worker-3" Id=31 WAITING
+[2021-01-27T19:07:42.288Z] 	at sun.misc.Unsafe.park(Native Method)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.ForkJoinPool.awaitWork(ForkJoinPool.java:1824)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1693)
+[2021-01-27T19:07:42.288Z] 	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:175)
+[2021-01-27T19:07:42.288Z] 
+[2021-01-27T19:07:42.288Z] "file lock watchdog" Id=33 TIMED_WAITING
+[2021-01-27T19:07:42.288Z] 	at java.lang.Object.wait(Native Method)
+[2021-01-27T19:07:42.288Z] 	at java.lang.Object.wait(Object.java:218)
+[2021-01-27T19:07:42.288Z] 	at java.util.TimerThread.mainLoop(Timer.java:552)
+[2021-01-27T19:07:42.288Z] 	at java.util.TimerThread.run(Timer.java:505)
+[2021-01-27T19:07:42.288Z] 
+[2021-01-27T19:07:42.288Z] "Attachment 37317" Id=34 RUNNABLE
+[2021-01-27T19:07:42.288Z] 	at openj9.internal.tools.attach.target.DiagnosticUtils.dumpAllThreadsImpl(Native Method)
+[2021-01-27T19:07:42.289Z] 	at openj9.internal.tools.attach.target.DiagnosticUtils.getThreadInfo(DiagnosticUtils.java:245)
+[2021-01-27T19:07:42.289Z] 	at openj9.internal.tools.attach.target.DiagnosticUtils$$Lambda$4/0x000000003006e9f0.apply(Unknown Source)
+[2021-01-27T19:07:42.289Z] 	at openj9.internal.tools.attach.target.DiagnosticUtils.executeDiagnosticCommand(DiagnosticUtils.java:181)
+[2021-01-27T19:07:42.289Z] 	at openj9.internal.tools.attach.target.Attachment.doCommand(Attachment.java:239)
+[2021-01-27T19:07:42.289Z] 	at openj9.internal.tools.attach.target.Attachment.run(Attachment.java:150)
+```

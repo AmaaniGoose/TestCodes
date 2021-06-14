@@ -1,0 +1,67 @@
+Functional tests which use j9core.dmp fail on osx.
+
+Similar symptoms to https://github.com/AdoptOpenJDK/openjdk-tests/issues/791 but that issue refers to running the tests docker containers.
+
+Any function tests (sanity.function or extended.functional) which require a dynamically created core file as input are failing on the AdoptOpenJDK builds but not when run at eclipse/openj9.
+
+Sample AdoptOpenJDK output (from https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_sanity.functional_x86-64_mac/46/consoleFull):
+```
+10:08:49  Testing: Create core file
+10:08:49  Test start time: 2020/12/08 10:08:48 Greenwich Mean Time
+10:08:49  Running command: "/Users/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/..//bin/java"   -Xaot:forceaot,count=0 -Xshareclasses:name=shareddbgext -cp /Users/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_mac/openjdk-tests/TKG/../../jvmtest/functional/cmdLineTests/utils/utils.jar -Xdump:system:file=j9core.dmp,events=vmstop org.openj9.test.ivj.Hanoi 2
+10:08:49  Time spent starting: 3 milliseconds
+10:08:56  Time spent executing: 6948 milliseconds
+10:08:56  Test result: PASSED
+10:08:56  
+10:08:56  Testing: Remove shared cache
+10:08:56  Test start time: 2020/12/08 10:08:55 Greenwich Mean Time
+10:08:56  Running command: "/Users/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/..//bin/java"   -Xshareclasses:name=shareddbgext,destroy
+10:08:56  Time spent starting: 3 milliseconds
+10:08:56  Time spent executing: 61 milliseconds
+10:08:56  Test result: PASSED
+10:08:56  
+10:08:56  Testing: Run !printallcallsites
+10:08:56  Test start time: 2020/12/08 10:08:55 Greenwich Mean Time
+10:08:56  Running command: /Users/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/..//bin/jdmpview -core j9core.dmp
+10:08:56  Time spent starting: 14 milliseconds
+10:08:56  Time spent executing: 569 milliseconds
+10:08:56  Test result: FAILED
+10:08:56  Output from test:
+10:08:56   [OUT] DTFJView version 4.29.5, using DTFJ version 1.12.29003
+10:08:56   [OUT] Loading image from DTFJ...
+10:08:56   [OUT] 
+10:08:56   [OUT] Could not load dump file and/or could not load XML file: Image file '/Users/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_mac/openjdk-tests/TKG/test_output_16074209001136/cmdLineTester_callsitedbgddrext_openj9_0/j9core.dmp' not found.
+10:08:56   [OUT] For a list of commands, type "help"; for how to use "help", type "help help"
+10:08:56   [OUT] > DDR is not enabled for this core file, '!' commands are disabled
+10:08:56   [OUT] > 
+10:08:56  >> Success condition was not found: [Output match: jvminit.c]
+10:08:56  >> Failure condition was not found: [Output match: DDRInteractiveCommandException]
+10:08:56  >> Failure condition was not found: [Output match: no shared cache]
+10:08:56  >> Failure condition was not found: [Output match: unable to read]
+10:08:56  >> Failure condition was not found: [Output match: could not read]
+10:08:56  >> Failure condition was not found: [Output match: dump event]
+```
+Sample eclipse/openj9 output (from https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_sanity.functional_x86-64_mac_Nightly_testList_1/184/consoleFull):
+```
+03:56:30  Testing: Create core file
+03:56:30  Test start time: 2020/12/07 22:56:29 Eastern Standard Time
+03:56:30  Running command: "/Users/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_mac_Nightly_testList_1/openjdkbinary/j2sdk-image/bin/java"   -Xaot:forceaot,count=0 -Xshareclasses:name=shareddbgext -cp /Users/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_mac_Nightly_testList_1/openjdk-tests/TKG/../../jvmtest/functional/cmdLineTests/utils/utils.jar -Xdump:system:file=j9core.dmp,events=vmstop org.openj9.test.ivj.Hanoi 2
+03:56:30  Time spent starting: 3 milliseconds
+03:56:37  Time spent executing: 7239 milliseconds
+03:56:37  Test result: PASSED
+03:56:37  
+03:56:37  Testing: Remove shared cache
+03:56:37  Test start time: 2020/12/07 22:56:36 Eastern Standard Time
+03:56:37  Running command: "/Users/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_mac_Nightly_testList_1/openjdkbinary/j2sdk-image/bin/java"   -Xshareclasses:name=shareddbgext,destroy
+03:56:37  Time spent starting: 3 milliseconds
+03:56:37  Time spent executing: 43 milliseconds
+03:56:37  Test result: PASSED
+03:56:37  
+03:56:37  Testing: Run !printallcallsites
+03:56:37  Test start time: 2020/12/07 22:56:36 Eastern Standard Time
+03:56:37  Running command: /Users/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_mac_Nightly_testList_1/openjdkbinary/j2sdk-image/bin/jdmpview -core j9core.dmp
+03:56:37  Time spent starting: 4 milliseconds
+03:57:20  Time spent executing: 42471 milliseconds
+03:57:20  Test result: PASSED
+```
+

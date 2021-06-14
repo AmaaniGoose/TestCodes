@@ -1,0 +1,3 @@
+Implement a primitive and reference version of `System.arraycopy` that does not involve calling the Java JNI native.
+
+Consider optimizations such as inlining constant length copies in JITed code to improve performance.

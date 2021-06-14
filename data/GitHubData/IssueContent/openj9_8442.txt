@@ -1,0 +1,8 @@
+Similarly to the existing eclipse/omr#4246 (@0xdaryl FYI) the OpenJ9 `J9::PrivateLinkage` class is common across all architectures. In fact, looking at the implementation of this API [1] [2] [3] [4] across various codegens we can see that the code is almost identical. x86 code generator does not appear to use this API which should be changed, so as to remain consistent with the other codegens and minimize technical debt.
+
+In theory we should all use a single implementation since all this API is doing is associating parameters with linkage argument indices.
+
+[1] https://github.com/eclipse/openj9/blob/7f3b2b80a55ddeddf087b09bc1070fff6ad033e0/runtime/compiler/aarch64/codegen/ARM64PrivateLinkage.cpp#L335-L376
+[2] https://github.com/eclipse/openj9/blob/7f3b2b80a55ddeddf087b09bc1070fff6ad033e0/runtime/compiler/arm/codegen/ARMPrivateLinkage.cpp#L322-L360
+[3] https://github.com/eclipse/openj9/blob/7f3b2b80a55ddeddf087b09bc1070fff6ad033e0/runtime/compiler/p/codegen/PPCPrivateLinkage.cpp#L614-L661
+[4] https://github.com/eclipse/openj9/blob/7f3b2b80a55ddeddf087b09bc1070fff6ad033e0/runtime/compiler/z/codegen/S390PrivateLinkage.cpp#L912-L1008

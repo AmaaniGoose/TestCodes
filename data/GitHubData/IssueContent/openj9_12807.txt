@@ -1,0 +1,77 @@
+https://openj9-jenkins.osuosl.org/job/Pipeline-Build-Test-Personal/7/
+
+xlinux passed on ub16x64j98
+mac passed on osx1011-x86-2
+
+test times:
+aix 9 hr 12 min
+plinux 3 hr 35 min
+zlinux 2 hr 15 min
+xlinux 4 hr 6 min
+mac 2 hr 54 min
+win 2 hr 31 min
+
+https://openj9-jenkins.osuosl.org/job/Test_openjdk11_j9_extended.openjdk_s390x_linux_Personal/1/ - rh7-390-1
+Looks like machine setup issue(s).
+    java/nio/channels/DatagramChannel/Promiscuous.java.Promiscuous - Expected message not received
+    java/nio/channels/DatagramChannel/Promiscuous.java.Promiscuous
+    com/sun/jndi/dns/ConfigTests/Timeout.java.Timeout - SocketException: No route to host (Receive failed)
+    com/sun/jndi/dns/ConfigTests/Timeout.java.Timeout
+
+https://openj9-jenkins.osuosl.org/job/Test_openjdk11_j9_extended.openjdk_ppc64le_linux_Personal/1/ - cent7-ppcle-1
+Looks like machine setup issue(s).
+    java/net/MulticastSocket/Promiscuous.java.Promiscuous - Expected message not received, Receive timed out
+    java/net/MulticastSocket/Promiscuous.java.Promiscuous
+    java/net/MulticastSocket/SetLoopbackMode.java.SetLoopbackMode - Packet not received (packet excepted as loopback is enabled)
+    java/net/MulticastSocket/SetLoopbackMode.java.SetLoopbackMode
+    java/net/MulticastSocket/Test.java.Test - No packet received within timeout!!!
+    java/net/MulticastSocket/Test.java.Test
+    java/nio/channels/DatagramChannel/MulticastSendReceiveTests.java.MulticastSendReceiveTests - Expected message not received
+    java/nio/channels/DatagramChannel/MulticastSendReceiveTests.java.MulticastSendReceiveTests
+    java/nio/channels/DatagramChannel/Promiscuous.java.Promiscuous - Expected message not received
+    java/nio/channels/DatagramChannel/Promiscuous.java.Promiscuous
+
+https://openj9-jenkins.osuosl.org/job/Test_openjdk11_j9_extended.openjdk_x86-64_windows_Personal/1/ - win2012-x86-8
+Known issues.
+    java/nio/channels/FileChannel/LoopingTruncate.java.LoopingTruncate - There is not enough space on the disk
+    java/nio/channels/FileChannel/LoopingTruncate.java.LoopingTruncate
+    java/security/KeyPairGenerator/FinalizeHalf.java.FinalizeHalf
+    java/security/KeyPairGenerator/FinalizeHalf.java.FinalizeHalf
+    java/security/Signature/ResetAfterException.java.ResetAfterException
+    java/security/Signature/ResetAfterException.java.ResetAfterException
+    java/security/Signature/SignatureLength.java.SignatureLength
+    java/security/Signature/SignatureLength.java.SignatureLength
+- The security tests failed due to:
+```
+Caused by: java.security.KeyException: Access is denied.
+
+	at jdk.crypto.mscapi/sun.security.mscapi.CKeyPairGenerator$RSA.generateCKeyPair(Native Method)
+	at jdk.crypto.mscapi/sun.security.mscapi.CKeyPairGenerator$RSA.generateKeyPair(CKeyPairGenerator.java:121)
+```
+
+https://openj9-jenkins.osuosl.org/job/Test_openjdk11_j9_extended.openjdk_ppc64_aix_Personal/1/ - aix71-p8-9
+In both cases, no suitable multicast interface is found.
+If I understand the following correctly, it's because the machine has an IPv6 address, and there is no wildcard ip address found. Possibly the test is trying to compensate for some old AIX bug, and we should try removing the AIX condition to see what happens.
+https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/lib/jdk/test/lib/NetworkConfiguration.java#L123-L132
+```
+name:lo0 (lo0) up: true p2p: false multicast: true
+        /0:0:0:0:0:0:0:1%lo0 isAnyLocalAddress: false
+        /127.0.0.1 isAnyLocalAddress: false
+name:en0 (en0) up: true p2p: false multicast: true
+        /x.x.x.x isAnyLocalAddress: false
+```
+    java/net/SocketPermission/SocketPermissionTest.java.SocketPermissionTest
+    java/net/SocketPermission/SocketPermissionTest.java.SocketPermissionTest
+```
+14:24:53  test SocketPermissionTest.joinGroupMulticastTest(): failure
+14:24:53  java.util.NoSuchElementException: No value present
+14:24:53  	at java.base/java.util.Optional.get(Optional.java:148)
+14:24:53  	at SocketPermissionTest.joinGroupMulticastTest(SocketPermissionTest.java:224)
+```
+    java/nio/channels/DatagramChannel/BasicMulticastTests.java.BasicMulticastTests
+    java/nio/channels/DatagramChannel/BasicMulticastTests.java.BasicMulticastTests
+```
+16:40:35  java.util.NoSuchElementException
+16:40:35  	at java.base/java.util.Spliterators$1Adapter.next(Spliterators.java:688)
+16:40:35  	at BasicMulticastTests.main(BasicMulticastTests.java:212)
+```

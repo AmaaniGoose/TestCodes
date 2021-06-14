@@ -1,0 +1,1 @@
+Our AWX server does not currently have a template for deploying to macos systems. We should add that and ensure that it is "safe" to deploy across all machines

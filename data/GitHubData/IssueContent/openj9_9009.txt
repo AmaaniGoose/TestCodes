@@ -1,0 +1,76 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/13/
+rh7-390-4 - history shows the test has passed on this machine before
+sun/nio/cs/FindDecoderBugs.java.FindDecoderBugs | 19 sec | 1
+sun/nio/cs/SurrogateGB18030Test.java.SurrogateGB18030Test | 0.32 sec | 1
+sun/nio/cs/SurrogateTestEUCTW.java.SurrogateTestEUCTW | 67 ms | 1
+sun/nio/cs/SurrogateTestHKSCS.java.SurrogateTestHKSCS | 0.14 sec | 1
+sun/nio/cs/Test4206507.java.Test4206507 | 90 ms | 1
+sun/nio/cs/TestConverterDroppedCharacters.java.TestConverterDroppedCharacters | 0.28 sec | 1
+sun/nio/cs/TestCp834_SBCS.java.TestCp834_SBCS | 0.38 sec | 1
+sun/nio/cs/TestEBCDICLineFeed.java.TestEBCDICLineFeed | 88 ms | 1
+sun/nio/cs/TestEUC_TW.java.TestEUC_TW | 0.3 sec | 1
+sun/nio/cs/TestGB18030.java.TestGB18030 | 88 ms | 1
+sun/nio/cs/TestHKSCS.java.TestHKSCS | 98 ms | 1
+sun/nio/cs/TestIBMBugs.java.TestIBMBugs | 0.1 sec | 1
+sun/nio/cs/TestISO2022CNDecoder.java.TestISO2022CNDecoder | 0.13 sec | 1
+sun/nio/cs/TestISO2022JP.java.TestISO2022JP | 0.13 sec | 1
+sun/nio/cs/TestISO2022JPEncoder.java.TestISO2022JPEncoder | 79 ms | 1
+sun/nio/cs/TestISO2022JPSubBytes.java.TestISO2022JPSubBytes | 89 ms | 1
+sun/nio/cs/TestIllegalSJIS.java.TestIllegalSJIS | 84 ms | 1
+sun/nio/cs/TestJIS0208Decoder.java.TestJIS0208Decoder | 85 ms | 1
+sun/nio/cs/TestJIS0212Decoder.java.TestJIS0212Decoder | 72 ms | 1
+sun/nio/cs/TestMS5022X.java.TestMS5022X | 97 ms | 1
+sun/nio/cs/TestMiscEUC_JP.java.TestMiscEUC_JP | 85 ms | 1
+sun/nio/cs/TestSJIS0213.java.TestSJIS0213 | 89 ms | 1
+sun/nio/cs/TestSJIS0213_SM.java.TestSJIS0213_SM | 79 ms | 1
+```
+java.lang.NullPointerException
+	at java.base/sun.nio.cs.StandardCharsets.cache(StandardCharsets.java:1332)
+	at java.base/sun.nio.cs.StandardCharsets.lookup(StandardCharsets.java:1323)
+	at java.base/sun.nio.cs.StandardCharsets.charsetForName(StandardCharsets.java:1338)
+	at java.base/java.nio.charset.Charset.lookup2(Charset.java:473)
+	at java.base/java.nio.charset.Charset.lookup(Charset.java:462)
+	at java.base/java.nio.charset.Charset.forName(Charset.java:526)
+	at jdk.charsets/sun.nio.cs.ext.JISAutoDetect$Decoder.decodeLoop(JISAutoDetect.java:155)
+	at java.base/java.nio.charset.CharsetDecoder.decode(CharsetDecoder.java:576)
+	at FindDecoderBugs$CharsetTester.recode(FindDecoderBugs.java:206)
+	at FindDecoderBugs$CharsetTester.recode2(FindDecoderBugs.java:256)
+	at FindDecoderBugs$CharsetTester.test(FindDecoderBugs.java:279)
+	at FindDecoderBugs$CharsetTester.testExhaustively(FindDecoderBugs.java:296)
+	at FindDecoderBugs$CharsetTester.testExhaustively(FindDecoderBugs.java:298)
+	at FindDecoderBugs$CharsetTester.testPrefix(FindDecoderBugs.java:319)
+	at FindDecoderBugs.testCharset(FindDecoderBugs.java:413)
+	at FindDecoderBugs.realMain(FindDecoderBugs.java:420)
+	at FindDecoderBugs.main(FindDecoderBugs.java:446)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+```
+
+
+sun/nio/cs/TestCp93xSISO.java.TestCp93xSISO | 69 ms | 1
+```
+java.lang.Exception: bug4429369: Cp93x SI/SO Ch->Byte mappings incorrect
+	at TestCp93xSISO.main(TestCp93xSISO.java:51)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+```
+
+sun/nio/cs/TestIllegalISO2022Esc.java.TestIllegalISO2022Esc | 91 ms | 1
+```
+java.lang.Exception: Incorrect handling of illegal ISO2022 escapes
+	at TestIllegalISO2022Esc.main(TestIllegalISO2022Esc.java:59)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+```

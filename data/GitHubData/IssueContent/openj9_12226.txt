@@ -1,0 +1,38 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_special.system_ppc64le_linux_Nightly_testList_4/69
+DaaLoadTest_daa1_special_5m_26
+variation: Mode610-OSRG
+JVM_OPTIONS:  -Xcompressedrefs -Xjit:enableOSR,enableOSROnGuardFailure,count=1,disableAsyncCompilation -Xgcpolicy:gencon 
+
+Only a single javacore available.
+https://140-211-168-230-openstack.osuosl.org/artifactory/ci-eclipse-openj9/Test/Test_openjdk11_j9_special.system_ppc64le_linux_Nightly_testList_4/69/system_test_output.tar.gz
+
+Not sure this is a real problem. Seems the test stalled, possible hang detected, a signal was used to generate a single javacore, and the test proceeded to pass.
+```
+DLT 07:40:14.273 - Completed 6.8%. Number of tests started=4
+DLT 07:40:14.273 - **POSSIBLE HANG DETECTED**
+STF 07:40:14.560 - **FAILED** Process DLT has hung
+STF 07:40:14.560 - Collecting dumps for: DLT
+STF 07:40:14.560 - Sending SIG 3 to the java process to generate a javacore
+STF 07:40:14.561 - Running command: kill -3 25921
+STF 07:40:14.561 - Redirecting stderr to /home/jenkins/jenkins-agent/workspace/Test_openjdk11_j9_special.system_ppc64le_linux_Nightly_testList_4/openjdk-tests/TKG/output_16158679017702/DaaLoadTest_daa1_special_5m_26/20210316-072307-DaaLoadTest/results/1.DLT.kill_3.stderr
+STF 07:40:14.561 - Redirecting stdout to /home/jenkins/jenkins-agent/workspace/Test_openjdk11_j9_special.system_ppc64le_linux_Nightly_testList_4/openjdk-tests/TKG/output_16158679017702/DaaLoadTest_daa1_special_5m_26/20210316-072307-DaaLoadTest/results/1.DLT.kill_3.stdout
+STF 07:40:14.563 - Pausing for 30 seconds
+STF 07:40:44.565 - Process DLT (pid 25921) is no longer running. Abandoning dump collection.
+DLT 07:40:23.752 - Completed 100.0%. Number of tests started=4 (+0)
+DLT 07:40:23.785 - **POSSIBLE HANG DETECTED**
+DLT 07:40:24.111 - Completed 100.0%. Number of tests started=4 (+0)
+DLT 07:40:24.212 - Completed 100.0%. Number of tests started=4 (+0)
+DLT 07:40:24.312 - Completed 100.0%. Number of tests started=4 (+0)
+DLT 07:40:24.412 - Completed 100.0%. Number of tests started=4 (+0)
+DLT 07:40:27.286 - Completed 100.0%. Number of tests started=4 (+0)
+DLT 07:40:28.891 - Completed 100.0%. Number of tests started=4 (+0)
+DLT 07:40:29.855 - Completed 100.0%. Number of tests started=4 (+0)
+DLT 07:40:29.871 - Thread completed. Suite=0 thread=0
+DLT 07:40:29.871 - Thread completed. Suite=0 thread=1
+DLT 07:40:29.955 - Test stopped due to reaching runtime limit
+DLT 07:40:29.955 - Load test completed
+DLT 07:40:29.955 -   Ran     : 4
+DLT 07:40:29.955 -   Passed  : 4
+DLT 07:40:29.956 -   Failed  : 0
+DLT 07:40:29.956 -   Result  : PASSED
+```

@@ -1,0 +1,165 @@
+https://ci.eclipse.org/openj9/view/Test/job/Grinder/1503/
+openjdk17 test java/lang/Thread/UncaughtExceptionsTest.java
+```
+12:35:21  STDOUT:
+12:35:21  [TestNG] Running:
+12:35:21    java/lang/Thread/UncaughtExceptionsTest.java
+12:35:21  
+12:35:21  Command line: [F:\Users\jenkins\workspace\Grinder\openjdkbinary\j2sdk-image\bin\java.exe -cp F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\java\lang\Thread\UncaughtExceptionsTest.d;F:\Users\jenkins\workspace\Grinder\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\Thread;F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\test\lib;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\javatest.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jtreg.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\junit.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\testng.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jcommander.jar UncaughtExitSimulator$ThreadIsDeadAfterJoin ]
+12:35:21  Command line: [F:\Users\jenkins\workspace\Grinder\openjdkbinary\j2sdk-image\bin\java.exe -cp F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\java\lang\Thread\UncaughtExceptionsTest.d;F:\Users\jenkins\workspace\Grinder\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\Thread;F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\test\lib;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\javatest.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jtreg.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\junit.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\testng.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jcommander.jar 'UncaughtExitSimulator$ThreadIsDeadAfterJoin']
+12:35:21  [2021-02-09T17:35:20.922998500Z] Gathering output for process 10052
+12:35:21  [2021-02-09T17:35:21.344924800Z] Waiting for completion for process 10052
+12:35:21  [2021-02-09T17:35:21.344924800Z] Waiting for completion finished for process 10052
+12:35:21  Output and diagnostic info for process 10052 was saved into 'pid-10052-output.log'
+12:35:21  OK
+12:35:21  Exception in thread "Thread-3" java.lang.RuntimeException: simulateUncaughtExitEvent
+12:35:21  	at UncaughtExitSimulator.throwRuntimeException(UncaughtExceptionsTest.java:94)
+12:35:21  	at UncaughtExitSimulator.run(UncaughtExceptionsTest.java:96)
+12:35:21  
+12:35:21  [2021-02-09T17:35:21.344924800Z] Waiting for completion for process 10052
+12:35:21  [2021-02-09T17:35:21.344924800Z] Waiting for completion finished for process 10052
+12:35:21  [2021-02-09T17:35:21.360518200Z] Waiting for completion for process 10052
+12:35:21  [2021-02-09T17:35:21.360518200Z] Waiting for completion finished for process 10052
+12:35:21  test UncaughtExceptionsTest.test("ThreadIsDeadAfterJoin", 0, "OK", "Exception in thread "Thread-0".*simulateUncaughtExitEvent"): failure
+12:35:21  java.lang.RuntimeException: 'Exception in thread "Thread-0".*simulateUncaughtExitEvent' missing from stderr 
+12:35:21  
+12:35:21  	at jdk.test.lib.process.OutputAnalyzer.stderrShouldMatch(OutputAnalyzer.java:361)
+12:35:21  	at UncaughtExceptionsTest.test(UncaughtExceptionsTest.java:71)
+12:35:21  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+12:35:21  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+12:35:21  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+12:35:21  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+12:35:21  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+12:35:21  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+12:35:21  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+12:35:21  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+12:35:21  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+12:35:21  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+12:35:21  	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+12:35:21  	at org.testng.TestRunner.run(TestRunner.java:623)
+12:35:21  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+12:35:21  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+12:35:21  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+12:35:21  	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+12:35:21  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+12:35:21  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+12:35:21  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+12:35:21  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+12:35:21  	at org.testng.TestNG.run(TestNG.java:1018)
+12:35:21  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+12:35:21  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+12:35:21  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+12:35:21  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+12:35:21  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+12:35:21  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+12:35:21  	at java.base/java.lang.Thread.run(Thread.java:853)
+12:35:21  Command line: [F:\Users\jenkins\workspace\Grinder\openjdkbinary\j2sdk-image\bin\java.exe -cp F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\java\lang\Thread\UncaughtExceptionsTest.d;F:\Users\jenkins\workspace\Grinder\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\Thread;F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\test\lib;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\javatest.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jtreg.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\junit.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\testng.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jcommander.jar UncaughtExitSimulator$MainThreadAbruptTermination ]
+12:35:21  Command line: [F:\Users\jenkins\workspace\Grinder\openjdkbinary\j2sdk-image\bin\java.exe -cp F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\java\lang\Thread\UncaughtExceptionsTest.d;F:\Users\jenkins\workspace\Grinder\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\Thread;F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\test\lib;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\javatest.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jtreg.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\junit.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\testng.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jcommander.jar 'UncaughtExitSimulator$MainThreadAbruptTermination']
+12:35:21  [2021-02-09T17:35:21.360518200Z] Gathering output for process 10852
+12:35:21  [2021-02-09T17:35:21.797997500Z] Waiting for completion for process 10852
+12:35:21  [2021-02-09T17:35:21.797997500Z] Waiting for completion finished for process 10852
+12:35:21  Output and diagnostic info for process 10852 was saved into 'pid-10852-output.log'
+12:35:21  OK
+12:35:21  Exception in thread "main" java.lang.RuntimeException: simulateUncaughtExitEvent
+12:35:21  	at UncaughtExitSimulator.throwRuntimeException(UncaughtExceptionsTest.java:94)
+12:35:21  	at UncaughtExitSimulator$MainThreadAbruptTermination.main(UncaughtExceptionsTest.java:123)
+12:35:21  
+12:35:21  [2021-02-09T17:35:21.797997500Z] Waiting for completion for process 10852
+12:35:21  [2021-02-09T17:35:21.797997500Z] Waiting for completion finished for process 10852
+12:35:21  test UncaughtExceptionsTest.test("MainThreadAbruptTermination", 1, "OK", "Exception in thread "main".*simulateUncaughtExitEvent"): success
+12:35:21  Command line: [F:\Users\jenkins\workspace\Grinder\openjdkbinary\j2sdk-image\bin\java.exe -cp F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\java\lang\Thread\UncaughtExceptionsTest.d;F:\Users\jenkins\workspace\Grinder\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\Thread;F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\test\lib;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\javatest.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jtreg.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\junit.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\testng.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jcommander.jar UncaughtExitSimulator$MainThreadNormalTermination ]
+12:35:21  Command line: [F:\Users\jenkins\workspace\Grinder\openjdkbinary\j2sdk-image\bin\java.exe -cp F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\java\lang\Thread\UncaughtExceptionsTest.d;F:\Users\jenkins\workspace\Grinder\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\Thread;F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\test\lib;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\javatest.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jtreg.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\junit.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\testng.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jcommander.jar 'UncaughtExitSimulator$MainThreadNormalTermination']
+12:35:21  [2021-02-09T17:35:21.813621600Z] Gathering output for process 5048
+12:35:21  [2021-02-09T17:35:22.204322800Z] Waiting for completion for process 5048
+12:35:21  [2021-02-09T17:35:22.204322800Z] Waiting for completion finished for process 5048
+12:35:21  Output and diagnostic info for process 5048 was saved into 'pid-5048-output.log'
+12:35:21  OK
+12:35:21  
+12:35:21  [2021-02-09T17:35:22.204322800Z] Waiting for completion for process 5048
+12:35:21  [2021-02-09T17:35:22.204322800Z] Waiting for completion finished for process 5048
+12:35:21  test UncaughtExceptionsTest.test("MainThreadNormalTermination", 0, "OK", ""): success
+12:35:21  Command line: [F:\Users\jenkins\workspace\Grinder\openjdkbinary\j2sdk-image\bin\java.exe -cp F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\java\lang\Thread\UncaughtExceptionsTest.d;F:\Users\jenkins\workspace\Grinder\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\Thread;F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\test\lib;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\javatest.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jtreg.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\junit.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\testng.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jcommander.jar UncaughtExitSimulator$DefaultUncaughtExceptionHandlerOnMainThread ]
+12:35:21  Command line: [F:\Users\jenkins\workspace\Grinder\openjdkbinary\j2sdk-image\bin\java.exe -cp F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\java\lang\Thread\UncaughtExceptionsTest.d;F:\Users\jenkins\workspace\Grinder\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\Thread;F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\test\lib;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\javatest.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jtreg.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\junit.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\testng.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jcommander.jar 'UncaughtExitSimulator$DefaultUncaughtExceptionHandlerOnMainThread']
+12:35:21  [2021-02-09T17:35:22.219882100Z] Gathering output for process 13504
+12:35:21  [2021-02-09T17:35:22.626123800Z] Waiting for completion for process 13504
+12:35:21  [2021-02-09T17:35:22.626123800Z] Waiting for completion finished for process 13504
+12:35:21  Output and diagnostic info for process 13504 was saved into 'pid-13504-output.log'
+12:35:21  OK
+12:35:21  
+12:35:21  [2021-02-09T17:35:22.626123800Z] Waiting for completion for process 13504
+12:35:21  [2021-02-09T17:35:22.626123800Z] Waiting for completion finished for process 13504
+12:35:21  test UncaughtExceptionsTest.test("DefaultUncaughtExceptionHandlerOnMainThread", 1, "OK", ""): success
+12:35:21  Command line: [F:\Users\jenkins\workspace\Grinder\openjdkbinary\j2sdk-image\bin\java.exe -cp F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\java\lang\Thread\UncaughtExceptionsTest.d;F:\Users\jenkins\workspace\Grinder\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\Thread;F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\test\lib;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\javatest.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jtreg.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\junit.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\testng.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jcommander.jar UncaughtExitSimulator$DefaultUncaughtExceptionHandlerOnMainThreadOverride ]
+12:35:21  Command line: [F:\Users\jenkins\workspace\Grinder\openjdkbinary\j2sdk-image\bin\java.exe -cp F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\java\lang\Thread\UncaughtExceptionsTest.d;F:\Users\jenkins\workspace\Grinder\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\Thread;F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\test\lib;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\javatest.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jtreg.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\junit.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\testng.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jcommander.jar 'UncaughtExitSimulator$DefaultUncaughtExceptionHandlerOnMainThreadOverride']
+12:35:21  [2021-02-09T17:35:22.626123800Z] Gathering output for process 3096
+12:35:21  [2021-02-09T17:35:23.048001800Z] Waiting for completion for process 3096
+12:35:21  [2021-02-09T17:35:23.048001800Z] Waiting for completion finished for process 3096
+12:35:21  Output and diagnostic info for process 3096 was saved into 'pid-3096-output.log'
+12:35:21  OK
+12:35:21  
+12:35:21  [2021-02-09T17:35:23.048001800Z] Waiting for completion for process 3096
+12:35:21  [2021-02-09T17:35:23.048001800Z] Waiting for completion finished for process 3096
+12:35:21  test UncaughtExceptionsTest.test("DefaultUncaughtExceptionHandlerOnMainThreadOverride", 1, "OK", ""): success
+12:35:21  Command line: [F:\Users\jenkins\workspace\Grinder\openjdkbinary\j2sdk-image\bin\java.exe -cp F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\java\lang\Thread\UncaughtExceptionsTest.d;F:\Users\jenkins\workspace\Grinder\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\Thread;F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\test\lib;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\javatest.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jtreg.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\junit.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\testng.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jcommander.jar UncaughtExitSimulator$DefaultUncaughtExceptionHandlerOnNonMainThreadOverride ]
+12:35:21  Command line: [F:\Users\jenkins\workspace\Grinder\openjdkbinary\j2sdk-image\bin\java.exe -cp F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\java\lang\Thread\UncaughtExceptionsTest.d;F:\Users\jenkins\workspace\Grinder\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\Thread;F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\test\lib;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\javatest.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jtreg.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\junit.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\testng.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jcommander.jar 'UncaughtExitSimulator$DefaultUncaughtExceptionHandlerOnNonMainThreadOverride']
+12:35:21  [2021-02-09T17:35:23.048001800Z] Gathering output for process 12712
+12:35:21  [2021-02-09T17:35:23.485498700Z] Waiting for completion for process 12712
+12:35:21  [2021-02-09T17:35:23.485498700Z] Waiting for completion finished for process 12712
+12:35:21  Output and diagnostic info for process 12712 was saved into 'pid-12712-output.log'
+12:35:21  OK
+12:35:21  
+12:35:21  [2021-02-09T17:35:23.485498700Z] Waiting for completion for process 12712
+12:35:21  [2021-02-09T17:35:23.485498700Z] Waiting for completion finished for process 12712
+12:35:21  test UncaughtExceptionsTest.test("DefaultUncaughtExceptionHandlerOnNonMainThreadOverride", 0, "OK", ""): success
+12:35:21  Command line: [F:\Users\jenkins\workspace\Grinder\openjdkbinary\j2sdk-image\bin\java.exe -cp F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\java\lang\Thread\UncaughtExceptionsTest.d;F:\Users\jenkins\workspace\Grinder\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\Thread;F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\test\lib;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\javatest.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jtreg.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\junit.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\testng.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jcommander.jar UncaughtExitSimulator$DefaultUncaughtExceptionHandlerOnNonMainThread ]
+12:35:21  Command line: [F:\Users\jenkins\workspace\Grinder\openjdkbinary\j2sdk-image\bin\java.exe -cp F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\java\lang\Thread\UncaughtExceptionsTest.d;F:\Users\jenkins\workspace\Grinder\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\Thread;F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\test\lib;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\javatest.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jtreg.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\junit.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\testng.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jcommander.jar 'UncaughtExitSimulator$DefaultUncaughtExceptionHandlerOnNonMainThread']
+12:35:21  [2021-02-09T17:35:23.485498700Z] Gathering output for process 8816
+12:35:21  [2021-02-09T17:35:23.907373400Z] Waiting for completion for process 8816
+12:35:21  [2021-02-09T17:35:23.907373400Z] Waiting for completion finished for process 8816
+12:35:21  Output and diagnostic info for process 8816 was saved into 'pid-8816-output.log'
+12:35:21  OK
+12:35:21  
+12:35:21  [2021-02-09T17:35:23.907373400Z] Waiting for completion for process 8816
+12:35:21  [2021-02-09T17:35:23.907373400Z] Waiting for completion finished for process 8816
+12:35:21  test UncaughtExceptionsTest.test("DefaultUncaughtExceptionHandlerOnNonMainThread", 0, "OK", ""): success
+12:35:21  Command line: [F:\Users\jenkins\workspace\Grinder\openjdkbinary\j2sdk-image\bin\java.exe -cp F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\java\lang\Thread\UncaughtExceptionsTest.d;F:\Users\jenkins\workspace\Grinder\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\Thread;F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\test\lib;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\javatest.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jtreg.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\junit.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\testng.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jcommander.jar UncaughtExitSimulator$ThreadGroupUncaughtExceptionHandlerOnNonMainThread ]
+12:35:21  Command line: [F:\Users\jenkins\workspace\Grinder\openjdkbinary\j2sdk-image\bin\java.exe -cp F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\java\lang\Thread\UncaughtExceptionsTest.d;F:\Users\jenkins\workspace\Grinder\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\Thread;F:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_16128921023505\jdk_custom_0\work\classes\0\test\lib;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\javatest.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jtreg.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\junit.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\testng.jar;F:\Users\jenkins\workspace\Grinder\jvmtest\openjdk\jtreg\lib\jcommander.jar 'UncaughtExitSimulator$ThreadGroupUncaughtExceptionHandlerOnNonMainThread']
+12:35:21  [2021-02-09T17:35:23.907373400Z] Gathering output for process 3840
+12:35:21  [2021-02-09T17:35:24.329310500Z] Waiting for completion for process 3840
+12:35:21  [2021-02-09T17:35:24.329310500Z] Waiting for completion finished for process 3840
+12:35:21  Output and diagnostic info for process 3840 was saved into 'pid-3840-output.log'
+12:35:21  OK
+12:35:21  
+12:35:21  [2021-02-09T17:35:24.329310500Z] Waiting for completion for process 3840
+12:35:21  [2021-02-09T17:35:24.329310500Z] Waiting for completion finished for process 3840
+12:35:21  test UncaughtExceptionsTest.test("ThreadGroupUncaughtExceptionHandlerOnNonMainThread", 0, "OK", ""): success
+12:35:21  
+12:35:21  ===============================================
+12:35:21  java/lang/Thread/UncaughtExceptionsTest.java
+12:35:21  Total tests run: 8, Failures: 1, Skips: 0
+12:35:21  ===============================================
+12:35:21  
+12:35:21  STDERR:
+12:35:21   stdout: [OK
+12:35:21  ];
+12:35:21   stderr: [Exception in thread "Thread-3" java.lang.RuntimeException: simulateUncaughtExitEvent
+12:35:21  	at UncaughtExitSimulator.throwRuntimeException(UncaughtExceptionsTest.java:94)
+12:35:21  	at UncaughtExitSimulator.run(UncaughtExceptionsTest.java:96)
+12:35:21  ]
+12:35:21   exitValue = 0
+12:35:21  
+12:35:21  java.lang.Exception: failures: 1
+12:35:21  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:96)
+12:35:21  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+12:35:21  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+12:35:21  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+12:35:21  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+12:35:21  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+12:35:21  	at java.base/java.lang.Thread.run(Thread.java:853)
+12:35:21  
+12:35:21  JavaTest Message: Test threw exception: java.lang.Exception
+12:35:21  JavaTest Message: shutting down test
+12:35:21  
+12:35:21  
+12:35:21  TEST RESULT: Failed. Execution failed: `main' threw exception: java.lang.Exception: failures: 1
+```

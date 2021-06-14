@@ -1,0 +1,61 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk14_j9_extended.functional_x86-64_mac_Nightly/81`:
+```
+23:50:54  openjdk version "14-internal" 2020-03-17
+23:50:54  OpenJDK Runtime Environment (build 14-internal+0-adhoc.jenkins.BuildJDK14x86-64macNightly)
+23:50:54  Eclipse OpenJ9 VM (build ibm_sdk-73a7565afc, JRE 14 Mac OS X amd64-64-Bit Compressed References 20200408_83 (JIT enabled, AOT enabled)
+23:50:54  OpenJ9   - 73a7565afc
+23:50:54  OMR      - 5d27d2483
+23:50:54  JCL      - f27172e3254 based on jdk-14+36)
+```
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+FAILED: testMemoryLeaks
+java.lang.AssertionError: Target process failed
+	at org.testng.Assert.fail(Assert.java:96)
+	at org.openj9.test.vmArguments.VmArgumentTests.runProcess(VmArgumentTests.java:1585)
+	at org.openj9.test.vmArguments.VmArgumentTests.runAndGetArgumentList(VmArgumentTests.java:1545)
+	at org.openj9.test.vmArguments.VmArgumentTests.testMemoryLeaks(VmArgumentTests.java:1252)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+	at org.testng.TestRunner.run(TestRunner.java:505)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+	at org.testng.TestNG.runSuites(TestNG.java:1049)
+	at org.testng.TestNG.run(TestNG.java:1017)
+	at org.testng.TestNG.privateMain(TestNG.java:1354)
+	at org.testng.TestNG.main(TestNG.java:1323)
+
+===============================================
+    VmArgumentTests
+    Tests run: 53, Failures: 1, Skips: 0
+===============================================
+
+VmArgumentTests_0_FAILED
+```
+
+For example, to rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links:  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=14&JDK_IMPL=openj9&BUILD_LIST=functional&PLATFORM=x86-64_mac&TARGET=VmArgumentTests_0

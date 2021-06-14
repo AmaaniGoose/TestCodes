@@ -1,0 +1,10 @@
+See https://openjdk.java.net/jeps/347
+
+Excerpt:
+* Windows: Visual Studio 2017 is required for JDK 11. (Earlier versions will generate a configure-time warning and may or may not work.) For Visual Studio 2017 the default C++ standard is C++14. The /std:c++14 option should be added. Support for older versions will be dropped entirely.
+
+* Linux: Replace the -std=gnu++98 compiler option with -std=c++14. The minimum supported version of gcc is 5.0.
+
+* macOS: Replace the -std=gnu++98 compiler option with -std=c++14. The minimum supported version of clang is 3.5.
+
+* AIX/PowerPC: Replace the -std=gnu++98 compiler option with -std=c++14 and require the use of xlclang++ as the compiler. The minimum supported version of xlclang++ is 16.1.

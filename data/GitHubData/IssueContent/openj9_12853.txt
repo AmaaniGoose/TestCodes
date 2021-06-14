@@ -1,0 +1,11 @@
+See https://github.com/eclipse-openj9/openj9/pull/12779 for a list of excluded tests
+
+```
+com.ibm.j9.jsr292.MethodHandleTest:testBindTo AN-https://github.com/eclipse-openj9/openj9/issues/12571 generic-all
+    com.ibm.j9.jsr292.AsTypeTest:testAll AN-https://github.com/eclipse-openj9/openj9/issues/12571 generic-all
+    com.ibm.j9.jsr292.PermuteTest:testPermuteArguments AN-https://github.com/eclipse-openj9/openj9/issues/12571 generic-all
+    com.ibm.j9.jsr292.VirtualHandleTest:testIfVirtualHandleTestIsJitted AN-https://github.com/eclipse-openj9/openj9/issues/12571 generic-all
+    com.ibm.j9.jsr292.ConstructorHandleTest:testIfConstructorHandleIsJitted AN-https://github.com/eclipse-openj9/openj9/issues/12571 generic-all
+    com.ibm.j9.jsr292.ReceiverBoundHandleTest:testIfRecieverBoundHandleTestIsJitted AN-https://github.com/eclipse-openj9/openj9/issues/12571 generic-all
+    com.ibm.j9.jsr292.InterfaceHandleTest:testIfInterfaceHandleIsJitted AN-https://github.com/eclipse-openj9/openj9/issues/12571 generic-all
+```

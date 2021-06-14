@@ -1,0 +1,38 @@
+Failing job link: https://ci.adoptopenjdk.net/job/Test_openjdk15_j9_sanity.functional_x86-64_windows/60/consoleFull
+
+Test runs OK on other machines - e.g. test-ibmcloud-win2012r2-x64-1 (https://ci.adoptopenjdk.net/job/Test_openjdk15_j9_sanity.functional_x86-64_windows/59/consoleFull)
+
+Output of failing test:
+```
+10:04:05  ===============================================
+10:04:05  Running test shrtest_win_1 ...
+10:04:05  ===============================================
+10:04:05  shrtest_win_1 Start Time: Thu Jan 21 10:04:00 2021 Epoch Time (ms): 1611223440009
+10:04:05  "C:/Users/jenkins/workspace/Test_openjdk15_j9_sanity.functional_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java" -Xshareclasses:destroyAll; "C:/Users/jenkins/workspace/Test_openjdk15_j9_sanity.functional_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+10:04:05  JVMSHRC005I No shared class caches available
+10:04:05  JVMSHRC005I No shared class caches available
+10:04:05  cache cleanup done
+10:04:05  variation: Mode610
+10:04:05  JVM_OPTIONS:  -Xcompressedrefs -Xjit -Xgcpolicy:gencon 
+10:04:05  { itercnt=1; \
+10:04:05  mkdir -p "C:/Users/jenkins/workspace/Test_openjdk15_j9_sanity.functional_x86-64_windows/openjdk-tests/\\TKG\\test_output_16112186521746\\shrtest_win_1"; \
+10:04:05  cd "C:/Users/jenkins/workspace/Test_openjdk15_j9_sanity.functional_x86-64_windows/openjdk-tests/\\TKG\\test_output_16112186521746\\shrtest_win_1"; \
+10:04:05  export PATH="/cygdrive/c/Users/jenkins/workspace/Test_openjdk15_j9_sanity.functional_x86-64_windows/openjdkbinary/openjdk-test-image/openj9:/cygdrive/c/Users/jenkins/workspace/Test_openjdk15_j9_sanity.functional_x86-64_windows/openjdkbinary/j2sdk-image/bin/compressedrefs:/cygdrive/c/Users/jenkins/workspace/Test_openjdk15_j9_sanity.functional_x86-64_windows/openjdkbinary/j2sdk-image/bin/j9vm:/cygdrive/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/usr/bin:/cygdrive/c/Windows/system32:/cygdrive/c/Windows:/cygdrive/c/Windows/System32/Wbem:/cygdrive/c/Windows/System32/WindowsPowerShell/v1.0:/cygdrive/c/Strawberry/perl/bin:/cygdrive/c/Program Files/Git/cmd:/cygdrive/c/Program Files/Java/jdk8u172-b11/bin:/cygdrive/c/apache-ant/apache-ant-1.10.3/bin:/cygdrive/c/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit:/cygdrive/c/Program Files/Microsoft SQL Server/110/Tools/Binn:/cygdrive/c/Program Files (x86)/Microsoft SDKs/TypeScript/1.0:/cygdrive/c/Program Files/Microsoft SQL Server/120/Tools/Binn"; \
+10:04:05  '/cygdrive/c/Users/jenkins/workspace/Test_openjdk15_j9_sanity.functional_x86-64_windows/openjdkbinary/openjdk-test-image/openj9\\shrtest'  -Xcompressedrefs -Xjit -Xgcpolicy:gencon  -Djava.home='C:/Users/jenkins/workspace/Test_openjdk15_j9_sanity.functional_x86-64_windows/openjdkbinary/j2sdk-image\\' '-Xbootclasspath/a:"dummy1;dummy2;dummy3"' ; \
+10:04:05  if [ $? -eq 0 ] ; then echo ""; echo "shrtest_win_1""_PASSED"; echo ""; cd C:/Users/jenkins/workspace/Test_openjdk15_j9_sanity.functional_x86-64_windows/openjdk-tests/; rm -f -r "C:/Users/jenkins/workspace/Test_openjdk15_j9_sanity.functional_x86-64_windows/openjdk-tests/\\TKG\\test_output_16112186521746\\shrtest_win_1"; else echo ""; echo "shrtest_win_1""_FAILED"; echo ""; fi; } 2>&1 | tee -a "C:/Users/jenkins/workspace/Test_openjdk15_j9_sanity.functional_x86-64_windows/openjdk-tests/\\TKG\\test_output_16112186521746\\TestTargetResult";
+10:04:05  JVMJ9VM011W Unable to load j9jit29: JVMPORT015E Unable to resolve shared library references - a prerequisite shared library may be missing
+10:04:05  JVMJ9VM004E Cannot load library required by: -Xjit
+10:04:05  
+10:04:05  Cound not create jvm for transaction tests. Exiting unit test...
+10:04:05  JVMJ9VM011W Unable to load j9jit29: JVMPORT015E Unable to resolve shared library references - a prerequisite shared library may be missing
+10:04:05  JVMJ9VM004E Cannot load library required by: -Xjit
+10:04:05  
+10:04:05  Cound not create jvm for transaction tests. Exiting unit test...
+10:04:05  JVMJ9VM011W Unable to load j9jit29: JVMPORT015E Unable to resolve shared library references - a prerequisite shared library may be missing
+10:04:05  JVMJ9VM004E Cannot load library required by: -Xjit
+10:04:05  
+10:04:05  Cound not create jvm. Exiting unit test...
+10:04:05  /bin/sh: line 5: 12372 Segmentation fault      '/cygdrive/c/Users/jenkins/workspace/Test_openjdk15_j9_sanity.functional_x86-64_windows/openjdkbinary/openjdk-test-image/openj9\\shrtest' -Xcompressedrefs -Xjit -Xgcpolicy:gencon -Djava.home='C:/Users/jenkins/workspace/Test_openjdk15_j9_sanity.functional_x86-64_windows/openjdkbinary/j2sdk-image\\' '-Xbootclasspath/a:"dummy1;dummy2;dummy3"'
+10:04:05  
+10:04:05  shrtest_win_1_FAILED
+```

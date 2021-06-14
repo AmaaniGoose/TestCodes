@@ -1,0 +1,39 @@
+CMake based builds on xlinux have a differing info in the ddr blob. Some of these may be a result of faults in the cmake ddr handling , others may be as a result of slightly different build configurations
+
+Type: CacheLifecycleManagerConstants
+  - [ ] constant J9SH_DESTROY_TOP_LAYER_ONLY is missing
+
+Type: J9BuildFlags
+- [ ] constant J9VM_ARCH_AARCH64 is missing
+- [ ] constant J9VM_ARCH_RISCV is missing
+- [ ] constant J9VM_BUILD_OPENJ9_JDK8 is missing
+- [ ] constant J9VM_ENV_CROSSBUILD is missing
+- [ ] constant J9VM_GC_ENABLE_DOUBLE_MAP is missing (#7983)
+- [ ] constant J9VM_GC_STACCATO is missing
+- [ ] constant J9VM_INTERP_ATOMIC_FREE_JNI_USES_FLUSH is missing (#8316)
+- [ ] constant J9VM_INTERP_TWO_PASS_EXCLUSIVE is missing (#8316)
+- [ ] constant J9VM_IVE_RAW_BUILD is missing
+- [ ] constant J9VM_OPT_USE_OMR_DDR is missing
+
+Type: J9PortLibrary
+- [ ] constant J9PORT_CAPABILITY_MASK is missing
+- [ ] constant J9PORT_CAPABILITY_MASK_CAN_RESERVE is missing
+
+Type: J9VMGC_SublistFragment
+ - [ ] constant J9MMCONSTANT_IMPLICIT_GC_PERCOLATE_ABORTED_SCAVENGE is missing
+
+Type: OmrBuildFlags
+ - [ ] constant HAVE_DWARF_H is missing
+ - [ ] constant HAVE_LIBDWARF_DWARF_H is missing
+ - [ ] constant HAVE_LIBDWARF_H is missing
+ - [ ] constant HAVE_LIBDWARF_LIBDWARF_H is missing
+ - [ ] constant OMR_INTERP_COMPRESSED_OBJECT_HEADER is missing
+ - [ ] constant OMR_VALGRIND_MEMCHECK is missing
+
+Type: TRBuildFlags
+ - [ ] constant HOST_ARCH is missing
+ - [ ] constant HOST_COMPILER is missing
+ - [ ] constant HOST_OS is missing
+ - [ ] constant TARGET_ARCH is missing
+ - [ ] constant TR_HOST_64BIT is missing
+ - [ ] constant TR_HOST_X86 is missing

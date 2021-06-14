@@ -1,0 +1,21 @@
+Creating this issue to keep track of off-heap (know as sparse-heap internally) technology delivery course.
+
+Technology summary:
+
+Introduce an optimized memory management for large arrays in region-based garbage collector, more specifically a new heap scheme and large object organization (in-heap and off-heap), enhanced method for allocating large objects (proxy objects) and an optimized technique of accessing large array during runtime (JIT optimizations). 
+This organization not only unburdens large segregated array allocation from the heap, but it also preserves the illusion to the Just-In-Time (JIT) compiler through a clever object layout that all array elements can be accessed as if all arrays were contiguous. Furthermore, we can leverage such object layout (object proxies) to optimize memory management for large objects in a heap, by introducing off-heap.
+
+Deliverables (action items):
+
+- [ ] Proxy objects (headers), which resides in heap and points to data residing outside the heap (later introduced as sparse-heap); 
+- [x] Phase 1: Introduce extra U_64 data field to Indexable Object Headers https://github.com/eclipse/openj9/pull/11755
+- [ ] Phase 2: Make sure `dataAddr` field always contain the correct value, which is the address pointing right after array header
+- [ ] Phase 3: Make use of introduced extra `void *` data field
+
+- [ ] Mechanism that provides a way to map sparse-heap data back to proxy objects. 
+
+- [ ] Introduce an off-heap/secondary-heap for very large object. This heap relies on vast, under-utilized 64-bit address space; hence, it is large enough to store any large object without the need of compaction ever.
+
+- [ ] Mechanism to identify all off-heap objects. Since there's no need to ever compact the off-heap, we'll introduce a mechanism that identifies large objects in the off-heap area and release them whenever they die.
+
+cc: @amicic @dmitripivkine @fjeremic @vijaysun-omr 

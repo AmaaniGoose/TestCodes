@@ -1,0 +1,9 @@
+Currently method handle chain should be inlined within one pass of inlining together with all the other normal Java methods https://github.com/eclipse/openj9/pull/6173. However, there are cases where the method handle thunk might not be inlined in the normal inlining and require a second pass:
+1. because of various heuristic in inlining there is still a chance the `java_lang_invoke_MethodHandle_invokeExact ` is not inlined. The chance is very low as we have carefully changed all the heuristics we can find but just in case.
+2. abstract interpretation doesn't support the entire family of bytecodes or any random control flow. Ideally, interpreter abstraction should be able to have complete support and make this second case non-exist. 
+
+With the above limitations, methodHandleInvokeInliningOpts is still needed and the opts there are used to guarantee known object info are propagated completed.
+
+https://github.com/eclipse/omr/blob/9d441291693d1ea018ca2fcea6878470cbb015c0/compiler/optimizer/OMROptimizer.cpp#L329-L340
+
+We should try to remove methodHandleInvokeInliningOpts completely or at least some of the opts in there as they may do more than inlining asks for and cause surprises. 

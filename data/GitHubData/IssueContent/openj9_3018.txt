@@ -1,0 +1,9 @@
+Static final fields can't be folded without any protection because Java provides several ways to modify their values. With the support of reporting the write to a static final field after initialization in the VM, plus a flag on J9Class telling us whether the class has one or more illegal writes to its static final fields, the JIT can constant fold static final fields with OSR guards. When an illegal write occurs, the JIT will be notified and handle assumptions that are violated.
+
+- [x] JIT hook to handle event of illegal write #2580
+- [x] Report illegal write from unsafe in the JIT #2843 #2829
+- [x] OSR bookkeeping for MethodHandle invoke #3466
+- [x]  Use potentialOSRPointHelper call as a marker of OSR point #3531
+- [x] Refactor: pull the transformation of static final field folding into its own function #3159
+- [x] Add an opt to fold static final field with fear #2885
+- [ ] Optimizations like loop version to be aware that a load with known object index can be flow sensitive, and should not be moved pass a OSR guard.

@@ -1,0 +1,17 @@
+CMake build is enabled by default for OpenJ9 Java 11 for AArch64 Linux.
+That does not work as expected in cross-building environment as shown below:
+
+```
+-- The ASM compiler identification is GNU
+-- Found assembler: /root/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc
+-- Looking for clock_gettime
+-- Looking for clock_gettime - found
+-- OMR: trace root is '/root/openj9/openj9-openjdk-jdk11/build/linux-aarch64-normal-server-release/vm/runtime'
+-- Starting with CMake version 3.5.1
+-- Found Git: /usr/bin/git (found version "2.7.4")
+-- Configuring incomplete, errors occurred!
+See also "/root/openj9/openj9-openjdk-jdk11/build/linux-aarch64-normal-server-release/vm/CMakeFiles/CMakeOutput.log".
+/root/openj9/openj9-openjdk-jdk11/closed/OpenJ9.gmk:388: recipe for target '/root/openj9/openj9-openjdk-jdk11/build/linux-aarch64-normal-server-release/vm/cmake.stamp' failed
+make[3]: *** [/root/openj9/openj9-openjdk-jdk11/build/linux-aarch64-normal-server-release/vm/cmake.stamp] Error 1
+/root/openj9/openj9-openjdk-jdk11/closed/custom/Main.gmk:56: recipe for target 'j9vm-build' failed
+```

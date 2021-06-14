@@ -1,0 +1,1 @@
+It would be useful if the JIT printed when a compilation thread is shutting down right in the verbose log. This can be used as an indication that a particular JVM has terminated in a multi-JVM environment where multiple verbose logs are collected.

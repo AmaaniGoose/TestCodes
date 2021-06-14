@@ -1,0 +1,21 @@
+Machine test-aws-ubuntu1804-armv8-1 fails testSCCMLTests1_openj9_1 Test 26 for nightly openjdk11 Aarch64 with timeout error, https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.functional_aarch64_linux/1. 
+
+After testing with other machines (test-packet-ubuntu1604-armv8-2, test-aws-rhel76-armv8-2, test-aws-rhel76-armv8-4, test-packet-ubuntu1604-armv8-1), they all passed this test, with links https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/4002 - 4005, only the same machine as nightly build (test-aws-ubuntu1804-armv8-1) still hangs at testSCCMLTests1_openj9_1 Test 26 (I manually cancelled after hanging for 1 hour) https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/4007/. Thanks.
+
+Related issue: eclipse/openj9#10741
+
+Failure Output:
+```
+21:24:09  Testing: Test 26: CMVC 168131 : Create a non persistent cache
+21:24:09  Test start time: 2020/09/29 01:24:08 Coordinated Universal Time
+21:24:09  Running command: "/home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java"  -Xcompressedrefs -Xjit -Xgcpolicy:gencon  -Xshareclasses:name=ShareClassesCMLTests,nonpersistent -version
+21:24:09  Time spent starting: 1 milliseconds
+21:34:08  ***[TEST INFO 2020/09/29 01:34:08] ProcessKiller detected a timeout after 600000 milliseconds!***
+21:34:08  INFO: getUnixPID() has failed indicating this is not a UNIX System.'Debug on timeout' is currently only supported on Linux.
+21:34:08  
+21:34:08  
+Cancelling nested steps due to timeout
+06:34:24  Sending interrupt signal to process
+06:34:26  Time spent executing: 33016381 milliseconds
+06:34:26  Test result: FAILED
+```

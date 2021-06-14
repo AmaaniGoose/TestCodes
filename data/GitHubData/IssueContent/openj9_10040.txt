@@ -1,0 +1,39 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk14_j9_extended.functional_x86-64_mac_Nightly_testList_0/33
+TestJcmd_0
+```
+FAILED: testCommandHelps
+java.lang.AssertionError: Help text corrupt: [Usage : jcmd <vmid> <arguments>, ,    -J : supply arguments to the Java VM running jcmd,    -l : list JVM processes on the local machine,    -h : print this help message, ,    <vmid> : Attach API VM ID as shown in jps or other Attach API-based tools, ,    arguments:,       help : print the list of diagnostic commands,       help <command> : print help for the specific command,       <command> [command arguments] : command from the list returned by "help", , list JVM processes on the local machine. Default behavior when no options are specified., , NOTE: this utility might significantly affect the performance of the target JVM.,     The available diagnostic commands are determined by,     the target VM and may vary between VMs.] expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:96)
+	at org.testng.Assert.failNotEquals(Assert.java:776)
+	at org.testng.Assert.assertTrue(Assert.java:44)
+	at org.openj9.test.attachAPI.TestJcmd.testCommandHelps(TestJcmd.java:114)
+```
+
+```
+FAILED: testCommandWrongArgumentNumber
+java.lang.AssertionError: Expected string "Error: wrong number of arguments" not found expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:96)
+	at org.testng.Assert.failNotEquals(Assert.java:776)
+	at org.testng.Assert.assertTrue(Assert.java:44)
+	at org.openj9.test.attachAPI.TestJcmd.testCommandWrongArgumentNumber(TestJcmd.java:146)
+```
+
+```
+FAILED: testNoCommandOptions
+java.lang.AssertionError: Expected string "java.util.HashMap" not found expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:96)
+	at org.testng.Assert.failNotEquals(Assert.java:776)
+	at org.testng.Assert.assertTrue(Assert.java:44)
+	at org.openj9.test.attachAPI.TestJcmd.testNoCommandOptions(TestJcmd.java:161)
+```
+
+```
+FAILED: testThreadPrint
+java.lang.AssertionError: Output contains locked synchronizer information: Locked ownable synchronizers expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:96)
+	at org.testng.Assert.failNotEquals(Assert.java:776)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:137)
+	at org.testng.Assert.assertEquals(Assert.java:118)
+	at org.testng.Assert.assertEquals(Assert.java:568)
+	at org.openj9.test.attachAPI.TestJcmd.testThreadPrint(TestJcmd.java:182)
+```

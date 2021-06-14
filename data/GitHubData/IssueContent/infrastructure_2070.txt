@@ -1,0 +1,10 @@
+
+Details:
+
+We now have multiple hosts on various architectures (x64, aarch64 and ppc64le) which we are using for hosting docker containers for running tests. Now that we have ironed out the problems associated with doing this we need to formalise things a bit more with the following steps:
+
+- [ ] Define and implement patching policy
+- [ ] Define update process when the docker files are updated
+- [ ] Determine optimal capacities for the containers based on host size and implement via the playbook role
+
+There is a separate issue regarding the naming of these host systems

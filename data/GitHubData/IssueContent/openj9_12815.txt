@@ -1,0 +1,96 @@
+### Summary
+We found that there is no restriction on structured locking in J9, that is, *entermonitor* and *exitmonitor* can appear unpaired. We checked the existing ISSUES and found that there were already similar problems. #9276
+ I agree with the explanation in this issues. According to the JVM specification, this seems to be no problem. But this seems to be unreasonable and will introduce new bugs. Perhaps this is where the JVM specification is not fully considered.
+
+For example, given a test case as shown below. There are two threads in this test case, thread *t1* tries to acquire *lock1*, thread *t2* first acquires *lock2* and then tries to acquire *lock1*. If we execute this program directly, it will execute normally and exit, since *lock1* will be released after t1 is finished, which can be verified by executing src1.ISME in the attachment. 
+```
+public class ISME {
+
+    public static Object lock1 = new Object();
+    public static Object lock2 = new Object();
+
+    public static void acquireLock1First(){
+
+        synchronized (lock1){
+        }
+    }
+
+    public static void acquireLock2First(){
+
+        synchronized (lock2){
+            synchronized (lock1){}
+        }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+
+        Thread t1 = new Thread(() -> {
+            acquireLock1First();
+        });
+        Thread t2 = new Thread(() -> {
+            acquireLock2First();
+        });
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+        System.out.println("finish...");
+    }
+}
+```
+
+However, if we delete the code after entermoniter in the *acquireLock1First*, that is, thread *t1* does not release *lock1* after executing the *acquireLock1First*, which leads to a deadlock in this program. This can be verified by implementing src2.ISME in the attachment.
+
+*Before：*
+```
+ public static Method acquireLock1First:"()V"
+stack 2 locals 2
+ {
+	getstatic	Field lock1:"Ljava/lang/Object;";
+	dup;
+	astore_0;
+	monitorenter;
+	try t0;
+	aload_0;
+	monitorexit;
+	endtry t0;
+	goto	L16;
+	catch t0 #0;
+	catch t1 #0;
+	try t1;
+	stack_frame_type full;
+	locals_map class java/lang/Object;
+	stack_map class java/lang/Throwable;
+	astore_1;
+	aload_0;
+	monitorexit;
+	endtry t1;
+	aload_1;
+	athrow;
+L16:	stack_frame_type chop1;
+	return;
+ }
+```
+
+*After：*
+```
+ public static Method acquireLock1First:"()V"
+stack 2 locals 2
+ {
+	getstatic	Field lock1:"Ljava/lang/Object;";
+	dup;
+	astore_0;
+	monitorenter;
+	return;
+ }
+```
+
+This is a very simple example, think about that, if this is a very complicated concurrent program. And if there exists malicious code modification, it is very difficult to find such bugs. Considering this kind of problem,  since it's always a deadlock,  is it  more user-friendly to throw an exception?
+
+I think that at least when the method exits, it is necessary to check whether the locks held in the method are correctly released, so as to avoid some unknown bugs. This will make the bug location more accurate and easy, since concurrency bug detection and location is very challenging.
+
+Anyway, this is a suggestion issue. 😌
+
+## How to reproduce?
+[ISME.zip](https://github.com/eclipse-openj9/openj9/files/6583730/ISME.zip)
+Follow the commands in readme.

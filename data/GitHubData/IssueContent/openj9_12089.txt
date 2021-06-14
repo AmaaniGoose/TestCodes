@@ -1,0 +1,17 @@
+Track Progress of Low-pause GC Concurrent Copy Forward
+
+The purpose of this issue is to keep track of development of low-pause Garbage Collector (GC) - concurrent copy forward, and conduct any discussions as necessary. The following is a rough plan of what’s to come. This plan is subject to modifications as new findings/development progress. 
+
+- [ ] Refactor/organize `IncrementalGenerationalGG` / `CopyForward` code 
+
+- [ ] Introduce `MM_ConcurrentCopyForwardSchemeTask` which is the equivalent of Concurrent Scavenger `MM_ConcurrentScavengeTask`. Also introduce CopyForward state machine that will dictate concurrent CopyForward phase transitions. 
+- [ ] First phase of Concurrent Partial GC (PGC): divide current PGC into 3 separate Stop the World (STW) phases and start to make use of introduced concurrent CopyForward code from above. These 3 STW phases (`STW -> STW -> STW`) will eventually become 2 STW phases and one middle concurrent phase (`STW -> concurrent -> STW`)
+- [ ] Introduce read barriers
+- [ ] Second phase of Concurrent PGC: start to make use of read barriers to transition to `STW -> concurrent -> STW` phase
+- [ ] Switch Global Marking Phase (GMP) to use Snapshot-At-The-Beginning (SATB) style Write barrier
+
+Additional details/plan for Concurrent Copy Forward goal:
+
+- PGC what is an evacuating style of GC will be made concurrent. Load Reference Barrier will be triggered on region check via a look up table. As it's the case already (with STW variant), it will be by default an one-pass GC, where references outside of Collection Set are fixed during the Remembered Set (RS) scan phase.
+- GMP will be converted to use SATB  style Write barrier to avoid final STW Card Clearing phase
+- Sweep (as an explicit STW operation piggybacked to first PGC after GMP is completed) will be eliminated. 

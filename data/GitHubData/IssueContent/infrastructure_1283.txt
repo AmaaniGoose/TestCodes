@@ -1,0 +1,1 @@
+Currently we only have 1 machine to build the den/rpm files and this is shared with the docker builds. This can cause a massive delay in getting releases out. Let’s get the required dependencies added to ansible.

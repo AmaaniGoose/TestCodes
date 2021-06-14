@@ -1,0 +1,3 @@
+The `jenkins.log` on our server is full of exceptions. We should go through and try and clea it up otherwise the server is wasting time dealing with all those issues.
+
+This will require someone with elevated access to fully analyse and resolve.

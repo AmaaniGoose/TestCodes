@@ -1,0 +1,5 @@
+With the removal of shrink wrapping (see eclipse/omr#2107) the register save description encoded in the GC stack map (and therefore encoded in a method's metadata) is no longer required.  Carefully remove it.
+
+This is the only consumer of the RSD from the Instruction class, which is not set anywhere and is slated for removal in #7203.
+
+Note, the Register Save Description in the CodeGenerator is still required.

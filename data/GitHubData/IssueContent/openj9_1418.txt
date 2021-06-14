@@ -1,0 +1,18 @@
+As far as I can see we only support a legacy view of page sizes where there is a default page size (typically 4K) and a single huge page size (typically either 4M or 1G on Linux). The size of the huge pages looks to be parsed from /proc/meminfo Hugepagesize: entry. In modern systems that can have multiple pools of hugepages of different sizes, the singular value in /proc/meminfo corresponds to the default hugepage size.
+
+The extended large page command line options
+`-Xlp:objectheap:pagesize=<size> -Xlp:codecache:pagesize=<size>`
+
+lend themselves to using multiple large page sizes. For example, on many systems it is likely that using 1G pages for the heap and 2M pages for the codecache would be an optimal choice. Even for the case of the simpler combined option `-Xlp<size>` it would be very useful to be able to choose the non-default hugepage size, which is currently not possible.
+
+Selection of the pagesize is achieved by passing one of SHM_HUGE_2MB, SHM_HUGE_1GB in the flags param of shmget.
+
+The available hugepage sizes can be determined by parsing the directories in /sys/kernel/mm/hugepages/ , e.g.
+```
+kingdon7 hugepages # ls -l /sys/kernel/mm/hugepages/
+total 0
+drwxr-xr-x 2 root root 0 Mar 11 16:59 hugepages-1048576kB
+drwxr-xr-x 2 root root 0 Mar 11 16:59 hugepages-2048kB
+```
+
+The number of available pages of each size is indicated by reading the contents of free_hugepages in the respective subdirectory.

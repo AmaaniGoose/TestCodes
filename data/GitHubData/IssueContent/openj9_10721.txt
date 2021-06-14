@@ -1,0 +1,19 @@
+GC Benchmark [Heapothesys  ](https://github.com/corretto/heapothesys/tree/master/HyperAlloc) (now called HyperAlloc) was used to compare performance of OpenJ9's Gencon, and Balanced GC's, as well as Hotspot's G1 collector. 
+
+A series of tests were run on all 3 GC's, to compare performance, and to find areas where OpenJ9's GC's could improve.
+There were 3 major issues/areas of improvement for OpenJ9's GC's, which were: 
+
+1. Long GC times due to verbose GC hook
+2. Suboptimal Eden/Nursery Sizing (both over and undersized)
+3. Longer average pause times in Balanced. 
+
+The file below contains a more thorough description of each problem.
+[Heapothesys Benchmark Summary.docx](https://github.com/eclipse/openj9/files/5293369/Heapothesys.Benchmark.Summary.docx)
+
+A brief summary of the 3 OpenJ9 problems:
+
+1. A handful of times per test, the `<exclusive-end>`'s duration, was 10-20x larger than `<gc-end>`'s duration, when verbose GC was being redirected to a file (both using &> file.out, and -Xverbosegclog). Using `-Xgc:bufferedLogging` option helped resolve this issue. All tests were run on a rhel6 machine set to retire in the coming weeks, and it is suspected that this machines age may have played a factor. This issue was not reproducible on other machines, or using other benchmarks.
+
+2. The division of eden/nursery is not always optimal, especially when the heap starts fully expanded (ie, -Xmx == -Xms). Unless specified by CL option, nursery/eden each take 25% of the heap when heap fully expanded. In tests where only -Xmx was provided, gencon allowed nursery to gradually expand, eventually taking 55% of the heap, which significantly improved performance. The expansion/contraction of nursery currently does not happen when heap is fully expanded. For Balanced, eden follows expansion logic which is driven by the current size of heap (by default, takes 25% of the current heap size).  Just like in Gencon, Balanced should be able to expand/shrink eden if performance can be improved. 
+
+3. Average Pause times were observed to be ~50% longer in Balanced than the other2 GC's. This area was not investigated as thoroughly as the first 2, but is certainly an area where Balanced can improve. The attached file contains additional details regarding the investigations which were done for this issue.

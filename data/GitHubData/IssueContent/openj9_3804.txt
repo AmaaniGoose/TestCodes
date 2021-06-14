@@ -1,0 +1,15 @@
+The JIT in OpenJ9 has a notion of recognized methods that are used to check for particular methods.  It also has ways of checking for a group of related methods (e.g., `java_util_Hashmap_all`).  Having a similar way of tracking recognized classes and groups of related classes would be handy.  Today, classes are recognized by performing `strcmp` and `strncmp` on their names or parts of their names, which is clumsy and can result in obscure coding errors.
+
+This idea was suggested by Filip Jeremic @fjeremic  in https://github.com/eclipse/openj9/pull/2752#pullrequestreview-176973358 in relation to a check introduced for the classes that wrap the primitive types:
+
+```
+   if (!strncmp("java/lang/", className, 10) &&
+          (!strcmp("Integer", &className[10]) ||
+           !strcmp("Long", &className[10]) ||
+           !strcmp("Short", &className[10]) ||
+           !strcmp("Byte", &className[10]) ||
+           !strcmp("Boolean", &className[10]) ||
+           !strcmp("Character", &className[10]) ||
+           !strcmp("Double", &className[10]) ||
+           !strcmp("Float", &className[10])))
+```

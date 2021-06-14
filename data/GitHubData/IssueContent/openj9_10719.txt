@@ -1,0 +1,3 @@
+See https://github.com/eclipse/openj9/pull/6908#issuecomment-671357778 for a background into the problem that surfaced this issue.
+
+A proposed solution to the above problem is that we should look into having a common place in the codegen where calls such as `java/lang/invoke/ComputedCalls.dispatchJ9Method_L` are recognized, and handled accordingly (for remote and AOT compilations) so that relocations can also be handled properly. This problem exists on all platforms and the solution should be implemented in the common codegen. 

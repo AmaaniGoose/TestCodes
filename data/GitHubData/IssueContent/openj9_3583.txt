@@ -1,0 +1,208 @@
+https://ci.eclipse.org/openj9/job/Test-extended.functional-JDK11-aix_ppc-64_cmprssptrs/66
+```
+      java.lang.AssertionError: -Xcheck:memory failed: stderr = WARNING: 4450 unfreed blocks remaining at shutdown!
+WARNING: 0 blocks were ignored per ignoredCallsite parameter
+WARNING: only 32 most recent leaked blocks will be described
+port_shutdown_library describing block at 00000000400C36B0 (header at 00000000400C34B0):
+Wrapped block size is 1032, allocation number is 8068
+Block was allocated by segment.c:233
+First 32 bytes:
+00000000400C36B0: 00 00 00 00 40 0C 37 00 E7 E7 40 0C 36 B0 E7 E7  ....@.7...@.6...
+00000000400C36C0: E7 E7 40 0C 36 B0 E7 E7 E7 E7 40 0C 36 B0 E7 E7  ..@.6.....@.6...
+port_shutdown_library describing block at 00000001108B7730 (header at 00000001108B7530):
+Wrapped block size is 1104, allocation number is 8064
+Block was allocated by segment.c:238
+First 32 bytes:
+00000001108B7730: 00 00 04 50 00 00 00 00 00 00 01 E0 00 00 02 1A  ...P............
+00000001108B7740: 00 00 10 30 0A 84 08 00 00 00 00 01 00 00 01 10  ...0............
+port_shutdown_library describing block at 0000000111972A50 (header at 0000000111972850):
+Wrapped block size is 8296, allocation number is 8060
+Block was allocated by trclog.c:1022
+First 32 bytes:
+0000000111972A50: 55 54 54 42 00 00 20 68 00 00 00 05 00 00 00 00  UTTB.. h........
+0000000111972A60: 00 00 00 01 11 37 D9 F0 E7 E7 11 97 2A 50 E7 E7  .....7......*P..
+port_shutdown_library describing block at 0000000111361D10 (header at 0000000111361B10):
+Wrapped block size is 16, allocation number is 8041
+Block was allocated by vmthread.c:138
+First 16 bytes:
+0000000111361D10: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+port_shutdown_library describing block at 00000000400C6300 (header at 00000000400C6100):
+Wrapped block size is 2984, allocation number is 8040
+Block was allocated by vmthread.c:121
+First 32 bytes:
+00000000400C6300: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+00000000400C6310: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+port_shutdown_library describing block at 000000011189BC30 (header at 000000011189BA30):
+Wrapped block size is 104, allocation number is 8031
+Block was allocated by jnicsup.cpp:1937
+First 32 bytes:
+000000011189BC30: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+000000011189BC40: 00 00 00 00 00 00 00 00 00 00 00 01 11 80 28 08  ..............(.
+port_shutdown_library describing block at 000000011189B770 (header at 000000011189B570):
+Wrapped block size is 104, allocation number is 8030
+Block was allocated by jnicsup.cpp:1937
+First 32 bytes:
+000000011189B770: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+000000011189B780: 00 00 00 00 00 00 00 00 00 00 00 01 11 80 27 E0  ..............'.
+port_shutdown_library describing block at 00000001114F7A50 (header at 00000001114F7850):
+Wrapped block size is 104, allocation number is 8026
+Block was allocated by jnicsup.cpp:1937
+First 32 bytes:
+00000001114F7A50: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+00000001114F7A60: 00 00 00 00 00 00 00 00 00 00 00 01 11 80 27 B8  ..............'.
+port_shutdown_library describing block at 0000000111903650 (header at 0000000111903450):
+Wrapped block size is 8296, allocation number is 7982
+Block was allocated by trclog.c:1022
+First 32 bytes:
+0000000111903650: 55 54 54 42 00 00 20 68 00 00 00 05 00 00 00 00  UTTB.. h........
+0000000111903660: 00 00 00 01 11 36 53 90 E7 E7 11 90 36 50 E7 E7  .....6S.....6P..
+port_shutdown_library describing block at 00000001108CEC70 (header at 00000001108CEA70):
+Wrapped block size is 16, allocation number is 7966
+Block was allocated by vmthread.c:138
+First 16 bytes:
+00000001108CEC70: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+port_shutdown_library describing block at 00000000400C5308 (header at 00000000400C5108):
+Wrapped block size is 2984, allocation number is 7965
+Block was allocated by vmthread.c:121
+First 32 bytes:
+00000000400C5300: -  -  -  -  -  -  -  -  E7 E7 40 0C 53 08 E7 E7          ..@.S...
+00000000400C5310: E7 E7 40 0C 53 08 E7 E7 E7 E7 40 0C 53 08 E7 E7  ..@.S.....@.S...
+00000000400C5320: E7 E7 40 0C 53 08 E7 E7                          ..@.S...
+port_shutdown_library describing block at 000000004025D420 (header at 000000004025D220):
+Wrapped block size is 32768, allocation number is 7956
+Block was allocated by segment.c:233
+First 32 bytes:
+000000004025D420: 00 00 00 00 40 26 46 00 00 00 00 00 40 00 BE 00  ....@&F.....@...
+000000004025D430: 00 00 00 00 40 25 DD 00 00 00 00 01 11 81 D2 98  ....@%..........
+port_shutdown_library describing block at 00000001108CE7B0 (header at 00000001108CE5B0):
+Wrapped block size is 82, allocation number is 7948
+Block was allocated by stringhelpers.cpp:335
+First 32 bytes:
+00000001108CE7B0: 44 65 73 74 72 6F 79 4A 61 76 61 56 4D 20 68 65  DestroyJavaVM he
+00000001108CE7C0: 6C 70 65 72 20 74 68 72 65 61 64 00 E7 B0 E7 E7  lper thread.....
+port_shutdown_library describing block at 00000001107D1410 (header at 00000001107D1210):
+Wrapped block size is 12, allocation number is 7946
+Block was allocated by trcmain.c:1007
+First 12 bytes:
+00000001107D1410: 4A 56 4D 56 4D 55 54 30 30 31 20 00              JVMVMUT001 .
+port_shutdown_library describing block at 0000000110816450 (header at 0000000110816250):
+Wrapped block size is 88, allocation number is 7945
+Block was allocated by trcmain.c:997
+First 32 bytes:
+0000000110816450: 55 54 54 44 00 00 00 58 00 00 00 05 00 00 00 00  UTTD...X........
+0000000110816460: 00 00 00 00 40 00 AC 00 00 00 00 01 10 06 7A 00  ....@.........z.
+port_shutdown_library describing block at 00000001107D5C50 (header at 00000001107D5A50):
+Wrapped block size is 104, allocation number is 7936
+Block was allocated by ../../omr/port/common/omrtlshelpers.c:65
+First 32 bytes:
+00000001107D5C50: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+00000001107D5C60: 00 00 00 02 FF FF FF 94 00 00 00 00 00 00 00 00  ................
+port_shutdown_library describing block at 00000001107D6290 (header at 00000001107D6090):
+Wrapped block size is 352, allocation number is 7933
+Block was allocated by TLHAllocationInterface.cpp:57
+First 32 bytes:
+00000001107D6290: 00 00 00 00 00 00 01 50 00 00 00 00 62 90 E7 E7  .......P....b...
+00000001107D62A0: 09 00 10 00 B3 7F BB 38 09 00 00 02 7B E6 65 9C  .......8....{.e.
+port_shutdown_library describing block at 00000001107D5630 (header at 00000001107D5430):
+Wrapped block size is 88, allocation number is 7932
+Block was allocated by OwnableSynchronizerObjectBufferStandard.cpp:47
+First 32 bytes:
+00000001107D5630: 00 00 00 00 00 00 00 48 00 00 00 00 56 30 E7 E7  .......H....V0..
+00000001107D5640: 09 00 10 00 B3 7F 10 18 09 00 00 02 7B E4 51 80  ............{.Q.
+port_shutdown_library describing block at 00000001107D4EB0 (header at 00000001107D4CB0):
+Wrapped block size is 88, allocation number is 7931
+Block was allocated by UnfinalizedObjectBufferStandard.cpp:47
+First 32 bytes:
+00000001107D4EB0: 00 00 00 00 00 00 00 48 00 00 00 00 4E B0 E7 E7  .......H....N...
+00000001107D4EC0: 09 00 10 00 B3 7F 0F 98 09 00 00 02 7B E4 50 70  ............{.Pp
+port_shutdown_library describing block at 00000001107CC590 (header at 00000001107CC390):
+Wrapped block size is 88, allocation number is 7930
+Block was allocated by ReferenceObjectBufferStandard.cpp:46
+First 32 bytes:
+00000001107CC590: 00 00 00 00 00 00 00 48 00 00 00 00 C5 90 E7 E7  .......H........
+00000001107CC5A0: 09 00 10 00 B3 7F 0F 18 09 00 00 02 7B E4 4F 94  ............{.O.
+port_shutdown_library describing block at 0000000110763C70 (header at 0000000110763A70):
+Wrapped block size is 88, allocation number is 7929
+Block was allocated by LargeObjectAllocateStats.cpp:85
+First 32 bytes:
+0000000110763C70: 00 00 00 00 00 00 00 48 00 00 00 00 3C 70 E7 E7  .......H....<p..
+0000000110763C80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+port_shutdown_library describing block at 00000001107D4690 (header at 00000001107D4490):
+Wrapped block size is 976, allocation number is 7928
+Block was allocated by LargeObjectAllocateStats.cpp:60
+First 32 bytes:
+00000001107D4690: 00 00 00 00 00 00 03 C0 00 00 00 00 46 90 E7 E7  ............F...
+00000001107D46A0: E7 E7 10 7D 46 90 E7 E7 E7 E7 10 7D 46 90 E7 E7  ...}F......}F...
+port_shutdown_library describing block at 00000001107D3E70 (header at 00000001107D3C70):
+Wrapped block size is 960, allocation number is 7927
+Block was allocated by LargeObjectAllocateStats.cpp:54
+First 32 bytes:
+00000001107D3E70: 00 00 00 00 00 00 03 B0 00 00 00 00 3E 70 E7 E7  ............>p..
+00000001107D3E80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+port_shutdown_library describing block at 00000001105C0090 (header at 00000001105BFE90):
+Wrapped block size is 960, allocation number is 7926
+Block was allocated by LargeObjectAllocateStats.cpp:46
+First 32 bytes:
+00000001105C0090: 00 00 00 00 00 00 03 B0 00 00 00 00 00 90 E7 E7  ................
+00000001105C00A0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+port_shutdown_library describing block at 00000001107D1A10 (header at 00000001107D1810):
+Wrapped block size is 8192, allocation number is 7925
+Block was allocated by ConfigurationStandard.cpp:273
+First 32 bytes:
+00000001107D1A10: 00 00 00 00 00 00 00 01 00 00 00 40 00 00 00 00  ...........@....
+00000001107D1A20: 00 00 00 00 00 00 00 00 00 00 00 00 00 3A 53 08  .............:S.
+port_shutdown_library describing block at 00000001105BEC30 (header at 00000001105BEA30):
+Wrapped block size is 4096, allocation number is 7924
+Block was allocated by vmthread.c:228
+First 32 bytes:
+00000001105BEC30: 00 00 00 00 00 00 00 00 00 00 00 48 00 00 00 44  ...........H...D
+00000001105BEC40: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+port_shutdown_library describing block at 00000001105BE7B0 (header at 00000001105BE5B0):
+Wrapped block size is 24, allocation number is 7923
+Block was allocated by vmthread.c:228
+First 24 bytes:
+00000001105BE7B0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 04 78  ...............x
+00000001105BE7C0: 00 00 00 00 00 00 04 70                          .......p
+port_shutdown_library describing block at 000000011010B6F0 (header at 000000011010B4F0):
+Wrapped block size is 72, allocation number is 7922
+Block was allocated by vmthread.c:228
+First 32 bytes:
+000000011010B6F0: 00 00 00 00 00 00 00 28 00 00 00 00 00 00 00 64  .......(.......d
+000000011010B700: 00 00 00 00 00 00 10 00 00 00 00 00 00 4B 30 A8  .............K0.
+port_shutdown_library describing block at 00000000400C1A58 (header at 00000000400C1858):
+Wrapped block size is 6152, allocation number is 7921
+Block was allocated by vmthread.c:1378
+First 32 bytes:
+00000000400C1A50: -  -  -  -  -  -  -  -  00 00 00 00 40 0C 32 60          ....@.2`
+00000000400C1A60: 00 00 00 00 00 00 08 00 00 00 00 00 00 00 00 00  ................
+00000000400C1A70: 00 00 00 00 00 00 00 00                          ........
+port_shutdown_library describing block at 0000000111830350 (header at 0000000111830150):
+Wrapped block size is 4696, allocation number is 7918
+Block was allocated by StringTable.cpp:88
+First 32 bytes:
+0000000111830350: 00 00 00 01 10 5E 46 B0 00 00 00 00 00 00 00 00  .....^F.........
+0000000111830360: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+port_shutdown_library describing block at 000000011182FEF0 (header at 000000011182FCF0):
+Wrapped block size is 16, allocation number is 7906
+Block was allocated by jnicsup.cpp:1937
+First 16 bytes:
+000000011182FEF0: 00 00 00 01 11 80 27 90 00 00 00 00 00 00 00 00  ......'.........
+port_shutdown_library describing block at 000000004025CBE8 (header at 000000004025C9E8):
+Wrapped block size is 1000, allocation number is 7904
+Block was allocated by segment.c:233
+First 32 bytes:
+000000004025CBE0: -  -  -  -  -  -  -  -  00 00 00 00 40 25 CC 00          ....@%..
+000000004025CBF0: E7 E7 40 25 CB E8 E7 E7 E7 E7 40 25 CB E8 E7 E7  ..@%......@%....
+000000004025CC00: 00 00 00 00 99 66 99 66                          .....f.f
+Memory checker statistics:
+Total blocks allocated = 8189 ( = most recent allocationNumber)
+Total blocks freed = 3739
+Total bytes allocated = 17032695
+Total bytes freed = 3217783
+Total unknown blocks ignored = 0
+High water blocks allocated = 4724
+High water bytes allocated = 14226690
+Largest block ever allocated = size 871128, allocation number 260
+Failed allocation attempts = 0
+4450 allocated blocks totaling 13814912 bytes were not freed before shutdown!
+```

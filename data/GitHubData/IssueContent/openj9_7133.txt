@@ -1,0 +1,6 @@
+Provide a fast, inlined version of the following recognized Unsafe methods:
+```
+sun_misc_Unsafe_compareAndSwapInt_jlObjectJII_Z
+sun_misc_Unsafe_compareAndSwapLong_jlObjectJJJ_Z
+sun_misc_Unsafe_compareAndSwapObject_jlObjectJjlObjectjlObject_Z
+```

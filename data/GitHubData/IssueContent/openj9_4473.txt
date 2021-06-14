@@ -1,0 +1,37 @@
+Regression observed with the 11.0.2 RC1 build ...
+
+Test https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/nio/Buffer/DirectBufferAllocTest.java is failing intermittently with the following ...
+
+```
+STDOUT:
+Allocating direct ByteBuffers with capacity 1048576 bytes, using 8 threads for 5 seconds...
+STDERR:
+java.lang.RuntimeException: Errors encountered!
+	at DirectBufferAllocTest.main(DirectBufferAllocTest.java:157)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+	Suppressed: java.lang.OutOfMemoryError: Direct buffer memory
+		at java.base/java.nio.Bits.reserveMemory(Bits.java:175)
+		at java.base/java.nio.DirectByteBuffer.<init>(DirectByteBuffer.java:123)
+		at java.base/java.nio.ByteBuffer.allocateDirect(ByteBuffer.java:317)
+		at DirectBufferAllocTest.lambda$main$0(DirectBufferAllocTest.java:126)
+		at DirectBufferAllocTest$$Lambda$16.00000000F2D5FD80.call(Unknown Source)
+		at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+		at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+		at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+		... 1 more
+```
+
+A 100x run showed a 20% failure rate - https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/915.
+
+A 100x run with -Xint showed a 23% failure rate - https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/919.
+
+I have kicked off a further 100x run with -Xint at https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/923.
+
+This intermittently failure has not been observed in the nightly Windows builds. To double check, I have kicked off a 100x run with -Xint at https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/922.
+
+This intermittently failure has not been observed on any non-Windows platform.

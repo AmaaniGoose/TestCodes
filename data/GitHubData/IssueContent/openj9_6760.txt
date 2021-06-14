@@ -1,0 +1,9 @@
+For JRuby we would like to be able to have JVM-specific flags as part of our default launcher. These flags are used to improve startup or tweak other settings to tune the target JVM for performance.
+
+We would like to be able to do this without first launching the discovered `java` command. We want a reliable way to determine, from simple files in the OpenJ9 JAVA_HOME, that we will eventually launch using OpenJ9.
+
+As an example, we would like to pass `-Xquickstart -Xshareclasses` for our faster-starting `--dev` mode, but we can only add those options if we will run on OpenJ9. Similarly, we use flags for Hotspot that either have no meaning or have different equivalents on OpenJ9, such as `-XX:TieredStopAtLevel=1`.
+
+Ideally whatever this mechanism is, it should work on current releases of OpenJ9 back to Java 8, or be backported. If we can't detect OpenJ9 we'll just assume it's Hotspot, which mostly works.
+
+Does any such mechanism exist?

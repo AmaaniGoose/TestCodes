@@ -1,0 +1,86 @@
+When running with SCC enabled parts of the ROM class are in inaccessible memory. This causes crashes at runtime or when attempting to view romclass bytes in DDR.
+
+To reproduce this issue one can use the following test application:
+
+```
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.VarHandle;
+public class StaticVarHandleTest {
+   static int field;
+   static int[] array = new int[20];
+   static final VarHandle FIELD;
+   static final VarHandle ARRAY;
+   static {
+      try {
+         FIELD = MethodHandles.lookup().in(StaticVarHandleTest.class).findStaticVarHandle(StaticVarHandleTest.class, "field", Integer.TYPE);
+         ARRAY = MethodHandles.arrayElementVarHandle(int[].class);
+      } catch(Exception e) {
+         throw new InternalError(e);
+      }
+   }
+   public static void main(String args[]) throws Exception {
+      int i = (int)FIELD.getVolatile();
+      System.out.println("=== ANSWER: field = " + i);
+      FIELD.getAndAdd(5);
+      System.out.println("=== ANSWER: field = " + field);
+      System.out.println("=== ANSWER: array = " + ARRAY.getAndAdd(array, 5, 5));
+      System.out.println("=== ANSWER: array = " + ARRAY.getAndAdd(array, 5, 5));
+   }
+}
+```
+
+With a a openJDK MH enabled JDK, instructions are here https://github.com/eclipse/openj9/issues/11458#issue-762908255.
+
+With SCC
+
+```
+~:~/scratch$ ./xa64150/jdk/bin/java StaticVarHandleTest.java
+=== ANSWER: field = 0
+Unhandled exception
+Type=Segmentation error vmState=0x00000000
+J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000001
+Handler1=00007F1348B386B0 Handler2=00007F134842CCC0 InaccessibleAddress=0000000000000008
+RDI=00007F1349A7A6D0 RSI=0000000000000000 RAX=00000000000007F0 RBX=00007F1349A7A6A0
+RCX=0000000000000000 RDX=000000000000007F R8=0000000000000001 R9=0000000000000004
+R10=00000007054AF918 R11=0000000000000000 R12=0000000000107760 R13=00007F1348BED4C8
+R14=0000000000000001 R15=00000000004E22E4
+RIP=00007F1348AAFC97 GS=0000 FS=0000 RSP=00007F1349A7A330
+EFlags=0000000000010206 CS=0033 RBP=0000000000019A00 ERR=0000000000000004
+TRAPNO=000000000000000E OLDMASK=0000000000000000 CR2=0000000000000008
+xmm0 0000000000000005 (f: 5.000000, d: 2.470328e-323)
+xmm1 00000007ffe5cde0 (f: 4293250560.000000, d: 1.697512e-313)
+xmm2 00007f1349a7a6d0 (f: 1235724032.000000, d: 6.903126e-310)
+xmm3 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm4 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm5 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm6 0000000000000019 (f: 25.000000, d: 1.235164e-322)
+xmm7 00000007057b81f8 (f: 91980280.000000, d: 1.489941e-313)
+xmm8 0000000000145650 (f: 1332816.000000, d: 6.584986e-318)
+xmm9 00000000001456b0 (f: 1332912.000000, d: 6.585460e-318)
+xmm10 00000000001456f0 (f: 1332976.000000, d: 6.585776e-318)
+xmm11 0000000000145730 (f: 1333040.000000, d: 6.586093e-318)
+xmm12 0000000000145790 (f: 1333136.000000, d: 6.586567e-318)
+xmm13 2f6176616a4c5b3b (f: 1783388928.000000, d: 1.840923e-80)
+xmm14 616a4c293b746365 (f: 997483392.000000, d: 1.848597e+161)
+xmm15 432f656b6f766e69 (f: 1870032512.000000, d: 4.418618e+15)
+Module=/home/tobi/scratch/xa64150/jdk/lib/compressedrefs/libj9vm29.so
+Module_base_address=00007F1348A9B000
+Target=2_90_20201211_000000 (Linux 4.4.0-197-generic)
+CPU=amd64 (8 logical CPUs) (0x3eaeaf000 RAM)
+----------- Stack Backtrace -----------
+(0x00007F1348AAFC97 [libj9vm29.so+0x14c97])
+(0x00007F1348AADB90 [libj9vm29.so+0x12b90])
+(0x00007F1348B74972 [libj9vm29.so+0xd9972])
+---------------------------------------
+```
+
+
+without it 
+
+```
+~:~/scratch$ ./xa64150/jdk/bin/java -Xshareclasses:none  StaticVarHandleTest.java
+=== ANSWER: field = 0
+=== ANSWER: field = 5
+=== ANSWER: array = 0
+=== ANSWER: array = 5
+```

@@ -1,0 +1,6 @@
+See if we can leverage https://jclouds.apache.org/ to dynamically allocate Jenkins nodes for use by longer running jobs, and container testing.
+
+Related:  
+1) https://wiki.jenkins.io/display/JENKINS/JClouds+Plugin
+2) @karianna mentioned the security team has recommendations related to this type of infra model, which will be shared at some point.
+

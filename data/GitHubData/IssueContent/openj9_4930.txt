@@ -1,0 +1,8 @@
+While it needs to be investigated if there is any non -XX options still to be recognized (these are functional options in some senses ... I am aware of none), the priority is on mapping or supporting performance-sensitive critical OpenJDK options ... for migration or transparent drop-in.
+
+I understood this is necessarily on-going, we have to collect this important set of -XX options.  To start off, I listed the GC thread options (which are repetitively mentioned to be performance-sensitive when engaging clients), and other important options as they come up:
+1) -XX:ParallelGCThreads=N   (this just is a simple mapping to -XgcthreadsN)
+2) -XX:ConcGCThreads=N      (I hoped this is a simple mapping as well:  -XconcurrentlevelN  or the corresponding option in parallel scavenger)
+3) -XX:ParallelCMSThreads=N  (I don't know if we have something similar)
+4) -XX:+UseLargePages  (-Xlp seemed applicable)
+5) -XX:LargePageSizeInBytes=2m (-Xlp2m  seemed matching) 

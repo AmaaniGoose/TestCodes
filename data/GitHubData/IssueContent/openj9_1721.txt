@@ -1,0 +1,18 @@
+#718 added OpenJ9DiagnosticsMXBean and a corresponding test. The test is not running and this should be fixed. This isn't the only mxbean test which isn't running, there are others as well: testOSMXBeanLocal, testOSMXBeanRemote, testJCMMXBeanLocal, testJCMMXBeanRemote. There are more but I think they have special machine requirements.
+
+https://ci.eclipse.org/openj9/job/Test-Extended-JDK8-linux_ppc-64_cmprssptrs_le/134/consoleFull
+
+02:38:29 ===============================================
+02:38:29 Running test testOpenJ9DiagnosticsMXBean_0 ...
+02:38:29 ===============================================
+02:38:29 testOpenJ9DiagnosticsMXBean_0 Start Time: Thu Apr 19 06:38:16 2018 Epoch Time (ms): 1524119896667
+02:38:29 Skipped due to jvm options ( -Xcompressedrefs -Xint -Xgcpolicy:optthruput -Xnocompressedrefs ) => testOpenJ9DiagnosticsMXBean_0_SKIPPED
+02:38:29 testOpenJ9DiagnosticsMXBean_0 Finish Time: Thu Apr 19 06:38:16 2018 Epoch Time (ms): 1524119896679
+02:38:29 
+02:38:29 ===============================================
+02:38:29 Running test testOpenJ9DiagnosticsMXBean_1 ...
+02:38:29 ===============================================
+02:38:29 testOpenJ9DiagnosticsMXBean_1 Start Time: Thu Apr 19 06:38:16 2018 Epoch Time (ms): 1524119896700
+02:38:29 Skipped due to jvm options ( -Xcompressedrefs -Xjit -Xgcpolicy:optthruput -Xnocompressedrefs ) => testOpenJ9DiagnosticsMXBean_1_SKIPPED
+02:38:29 testOpenJ9DiagnosticsMXBean_1 Finish Time: Thu Apr 19 06:38:16 2018 Epoch Time (ms): 1524119896713
+

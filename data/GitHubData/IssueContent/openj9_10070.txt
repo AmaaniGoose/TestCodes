@@ -1,0 +1,9 @@
+We had to introduce the concept of pre-padding for for standalone VTs to satisfy alignment constraints. We need to do this for instance fields on compressedRefs because VTs do not have lockwords so fields always begin on a 4byte boundary.
+
+The offset is calculated from the object header. So in compressedrefs backfill == 0 means offset 4 from the start of the object, backfill == 4 means offset 8 from the start of the object.
+
+For arrays however since the header is always going to be a multiple of U_64 and the stride length is always going to be correctly aligned, the backfill offset is not needed and the array elements can always be written at "backfill 0". Similarly, for flattened instance fields backfill is essentially zero since we dont want gaps between fields.
+
+When the VT is flattened in an instance field we ignore (subtract) the pre-padding so there are no gaps in the instance layout. This was not done for array elements which led to bugs, https://github.com/eclipse/openj9/issues/10067 and https://github.com/eclipse/openj9/issues/9441.
+
+The proposed solution is to modify the array scanner to detect this, in the future we may want to come up with a better solution.

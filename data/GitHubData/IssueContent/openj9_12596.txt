@@ -1,0 +1,10 @@
+I'm opening this issue to start a discussion on defining a policy for how external controls (JVM options, APIs, etc), can be deprecated. For example, before letting https://github.com/eclipse-openj9/openj9/issues/12503 get too far along, it would be beneficial for OpenJ9 to have a defined procedure for how deprecation should be handled. This procedure should take into account (at least):
+
+- Current Stakeholders usage
+- Overlap period
+- Release schedule
+- Documentation updates
+- Dealing with deprecation because of OMR
+- Dealing with deprecation that needs changes to OMR
+
+Once a community approved procedure is defined, issues like https://github.com/eclipse-openj9/openj9/issues/12503 can be tackled.

@@ -1,0 +1,3 @@
+The tool was created quite awhile ago and It's better practise to have the machine configs setup using Ansible and templates stored within the playbooks.
+
+Ref: #1229 

@@ -1,0 +1,9 @@
+Test https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/util/stream/boottest/java.base/java/util/stream/NodeTest.java fails intermittently on MacOS with ...
+
+```
+01:03:46.691 0xdda5b00    j9mm.107    *   ** ASSERTION FAILED ** at CopyScanCacheList.cpp:291: ((false && (__null == sublist->_cacheHead)))
+JVMDUMP039I Processing dump event "traceassert", detail "" at 2018/12/14 17:03:46 - please wait.
+JVMDUMP032I JVM requested System dump using '/Users/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image/bin/../bin/core.20181214.170346.1796.0001.dmp' in response to an event
+```
+
+Example job showing failure - https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/609/consoleText

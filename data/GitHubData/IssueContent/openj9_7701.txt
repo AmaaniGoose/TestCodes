@@ -1,0 +1,8 @@
+From #7697,
+> Further improvements are needed to get profiling for the "real"
+method being called in the invokeprivate case but that will
+have to be done in a separate PR.
+
+The right way to do this is to add profiling to the invokePrivateMethod implementation that (re)fetches the receiver class, and then generates a new profile record.
+
+The IProfiler is already able to discard the samples containing the invokePrivateMethod so a second sample would give the JIT the correct information to know the target.

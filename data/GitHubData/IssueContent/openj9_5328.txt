@@ -1,0 +1,27 @@
+Failure link
+------------
+https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/1409/
+
+Also see the jtr file: 
+[TestMaxCachedBufferSize.jtr.log](https://github.com/eclipse/openj9/files/3034732/TestMaxCachedBufferSize.jtr.log)
+
+Optional info
+-------------
+- intermittent failure (yes|no):  No
+
+Failure output
+--------------
+Test: `sun/nio/ch/TestMaxCachedBufferSize.java` 
+```
+java.lang.Error: inconsistent direct buffer total count, expected = 4, found = 10
+        at TestMaxCachedBufferSize.checkDirectBuffers(TestMaxCachedBufferSize.java:186)
+        at TestMaxCachedBufferSize.main(TestMaxCachedBufferSize.java:257)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+        at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:115)
+        at java.base/java.lang.Thread.run(Thread.java:825)
+
+JavaTest Message: Test threw exception: java.lang.Error: inconsistent direct buffer total count, expected = 4, found = 10
+```

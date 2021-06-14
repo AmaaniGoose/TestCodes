@@ -1,0 +1,18 @@
+Hi,
+
+We are randomly facing the two following issues with the PotgreSQL JDBC driver using SSL.
+
+`org.postgresql.util.PSQLException: SSL error: point has incorrect order`
+and
+` org.postgresql.util.PSQLException: SSL error: Received fatal alert: bad_record_mac`
+
+This is the java version used by the driver.
+```
+$ java -version
+openjdk version "11.0.5" 2019-10-15
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.5+10)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.17.0, JRE 11 Linux amd64-64-Bit Compressed References 20191016_358 (JIT enabled, AOT enabled)
+OpenJ9   - 77c1cf708
+OMR      - 20db4fbc
+JCL      - 2a7af5674b based on jdk-11.0.5+10)
+```

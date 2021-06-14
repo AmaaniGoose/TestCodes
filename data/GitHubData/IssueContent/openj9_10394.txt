@@ -1,0 +1,60 @@
+```
+In file included from /tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../compiler/env/J9IO.hpp:37,
+                 from /tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../compiler/env/IO.hpp:27,
+                 from /tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../compiler/env/VMJ9.h:38,
+                 from /tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../compiler/compile/AOTClassInfo.hpp:29,
+                 from /tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../compiler/compile/J9Compilation.hpp:43,
+                 from /tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../compiler/compile/Compilation.hpp:26,
+                 from /tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../omr/compiler/codegen/OMRCodeGenerator.hpp:45,
+                 from /tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../omr/compiler/x/codegen/OMRCodeGenerator.hpp:34,
+                 from /tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../omr/compiler/x/amd64/codegen/OMRCodeGenerator.hpp:36,
+                 from /tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../compiler/codegen/J9CodeGenerator.hpp:36,
+                 from /tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../compiler/x/codegen/J9CodeGenerator.hpp:26,
+                 from /tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../compiler/x/amd64/codegen/J9CodeGenerator.hpp:41,
+                 from /tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../compiler/codegen/CodeGenerator.hpp:26,
+                 from /tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../compiler/codegen/CodeGenGPU.cpp:32:
+/tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../compiler/codegen/CodeGenGPU.cpp: In function 'void getNodeName(TR::Node*, char*, TR::Compilation*)':
+/tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../omr/compiler/env/OMRIO.hpp:49:30: warning: format '%llu' expects argument of type 'long long unsigned int', but argument 4 has type 'uint64_t' {aka 'long unsigned int'} [-Wformat=]
+   49 | #define UINT64_PRINTF_FORMAT "%llu"
+      |                              ^~~~~~
+/tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../omr/compiler/env/OMRIO.hpp:49:30: note: in definition of macro 'UINT64_PRINTF_FORMAT'
+   49 | #define UINT64_PRINTF_FORMAT "%llu"
+      |                              ^~~~~~
+/tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../omr/compiler/env/OMRIO.hpp:49:34: note: format string is defined here
+   49 | #define UINT64_PRINTF_FORMAT "%llu"
+      |                               ~~~^
+      |                                  |
+      |                                  long long unsigned int
+      |                               %lu
+/tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../omr/compiler/env/OMRIO.hpp:47:30: warning: format '%lld' expects argument of type 'long long int', but argument 4 has type 'int64_t' {aka 'long int'} [-Wformat=]
+   47 | #define INT64_PRINTF_FORMAT  "%lld"
+      |                              ^~~~~~
+/tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../omr/compiler/env/OMRIO.hpp:47:30: note: in definition of macro 'INT64_PRINTF_FORMAT'
+   47 | #define INT64_PRINTF_FORMAT  "%lld"
+      |                              ^~~~~~
+/tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../omr/compiler/env/OMRIO.hpp:47:34: note: format string is defined here
+   47 | #define INT64_PRINTF_FORMAT  "%lld"
+      |                               ~~~^
+      |                                  |
+      |                                  long long int
+      |                               %ld
+/tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../compiler/codegen/CodeGenGPU.cpp:1460:41: warning: '0' flag ignored with precision and '%x' gnu_printf format [-Wformat=]
+ 1460 |             len = snprintf(s, MAX_NAME, "0x%0.16llx", doubleBits);
+      |                                         ^~~~~~~~~~~~
+/tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../compiler/codegen/CodeGenGPU.cpp:1460:51: warning: format '%llx' expects argument of type 'long long unsigned int', but argument 4 has type 'int64_t' {aka 'long int'} [-Wformat=]
+ 1460 |             len = snprintf(s, MAX_NAME, "0x%0.16llx", doubleBits);
+      |                                            ~~~~~~~^   ~~~~~~~~~~
+      |                                                   |   |
+      |                                                   |   int64_t {aka long int}
+      |                                                   long long unsigned int
+      |                                            %0.16lx
+/tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../compiler/codegen/CodeGenGPU.cpp:1463:41: warning: '0' flag ignored with precision and '%x' gnu_printf format [-Wformat=]
+ 1463 |             len = snprintf(s, MAX_NAME, "0x%0.16llx", node->getDoubleBits());
+      |                                         ^~~~~~~~~~~~
+/tmp/portage/dev-java/openj9-openjdk-15.9999/work/openj9-openjdk-jdk15/build/linux-x86_64-server-release/vm/compiler/../compiler/codegen/CodeGenGPU.cpp:1463:51: warning: format '%llx' expects argument of type 'long long unsigned int', but argument 4 has type 'uint64_t' {aka 'long unsigned int'} [-Wformat=]
+ 1463 |             len = snprintf(s, MAX_NAME, "0x%0.16llx", node->getDoubleBits());
+      |                                            ~~~~~~~^   ~~~~~~~~~~~~~~~~~~~~~
+      |                                                   |                      |
+      |                                                   long long unsigned int uint64_t {aka long unsigned int}
+      |                                            %0.16lx
+```

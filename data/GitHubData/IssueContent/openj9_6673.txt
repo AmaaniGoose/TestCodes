@@ -1,0 +1,26 @@
+Failure link
+------------
+https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/lang/String/CompactString/IndexOf.java
+Test Category: openjdk
+Test Suite Name: jdk_lang
+OS/Architecture: x86-64-windows, x86-64-linux, x86-64-osx, ...
+OpenJDK Version: 11.0.4+11
+Public Build SHAs:
+OpenJ9 - `b09716014`
+OMR - `6e99760b`
+JCL - `965d0c0df3`
+
+Optional info
+-------------
+All of the failing tests are all cases where the second string is longer than the first one, so should output -1 regardless. However, if the strings are equal when the first one has been iterated through, then the program seems to terminate and pass.
+Interesting to note that the test passed on an ubuntu system with the same parameters but failed on jenkins.
+
+Failure output
+--------------
+The following are the failing tests, outputted to the console.
+```
+test IndexOf.testIndexOf("Ａ", "ＡA", -1)
+test IndexOf.testIndexOf("ＡＢＡＢＡＢＡＢＡＢ", "ＡＢＡＢＡＢＡＢＡＢＡ", -1)
+test IndexOf.testIndexOf("Ａ", "ＡA", 0, -1)
+test IndexOf.testIndexOf("AＡ", "AＡA", 0, -1)
+```

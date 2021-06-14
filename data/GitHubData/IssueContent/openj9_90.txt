@@ -1,0 +1,85 @@
+Long running issue to track progress on migrating openj9 from UMA to CMake/
+- Platform Support:
+
+  - [x] xLinux
+  - [x] pLinux
+
+# Timeline
+
+## ~Nov 23~
+- [x] Integrate VMCPTool and NLSTool
+  - ~#3675~
+
+## Dec 17
+- [x] JDK 11 Extension changes
+  - Remaining changes are ready, just need to open PRs. All fairly trivial, should be merged quickly
+  - ~class library natives~
+  - redirector
+  - ~~#3659~~
+  - ~#3675~ 
+  - ~#4041~
+  - ~#4042~
+  - ~#4043~
+
+## Dec 21
+  - [x] osx
+    - ~#3293~
+    - ~eclipse/omr#3124~
+
+## March 1
+- [ ] DDR support for non-windows platforms
+  - ~eclipse/omr#3209~
+  - ~eclipse/omr#3308~
+ 
+
+## March 1
+- [ ] stop staging the source files 
+  - ~eclipse/omr#3189~
+  - ~eclipse/omr#3213~
+  - ~#3725~
+  - ~#4928~
+  - ~#3726~
+  - ~#5341~
+  - ibmruntimes/openj9-openjdk-jdk11#68
+
+Milestone: First pass of linux x86-64 cmake build modulo any bugs
+
+## March 20
+- [ ] Windows support (un-optimized bytecode interpreter)
+  - ~eclipse/omr#3677~
+  - ~eclipse/omr#3669~
+  - ~eclipse/omr#3670~
+  - ~#5227~
+  - ~#5228~
+  - ~#5240~
+  - ~#5267~
+  - #5268
+  - ~#5269~
+  - ~#5270~
+  - ~#5271~
+  - ~#5280~
+  - eclipse/omr#3705
+  - #5308
+
+## March 22
+- [ ] Optimized bytecode interpreter on windows
+
+Milestone: First pass of win x86-64 cmake build modulo any bugs
+
+## April 12
+- [ ] AIX Support
+- [ ] All supported platforms work on cmake
+- [ ] Turn off UMA
+
+
+## Validation
+- TODO: how to validate the cmake build is equivalent to the autotools build?
+- Test equivilent build flags between uma and cmake builds
+- Testing
+- Perf
+
+## Misc TODOS
+- [ ] Copyright info
+- [ ] Documentation describing how the cmake build is structured
+
+

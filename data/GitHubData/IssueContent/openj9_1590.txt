@@ -1,0 +1,2 @@
+Metronome loosing roots somehow if -Xcheck:memory is specified. Obviously it leads to assertion/crash
+Looks like this problem exists AIX platforms only

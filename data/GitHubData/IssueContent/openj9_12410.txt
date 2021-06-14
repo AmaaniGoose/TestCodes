@@ -1,0 +1,44 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_special.system_x86-64_mac_Release_testList_3/9
+osx1011-x86-2
+DaaLoadTest_daa2_special_5m_22
+variation: Mode687
+JVM_OPTIONS:  -XX:+UseCompressedOops -Xjit -Xgcpolicy:gencon -Xaggressive 
+
+https://140-211-168-230-openstack.osuosl.org/artifactory/ci-eclipse-openj9/Test/Test_openjdk11_j9_special.system_x86-64_mac_Release_testList_3/9/system_test_output.tar.gz
+```
+DLT stderr Unhandled exception
+DLT stderr Type=Unhandled trap vmState=0x00000000
+DLT stderr J9Generic_Signal_Number=00000108 Signal_Number=00000005 Error_Value=00000000 Signal_Code=00000001
+DLT stderr Handler1=0000000008C36290 Handler2=0000000008F0CA40
+DLT stderr RDI=00007000008A7810 RSI=0000000000000000 RAX=00000000AF0CE070 RBX=0000000008E7A628
+DLT stderr RCX=D300C4B287C3F674 RDX=00007000008A7810 R8=00007000008A7820 R9=0000000000000015
+DLT stderr R10=0000000000000000 R11=00007000008A7AD0 R12=0000000008E731C0 R13=0000000000000000
+DLT stderr R14=000000000B07E500 R15=000000000000A404
+DLT stderr RIP=00000000B063421E GS=0000 FS=0000 RSP=000000000B51B8C0
+DLT stderr RFlags=0000000000000606 CS=002B RBP=000000000B510900 ERR=1142700000000000
+DLT stderr TRAPNO=0000000000000003 CPU=7000000000000000 FAULTVADDR=0000000111427000
+DLT stderr XMM0 0000000000000005 (f: 5.000000, d: 2.470328e-323)
+DLT stderr XMM1 000000000b51b8d0 (f: 189905104.000000, d: 9.382559e-316)
+DLT stderr XMM2 006c006141800000 (f: 1098907648.000000, d: 1.246107e-306)
+DLT stderr XMM3 3e185ded51d08f78 (f: 1372622720.000000, d: 1.418340e-09)
+DLT stderr XMM4 3eb606f1b78d022a (f: 3079471616.000000, d: 1.312919e-06)
+DLT stderr XMM5 0000000001e20000 (f: 31588352.000000, d: 1.560672e-316)
+DLT stderr XMM6 3fd86e919a330ba0 (f: 2587036672.000000, d: 3.817486e-01)
+DLT stderr XMM7 402fe2804e87b348 (f: 1317516160.000000, d: 1.594239e+01)
+DLT stderr XMM8 3fe857dd40504dfb (f: 1079004672.000000, d: 7.607256e-01)
+DLT stderr XMM9 3fe3ea554b3a7902 (f: 1262123264.000000, d: 6.223551e-01)
+DLT stderr XMM10 c7eed72260000000 (f: 1610612736.000000, d: -3.279510e+38)
+DLT stderr XMM11 c7eed72260000000 (f: 1610612736.000000, d: -3.279510e+38)
+DLT stderr XMM12 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+DLT stderr XMM13 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+DLT stderr XMM14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+DLT stderr XMM15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+DLT stderr 
+DLT stderr Compiled_method=java/lang/NullPointerException.<init>(Ljava/lang/String;)V
+DLT stderr Target=2_90_20210411_66 (Mac OS X 10.11.6)
+DLT stderr CPU=amd64 (4 logical CPUs) (0x200000000 RAM)
+DLT stderr ----------- Stack Backtrace -----------
+DLT stderr ---------------------------------------
+```
+
+Perhaps related to https://github.com/eclipse/openj9/issues/9782 since it's on osx1011-x86-2

@@ -1,0 +1,15 @@
+AArch64 JIT generates the following instructions for `a[1] = 101;`:
+```
+------------------------------
+ n34n     (  0)  lstorei  <array-shadow>[#189  Shadow] [flags 0x80000604 0x0 ]                        [    0xffff73004aa0] bci=[-1,15,6] rc=0 vc=239 vn=- li=2 udi=- nc=2
+ n33n     (  0)    aladd (in GPR_0060) (X>=0 internalPtr sharedMemory )                               [    0xffff73004a50] bci=[-1,15,6] rc=0 vc=239 vn=- li=2 udi=5792 nc=2 flg=0x8100
+ n5n      (  2)      ==>newarray (in &GPR_0022) (highWordZero Unsigned X!=0 allocationCanBeRemoved sharedMemory )
+ n32n     (  0)      lconst 16 (highWordZero X!=0 X>=0 )                                              [    0xffff73004a00] bci=[-1,15,6] rc=0 vc=239 vn=- li=2 udi=- nc=0 flg=0x4104
+ n24n     (  0)    lconst 101 (in GPR_0061) (highWordZero X!=0 X>=0 )                                 [    0xffff73004780] bci=[-1,12,6] rc=0 vc=239 vn=- li=2 udi=6064 nc=0 flg=0x4104
+------------------------------
+
+ [    0xffff73131710]   15      addimmx         GPR_0060, &GPR_0022, 16
+ [    0xffff73131820]   12      movzx   GPR_0061, 0x0065
+ [    0xffff731318b0]   15      strimmx         GPR_0061, [GPR_0060, 0]         # SymRef  <array-shadow>[#189  Shadow] [flags 0x80000604 0x0 ]
+```
+The two instructions `addimmx GPR_0060, &GPR_0022, 16` - `strimmx GPR_0061, [GPR_0060, 0]` can be changed to `strimmx GPR_0061, [GPR_0022, 16]`, saving one instruction.  It also removes the use of `GPR_0060`.

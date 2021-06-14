@@ -1,0 +1,7 @@
+@joransiu suggested a small code improvement in https://github.com/eclipse/openj9/pull/742#discussion_r154816421 to the `asynccheckEvaluator` which can simplify one of the paths:
+
+https://github.com/eclipse/openj9/blob/94649e13230cf293f73f060f83b331eb38174d8b/runtime/compiler/z/codegen/J9TreeEvaluator.cpp#L2189-L2211
+
+As per the review comment, the code in `lowerAsyncCheck` will have ensured the memref we compare against will not have a base and an index register. If in case this does happen for whatever reason, the code in `generateSILInstruction` has us taken care of because it will separate the index register:
+
+https://github.com/eclipse/omr/blob/840473a5de22834948bed9a8acc5bfb36a6ad10b/compiler/z/codegen/S390GenerateInstructions.cpp#L1565-L1568

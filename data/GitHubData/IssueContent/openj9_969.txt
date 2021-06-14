@@ -1,0 +1,1 @@
+In Jenkins builds, we should be collecting and archiving any unexpected dump/core files that are produced during a test run.

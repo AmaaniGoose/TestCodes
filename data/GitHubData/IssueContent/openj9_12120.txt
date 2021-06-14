@@ -1,0 +1,126 @@
+**Test**
+
+MixedLoadTest -test-args="timeLimit=30m"
+Variation: Mode554
+JVM_OPTIONS: --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED -Xcompressedrefs -Xgcpolicy:balanced -XXgc:tarokEnableExpensiveAssertions,fvtest_tarokPGCRotateCollectors -Xjit:count=0,optlevel=hot,gcOnResolve,rtResolve
+
+**Java Version**
+
+```
+13:51:42  openjdk version "11.0.11" 2021-04-20
+13:51:42  OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.11+4-202103021928)
+13:51:42  Eclipse OpenJ9 VM AdoptOpenJDK (build master-9123f9b8a, JRE 11 AIX ppc64-64-Bit Compressed References 20210302_932 (JIT enabled, AOT enabled)
+13:51:42  OpenJ9   - 9123f9b8a
+13:51:42  OMR      - eb4f5a875
+13:51:42  JCL      - 7222dc7018 based on jdk-11.0.11+4)
+```
+
+**Error details copied from console output**
+
+```
+14:03:39  LT  stderr Unhandled exception
+14:03:39  LT  stderr Type=Segmentation error vmState=0x00000000
+14:03:39  LT  stderr J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000033
+14:03:39  LT  stderr Handler1=09001000A0E1E3E0 Handler2=09001000A0DDF2C0
+14:03:39  LT  stderr R0=0000000000000020 R1=000001002EC71E70 R2=08001000A01A3348 R3=000001001EA159B0
+14:03:39  LT  stderr R4=000001001B41A2B8 R5=0000000000000000 R6=0000000000000000 R7=000001001B41B07C
+14:03:39  LT  stderr R8=0000000000000001 R9=0000000000000001 R10=000000003002D868 R11=000001001E8EBE24
+14:03:39  LT  stderr R12=0000000000000000 R13=000001002EC7D800 R14=00000000305742E0 R15=000000003052D900
+14:03:39  LT  stderr R16=000001002C85A998 R17=FFFFFFFFFFFFFFFF R18=0A000100088E0400 R19=00000003F7233F20
+14:03:39  LT  stderr R20=0000000408F2AE50 R21=00000000002C0000 R22=0000000048000001 R23=0000000000000000
+14:03:39  LT  stderr R24=FFFFFEFFE17141DC R25=0000000000000000 R26=0000010034C2A390 R27=0000000000000001
+14:03:39  LT  stderr R28=000001001B41B07C R29=0000000000000000 R30=000001001EA15990 R31=000000003002D868
+14:03:39  LT  stderr IAR=090000001287D8F8 LR=090000001287D8B4 MSR=A00000000200D032 CTR=090000001287CF80
+14:03:39  LT  stderr CR=4200024B00000001 FPSCR=BF80010000000000 XER=00000001BF800100
+14:03:39  LT  stderr FPR0 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr FPR1 c3e0000000000000 (f: 0.000000, d: -9.223372e+18)
+14:03:39  LT  stderr FPR2 41cdcd6500000000 (f: 0.000000, d: 1.000000e+09)
+14:03:39  LT  stderr FPR3 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr FPR4 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr FPR5 c3e0000000000000 (f: 0.000000, d: -9.223372e+18)
+14:03:39  LT  stderr FPR6 3ee56d022b4f4c83 (f: 726617216.000000, d: 1.021662e-05)
+14:03:39  LT  stderr FPR7 412e848000000000 (f: 0.000000, d: 1.000000e+06)
+14:03:39  LT  stderr FPR8 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr FPR9 4530000000000000 (f: 0.000000, d: 1.934281e+25)
+14:03:39  LT  stderr FPR10 412e848000000000 (f: 0.000000, d: 1.000000e+06)
+14:03:39  LT  stderr FPR11 43300000000f4240 (f: 1000000.000000, d: 4.503600e+15)
+14:03:39  LT  stderr FPR12 4530000000000000 (f: 0.000000, d: 1.934281e+25)
+14:03:39  LT  stderr FPR13 3ff167e75c644e2f (f: 1550077440.000000, d: 1.087867e+00)
+14:03:39  LT  stderr FPR14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr FPR15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr FPR16 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr FPR17 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr FPR18 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr FPR19 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr FPR20 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr FPR21 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr FPR22 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr FPR23 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr FPR24 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr FPR25 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr FPR26 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr FPR27 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr FPR28 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr FPR29 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr FPR30 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr FPR31 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+14:03:39  LT  stderr Module=/home/jenkins/workspace/Grinder_SM/openjdkbinary/j2sdk-image/lib/default/libj9jit29.so
+14:03:39  LT  stderr Module_base_address=0900000012641000
+14:03:39  LT  stderr Target=2_90_20210302_932 (AIX 7.2)
+14:03:39  LT  stderr CPU=ppc64 (24 logical CPUs) (0x1000000000 RAM)
+14:03:39  LT  stderr ----------- Stack Backtrace -----------
+14:03:39  LT  stderr replaceTrampoline__Q2_3OMR16CodeCacheManagerFP20TR_OpaqueMethodBlockPvN32b+0x100 (0x090000001287D784 [libj9jit29.so+0x23c784])
+14:03:39  LT  stderr mcc_replaceTrampoline+0x3c (0x090000001287D5C0 [libj9jit29.so+0x23c5c0])
+14:03:39  LT  stderr ppcCodePatching__FPvN51+0x364 (0x090000001287D2E8 [libj9jit29.so+0x23c2e8])
+14:03:39  LT  stderr patchCallPoint__Q2_3OMR9CodeCacheFP20TR_OpaqueMethodBlockPvN22+0x128 (0x090000001272622C [libj9jit29.so+0xe522c])
+14:03:39  LT  stderr mcc_callPointPatching_unwrapper+0x40 (0x0900000012721EC4 [libj9jit29.so+0xe0ec4])
+14:03:39  LT  stderr old_slow_jitCallCFunction+0x50 (0x0900000012702954 [libj9jit29.so+0xc1954])
+14:03:39  LT  stderr (0x09000000126ED1EC [libj9jit29.so+0xac1ec])
+14:03:39  LT  stderr sidecarInvokeReflectMethodImpl+0x274 (0x090000000FE41DD8 [libj9vm29.so+0x72dd8])
+14:03:39  LT  stderr sidecarInvokeReflectMethod+0x30 (0x090000000FE44474 [libj9vm29.so+0x75474])
+14:03:39  LT  stderr JVM_InvokeMethod_Impl+0xb0 (0x09000000068EE114 [libjclse29.so+0x90114])
+14:03:39  LT  stderr JVM_InvokeMethod+0x64 (0x0900000005C21568 [libjvm.so+0x15568])
+14:03:39  LT  stderr JVM_InvokeMethod+0x68 (0x0900000005BDC5CC [libjvm.so+0x65cc])
+14:03:39  LT  stderr JVM_InvokeMethod+0x68 (0x090000000568E5CC [libjvm.so+0x65cc])
+14:03:39  LT  stderr Java_jdk_internal_reflect_NativeMethodAccessorImpl_invoke0+0x18 (0x090000000582F21C [libjava.so+0x1021c])
+14:03:39  LT  stderr (0x000001001B6A8E30)
+14:03:39  LT  stderr runJavaThread+0x1b4 (0x090000000FE42CB8 [libj9vm29.so+0x73cb8])
+14:03:39  LT  stderr javaProtectedThreadProc+0x128 (0x090000000FDD1F0C [libj9vm29.so+0x2f0c])
+14:03:39  LT  stderr omrsig_protect+0x488 (0x0900000005CCAE4C [libj9prt29.so+0x59e4c])
+14:03:39  LT  stderr javaThreadProc+0x68 (0x090000000FDD1CEC [libj9vm29.so+0x2cec])
+14:03:39  LT  stderr thread_wrapper+0x33c (0x090000000574B760 [libj9thr29.so+0x4760])
+14:03:39  LT  stderr _pthread_body+0xe8 (0x090000000059DFEC [libpthreads.a+0x3fec])
+14:03:39  LT  stderr ---------------------------------------
+14:03:39  LT  stderr JVMDUMP039I Processing dump event "gpf", detail "" at 2021/03/03 13:03:39 - please wait.
+14:03:39  LT  stderr JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Grinder_SM/openjdk-tests/TKG/output_16147981351093/system_custom_0/20210303-130215-MixedLoadTest/results/core.20210303.130339.30147054.0001.dmp' in response to an event
+14:03:39  LT  stderr JVMDUMP012E Error in System dump: cannot find core file: "A file or directory in the path name does not exist.". check "ulimit -Hc" is set high enough
+14:03:39  LT  stderr JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Grinder_SM/openjdk-tests/TKG/output_16147981351093/system_custom_0/20210303-130215-MixedLoadTest/results/javacore.20210303.130339.30147054.0002.txt' in response to an event
+14:03:39  STF 13:03:39.636 - Found dump at: /home/jenkins/workspace/Grinder_SM/openjdk-tests/TKG/output_16147981351093/system_custom_0/20210303-130215-MixedLoadTest/results/javacore.20210303.130339.30147054.0002.txt
+14:03:40  LT  stderr javacore file generated - /home/jenkins/workspace/Grinder_SM/openjdk-tests/TKG/output_16147981351093/system_custom_0/20210303-130215-MixedLoadTest/results/javacore.20210303.130339.30147054.0002.txt
+14:03:40  LT  stderr 
+14:03:40  LT  stderr 
+14:03:40  LT  stderr *** Invalid JIT return address 0000000030D69F40 in 000001002EC63AA0
+14:03:40  LT  stderr 
+14:04:02  LT  stderr JVMDUMP010I Java dump written to /home/jenkins/workspace/Grinder_SM/openjdk-tests/TKG/output_16147981351093/system_custom_0/20210303-130215-MixedLoadTest/results/javacore.20210303.130339.30147054.0002.txt
+```
+
+**To reproduce**
+
+Run grinder with following settings: 
+
+```
+PLATFORM=ppc64_aix
+BUILD_LIST=system
+TARGET=system_custom
+CUSTOM_TARGET=-test=MixedLoadTest -test-args="timeLimit=5m"
+SDK_RESOURC=nightly
+JDK_VERSION=11
+JDK_IMPL=openj9
+EXTRA_OPTIONS= --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED -Xcompressedrefs -Xgcpolicy:balanced -XXgc:tarokEnableExpensiveAssertions,fvtest_tarokPGCRotateCollectors -Xjit:count=0,optlevel=hot,gcOnResolve,rtResolve
+
+(Please accept default values for all the rest of the fields) 
+``` 
+
+
+
+

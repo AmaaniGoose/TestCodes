@@ -1,0 +1,33 @@
+Test category: openjdk
+Test name(s):
+
+    java/lang/System/LoggerFinder/modules/JDKLoggerForImageTest.java
+    java/lang/System/LoggerFinder/modules/LoggerInImageTest.java
+    java/lang/System/LoggerFinder/modules/NamedLoggerForImageTest.java
+    java/lang/System/LoggerFinder/modules/UnnamedLoggerForImageTest.java
+    jdk/modules/etc/DefaultModules.java
+    jdk/modules/incubator/ImageModules.java
+    java/nio/channels/DatagramChannel/MulticastSendReceiveTests.java
+    java/lang/Class/GetPackageBootLoaderChildLayer.java
+    java/nio/file/Files/CopyAndMove.java
+    java/util/concurrent/locks/Lock/TimedAcquireLeak.java
+    java/util/logging/TestLoggerWeakRefLeak.java
+
+
+Product(s) tested: 
+JDK11:
+ openjdk version "11.0.5" 2019-10-15
+20:42:00  OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.5+10-201908081809)
+20:42:00  OpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.5+10-201908081809, mixed mode)OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_222-201907290328-b10)
+JDK13:
+06:20:05  openjdk version "13" 2019-09-17
+06:20:05  OpenJDK Runtime Environment AdoptOpenJDK (build 13+32-201908100404)
+06:20:05  OpenJDK 64-Bit Server VM AdoptOpenJDK (build 13+32-201908100404, mixed mode, sharing)
+
+OS/architecture: macosx
+Platform specific: yes
+
+Reproducibility: yes
+
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk11_hs_sanity.openjdk_x86-64_mac/26/consoleFull
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk13_hs_sanity.openjdk_x86-64_mac/18/consoleFull

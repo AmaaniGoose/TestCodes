@@ -1,0 +1,102 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk8_j9_extended.perf_aarch64_linux/5/`:
+```
+openjdk version "1.8.0_292"
+OpenJDK Runtime Environment (build 1.8.0_292-b10)
+Eclipse OpenJ9 VM (build master-194f7f30f, JRE 1.8.0 Linux aarch64-64-Bit Compressed References 20210501_106 (JIT enabled, AOT enabled)
+OpenJ9   - 194f7f30f
+OMR      - c4ef57d3f
+JCL      - 2c626fee based on jdk8u292-b10)
+```
+[Rerun in Grinder](https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?TARGET=renaissance-movie-lens_0&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;PLATFORM=aarch64_linux&amp;KEEP_REPORTDIR=false&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-linux-aarch64-openj9%2F106%2FOpenJDK8U-jdk_aarch64_linux_openj9_2021-05-01-02-31.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-linux-aarch64-openj9%2F106%2FOpenJDK8U-debugimage_aarch64_linux_openj9_2021-05-01-02-31.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-linux-aarch64-openj9%2F106%2FOpenJDK8U-testimage_aarch64_linux_openj9_2021-05-01-02-31.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-linux-aarch64-openj9%2F106%2FOpenJDK8U-jre_aarch64_linux_openj9_2021-05-01-02-31.tar.gz&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;LIGHT_WEIGHT_CHECKOUT=true&amp;ARTIFACTORY_SERVER=na.artifactory.swg-devops&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=8&amp;USER_CREDENTIALS_ID=&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=&amp;JDK_REPO=https%3A%2F%2Fgithub.com%2Fibmruntimes%2Fopenj9-openjdk-jdk8&amp;RELEASE_TAG=&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;UPSTREAM_JOB_NAME=&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=openj9&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=openj9&amp;SSH_AGENT_CREDENTIAL=83181e25-eea4-4f55-8b3e-e79615733226&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=4e18ffe7-b1b1-4272-9979-99769b68bcc2&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=perf&amp;UPSTREAM_JOB_NUMBER=&amp;TIME_LIMIT=20&amp;JVM_OPTIONS=&amp;PARALLEL=)
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+[2021-05-01T05:23:58.729Z] Running test renaissance-movie-lens_0 ...
+[2021-05-01T05:23:58.729Z] ===============================================
+[2021-05-01T05:23:58.729Z] renaissance-movie-lens_0 Start Time: Sat May  1 01:23:55 2021 Epoch Time (ms): 1619846635722
+[2021-05-01T05:23:58.729Z] "/home/jenkins/workspace/Test_openjdk8_j9_extended.perf_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk8_j9_extended.perf_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+[2021-05-01T05:23:58.729Z] JVMSHRC005I No shared class caches available
+[2021-05-01T05:23:58.729Z] JVMSHRC005I No shared class caches available
+[2021-05-01T05:23:58.729Z] cache cleanup done
+[2021-05-01T05:23:58.729Z] variation: NoOptions
+[2021-05-01T05:23:58.729Z] JVM_OPTIONS:  
+
+[Stage 597:>                                                        (0 + 0) / 8]
+                                                                                
+RMSE (validation) = 3.6219689545487634 for the model trained with rank = 8, lambda = 10.0, and numIter = 20.
+[2021-05-01T05:24:39.272Z] 
+[Stage 738:>                                                        (0 + 0) / 8]Exception in thread "dag-scheduler-event-loop" java.lang.StackOverflowError
+[2021-05-01T05:24:39.272Z] 	at scala.collection.immutable.List$SerializationProxy.writeObject(List.scala:468)
+[2021-05-01T05:24:39.272Z] 	at sun.reflect.GeneratedMethodAccessor10.invoke(Unknown Source)
+[2021-05-01T05:24:39.272Z] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-05-01T05:24:39.272Z] 	at java.lang.reflect.Method.invoke(Method.java:498)
+[2021-05-01T05:24:39.272Z] 	at java.io.ObjectStreamClass.invokeWriteObject(ObjectStreamClass.java:1154)
+[2021-05-01T05:24:39.272Z] 	at java.io.ObjectOutputStream.writeSerialData(ObjectOutputStream.java:1496)
+[2021-05-01T05:24:39.272Z] 	at java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1432)
+[2021-05-01T05:24:39.272Z] 	at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1178)
+[2021-05-01T05:24:39.272Z] 	at java.io.ObjectOutputStream.defaultWriteFields(ObjectOutputStream.java:1548)
+[2021-05-01T05:24:39.272Z] 	at java.io.ObjectOutputStream.writeSerialData(ObjectOutputStream.java:1509)
+[2021-05-01T05:24:39.272Z] 	at java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1432)
+[2021-05-01T05:24:39.272Z] 	at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1178)
+[2021-05-01T05:24:39.272Z] 	at java.io.ObjectOutputStream.defaultWriteFields(ObjectOutputStream.java:1548)
+[2021-05-01T05:24:39.272Z] 	at java.io.ObjectOutputStream.writeSerialData(ObjectOutputStream.java:1509)
+[2021-05-01T05:24:39.272Z] 	at java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1432)
+[2021-05-01T05:24:39.272Z] 	at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1178)
+[2021-05-01T05:24:39.272Z] 	at java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:348)
+[2021-05-01T05:24:39.272Z] 	at scala.collection.immutable.List$SerializationProxy.writeObject(List.scala:468)
+[2021-05-01T05:24:39.272Z] 	at sun.reflect.GeneratedMethodAccessor10.invoke(Unknown Source)
+[2021-05-01T05:24:39.272Z] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-05-01T05:24:39.272Z] 	at java.lang.reflect.Method.invoke(Method.java:498)
+[2021-05-01T05:24:39.272Z] 	at java.io.ObjectStreamClass.invokeWriteObject(ObjectStreamClass.java:1154)
+
+[2021-05-01T05:24:39.302Z] 	at java.io.ObjectStreamClass.invokeWriteObject(ObjectStreamClass.java:1154)
+[2021-05-01T05:24:39.302Z] 	at java.io.ObjectOutputStream.writeSerialData(ObjectOutputStream.java:1496)
+[2021-05-01T05:24:39.302Z] 	at java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1432)
+[2021-05-01T05:24:39.302Z] 	at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1178)
+[2021-05-01T05:24:39.302Z] 	at java.io.ObjectOutputStream.defaultWriteFields(ObjectOutputStream.java:1548)
+[2021-05-01T05:24:39.302Z] 	at java.io.ObjectOutputStream.writeSerialData(ObjectOutputStream.java:1509)
+[2021-05-01T05:24:39.302Z] 	at java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1432)
+[2021-05-01T05:24:39.302Z] 	at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1178)
+[2021-05-01T05:24:39.302Z] 	at java.io.ObjectOutputStream.defaultWriteFields(ObjectOutputStream.java:1548)
+[2021-05-01T05:24:39.302Z] 	at java.io.ObjectOutputStream.writeSerialData(ObjectOutputStream.java:1509)
+[2021-05-01T05:24:39.302Z] 	at java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1432)
+[2021-05-01T05:24:39.302Z] 	at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1178)
+[2021-05-01T05:24:39.302Z] 	at java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:348)
+[2021-05-01T05:24:39.302Z] 	at org.apache.spark.serializer.JavaSerializationStream.writeObject(JavaSerializer.scala:43)
+[2021-05-01T05:24:39.302Z] 	at org.apache.spark.serializer.JavaSerializerInstance.serialize(JavaSerializer.scala:100)
+[2021-05-01T05:24:39.302Z] 	at org.apache.spark.scheduler.DAGScheduler.submitMissingTasks(DAGScheduler.scala:1007)
+[2021-05-01T05:24:39.302Z] 	at org.apache.spark.scheduler.DAGScheduler.org$apache$spark$scheduler$DAGScheduler$$submitStage(DAGScheduler.scala:933)
+[2021-05-01T05:24:39.302Z] 	at org.apache.spark.scheduler.DAGScheduler$$anonfun$org$apache$spark$scheduler$DAGScheduler$$submitStage$4.apply(DAGScheduler.scala:936)
+[2021-05-01T05:24:39.302Z] 	at org.apache.spark.scheduler.DAGScheduler$$anonfun$org$apache$spark$scheduler$DAGScheduler$$submitStage$4.apply(DAGScheduler.scala:935)
+[2021-05-01T05:24:39.302Z] 	at scala.collection.immutable.List.foreach(List.scala:381)
+[2021-05-01T05:24:39.302Z] 	at org.apache.spark.scheduler.DAGScheduler.org$apache$spark$scheduler$DAGScheduler$$submitStage(DAGScheduler.scala:935)
+[2021-05-01T05:24:39.302Z] 	at org.apache.spark.scheduler.DAGScheduler$$anonfun$org$apache$spark$scheduler$DAGScheduler$$submitStage$4.apply(DAGScheduler.scala:936)
+[2021-05-01T05:24:39.302Z] 	at org.apache.spark.scheduler.DAGScheduler$$anonfun$org$apache$spark$scheduler$DAGScheduler$$submitStage$4.apply(DAGScheduler.scala:935)
+[2021-05-01T05:24:39.302Z] 	at scala.collection.immutable.List.foreach(List.scala:381)
+[2021-05-01T05:24:39.302Z] 	at org.apache.spark.scheduler.DAGScheduler.org$apache$spark$scheduler$DAGScheduler$$submitStage(DAGScheduler.scala:935)
+[2021-05-01T05:24:39.302Z] 	at org.apache.spark.scheduler.DAGScheduler$$anonfun$submitWaitingStages$6.apply(DAGScheduler.scala:772)
+[2021-05-01T05:24:39.302Z] 	at org.apache.spark.scheduler.DAGScheduler$$anonfun$submitWaitingStages$6.apply(DAGScheduler.scala:771)
+[2021-05-01T05:24:39.302Z] 	at scala.collection.IndexedSeqOptimized$class.foreach(IndexedSeqOptimized.scala:33)
+[2021-05-01T05:24:39.302Z] 	at scala.collection.mutable.ArrayOps$ofRef.foreach(ArrayOps.scala:186)
+[2021-05-01T05:24:39.302Z] 	at org.apache.spark.scheduler.DAGScheduler.submitWaitingStages(DAGScheduler.scala:771)
+[2021-05-01T05:24:39.302Z] 	at org.apache.spark.scheduler.DAGScheduler.handleTaskCompletion(DAGScheduler.scala:1318)
+[2021-05-01T05:24:39.302Z] 	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:1656)
+[2021-05-01T05:24:39.302Z] 	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1618)
+[2021-05-01T05:24:39.302Z] 	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1607)
+[2021-05-01T05:24:39.302Z] 	at org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:48)
+[2021-05-01T05:39:21.699Z] 
+[Stage 740:>                                                        (0 + 0) / 8]
+```
+
+This occurred at JDK11 as well `Test_openjdk11_j9_extended.perf_aarch64_linux/4/`.
+It is not seen in other platforms.
+
+fyi @knn-k 

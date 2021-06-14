@@ -1,0 +1,5 @@
+The jextract code is included in the openj9.dtfj module, however it should be separated into its own openj9.jextract module. jextract is used for service in order to zip up native libraries, therefore it should be included in the JRE, or at least separated from dtfj. The openj9.dtfj module is not included in the JRE since dtfj is not required for a runtime.
+
+jextract invokes `openj9.dtfj/com.ibm.jvm.j9.dump.extract.Main`
+
+The libjextract.so native library will be moved to the openj9.jextract module.

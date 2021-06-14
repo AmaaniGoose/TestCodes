@@ -1,0 +1,20 @@
+The following j/u/c methods are presently recognized by some JIT backends.  However, the `Fences` class is not part of any j/u/c package supported by OpenJ9.  It appears to be legacy code.  They should be removed.
+
+```
+TR::java_util_concurrent_atomic_Fences_orderAccesses
+TR::java_util_concurrent_atomic_Fences_orderReads
+TR::java_util_concurrent_atomic_Fences_orderWrites
+TR::java_util_concurrent_atomic_Fences_postLoadFence
+TR::java_util_concurrent_atomic_Fences_postLoadFence_jlObject
+TR::java_util_concurrent_atomic_Fences_postLoadFence_jlObjectI
+TR::java_util_concurrent_atomic_Fences_postLoadFence_jlObjectjlrField
+TR::java_util_concurrent_atomic_Fences_postStorePreLoadFence
+TR::java_util_concurrent_atomic_Fences_postStorePreLoadFence_jlObject
+TR::java_util_concurrent_atomic_Fences_postStorePreLoadFence_jlObjectI
+TR::java_util_concurrent_atomic_Fences_postStorePreLoadFence_jlObjectjlrField
+TR::java_util_concurrent_atomic_Fences_preStoreFence
+TR::java_util_concurrent_atomic_Fences_preStoreFence_jlObject
+TR::java_util_concurrent_atomic_Fences_preStoreFence_jlObjectI
+TR::java_util_concurrent_atomic_Fences_preStoreFence_jlObjectjlrField
+TR::java_util_concurrent_atomic_Fences_reachabilityFence
+```

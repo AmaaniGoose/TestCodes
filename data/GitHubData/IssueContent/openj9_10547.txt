@@ -1,0 +1,29 @@
+The Xdump `tool` agent allows the user to specify a command to execute when a dump event occurs. The command is specified in the exec sub-option. For example:
+
+`"-Xdump:tool:events=vmstart,exec=echo hello"`
+
+This simple example behaves identically on Unix and Windows, but a difference can be observed when the command includes special characters such as `>`. For example, if we want to run this command:
+
+`echo "this is a test" >test.txt`
+
+We would use an Xdump option like this:
+
+`"-Xdump:tool:events=vmstart,exec=echo \"this is a test\" >test.txt"`
+
+When this agent runs on Unix platforms the result is a test.txt file containing the string "this is a test", as expected. But on Windows, everything after the `echo` is printed to the console, and nothing is redirected to a file.
+
+The reason seems to be that on Windows the command is not processed by a shell prior to execution (here the command is `unicodePath`):
+
+https://github.com/eclipse/openj9/blob/060ace320f356e8312e2a8ee524338f570b988dc/runtime/rasdump/dmpagent.c#L837
+
+but on Unix it is (here the command is `label`):
+
+https://github.com/eclipse/openj9/blob/060ace320f356e8312e2a8ee524338f570b988dc/runtime/rasdump/dmpagent.c#L865
+
+The Windows behaviour can be made to match the behaviour on Unix by prepending `CMD /C` to the command specified in `exec`, like this:
+
+`"-Xdump:tool:events=vmstart,exec=CMD /C echo \"this is a test\" >test.txt"`
+
+This inconsistency between the platforms is not documented, so I'm not sure whether it's intentional or accidental.
+
+My suggestion is that the tool agent should always execute the specified command in a shell on Windows, by prepending `CMD /C` to the specified command when calling `CreateProcessW()`.

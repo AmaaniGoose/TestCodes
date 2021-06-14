@@ -1,0 +1,84 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/347
+```
+STF 21:53:20.826 - +------ Step 16 - Run Jvm4 workload process
+STF 21:53:20.826 - | Run foreground process
+STF 21:53:20.826 - |   Program:     C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/openjdkbinary/j2sdk-image/bin/java
+STF 21:53:20.826 - |   Mnemonic:    jvm4
+STF 21:53:20.826 - |   Echo:        ECHO_OFF
+STF 21:53:20.826 - |   Expectation: NON_ZERO_EXIT [0, 1] within 30m
+STF 21:53:20.826 - |
+STF 21:53:20.826 - Running command: C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/openjdkbinary/j2sdk-image/bin/java -Xshareclasses:addtestjithints,verbose,name=SCC_SysTest_Workload_Cache,cacheDir=C:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly\openjdk-tests\TKG\test_output_15876956725790\SC_Softmx_JitAot_0\20200423-215254-SharedClassesWorkloadTest_Softmx_Increase_JitAot\results\cache -Xaot:forceAot,disableAsyncCompilation,count=0 -classpath C:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly\jvmtest\system\stf\stf.load\bin;C:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly\jvmtest\system\stf\stf.core\bin;C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/jvmtest/system/systemtest_prereqs/log4j-2.3/log4j-api-2.3.jar;C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/jvmtest/system/systemtest_prereqs/log4j-2.3/log4j-core-2.3.jar;C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/jvmtest/system/systemtest_prereqs/junit-4.12/junit-4.12.jar;C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/jvmtest/system/systemtest_prereqs/junit-4.12/hamcrest-core-1.3.jar;C:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly\jvmtest\system\openjdk-systemtest\openjdk.test.lang\bin;C:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly\jvmtest\system\openjdk-systemtest\openjdk.test.util\bin;C:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly\jvmtest\system\openjdk-systemtest\openjdk.test.math\bin;C:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly\jvmtest\system\openjdk-systemtest\openjdk.test.classloading\bin;C:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly\jvmtest\system\openjdk-systemtest\openjdk.test.nio\bin;C:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly\jvmtest\system\openj9-systemtest\openj9.test.daa\bin net.adoptopenjdk.loadTest.LoadTest -resultsDir C:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly\openjdk-tests\TKG\test_output_15876956725790\SC_Softmx_JitAot_0\20200423-215254-SharedClassesWorkloadTest_Softmx_Increase_JitAot\results -resultsPrefix 16.jvm4. -dumpRequested false -reportFailureLimit 1 -abortAtFailureLimit 10 -maxTotalLogFileSpace 200M -maxSingleLogSize 1/25 -suite.sharedclasses-mix.inventoryFile C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/openjdk-tests/TKG/test_output_15876956725790/SC_Softmx_JitAot_0/20200423-215254-SharedClassesWorkloadTest_Softmx_Increase_JitAot/results/16.jvm4.inventory/openj9.test.load/config/inventories/mix/sharedclasses-mix.xml -suite.sharedclasses-mix.inventoryExcludeFile C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/openjdk-tests/TKG/test_output_15876956725790/SC_Softmx_JitAot_0/20200423-215254-SharedClassesWorkloadTest_Softmx_Increase_JitAot/results/16.jvm4.inventory/openjdk.test.load/config/inventories/mix/mini-mix_exclude.xml -suite.sharedclasses-mix.threadCount 7 -suite.sharedclasses-mix.totalNumberTests 500 -suite.sharedclasses-mix.selection sequential -suite.sharedclasses-mix.seed -1 -suite.sharedclasses-mix.repeatCount 1 -suite.sharedclasses-mix.thinkingTime 0ms..0ms
+STF 21:53:20.826 - Redirecting stderr to C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/openjdk-tests/TKG/test_output_15876956725790/SC_Softmx_JitAot_0/20200423-215254-SharedClassesWorkloadTest_Softmx_Increase_JitAot/results/16.jvm4.stderr
+STF 21:53:20.826 - Redirecting stdout to C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/openjdk-tests/TKG/test_output_15876956725790/SC_Softmx_JitAot_0/20200423-215254-SharedClassesWorkloadTest_Softmx_Increase_JitAot/results/16.jvm4.stdout
+STF 21:53:20.829 - Monitoring processes: jvm4
+STF 21:57:58.139 - Heartbeat: Process jvm4 is still running
+STF 22:02:58.233 - Heartbeat: Process jvm4 is still running
+STF 22:07:58.327 - Heartbeat: Process jvm4 is still running
+STF 22:12:58.421 - Heartbeat: Process jvm4 is still running
+STF 22:17:58.514 - Heartbeat: Process jvm4 is still running
+STF 22:22:58.093 - Heartbeat: Process jvm4 is still running
+STF 22:23:21.296 - **FAILED** Process jvm4 has timed out
+STF 22:23:21.296 - Collecting dumps for: jvm4
+STF 22:23:22.497 - Using procdump.exe to generate .DMP files
+STF 22:23:22.497 - Running command: C:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly\jvmtest\system\systemtest_prereqs\windows_sysinternals\procdump.exe -accepteula -ma 368
+STF 22:23:22.497 - Redirecting stderr to C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/openjdk-tests/TKG/test_output_15876956725790/SC_Softmx_JitAot_0/20200423-215254-SharedClassesWorkloadTest_Softmx_Increase_JitAot/results/16.jvm4.jvmdump.stderr
+STF 22:23:22.497 - Redirecting stdout to C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/openjdk-tests/TKG/test_output_15876956725790/SC_Softmx_JitAot_0/20200423-215254-SharedClassesWorkloadTest_Softmx_Increase_JitAot/results/16.jvm4.jvmdump.stdout
+STF 22:23:22.522 - Pausing for 30 seconds
+STF 22:23:52.591 - Using procdump.exe to generate .DMP files
+STF 22:23:52.591 - Running command: C:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly\jvmtest\system\systemtest_prereqs\windows_sysinternals\procdump.exe -accepteula -ma 368
+STF 22:23:52.591 - Redirecting stderr to C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/openjdk-tests/TKG/test_output_15876956725790/SC_Softmx_JitAot_0/20200423-215254-SharedClassesWorkloadTest_Softmx_Increase_JitAot/results/16.jvm4.jvmdump.stderr
+STF 22:23:52.591 - Redirecting stdout to C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/openjdk-tests/TKG/test_output_15876956725790/SC_Softmx_JitAot_0/20200423-215254-SharedClassesWorkloadTest_Softmx_Increase_JitAot/results/16.jvm4.jvmdump.stdout
+STF 22:23:52.593 - Pausing for 30 seconds
+STF 22:24:22.653 - Using procdump.exe to generate .DMP files
+STF 22:24:22.653 - Running command: C:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly\jvmtest\system\systemtest_prereqs\windows_sysinternals\procdump.exe -accepteula -ma 368
+STF 22:24:22.653 - Redirecting stderr to C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/openjdk-tests/TKG/test_output_15876956725790/SC_Softmx_JitAot_0/20200423-215254-SharedClassesWorkloadTest_Softmx_Increase_JitAot/results/16.jvm4.jvmdump.stderr
+STF 22:24:22.653 - Redirecting stdout to C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/openjdk-tests/TKG/test_output_15876956725790/SC_Softmx_JitAot_0/20200423-215254-SharedClassesWorkloadTest_Softmx_Increase_JitAot/results/16.jvm4.jvmdump.stdout
+STF 22:24:22.656 - Pausing for 30 seconds
+STF 22:24:52.653 - Monitoring Report Summary:
+STF 22:24:52.653 -   o Process jvm4 has timed out
+STF 22:24:52.654 - Killing processes: jvm4
+STF 22:24:58.669 - Using powershell to kill jvm4
+STF 22:24:58.669 - Running command: cmd /c echo | powershell Stop-Process 368
+STF 22:24:58.669 - Redirecting stderr to C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/openjdk-tests/TKG/test_output_15876956725790/SC_Softmx_JitAot_0/20200423-215254-SharedClassesWorkloadTest_Softmx_Increase_JitAot/results\kill_powershell.stderr
+STF 22:24:58.669 - Redirecting stdout to C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/openjdk-tests/TKG/test_output_15876956725790/SC_Softmx_JitAot_0/20200423-215254-SharedClassesWorkloadTest_Softmx_Increase_JitAot/results\kill_powershell.stdout
+STF 22:25:00.684 -   o Process jvm4 killed
+```
+
+16.jvm4.stderr
+```
+[-Xshareclasses persistent cache enabled]
+[-Xshareclasses verbose output enabled]
+JVMSHRC764W Unable to create shared memory of size 314572800 bytes as requested 
+ 	Adjusted to maximum shared memory permitted (67108864 bytes) 
+ 	(To increase available shared memory, modify system SHMMAX value) 
+ 	 If -Xscdmx is used, the debug attribute area is adjusted in proportion 
+ 	 according to its original ratio to the -Xscmx value.
+JVMSHRC237I Opened shared classes persistent cache SCC_SysTest_Workload_Cache
+JVMSHRC246I Attached shared classes persistent cache SCC_SysTest_Workload_Cache
+JVMSHRC765I Memory page protection on runtime data, string read-write data and partially filled pages is successfully enabled
+JVMJITM004W AOT code in shared class cache cannot execute on current processor. Ignoring AOT code in shared class cache.
+```
+
+16.jvm4.stdout
+```
+...
+addTestJitHint adding hint to java/net/InetSocketAddress.checkPort
+addTestJitHint adding hint to java/nio/channels/CompletionHandler.completed
+addTestJitHint adding hint to sun/nio/ch/IOStatus.<init>
+addTestJitHint adding hint to java/lang/Math$RandomNumberGeneratorHolder.<init>
+```
+
+16.jvm4.jvmdump.stderr
+```
+ProcDump v9.0 - Sysinternals process dump utility
+Copyright (C) 2009-2017 Mark Russinovich and Andrew Richards
+Sysinternals - www.sysinternals.com
+```
+
+16.jvm4.jvmdump.stdout
+```
+No process matching the specified PID can be found.
+Try elevating the command prompt or using PsExec to make one as SYSTEM.
+	psexec.exe -s -d -i cmd.exe
+	procdump.exe -accepteula ...
+```

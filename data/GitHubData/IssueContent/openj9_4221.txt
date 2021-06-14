@@ -1,0 +1,17 @@
+- What we would capture
+   - When a playbook ran
+   - What machine(s)
+   - What was installed/changed on a given machine
+   - Summary of config for each machine
+- Where would we store this record?
+   - Github
+- Where would we publish this record?
+   - Github
+   - Slack
+   - Mailing list
+
+Currently we run commands by hand based on what the playbook would execute. We are working with Adopt (AdoptOpenJDK/openjdk-infrastructure#562, https://github.com/AdoptOpenJDK/openjdk-infrastructure/issues/553 etc) to improve the robustness and quality of the playbooks so we can build our confidence in them. Once they are "ready" we will run them on a schedule (weekly?). We also need an Ansible tower (AWX) installation in order to run the playbooks in this manner.
+
+- [x] Setup AWX #4441 
+- [ ] Enable AWX Schedule #4572
+- [ ] Document machine inventory #4573

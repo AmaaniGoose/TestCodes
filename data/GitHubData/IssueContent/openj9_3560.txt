@@ -1,0 +1,20 @@
+```
+ [OUT] [MSG] Opening jvm from /home/jenkins/jenkins-agent/workspace/Test-extended.functional-JDK8-linux_390-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/bin/j9vm/libjvm.so
+ [OUT] [MSG] Test jep178 failed with error code: 6
+ [ERR] [ERR] Failed opening virtual machine.
+```
+
+Not all platforms are failing the same way.
+
+https://ci.eclipse.org/openj9/job/Test-extended.functional-JDK8-linux_390-64_cmprssptrs/142
+https://ci.eclipse.org/openj9/job/Test-extended.functional-JDK11-linux_x86-64_cmprssptrs/75
+https://ci.eclipse.org/openj9/job/Test-extended.functional-JDK8-win_x86-64_cmprssptrs/64
+https://ci.eclipse.org/openj9/job/Test-extended.functional-JDK11-linux_ppc-64_cmprssptrs_le/71
+https://ci.eclipse.org/openj9/job/Test-extended.functional-JDK8-win_x86/62
+https://ci.eclipse.org/openj9/job/Test-extended.functional-JDK11-linux_390-64_cmprssptrs/69/
+https://ci.eclipse.org/openj9/job/Test-extended.functional-JDK11-linux_x86-64/72
+https://ci.eclipse.org/openj9/job/Test-extended.functional-JDK11-aix_ppc-64_cmprssptrs/65
+https://ci.eclipse.org/openj9/job/Test-extended.functional-JDK8-linux_ppc-64_cmprssptrs_le/126
+https://ci.eclipse.org/openj9/job/Test-extended.functional-JDK8-linux_x86-64/131
+https://ci.eclipse.org/openj9/job/Test-extended.functional-JDK8-aix_ppc-64_cmprssptrs/124
+https://ci.eclipse.org/openj9/job/Test-extended.functional-JDK8-linux_x86-64_cmprssptrs/127

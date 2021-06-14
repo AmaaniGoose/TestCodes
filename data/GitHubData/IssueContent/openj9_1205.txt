@@ -1,0 +1,25 @@
+J9::ARM::AheadOfTimeCompile::initialiseAOTRelocationHeader(TR::IteratedExternalRelocation*) uses stm to access unaligned memory causing sigbus and a core file when running on 64bit OS. This causes a failures in test/VM_Test and test/cmdLineTests/shareClassTests/SCCMLTests
+
+`=> 0xf5d8ee78 <_ZN2J93ARM18AheadOfTimeCompile29initialiseAOTRelocationHeaderEPN2TR26IteratedExternalRelocationE+1504>:	stmib	r4, {r1, r3}`
+
+```
+(gdb) info reg
+r0             0xf0f0f6e8	4042323688
+r1             0xffffffff	4294967295
+r2             0xed13f102	3977507074
+r3             0xee008df0	3993013744
+r4             0xed13f0f6	3977507062
+r5             0xf0c05608	4039136776
+r6             0xf6399c78	4130970744
+r7             0xefc00000	4022337536
+r8             0xefc076c0	4022367936
+r9             0xf11abcd8	4045061336
+r10            0xefcdc810	4023240720
+r11            0x3	3
+r12            0x0	0
+sp             0xf0ee3818	0xf0ee3818
+lr             0x40	64
+pc             0xf5d8ee78	0xf5d8ee78 <J9::ARM::AheadOfTimeCompile::initialiseAOTRelocationHeader(TR::IteratedExternalRelocation*)+1504>
+cpsr           0x800f0010	-2146500592
+
+```

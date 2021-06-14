@@ -1,0 +1,1 @@
+Because `openj9_version_info.h` is includes git SHAs, and is included widely, it causes a significant number of cache misses when using ccache, even though the updated SHAs are only used in a hand full of source files. We may want to switch over to a system where the SHAs are stored in a variable defined in an `openj9_version_info.c` or something similar. 

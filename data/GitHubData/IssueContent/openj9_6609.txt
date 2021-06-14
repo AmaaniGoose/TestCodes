@@ -1,0 +1,1 @@
+Enable atomic free JNI for ARM32.  See #2576.

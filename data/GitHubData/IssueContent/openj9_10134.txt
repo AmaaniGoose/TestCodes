@@ -1,0 +1,35 @@
+### invokebasic and target
+
+**stack:**
+```
+argCount              -> methodIndexAndArgCount & 0xFF
+sp[0]                 -> MemberName
+sp[1:argCount - 2]    -> MethodHandle arguments
+sp[argCount]          -> MethodHandle
+```
+
+**target:**
+```
+MethodHandle
+- LambdaForm ... MH.form
+-- MemberName ... MH.form.vmentry
+--- J9Method ... MH.form.vmentry.vmtarget
+```
+
+**invokebasic pseudocode:**
+``` 
+j9object_t mhReceiver = ((j9object_t*)_sp)[methodIndexAndArgCount & 0xFF];
+if (J9_UNEXPECTED(NULL == mhReceiver)) {
+	return THROW_NPE;
+}
+
+j9object_t lambdaForm = J9VMJAVALANGINVOKEMETHODHANDLE_FORM(_currentThread, mhReceiver);
+j9object_t memberName = J9VMJAVALANGINVOKELAMBDAFORM_VMENTRY(_currentThread, lambdaForm);
+_sendMethod = (J9Method *)J9OBJECT_ADDRESS_LOAD(_currentThread, memberName, _vm->vmtargetOffset);
+
+return GOTO_RUN_METHOD;
+```
+
+### methodhandle bytecode examples
+
+TODO

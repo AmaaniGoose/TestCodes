@@ -1,0 +1,10 @@
+Merging of [1] caused a build break at OpenJ9 due to `s390m4check.pl` not liking a particular line added in Helpers.inc file:
+
+```
+16:17:59  line longer than 71 characters (73) '    .set TR_storeFlattenableArrayElement,TR_loadFlattenableArrayElement+1' at /home/jenkins/workspace/Build_JDK8_s390x_linux_xl_OMR/build/linux-s390x-normal-server-release/vm/compiler/../compiler/build/scripts/s390m4check.pl line 40, <FILE> line 623.
+16:17:59  /home/jenkins/workspace/Build_JDK8_s390x_linux_xl_OMR/build/linux-s390x-normal-server-release/vm/compiler/../compiler/build/rules/gnu/common.mk:81: recipe for target '/home/jenkins/workspace/Build_JDK8_s390x_linux_xl_OMR/build/linux-s390x-normal-server-release/vm/compiler/../objs/compiler/z/runtime/Math.o.s' failed
+```
+
+`s390m4check.pl` was introduced to ensure line length does not exceed 71 characters to ensure when the file is fed into the assembler it doesn't choke. I'm not sure if we still have this restriction today with the compiler toolchains we use. We should validate the need for `s390m4check.pl` existence.
+
+[1] https://github.com/eclipse/omr/pull/5278

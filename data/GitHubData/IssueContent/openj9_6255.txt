@@ -1,0 +1,26 @@
+Hello,
+
+My name is Erick and I've been working with @andrewcraik on an experimental inliner. The inliner is closed source at the moment and we would like to contribute it soon. We have already submitted a [couple](https://github.com/eclipse/openj9/pull/6141) [of](https://github.com/eclipse/omr/pull/4022) [PRs](https://github.com/eclipse/omr/pull/3971), however more will be coming soon.
+
+So, why would this be good for OpenJ9? 
+
+* Instead of inlining as the call graph is traversed, the inliner first creates a data type called the _Inlining_ _Dependency_ _Tree_ (IDT), which holds the universe of inlining decisions available for the inliner. Each node in the tree represents an inlining opportunity and has both a _benefit_ and a _cost_.
+* Having the IDT allows us to use the nested packing algorithm that produces a solution to the following problem: Which nodes in IDT should be selected such that we have the greatest cummulative benefit but do not exceed a cost?
+* Keeps track of reasons why a callsite-method pair is given benefits so that we can answer questions like: Why was this callsite-method selected for inlining?
+* One can add criteria to decide if a callsite-method pair should be inlined in the form of constraints and assign a benefit if that constraint is satisfied.
+* Uses a fast approximation to find out static estimates about the operand stack and local variable array.
+
+Some of the PRs that will be incoming in the next weeks will be:
+
+- [ ] Obtaining the CFG from `TR_EstimateCodeSize::realSize`
+- [ ] The contribution of the IDT class and how to build it
+- [ ] Adding frequency information to the IDT (how often a call-site method pair is executed)
+- [ ] Using BitVectors to represent inlining plans over the IDT.
+- [ ] The inliner packing algorithm
+- [ ] An abstract interpreter to find static approximation of run time values
+- [ ] Method summaries to encode constraints
+
+This inliner will probably not be used by default and some contributions will not be in use right away. There are still work we want to do to improve it.
+
+If there are any questions feel free to ask!
+As more PRs are submitted, I'm sure more level of detail will be required for a meaningful discussion. We will be working to provide documentation for this inliner and also discuss design decisions so that this contribution fits OMR/OpenJ9's standards.

@@ -1,0 +1,17 @@
+To build runtime compressed refs today, I delete the `default` directory and symlink it to the `compressedrefs` directory.
+
+For a real mixed build, we need a single VM directory.
+
+There are several things to consider:
+
+- redirector makes the compressed/full decision based on heap size
+
+In the most basic scenario, the redirector will need to add `-Xcompressedrefs` or `-Xnocompressedrefs` to the command line rather than selecting a VM
+
+- redirector is no longer needed at all
+
+For the purposes of this feature, the redirector could just be deleted. There are other reasons to keep this alive (future VM extensions like the past `-Xaggressive`). Might be nice to make it optional, though that brings its own technical debt.
+
+I suggest that we stick with `default` as the VM directory for mixed. This is consistent with adding future selectable VMs.
+
+Related: #9231 

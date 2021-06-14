@@ -1,0 +1,48 @@
+I think this is a machine issue, the tests passed on ub16x64j94 and ub16x64j910.
+
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_sanity.openjdk_x86-64_linux_Nightly/4/
+cent6-x64-2
+
+java/net/MulticastSocket/SetLoopbackMode.java.SetLoopbackMode
+```
+Test will use multicast group: /ff01:0:0:0:0:0:0:1
+
+******************
+
+Loopback mode is disabled.
+Packet not received - correct.
+
+******************
+
+Loopback mode is enabled.
+Packet not received (packet excepted as loopback is enabled)
+```
+java/net/MulticastSocket/Test.java.Test
+```
+Test 1: /224.80.80.80
+Join: /224.80.80.80
+Send packet to: /224.80.80.80
+Failed: No packet received within timeout!!!
+Send packet to: /224.80.80.80
+Failed: No packet received within timeout!!!
+Leave: /224.80.80.80
+No packet received within timeout! - Good.
+Join: /224.80.80.80
+Send packet to: /224.80.80.80
+Failed: No packet received within timeout!!!
+Send packet to: /224.80.80.80
+Failed: No packet received within timeout!!!
+Leave: /224.80.80.80
+No packet received within timeout! - Good.
+Test failed!!
+```
+ java/nio/channels/DatagramChannel/MulticastSendReceiveTests.java.MulticastSendReceiveTests
+```
+Test DatagramChannel to INET socket
+join 225.4.5.6 @ eth1
+Send message from 192.168.10.184 -> group 225.4.5.6 (id=0x678ce920)
+Waiting to receive message
+    
+Standard Error
+java.lang.RuntimeException: Expected message not recieved
+```

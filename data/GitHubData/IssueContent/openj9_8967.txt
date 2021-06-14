@@ -1,0 +1,14 @@
+Failure link
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_extended.functional_aarch64_linux_Personal/7/
+org.openj9.test.softmx.SoftmxUserScenarioTest.testSoftmxUserScenario
+
+The test tries to start the VM with `-Xmx132362m -Xsoftmx66131m`, which is too large for a compressed refs build.  The test machine seems to have 128GB memory.
+
+```
+[2020-03-23T05:38:41.885Z] [SoftmxUserScenarioTest] [INFO] Starting a new JVM using -Xmx = 132362 and -Xsoftmx = 66131
+[2020-03-23T05:38:41.885Z] [SoftmxUserScenarioTest] [INFO] Executing cmd : /home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux_Personal/openjdkbinary/j2sdk-image/bin/java -cp /home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux_Personal/openjdk-tests/TKG/../../jvmtest/TestConfig/resources:/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux_Personal/openjdk-tests/TKG/../TKG/lib/commons-exec.jar:/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux_Personal/openjdk-tests/TKG/../TKG/lib/testng.jar:/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux_Personal/openjdk-tests/TKG/../TKG/lib/jcommander.jar:/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux_Personal/openjdk-tests/TKG/../../jvmtest/functional/JLM_Tests/jlm_tests.jar -Xmx132362m -Xsoftmx66131m org.openj9.test.softmx.HelperClass
+[2020-03-23T05:38:41.885Z] Selected VM [default] does not exist.
+[2020-03-23T05:38:41.885Z] This JVM package only includes the '-Xcompressedrefs' configuration. Please run the VM without specifying the '-Xnocompressedrefs' option or by specifying the '-Xcompressedrefs' option.
+[2020-03-23T05:38:41.885Z] To compile the other configuration, please run configure with '--with-noncompressedrefs.
+[2020-03-23T05:38:41.885Z] [SoftmxUserScenarioTest] [WARN] Exception throw from executing the second JVM:org.apache.commons.exec.ExecuteException: Process exited with an error: 255 (Exit value: 255)
+```

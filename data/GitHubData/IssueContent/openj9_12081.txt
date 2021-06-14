@@ -1,0 +1,262 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk17_j9_extended.openjdk_x86-64_linux/1`
+```
+01:35:10  openjdk version "17" 2021-09-14
+01:35:10  OpenJDK Runtime Environment AdoptOpenJDK (build 17+11)
+01:35:10  Eclipse OpenJ9 VM AdoptOpenJDK (build master-f021812fb, JRE 17 Linux amd64-64-Bit Compressed References 20210227_15 (JIT enabled, AOT enabled)
+01:35:10  OpenJ9   - f021812fb
+01:35:10  OMR      - eb4f5a875
+01:35:10  JCL      - 6031ea3dbe based on jdk-17+11)
+```
+rebuild the failed tests in one link:
+08:52:56  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=17&JDK_IMPL=openj9&JDK_VENDOR=adoptopenjdk&BUILD_LIST=openjdk&PLATFORM=x86-64_linux_mixed&TARGET=testList%20TESTLIST=jdk_io_0,jdk_io_1,jdk_other_0,jdk_other_1,jdk_net_0,jdk_net_1
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+03:44:49  --------------------------------------------------
+03:44:49  TEST: java/net/Socket/SocketAcceptInterruptTest.java
+03:44:49  TEST JDK: /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image
+03:44:49  
+03:44:49  ACTION: compile -- Passed. Compilation successful
+03:44:49  REASON: User specified action: run compile NativeThread.java 
+03:44:49  TIME:   0.021 seconds
+03:44:49  messages:
+03:44:49  command: compile /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket/NativeThread.java
+03:44:49  reason: User specified action: run compile NativeThread.java 
+03:44:49  Mode: agentvm
+03:44:49  Agent id: 1
+03:44:49  elapsed time (seconds): 0.021
+03:44:49  configuration:
+03:44:49  Boot Layer (javac runtime environment)
+03:44:49    class path: /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/javatest.jar 
+03:44:49                /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+03:44:49    patch:      java.base /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/patches/java.base
+03:44:49  
+03:44:49  javac compilation environment
+03:44:49    source path: /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket
+03:44:49    class path:  /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket
+03:44:49                 /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketAcceptInterruptTest.d
+03:44:49  
+03:44:49  rerun:
+03:44:49  cd /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/scratch && \
+03:44:49  DISPLAY=:0 \
+03:44:49  HOME=/home/jenkins \
+03:44:49  LANG=en_US.UTF-8 \
+03:44:49  PATH=/bin:/usr/bin:/usr/sbin \
+03:44:49      /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image/bin/javac \
+03:44:49          -J-ea \
+03:44:49          -J-esa \
+03:44:49          -J-Xmx512m \
+03:44:49          -J-XX:+UseCompressedOops \
+03:44:49          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+03:44:49          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+03:44:49          -J-Dtest.compiler.opts= \
+03:44:49          -J-Dtest.java.opts= \
+03:44:49          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+03:44:49          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+03:44:49          -J-Dtest.timeout.factor=8.0 \
+03:44:49          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+03:44:49          -J-Dtest.name=java/net/Socket/SocketAcceptInterruptTest.java \
+03:44:49          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket/SocketAcceptInterruptTest.java \
+03:44:49          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket \
+03:44:49          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket \
+03:44:49          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketAcceptInterruptTest.d \
+03:44:49          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketAcceptInterruptTest.d \
+03:44:49          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketAcceptInterruptTest.d:/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket \
+03:44:49          -d /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketAcceptInterruptTest.d \
+03:44:49          -sourcepath /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket \
+03:44:49          -classpath /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket:/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketAcceptInterruptTest.d /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket/NativeThread.java
+03:44:49  
+03:44:49  ACTION: build -- Passed. Build successful
+03:44:49  REASON: Named class compiled on demand
+03:44:49  TIME:   0.037 seconds
+03:44:49  messages:
+03:44:49  command: build SocketAcceptInterruptTest
+03:44:49  reason: Named class compiled on demand
+03:44:49  Test directory:
+03:44:49    compile: SocketAcceptInterruptTest
+03:44:49  elapsed time (seconds): 0.037
+03:44:49  
+03:44:49  ACTION: compile -- Passed. Compilation successful
+03:44:49  REASON: .class file out of date or does not exist
+03:44:49  TIME:   0.036 seconds
+03:44:49  messages:
+03:44:49  command: compile /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket/SocketAcceptInterruptTest.java
+03:44:49  reason: .class file out of date or does not exist
+03:44:49  Mode: agentvm
+03:44:49  Agent id: 1
+03:44:49  elapsed time (seconds): 0.036
+03:44:49  configuration:
+03:44:49  Boot Layer (javac runtime environment)
+03:44:49    class path: /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/javatest.jar 
+03:44:49                /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+03:44:49    patch:      java.base /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/patches/java.base
+03:44:49  
+03:44:49  javac compilation environment
+03:44:49    source path: /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket
+03:44:49    class path:  /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket
+03:44:49                 /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketAcceptInterruptTest.d
+03:44:49  
+03:44:49  rerun:
+03:44:49  cd /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/scratch && \
+03:44:49  DISPLAY=:0 \
+03:44:49  HOME=/home/jenkins \
+03:44:49  LANG=en_US.UTF-8 \
+03:44:49  PATH=/bin:/usr/bin:/usr/sbin \
+03:44:49      /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image/bin/javac \
+03:44:49          -J-ea \
+03:44:49          -J-esa \
+03:44:49          -J-Xmx512m \
+03:44:49          -J-XX:+UseCompressedOops \
+03:44:49          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+03:44:49          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+03:44:49          -J-Dtest.compiler.opts= \
+03:44:49          -J-Dtest.java.opts= \
+03:44:49          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+03:44:49          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+03:44:49          -J-Dtest.timeout.factor=8.0 \
+03:44:49          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+03:44:49          -J-Dtest.name=java/net/Socket/SocketAcceptInterruptTest.java \
+03:44:49          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket/SocketAcceptInterruptTest.java \
+03:44:49          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket \
+03:44:49          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket \
+03:44:49          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketAcceptInterruptTest.d \
+03:44:49          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketAcceptInterruptTest.d \
+03:44:49          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketAcceptInterruptTest.d:/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket \
+03:44:49          -d /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketAcceptInterruptTest.d \
+03:44:49          -sourcepath /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket \
+03:44:49          -classpath /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket:/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketAcceptInterruptTest.d /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket/SocketAcceptInterruptTest.java
+03:44:49  
+03:44:49  TEST RESULT: Error. Use -nativepath to specify the location of native code
+03:44:49  --------------------------------------------------
+03:44:49  TEST: java/net/Socket/SocketReadInterruptTest.java
+03:44:49  TEST JDK: /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image
+03:44:49  
+03:44:49  ACTION: compile -- Passed. Compilation successful
+03:44:49  REASON: User specified action: run compile NativeThread.java 
+03:44:49  TIME:   0.056 seconds
+03:44:49  messages:
+03:44:49  command: compile /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket/NativeThread.java
+03:44:49  reason: User specified action: run compile NativeThread.java 
+03:44:49  Mode: agentvm
+03:44:49  Agent id: 1
+03:44:49  elapsed time (seconds): 0.056
+03:44:49  configuration:
+03:44:49  Boot Layer (javac runtime environment)
+03:44:49    class path: /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/javatest.jar 
+03:44:49                /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+03:44:49    patch:      java.base /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/patches/java.base
+03:44:49  
+03:44:49  javac compilation environment
+03:44:49    source path: /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket
+03:44:49    class path:  /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket
+03:44:49                 /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketReadInterruptTest.d
+03:44:49  
+03:44:49  rerun:
+03:44:49  cd /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/scratch && \
+03:44:49  DISPLAY=:0 \
+03:44:49  HOME=/home/jenkins \
+03:44:49  LANG=en_US.UTF-8 \
+03:44:49  PATH=/bin:/usr/bin:/usr/sbin \
+03:44:49      /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image/bin/javac \
+03:44:49          -J-ea \
+03:44:49          -J-esa \
+03:44:49          -J-Xmx512m \
+03:44:49          -J-XX:+UseCompressedOops \
+03:44:49          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+03:44:49          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+03:44:49          -J-Dtest.compiler.opts= \
+03:44:49          -J-Dtest.java.opts= \
+03:44:49          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+03:44:49          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+03:44:49          -J-Dtest.timeout.factor=8.0 \
+03:44:49          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+03:44:49          -J-Dtest.name=java/net/Socket/SocketReadInterruptTest.java \
+03:44:49          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket/SocketReadInterruptTest.java \
+03:44:49          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket \
+03:44:49          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket \
+03:44:49          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketReadInterruptTest.d \
+03:44:49          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketReadInterruptTest.d \
+03:44:49          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketReadInterruptTest.d:/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket \
+03:44:49          -d /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketReadInterruptTest.d \
+03:44:49          -sourcepath /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket \
+03:44:49          -classpath /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket:/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketReadInterruptTest.d /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket/NativeThread.java
+03:44:49  
+03:44:49  ACTION: build -- Passed. Build successful
+03:44:49  REASON: Named class compiled on demand
+03:44:49  TIME:   0.04 seconds
+03:44:49  messages:
+03:44:49  command: build SocketReadInterruptTest
+03:44:49  reason: Named class compiled on demand
+03:44:49  Test directory:
+03:44:49    compile: SocketReadInterruptTest
+03:44:49  elapsed time (seconds): 0.04
+03:44:49  
+03:44:49  ACTION: compile -- Passed. Compilation successful
+03:44:49  REASON: .class file out of date or does not exist
+03:44:49  TIME:   0.04 seconds
+03:44:49  messages:
+03:44:49  command: compile /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket/SocketReadInterruptTest.java
+03:44:49  reason: .class file out of date or does not exist
+03:44:49  Mode: agentvm
+03:44:49  Agent id: 1
+03:44:49  elapsed time (seconds): 0.04
+03:44:49  configuration:
+03:44:49  Boot Layer (javac runtime environment)
+03:44:49    class path: /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/javatest.jar 
+03:44:49                /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+03:44:49    patch:      java.base /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/patches/java.base
+03:44:49  
+03:44:49  javac compilation environment
+03:44:49    source path: /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket
+03:44:49    class path:  /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket
+03:44:49                 /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketReadInterruptTest.d
+03:44:49  
+03:44:49  rerun:
+03:44:49  cd /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/scratch && \
+03:44:49  DISPLAY=:0 \
+03:44:49  HOME=/home/jenkins \
+03:44:49  LANG=en_US.UTF-8 \
+03:44:49  PATH=/bin:/usr/bin:/usr/sbin \
+03:44:49      /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image/bin/javac \
+03:44:49          -J-ea \
+03:44:49          -J-esa \
+03:44:49          -J-Xmx512m \
+03:44:49          -J-XX:+UseCompressedOops \
+03:44:49          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+03:44:49          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+03:44:49          -J-Dtest.compiler.opts= \
+03:44:49          -J-Dtest.java.opts= \
+03:44:49          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+03:44:49          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+03:44:49          -J-Dtest.timeout.factor=8.0 \
+03:44:49          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+03:44:49          -J-Dtest.name=java/net/Socket/SocketReadInterruptTest.java \
+03:44:49          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket/SocketReadInterruptTest.java \
+03:44:49          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket \
+03:44:49          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket \
+03:44:49          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketReadInterruptTest.d \
+03:44:49          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketReadInterruptTest.d \
+03:44:49          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketReadInterruptTest.d:/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket \
+03:44:49          -d /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketReadInterruptTest.d \
+03:44:49          -sourcepath /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket \
+03:44:49          -classpath /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket:/home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work/classes/java/net/Socket/SocketReadInterruptTest.d /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket/SocketReadInterruptTest.java
+03:44:49  
+03:44:49  TEST RESULT: Error. Use -nativepath to specify the location of native code
+03:44:49  --------------------------------------------------
+03:56:00  Test results: passed: 793; error: 2
+03:56:04  Report written to /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/jvmtest/openjdk/report/html/report.html
+03:56:04  Results written to /home/jenkins/workspace/Test_openjdk17_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16144108423372/jdk_net_0/work
+03:56:04  Error: Some tests failed or other problems occurred.
+03:56:04  
+03:56:04  jdk_net_0_FAILED
+```
+
+This appears a test setup issue.

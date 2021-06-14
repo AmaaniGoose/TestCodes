@@ -1,0 +1,67 @@
+Failure link
+------------
+
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.functional_x86-64_linux_Nightly/301/tapResults/
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+     [java] [AutoRun] [INFO] Starting testShrcStatsExt(j9vm.test.ddrext.junit.TestSharedClassesExt)
+     [java] [DDRExtTesterBase] [ERROR] '!shrc  stats' output does not contain success key : JITPROFILE data length [1-9][0-9]* metadata [1-9][0-9]*
+     [java] [DDRExtTesterBase] [ERROR] '!shrc  stats' output :!j9sharedclassconfig 0x00007F16380CECB0
+...
+     [java] Cache contains 546 classes, 9 orphans, 3 classpaths, 0 URLs, 0 tokens
+     [java] 7 AOT, 53 SCOPES, 29 BYTE data, 0 UNINDEXED DATA, 0 CHARARRAY, 0 stale
+     [java] stale bytes 0
+     [java] 0 JITPROFILE, 507 JITHINT
+     [java] AOT data length 19192 code length 20576 metadata 196 total 39768
+     [java] JITPROFILE data length 0 metadata 0 
+     [java] JITHINT data length 2028 metadata 16224 
+     [java] ROMClass data 1576040 metadata 24204
+     [java] SCOPE data 7166 metadata 636 total 7802
+     [java] BYTE data 926356 metadata 1044 rwarea 0
+     [java] UNINDEXEDBYTE data 0 metadata 0
+     [java] CHARARRAY data 0 metadata 0
+     [java] BYTEDATA Summary
+     [java] 	UNKNOWN 0  HELPER 0  POOL 0  AOTHEADER 248
+     [java] 	JCL 0  VM 0  ROMSTRING 0  ZIPCACHE 925296  STARTUPHINTS 96
+     [java] 	JITHINT 0  AOTCLASSCHAIN 536 AOTTHUNK 180
+     [java] DEBUG Area Summary
+     [java] 	LineNumberTable bytes    : 147472
+     [java] 	LocalVariableTable bytes : 718
+...
+     [java] [DDRExtTesterBase] [INFO] Validation started for : '!coreinfo '
+     [java] [DDRExtTesterBase] [ERROR] '!coreinfo ' output does not contain success key : JITPROFILE data length [1-9][0-9]* metadata [1-9][0-9]*
+     [java] [DDRExtTesterBase] [ERROR] '!coreinfo ' output :!j9sharedclassconfig 0x00007F16380CECB0
+```
+
+```
+     [java] [AutoRun] [INFO] ================Test Result for /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_linux_Nightly/openjdk-tests/TKG/../TKG/test_output_15834759342049/testDDRExt_SharedClasses_openj9_0/DDREXT.J9CORE.DMP==================
+     [java] [AutoRun] [INFO] Errors:   0 out of 30 test cases.
+     [java] [AutoRun] [INFO] Failures: 9 out of 30 test cases.
+     [java] [AutoRun] [INFO] Total Error/Failures: 9
+     [java] [AutoRun] [ERROR] testShrcStatsExt(j9vm.test.ddrext.junit.TestSharedClassesExt)
+     [java] [AutoRun] [ERROR] testShrcAllStatsExt(j9vm.test.ddrext.junit.TestSharedClassesExt)
+     [java] [AutoRun] [ERROR] testShrcRcStatsExt(j9vm.test.ddrext.junit.TestSharedClassesExt)
+     [java] [AutoRun] [ERROR] testShrcCpStatsExt(j9vm.test.ddrext.junit.TestSharedClassesExt)
+     [java] [AutoRun] [ERROR] testShrcJITPStatsExt(j9vm.test.ddrext.junit.TestSharedClassesExt)
+     [java] [AutoRun] [ERROR] testShrcFindJITPext(j9vm.test.ddrext.junit.TestSharedClassesExt)
+     [java] [AutoRun] [ERROR] testShrcFindJITPPext(j9vm.test.ddrext.junit.TestSharedClassesExt)
+     [java] [AutoRun] [ERROR] testShrcJITPForExt(j9vm.test.ddrext.junit.TestSharedClassesExt)
+     [java] [AutoRun] [ERROR] testShrcJITHStatsExt(j9vm.test.ddrext.junit.TestSharedClassesExt)
+
+BUILD FAILED
+/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_linux_Nightly/jvmtest/functional/DDR_Test/tck_ddrext.xml:102: Java returned: 254
+
+Total time: 22 seconds
+
+testDDRExt_SharedClasses_openj9_0_FAILED
+```
+
+To rebuild the failed tests in <Jenkins URL>=https://ci.adoptopenjdk.net/job/Grinder, use the following links:
+04:46:14  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=functional&PLATFORM=x86-64_linux&TARGET=testDDRExt_SharedClasses_openj9_0

@@ -1,0 +1,1 @@
+In https://github.com/eclipse/openj9/pull/12230 we disabled profiled class test on all platform due to lack of validation records to verify the relationship between profiled class and cast class. Once we have enough relocation re-enable tests. 

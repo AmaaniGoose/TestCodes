@@ -1,0 +1,8 @@
+Both hotspot and openj9 are hitting the 10hr timeout before completing:
+
+https://ci.adoptopenjdk.net/view/Test_all/job/openjdk8_hs_openjdktest_extended_x86-64_windows/
+https://ci.adoptopenjdk.net/view/Test_all/job/openjdk8_j9_openjdktest_extended_x86-64_windows/
+
+We will have to consider running these extended tests in parallel (when we have more machine capacity).  
+
+As an interim workaround, we could consider increasing timeout, and/or reducing number of targets in this set.  

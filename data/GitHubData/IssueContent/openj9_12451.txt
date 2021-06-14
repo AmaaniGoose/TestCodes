@@ -1,0 +1,10 @@
+See https://github.com/eclipse/openj9/issues/11201
+
+The `TR_AbsoluteHelperAddress` relocation record is used on all platforms. However, on P, ARM, and aarch64 the `TR::ExternalRelocationRecord` generated in the code generator contains different information. This is because the `TR::ExternalRelocationRecord` constructor can only take up to two parameters (`targetAddress` & `targetAddress2`) but on P, ARM, and aarch64 we need to pass in three parameters. Therefore we use the `TR_RelocationRecordInformation` to hold the three pieces of data and pass the `TR_RelocationRecordInformation` object into the `TR::ExternalRelocationRecord` constructor. 
+
+However, this means that when using the information in the `TR::ExternalRelocationRecord` to write to the binary template (that gets stored to the SCC - which btw is common on all platforms) we have to do one thing for most platforms [1] and a different thing for P, ARM, aarch64 [2] (note that the only difference is we set the relo flag).
+
+We should make the data we store to the `TR::ExternalRelocationRecord` the same on all platforms. This means that on X & Z, we should also pass in a `TR_RelocationRecordInformation`. Then we just have to update the common implementation [1] and delete the specialized one [2].
+
+[1] https://github.com/eclipse/openj9/blob/8163427bc8df3dbdb5dd81ab8fa5695652479ac8/runtime/compiler/codegen/J9AheadOfTimeCompile.cpp#L258-L265
+[2] https://github.com/eclipse/openj9/blob/8163427bc8df3dbdb5dd81ab8fa5695652479ac8/runtime/compiler/p/codegen/J9AheadOfTimeCompile.cpp#L168-L177

@@ -1,0 +1,229 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/342
+osx1014-x86-1
+jdk_util_0
+JVM_OPTIONS:  -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache -XX:+UseCompressedOops 
+java/util/BitSet/BitSetStreamTest.java
+
+https://140-211-168-230-openstack.osuosl.org/artifactory/ci-eclipse-openj9/Test/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/342/openjdk_test_output.tar.gz
+```
+22:11:31  test BitSetStreamTest.testRandomStream(): failure
+22:11:31  java.lang.OutOfMemoryError: Java heap space
+22:11:31  	at java.util.stream.Nodes$IntArrayNode.<init>(Nodes.java:1319)
+22:11:31  	at java.util.stream.Nodes$IntFixedNodeBuilder.<init>(Nodes.java:1481)
+22:11:31  	at java.util.stream.Nodes.intBuilder(Nodes.java:205)
+22:11:31  	at java.util.stream.IntPipeline.makeNodeBuilder(IntPipeline.java:175)
+22:11:31  	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:559)
+22:11:31  	at java.util.stream.AbstractPipeline.evaluateToArrayNode(AbstractPipeline.java:267)
+22:11:31  	at java.util.stream.IntPipeline.toArray(IntPipeline.java:556)
+22:11:31  	at BitSetStreamTest.testRandomStream(BitSetStreamTest.java:126)
+22:11:31  	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+22:11:31  	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+22:11:31  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+22:11:31  	at java.lang.reflect.Method.invoke(Method.java:498)
+22:11:31  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+22:11:31  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+22:11:31  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+22:11:31  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+22:11:31  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+22:11:31  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+22:11:31  	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+22:11:31  	at org.testng.TestRunner.run(TestRunner.java:623)
+22:11:31  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+22:11:31  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+22:11:31  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+22:11:31  	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+22:11:31  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+22:11:31  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+22:11:31  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+22:11:31  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+22:11:31  	at org.testng.TestNG.run(TestNG.java:1018)
+22:11:31  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+22:11:31  	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+22:11:31  	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+22:11:31  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+22:11:31  	at java.lang.reflect.Method.invoke(Method.java:498)
+22:11:31  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:312)
+22:11:31  	at java.lang.Thread.run(Thread.java:821)
+22:11:31  
+22:11:31  ===============================================
+22:11:31  java/util/BitSet/BitSetStreamTest.java
+22:11:31  Total tests run: 12, Failures: 1, Skips: 0
+22:11:31  ===============================================
+22:11:31  
+22:11:31  STDERR:
+22:11:31  java.lang.Exception: failures: 1
+22:11:31  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:96)
+22:11:31  	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+22:11:31  	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+22:11:31  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+22:11:31  	at java.lang.reflect.Method.invoke(Method.java:498)
+22:11:31  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:312)
+22:11:31  	at java.lang.Thread.run(Thread.java:821)
+22:11:31  
+22:11:31  JavaTest Message: Test threw exception: java.lang.Exception
+22:11:31  JavaTest Message: shutting down test
+```
+
+There is no core, just a javacore and snap.
+```
+3MEMUSER       |  +--Memory Manager (GC): 1,647,850,016 bytes / 692 allocations
+3MEMUSER       |  |  |
+4MEMUSER       |  |  +--Java Heap: 1,614,868,480 bytes / 1 allocation
+
+
+1STHEAPTYPE    Object Memory
+NULL           id                 start              end                size               space/region
+1STHEAPSPACE   0x00007FB048425070         --                 --                 --         Generational
+1STHEAPREGION  0x00007FB0484252D0 0x000000009FC00000 0x00000000A1E70000 0x0000000002270000 Generational/Tenured Region
+1STHEAPREGION  0x00007FB048425200 0x00000000FEA40000 0x00000000FEF60000 0x0000000000520000 Generational/Nursery Region
+1STHEAPREGION  0x00007FB048425130 0x00000000FEF60000 0x0000000100000000 0x00000000010A0000 Generational/Nursery Region
+NULL
+1STHEAPTOTAL   Total memory:                    58916864 (0x0000000003830000)
+1STHEAPINUSE   Total memory in use:              8960656 (0x000000000088BA90)
+1STHEAPFREE    Total memory free:               49956208 (0x0000000002FA4570)
+
+
+1STGCHTYPE     GC History
+3STHSTTYPE     02:11:29:849046000 GMT j9mm.101 -   J9AllocateIndexableObject() returning NULL! 16784328 bytes requested for object of class 00000000085CA100 from memory space 'Generational' id=00007FB048425070
+3STHSTTYPE     02:11:29:849034000 GMT j9mm.134 -   Allocation failure end: newspace=16383840/22806528 oldspace=33592848/36110336 loa=361472/361472
+3STHSTTYPE     02:11:29:849031000 GMT j9mm.470 -   Allocation failure cycle end: newspace=16383840/22806528 oldspace=33592848/36110336 loa=361472/361472
+3STHSTTYPE     02:11:29:849016000 GMT j9mm.475 -   GlobalGC end: workstackoverflow=0 overflowcount=0 memory=49976688/58916864
+3STHSTTYPE     02:11:29:848892000 GMT j9mm.90 -   GlobalGC collect complete
+3STHSTTYPE     02:11:29:848882000 GMT j9mm.57 -   Sweep end
+3STHSTTYPE     02:11:29:848412000 GMT j9mm.56 -   Sweep start
+3STHSTTYPE     02:11:29:848411000 GMT j9mm.94 -   Class unloading end: classloadersunloaded=4 classesunloaded=4
+3STHSTTYPE     02:11:29:848185000 GMT j9mm.60 -   Class unloading start
+3STHSTTYPE     02:11:29:848184000 GMT j9mm.55 -   Mark end
+3STHSTTYPE     02:11:29:846219000 GMT j9mm.54 -   Mark start
+3STHSTTYPE     02:11:29:846187000 GMT j9mm.474 -   GlobalGC start: globalcount=11
+3STHSTTYPE     02:11:29:846093000 GMT j9mm.475 -   GlobalGC end: workstackoverflow=0 overflowcount=0 memory=51147880/60096512
+3STHSTTYPE     02:11:29:845961000 GMT j9mm.90 -   GlobalGC collect complete
+3STHSTTYPE     02:11:29:845934000 GMT j9mm.137 -   Compact end: bytesmoved=2786920
+3STHSTTYPE     02:11:29:840089000 GMT j9mm.136 -   Compact start: reason=compact to meet allocation
+3STHSTTYPE     02:11:29:840087000 GMT j9mm.57 -   Sweep end
+3STHSTTYPE     02:11:29:839723000 GMT j9mm.56 -   Sweep start
+3STHSTTYPE     02:11:29:839722000 GMT j9mm.55 -   Mark end
+3STHSTTYPE     02:11:29:838568000 GMT j9mm.54 -   Mark start
+3STHSTTYPE     02:11:29:838540000 GMT j9mm.474 -   GlobalGC start: globalcount=10
+3STHSTTYPE     02:11:29:838528000 GMT j9mm.135 -   Exclusive access: exclusiveaccessms=0.012 meanexclusiveaccessms=0.007 threads=1 lastthreadtid=0x00000000085C0A08 beatenbyotherthread=0
+3STHSTTYPE     02:11:29:838528000 GMT j9mm.469 -   Allocation failure cycle start: newspace=16365296/22806528 oldspace=18905792/39256064 loa=1051776/2748416 requestedbytes=16784328
+3STHSTTYPE     02:11:29:838516000 GMT j9mm.470 -   Allocation failure cycle end: newspace=16365296/22806528 oldspace=18905792/39256064 loa=1051776/2748416
+3STHSTTYPE     02:11:29:838500000 GMT j9mm.468 -   Cycle End: type 2 approximateFreeMemorySize 35271088
+3STHSTTYPE     02:11:29:838482000 GMT j9mm.560 -   LocalGC end: rememberedsetoverflow=0 causedrememberedsetoverflow=0 scancacheoverflow=0 failedflipcount=0 failedflipbytes=0 failedtenurecount=0 failedtenurebytes=0 flipcount=6 flipbytes=1048736 newspace=16365296/22806528 oldspace=18905792/39256064 loa=1051776/2748416 tenureage=0
+3STHSTTYPE     02:11:29:838443000 GMT j9mm.140 -   Tilt ratio: 73
+3STHSTTYPE     02:11:29:838185000 GMT j9mm.64 -   LocalGC start: globalcount=10 scavengecount=102 weakrefs=0 soft=0 phantom=0 finalizers=0
+3STHSTTYPE     02:11:29:838180000 GMT j9mm.467 -   Cycle Start: type 2 approximateFreeMemorySize 21625504
+3STHSTTYPE     02:11:29:838154000 GMT j9mm.135 -   Exclusive access: exclusiveaccessms=0.012 meanexclusiveaccessms=0.007 threads=1 lastthreadtid=0x00000000085C0A08 beatenbyotherthread=0
+3STHSTTYPE     02:11:29:838154000 GMT j9mm.469 -   Allocation failure cycle start: newspace=2719712/22806528 oldspace=18905792/39256064 loa=1051776/2748416 requestedbytes=16784328
+3STHSTTYPE     02:11:29:838153000 GMT j9mm.133 -   Allocation failure start: newspace=2719712/22806528 oldspace=18905792/39256064 loa=1051776/2748416 requestedbytes=16784328
+3STHSTTYPE     02:11:29:816931000 GMT j9mm.134 -   Allocation failure end: newspace=16711664/22806528 oldspace=18905792/39256064 loa=1051776/2748416
+3STHSTTYPE     02:11:29:816927000 GMT j9mm.470 -   Allocation failure cycle end: newspace=16711680/22806528 oldspace=18905792/39256064 loa=1051776/2748416
+3STHSTTYPE     02:11:29:816919000 GMT j9mm.468 -   Cycle End: type 2 approximateFreeMemorySize 35617472
+3STHSTTYPE     02:11:29:816905000 GMT j9mm.560 -   LocalGC end: rememberedsetoverflow=0 causedrememberedsetoverflow=0 scancacheoverflow=0 failedflipcount=0 failedflipbytes=0 failedtenurecount=0 failedtenurebytes=0 flipcount=0 flipbytes=0 newspace=16711680/22806528 oldspace=18905792/39256064 loa=1051776/2748416 tenureage=0
+3STHSTTYPE     02:11:29:816868000 GMT j9mm.140 -   Tilt ratio: 66
+3STHSTTYPE     02:11:29:816690000 GMT j9mm.64 -   LocalGC start: globalcount=10 scavengecount=101 weakrefs=0 soft=0 phantom=0 finalizers=0
+3STHSTTYPE     02:11:29:816685000 GMT j9mm.467 -   Cycle Start: type 2 approximateFreeMemorySize 18905792
+3STHSTTYPE     02:11:29:816666000 GMT j9mm.135 -   Exclusive access: exclusiveaccessms=0.012 meanexclusiveaccessms=0.012 threads=0 lastthreadtid=0x0000000008807E08 beatenbyotherthread=0
+3STHSTTYPE     02:11:29:816666000 GMT j9mm.469 -   Allocation failure cycle start: newspace=0/22806528 oldspace=18905792/39256064 loa=1051776/2748416 requestedbytes=16
+3STHSTTYPE     02:11:29:816665000 GMT j9mm.133 -   Allocation failure start: newspace=0/22806528 oldspace=18905792/39256064 loa=1051776/2748416 requestedbytes=16
+3STHSTTYPE     02:11:29:804421000 GMT j9mm.134 -   Allocation failure end: newspace=15204336/22806528 oldspace=18905792/39256064 loa=1051776/2748416
+3STHSTTYPE     02:11:29:804417000 GMT j9mm.470 -   Allocation failure cycle end: newspace=15204352/22806528 oldspace=18905792/39256064 loa=1051776/2748416
+3STHSTTYPE     02:11:29:804408000 GMT j9mm.468 -   Cycle End: type 2 approximateFreeMemorySize 34110144
+3STHSTTYPE     02:11:29:804396000 GMT j9mm.560 -   LocalGC end: rememberedsetoverflow=0 causedrememberedsetoverflow=0 scancacheoverflow=0 failedflipcount=0 failedflipbytes=0 failedtenurecount=0 failedtenurebytes=0 flipcount=0 flipbytes=0 newspace=15204352/22806528 oldspace=18905792/39256064 loa=1051776/2748416 tenureage=0
+3STHSTTYPE     02:11:29:804360000 GMT j9mm.140 -   Tilt ratio: 58
+3STHSTTYPE     02:11:29:804215000 GMT j9mm.64 -   LocalGC start: globalcount=10 scavengecount=100 weakrefs=0 soft=0 phantom=0 finalizers=0
+3STHSTTYPE     02:11:29:804211000 GMT j9mm.467 -   Cycle Start: type 2 approximateFreeMemorySize 18905792
+3STHSTTYPE     02:11:29:804195000 GMT j9mm.135 -   Exclusive access: exclusiveaccessms=0.010 meanexclusiveaccessms=0.010 threads=0 lastthreadtid=0x0000000008807E08 beatenbyotherthread=0
+3STHSTTYPE     02:11:29:804194000 GMT j9mm.469 -   Allocation failure cycle start: newspace=0/22806528 oldspace=18905792/39256064 loa=1051776/2748416 requestedbytes=16
+3STHSTTYPE     02:11:29:804193000 GMT j9mm.133 -   Allocation failure start: newspace=0/22806528 oldspace=18905792/39256064 loa=1051776/2748416 requestedbytes=16
+3STHSTTYPE     02:11:29:795352000 GMT j9mm.134 -   Allocation failure end: newspace=13303792/22806528 oldspace=18905792/39256064 loa=1051776/2748416
+3STHSTTYPE     02:11:29:795349000 GMT j9mm.470 -   Allocation failure cycle end: newspace=13303808/22806528 oldspace=18905792/39256064 loa=1051776/2748416
+3STHSTTYPE     02:11:29:795342000 GMT j9mm.468 -   Cycle End: type 2 approximateFreeMemorySize 32209600
+3STHSTTYPE     02:11:29:795329000 GMT j9mm.560 -   LocalGC end: rememberedsetoverflow=0 causedrememberedsetoverflow=0 scancacheoverflow=0 failedflipcount=0 failedflipbytes=0 failedtenurecount=0 failedtenurebytes=0 flipcount=0 flipbytes=0 newspace=13303808/22806528 oldspace=18905792/39256064 loa=1051776/2748416 tenureage=0
+3STHSTTYPE     02:11:29:795286000 GMT j9mm.140 -   Tilt ratio: 50
+3STHSTTYPE     02:11:29:795097000 GMT j9mm.64 -   LocalGC start: globalcount=10 scavengecount=99 weakrefs=0 soft=0 phantom=0 finalizers=0
+3STHSTTYPE     02:11:29:795092000 GMT j9mm.467 -   Cycle Start: type 2 approximateFreeMemorySize 18905792
+3STHSTTYPE     02:11:29:795073000 GMT j9mm.135 -   Exclusive access: exclusiveaccessms=0.009 meanexclusiveaccessms=0.009 threads=0 lastthreadtid=0x0000000008807E08 beatenbyotherthread=0
+3STHSTTYPE     02:11:29:795073000 GMT j9mm.469 -   Allocation failure cycle start: newspace=0/22806528 oldspace=18905792/39256064 loa=1051776/2748416 requestedbytes=16
+3STHSTTYPE     02:11:29:795072000 GMT j9mm.133 -   Allocation failure start: newspace=0/22806528 oldspace=18905792/39256064 loa=1051776/2748416 requestedbytes=16
+3STHSTTYPE     02:11:29:787866000 GMT j9mm.134 -   Allocation failure end: newspace=11403248/22806528 oldspace=18905792/39256064 loa=1051776/2748416
+3STHSTTYPE     02:11:29:787862000 GMT j9mm.470 -   Allocation failure cycle end: newspace=11403264/22806528 oldspace=18905792/39256064 loa=1051776/2748416
+3STHSTTYPE     02:11:29:787853000 GMT j9mm.468 -   Cycle End: type 2 approximateFreeMemorySize 30309056
+3STHSTTYPE     02:11:29:787839000 GMT j9mm.560 -   LocalGC end: rememberedsetoverflow=0 causedrememberedsetoverflow=0 scancacheoverflow=0 failedflipcount=0 failedflipbytes=0 failedtenurecount=0 failedtenurebytes=0 flipcount=0 flipbytes=0 newspace=11403264/22806528 oldspace=18905792/39256064 loa=1051776/2748416 tenureage=0
+3STHSTTYPE     02:11:29:787806000 GMT j9mm.140 -   Tilt ratio: 50
+3STHSTTYPE     02:11:29:787638000 GMT j9mm.64 -   LocalGC start: globalcount=10 scavengecount=98 weakrefs=0 soft=0 phantom=0 finalizers=0
+3STHSTTYPE     02:11:29:787633000 GMT j9mm.467 -   Cycle Start: type 2 approximateFreeMemorySize 18905792
+3STHSTTYPE     02:11:29:787608000 GMT j9mm.135 -   Exclusive access: exclusiveaccessms=0.012 meanexclusiveaccessms=0.012 threads=0 lastthreadtid=0x0000000008807E08 beatenbyotherthread=0
+3STHSTTYPE     02:11:29:787607000 GMT j9mm.469 -   Allocation failure cycle start: newspace=0/22806528 oldspace=18905792/39256064 loa=1051776/2748416 requestedbytes=16
+3STHSTTYPE     02:11:29:787606000 GMT j9mm.133 -   Allocation failure start: newspace=0/22806528 oldspace=18905792/39256064 loa=1051776/2748416 requestedbytes=16
+3STHSTTYPE     02:11:29:777421000 GMT j9mm.134 -   Allocation failure end: newspace=11403248/22806528 oldspace=18905792/39256064 loa=1051776/2748416
+3STHSTTYPE     02:11:29:777416000 GMT j9mm.470 -   Allocation failure cycle end: newspace=11403264/22806528 oldspace=18905792/39256064 loa=1051776/2748416
+3STHSTTYPE     02:11:29:777407000 GMT j9mm.468 -   Cycle End: type 2 approximateFreeMemorySize 30309056
+3STHSTTYPE     02:11:29:777392000 GMT j9mm.560 -   LocalGC end: rememberedsetoverflow=0 causedrememberedsetoverflow=0 scancacheoverflow=0 failedflipcount=0 failedflipbytes=0 failedtenurecount=0 failedtenurebytes=0 flipcount=0 flipbytes=0 newspace=11403264/22806528 oldspace=18905792/39256064 loa=1051776/2748416 tenureage=0
+3STHSTTYPE     02:11:29:777344000 GMT j9mm.140 -   Tilt ratio: 50
+3STHSTTYPE     02:11:29:777161000 GMT j9mm.64 -   LocalGC start: globalcount=10 scavengecount=97 weakrefs=0 soft=0 phantom=0 finalizers=0
+3STHSTTYPE     02:11:29:777154000 GMT j9mm.467 -   Cycle Start: type 2 approximateFreeMemorySize 18905792
+3STHSTTYPE     02:11:29:777122000 GMT j9mm.135 -   Exclusive access: exclusiveaccessms=0.014 meanexclusiveaccessms=0.014 threads=0 lastthreadtid=0x0000000008807E08 beatenbyotherthread=0
+3STHSTTYPE     02:11:29:777121000 GMT j9mm.469 -   Allocation failure cycle start: newspace=0/22806528 oldspace=18905792/39256064 loa=1051776/2748416 requestedbytes=16
+3STHSTTYPE     02:11:29:777120000 GMT j9mm.133 -   Allocation failure start: newspace=0/22806528 oldspace=18905792/39256064 loa=1051776/2748416 requestedbytes=16
+3STHSTTYPE     02:11:29:767689000 GMT j9mm.134 -   Allocation failure end: newspace=11403248/22806528 oldspace=18905792/39256064 loa=1051776/2748416
+3STHSTTYPE     02:11:29:767684000 GMT j9mm.470 -   Allocation failure cycle end: newspace=11403264/22806528 oldspace=18905792/39256064 loa=1051776/2748416
+3STHSTTYPE     02:11:29:767676000 GMT j9mm.468 -   Cycle End: type 2 approximateFreeMemorySize 30309056
+3STHSTTYPE     02:11:29:767661000 GMT j9mm.560 -   LocalGC end: rememberedsetoverflow=0 causedrememberedsetoverflow=0 scancacheoverflow=0 failedflipcount=0 failedflipbytes=0 failedtenurecount=0 failedtenurebytes=0 flipcount=0 flipbytes=0 newspace=11403264/22806528 oldspace=18905792/39256064 loa=1051776/2748416 tenureage=0
+3STHSTTYPE     02:11:29:767618000 GMT j9mm.140 -   Tilt ratio: 50
+3STHSTTYPE     02:11:29:767439000 GMT j9mm.64 -   LocalGC start: globalcount=10 scavengecount=96 weakrefs=0 soft=0 phantom=0 finalizers=0
+3STHSTTYPE     02:11:29:767433000 GMT j9mm.467 -   Cycle Start: type 2 approximateFreeMemorySize 18905792
+3STHSTTYPE     02:11:29:767410000 GMT j9mm.135 -   Exclusive access: exclusiveaccessms=0.012 meanexclusiveaccessms=0.012 threads=0 lastthreadtid=0x0000000008807E08 beatenbyotherthread=0
+3STHSTTYPE     02:11:29:767409000 GMT j9mm.469 -   Allocation failure cycle start: newspace=0/22806528 oldspace=18905792/39256064 loa=1051776/2748416 requestedbytes=16
+3STHSTTYPE     02:11:29:767408000 GMT j9mm.133 -   Allocation failure start: newspace=0/22806528 oldspace=18905792/39256064 loa=1051776/2748416 requestedbytes=16
+3STHSTTYPE     02:11:29:757952000 GMT j9mm.134 -   Allocation failure end: newspace=11403248/22806528 oldspace=18905792/39256064 loa=1051776/2748416
+3STHSTTYPE     02:11:29:757947000 GMT j9mm.470 -   Allocation failure cycle end: newspace=11403264/22806528 oldspace=18905792/39256064 loa=1051776/2748416
+3STHSTTYPE     02:11:29:757940000 GMT j9mm.468 -   Cycle End: type 2 approximateFreeMemorySize 30309056
+3STHSTTYPE     02:11:29:757923000 GMT j9mm.560 -   LocalGC end: rememberedsetoverflow=0 causedrememberedsetoverflow=0 scancacheoverflow=0 failedflipcount=0 failedflipbytes=0 failedtenurecount=0 failedtenurebytes=0 flipcount=0 flipbytes=0 newspace=11403264/22806528 oldspace=18905792/39256064 loa=1051776/2748416 tenureage=0
+3STHSTTYPE     02:11:29:757879000 GMT j9mm.140 -   Tilt ratio: 50
+3STHSTTYPE     02:11:29:757703000 GMT j9mm.64 -   LocalGC start: globalcount=10 scavengecount=95 weakrefs=0 soft=0 phantom=0 finalizers=0
+3STHSTTYPE     02:11:29:757698000 GMT j9mm.467 -   Cycle Start: type 2 approximateFreeMemorySize 18905792
+3STHSTTYPE     02:11:29:757681000 GMT j9mm.135 -   Exclusive access: exclusiveaccessms=0.009 meanexclusiveaccessms=0.009 threads=0 lastthreadtid=0x0000000008807E08 beatenbyotherthread=0
+3STHSTTYPE     02:11:29:757680000 GMT j9mm.469 -   Allocation failure cycle start: newspace=0/22806528 oldspace=18905792/39256064 loa=1051776/2748416 requestedbytes=16
+3STHSTTYPE     02:11:29:757680000 GMT j9mm.133 -   Allocation failure start: newspace=0/22806528 oldspace=18905792/39256064 loa=1051776/2748416 requestedbytes=16
+3STHSTTYPE     02:11:29:748626000 GMT j9mm.134 -   Allocation failure end: newspace=11403248/22806528 oldspace=18905792/39256064 loa=1051776/2748416
+3STHSTTYPE     02:11:29:748623000 GMT j9mm.470 -   Allocation failure cycle end: newspace=11403264/22806528 oldspace=18905792/39256064 loa=1051776/2748416
+3STHSTTYPE     02:11:29:748615000 GMT j9mm.468 -   Cycle End: type 2 approximateFreeMemorySize 30309056
+3STHSTTYPE     02:11:29:748603000 GMT j9mm.560 -   LocalGC end: rememberedsetoverflow=0 causedrememberedsetoverflow=0 scancacheoverflow=0 failedflipcount=0 failedflipbytes=0 failedtenurecount=0 failedtenurebytes=0 flipcount=0 flipbytes=0 newspace=11403264/22806528 oldspace=18905792/39256064 loa=1051776/2748416 tenureage=0
+3STHSTTYPE     02:11:29:748570000 GMT j9mm.140 -   Tilt ratio: 50
+3STHSTTYPE     02:11:29:748398000 GMT j9mm.64 -   LocalGC start: globalcount=10 scavengecount=94 weakrefs=0 soft=0 phantom=0 finalizers=0
+3STHSTTYPE     02:11:29:748394000 GMT j9mm.467 -   Cycle Start: type 2 approximateFreeMemorySize 18905792
+3STHSTTYPE     02:11:29:748372000 GMT j9mm.135 -   Exclusive access: exclusiveaccessms=0.012 meanexclusiveaccessms=0.012 threads=0 lastthreadtid=0x0000000008807E08 beatenbyotherthread=0
+3STHSTTYPE     02:11:29:748372000 GMT j9mm.469 -   Allocation failure cycle start: newspace=0/22806528 oldspace=18905792/39256064 loa=1051776/2748416 requestedbytes=16
+3STHSTTYPE     02:11:29:748371000 GMT j9mm.133 -   Allocation failure start: newspace=0/22806528 oldspace=18905792/39256064 loa=1051776/2748416 requestedbytes=16
+3STHSTTYPE     02:11:29:739681000 GMT j9mm.134 -   Allocation failure end: newspace=11403248/22806528 oldspace=18905792/39256064 loa=1051776/2748416
+3STHSTTYPE     02:11:29:739676000 GMT j9mm.470 -   Allocation failure cycle end: newspace=11403264/22806528 oldspace=18905792/39256064 loa=1051776/2748416
+3STHSTTYPE     02:11:29:739655000 GMT j9mm.475 -   GlobalGC end: workstackoverflow=0 overflowcount=0 memory=30309056/62062592
+3STHSTTYPE     02:11:29:739556000 GMT j9mm.90 -   GlobalGC collect complete
+3STHSTTYPE     02:11:29:739546000 GMT j9mm.57 -   Sweep end
+3STHSTTYPE     02:11:29:739129000 GMT j9mm.56 -   Sweep start
+3STHSTTYPE     02:11:29:739128000 GMT j9mm.55 -   Mark end
+3STHSTTYPE     02:11:29:738304000 GMT j9mm.54 -   Mark start
+3STHSTTYPE     02:11:29:738284000 GMT j9mm.73 -   Concurrent collection card cleaning end
+3STHSTTYPE     02:11:29:738116000 GMT j9mm.72 -   Concurrent collection card cleaning start, workstackoverflowcount=0
+3STHSTTYPE     02:11:29:738116000 GMT j9mm.79 -   Concurrent remembered set scan end, rememberedsetobjectsfound=0 scantracecount=6468 overflowcount=0
+3STHSTTYPE     02:11:29:737783000 GMT j9mm.78 -   Concurrent remembered set scan start, overflowcount=0
+3STHSTTYPE     02:11:29:737782000 GMT j9mm.188 -   Concurrent Halted States: Card cleaning complete, Scan classes complete, Tracing complete
+3STHSTTYPE     02:11:29:737782000 GMT j9mm.71 -   Concurrent halted, execmodeatgc=30 tracesizetarget=2694809 totaltraced=641432 mutatorstraced=252372 conhelpertraced=389060 cleanedcards=0 cardcleaningthreshold=153164 workstackoverflow=false workstackoverflowcount=0
+3STHSTTYPE     02:11:29:737759000 GMT j9mm.474 -   GlobalGC start: globalcount=9
+3STHSTTYPE     02:11:29:737742000 GMT j9mm.135 -   Exclusive access: exclusiveaccessms=0.013 meanexclusiveaccessms=0.013 threads=0 lastthreadtid=0x0000000008807E08 beatenbyotherthread=0
+3STHSTTYPE     02:11:29:737741000 GMT j9mm.469 -   Allocation failure cycle start: newspace=0/22806528 oldspace=3164528/41353216 loa=2894848/2894848 requestedbytes=16
+3STHSTTYPE     02:11:29:737740000 GMT j9mm.133 -   Allocation failure start: newspace=0/22806528 oldspace=3164528/41353216 loa=2894848/2894848 requestedbytes=16
+3STHSTTYPE     02:11:29:737671000 GMT j9mm.77 -   Concurrent background thread finished
+3STHSTTYPE     02:11:29:737662000 GMT j9mm.76 -   Concurrent background thread activated
+3STHSTTYPE     02:11:29:737590000 GMT j9mm.77 -   Concurrent background thread finished
+3STHSTTYPE     02:11:29:737589000 GMT j9mm.76 -   Concurrent background thread activated
+3STHSTTYPE     02:11:29:737563000 GMT j9mm.77 -   Concurrent background thread finished
+3STHSTTYPE     02:11:29:737562000 GMT j9mm.76 -   Concurrent background thread activated
+3STHSTTYPE     02:11:29:727777000 GMT j9mm.77 -   Concurrent background thread finished
+3STHSTTYPE     02:11:29:726828000 GMT j9mm.76 -   Concurrent background thread activated
+3STHSTTYPE     02:11:29:726817000 GMT j9mm.134 -   Allocation failure end: newspace=11403248/22806528 oldspace=3164528/41353216 loa=2894848/2894848
+3STHSTTYPE     02:11:29:725031000 GMT j9mm.470 -   Allocation failure cycle end: newspace=11403264/22806528 oldspace=3164528/41353216 loa=2894848/2894848
+```
+
+@dmitripivkine fyi

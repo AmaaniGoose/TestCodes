@@ -1,0 +1,5 @@
+With the aarch64 macos systems able to run x64 code under their Rosetta emulation layer, we could run out macos testing across this machines as well as the x64 ones.
+
+In order to determine if this is feasible I have [kicked off a run](https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk8_hs_sanity.openjdk_x86-64_mac/409/console) of the latest JDK8/HotSpot/macos on [one of our macos/aarch64 systems](https://ci.adoptopenjdk.net/computer/test-macstadium-macos11-arm64-2).
+
+Note that at the moment, the OpenJ9 builds for macos/x64 crash when run on the aarch64 systems, so if we added this functionaliy in we'd have to exclude openj9 (although we now have precedent for splitting them now that https://github.com/AdoptOpenJDK/openjdk-build/pull/2372 has been implemented

@@ -1,0 +1,3 @@
+The commoned LinkageInfoWord initialization from #10731 caused problems on AArch64 and was reverted via #11006.
+
+This issue tracks the investigation into the proper fix and re-enabling the common LinkageInfoWord code on AArch64.

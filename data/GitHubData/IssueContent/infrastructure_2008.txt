@@ -1,0 +1,3 @@
+https://www.redhat.com/en/blog/extending-no-cost-red-hat-enterprise-linux-open-source-organizations
+
+[Following up on a Slack conversation](https://adoptopenjdk.slack.com/archives/C53GHCXL4/p1614511308045400), I mailed the ROSI program people today.

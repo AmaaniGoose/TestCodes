@@ -1,0 +1,5 @@
+The following checks seem redundant. Why do we care that the method is JNI for example? Would there ever be a case where you recognize `TR::java_lang_System_nanoTime` but all of these checks fail?
+
+https://github.com/eclipse/openj9/blob/94649e13230cf293f73f060f83b331eb38174d8b/runtime/compiler/optimizer/J9Simplifier.cpp#L318-L328
+
+My thinking is no and we should remove the extra checks.

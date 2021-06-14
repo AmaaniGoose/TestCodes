@@ -1,0 +1,29 @@
+Java -version output
+
+java version "1.8.0_221"
+Java(TM) SE Runtime Environment (build 8.0.5.40 - pxa6480sr5fp40-20190807_01(SR5 FP40))
+IBM J9 VM (build 2.9, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20190802_424001 (JIT enabled, AOT enabled)
+OpenJ9   - 106f6ce
+OMR      - fe07f6f
+IBM      - af2a365)
+JCL - 20190712_01 based on Oracle jdk8u221-b11
+Output from `java -version`.
+If the shas are not public, include equivalent public shas.
+
+Summary of problem
+------------------
+Java Agent is not instrumenting methods starting with package "com.ibm.ws".
+But still getting javacore when server compiling below method:
+
+2XHREGISTER      CR2: 0000000000000000
+1XHEXCPMODULE  Compiling method: com/ibm/ws/security/jaspi/JaspiServletFilter.doFilter(Ljavax/servlet/ServletRequest;Ljavax/servlet/ServletResponse;Ljavax/servlet/FilterChain;)V
+NULL
+But when we exclude these methods using -Xjit:exclude={...} then not getting javacore as given in example below-
+
+1CICMDLINE
+/opt/IBM/InstallationManager/eclipse/jre_8.0.5040.20190923_1526/jre/bin/java -javaagent:/opt/IBM/WebSphere/Liberty/bin/tools/ws-javaagent.jar -Djava.awt.headless=true -Djdk.attach.allowAttachSelf=true -Xmx2048m -Xms1024m -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=9000 -Djava.rmi.server.hostname=x.x.x.x -Xjit:exclude={com/ibm/ws/*} -javaagent:/home/cavisson/netdiagnostics/lib/ndmain.jar=time,ndAgentJar=/home/cavisson/netdiagnostics/lib/ndagent-with-dep.jar,ndHome=/home/cavisson/netdiagnostics,logInstrCode=1 -Dorg.osgi.framework.bootdelegation=com.cavisson.ndutils -jar /opt/IBM/WebSphere/Liberty/bin/tools/ws-server.jar defaultServer
+
+Diagnostic files
+----------------
+[javacore.20200513.062109.7140.0002.txt](https://github.com/eclipse/openj9/files/4661463/javacore.20200513.062109.7140.0002.txt)
+

@@ -1,0 +1,3 @@
+At OpenJ9 the file is called `debug-image`, and at Adopt the file contains `debugimage`. It may be less confusing for users, and easier for the test code to deal with if the names are consistent.
+
+@llxia 

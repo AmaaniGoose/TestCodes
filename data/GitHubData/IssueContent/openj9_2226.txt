@@ -1,0 +1,11 @@
+Test the following with 
+a) the default security manager and 
+b) a security manager which allows AttachPermission ("createAttachProvider")
+
+1. AttachProvider.providers()
+2. AttachProvider.listVirtualMachines()
+3. AttachProvider.attachVirtualMachine()
+
+Cases 1. and 2. should work under both a) and b), case 3. should work under b) only.
+
+@pshipton FYI. 

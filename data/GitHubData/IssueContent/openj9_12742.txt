@@ -1,0 +1,14 @@
+The JIT has two variants of asserts, `TR_ASSERT` and `TR_ASSERT_FATAL`. `TR_ASSERT` is a NOP unless running a debug build. This means that there many asserts that perform conceptual integrity checks that are not actually checked by default. Nowadays, all new asserts added are of the variant `TR_ASSERT_FATAL` (because there's no point adding an assert that won't actually assert).
+
+One of the main arguments against this change in the past was that it could affect performance. However, it has been shown in the past that these types of changes are generally noise. Also, even if there is a small performance hit, the cost is miniscule compared to the time spent debugging issues in production. @fjeremic has multiple examples of bugs that were determined almost immediately once asserts were enabled. However, if it turns out that there is a significant performance hit, then the solution isn't to hide them in a debug build but to find better placements of these asserts and remove redundant asserts.
+
+A plan to move forward with this might be:
+1. Find all locations of `TR_ASSERT`
+2. Remove redundant asserts, place asserts in more appropriate locations if needed
+3. Fix all asserts that get triggered when made fatal
+4. Do performance sniff tests, go to step 2 if needed.
+5. Change semantics of `TR_ASSERT` to be fatal; replace existing `TR_ASSERT_FATAL` with `TR_ASSERT`.
+
+Beyond the obvious benefits, doing so will also make the JIT consistent with the rest of OpenJ9 which run with asserts enabled in production.
+
+@fjeremic @vijaysun-omr @joransiu @zl-wang @gita-omr @mpirvu @0xdaryl @mstoodle would appreciate your thoughts on this. Granted the assert is defined in OMR so this discussion will also have to happen there. However since a lot of concerns/consequences are shared and OpenJ9 has a bigger set of tests that exercise more of the compiler, I've opened the issue here. That said I've opened https://github.com/eclipse/omr/issues/6023 for OMR specific discussion.

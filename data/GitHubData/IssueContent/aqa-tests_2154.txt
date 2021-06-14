@@ -1,0 +1,148 @@
+jdk8 win64 hotspot: jdk_jdi_0 fails with:
+```
+FATAL ERROR in native method: JDWP One or more of the library paths supplied to jdwp, likely by sun.boot.library.path, is too long., jvmtiError=JVMTI_ERROR_INVALID_LOCATION(24)
+```
+Link to failing job: https://ci.adoptopenjdk.net/job/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/397/consoleFull
+Build under test:
+```
+12:29:01  openjdk version "1.8.0_282"
+12:29:01  OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_282-b07)
+12:29:01  OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.282-b07, mixed mode)
+```
+Output of failing test:
+```
+12:46:26  ===============================================
+12:46:26  Running test jdk_jdi_0 ...
+12:46:26  ===============================================
+12:46:26  jdk_jdi_0 Start Time: Sat Jan  9 12:46:19 2021 Epoch Time (ms): 1610196379619
+12:46:26  Nothing to be done for setup.
+12:46:26  variation: Mode150
+12:46:26  JVM_OPTIONS:  -XX:+UseCompressedOops 
+12:46:26  { itercnt=1; \
+12:46:26  mkdir -p "J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdk-tests/\\TKG\\test_output_16101954855260\\jdk_jdi_0"; \
+12:46:26  cd "J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdk-tests/\\TKG\\test_output_16101954855260\\jdk_jdi_0"; \
+12:46:26  "J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java" -Xmx512m -jar "J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdk-tests///..//jvmtest\\openjdk\\jtreg\\lib\\jtreg.jar" \
+12:46:26  -agentvm -a -ea -esa -v:fail,error,time,nopass -retain:fail,error,*.dmp,javacore.*,heapdump.*,*.trc -ignore:quiet -timeoutFactor:8 -xml:verify -concurrency:2  -vmoptions:"-Xmx512m  -XX:+UseCompressedOops " \
+12:46:26  -w ""J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdk-tests/\\TKG\\test_output_16101954855260\\jdk_jdi_0"\\work" \
+12:46:26  -r "J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdk-tests///..//jvmtest\\openjdk\\report" \
+12:46:26  -jdk:"J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdkbinary/j2sdk-image" \
+12:46:26  -exclude:"J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdk-tests/\\openjdk\\openjdk-jdk\\jdk\\test\\ProblemList.txt" \
+12:46:26  -exclude:"J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdk-tests///..//jvmtest\\openjdk\\ProblemList_openjdk8.txt" \
+12:46:26  "J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdk-tests/\\openjdk\\openjdk-jdk\\jdk\\test:jdk_jdi"; \
+12:46:26  if [ $? -eq 0 ] ; then echo ""; echo "jdk_jdi_0""_PASSED"; echo ""; cd J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdk-tests/;  else echo ""; echo "jdk_jdi_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdk-tests/\\TKG\\test_output_16101954855260\\TestTargetResult";
+12:46:26  Directory "J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_16101954855260\jdk_jdi_0\work" not found: creating
+12:46:26  XML output with verification to J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_16101954855260\jdk_jdi_0\work
+12:47:35  --------------------------------------------------
+12:47:35  TEST: com/sun/jdi/PrivateTransportTest.sh
+12:47:35  TEST JDK: J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdkbinary\j2sdk-image
+12:47:35  
+12:47:35  ACTION: compile -- Passed. Compilation successful
+12:47:35  REASON: User specified action: run compile -g HelloWorld.java 
+12:47:35  TIME:   0.026 seconds
+12:47:35  messages:
+12:47:35  command: compile -g J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\com\sun\jdi\HelloWorld.java
+12:47:35  reason: User specified action: run compile -g HelloWorld.java 
+12:47:35  Mode: agentvm
+12:47:35  Agent id: 2
+12:47:35  elapsed time (seconds): 0.026
+12:47:35  configuration:
+12:47:35  Boot Layer (javac runtime environment)
+12:47:35    class path: J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdkbinary\j2sdk-image\lib\tools.jar
+12:47:35                J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\javatest.jar
+12:47:35                J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\jtreg.jar
+12:47:35  
+12:47:35  javac compilation environment
+12:47:35    source path: J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\com\sun\jdi
+12:47:35    class path:  J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\com\sun\jdi
+12:47:35                 J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_16101954855260\jdk_jdi_0\work\classes\1\com\sun\jdi
+12:47:35                 J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdkbinary\j2sdk-image\lib\tools.jar
+12:47:35  
+12:47:35  rerun:
+12:47:35  cd 'J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_16101954855260\jdk_jdi_0\work\scratch\1' && \
+12:47:35  PATH='C:\cygwin64\bin;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn;C:\Program Files\Microsoft SQL Server\100\Tools\Binn;C:\Program Files\Microsoft SQL Server\100\DTS\Binn;C:\Strawberry\perl\bin;C:\Program Files\Git\cmd;C:\openjdk\jdk-8\bin;C:\apache-ant\apache-ant-1.10.5\bin;C:\Program Files\Microsoft SQL Server\110\Tools\Binn;C:\Program Files\Microsoft SQL Server\120\Tools\Binn;C:\rust\bin;C:\Program Files\IcedTeaWEB\bin;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0;C:\Program Files (x86)\WiX Toolset v3.14\bin;C:\Program Files (x86)\IncrediBuild' \
+12:47:35  SystemDrive=C: \
+12:47:35  SystemRoot='C:\windows' \
+12:47:35  TEMP='C:\Users\jenkins.bld-win2012r2-2\AppData\Local\Temp' \
+12:47:35  TMP='C:\Users\jenkins.bld-win2012r2-2\AppData\Local\Temp' \
+12:47:35  windir='C:\windows' \
+12:47:35      'J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdkbinary\j2sdk-image\bin\javac' \
+12:47:35          -J-ea \
+12:47:35          -J-esa \
+12:47:35          -J-Xmx512m \
+12:47:35          -J-XX:+UseCompressedOops \
+12:47:35          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+12:47:35          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+12:47:35          -J-Dtest.compiler.opts= \
+12:47:35          -J-Dtest.java.opts= \
+12:47:35          -J-Dtest.jdk='J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdkbinary\j2sdk-image' \
+12:47:35          -J-Dcompile.jdk='J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdkbinary\j2sdk-image' \
+12:47:35          -J-Dtest.timeout.factor=8.0 \
+12:47:35          -J-Dtest.root='J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test' \
+12:47:35          -J-Dtest.name=com/sun/jdi/PrivateTransportTest.sh \
+12:47:35          -J-Dtest.file='J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\com\sun\jdi\PrivateTransportTest.sh' \
+12:47:35          -J-Dtest.src='J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\com\sun\jdi' \
+12:47:35          -J-Dtest.src.path='J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\com\sun\jdi' \
+12:47:35          -J-Dtest.classes='J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_16101954855260\jdk_jdi_0\work\classes\1\com\sun\jdi' \
+12:47:35          -J-Dtest.class.path='J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_16101954855260\jdk_jdi_0\work\classes\1\com\sun\jdi' \
+12:47:35          -J-Dtest.class.path.prefix='J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_16101954855260\jdk_jdi_0\work\classes\1\com\sun\jdi;J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\com\sun\jdi' \
+12:47:35          -d 'J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_16101954855260\jdk_jdi_0\work\classes\1\com\sun\jdi' \
+12:47:35          -sourcepath 'J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\com\sun\jdi' \
+12:47:35          -classpath 'J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\com\sun\jdi;J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_16101954855260\jdk_jdi_0\work\classes\1\com\sun\jdi;J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdkbinary\j2sdk-image\lib\tools.jar' \
+12:47:35          -g 'J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\com\sun\jdi\HelloWorld.java'
+12:47:35  
+12:47:35  ACTION: shell -- Failed. Execution failed: exit code 1
+12:47:35  REASON: User specified action: run shell PrivateTransportTest.sh 
+12:47:35  TIME:   0.214 seconds
+12:47:35  messages:
+12:47:35  command: shell PrivateTransportTest.sh
+12:47:35  reason: User specified action: run shell PrivateTransportTest.sh 
+12:47:35  elapsed time (seconds): 0.214
+12:47:35  STDOUT:
+12:47:35  JDK under test is: J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdkbinary/j2sdk-image
+12:47:35  Setup private transport library by copying an existing one and renaming
+12:47:35  cp J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdkbinary/j2sdk-image/jre/bin/dt_socket.dll /cygdrive/j/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdk-tests/TKG/test_output_16101954855260/jdk_jdi_0/work/classes/1/com/sun/jdi/private_dt_socket.dll
+12:47:35  PATH=/usr/bin:/cygdrive/c/windows/system32:/cygdrive/c/windows:/cygdrive/c/windows/System32/Wbem:/cygdrive/c/windows/System32/WindowsPowerShell/v1.0:/cygdrive/c/Program Files (x86)/Microsoft SQL Server/100/Tools/Binn:/cygdrive/c/Program Files/Microsoft SQL Server/100/Tools/Binn:/cygdrive/c/Program Files/Microsoft SQL Server/100/DTS/Binn:/cygdrive/c/Strawberry/perl/bin:/cygdrive/c/Program Files/Git/cmd:/cygdrive/c/openjdk/jdk-8/bin:/cygdrive/c/apache-ant/apache-ant-1.10.5/bin:/cygdrive/c/Program Files/Microsoft SQL Server/110/Tools/Binn:/cygdrive/c/Program Files/Microsoft SQL Server/120/Tools/Binn:/cygdrive/c/rust/bin:/cygdrive/c/Program Files/IcedTeaWEB/bin:/cygdrive/c/ProgramData/chocolatey/bin:/cygdrive/c/Program Files (x86)/Microsoft SDKs/TypeScript/1.0:/cygdrive/c/Program Files (x86)/WiX Toolset v3.14/bin:/cygdrive/c/Program Files (x86)/IncrediBuild:/cygdrive/j/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdk-tests/TKG/test_output_16101954855260/jdk_jdi_0/work/classes/1/com/sun/jdi
+12:47:35  J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdkbinary/j2sdk-image/bin/java -agentlib:jdwp=transport=J:\\jenkins\\workspace\\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\\openjdk-tests\\TKG\\test_output_16101954855260\\jdk_jdi_0\\work\\classes\\1\\com\\sun\\jdi\\private_dt_socket,server=y,suspend=n -classpath "J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdk-tests/TKG/test_output_16101954855260/jdk_jdi_0/work/classes/1/com/sun/jdi" HelloWorld
+12:47:35  FATAL ERROR in native method: JDWP One or more of the library paths supplied to jdwp, likely by sun.boot.library.path, is too long., jvmtiError=JVMTI_ERROR_INVALID_LOCATION(24)
+12:47:35  test status for  was: 1
+12:47:35  The test failed :-(
+12:47:35  exit status was 1
+12:47:35  STDERR:
+12:47:35  JDWP exit error JVMTI_ERROR_INVALID_LOCATION(24): One or more of the library paths supplied to jdwp, likely by sun.boot.library.path, is too long. [linker_md.c:60]
+12:47:35  unspecified test failure
+12:47:35  rerun:
+12:47:35  cd 'J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_16101954855260\jdk_jdi_0\work\scratch\1' && \
+12:47:35  PATH='C:\cygwin64\bin;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn;C:\Program Files\Microsoft SQL Server\100\Tools\Binn;C:\Program Files\Microsoft SQL Server\100\DTS\Binn;C:\Strawberry\perl\bin;C:\Program Files\Git\cmd;C:\openjdk\jdk-8\bin;C:\apache-ant\apache-ant-1.10.5\bin;C:\Program Files\Microsoft SQL Server\110\Tools\Binn;C:\Program Files\Microsoft SQL Server\120\Tools\Binn;C:\rust\bin;C:\Program Files\IcedTeaWEB\bin;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0;C:\Program Files (x86)\WiX Toolset v3.14\bin;C:\Program Files (x86)\IncrediBuild' \
+12:47:35  SystemDrive=C: \
+12:47:35  SystemRoot='C:\windows' \
+12:47:35  TEMP='C:\Users\jenkins.bld-win2012r2-2\AppData\Local\Temp' \
+12:47:35  TMP='C:\Users\jenkins.bld-win2012r2-2\AppData\Local\Temp' \
+12:47:35  windir='C:\windows' \
+12:47:35  TESTFILE=J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdk-tests/openjdk/openjdk-jdk/jdk/test/com/sun/jdi/PrivateTransportTest.sh \
+12:47:35  TESTSRC=J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdk-tests/openjdk/openjdk-jdk/jdk/test/com/sun/jdi \
+12:47:35  TESTSRCPATH=J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdk-tests/openjdk/openjdk-jdk/jdk/test/com/sun/jdi \
+12:47:35  TESTCLASSES=J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdk-tests/TKG/test_output_16101954855260/jdk_jdi_0/work/classes/1/com/sun/jdi \
+12:47:35  TESTCLASSPATH=J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdk-tests/TKG/test_output_16101954855260/jdk_jdi_0/work/classes/1/com/sun/jdi \
+12:47:35  COMPILEJAVA=J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdkbinary/j2sdk-image \
+12:47:35  TESTJAVA=J:/jenkins/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdkbinary/j2sdk-image \
+12:47:35  TESTVMOPTS='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+12:47:35  TESTTOOLVMOPTS='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+12:47:35  TESTJAVACOPTS= \
+12:47:35  TESTJAVAOPTS= \
+12:47:35  TESTTIMEOUTFACTOR=8.0 \
+12:47:35  TESTROOT='J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test' \
+12:47:35  FS='\' \
+12:47:35  PS=; \
+12:47:35  NULL=NUL \
+12:47:35      sh \
+12:47:35          'J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\com\sun\jdi\PrivateTransportTest.sh'
+12:47:35  
+12:47:35  TEST RESULT: Failed. Execution failed: exit code 1
+12:47:35  --------------------------------------------------
+12:48:02  Test results: passed: 111; failed: 1
+12:48:07  Report written to J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\jvmtest\openjdk\report\html\report.html
+12:48:07  Results written to J:\jenkins\workspace\Test_openjdk8_hs_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_16101954855260\jdk_jdi_0\work
+12:48:07  Error: Some tests failed or other problems occurred.
+12:48:07  
+12:48:07  jdk_jdi_0_FAILED
+```

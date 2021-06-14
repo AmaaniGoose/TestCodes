@@ -1,0 +1,65 @@
+Failing job link: https://ci.adoptopenjdk.net/job/Test_openjdk17_hs_sanity.functional_aarch64_linux/37/console
+
+The functional test build is failing on hotspot jdk17:
+```
+01:33:13  compile:
+01:33:13       [echo] Ant version is Apache Ant(TM) version 1.10.5 compiled on July 10 2018
+01:33:13       [echo] ============COMPILER SETTINGS============
+01:33:13       [echo] ===fork:                         yes
+01:33:13       [echo] ===executable:                   /home/jenkins/workspace/Test_openjdk17_hs_sanity.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/javac
+01:33:13       [echo] ===debug:                        on
+01:33:13       [echo] ===destdir:                      /home/jenkins/workspace/Test_openjdk17_hs_sanity.functional_aarch64_linux/openjdk-tests/TKG/../../jvmtest/functional/Jsr335
+01:33:13      [javac] Compiling 29 source files to /home/jenkins/workspace/Test_openjdk17_hs_sanity.functional_aarch64_linux/openjdk-tests/functional/Jsr335/bin
+01:33:14      [javac] /home/jenkins/workspace/Test_openjdk17_hs_sanity.functional_aarch64_linux/openjdk-tests/functional/Jsr335/src/org/openj9/test/jsr335/defineAnonClass/DefineAnonClass.java:30: warning: Unsafe is internal proprietary API and may be removed in a future release
+01:33:14      [javac] import sun.misc.Unsafe;
+01:33:14      [javac]                ^
+01:33:15      [javac] /home/jenkins/workspace/Test_openjdk17_hs_sanity.functional_aarch64_linux/openjdk-tests/functional/Jsr335/src/org/openj9/test/jsr335/defineAnonClass/DefineAnonClass.java:39: warning: Unsafe is internal proprietary API and may be removed in a future release
+01:33:15      [javac] 	private static Unsafe unsafe;
+01:33:15      [javac] 	               ^
+01:33:15      [javac] /home/jenkins/workspace/Test_openjdk17_hs_sanity.functional_aarch64_linux/openjdk-tests/functional/Jsr335/src/org/openj9/test/jsr335/defineAnonClass/DefineAnonClass.java:42: warning: Unsafe is internal proprietary API and may be removed in a future release
+01:33:15      [javac] 			Field f = Unsafe.class.getDeclaredField("theUnsafe");
+01:33:15      [javac] 			          ^
+01:33:15      [javac] /home/jenkins/workspace/Test_openjdk17_hs_sanity.functional_aarch64_linux/openjdk-tests/functional/Jsr335/src/org/openj9/test/jsr335/defineAnonClass/DefineAnonClass.java:44: warning: Unsafe is internal proprietary API and may be removed in a future release
+01:33:15      [javac] 			unsafe = (Unsafe) f.get(null);
+01:33:15      [javac] 			          ^
+01:33:15      [javac] /home/jenkins/workspace/Test_openjdk17_hs_sanity.functional_aarch64_linux/openjdk-tests/functional/Jsr335/src/org/openj9/test/jsr335/defineAnonClass/DefineAnonClass.java:53: error: cannot find symbol
+01:33:15      [javac] 		Class<?> anon = unsafe.defineAnonymousClass(hostClass, bytes, null);
+01:33:15      [javac] 		                      ^
+01:33:15      [javac]   symbol:   method defineAnonymousClass(Class<CAP#1>,byte[],<null>)
+01:33:15      [javac]   location: variable unsafe of type Unsafe
+01:33:15      [javac]   where CAP#1 is a fresh type-variable:
+01:33:15      [javac]     CAP#1 extends Object from capture of ?
+01:33:15      [javac] /home/jenkins/workspace/Test_openjdk17_hs_sanity.functional_aarch64_linux/openjdk-tests/functional/Jsr335/src/org/openj9/test/jsr335/defineAnonClass/DefineAnonClass.java:60: error: cannot find symbol
+01:33:15      [javac] 		Class<?> anon = unsafe.defineAnonymousClass(hostClass, bytes, null);
+01:33:15      [javac] 		                      ^
+01:33:15      [javac]   symbol:   method defineAnonymousClass(Class<CAP#1>,byte[],<null>)
+01:33:15      [javac]   location: variable unsafe of type Unsafe
+01:33:15      [javac]   where CAP#1 is a fresh type-variable:
+01:33:15      [javac]     CAP#1 extends Object from capture of ?
+01:33:15      [javac] /home/jenkins/workspace/Test_openjdk17_hs_sanity.functional_aarch64_linux/openjdk-tests/functional/Jsr335/src/org/openj9/test/jsr335/defineAnonClass/DefineAnonClass.java:65: error: cannot find symbol
+01:33:15      [javac] 		return unsafe.defineAnonymousClass(hostClass, bytes, cpPatches);
+01:33:15      [javac] 		             ^
+01:33:15      [javac]   symbol:   method defineAnonymousClass(Class<CAP#1>,byte[],Object[])
+01:33:15      [javac]   location: variable unsafe of type Unsafe
+01:33:15      [javac]   where CAP#1 is a fresh type-variable:
+01:33:15      [javac]     CAP#1 extends Object from capture of ?
+01:33:15      [javac] /home/jenkins/workspace/Test_openjdk17_hs_sanity.functional_aarch64_linux/openjdk-tests/functional/Jsr335/src/org/openj9/test/jsr335/defineAnonClass/TestUnsafeDefineAnonClass.java:115: warning: non-varargs call of varargs method with inexact argument type for last parameter;
+01:33:15      [javac] 			Method getClassName = clazz.getDeclaredMethod("getClassName", null);
+01:33:15      [javac] 			                                                              ^
+01:33:15      [javac]   cast to Class<?> for a varargs call
+01:33:15      [javac]   cast to Class<?>[] for a non-varargs call and to suppress this warning
+01:33:15      [javac] /home/jenkins/workspace/Test_openjdk17_hs_sanity.functional_aarch64_linux/openjdk-tests/functional/Jsr335/src/org/openj9/test/jsr335/defineAnonClass/TestUnsafeDefineAnonClass.java:116: warning: non-varargs call of varargs method with inexact argument type for last parameter;
+01:33:15      [javac] 			String className = (String) getClassName.invoke(clazz.newInstance(), null);
+01:33:15      [javac] 			                                                                     ^
+01:33:15      [javac]   cast to Object for a varargs call
+01:33:15      [javac]   cast to Object[] for a non-varargs call and to suppress this warning
+01:33:16      [javac] Note: Some input files use or override a deprecated API.
+01:33:16      [javac] Note: Recompile with -Xlint:deprecation for details.
+01:33:16      [javac] Note: Some input files use unchecked or unsafe operations.
+01:33:16      [javac] Note: Recompile with -Xlint:unchecked for details.
+01:33:16      [javac] 3 errors
+01:33:16      [javac] 6 warnings
+01:33:16  
+01:33:16  BUILD FAILED
+```
+May be due to https://github.com/eclipse-openj9/openj9/commit/17fc1ac8244832889e885c6de8cdc0ef9822e395#diff-5e73fc5843caacf769352ac9291e6fc7e2ea91eb636dd211e88db9b06421878d

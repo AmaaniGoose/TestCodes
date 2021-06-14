@@ -1,0 +1,11 @@
+Several areas are lacking value type support due to a lack of specification. Those that have been noted are:
+1) https://github.com/eclipse/openj9/blob/master/runtime/jcl/common/reflecthelp.c
+Currently, the function `classForSignature` does not support value types. This is as it is unknown whether Q and L types will share a ramClass or not.
+
+2) https://github.com/eclipse/openj9/blob/master/runtime/jcl/common/java_lang_Class.h
+Currently, the JNI function `Java_com_ibm_oti_vm_VM_getClassNameImpl` outputs a type of `L` for objects, both Q and L type. Once the Java API specs contain Q type implementation details, this will need to be updated.
+
+3) https://github.com/eclipse/openj9/blob/master/runtime/bcverify/bcverify.c and https://github.com/eclipse/openj9/blob/master/runtime/cfdumper/main.c
+Currently, there is no java language specification for source code that will generate Q types. Both files output source code given java bytecode and thus will need to be updated once Q type compilation is specified.
+`bcverify.c` will need the method `printMethod` to be updated, while `main.c` will need multiple methods to be updated. Locations requiring update are all switch cases containing `case 'Q':`
+Until specifications are created, Q types are output as normal objects, prepended with `flattenable `.

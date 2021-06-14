@@ -1,0 +1,8 @@
+The current code is expensive, since it is based on the member fields _and_ is recomputed every time. It also uses the sum of several small integers weighted equally.
+
+Suggested improvements:
+1. compute the value lazily and cache it for further use
+2. assign different weights to boolean and numeric components, especially those likely to be small integers like `waitedCount` and `threadId`.
+3. explicitly invoke the hashCode() for string components.
+
+@keithc-ca you know much more about this than I do: your suggestions are welcome.

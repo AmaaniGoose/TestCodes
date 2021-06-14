@@ -1,0 +1,13 @@
+With a standard format for disabling tests, I think we can create a workflow to auto re-enable tests as mentioned in https://github.com/AdoptOpenJDK/openjdk-tests/issues/1853#issuecomment-662800038
+
+Scenario 1: 
+An issue is closed, but the test is still disabled.
+(can run on schedule. i.e.,  weekly or monthly)
+- scan the playlist to find `<disable>` tag
+- check git issue link to see if the issue is closed
+- if the issue is closed, run this disabled test. If the intermittent label exists, run multiple times. We should be able to get JDK version and platforms based on the label. If not, the information should be in the description. Or just run all available combinations.
+- if the test fails, reopen the issue with detail. Otherwise, create a PR to re-enable the test and remove `test excluded` label on the issue
+
+Scenario 2:
+An issue may already be fixed by other PRs and we want to auto verify and re-enable the test.
+This is very similar to Scenario 1. Instead of running disabled tests only if the issue is closed, run the disabled test regardless. If the test passes with different combinations, leave a comment on the issue and create a PR to re-enable the test.

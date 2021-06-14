@@ -1,0 +1,64 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk8_j9_sanity.perf_ppc64le_linux/44/`
+```
+openjdk version "1.8.0_292-internal"
+OpenJDK Runtime Environment (build 1.8.0_292-internal-202104230402-b10)
+Eclipse OpenJ9 VM (build master-f296ae765, JRE 1.8.0 Linux ppc64le-64-Bit Compressed References 20210423_98 (JIT enabled, AOT enabled)
+OpenJ9   - f296ae765
+OMR      - 22a4853ac
+JCL      - 2c626fee based on jdk8u292-b10)
+```
+[Rerun in Grinder](https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?TARGET=renaissance-future-genetic_0&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;PLATFORM=ppc64le_linux&amp;KEEP_REPORTDIR=false&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-linux-ppc64le-openj9%2F98%2FOpenJDK8U-jre_ppc64le_linux_openj9_2021-04-23-04-00.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-linux-ppc64le-openj9%2F98%2FOpenJDK8U-jdk_ppc64le_linux_openj9_2021-04-23-04-00.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-linux-ppc64le-openj9%2F98%2FOpenJDK8U-testimage_ppc64le_linux_openj9_2021-04-23-04-00.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-linux-ppc64le-openj9%2F98%2FOpenJDK8U-debugimage_ppc64le_linux_openj9_2021-04-23-04-00.tar.gz&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;LIGHT_WEIGHT_CHECKOUT=true&amp;ARTIFACTORY_SERVER=na.artifactory.swg-devops&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=8&amp;USER_CREDENTIALS_ID=&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=&amp;JDK_REPO=https%3A%2F%2Fgithub.com%2Fibmruntimes%2Fopenj9-openjdk-jdk8&amp;RELEASE_TAG=&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;UPSTREAM_JOB_NAME=&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=openj9&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=openj9&amp;SSH_AGENT_CREDENTIAL=83181e25-eea4-4f55-8b3e-e79615733226&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=4e18ffe7-b1b1-4272-9979-99769b68bcc2&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=perf&amp;UPSTREAM_JOB_NUMBER=&amp;TIME_LIMIT=20&amp;JVM_OPTIONS=&amp;PARALLEL=)
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+[2021-04-23T05:16:02.642Z] Running test renaissance-future-genetic_0 ...
+[2021-04-23T05:16:02.642Z] ===============================================
+[2021-04-23T05:16:02.642Z] renaissance-future-genetic_0 Start Time: Thu Apr 22 22:14:35 2021 Epoch Time (ms): 1619154875837
+[2021-04-23T05:16:02.642Z] "/home/jenkins/workspace/Test_openjdk8_j9_sanity.perf_ppc64le_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk8_j9_sanity.perf_ppc64le_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+[2021-04-23T05:16:02.642Z] JVMSHRC005I No shared class caches available
+[2021-04-23T05:16:02.642Z] JVMSHRC005I No shared class caches available
+[2021-04-23T05:16:02.642Z] cache cleanup done
+[2021-04-23T05:16:02.642Z] variation: NoOptions
+[2021-04-23T05:16:02.642Z] JVM_OPTIONS:  
+[2021-04-23T05:16:02.642Z] ====== future-genetic (jdk-concurrent), iteration 0 started ======
+[2021-04-23T05:16:02.642Z] Exception occurred in org.renaissance.jdk.concurrent.FutureGenetic@67b5d186: java.lang.NullPointerException
+[2021-04-23T05:16:02.642Z] java.util.concurrent.CompletionException: java.lang.NullPointerException
+[2021-04-23T05:16:02.642Z] 	at java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:273)
+[2021-04-23T05:16:02.642Z] 	at java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:280)
+[2021-04-23T05:16:02.642Z] 	at java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1606)
+[2021-04-23T05:16:02.642Z] 	at java.util.concurrent.CompletableFuture$AsyncSupply.exec(CompletableFuture.java:1596)
+[2021-04-23T05:16:02.642Z] 	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+[2021-04-23T05:16:02.642Z] 	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
+[2021-04-23T05:16:02.642Z] 	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+[2021-04-23T05:16:02.642Z] 	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:175)
+[2021-04-23T05:16:02.642Z] Caused by: java.lang.NullPointerException
+[2021-04-23T05:16:02.642Z] 	at java.util.Objects.requireNonNull(Objects.java:203)
+[2021-04-23T05:16:02.642Z] 	at io.jenetics.engine.Timer.of(Timer.java:87)
+[2021-04-23T05:16:02.642Z] 	at io.jenetics.engine.TimedResult.lambda$of$0(TimedResult.java:59)
+[2021-04-23T05:16:02.642Z] 	at io.jenetics.engine.TimedResult$$Lambda$149/0x0000000000000000.get(Unknown Source)
+[2021-04-23T05:16:02.642Z] 	at io.jenetics.engine.Engine.evolve(Engine.java:327)
+[2021-04-23T05:16:02.643Z] 	at io.jenetics.engine.Engine$$Lambda$117/0x0000000000000000.apply(Unknown Source)
+[2021-04-23T05:16:02.643Z] 	at io.jenetics.internal.engine.EvolutionSpliterator.tryAdvance(EvolutionSpliterator.java:75)
+[2021-04-23T05:16:02.643Z] 	at java.util.stream.ReferencePipeline.forEachWithCancel(ReferencePipeline.java:126)
+[2021-04-23T05:16:02.643Z] 	at java.util.stream.AbstractPipeline.copyIntoWithCancel(AbstractPipeline.java:514)
+[2021-04-23T05:16:02.643Z] 	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:501)
+[2021-04-23T05:16:02.643Z] 	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:487)
+[2021-04-23T05:16:02.643Z] 	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+[2021-04-23T05:16:02.643Z] 	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:241)
+[2021-04-23T05:16:02.643Z] 	at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+[2021-04-23T05:16:02.643Z] 	at org.renaissance.jdk.concurrent.JavaJenetics.evolveChromosome(JavaJenetics.java:85)
+[2021-04-23T05:16:02.643Z] 	at org.renaissance.jdk.concurrent.JavaJenetics$$Lambda$99/0x0000000000000000.get(Unknown Source)
+[2021-04-23T05:16:02.643Z] 	at java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1604)
+[2021-04-23T05:16:02.643Z] 	... 5 more
+[2021-04-23T05:16:02.643Z] The following benchmarks failed: future-genetic
+[2021-04-23T05:16:02.643Z] 
+[2021-04-23T05:16:02.643Z] renaissance-future-genetic_0_FAILED
+```

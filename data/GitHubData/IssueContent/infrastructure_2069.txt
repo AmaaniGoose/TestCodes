@@ -1,0 +1,13 @@
+Both grinders on the build-osuosl machines still failed the following tests despite the symlinks being in place
+```
+jdk_lang_1
+jdk_util_1
+```
+with the same error
+```
+LD_LIBRARY_PATH= : 	0509-022 Cannot load module /home/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image/lib/libawt_xawt.so.
+13:52:59  	0509-150   Dependent module /opt/freeware/lib/libXrender.a(shr_64.o) could not be loaded.
+13:52:59  	0509-152   Member shr_64.o is not found in archive
+```
+
+_Originally posted by @Haroon-Khel in https://github.com/AdoptOpenJDK/openjdk-infrastructure/issues/1697#issuecomment-804111475_

@@ -1,0 +1,6 @@
+We are missing a few Linux on Z feature flags[2], `HWCAP_S390_VXRS_EXT2` and `HWCAP_S390_VXRS_PDE`. These have already been added to the linux kernel [1] but weren't added to the eclipse-openj9/openj9 repo. These flags are needed for `J9PORT_S390_FEATURE_VECTOR_PACKED_DECIMAL_ENHANCEMENT_FACILITY` [3] and `J9PORT_S390_FEATURE_VECTOR_FACILITY_ENHANCEMENT_2` [4] facilities.
+
+[1] https://github.com/torvalds/linux/blob/5bfc75d92efd494db37f5c4c173d3639d4772966/arch/s390/include/asm/elf.h#L107-L111 "Bits present in AT_HWCAP."
+[2] https://github.com/eclipse-openj9/openj9/blob/fc324bb714d745f3494be05eda15e718995113c5/runtime/oti/j9port.h#L573-L575 "Linux on Z features"
+[3] https://github.com/eclipse-openj9/openj9/blob/510d170ad7b514e001bbf600bad6985ea4834ecd/runtime/port/unix/j9sysinfo.c#L1193 "`J9PORT_S390_FEATURE_VECTOR_PACKED_DECIMAL_ENHANCEMENT_FACILITY`"
+[4] https://github.com/eclipse-openj9/openj9/blob/fc324bb714d745f3494be05eda15e718995113c5/runtime/port/unix/j9sysinfo.c#L1180 "`J9PORT_S390_FEATURE_VECTOR_FACILITY_ENHANCEMENT_2`"

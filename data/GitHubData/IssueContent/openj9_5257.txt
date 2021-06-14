@@ -1,0 +1,11 @@
+There are multiple uses of the `getMethodFromNode` and `getMethodFromBCInfo` routines used throughout eclipse/openj9 and eclipse/omr.
+
+Here are two examples of the definitions. There are more scattered around the omr and openj9 codebases.
+https://github.com/eclipse/openj9/blob/3b6cb12977ffd6e72b4ab3e9e5417317ecb4a3fe/runtime/compiler/runtime/IProfiler.cpp#L1899-L1910
+
+https://github.com/eclipse/openj9/blob/3b6cb12977ffd6e72b4ab3e9e5417317ecb4a3fe/runtime/compiler/runtime/IProfiler.cpp#L1704-L1725
+
+These routines all look like duplicates of `OMR::Node::getOwningMethod`. We should refactor these routines into OMR and eliminate the redundancy.
+
+https://github.com/eclipse/omr/blob/b0aead1c0a6037ebd58e1cc2da6ccc6601dcb177/compiler/il/OMRNode.cpp#L3391-L3408
+ 

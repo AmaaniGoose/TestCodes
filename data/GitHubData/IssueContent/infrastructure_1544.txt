@@ -1,0 +1,8 @@
+
+Ref: https://github.com/AdoptOpenJDK/openjdk-infrastructure/blob/master/ansible/playbooks/aix.yml#L735
+
+This can break certain default AIX startup scripts which require the AIX `grep` command.
+
+We need to determine the impact to the adoptopenjdk scripts of changing this.
+
+@Haroon-Khel Possibly somethign we can do while switching to the invididual Role-based playbooks?

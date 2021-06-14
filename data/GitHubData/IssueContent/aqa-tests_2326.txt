@@ -1,0 +1,15 @@
+**Describe the bug**
+It can be difficult to search through the mass of tests in the https://ci.adoptopenjdk.net/view/Test_openjdk/ view to find the one you are looking for, especially considering the long names of each job making it harder to read.
+
+It would be nice for the each test job to be contained within a folder in a similar manner to the [downstream build jobs](https://ci.adoptopenjdk.net/job/build-scripts/job/jobs/) so you can quickly find the version, os, arch (and perhaps even variant) you are looking for. This could be append or replace the current view depending on if people prefer having one big view for all the jobs or would prefer having them in folders or a mix of both.
+
+**To Reproduce**
+https://ci.adoptopenjdk.net/view/Test_openjdk/ and try and find a job. It will probably take longer than 1 min if you are not familiar with the layout and job name format.
+
+**Expected behavior**
+I can easily and quickly find the exact test job I am looking for it in the view.
+
+**Screenshots**
+<img width="846" alt="Screenshot 2021-03-02 at 10 21 34" src="https://user-images.githubusercontent.com/25231953/109634410-1cba6380-7b41-11eb-9e31-b6488dd559fc.png">
+Downstream job view that is neatly organised. This is what I would like for the test view, perhaps even improving upon this view by splitting it down by os, arch and variant. 
+

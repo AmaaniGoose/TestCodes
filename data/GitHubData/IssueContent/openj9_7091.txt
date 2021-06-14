@@ -1,0 +1,36 @@
+Consider the following testcase:
+
+```
+import java.io.Closeable;
+import com.ibm.jvm.Dump;
+                                    
+public class FinalizerTest implements Closeable{
+    private boolean isClosed = false;
+
+    public static void main (String args[]) {
+        for (int i = 0; i < 1000; i++) {
+            new FinalizerTest();
+        }
+        System.gc();
+        Dump.SystemDump();
+    }
+
+    public void close() {
+        this.isClosed = true;
+    }
+
+    public void finalize() {
+        close();
+    }
+}
+```
+
+This program creates and discards 1000 objects with finalizers, then forces a GC to induce finalization, and finally triggers a dump so we can examine the state of these objects.
+
+If you run the test and open the resulting dump in Eclipse MAT you will find 1000 FinalizerTest objects of root type `Finalizable`. If you run the "Finalizer Overview" query you can also see that MAT describes the objects as being "ready for finalizer thread".
+
+However, if you look at the fields in these objects you can see that they are closed, and `close()` can only be called from `finalize()`, so the objects have in fact already been finalized. The information presented by MAT is contradictory and misleading.
+
+It turns out that MAT is passing on information provided by DTFJ. When parsing system dumps DTFJ tags objects with a `finalize()` method as `HEAP_ROOT_FINALIZABLE_OBJ`. MAT then assumes that objects tagged in this way are on the finalizer queue waiting to be finalized. This _might_ be correct, but it might not - objects appear to be tagged in this way by DTFJ regardless of whether or not their finalizer has been run.
+
+When finalizable objects have been processed by the finalizer thread they should become unreachable, so they should not be tagged as roots (of any kind) by DTFJ. MAT would then present the objects correctly - i.e. they would be visible in the unreachable objects histogram, or as "roots" of type `Unreachable` if "keep unreachable objects" were enabled when parsing the dump.

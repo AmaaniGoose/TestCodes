@@ -1,0 +1,3 @@
+The AArch64 JIT implementation of the fence opcodes (`TR::loadFence`, `TR::storeFence`, `TR::fullFence`) uses a conservatively correct `DSB` instruction.
+
+The task here is to understand the AArch64 memory model and choose the best memory barrier instructions that meet the semantics of the Java memory model.

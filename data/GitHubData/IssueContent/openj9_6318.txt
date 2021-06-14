@@ -1,0 +1,7 @@
+I tried to follow this inside openj9 repo:
+https://github.com/eclipse/openj9/blob/master/test/docs/OpenJ9TestUserGuide.md
+Then I found this:
+https://github.com/eclipse/openj9/wiki/Reproducing-Test-Failures-Locally
+which I think is more detailed and works better (clones AdoptOpenJDK repo).
+
+Could we consolidate these two documents?

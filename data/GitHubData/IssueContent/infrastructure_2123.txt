@@ -1,0 +1,5 @@
+Ref: #1483 , #2121 , #2122 
+
+Using #1483 as a reference, RISC-V support needs to be added to the playbook as we have those machines. I thought it'd be best to open an issue to document the changes that need to be made from the original PR, as well as any issues that I will probably run into :-) 
+
+It may be best to look at this once #2100 has been fixed, as using mutli cores to run the playbook should significantly speed it up.

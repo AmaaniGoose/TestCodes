@@ -1,0 +1,10 @@
+Last night, `infra-ibmcloud-vagrant-x64-1"` ran out of space. I have been able to rectify this with removing some vagrant boxes that go unused - however, they are so large, that it makes a lot more sense for them to be shared among all the vagrant users. 
+
+Vagrant doesn't inherently offer this: https://github.com/hashicorp/vagrant/issues/8413 
+But it is suggested that it can be done by having symlinks. Alternatively, setting the `VAGRANT_HOME` variable.
+
+I was able to test the latter - the user `vagrant3` had access to the new Windows 10 vagrant box (ref: #1883 ), however user `vagrant5` didn't. After running `chown -R vagrant5 /home/vagrant3/.vagrant.d`, and `export VAGRANT_HOME=/home/vagrant3/.vagrant.d/`, when running `vagrant box list`, the Win 10 box came up where it didn't before.
+
+While this does work, the `.vagrant.d` file contains more than just the boxes, and so it may have some unintended consequences, especially if we're running VPC in parallel. 
+
+(ping @sxa ).

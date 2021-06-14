@@ -1,0 +1,16 @@
+The destination and trigger Xtrace clauses behave differently with regard to case-sensitivity. For example, the print option doesn't care about case, so both of these options work:
+
+`   -Xtrace:print=j9thr.0`
+`   -Xtrace:print=J9THR.0`
+
+However, trigger clauses _do_ care about case, so this option works:
+
+`   -Xtrace:trigger=tpnid{j9thr.0,javadump}`
+
+but this option doesn't:
+
+`   -Xtrace:trigger=tpnid{J9THR.0,javadump}`
+   
+To make things worse, you can't just make a mental note to always specify tracepoint IDs in lower case because different tracepoint IDs can use different cases - e.g. OpenJ9 tracepoints are in lower case, but IBM JCL tracepoints are in uppercase.
+
+I think the best solution is to remove case-sensitivity for trigger clauses.

@@ -1,0 +1,11 @@
+_I could be missing something here_ 
+
+Looking at the file `test/JIT_Test/src/jit/test/tr/ipa/IpaTest.java`, it appears the test case was written with a JIT option in mind, in order to ensure some behaviour get executed. 
+
+https://github.com/eclipse/openj9/blob/3b34d58942a9c34271fe7d9fdcda46201c5f7631/test/JIT_Test/src/jit/test/tr/ipa/IpaTest.java#L31
+
+However, I cannot find that option actually getting passed to any part of the testing. 
+
+Similar issues seem to manifest for `test/JIT_Test/src/jit/test/tr/liveMonitor/monTests.java` and JarTester, where only the Windows BATCH file seems to know about the expected `tossCode,testMode` options. 
+
+

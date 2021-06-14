@@ -1,0 +1,12 @@
+The addition or removal of methods which do not affect the shape of the vTable should be allowed in fast HCR.
+
+Methods which never appear in the vTable are:
+
+- private instance methods
+- static methods
+
+Methods which do not need to appear in the vTable but currently do:
+
+- final instance methods which do not override
+
+New final methods should follow the invokeprivate path. This is likely a matter of removing their vTable modifier and modifying the restrictions on which methods can use invokeprivate during resolution.

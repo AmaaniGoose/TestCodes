@@ -1,0 +1,5 @@
+https://github.com/eclipse/openj9/blob/a851c8f47bfdeb083d532e00f9a48d10e9cc5a4b/runtime/bcutil/ROMClassBuilder.cpp#L1165-L1178
+
+`J9AccClassHasVerifyData` doesn't appear to have any value anymore.
+
+We should confirm that and remove the flag so it can be reused for other things.

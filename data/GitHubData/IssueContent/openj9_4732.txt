@@ -1,0 +1,33 @@
+java/nio/channels/AsyncCloseAndInterrupt.java.AsyncCloseAndInterrupt failed on java8 windows with 'Execution failed: `main' threw exception: java.lang.Exception: Pipe.SourceChannel/readv/close threw an exception    '
+
+```
+Pipe.SourceChannel/readv/close
+java.lang.Exception: Pipe.SourceChannel/readv/close threw an exception
+	at TestThread.finishAndThrow(TestThread.java:80)
+	at AsyncCloseAndInterrupt.test(AsyncCloseAndInterrupt.java:602)
+	at AsyncCloseAndInterrupt.test(AsyncCloseAndInterrupt.java:622)
+	at AsyncCloseAndInterrupt.test(AsyncCloseAndInterrupt.java:638)
+	at AsyncCloseAndInterrupt.main(AsyncCloseAndInterrupt.java:732)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.nio.channels.ClosedChannelException
+	at sun.nio.ch.SocketChannelImpl.ensureReadOpen(SocketChannelImpl.java:257)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:428)
+	at java.nio.channels.SocketChannel.read(SocketChannel.java:481)
+	at sun.nio.ch.SourceChannelImpl.read(SourceChannelImpl.java:135)
+	at AsyncCloseAndInterrupt$11.doIO(AsyncCloseAndInterrupt.java:278)
+	at AsyncCloseAndInterrupt$Tester.go(AsyncCloseAndInterrupt.java:485)
+	at TestThread.run(TestThread.java:55)
+
+JavaTest Message: Test threw exception: java.lang.Exception: Pipe.SourceChannel/readv/close threw an exception
+JavaTest Message: shutting down test
+
+STATUS:Failed.`main' threw exception: java.lang.Exception: Pipe.SourceChannel/readv/close threw an exception
+
+```
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/openjdk8_hs_openjdktest_x86-64_windows/203/testReport/junit/java_nio_channels_AsyncCloseAndInterrupt/java/AsyncCloseAndInterrupt/
+

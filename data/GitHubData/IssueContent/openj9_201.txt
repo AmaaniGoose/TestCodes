@@ -1,0 +1,9 @@
+Performance of the Sparse Matrix Multiply kernel of the SciMark benchmark is significantly less with OpenJ9 compared to HotSpot.
+
+Results on 32 core Xeon(R) CPU E7-8867:
+
+OpenJ9 615 Mflops vs HotSpot 1755 Mflops
+
+Part of the issue is that the test is short-running and we spend most of the run in a profiling compile. Wrapping the test in a harness for multiple iterations raises the throughput to 1104 Mflops.
+
+Studying the compilation log suggests an opportunity to exploit x86 fused multiply add instructions, and this is being investigated.

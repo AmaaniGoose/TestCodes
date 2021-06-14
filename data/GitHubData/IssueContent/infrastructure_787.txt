@@ -1,0 +1,15 @@
+### Proposed Changes
+
+I would request to install Software Testing Automation Framework (STAF) on 2 perf machines. This would allow us to run benchmarks such as Open Liberty with DayTrader that require 2 machines to communicate with each other. Thanks!
+
+Currently, we just have 2 machines labelled with `ci.role.perf`: https://ci.adoptopenjdk.net/label/ci.role.perf/
+
+We need to install STAF on those 2 machines. My team has been using STAF for quite sometime so I would be happy to help in setting it up.
+
+### Justification
+
+Please refer to this prerequisite for perf testing: https://github.com/AdoptOpenJDK/openjdk-tests/issues/1138
+
+### Related Machines 
+https://ci.adoptopenjdk.net/computer/test-packet-ubuntu1604-x64-2/
+https://ci.adoptopenjdk.net/computer/test-softlayer-ubuntu1604-x64-1/

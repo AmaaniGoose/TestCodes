@@ -1,0 +1,6 @@
+This issue contains performance data for OpenJ9 with OJDK MHs enabled.
+
+### Target benchmarks
+1) JRuby
+2) Nashorn
+3) scala-java-records-benchmark (https://github.com/harpocrates/scala-java-records-benchmark, https://github.com/eclipse-openj9/openj9/issues/12359)

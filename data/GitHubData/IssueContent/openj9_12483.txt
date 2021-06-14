@@ -1,0 +1,50 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk17_j9_sanity.openjdk_ppc64_aix/14/`
+```
+openjdk version "17" 2021-09-14
+OpenJDK Runtime Environment AdoptOpenJDK-17+18 (build 17+18)
+Eclipse OpenJ9 VM AdoptOpenJDK-17+18 (build master-22fc51137, JRE 17 AIX ppc64-64-Bit Compressed References 20210417_36 (JIT enabled, AOT enabled)
+OpenJ9   - 22fc51137
+OMR      - 0f967b721
+JCL      - 380dc812b6 based on jdk-17+18)
+```
+[Rerun in Grinder](https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?TARGET=jdk_util_0&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;PLATFORM=ppc64_aix&amp;KEEP_REPORTDIR=true&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk%2Fjdk-aix-ppc64-openj9%2F36%2FOpenJDK-testimage_ppc64_aix_openj9_2021-04-17-14-31.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk%2Fjdk-aix-ppc64-openj9%2F36%2FOpenJDK-jdk_ppc64_aix_openj9_2021-04-17-14-31.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk%2Fjdk-aix-ppc64-openj9%2F36%2FOpenJDK-debugimage_ppc64_aix_openj9_2021-04-17-14-31.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk%2Fjdk-aix-ppc64-openj9%2F36%2FOpenJDK-jre_ppc64_aix_openj9_2021-04-17-14-31.tar.gz&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;LIGHT_WEIGHT_CHECKOUT=true&amp;ARTIFACTORY_SERVER=na.artifactory.swg-devops&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=17&amp;USER_CREDENTIALS_ID=&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=&amp;JDK_REPO=https%3A%2F%2Fgithub.com%2Fibmruntimes%2Fopenj9-openjdk-jdk&amp;RELEASE_TAG=&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;UPSTREAM_JOB_NAME=&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=openj9&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=openj9&amp;SSH_AGENT_CREDENTIAL=83181e25-eea4-4f55-8b3e-e79615733226&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=4e18ffe7-b1b1-4272-9979-99769b68bcc2&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=openjdk&amp;UPSTREAM_JOB_NUMBER=&amp;TIME_LIMIT=10&amp;JVM_OPTIONS=&amp;PARALLEL=)
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+[2021-04-17T20:09:34.702Z]   *** Failure of jdk.random.L64X1024MixRandom doubles(43, 67)
+[2021-04-17T20:09:34.702Z]   chi-squared test failure for jdk.random.L64X1024MixRandom doubles(-59, -35): x=-9918.25 (should be in [3.03708,71.2211])
+[2021-04-17T20:09:34.702Z]   testRngChiSquared glitch  chi-squared test failure for jdk.random.L64X1024MixRandom doubles(-59, -35): x=-9972.36 (should be in [3.03708,71.2211])
+[2021-04-17T20:09:34.702Z]   *** Failure of jdk.random.L64X1024MixRandom doubles(-59, -35)
+[2021-04-17T20:09:34.702Z] java.lang.RuntimeException: 3720 fails detected
+[2021-04-17T20:09:34.702Z] 	at RandomTestChiSquared.exceptionOnFail(RandomTestChiSquared.java:60)
+[2021-04-17T20:09:34.702Z] 	at RandomTestChiSquared.main(RandomTestChiSquared.java:237)
+[2021-04-17T20:09:34.702Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-04-17T20:09:34.702Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+[2021-04-17T20:09:34.702Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-04-17T20:09:34.702Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+[2021-04-17T20:09:34.702Z] 	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+[2021-04-17T20:09:34.702Z] 	at java.base/java.lang.Thread.run(Thread.java:878)
+[2021-04-17T20:09:34.702Z] 
+[2021-04-17T20:09:34.702Z] JavaTest Message: Test threw exception: java.lang.RuntimeException
+[2021-04-17T20:09:34.702Z] JavaTest Message: shutting down test
+[2021-04-17T20:09:34.702Z] 
+[2021-04-17T20:09:34.702Z] 
+[2021-04-17T20:09:34.702Z] TEST RESULT: Failed. Execution failed: `main' threw exception: java.lang.RuntimeException: 3720 fails detected
+[2021-04-17T20:09:34.702Z] --------------------------------------------------
+[2021-04-17T20:30:42.641Z] Test results: passed: 887; failed: 1
+[2021-04-17T20:30:49.611Z] Report written to /home/jenkins/workspace/Test_openjdk17_j9_sanity.openjdk_ppc64_aix/jvmtest/openjdk/report/html/report.html
+[2021-04-17T20:30:49.611Z] Results written to /home/jenkins/workspace/Test_openjdk17_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/output_16186885972838/jdk_util_0/work
+[2021-04-17T20:30:49.611Z] Error: Some tests failed or other problems occurred.
+[2021-04-17T20:30:49.611Z] 
+[2021-04-17T20:30:49.611Z] jdk_util_0_FAILED
+```
+
+No obvious VM code involved, need check RI behaviours.

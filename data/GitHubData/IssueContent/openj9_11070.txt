@@ -1,0 +1,11 @@
+Sorry in advance if this is not the appropriate channel to raise this issue. Let me know if there is a better channel and I can move the conversation there.
+
+My project has been using OpenJ9 for a few months primarily due to the smaller memory footprint compared to GraalVM or plain Hotspot. This is an importante feature for us, since we are developing microservices that run on Kubernetes. We are also agressively using OpenJ9's AOT and SCC to reduce further the memory footprint. We mount a shared volume in each of our nodes for the SCC, and all pods use that same SCC.
+
+The results are great! One of my processes has a RSS of 774MB, but a PSS of only 520MB. Nice!
+
+However... Kubernetes isn't using those metrics to monitor the pod's memory. Kubernetes delegates gathering the memory metrics to a project called cadvisor (https://github.com/google/cadvisor) which sends 2 revelant metrics to Kubernetes in order to determine how much memory a pod is using: `memory_working_set` and `memory_rss` (please note, the definition of these metrics do not match the linux definition of WSS and RSS). The `memory_rss` metric is fine, since it doesn't take into account memory mapped files, so I'll focus on `memory_working_set`. 
+
+`memory_working_set` is a metric that is calculated as follows: `usage - total_inactive_file` (where `usage` is the value found in `/sys/fs/cgroup/memory/memory.usage_in_bytes` and `total_inactive_file` is the value found in `/sys/fs/cgroup/memory/memory.stat`). In my process, usage is 675MB and total_inactive_file is just 15MB, since is only accounts for the portion of memory_mapped file that hasn't been accessed for a while (see https://lwn.net/Articles/432224/). This means that `memory_working_set` is 660MB, which is 140MB higher than my PSS! So I am wasting 140MB per pod/container, which adds up to a whole lot of memory.
+
+I am not sure if there's anything that can be done on OpenJ9's side to improve this scenario on Kubernetes, but I definitely wanted to let you know this since I believe this hurts OpenJ9's value proposition for the SCC in cloud scenarios. It might be worth working with the cadvisor team to fix this or thinking of a way to mitigate this in OpenJ9's side. 140MB of potential RAM savings per pod is a lot!

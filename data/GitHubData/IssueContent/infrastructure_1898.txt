@@ -1,0 +1,9 @@
+Do we actively use this role? It puts freemarker.jar into `/home/jenkins` (which seems a little risky since it could be overridden by any rogue jenkins job) and we seem to download it from apache.org during the build scripts for OpenJ9 anyway, so we probably don't even use it from there:
+```
+12:53:35  Checking and downloading Freemarker dependency
+12:53:35  Checking for FREEMARKER
+12:53:35  --2021-02-04 12:53:35--  https://www.apache.org/dist/freemarker/engine/2.3.30/binaries/apache-freemarker-2.3.30-bin.tar.gz
+```
+My personal feeling? For performance/reliability we should download it to somewhere else on the machine (Maybe `/usr/local/lib`) and point the build process at it in that location.
+
+Ref: https://github.com/AdoptOpenJDK/openjdk-build/blob/master/sbin/prepareWorkspace.sh#L386

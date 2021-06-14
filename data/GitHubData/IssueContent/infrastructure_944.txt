@@ -1,0 +1,4 @@
+We need either a dedicated freebsd machine for testing, or add a few [test prereqs](https://github.com/eclipse/openj9/blob/master/test/docs/Prerequisites.md) to build-spearhead-freebsd12-x64-1 so we can test the changes to add test support for that platform/OS.
+
+Trying to run [Grinder tests](https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder_Advanced/612) to verify https://github.com/AdoptOpenJDK/openjdk-tests/pull/1325
+

@@ -1,0 +1,19 @@
+In June 2020 Apple announced they will be migrating Macs to their own SoCs for processors, which is based on the ARM architecture.  
+
+This is a request to support Apple Silicon Macs with a native OpenJDK/JRE that includes an arm64 architecture 'slice' in the Java binaries.  Currently, OpenJDK targets 64-bit Intel:
+
+```
+[mac]:/Users/tpeterx/JRE/bin$ file java
+java: Mach-O 64-bit executable x86_64
+
+```
+When adding Apple silicon support, please add arm64 to the same binaries, so there is one version of an OpenJDK distribution that supports both architectures, like this sample app I built:
+
+```
+[mac]:/Volumes/Nuzzle/Universal2/hello$ file hello_fat
+hello_fat: Mach-O universal binary with 2 architectures: [x86_64:Mach-O 64-bit executable x86_64] [arm64:Mach-O 64-bit executable arm64]
+hello_fat (for architecture x86_64):	Mach-O 64-bit executable x86_64
+hello_fat (for architecture arm64):	Mach-O 64-bit executable arm64
+
+```
+Naturally all OpenJDK shared libs and binaries should follow the same multiple-architecture universal binary method.    Thanks. 

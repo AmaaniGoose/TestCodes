@@ -1,0 +1,42 @@
+Failure link
+------------
+
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.functional_ppc64_aix_Release_testList_0/12/consoleFull
+aix71-p8-6
+```
+To rebuild the failed tests in <Jenkins URL>=https://ci.eclipse.org/openj9/job/Grinder, use the following links:
+12:02:42  https://ci.eclipse.org/openj9/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&BUILD_LIST=functional&PLATFORM=ppc64_aix&TARGET=cmdLineTester_pltest_aix_0
+```
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+12:00:45   [ERR] 1: j9sl_AixDLLMissingDependency
+12:00:45   [ERR] 	/home/jenkins/workspace/Build_JDK11_ppc64_aix_Release/openj9/runtime/tests/port/j9slTest.c line  166:  Unexpectedly loaded j9aixbaddep, should have failed with dependency error
+12:00:45   [ERR] 
+12:00:45   [ERR] 		LastErrorNumber: -252
+12:00:45   [ERR] 		LastErrorMessage: System call error number -1.
+12:00:45   [ERR] 
+12:00:45   [ERR] 
+12:00:45  >> Success condition was not found: [Output match: ALL TESTS COMPLETED AND PASSED]
+12:00:45  >> Failure condition was not found: [Output match: ASSERTION FAILED]
+12:00:45  
+12:00:45  
+12:00:45  ---TEST RESULTS---
+12:00:45  Number of PASSED tests: 0 out of 1
+12:00:45  Number of FAILED tests: 1 out of 1
+12:00:45  
+12:00:45  ---SUMMARY OF FAILED TESTS---
+12:00:45  PLTEST
+12:00:45  -----------------------------
+12:00:45  
+12:00:45  
+12:00:45  cmdLineTester_pltest_aix_0_FAILED
+```
+
+Similar with https://github.com/eclipse/openj9/issues/3942 which occurred at JDK8.

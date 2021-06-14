@@ -1,0 +1,53 @@
+### Test failure
+```
+12:19:45  FAILED: test_doPrivilegedFrameStackWalking
+12:19:45  java.lang.AssertionError: FAIL: unexpected exception.
+12:19:45  	at org.testng.Assert.fail(Assert.java:85) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  	at org.openj9.test.java.security.Test_AccessController.test_doPrivilegedFrameStackWalking(Test_AccessController.java:394) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/jvmtest/functional/Java8andUp/GeneralTest.jar)
+12:19:45  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) from jrt:/java.base
+12:19:45  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78) from jrt:/java.base
+12:19:45  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) from jrt:/java.base
+12:19:45  	at java.base/java.lang.reflect.Method.invoke(Method.java:567) from jrt:/java.base
+12:19:45  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:580) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  	at org.testng.TestRunner.privateRun(TestRunner.java:648) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  	at org.testng.TestRunner.run(TestRunner.java:505) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  	at org.testng.SuiteRunner.run(SuiteRunner.java:364) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  	at org.testng.TestNG.runSuites(TestNG.java:1049) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  	at org.testng.TestNG.run(TestNG.java:1017) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  	at org.testng.TestNG.privateMain(TestNG.java:1354) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  	at org.testng.TestNG.main(TestNG.java:1323) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  Caused by: java.lang.AssertionError: FAIL: security exception NOT thrown, get system property java.home : F:\Users\jenkins\workspace\Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1\openjdkbinary\j2sdk-image
+12:19:45  	at org.testng.Assert.fail(Assert.java:96) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+12:19:45  	at org.openj9.test.java.security.Test_AccessController.test_doPrivilegedFrameStackWalking(Test_AccessController.java:389) from jdk.internal.loader.ClassLoaders$AppClassLoader@c29751b(file:/F:/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_windows_ojdk292_Personal_testList_1/jvmtest/functional/Java8andUp/GeneralTest.jar)
+12:19:45  	... 24 more
+12:19:45  
+12:19:45  
+12:19:45  ===============================================
+12:19:45      JCL_TEST_Java-Security
+12:19:45      Tests run: 25, Failures: 1, Skips: 0
+12:19:45  ===============================================
+```
+`java.security.AccessControlException` not thrown at `Test_AccessController.test_doPrivilegedFrameStackWalking()` as per https://github.com/eclipse-openj9/openj9/pull/12604#issuecomment-840088458, the test in question is https://github.com/eclipse-openj9/openj9/blob/e80ab0f032fc4c2de3be817573f1fd4dda591a6f/test/functional/Java8andUp/src/org/openj9/test/java/security/Test_AccessController.java#L386-L395
+
+Before https://github.com/eclipse-openj9/openj9/pull/12604, the test throws a different exception `AccessControlException: Access denied ("java.lang.RuntimePermission" "getProtectionDomain")` like https://github.com/eclipse-openj9/openj9/issues/12600, it doesn't throw an expected exception `AccessControlException: access denied ("java.util.PropertyPermission" "java.home" "read")`.
+
+This is due to removal of `java.lang.invoke.SecurityFrame`
+https://github.com/eclipse-openj9/openj9/blob/a6bf623d7dcbfcc727980536fb75c206e9dd287d/jcl/src/java.base/share/classes/java/lang/invoke/SecurityFrame.java#L25-L31
+
+### Grinder to re-run the failed test target
+https://ci.eclipse.org/openj9/job/Grinder/parambuild/?JDK_VERSION=16&JDK_IMPL=openj9&JDK_VENDOR=eclipse&BUILD_LIST=functional&PLATFORM=x86-64_windows_mixed&TARGET=JCL_TEST_Java-Security_0
+
+### Steps to build an OpenJ9 JDK with OJDK MHs enabled
+Refer to #11458

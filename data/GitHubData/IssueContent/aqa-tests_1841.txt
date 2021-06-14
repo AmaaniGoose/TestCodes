@@ -1,0 +1,37 @@
+We are using AQA internally at Microsoft and we'd like to continue to be good community citizens by not using free community resources wherever we can avoid it.
+
+One of the things we currently are working through is downloading of dependencies from external sources. We run so many parallel builds a day that we would be unnecessarily taxing these free resources.
+
+Instead, we'd like to download these resources once, and then pull from that 'cache' going forward. We have done this already in some places via Docker usage, and we've also hard-coded our own internal sources in others. Ideally, we'd not hard-code anything and we would simply specify alternates whenever possible.
+
+**For Example:**
+1. Go to perf\liberty\scripts\bin\configure_liberty.sh
+1. View "JMETER_DEPENDENCIES_URL" and see a list of file URLs. These are downloaded every time this script is run, and doesn't appear to check for the existance of these files first.
+
+**Another example:**
+
+1. Scroll down to `downloadDependencies` and below.
+1. See that each dependency is named and downloaded in a block that calls the above function. This does have the functionality built-in to not re-download things that are already in place.
+
+**Another example:**
+
+1. Open perf\dacapo\build.xml
+1. Scroll down to `getDacapoSuite`.
+1. See that the dacapobench files are downloaded each time without any ability to change the source URL, or to check that the file already exists.
+
+**Proposal**
+Allow alternate sources to be defined in an easy to understand way across the AQA testing scripts.
+
+We can do this a few different ways:
+
+## Derek Option 1: Single Dependency File/Single Download Function
+
+Defining a single file that contains all dependencies (in JSON/YAML/whatever), by key-value pair. Couple this with a single file that performs the download. Allow download to check to see if the requested file is already present, and issue a warning whenever the file is not found locally.
+
+
+## Derek Option 2: Updating All Dependency Download Scripts
+
+Go through all scripts that currently download a dependency and update it to (a) download from an _override-able_ location. (b) ensure that the download is always checked to see if it exists first. (c) If the file doesn't exists, echo a warning to `stdout` to notify the user that this is being downloaded.
+
+
+Would love to hear people's thoughts before anyone embarks on work here, and if there is no objection or concerns raised we at Microsoft can take this on in the coming month. (For what it's worth, I like "Derek Option 1" above, and am not keen on 2, but I'm very open to other suggestions!).

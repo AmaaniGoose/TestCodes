@@ -1,0 +1,9 @@
+With the introduction of VTs CONSTANT_Class descriptions can be simple names, array signatures and now Q type signatures.
+
+Currently we have checks in `checkNameImpl` that restricts CONSTANT_Class desc to simple names and array signatures, this will cause verification errors when loading a VT classfile: 
+
+```
+java.lang.ClassFormatError: JVMCFRE068 class name is invalid; class=runtime/valhalla/inlinetypes/CheckcastTest, offset=0
+```
+
+We need to update `checkNameImpl` in chverify.c to support qtype signatures for class desc.

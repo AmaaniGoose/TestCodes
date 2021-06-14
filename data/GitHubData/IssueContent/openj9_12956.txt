@@ -1,0 +1,52 @@
+```
+OpenJDK Runtime Environment (build 1.8.0_302-b05)
+Eclipse OpenJ9 VM (build master-f6bdf7af9, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20210605_150 (JIT enabled, AOT enabled)
+OpenJ9   - f6bdf7af9
+OMR      - bb369d1aa
+JCL      - f7ae2714 based on jdk8u302-b05)
+```
+Looking at a core (supposedly) produced by this build:
+```
+> !whatis 0x000000000076cd90
+Error executing DDR command !whatis 0x000000000076cd90 : null
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.ibm.jvm.dtfjview.CombinedContext.executeDDRInteractiveCommand(CombinedContext.java:258)
+	at com.ibm.jvm.dtfjview.CombinedContext.execute(CombinedContext.java:169)
+	at com.ibm.jvm.dtfjview.Session.execute(Session.java:811)
+	at com.ibm.jvm.dtfjview.Session.execute(Session.java:765)
+	at com.ibm.jvm.dtfjview.tools.ToolsRegistry.executeJdmpviewCommand(ToolsRegistry.java:183)
+	at com.ibm.jvm.dtfjview.tools.ToolsRegistry.execute(ToolsRegistry.java:107)
+	at com.ibm.jvm.dtfjview.tools.ToolsRegistry.execute(ToolsRegistry.java:88)
+	at com.ibm.jvm.dtfjview.tools.ToolsRegistry.recordAndExecute(ToolsRegistry.java:72)
+	at com.ibm.jvm.dtfjview.Session.runInteractive(Session.java:739)
+	at com.ibm.jvm.dtfjview.Session.run(Session.java:663)
+	at com.ibm.jvm.dtfjview.DTFJView.launch(DTFJView.java:52)
+	at com.ibm.jvm.dtfjview.DTFJView.main(DTFJView.java:46)
+Caused by: java.lang.NoClassDefFoundError: com.ibm.j9ddr.vm29.pointer.generated.__pthread_mutex_sPointer
+	at java.lang.Class.getVirtualMethodsImpl(Native Method)
+	at java.lang.Class.getMethodSet(Class.java:1615)
+	at java.lang.Class.getMethods(Class.java:1578)
+	at com.ibm.j9ddr.vm29.tools.ddrinteractive.WhatIsCommand$SearchFrame.getFieldAccessors(WhatIsCommand.java:465)
+	at com.ibm.j9ddr.vm29.tools.ddrinteractive.WhatIsCommand$SearchFrame.<init>(WhatIsCommand.java:447)
+	at com.ibm.j9ddr.vm29.tools.ddrinteractive.WhatIsCommand.walkStructuresFrom(WhatIsCommand.java:333)
+	at com.ibm.j9ddr.vm29.tools.ddrinteractive.WhatIsCommand.runWhatIs(WhatIsCommand.java:174)
+	at com.ibm.j9ddr.vm29.tools.ddrinteractive.WhatIsCommand.run(WhatIsCommand.java:107)
+	at com.ibm.j9ddr.tools.ddrinteractive.Context.tryCommand(Context.java:229)
+	at com.ibm.j9ddr.tools.ddrinteractive.Context.execute(Context.java:202)
+	at com.ibm.j9ddr.tools.ddrinteractive.DDRInteractive.execute(DDRInteractive.java:356)
+	at com.ibm.j9ddr.command.CommandReader.processLine(CommandReader.java:79)
+	at com.ibm.j9ddr.tools.ddrinteractive.DDRInteractive.processLine(DDRInteractive.java:331)
+	... 16 more
+Caused by: java.lang.ClassNotFoundException: __pthread_mutex_sPointer is not in core file.
+	at com.ibm.j9ddr.StructureReader.getPointerClassBytes(StructureReader.java:1068)
+	at com.ibm.j9ddr.J9DDRClassLoader.getPointerClass(J9DDRClassLoader.java:227)
+	at com.ibm.j9ddr.J9DDRClassLoader.findClass(J9DDRClassLoader.java:129)
+	at com.ibm.j9ddr.J9DDRClassLoader.loadClass(J9DDRClassLoader.java:206)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:882)
+	... 29 more
+```
+Commands like structure dumping work fine.

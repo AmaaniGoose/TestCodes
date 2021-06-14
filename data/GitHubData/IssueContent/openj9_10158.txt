@@ -1,0 +1,147 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_sanity.openjdk_x86-64_linux_Nightly/117
+java/util/concurrent/BlockingQueue/ProducerConsumerLoops.java
+Core file available in artifacts, copied to /team/triage/openj9-10158
+```
+07:05:57  ACTION: main -- Error. Agent error: java.lang.Exception: Agent 3 timed out with a timeout of 28800 seconds; check console log for any additional details
+07:05:57  REASON: User specified action: run main/timeout=3600 ProducerConsumerLoops 
+07:05:57  TIME:   28806.986 seconds
+07:05:57  messages:
+07:05:57  command: main ProducerConsumerLoops
+07:05:57  reason: User specified action: run main/timeout=3600 ProducerConsumerLoops 
+07:05:57  Mode: agentvm
+07:05:57  Agent id: 3
+07:05:57  Timeout refired 28800 times
+07:05:57  Timeout information:
+07:05:57  Running jcmd on process 29011
+07:05:57  Dump written to /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux_Nightly/openjdk-tests/TKG/test_output_15946950832933/jdk_util_j9_0/work/scratch/0/core.20200714.080544.29011.0001.dmp
+07:05:57  Running jstack on process 29011
+07:05:57  2020-07-14T08:05:48.358
+07:05:57  Virtual machine: 29011 JVM information:
+07:05:57  JRE 1.8.0 Linux amd64-64-Bit Compressed References 20200713_445 (JIT enabled, AOT enabled)
+07:05:57  OpenJ9   - 01cb796fc18
+07:05:57  OMR      - 19153e91d16
+07:05:57  JCL      - 1455ea2dbbb based on jdk8u262-b09
+07:05:57  
+07:05:57  "main" Id=1 WAITING
+07:05:57  	at java.lang.Object.wait(Native Method)
+07:05:57  	at java.lang.Object.wait(Object.java:218)
+07:05:57  	at java.lang.Thread.join(Thread.java:703)
+07:05:57  	- locked java.lang.Thread@5ed47643
+07:05:57  	at com.sun.javatest.regtest.agent.MainActionHelper.runClass(MainActionHelper.java:184)
+07:05:57  	at com.sun.javatest.regtest.agent.AgentServer.doMain(AgentServer.java:301)
+07:05:57  	at com.sun.javatest.regtest.agent.AgentServer.run(AgentServer.java:232)
+07:05:57  	at com.sun.javatest.regtest.agent.AgentServer.main(AgentServer.java:69)
+07:05:57  
+07:05:57  "JIT Compilation Thread-000" Id=2 RUNNABLE
+07:05:57  
+07:05:57  "JIT Compilation Thread-001 Suspended" Id=3 RUNNABLE
+07:05:57  
+07:05:57  "JIT Compilation Thread-002 Suspended" Id=4 RUNNABLE
+07:05:57  
+07:05:57  "JIT Compilation Thread-003 Suspended" Id=5 RUNNABLE
+07:05:57  
+07:05:57  "JIT Compilation Thread-004 Suspended" Id=6 RUNNABLE
+07:05:57  
+07:05:57  "JIT Compilation Thread-005 Suspended" Id=7 RUNNABLE
+07:05:57  
+07:05:57  "JIT Compilation Thread-006 Suspended" Id=8 RUNNABLE
+07:05:57  
+07:05:57  "JIT Diagnostic Compilation Thread-007 Suspended" Id=9 RUNNABLE
+07:05:57  
+07:05:57  "JIT-SamplerThread" Id=10 TIMED_WAITING
+07:05:57  
+07:05:57  "IProfiler" Id=11 RUNNABLE
+07:05:57  
+07:05:57  "Concurrent Mark Helper" Id=12 RUNNABLE
+07:05:57  
+07:05:57  "GC Slave" Id=13 RUNNABLE
+07:05:57  
+07:05:57  "GC Slave" Id=14 RUNNABLE
+07:05:57  
+07:05:57  "GC Slave" Id=15 RUNNABLE
+07:05:57  
+07:05:57  "Attach API wait loop" Id=18 TIMED_WAITING
+07:05:57  	at java.lang.Thread.sleep(Native Method)
+07:05:57  	at java.lang.Thread.sleep(Thread.java:953)
+07:05:57  	at openj9.internal.tools.attach.target.WaitLoop.checkReplyAndCreateAttachment(WaitLoop.java:140)
+07:05:57  	at openj9.internal.tools.attach.target.WaitLoop.waitForNotification(WaitLoop.java:117)
+07:05:57  	at openj9.internal.tools.attach.target.WaitLoop.run(WaitLoop.java:154)
+07:05:57  
+07:05:57  "Finalizer thread" Id=19 RUNNABLE
+07:05:57  
+07:05:57  "pool-1-thread-1" Id=20 TIMED_WAITING
+07:05:57  	at sun.misc.Unsafe.park(Native Method)
+07:05:57  	at java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:215)
+07:05:57  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2078)
+07:05:57  	at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1093)
+07:05:57  	at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:809)
+07:05:57  	at java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+07:05:57  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+07:05:57  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+07:05:57  	at java.lang.Thread.run(Thread.java:823)
+07:05:57  
+07:05:57  "ClassCache Reaper" Id=42 WAITING
+07:05:57  	at java.lang.Object.wait(Native Method)
+07:05:57  	at java.lang.Object.wait(Object.java:218)
+07:05:57  	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:138)
+07:05:57  	- locked java.lang.ref.ReferenceQueue@acefa808
+07:05:57  	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:110)
+07:05:57  	at java.io.ClassCache$Reaper.run(ClassCache.java:234)
+07:05:57  	at java.lang.Thread.run(Thread.java:823)
+07:05:57  
+07:05:57  "AgentVMThread" Id=303 WAITING
+07:05:57  	at sun.misc.Unsafe.park(Native Method)
+07:05:57  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+07:05:57  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+07:05:57  	at java.util.concurrent.CyclicBarrier.dowait(CyclicBarrier.java:234)
+07:05:57  	at java.util.concurrent.CyclicBarrier.await(CyclicBarrier.java:362)
+07:05:57  	at ProducerConsumerLoops.oneRun(ProducerConsumerLoops.java:176)
+07:05:57  	at ProducerConsumerLoops.oneTest(ProducerConsumerLoops.java:101)
+07:05:57  	at ProducerConsumerLoops.main(ProducerConsumerLoops.java:73)
+07:05:57  	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+07:05:57  	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+07:05:57  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+07:05:57  	at java.lang.reflect.Method.invoke(Method.java:498)
+07:05:57  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+07:05:57  	at java.lang.Thread.run(Thread.java:823)
+07:05:57  
+07:05:57  "pool-4-thread-1" Id=304 WAITING
+07:05:57  	at sun.misc.Unsafe.park(Native Method)
+07:05:57  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+07:05:57  	at java.util.concurrent.SynchronousQueue$TransferStack.awaitFulfill(SynchronousQueue.java:458)
+07:05:57  	at java.util.concurrent.SynchronousQueue$TransferStack.transfer(SynchronousQueue.java:362)
+07:05:57  	at java.util.concurrent.SynchronousQueue.put(SynchronousQueue.java:877)
+07:05:57  	at ProducerConsumerLoops$Producer.run(ProducerConsumerLoops.java:128)
+07:05:57  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+07:05:57  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+07:05:57  	at java.lang.Thread.run(Thread.java:823)
+07:05:57  
+07:05:57  "pool-4-thread-2" Id=305 WAITING
+07:05:57  	at sun.misc.Unsafe.park(Native Method)
+07:05:57  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+07:05:57  	at java.util.concurrent.SynchronousQueue$TransferQueue.awaitFulfill(SynchronousQueue.java:762)
+07:05:57  	at java.util.concurrent.SynchronousQueue$TransferQueue.transfer(SynchronousQueue.java:695)
+07:05:57  	at java.util.concurrent.SynchronousQueue.take(SynchronousQueue.java:924)
+07:05:57  	at ProducerConsumerLoops$Consumer.run(ProducerConsumerLoops.java:152)
+07:05:57  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+07:05:57  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+07:05:57  	at java.lang.Thread.run(Thread.java:823)
+07:05:57  
+07:05:57  "file lock watchdog" Id=308 TIMED_WAITING
+07:05:57  	at java.lang.Object.wait(Native Method)
+07:05:57  	at java.lang.Object.wait(Object.java:218)
+07:05:57  	at java.util.TimerThread.mainLoop(Timer.java:552)
+07:05:57  	- locked java.util.TaskQueue@c26f2ea4
+07:05:57  	at java.util.TimerThread.run(Timer.java:505)
+07:05:57  
+07:05:57  "Attachment 40994" Id=309 RUNNABLE
+07:05:57  	at openj9.internal.tools.attach.target.DiagnosticUtils.dumpAllThreadsImpl(Native Method)
+07:05:57  	at openj9.internal.tools.attach.target.DiagnosticUtils.getThreadInfo(DiagnosticUtils.java:233)
+07:05:57  	at openj9.internal.tools.attach.target.DiagnosticUtils$$Lambda$4/0000000000000000.apply(Unknown Source)
+07:05:57  	at openj9.internal.tools.attach.target.DiagnosticUtils.executeDiagnosticCommand(DiagnosticUtils.java:169)
+07:05:57  	at openj9.internal.tools.attach.target.Attachment.doCommand(Attachment.java:239)
+07:05:57  	at openj9.internal.tools.attach.target.Attachment.run(Attachment.java:150)
+07:05:57  
+07:05:57  
+07:05:57  --- Timeout information end.
+```

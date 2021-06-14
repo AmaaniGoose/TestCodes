@@ -1,0 +1,19 @@
+Hello,
+
+I got some feedbacks that OpenJ9 current behavior not to dump javacore files (upon kill QUIT) to STDOUT (standard output) is causing couple of issues:
+1. With web apps running on Tomcat, OpenJ9 generates javacore into
+  `\<tomcat install path\>/bin`
+  directory, which might not have write permissions to the running Tomcat process.
+  Whereas Hotspot uses by default STDOUT so javacore is writen to:
+` \<tomcat install path\>/logs/catalina.out`
+for which no permissions issue can happen.
+2. Even if the Tomcat process has write permissions to <tomcat install path>/bin, this spreads the javacore to some other place than logs/ directory, hence making support's job more complex, as they are used to ask people using our web apps to copy to send their logs/ directory's content upon "crashes".
+3. As already mentioned in #2837, the default way to send traces/logs in container world (K8S, etc) is stdout/stderr, so HotSpot's default behavior sounds reasonably in line with this growing type of deployments.
+4. Last but not least, I have seen couple of fixes made on OpenJ9 to make transition from HotSpot to OpenJ9 as smooth as possible. I am aware that next OpenJ9 release includes the ability to send javacore to STDOUT (I was able to test it using latest Nightly Build of AdoptOpenJDK11 with OpenJ9) using this new option:
+-`Xdump:java:file=/stdout/`
+but honestly people won't hit documentation first : they will first curse OpenJ9 for this unusual javacore handling, and then maybe only later care reading the fine manual...
+
+Would it be possible to make javacore writen by default to STDOUT?
+
+Kind regards,
+Alexandre Vermeerbergen

@@ -1,0 +1,28 @@
+Java -version output
+--------------------
+OpenJDK Runtime Environment (build 1.8.0_282-b08)
+Eclipse OpenJ9 VM (build openj9-0.24.0, JRE 1.8.0 Windows 8.1 amd64-64-Bit Compressed References 20210120_972 (JIT enabled, AOT enabled)
+OpenJ9   - 345e1b09e
+OMR      - 741e94ea8
+JCL      - ab07c6a8fd based on jdk8u282-b08)
+
+Summary of problem
+------------------
+We have a process that creates a javax Transformer object from an XSLT file and re-uses that transformer many times against many different XML files. It's all synchronous on a single thread, and it's been running without problem for years on J9 versions back to IBM J9 for Java 1.4 and 1.6.
+
+We recently updated to OpenJDK J9 1.8.0_282-b08 and found that after many iterations of using the transformer over and over, eventually the transformer will stop working properly and no results will be returned. There are no errors and no indication that there was a problem, just an empty result.
+
+I've narrowed it down to some XSLT that uses an <xsl:variable> and I attached a java file that reproduces the issue. I'm just running it using a command line of "java XslTest", nothing fancy.
+
+[XslTest.java.txt](https://github.com/eclipse-openj9/openj9/files/6642769/XslTest.java.txt)
+
+I've also downloaded several recent versions of the Windows 64 version of OpenJDK from https://adoptopenjdk.net and run the XslTest file using each, to see when the problem started happening. 
+
+- jdk8u275 J9: no problem
+- jdk8u282 J9: fails after several thousand iterations (usually between 3000 and 4000)
+- jdk8u282 Hotspot: no problem
+- jdk8u292 J9: no problem (I think)
+
+So I'm only seeing this on J9, and there's a possibility that it got fixed in jdk8u292 but I'm a little nervous about the whole thing because I don't see any tickets that would seem to explain why this suddenly started happening or why it suddenly stopped. I want to say this is fixed, but I'd feel a lot better if I knew why it happened and what fixed it.
+
+If there's any way that someone could take a look and try to figure out the cause and/or confirm the fix, I'd really appreciate it (as would my customers who use this code). Thanks.

@@ -1,0 +1,3 @@
+All the script changes included at https://github.com/eclipse/openj9/issues/5058 are based on UMA for the moment. With the changes being merged, we might also consider to enable the compilation with `cmake` in the future after JIT is totally implemented on both OpenJ9 and OMR side.
+
+FYI:  @keithc-ca , @DanHeidinga , @pshipton, @tajila 

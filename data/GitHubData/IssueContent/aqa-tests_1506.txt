@@ -1,0 +1,9 @@
+Version: jdk8
+Platform: linux-all
+JVM Impl: Both
+Fail rate: 2%
+
+Test sets up a server on a second thread and sends a bunch of data to it. When the server receives the data, it will close the connection, which should cause an IOException on the client side. However if the server start-up thread is slow, the client sometimes finishes sending all of the data before the connection closes (which causes the test to fail). 
+
+Documented here: https://bugs.openjdk.java.net/browse/JDK-8041924
+Looks like a test fix for this went into jdk9 but not 8.

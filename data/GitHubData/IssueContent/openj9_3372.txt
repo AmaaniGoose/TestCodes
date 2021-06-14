@@ -1,0 +1,6 @@
+During compilation the JITaaS server may access various fields from jitConfig and privateJitConfig. Currently, these structures are global to the entire JVM and this leads to problems when multiple clients, that are configured differently, connect to the server. The desired behavior is for the server to have a separate jitConfig copy for each client that is connected.
+
+Possible solution: 
+- Create a copy of JitConfig for each client and store it in the clientSessionData
+- Maintain a pointer to this copy in the comp object
+- Change the optimizer/codegen to access jitConfig through this new pointer instead of going for the global jitConfig. 

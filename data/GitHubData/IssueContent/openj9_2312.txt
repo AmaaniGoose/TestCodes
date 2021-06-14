@@ -1,0 +1,2 @@
+I am raising this bug on behalf of Ruslan Synytsky. He reported that when using this [app](https://github.com/jelastic/java-vertical-scaling-test/tree/master/dist) with the following commandline, RES mem as seen by top on idle does not reduce as expected every time.
+```java -Xmx3276M -Xms32M -XX:+IdleTuningCompactOnIdle -XX:+IdleTuningGcOnIdle -XX:IdleTuningMinIdleWaitTime=10 -jar app.jar 1```

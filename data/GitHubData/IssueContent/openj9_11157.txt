@@ -1,0 +1,18 @@
+I am having an issue where a process running with
+- shared classes
+- xtune:virtualized
+- aot enabled
+
+if there aren't cached classes yet, the app will start normally and then as it becomes idle few seconds later, lag the server to death with AOT compilation requests (most likely), then about 2-3 minutes later it's back to normal and the app is responsive again.
+The behaviour seems the same with both jitserver client enabled and disabled...
+
+Is this expected behaviour? And is compiler thread at least set to be lower priority than the app threads?
+
+```
+openjdk version "15.0.1" 2020-10-20
+OpenJDK Runtime Environment AdoptOpenJDK (build 15.0.1+9)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.23.0, JRE 15 Linux amd64-64-Bit Compressed References 20201022_81 (JIT enabled, AOT enabled)
+OpenJ9   - 0394ef754
+OMR      - 582366ae5
+JCL      - ad583de3b5 based on jdk-15.0.1+9)
+```

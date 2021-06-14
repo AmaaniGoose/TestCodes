@@ -1,0 +1,191 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.openjdk_x86-64_linux_xl_OpenJDK11/24
+java/lang/Runtime/shutdown/Basic.java
+ub16x64j98
+```
+03:28:58  ACTION: testng -- Error. Agent error: java.lang.Exception: Agent 38 timed out with a timeout of 960 seconds; check console log for any additional details
+03:28:58  REASON: User specified action: run testng Basic 
+03:28:58  TIME:   972.297 seconds
+03:28:58  messages:
+03:28:58  command: testng Basic
+03:28:58  reason: User specified action: run testng Basic 
+03:28:58  Mode: agentvm
+03:28:58  Agent id: 38
+03:28:58  Timeout refired 960 times
+03:28:58  Timeout information:
+03:28:58  Running jcmd on process 4970
+03:28:58  Dump written to /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_x86-64_linux_xl_OpenJDK11/openjdk-tests/TKG/test_output_16050811557973/jdk_lang_j9_0/work/scratch/1/core.20201111.032834.4970.0001.dmp
+03:28:58  Running jstack on process 4970
+03:28:58  2020-11-11T03:28:43.397540451
+03:28:58  Virtual machine: 4970 JVM information:
+03:28:58  JRE 11 Linux amd64-64-Bit 20201111_78 (JIT enabled, AOT enabled)
+03:28:58  OpenJ9   - f090f10c248
+03:28:58  OMR      - 422db192be0
+03:28:58  JCL      - 6513c6a9c01 based on jdk-11.0.10+2
+03:28:58  
+03:28:58  "main" prio=5 Id=1 WAITING
+03:28:58  	at java.base@11.0.10-internal/java.lang.Object.wait(Native Method)
+03:28:58  	at java.base@11.0.10-internal/java.lang.Object.wait(Object.java:221)
+03:28:58  	at java.base@11.0.10-internal/java.lang.Thread.join(Thread.java:715)
+03:28:58  	- locked java.lang.Thread@92dd185c
+03:28:58  	at app//com.sun.javatest.regtest.agent.MainActionHelper.runClass(MainActionHelper.java:198)
+03:28:58  	at app//com.sun.javatest.regtest.agent.AgentServer.doMain(AgentServer.java:305)
+03:28:58  	at app//com.sun.javatest.regtest.agent.AgentServer.run(AgentServer.java:232)
+03:28:58  	at app//com.sun.javatest.regtest.agent.AgentServer.main(AgentServer.java:69)
+03:28:58  
+03:28:58  "JIT Compilation Thread-000" prio=10 Id=3 RUNNABLE
+03:28:58  
+03:28:58  "JIT Compilation Thread-001" prio=10 Id=4 RUNNABLE
+03:28:58  
+03:28:58  "JIT Compilation Thread-002" prio=10 Id=5 RUNNABLE
+03:28:58  
+03:28:58  "JIT Compilation Thread-003 Suspended" prio=10 Id=6 RUNNABLE
+03:28:58  
+03:28:58  "JIT Compilation Thread-004 Suspended" prio=10 Id=7 RUNNABLE
+03:28:58  
+03:28:58  "JIT Compilation Thread-005 Suspended" prio=10 Id=8 RUNNABLE
+03:28:58  
+03:28:58  "JIT Compilation Thread-006 Suspended" prio=10 Id=9 RUNNABLE
+03:28:58  
+03:28:58  "JIT Diagnostic Compilation Thread-007 Suspended" prio=10 Id=10 RUNNABLE
+03:28:58  
+03:28:58  "JIT-SamplerThread" prio=10 Id=11 TIMED_WAITING
+03:28:58  
+03:28:58  "IProfiler" prio=5 Id=12 RUNNABLE
+03:28:58  
+03:28:58  "Common-Cleaner" prio=8 Id=2 TIMED_WAITING
+03:28:58  	at java.base@11.0.10-internal/java.lang.Object.wait(Native Method)
+03:28:58  	at java.base@11.0.10-internal/java.lang.Object.wait(Object.java:221)
+03:28:58  	at java.base@11.0.10-internal/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:138)
+03:28:58  	- locked java.lang.ref.ReferenceQueue@823b5777
+03:28:58  	at java.base@11.0.10-internal/jdk.internal.ref.CleanerImpl.run(CleanerImpl.java:148)
+03:28:58  	at java.base@11.0.10-internal/java.lang.Thread.run(Thread.java:835)
+03:28:58  	at java.base@11.0.10-internal/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:134)
+03:28:58  
+03:28:58  "Concurrent Mark Helper" prio=1 Id=13 RUNNABLE
+03:28:58  
+03:28:58  "Finalizer thread" prio=5 Id=14 RUNNABLE
+03:28:58  
+03:28:58  "GC Worker" prio=5 Id=15 RUNNABLE
+03:28:58  
+03:28:58  "GC Worker" prio=5 Id=16 RUNNABLE
+03:28:58  
+03:28:58  "GC Worker" prio=5 Id=17 RUNNABLE
+03:28:58  
+03:28:58  "Attach API wait loop" prio=10 Id=20 TIMED_WAITING
+03:28:58  	at java.base@11.0.10-internal/java.lang.Thread.sleep(Native Method)
+03:28:58  	at java.base@11.0.10-internal/java.lang.Thread.sleep(Thread.java:965)
+03:28:58  	at java.base@11.0.10-internal/openj9.internal.tools.attach.target.WaitLoop.checkReplyAndCreateAttachment(WaitLoop.java:140)
+03:28:58  	at java.base@11.0.10-internal/openj9.internal.tools.attach.target.WaitLoop.waitForNotification(WaitLoop.java:117)
+03:28:58  	at java.base@11.0.10-internal/openj9.internal.tools.attach.target.WaitLoop.run(WaitLoop.java:154)
+03:28:58  
+03:28:58  "pool-1-thread-1" prio=5 Id=21 TIMED_WAITING
+03:28:58  	at java.base@11.0.10-internal/jdk.internal.misc.Unsafe.park(Native Method)
+03:28:58  	at java.base@11.0.10-internal/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:234)
+03:28:58  	at java.base@11.0.10-internal/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2123)
+03:28:58  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+03:28:58  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+03:28:58  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1054)
+03:28:58  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1114)
+03:28:58  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+03:28:58  	at java.base@11.0.10-internal/java.lang.Thread.run(Thread.java:835)
+03:28:58  
+03:28:58  "process reaper" prio=10 Id=23 RUNNABLE
+03:28:58  	at java.base@11.0.10-internal/java.lang.ProcessHandleImpl.waitForProcessExit0(Native Method)
+03:28:58  	at java.base@11.0.10-internal/java.lang.ProcessHandleImpl$1.run(ProcessHandleImpl.java:138)
+03:28:58  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+03:28:58  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+03:28:58  	at java.base@11.0.10-internal/java.lang.Thread.run(Thread.java:835)
+03:28:58  
+03:28:58  "AgentVMThread" prio=5 Id=26 WAITING
+03:28:58  	at java.base@11.0.10-internal/java.lang.Object.wait(Native Method)
+03:28:58  	at java.base@11.0.10-internal/java.lang.Object.wait(Object.java:192)
+03:28:58  	at java.base@11.0.10-internal/java.lang.ProcessImpl.waitFor(ProcessImpl.java:495)
+03:28:58  	- locked java.lang.ProcessImpl@e24d0526
+03:28:58  	at app//jdk.test.lib.process.ProcessTools.getOutput(ProcessTools.java:97)
+03:28:58  	at app//jdk.test.lib.process.OutputAnalyzer.<init>(OutputAnalyzer.java:48)
+03:28:58  	at app//jdk.test.lib.process.ProcessTools.executeProcess(ProcessTools.java:397)
+03:28:58  	at app//jdk.test.lib.process.ProcessTools.executeTestJvm(ProcessTools.java:373)
+03:28:58  	at app//jdk.test.lib.process.ProcessTools.executeTestJava(ProcessTools.java:382)
+03:28:58  	at app//Basic.test(Basic.java:75)
+03:28:58  	at java.base@11.0.10-internal/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+03:28:58  	at java.base@11.0.10-internal/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+03:28:58  	at java.base@11.0.10-internal/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+03:28:58  	at java.base@11.0.10-internal/java.lang.reflect.Method.invoke(Method.java:566)
+03:28:58  	at app//org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+03:28:58  	at app//org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+03:28:58  	at app//org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+03:28:58  	at app//org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+03:28:58  	at app//org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+03:28:58  	at app//org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+03:28:58  	at app//org.testng.TestRunner.privateRun(TestRunner.java:773)
+03:28:58  	at app//org.testng.TestRunner.run(TestRunner.java:623)
+03:28:58  	at app//org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+03:28:58  	at app//org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+03:28:58  	at app//org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+03:28:58  	at app//org.testng.SuiteRunner.run(SuiteRunner.java:259)
+03:28:58  	at app//org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+03:28:58  	at app//org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+03:28:58  	at app//org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+03:28:58  	at app//org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+03:28:58  	at app//org.testng.TestNG.run(TestNG.java:1018)
+03:28:58  	at app//com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+03:28:58  	at java.base@11.0.10-internal/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+03:28:58  	at java.base@11.0.10-internal/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+03:28:58  	at java.base@11.0.10-internal/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+03:28:58  	at java.base@11.0.10-internal/java.lang.reflect.Method.invoke(Method.java:566)
+03:28:58  	at app//com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:312)
+03:28:58  	at java.base@11.0.10-internal/java.lang.Thread.run(Thread.java:835)
+03:28:58  
+03:28:58  "Thread-17" prio=5 Id=39 RUNNABLE
+03:28:58  	at java.base@11.0.10-internal/java.io.FileInputStream.readBytes(Native Method)
+03:28:58  	at java.base@11.0.10-internal/java.io.FileInputStream.read(FileInputStream.java:279)
+03:28:58  	at java.base@11.0.10-internal/java.io.BufferedInputStream.read1(BufferedInputStream.java:290)
+03:28:58  	at java.base@11.0.10-internal/java.io.BufferedInputStream.read(BufferedInputStream.java:351)
+03:28:58  	- locked java.lang.ProcessImpl$ProcessPipeInputStream@145579d3
+03:28:58  	at java.base@11.0.10-internal/java.io.BufferedInputStream.fill(BufferedInputStream.java:252)
+03:28:58  	at java.base@11.0.10-internal/java.io.BufferedInputStream.read1(BufferedInputStream.java:292)
+03:28:58  	at java.base@11.0.10-internal/java.io.BufferedInputStream.read(BufferedInputStream.java:351)
+03:28:58  	- locked java.io.BufferedInputStream@edf1f61d
+03:28:58  	at java.base@11.0.10-internal/java.io.FilterInputStream.read(FilterInputStream.java:107)
+03:28:58  	at app//jdk.test.lib.process.StreamPumper.run(StreamPumper.java:110)
+03:28:58  	at java.base@11.0.10-internal/java.lang.Thread.run(Thread.java:835)
+03:28:58  
+03:28:58  "Thread-18" prio=5 Id=40 RUNNABLE
+03:28:58  	at java.base@11.0.10-internal/java.io.FileInputStream.readBytes(Native Method)
+03:28:58  	at java.base@11.0.10-internal/java.io.FileInputStream.read(FileInputStream.java:279)
+03:28:58  	at java.base@11.0.10-internal/java.io.BufferedInputStream.read1(BufferedInputStream.java:290)
+03:28:58  	at java.base@11.0.10-internal/java.io.BufferedInputStream.read(BufferedInputStream.java:351)
+03:28:58  	- locked java.lang.ProcessImpl$ProcessPipeInputStream@a16175a0
+03:28:58  	at java.base@11.0.10-internal/java.io.BufferedInputStream.fill(BufferedInputStream.java:252)
+03:28:58  	at java.base@11.0.10-internal/java.io.BufferedInputStream.read1(BufferedInputStream.java:292)
+03:28:58  	at java.base@11.0.10-internal/java.io.BufferedInputStream.read(BufferedInputStream.java:351)
+03:28:58  	- locked java.io.BufferedInputStream@f050221d
+03:28:58  	at java.base@11.0.10-internal/java.io.FilterInputStream.read(FilterInputStream.java:107)
+03:28:58  	at app//jdk.test.lib.process.StreamPumper.run(StreamPumper.java:110)
+03:28:58  	at java.base@11.0.10-internal/java.lang.Thread.run(Thread.java:835)
+03:28:58  
+03:28:58  "file lock watchdog" prio=10 Id=42 TIMED_WAITING
+03:28:58  	at java.base@11.0.10-internal/java.lang.Object.wait(Native Method)
+03:28:58  	at java.base@11.0.10-internal/java.lang.Object.wait(Object.java:221)
+03:28:58  	at java.base@11.0.10-internal/java.util.TimerThread.mainLoop(Timer.java:553)
+03:28:58  	- locked java.util.TaskQueue@367e509a
+03:28:58  	at java.base@11.0.10-internal/java.util.TimerThread.run(Timer.java:506)
+03:28:58  
+03:28:58  "Attachment 39697" prio=10 Id=43 RUNNABLE
+03:28:58  	at java.base@11.0.10-internal/openj9.internal.tools.attach.target.DiagnosticUtils.dumpAllThreadsImpl(Native Method)
+03:28:58  	at java.base@11.0.10-internal/openj9.internal.tools.attach.target.DiagnosticUtils.getThreadInfo(DiagnosticUtils.java:245)
+03:28:58  	at app//openj9.internal.tools.attach.target.DiagnosticUtils$$Lambda$273/0x00000000a800e3a0.apply(Unknown Source)
+03:28:58  	at java.base@11.0.10-internal/openj9.internal.tools.attach.target.DiagnosticUtils.executeDiagnosticCommand(DiagnosticUtils.java:181)
+03:28:58  	at java.base@11.0.10-internal/openj9.internal.tools.attach.target.Attachment.doCommand(Attachment.java:249)
+03:28:58  	at java.base@11.0.10-internal/openj9.internal.tools.attach.target.Attachment.run(Attachment.java:160)
+03:28:58  
+03:28:58  
+03:28:58  --- Timeout information end.
+03:28:58  elapsed time (seconds): 972.297
+```
+```
+03:28:58  test Basic.test("halt", 0, "", ""): success
+03:28:58  Test haltNoHook
+03:28:58  Command line: [/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_x86-64_linux_xl_OpenJDK11/openjdkbinary/j2sdk-image/bin/java -cp /home/jenkins/workspace/Test_openjdk11_j9_sstderr:
+03:28:58  JVMDUMP034I User requested System dump using '/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_x86-64_linux_xl_OpenJDK11/openjdk-tests/TKG/test_output_16050811557973/jdk_lang_j9_0/work/scratch/1/core.20201111.032834.4970.0001.dmp' through com.ibm.jvm.Dump.systemDumpToFile
+```

@@ -1,0 +1,10 @@
+@ashu-mehra raised a great question regarding deprecating options / APIs in OpenJ9 in https://github.com/eclipse/openj9/pull/2196:
+
+> Perhaps time to standardize and document the process for deprecating options/APIs? I think we used to have it earlier before we went open.
+Eclipse project has a deprecation policy for APIs which is well documented here.
+OpenJDK has also added more clarity on API deprecation in this jep and I guess deprecation policy for OpenJ9 specific Java APIs would follow the same.
+But I didn't find any policy for deprecation of VM options.
+
+This issue can serve as a placeholder for the discussions, ideas and links to relevant policies.  Once all the requisite data has been collected, a policy can be pulled together from this info.
+
+Note that there is likely an existing Eclipse foundation policy that we'll need to find and use as a basis.

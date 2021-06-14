@@ -1,0 +1,42 @@
+Test results from the openjdk regression test group run against the nightly openjdk8-openj9 build at AdoptOpenJDK:  Test results: passed: 328; failed: 12
+
+https://ci.adoptopenjdk.net/view/work%20in%20progress/job/test_personal/183/testReport/junit/
+
+https://ci.adoptopenjdk.net/view/work%20in%20progress/job/test_personal/lastSuccessfulBuild/artifact/jvmtest/openjdk_regression/work/java/nio/
+
+java/nio/Buffer/Chew.java
+java/nio/Buffer/DirectBufferAllocTest.java
+java/nio/Buffer/LimitDirectMemory.sh
+java/nio/channels/Selector/KeySets.java
+java/nio/charset/Charset/EmptyCharsetName.java
+java/nio/charset/Charset/NIOCharsetAvailabilityTest.java
+java/nio/charset/CharsetDecoder/AverageMax.java
+java/nio/charset/coders/Check.java
+java/nio/charset/coders/CheckSJISMappingProp.sh
+sun/nio/ch/TestMaxCachedBufferSize.java
+sun/nio/cs/TestCompoundTest.java
+
+-------------------------
+
+As links above expire, steps to reproduce locally (on x86-64_linux machine and assume cloned into /tmp):
+
+Get test materials and SDK:
+cd /tmp
+git clone https://github.com/AdoptOpenJDK/openjdk-tests.git
+cd /tmp/openjdk-tests
+./get.sh -s /tmp/openjdk8_j9_nightlybuild -t /tmp/openjdk-tests -p x64_linux -v openjdk8-openj9 -r nightly
+
+Update the excludes file to reinclude the test you want to retry: 
+/tmp/openjdk-tests/openjdk_regression/ProblemList_openjdk8-openj9.txt
+
+Configure/compile/execute tests:
+cd /tmp/openjdk-tests/TestConfig
+export JAVA_BIN=/tmp/openjdk8_j9_nightlybuild/jre/bin 
+export SPEC=linux_x86-64_cmprssptrs
+export JAVA_VERSION=SE80
+export BUILD_LIST=openjdk_regression
+make -f run_configure.mk
+make compile
+make jdk_nio
+
+

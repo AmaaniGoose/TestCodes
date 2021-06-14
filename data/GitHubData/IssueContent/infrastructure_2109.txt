@@ -1,0 +1,21 @@
+test-azure-win2012r2-x64-1 times out after 10hrs trying to run the4se tests, eg:
+https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_sanity.openjdk_x86-64_windows/55/ **Green** on build-alibaba-win2012r2-x64-2
+https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_sanity.openjdk_x86-64_windows/54/ **Aborted after 10hrs** on test-azure-win2012r2-x64-1
+Some symptoms:
+```
+13:08:28  Thread-272
+13:08:28  
+13:08:28  Thread-269
+13:08:28  
+13:08:28  Thread-268
+13:08:28  
+13:08:28  
+13:08:28  TEST RESULT: Error. Error while cleaning up threads after test
+...
+13:25:42  JVMSHRC241E Error: unable to delete shared class cache file
+13:25:42  JVMSHRC336E Port layer error code = -100
+13:25:42  JVMSHRC337E Platform error message: (32) The process cannot access the file because it is being used by another process.
+13:25:42  JVMSHRC430I Failed to remove current generation of shared class cache "sharedcc_jenkins"
+...
+```
+Generally hung testcases

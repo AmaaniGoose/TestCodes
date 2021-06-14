@@ -1,0 +1,6 @@
+We should move bastillion over to bastillion.adoptium.net
+
+Steps:
+- [x] Setup A record for bastillion.adoptium.net
+- [ ] Generate a new SSL cert (@sxa I might need your help to work out where the current cert is stored)
+- [ ] Create full redirect in cloudflare

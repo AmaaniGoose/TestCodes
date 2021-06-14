@@ -1,0 +1,34 @@
+Failure link
+------------
+
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.openjdk_x86-64_mac/10/consoleFull
+
+Only seems to occur on mac. Not seen on Hotspot. However, OpenJDK has a bug that looks like this one: https://bugs.openjdk.java.net/browse/JDK-8144003
+
+This bug contains class library code, and implies that it was closed as a non-issue, as per the last two comments in the issue.
+
+Optional info
+-------------
+
+- intermittent failure: yes
+- regression or new test:  regression
+- if regression, what are the last passing / first failing public SHAs (OpenJ9, OMR, JCL) :
+Seems to have been occurring intermittently for months now, as per:
+https://github.com/eclipse/openj9/issues/4128
+
+Failure output
+--------------
+
+21:44:46  java.net.SocketException: Exec format error
+21:44:46  	at java.base/sun.nio.ch.Net.joinOrDrop4(Native Method)
+21:44:46  	at java.base/sun.nio.ch.Net.join4(Net.java:542)
+21:44:46  	at java.base/sun.nio.ch.DatagramChannelImpl.innerJoin(DatagramChannelImpl.java:999)
+21:44:46  	at java.base/sun.nio.ch.DatagramChannelImpl.join(DatagramChannelImpl.java:1017)
+21:44:46  	at Promiscuous.test(Promiscuous.java:175)
+21:44:46  	at Promiscuous.main(Promiscuous.java:220)
+21:44:46  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+21:44:46  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+21:44:46  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+21:44:46  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+21:44:46  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+21:44:46  	at java.base/java.lang.Thread.run(Thread.java:831)

@@ -1,0 +1,36 @@
+ref: #1229 
+
+I've written a script that compares the machines on Jenkins to config files on the Nagios server, and outputs a list of machines that still need to be added to Nagios:
+**Note:** An exceptions list is used to filter out names with the following string in their name: `win sxa gdams will EC2 azurebuildagent aahlenst master infra`.
+```
+build-inspira-solaris10u11-sparcv9-1
+build-inspira-solaris10u11-sparcv9-2
+build-linaro-centos74-armv8-1
+build-linaro-centos74-armv8-2
+build-linaro-centos76-armv8-2
+build-macstadium-macos1010-x64-1
+build-osuosl-aix71-ppc64-1
+build-osuosl-aix71-ppc64-2
+build-packet-ubuntu1804-armv8l-1
+build-packet_esxi-solaris10u11-x64-1
+build-packet_esxi-solaris10u11-x64-2
+docker-aws-ubuntu1604-x64-0
+docker-aws-ubuntu1604-x64-1
+docker-aws-ubuntu1604-x64-2
+docker-godaddy-ubuntu1604-x64-1
+docker-marist-ubuntu1604-s390x-1
+docker-scaleway-ubuntu1604-armv7l-1
+test-ibm-aix71-ppc64-1
+test-ibm-aix71-ppc64-2
+test-ibmcloud-ubuntu1604-x64-1
+test-inspira-solaris10u11-sparcv9-1
+test-inspira-solaris11-sparcv9-1
+test-macincloud-macos1010-x64-1
+test-macincloud-macos1010-x64-2
+test-macstadium-macos11-arm64-1
+test-macstadium-macos11-arm64-2
+test-osuosl-aix71-ppc64-1
+test-osuosl-aix72-ppc64-1
+test-osuosl-aix72-ppc64-2
+test-osuosl-centos74-ppc64le-2
+```

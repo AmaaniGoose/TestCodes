@@ -1,0 +1,4 @@
+Related to [1]. Folding of Stable non-array elements has been implemented. Handling array elements including those of multi-dimensional arrays would be next step.
+
+
+[1] https://github.com/eclipse-openj9/openj9/issues/12710

@@ -1,0 +1,7 @@
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_extended.openjdk_x86-64_mac/20/#showFailuresLink
+```
+Execution failed: Applet thread threw exception: java.awt.AWTError: WindowServer is not available    
+```
+See infra issue: https://github.com/AdoptOpenJDK/openjdk-infrastructure/issues/211
+
+@smlambert maybe a block mac exclude until infra issue is resolved?

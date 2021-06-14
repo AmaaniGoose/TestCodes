@@ -1,0 +1,9 @@
+From running the playbooks on [build-linaro-centos74-armv8-2](https://ci.adoptopenjdk.net/computer/build-linaro-centos74-armv8-2/) - the path to the nagios' user home directory appears to be hard coded to /home/nagios. This error showed up:
+```
+TASK [Nagios_Tunnel : Place Adopt_Tunnel_User.key in nagios users ssh folder] ***
+15:12:58
+fatal: [build-linaro-centos74-armv8-2]: FAILED! => {"changed": false, "checksum": "71f2a895799ba98194f4f2a05c20c114f8b5a9d7", "failed": true, "msg": "Destination directory /home/nagios/.ssh does not exist"}
+```
+The nagios user is at `/var/spool/nagios` on the machine. As a fix I have symlinked /home/nagios to the correct location but this is a "temporary fudge".
+
+Ref: #695 

@@ -1,0 +1,44 @@
+```
+sun/nio/cs/FindDecoderBugs.java
+sun/nio/cs/SurrogateGB18030Test.java
+sun/nio/cs/Test4206507.java
+sun/nio/cs/TestConverterDroppedCharacters.java
+sun/nio/cs/TestCp834_SBCS.java
+sun/nio/cs/TestEBCDICLineFeed.java
+sun/nio/cs/TestGB18030.java
+sun/nio/cs/TestHKSCS.java
+sun/nio/cs/TestIBMBugs.java
+sun/nio/cs/TestISO2022CNDecoder.java
+sun/nio/cs/TestISO2022JP.java
+sun/nio/cs/TestISO2022JPEncoder.java
+sun/nio/cs/TestISO2022JPSubBytes.java
+sun/nio/cs/TestIllegalISO2022Esc.java
+sun/nio/cs/TestIllegalSJIS.java
+sun/nio/cs/TestJIS0208Decoder.java
+sun/nio/cs/TestJIS0212Decoder.java
+sun/nio/cs/TestMS5022X.java
+sun/nio/cs/TestMiscEUC_JP.java
+sun/nio/cs/TestSJIS0213.java
+sun/nio/cs/TestSJIS0213_SM.java
+```
+Test_openjdk11_j9_sanity.openjdk_s390x_linux 02-Feb-2020
+Test_openjdk11_j9_sanity.openjdk_s390x_linux_xl 10-Feb-2020
+```
+Various NullPointerException eg.
+
+java.lang.NullPointerException
+	at java.base/sun.reflect.misc.ReflectUtil.isAncestor(ReflectUtil.java:178)
+	at java.base/sun.reflect.misc.ReflectUtil.needsPackageAccessCheck(ReflectUtil.java:204)
+	at java.base/java.lang.Class.checkNonSunProxyMemberAccess(Class.java:279)
+	at java.base/java.lang.Class.newInstance(Class.java:2081)
+	at java.base/sun.nio.cs.StandardCharsets.lookup(StandardCharsets.java:1322)
+	at java.base/sun.nio.cs.StandardCharsets.charsetForName(StandardCharsets.java:1338)
+	at java.base/java.nio.charset.Charset.lookup2(Charset.java:473)
+	at java.base/java.nio.charset.Charset.lookup(Charset.java:462)
+	at java.base/java.nio.charset.Charset.isSupported(Charset.java:503)
+	at java.base/java.lang.StringCoding.lookupCharset(StringCoding.java:101)
+	at java.base/java.lang.StringCoding.encode(StringCoding.java:412)
+	at java.base/java.lang.String.getBytes(String.java:1805)
+	at TestHKSCS.main(TestHKSCS.java:44)
+```
+-> Seems to only occur on `test-marist-ubuntu1604-s390x-4`

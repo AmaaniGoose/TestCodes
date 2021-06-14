@@ -1,0 +1,14 @@
+Split from https://github.com/eclipse/openj9/pull/5909#discussion_r288322131
+
+While there are links to `templatedtd.dtd` and `templatedtd.html`:
+https://github.com/eclipse/openj9/blob/3ddd56b705757e978be121a87c932e3d37c95206/debugtools/DDR_VM/src/com/ibm/j9ddr/corereaders/tdump/zebedee/util/Template.java#L42-L45
+
+The only related file in this directory is [template.dtd](https://github.com/eclipse/openj9/blob/3ddd56b705757e978be121a87c932e3d37c95206/debugtools/DDR_VM/src/com/ibm/j9ddr/corereaders/tdump/zebedee/util/template.dtd).
+
+There's no code history to speak of, and no obvious references.
+
+The only instance of the filename `templatedtd.html` per google is the [zebedee/util/Template.java](https://github.com/eclipse/openj9/blob/3ddd56b705757e978be121a87c932e3d37c95206/debugtools/DDR_VM/src/com/ibm/j9ddr/corereaders/tdump/zebedee/util/Template.java) file itself: https://www.google.com/search?q=%22templatedtd.html%22
+
+Is there anyone who might know what this is talking about? Offhand, it feels like two files were lost in open-sourcing: `templatedtd.html` and `oldtemplate.html`:
+https://github.com/eclipse/openj9/blob/3ddd56b705757e978be121a87c932e3d37c95206/debugtools/DDR_VM/src/com/ibm/j9ddr/corereaders/tdump/zebedee/util/template.dtd#L14-L16
+(That the author is the anonymous `I` doesn't help matters.)

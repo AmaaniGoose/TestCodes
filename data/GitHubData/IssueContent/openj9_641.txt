@@ -1,0 +1,3 @@
+There are many tests throw Runtime Exceptions (SE90_GIT J9vmTest_2 is one of them). The problem is nothing stored in test results after such event so we need to reproduce the problem again got get files for investigation. However it might be a problematic for tests with low reproducibility rate.
+My suggestion is to add "-Xdump:system:events=throw,filter=java/lang/RuntimeException" option to tests so we can get a material for investigation right away.
+It is needs to be investigated which tests might be equipped with this option to exclude cases with potential large number of Runtime Exceptions thrown.

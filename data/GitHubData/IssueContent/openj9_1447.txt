@@ -1,0 +1,12 @@
+4 tests in ContendedFieldsTests_90_1 fail with openj9-openjdk9 for ARM as shown below:
+```
+FAILED: testContentionGroupsAndClass
+java.lang.AssertionError: org.openj9.test.contendedfields.TestClasses$ContGroupContClass calculated size 64 actual size 24 difference -40
+	at org.testng.AssertJUnit.fail(AssertJUnit.java:59)
+	at org.testng.AssertJUnit.assertTrue(AssertJUnit.java:24)
+	at org.openj9.test.contendedfields.FieldUtilities.checkObjectSize(FieldUtilities.java:67)
+	at org.openj9.test.contendedfields.ContendedFieldsTests.testContentionGroupsAndClass(ContendedFieldsTests.java:194)
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(java.base@9-internal/Native Method)
+```
+
+This is because the port library function j9sysinfo_get_cache_info() returns J9PORT_ERROR_SYSINFO_NOT_SUPPORTED (-355) on ARM.

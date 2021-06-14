@@ -1,0 +1,38 @@
+Currently, there's some jck code in testJobTemplate.
+
+```
+if (GROUP == "jck" && JDK_IMPL == "openj9") {
+	EXTRA_OPTIONS = "-Xfuture"
+	if (JDK_VERSION != "8") {
+		EXTRA_OPTIONS += " --enable-preview"
+	}
+	if (ARCH_OS == "s390x_zos") {
+		// zOS has Attach API disabled by default
+		EXTRA_OPTIONS += " -Dcom.ibm.tools.attach.enable=yes"
+	}
+}
+```
+
+This issue covers moving that into jck.mk, and any related changes.
+
+As mentioned in https://github.com/AdoptOpenJDK/openjdk-tests/pull/1753 
+
+**📋 Step by Step**
+
+To solve this issue and contribute a fix you should check the following step-by-step list. A more detailed documentation of the workflow can be found [here](https://github.com/firstcontributions/first-contributions/blob/master/README.md).
+
+- [ ] Claim this issue: Comment below.
+- [ ]  Fork the [openjdk-test](https://github.com/AdoptOpenJDK/openjdk-tests) in github by simply clicking the 'fork' button.
+- [ ]  Check out the forked repository
+- [ ]  Using any kind of git client (command line, Git plugin on Eclipse IDE, etc) create a feature branch off of your fork for the issue. We do not have any naming definition for branches.
+- [ ] At this point, you'd have a local clone of openjdk-test](https://github.com/AdoptOpenJDK/openjdk-tests). Update the jck.mk file with your change in the local clone. 
+- [ ]  Commit your changes.
+- [ ]  Start a Pull Request.
+- [ ]  Done 👍 Ask in comments for a review :)
+- [ ]  If the reviewers find some missing peaces or a problem, s/he will start a discussion with you and describe the next steps how the problem can be solved.
+- [ ]  You did it 🎉 We will merge the fix in the master branch.
+- [ ]  Thanks, thanks, thanks for being part of this project as an open source contributor ❤️
+
+**🤔❓ Questions**
+
+If you have any questions just ask us directly in this issue by adding a comment. You can join our community chat at [Slack](https://adoptopenjdk.net/slack.html). Next to this you can find a general manual about open source contributions [here](https://github.com/firstcontributions/first-contributions/blob/master/README.md).

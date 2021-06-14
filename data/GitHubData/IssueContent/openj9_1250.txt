@@ -1,0 +1,3 @@
+Relates to #1221 - we should assess the value of these DDR tests (from com/ibm/j9ddr/tools).  If they are deemed useful, the tests should be migrated to the test dir (and cleaned up to be testng format, package renamed, using logger, etc).
+
+We have other DDR tests that will be added to the OpenJ9 project, so this assessment should look at whether there is duplication and drop anything that is duplicate testing.

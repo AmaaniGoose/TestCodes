@@ -1,0 +1,84 @@
+Hi I encountered OpenJ9 Java 11 JVM crash indicating segmentation error on console, and gpf in the javacore_xxx text file.
+
+My application behaves like an application launcher, such that it can launch another app (display a splash screen while waiting) - and monitor the foreground window using JNA API on Windows environment.
+
+I have sort of replicated the crash via a smaller program, however, I may not always encounter the crash - approx 3/5 times
+
+Attached: 
+- Sample app to replicate, in product form, and with src codes
+- javacore_xx_.txt
+- console printout
+- batch file to generate the JRE I had been using.
+
+See below for snipplet of the logs
+
+```
+
+Unhandled exception
+Type=Segmentation error vmState=0x00040000
+Windows_ExceptionCode=c0000005 J9Generic_Signal=00000004 ExceptionAddress=00000260945A0010 ContextFlags=0010005f
+Handler1=00007FFB03221120 Handler2=00007FFB185BAC10 InaccessibleReadAddress=000000007FFB247D
+RDI=0000000000000001 RSI=000000746C7FF110 RAX=00000260945A0010 RBX=0000026093D40B40
+RCX=00000000271C20F5 RDX=0000000000000003 R8=0000000000BA4392 R9=0000000000000000
+R10=0000000000000000 R11=0000000000000246 R12=0000000000000000 R13=0000000000000000
+R14=0000000000000000 R15=0000000000000000
+RIP=00000260945A0010 RSP=000000746C7FE1F8 RBP=000000746C7FE3A0 GS=002B
+FS=0053 ES=002B DS=002B
+```
+
+```
+
+0SECTION       TITLE subcomponent dump routine
+NULL           ===============================
+1TICHARSET     437
+1TISIGINFO     Dump Event "gpf" (00002000) received 
+1TIDATETIME    Date: 2021/01/12 at 17:30:27:411
+1TINANOTIME    System nanotime: 4259107357916200
+1TIFILENAME    Javacore filename:    D:\LY\b_StartupPerf\Products\product_splash_andapps\customLauncher\appmgmtLaunchUI_openj9crash3\javacore.20210112.173021.7964.0002.txt
+1TIREQFLAGS    Request Flags: 0x81 (exclusive+preempt)
+1TIPREPSTATE   Prep State: 0x100 (trace_disabled)
+1TIPREPINFO    Exclusive VM access not taken: data may not be consistent across javacore sections
+
+..
+1XMCURTHDINFO  Current thread
+3XMTHREADINFO      "AppMgmt_Thread" J9VMThread:0x00000000002F9800, omrthread_t:0x00000260939DBDD0, java/lang/Thread:0x0000000709DF32D8, state:R, prio=5
+3XMJAVALTHREAD            (java/lang/Thread getId:0x20, isDaemon:false)
+3XMTHREADINFO1            (native thread ID:0x4A30, native priority:0x5, native policy:UNKNOWN, vmstate:R, vm thread flags:0x00000020)
+3XMCPUTIME               CPU usage total: 0.234375000 secs, user: 0.156250000 secs, system: 0.078125000 secs, current category="Application"
+3XMHEAPALLOC             Heap bytes allocated since last GC cycle=0 (0x0)
+3XMTHREADINFO3           Java callstack:
+4XESTACKTRACE                at com/sun/jna/Native.invokeInt(Native Method)
+4XESTACKTRACE                at com/sun/jna/Function.invoke(Function.java:419)
+4XESTACKTRACE                at com/sun/jna/Function.invoke(Function.java:354)
+4XESTACKTRACE                at com/sun/jna/Library$Handler.invoke(Library.java:244)
+4XESTACKTRACE                at com/sun/proxy/$Proxy0.GetMessage(Bytecode PC:37)
+4XESTACKTRACE                at launchApp/ForegroundAppMonitorTask.run(ForegroundAppMonitorTask.java:36)
+
+```
+
+User32.INSTANCE.GetMessage(xxx) seems to be resulting in the JVM crashing, though I am not sure is it an issue on OpenJ9 or JNA.
+
+JRE in use: OpenJ9 11.0.9 + OpenJFx 11.0.2 JRE generated using Jlink
+
+To try replicate: 
+1) Run appProduct.zip/run.bat on Windows (make sure to point to the respective JRE with JavaFX). It has been configured to launch Notepad.exe 
+2) When UI is displayed, click on "Launch App" button. Wait for Notepad to be launch. 
+3) If no crash happens, repeat step 2 for up to 5 times. 
+4) If no crash, close the app, and restart the app and try again.  
+
+Typically - within the first run, and repeating step 2 for 2nd or 3rd time, I would encounter the crash. 
+
+Appreciate any help and advice on this, thanks!
+
+[LaunchAppUI_j9Crash.zip](https://github.com/eclipse/openj9/files/5801205/LaunchAppUI_j9Crash.zip)
+[javacore.20210112.173021.7964.0002.txt](https://github.com/eclipse/openj9/files/5801208/javacore.20210112.173021.7964.0002.txt)
+[genJre_openj9_11.0.9+11.0.2fx.txt](https://github.com/eclipse/openj9/files/5801209/genJre_openj9_11.0.9%2B11.0.2fx.txt)
+
+[appProduct.zip](https://github.com/eclipse/openj9/files/5801152/appProduct.zip)
+
+
+
+
+
+
+[console.txt](https://github.com/eclipse/openj9/files/5801151/console.txt)

@@ -1,0 +1,3 @@
+Optimizations in ILGen especially optimizations that transform a call has create difficulty in adding OSR bookkeeping at call sites. Those optimizations don't have to be done in ILGen and should really belong to J9RecognizedCallTransformer.
+
+Notice that the optimizations/transformations for JSR292 can still live in ILGen because some of them need to manipulate the stack.

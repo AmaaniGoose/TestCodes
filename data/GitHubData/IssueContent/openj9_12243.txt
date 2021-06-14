@@ -1,0 +1,37 @@
+Jenkins jobs for JDK 11 AArch64 Linux frequently fails in building the runtime on cent7-aarch64-1, generating core files.
+The failures seem to be caused by the boot JDK.  Both OpenJ9 v.0.21.0 and v.0.24.0 fail as shown below.
+
+https://ci.eclipse.org/openj9/job/Build_JDK11_aarch64_linux_Personal/
+
+[Build 259 on February 24]
+boot JDK: openj9-0.21.0
+```
+[2021-02-25T05:01:32.716Z] build/linux-aarch64-normal-server-release/vm/ddr_info/targets/omrvmstartup.txt
+[2021-02-25T05:01:32.716Z] build/linux-aarch64-normal-server-release/vm/ddr_info/targets/j9hook_obj.txt
+[2021-02-25T05:01:32.716Z] make/jitdump.20210225.050034.67918.0006.dmp
+[2021-02-25T05:01:32.716Z] make/Snap.20210225.050034.67918.0005.trc
+[2021-02-25T05:01:32.716Z] make/core.20210225.050026.67918.0001.dmp
+[2021-02-25T05:05:17.803Z] make/javacore.20210225.050034.67918.0004.txt
+[2021-02-25T05:05:17.803Z] make/core.20210225.050034.67918.0003.dmp
+```
+
+[Build 263 on March 9]
+boot JDK: openj9-0.21.0
+```
+[2021-03-10T02:10:27.450Z] build/linux-aarch64-normal-server-release/vm/ddr_info/targets/omrvmstartup.txt
+[2021-03-10T02:10:27.450Z] build/linux-aarch64-normal-server-release/vm/ddr_info/targets/j9hook_obj.txt
+[2021-03-10T02:10:27.450Z] make/Snap.20210310.020942.34032.0003.trc
+[2021-03-10T02:10:27.450Z] make/javacore.20210310.020942.34032.0002.txt
+[2021-03-10T02:10:27.770Z] make/core.20210310.020942.34032.0001.dmp
+```
+
+[Build 266 on March 11]
+boot JDK: openj9-0.24.0
+```
+[2021-03-11T09:21:04.951Z] build/linux-aarch64-normal-server-release/vm/ddr_info/targets/j9hook_obj.txt
+[2021-03-11T09:21:04.951Z] build/linux-aarch64-normal-server-release/jdk/lib/default/j9ddr.dat
+[2021-03-11T09:21:04.951Z] build/linux-aarch64-normal-server-release/support/modules_libs/java.base/default/j9ddr.dat
+[2021-03-11T09:21:04.951Z] make/javacore.20210311.090814.38931.0002.txt
+[2021-03-11T09:21:04.951Z] make/core.20210311.090814.38931.0001.dmp
+[2021-03-11T09:24:57.009Z] make/Snap.20210311.090814.38931.0003.trc
+```

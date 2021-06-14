@@ -1,0 +1,52 @@
+Consistent failures of form ...
+
+```
+[2019-02-27T15:43:30.641Z] test VarHandleTestByteArrayAsChar.testEqualsAndHashCode(): failure
+[2019-02-27T15:43:30.641Z] java.lang.AssertionError: null
+[2019-02-27T15:43:30.641Z] 	at org.testng.Assert.fail(Assert.java:94)
+[2019-02-27T15:43:30.641Z] 	at org.testng.Assert.assertNotEquals(Assert.java:856)
+[2019-02-27T15:43:30.641Z] 	at org.testng.Assert.assertNotEquals(Assert.java:861)
+[2019-02-27T15:43:30.641Z] 	at VarHandleTestByteArrayAsChar.testEqualsAndHashCode(VarHandleTestByteArrayAsChar.java:98)
+[2019-02-27T15:43:30.641Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2019-02-27T15:43:30.641Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2019-02-27T15:43:30.641Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2019-02-27T15:43:30.641Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+[2019-02-27T15:43:30.641Z] 	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+[2019-02-27T15:43:30.641Z] 	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+[2019-02-27T15:43:30.641Z] 	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+[2019-02-27T15:43:30.641Z] 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+[2019-02-27T15:43:30.641Z] 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+[2019-02-27T15:43:30.641Z] 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+[2019-02-27T15:43:30.641Z] 	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+[2019-02-27T15:43:30.641Z] 	at org.testng.TestRunner.run(TestRunner.java:623)
+[2019-02-27T15:43:30.641Z] 	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+[2019-02-27T15:43:30.641Z] 	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+[2019-02-27T15:43:30.641Z] 	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+[2019-02-27T15:43:30.641Z] 	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+[2019-02-27T15:43:30.641Z] 	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+[2019-02-27T15:43:30.641Z] 	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+[2019-02-27T15:43:30.641Z] 	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+[2019-02-27T15:43:30.641Z] 	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+[2019-02-27T15:43:30.641Z] 	at org.testng.TestNG.run(TestNG.java:1018)
+[2019-02-27T15:43:30.641Z] 	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+[2019-02-27T15:43:30.641Z] 	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+[2019-02-27T15:43:30.641Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2019-02-27T15:43:30.641Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2019-02-27T15:43:30.641Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2019-02-27T15:43:30.641Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+[2019-02-27T15:43:30.641Z] 	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+[2019-02-27T15:43:30.641Z] 	at java.base/java.lang.Thread.run(Thread.java:825)
+```
+
+... observed against jdk12 build (https://ci.adoptopenjdk.net/job/build-scripts/job/jobs/job/jdk12u/job/jdk12u-linux-x64-openj9/lastSuccessfulBuild/artifact/workspace/target/OpenJDK12U-jdk_x64_linux_openj9_2019-02-26-16-41.tar.gz) with tests ...
+
+java/lang/invoke/VarHandles/VarHandleTestByteArrayAsChar.java, 
+java/lang/invoke/VarHandles/VarHandleTestByteArrayAsDouble.java, 
+java/lang/invoke/VarHandles/VarHandleTestByteArrayAsFloat.java, 
+java/lang/invoke/VarHandles/VarHandleTestByteArrayAsInt.java, 
+java/lang/invoke/VarHandles/VarHandleTestByteArrayAsLong.java &
+java/lang/invoke/VarHandles/VarHandleTestByteArrayAsShort.java
+
+Test source code for each of those - https://github.com/ibmruntimes/openj9-openjdk-jdk12/tree/openj9/test/jdk/java/lang/invoke/VarHandles.
+
+See [consoleText.txt](https://github.com/eclipse/openj9/files/2915669/consoleText.txt).

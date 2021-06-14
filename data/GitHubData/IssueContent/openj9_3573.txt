@@ -1,0 +1,19 @@
+Jenkins Compress build log plugin
+https://wiki.jenkins.io/display/JENKINS/Compress+Build+Log+Plugin
+
+Issue:
+```
+Pipeline Compatibility
+From version 1.1, the Compress Build Log Plugin supports compressing full pipeline build logs, but not the per-step build logs stored separately.
+```
+
+What this means, The overall log is essentially duplicated/separated into each step as a separate numbered log file. The overall log which has all the output will be replaced with a `gz` compressed version but each step will not be compressed. I have tried removing the individual step logs. This removes the steps from the blue ocean view. I have also tried gzipping the numbered logs but this is the same result as deleting them.
+
+See
+
+Compress pipeline stage logs?
+https://issues.jenkins-ci.org/browse/JENKINS-47192
+Optimize log handling in Pipeline and Durable Task
+https://issues.jenkins-ci.org/browse/JENKINS-38381
+External Build Log storage for Jenkins
+https://issues.jenkins-ci.org/browse/JENKINS-38313

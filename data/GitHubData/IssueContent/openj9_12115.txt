@@ -1,0 +1,15 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_extended.system_x86-64_windows_Nightly_testList_2/6/
+SC_Softmx_JitAot_0
+```
+STF 01:54:38.145 - +------ Step 6 - Waiting for jvm1 and jvm2 to finish
+STF 01:54:38.145 - | Wait for processes to meet expectations
+STF 01:54:38.145 - |   Processes: [jvm1, jvm2]
+STF 01:54:38.145 - |
+STF 01:54:38.145 - Monitoring processes: jvm1 jvm2
+Uncaught exception from user code:
+	Could not open file 'F:/Users/jenkins/workspace/Test_openjdk11_j9_extended.system_x86-64_windows_Nightly_testList_2/openjdk-tests/\TKG\output_16147552716320\SC_Softmx_JitAot_0/20210303-015432-SharedClassesWorkloadTest_Softmx_Increase_JitAot/execute/execute.stdout' Invalid argument at F:/Users/jenkins/workspace/Test_openjdk11_j9_extended.system_x86-64_windows_Nightly_testList_2/jvmtest/system/stf/stf.core/scripts/stf/Commands.pm line 614.
+	stf::Commands::process_logs("stf::Commands", stf::ProcessMgmt::Windows=HASH(0x17c27d8)) called at F:/Users/jenkins/workspace/Test_openjdk11_j9_extended.system_x86-64_windows_Nightly_testList_2/jvmtest/system/stf/stf.core/scripts/stf/Commands.pm line 387
+	stf::Commands::monitor_processes("stf::Commands", stf::ProcessMgmt::Windows=HASH(0x17c27d8)) called at F:/Users/jenkins/workspace/Test_openjdk11_j9_extended.system_x86-64_windows_Nightly_testList_2/jvmtest/system/stf/stf.core/scripts/stf/Commands.pm line 830
+	stf::Commands::run_process("stf::Commands", "mnemonic", "STF", "command", "perl F:/Users/jenkins/workspace/Test_openjdk11_j9_extended.sy"..., "logName", "F:/Users/jenkins/workspace/Test_openjdk11_j9_extended.system_"..., "uid", ...) called at F:/Users/jenkins/workspace/Test_openjdk11_j9_extended.system_x86-64_windows_Nightly_testList_2/openjdk-tests///..//jvmtest\system\sharedClasses/../\stf\stf.core\scripts\stf.pl line 584
+	main::runScript("perl F:/Users/jenkins/workspace/Test_openjdk11_j9_extended.sy"..., "F:/Users/jenkins/workspace/Test_openjdk11_j9_extended.system_"..., "execute") called at F:/Users/jenkins/workspace/Test_openjdk11_j9_extended.system_x86-64_windows_Nightly_testList_2/openjdk-tests///..//jvmtest\system\sharedClasses/../\stf\stf.core\scripts\stf.pl line 505
+```

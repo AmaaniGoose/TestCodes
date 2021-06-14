@@ -1,0 +1,29 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_special.system_x86-64_linux_Personal_daaLoadTest/25
+DaaLoadTest_all_special_28
+15:55:43  variation: Mode610-OSRG
+15:55:43  JVM_OPTIONS:  -Xcompressedrefs -Xjit:enableOSR,enableOSROnGuardFailure,count=1,disableAsyncCompilation -Xgcpolicy:gencon 
+```
+15:56:16  DLT 16:56:10.504 - Starting thread. Suite=0 thread=0
+15:56:16  DLT 16:56:10.517 - Starting thread. Suite=0 thread=1
+15:58:06  DLT 16:57:57.410 - Completed 0.6%. Number of tests started=4
+15:58:06  DLT 16:58:02.784 - Completed 0.6%. Number of tests started=4 (+0)
+15:58:06  DLT 16:58:02.884 - Completed 0.8%. Number of tests started=6 (+2)
+15:58:06  DLT 16:58:02.985 - Completed 0.8%. Number of tests started=6 (+0)
+15:58:06  DLT 16:58:03.086 - Completed 0.8%. Number of tests started=6 (+0)
+15:58:12  DLT 16:58:10.508 - Completed 2.1%. Number of tests started=15 (+9)
+15:58:34  DLT 16:58:31.324 - Completed 2.2%. Number of tests started=16 (+1)
+15:58:52  DLT 16:58:52.412 - Completed 2.9%. Number of tests started=21 (+5)
+15:59:28  DLT 16:59:25.463 - Completed 5.1%. Number of tests started=37 (+16)
+15:59:32  DLT 16:59:30.488 - Completed 5.1%. Number of tests started=37 (+0)
+15:59:53  DLT 16:59:50.462 - Completed 5.1%. Number of tests started=37 (+0)
+16:00:12  DLT 17:00:10.440 - Completed 5.3%. Number of tests started=38 (+1)
+Cancelling nested steps due to timeout
+16:00:15  Sending interrupt signal to process
+16:00:22  /bin/sh: line 4: 27474 Terminated              perl /home/jenkins/workspace/Test_openjdk11_j9_special.system_x86-64_linux_Personal_daaLoadTest/openjdk-tests/TKG/../../jvmtest/system/daaLoadTest/..//stf/stf.core/scripts/stf.pl -test-root="/home/jenkins/workspace/Test_openjdk11_j9_special.system_x86-64_linux_Personal_daaLoadTest/openjdk-tests/TKG/../../jvmtest/system/daaLoadTest/..//stf;/home/jenkins/workspace/Test_openjdk11_j9_special.system_x86-64_linux_Personal_daaLoadTest/openjdk-tests/TKG/../../jvmtest/system/daaLoadTest/..//openjdk-systemtest;/home/jenkins/workspace/Test_openjdk11_j9_special.system_x86-64_linux_Personal_daaLoadTest/openjdk-tests/TKG/../../jvmtest/system/daaLoadTest/..//openj9-systemtest" -systemtest-prereqs="/home/jenkins/workspace/Test_openjdk11_j9_special.system_x86-64_linux_Personal_daaLoadTest/openjdk-tests/TKG/../../jvmtest/system/daaLoadTest/..//systemtest_prereqs" -java-args=' -Xcompressedrefs -Xjit:enableOSR,enableOSROnGuardFailure,count=1,disableAsyncCompilation -Xgcpolicy:gencon ' -results-root="/home/jenkins/workspace/Test_openjdk11_j9_special.system_x86-64_linux_Personal_daaLoadTest/openjdk-tests/TKG/../TKG/test_output_16054390047268/DaaLoadTest_all_special_28" -test=DaaLoadTest
+16:00:22  
+16:00:22  DaaLoadTest_all_special_28_FAILED
+```
+
+No diagnostics. Nothing in stderr output.
+
+Timeout seems really short, 2 min. Either this normally runs much quicker, or the timer triggered too early.

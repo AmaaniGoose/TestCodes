@@ -1,0 +1,236 @@
+https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_extended.openjdk_aarch64_linux/12/consoleFull
+https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_extended.openjdk_x86-64_linux/13/#showFailuresLink
+Tests:
+```
+jdk/incubator/vector/AddTest.java.AddTest
+jdk/incubator/vector/Vector128ConversionTests.java.Vector128ConversionTests
+jdk/incubator/vector/Vector64ConversionTests.java#id0.Vector64ConversionTests_id0
+jdk/incubator/vector/VectorMaxConversionTests.java.VectorMaxConversionTests
+```
+OpenJ9:
+```
+16:17:41  openjdk version "16" 2021-03-16
+16:17:41  OpenJDK Runtime Environment AdoptOpenJDK (build 16+36)
+16:17:41  Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.26.0-m1, JRE 16 Linux aarch64-64-Bit Compressed References 20210309_77 (JIT enabled, AOT enabled)
+16:17:41  OpenJ9   - b227feba2
+16:17:41  OMR      - 4665e2f72
+16:17:41  JCL      - 7d78cfa0dc2 based on jdk-16+36)
+```
+```
+20:23:31  TEST: jdk/incubator/vector/AddTest.java
+20:23:31  TEST JDK: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdkbinary/j2sdk-image
+20:23:31  
+20:23:31  ACTION: build -- Passed. Build successful
+20:23:31  REASON: Named class compiled on demand
+20:23:31  TIME:   8.993 seconds
+20:23:31  messages:
+20:23:31  command: build AddTest
+20:23:31  reason: Named class compiled on demand
+20:23:31  Test directory:
+20:23:31    compile: AddTest
+20:23:31  elapsed time (seconds): 8.993
+20:23:31  
+20:23:31  ACTION: compile -- Passed. Compilation successful
+20:23:31  REASON: .class file out of date or does not exist
+20:23:31  TIME:   8.979 seconds
+20:23:31  messages:
+20:23:31  command: compile /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/incubator/vector/AddTest.java
+20:23:31  reason: .class file out of date or does not exist
+20:23:31  Additional options from @modules: --add-modules jdk.incubator.vector
+20:23:31  Mode: agentvm
+20:23:31  Agent id: 4
+20:23:31  elapsed time (seconds): 8.979
+20:23:31  configuration:
+20:23:31  Boot Layer (javac runtime environment)
+20:23:31    class path: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/jvmtest/openjdk/jtreg/lib/javatest.jar 
+20:23:31                /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+20:23:31    patch:      java.base /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16153931774853/jdk_vector_1/work/patches/java.base
+20:23:31  
+20:23:31  javac compilation environment
+20:23:31    add modules: jdk.incubator.vector
+20:23:31    source path: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/incubator/vector
+20:23:31    class path:  /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/incubator/vector
+20:23:31                 /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16153931774853/jdk_vector_1/work/classes/0/jdk/incubator/vector/AddTest.d
+20:23:31  
+20:23:31  rerun:
+20:23:31  cd /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16153931774853/jdk_vector_1/work/scratch/2 && \
+20:23:31  DISPLAY=:0 \
+20:23:31  HOME=/home/jenkins \
+20:23:31  PATH=/bin:/usr/bin:/usr/sbin \
+20:23:31      /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdkbinary/j2sdk-image/bin/javac \
+20:23:31          -J-ea \
+20:23:31          -J-esa \
+20:23:31          -J-Xmx512m \
+20:23:31          -J-XX:-UseCompressedOops \
+20:23:31          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:-UseCompressedOops' \
+20:23:31          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:-UseCompressedOops' \
+20:23:31          -J-Dtest.compiler.opts= \
+20:23:31          -J-Dtest.java.opts= \
+20:23:31          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdkbinary/j2sdk-image \
+20:23:31          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdkbinary/j2sdk-image \
+20:23:31          -J-Dtest.timeout.factor=8.0 \
+20:23:31          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+20:23:31          -J-Dtest.name=jdk/incubator/vector/AddTest.java \
+20:23:31          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/incubator/vector/AddTest.java \
+20:23:31          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/incubator/vector \
+20:23:31          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/incubator/vector \
+20:23:31          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16153931774853/jdk_vector_1/work/classes/0/jdk/incubator/vector/AddTest.d \
+20:23:31          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16153931774853/jdk_vector_1/work/classes/0/jdk/incubator/vector/AddTest.d \
+20:23:31          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16153931774853/jdk_vector_1/work/classes/0/jdk/incubator/vector/AddTest.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/incubator/vector \
+20:23:31          -J-Dtest.modules=jdk.incubator.vector \
+20:23:31          --add-modules jdk.incubator.vector \
+20:23:31          -d /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16153931774853/jdk_vector_1/work/classes/0/jdk/incubator/vector/AddTest.d \
+20:23:31          -sourcepath /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/incubator/vector \
+20:23:31          -classpath /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/incubator/vector:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16153931774853/jdk_vector_1/work/classes/0/jdk/incubator/vector/AddTest.d /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/incubator/vector/AddTest.java
+20:23:31  direct:
+20:23:31  warning: using incubating module(s): jdk.incubator.vector
+20:23:31  1 warning
+20:23:31  
+20:23:31  ACTION: main -- Error. Program `/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdkbinary/j2sdk-image/bin/java' timed out (timeout set to 960000ms, elapsed time including timeout handling was 961825ms).
+20:23:31  REASON: Assumed action based on file name: run main AddTest 
+20:23:31  TIME:   961.847 seconds
+20:23:31  messages:
+20:23:31  command: main AddTest
+20:23:31  reason: Assumed action based on file name: run main AddTest 
+20:23:31  Mode: othervm [test needs --add-modules]
+20:23:31  Additional options from @modules: --add-modules jdk.incubator.vector
+20:23:31  Timeout information:
+20:23:31  Running jstack on process 26449
+20:23:31  2021-03-10T20:23:18.074087876
+20:23:31  Virtual machine: 26449 JVM information:
+20:23:31  JRE 16 Linux aarch64-64-Bit Compressed References 20210309_77 (JIT enabled, AOT enabled)
+20:23:31  OpenJ9   - b227feba2
+20:23:31  OMR      - 4665e2f72
+20:23:31  JCL      - 7d78cfa0dc2 based on jdk-16+36
+20:23:31  
+20:23:31  "main" prio=5 Id=1 WAITING
+20:23:31  	at java.base@16/java.lang.Object.wait(Native Method)
+20:23:31  	at java.base@16/java.lang.Object.wait(Object.java:221)
+20:23:31  	at java.base@16/java.lang.Thread.join(Thread.java:733)
+20:23:31  	at app//com.sun.javatest.regtest.agent.MainWrapper.main(MainWrapper.java:74)
+20:23:31  
+20:23:31  "JIT Compilation Thread-000" prio=10 Id=3 RUNNABLE
+20:23:31  
+20:23:31  "JIT Compilation Thread-001" prio=10 Id=4 RUNNABLE
+20:23:31  
+20:23:31  "JIT Compilation Thread-002 Suspended" prio=10 Id=5 RUNNABLE
+20:23:31  
+20:23:31  "JIT Compilation Thread-003 Suspended" prio=10 Id=6 RUNNABLE
+20:23:31  
+20:23:31  "JIT Compilation Thread-004 Suspended" prio=10 Id=7 RUNNABLE
+20:23:31  
+20:23:31  "JIT Compilation Thread-005 Suspended" prio=10 Id=8 RUNNABLE
+20:23:31  
+20:23:31  "JIT Compilation Thread-006 Suspended" prio=10 Id=9 RUNNABLE
+20:23:31  
+20:23:31  "JIT Diagnostic Compilation Thread-007 Suspended" prio=10 Id=10 RUNNABLE
+20:23:31  
+20:23:31  "JIT-SamplerThread" prio=10 Id=11 TIMED_WAITING
+20:23:31  
+20:23:31  "IProfiler" prio=5 Id=12 RUNNABLE
+20:23:31  
+20:23:31  "Common-Cleaner" prio=8 Id=2 TIMED_WAITING
+20:23:31  	at java.base@16/java.lang.Object.wait(Native Method)
+20:23:31  	at java.base@16/java.lang.Object.wait(Object.java:221)
+20:23:31  	at java.base@16/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:138)
+20:23:31  	at java.base@16/jdk.internal.ref.CleanerImpl.run(CleanerImpl.java:140)
+20:23:31  	at java.base@16/java.lang.Thread.run(Thread.java:853)
+20:23:31  	at java.base@16/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:134)
+20:23:31  
+20:23:31  "VM Runtime State Listener" prio=5 Id=13 RUNNABLE
+20:23:31  
+20:23:31  "Finalizer thread" prio=5 Id=14 RUNNABLE
+20:23:31  
+20:23:31  "Concurrent Mark Helper" prio=1 Id=15 RUNNABLE
+20:23:31  
+20:23:31  "GC Worker" prio=5 Id=16 RUNNABLE
+20:23:31  
+20:23:31  "GC Worker" prio=5 Id=17 RUNNABLE
+20:23:31  
+20:23:31  "GC Worker" prio=5 Id=18 RUNNABLE
+20:23:31  
+20:23:31  "GC Worker" prio=5 Id=19 RUNNABLE
+20:23:31  
+20:23:31  "GC Worker" prio=5 Id=20 RUNNABLE
+20:23:31  
+20:23:31  "GC Worker" prio=5 Id=21 RUNNABLE
+20:23:31  
+20:23:31  "GC Worker" prio=5 Id=22 RUNNABLE
+20:23:31  
+20:23:31  "Attach API wait loop" prio=10 Id=25 RUNNABLE
+20:23:31  	at java.base@16/openj9.internal.tools.attach.target.IPC.waitSemaphore(Native Method)
+20:23:31  	at java.base@16/openj9.internal.tools.attach.target.CommonDirectory.waitSemaphore(CommonDirectory.java:259)
+20:23:31  	at java.base@16/openj9.internal.tools.attach.target.WaitLoop.waitForNotification(WaitLoop.java:66)
+20:23:31  	at java.base@16/openj9.internal.tools.attach.target.WaitLoop.run(WaitLoop.java:154)
+20:23:31  
+20:23:31  "MainThread" prio=5 Id=27 RUNNABLE
+20:23:31  	at jdk.incubator.vector@16/jdk.incubator.vector.Int256Vector.broadcast(Int256Vector.java:41)
+20:23:31  	at jdk.incubator.vector@16/jdk.incubator.vector.IntVector.lanewise(IntVector.java:724)
+20:23:31  	at jdk.incubator.vector@16/jdk.incubator.vector.IntVector.add(IntVector.java:1122)
+20:23:31  	at jdk.incubator.vector@16/jdk.incubator.vector.FloatVector.intoArray(FloatVector.java:2942)
+20:23:31  	at app//AddTest.workloadIndexMapped(AddTest.java:67)
+20:23:31  	at app//AddTest.main(AddTest.java:83)
+20:23:31  	at java.base@16/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+20:23:31  	at java.base@16/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+20:23:31  	at java.base@16/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+20:23:31  	at java.base@16/java.lang.reflect.Method.invoke(Method.java:567)
+20:23:31  	at app//com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+20:23:31  	at java.base@16/java.lang.Thread.run(Thread.java:853)
+20:23:31  
+20:23:31  "Attachment 36181" prio=10 Id=28 RUNNABLE
+20:23:31  	at java.base@16/openj9.internal.tools.attach.target.DiagnosticUtils.dumpAllThreadsImpl(Native Method)
+20:23:31  	at java.base@16/openj9.internal.tools.attach.target.DiagnosticUtils.getThreadInfo(DiagnosticUtils.java:245)
+20:23:31  	at java.base@16/openj9.internal.tools.attach.target.DiagnosticUtils$$Lambda$59/0x0000000034056d40.apply(Unknown Source)
+20:23:31  	at java.base@16/openj9.internal.tools.attach.target.DiagnosticUtils.executeDiagnosticCommand(DiagnosticUtils.java:181)
+20:23:31  	at java.base@16/openj9.internal.tools.attach.target.Attachment.doCommand(Attachment.java:249)
+20:23:31  	at java.base@16/openj9.internal.tools.attach.target.Attachment.run(Attachment.java:160)
+20:23:31  
+20:23:31  "file lock watchdog" prio=10 Id=29 TIMED_WAITING
+20:23:31  	at java.base@16/java.lang.Object.wait(Native Method)
+20:23:31  	at java.base@16/java.lang.Object.wait(Object.java:221)
+20:23:31  	at java.base@16/java.util.TimerThread.mainLoop(Timer.java:553)
+20:23:31  	at java.base@16/java.util.TimerThread.run(Timer.java:506)
+20:23:31  
+20:23:31  
+20:23:31  --- Timeout information end.
+20:23:31  elapsed time (seconds): 961.847
+20:23:31  configuration:
+20:23:31  Boot Layer
+20:23:31    add modules: jdk.incubator.vector
+20:23:31  
+20:23:31  STDOUT:
+20:23:31  Timeout refired 960 times
+20:23:31  STDERR:
+20:23:31  WARNING: Using incubator modules: jdk.incubator.vector
+20:23:31  rerun:
+20:23:31  cd /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16153931774853/jdk_vector_1/work/scratch/2 && \
+20:23:31  DISPLAY=:0 \
+20:23:31  HOME=/home/jenkins \
+20:23:31  PATH=/bin:/usr/bin:/usr/sbin \
+20:23:31  CLASSPATH=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16153931774853/jdk_vector_1/work/classes/0/jdk/incubator/vector/AddTest.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/incubator/vector:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+20:23:31      /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdkbinary/j2sdk-image/bin/java \
+20:23:31          -Dtest.vm.opts='-ea -esa -Xmx512m -XX:-UseCompressedOops' \
+20:23:31          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:-UseCompressedOops' \
+20:23:31          -Dtest.compiler.opts= \
+20:23:31          -Dtest.java.opts= \
+20:23:31          -Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdkbinary/j2sdk-image \
+20:23:31          -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdkbinary/j2sdk-image \
+20:23:31          -Dtest.timeout.factor=8.0 \
+20:23:31          -Dtest.root=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+20:23:31          -Dtest.name=jdk/incubator/vector/AddTest.java \
+20:23:31          -Dtest.file=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/incubator/vector/AddTest.java \
+20:23:31          -Dtest.src=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/incubator/vector \
+20:23:31          -Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/incubator/vector \
+20:23:31          -Dtest.classes=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16153931774853/jdk_vector_1/work/classes/0/jdk/incubator/vector/AddTest.d \
+20:23:31          -Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16153931774853/jdk_vector_1/work/classes/0/jdk/incubator/vector/AddTest.d \
+20:23:31          -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16153931774853/jdk_vector_1/work/classes/0/jdk/incubator/vector/AddTest.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/incubator/vector \
+20:23:31          -Dtest.modules=jdk.incubator.vector \
+20:23:31          --add-modules jdk.incubator.vector \
+20:23:31          -ea \
+20:23:31          -esa \
+20:23:31          -Xmx512m \
+20:23:31          -XX:-UseCompressedOops \
+20:23:31          com.sun.javatest.regtest.agent.MainWrapper /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16153931774853/jdk_vector_1/work/jdk/incubator/vector/AddTest.d/main.0.jta
+
+```
+

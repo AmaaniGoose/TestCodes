@@ -1,0 +1,1 @@
+Z linkages `S390PrivateLinkage`, `S390HelperLinkage`, and `J9S390JNILinkage` use `self()` calls when referring to members defined in the extensible base class (i.e., `TR::Linkage`).  But because these classes are not extensible themselves and derive from `TR::Linkage` the `self()` calls are not needed.  They should be removed for code clarity and to avoid confusion.

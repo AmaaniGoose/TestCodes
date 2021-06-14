@@ -1,0 +1,20 @@
+Hooks section in javacore contains statistical information of usage of each hook. Currently it looks like:
+```
+2HKEVENTID     66
+3HKCALLCOUNT       245618
+3HKLAST            Last Callback
+4HKCALLSITE           /tmp/bld_371101/bld_aix_ppc-64_cmprssptrs/compiler/../compiler/trj9/control/HookedByTheJit.cpp:7136
+4HKSTARTTIME          Start Time: 2019-01-26T16:19:45.707
+4HKDURATION           DurationMs: 0
+3HKLONGST          Longest Callback
+4HKCALLSITE           /tmp/bld_371101/bld_aix_ppc-64_cmprssptrs/compiler/../compiler/trj9/control/HookedByTheJit.cpp:7136
+4HKSTARTTIME          Start Time: 2019-01-24T18:53:04.792
+4HKDURATION           DurationMs: 22
+```
+There are a few improvements we can do:
+- Add name of hook in verbose form (currently it is a number `EVENTID     66`)
+This name might be used for Snap traces as well
+
+- Currently we are providing stats for last/longest callbacks. It would be very valuable to add average time spent in callback (should we add stats for each subscriber?)
+
+- Current time measuring unit is ms. I believe we should use lower time granulation when possible.

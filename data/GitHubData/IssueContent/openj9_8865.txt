@@ -1,0 +1,7 @@
+While implementing another feature I stumbled upon a couple of features (presumably related to each other) implemented on x86 only: 1) RTGCMapCheck (enabled via the `rtGCMapCheck` option) and 2) dead slot poisoning (enabled via the `deadSlotPoisoning` option).  The first presumably does a GC map verification at runtime.  It looks to trigger a stack walk at async check points, inspects the I-slots on the stack, and then aborts if one of the slots looks like a heap reference.  The second (I think) tries to improve the effectiveness of 1) by storing a poison value in reference slots as they go dead to avoid false positives (just a guess without exploring too deeply).  Actually, this second feature seems to be implemented in common code.
+
+Both sound vaguely familiar, and a bit of archaeology found they were introduced in 2010.  Has anyone been using these since?
+
+I'm proposing removing this code.  If it has been in the codebase for 10 years and no one either knows of its existence nor ever felt the need to implement something with similar functionality in order to diagnose a problem in the time since then I feel this is technical debt we don't need.  I'm not sure if this code even still works, nor convinced that this approach is likely to catch many bugs.
+
+Any opinions?  @andrewcraik @fjeremic @gita-omr @JamesKingdon @klangman @gacholio 

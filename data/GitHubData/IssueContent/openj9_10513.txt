@@ -1,0 +1,7 @@
+My proposal was that `MethodHandleNatives.checkClassBytes` return the classname as a String to avoid partially reparsing the classfile.  The checks in `getClassName` can still be done in java code after renaming the method to something like `validateClassName`.  
+```suggestion
+			String targetClassName = MethodHandleNatives.checkClassBytes(bytes);
+			validateClassName(targetClassName, bytes);
+```
+
+_Originally posted by @DanHeidinga in https://github.com/eclipse/openj9/pull/10471#discussion_r482303395_

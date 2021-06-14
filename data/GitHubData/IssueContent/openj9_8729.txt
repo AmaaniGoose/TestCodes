@@ -1,0 +1,20 @@
+I think it occurs after we get unexpectedly disconnected from the machine. It seems the corruptcache diagnostics interfere with getting the JVM version so the build fails.
+
+Diagnostic files are in the artifacts attached to the build job.
+
+https://ci.eclipse.org/openj9/job/Build_JDK11_s390x_linux_OMR/496
+  the previous job was https://ci.eclipse.org/openj9/job/Build_JDK11_s390x_linux_OMR/495/ which ended unexpectedly `Cannot contact rh7-390-3: java.lang.InterruptedException`
+
+https://ci.eclipse.org/openj9/job/Build_JDK8_s390x_linux_xl_Nightly/95
+```
+16:37:30  configure: Potential Boot JDK found at /usr/lib/jvm/adoptojdk-java-11 is incorrect JDK version (JVMDUMP039I Processing dump event "corruptcache", detail "" at 2020/02/28 16:37:21 - please wait.); ignoring
+16:37:30  configure: (Your Boot JDK version must be one of: 10 11)
+16:37:30  configure exiting with result code 1
+[Pipeline] sh
+16:37:31  + find . -name 'core.*.dmp' -o -name 'javacore.*.txt' -o -name 'Snap.*.trc' -o -name 'jitdump.*.dmp'
+16:37:31  + sed 's#^./##'
+16:37:31  + tar -zcvf Build_JDK11_s390x_linux_OMR-496-20200228-213504-diagnostics.tar.gz -T -
+16:37:31  javacore.20200228.163721.2355.0002.txt
+16:37:31  core.20200228.163721.2355.0001.dmp
+16:37:43  Snap.20200228.163721.2355.0003.trc
+```

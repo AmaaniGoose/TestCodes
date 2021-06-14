@@ -1,0 +1,1 @@
+`jitStateLogic` is a ridiculously big function; each state within it should be refactored into its own helper function.

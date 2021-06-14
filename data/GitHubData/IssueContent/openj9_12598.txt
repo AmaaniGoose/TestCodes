@@ -1,0 +1,3 @@
+In https://github.com/eclipse-openj9/openj9/pull/12523 @klangman fixed an issue where we used to compare 32-bit reference for NULL Test in ArrayStoreCHK to skip wrtBar/crdMark and ArrayStore check. Right before generating the test in [1], codegen makes an assumption that second child of the write node is compressed and traverses it's child to get actual decompressed pointer. Using 32-Bit comparison was incorrect as for references which contains 0 in the lower half, it would skip write barrier or marking. 
+
+Opening up this issue to make sure, other codegen is not doing the same mistake Z was doing. 

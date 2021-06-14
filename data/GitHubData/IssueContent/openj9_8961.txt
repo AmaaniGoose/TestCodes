@@ -1,0 +1,7 @@
+@zl-wang @gita-omr @IBMJimmyk : would one of you mind summarizing the read-only monitor optimization on Power?
+
+This is an optimization this is enabled for Power and ARM.  However, ARM doesn't provide any codegen support for it.  X86 seems to have some backend support for it, but doesn't enable the optimizer analysis.  Z and AArch64 don't provide any support.
+
+I remember some work being done in this space maybe 15 years ago.  Is this the same optimization?  What kind of performance is expected in current workloads and should this be something that should be implemented across all platforms?
+
+FYI: @fjeremic @andrewcraik @knn-k 

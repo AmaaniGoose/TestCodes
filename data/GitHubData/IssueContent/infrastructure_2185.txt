@@ -1,0 +1,9 @@
+Please put the name of the software product (and affected platforms if relevant) in the title of this issue
+
+- [ ] Missing install
+- [ ] Bug in ansible playbook
+- [x] Request for new playbook addition
+
+Details: Currently the [linux_installer role](https://github.com/AdoptOpenJDK/openjdk-infrastructure/blob/master/ansible/playbooks/AdoptOpenJDK_Unix_Playbook/roles/linux_installer/tasks/main.yml) as called from [linux_installer_setup.yml](https://github.com/AdoptOpenJDK/openjdk-infrastructure/blob/master/ansible/playbooks/AdoptOpenJDK_Unix_Playbook/linux_installer_setup.yml). For this to work in practive it is necessary for an `.rpmmacros` file to be available to jenkins as per the end of [this section](https://github.com/AdoptOpenJDK/openjdk-installer/tree/master/linux#upload-to-package-repositories) of the docs, and for `.gnupg` to be populated.
+
+Since the output of the playbook will not be usable without this file, we should add a final step that checks for the presence of it and if not, prints out a warning to the user to notify them that the extra step is required.

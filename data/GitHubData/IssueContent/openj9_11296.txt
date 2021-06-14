@@ -1,0 +1,37 @@
+The segfault happens every time when running `-version` with `TR_StressTrampolines` enabled.
+```
+$JAVA_BIN/java -Xjit:count=0,stressTrampolines,verbose -version
+```
+The crash occurs on x86, but I haven't checked other platforms.
+The stack trace:
+```
+Thread 2 "java" received signal SIGSEGV, Segmentation fault.
+[Switching to Thread 0x7ffff7193700 (LWP 31893)]
+0x00007fffeedd8cbf in OMR::CodeCache::replaceTrampoline (this=0x7ffff00b3c80, method=0x51718, oldTrampoline=0x0, oldTargetPC=0x0,
+    newTargetPC=0x7fffd9434b48, needSync=false) at /home/dmitry-ten/src/omr/compiler/runtime/OMRCodeCache.cpp:623
+623           entry->_info._resolved._currentTrampoline = trampoline;
+(gdb) bt
+#0  0x00007fffeedd8cbf in OMR::CodeCache::replaceTrampoline (this=0x7ffff00b3c80, method=0x51718, oldTrampoline=0x0, oldTargetPC=0x0,
+    newTargetPC=0x7fffd9434b48, needSync=false) at /home/dmitry-ten/src/omr/compiler/runtime/OMRCodeCache.cpp:623
+#1  0x00007fffeeddca1b in OMR::CodeCacheManager::replaceTrampoline (this=0x7ffff00a8cc0, method=0x51718, callSite=0x7fffd9433170,
+    oldTrampoline=0x0, oldTargetPC=0x0, newTargetPC=0x7fffd9434b48, needSync=false)
+    at /home/dmitry-ten/src/omr/compiler/runtime/OMRCodeCacheManager.cpp:560
+#2  0x00007fffeed71a78 in mcc_replaceTrampoline (method=0x51718, callSite=0x7fffd9433170, oldTrampoline=0x0, oldTargetPC=0x0,
+    newTargetPC=0x7fffd9434b48, needSync=false) at /home/dmitry-ten/src/compiler/runtime/J9CodeCache.cpp:755
+#3  0x00007fffeedd2735 in amd64CodePatching (theMethod=0x51718, callSite=0x7fffd9433170, currentPC=0x0, currentTramp=0x0,
+    newPC=0x7fffd9434b48, extra=0x0) at /home/dmitry-ten/src/compiler/runtime/Trampoline.cpp:632
+#4  0x00007fffeedd90ee in OMR::CodeCache::patchCallPoint (this=0x7ffff00b3c80, method=0x51718, callSite=0x7fffd9433170,
+    newStartPC=0x7fffd9434b48, extraArg=0x0) at /home/dmitry-ten/src/omr/compiler/runtime/OMRCodeCache.cpp:764
+#5  0x00007fffeed7191b in mcc_callPointPatching_unwrapper (argsPtr=0x17d28, resPtr=0x17d28)
+    at /home/dmitry-ten/src/compiler/runtime/J9CodeCache.cpp:726
+#6  0x00007fffef63c888 in old_slow_jitCallCFunction (currentThread=0x18100) at cnathelp.cpp:2868
+#7  0x00007fffef65b076 in jitCallCFunction () at xnathelp.s:9797
+#8  0x0000000000018100 in ?? ()
+#9  0x00007ffff718fa40 in ?? ()
+#10 0x00007fffeed718a6 in J9::CodeCache::resetCodeCache (this=0x7ffff718fa40) at /home/dmitry-ten/src/compiler/runtime/J9CodeCache.cpp:713
+```
+I'm pretty sure that the last frame should be ignored, as `resetCodeCache` is only called in one place on JITServer server, so it's impossible for it to be called in this case and it's probably gdb messing up the stack trace.
+
+`entry` is NULL, which indicates that method `0x51718` hasn't been added to the hash table of methods for which we know we might need a trampoline.  To reserve a trampoline, `TR_J9VMBase::reserveTrampolineIfNecessary` should be called. 
+
+All of this information leads me to conclude that somewhere we force a call through trampoline under `TR_StressTrampolines` but don't account for it with `reserveTrampolineIfNecessary`. 

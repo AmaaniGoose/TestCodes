@@ -1,0 +1,5 @@
+[MethodHandlesPermuteArgumentsTest](https://github.com/ibmruntimes/openj9-openjdk-jdk16/blob/f28951c83db05bb661d5dbeef4684f47a4c44d61/test/jdk/java/lang/invoke/MethodHandlesPermuteArgumentsTest.java#L200-L228) passes with OJDK MHs enabled in OpenJ9. So, it should be enabled once OJDK MHs are officially enabled in OpenJ9. 
+
+Related: https://github.com/eclipse/openj9/pull/11697#issuecomment-763282951
+
+To enable the test, the line corresponding to `MethodHandlesPermuteArgumentsTest` should be removed from https://github.com/AdoptOpenJDK/openjdk-tests/blob/master/openjdk/ProblemList_openjdk16-openj9.txt.

@@ -1,0 +1,31 @@
+https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_extended.functional_x86-64_windows/45/consoleFull
+```
+01:47:06  variation: Mode110
+01:47:06  JVM_OPTIONS:  -Xjit -Xgcpolicy:gencon -Xnocompressedrefs 
+...
+05:47:08  [SoftmxRASTest2] [INFO] Starting RAS testcase 2:
+05:47:09  JVMDUMP039I Processing dump event "systhrow", detail "java/lang/OutOfMemoryError" at 2021/03/25 05:47:09 - please wait.
+05:47:09  JVMDUMP039I Processing dump event "systhrow", detail "java/lang/OutOfMemoryError" at 2021/03/25 05:47:09 - please wait.
+05:47:09  JVMDUMP032I JVM requested Java dump using 'C:\Users\jenkins\workspace\Test_openjdk16_j9_extended.functional_x86-64_windows\openjdk-tests\TKG\output_16166408282638\SoftmxRASTest2_0\javacore.20210325.054709.9044.0001.txt' in response to an event
+05:47:10  JVMDUMP010I Java dump written to C:\Users\jenkins\workspace\Test_openjdk16_j9_extended.functional_x86-64_windows\openjdk-tests\TKG\output_16166408282638\SoftmxRASTest2_0\javacore.20210325.054709.9044.0001.txt
+05:47:10  JVMDUMP013I Processed dump event "systhrow", detail "java/lang/OutOfMemoryError".
+05:47:10  JVMDUMP032I JVM requested Java dump using 'C:\Users\jenkins\workspace\Test_openjdk16_j9_extended.functional_x86-64_windows\openjdk-tests\TKG\output_16166408282638\SoftmxRASTest2_0\javacore.20210325.054709.9044.0002.txt' in response to an event
+Aborted by Andrew Leonard
+10:18:06  Sending interrupt signal to process
+10:18:11  PASSED: testSoftmx_RAS_Test_2
+```
+a previous successful run below that did not hang only processed ONE dump event, the above generates TWO...?:
+```
+05:16:40  [SoftmxRASTest2] [INFO] Starting RAS testcase 2:
+05:16:41  JVMDUMP039I Processing dump event "systhrow", detail "java/lang/OutOfMemoryError" at 2021/03/23 05:16:41 - please wait.
+05:16:41  JVMDUMP032I JVM requested Java dump using 'C:\Users\jenkins\workspace\Test_openjdk16_j9_extended.functional_x86-64_windows\openjdk-tests\TKG\output_16164674842500\SoftmxRASTest2_0\javacore.20210323.051641.4860.0001.txt' in response to an event
+05:16:41  JVMDUMP010I Java dump written to C:\Users\jenkins\workspace\Test_openjdk16_j9_extended.functional_x86-64_windows\openjdk-tests\TKG\output_16164674842500\SoftmxRASTest2_0\javacore.20210323.051641.4860.0001.txt
+05:16:41  JVMDUMP013I Processed dump event "systhrow", detail "java/lang/OutOfMemoryError".
+05:16:42  PASSED: testSoftmx_RAS_Test_2
+05:16:42  
+05:16:42  ===============================================
+05:16:42      SoftmxRASTest2
+05:16:42      Tests run: 1, Failures: 0, Skips: 0
+05:16:42  ===============================================
+```
+

@@ -1,0 +1,56 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk15_j9_sanity.functional_x86-64_windows_Nightly_testList_1/49`:
+```
+03:04:02  openjdk version "15-internal" 2020-09-15
+03:04:02  OpenJDK Runtime Environment (build 15-internal+0-adhoc.jenkins.BuildJDK15x86-64windowsNightly)
+03:04:02  Eclipse OpenJ9 VM (build master-d6380006236, JRE 15 Windows Server 2016 amd64-64-Bit Compressed References 20200924_84 (JIT enabled, AOT enabled)
+03:04:02  OpenJ9   - d6380006236
+03:04:02  OMR      - 79c250b8851
+03:04:02  JCL      - 39a43ea0200 based on jdk-15+36)
+```
+For example, to rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links:
+06:14:17  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=15&JDK_IMPL=openj9&BUILD_LIST=functional&PLATFORM=x86-64_windows&TARGET=cmdLineTester_decompilationTests_1
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+*** Starting test suite: Decompilation Tests ***
+Testing: decomp001
+Test start time: 2020/09/25 04:23:51 Eastern Standard Time
+Running command: "C:/Users/jenkins/workspace/Test_openjdk15_j9_sanity.functional_x86-64_windows_Nightly_testList_1/openjdkbinary/j2sdk-image\\bin\\java"  -Xcompressedrefs -Xgcpolicy:gencon -Xjit:enableOSR,count=0  -Xdump -Xgcthreads1  -Xdump:system:events=abort  -agentlib:jvmtitest=test:decomp001 -cp "C:/Users/jenkins/workspace/Test_openjdk15_j9_sanity.functional_x86-64_windows_Nightly_testList_1/openjdk-tests///..//jvmtest\functional\cmdLineTests\jvmtitests\jvmtitest.jar" com.ibm.jvmti.tests.util.TestRunner
+Time spent starting: 1375 milliseconds
+***[TEST INFO 2020/09/25 04:29:04] ProcessKiller detected a timeout after 300000 milliseconds!***
+INFO: getUnixPID() has failed indicating this is not a UNIX System.'Debug on timeout' is currently only supported on Linux.
+Output from test:
+ [OUT] *** Testing [1/2]:	testInterfaceMethodResolveFrame
+ [OUT] Loading class: com.ibm.jvmti.tests.decompResolveFrame.ResolveFrameMain, resolve: false
+ [OUT] Loading class: java.lang.Object, resolve: false
+ [OUT] Loading class: java.lang.Integer, resolve: false
+ [OUT] Loading class: com.ibm.jvmti.tests.decompResolveFrame.ResolveFrame_TestInterfaceMethod, resolve: false
+ [OUT] Loading class: com.ibm.jvmti.tests.decompResolveFrame.ResolveFrame_Interface, resolve: false
+ [OUT] *** Test took 165687 milliseconds
+ [OUT] OK
+ [OUT] 
+ [OUT] *** Testing [2/2]:	testMethodResolveFrame
+ [OUT] Loading class: com.ibm.jvmti.tests.decompResolveFrame.ResolveFrameMain, resolve: false
+ [OUT] Loading class: java.lang.Object, resolve: false
+ [OUT] Loading class: java.lang.Integer, resolve: false
+ [OUT] Loading class: com.ibm.jvmti.tests.decompResolveFrame.ResolveFrame_TestMethod, resolve: false
+Time spent executing: 325794 milliseconds
+Test result: FAILED
+Output from test:
+ [OUT] *** Test took 87622 milliseconds
+ [OUT] OK
+ [OUT] 
+ [OUT] In Java_com_ibm_jvmti_tests_decompResolveFrame_DecompResolveMethodClassloader_checkFrame
+ [OUT] In Java_com_ibm_jvmti_tests_decompResolveFrame_DecompResolveMethodClassloader_checkFrame
+
+cmdLineTester_decompilationTests_1_FAILED
+```

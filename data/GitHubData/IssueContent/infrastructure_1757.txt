@@ -1,0 +1,14 @@
+
+- [ ] Missing install
+- [ ] Bug in ansible playbook
+- [ ] Request for new playbook addition
+- [x] Improvement
+
+Details:
+As discussed with @sxa in PR #1743 , some of the labels to the section lists could be misleading in future when further releases are available.  Raising this as an issue to get some agreement on what the names ought to be.
+
+In particular, he raised that in `roles/Common/vars/Redhat.yml` the label `Additional_Build_Tools_NOT_RHEL8` will likely apply to future releases also, by which time the name will no longer be entirely accurate.  The same can be said for some of the other sections, and the other distros also. 
+
+If the labels in the vars files are changed, then the corresponding tasks also need to be changed to match.
+
+In addition, it would be helpful if each task had its own individual tag as well as the broader `build_tools` to help with re-running smaller parts of the playbook when debugging.

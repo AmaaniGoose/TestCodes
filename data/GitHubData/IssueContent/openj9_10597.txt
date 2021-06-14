@@ -1,0 +1,90 @@
+There are random and intermittent OutOfMemoryErrors with javac in AArch64 Java 11 XL builds.
+
+Failure link
+------------
+
+- https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/204/ (2 failures)
+- https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/205/ (4 failures)
+- https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/206/ (2 failures)
+- https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/207/ (2 failures)
+
+Optional info
+-------------
+
+- intermittent failure: yes
+- regression or new test: regression
+- if regression, what are the last passing : https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/203/
+
+Failure output (captured from console output)
+---------------------------------------------
+
+From https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/204/
+```
+09:54:39  TEST: java/util/regex/PatternStreamTest.java
+(... snip ...)
+09:54:39  rerun:
+09:54:39  cd /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/TKG/test_output_15998709532762/jdk_util_j9_0/work/scratch/29 && \
+09:54:39  DISPLAY=:0 \
+09:54:39  HOME=/home/jenkins \
+09:54:39  LANG=en_US.UTF-8 \
+09:54:39  PATH=/bin:/usr/bin:/usr/sbin \
+09:54:39      /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdkbinary/j2sdk-image/bin/javac \
+09:54:39          -J-ea \
+09:54:39          -J-esa \
+09:54:39          -J-Xmx512m \
+09:54:39          -J-Xdump:system:none \
+09:54:39          -J-Xdump:heap:none \
+09:54:39          -J-Xdump:system:events=gpf+abort+traceassert+corruptcache \
+09:54:39          -J-Dtest.vm.opts='-ea -esa -Xmx512m -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache' \
+09:54:39          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-Xdump:system:none -J-Xdump:heap:none -J-Xdump:system:events=gpf+abort+traceassert+corruptcache' \
+09:54:39          -J-Dtest.compiler.opts= \
+09:54:39          -J-Dtest.java.opts= \
+09:54:39          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdkbinary/j2sdk-image \
+09:54:39          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdkbinary/j2sdk-image \
+09:54:39          -J-Dtest.timeout.factor=8.0 \
+09:54:39          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+09:54:39          -J-Dtest.name=java/util/regex/PatternStreamTest.java \
+09:54:39          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/regex/PatternStreamTest.java \
+09:54:39          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/regex \
+09:54:39          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/regex \
+09:54:39          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/TKG/test_output_15998709532762/jdk_util_j9_0/work/classes/30/java/util/regex/PatternStreamTest.d \
+09:54:39          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/TKG/test_output_15998709532762/jdk_util_j9_0/work/classes/30/java/util/regex/PatternStreamTest.d \
+09:54:39          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/regex \
+09:54:39          -J-Dtest.patch.path=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/TKG/test_output_15998709532762/jdk_util_j9_0/work/classes/30/lib/testlibrary/bootlib \
+09:54:39          -d /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/TKG/test_output_15998709532762/jdk_util_j9_0/work/classes/30/lib/testlibrary/bootlib/java.base \
+09:54:39          --patch-module java.base=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/lib/testlibrary/bootlib/java.base:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/TKG/test_output_15998709532762/jdk_util_j9_0/work/classes/30/lib/testlibrary/bootlib/java.base \
+09:54:39          -classpath /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/jvmtest/openjdk/jtreg/lib/testng.jar:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/jvmtest/openjdk/jtreg/lib/jcommander.jar \
+09:54:39          --add-reads java.base=ALL-UNNAMED /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/lib/testlibrary/bootlib/java.base/java/util/stream/OpTestCase.java
+09:54:39  stderr:
+09:54:39  JVMDUMP039I Processing dump event "systhrow", detail "java/lang/OutOfMemoryError" at 2020/09/12 00:54:08 - please wait.
+09:54:39  JVMDUMP039I Processing dump event "systhrow", detail "java/lang/OutOfMemoryError" at 2020/09/12 00:54:12 - please wait.
+09:54:39  JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/TKG/test_output_15998709532762/jdk_util_j9_0/work/scratch/29/javacore.20200912.005408.49560.0001.txt' in response to an event
+09:54:39  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/TKG/test_output_15998709532762/jdk_util_j9_0/work/scratch/29/javacore.20200912.005408.49560.0001.txt
+09:54:39  JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/TKG/test_output_15998709532762/jdk_util_j9_0/work/scratch/29/Snap.20200912.005408.49560.0003.trc' in response to an event
+09:54:39  JVMDUMP039I Processing dump event "systhrow", detail "java/lang/OutOfMemoryError" at 2020/09/12 00:54:29 - please wait.
+09:54:39  JVMDUMP010I Snap dump written to /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/TKG/test_output_15998709532762/jdk_util_j9_0/work/scratch/29/Snap.20200912.005408.49560.0003.trc
+09:54:39  JVMDUMP013I Processed dump event "systhrow", detail "java/lang/OutOfMemoryError".
+09:54:39  JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/TKG/test_output_15998709532762/jdk_util_j9_0/work/scratch/29/javacore.20200912.005412.49560.0002.txt' in response to an event
+09:54:39  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/TKG/test_output_15998709532762/jdk_util_j9_0/work/scratch/29/javacore.20200912.005412.49560.0002.txt
+09:54:39  JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/TKG/test_output_15998709532762/jdk_util_j9_0/work/scratch/29/Snap.20200912.005412.49560.0005.trc' in response to an event
+09:54:39  JVMDUMP010I Snap dump written to {nothing to snap}
+09:54:39  JVMDUMP013I Processed dump event "systhrow", detail "java/lang/OutOfMemoryError".
+09:54:39  direct.log:
+09:54:39  java.lang.reflect.InvocationTargetException
+09:54:39  	at jdk.internal.reflect.GeneratedMethodAccessor6.invoke(Unknown Source)
+09:54:39  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+09:54:39  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+09:54:39  	at com.sun.javatest.regtest.agent.RegressionCompileCommand.run(RegressionCompileCommand.java:189)
+09:54:39  	at com.sun.javatest.regtest.agent.CompileActionHelper.runCompile(CompileActionHelper.java:92)
+09:54:39  	at com.sun.javatest.regtest.agent.AgentServer.doCompile(AgentServer.java:262)
+09:54:39  	at com.sun.javatest.regtest.agent.AgentServer.run(AgentServer.java:229)
+09:54:39  	at com.sun.javatest.regtest.agent.AgentServer.main(AgentServer.java:69)
+09:54:39  Caused by: java.lang.ClassCastException: com.sun.tools.javac.util.List incompatible with java.io.Closeable
+09:54:39  	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.close(JavaCompiler.java:1808)
+09:54:39  	at jdk.compiler/com.sun.tools.javac.main.Main.compile(Main.java:352)
+09:54:39  	at jdk.compiler/com.sun.tools.javac.main.Main.compile(Main.java:170)
+09:54:39  	at jdk.compiler/com.sun.tools.javac.Main.compile(Main.java:75)
+09:54:39  	... 8 more
+09:54:39  
+09:54:39  TEST RESULT: Error. Error invoking compiler
+```

@@ -1,0 +1,48 @@
+**Test Info**
+Test Name: jdk_lang_0
+Test Duration: 17 min 1 sec
+Machine: test-aws-rhel76-armv8-2
+TRSS link for the test output: https://trss.adoptopenjdk.net/output/test?id=5f0a618a7eaab3443c9bfd8a
+
+**Build Info**
+Build Name: Test_openjdk11_hs_sanity.openjdk_aarch64_linux
+Jenkins Build start time: Jul 11 2020, 07:49 pm
+Jenkins Build URL: https://ci.adoptopenjdk.net/job/Test_openjdk11_hs_sanity.openjdk_aarch64_linux/261/
+TRSS link for the build: https://trss.adoptopenjdk.net/allTestsInfo?buildId=5f0a61087eaab3443c9bf991
+
+
+**Java Version**
+openjdk version "11.0.8" 2020-07-14
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.8+8-202007112322)
+OpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.8+8-202007112322, mixed mode)
+
+
+----
+
+
+Console output: 
+[2020-07-11T23:56:30.836Z] test VarHandleTestByteArrayAsLong.testAccess(" VarHandle [ALIGNED, LITTLE_ENDIAN, READ_WRITE] -> java.nio.HeapByteBuffer[pos=0 lim=32 cap=32] [ALIGNED, LITTLE_ENDIAN, READ_WRITE] read write", VarHandleBaseByteArrayTest$VarHandleSourceAccessTestCase@4ce4a83f): failure
+[2020-07-11T23:56:30.836Z] java.lang.AssertionError: weakCompareAndSetAcquire long expected [true] but found [false]
+[2020-07-11T23:56:30.836Z] 	at org.testng.Assert.fail(Assert.java:94)
+[2020-07-11T23:56:30.836Z] 	at org.testng.Assert.failNotEquals(Assert.java:496)
+[2020-07-11T23:56:30.836Z] 	at org.testng.Assert.assertEquals(Assert.java:125)
+[2020-07-11T23:56:30.836Z] 	at org.testng.Assert.assertEquals(Assert.java:288)
+[2020-07-11T23:56:30.836Z] 	at VarHandleTestByteArrayAsLong.testArrayReadWrite(VarHandleTestByteArrayAsLong.java:1531)
+[2020-07-11T23:56:30.836Z] 	at VarHandleTestByteArrayAsLong.lambda$accessTestCaseProvider$5(VarHandleTestByteArrayAsLong.java:159)
+[2020-07-11T23:56:30.836Z] 	at VarHandleBaseTest$AccessTestCase.testAccess(VarHandleBaseTest.java:405)
+[2020-07-11T23:56:30.836Z] 	at VarHandleTestByteArrayAsLong.testAccess(VarHandleTestByteArrayAsLong.java:196)
+[2020-07-11T23:56:30.836Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2020-07-11T23:56:30.836Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2020-07-11T23:56:30.836Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2020-07-11T23:56:30.836Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+[2020-07-11T23:56:30.836Z] 	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+
+...
+
+[2020-07-11T23:56:30.839Z] java/lang/invoke/VarHandles/VarHandleTestByteArrayAsLong.java
+[2020-07-11T23:56:30.839Z] Total tests run: 138, Failures: 1, Skips: 0
+
+
+Appears to be intermittent, occurred previously on a different aarch64 machine https://trss.adoptopenjdk.net/output/test?id=5f03c9d22e55416417c5947d
+
+To rerun in Grinder, pre-populate the parameters using this [link](https://ci.adoptopenjdk.net/job/Grinder/parambuild/?TARGET=jdk_lang&SDK_RESOURCE=nightly&PLATFORM=aarch64_linux&KEEP_REPORTDIR=true&PERSONAL_BUILD=false&ADOPTOPENJDK_REPO=https://github.com/AdoptOpenJDK/openjdk-tests.git&JDK_IMPL=hotspot&LABEL=&TKG_BRANCH=master&EXTRA_OPTIONS=&SSH_AGENT_CREDENTIAL=&IS_PARALLEL=false&CUSTOMIZED_SDK_URL=&BUILD_IDENTIFIER=&AUTO_DETECT=true&ADOPTOPENJDK_BRANCH=master&TKG_SHA=&ARTIFACTORY_SERVER=&CUSTOMIZED_SDK_URL_CREDENTIAL_ID=&OPENJDK_SHA=&KEEP_WORKSPACE=false&JDK_VERSION=11&BUILD_LIST=openjdk&USER_CREDENTIALS_ID=&ITERATIONS=1&TIME_LIMIT=10&RELEASE_TAG=&OPENJ9_BRANCH=master&OPENJ9_SHA=&JCK_GIT_REPO=&VENDOR_TEST_BRANCHES=&OPENJ9_REPO=https://github.com/eclipse/openj9.git&JVM_OPTIONS=&TKG_REPO=https://github.com/AdoptOpenJDK/TKG.git)

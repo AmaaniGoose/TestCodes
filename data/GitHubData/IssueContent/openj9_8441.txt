@@ -1,0 +1,68 @@
+While investigating a miscellaneous issue we came across the following tree and evaluation sequence of a `TR::checkcast` IL:
+
+```
+============================================================
+; Live regs: GPR=1 FPR=0 VRF=0 {&GPR_1776}
+------------------------------
+ n5564n   (  0)  checkcast [#85]                                                                      [     0x3ff6e60bae0] bci=[3,5,3774] rc=0 vc=11 vn=- li=84 udi=- nc=2
+ n25152n  (  6)    ==>aRegLoad (in &GPR_1776) (X>=0 SeenRealReference sharedMemory )
+ n5566n   (  1)    loadaddr  java/lang/Class$ReflectRef[#571  Static] [flags 0x18307 0x0 ]            [     0x3ff6e60bb80] bci=[3,5,3774] rc=1 vc=11 vn=- li=84 udi=- nc=0
+------------------------------
+checkcast:Maximum Profiled Classes = 3
+Outline Super Class Test: 0
+checkcast: Class Not Evaluated. Evaluating it
+[ 13557] O^O OMIT HCR CLASS POINTER ASSUMPTION: class=00000000000E8B00, for node 000003FF6E60BB80
+checkcast: Emitting NullTest
+checkcast: Loading Object Class
+checkcast: Emitting Class Equality Test
+checkcast: Emitting helper call for failure
+checkcast: Internal Control Flow in OOL : false
+ReturnType = Address
+------------------------------
+ n5564n   (  0)  checkcast [#85]                                                                      [     0x3ff6e60bae0] bci=[3,5,3774] rc=0 vc=11 vn=- li=84 udi=- nc=2
+ n25152n  (  5)    ==>aRegLoad (in &GPR_1776) (X>=0 SeenRealReference sharedMemory )
+ n5566n   (  0)    loadaddr  java/lang/Class$ReflectRef[#571  Static] [flags 0x18307 0x0 ] (in GPR_1777)  [     0x3ff6e60bb80] bci=[3,5,3774] rc=0 vc=11 vn=- li=84 udi=- nc=0
+------------------------------
+
+ [     0x3fed56a1d00]   LGFI    GPR_1777,953088
+ [     0x3fed56a1e10]   LTGR    &GPR_1776,&GPR_1776
+ [     0x3fed56a1ef0]   BRC     BH(0x8), Label L0672
+ [     0x3fed56a2110]   LLZRGF  GPR_1792,#1736 0(&GPR_1776)
+ [     0x3fed56a21f0]   CGRJ    GPR_1777,GPR_1792,Label L0672,BH(mask=0x8),
+ [     0x3fed56a24a0]   BRC     NOP(0xf), Outlined Label L0673
+ [     0x3fed56a5e90]   ASSOCREGS
+ [     0x3fed56a58d0]   Label L0672:
+ POST:
+ {AssignAny:&GPR_1776:R} {AssignAny:GPR_1792:R} {AssignAny:GPR_1777:R}
+
+------------------------------
+
+ [     0x3fed56a2640]   Outlined Label L0673:
+ [     0x3fed56a3960]   LGR     GPR_1831,GPR13
+ [     0x3fed56a3ab0]   LGR     &GPR_1832,&GPR_1776  ; LR=Clobber_eval
+ [     0x3fed56a4560]   ASSOCREGS
+ [     0x3fed56a4f30]   ASSOCREGS
+  PRE:
+ {GPR2:GPR_1831:R} {GPR3:&GPR_1832:R} {GPR4:GPR_1777:R}
+ [     0x3fed56a3f80]   BRASL   GPR_1798,0x0000000000000000
+ POST:
+ {GPR0:D_GPR_1793:D}* {GPR1:D_GPR_1794:D}* {GPR2:GPR_1795:D} {GPR3:D_GPR_1796:D}* {GPR4:D_GPR_1797:D}* {GPR14:GPR_1798:D} {FPR0:D_FPR_1799:D}* {FPR1:D_FPR_1800:D}*
+ {FPR2:D_FPR_1801:D}* {FPR3:D_FPR_1802:D}* {FPR4:D_FPR_1803:D}* {FPR5:D_FPR_1804:D}* {FPR6:D_FPR_1805:D}* {FPR7:D_FPR_1806:D}* {FPR8:D_FPR_1807:D}* {FPR9:D_FPR_1808:D}*
+ {FPR10:D_FPR_1809:D}* {FPR11:D_FPR_1810:D}* {FPR12:D_FPR_1811:D}* {FPR13:D_FPR_1812:D}* {FPR14:D_FPR_1813:D}* {FPR15:D_FPR_1814:D}* {VRF16:D_VRF_1815:D}* {VRF17:D_VRF_1816:D}*
+ {VRF18:D_VRF_1817:D}* {VRF19:D_VRF_1818:D}* {VRF20:D_VRF_1819:D}* {VRF21:D_VRF_1820:D}* {VRF22:D_VRF_1821:D}* {VRF23:D_VRF_1822:D}* {VRF24:D_VRF_1823:D}* {VRF25:D_VRF_1824:D}*
+ {VRF26:D_VRF_1825:D}* {VRF27:D_VRF_1826:D}* {VRF28:D_VRF_1827:D}* {VRF29:D_VRF_1828:D}* {VRF30:D_VRF_1829:D}* {VRF31:D_VRF_1830:D}*
+ [     0x3fed56a5070]   LGR     &GPR_1833,GPR_1795
+ [     0x3fed56a5710]   ASSOCREGS
+ [     0x3fed56a5150]   Label L0688:
+ POST:
+ {AssignAny:&GPR_1776:R} {AssignAny:GPR_1777:R} {AssignAny:&GPR_1833:R}
+ [     0x3fed56a57e0]   BRC     NOP(0xf), Label L0672
+```
+
+The `CGRJ` + `BRC` sequence is suboptimal. The `BRC` is a branch to the OOL sequence for a call to the checkcast helper, meaning this is the least frequent path. The `CGRJ` should therefore be changed such that the target is the fallthrough.
+
+This sequence is a result of the evaluation of `TR::checkcast` via [1]. However given this is a cross codegen implementation, i.e. we just evaluate a sequence of checks given to us, we should likely not mess with that. Rather we should implement a peephole pass which looks for conditional branches followed by an unconditional branch to an OOL sequence. If such a sequence is encountered we can negate the conditional branch and get rid of the unconditional branch.
+
+This only works is the only instruction between the conditional branch and its target label is the unconditional branch. We should also be careful with the bookkeeping of the OOL section as we do special things for that during RA. This makes me inclined that we should do this peephole post-RA to avoid such issues.
+
+[1] https://github.com/eclipse/openj9/blob/e83241b59f456511b0dbe4f686108bba94e9fdd3/runtime/compiler/z/codegen/J9TreeEvaluator.cpp#L2534-L2697

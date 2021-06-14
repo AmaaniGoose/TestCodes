@@ -1,0 +1,30 @@
+Failure link
+------------
+https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder_Advanced/472/
+- test category: openjdk
+- OS/architecture: all
+- version: jdk11, 13
+- JVM: openj9
+
+Optional info
+-------------
+- intermittent failure: no
+- regression or new test: regression
+
+Failure output (captured from console output)
+---------------------------------------------
+run main/othervm -Xbootclasspath/a:. -XX:+UnlockDiagnosticVMOptions -XX:+WhiteBoxAPI TimSortStackSize2:
+```
+10:18:00  java.lang.UnsatisfiedLinkError: sun/hotspot/WhiteBox.registerNatives()V
+10:18:00  	at sun.hotspot.WhiteBox.<clinit>(WhiteBox.java:66)
+10:18:00  	at TimSortStackSize2.startMeWithArgs(TimSortStackSize2.java:66)
+10:18:00  	at TimSortStackSize2.main(TimSortStackSize2.java:53)
+10:18:00  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+10:18:00  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+10:18:00  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+10:18:00  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+10:18:00  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+10:18:00  	at java.base/java.lang.Thread.run(Thread.java:831)
+```
+
+This test is using the sun/hotspot/WhiteBox class which means it is not relevant for openj9 and therefore should be permanently excluded?

@@ -1,0 +1,25 @@
+There are currently two IdleTuning options for GC which get enabled as follows (once #3228 is merged) :
+1) `IdleTuningGcOnIdle`: it gets enabled as
+```
+                                /* 
+                                 * GcOnIdle is enabled only if:
+                                 * 1. -XX:+IdleTuningGcOnIdle is set, or
+                                 * 2. running in container, or
+                                 * 3. if java version is 9 or above and -Xtune:virtualized is set as VM option
+                                 */
+```
+2) `IdleTuningCompactOnIdle`: it gets enabled as
+```
+                                /*
+                                 * CompactOnIdle is enabled only if:
+                                 * 1. -XX:+IdleTuningCompactOnIdle is set, or
+                                 * 2. running in container
+                                 */
+```
+
+@DanHeidinga pointed [here](https://github.com/eclipse/openj9/pull/3228#discussion_r236685105) that `CompactOnIdle` should also be enabled `if java version is 9 or above and -Xtune:virtualized is set as VM option`.
+@vijaysun-omr has suggested to enabling idle tuning options under -Xtune:virtualized in Java8 as well.  
+
+I am wondering if there is any scenario where we would want to enable `GcOnIdle` and not `CompactOnIdle`? Would it make sense to enable `CompactOnIdle` every time `GcOnIdle` is set, unless `-XX:-IdleTuningCompactOnIdle` is explicitly specified.
+
+@pshipton @amicic @dmitripivkine your thoughts on this?

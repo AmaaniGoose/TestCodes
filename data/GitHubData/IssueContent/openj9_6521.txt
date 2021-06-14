@@ -1,0 +1,19 @@
+Add:
+- `-f`: read commands from a file
+- select VMs by main class instead of VMID
+- select all VMs if VMID==0
+
+Update help text accordingly:
+```
+jcmd <vmid | class> <arguments>
+...
+    <main class>: string used to select processes from the full list; may be a substring of a fully qualified class name
+...
+    -f <command file>: read command from a file, one command per line
+...
+      A <vmid> of 0 indicates that the command should be applied to all Java processes. 
+```
+
+This is part of https://github.com/eclipse/openj9/issues/5164
+
+Doc issue eclipse/openj9-docs#343

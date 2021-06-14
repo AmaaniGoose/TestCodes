@@ -1,0 +1,25 @@
+**I've tested the following JVM implementations in [SPECjvm2008](https://t.co/Ssw3vHqZ2i?amp=1):**
+- GraalVM CE 25.222-b08-jvmci-19.1-b01
+- GraalVM EE 19.1.1 25.221-b11-jvmci-19.1-b01
+- Openj9-0.15.1 build 1.8.0_222-b10
+- OpenJDK Zulu 8.40.0.25-CA-macosx 1.8.0_222-b10
+
+**Environment:**
+- Mac mini 2018 i7-8700b 3.2 GHz/32 Gb DDR4 2666MHz
+- Clean installation of macOS Mojave 10.14.6
+- Disabled SIP (**csrutil disable**)
+- Disabled Spotlight (**sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist**)
+- ~0% CPU load, 100% fan speed
+
+**JVM options and cmd args to run the test:**
+
+$JAVA_HOME/bin/java -Xmx4096m -jar SPECjvm2008.jar startup.helloworld startup.compiler.compiler  startup.compress startup.crypto.aes startup.crypto.rsa startup.crypto.signverify startup.mpegaudio startup.scimark.fft startup.scimark.lu startup.scimark.monte_carlo startup.scimark.sor startup.scimark.sparse startup.serial startup.sunflow startup.xml.validation compiler.compiler compress crypto.aes crypto.rsa crypto.signverify derby mpegaudio scimark.fft.large scimark.lu.large scimark.sor.large scimark.sparse.large scimark.fft.small scimark.lu.small scimark.sor.small scimark.sparse.small scimark.monte_carlo serial sunflow xml.validation
+
+**Consolidated chart:**
+![specjvm2008-chart](https://user-images.githubusercontent.com/8986329/63104482-bcc49200-bf87-11e9-9038-964fa1084776.jpeg)
+
+**Raw test results:**
+[graalvmse.txt](https://github.com/eclipse/openj9/files/3505986/graalvmse.txt)
+[openj9.txt](https://github.com/eclipse/openj9/files/3505987/openj9.txt)
+[hotspot.txt](https://github.com/eclipse/openj9/files/3505988/hotspot.txt)
+[graalvmee.txt](https://github.com/eclipse/openj9/files/3505989/graalvmee.txt)

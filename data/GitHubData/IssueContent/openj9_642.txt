@@ -1,0 +1,4 @@
+https://github.com/eclipse/openj9/pull/631 fixed https://github.com/eclipse/openj9/issues/548 with generic `java.lang.CharSequence` methods.
+`chars()/codePoints()` within `java.lang.String/StringBuffer/StringBuilder` should be updated with optimized implementation specifically for the declaring classes. String compression might be considered as well.
+
+FYI @DanHeidinga @pshipton 

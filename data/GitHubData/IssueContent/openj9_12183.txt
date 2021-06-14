@@ -1,0 +1,3 @@
+VTs in field and method signatures are represented as Q types. Currently when performing lookups for VTs the MH code uses L types. This results in NoSuchMethodExceptions. We need to modify the `createMethodDescriptorString` helper in MethodType to check for ValueTypes (isPrimitiveClass()) and if so use the Q signature.
+
+This depends on https://github.com/eclipse/openj9/issues/12185

@@ -1,0 +1,111 @@
+**Describe the bug**
+Test failure within a handful of seconds. Symptoms can vary, but always include this error message:
+
+```
+java.lang.reflect.InaccessibleObjectException: Unable to make field transient java.lang.Object[] java.util.ArrayList.elementData accessible: module java.base does not "opens java.util" to unnamed module @52d239ba
+```
+
+Passes almost always on JDK11 and below, and shows no sign of this failure message when it does fail.
+
+**To Reproduce**
+Run a JDK16 or 17 test grinder for perf on the target renaissance-chi-square or renaissance-chi-square_0 (any platform/VM).
+
+**Expected behavior**
+Test should pass, though there is no evidence of it ever having done so on these releases.
+
+**Screenshots**
+```
+[2021-03-21T13:38:27.841Z] java.lang.reflect.InaccessibleObjectException: Unable to make field transient java.lang.Object[] java.util.ArrayList.elementData accessible: module java.base does not "opens java.util" to unnamed module @52d239ba
+[2021-03-21T13:38:27.841Z] 	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:357)
+[2021-03-21T13:38:27.841Z] 	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)
+[2021-03-21T13:38:27.841Z] 	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:177)
+[2021-03-21T13:38:27.841Z] 	at java.base/java.lang.reflect.Field.setAccessible(Field.java:171)
+[2021-03-21T13:38:27.841Z] 	at org.apache.spark.util.SizeEstimator$$anonfun$getClassInfo$3.apply(SizeEstimator.scala:336)
+[2021-03-21T13:38:27.841Z] 	at org.apache.spark.util.SizeEstimator$$anonfun$getClassInfo$3.apply(SizeEstimator.scala:330)
+[2021-03-21T13:38:27.841Z] 	at scala.collection.IndexedSeqOptimized$class.foreach(IndexedSeqOptimized.scala:33)
+[2021-03-21T13:38:27.841Z] 	at scala.collection.mutable.ArrayOps$ofRef.foreach(ArrayOps.scala:186)
+[2021-03-21T13:38:27.841Z] 	at org.apache.spark.util.SizeEstimator$.getClassInfo(SizeEstimator.scala:330)
+[2021-03-21T13:38:27.841Z] 	at org.apache.spark.util.SizeEstimator$.visitSingleObject(SizeEstimator.scala:222)
+[2021-03-21T13:38:27.841Z] 	at org.apache.spark.util.SizeEstimator$.org$apache$spark$util$SizeEstimator$$estimate(SizeEstimator.scala:201)
+[2021-03-21T13:38:27.841Z] 	at org.apache.spark.util.SizeEstimator$.estimate(SizeEstimator.scala:69)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.util.collection.SizeTracker$class.takeSample(SizeTracker.scala:78)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.util.collection.SizeTracker$class.afterUpdate(SizeTracker.scala:70)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.util.collection.SizeTrackingVector.$plus$eq(SizeTrackingVector.scala:31)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.storage.memory.MemoryStore.putIteratorAsValues(MemoryStore.scala:214)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.storage.BlockManager$$anonfun$doPutIterator$1.apply(BlockManager.scala:919)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.storage.BlockManager$$anonfun$doPutIterator$1.apply(BlockManager.scala:910)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.storage.BlockManager.doPut(BlockManager.scala:866)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.storage.BlockManager.doPutIterator(BlockManager.scala:910)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.storage.BlockManager.putIterator(BlockManager.scala:700)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.storage.BlockManager.putSingle(BlockManager.scala:1213)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.broadcast.TorrentBroadcast.writeBlocks(TorrentBroadcast.scala:103)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.broadcast.TorrentBroadcast.<init>(TorrentBroadcast.scala:86)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.broadcast.TorrentBroadcastFactory.newBroadcast(TorrentBroadcastFactory.scala:34)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.broadcast.BroadcastManager.newBroadcast(BroadcastManager.scala:56)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.SparkContext.broadcast(SparkContext.scala:1370)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.SparkContext$$anonfun$hadoopFile$1.apply(SparkContext.scala:984)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.SparkContext$$anonfun$hadoopFile$1.apply(SparkContext.scala:981)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:112)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.SparkContext.withScope(SparkContext.scala:682)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.SparkContext.hadoopFile(SparkContext.scala:981)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.SparkContext$$anonfun$textFile$1.apply(SparkContext.scala:802)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.SparkContext$$anonfun$textFile$1.apply(SparkContext.scala:800)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:112)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.SparkContext.withScope(SparkContext.scala:682)
+[2021-03-21T13:38:27.842Z] 	at org.apache.spark.SparkContext.textFile(SparkContext.scala:800)
+[2021-03-21T13:38:27.842Z] 	at org.renaissance.apache.spark.ChiSquare.loadData(ChiSquare.scala:88)
+[2021-03-21T13:38:27.842Z] 	at org.renaissance.apache.spark.ChiSquare.setUpBeforeAll(ChiSquare.scala:103)
+[2021-03-21T13:38:27.842Z] 	at org.renaissance.harness.ExecutionDriver.executeBenchmark(ExecutionDriver.java:44)
+[2021-03-21T13:38:27.842Z] 	at org.renaissance.harness.RenaissanceSuite$.$anonfun$runBenchmarks$1(RenaissanceSuite.scala:118)
+[2021-03-21T13:38:27.842Z] 	at org.renaissance.harness.RenaissanceSuite$.$anonfun$runBenchmarks$1$adapted(RenaissanceSuite.scala:113)
+[2021-03-21T13:38:27.842Z] 	at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)
+[2021-03-21T13:38:27.842Z] 	at scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)
+[2021-03-21T13:38:27.842Z] 	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)
+[2021-03-21T13:38:27.842Z] 	at org.renaissance.harness.RenaissanceSuite$.runBenchmarks(RenaissanceSuite.scala:113)
+[2021-03-21T13:38:27.842Z] 	at org.renaissance.harness.RenaissanceSuite$.main(RenaissanceSuite.scala:94)
+[2021-03-21T13:38:27.842Z] 	at org.renaissance.harness.RenaissanceSuite.main(RenaissanceSuite.scala)
+[2021-03-21T13:38:27.842Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-03-21T13:38:27.842Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+[2021-03-21T13:38:27.842Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-03-21T13:38:27.842Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+[2021-03-21T13:38:27.842Z] 	at org.renaissance.core.Launcher.launchHarnessClass(Launcher.java:37)
+[2021-03-21T13:38:27.842Z] 	at org.renaissance.core.Launcher.main(Launcher.java:25)
+```
+
+**Additional context**
+JDK17 example (HS): https://trss.adoptopenjdk.net/output/test?id=6057883e5730424dbcb33175
+JDK17 example (J9): https://trss.adoptopenjdk.net/output/test?id=60735f1947db975731f2ac17
+JDK16 example (HS): https://trss.adoptopenjdk.net/output/test?id=6072a79b47db975731e9036a
+JDK16 example (J9): https://trss.adoptopenjdk.net/output/test?id=6072fcf947db975731ed26b9
+
+Also, many (not all) failures also contain this:
+```
+[2021-04-11T14:09:45.061Z] Error during tear-down: Cannot read the array length because "$this" is null
+[2021-04-11T14:09:45.061Z] java.lang.NullPointerException: Cannot read the array length because "$this" is null
+[2021-04-11T14:09:45.061Z] 	at scala.collection.mutable.ArrayOps$ofRef$.length$extension(ArrayOps.scala:192)
+[2021-04-11T14:09:45.061Z] 	at scala.collection.mutable.ArrayOps$ofRef.length(ArrayOps.scala:192)
+[2021-04-11T14:09:45.061Z] 	at scala.collection.SeqLike$class.size(SeqLike.scala:106)
+[2021-04-11T14:09:45.061Z] 	at scala.collection.mutable.ArrayOps$ofRef.size(ArrayOps.scala:186)
+[2021-04-11T14:09:45.061Z] 	at scala.collection.mutable.Builder$class.sizeHint(Builder.scala:69)
+[2021-04-11T14:09:45.061Z] 	at scala.collection.mutable.ArrayBuilder.sizeHint(ArrayBuilder.scala:22)
+[2021-04-11T14:09:45.061Z] 	at scala.collection.TraversableLike$class.builder$1(TraversableLike.scala:230)
+[2021-04-11T14:09:45.061Z] 	at scala.collection.TraversableLike$class.map(TraversableLike.scala:233)
+[2021-04-11T14:09:45.061Z] 	at scala.collection.mutable.ArrayOps$ofRef.map(ArrayOps.scala:186)
+[2021-04-11T14:09:45.061Z] 	at org.renaissance.apache.spark.ChiSquare.tearDownAfterAll(ChiSquare.scala:98)
+[2021-04-11T14:09:45.061Z] 	at org.renaissance.RenaissanceBenchmark.runBenchmark(RenaissanceBenchmark.java:97)
+[2021-04-11T14:09:45.061Z] 	at org.renaissance.RenaissanceSuite$.$anonfun$main$2(renaissance-suite.scala:308)
+[2021-04-11T14:09:45.061Z] 	at org.renaissance.RenaissanceSuite$.$anonfun$main$2$adapted(renaissance-suite.scala:306)
+[2021-04-11T14:09:45.061Z] 	at org.renaissance.RenaissanceSuite$$$Lambda$124/0x00000000cdb63460.apply(Unknown Source)
+[2021-04-11T14:09:45.061Z] 	at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)
+[2021-04-11T14:09:45.061Z] 	at scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)
+[2021-04-11T14:09:45.061Z] 	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)
+[2021-04-11T14:09:45.061Z] 	at org.renaissance.RenaissanceSuite$.main(renaissance-suite.scala:306)
+[2021-04-11T14:09:45.061Z] 	at org.renaissance.RenaissanceSuite.main(renaissance-suite.scala)
+[2021-04-11T14:09:45.061Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-04-11T14:09:45.061Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+[2021-04-11T14:09:45.061Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-04-11T14:09:45.061Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+[2021-04-11T14:09:45.061Z] 	at org.renaissance.Launcher.main(Launcher.java:18)
+```

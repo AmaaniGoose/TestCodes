@@ -1,0 +1,101 @@
+**Describe the bug**
+jdk_security_infra test failed several sub-tests due to certificate status:
+- BuypassCA and QuoVadisCA failed because the certificates have been revoked, for both openj9 and hotspot with jdk 11+. These two issues have been opened on Openjdk Bug Systems, and reported to CA to wait for the certificates update: https://bugs.openjdk.java.net/browse/JDK-8243543 and https://bugs.openjdk.java.net/browse/JDK-8248899.
+- LuxTrustCA failed for both openj9 and hotspot with jdk 11+, because "java.security.cert.CertPathValidatorException: Path does not chain with any of the trust anchors".
+- GlobalSignR6CA failed for both openj9 and hotspot with jdk 15, because "Certificate has been revoked, reason: CESSATION_OF_OPERATION".
+
+**To Reproduce**
+BuypassCA failure
+[openj9](https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/5034/testReport/security_infra_java_security_cert_CertPathValidator_certification_BuypassCA/java/BuypassCA/)
+[hotspot](https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/5040/testReport/security_infra_java_security_cert_CertPathValidator_certification_BuypassCA/java/BuypassCA/)
+```
+=====================================================
+CONFIGURATION
+=====================================================
+http.proxyHost :null
+http.proxyPort :null
+https.proxyHost :null
+https.proxyPort :null
+https.socksProxyHost :null
+https.socksProxyPort :null
+jdk.certpath.disabledAlgorithms :MD2, MD5, SHA1 jdkCA & usage TLSServer, RSA keySize < 1024, DSA keySize < 1024, EC keySize < 224, include jdk.disabled.namedCurves
+Revocation options :[NO_FALLBACK]
+OCSP responder set :null
+Trusted root set: false
+Expected EE Status:GOOD
+=====================================================
+Received exception: java.security.cert.CertPathValidatorException: Certificate has been revoked, reason: SUPERSEDED, revocation date: Tue Apr 21 07:02:18 UTC 2020, authority: CN=Buypass OCSP, O=Buypass AS-983163327, C=NO, extension OIDs: []
+Expected Certificate status: GOOD
+Certificate status after validation: REVOKED
+```
+QuoVadisCA failure:
+[openj9](https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/5034/testReport/security_infra_java_security_cert_CertPathValidator_certification_QuoVadisCA/java/QuoVadisCA/)
+[hotspot](https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/5040/testReport/security_infra_java_security_cert_CertPathValidator_certification_QuoVadisCA/java/QuoVadisCA/)
+```
+=====================================================
+CONFIGURATION
+=====================================================
+http.proxyHost :null
+http.proxyPort :null
+https.proxyHost :null
+https.proxyPort :null
+https.socksProxyHost :null
+https.socksProxyPort :null
+jdk.certpath.disabledAlgorithms :MD2, MD5, SHA1 jdkCA & usage TLSServer, RSA keySize < 1024, DSA keySize < 1024, EC keySize < 224, include jdk.disabled.namedCurves
+Revocation options :[NO_FALLBACK]
+OCSP responder set :null
+Trusted root set: false
+Expected EE Status:GOOD
+=====================================================
+Received exception: java.security.cert.CertPathValidatorException: Certificate has been revoked, reason: SUPERSEDED, revocation date: Fri Jul 03 18:50:28 UTC 2020, authority: CN=QuoVadis OCSP Authority Signature, OU=OCSP Responder, O=QuoVadis Limited, C=BM, extension OIDs: []
+Expected Certificate status: GOOD
+Certificate status after validation: REVOKED
+```
+LuxTrustCA:
+```
+Stacktrace
+Execution failed: `main' threw exception: java.lang.RuntimeException: TEST FAILED: couldn't determine EE certificate status    
+Standard Output
+=====================================================
+CONFIGURATION
+=====================================================
+http.proxyHost :null
+http.proxyPort :null
+https.proxyHost :null
+https.proxyPort :null
+https.socksProxyHost :null
+https.socksProxyPort :null
+jdk.certpath.disabledAlgorithms :MD2, MD5, SHA1 jdkCA & usage TLSServer, RSA keySize < 1024, DSA keySize < 1024, EC keySize < 224, include jdk.disabled.namedCurves
+Revocation options :[NO_FALLBACK]
+OCSP responder set :null
+Trusted root set: false
+Expected EE Status:GOOD
+=====================================================
+Received exception: java.security.cert.CertPathValidatorException: Path does not chain with any of the trust anchors
+```
+GlobalSignR6CA
+```
+Execution failed: `main' threw exception: java.lang.RuntimeException: TEST FAILED: unexpected status of EE certificate    
+Standard Output
+=====================================================
+CONFIGURATION
+=====================================================
+http.proxyHost :null
+http.proxyPort :null
+https.proxyHost :null
+https.proxyPort :null
+https.socksProxyHost :null
+https.socksProxyPort :null
+jdk.certpath.disabledAlgorithms :MD2, MD5, SHA1 jdkCA & usage TLSServer, RSA keySize < 1024, DSA keySize < 1024, EC keySize < 224, include jdk.disabled.namedCurves
+Revocation options :[NO_FALLBACK]
+OCSP responder set :null
+Trusted root set: false
+Expected EE Status:GOOD
+=====================================================
+Received exception: java.security.cert.CertPathValidatorException: Certificate has been revoked, reason: CESSATION_OF_OPERATION, revocation date: Wed Jul 08 17:00:00 IST 2020, authority: CN=GlobalSign OCSP for Root R6 - Signer 1.2, O=GlobalSign nv-sa, C=BE, extension OIDs: []
+Expected Certificate status: GOOD
+Certificate status after validation: REVOKED
+```
+
+**Additional context**
+Related to Issue: https://github.com/eclipse/openj9/issues/10757

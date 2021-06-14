@@ -1,0 +1,51 @@
+When the JIT is built under `DEBUG` mode by specifying `BUILD_CONFIG=DEBUG` during the make process the following assertion was seen on Linux on Z compressedrefs running the DayTrader 7 benchmark:
+
+```
+Assertion failed at /jit/team/fjeremic/development/asserts-comptime/sdk/jre/lib/s390x/compressedrefs/compiler/..//omr/compiler/optimizer/LocalOpts.cpp:7000: !clazz || !clazzFromMethod || clazz == clazzFromMethod || fe()->isInstanceOf(clazz, clazzFromMethod, true, true, true) == TR_yes
+VMState: 0x00052fff
+    Type from argInfo should be more specific clazz 0xac800 clazzFromMethod 0x203100
+compiling com/ibm/ws/logging/internal/impl/BaseTraceFormatter.messageLogFormat(Ljava/util/logging/LogRecord;Ljava/lang/String;)Ljava/lang/String; at level: hot
+#0: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x88ed5a) [0x3ffa7b8ed5a]
+#1: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x89c30c) [0x3ffa7b9c30c]
+#2: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x570680) [0x3ffa7870680]
+#3: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x5708b8) [0x3ffa78708b8]
+#4: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x69ffdc) [0x3ffa799ffdc]
+#5: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x7104c2) [0x3ffa7a104c2]
+#6: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x7119d0) [0x3ffa7a119d0]
+```
+
+For this one I have the core file saved as well as a JIT dump which I will attach to this issue. The core file is unfortunately too large to attach, but I can provide it. This issue is intermittent and I am not sure I will be able to reproduce, but I can try if we need more tracing.
+
+Here is the full backtrace from the core:
+
+```
+#16 0x000003ffa78708b8 in TR::fatal_assertion(char const*, int, char const*, char const*, ...) () from /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so
+#17 0x000003ffa799ffdc in TR_InvariantArgumentPreexistence::perform() () from /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so
+#18 0x000003ffa7a104c2 in OMR::Optimizer::performOptimization(OptimizationStrategy const*, int, int, int) ()
+   from /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so
+#19 0x000003ffa7a119d0 in OMR::Optimizer::optimize() () from /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so
+#20 0x000003ffa786c6b8 in OMR::ResolvedMethodSymbol::genIL(TR_FrontEnd*, TR::Compilation*, TR::SymbolReferenceTable*, TR::IlGenRequest&) ()
+   from /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so
+#21 0x000003ffa753d190 in TR_J9InlinerPolicy::_tryToGenerateILForMethod(TR::ResolvedMethodSymbol*, TR::ResolvedMethodSymbol*, TR_CallTarget*) ()
+   from /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so
+#22 0x000003ffa79490a0 in TR_InlinerBase::inlineCallTarget2(TR_CallStack*, TR_CallTarget*, TR::TreeTop**, bool, int) ()
+   from /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so
+#23 0x000003ffa755c7e4 in TR_InlinerBase::inlineCallTarget(TR_CallStack*, TR_CallTarget*, bool, TR_PrexArgInfo*, TR::TreeTop**) ()
+   from /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so
+#24 0x000003ffa7942b68 in TR_DumbInliner::analyzeCallSite(TR_CallStack*, TR::TreeTop*, TR::Node*, TR::Node*) ()
+   from /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so
+#25 0x000003ffa7936500 in TR_DumbInliner::inlineCallTargets(TR::ResolvedMethodSymbol*, TR_CallStack*, TR_InnerPreexistenceInfo*) ()
+   from /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so
+#26 0x000003ffa79492ac in TR_InlinerBase::inlineCallTarget2(TR_CallStack*, TR_CallTarget*, TR::TreeTop**, bool, int) ()
+   from /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so
+#27 0x000003ffa755c7e4 in TR_InlinerBase::inlineCallTarget(TR_CallStack*, TR_CallTarget*, bool, TR_PrexArgInfo*, TR::TreeTop**) ()
+   from /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so
+#28 0x000003ffa794c504 in TR_InlineCall::inlineCall(TR::TreeTop*, TR_OpaqueClassBlock*, bool, TR_PrexArgInfo*, int) ()
+   from /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so
+#29 0x000003ffa7a6db26 in OMR::ValuePropagation::doDelayedTransformations() () from /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so
+#30 0x000003ffa7a7d1f0 in TR::GlobalValuePropagation::perform() () from /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so
+#31 0x000003ffa7a104c2 in OMR::Optimizer::performOptimization(OptimizationStrategy const*, int, int, int) ()
+```
+
+
+[jitdump.20190205.195352.33612.0004.txt](https://github.com/eclipse/openj9/files/2837403/jitdump.20190205.195352.33612.0004.txt)

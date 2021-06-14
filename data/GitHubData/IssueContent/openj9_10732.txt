@@ -1,0 +1,42 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk15_j9_extended.functional_ppc64le_linux_Nightly_testList_0/57
+testSoftMxDisclaimMemory_2
+ub18-ppcle-1
+variation: Mode601
+JVM_OPTIONS:  -Xcompressedrefs -Xjit -Xgcpolicy:optthruput 
+```
+[SoftmxAdvanceTest] [ERROR] 	FAIL: Memory didn't release back to OS! Post memory size 3416391680 is less than or equal to previous memory size 3401515008
+[SoftmxAdvanceTest] [ERROR] 	FAIL: Memory didn't release back to OS! Post memory size 3416588288 is less than or equal to previous memory size 3416391680
+JVMDUMP039I Processing dump event "systhrow", detail "java/lang/OutOfMemoryError" at 2020/09/27 02:01:57 - please wait.
+...
+FAILED: testDisclaimMemoryEffects(5)
+java.lang.OutOfMemoryError: Java heap space
+	at java.management/com.ibm.java.lang.management.internal.MemoryMXBeanImpl.getHeapMemoryUsageImpl(Native Method)
+	at java.management/com.ibm.java.lang.management.internal.MemoryMXBeanImpl.getHeapMemoryUsage(MemoryMXBeanImpl.java:390)
+	at j9vm.test.softmx.SoftmxAdvanceTest.runTestDisclaimMemoryEffects(SoftmxAdvanceTest.java:137)
+	at j9vm.test.softmx.SoftmxAdvanceTest.testDisclaimMemoryEffects(SoftmxAdvanceTest.java:64)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+	at org.testng.TestRunner.run(TestRunner.java:505)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+	at org.testng.TestNG.runSuites(TestNG.java:1049)
+	at org.testng.TestNG.run(TestNG.java:1017)
+	at org.testng.TestNG.privateMain(TestNG.java:1354)
+	at org.testng.TestNG.main(TestNG.java:1323)
+
+```

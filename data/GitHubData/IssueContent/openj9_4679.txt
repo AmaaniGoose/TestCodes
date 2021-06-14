@@ -1,0 +1,38 @@
+Consistent failures ...
+
+```
+java.nio.file.ProviderNotFoundException: Provider not found
+	at java.base/java.nio.file.FileSystems.newFileSystem(FileSystems.java:430)
+	at ZipFSTester.test1(ZipFSTester.java:150)
+	at ZipFSTester.main(ZipFSTester.java:95)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+```
+
+... observed for test jdk/nio/zipfs/ZipFSTester.java against Linux Large Heap and MacOS Large Heap builds. See https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/1025/consoleText and https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/1028/consoleText.
+
+There are no such failures observed for Linux non Large Heap and MacOS non Large Heap builds. See https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/1024/consoleText and https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/1026/consoleText.
+
+Disabling the failing sub-test test1, shows there are failures encountered in sub-test test2 ...
+
+```
+java.lang.UnsupportedOperationException
+	at jdk.zipfs/jdk.nio.zipfs.ZipFileSystem$3.position(ZipFileSystem.java:665)
+	at ZipFSTester.checkEqual(ZipFSTester.java:898)
+	at ZipFSTester.test2(ZipFSTester.java:389)
+	at ZipFSTester.main(ZipFSTester.java:97)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+```
+
+... against Large Heap vs non Large Heap builds which are symptomatic of the initially observed failure. See https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/1038 vs https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/1039.
+
+No such problems observed with this test against HotSpot builds - see https://ci.adoptopenjdk.net/view/Test_openjdk/job/openjdk11_hs_openjdktest_x86-64_linux/161/testReport/jdk_nio_zipfs_ZipFSTester.

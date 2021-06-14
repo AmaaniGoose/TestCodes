@@ -1,0 +1,76 @@
+Below, I have listed the five different approaches/solutions, which will improve OpenJ9's locking performance. Each approach listed below will incrementally improve OpenJ9's locking performance. 
+
+## Transition to a Scalable Lock
+
+**Unfavorable environment**: OpenJ9 performance regressions are seen on large machines (24+ CPUs) with high lock contention where many threads attempt to acquire a lock simultaneouly.
+
+In the [OpenJ9 three-tier spin loops](https://blog.openj9.org/2019/04/02/three-tier-spinning/), we use TATAS locks; CAS operation is performed only when the lock is not held.
+
+TATAS locks collapse in the above described environment (refer to **Figure 3** in [MCS Lock Now Welcomes Guests](https://www.labs.hpe.com/techreports/2016/HPE-2016-01.pdf).
+
+For [Scalable Syncronization on Shared-Memory Multiprocessors](https://www.cs.rochester.edu/u/scott/papers/1991_TOCS_synch.pdf), we need to move away from TATAS locks since they are dangerous and can cause system performance to suddenly collapse in real workloads.
+
+I am proposing a move to queue based locks. The Linux kernel has replaced non-scalable locks with MCS locks. There are different variants of the MCS locks:
+1. **MCS lock:** refer to section 2.4 in [Scalable Syncronization on Shared-Memory Multiprocessors](https://www.cs.rochester.edu/u/scott/papers/1991_TOCS_synch.pdf).
+2. **K42 lock:** variant of the MCS locks that requires fewer API changes, [patented by IBM](http://appft1.uspto.gov/netacgi/nph-Parser?Sect1=PTO2&Sect2=HITOFF&p=1&u=%2Fnetahtml%2FPTO%2Fsearch-bool.html&r=1&f=G&l=50&co1=AND&d=PG01&s1=20030200457.PGNR.&OS=DN/20030200457&RS=DN/20030200457). 
+3. **CLH lock:** variant of the MCS lock where the waiter spins on its predecessor.
+4. **HCLH lock:** hierarchical variant of the CLH lock inttended for NUMA machines.
+5. **[qspinlock](https://lwn.net/Articles/590243/)**: MCS with 32-bit lock-words (designed for kernels), requires kernel-space ability to disable preemption.
+6. **MCSg**: MCS for regular users and TATAS for guest (infrequent) users who don't need the lock context; refer to section 2 in [MCS Lock Now Welcomes Guests](https://www.labs.hpe.com/techreports/2016/HPE-2016-01.pdf).
+7. **MCSg++**: more fair version of MCSg.
+
+**Lock comparison studies:**
+1. [MCS Lock Now Welcomes Guests, 2016](https://www2.cs.sfu.ca/~tzwang/mcsg.pdf)
+   - Compares TATAS, K42, K42-TLS, CLH, CLH-TLS, MCS, MCSg, MCSg++, MCSg+.
+2. [Non-scalable locks are dangerous, 2012](https://people.csail.mit.edu/nickolai/papers/boyd-wickizer-locks.pdf)
+   - Compares ticket lock, MCS lock, CLH lock, proportional lock, K42 lock.
+
+**When moving to queue based locks, we need to**
+- Replace the [three-tier TATAS spinloops](https://blog.openj9.org/2019/04/02/three-tier-spinning/) with the queue based lock algorithms.
+- Check compatibility with the [lock nursery](https://blog.openj9.org/2019/04/02/lock-nursery/) (32-bit lock words) and [lock reservation](https://blog.openj9.org/2019/04/02/lock-reservation/) features in OpenJ9.
+- Amend OpenJ9's [adaptive spinning feature](https://blog.openj9.org/2019/04/02/adaptive-spinning/) to support MCS or disable it.
+- Re-purpose spin parameters to support MCS locks because they utilize spinning as well.
+
+The [code/implementation](https://locklessinc.com/articles/locks/) for the various lock algorithms (TATAS, MCS, K42, bitlist-lock, stack-lock, ticket-lock, etc.).
+
+**Which queue based locking algorithm to use?** Criteria - ease of acceptance and performance benefits. Choice: TBD.
+
+## Lock Cohorting
+
+[Lock Cohorting: A General Technique for Designing NUMA Locks](http://groups.csail.mit.edu/mag/a13-dice.pdf)
+
+The above research paper discusses about "scalable NUMA aware locking algorithms. Lock cohorting allows one to transform any spin-lock algorithm, with minimal nonintrusive changes, into a scalable NUMA-aware spin-lock. Cohort detection property: a thread releasing the lock can detect if it has a nonempty cohort of threads concurrently attempting to acquire the lock. A NUMA-aware cohort lock consists of a single thread-oblivious global lock and a set of local locks, one for each NUMA node. The local locks must provide the cohort detect property. Results demonstrate that cohort locks perform as well or better than known locks when the load is low and significantly out-perform them as the load increases."
+
+**Comparison of various locking algorithms:** refer to **Figures 7, 8 and 9** in the above research paper.
+
+Lock cohorting yields better results than just using queue based locks.
+
+## Concurrency Restriction
+
+[Malthusian Locks](http://delivery.acm.org/10.1145/3070000/3064203/p314-Dice.pdf?ip=76.224.89.165&id=3064203&acc=ACTIVE%20SERVICE&key=90259622823F2C32%2E90259622823F2C32%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1557170844_5ccb1ad04f2018446529e19db5ef907e)
+
+**Summary of the above research paper:**
+
+**ACS** - Active Circulating Thread Set
+**LWS** - Lock Working Set
+**LWSS** - Lock Working Set Size
+
+Applications running in modern multi-threaded environments are sometimes over-threaded. The excess threads do not improve performance, and in fact may act to degrade performance via scalability collapse. We leverage the existence of such locks by modifying the lock admission policy so as to intentionally limit (a.k.a concurrency restriction) the number of distinct threads circulating over the lock in a given period. **Objective function:** minimize the size of the ACS (and thus the LWSS) while still remaining work conserving, ensuring there are sufficient threads in the ACS to saturate the lock – and that the critical section enjoys maximum occupancy. 
+
+Two metrics for short-term fairness, which help gauge the trade-off between the throughput and fairness, are used:
+- Average LWSS over the measurement interval
+- Median time to reacquire (MTTR), computed over the entire acquisition history
+
+## Transactional Lock Elision (TLE)
+
+[Refined Transactional Lock Elision](http://transact2015.cse.lehigh.edu/dice-transact-2015.pdf)
+
+TLE uses hardware transcational memory (HTM) to introduce concurrency in existing locking algorithms. In the above research paper, **Figure 1** highlights the base design for TLE and refined TLE. Section 2 lists the TLE related works. Section 3 (RW-TLE) and Section 4 (FG-TLE) contain two different TLE algorithms. 2x to 4x speedup is seen with the proposed TLE approaches.
+
+## Scalable Statistics Counters
+
+[Scalable Statistics Counters](https://cdn.app.compendium.com/uploads/user/e7c690e8-6ff9-102a-ac6d-e4aebca50425/f4a5b21d-66fa-4885-92bf-c4e81c06d916/File/088e77af1c61aee424725152830c44f7/spaa13_dice_scalablestatscounters.pdf)
+
+In high contention scenarios, I have seen the Java Lock Monitor (JLM) counters overflow. Also, we update the JLM counters every-time while exiting a three-tier spinloop. The inefficiency (poor performance) in updating the JLM counters increase the time spent in monitor_enter and monitor_exit functions, especially in high contention cases.
+
+The above paper proposes scalable statistics counters. These perform well in NUMA environments, have minimal space overhead and don't need to be updated every time (i.e. less CAS operations). Such counters rely on probability models, they are near-accurate and yield 100x+ throughput in comparison to naive/traditional counters. They use the principles of [Morris's Counting Algorithm](https://www.inf.ed.ac.uk/teaching/courses/exc/reading/morris.pdf); 255 is the largest numerical value, which can be stored in a 8-bit counter; using Morris's algorithm, the largest value represented by a 8-bit counter can be 130,000. There is trade-off between accuracy and performance.

@@ -1,0 +1,27 @@
+Build: https://github.com/JamesKingdon/openj9-openjdk-jdk10/releases/tag/20180429170711-71d04615
+
+Seems to repeatedly hang (with idle cpu) in SharedClassesSysVTesting_0
+
+This might just be a side-effect of https://github.com/eclipse/openj9/issues/1205 but it would be an unusual outcome.
+
+Console output:
+```
+===============================================
+Running test SharedClassesSysVTesting_0 ...
+===============================================
+SharedClassesSysVTesting_0 Start Time: Sun Apr 29 22:08:25 2018 Epoch Time (ms): 1525039705328
+test with NoOptions
+{ perl /home/jkingdon/tests/openj9/test/TestConfig/scripts/testKitGen/../../../../jvmtest/TestConfig/scripts/tools/sysvcleanup.pl all ; \
+cd /home/jkingdon/sdks/jdk-travis-sdk10/bin ; \
+perl /home/jkingdon/tests/openj9/test/TestConfig/scripts/testKitGen/../../../../jvmtest/functional/VM_Test/SharedClassesSysVTesting/testSC_SysV_Java7_Tests.pl linux ; \
+if [ $? -eq 0 ] ; then echo ""; echo "SharedClassesSysVTesting_0""_PASSED"; echo ""; else echo ""; echo "SharedClassesSysVTesting_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/home/jkingdon/tests/openj9/test/TestConfig/scripts/testKitGen/../../../TestConfig/test_output_15250380605932/TestTargetResult";
+Start SysV clean up for user:all 
+Clean up is finished:
+        Shared Memory Segments Removed:0
+        Shared Semaphores Removed:1
+Test 1: verify 1 only semaphore created
+        We succesfully ran 15 JVMs with shared classes.
+        There is only one semaphore (as expected)
+        TEST PASS
+Test 2: verify 1 only shared memory created
+```

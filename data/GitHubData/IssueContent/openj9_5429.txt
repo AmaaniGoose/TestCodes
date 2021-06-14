@@ -1,0 +1,10 @@
+Code in the call to `JavaCoreDumpWriter::writeMonitorObject` from the javadump agent passes a stack-local J9VMThread to the `getObjectMonitorOwner ` call:
+https://github.com/eclipse/openj9/blob/2f295ea91cdd97ff37eb5d164fc63014ea718bc7/runtime/rasdump/javadump.cpp#L3832-L3837
+
+which the called API: 
+https://github.com/eclipse/openj9/blob/2f295ea91cdd97ff37eb5d164fc63014ea718bc7/runtime/util/moninfo.c#L59
+
+uses its `J9VMThread*` in a variety of ways:
+https://github.com/eclipse/openj9/blob/2f295ea91cdd97ff37eb5d164fc63014ea718bc7/runtime/util/moninfo.c#L71-L87
+
+This may result in issues when the code attempts to use that J9VMThread as though it was a real thread.

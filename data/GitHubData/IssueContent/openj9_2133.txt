@@ -1,0 +1,1 @@
+Test target directories with no write permission, files with no read permission, etc.

@@ -1,0 +1,25 @@
+I see the following assertion failure with my local debug build on AArch64:
+```
+Assertion failed at /root/openj9/openj9-openjdk-jdk11/build/linux-aarch64-normal-server-release/vm/compiler/../omr/compiler/il/OMRNode.cpp:4382: self()->getOpCode().isTreeTop()
+VMState: 0x000547ff
+        OMR::Node::recursivelyDecReferenceCount() invoked for nontreetop node loadaddr     0xffffd30045f0 with count == 0
+```
+This is from `TR_ASSERT()`, and you cannot reproduce it with the product build.
+
+The stack trace in gdb looks like this:
+```
+#4  0x0000fffff667eff8 in OMR::Node::recursivelyDecReferenceCount() ()
+   from /home/ubuntu/openj9/jdk/lib/compressedrefs/libj9jit29.so
+#5  0x0000fffff667f2b4 in OMR::Node::removeAllChildren() ()
+   from /home/ubuntu/openj9/jdk/lib/compressedrefs/libj9jit29.so
+#6  0x0000fffff67c3f8c in TR_ProfiledNodeVersioning::perform() ()
+   from /home/ubuntu/openj9/jdk/lib/compressedrefs/libj9jit29.so
+#7  0x0000fffff6837688 in OMR::Optimizer::performOptimization(OptimizationStrategy const*, int, int, int) ()
+   from /home/ubuntu/openj9/jdk/lib/compressedrefs/libj9jit29.so
+#8  0x0000fffff68382b4 in OMR::Optimizer::performOptimization(OptimizationStrategy const*, int, int, int) ()
+   from /home/ubuntu/openj9/jdk/lib/compressedrefs/libj9jit29.so
+#9  0x0000fffff6839020 in OMR::Optimizer::optimize() () from /home/ubuntu/openj9/jdk/lib/compressedrefs/libj9jit29.so
+```
+
+OMR: 281f29d
+OpenJ9: cfc41a5

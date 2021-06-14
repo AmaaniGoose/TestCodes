@@ -1,0 +1,3 @@
+Currently to test if a given OpenJ9 build supports OpenSSL crypto acceleration you need to run some Java code which uses the crypto pathways and the add `-Djdk.nativeCryptoTrace=true`. It would be very nice if the -version output could include a) if the JVM was built with OpenSSL support and b) report if the OpenSSL support is enabled in the VM (eg the shared library was found and is functional).
+
+This would make diagnosing performance differences due to the crypto acceleration differences much MUCH easier. If we can't add it to -version then perhaps -Xinternalversion or some other command line option to make checking the status easy.

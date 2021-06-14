@@ -1,0 +1,16 @@
+Possibly related to https://github.com/eclipse/openj9/issues/8508
+
+https://ci.adoptopenjdk.net/view/Failing%20Builds/job/build-scripts/job/jobs/job/jdk8u/job/jdk8u-aix-ppc64-openj9
+https://ci.adoptopenjdk.net/view/Failing%20Builds/job/build-scripts/job/jobs/job/jdk11u/job/jdk11u-aix-ppc64-openj9
+```
+Running ddrgen to generate j9ddr.dat and superset.dat
+Error: dwarf/AixSymbolTableParser.cpp:698 parseStabstringDeclarationIntoDwarfDie(const string &, Dwarf_Error *) - Unknown stabs tag: ';'
+Error: dwarf/AixSymbolTableParser.cpp:698 parseStabstringDeclarationIntoDwarfDie(const string &, Dwarf_Error *) - Unknown stabs tag: ';'
+run_omrddrgen.mk:82: recipe for target '../j9ddr.dat' failed
+gmake[2]: *** [../j9ddr.dat] IOT/Abort trap (core dumped)
+/ramdisk0/build/workspace/build-scripts/jobs/jdk8u/jdk8u-aix-ppc64-openj9/workspace/build/src/closed/CopyToBuildJdk.gmk:241: recipe for target 'run-ddrgen' failed
+gmake[1]: *** [run-ddrgen] Error 2
+/ramdisk0/build/workspace/build-scripts/jobs/jdk8u/jdk8u-aix-ppc64-openj9/workspace/build/src/closed/make/Main.gmk:38: recipe for target 'build-j9vm' failed
+gmake: *** [build-j9vm] Error 2
+```
+Failing since 22/04/2020

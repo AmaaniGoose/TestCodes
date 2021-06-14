@@ -1,0 +1,10 @@
+Access level:
+
+- [x] Non-privileged
+- [ ] jenkins user
+- [ ] root/Administrative
+- [ ] other (Please specify):
+
+System for which access is needed: Any of the RISC-V unleashed ones
+
+Please explain why you need this access including whether it is a temporary or permanent request: Time TBC but @advancedwebdeveloper is an enthusiast looking to debug problems he's having with running java code on a real RISC-V board instead of an emulated one so I'm happy for him to have it until we start using the system more heavily :-)

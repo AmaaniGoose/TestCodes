@@ -1,0 +1,72 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk16_j9_special.system_aarch64_linux_testList_1/24/`:
+```
+openjdk version "16.0.1" 2021-04-20
+OpenJDK Runtime Environment Temurin-16.0.1+9-202106021901 (build 16.0.1+9-202106021901)
+Eclipse OpenJ9 VM Temurin-16.0.1+9-202106021901 (build master-5530af2e1, JRE 16 Linux aarch64-64-Bit Compressed References 20210602_40 (JIT enabled, AOT enabled)
+OpenJ9   - 5530af2e1
+OMR      - 76bff2099
+JCL      - 9fcf6fbf01 based on jdk-16.0.1+9)
+```
+[Rerun in Grinder](https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?TARGET=DaaLoadTest_daa1_special_5m_12&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=Test_openjdk16_j9_special.system_aarch64_linux&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;PLATFORM=aarch64_linux&amp;KEEP_REPORTDIR=false&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk16u%2Fjdk16u-linux-aarch64-openj9%2F40%2FOpenJDK16U-jre_aarch64_linux_openj9_2021-06-01-03-59.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk16u%2Fjdk16u-linux-aarch64-openj9%2F40%2FOpenJDK16U-testimage_aarch64_linux_openj9_2021-06-01-03-59.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk16u%2Fjdk16u-linux-aarch64-openj9%2F40%2FOpenJDK16U-jdk_aarch64_linux_openj9_2021-06-01-03-59.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk16u%2Fjdk16u-linux-aarch64-openj9%2F40%2FOpenJDK16U-debugimage_aarch64_linux_openj9_2021-06-01-03-59.tar.gz&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;LIGHT_WEIGHT_CHECKOUT=true&amp;ARTIFACTORY_SERVER=na.artifactory.swg-devops&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=16&amp;USER_CREDENTIALS_ID=&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=&amp;JDK_REPO=https%3A%2F%2Fgithub.com%2Fibmruntimes%2Fopenj9-openjdk-jdk16&amp;RELEASE_TAG=&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;UPSTREAM_JOB_NAME=&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=openj9&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=24&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=openj9&amp;SSH_AGENT_CREDENTIAL=83181e25-eea4-4f55-8b3e-e79615733226&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=4e18ffe7-b1b1-4272-9979-99769b68bcc2&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=system&amp;UPSTREAM_JOB_NUMBER=&amp;TIME_LIMIT=10&amp;JVM_OPTIONS=&amp;PARALLEL=None)
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+[2021-06-03T02:27:48.611Z] Running test DaaLoadTest_daa1_special_5m_12 ...
+[2021-06-03T02:27:48.611Z] ===============================================
+[2021-06-03T02:27:48.611Z] DaaLoadTest_daa1_special_5m_12 Start Time: Wed Jun  2 22:27:48 2021 Epoch Time (ms): 1622687268393
+[2021-06-03T02:27:48.611Z] "/home/jenkins/workspace/Test_openjdk16_j9_special.system_aarch64_linux_testList_1/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk16_j9_special.system_aarch64_linux_testList_1/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+[2021-06-03T02:27:48.611Z] JVMSHRC005I No shared class caches available
+[2021-06-03T02:27:48.611Z] JVMSHRC005I No shared class caches available
+[2021-06-03T02:27:48.611Z] cache cleanup done
+[2021-06-03T02:27:48.611Z] variation: Mode501
+[2021-06-03T02:27:48.611Z] JVM_OPTIONS:  -Xjit -Xgcpolicy:balanced -Xnocompressedrefs 
+
+[2021-06-03T02:31:07.026Z] DLT stderr JVMCDRT000E Unable to locate JIT stack map - aborting VM
+[2021-06-03T02:31:07.026Z] DLT stderr JVMCDRT001E Method: com/ibm/dataaccess/DecimalData.slowSignedPackedToBigDecimal([BIIIZ)Ljava/math/BigDecimal; (0000FFFE6C02CAF0)
+[2021-06-03T02:31:07.026Z] DLT stderr JVMCDRT002E Failing PC: 0000FFFEECE74795 (offset 0000000000000065), metaData = 0000FFFEE7BC9C58
+[2021-06-03T02:31:07.026Z] DLT stderr 02:31:04.975 0xfffe88002200j9codertvm(j9ji.110    *   ** ASSERTION FAILED ** at ../../../../../openj9/runtime/codert_vm/jswalk.c:532: ((0 ))
+[2021-06-03T02:31:07.026Z] DLT stderr JVMDUMP039I Processing dump event "traceassert", detail "" at 2021/06/02 22:31:04 - please wait.
+[2021-06-03T02:31:07.026Z] DLT stderr JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test_openjdk16_j9_special.system_aarch64_linux_testList_1/openjdk-tests/TKG/output_16226865944912/DaaLoadTest_daa1_special_5m_12/20210602-222748-DaaLoadTest/results/core.20210602.223104.16455.0001.dmp' in response to an event
+[2021-06-03T02:31:07.026Z] DLT stderr JVMDUMP010I System dump written to /home/jenkins/workspace/Test_openjdk16_j9_special.system_aarch64_linux_testList_1/openjdk-tests/TKG/output_16226865944912/DaaLoadTest_daa1_special_5m_12/20210602-222748-DaaLoadTest/results/core.20210602.223104.16455.0001.dmp
+[2021-06-03T02:31:07.029Z] DLT stderr JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk16_j9_special.system_aarch64_linux_testList_1/openjdk-tests/TKG/output_16226865944912/DaaLoadTest_daa1_special_5m_12/20210602-222748-DaaLoadTest/results/javacore.20210602.223104.16455.0002.txt' in response to an event
+[2021-06-03T02:31:07.029Z] STF 22:31:05.761 - Found dump at: /home/jenkins/workspace/Test_openjdk16_j9_special.system_aarch64_linux_testList_1/openjdk-tests/TKG/output_16226865944912/DaaLoadTest_daa1_special_5m_12/20210602-222748-DaaLoadTest/results/javacore.20210602.223104.16455.0002.txt
+[2021-06-03T02:31:07.029Z] STF 22:31:05.761 - Found dump at: /home/jenkins/workspace/Test_openjdk16_j9_special.system_aarch64_linux_testList_1/openjdk-tests/TKG/output_16226865944912/DaaLoadTest_daa1_special_5m_12/20210602-222748-DaaLoadTest/results/core.20210602.223104.16455.0001.dmp
+[2021-06-03T02:31:07.029Z] DLT stderr javacore file generated - /home/jenkins/workspace/Test_openjdk16_j9_special.system_aarch64_linux_testList_1/openjdk-tests/TKG/output_16226865944912/DaaLoadTest_daa1_special_5m_12/20210602-222748-DaaLoadTest/results/javacore.20210602.223104.16455.0002.txt
+[2021-06-03T02:31:07.029Z] DLT stderr core file generated - /home/jenkins/workspace/Test_openjdk16_j9_special.system_aarch64_linux_testList_1/openjdk-tests/TKG/output_16226865944912/DaaLoadTest_daa1_special_5m_12/20210602-222748-DaaLoadTest/results/core.20210602.223104.16455.0001.dmp
+[2021-06-03T02:31:07.029Z] DLT stderr JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk16_j9_special.system_aarch64_linux_testList_1/openjdk-tests/TKG/output_16226865944912/DaaLoadTest_daa1_special_5m_12/20210602-222748-DaaLoadTest/results/javacore.20210602.223104.16455.0002.txt
+[2021-06-03T02:31:07.029Z] DLT stderr JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Test_openjdk16_j9_special.system_aarch64_linux_testList_1/openjdk-tests/TKG/output_16226865944912/DaaLoadTest_daa1_special_5m_12/20210602-222748-DaaLoadTest/results/Snap.20210602.223104.16455.0003.trc' in response to an event
+[2021-06-03T02:31:07.029Z] DLT stderr JVMDUMP010I Snap dump written to /home/jenkins/workspace/Test_openjdk16_j9_special.system_aarch64_linux_testList_1/openjdk-tests/TKG/output_16226865944912/DaaLoadTest_daa1_special_5m_12/20210602-222748-DaaLoadTest/results/Snap.20210602.223104.16455.0003.trc
+[2021-06-03T02:31:07.029Z] DLT stderr JVMDUMP013I Processed dump event "traceassert", detail "".
+[2021-06-03T02:31:07.029Z] STF 22:31:06.263 - Found dump at: /home/jenkins/workspace/Test_openjdk16_j9_special.system_aarch64_linux_testList_1/openjdk-tests/TKG/output_16226865944912/DaaLoadTest_daa1_special_5m_12/20210602-222748-DaaLoadTest/results/Snap.20210602.223104.16455.0003.trc
+[2021-06-03T02:31:07.029Z] STF 22:31:06.264 - **FAILED** Process DLT ended with exit code (255) and not the expected exit code/s (0)
+[2021-06-03T02:31:07.029Z] DLT stderr Snap file generated - /home/jenkins/workspace/Test_openjdk16_j9_special.system_aarch64_linux_testList_1/openjdk-tests/TKG/output_16226865944912/DaaLoadTest_daa1_special_5m_12/20210602-222748-DaaLoadTest/results/Snap.20210602.223104.16455.0003.trc
+[2021-06-03T02:31:07.029Z] STF 22:31:06.264 - Monitoring Report Summary:
+[2021-06-03T02:31:07.029Z] STF 22:31:06.264 -   o Process DLT has crashed unexpectedly
+[2021-06-03T02:31:07.029Z] STF 22:31:06.264 - Killing processes: DLT
+[2021-06-03T02:31:07.029Z] STF 22:31:06.264 -   o Process DLT pid 16455 is not running
+[2021-06-03T02:31:07.029Z] **FAILED** at step 1 (Run daa load test). Expected return value=0 Actual=1 at /home/jenkins/workspace/Test_openjdk16_j9_special.system_aarch64_linux_testList_1/openjdk-tests/TKG/../TKG/output_16226865944912/DaaLoadTest_daa1_special_5m_12/20210602-222748-DaaLoadTest/execute.pl line 95.
+[2021-06-03T02:31:07.029Z] STF 22:31:06.610 - **FAILED** execute script failed. Expected return value=0 Actual=1
+[2021-06-03T02:31:07.030Z] STF 22:31:06.610 - 
+[2021-06-03T02:31:07.030Z] STF 22:31:06.610 - ====================   T E A R D O W N   ====================
+[2021-06-03T02:31:07.030Z] STF 22:31:06.610 - Running teardown: perl /home/jenkins/workspace/Test_openjdk16_j9_special.system_aarch64_linux_testList_1/openjdk-tests/TKG/../TKG/output_16226865944912/DaaLoadTest_daa1_special_5m_12/20210602-222748-DaaLoadTest/tearDown.pl
+[2021-06-03T02:31:07.030Z] STF 22:31:06.692 - TEARDOWN stage completed
+[2021-06-03T02:31:07.030Z] STF 22:31:06.699 - 
+[2021-06-03T02:31:07.030Z] STF 22:31:06.699 - =====================   R E S U L T S   =====================
+[2021-06-03T02:31:07.030Z] STF 22:31:06.699 - Stage results:
+[2021-06-03T02:31:07.030Z] STF 22:31:06.699 -   setUp:     pass
+[2021-06-03T02:31:07.030Z] STF 22:31:06.699 -   execute:  *fail*
+[2021-06-03T02:31:07.030Z] STF 22:31:06.699 -   teardown:  pass
+[2021-06-03T02:31:07.030Z] STF 22:31:06.699 - 
+[2021-06-03T02:31:07.030Z] STF 22:31:06.699 - Overall result: **FAILED**
+[2021-06-03T02:31:07.030Z] 
+[2021-06-03T02:31:07.030Z] DaaLoadTest_daa1_special_5m_12_FAILED
+```
+fyi @knn-k 

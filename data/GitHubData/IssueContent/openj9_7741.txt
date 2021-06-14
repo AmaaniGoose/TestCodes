@@ -1,0 +1,108 @@
+Failure link
+------------
+https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/5961cb4f17facbc7824e7550ca475916ebe93f38/test/jdk/java/lang/reflect/Proxy/ProxyForMethodHandle.java#L1 and https://github.com/ibmruntimes/openj9-openjdk-jdk13/blob/5555cfa6ef8926f0c30ea9fe14aa41c9e7b3cd96/test/jdk/java/lang/reflect/Proxy/ProxyForMethodHandle.java#L1 consistantly fail for JDK11/13-openj9
+- test category, openjdk
+- OS/architecture, openjdk_x86-64_linux, openjdk_x86-64_windows, openjdk_x86-64_mac
+
+Optional info
+-------------
+- Part of the excluded https://github.com/AdoptOpenJDK/openjdk-tests/issues/585
+- Suspected unsuitable for openj9 due to the nature of the failure. The test is searching for a method that is likely implementation specific and so, can't be looked up usng MH
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+JDK11
+16:08:37  Eclipse OpenJ9 VM AdoptOpenJDK (build master-59fcbec6f, JRE 11 Linux amd64-64-Bit Compressed References 20191108_360 (JIT enabled, AOT enabled)
+16:08:37  OpenJ9   - 59fcbec6f
+16:08:37  OMR      - d8a74ca74
+16:08:37  JCL      - e7da16be04 based on jdk-11.0.5+10)
+
+16:10:56  STDOUT:
+16:10:56  [TestNG] Running:
+16:10:56    java/lang/reflect/Proxy/ProxyForMethodHandle.java
+16:10:56  
+16:10:56  test ProxyForMethodHandle.testRunnableMethodHandle(): failure
+16:10:56  java.lang.InternalError: java.lang.IllegalAccessException: Caller-sensitive method cannot be looked up using a restricted lookup object
+16:10:56  	at java.base/java.lang.invoke.MethodHandleImpl$BindCaller.<clinit>(MethodHandleImpl.java:1284)
+16:10:56  	at java.base/java.lang.invoke.MethodHandleImpl.bindCaller(MethodHandleImpl.java:1190)
+16:10:56  	at java.base/java.lang.invoke.MethodHandleProxies.bindCaller(MethodHandleProxies.java:230)
+16:10:56  	at java.base/java.lang.invoke.MethodHandleProxies.asInterfaceInstance(MethodHandleProxies.java:164)
+16:10:56  	at ProxyForMethodHandle.testRunnableMethodHandle(ProxyForMethodHandle.java:52)
+16:10:56  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+16:10:56  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+16:10:56  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+16:10:56  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+16:10:56  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+16:10:56  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+16:10:56  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+16:10:56  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+16:10:56  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+16:10:56  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+16:10:56  	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+16:10:56  	at org.testng.TestRunner.run(TestRunner.java:623)
+16:10:56  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+16:10:56  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+16:10:56  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+16:10:56  	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+16:10:56  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+16:10:56  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+16:10:56  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+16:10:56  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+16:10:56  	at org.testng.TestNG.run(TestNG.java:1018)
+16:10:56  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+16:10:56  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+16:10:56  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+16:10:56  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+16:10:56  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+16:10:56  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+16:10:56  	at java.base/java.lang.Thread.run(Thread.java:832)
+
+JDK13
+16:08:15  OpenJDK Runtime Environment AdoptOpenJDK (build 13.0.1+9-201911081205)
+16:08:15  Eclipse OpenJ9 VM AdoptOpenJDK (build master-59fcbec6f, JRE 13 Linux amd64-64-Bit Compressed References 20191108_98 (JIT enabled, AOT enabled)
+16:08:15  OpenJ9   - 59fcbec6f
+16:08:15  OMR      - d8a74ca74
+16:08:15  JCL      - 12bdd06298 based on jdk-13.0.1+9)
+
+16:10:26  STDOUT:
+16:10:26  [TestNG] Running:
+16:10:26    java/lang/reflect/Proxy/ProxyForMethodHandle.java
+16:10:26  
+16:10:26  test ProxyForMethodHandle.testRunnableMethodHandle(): failure
+16:10:26  java.lang.InternalError: java.lang.IllegalAccessException: Caller-sensitive method cannot be looked up using a restricted lookup object
+16:10:26  	at java.base/java.lang.invoke.MethodHandleImpl$BindCaller.<clinit>(MethodHandleImpl.java:1236)
+16:10:26  	at java.base/java.lang.invoke.MethodHandleImpl.bindCaller(MethodHandleImpl.java:1142)
+16:10:26  	at java.base/java.lang.invoke.MethodHandleProxies.bindCaller(MethodHandleProxies.java:230)
+16:10:26  	at java.base/java.lang.invoke.MethodHandleProxies.asInterfaceInstance(MethodHandleProxies.java:164)
+16:10:26  	at ProxyForMethodHandle.testRunnableMethodHandle(ProxyForMethodHandle.java:52)
+16:10:26  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+16:10:26  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+16:10:26  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+16:10:26  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+16:10:26  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+16:10:26  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+16:10:26  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+16:10:26  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+16:10:26  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+16:10:26  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+16:10:26  	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+16:10:26  	at org.testng.TestRunner.run(TestRunner.java:623)
+16:10:26  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+16:10:26  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+16:10:26  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+16:10:26  	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+16:10:26  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+16:10:26  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+16:10:26  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+16:10:26  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+16:10:26  	at org.testng.TestNG.run(TestNG.java:1018)
+16:10:26  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+16:10:26  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+16:10:26  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+16:10:26  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+16:10:26  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+16:10:26  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+16:10:26  	at java.base/java.lang.Thread.run(Thread.java:832)
+```
+Rerun JDK11 job: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&BUILD_LIST=openjdk&JenkinsFile=openjdk_x86-64_linux&CUSTOM_TARGET=test/jdk/java/lang/reflect/Proxy/ProxyForMethodHandle.java&TARGET=jdk_custom_0

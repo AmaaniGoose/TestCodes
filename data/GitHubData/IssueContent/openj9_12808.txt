@@ -1,0 +1,9 @@
+Linux (and probably most other OSes) processes pick up the environment variable values as specified at the time the process was started. In other words, if some environment variable changes in value after the process starts up, this is not visible to the process since its view of the environment variables is what was initialized at process start time.
+
+This behavior also translates to processes that get restored by CRIU not picking up environment variables from the restored environment, and instead using environment variables as specified in the snapshot environment. This can be a problem in the restore environment that may wish to specify a different locale or some other property relevant to the application via environment variables.
+
+This problem is really to be viewed as two separate cases probably :
+1) Java code that wants to read environment variables which typically goes through System or ProcessEnvironment classes/apis for doing so.
+2) OpenJ9 code that wants to read environment variables which typically calls native api via the port library interface, e.g. something that controls options in use or something that controls whether a particular JIT transformation will be done or not. 
+
+OpenJ9 needs to handle both cases by scraping the environment variables from the restore environment (crudely speaking by doing an exec call to `printenv` and then parsing the key/value mappings from the output and using the result rather than relying on the OS returning the values in the restore environment OR some other better technique to achieve the same end result) so that the restored JVM adapts as expected from an end-user perspective. Specifically, this means hiding this issue from Java code (such as Open Liberty) that should transparently be given the values from the restore environment.

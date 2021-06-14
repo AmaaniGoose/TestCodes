@@ -1,0 +1,1 @@
+Because of the architecture where the jit library is created via create_omr_compiler_library, it is not possible for it to use j9vm_add_library. Currently it doesn't cause issue since we ensure we get desired behaviour anyway (#9344). However if we add more functionality to j9vm_add_library this may start to become an issue.

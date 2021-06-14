@@ -1,0 +1,68 @@
+Failure link
+------------
+https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/7fb21dfc7efc922f36a5d207115d567516aee92b/test/jdk/java/nio/Buffer/LimitDirectMemory.java#L1 and https://github.com/ibmruntimes/openj9-openjdk-jdk13/blob/9c25debd395b89cc3d7d100106983dfa30b125c9/test/jdk/java/nio/Buffer/LimitDirectMemory.java#L1 fail for JDK11/13-openj9 (hotspot is passing)
+- test category, openjdk
+- OS/architecture, openjdk_x86-64_linux, openjdk_x86-64_windows, openjdk_x86-64_mac
+```
+JDK11
+11:54:22  openjdk version "11.0.6" 2020-01-14
+11:54:22  OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.6+6-201912091932)
+11:54:22  Eclipse OpenJ9 VM AdoptOpenJDK (build master-f154b35e4, JRE 11 Linux amd64-64-Bit Compressed References 20191209_395 (JIT enabled, AOT enabled)
+11:54:22  OpenJ9   - f154b35e4
+11:54:22  OMR      - 7b2e5df4e
+11:54:22  JCL      - d24795242d based on jdk-11.0.6+6)
+
+JDK13
+15:09:19  openjdk version "13.0.1" 2019-10-15
+15:09:19  OpenJDK Runtime Environment AdoptOpenJDK (build 13.0.1+9-201912100753)
+15:09:19  Eclipse OpenJ9 VM AdoptOpenJDK (build master-db1ce597b, JRE 13 Linux s390x-64-Bit Compressed References 20191210_119 (JIT enabled, AOT enabled)
+15:09:19  OpenJ9   - db1ce597b
+15:09:19  OMR      - 50e115ff2
+15:09:19  JCL      - 9c25debd39 based on jdk-13.0.1+9)
+```
+
+Optional info
+-------------
+- intermittent failure (no): 
+- Part of the excluded https://github.com/AdoptOpenJDK/openjdk-tests/issues/585
+- Note that the error is thrown before any memory is assigned to the buffers so this is an unexpected OOM error. 
+
+Failure output (captured from JDK11 console output)
+---------------------------------------------
+```
+11:56:03  Exception in thread "main" java.lang.OutOfMemoryError: Direct buffer memory
+11:56:03  	at java.base/java.nio.Bits.reserveMemory(Bits.java:175)
+11:56:03  	at java.base/java.nio.DirectByteBuffer.<init>(DirectByteBuffer.java:123)
+11:56:03  	at java.base/java.nio.ByteBuffer.allocateDirect(ByteBuffer.java:317)
+11:56:03  	at java.base/jdk.internal.perf.Perf.createLong(Native Method)
+11:56:03  	at java.base/jdk.internal.perf.PerfCounter.<init>(PerfCounter.java:65)
+11:56:03  	at java.base/jdk.internal.perf.PerfCounter.newPerfCounter(PerfCounter.java:71)
+11:56:03  	at java.base/jdk.internal.perf.PerfCounter$CoreCounters.<clinit>(PerfCounter.java:130)
+11:56:03  	at java.base/jdk.internal.perf.PerfCounter.getZipFileOpenTime(PerfCounter.java:178)
+11:56:03  	at java.base/java.util.zip.ZipFile.<init>(ZipFile.java:249)
+11:56:03  	at java.base/java.util.zip.ZipFile.<init>(ZipFile.java:177)
+11:56:03  	at java.base/java.util.jar.JarFile.<init>(JarFile.java:346)
+11:56:03  	at java.base/jdk.internal.loader.URLClassPath$JarLoader.getJarFile(URLClassPath.java:931)
+11:56:03  	at java.base/jdk.internal.loader.URLClassPath$JarLoader$1.run(URLClassPath.java:871)
+11:56:03  	at java.base/jdk.internal.loader.URLClassPath$JarLoader$1.run(URLClassPath.java:864)
+11:56:03  	at java.base/java.security.AccessController.doPrivileged(AccessController.java:770)
+11:56:03  	at java.base/jdk.internal.loader.URLClassPath$JarLoader.ensureOpen(URLClassPath.java:863)
+11:56:03  	at java.base/jdk.internal.loader.URLClassPath$JarLoader.<init>(URLClassPath.java:838)
+11:56:03  	at java.base/jdk.internal.loader.URLClassPath$3.run(URLClassPath.java:604)
+11:56:03  	at java.base/jdk.internal.loader.URLClassPath$3.run(URLClassPath.java:587)
+11:56:03  	at java.base/java.security.AccessController.doPrivileged(AccessController.java:770)
+11:56:03  	at java.base/jdk.internal.loader.URLClassPath.getLoader(URLClassPath.java:586)
+11:56:03  	at java.base/jdk.internal.loader.URLClassPath.getLoader(URLClassPath.java:550)
+11:56:03  	at java.base/jdk.internal.loader.URLClassPath.getResource(URLClassPath.java:413)
+11:56:03  	at java.base/jdk.internal.loader.URLClassPath.getResource(URLClassPath.java:469)
+11:56:03  	at java.base/jdk.internal.loader.BuiltinClassLoader.findClassOnClassPathOrNull(BuiltinClassLoader.java:895)
+11:56:03  	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClassOrNull(BuiltinClassLoader.java:806)
+11:56:03  	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:764)
+11:56:03  	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:178)
+11:56:03  	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:1078)
+11:56:03  	at java.base/java.lang.Class.forNameImpl(Native Method)
+11:56:03  	at java.base/java.lang.Class.forName(Class.java:412)
+11:56:03  	at java.base/sun.launcher.LauncherHelper.loadMainClass(LauncherHelper.java:760)
+11:56:03  	at java.base/sun.launcher.LauncherHelper.checkAndLoadMain(LauncherHelper.java:655)
+```
+Rebuild JDK11 job: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&BUILD_LIST=openjdk&JenkinsFile=openjdk_x86-64_linux&CUSTOM_TARGET=test/jdk/java/nio/Buffer/LimitDirectMemory.java&TARGET=jdk_custom_0

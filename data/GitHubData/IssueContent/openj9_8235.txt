@@ -1,0 +1,12 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.functional_x86-64_windows_Nightly/247
+testSCCMLTests3_1
+`Testing: Test 192: Try to load the cache and make sure classes are being found in the cache`
+```
+	...........................................................
+	  ............ 256 lines of output is removed ............
+	...........................................................
+
+>> Failure condition was found: [Output match: Unhandled Exception]
+>> Failure condition was found: [Output match: Processing dump event]
+```
+No other useful output or diagnostic files found.

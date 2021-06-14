@@ -1,0 +1,4 @@
+We limited automatically triggered PR testing to `ready_for_review`. 
+https://github.com/AdoptOpenJDK/openjdk-tests/blob/master/.github/workflows/directoriesFilesChangePR.yml#L4
+
+If people do not create a draft, the workflow does not get triggered. The workflow should be triggered after pushing changes to a PR. Maybe we should use `synchronize `. We should check the gitbub docs.

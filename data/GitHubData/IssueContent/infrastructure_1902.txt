@@ -1,0 +1,23 @@
+Please put the name of the software product (and affected platforms if relevant) in the title of this issue
+
+- [ ] Missing install
+- [x] Bug in ansible playbook
+- [ ] Request for new playbook addition
+
+Details: When running the `ansible-playbook` operation on the UNIX playbooks with verison 2.6.3 the following error occurs. We should either resolve this or adjust the version check in https://github.com/AdoptOpenJDK/openjdk-infrastructure/blob/2925d55ff93ca8bbbbaf6ada6184b7aa18847a69/ansible/playbooks/AdoptOpenJDK_Unix_Playbook/roles/Version/tasks/main.yml#L5 if a later version is required. Error output below:
+```
+[ansible@sainz ansible]$ ansible-playbook -i hosts --tags debug playbooks/AdoptOpenJDK_Unix_Playbook/main.yml 
+ERROR! no action detected in task. This often indicates a misspelled module name, or incorrect module path.
+
+The error appears to have been in '/home/ansible/infra.docker/ansible/playbooks/AdoptOpenJDK_Unix_Playbook/roles/macos_codesign/tasks/main.yml': line 41, column 3, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+
+- name: Reboot macOS after setting Default keychain
+  ^ here
+```
+The "offending line" is https://github.com/AdoptOpenJDK/openjdk-infrastructure/blob/2925d55ff93ca8bbbbaf6ada6184b7aa18847a69/ansible/playbooks/AdoptOpenJDK_Unix_Playbook/roles/macos_codesign/tasks/main.yml#L41
+
+I'd prefer a fix if possible rather than upgrading the requirement, but it would be good to identify the cuase and see if it can be resolved since this is the only role that seems to cause a problem.

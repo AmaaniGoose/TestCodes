@@ -1,0 +1,31 @@
+When the JIT is built under `DEBUG` mode by specifying `BUILD_CONFIG=DEBUG` during the make process the following assertion was seen on Linux on Z compressedrefs running the DayTrader 7 benchmark:
+
+```
+Assertion failed at /jit/team/fjeremic/development/asserts-comptime/sdk/jre/lib/s390x/compressedrefs/compiler/..//compiler/optimizer/MonitorElimination.cpp:631: !monitor->getMonitorObject()VMState: 0x000514ff
+        monitor should have only one object store within it
+compiling com/ibm/ws/sib/msgstore/cache/links/AbstractItemLink.preCommitAdd(Lcom/ibm/ws/sib/msgstore/transactions/impl/PersistentTransaction;)V at level: warm
+#0: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x88ee1a) [0x3ff9e70ee1a]
+#1: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x89c3cc) [0x3ff9e71c3cc]
+#2: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x570740) [0x3ff9e3f0740]
+#3: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x570978) [0x3ff9e3f0978]
+#4: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x46e3cc) [0x3ff9e2ee3cc]
+#5: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x476f54) [0x3ff9e2f6f54]
+#6: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x710582) [0x3ff9e590582]
+#7: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x71013c) [0x3ff9e59013c]
+#8: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x711a90) [0x3ff9e591a90]
+#9: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x50794e) [0x3ff9e38794e]
+#10: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x1823a2) [0x3ff9e0023a2]
+#11: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x183816) [0x3ff9e003816]
+#12: /jit/team/fjeremic/development/asserts-comptime/sdk/jre/lib/s390x/compressedrefs/libj9prt29.so(+0x28970) [0x3ff9ef28970]
+#13: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x185250) [0x3ff9e005250]
+#14: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x1857d0) [0x3ff9e0057d0]
+#15: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x185fb4) [0x3ff9e005fb4]
+#16: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x1863e6) [0x3ff9e0063e6]
+#17: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x1864a8) [0x3ff9e0064a8]
+#18: /jit/team/fjeremic/development/asserts-comptime/sdk/jre/lib/s390x/compressedrefs/libj9prt29.so(+0x28970) [0x3ff9ef28970]
+#19: /jit/team/fjeremic/development/asserts-comptime/sdk/assert-all/libj9jit29.so(+0x18689e) [0x3ff9e00689e]
+#20: /jit/team/fjeremic/development/asserts-comptime/sdk/jre/lib/s390x/compressedrefs/libj9thr29.so(+0x57f0) [0x3ff9f0057f0]
+#21: /lib64/libpthread.so.0(+0x8504) [0x3ffa0008504]
+```
+
+Unfortunately I accidentally deleted the core file so I did not get a proper backtrace but the assertion is one of a kind in the codebase and I'm certain I can reproduce it. I suspect we'll need additional tracing which I can also provide. I'll go ahead and try to reproduce with a proper backtrace and get a log with `traceRedundantMonitorElimination` unless otherwise told we need additional options.

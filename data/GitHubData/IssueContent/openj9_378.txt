@@ -1,0 +1,13 @@
+The OMR project has been implementing Direct Dump Reader (DDR) support on top of libdwarf.  
+
+OpenJ9 needs to enable DDR support and ensure that the functionality in the OMR project is sufficient to provide the rich debug & introspection capabilities J9 has historically supported.
+
+OpenJ9 issues are difficult to debug without this support.
+
+OMR links
+----------
+https://github.com/eclipse/omr/blob/f4394252018f04074cb375cbbd7f1f00f41a106c/doc/ddr.md
+
+https://github.com/eclipse/omr/blob/f4394252018f04074cb375cbbd7f1f00f41a106c/doc/ddr/DDR.md
+
+https://github.com/eclipse/omr/pull/1222

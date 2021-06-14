@@ -1,0 +1,115 @@
+### 1. Instructions to build OpenJ9 JDK16 with OpenJDK MethodHandles
+
+Get the JDK16 extensions repo: https://github.com/ibmruntimes/openj9-openjdk-jdk16 (default `openj9` branch)
+
+Then, revert the commit from https://github.com/ibmruntimes/openj9-openjdk-jdk16/pull/9:
+```
+git revert 5d554a114d64937d59f432c5e0ac3b4e6e691531
+```
+
+Get the following OpenJ9 branch: https://github.com/babsingh/openj9/commits/ojdk_jsr292_final
+
+Commits, from the **following unmerged PRs and branches**, are included in the above OpenJ9 branch:
+1. ~https://github.com/eclipse/openj9/pull/10690~ (merged)
+2. https://github.com/eclipse/openj9/pull/11261
+3. ~https://github.com/eclipse/openj9/pull/11372~ (merged)
+4. ~https://github.com/eclipse/openj9/pull/11371~ (replaced with https://github.com/eclipse/openj9/pull/11827)
+5. ~https://github.com/eclipse/openj9/pull/11367~ (merged)
+6. ~https://github.com/eclipse/openj9/pull/10607~ (merged)
+7. ~https://github.com/eclipse/openj9/pull/11588~ (merged)
+8. ~https://github.com/eclipse/omr/pull/5739~ (merged)
+
+**Unaddressed issues:**
+1. https://github.com/eclipse/openj9/pull/11715 ~https://github.com/eclipse/openj9/pull/11599~ (may be amended for the JIT; not critical for JDK16 since it is needed for JIT performance)
+2. https://github.com/eclipse/openj9/issues/11580 (disable OpenJ9 VarHandle code; this should be quick; not critical since it will just be dead code if enabled)
+3. https://github.com/eclipse/openj9/issues/11528 (HCR support; this will be important for functionality)
+
+#### Build Commands:
+```
+bash ./configure --with-freemarker-jar=/root/freemarker.jar --enable-openjdk-methodhandles
+make clean
+make images
+```
+
+### 2. Download OpenJ9 JDK15 with OpenJDK MethodHandles for Linux x64
+
+https://ibm.box.com/shared/static/1ge4sry9y1h2mg81ilpjcwpnrvqgdwyq.zip
+
+### 3. Instructions to run sanity functional tests
+
+**Test Reference:** https://github.com/eclipse/openj9/blob/master/test/docs/OpenJ9TestUserGuide.md
+
+#### Test commands:
+```
+cd openj9/test
+git clone https://github.com/AdoptOpenJDK/TKG.git
+cd TKG
+export TEST_JDK_HOME=<path to JDK directory that you wish to test>
+export BUILD_LIST=functional
+make compile
+make _sanity.regular EXTRA_OPTIONS="-Xshare:off"
+```
+
+### 4. OpenJ9 JDK15 sanity.functional test results
+
+**Log file** with the full sanity.functional test output: [test_sanity_regular_Xjit_shareoff_11Dec20.log](https://github.com/eclipse/openj9/files/5681585/test_sanity_regular_Xjit_shareoff_11Dec20.log).
+
+#### Viewing errors in the log file:
+```
+grep -A10 FAILED: test_sanity_regular_Xjit_shareoff_11Dec20.log | less
+```
+
+The tests were run with the:
+- **JIT enabled**
+- **SCC disabled** `-Xshare:off` because corrupt bytecodes were encountered for hidden classes
+
+#### Summary:
+```
+TOTAL: 191   EXECUTED: 137   PASSED: 110   FAILED: 27   DISABLED: 0   SKIPPED: 54
+```
+
+#### Failed test targets:
+```
+FAILED test targets:
+        jit_jitt_0 [FIXED]
+        jit_jitt_1 [FIXED]
+        jit_jitt_2 [FIXED]
+        jit_jitt_3 [FIXED]
+        jit_jitt_openj9_none_SCC_0 [FIXED]
+        jit_jitt_openj9_none_SCC_1 [FIXED]
+        jit_jitt_openj9_none_SCC_2 [FIXED]
+        jit_jitt_openj9_none_SCC_3 [FIXED]
+        CondyPrimitive_1 [FIXED]
+        Jep334Tests_0 [FIXED]
+        JEP358NPEMessageTests_0 [FIXED]
+        JEP358NPEMessageTests-noDebugInfo_0 [FIXED]
+        jsr335_interfacePrivateMethod_1 [OLD]
+        JCL_Test_0 [OLD]
+        JCL_Test_1 [OLD]
+        JCL_Test_2 [OLD]
+        JCL_Test_none_SCC_0 [OLD]
+        JCL_Test_none_SCC_1 [OLD]
+        JCL_TEST_Java-Security_0 [OLD]
+        jsr335tests_1 [OLD]
+        jsr335tests_3 [OLD]
+        jsr335tests_5 [OLD]
+        jsr335tests_none_SCC_1 [OLD]
+        jsr335tests_none_SCC_3 [OLD]
+        jsr335tests_none_SCC_5 [OLD]
+        cmdLineTester_CryptoTest_0 [OLD]
+        ShareClassesCML_1 [OLD]
+        cmdLineTester_GCRegressionTests_2 [NEW]
+        cmdLineTester_GCRegressionTests_3 [NEW]
+        testSCCMLModularity_1 [NEW]
+```
+#### Common error types:
+1. `java.lang.AssertionError: expected [true] but found [false]`: incorrect test output.
+2. The exception was thrown with the wrong message.
+3. `java.lang.NoSuchMethodException` was thrown instead of `IllegalAccessException`.
+4. Unexpected `java.lang.ArrayIndexOutOfBoundsException`. 
+    - **Fix:** https://bugs.openjdk.java.net/browse/JDK-8259922
+5. Unexpected `java.lang.IndexOutOfBoundsException: bad index: *`. 
+    - **Fix:** https://bugs.openjdk.java.net/browse/JDK-8259922
+6. Unexpected `java.lang.NoClassDefFoundError`.
+7. Unexpected `java.lang.IllegalAccessException`.
+8. Seg. faults seen during `jit_jitt_*` variants and `CondyPrimitive_1`.

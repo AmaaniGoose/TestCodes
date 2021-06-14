@@ -1,0 +1,16 @@
+Tests fail to run on test-osuosl-aix72-ppc64-1 because the unzip of the jdk under test fails:
+Failing job: https://ci.adoptopenjdk.net/view/Failing%20Test%20Jobs/job/Test_openjdk11_j9_sanity.functional_ppc64_aix/31/console
+Output at time of failure:
+```
+10:46:52  + ./openjdk-tests/get.sh -s /home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_ppc64_aix -t /home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_ppc64_aix/openjdk-tests -p ppc64_aix -r upstream -j 11 -i openj9 --openj9_repo https://github.com/eclipse/openj9.git --openj9_branch master --tkg_repo https://github.com/AdoptOpenJDK/TKG.git --tkg_branch master
+10:46:52  TESTDIR: /home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_ppc64_aix/openjdk-tests
+10:46:52  get jdk binary...
+10:46:52  --sdkdir is set to upstream. Therefore, skip download jdk binary
+10:46:52  unzip file: OpenJDK11U-jdk_ppc64_aix_openj9_2020-12-10-09-13.tar.gz ...
+10:47:03  unzip file: OpenJDK11U-jre_ppc64_aix_openj9_2020-12-10-09-13.tar.gz ...
+10:47:07  unzip file: OpenJDK11U-testimage_ppc64_aix_openj9_2020-12-10-09-13.tar.gz ...
+10:47:10  unzip OpenJDK11U-debugimage_ppc64_aix_openj9_2020-12-10-09-13.tar.gz in ./j2sdk-image...
+10:47:13  File --strip not present in the archive.
+10:47:13  File 1 not present in the archive.
+```
+Maybe the version of tar on the machine doesn't support --strip?

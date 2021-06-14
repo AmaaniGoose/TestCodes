@@ -1,0 +1,5 @@
+Align the logic for splitAvailableListSplitAmount in Metronome (currently equals to GC thread count what is likely too much and hurting fragmentation) with   splitFreeListSplitAmount in Standard group of GCs (which currently uses formula gcThreadCount / 8)
+
+Investigate a crash in joinBucketListsForSplitIndex, when splitAvailableListSplitAmount  < gcThreadCount: a quick theory is this will lead to the same bucket being added to the primary bucked by several racing GC threads.
+
+After splitAvailableListSplitAmount is reduced, also investagate is joinBucketListsForSplitIndex benefitial at all. It was probably introduced to reduce search time for finding non-empty bucket, but since we reduced the total number of buckets (by reducing the number of split pools), the search time should not be that bad.

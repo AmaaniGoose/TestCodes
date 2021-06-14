@@ -1,0 +1,89 @@
+Running AIX Java 12 on the 0.15.1 release branch
+Core available internally
+```
+12:08:42  STDOUT:
+12:08:42  Command line: [/home/jenkins/workspace/Test-sanity.openjdk-JDK12-aix_ppc-64_cmprssptrs/openjdkbinary/j2sdk-image/bin/java -cp /home/jenkins/workspace/Test-sanity.openjdk-JDK12-aix_ppc-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15688215792430/jdk_lang_0/work/classes/java/lang/invoke/condy/CondyNestedResolutionTest.d:/home/jenkins/workspace/Test-sanity.openjdk-JDK12-aix_ppc-64_cmprssptrs/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/invoke/condy:/home/jenkins/workspace/Test-sanity.openjdk-JDK12-aix_ppc-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15688215792430/jdk_lang_0/work/classes/test/lib:/home/jenkins/workspace/Test-sanity.openjdk-JDK12-aix_ppc-64_cmprssptrs/openjdk-tests/openjdk/openjdk-jdk/test/lib:/home/jenkins/workspace/Test-sanity.openjdk-JDK12-aix_ppc-64_cmprssptrs/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test-sanity.openjdk-JDK12-aix_ppc-64_cmprssptrs/jvmtest/openjdk/jtreg/lib/jtreg.jar CondyNestedResolution ]
+12:08:42  STDERR:
+12:08:42   stdout: [In bsm1arg
+12:08:42  hello1
+12:08:42  In bsm1arg
+12:08:42  hello2
+12:08:42  In bsm1arg
+12:08:42  hello4
+12:08:42  In bsm1arg
+12:08:42  hello6
+12:08:42  ];
+12:08:42   stderr: [Unhandled exception
+12:08:42  Type=Segmentation error vmState=0x00020019
+12:08:42  J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000032
+12:08:42  Handler1=09001000A1067880 Handler2=09001000A0FB4C88
+12:08:42  R0=0000000000000002 R1=000000011004BA60 R2=09001000A10935A8 R3=0000007D92BAA210
+12:08:42  R4=0000007E025E6000 R5=0000000180073800 R6=0000007802418000 R7=00000006001CE000
+12:08:42  R8=09001000A108BA90 R9=0000000000000001 R10=00000000000022CC R11=0000000000000000
+12:08:42  R12=0000000020000420 R13=0000000110057800 R14=09001000A0004A78 R15=0000000000406B00
+12:08:42  R16=0000000000000001 R17=0000007C82572800 R18=0000000000000000 R19=0000000000000000
+12:08:42  R20=00000000302DB9E0 R21=0000000000000000 R22=0000000000000001 R23=000000003000E700
+12:08:42  R24=0000000000000000 R25=000000003000E700 R26=0000000000000000 R27=0000000000000000
+12:08:42  R28=0000000000000000 R29=090000000EE00778 R30=0000000000000010 R31=00000001106365B0
+12:08:42  IAR=090000000EBE4FC8 LR=090000000EBECE9C MSR=A00000000000D032 CTR=090000000EBE4EC0
+12:08:42  CR=2400042020000010 FPSCR=8202000000000000 XER=2000001082020000
+12:08:42  FPR0 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+12:08:42  FPR1 c3e0000000000000 (f: 0.000000, d: -9.223372e+18)
+12:08:42  FPR2 bfe00044101ea56d (f: 270443872.000000, d: -5.000325e-01)
+12:08:42  FPR3 3f8733a0bb86f444 (f: 3146183680.000000, d: 1.132894e-02)
+12:08:42  FPR4 3f8755666e6fefda (f: 1852829696.000000, d: 1.139336e-02)
+12:08:42  FPR5 3fda7aecbeba4e46 (f: 3199880704.000000, d: 4.137527e-01)
+12:08:42  FPR6 3fd5555555555611 (f: 1431655936.000000, d: 3.333333e-01)
+12:08:42  FPR7 3f2103a728337cfa (f: 674462976.000000, d: 1.298086e-04)
+12:08:42  FPR8 bfb96bfae093ca0d (f: 3767781888.000000, d: -9.930389e-02)
+12:08:42  FPR9 40fb39456ab53250 (f: 1790259840.000000, d: 1.115083e+05)
+12:08:42  FPR10 407816625220ec6e (f: 1377889408.000000, d: 3.853990e+02)
+12:08:42  FPR11 3fbc73cd95d5986d (f: 2513803264.000000, d: 1.111420e-01)
+12:08:42  FPR12 3ff0000000000000 (f: 0.000000, d: 1.000000e+00)
+12:08:42  FPR13 0000000000000003 (f: 3.000000, d: 1.482197e-323)
+12:08:42  FPR14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+12:08:42  FPR15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+12:08:42  FPR16 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+12:08:42  FPR17 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+12:08:42  FPR18 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+12:08:42  FPR19 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+12:08:42  FPR20 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+12:08:42  FPR21 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+12:08:42  FPR22 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+12:08:42  FPR23 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+12:08:42  FPR24 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+12:08:42  FPR25 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+12:08:42  FPR26 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+12:08:42  FPR27 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+12:08:42  FPR28 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+12:08:42  FPR29 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+12:08:42  FPR30 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+12:08:42  FPR31 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+12:08:42  Module=/home/jenkins/workspace/Test-sanity.openjdk-JDK12-aix_ppc-64_cmprssptrs/openjdkbinary/j2sdk-image/lib/compressedrefs/libj9gc29.so
+12:08:42  Module_base_address=090000000EA85000
+12:08:42  Target=2_90_20190916_200 (AIX 7.1)
+12:08:42  CPU=ppc64 (16 logical CPUs) (0x200000000 RAM)
+12:08:42  ----------- Stack Backtrace -----------
+12:08:42  allocateObject__40MM_MemoryPoolSplitAddressOrderedListBaseFP18MM_EnvironmentBaseP22MM_AllocateDescription+0x58 (0x090000000EBECE9C [libj9gc29.so+0x167e9c])
+12:08:42  allocateObject__25MM_MemoryPoolLargeObjectsFP18MM_EnvironmentBaseP22MM_AllocateDescription+0x84 (0x090000000EC704A8 [libj9gc29.so+0x1eb4a8])
+12:08:42  allocateObject__24MM_MemorySubSpaceGenericFP18MM_EnvironmentBaseP22MM_AllocateDescriptionP17MM_MemorySubSpaceT3b+0x3c0 (0x090000000EC7FF44 [libj9gc29.so+0x1faf44])
+12:08:42  allocateObject__25MM_TLHAllocationInterfaceFP18MM_EnvironmentBaseP22MM_AllocateDescriptionP14MM_MemorySpaceb+0x2e0 (0x090000000EC89584 [libj9gc29.so+0x204584])
+12:08:42  OMR_GC_AllocateObject__FP12OMR_VMThreadP25MM_AllocateInitialization+0x4e8 (0x090000000EB05A6C [libj9gc29.so+0x80a6c])
+12:08:42  J9AllocateObject+0x8e4 (0x090000000EB03528 [libj9gc29.so+0x7e528])
+12:08:42  j9gc_allocStringWithSharedCharData+0x158 (0x090000000EC91EDC [libj9gc29.so+0x20cedc])
+12:08:42  resolveStringRef+0x13c (0x090000000F1BC5A0 [libj9vm29.so+0x7b5a0])
+12:08:42  (0x090000000F312510 [libj9vm29.so+0x1d1510])
+12:08:42  (0x090000000F1AC8FC [libj9vm29.so+0x6b8fc])
+12:08:42  handleUncaughtException+0x270 (0x090000000F1A9AF4 [libj9vm29.so+0x68af4])
+12:08:42  threadCleanup+0x58 (0x090000000F143D9C [libj9vm29.so+0x2d9c])
+12:08:42  protectedDetachCurrentThread+0x1c (0x090000000F16C0E0 [libj9vm29.so+0x2b0e0])
+12:08:42  omrsig_protect+0x488 (0x090000000CE28CCC [libj9prt29.so+0x69ccc])
+12:08:42  DetachCurrentThread+0xc8 (0x090000000F16B92C [libj9vm29.so+0x2a92c])
+12:08:42  (0x0000000100007060 [java+0x7060])
+12:08:42  _pthread_body+0xf0 (0x0900000000568E14 [libpthreads.a+0x3e14])
+```
+```
+https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=12&JDK_IMPL=openj9&BUILD_LIST=openjdk&JenkinsFile=openjdk_ppc64_aix&TARGET=jdk_lang_0
+
+https://ci.adoptopenjdk.net/job/Grinder_Advanced/parambuild/?JDK_VERSION=12&JDK_IMPL=openj9&BUILD_LIST=openjdk&JenkinsFile=openjdk_ppc64_aix&CUSTOM_TARGET=java/lang/invoke/condy/CondyNestedResolutionTest.java&TARGET=jdk_custom_0
+```

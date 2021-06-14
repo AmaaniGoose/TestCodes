@@ -1,0 +1,1 @@
+The `J9JITExceptionTable` is a struct that holds more than just the Exception Table (despite its name - hence why in part of the code you may see `TR_MetaData` which is an alias). The exact structure of the exception table is not documented anywhere - the only way to determine what is stored is to read the code in MetaData.cpp.

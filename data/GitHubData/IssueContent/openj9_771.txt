@@ -1,0 +1,80 @@
+The jvmti spec states:
+
+"The redefinition may change method bodies, the constant pool and attributes. The redefinition must not add, remove or rename fields or methods, change the signatures of methods, change modifiers, or change inheritance. These restrictions may be lifted in future versions."
+
+
+However, Oracle's JVM allows one to add new methods. For example:
+
+Redefining C1 to C2 (as seen below) should fail with JVMTI_ERROR_UNSUPPORTED_REDEFINITION_METHOD_ADDED according to the spec since C2 adds a new method 'checkUses1'. When this is redefined with Oracle, it does not fail. This is also true for retransformation. OpenJ9 will throw an error when attempting to redefine C1 to C2.
+
+```
+class C1 {
+    public static boolean checkReads() {
+        return false;
+    }
+
+    public static boolean checkUses() {
+        return false;
+    }
+
+    public static boolean checkProvides() {
+        return false;
+    }
+}
+
+class C2 {
+    public static boolean checkReads() {
+        return false;
+    }
+
+    public static boolean checkUses() {        
+        return true;
+    }
+
+    public static boolean checkProvides() {
+        return true;
+    }
+    
+    private static boolean checkUses1() {
+        return false;
+    }
+}
+```
+
+I have noticed that this behaviour only occurs when 'private static' and 'private final' methods are added/removed. For example if C2 is modified to the following:
+
+```
+class C1 {
+    public static boolean checkReads() {
+        return false;
+    }
+
+    public static boolean checkUses() {
+        return false;
+    }
+
+    public static boolean checkProvides() {
+        return false;
+    }
+}
+
+class C2 {
+    public static boolean checkReads() {
+        return false;
+    }
+
+    public static boolean checkUses() {        
+        return true;
+    }
+
+    public static boolean checkProvides() {
+        return true;
+    }
+    
+    public static boolean checkUses1() {
+        return false;
+    } 
+}
+```
+
+Then Oracle correctly rejects the redefinition with JVMTI_ERROR_UNSUPPORTED_REDEFINITION_METHOD_ADDED.

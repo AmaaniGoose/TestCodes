@@ -1,0 +1,22 @@
+Testcases on various platforms hang periodically, see:
+https://github.com/AdoptOpenJDK/openjdk-infrastructure/issues/1579#issuecomment-726595987
+https://github.com/AdoptOpenJDK/openjdk-infrastructure/issues/1579#issuecomment-726630670
+
+The console output:
+```
+01:18:00  Testing: Test 26: CMVC 168131 : Create a non persistent cache
+01:18:00  Test start time: 2020/11/13 01:17:59 Coordinated Universal Time
+01:18:00  Running command: "/home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java"  -Xcompressedrefs -Xjit -Xgcpolicy:gencon  -Xshareclasses:name=ShareClassesCMLTests,nonpersistent -version
+01:18:00  Time spent starting: 2 milliseconds
+01:28:13  ***[TEST INFO 2020/11/13 01:27:59] ProcessKiller detected a timeout after 600000 milliseconds!***
+01:28:13  INFO: getUnixPID() has failed indicating this is not a UNIX System.'Debug on timeout' is currently only supported on Linux.
+```
+
+From a bit of an examination of the above test framework code, I believe the hang is here as it uses no timeout on the wait:
+https://github.com/eclipse/openj9/blob/efdb86514d722cf83747d9d8badc449fe6121658/test/functional/cmdline_options_tester/src/Test.java#L227
+
+The above console output indicates the test had timed out and ProcessKiller logic kills the process here:
+https://github.com/eclipse/openj9/blob/efdb86514d722cf83747d9d8badc449fe6121658/test/functional/cmdline_options_tester/src/Test.java#L565
+So I suspect the proc.waitFor() above is waiting for a process that has already terminated.
+
+Adding a timeout to this proc.waitFor() would at least alleviate the Adopt hang please...?

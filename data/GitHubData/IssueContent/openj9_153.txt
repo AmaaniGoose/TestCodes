@@ -1,0 +1,46 @@
+Problem determination becomes difficult when there is no diagnostic information.  A running OpenJ9 JVM includes mechanisms for producing different types of diagnostic data when different events occur. In general, the production of this data happens by default and can also be controlled by using the command line JVM options such as  [*-Xdump*](https://www.ibm.com/support/knowledgecenter/en/SSYKE2_8.0.0/com.ibm.java.lnx.80.doc/diag/tools/dumpagents_syntax.html) or [*-Xtrace*](https://www.ibm.com/support/knowledgecenter/en/SSYKE2_8.0.0/com.ibm.java.lnx.80.doc/diag/tools/tracing.html) at JVM startup or by dynamically setting them using the [*com.ibm.jvm.Dump*](https://www.ibm.com/support/knowledgecenter/en/SSYKE2_8.0.0/com.ibm.java.api.80.doc/com.ibm.jvm.ras/com/ibm/jvm/Dump.html) or [*com.ibm.jvm.Trace*](https://www.ibm.com/support/knowledgecenter/en/SSYKE2_8.0.0/com.ibm.java.api.80.doc/com.ibm.jvm.ras/com/ibm/jvm/Trace.html) API
+
+Instead of using these APIs, we can include a MXBean (*which in turn calls the methods of Dump/Trace API*) to dynamically configure these JVM options while remotely monitoring an application running in a remote server or container.  This MXBean can be used in *jconsole* (or by any other monitoring tool / admin console) to dynamically configure the diagnostic options while monitoring the application, without having to actually restart the application.
+
+We can include the following methods in the MXBean:
+1. configureDumpOptions(String dumpOption) – sets the specified dump options
+1. setTraceOptions(String traceOption) - sets the trace options
+1. resetDumpOption(String option) – resets the dump options to what it was at JVM initialization
+1. triggerDump(String dumpType) – triggers a dump agent based on dump type requested
+1. triggerDumpToFile(String dumpType, String fileNamePattern) - triggers a dump agent based on the dump type, writes to the file name specified by the user and returns the filename to which the dump was actually written to
+1. triggerClassicHeapDump() – triggers a heap dump in the classic format
+
+
+We can also extend the functionality to include few most commonly used options for capturing diagnostic information, for example, 
+
+> *JavaDumpOnThreadBlock* -  setting this would trigger a Java dump on a thread block. 
+
+*Above option is just an example, we need to find if there are any such frequently used options.*
+
+**Usage**
+``` java
+  try {
+        mxbeanName = new ObjectName("com.ibm.lang.management:type=Diagnostics");
+   } catch (MalformedObjectNameException e) {
+        // Exception Handling
+   }
+   
+  try {
+         MBeanServer mbeanServer = ManagementFactory.getPlatformMBeanServer();
+         if (true != mbeanServer.isRegistered(mxbeanName)) {
+                // DiagnosticsMXBean not registered
+         }
+         DiagnosticsMXBean bean = JMX.newMXBeanProxy(mbeanServer, mxbeanName, DiagnosticsMXBean.class);
+   } catch (Exception e) {
+          // Exception Handling
+   }
+  bean.configureDumpOptions("heap+java:events=vmstop"); // trigger heap & java dumps on vmstop
+  bean.configureDumpOptions("heap:none"); // Remove all heap dump agents
+  bean.resetDumpOption();
+
+  bean.triggerDump(“java”); // trigger a java dump
+
+  // trigger a heap dump and written the file name to which the dump was actually written to
+  String filename = bean.triggerDumpToFile(“heap”, "heapdump.%pid.phd"); 
+```
+Opening this issue to discuss on this requirement, please feel free to comment.

@@ -1,0 +1,39 @@
+**Describe the bug**
+renaissance-naive-bayes_0 perf tests fail on jdk15 with NPE
+
+**To Reproduce**
+https://trss.adoptopenjdk.net/output/test?id=5f28a1350bec7975ae08ae21
+
+Just one example. Seems consistent across the board, all VMs and platforms.
+
+Only occurs on JDK15.
+
+**Expected behavior**
+Expected no NPE here.
+
+**Screenshot**
+```
+[2020-08-03T22:20:46.691Z] Error during tear-down: null
+[2020-08-03T22:20:46.691Z] java.lang.NullPointerException
+[2020-08-03T22:20:46.691Z] 	at java.base/java.lang.NullPointerException.fillInStackTrace(NullPointerException.java:91)
+[2020-08-03T22:20:46.691Z] 	at java.base/java.lang.Throwable.<init>(Throwable.java:90)
+[2020-08-03T22:20:46.691Z] 	at java.base/java.lang.Throwable.<init>(Throwable.java:101)
+[2020-08-03T22:20:46.691Z] 	at java.base/java.lang.Exception.<init>(Exception.java:67)
+[2020-08-03T22:20:46.691Z] 	at java.base/java.lang.RuntimeException.<init>(RuntimeException.java:63)
+[2020-08-03T22:20:46.691Z] 	at java.base/java.lang.NullPointerException.<init>(NullPointerException.java:70)
+[2020-08-03T22:20:46.691Z] 	at org.renaissance.apache.spark.NaiveBayes.tearDownAfterAll(NaiveBayes.scala:93)
+[2020-08-03T22:20:46.691Z] 	at org.renaissance.RenaissanceBenchmark.runBenchmark(RenaissanceBenchmark.java:97)
+[2020-08-03T22:20:46.691Z] 	at org.renaissance.RenaissanceSuite$.$anonfun$main$2(renaissance-suite.scala:308)
+[2020-08-03T22:20:46.691Z] 	at org.renaissance.RenaissanceSuite$.$anonfun$main$2$adapted(renaissance-suite.scala:306)
+[2020-08-03T22:20:46.691Z] 	at org.renaissance.RenaissanceSuite$$$Lambda$125/00000000321B4E20.apply(Unknown Source)
+[2020-08-03T22:20:46.691Z] 	at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)
+[2020-08-03T22:20:46.691Z] 	at scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)
+[2020-08-03T22:20:46.691Z] 	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)
+[2020-08-03T22:20:46.691Z] 	at org.renaissance.RenaissanceSuite$.main(renaissance-suite.scala:306)
+[2020-08-03T22:20:46.691Z] 	at org.renaissance.RenaissanceSuite.main(renaissance-suite.scala)
+[2020-08-03T22:20:46.691Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2020-08-03T22:20:46.691Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+[2020-08-03T22:20:46.691Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2020-08-03T22:20:46.691Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+[2020-08-03T22:20:46.691Z] 	at org.renaissance.Launcher.main(Launcher.java:18)
+```

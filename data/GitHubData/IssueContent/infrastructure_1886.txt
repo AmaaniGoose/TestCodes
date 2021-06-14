@@ -1,0 +1,24 @@
+Please put the name of the software product (and affected platforms if relevant) in the title of this issue
+
+- [ ] Missing install
+- [ ] Bug in ansible playbook
+- [ ] Request for new playbook addition
+- [ ] OS updates
+- [ ] OSS updates
+- [ ] Ansible playbook refresh
+
+Details:
+These systems were installed in 2017 - and no systems maintenance has been performed since.
+
+Neither are they identical (which I would have expected from the node labels). While I believe there are, or were, differences regarding system access - I always thought the configs, though old, were identical. My second reason for thinking this comes from the (intended) use of Ansible for system configuration.
+
+How different? #1881 was resolved by installing `ant` and `ant-config`. Makes me wonder how the `-2` system was used. Obviously people have been satisfied - or differences such as this would have been resolved long ago. So,
+- are there reasons that the systems were different (and yesterdays changes should be undone)?
+- or, should an effort be made to find other differences
+
+My other key questions re: the level of OS and OSS packages used.
+- is there a project reason that AIX service packs are not installed (4 have been released since the systems were installed). NOTE: I am not talking about an update to a new TL (technology level) that may bring different features. Constant TL - plus most/more recent patches.
+- same as for OSS packages. One example. The current version of bash on these systems is 4.3 - which, as an effect (or bug) leaves many files (pipes) in /tmp - On a busy test day this can be 20k to 30k empty files left behind. While this can be monitored and cleaned up (e.g., using skulker) - what about updates.
+- As to Ansible playbooks: one of the core features of Ansible (I was taught) is being `idempotent` - which I take to mean that playbooks should be runnable at any time - and reapplied anytime there are are playbook updates to bring everything back into sync.
+
+Hence, this issue to establish what the project goals, better, need are - and work with you to attain those goals.

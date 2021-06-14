@@ -1,0 +1,15 @@
+`getResolvedMethods(TR_Memory *, TR_OpaqueClassBlock *, List<TR_ResolvedMethod> *)` constructs a list of resolved methods from all the j9methods existent in a given j9class. Most of the time the purpose of using this function is to search for a method by name. E.g.
+```
+               TR_ScratchList<TR_ResolvedMethod> bdMethods(trMemory());
+               fej9()->getResolvedMethods(trMemory(), clazz, &bdMethods);
+               ListIterator<TR_ResolvedMethod> bdit(&bdMethods);
+               TR_ResolvedMethod * method = NULL;
+               for (method = bdit.getCurrent(); method; method = bdit.getNext()) {
+                  const char *sig = method->signature(comp()->trMemory());
+                  int32_t len = strlen(sig);
+                  if (BDDFPUSEDFPLEN == len && !strncmp(sig, BDDFPUSEDFP, BDDFPUSEDFPLEN)) {
+                     break;
+                 }
+```
+This is wasteful because creating a resolved method is quite expensive in terms of CPU. It's better to use `getResolvedMethodForNameAndSignature(TR_Memory * trMemory, TR_OpaqueClassBlock * classPointer, const char* methodName, const char *signature)` instead.
+omr code could benefit from a similar change.

@@ -1,0 +1,35 @@
+AssertionError "Free Physical Memory size cannot be greater than total Physical Memory Size." with OSMXBeanLocal tests.
+
+Failure link
+------------
+
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_extended.functional_aarch64_linux/119/ (on build-docker-fedora33-armv8-4)
+https://ci.adoptopenjdk.net/view/Test_functional/job/Test_openjdk11_j9_extended.functional_aarch64_linux_xl/5/ (on build-docker-ubuntu1804-armv8-4)
+https://ci.adoptopenjdk.net/view/Test_functional/job/Test_openjdk11_j9_extended.functional_aarch64_linux_xl/4/ (on build-docker-ubuntu1804-armv8-5)
+https://ci.adoptopenjdk.net/view/Test_functional/job/Test_openjdk11_j9_extended.functional_aarch64_linux_xl/3/ (on build-docker-fedora33-armv8-5)
+https://ci.adoptopenjdk.net/view/Test_functional/job/Test_openjdk11_j9_extended.functional_aarch64_linux_xl/1/ (on build-docker-ubuntu1804-armv8-5)
+
+Optional info
+-------------
+
+- intermittent failure: yes
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+[TestOperatingSystemMXBean] [INFO]  ----------------------------------------------------------
+[TestOperatingSystemMXBean] [INFO]  Starting the OperatingSystemMXBean usage API tests........
+[TestOperatingSystemMXBean] [INFO]  ----------------------------------------------------------
+[TestOperatingSystemMXBean] [INFO] Tests starting at: 1614111474129 ms.
+[TestOperatingSystemMXBean] [INFO] Testing getTotalPhysicalMemory() & getFreePhysicalMemorySize() APIs
+[TestOperatingSystemMXBean] [INFO] Tests finished at: 1614111474145 ms.
+FAILED: runTestOSMXBean
+java.lang.AssertionError: Free Physical Memory size cannot be greater than total Physical Memory Size. expected [false] but found [true]
+	at org.testng.Assert.fail(Assert.java:96)
+	at org.testng.Assert.failNotEquals(Assert.java:776)
+	at org.testng.Assert.assertFalse(Assert.java:65)
+	at org.openj9.test.management.TestOperatingSystemMXBean.test_PhysicalMemoryAPIs(TestOperatingSystemMXBean.java:263)
+	at org.openj9.test.management.TestOperatingSystemMXBean.runTestOSMXBean(TestOperatingSystemMXBean.java:170)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+```

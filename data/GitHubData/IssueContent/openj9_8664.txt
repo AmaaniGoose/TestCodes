@@ -1,0 +1,2 @@
+the `returnCleanup` method ECS has magic numbers as its argument used to identify the location of error return. It's better to clean this up and replace the number with enum or find a cleaner way to represent the location info.
+See https://github.com/eclipse/openj9/pull/8598#discussion_r382764052

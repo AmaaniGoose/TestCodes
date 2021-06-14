@@ -1,0 +1,9 @@
+openj9/test/TestConfig/scripts/tools/getDependencies.pl
+my %asmtools = (
+	url => 'https://ci.adoptopenjdk.net/view/Dependencies/job/asmtools/lastSuccessfulBuild/artifact/asmtools.jar',
+	fname => 'asmtools.jar',
+	sha1 => '04cf07c584121c2e5a3d1dad2839fc8ab4828b6d'
+);
+use lastSuccessfulBuild is very fragile.  Actually, I found a new built succeeded. sha1 checksum changed then. 
+
+I think you need to specify a fixed built number. eg. 107

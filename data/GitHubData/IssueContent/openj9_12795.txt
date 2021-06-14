@@ -1,0 +1,118 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk11_j9_extended.openjdk_ppc64_aix/13/` (`pll011`):
+```
+java version "11.0.12" 2021-07-20
+Java(TM) SE Runtime Environment 11.0.12.0-IBM (build 11.0.12+4)
+Eclipse OpenJ9 VM 11.0.12.0-IBM (build master-262b10ca7, JRE 11 AIX ppc64-64-Bit Compressed References 20210528_76 (JIT enabled, AOT enabled)
+OpenJ9   - 262b10ca7
+OMR      - e358cd0e5
+JCL      - 34925c161a based on jdk-11.0.12+4)
+```
+[Rerun in Grinder](https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?TARGET=jdk_nio_0&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;PLATFORM=ppc64_aix&amp;KEEP_REPORTDIR=true&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-aix-ppc64-openj9-IBM%2F76%2FOpenJDK11U-jre_ppc64_aix_openj9_IBM_2021-05-29-01-00.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-aix-ppc64-openj9-IBM%2F76%2FOpenJDK11U-debugimage_ppc64_aix_openj9_IBM_2021-05-29-01-00.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-aix-ppc64-openj9-IBM%2F76%2FOpenJDK11U-testimage_ppc64_aix_openj9_IBM_2021-05-29-01-00.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-aix-ppc64-openj9-IBM%2F76%2FOpenJDK11U-jdk_ppc64_aix_openj9_IBM_2021-05-29-01-00.tar.gz&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;LIGHT_WEIGHT_CHECKOUT=true&amp;ARTIFACTORY_SERVER=na.artifactory.swg-devops&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=11&amp;USER_CREDENTIALS_ID=&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=&amp;JDK_REPO=git%40github.com%3Aibmruntimes%2Fopenj9-openjdk-jdk11&amp;RELEASE_TAG=&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;UPSTREAM_JOB_NAME=&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=openj9&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=openj9&amp;SSH_AGENT_CREDENTIAL=83181e25-eea4-4f55-8b3e-e79615733226&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=4e18ffe7-b1b1-4272-9979-99769b68bcc2&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=openjdk&amp;UPSTREAM_JOB_NUMBER=&amp;TIME_LIMIT=10&amp;JVM_OPTIONS=&amp;PARALLEL=)
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+[2021-05-29T03:04:29.456Z] Running test jdk_net_0 ...
+[2021-05-29T03:04:29.456Z] ===============================================
+[2021-05-29T03:04:29.456Z] jdk_net_0 Start Time: Fri May 28 23:04:26 2021 Epoch Time (ms): 1622257466786
+[2021-05-29T03:04:29.456Z] "/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+[2021-05-29T03:04:29.456Z] JVMSHRC005I No shared class caches available
+[2021-05-29T03:04:29.456Z] JVMSHRC005I No shared class caches available
+[2021-05-29T03:04:29.456Z] cache cleanup done
+[2021-05-29T03:04:29.456Z] variation: Mode150
+[2021-05-29T03:04:29.456Z] JVM_OPTIONS:  -XX:+UseCompressedOops 
+
+[2021-05-29T06:43:01.140Z] Running test jdk_nio_0 ...
+[2021-05-29T06:43:01.140Z] ===============================================
+[2021-05-29T06:43:01.140Z] jdk_nio_0 Start Time: Sat May 29 02:43:00 2021 Epoch Time (ms): 1622270580433
+[2021-05-29T06:43:01.140Z] "/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+[2021-05-29T06:43:01.140Z] JVMSHRC005I No shared class caches available
+[2021-05-29T06:43:01.140Z] JVMSHRC005I No shared class caches available
+[2021-05-29T06:43:01.140Z] cache cleanup done
+[2021-05-29T06:43:01.140Z] variation: Mode150
+[2021-05-29T06:43:01.140Z] JVM_OPTIONS:  -XX:+UseCompressedOops 
+
+[2021-05-29T06:49:02.228Z] STDERR:
+[2021-05-29T06:49:02.228Z] java.util.NoSuchElementException
+[2021-05-29T06:49:02.228Z] 	at java.base/java.util.Spliterators$1Adapter.next(Spliterators.java:688)
+[2021-05-29T06:49:02.228Z] 	at BasicMulticastTests.main(BasicMulticastTests.java:212)
+[2021-05-29T06:49:02.228Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-05-29T06:49:02.228Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2021-05-29T06:49:02.228Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-05-29T06:49:02.228Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+[2021-05-29T06:49:02.228Z] 	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:312)
+[2021-05-29T06:49:02.228Z] 	at java.base/java.lang.Thread.run(Thread.java:861)
+[2021-05-29T06:49:02.228Z] 
+[2021-05-29T06:49:02.228Z] JavaTest Message: Test threw exception: java.util.NoSuchElementException
+[2021-05-29T06:49:02.228Z] JavaTest Message: shutting down test
+[2021-05-29T06:49:02.228Z] 
+[2021-05-29T06:49:02.228Z] 
+[2021-05-29T06:49:02.228Z] TEST RESULT: Failed. Execution failed: `main' threw exception: java.util.NoSuchElementException
+[2021-05-29T06:49:02.228Z] --------------------------------------------------
+[2021-05-29T07:13:51.046Z] Test results: passed: 384; failed: 1
+[2021-05-29T07:13:52.495Z] Report written to /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/report/html/report.html
+[2021-05-29T07:13:52.495Z] Results written to /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16222554973820/jdk_nio_0/work
+[2021-05-29T07:13:52.495Z] Error: Some tests failed or other problems occurred.
+[2021-05-29T07:13:52.495Z] 
+[2021-05-29T07:13:52.495Z] jdk_nio_0_FAILED
+```
+
+### Might be related failures:
+`Test_openjdk11_j9_extended.openjdk_ppc64_aix/13/` (`pll011 `):
+```
+[2021-05-29T04:42:20.980Z] java.util.NoSuchElementException: No value present
+[2021-05-29T04:42:20.980Z] 	at java.base/java.util.Optional.get(Optional.java:148)
+[2021-05-29T04:42:20.980Z] 	at SocketPermissionTest.joinGroupMulticastTest(SocketPermissionTest.java:224)
+[2021-05-29T04:42:20.980Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-05-29T04:42:20.980Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2021-05-29T04:42:20.980Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-05-29T04:42:20.980Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+[2021-05-29T04:42:20.980Z] 	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+[2021-05-29T04:42:20.980Z] 	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+[2021-05-29T04:42:20.980Z] 	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+[2021-05-29T04:42:20.980Z] 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+[2021-05-29T04:42:20.980Z] 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+[2021-05-29T04:42:20.980Z] 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+[2021-05-29T04:42:20.980Z] 	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+[2021-05-29T04:42:20.980Z] 	at org.testng.TestRunner.run(TestRunner.java:623)
+[2021-05-29T04:42:20.980Z] 	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+[2021-05-29T04:42:20.980Z] 	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+[2021-05-29T04:42:20.980Z] 	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+[2021-05-29T04:42:20.980Z] 	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+[2021-05-29T04:42:20.980Z] 	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+[2021-05-29T04:42:20.980Z] 	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+[2021-05-29T04:42:20.980Z] 	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+[2021-05-29T04:42:20.980Z] 	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+[2021-05-29T04:42:20.980Z] 	at org.testng.TestNG.run(TestNG.java:1018)
+[2021-05-29T04:42:20.980Z] 	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+[2021-05-29T04:42:20.980Z] 	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+[2021-05-29T04:42:20.980Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-05-29T04:42:20.980Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2021-05-29T04:42:20.980Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-05-29T04:42:20.980Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+[2021-05-29T04:42:20.980Z] 	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+[2021-05-29T04:42:20.980Z] 	at java.base/java.lang.Thread.run(Thread.java:861)
+[2021-05-29T04:42:20.980Z] config SocketPermissionTest.setupSecurityManager(): success
+[2021-05-29T04:42:20.980Z] test SocketPermissionTest.listenDatagramSocketTest(): success
+[2021-05-29T04:42:20.980Z] config SocketPermissionTest.setupSecurityManager(): success
+[2021-05-29T04:42:20.980Z] test SocketPermissionTest.listenMulticastSocketTest(): success
+[2021-05-29T04:42:20.981Z] config SocketPermissionTest.setupSecurityManager(): success
+[2021-05-29T04:42:20.981Z] test SocketPermissionTest.listenServerSocketTest(): success
+[2021-05-29T04:42:20.981Z] config SocketPermissionTest.setupSecurityManager(): success
+[2021-05-29T04:42:20.981Z] test SocketPermissionTest.sendDatagramPacketTest(): success
+[2021-05-29T04:42:20.981Z] 
+[2021-05-29T04:42:20.981Z] ===============================================
+[2021-05-29T04:42:20.981Z] java/net/SocketPermission/SocketPermissionTest.java
+[2021-05-29T04:42:20.981Z] Total tests run: 8, Failures: 1, Skips: 0
+[2021-05-29T04:42:20.981Z] ===============================================
+
+[2021-05-29T04:53:44.627Z] jdk_net_0_FAILED
+```
+[Rerun in Grinder](https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?TARGET=jdk_net_0&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;PLATFORM=ppc64_aix&amp;KEEP_REPORTDIR=true&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-aix-ppc64-openj9-IBM%2F76%2FOpenJDK11U-jre_ppc64_aix_openj9_IBM_2021-05-29-01-00.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-aix-ppc64-openj9-IBM%2F76%2FOpenJDK11U-debugimage_ppc64_aix_openj9_IBM_2021-05-29-01-00.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-aix-ppc64-openj9-IBM%2F76%2FOpenJDK11U-testimage_ppc64_aix_openj9_IBM_2021-05-29-01-00.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-aix-ppc64-openj9-IBM%2F76%2FOpenJDK11U-jdk_ppc64_aix_openj9_IBM_2021-05-29-01-00.tar.gz&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;LIGHT_WEIGHT_CHECKOUT=true&amp;ARTIFACTORY_SERVER=na.artifactory.swg-devops&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=11&amp;USER_CREDENTIALS_ID=&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=&amp;JDK_REPO=git%40github.com%3Aibmruntimes%2Fopenj9-openjdk-jdk11&amp;RELEASE_TAG=&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;UPSTREAM_JOB_NAME=&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=openj9&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=openj9&amp;SSH_AGENT_CREDENTIAL=83181e25-eea4-4f55-8b3e-e79615733226&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=4e18ffe7-b1b1-4272-9979-99769b68bcc2&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=openjdk&amp;UPSTREAM_JOB_NUMBER=&amp;TIME_LIMIT=10&amp;JVM_OPTIONS=&amp;PARALLEL=)

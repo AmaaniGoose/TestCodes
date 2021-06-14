@@ -1,0 +1,1 @@
+After merging the code from openj9/master into jitaas we observed a 2.2% througput drop for AcmeAir. The non-jitaas build is stable.

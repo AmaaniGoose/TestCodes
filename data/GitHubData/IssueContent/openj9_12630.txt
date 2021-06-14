@@ -1,0 +1,60 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk16_j9_sanity.openjdk_x86-64_mac/34/`:
+```
+openjdk version "16.0.1" 2021-04-20
+OpenJDK Runtime Environment AdoptOpenJDK-16.0.1+9-202105040619 (build 16.0.1+9-202105040619)
+Eclipse OpenJ9 VM AdoptOpenJDK-16.0.1+9-202105040619 (build master-c5144068e, JRE 16 Mac OS X amd64-64-Bit Compressed References 20210504_26 (JIT enabled, AOT enabled)
+OpenJ9   - c5144068e
+OMR      - 79c52c726
+JCL      - 09a2433813 based on jdk-16.0.1+9)
+```
+[Rerun in Grinder](https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?TARGET=jdk_lang_0&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;PLATFORM=x86-64_mac&amp;KEEP_REPORTDIR=true&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk16u%2Fjdk16u-mac-x64-openj9%2F26%2FOpenJDK16U-debugimage_x64_mac_openj9_2021-05-04-03-59.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk16u%2Fjdk16u-mac-x64-openj9%2F26%2FOpenJDK16U-testimage_x64_mac_openj9_2021-05-04-03-59.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk16u%2Fjdk16u-mac-x64-openj9%2F26%2FOpenJDK16U-jdk_x64_mac_openj9_2021-05-04-03-59.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk16u%2Fjdk16u-mac-x64-openj9%2F26%2FOpenJDK16U-jre_x64_mac_openj9_2021-05-04-03-59.tar.gz&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;LIGHT_WEIGHT_CHECKOUT=true&amp;ARTIFACTORY_SERVER=na.artifactory.swg-devops&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=16&amp;USER_CREDENTIALS_ID=&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=&amp;JDK_REPO=https%3A%2F%2Fgithub.com%2Fibmruntimes%2Fopenj9-openjdk-jdk16&amp;RELEASE_TAG=&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;UPSTREAM_JOB_NAME=&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=openj9&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=openj9&amp;SSH_AGENT_CREDENTIAL=83181e25-eea4-4f55-8b3e-e79615733226&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=4e18ffe7-b1b1-4272-9979-99769b68bcc2&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=openjdk&amp;UPSTREAM_JOB_NUMBER=&amp;TIME_LIMIT=10&amp;JVM_OPTIONS=&amp;PARALLEL=)
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+[2021-05-04T06:44:10.578Z] Running test jdk_lang_0 ...
+[2021-05-04T06:44:10.578Z] ===============================================
+[2021-05-04T06:44:10.578Z] jdk_lang_0 Start Time: Tue May  4 02:44:09 2021 Epoch Time (ms): 1620110649007
+[2021-05-04T06:44:10.578Z] "/Users/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/..//bin/java" -Xshareclasses:destroyAll; "/Users/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/..//bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+[2021-05-04T06:44:10.578Z] 
+[2021-05-04T06:44:10.578Z] Attempting to destroy all caches in cacheDir /Users/jenkins/javasharedresources/
+[2021-05-04T06:44:10.578Z] 
+[2021-05-04T06:44:10.578Z] JVMSHRC806I Compressed references persistent shared cache "sharedcc_jenkins" has been destroyed. Use option -Xnocompressedrefs if you want to destroy a non-compressed references cache.
+[2021-05-04T06:44:10.578Z] JVMSHRC806I Compressed references persistent shared cache "sharedcc_jenkins" has been destroyed. Use option -Xnocompressedrefs if you want to destroy a non-compressed references cache.
+[2021-05-04T06:44:10.579Z] JVMSHRC807I Non-compressed references persistent shared cache "sharedcc_jenkins" has been destroyed. Use option -Xcompressedrefs if you want to destroy a compressed references cache.
+[2021-05-04T06:44:10.579Z] JVMSHRC807I Non-compressed references persistent shared cache "sharedcc_jenkins" has been destroyed. Use option -Xcompressedrefs if you want to destroy a compressed references cache.
+[2021-05-04T06:44:10.579Z] JVMSHRC005I No shared class caches available
+[2021-05-04T06:44:10.579Z] cache cleanup done
+[2021-05-04T06:44:10.579Z] variation: -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache -XX:-JITServerTechPreviewMessage Mode150
+[2021-05-04T06:44:10.579Z] JVM_OPTIONS:  -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache -XX:-JITServerTechPreviewMessage -XX:+UseCompressedOops 
+
+[2021-05-04T07:01:14.913Z] STDERR:
+[2021-05-04T07:01:14.913Z] java.lang.Error: 10.16 != 11.3
+[2021-05-04T07:01:14.913Z] 	at OsVersionTest.main(OsVersionTest.java:60)
+[2021-05-04T07:01:14.914Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-05-04T07:01:14.914Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+[2021-05-04T07:01:14.914Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-05-04T07:01:14.914Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+[2021-05-04T07:01:14.914Z] 	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+[2021-05-04T07:01:14.914Z] 	at java.base/java.lang.Thread.run(Thread.java:878)
+[2021-05-04T07:01:14.914Z] 
+[2021-05-04T07:01:14.914Z] JavaTest Message: Test threw exception: java.lang.Error
+[2021-05-04T07:01:14.914Z] JavaTest Message: shutting down test
+[2021-05-04T07:01:14.914Z] 
+[2021-05-04T07:01:14.914Z] 
+[2021-05-04T07:01:14.914Z] TEST RESULT: Failed. Execution failed: `main' threw exception: java.lang.Error: 10.16 != 11.3
+[2021-05-04T07:01:14.914Z] --------------------------------------------------
+[2021-05-04T07:04:59.726Z] Test results: passed: 745; failed: 1
+[2021-05-04T07:05:31.039Z] Report written to /Users/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_x86-64_mac/jvmtest/openjdk/report/html/report.html
+[2021-05-04T07:05:31.039Z] Results written to /Users/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_x86-64_mac/openjdk-tests/TKG/output_16201106481783/jdk_lang_0/work
+[2021-05-04T07:05:31.039Z] Error: Some tests failed or other problems occurred.
+[2021-05-04T07:05:31.039Z] 
+[2021-05-04T07:05:31.039Z] jdk_lang_0_FAILED
+```

@@ -1,0 +1,9 @@
+As part of https://github.com/eclipse/openj9/pull/7387, we noticed that the Power codegen's behaviour w.r.t inlining `java_lang_String_hashCodeImplDecompressed` differs from the other codegens. The reason for this is explained by @ymanton here: https://github.com/eclipse/openj9/pull/7387#issuecomment-545606441. For convenience, I am pasting his comment here:
+
+```
+Power has the restriction because the Power codegen generates code that loads data from a table that is defined as a static array in the JIT library. We don't have relocations for that sort of thing so this path is disabled for AOT.
+
+The other codegens put their constant data in constant data snippets which already support AOT and therefore also work for JITServer. We should fix this by at least doing the same on Power.
+```
+
+We should remove this limitation in the Power codegen and follow the suggestion provided by Younes in the comment linked above.

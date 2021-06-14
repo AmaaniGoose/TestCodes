@@ -1,0 +1,126 @@
+**Describe the bug**
+Several MulticastSocket test failed on aix with jdk 15 and 16 for both hotspot and openj9. These tests are:
+- java/net/MulticastSocket/Test.java
+- java/net/MulticastSocket/Promiscuous.java
+- java/net/MulticastSocket/B6427403.java
+- java/net/MulticastSocket/NoLoopbackPackets.java
+- java/net/MulticastSocket/SetLoopbackMode.java
+
+**To Reproduce**
+Steps to reproduce the behavior (or Grinder rerun link):
+https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/6464/testReport/
+https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/6463/testReport/
+https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/6522/testReport/
+
+**Additional context**
+
+java/net/MulticastSocket/Test.java
+```
+java.net.SocketException: joinGroup failed
+	at java.base/sun.nio.ch.DatagramSocketAdaptor.joinGroup(DatagramSocketAdaptor.java:482)
+	at java.base/java.net.MulticastSocket.joinGroup(MulticastSocket.java:329)
+	at Test.doTest(Test.java:71)
+	at Test.allTests(Test.java:141)
+	at Test.main(Test.java:167)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+Caused by: java.lang.IllegalArgumentException: IPv6 socket cannot join IPv4 multicast group
+	at java.base/sun.nio.ch.DatagramChannelImpl.innerJoin(DatagramChannelImpl.java:1466)
+	at java.base/sun.nio.ch.DatagramChannelImpl.join(DatagramChannelImpl.java:1551)
+	at java.base/sun.nio.ch.DatagramSocketAdaptor.joinGroup(DatagramSocketAdaptor.java:532)
+	at java.base/sun.nio.ch.DatagramSocketAdaptor.joinGroup(DatagramSocketAdaptor.java:479)
+	... 10 more
+java.lang.Exception: Test failed - see log file for details
+	at Test.main(Test.java:179)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+
+JavaTest Message: Test threw exception: java.lang.Exception
+```
+
+java/net/MulticastSocket/Promiscuous.java
+```
+java.lang.RuntimeException: 0.0.0.0/0.0.0.0:36590: Expected message not received, Receive timed out
+	at Promiscuous.receive(Promiscuous.java:79)
+	at Promiscuous.test(Promiscuous.java:140)
+	at Promiscuous.main(Promiscuous.java:195)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+
+JavaTest Message: Test threw exception: java.lang.RuntimeException: 0.0.0.0/0.0.0.0:36590: Expected message not received, Receive timed out
+```
+
+java/net/MulticastSocket/B6427403.java
+```
+java.net.SocketException: joinGroup failed
+	at java.base/sun.nio.ch.DatagramSocketAdaptor.joinGroup(DatagramSocketAdaptor.java:482)
+	at java.base/java.net.MulticastSocket.joinGroup(MulticastSocket.java:329)
+	at B6427403.main(B6427403.java:38)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+Caused by: java.lang.IllegalArgumentException: IPv6 socket cannot join IPv4 multicast group
+	at java.base/sun.nio.ch.DatagramChannelImpl.innerJoin(DatagramChannelImpl.java:1466)
+	at java.base/sun.nio.ch.DatagramChannelImpl.join(DatagramChannelImpl.java:1551)
+	at java.base/sun.nio.ch.DatagramSocketAdaptor.joinGroup(DatagramSocketAdaptor.java:532)
+	at java.base/sun.nio.ch.DatagramSocketAdaptor.joinGroup(DatagramSocketAdaptor.java:479)
+	... 8 more
+
+JavaTest Message: Test threw exception: java.net.SocketException
+JavaTest Message: shutting down test
+```
+
+java/net/MulticastSocket/NoLoopbackPackets.java
+```
+java.lang.IllegalArgumentException: IPv6 socket cannot join IPv4 multicast group
+	at java.base/sun.nio.ch.DatagramChannelImpl.innerJoin(DatagramChannelImpl.java:1466)
+	at java.base/sun.nio.ch.DatagramChannelImpl.join(DatagramChannelImpl.java:1551)
+	at java.base/sun.nio.ch.DatagramSocketAdaptor.joinGroup(DatagramSocketAdaptor.java:532)
+	at java.base/java.net.MulticastSocket.joinGroup(MulticastSocket.java:384)
+	at NoLoopbackPackets.main(NoLoopbackPackets.java:94)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+
+JavaTest Message: Test threw exception: java.lang.IllegalArgumentException
+```
+
+java/net/MulticastSocket/SetLoopbackMode.java
+```
+java.net.SocketException: joinGroup failed
+	at java.base/sun.nio.ch.DatagramSocketAdaptor.joinGroup(DatagramSocketAdaptor.java:482)
+	at java.base/java.net.MulticastSocket.joinGroup(MulticastSocket.java:329)
+	at SetLoopbackMode.main(SetLoopbackMode.java:132)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+Caused by: java.lang.IllegalArgumentException: IPv6 socket cannot join IPv4 multicast group
+	at java.base/sun.nio.ch.DatagramChannelImpl.innerJoin(DatagramChannelImpl.java:1466)
+	at java.base/sun.nio.ch.DatagramChannelImpl.join(DatagramChannelImpl.java:1551)
+	at java.base/sun.nio.ch.DatagramSocketAdaptor.joinGroup(DatagramSocketAdaptor.java:532)
+	at java.base/sun.nio.ch.DatagramSocketAdaptor.joinGroup(DatagramSocketAdaptor.java:479)
+	... 8 more
+
+JavaTest Message: Test threw exception: java.net.SocketException: joinGroup failed
+```

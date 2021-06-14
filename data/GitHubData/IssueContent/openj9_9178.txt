@@ -1,0 +1,1 @@
+port_omrsigSupport is set to false in AArch64 spec files.

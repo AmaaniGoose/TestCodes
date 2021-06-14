@@ -1,0 +1,47 @@
+```
+13:23:02 ===============================================
+13:23:02 Running test cmdLineTester_getPid_0 ...
+13:23:02 ===============================================
+13:23:03 cmdLineTester_getPid_0 Start Time: Fri Apr  6 18:23:15 2018 Epoch Time (ms): 1523035395772
+13:23:03 test with NoOptions
+13:23:03 { "C:\Users\j9build\jenkins\workspace\Test-Sanity-JDK10-win_x86-64_cmprssptrs/jdk/bin\\java"  -Xcompressedrefs  -DTESTDIR="C:/Users/j9build/jenkins/workspace/Test-Sanity-JDK10-win_x86-64_cmprssptrs/openj9/test///..//jvmtest\\cmdLineTests\\runtimemxbeanTests" -DRESJAR="C:/Users/j9build/jenkins/workspace/Test-Sanity-JDK10-win_x86-64_cmprssptrs/openj9/test///..//jvmtest\\cmdline_options_testresources\\cmdlinetestresources.jar" -DEXE='"C:\Users\j9build\jenkins\workspace\Test-Sanity-JDK10-win_x86-64_cmprssptrs/jdk/bin\\java"  -Xcompressedrefs ' -DTESTSJARPATH="C:/Users/j9build/jenkins/workspace/Test-Sanity-JDK10-win_x86-64_cmprssptrs/openj9/test///..//jvmtest\\cmdLineTests\\runtimemxbeanTests\\runtimemxbeanTests.jar" -jar "C:/Users/j9build/jenkins/workspace/Test-Sanity-JDK10-win_x86-64_cmprssptrs/openj9/test///..//jvmtest\\cmdline_options_tester\\cmdlinetester.jar" -config "C:/Users/j9build/jenkins/workspace/Test-Sanity-JDK10-win_x86-64_cmprssptrs/openj9/test///..//jvmtest\\cmdLineTests\\runtimemxbeanTests\\getPidTest.xml" -explainExcludes -nonZeroExitWhenError; \
+13:23:03 if [ $? -eq 0 ] ; then echo ""; echo "cmdLineTester_getPid_0""_PASSED"; echo ""; else echo ""; echo "cmdLineTester_getPid_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "C:/Users/j9build/jenkins/workspace/Test-Sanity-JDK10-win_x86-64_cmprssptrs/openj9/test/\\TestConfig\\test_output_15230353862082\\TestTargetResult";
+13:23:04 *** Starting test suite: getPid test ***
+13:23:04 Testing: Compare RuntimeMXBean.getPid() with getting PID from system
+13:23:04 Test start time: 2018/04/06 18:23:16 Greenwich Mean Time
+13:23:04 Running command: perl C:/Users/j9build/jenkins/workspace/Test-Sanity-JDK10-win_x86-64_cmprssptrs/openj9/test///..//jvmtest\cmdLineTests\runtimemxbeanTests/getPidTest.pl "C:\Users\j9build\jenkins\workspace\Test-Sanity-JDK10-win_x86-64_cmprssptrs/jdk/bin\\java"  -Xcompressedrefs  -cp C:/Users/j9build/jenkins/workspace/Test-Sanity-JDK10-win_x86-64_cmprssptrs/openj9/test///..//jvmtest\cmdLineTests\runtimemxbeanTests\runtimemxbeanTests.jar GetPid
+13:23:04 Time spent starting: 23 milliseconds
+13:23:04 Time spent executing: 309 milliseconds
+13:23:04 Test result: FAILED
+13:23:04 Output from test:
+13:23:04  [OUT] FAIL: RuntimeMXBean.getPID() returned sh: C:Usersj9buildjenkinsworkspaceTest-Sanity-JDK10-win_x86-64_cmprssptrs/jdk/bin\java: No such file or directory
+13:23:04  [OUT]  instead of 5176
+13:23:04  [ERR] Argument "sh: C:Usersj9buildjenkinsworkspaceTest-Sanity-JDK10-win_..." isn't numeric in numeric eq (==) at C:/Users/j9build/jenkins/workspace/Test-Sanity-JDK10-win_x86-64_cmprssptrs/openj9/test///..//jvmtest\cmdLineTests\runtimemxbeanTests/getPidTest.pl line 37, <GEN1> line 1.
+13:23:04 >> Success condition was not found: [Output match: PASS]
+13:23:04 >> Failure condition was found: [Output match: FAIL]
+13:23:04 
+13:23:04 
+13:23:04 ---TEST RESULTS---
+13:23:04 Number of PASSED tests: 0 out of 1
+13:23:04 Number of FAILED tests: 1 out of 1
+13:23:04 
+13:23:04 ---SUMMARY OF FAILED TESTS---
+13:23:04 Compare RuntimeMXBean.getPid() with getting PID from system
+13:23:04 -----------------------------
+13:23:04 
+13:23:04 
+13:23:04 cmdLineTester_getPid_0_FAILED
+13:23:04 
+13:23:04 cmdLineTester_getPid_0 Finish Time: Fri Apr  6 18:23:17 2018 Epoch Time (ms): 1523035397295
+```
+
+Java version:
+```
+13:04:10 + build/windows-x86_64-normal-server-release/images/jdk/bin/java -version
+13:04:10 openjdk version "10-internal" 2018-03-20
+13:04:10 OpenJDK Runtime Environment (build 10-internal+0-adhoc..Build-JDK10-winx86-64cmprssptrs)
+13:04:10 Eclipse OpenJ9 VM (build ibm_sdk-e9cc0eaf00, JRE 10 Windows Server 2008 R2 amd64-64 Compressed References 20180406_9 (JIT enabled, AOT enabled)
+13:04:10 OpenJ9   - e9cc0eaf00
+13:04:10 OMR      - 12d6fd9b
+13:04:10 JCL      - fe3402a9c4 based on jdk-10+46)
+```

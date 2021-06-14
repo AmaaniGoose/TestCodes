@@ -1,0 +1,29 @@
+Failure link
+------------
+- test category, sanity.openjdk
+- OS/architecture, aarch_64
+```
+17:48:19  openjdk version "11.0.7" 2020-04-14
+17:48:19  OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.7+9)
+17:48:19  Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.20.0-m2, JRE 11 Linux aarch64-64-Bit Compressed References 20200330_255 (JIT enabled, AOT enabled)
+17:48:19  OpenJ9   - c93e4dabc
+17:48:19  OMR      - 1b6abd044
+17:48:19  JCL      - 644e9abfc0 based on jdk-11.0.7+9)
+```
+
+Optional info
+-------------
+- intermittent failure (no):  
+- Part of the jdk11-m2 triage https://github.com/AdoptOpenJDK/openjdk-tests/issues/1705
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+19:59:48  STDOUT:
+19:59:48  [TestNG] Running:
+19:59:48    java/util/stream/test/org/openjdk/tests/java/util/stream/CountLargeTest.java
+19:59:48  
+19:59:48  test org.openjdk.tests.java.util.stream.CountLargeTest.testDoubleLarge(): success
+19:59:48  test org.openjdk.tests.java.util.stream.CountLargeTest.testIntLarge(): success
+19:59:48  Timeout refired 960 times
+```

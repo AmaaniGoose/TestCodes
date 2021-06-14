@@ -1,0 +1,115 @@
+Java -version output
+--------------------
+
+```
+openjdk version "11" 2018-09-25
+OpenJDK Runtime Environment AdoptOpenJDK (build 11+28)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.10.0, JRE 11 Linux amd64-64-Bit Compressed References 20181003_44 (JIT enabled, AOT enabled)
+OpenJ9   - e44c4716
+OMR      - 32df9563
+JCL      - eeda2c2d02 based on jdk-11+28)
+```
+```
+openjdk version "12" 2019-03-19
+OpenJDK Runtime Environment AdoptOpenJDK (build 12+33)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.13.0, JRE 12 Linux amd64-64-Bit Compressed References 20190320_41 (JIT enabled, AOT enabled)
+OpenJ9   - caeb51f87
+OMR      - 33a33ff2
+JCL      - 419f571019 based on jdk-12+33)
+```
+```
+openjdk version "11.0.3" 2019-04-16
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.3+7)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.14.3, JRE 11 Linux amd64-64-Bit Compressed References 20190531_239 (JIT enabled, AOT enabled)
+OpenJ9   - b8ab01656
+OMR      - b56045d2
+JCL      - dcdc97f9dc based on jdk-11.0.3+7)
+```
+
+------------------
+
+I intercepted a very strange issue. I am reporting it here because it fails *only* on OpenJ9, but it may well be an issue of Eclipse EMF, in which case I apologize. 
+
+We wrote a [programming language](www.protelis.org) using Xtext. We set up the continuous integration and found errors only on Open J9 11 and 12 (everything works as expected in every other JVM, OpenJDK, Oracle, Amazon Corretto).
+
+The issue is hard to reproduce, as it only shows up if the test suite is executed in order and including all tests. Re-executing only the failing test does not reproduce the issue (which IMHO may point to some issue with caching/interning).
+
+At some point, we generate a string which is in the form:
+``dummy:/protelis-generated-program-<SHA-512-hash>.pt``, then we call `org.eclipse.emf.common.util.URI.createURI(programId)`.
+Internally, such method interns arrays of strings, and uses an assertion to check that interning was successful:
+``assert segments == SegmentSequence.STRING_ARRAY_POOL.intern(true, true, segments, segments.length);``
+This check sometimes fails. As said, its not trivial to reproduce. It's not due to a specific String, but to the sequence of calls to the method.
+However, by feeding the same sequence, the error appears consistently and on every platform (tested under Linux, OSX, Windows), which makes me wonder if OpenJ9 has a different String interning mechanism than OpenJDK.
+Curiously, this problem can be (horribly) worked around by creating the URI twice and accounting for a possible failure on the first attempt:
+```java
+URI uri;
+try {
+    uri = URI.createURI(programId);
+} catch (AssertionError e) {
+    uri = URI.createURI(programId);
+}
+```
+
+My hypothesis is that OpenJ9 has a different String interning mechanism than OpenJDK, and EMF makes assumptions that are not verified on all platforms.
+Can this be the root of the issue?
+
+Diagnostic files
+----------------
+
+I can only provide the stacktrace:
+
+```
+java.lang.AssertionError
+	at org.eclipse.emf.common.util.URI$Hierarchical.<init>(URI.java:3197)
+	at org.eclipse.emf.common.util.URI$URIPool$URIComponentsAccessUnit.getInternalizedValue(URI.java:1875)
+	at org.eclipse.emf.common.util.URI$URIPool$URIComponentsAccessUnit.getInternalizedValue(URI.java:1)
+	at org.eclipse.emf.common.util.Pool.doIntern(Pool.java:932)
+	at org.eclipse.emf.common.util.URI$URIPool.intern(URI.java:2006)
+	at org.eclipse.emf.common.util.URI$URIPool$StringAccessUnit.parseIntoURI(URI.java:682)
+	at org.eclipse.emf.common.util.URI$URIPool$StringAccessUnit.getInternalizedValue(URI.java:400)
+	at org.eclipse.emf.common.util.URI$URIPool.intern(URI.java:1931)
+	at org.eclipse.emf.common.util.URI.createURIWithCache(URI.java:2570)
+	at org.eclipse.emf.common.util.URI.createURI(URI.java:2445)
+	at org.protelis.lang.ProtelisLoader.resourceFromString(ProtelisLoader.java:471)
+	at org.protelis.lang.ProtelisLoader.parseAnonymousModule(ProtelisLoader.java:393)
+	at org.protelis.lang.ProtelisLoader.parse(ProtelisLoader.java:372)
+	at org.protelis.test.ProgramTester.runFile(ProgramTester.java:189)
+	at org.protelis.test.ProgramTester.lambda$2(ProgramTester.java:165)
+	at org.protelis.test.ProgramTester$$Lambda$274.0000000081412240.accept(Unknown Source)
+	at java8.util.stream.Streams$RangeIntSpliterator.forEachRemaining(Streams.java:110)
+	at java8.util.stream.IntPipeline$Head.forEach(IntPipeline.java:594)
+	at org.protelis.test.ProgramTester.runFileWithMultipleRuns(ProgramTester.java:164)
+	at org.protelis.test.ProgramTester.runFileWithMultipleRuns(ProgramTester.java:153)
+	at org.protelis.test.ProgramTester.runFileWithMultipleRuns(ProgramTester.java:140)
+	at org.protelis.lang.test.TestApis.testProgram(TestApis.java:32)
+	at org.protelis.lang.test.TestApis.testFlip(TestApis.java:562)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:89)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:41)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:541)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:763)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:463)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:209)
+
+```

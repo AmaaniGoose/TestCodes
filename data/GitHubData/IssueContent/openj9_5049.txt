@@ -1,0 +1,56 @@
+Failure link
+------------
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/openjdk8_j9_openjdktest_x86-64_macos/132/console
+
+- JTReg rmi tests 
+- Macos
+- JDK8
+- build level : 
+
+```
+07:11:07  openjdk version "1.8.0_202-internal"
+07:11:07  OpenJDK Runtime Environment (build 1.8.0_202-internal-201903110454-b08)
+07:11:07  Eclipse OpenJ9 VM (build master-f0820b5ca, JRE 1.8.0 Mac OS X amd64-64-Bit Compressed References 20190311_181 (JIT enabled, AOT enabled)
+07:11:07  OpenJ9   - f0820b5ca
+07:11:07  OMR      - 5f74eb34
+07:11:07  JCL      - 9dc1c4d81c based on )
+```
+
+Optional info
+-------------
+
+- intermittent failure : yes 
+- regression or new test:  java/rmi/activation/Activatable/checkActivateRef/CheckActivateRef.java
+
+Failure output
+--------------
+
+```
+08:30:40  ACTIVATION_LIBRARY: Activation System available after 800 milliseconds
+08:30:40  RMID: finished starting rmid.
+08:30:40  Create activation group in this VM
+08:30:40  TEST FAILED: 
+08:30:40  Test failed with: null
+08:30:40  java.lang.NullPointerException
+08:30:40  	at CheckActivateRef.main(CheckActivateRef.java:140)
+08:30:40  	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+08:30:40  	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+08:30:40  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+08:30:40  	at java.lang.reflect.Method.invoke(Method.java:498)
+08:30:40  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+08:30:40  	at java.lang.Thread.run(Thread.java:813)
+08:30:40  ACTIVATION_LIBRARY: Activation System available after 0 milliseconds
+08:30:40  RMID: getting a reference to the activation system
+08:30:40  RMID: obtained a reference to the activation system
+08:30:40  TEST FAILED: reference to the activation system was null
+08:30:40  RMID: caught exception trying to shutdown rmid
+08:30:40  RMID: TEST FAILED: reference to the activation system was null
+08:30:40  TestFailedException: TEST FAILED: reference to the activation system was null
+08:30:40  	at TestLibrary.bomb(TestLibrary.java:121)
+08:30:40  	at TestLibrary.bomb(TestLibrary.java:124)
+08:30:40  	at RMID.shutdown(RMID.java:291)
+08:30:40  	at RMID.destroy(RMID.java:313)
+08:30:40  	at ActivationLibrary$DestroyThread.run(ActivationLibrary.java:220)
+08:30:40  RMID: testlibrary finished shutting down rmid
+```
+

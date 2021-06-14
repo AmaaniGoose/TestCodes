@@ -1,0 +1,51 @@
+Build:
+```
+10:54:48  openjdk version "16" 2021-03-16
+10:54:48  OpenJDK Runtime Environment AdoptOpenJDK-16+36-202104050831 (build 16+36)
+10:54:48  Eclipse OpenJ9 VM AdoptOpenJDK-16+36-202104050831 (build openj9-0.26.0-m2, JRE 16 Linux amd64-64-Bit Compressed References 20210405_13 (JIT enabled, AOT enabled)
+10:54:48  OpenJ9   - 4ce9ec8a1
+10:54:48  OMR      - b8996ac2c
+10:54:48  JCL      - 8f1ec25575b based on jdk-16+36)
+```
+
+https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_extended.functional_x86-64_linux/57/consoleFull - test-docker-fedora33-x64-2
+```
+14:09:30  ===============================================
+14:09:30  Running test testDefaultDisclaimMemory_1 ...
+14:09:30  ===============================================
+14:09:30  testDefaultDisclaimMemory_1 Start Time: Mon Apr  5 13:09:29 2021 Epoch Time (ms): 1617628169531
+14:09:30  "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+14:09:30  JVMSHRC005I No shared class caches available
+14:09:30  JVMSHRC005I No shared class caches available
+14:09:30  cache cleanup done
+14:09:30  variation: Mode119
+14:09:30  JVM_OPTIONS:  -Xgcpolicy:optavgpause -Xjit -Xnocompressedrefs 
+14:09:30  { itercnt=1; \
+14:09:30  mkdir -p "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux/openjdk-tests/TKG/../TKG/output_1617616939728/testDefaultDisclaimMemory_1"; \
+14:09:30  cd "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux/openjdk-tests/TKG/../TKG/output_1617616939728/testDefaultDisclaimMemory_1"; \
+14:09:30  export LD_LIBRARY_PATH="/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux/openjdkbinary/openjdk-test-image/openj9:/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux/openjdkbinary/j2sdk-image/bin/../lib/default:/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux/openjdkbinary/j2sdk-image/bin/../lib/j9vm:"; \
+14:09:30  "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux/openjdkbinary/j2sdk-image/bin/java"  -Xgcpolicy:optavgpause -Xjit -Xnocompressedrefs  \
+14:09:30  -Xsoftmx512m -Xmx1024m -Xmn1m -verbose:gc -Xverbosegclog:"/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux/openjdk-tests/TKG/../TKG/output_1617616939728/testDefaultDisclaimMemory_1"/vgc.log \
+14:09:30  -cp "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux/openjdk-tests/TKG/../../jvmtest/TestConfig/resources:/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux/openjdk-tests/TKG/../TKG/lib/testng.jar:/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux/openjdk-tests/TKG/../TKG/lib/jcommander.jar:/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux/openjdk-tests/TKG/../../jvmtest/functional/JLM_Tests/jlm_tests.jar" \
+14:09:30  org.testng.TestNG -d "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux/openjdk-tests/TKG/../TKG/output_1617616939728/testDefaultDisclaimMemory_1" "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux/openjdk-tests/TKG/../../jvmtest/functional/JLM_Tests/testng.xml" \
+14:09:30  -testnames testSoftMxDisclaimMemory \
+14:09:30  -groups level.extended \
+14:09:30  -excludegroups d.*.linux_x86-64_mxdptrs,d.*.arch.x86,d.*.os.linux,d.*.bits.64,d.*.generic-all; \
+14:09:30  if [ $? -eq 0 ] ; then echo ""; echo "testDefaultDisclaimMemory_1""_PASSED"; echo ""; cd /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux/openjdk-tests/TKG/..; rm -f -r "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux/openjdk-tests/TKG/../TKG/output_1617616939728/testDefaultDisclaimMemory_1"; else echo ""; echo "testDefaultDisclaimMemory_1""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux/openjdk-tests/TKG/../TKG/output_1617616939728/TestTargetResult";
+14:09:30  [IncludeExcludeTestAnnotationTransformer] [INFO] exclude file is /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux/openjdk-tests/TKG/../TestConfig/resources/excludes/latest_exclude_16.txt
+14:09:30  ...
+14:09:30  ... TestNG 6.14.2 by Cédric Beust (cedric@beust.com)
+14:09:30  ...
+14:09:30  
+14:09:40  [SoftmxAdvanceTest] [ERROR] 	FAIL: Memory didn't release back to OS! Post memory size 46625583104 is less than or equal to previous memory size 46801637376
+14:09:47  [SoftmxAdvanceTest] [ERROR] 	FAIL: Memory didn't release back to OS! Post memory size 46460198912 is less than or equal to previous memory size 46623485952
+14:09:54  [SoftmxAdvanceTest] [ERROR] 	FAIL: Memory didn't release back to OS! Post memory size 46457593856 is less than or equal to previous memory size 46458101760
+14:10:00  [SoftmxAdvanceTest] [ERROR] 	FAIL: Memory didn't release back to OS! Post memory size 46269779968 is less than or equal to previous memory size 46455496704
+14:10:07  [SoftmxAdvanceTest] [ERROR] 	FAIL: Memory didn't release back to OS! Post memory size 45449265152 is less than or equal to previous memory size 46267682816
+14:10:07  FAILED: testDisclaimMemoryEffects(5)
+14:10:07  java.lang.AssertionError: Test has failed after 5 attempts
+14:10:07  	at org.testng.AssertJUnit.fail(AssertJUnit.java:59)
+14:10:07  	at org.testng.AssertJUnit.assertTrue(AssertJUnit.java:24)
+14:10:07  	at j9vm.test.softmx.SoftmxAdvanceTest.testDisclaimMemoryEffects(SoftmxAdvanceTest.java:70)
+```
+

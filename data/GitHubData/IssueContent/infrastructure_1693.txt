@@ -1,0 +1,12 @@
+Access level:
+- [ ] Non-privileged
+- [ ] jenkins user
+- [ ] root/Administrative
+- [ ] other (Please specify):
+
+System for which access is needed: 
+I need a Linux aarch64 system with docker installed.
+
+Please explain why you need this access including whether it is a temporary or permanent request:
+There is some issue with SCC on aarch64 which needs an investigation, more info - https://github.com/AdoptOpenJDK/openjdk-docker/issues/464
+

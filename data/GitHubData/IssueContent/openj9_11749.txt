@@ -1,0 +1,53 @@
+Enabling `-Xjit:verbose={codeCache}` can sometimes lead to a crash. 
+The crash happens in `compilationEnd()` when we try to get to the metadata for an existing compiled body from its startPC
+```
+      if (oldStartPC)
+         {
+         if (TR::Options::getVerboseOption(TR_VerboseCodeCache))
+            {
+            OMR::CodeCacheMethodHeader *oldMethodHeader = getCodeCacheMethodHeader((char*)oldStartPC, 32, NULL);
+            OMR::CodeCacheMethodHeader *recompiledMethodHeader = getCodeCacheMethodHeader((char*)startPC, 32, NULL);
+            UDATA oldEndPC = oldMethodHeader ? oldMethodHeader->_metaData->endPC :  -1;
+```
+`getCodeCacheMethodHeader()` searches back from startPC for the eyecatcher that is stored in the code cache header of a method.
+```
+struct CodeCacheMethodHeader
+   {
+   uint32_t _size;
+   char _eyeCatcher[4];
+   OMR::MethodExceptionData *_metaData;
+   };
+```
+Debugging the issue I was able to determine that the code cache header that is found is not the correct one and the `_metadaData` pointer is bogus. Further along (at lower addresses) there is another eyecather and the metadata from that CodeCacheMethodHeader is the correct one.
+
+Instrumenting the code I determined that this situation happens for some AOT compilations when we need to call `TreeEvaluator::tableEvaluator()`. This code allocates some code cache space, implicitly requesting a code cache header:
+```
+TR::Register *OMR::X86::TreeEvaluator::tableEvaluator(TR::Node *node, TR::CodeGenerator *cg)
+   {
+   int32_t i;
+   uint32_t numBranchTableEntries = node->getNumChildren() - 2;
+   intptr_t *branchTable =
+      (intptr_t*)cg->allocateCodeMemory(numBranchTableEntries * sizeof(branchTable[0]), cg->getCurrentEvaluationBlock()->isCold());
+```
+Later on, during binary encoding, we allocate another code cache piece for the compiled body. This allocation also requests a code cache header. So we have two back-to-back allocations with headers. 
+In the comp object we also remember the start of the first code cache piece:
+```
+TR_J9SharedCacheVM::getDesignatedCodeCache(TR::Compilation *comp)
+   {
+   int32_t numReserved;
+   int32_t compThreadID = comp ? comp->getCompThreadID() : -1;
+   bool hadClassUnloadMonitor;
+   bool hadVMAccess = releaseClassUnloadMonitorAndAcquireVMaccessIfNeeded(comp, &hadClassUnloadMonitor);
+   TR::CodeCache * codeCache = TR::CodeCacheManager::instance()->reserveCodeCache(true, 0, compThreadID, &numReserved);
+   acquireClassUnloadMonitorAndReleaseVMAccessIfNeeded(comp, hadVMAccess, hadClassUnloadMonitor);
+   // For AOT we need some alignment
+   if (codeCache)
+      {
+      codeCache->alignWarmCodeAlloc(_jitConfig->codeCacheAlignment);
+
+      // For AOT we must install the beginning of the code cache
+      comp->setRelocatableMethodCodeStart((uint32_t *)codeCache->getWarmCodeAlloc());
+```
+When we write the metadata for the compiled body, we consider these two code cache allocations as a single entity and use the first (lower address) code cache method header. The problem is in between this code cache method header and startPC there is another code cache method header with a valid eyecatcher but invalid _metaData pointer. This is the one that is found by searching back from startPC.
+
+One possible solution would be to identify this scenario and wack the eyecatcher in the bogus code cache method header.

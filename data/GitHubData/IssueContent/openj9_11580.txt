@@ -1,0 +1,7 @@
+`VarHandle MethodType lookup table` is stored in the `J9ROMClass`.
+
+The code related to the `VarHandle MethodType lookup table` should be wrapped with `J9VM_OPT_METHOD_HANDLE` or an identical flag so that it stays disabled for OJDK MH.
+
+The code related to the `VarHandle MethodType lookup table` is mentioned in the following comments:
+1. https://github.com/eclipse/openj9/pull/11566#pullrequestreview-561367547
+2. https://github.com/eclipse/openj9/pull/11566#issuecomment-754855484

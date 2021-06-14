@@ -1,0 +1,6 @@
+HotSpot has a new GC called ZGC that comes with a `-XX:SoftMaxHeapSize` option. It represents another way of tackling the problem `-Xsoftmx` tries to solve: instead of handing the control to the program with an interface extension, it lets the GC figure out how much heap size to add when more memory is requested. This can be helpful when running some closed-source Java programs out of the box, while hoping to have some of the flexibility of `-Xsoftmx`.
+
+In slightly more concrete terms, let's pretend we are making this around the existing `softmx`. The `-XX:SoftMaxHeapSize` is treated as the initial value and the minimum value for auto-adjustment. The requested behavior is:
+* When an out-of-memory GC is about to be triggered, the VM should increase `softmx` if it's not yet the same as `-Xmx`.
+* When the GC decides it's time to uncommit some memory, it dials down `softmx` accordingly too.
+* (Possibly something to push `softmx` down further when it's more than the initial value. The idle tuning will probably do.)

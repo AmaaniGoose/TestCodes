@@ -1,0 +1,173 @@
+Failing jdk build:
+```
+openjdk version "1.8.0_292-internal"
+OpenJDK Runtime Environment (build 1.8.0_292-internal-202104050821-b09)
+Eclipse OpenJ9 VM (build openj9-0.26.0-m2, JRE 1.8.0 Windows Server 2012 R2 amd64-64-Bit Compressed References 20210405_1034 (JIT enabled, AOT enabled)
+OpenJ9   - 4ce9ec8a1
+OMR      - b8996ac2c
+JCL      - e21e76d905 based on jdk8u292-b09)
+```
+javax/rmi/ssl/SSLSocketParametersTest.sh failed with:
+```
+13:34:16  Running SSLSocketParametersTest [1]
+13:34:16  ServerFactory::Calling createServerSocket(0)
+13:34:16  Inside HelloImpl::runServer
+13:34:16  Stub = Proxy[SSLSocketParametersTest$Hello,RemoteObjectInvocationHandler[UnicastRef2 [liveRef: [endpoint:[169.48.4.131:57678,SSLSocketParametersTest$ServerFactory@2a669173,SSLSocketParametersTest$ClientFactory@c2ead1af](local),objID:[-377ccdf3:178a206b27a:-7fff, 1409244680051132180]]]]]
+13:34:16  Inside HelloClient::runClient
+13:34:16  ClientFactory::Calling createSocket(169.48.4.131,57678)
+13:34:16  SSLSocketParametersTest [1] FAILED! Exception: java.rmi.NoSuchObjectException: no such object in table
+13:34:16  java.rmi.NoSuchObjectException: no such object in table
+13:34:16  	at sun.rmi.transport.StreamRemoteCall.exceptionReceivedFromServer(StreamRemoteCall.java:303)
+13:34:16  	at sun.rmi.transport.StreamRemoteCall.executeCall(StreamRemoteCall.java:279)
+13:34:16  	at sun.rmi.server.UnicastRef.invoke(UnicastRef.java:164)
+13:34:16  	at java.rmi.server.RemoteObjectInvocationHandler.invokeRemoteMethod(RemoteObjectInvocationHandler.java:235)
+13:34:16  	at java.rmi.server.RemoteObjectInvocationHandler.invoke(RemoteObjectInvocationHandler.java:180)
+13:34:16  	at com.sun.proxy.$Proxy0.sayHello(Unknown Source)
+13:34:16  	at SSLSocketParametersTest$HelloClient.runClient(SSLSocketParametersTest.java:75)
+13:34:16  	at SSLSocketParametersTest.runTest(SSLSocketParametersTest.java:137)
+13:34:16  	at SSLSocketParametersTest.main(SSLSocketParametersTest.java:286)
+```
+Failing job: https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_extended.openjdk_x86-64_windows/20/consoleFull
+
+Full output of failing test:
+```
+13:34:16  TEST: javax/rmi/ssl/SSLSocketParametersTest.sh
+13:34:16  TEST JDK: E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdkbinary\j2sdk-image
+13:34:16  
+13:34:16  ACTION: clean -- Passed. Clean successful
+13:34:16  REASON: User specified action: run clean SSLSocketParametersTest 
+13:34:16  TIME:   0.0 seconds
+13:34:16  messages:
+13:34:16  command: clean SSLSocketParametersTest
+13:34:16  reason: User specified action: run clean SSLSocketParametersTest 
+13:34:16  elapsed time (seconds): 0.0
+13:34:16  rerun:
+13:34:16  cd 'E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16176257216142\jdk_other_0\work\scratch\0' && \
+13:34:16  rm -f E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16176257216142\jdk_other_0\work\classes\0\javax\rmi\ssl\SSLSocketParametersTest.class
+13:34:16  
+13:34:16  ACTION: build -- Passed. Build successful
+13:34:16  REASON: User specified action: run build SSLSocketParametersTest 
+13:34:16  TIME:   0.093 seconds
+13:34:16  messages:
+13:34:16  command: build SSLSocketParametersTest
+13:34:16  reason: User specified action: run build SSLSocketParametersTest 
+13:34:16  Test directory:
+13:34:16    compile: SSLSocketParametersTest
+13:34:16  elapsed time (seconds): 0.093
+13:34:16  
+13:34:16  ACTION: compile -- Passed. Compilation successful
+13:34:16  REASON: .class file out of date or does not exist
+13:34:16  TIME:   0.092 seconds
+13:34:16  messages:
+13:34:16  command: compile -XDignore.symbol.file=true E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\javax\rmi\ssl\SSLSocketParametersTest.java
+13:34:16  reason: .class file out of date or does not exist
+13:34:16  Mode: agentvm
+13:34:16  Agent id: 2
+13:34:16  elapsed time (seconds): 0.092
+13:34:16  configuration:
+13:34:16  Boot Layer (javac runtime environment)
+13:34:16    class path: E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdkbinary\j2sdk-image\lib\tools.jar
+13:34:16                E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\javatest.jar
+13:34:16                E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\jtreg.jar
+13:34:16  
+13:34:16  javac compilation environment
+13:34:16    source path: E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\javax\rmi\ssl
+13:34:16    class path:  E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\javax\rmi\ssl
+13:34:16                 E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16176257216142\jdk_other_0\work\classes\0\javax\rmi\ssl
+13:34:16                 E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdkbinary\j2sdk-image\lib\tools.jar
+13:34:16  
+13:34:16  rerun:
+13:34:16  cd 'E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16176257216142\jdk_other_0\work\scratch\0' && \
+13:34:16  PATH='C:\cygwin64\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn;C:\Program Files\Microsoft SQL Server\100\Tools\Binn;C:\Program Files\Microsoft SQL Server\100\DTS\Binn;C:\Strawberry\perl\bin;C:\Program Files\Git\cmd;C:\openjdk\jdk-8\bin;C:\apache-ant\apache-ant-1.10.5\bin;C:\Program Files\Microsoft SQL Server\110\Tools\Binn;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0;C:\Program Files\Microsoft SQL Server\120\Tools\Binn;C:\Program Files (x86)\IncrediBuild;C:\rust\bin;C:\Program Files\IcedTeaWEB\bin' \
+13:34:16  SystemDrive=C: \
+13:34:16  SystemRoot='C:\Windows' \
+13:34:16  TEMP='C:\Users\JENKIN~1.TST\AppData\Local\Temp' \
+13:34:16  TMP='C:\Users\JENKIN~1.TST\AppData\Local\Temp' \
+13:34:16  windir='C:\Windows' \
+13:34:16      'E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdkbinary\j2sdk-image\bin\javac' \
+13:34:16          -J-ea \
+13:34:16          -J-esa \
+13:34:16          -J-Xmx512m \
+13:34:16          -J-XX:+UseCompressedOops \
+13:34:16          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+13:34:16          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+13:34:16          -J-Dtest.compiler.opts= \
+13:34:16          -J-Dtest.java.opts= \
+13:34:16          -J-Dtest.jdk='E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdkbinary\j2sdk-image' \
+13:34:16          -J-Dcompile.jdk='E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdkbinary\j2sdk-image' \
+13:34:16          -J-Dtest.timeout.factor=8.0 \
+13:34:16          -J-Dtest.root='E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test' \
+13:34:16          -J-Dtest.name=javax/rmi/ssl/SSLSocketParametersTest.sh \
+13:34:16          -J-Dtest.file='E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\javax\rmi\ssl\SSLSocketParametersTest.sh' \
+13:34:16          -J-Dtest.src='E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\javax\rmi\ssl' \
+13:34:16          -J-Dtest.src.path='E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\javax\rmi\ssl' \
+13:34:16          -J-Dtest.classes='E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16176257216142\jdk_other_0\work\classes\0\javax\rmi\ssl' \
+13:34:16          -J-Dtest.class.path='E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16176257216142\jdk_other_0\work\classes\0\javax\rmi\ssl' \
+13:34:16          -J-Dtest.class.path.prefix='E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16176257216142\jdk_other_0\work\classes\0\javax\rmi\ssl;E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\javax\rmi\ssl' \
+13:34:16          -d 'E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16176257216142\jdk_other_0\work\classes\0\javax\rmi\ssl' \
+13:34:16          -sourcepath 'E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\javax\rmi\ssl' \
+13:34:16          -classpath 'E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\javax\rmi\ssl;E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16176257216142\jdk_other_0\work\classes\0\javax\rmi\ssl;E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdkbinary\j2sdk-image\lib\tools.jar' \
+13:34:16          -XDignore.symbol.file=true 'E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\javax\rmi\ssl\SSLSocketParametersTest.java'
+13:34:16  
+13:34:16  ACTION: shell -- Failed. Execution failed: exit code 1
+13:34:16  REASON: User specified action: run shell/timeout=300 SSLSocketParametersTest.sh 
+13:34:16  TIME:   17.84 seconds
+13:34:16  messages:
+13:34:16  command: shell SSLSocketParametersTest.sh
+13:34:16  reason: User specified action: run shell/timeout=300 SSLSocketParametersTest.sh 
+13:34:16  elapsed time (seconds): 17.84
+13:34:16  STDOUT:
+13:34:16  -------------------------------------------------------------
+13:34:16  Launching test for SSLSocketParametersTest
+13:34:16  -------------------------------------------------------------
+13:34:16  KeyStore = E:/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_windows/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/rmi/ssl\keystore
+13:34:16  TrustStore = E:/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_windows/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/rmi/ssl\truststore
+13:34:16  Running SSLSocketParametersTest [1]
+13:34:16  ServerFactory::Calling createServerSocket(0)
+13:34:16  Inside HelloImpl::runServer
+13:34:16  Stub = Proxy[SSLSocketParametersTest$Hello,RemoteObjectInvocationHandler[UnicastRef2 [liveRef: [endpoint:[169.48.4.131:57678,SSLSocketParametersTest$ServerFactory@2a669173,SSLSocketParametersTest$ClientFactory@c2ead1af](local),objID:[-377ccdf3:178a206b27a:-7fff, 1409244680051132180]]]]]
+13:34:16  Inside HelloClient::runClient
+13:34:16  ClientFactory::Calling createSocket(169.48.4.131,57678)
+13:34:16  SSLSocketParametersTest [1] FAILED! Exception: java.rmi.NoSuchObjectException: no such object in table
+13:34:16  java.rmi.NoSuchObjectException: no such object in table
+13:34:16  	at sun.rmi.transport.StreamRemoteCall.exceptionReceivedFromServer(StreamRemoteCall.java:303)
+13:34:16  	at sun.rmi.transport.StreamRemoteCall.executeCall(StreamRemoteCall.java:279)
+13:34:16  	at sun.rmi.server.UnicastRef.invoke(UnicastRef.java:164)
+13:34:16  	at java.rmi.server.RemoteObjectInvocationHandler.invokeRemoteMethod(RemoteObjectInvocationHandler.java:235)
+13:34:16  	at java.rmi.server.RemoteObjectInvocationHandler.invoke(RemoteObjectInvocationHandler.java:180)
+13:34:16  	at com.sun.proxy.$Proxy0.sayHello(Unknown Source)
+13:34:16  	at SSLSocketParametersTest$HelloClient.runClient(SSLSocketParametersTest.java:75)
+13:34:16  	at SSLSocketParametersTest.runTest(SSLSocketParametersTest.java:137)
+13:34:16  	at SSLSocketParametersTest.main(SSLSocketParametersTest.java:286)
+13:34:16  STDERR:
+13:34:16  rerun:
+13:34:16  cd 'E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16176257216142\jdk_other_0\work\scratch\0' && \
+13:34:16  PATH='C:\cygwin64\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn;C:\Program Files\Microsoft SQL Server\100\Tools\Binn;C:\Program Files\Microsoft SQL Server\100\DTS\Binn;C:\Strawberry\perl\bin;C:\Program Files\Git\cmd;C:\openjdk\jdk-8\bin;C:\apache-ant\apache-ant-1.10.5\bin;C:\Program Files\Microsoft SQL Server\110\Tools\Binn;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0;C:\Program Files\Microsoft SQL Server\120\Tools\Binn;C:\Program Files (x86)\IncrediBuild;C:\rust\bin;C:\Program Files\IcedTeaWEB\bin' \
+13:34:16  SystemDrive=C: \
+13:34:16  SystemRoot='C:\Windows' \
+13:34:16  TEMP='C:\Users\JENKIN~1.TST\AppData\Local\Temp' \
+13:34:16  TMP='C:\Users\JENKIN~1.TST\AppData\Local\Temp' \
+13:34:16  windir='C:\Windows' \
+13:34:16  TESTFILE=E:/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_windows/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/rmi/ssl/SSLSocketParametersTest.sh \
+13:34:16  TESTSRC=E:/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_windows/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/rmi/ssl \
+13:34:16  TESTSRCPATH=E:/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_windows/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/rmi/ssl \
+13:34:16  TESTCLASSES=E:/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_windows/openjdk-tests/TKG/output_16176257216142/jdk_other_0/work/classes/0/javax/rmi/ssl \
+13:34:16  TESTCLASSPATH=E:/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_windows/openjdk-tests/TKG/output_16176257216142/jdk_other_0/work/classes/0/javax/rmi/ssl \
+13:34:16  COMPILEJAVA=E:/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_windows/openjdkbinary/j2sdk-image \
+13:34:16  TESTJAVA=E:/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_windows/openjdkbinary/j2sdk-image \
+13:34:16  TESTVMOPTS='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+13:34:16  TESTTOOLVMOPTS='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+13:34:16  TESTJAVACOPTS= \
+13:34:16  TESTJAVAOPTS= \
+13:34:16  TESTTIMEOUTFACTOR=8.0 \
+13:34:16  TESTROOT='E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test' \
+13:34:16  FS='\' \
+13:34:16  PS=; \
+13:34:16  NULL=NUL \
+13:34:16      sh \
+13:34:16          'E:\workspace\Test_openjdk8_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\javax\rmi\ssl\SSLSocketParametersTest.sh'
+13:34:16  
+13:34:16  TEST RESULT: Failed. Execution failed: exit code 1
+13:34:16  --------------------------------------------------
+13:35:44  Test results: passed: 211; failed: 2
+```

@@ -1,0 +1,11 @@
+Now that there are [solaris builds for jdk8](https://ci.adoptopenjdk.net/job/build-scripts/job/jobs/job/jdk8u/job/jdk8u-solaris-sparcv9-hotspot), we should enable testing
+
+jdk8 openjdk: 
+
+- [ ] [openjdk8_hs_openjdktest_sparcv9_solaris](https://ci.adoptopenjdk.net/view/Test_openjdk/job/openjdk8_hs_openjdktest_sparcv9_solaris/)
+
+jdk8 system:
+
+- [ ] openjdk8_hs_systemtest_sparc_solaris
+
+Do not yet see a live jdk11 build for solaris, so will wait for it before enabling testing in that version.

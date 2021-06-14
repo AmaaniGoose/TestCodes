@@ -1,0 +1,5 @@
+This issue exists to track test failures seen when running AOT PR test (ie PR tests run with `+aot`)
+
+- [x] https://github.com/eclipse/openj9/issues/6011 Crash in compiler in CondyPrimitive_* tests under forceAOT
+- [x] https://github.com/eclipse/openj9/issues/6052 Failure in cmdLineTester_DataHelperTests test under forceAOT
+- [ ] https://github.com/eclipse/openj9/issues/6053 Failure in cmdLineTester_SCHelperCompatibilityTests_win under forceAOT

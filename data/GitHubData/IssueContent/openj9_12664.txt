@@ -1,0 +1,97 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.openjdk_x86-64_windows_Nightly/346/
+win2012-x86-10
+java/lang/ProcessBuilder/Basic.java
+```
+23:15:20  STDOUT:
+23:15:20  This appears to be a Windows system.
+23:15:20  This appears to be a Unicode-based OS.
+23:15:20  Testing ASCII environment values
+23:15:20  Testing Latin1 environment values
+23:15:20  Testing directory .
+23:15:20  Testing directory ..
+23:15:20  Testing directory \
+23:15:20  Testing directory C:
+23:15:20  Testing directory c:
+23:15:20  Testing directory C:\
+23:15:20  Testing directory c:\
+23:15:20  Testing directory \
+23:15:20  Testing directory c:\windows  
+23:15:20  Testing directory c:\Program Files
+23:15:20  Testing directory c:\Program Files
+23:15:20  Testing Unicode directory:.\ProcessBuilderDir??
+23:15:20  Running case insensitve variable tests
+23:15:20  cmdp
+23:15:20  cmdp 0: F:\Users\jenkins\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_Nightly\openjdkbinary\j2sdk-image\bin\java
+23:15:20  cmdp 1: -XX:+DisplayVMOutputToStderr
+23:15:20  cmdp 2: -classpath
+23:15:20  cmdp 3: F:\Users\jenkins\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_Nightly\openjdk-tests\TKG\output_16207019969801\jdk_lang_1\work\classes\2\java\lang\ProcessBuilder\Basic_id0.d;F:\Users\jenkins\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_Nightly\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\ProcessBuilder;F:\Users\jenkins\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_Nightly\jvmtest\openjdk\jtreg\lib\javatest.jar;F:\Users\jenkins\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_Nightly\jvmtest\openjdk\jtreg\lib\jtreg.jar
+23:15:20  cmdp 4: Basic$JavaChild
+23:15:20  cmdp 5: System.getenv()
+23:15:20  envp
+23:15:20  envp 0: SystemRoot=C:\Windows
+23:15:20  envp 1: LC_ALL=C
+23:15:20  envp 2: FO=BR
+23:15:20   waitFor process: delta: 121376
+23:15:20  
+23:15:20  Passed = 9217, failed = 3
+23:15:20  
+23:15:20  STDERR:
+23:15:20  >'1'< not equal to '0'
+23:15:20  java.lang.Throwable
+23:15:20  	at java.base/java.lang.Thread.dumpStack(Thread.java:536)
+23:15:20  	at Basic.fail(Basic.java:2774)
+23:15:20  	at Basic.fail(Basic.java:2775)
+23:15:20  	at Basic.equal(Basic.java:2781)
+23:15:20  	at Basic.commandOutput(Basic.java:111)
+23:15:20  	at Basic.commandOutput(Basic.java:122)
+23:15:20  	at Basic.javaChildOutput(Basic.java:567)
+23:15:20  	at Basic.pwdInChild(Basic.java:583)
+23:15:20  	at Basic.realMain(Basic.java:1749)
+23:15:20  	at Basic.main(Basic.java:2784)
+23:15:20  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+23:15:20  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+23:15:20  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+23:15:20  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+23:15:20  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+23:15:20  	at java.base/java.lang.Thread.run(Thread.java:861)
+23:15:20  >'1'< not equal to '0'
+23:15:20  java.lang.Throwable
+23:15:20  	at java.base/java.lang.Thread.dumpStack(Thread.java:536)
+23:15:20  	at Basic.fail(Basic.java:2774)
+23:15:20  	at Basic.fail(Basic.java:2775)
+23:15:20  	at Basic.equal(Basic.java:2781)
+23:15:20  	at Basic.commandOutput(Basic.java:112)
+23:15:20  	at Basic.commandOutput(Basic.java:122)
+23:15:20  	at Basic.javaChildOutput(Basic.java:567)
+23:15:20  	at Basic.pwdInChild(Basic.java:583)
+23:15:20  	at Basic.realMain(Basic.java:1749)
+23:15:20  	at Basic.main(Basic.java:2784)
+23:15:20  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+23:15:20  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+23:15:20  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+23:15:20  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+23:15:20  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+23:15:20  	at java.base/java.lang.Thread.run(Thread.java:861)
+23:15:20  >''< not equal to 'F:\'
+23:15:20  java.lang.Throwable
+23:15:20  	at java.base/java.lang.Thread.dumpStack(Thread.java:536)
+23:15:20  	at Basic.fail(Basic.java:2774)
+23:15:20  	at Basic.fail(Basic.java:2775)
+23:15:20  	at Basic.equal(Basic.java:2781)
+23:15:20  	at Basic.realMain(Basic.java:1749)
+23:15:20  	at Basic.main(Basic.java:2784)
+23:15:20  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+23:15:20  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+23:15:20  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+23:15:20  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+23:15:20  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+23:15:20  	at java.base/java.lang.Thread.run(Thread.java:861)
+23:15:20  java.lang.AssertionError: Some tests failed
+23:15:20  	at Basic.main(Basic.java:2786)
+23:15:20  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+23:15:20  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+23:15:20  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+23:15:20  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+23:15:20  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+23:15:20  	at java.base/java.lang.Thread.run(Thread.java:861)
+```

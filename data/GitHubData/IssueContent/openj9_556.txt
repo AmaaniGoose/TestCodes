@@ -1,0 +1,1 @@
+On those processors that have 256 bit wide vector registers we could obtain significant performance gains by extending our current auto-SIMD support to use the wider registers.

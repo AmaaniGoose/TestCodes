@@ -1,0 +1,48 @@
+```
+Compilation levels:
+Level=1 numComp=7695
+Level=2 numComp=10039
+Level=3 numComp=6
+Run 9 Throughput=2184.9 WS=618796 CPU=175313 Errors=0
+Results for JDK=/home/harryayu2/sdks/java8 jvmOpts=-Xnoaot -Xmx1G 
+Throughput	avg=2257.87	min=2184.90	max=2338.60	stdDev=57.2	maxVar=7.03%	confInt=1.57%	samples= 9
+Intermediate results:
+Run 0	2235.6	Avg=2236	CPU=166353 ms  Footprint=612788 KB
+Run 1	2338.6	Avg=2339	CPU=162923 ms  Footprint=613648 KB
+Run 2	2315.9	Avg=2316	CPU=167866 ms  Footprint=608356 KB
+Run 3	2270.6	Avg=2271	CPU=169253 ms  Footprint=606584 KB
+Run 4	2258.6	Avg=2259	CPU=170535 ms  Footprint=606376 KB
+Run 5	2186.3	Avg=2186	CPU=167245 ms  Footprint=605152 KB
+Run 6	2214.8	Avg=2215	CPU=169812 ms  Footprint=601064 KB
+Run 7	2315.5	Avg=2316	CPU=165812 ms  Footprint=606920 KB
+Run 8	2184.9	Avg=2185	CPU=175313 ms  Footprint=618796 KB
+CompTime	avg=168345.78	min=162923.00	max=175313.00	stdDev=3491.9	maxVar=7.60%	confInt=1.29%	samples= 9
+Footprint	avg=608853.78	min=601064.00	max=618796.00	stdDev=5326.5	maxVar=2.95%	confInt=0.54%	samples= 9
+```
+
+```
+Level=1 numComp=7312
+Level=2 numComp=10454
+Level=3 numComp=6
+Run 9 Throughput=2190.4 WS=618956 CPU=168973 Errors=0
+Results for JDK=/home/harryayu2/sdks/java11 jvmOpts=-Xnoaot -Xmx1G 
+Throughput	avg=2175.72	min=2096.00	max=2316.70	stdDev=67.3	maxVar=10.53%	confInt=1.92%	samples= 9
+Intermediate results:
+Run 0	2137.9	Avg=2138	CPU=172329 ms  Footprint=640228 KB
+Run 1	2316.7	Avg=2317	CPU=158169 ms  Footprint=608228 KB
+Run 2	2219.4	Avg=2219	CPU=167760 ms  Footprint=612148 KB
+Run 3	2129.2	Avg=2129	CPU=174637 ms  Footprint=628884 KB
+Run 4	2124.5	Avg=2124	CPU=174872 ms  Footprint=617940 KB
+Run 5	2155.7	Avg=2156	CPU=169916 ms  Footprint=637068 KB
+Run 6	2096.0	Avg=2096	CPU=177876 ms  Footprint=622904 KB
+Run 7	2211.7	Avg=2212	CPU=169638 ms  Footprint=627580 KB
+Run 8	2190.4	Avg=2190	CPU=168973 ms  Footprint=618956 KB
+CompTime	avg=170463.33	min=158169.00	max=177876.00	stdDev=5667.3	maxVar=12.46%	confInt=2.06%	samples= 9
+Footprint	avg=623770.67	min=608228.00	max=640228.00	stdDev=10740.8	maxVar=5.26%	confInt=1.07%	samples= 9
+```
+
+liberty version: liberty-20.0.0.2_wlp_webProfile7_java8 (https://developer.ibm.com/wasdev/downloads/#asset/runtimes-webprofile7-ibm-java)
+
+(2257.87-2175.72)/2257.87 = 0.03638384849
+
+3.6% Throughput gap.

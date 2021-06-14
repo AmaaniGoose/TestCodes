@@ -1,0 +1,1 @@
+https://github.com/eclipse/openj9/pull/3396 is created as a workaround to a defect where we use 64-bit atomic intrinsics on IA32, which is not yet implemented. The workaround should be removed as soon as https://github.com/eclipse/omr/issues/3100 is finished.

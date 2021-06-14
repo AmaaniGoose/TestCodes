@@ -1,0 +1,4 @@
+Each Java version may introduce new features in class files which may require a new ASM version (in Opcodes.java).
+`com.ibm.java.diagnostics.utils.plugins.impl.ClassScanner` should use the latest available ASM version.
+
+Don't close this issue, move it to the next milestone after completing the update.

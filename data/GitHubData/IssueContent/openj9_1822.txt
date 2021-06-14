@@ -1,0 +1,8 @@
+OpenJ9 has an optimization to not recreate the classfile from the ROMClass if no transformers have been added.  This is present in the Extensions repos[1] and has been contributed to OpenJDK starting in JDK10[2].
+
+We need to add a test case that uses a simple agent with no transformers that calls retransformClasses and ensures that the tracepoints in the code that converts ROMClasses to Classfiles don't fire.
+
+This will let us know if the optimization ever breaks.
+
+[1] https://github.com/ibmruntimes/openj9-openjdk-jdk8/blob/openj9/jdk/src/share/classes/sun/instrument/InstrumentationImpl.java
+[2] http://hg.openjdk.java.net/jdk10/hs/rev/d85284ccd1bd

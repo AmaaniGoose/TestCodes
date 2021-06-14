@@ -1,0 +1,7 @@
+- `JVM_LogLambdaFormInvoker` was introduced in JDK16: https://github.com/eclipse/openj9/pull/10868.
+- Investigate if `JVM_LogLambdaFormInvoker` is needed to support OpenJDK MethodHandles.
+- If needed, then implement `JVM_LogLambdaFormInvoker`.
+
+Related: #7352
+
+**project:MH**

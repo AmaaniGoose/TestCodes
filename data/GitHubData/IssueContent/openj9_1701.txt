@@ -1,0 +1,21 @@
+[OpenJ9 Build](https://www.eclipse.org/openj9/oj9_build.html) website refers to **Build_Instructions_V${version}.md** for the full set of build instructions.
+
+Within **Build_Instructions_V${version}.md**, there is a reference to **yum_install_aix-ppc64.txt** in the [Prepare your system](https://github.com/babsingh/openj9/blob/master/buildenv/Build_Instructions_V8.md#1-prepare-your-system-1) section for AIX.
+
+I have been informed that **yum_install_aix-ppc64.txt** may be outdated. So, we need to verify if the current dependencies within **yum_install_aix-ppc64.txt** are sufficient to build the JDK on AIX. If the current dependencies are insufficient, then we would need to update **yum_install_aix-ppc64.txt**. 
+
+By verifying **yum_install_aix-ppc64.txt**, we will also be verifying the [AIX build](https://github.com/babsingh/openj9/blob/master/buildenv/Build_Instructions_V8.md#aix) section. If required, this section can be updated. If the AIX build process is successful, we can remove the following comment from the [AIX build](https://github.com/babsingh/openj9/blob/master/buildenv/Build_Instructions_V8.md#aix) section: `🚧 This section is still under construction. Further contributions expected.`
+
+To verify **yum_install_aix-ppc64.txt**, one needs a personal AIX machine where the user can execute the following command with root permissions: `yum shell yum_install_aix-ppc64.txt`. Currently, this is a problem since we don't have a machine where one can execute the `yum shell ...` command with root permissions. 
+
+Verification needs to be done for **JDK 8, 9 and 10**.
+
+**Build_Instructions_V${version}.md**:
+1) [Build_Instructions_V8.md](https://github.com/eclipse/openj9/blob/master/buildenv/Build_Instructions_V8.md)
+2) [Build_Instructions_V9.md](https://github.com/eclipse/openj9/blob/master/buildenv/Build_Instructions_V9.md)
+3) [Build_Instructions_V10.md](https://github.com/eclipse/openj9/blob/master/buildenv/Build_Instructions_V10.md)
+
+**yum_install_aix-ppc64.txt**:
+1) [JDK8](https://github.com/eclipse/openj9/blob/master/buildenv/aix/jdk8/yum_install_aix-ppc64.txt)
+2) [JDK9](https://github.com/eclipse/openj9/blob/master/buildenv/aix/jdk9/yum_install_aix-ppc64.txt)
+3) [JDK10](https://github.com/eclipse/openj9/blob/master/buildenv/aix/jdk10/yum_install_aix-ppc64.txt)

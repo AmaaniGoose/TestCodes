@@ -1,0 +1,3 @@
+PR #605 was part of a larger set of issues to clean up the trampoline logic in general and get the code in better shape to support trampolines for native functions.
+
+Some comments were raised during the review of the code that was relocated.  Because PR #605 was not about understanding or refactoring the method logic itself, this issue was created to track addressing the comments when the logic is revisited.

@@ -1,0 +1,80 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_special.system_x86-64_mac_Nightly/778
+MathLoadTest_bigdecimal_special_14
+variation: Mode551
+JVM_OPTIONS: -Xcompressedrefs -XX:+UseCompressedOops -Xjit -Xgcpolicy:balanced 
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.system_ppc64_aix_Nightly/265
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.system_x86-64_linux_Nightly/260
+MathLoadTest_all_0
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_special.system_ppc64_aix_Nightly/494
+MathLoadTest_all_special_19
+variation: Mode610
+JVM_OPTIONS: -Xcompressedrefs -Xcompressedrefs -Xjit -Xgcpolicy:gencon 
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_special.system_ppc64le_linux_Nightly/517
+MathLoadTest_all_special_21
+variation: Mode687
+JVM_OPTIONS: -Xcompressedrefs -XX:+UseCompressedOops -Xjit -Xgcpolicy:gencon -Xaggressive 
+```
+MLT testFailure: testItem_0216(net.adoptopenjdk.test.bigdecimal.TestSuite047): null
+MLT java.lang.ArrayIndexOutOfBoundsException
+MLT 	at java.math.BigInteger.add(BigInteger.java:1340)
+MLT 	at java.math.BigInteger.add(BigInteger.java:1238)
+MLT 	at java.math.BigInteger.multiplyKaratsuba(BigInteger.java:1728)
+MLT 	at java.math.BigInteger.multiply(BigInteger.java:1530)
+MLT 	at java.math.BigInteger.multiplyToomCook3(BigInteger.java:1789)
+MLT 	at java.math.BigInteger.multiply(BigInteger.java:1589)
+MLT 	at java.math.BigInteger.multiply(BigInteger.java:1493)
+MLT 	at java.math.BigInteger.pow(BigInteger.java:2403)
+MLT 	at java.math.BigDecimal.bigTenToThe(BigDecimal.java:3574)
+MLT 	at java.math.BigDecimal.bigDigitLength(BigDecimal.java:3851)
+MLT 	at java.math.BigDecimal.precision(BigDecimal.java:2243)
+MLT 	at java.math.BigDecimal.doRound(BigDecimal.java:4019)
+MLT 	at java.math.BigDecimal.divide(BigDecimal.java:4754)
+MLT 	at java.math.BigDecimal.divide(BigDecimal.java:1755)
+MLT 	at java.math.BigDecimal.divideToIntegralValue(BigDecimal.java:1795)
+MLT 	at java.math.BigDecimal.divideToIntegralValue(BigDecimal.java:1833)
+MLT 	at net.adoptopenjdk.test.bigdecimal.TestSuite047.testItem_0216(TestSuite047.java:1605)
+```
+
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_special.system_x86-64_linux_Nightly/1036
+MathLoadTest_bigdecimal_special_14 
+MathLoadTest_all_special_14
+```
+MLT testFailure: testItem_0895(net.adoptopenjdk.test.bigdecimal.TestSuite043): null
+MLT java.lang.NullPointerException
+MLT 	at java.math.BigInteger.add(BigInteger.java:1340)
+MLT 	at java.math.BigInteger.add(BigInteger.java:1238)
+MLT 	at java.math.BigInteger.squareKaratsuba(BigInteger.java:2119)
+MLT 	at java.math.BigInteger.square(BigInteger.java:1985)
+MLT 	at java.math.BigInteger.square(BigInteger.java:1964)
+MLT 	at java.math.BigInteger.pow(BigInteger.java:2407)
+MLT 	at java.math.BigDecimal.bigTenToThe(BigDecimal.java:3574)
+MLT 	at java.math.BigDecimal.bigMultiplyPowerTen(BigDecimal.java:4539)
+MLT 	at java.math.BigDecimal.divide(BigDecimal.java:4745)
+MLT 	at java.math.BigDecimal.divide(BigDecimal.java:1755)
+MLT 	at java.math.BigDecimal.divideToIntegralValue(BigDecimal.java:1795)
+MLT 	at java.math.BigDecimal.divideAndRemainder(BigDecimal.java:1951)
+MLT 	at net.adoptopenjdk.test.bigdecimal.TestSuite043.testItem_0895(TestSuite043.java:6202)
+```
+```
+MLT testFailure: testItem_0216(net.adoptopenjdk.test.bigdecimal.TestSuite047): null
+MLT java.lang.NullPointerException
+MLT 	at java.math.BigInteger.add(BigInteger.java:1352)
+MLT 	at java.math.BigInteger.add(BigInteger.java:1238)
+MLT 	at java.math.BigInteger.multiplyKaratsuba(BigInteger.java:1725)
+MLT 	at java.math.BigInteger.multiply(BigInteger.java:1530)
+MLT 	at java.math.BigInteger.multiply(BigInteger.java:1493)
+MLT 	at java.math.BigInteger.multiplyKaratsuba(BigInteger.java:1722)
+MLT 	at java.math.BigInteger.multiply(BigInteger.java:1530)
+MLT 	at java.math.BigInteger.multiplyToomCook3(BigInteger.java:1795)
+MLT 	at java.math.BigInteger.multiply(BigInteger.java:1589)
+MLT 	at java.math.BigInteger.multiply(BigInteger.java:1493)
+MLT 	at java.math.BigInteger.pow(BigInteger.java:2403)
+MLT 	at java.math.BigDecimal.bigTenToThe(BigDecimal.java:3574)
+MLT 	at java.math.BigDecimal.setScale(BigDecimal.java:2473)
+MLT 	at java.math.BigDecimal.setScale(BigDecimal.java:2389)
+MLT 	at java.math.BigDecimal.divideToIntegralValue(BigDecimal.java:1798)
+MLT 	at java.math.BigDecimal.divideToIntegralValue(BigDecimal.java:1833)
+MLT 	at net.adoptopenjdk.test.bigdecimal.TestSuite047.testItem_0216(TestSuite047.java:1605)
+```
+
+Changes 229e6e2...a055a16

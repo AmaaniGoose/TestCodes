@@ -1,0 +1,27 @@
+Test https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/rmi/dgc/dgcAckFailure/DGCAckFailure.java fails with ....
+
+```
+test socket factory set
+remote object exported; stub = DGCAckFailure_Stub[UnicastRef [liveRef: [endpoint:[9.20.66.82:40708](local),objID:[7bc7a025:16687393a1f:-7fff, -3900062484527079453]]]]
+java.rmi.NoSuchObjectException: no such object in table
+	at java.rmi/sun.rmi.transport.StreamRemoteCall.exceptionReceivedFromServer(StreamRemoteCall.java:283)
+	at java.rmi/sun.rmi.transport.StreamRemoteCall.executeCall(StreamRemoteCall.java:260)
+	at java.rmi/sun.rmi.server.UnicastRef.invoke(UnicastRef.java:161)
+	at DGCAckFailure_Stub.returnRemote(DGCAckFailure_Stub.java:56)
+	at DGCAckFailure.main(DGCAckFailure.java:87)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:115)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+```
+
+Test passes against Hotspot.
+
+There is only a single line in the source code which throws such an exception - https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/src/java.rmi/share/classes/sun/rmi/transport/Transport.java#L177
+
+Having imported the test into Eclipse I get the same failure with "Run As - Java Application".
+Unfortunately, with "Debug As - Java Application" (with a suitable breakpoint set at the identified line in the Transport class) there is no such failure and the test runs through to completion and passes.
+
+Log archive : [DGCAckFailProb.tar.gz](https://github.com/eclipse/openj9/files/2492306/DGCAckFailProb.tar.gz)

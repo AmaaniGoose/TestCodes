@@ -1,0 +1,7 @@
+There are numerous places in the JIT where code is guarded with some variant/permutation of:
+```
+#if (defined(TR_HOST_X86) || defined(TR_HOST_POWER) || defined(TR_HOST_S390) || defined(TR_HOST_ARM))
+```
+You'll find the same for `TR_TARGET_XXX` as well.
+
+These should all be rooted out and replaced with capability-based queries, depending on the context and what it is guarding of course.  Guarding code this way makes it difficult to discover and enable support for new architectures of certain features.

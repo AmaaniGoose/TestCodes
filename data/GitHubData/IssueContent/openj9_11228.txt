@@ -1,0 +1,62 @@
+Java -version output
+--------------------
+java version "1.8.0_251"
+Java(TM) SE Runtime Enviroment (build 8.0.6.10 -pxa6480sr6fp10-20200408_01(SR6 FP10))
+IBM J9 VM (build 2.9, JRE 1.8.0 Linux amd64-64-Bit Compressed References 2020402_443261 (JIT enabled, AOT enabled)
+OpenJ9      - 35ef566
+OMR           - 4bca4f4
+IBM             - 55acf4a)
+JCL - 20200407_01 based on Oracle jdk8u251-b08
+
+
+
+
+
+
+Summary of problem
+------------------
+
+I have a java application which deployed on IBM JAVA.
+It's version is 8.0.6.10. OpenJ9 35ef566, OMR 4bca4f4, IBM 55acf4a.
+This application always crashed when the java attempt to compile a method on optLevel warm. When I use the -Xjit parameter to decrease the optLevel to cold. The application crashed again when the java attempt to compile another method on optLevel warm. So I want get the omr team's support to resolve this question.
+
+I got the jitdump and javacore files.
+If you need this files I will upload them.
+
+thanks very much
+
+I paste some messages which are from jitdump file.
+
+=======>java/beans/PropertyDescriptor.getReadMethod()Ljava/lang/reflect/Method;
+<ilgen
+method="java/beans/PropertyDescriptor.getReadMethod()Ljava/lang/reflect/Method;">
+<request> {DumpMethod(<NULL>)} </request>
+......
+ExceptionRange: start [ a3] end [ a7] handler [ ab] type [ 25]
+got fieldsig as Ljava/beans/MethodRef;�
+IlGenerator: Generating compressedRefs anchor [00007F019B003F50] for node [00007F019B003EB0]
+got fieldsig as Ljava/lang/String;�
+IlGenerator: Generating compressedRefs anchor [00007F019B0801E0] for node [00007F019B080140]
+got fieldsig as Ljava/beans/MethodRef;�
+IlGenerator: Generating compressedRefs anchor [00007F019B080640] for node [00007F019B0805A0]
+got fieldsig as Ljava/lang/String;�
+IlGenerator: Generating compressedRefs anchor [00007F019B0813B0] for node [00007F019B081310]
+got fieldsig as Ljava/lang/String;�
+IlGenerator: Generating compressedRefs anchor [00007F019B081A40] for node [00007F019B0819A0]
+got fieldsig as Ljava/lang/String;�
+IlGenerator: Generating compressedRefs anchor [00007F019B082A30] for node [00007F019B082990]
+got fieldsig as Ljava/lang/String;�
+IlGenerator: Generating compressedRefs anchor [00007F019B082BC0] for node [00007F019B082B20]
+got fieldsig as Ljava/lang/String;�
+IlGenerator: Generating compressedRefs anchor [00007F019B0832A0] for node [00007F019B083200]
+got fieldsig as Ljava/lang/String;�
+IlGenerator: Generating compressedRefs anchor [00007F019B083480] for node [00007F019B0833E0]
+got fieldsig as Ljava/lang/String;�
+IlGenerator: Generating compressedRefs anchor [00007F019B083610] for node [00007F019B083570]
+genIL() returned 1
+
+Diagnostic files
+----------------
+
+
+

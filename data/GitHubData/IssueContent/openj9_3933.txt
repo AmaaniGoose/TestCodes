@@ -1,0 +1,31 @@
+This occurred during the [last system test job](https://ci.eclipse.org/openj9/job/Test-extended.system-JDK11-aix_ppc-64_cmprssptrs/93) before the AIX machine's tmp dir filled up and ran out of disk space (reported in #3924).  There were other failures in that test job, but those are due to machine not having enough space to proceed with further testing.  
+
+Have retrieved core files and can share with whoever needs them.  
+
+Snippet from [job id 93 test output](https://ci.eclipse.org/openj9/job/Test-extended.system-JDK11-aix_ppc-64_cmprssptrs/93/tapResults/) : 
+
+DBLT 00:18:54.506 - First failure detected by thread: load-4. Running test: JUnit[net.adoptopenjdk.test.nio2.path.PathDirectoryStreamTest]. Creating java dumps.
+DBLT stderr The assert subroutine failed: 0, file ../../gc_glue_java/CompactSchemeFixupObject.cpp, line 96
+DBLT stderr JVMDUMP039I Processing dump event "abort", detail "" at 2018/12/05 00:18:54 - please wait.
+DBLT stderr JVMDUMP032I JVM requested System dump using '/home/u0020236/workspace/Test-extended.system-JDK11-aix_ppc-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15439907297540/DirectByteBufferLoadTest_0/20181205-001850-DirectByteBufferLoadTest/results/core.20181205.001854.17367256.0002.dmp' in response to an event
+STF 00:18:54.538 - Found dump at: /home/u0020236/workspace/Test-extended.system-JDK11-aix_ppc-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../TestConfig/test_output_15439907297540/DirectByteBufferLoadTest_0/20181205-001850-DirectByteBufferLoadTest/results/core.20181205.001854.17367256.0002.dmp
+DBLT stderr core file generated - /home/u0020236/workspace/Test-extended.system-JDK11-aix_ppc-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../TestConfig/test_output_15439907297540/DirectByteBufferLoadTest_0/20181205-001850-DirectByteBufferLoadTest/results/core.20181205.001854.17367256.0002.dmp
+DBLT stderr JVMDUMP010I System dump written to /home/u0020236/workspace/Test-extended.system-JDK11-aix_ppc-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15439907297540/DirectByteBufferLoadTest_0/20181205-001850-DirectByteBufferLoadTest/results/core.20181205.001854.17367256.0002.dmp
+DBLT stderr JVMDUMP032I JVM requested Java dump using '/home/u0020236/workspace/Test-extended.system-JDK11-aix_ppc-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15439907297540/DirectByteBufferLoadTest_0/20181205-001850-DirectByteBufferLoadTest/results/javacore.20181205.001854.17367256.0003.txt' in response to an event
+STF 00:19:06.350 - Found dump at: /home/u0020236/workspace/Test-extended.system-JDK11-aix_ppc-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../TestConfig/test_output_15439907297540/DirectByteBufferLoadTest_0/20181205-001850-DirectByteBufferLoadTest/results/javacore.20181205.001854.17367256.0003.txt
+DBLT stderr javacore file generated - /home/u0020236/workspace/Test-extended.system-JDK11-aix_ppc-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../TestConfig/test_output_15439907297540/DirectByteBufferLoadTest_0/20181205-001850-DirectByteBufferLoadTest/results/javacore.20181205.001854.17367256.0003.txt
+DBLT stderr JVMDUMP010I Java dump written to /home/u0020236/workspace/Test-extended.system-JDK11-aix_ppc-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15439907297540/DirectByteBufferLoadTest_0/20181205-001850-DirectByteBufferLoadTest/results/javacore.20181205.001854.17367256.0003.txt
+DBLT stderr JVMDUMP032I JVM requested Snap dump using '/home/u0020236/workspace/Test-extended.system-JDK11-aix_ppc-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15439907297540/DirectByteBufferLoadTest_0/20181205-001850-DirectByteBufferLoadTest/results/Snap.20181205.001854.17367256.0004.trc' in response to an event
+DBLT stderr JVMDUMP010I Snap dump written to /home/u0020236/workspace/Test-extended.system-JDK11-aix_ppc-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15439907297540/DirectByteBufferLoadTest_0/20181205-001850-DirectByteBufferLoadTest/results/Snap.20181205.001854.17367256.0004.trc
+DBLT stderr JVMDUMP007I JVM Requesting JIT dump using '/home/u0020236/workspace/Test-extended.system-JDK11-aix_ppc-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15439907297540/DirectByteBufferLoadTest_0/20181205-001850-DirectByteBufferLoadTest/results/jitdump.20181205.001854.17367256.0005.dmp'
+DBLT stderr JVMDUMP010I JIT dump written to /home/u0020236/workspace/Test-extended.system-JDK11-aix_ppc-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15439907297540/DirectByteBufferLoadTest_0/20181205-001850-DirectByteBufferLoadTest/results/jitdump.20181205.001854.17367256.0005.dmp
+DBLT stderr JVMDUMP013I Processed dump event "abort", detail "".
+STF 00:19:07.152 - Found dump at: /home/u0020236/workspace/Test-extended.system-JDK11-aix_ppc-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../TestConfig/test_output_15439907297540/DirectByteBufferLoadTest_0/20181205-001850-DirectByteBufferLoadTest/results/Snap.20181205.001854.17367256.0004.trc
+DBLT stderr Snap file generated - /home/u0020236/workspace/Test-extended.system-JDK11-aix_ppc-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../TestConfig/test_output_15439907297540/DirectByteBufferLoadTest_0/20181205-001850-DirectByteBufferLoadTest/results/Snap.20181205.001854.17367256.0004.trc
+STF 00:19:07.296 - **FAILED** Process DBLT ended with exit code (1) and not the expected exit code/s (0)
+STF 00:19:07.296 - Monitoring Report Summary:
+STF 00:19:07.296 -   o Process DBLT has crashed unexpectedly
+STF 00:19:07.296 - Killing processes: DBLT
+STF 00:19:07.296 -   o Process DBLT is not running
+**FAILED** at step 1 (Run DirectByteBuffer load test). Expected return value=0 Actual=1 at /home/u0020236/workspace/Test-extended.system-JDK11-aix_ppc-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../TestConfig/test_output_15439907297540/DirectByteBufferLoadTest_0/20181205-001850-DirectByteBufferLoadTest/execute.pl line 92.
+STF 00:19:07.398 - **FAILED** execute script failed. Expected return value=0 Actual=1

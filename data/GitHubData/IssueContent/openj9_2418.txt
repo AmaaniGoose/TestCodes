@@ -1,0 +1,35 @@
+The OpenJ9 x86 JIT uses a number of hand-written assembly files as part of its runtime.  The choice of assembly allows very precise control of the instructions, registers, and stack in some contexts, as well as customized linkages between sections of code.  There are about 7000 lines of x86 assembly in the JIT and are written using MASM syntax (Microsoft Macro Assembler).  This creates a challenge when building on Linux using the GNU assembler (gas) because it consumes a different syntax altogether.
+
+Rather than maintain two independent but logically similar sets of source files that require dual-maintenance, a tool (`masm2gas.pl`) was written to convert MASM syntax files into AT&T syntax just-in-time during the build that can be consumed by gas.  The decision behind writing a tool rather than using a common assembler on both platforms is historical.  Many of these files were created during the first x86-64 port 15 years ago and at that time there weren't any assemblers mature enough that worked across operating systems that supported all the features the project needed (x86-64 support, macros, preprocessor directives, etc.).  While a tooling solution was able to reduce the dual maintenance of the code, it is a fragile and incomplete solution that needs updates as new assembly is written that uses MASM syntax variants that weren't handled previously.  Furthermore, it is incapable of handling conditional assembly, and to get around that some of the assembly files are actually run through the C preprocessor first (the files have a `.pasm` extension).
+
+With the work underway to port OpenJ9 to macOS these assembly files will need to be built as well.  Unfortunately, the LLVM assembler (llvm-mc) while similar to gas in terms of syntax and command-line options, does have some syntax differences that need to be dealt with.  Rather than simply modifying (hacking) the translation tool to handle LLVM assembly, I think this is a good opportunity to take stock of where we are and evaluate what the long term strategy should be with these files.
+
+Also, for whatever is decided here, I would like to give that strong consideration for the x86 assembly solution in Eclipse OMR.  At present, there are no x86 assembly files but if they were to be introduced then an assembly solution is required.
+
+Here are some options to consider:
+
+1.  *"masm2gas.pl Forever, Dude!"*
+
+    This essentially extends the role of `masm2gas.pl` to handle the syntax variants of llvm-mc.  We have found documentation on this assembler lacking and had to scrutinize the source code to find the information we needed to make the translation (for macOS we did a manual translation of the `.s` files rather than modifying the tool).  Extending this tool adds to its fragility and does nothing to improve or address its warts.  If this is the solution that is ultimately agreed upon I think the tool is due for some refactoring (dare I say "rewrite"?).
+
+2.  Use the M4 macro processor (https://www.gnu.org/software/m4/manual/m4.html) to generate appropriate syntax for each assembler.
+
+    This is the approach taken by the OpenJ9 VM for its limited set of assembly files.  There will be work involved to translate the existing files into a macro format, and this may impact the readability and debugability of the code.
+
+3.  Use the Netwide Assembler (NASM) (https://www.nasm.us/) as the common assembly solution across all operating systems.
+
+    We considered this many years ago, but NASM wasn't mature enough yet to meet our needs.  However, its grown up quite a bit.  The advantage with this is that the same assembler will run on all platforms, consume the same untranslated input files, and produce objects suitable for the target build environment.  NASM syntax is very similar to MASM syntax so translation of the files should be straightforward, and the code will maintain the familiarity that developers expect.  NASM is a stable, modern assembler supporting current Intel instructions and processors on all operating systems we care about.
+
+4.  Upon startup, use the JIT to generate the instructions directly into a code cache.
+
+    There is a precedent for other architectures (such as Power) to emit helpers directly into a code cache (I believe Power does it to guarantee helpers can be reached from any code cache).  A similar technique could be employed here and doing so will eliminate the need for an assembler for runtime functions.  However, the amount of code to be emitted this way is quite large, the translation could be error prone, debugging would be a hassle, and it will lead to an increase in the size of the JIT shared object as these runtime methods are programmatically constructed.
+
+5.  Convert the runtime assembly files to C with inline assembly as needed.
+
+    Avoid a runtime assembler altogether and convert the runtime helpers into portable, callable C functions.  While it's possible to do and it solves the building issues, the main disadvantages are the large amount of code that will have to be translated from assembly to C (perhaps error prone) and the fact that the functions will now use C linkage which can impose performance challenges (and possibly footprint increases) to the JIT compiled code.  I think parts of the assembly code could be converted to C when its not called on a performance or footprint sensitive path, but I don't think this solution will eliminate the need for assembly files altogether.
+
+I have some opinions on which option I personally prefer, but I will remain silent for a bit while allowing others to chime in.
+
+Thoughts anyone?
+
+FYI:  @andrewcraik, @0dvictor, @vijaysun-omr, @mstoodle, @nbhuiyan, @cathyzhyi, @leonardo2718, @rwy0717, @charliegracie, @DanHeidinga, @pshipton

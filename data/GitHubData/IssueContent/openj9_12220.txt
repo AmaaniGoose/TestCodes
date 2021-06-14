@@ -1,0 +1,72 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk11_j9_extended.perf_s390x_linux/3`:
+```
+00:11:49  openjdk version "11.0.11" 2021-04-20
+00:11:49  OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.11+6)
+00:11:49  Eclipse OpenJ9 VM AdoptOpenJDK (build master-67bdb5a35, JRE 11 Linux s390x-64-Bit Compressed References 20210312_78 (JIT enabled, AOT enabled)
+00:11:49  OpenJ9   - 67bdb5a35
+00:11:49  OMR      - 2c0d1393c
+00:11:49  JCL      - 8e3c671652 based on jdk-11.0.11+6)
+```
+to rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links:
+00:38:17  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&JDK_VENDOR=adoptopenjdk&BUILD_LIST=perf&PLATFORM=s390x_linux_mixed&TARGET=renaissance-log-regression_0
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+===============================================
+Running test renaissance-log-regression_0 ...
+===============================================
+renaissance-log-regression_0 Start Time: Fri Mar 12 20:29:18 2021 Epoch Time (ms): 1615609758211
+variation: NoOptions
+JVM_OPTIONS:  
+
+====== log-regression (apache-spark) [default], iteration 0 started ======
+GC before operation: completed in 60.225 ms, heap usage 32.643 MB -> 19.767 MB.
+21/03/12 20:29:31 ERROR Executor: Exception in task 0.0 in stage 0.0 (TID 0)
+
+21/03/12 20:29:31 ERROR SparkUncaughtExceptionHandler: Uncaught exception in thread Thread[Executor task launch worker-0,5,main]
+java.lang.NoSuchMethodError: sun/nio/ch/DirectBuffer.cleaner()Lsun/misc/Cleaner; (loaded from jrt:/java.base by <Bootstrap Loader>) called from class org.apache.spark.storage.StorageUtils$ (loaded from file:/home/jenkins/workspace/Test_openjdk11_j9_extended.perf_s390x_linux/openjdk-tests/TKG/output_16156091604667/renaissance-log-regression_0/./tmp-jars-6377558327800512298/cp-spark-core_2.11-2.0.0.jar10792779348119706329.jar by java.net.URLClassLoader@cd1ec68f).
+	at org.apache.spark.storage.StorageUtils$.dispose(StorageUtils.scala:244)
+	at org.apache.spark.util.io.ChunkedByteBuffer$$anonfun$dispose$1.apply(ChunkedByteBuffer.scala:142)
+	at org.apache.spark.util.io.ChunkedByteBuffer$$anonfun$dispose$1.apply(ChunkedByteBuffer.scala:142)
+	at scala.collection.IndexedSeqOptimized$class.foreach(IndexedSeqOptimized.scala:33)
+	at scala.collection.mutable.ArrayOps$ofRef.foreach(ArrayOps.scala:186)
+	at org.apache.spark.util.io.ChunkedByteBuffer.dispose(ChunkedByteBuffer.scala:142)
+	at org.apache.spark.util.io.ChunkedByteBufferInputStream.close(ChunkedByteBuffer.scala:213)
+	at org.apache.spark.util.io.ChunkedByteBufferInputStream.read(ChunkedByteBuffer.scala:189)
+	at java.base/java.io.BufferedInputStream.fill(BufferedInputStream.java:252)
+	at java.base/java.io.BufferedInputStream.read(BufferedInputStream.java:271)
+	at java.base/java.io.ObjectInputStream$PeekInputStream.peek(ObjectInputStream.java:2961)
+	at java.base/java.io.ObjectInputStream$BlockDataInputStream.peek(ObjectInputStream.java:3288)
+	at java.base/java.io.ObjectInputStream$BlockDataInputStream.peekByte(ObjectInputStream.java:3298)
+	at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1752)
+	at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:577)
+	at java.base/java.io.ObjectInputStream.redirectedReadObject(ObjectInputStream.java:507)
+	at org.apache.spark.serializer.JavaDeserializationStream.readObject(JavaSerializer.scala:75)
+	at org.apache.spark.serializer.DeserializationStream$$anon$1.getNext(Serializer.scala:169)
+	at org.apache.spark.util.NextIterator.hasNext(NextIterator.scala:73)
+	at org.apache.spark.storage.memory.MemoryStore.putIteratorAsValues(MemoryStore.scala:213)
+	at org.apache.spark.storage.BlockManager.maybeCacheDiskValuesInMemory(BlockManager.scala:1058)
+	at org.apache.spark.storage.BlockManager.getLocalValues(BlockManager.scala:444)
+	at org.apache.spark.storage.BlockManager.getOrElseUpdate(BlockManager.scala:672)
+	at org.apache.spark.rdd.RDD.getOrCompute(RDD.scala:330)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:281)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:38)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:319)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:283)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:70)
+	at org.apache.spark.scheduler.Task.run(Task.scala:85)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:274)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:836)
+
+renaissance-log-regression_0_FAILED
+```

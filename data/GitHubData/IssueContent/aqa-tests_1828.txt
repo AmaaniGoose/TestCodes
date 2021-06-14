@@ -1,0 +1,14 @@
+I hit this problem today during a Grinder run. The URL did not point to something that could be retrieved and gave a 404. To aid debugging it would be useful to have a "Download failed" message instead of just an error occurring on decompression:
+
+```
+19:28:21  TESTDIR: /home/jenkins/workspace/Grinder/openjdk-tests
+19:28:21  get jdk binary...
+19:28:21  _ENCODE_FILE_NEW=UNTAGGED curl -OLJSks  https://api.adoptopenjdk.net/v3/binary/latest/11/ea/linux/riscv64/jdk/openj9/normal/adoptopenjdk
+19:28:25  _ENCODE_FILE_NEW=UNTAGGED curl -OLJSks  https://api.adoptopenjdk.net/v3/binary/latest/11/ea/linux/riscv64/testimage/openj9/normal/adoptopenjdk
+19:28:32  unzip file: adoptopenjdk ...
+19:28:32  
+19:28:32  gzip: adoptopenjdk: not in gzip format
+19:28:32  tar: This does not look like a tar archive
+19:28:32  tar: Exiting with failure status due to previous errors
+[Pipeline] }
+```

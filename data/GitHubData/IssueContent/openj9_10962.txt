@@ -1,0 +1,11 @@
+If a crash happens in an AOT body, the jitdump should generate an AOT compilation. However, this is not as trivial as it might seem, as there are three scenarios:
+
+- [x] 1. Crash during an AOT compile - https://github.com/eclipse/openj9/pull/10852
+- [ ] 2. Crash in an AOT body that was generated in the current JVM instance
+- [ ] 3. Crash in an AOT body that was generated in a different JVM instance
+
+Regarding 2, should the jitdump redo the AOT compilation, the AOT load, or both?
+Regarding 3, should the jitdump redo the AOT load?
+
+<hr/>
+

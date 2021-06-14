@@ -1,0 +1,23 @@
+**Describe the bug**
+SocketReadInterruptTest and SocketAcceptInterruptTest failed on jdk16 all platforms except windows, for both hotspot and openj9.
+**To Reproduce**
+Steps to reproduce the behavior (or Grinder rerun link):
+https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/6520/testReport/junit/java_net_Socket_SocketReadInterruptTest/java/SocketReadInterruptTest/
+https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/6520/testReport/java_net_Socket_SocketAcceptInterruptTest/java/SocketAcceptInterruptTest/
+
+**Additional context**
+java/net/Socket/SocketReadInterruptTest
+```
+22:40:38  command: compile /home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket/SocketReadInterruptTest.java
+22:40:38  reason: .class file out of date or does not exist
+
+22:40:38  TEST RESULT: Error. Use -nativepath to specify the location of native code
+```
+
+java/net/Socket/SocketAcceptInterruptTest
+```
+22:40:38  command: compile /home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/Socket/SocketAcceptInterruptTest.java
+22:40:38  reason: .class file out of date or does not exist
+
+TEST RESULT: Error. Use -nativepath to specify the location of native code
+```

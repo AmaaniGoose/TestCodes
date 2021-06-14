@@ -1,0 +1,7 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.openjdk_x86-64_windows_mixed_Nightly/12
+java/util/Collections/RacingCollections.java
+```
+00:47:16  java.lang.NoClassDefFoundError: java.util.Queue
+00:47:16  	at RacingCollections$Frobber.realRun(RacingCollections.java:144)
+00:47:16  	at RacingCollections$CheckedThread.run(RacingCollections.java:383)
+```

@@ -1,0 +1,41 @@
+Failure link
+------------
+Rebuild link: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&BUILD_LIST=openjdk&JenkinsFile=openjdk_x86-64_linux&CUSTOM_TARGET=test/jdk/jdk/internal/reflect/CallerSensitive/CheckCSMs.java&TARGET=jdk_custom_0
+- test category: openjdk
+- OS/architecture: all
+- version: 11, 13
+- JVM: openj9 only
+
+Optional info
+-------------
+- intermittent failure: no
+- regression or new test: regression
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+14:14:03  STDOUT:
+14:14:03  Parsed 25884 classfiles
+14:14:03  STDERR:
+14:14:03  Unsupported @CallerSensitive: java/io/ObjectStreamField#getType ()Ljava/lang/Class;
+14:14:03  Unsupported @CallerSensitive: java/io/ObjectStreamClass#forClass ()Ljava/lang/Class;
+14:14:03  Unsupported @CallerSensitive: java/lang/Runtime#load (Ljava/lang/String;)V
+14:14:03  Unsupported @CallerSensitive: java/lang/Runtime#loadLibrary (Ljava/lang/String;)V
+14:14:03  Unsupported @CallerSensitive: javax/sql/rowset/serial/SerialJavaObject#getFields ()[Ljava/lang/reflect/Field;
+14:14:03  java.lang.RuntimeException: Unexpected non-final instance method: 
+14:14:03  java/io/ObjectStreamClass#forClass ()Ljava/lang/Class;
+14:14:03  java/io/ObjectStreamField#getType ()Ljava/lang/Class;
+14:14:03  java/lang/Runtime#load (Ljava/lang/String;)V
+14:14:03  java/lang/Runtime#loadLibrary (Ljava/lang/String;)V
+14:14:03  javax/sql/rowset/serial/SerialJavaObject#getFields ()[Ljava/lang/reflect/Field;
+14:14:03  	at CheckCSMs.main(CheckCSMs.java:85)
+14:14:03  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+14:14:03  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+14:14:03  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+14:14:03  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+14:14:03  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+14:14:03  	at java.base/java.lang.Thread.run(Thread.java:831)
+```
+
+https://github.com/AdoptOpenJDK/openjdk-jdk11u/blob/9456afc1a52221bb397bf067ca39e90dee7411ca/test/jdk/jdk/internal/reflect/CallerSensitive/CheckCSMs.java#L80
+This if statement checks the result of operations against the values of the final set `KNOWN_NON_FINAL_CSMS`. The result contains every value in the set, except `"java/lang/Thread#getContextClassLoader ()Ljava/lang/ClassLoader;"`, which causes this if statement to be taken and the test to fail.

@@ -1,0 +1,13 @@
+Failure encountered while running the test within a docker container
+```
+[SoftmxUserScenarioTest] [INFO] Starting a new JVM using -Xmx = 258903 and -Xsoftmx = 129401
+[SoftmxUserScenarioTest] [INFO] Executing cmd : /home/jenkins/workspace/Test_openjdk12_j9_extended.functional_x86-64_linux_Nightly/openjdkbinary/j2sdk-image/bin/java -cp /home/jenkins/workspace/Test_openjdk12_j9_extended.functional_x86-64_linux_Nightly/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/TestConfig/resources:/home/jenkins/workspace/Test_openjdk12_j9_extended.functional_x86-64_linux_Nightly/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/TestConfig/lib/commons-exec.jar:/home/jenkins/workspace/Test_openjdk12_j9_extended.functional_x86-64_linux_Nightly/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/TestConfig/lib/testng.jar:/home/jenkins/workspace/Test_openjdk12_j9_extended.functional_x86-64_linux_Nightly/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/TestConfig/lib/jcommander.jar:/home/jenkins/workspace/Test_openjdk12_j9_extended.functional_x86-64_linux_Nightly/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/functional/JLM_Tests/jlm_tests.jar -Xmx258903m -Xsoftmx129401m org.openj9.test.softmx.HelperClass
+Selected VM [default] does not exist.
+This JVM package only includes the '-Xcompressedrefs' configuration. Please run the VM without specifying the '-Xnocompressedrefs' option or by specifying the '-Xcompressedrefs' option.
+To compile the other configuration, please run configure with '--with-noncompressedrefs.
+[SoftmxUserScenarioTest] [WARN] Exception throw from executing the second JVM:org.apache.commons.exec.ExecuteException: Process exited with an error: 255 (Exit value: 255)
+```
+
+https://github.com/eclipse/openj9/blob/5b07f4d539f3e142d6449af471de9c22bd04a048/test/functional/JLM_Tests/src/org/openj9/test/softmx/SoftmxUserScenarioTest.java#L52
+
+The host the docker container starts up is 120cpu ~256g ram; the container is not being limited.

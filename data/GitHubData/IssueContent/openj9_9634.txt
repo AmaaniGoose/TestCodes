@@ -1,0 +1,13 @@
+As part of the work at #5058,  the issue is created to keep track of all test related PRs from different repos (OpenJ9, AdoptOpenJDK, etc). Given that the OpenJ9 test framework was modified earlier this year (e.g. part of settings was moved to https://github.com/AdoptOpenJDK/TKG), the test changes previously ran on the QEMU should be updated accordingly to fit in the latest setting of the test environment.
+
+These PRs mainly includes the setting for the test environment on RISC-V, a few test code changes due to the lack of JIT and all script changes involved in test suites with JIT excluded.
+
+(will be added after the tests are verified on the Debian_riscv/U540)
+[1] from AdoptOpenJDK
+https://github.com/AdoptOpenJDK/openjdk-tests/pull/1832, https://github.com/AdoptOpenJDK/TKG/pull/83
+[2] from OpenJ9
+https://github.com/eclipse/openj9/pull/9900, https://github.com/eclipse/openj9/pull/9899, https://github.com/eclipse/openj9/pull/9898, https://github.com/eclipse/openj9/pull/9897
+
+All the PRs (without JIT  & only support gencon GC) here are to ensure the enabled OpenJ9 test suites can be safely executed on the RISC-V hardware (HiFive U540) till the Open9 JIT & OMR JIT are fully implemented.
+
+FYI: @smlambert , @llxia , @DanHeidinga , @pshipton

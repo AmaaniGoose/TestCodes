@@ -1,0 +1,34 @@
+javax/xml/crypto/dsig/LineFeedOnlyTest.java
+https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_extended.openjdk_x86-32_windows/14/consoleFull
+```
+12:45:18  openjdk version "1.8.0_292"
+12:45:18  OpenJDK Runtime Environment (build 1.8.0_292-202103091148-b05)
+12:45:18  Eclipse OpenJ9 VM (build openj9-0.26.0-m1, JRE 1.8.0 Windows Server 2012 R2 x86-32-Bit 20210309_870 (JIT enabled, AOT enabled)
+12:45:18  OpenJ9   - b227feba2
+12:45:18  OMR      - 4665e2f72
+12:45:18  JCL      - 1780cbc92b based on jdk8u292-b05)
+```
+```
+13:26:54  messages:
+13:26:54  command: main -Dcom.sun.org.apache.xml.internal.security.lineFeedOnly=false LineFeedOnlyTest
+13:26:54  reason: User specified action: run main/othervm/timeout=300 -Dcom.sun.org.apache.xml.internal.security.lineFeedOnly=false LineFeedOnlyTest 
+13:26:54  Mode: othervm [/othervm specified]
+13:26:54  elapsed time (seconds): 1.523
+13:26:54  configuration:
+13:26:54  STDOUT:
+13:26:54  * Generating signature-line-endings.xml
+13:26:54  * com.sun.org.apache.xml.internal.security.lineFeedOnly is false
+13:26:54  * com.sun.org.apache.xml.internal.security.ignoreLineBreaks is false
+13:26:54  STDERR:
+13:26:54  java.lang.Exception: Unexpected output in encoded certificate
+13:26:54  	at LineFeedOnlyTest.test_create_signature_line_endings(LineFeedOnlyTest.java:183)
+13:26:54  	at LineFeedOnlyTest.main(LineFeedOnlyTest.java:101)
+13:26:54  	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+13:26:54  	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+13:26:54  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+13:26:54  	at java.lang.reflect.Method.invoke(Method.java:498)
+13:26:54  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+13:26:54  	at java.lang.Thread.run(Thread.java:823)
+13:26:54  
+13:26:54  JavaTest Message: Test threw exception: java.lang.Exception: Unexpected output in encoded certificate
+```

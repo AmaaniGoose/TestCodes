@@ -1,0 +1,16 @@
+This issue builds upon AQA v1.0 (https://github.com/AdoptOpenJDK/openjdk-tests/issues/965)
+
+Features to be included in the next drop of AQA (targeted for 3Q 2020):
+
+- AQA BoM https://github.com/AdoptOpenJDK/openjdk-tests/issues/1169
+    - add SHA.txt to releases repo
+    - include link to 'exec summary' of test results and excludes as part of releases artifact
+- updated external test targets to be included (related: https://github.com/AdoptOpenJDK/openjdk-tests/issues/1109)
+- perf targets move from functional set to 'compare to previous release' bar (related: https://github.com/AdoptOpenJDK/openjdk-tests/issues/1505)
+- initial release to release comparison of perf test targets for LTS releases on xlinux & mac (done manually at first as dependent on some additional work to be done in TRSS) 
+- triage and include extended.openjdk target 
+
+Also need to decide if we should include a 'badge' of successful completion on the website, or if BoM in releases repo is sufficient reporting.
+
+
+

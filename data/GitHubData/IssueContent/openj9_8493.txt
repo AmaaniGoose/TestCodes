@@ -1,0 +1,52 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.system_x86-64_linux_Nightly/271
+ConcurrentLoadTest_0
+ub16x64j94
+```
+LT  00:41:42.224 - First failure detected by thread: load-10. Not creating dumps as no dump generation is requested for this load test
+LT  00:41:42.230 - suite.getInventory().getInventoryFileRef(): openjdk.test.load/config/inventories/concurrent/concurrent.xml
+LT  00:41:42.231 - suite.isCreateDump() : false
+LT  00:41:42.232 - Test failed
+LT    Failure num.  = 1
+LT    Test number   = 12
+LT    Test details  = 'JUnit[net.adoptopenjdk.test.concurrent.jsr166y.PhaserTest]'
+LT    Suite number  = 0
+LT    Thread number = 10
+LT  >>> Captured test output >>>
+LT  testStarted : testAPI(net.adoptopenjdk.test.concurrent.jsr166y.PhaserTest)
+LT  testFinished: testAPI(net.adoptopenjdk.test.concurrent.jsr166y.PhaserTest)
+LT  testStarted : testStress(net.adoptopenjdk.test.concurrent.jsr166y.PhaserTest)
+LT  testFailure: testStress(net.adoptopenjdk.test.concurrent.jsr166y.PhaserTest): Attempted arrival of unregistered party for java.util.concurrent.Phaser@1ebe5c87[phase = 0 parties = 2 arrived = 2]
+LT  java.lang.IllegalStateException: Attempted arrival of unregistered party for java.util.concurrent.Phaser@1ebe5c87[phase = 0 parties = 2 arrived = 2]
+LT  	at java.util.concurrent.Phaser.doArrive(Phaser.java:391)
+LT  	at java.util.concurrent.Phaser.arriveAndDeregister(Phaser.java:654)
+LT  	at net.adoptopenjdk.test.concurrent.jsr166y.PhaserTest.testStress(PhaserTest.java:499)
+LT  	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+LT  	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+LT  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+LT  	at java.lang.reflect.Method.invoke(Method.java:498)
+LT  	at junit.framework.TestCase.runTest(TestCase.java:176)
+LT  	at junit.framework.TestCase.runBare(TestCase.java:141)
+LT  	at junit.framework.TestResult$1.protect(TestResult.java:122)
+LT  	at junit.framework.TestResult.runProtected(TestResult.java:142)
+LT  	at junit.framework.TestResult.run(TestResult.java:125)
+LT  	at junit.framework.TestCase.run(TestCase.java:129)
+LT  	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+LT  	at junit.framework.TestSuite.run(TestSuite.java:247)
+LT  	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+LT  	at org.junit.runners.Suite.runChild(Suite.java:128)
+LT  	at org.junit.runners.Suite.runChild(Suite.java:27)
+LT  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+LT  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+LT  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+LT  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+LT  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+LT  	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+LT  	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+LT  	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+LT  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+LT  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+LT  	at java.lang.Thread.run(Thread.java:821)
+LT  testFinished: testStress(net.adoptopenjdk.test.concurrent.jsr166y.PhaserTest)
+```

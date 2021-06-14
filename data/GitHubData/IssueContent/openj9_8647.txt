@@ -1,0 +1,4 @@
+As part of a PR review [1] we have identified that many of the APIs within the `ExtendedOperatingSystemMXBeanImpl` class [2] can be made `static`. The goal should be to identify all APIs within the class that can be made `static` and to bulk-transform them by adding the `static` qualifier and updating the corresponding backing native implementations.
+
+[1] https://github.com/eclipse/openj9/pull/8265#discussion_r382136878
+[2] https://github.com/eclipse/openj9/blob/master/jcl/src/jdk.management/share/classes/com/ibm/lang/management/internal/ExtendedOperatingSystemMXBeanImpl.java

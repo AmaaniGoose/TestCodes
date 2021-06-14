@@ -1,0 +1,33 @@
+Failure link
+------------
+- Test: https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/lang/Throwable/SuppressedExceptions.java
+- Build: https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/1857/
+- Test Category: openjdk
+- Test Suite Name: jdk_lang
+- OS/Architecture: x86-64-windows, x86-64-linux, x86-64-osx, ...
+- OpenJDK Version: 11.0.4+11
+- Public Build SHAs:
+- OpenJ9 - `85b0693`
+- OMR - `6e99760b`
+- JCL - `965d0c0df3`
+
+Optional info
+-------------
+- Intermittent failure: No 
+- Regression or new test: Regression
+- Part of the Excluded jdk11 openj9 JTReg tests: https://github.com/AdoptOpenJDK/openjdk-tests/issues/585
+- `Throwable.addSurpressed(self)` is returning an `IllegalArgumentException` (as expected), but the value of `IllegalArgumentException.cause` != same Throwable object, which is causing the failure.
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+java.lang.RuntimeException: Bad cause after self-suppresion.
+        at SuppressedExceptions.noSelfSuppression(SuppressedExceptions.java:54)
+        at SuppressedExceptions.main(SuppressedExceptions.java:38)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+        at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+        at java.base/java.lang.Thread.run(Thread.java:831)
+```

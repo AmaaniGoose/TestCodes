@@ -1,0 +1,8 @@
+I propose we stop using `.c` files in OpenJ9 in favour of `.cpp` files. I am not proposing an actual language shift - most files would be wrapped in `extern "C"` rather than making them into classes. The advantages are:
+
+- inline variable declarations on every platform
+- inline functions are much more flexible and readable than preprocessor macros
+
+Conversion can take place one file at a time. The majority of the work will be adding casts because C++ does not allow implicit conversion to/from `void*`.
+
+Any new files should be `.cpp`.

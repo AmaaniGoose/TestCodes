@@ -1,0 +1,1 @@
+By default compilation entries are placed on the Compilation Queue. However, there also exists a Low Priority Queue. The circumstances under which entries are added to this queue and compiled from this queue should be documented.

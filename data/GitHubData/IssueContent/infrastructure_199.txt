@@ -1,0 +1,11 @@
+I'd like to have a conversation about changing the way that tests and builds get hold of machines.
+
+Right now we have a static list of machines that are assigned as build, jck or test, and that jobs kicked off from Jenkins are assigned to the right "kind" of machine (platform, o/s, function, etc).
+
+These machines, as far as I'm aware, are created manually (I think) from the various clouds to which we've been granted access by our sponsors.
+
+These machines often sit idle when no jobs are running.
+
+Would it not be a better use of resource to change our machine provisioning model to be one where the Jenkins jobs request the machines they need on demand? Is this even possible? Is it something the community wants?
+
+I'd like to bring this up on the infrastructure hangout on Tuesday 13th February. If you would like to help move this conversation forward, please add comments here and/or join the hangout on Tuesday. I think @gdams posts the hangout URL on the [#infrastructure](https://adoptopenjdk.slack.com/messages/C53GHCXL4) Slack channel.

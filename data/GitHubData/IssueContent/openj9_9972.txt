@@ -1,0 +1,174 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.system_x86-64_windows_Release/34
+SharedClassesWorkload_0
+win2012r2-x86-2
+Step 12 - Run multiple workload processes
+SCL2
+```
+Caused by: java.lang.OutOfMemoryError: Java heap space
+	at java.lang.Throwable.fillInStackTrace(Native Method)
+	at java.lang.Throwable.<init>(Throwable.java:90)
+	at java.lang.Throwable.<init>(Throwable.java:101)
+	at java.lang.Error.<init>(Error.java:70)
+	at java.lang.VirtualMachineError.<init>(VirtualMachineError.java:53)
+	at java.lang.OutOfMemoryError.<init>(OutOfMemoryError.java:58)
+	at java.util.TreeMap.put(TreeMap.java:577)
+	at java.util.Collections$SynchronizedMap.put(Collections.java:2590)
+	at <unknown class>.<unknown method>(Unknown Source)
+	at net.adoptopenjdk.test.util.treemap.TreeMapFactory.<clinit>(TreeMapFactory.java:59)
+	at net.adoptopenjdk.test.util.treemap.TreeMapAPITest.testTailMap(TreeMapAPITest.java:720)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+```
+```
+1STHEAPTYPE    Object Memory
+NULL           id                 start              end                size               space/region
+1STHEAPSPACE   0x000000000DBF8EF0         --                 --                 --         Generational 
+1STHEAPREGION  0x000000000D9B6A70 0x0000000080110000 0x00000000FC770000 0x000000007C660000 Generational/Tenured Region 
+1STHEAPREGION  0x000000000D9B6990 0x00000000FC770000 0x00000000FCD20000 0x00000000005B0000 Generational/Nursery Region 
+1STHEAPREGION  0x000000000D9B5D50 0x00000000FCD20000 0x00000000FFFF0000 0x00000000032D0000 Generational/Nursery Region 
+NULL
+1STHEAPTOTAL   Total memory:                  2146304000 (0x000000007FEE0000)
+1STHEAPINUSE   Total memory in use:           2104304320 (0x000000007D6D22C0)
+1STHEAPFREE    Total memory free:               41999680 (0x000000000280DD40)
+```
+```
+1STGCHTYPE     GC History  
+3STHSTTYPE     11:57:33:521569920 GMT j9mm.134 -   Allocation failure end: newspace=2080/59244544 oldspace=41997952/2087059456 loa=20871168/20871168 
+3STHSTTYPE     11:57:33:521549440 GMT j9mm.69 -   Concurrent kickoff, tracesizetarget=2489400912 kickoffthreshold=321419200 remainingfree=2080 
+3STHSTTYPE     11:57:33:521492560 GMT j9mm.470 -   Allocation failure cycle end: newspace=2112/59244544 oldspace=41997952/2087059456 loa=20871168/20871168 
+3STHSTTYPE     11:57:33:521476416 GMT j9mm.82 -   Excessive GC raised! 
+3STHSTTYPE     11:57:33:521300944 GMT j9mm.475 -   GlobalGC end: workstackoverflow=0 overflowcount=0 memory=42000064/2146304000 
+3STHSTTYPE     11:57:33:521197744 GMT j9mm.90 -   GlobalGC collect complete 
+3STHSTTYPE     11:57:33:520918416 GMT j9mm.137 -   Compact end: bytesmoved=32 
+3STHSTTYPE     11:57:22:767796448 GMT j9mm.136 -   Compact start: reason=low free space (less than 4%) 
+3STHSTTYPE     11:57:22:767756032 GMT j9mm.57 -   Sweep end 
+3STHSTTYPE     11:57:22:746386048 GMT j9mm.56 -   Sweep start 
+3STHSTTYPE     11:57:22:746349888 GMT j9mm.94 -   Class unloading end: classloadersunloaded=0 classesunloaded=0 
+3STHSTTYPE     11:57:22:746260128 GMT j9mm.60 -   Class unloading start 
+3STHSTTYPE     11:57:22:746245040 GMT j9mm.55 -   Mark end 
+3STHSTTYPE     11:57:18:731109408 GMT j9mm.54 -   Mark start 
+3STHSTTYPE     11:57:18:730985312 GMT j9mm.474 -   GlobalGC start: globalcount=82 
+3STHSTTYPE     11:57:18:730945440 GMT j9mm.70 -   Concurrent aborted 
+3STHSTTYPE     11:57:18:730860560 GMT j9mm.135 -   Exclusive access: exclusiveaccessms=0.046 meanexclusiveaccessms=0.046 threads=0 lastthreadtid=0x0000000001440D80 beatenbyotherthread=0 
+3STHSTTYPE     11:57:18:730847344 GMT j9mm.469 -   Allocation failure cycle start: newspace=0/59244544 oldspace=41997952/2087059456 loa=20871168/20871168 requestedbytes=32 
+3STHSTTYPE     11:57:18:730833408 GMT j9mm.133 -   Allocation failure start: newspace=0/59244544 oldspace=41997952/2087059456 loa=20871168/20871168 requestedbytes=32 
+3STHSTTYPE     11:57:18:730583472 GMT j9mm.101 -   J9AllocateIndexableObject() returning NULL! 32 bytes requested for object of class 0000000001028E00 from memory space 'Generational' id=000000000DBF8EF0 
+3STHSTTYPE     11:57:18:730569056 GMT j9mm.84 -   Forcing J9AllocateIndexableObject() to fail due to excessive GC 
+3STHSTTYPE     11:57:18:730435968 GMT j9mm.100 -   J9AllocateObject() returning NULL! 32 bytes requested for object of class 0000000001178300 from memory space 'Generational' id=000000000DBF8EF0 
+3STHSTTYPE     11:57:18:730421680 GMT j9mm.83 -   Forcing J9AllocateObject() to fail due to excessive GC 
+3STHSTTYPE     11:57:18:730365392 GMT j9mm.134 -   Allocation failure end: newspace=2112/59244544 oldspace=41997952/2087059456 loa=20871168/20871168 
+3STHSTTYPE     11:57:18:730343456 GMT j9mm.69 -   Concurrent kickoff, tracesizetarget=2489400912 kickoffthreshold=321419200 remainingfree=2112 
+3STHSTTYPE     11:57:18:730288816 GMT j9mm.470 -   Allocation failure cycle end: newspace=2112/59244544 oldspace=41997952/2087059456 loa=20871168/20871168 
+3STHSTTYPE     11:57:18:730272160 GMT j9mm.82 -   Excessive GC raised! 
+3STHSTTYPE     11:57:18:730069504 GMT j9mm.475 -   GlobalGC end: workstackoverflow=0 overflowcount=0 memory=42000096/2146304000 
+3STHSTTYPE     11:57:18:729981472 GMT j9mm.90 -   GlobalGC collect complete 
+3STHSTTYPE     11:57:18:729573088 GMT j9mm.137 -   Compact end: bytesmoved=2093519832 
+3STHSTTYPE     11:55:37:537672768 GMT j9mm.136 -   Compact start: reason=low free space (less than 4%) 
+3STHSTTYPE     11:55:37:537636160 GMT j9mm.57 -   Sweep end 
+3STHSTTYPE     11:55:37:515655472 GMT j9mm.56 -   Sweep start 
+3STHSTTYPE     11:55:37:515622048 GMT j9mm.94 -   Class unloading end: classloadersunloaded=5 classesunloaded=5 
+3STHSTTYPE     11:55:37:514290336 GMT j9mm.60 -   Class unloading start 
+3STHSTTYPE     11:55:37:514276048 GMT j9mm.55 -   Mark end 
+3STHSTTYPE     11:55:33:499622432 GMT j9mm.54 -   Mark start 
+3STHSTTYPE     11:55:33:499486288 GMT j9mm.474 -   GlobalGC start: globalcount=81 
+3STHSTTYPE     11:55:33:499378528 GMT j9mm.135 -   Exclusive access: exclusiveaccessms=0.077 meanexclusiveaccessms=0.077 threads=0 lastthreadtid=0x0000000001440D80 beatenbyotherthread=0 
+3STHSTTYPE     11:55:33:499365360 GMT j9mm.469 -   Allocation failure cycle start: newspace=0/59244544 oldspace=41846928/2087059456 loa=20871168/20871168 requestedbytes=32 
+3STHSTTYPE     11:55:33:499292128 GMT j9mm.470 -   Allocation failure cycle end: newspace=0/59244544 oldspace=41846928/2087059456 loa=20871168/20871168 
+3STHSTTYPE     11:55:33:499275456 GMT j9mm.82 -   Excessive GC raised! 
+3STHSTTYPE     11:55:33:499095408 GMT j9mm.475 -   GlobalGC end: workstackoverflow=0 overflowcount=0 memory=41846928/2146304000 
+3STHSTTYPE     11:55:33:499004544 GMT j9mm.90 -   GlobalGC collect complete 
+3STHSTTYPE     11:55:33:498696000 GMT j9mm.137 -   Compact end: bytesmoved=0 
+3STHSTTYPE     11:55:32:224272240 GMT j9mm.136 -   Compact start: reason=low free space (less than 4%) 
+3STHSTTYPE     11:55:32:224236160 GMT j9mm.57 -   Sweep end 
+3STHSTTYPE     11:55:32:200936048 GMT j9mm.56 -   Sweep start 
+3STHSTTYPE     11:55:32:200921504 GMT j9mm.55 -   Mark end 
+3STHSTTYPE     11:55:28:427568992 GMT j9mm.54 -   Mark start 
+3STHSTTYPE     11:55:28:427420736 GMT j9mm.474 -   GlobalGC start: globalcount=80 
+3STHSTTYPE     11:55:28:427307616 GMT j9mm.135 -   Exclusive access: exclusiveaccessms=0.077 meanexclusiveaccessms=0.077 threads=0 lastthreadtid=0x0000000001440D80 beatenbyotherthread=0 
+3STHSTTYPE     11:55:28:427294176 GMT j9mm.469 -   Allocation failure cycle start: newspace=0/59244544 oldspace=41846928/2087059456 loa=20871168/20871168 requestedbytes=32 
+3STHSTTYPE     11:55:28:427279520 GMT j9mm.133 -   Allocation failure start: newspace=0/59244544 oldspace=41846928/2087059456 loa=20871168/20871168 requestedbytes=32 
+3STHSTTYPE     11:55:28:427051664 GMT j9mm.134 -   Allocation failure end: newspace=0/59244544 oldspace=41846928/2087059456 loa=20871168/20871168 
+3STHSTTYPE     11:55:28:426996560 GMT j9mm.470 -   Allocation failure cycle end: newspace=0/59244544 oldspace=41846928/2087059456 loa=20871168/20871168 
+3STHSTTYPE     11:55:28:426695792 GMT j9mm.475 -   GlobalGC end: workstackoverflow=0 overflowcount=0 memory=41847016/2146304000 
+3STHSTTYPE     11:55:28:426605328 GMT j9mm.90 -   GlobalGC collect complete 
+3STHSTTYPE     11:55:28:426310544 GMT j9mm.137 -   Compact end: bytesmoved=0 
+3STHSTTYPE     11:55:27:153958624 GMT j9mm.136 -   Compact start: reason=low free space (less than 4%) 
+3STHSTTYPE     11:55:27:153922816 GMT j9mm.57 -   Sweep end 
+3STHSTTYPE     11:55:27:131317712 GMT j9mm.56 -   Sweep start 
+3STHSTTYPE     11:55:27:131303712 GMT j9mm.55 -   Mark end 
+3STHSTTYPE     11:55:23:314739616 GMT j9mm.54 -   Mark start 
+3STHSTTYPE     11:55:23:314602048 GMT j9mm.474 -   GlobalGC start: globalcount=79 
+3STHSTTYPE     11:55:23:314495040 GMT j9mm.135 -   Exclusive access: exclusiveaccessms=0.097 meanexclusiveaccessms=0.062 threads=1 lastthreadtid=0x0000000001440D80 beatenbyotherthread=0 
+3STHSTTYPE     11:55:23:314481936 GMT j9mm.469 -   Allocation failure cycle start: newspace=0/59244544 oldspace=41847016/2087059456 loa=20871168/20871168 requestedbytes=88 
+3STHSTTYPE     11:55:23:314408512 GMT j9mm.470 -   Allocation failure cycle end: newspace=0/59244544 oldspace=41847016/2087059456 loa=20871168/20871168 
+3STHSTTYPE     11:55:23:314207584 GMT j9mm.475 -   GlobalGC end: workstackoverflow=0 overflowcount=0 memory=41847016/2146304000 
+3STHSTTYPE     11:55:23:314116304 GMT j9mm.90 -   GlobalGC collect complete 
+3STHSTTYPE     11:55:23:313821920 GMT j9mm.137 -   Compact end: bytesmoved=0 
+3STHSTTYPE     11:55:22:026591024 GMT j9mm.136 -   Compact start: reason=low free space (less than 4%) 
+3STHSTTYPE     11:55:22:026554496 GMT j9mm.57 -   Sweep end 
+3STHSTTYPE     11:55:22:003566272 GMT j9mm.56 -   Sweep start 
+3STHSTTYPE     11:55:22:003551824 GMT j9mm.55 -   Mark end 
+3STHSTTYPE     11:55:18:235579120 GMT j9mm.54 -   Mark start 
+3STHSTTYPE     11:55:18:235422496 GMT j9mm.474 -   GlobalGC start: globalcount=78 
+3STHSTTYPE     11:55:18:235309248 GMT j9mm.135 -   Exclusive access: exclusiveaccessms=0.097 meanexclusiveaccessms=0.062 threads=1 lastthreadtid=0x0000000001440D80 beatenbyotherthread=0 
+3STHSTTYPE     11:55:18:235295776 GMT j9mm.469 -   Allocation failure cycle start: newspace=0/59244544 oldspace=41847016/2087059456 loa=20871168/20871168 requestedbytes=88 
+3STHSTTYPE     11:55:18:235281104 GMT j9mm.133 -   Allocation failure start: newspace=0/59244544 oldspace=41847016/2087059456 loa=20871168/20871168 requestedbytes=88 
+3STHSTTYPE     11:55:18:235052288 GMT j9mm.134 -   Allocation failure end: newspace=0/59244544 oldspace=41847016/2087059456 loa=20871168/20871168 
+3STHSTTYPE     11:55:18:234997056 GMT j9mm.470 -   Allocation failure cycle end: newspace=0/59244544 oldspace=41847016/2087059456 loa=20871168/20871168 
+3STHSTTYPE     11:55:18:234715312 GMT j9mm.475 -   GlobalGC end: workstackoverflow=0 overflowcount=0 memory=41847032/2146304000 
+3STHSTTYPE     11:55:18:234624416 GMT j9mm.90 -   GlobalGC collect complete 
+3STHSTTYPE     11:55:18:234284256 GMT j9mm.137 -   Compact end: bytesmoved=0 
+3STHSTTYPE     11:55:16:943388640 GMT j9mm.136 -   Compact start: reason=low free space (less than 4%) 
+3STHSTTYPE     11:55:16:943352288 GMT j9mm.57 -   Sweep end 
+3STHSTTYPE     11:55:16:918314096 GMT j9mm.56 -   Sweep start 
+3STHSTTYPE     11:55:16:918299616 GMT j9mm.55 -   Mark end 
+3STHSTTYPE     11:55:13:158437584 GMT j9mm.54 -   Mark start 
+3STHSTTYPE     11:55:13:158298992 GMT j9mm.474 -   GlobalGC start: globalcount=77 
+3STHSTTYPE     11:55:13:158192160 GMT j9mm.135 -   Exclusive access: exclusiveaccessms=0.090 meanexclusiveaccessms=0.090 threads=0 lastthreadtid=0x0000000001440D80 beatenbyotherthread=0 
+3STHSTTYPE     11:55:13:158178992 GMT j9mm.469 -   Allocation failure cycle start: newspace=0/59244544 oldspace=41847032/2087059456 loa=20871168/20871168 requestedbytes=16 
+3STHSTTYPE     11:55:13:158105216 GMT j9mm.470 -   Allocation failure cycle end: newspace=0/59244544 oldspace=41847032/2087059456 loa=20871168/20871168 
+3STHSTTYPE     11:55:13:157922944 GMT j9mm.475 -   GlobalGC end: workstackoverflow=0 overflowcount=0 memory=41847032/2146304000 
+3STHSTTYPE     11:55:13:157831248 GMT j9mm.90 -   GlobalGC collect complete 
+3STHSTTYPE     11:55:13:157537888 GMT j9mm.137 -   Compact end: bytesmoved=0 
+3STHSTTYPE     11:55:11:907883616 GMT j9mm.136 -   Compact start: reason=low free space (less than 4%) 
+3STHSTTYPE     11:55:11:907847456 GMT j9mm.57 -   Sweep end 
+3STHSTTYPE     11:55:11:884595920 GMT j9mm.56 -   Sweep start 
+3STHSTTYPE     11:55:11:884581936 GMT j9mm.55 -   Mark end 
+3STHSTTYPE     11:55:08:118479728 GMT j9mm.54 -   Mark start 
+3STHSTTYPE     11:55:08:118324144 GMT j9mm.474 -   GlobalGC start: globalcount=76 
+3STHSTTYPE     11:55:08:118211920 GMT j9mm.135 -   Exclusive access: exclusiveaccessms=0.090 meanexclusiveaccessms=0.090 threads=0 lastthreadtid=0x0000000001440D80 beatenbyotherthread=0 
+3STHSTTYPE     11:55:08:118198432 GMT j9mm.469 -   Allocation failure cycle start: newspace=0/59244544 oldspace=41847808/2087059456 loa=20871168/20871168 requestedbytes=16 
+3STHSTTYPE     11:55:08:118183680 GMT j9mm.133 -   Allocation failure start: newspace=0/59244544 oldspace=41847808/2087059456 loa=20871168/20871168 requestedbytes=16 
+3STHSTTYPE     11:55:08:117949504 GMT j9mm.134 -   Allocation failure end: newspace=0/59244544 oldspace=41847808/2087059456 loa=20871168/20871168 
+3STHSTTYPE     11:55:08:117894736 GMT j9mm.470 -   Allocation failure cycle end: newspace=0/59244544 oldspace=41847808/2087059456 loa=20871168/20871168 
+3STHSTTYPE     11:55:08:117593616 GMT j9mm.475 -   GlobalGC end: workstackoverflow=0 overflowcount=0 memory=41847880/2146304000 
+3STHSTTYPE     11:55:08:117505456 GMT j9mm.90 -   GlobalGC collect complete 
+3STHSTTYPE     11:55:08:117223248 GMT j9mm.137 -   Compact end: bytesmoved=0 
+3STHSTTYPE     11:55:06:849837536 GMT j9mm.136 -   Compact start: reason=low free space (less than 4%) 
+3STHSTTYPE     11:55:06:849801488 GMT j9mm.57 -   Sweep end 
+3STHSTTYPE     11:55:06:826835872 GMT j9mm.56 -   Sweep start 
+3STHSTTYPE     11:55:06:826820960 GMT j9mm.55 -   Mark end 
+3STHSTTYPE     11:55:03:033139984 GMT j9mm.54 -   Mark start 
+3STHSTTYPE     11:55:03:032999360 GMT j9mm.474 -   GlobalGC start: globalcount=75 
+```

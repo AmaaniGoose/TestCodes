@@ -1,0 +1,6 @@
+Dump.setDumpOptions() did not work when I passed the below option:
+    _"java:events=throw,filter=java/lang/NullPointerException#DumpTest.main*,range=1..1"_
+
+After investigation, I found -Xdump:dynamic has to be specified if throw/catch events are configured through Dump.setDumpOptions() when JIT is ON, whereas this option is not required when we set the above option on command line using -Xdump
+
+Documentation for com.ibm.jvm.Dump API needs to be updated.  Also update the user guide as required.

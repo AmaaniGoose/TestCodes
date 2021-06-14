@@ -1,0 +1,3 @@
+Currently OpenJ9 optimized intrinsic related to floating point square root via each platform's CodeGen's own "inlineXXXPrecisionSQRT" helper; however, OMR has IL OpCodes TR::[fd]sqrt for floating point square root. The OpCodes are supported on P and Z, and X86 will introduce the support soon. (https://github.com/eclipse/omr/pull/2575)
+https://github.com/eclipse/omr/pull/2575 also introduces Optimizer support for simplification.
+To cleanup redundant code and allow Optimizer catch more opportunities, OpenJ9 should map the square root related intrinsic methods to TR::[fd]sqrt instead of doing its own inlining logic.

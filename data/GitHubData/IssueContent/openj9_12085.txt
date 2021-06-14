@@ -1,0 +1,134 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk11_j9_extended.openjdk_x86-64_mac/1`
+```
+05:23:03  openjdk version "11.0.11" 2021-04-20
+05:23:03  OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.11+4)
+05:23:03  Eclipse OpenJ9 VM AdoptOpenJDK (build master-f021812fb, JRE 11 Mac OS X amd64-64-Bit Compressed References 20210227_55 (JIT enabled, AOT enabled)
+05:23:03  OpenJ9   - f021812fb
+05:23:03  OMR      - eb4f5a875
+05:23:03  JCL      - 7222dc7018 based on jdk-11.0.11+4)
+```
+rebuild the failed tests in one link:
+07:09:55  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&JDK_VENDOR=adoptopenjdk&BUILD_LIST=openjdk&PLATFORM=x86-64_mac_mixed&TARGET=testList%20TESTLIST=jdk_imageio_0,jdk_imageio_1
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+07:03:29  TEST: javax/imageio/plugins/wbmp/WbmpBigDestinationTest.java
+07:03:29  TEST JDK: /Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/..
+07:03:29  
+07:03:29  ACTION: build -- Passed. Build successful
+07:03:29  REASON: Named class compiled on demand
+07:03:29  TIME:   1.184 seconds
+07:03:29  messages:
+07:03:29  command: build WbmpBigDestinationTest
+07:03:29  reason: Named class compiled on demand
+07:03:29  Test directory:
+07:03:29    compile: WbmpBigDestinationTest
+07:03:29  elapsed time (seconds): 1.184
+07:03:29  
+07:03:29  ACTION: compile -- Passed. Compilation successful
+07:03:29  REASON: .class file out of date or does not exist
+07:03:29  TIME:   1.184 seconds
+07:03:29  messages:
+07:03:29  command: compile /Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/wbmp/WbmpBigDestinationTest.java
+07:03:29  reason: .class file out of date or does not exist
+07:03:29  Additional options from @modules: --add-modules java.desktop
+07:03:29  Mode: othervm
+07:03:29  elapsed time (seconds): 1.184
+07:03:29  configuration:
+07:03:29  javac compilation environment
+07:03:29    add modules: java.desktop
+07:03:29    source path: /Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/wbmp
+07:03:29    class path:  /Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/wbmp
+07:03:29                 /Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/output_1614422039661/jdk_imageio_0/work/classes/1/javax/imageio/plugins/wbmp/WbmpBigDestinationTest.d
+07:03:29  
+07:03:29  rerun:
+07:03:29  cd /Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/output_1614422039661/jdk_imageio_0/work/javax/imageio/plugins/wbmp/WbmpBigDestinationTest && \
+07:03:29  HOME=/Users/jenkins \
+07:03:29  PATH=/bin:/usr/bin:/usr/sbin \
+07:03:29      /Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/../bin/javac \
+07:03:29          -J-ea \
+07:03:29          -J-esa \
+07:03:29          -J-Xmx512m \
+07:03:29          -J-XX:+UseCompressedOops \
+07:03:29          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+07:03:29          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+07:03:29          -J-Dtest.compiler.opts= \
+07:03:29          -J-Dtest.java.opts= \
+07:03:29          -J-Dtest.jdk=/Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/.. \
+07:03:29          -J-Dcompile.jdk=/Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/.. \
+07:03:29          -J-Dtest.timeout.factor=8.0 \
+07:03:29          -J-Dtest.root=/Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+07:03:29          -J-Dtest.name=javax/imageio/plugins/wbmp/WbmpBigDestinationTest.java \
+07:03:29          -J-Dtest.file=/Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/wbmp/WbmpBigDestinationTest.java \
+07:03:29          -J-Dtest.src=/Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/wbmp \
+07:03:29          -J-Dtest.src.path=/Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/wbmp \
+07:03:29          -J-Dtest.classes=/Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/output_1614422039661/jdk_imageio_0/work/classes/1/javax/imageio/plugins/wbmp/WbmpBigDestinationTest.d \
+07:03:29          -J-Dtest.class.path=/Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/output_1614422039661/jdk_imageio_0/work/classes/1/javax/imageio/plugins/wbmp/WbmpBigDestinationTest.d \
+07:03:29          -J-Dtest.modules=java.desktop \
+07:03:29          --add-modules java.desktop \
+07:03:29          -d /Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/output_1614422039661/jdk_imageio_0/work/classes/1/javax/imageio/plugins/wbmp/WbmpBigDestinationTest.d \
+07:03:29          -sourcepath /Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/wbmp \
+07:03:29          -classpath /Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/wbmp:/Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/output_1614422039661/jdk_imageio_0/work/classes/1/javax/imageio/plugins/wbmp/WbmpBigDestinationTest.d /Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/wbmp/WbmpBigDestinationTest.java
+07:03:29  STDOUT:
+07:03:29  STDERR:
+07:03:29  
+07:03:29  ACTION: main -- Failed. Execution failed: `main' threw exception: java.awt.AWTError: WindowServer is not available
+07:03:29  REASON: Assumed action based on file name: run main WbmpBigDestinationTest 
+07:03:29  TIME:   0.349 seconds
+07:03:29  messages:
+07:03:29  command: main WbmpBigDestinationTest
+07:03:29  reason: Assumed action based on file name: run main WbmpBigDestinationTest 
+07:03:29  Mode: othervm
+07:03:29  Additional options from @modules: --add-modules java.desktop
+07:03:29  elapsed time (seconds): 0.349
+07:03:29  configuration:
+07:03:29  Boot Layer
+07:03:29    add modules: java.desktop
+07:03:29  
+07:03:29  STDOUT:
+07:03:29  STDERR:
+07:03:29  java.awt.AWTError: WindowServer is not available
+07:03:29  	at java.desktop/sun.lwawt.macosx.LWCToolkit.<clinit>(LWCToolkit.java:167)
+07:03:29  	at java.base/java.lang.Class.forNameImpl(Native Method)
+07:03:29  	at java.base/java.lang.Class.forName(Class.java:337)
+07:03:29  	at java.desktop/java.awt.Toolkit$2.run(Toolkit.java:588)
+07:03:29  	at java.desktop/java.awt.Toolkit$2.run(Toolkit.java:583)
+07:03:29  	at java.base/java.security.AccessController.doPrivileged(AccessController.java:682)
+07:03:29  	at java.desktop/java.awt.Toolkit.getDefaultToolkit(Toolkit.java:582)
+07:03:29  	at java.desktop/sun.awt.CGraphicsEnvironment.<clinit>(CGraphicsEnvironment.java:73)
+07:03:29  	at java.base/java.lang.Class.forNameImpl(Native Method)
+07:03:29  	at java.base/java.lang.Class.forName(Class.java:337)
+07:03:29  	at java.desktop/java.awt.GraphicsEnvironment$LocalGE.createGE(GraphicsEnvironment.java:101)
+07:03:29  	at java.desktop/java.awt.GraphicsEnvironment$LocalGE.<clinit>(GraphicsEnvironment.java:83)
+07:03:29  	at java.desktop/java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment(GraphicsEnvironment.java:129)
+07:03:29  	at java.desktop/java.awt.image.BufferedImage.createGraphics(BufferedImage.java:1181)
+07:03:29  	at WbmpBigDestinationTest.main(WbmpBigDestinationTest.java:51)
+07:03:29  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+07:03:29  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+07:03:29  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+07:03:29  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+07:03:29  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+07:03:29  	at java.base/java.lang.Thread.run(Thread.java:836)
+07:03:29  
+07:03:29  JavaTest Message: Test threw exception: java.awt.AWTError: WindowServer is not available
+07:03:29  JavaTest Message: shutting down test
+07:03:29  
+07:03:29  STATUS:Failed.`main' threw exception: java.awt.AWTError: WindowServer is not available
+07:03:58  --------------------------------------------------
+07:04:27  Test results: passed: 122; failed: 68
+07:04:37  Report written to /Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/jvmtest/openjdk/report/html/report.html
+07:04:37  Results written to /Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/output_1614422039661/jdk_imageio_0/work
+07:04:37  Error: Some tests failed or other problems occurred.
+07:04:37  
+07:04:37  jdk_imageio_0_FAILED
+```
+
+It appears related to the test setup.

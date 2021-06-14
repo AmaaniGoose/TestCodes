@@ -1,0 +1,9 @@
+Comment-triggered PR builds are enabled at Adopt test repo with nightly/releases. And we are working on [PR builds enhancement](https://github.com/AdoptOpenJDK/openjdk-tests/issues/2296). In order for more people to benefit from the current comment triggered PR builds feature, I think we should port it into openj9 and TKG repo. The enhancement can be ported at a later stage.
+
+For [openj9 repo](https://github.com/eclipse/openj9):
+PR builds workflow should take openj9 repo and branch from the openj9 PR. The rest repo and branch should use the default values.
+
+For [TKG repo](https://github.com/adoptium/TKG):
+PR builds workflow should take TKG repo and branch from the TKG PR. The rest repo and branch should use the default values.
+
+

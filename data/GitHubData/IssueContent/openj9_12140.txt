@@ -1,0 +1,15 @@
+`_autoSymRefs` declared in `ResolvedMethodSymbol` is used to track all the auto and temp symrefs. One can use `getAutoSymRefs` to obtain the list.
+
+However, in block splitting, we create an auto symref without adding it to the list.
+https://github.com/eclipse/omr/blob/ca24f8df45f058f6f9249ce59c999a335e64444d/compiler/optimizer/Inliner.cpp#L3432-L3436
+https://github.com/eclipse/omr/blob/ca24f8df45f058f6f9249ce59c999a335e64444d/compiler/optimizer/Inliner.cpp#L3459-L3467
+
+`OMR_InlinerUtil::storeValueInATemp` is used by `TR_HandleInjectedBasicBlock`, which is used to do uncommoning in block splitting
+https://github.com/eclipse/omr/blob/ca24f8df45f058f6f9249ce59c999a335e64444d/compiler/il/OMRBlock.cpp#L782
+
+But only the symbol is added to the list, not the symref.
+
+In an attempt to add the symref to the list (by using `create` API in sym ref table to create the symref), I'm getting test failures.
+
+We should still try to make the list complete, as the list can be used in different places. Currently, we're not seeing issues as all the places are looking at autos not temps. #11634 initially used the list but got test failures. We have to workaround it by walking the trees to collect a complete list of autos.
+

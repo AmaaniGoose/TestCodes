@@ -1,0 +1,12 @@
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_extended.external_x86-64_linux_wildfly/2/console
+
+```
+13:02:28  [ERROR] Tests run: 11, Failures: 0, Errors: 6, Skipped: 1, Time elapsed: 116.626 s <<< FAILURE! - in org.wildfly.extension.messaging.activemq.MessagingActiveMQSubsystem_7_0_TestCase
+13:02:28  [ERROR] testTransformersEAP_7_0_0(org.wildfly.extension.messaging.activemq.MessagingActiveMQSubsystem_7_0_TestCase)  Time elapsed: 12.213 s  <<< ERROR!
+13:02:28  java.lang.RuntimeException: org.eclipse.aether.resolution.ArtifactResolutionException: Could not transfer artifact org.jboss.eap:wildfly-messaging-activemq:jar:7.0.0.GA-redhat-2 from/to product-repository (https://maven.repository.redhat.com/ga/): Connect to maven.repository.redhat.com:443 timed out
+13:02:28  	at org.jboss.as.model.test.MavenUtil.createMavenGavURL(MavenUtil.java:142)
+13:02:28  	at org.jboss.as.model.test.ChildFirstClassLoaderBuilder.addMavenResourceURL(ChildFirstClassLoaderBuilder.java:198)
+13:02:28  	at org.jboss.as.subsystem.test.SubsystemTestDelegate$LegacyKernelServiceInitializerImpl.addMavenResourceURL(SubsystemTestDelegate.java:717)
+13:02:28  	at org.wildfly.extension.messaging.activemq.MessagingActiveMQSubsystem_7_0_TestCase.testTransformers(MessagingActiveMQSubsystem_7_0_TestCase.java:176)
+13:02:28  	at org.wildfly.extension.messaging.activemq.MessagingActiveMQSubsystem_7_0_TestCase.testTransformersEAP_7_0_0(MessagingActiveMQSubsystem_7_0_TestCase.java:153)
+```

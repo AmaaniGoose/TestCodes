@@ -1,0 +1,1 @@
+Incremental openj9 build does not seem to be working. To make sure some small change takes effect I have to do "make clean; make all", which takes extremely long. Has anybody else experienced that?

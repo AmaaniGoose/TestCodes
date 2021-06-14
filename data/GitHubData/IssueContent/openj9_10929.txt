@@ -1,0 +1,84 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl_Nightly/218`:
+```
+23:09:50  openjdk version "11.0.9-internal" 2020-10-20
+23:09:50  OpenJDK Runtime Environment (build 11.0.9-internal+0-adhoc.jenkins.BuildJDK11x86-64windowsxlNightly)
+23:09:50  Eclipse OpenJ9 VM (build master-e5e0324a0f5, JRE 11 Windows Server 2016 amd64-64-Bit 20201018_222 (JIT enabled, AOT enabled)
+23:09:50  OpenJ9   - e5e0324a0f5
+23:09:50  OMR      - d2cc022b7d9
+23:09:50  JCL      - 5e617ab0c87 based on jdk-11.0.9+10)
+```
+To rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links:
+00:46:29  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&BUILD_LIST=openjdk&PLATFORM=x86-64_windows_xl&TARGET=jdk_lang_j9_0
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+23:16:32  ===============================================
+23:16:32  Running test jdk_lang_j9_0 ...
+23:16:32  ===============================================
+23:28:44  STDERR:
+23:28:44  java.lang.BootstrapMethodError: java.lang.NullPointerException
+23:28:44  	at java.base/java.util.ResourceBundle$ResourceBundleProviderHelper.newResourceBundle(ResourceBundle.java:3572)
+23:28:44  	at java.base/java.util.ResourceBundle$1.newResourceBundle(ResourceBundle.java:416)
+23:28:44  	at java.base/sun.util.resources.Bundles.findBundleOf(Bundles.java:209)
+23:28:44  	at java.base/sun.util.resources.Bundles.loadBundleOf(Bundles.java:145)
+23:28:44  	at java.base/sun.util.resources.Bundles.of(Bundles.java:106)
+23:28:44  	at java.base/sun.util.resources.LocaleData$1.run(LocaleData.java:185)
+23:28:44  	at java.base/sun.util.resources.LocaleData$1.run(LocaleData.java:182)
+23:28:44  	at java.base/java.security.AccessController.doPrivileged(AccessController.java:678)
+23:28:44  	at java.base/sun.util.resources.LocaleData.getBundle(LocaleData.java:182)
+23:28:44  	at java.base/sun.util.resources.LocaleData.getCalendarData(LocaleData.java:90)
+23:28:44  	at java.base/sun.util.locale.provider.LocaleResources.getCalendarData(LocaleResources.java:138)
+23:28:44  	at java.base/sun.util.cldr.CLDRCalendarDataProviderImpl.findValue(CLDRCalendarDataProviderImpl.java:91)
+23:28:44  	at java.base/sun.util.cldr.CLDRCalendarDataProviderImpl.getFirstDayOfWeek(CLDRCalendarDataProviderImpl.java:59)
+23:28:44  	at java.base/sun.util.locale.provider.CalendarDataUtility$CalendarWeekParameterGetter.getObject(CalendarDataUtility.java:248)
+23:28:44  	at java.base/sun.util.locale.provider.CalendarDataUtility$CalendarWeekParameterGetter.getObject(CalendarDataUtility.java:233)
+23:28:44  	at java.base/sun.util.locale.provider.LocaleServiceProviderPool.getLocalizedObjectImpl(LocaleServiceProviderPool.java:281)
+23:28:44  	at java.base/sun.util.locale.provider.LocaleServiceProviderPool.getLocalizedObject(LocaleServiceProviderPool.java:262)
+23:28:44  	at java.base/sun.util.locale.provider.CalendarDataUtility.retrieveFirstDayOfWeek(CalendarDataUtility.java:75)
+23:28:44  	at java.base/java.util.Calendar.setWeekCountData(Calendar.java:3412)
+23:28:44  	at java.base/java.util.Calendar.<init>(Calendar.java:1611)
+23:28:44  	at java.base/java.util.GregorianCalendar.<init>(GregorianCalendar.java:738)
+23:28:44  	at java.base/java.util.Calendar$Builder.build(Calendar.java:1493)
+23:28:44  	at java.base/sun.util.locale.provider.CalendarProviderImpl.getInstance(CalendarProviderImpl.java:87)
+23:28:44  	at java.base/java.util.Calendar.createCalendar(Calendar.java:1696)
+23:28:44  	at java.base/java.util.Calendar.getInstance(Calendar.java:1660)
+23:28:44  	at java.base/java.text.SimpleDateFormat.initializeCalendar(SimpleDateFormat.java:676)
+23:28:44  	at java.base/java.text.SimpleDateFormat.<init>(SimpleDateFormat.java:620)
+23:28:44  	at java.base/java.text.SimpleDateFormat.<init>(SimpleDateFormat.java:599)
+23:28:44  	at org.testng.reporters.XMLReporter.addDurationAttributes(XMLReporter.java:180)
+23:28:44  	at org.testng.reporters.XMLReporter.getSuiteAttributes(XMLReporter.java:171)
+23:28:44  	at org.testng.reporters.XMLReporter.writeSuiteToBuffer(XMLReporter.java:114)
+23:28:44  	at org.testng.reporters.XMLReporter.writeSuite(XMLReporter.java:86)
+23:28:44  	at org.testng.reporters.XMLReporter.generateReport(XMLReporter.java:63)
+23:28:44  	at org.testng.TestNG.generateReports(TestNG.java:1076)
+23:28:44  	at org.testng.TestNG.run(TestNG.java:1035)
+23:28:44  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+23:28:44  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+23:28:44  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+23:28:44  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+23:28:44  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+23:28:44  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+23:28:44  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+23:28:44  	at java.base/java.lang.Thread.run(Thread.java:835)
+23:28:44  Caused by: java.lang.NullPointerException
+23:28:44  	at java.base/java.lang.invoke.InnerClassLambdaMetafactory.buildCallSite(InnerClassLambdaMetafactory.java:231)
+23:28:44  	at java.base/java.lang.invoke.LambdaMetafactory.metafactory(LambdaMetafactory.java:329)
+23:28:44  	at java.base/java.lang.invoke.DirectHandle.invokeExact_thunkArchetype_L(DirectHandle.java:302)
+23:28:44  	at java.base/java.lang.invoke.AsTypeHandle.invokeExact_thunkArchetype_X(AsTypeHandle.java:49)
+23:28:44  	at java.base/java.lang.invoke.MethodHandleResolver.invokeBsm(MethodHandleResolver.java:181)
+23:28:44  	at java.base/java.lang.invoke.MethodHandleResolver.resolveInvokeDynamic(MethodHandleResolver.java:237)
+23:28:44  	... 43 more
+23:28:44  
+23:28:44  JavaTest Message: Test threw exception: java.lang.BootstrapMethodError: java.lang.NullPointerException
+23:28:44  JavaTest Message: shutting down test
+23:28:44  
+23:28:44  STATUS:Failed.`main' threw exception: java.lang.BootstrapMethodError: java.lang.NullPointerException
+```

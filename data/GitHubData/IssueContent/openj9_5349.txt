@@ -1,0 +1,3 @@
+Both `TR_DontRIUpgradeAOTWarmMethods` and `TR_UseRIOnlyForLargeQSZ` share the same value in enum TR_CompilationOptions [in OMROptions.hpp](https://github.com/eclipse/omr/blob/3e2bef8e9e0840ef3ddb61abc3f2bf5a8b4e0bab/compiler/control/OMROptions.hpp#L965)
+
+Setting and querying about any of these options would result in the same value. `TR_UseRIOnlyForLargeQSZ` gets enabled by default on plinux, resulting in `TR_DontRIUpgradeAOTWarmMethods` being enabled as well.

@@ -1,0 +1,38 @@
+Java -version output
+--------------------
+openjdk version "11.0.8" 2020-07-14
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.8+10)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.21.0, JRE 11 Linux amd64-64-Bit Compressed References 20200715_697 (JIT enabled, AOT enabled)
+OpenJ9 - 34cf4c075
+OMR - 113e54219
+JCL - 95bb504fbb based on jdk-11.0.8+10)
+
+Summary of problem
+------------------
+```
+*** buffer overflow detected ***: /opt/jdk-11.0.8+10/bin/java terminated
+======= Backtrace: =========
+/lib64/libc.so.6(__fortify_fail+0x37)[0x7f6f193b8607]
+/lib64/libc.so.6(+0x116782)[0x7f6f193b6782]
+/lib64/libc.so.6(+0x118567)[0x7f6f193b8567]
+/lib64/libglib-2.0.so.0(g_spawn_sync+0x230)[0x7f6eac45f070]
+/lib64/libglib-2.0.so.0(g_spawn_command_line_sync+0x75)[0x7f6eac45f745]
+/lib64/libgio-2.0.so.0(+0xb2100)[0x7f6eacdf1100]
+/lib64/libgio-2.0.so.0(g_dbus_address_get_for_bus_sync+0x340)[0x7f6eacdf2ad0]
+/lib64/libgio-2.0.so.0(+0xbf2fe)[0x7f6eacdfe2fe]
+/lib64/libgio-2.0.so.0(g_bus_get_sync+0x56)[0x7f6eace03c16]
+/usr/lib64/gio/modules/libdconfsettings.so(+0x7b00)[0x7f6e7754bb00]
+/usr/lib64/gio/modules/libdconfsettings.so(+0x7bed)[0x7f6e7754bbed]
+/lib64/libglib-2.0.so.0(+0x48cc7)[0x7f6eac414cc7]
+/lib64/libglib-2.0.so.0(g_main_context_dispatch+0x159)[0x7f6eac418099]
+/lib64/libglib-2.0.so.0(+0x4c3f8)[0x7f6eac4183f8]
+/lib64/libglib-2.0.so.0(g_main_context_iteration+0x2c)[0x7f6eac4184ac]
+/usr/lib64/gio/modules/libdconfsettings.so(+0x7d6d)[0x7f6e7754bd6d]
+/lib64/libglib-2.0.so.0(+0x73540)[0x7f6eac43f540]
+/lib64/libpthread.so.0(+0x7ea5)[0x7f6f19a8aea5]
+/lib64/libc.so.6(clone+0x6d)[0x7f6f1939e96d]
+```
+
+Diagnostic files
+----------------
+I've sent the dumps to @pshipton via Slack

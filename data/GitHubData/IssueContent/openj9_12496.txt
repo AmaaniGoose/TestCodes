@@ -1,0 +1,1 @@
+`TR::CompilationInfoPerThreadBase::wrappedCompile` is a ridiculously big method. A lot of the code within should be moved into smaller functions.

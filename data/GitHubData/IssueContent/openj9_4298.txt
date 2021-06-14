@@ -1,0 +1,1177 @@
+Test https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/net/httpclient/websocket/BlowupOutputQueue.java (along with multiple similar tests) are failing consistently on Mac OS with the following errors ...
+
+```
+java.util.concurrent.ExecutionException: java.io.IOException: closed output
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:395)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2022)
+	at BlowupOutputQueue.lambda$full$0(BlowupOutputQueue.java:115)
+	at BlowupOutputQueue$$Lambda$24.000000009A446A80.call(Unknown Source)
+	at PendingOperations.repeatable(PendingOperations.java:84)
+	at BlowupOutputQueue.full(BlowupOutputQueue.java:83)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+	at org.testng.TestRunner.run(TestRunner.java:623)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+	at org.testng.TestNG.run(TestNG.java:1018)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+Caused by: java.io.IOException: closed output
+	at java.net.http/jdk.internal.net.http.RawChannelTube.write(RawChannelTube.java:340)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.write(TransportImpl.java:114)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.tryCompleteWrite(TransportImpl.java:597)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.run(TransportImpl.java:547)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:147)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$TryEndDeferredCompleter.complete(SequentialScheduler.java:315)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:149)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$SchedulableTask.run(SequentialScheduler.java:198)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:271)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:224)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.sendText(TransportImpl.java:149)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl.sendText(WebSocketImpl.java:184)
+	at BlowupOutputQueue.lambda$full$0(BlowupOutputQueue.java:113)
+	... 32 more
+
+java.io.IOException: Broken pipe
+	at java.base/sun.nio.ch.FileDispatcherImpl.writev0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.writev(SocketDispatcher.java:51)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:182)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:130)
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:496)
+	at java.base/java.nio.channels.SocketChannel.write(SocketChannel.java:507)
+	at java.net.http/jdk.internal.net.http.SocketTube.writeAvailable(SocketTube.java:1219)
+	at java.net.http/jdk.internal.net.http.SocketTube$InternalWriteSubscriber.tryFlushCurrent(SocketTube.java:342)
+	at java.net.http/jdk.internal.net.http.SocketTube$InternalWriteSubscriber.onNext(SocketTube.java:309)
+	at java.net.http/jdk.internal.net.http.SocketTube.onNext(SocketTube.java:133)
+	at java.net.http/jdk.internal.net.http.SocketTube.onNext(SocketTube.java:56)
+	at java.net.http/jdk.internal.net.http.RawChannelTube.write(RawChannelTube.java:356)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.write(TransportImpl.java:114)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.tryCompleteWrite(TransportImpl.java:597)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.run(TransportImpl.java:547)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:147)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$TryEndDeferredCompleter.complete(SequentialScheduler.java:315)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:149)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$SchedulableTask.run(SequentialScheduler.java:198)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:271)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:224)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.sendText(TransportImpl.java:149)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl.sendText(WebSocketImpl.java:184)
+	at BlowupOutputQueue.lambda$full$0(BlowupOutputQueue.java:113)
+	at BlowupOutputQueue$$Lambda$24.000000009A446A80.call(Unknown Source)
+	at PendingOperations.repeatable(PendingOperations.java:84)
+	at BlowupOutputQueue.full(BlowupOutputQueue.java:83)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+	at org.testng.TestRunner.run(TestRunner.java:623)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+	at org.testng.TestNG.run(TestNG.java:1018)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+```	
+
+Also ...
+
+**java/net/httpclient/websocket/PendingBinaryPingClose.java**
+
+```
+java.util.concurrent.ExecutionException: java.io.IOException: Output closed
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:395)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2022)
+	at PendingBinaryPingClose.lambda$pendingBinaryPingClose$0(PendingBinaryPingClose.java:63)
+	at PendingBinaryPingClose$$Lambda$24.0000000053DAFF30.call(Unknown Source)
+	at PendingOperations.repeatable(PendingOperations.java:84)
+	at PendingBinaryPingClose.pendingBinaryPingClose(PendingBinaryPingClose.java:51)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+	at org.testng.TestRunner.run(TestRunner.java:623)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+	at org.testng.TestNG.run(TestNG.java:1018)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+Caused by: java.io.IOException: Output closed
+	at java.net.http/jdk.internal.net.http.websocket.MessageEncoder.encodeBinary(MessageEncoder.java:224)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask$1.onBinary(TransportImpl.java:376)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask$1.onBinary(TransportImpl.java:357)
+	at java.net.http/jdk.internal.net.http.websocket.MessageQueue.peek(MessageQueue.java:240)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.run(TransportImpl.java:545)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:147)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$SchedulableTask.run(SequentialScheduler.java:198)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:271)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:224)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.sendBinary(TransportImpl.java:174)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl.sendBinary(WebSocketImpl.java:208)
+	at PendingBinaryPingClose.lambda$pendingBinaryPingClose$0(PendingBinaryPingClose.java:61)
+	... 32 more
+
+java.util.concurrent.ExecutionException: java.io.IOException: closed output
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:395)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2022)
+	at PendingBinaryPingClose.lambda$pendingBinaryPingClose$0(PendingBinaryPingClose.java:63)
+	at PendingBinaryPingClose$$Lambda$24.0000000053DAFF30.call(Unknown Source)
+	at PendingOperations.repeatable(PendingOperations.java:84)
+	at PendingBinaryPingClose.pendingBinaryPingClose(PendingBinaryPingClose.java:51)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+	at org.testng.TestRunner.run(TestRunner.java:623)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+	at org.testng.TestNG.run(TestNG.java:1018)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+Caused by: java.io.IOException: closed output
+	at java.net.http/jdk.internal.net.http.RawChannelTube.write(RawChannelTube.java:340)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.write(TransportImpl.java:114)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.tryCompleteWrite(TransportImpl.java:597)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.run(TransportImpl.java:547)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:147)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$TryEndDeferredCompleter.complete(SequentialScheduler.java:315)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:149)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$SchedulableTask.run(SequentialScheduler.java:198)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:271)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:224)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.sendBinary(TransportImpl.java:174)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl.sendBinary(WebSocketImpl.java:208)
+	at PendingBinaryPingClose.lambda$pendingBinaryPingClose$0(PendingBinaryPingClose.java:61)
+	... 32 more
+```
+
+**java/net/httpclient/websocket/PendingBinaryPongClose.java**
+
+```
+java.util.concurrent.ExecutionException: java.io.IOException: closed output
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:395)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2022)
+	at PendingBinaryPongClose.lambda$pendingBinaryPongClose$0(PendingBinaryPongClose.java:63)
+	at PendingBinaryPongClose$$Lambda$24.000000001BD48DE0.call(Unknown Source)
+	at PendingOperations.repeatable(PendingOperations.java:84)
+	at PendingBinaryPongClose.pendingBinaryPongClose(PendingBinaryPongClose.java:51)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+	at org.testng.TestRunner.run(TestRunner.java:623)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+	at org.testng.TestNG.run(TestNG.java:1018)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+Caused by: java.io.IOException: closed output
+	at java.net.http/jdk.internal.net.http.RawChannelTube.write(RawChannelTube.java:340)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.write(TransportImpl.java:114)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.tryCompleteWrite(TransportImpl.java:597)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.run(TransportImpl.java:547)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:147)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$TryEndDeferredCompleter.complete(SequentialScheduler.java:315)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:149)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$SchedulableTask.run(SequentialScheduler.java:198)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:271)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:224)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.sendBinary(TransportImpl.java:174)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl.sendBinary(WebSocketImpl.java:208)
+	at PendingBinaryPongClose.lambda$pendingBinaryPongClose$0(PendingBinaryPongClose.java:61)
+	... 32 more
+```
+
+**java/net/httpclient/websocket/PendingPingBinaryClose.java**
+
+```
+java.util.concurrent.ExecutionException: java.io.IOException: closed output
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:395)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2022)
+	at PendingPingBinaryClose.lambda$pendingPingBinaryClose$0(PendingPingBinaryClose.java:65)
+	at PendingPingBinaryClose$$Lambda$24.0000000080C24680.call(Unknown Source)
+	at PendingOperations.repeatable(PendingOperations.java:84)
+	at PendingPingBinaryClose.pendingPingBinaryClose(PendingPingBinaryClose.java:53)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+	at org.testng.TestRunner.run(TestRunner.java:623)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+	at org.testng.TestNG.run(TestNG.java:1018)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+Caused by: java.io.IOException: closed output
+	at java.net.http/jdk.internal.net.http.RawChannelTube.write(RawChannelTube.java:340)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.write(TransportImpl.java:114)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.tryCompleteWrite(TransportImpl.java:597)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.run(TransportImpl.java:547)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:147)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$SchedulableTask.run(SequentialScheduler.java:198)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:271)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:224)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.sendPing(TransportImpl.java:198)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl.sendPing(WebSocketImpl.java:247)
+	at PendingPingBinaryClose.lambda$pendingPingBinaryClose$0(PendingPingBinaryClose.java:63)
+	... 32 more
+
+java.util.concurrent.ExecutionException: java.io.IOException: Output closed
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:395)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2022)
+	at PendingPingBinaryClose.lambda$pendingPingBinaryClose$0(PendingPingBinaryClose.java:65)
+	at PendingPingBinaryClose$$Lambda$24.0000000080C24680.call(Unknown Source)
+	at PendingOperations.repeatable(PendingOperations.java:84)
+	at PendingPingBinaryClose.pendingPingBinaryClose(PendingPingBinaryClose.java:53)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+	at org.testng.TestRunner.run(TestRunner.java:623)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+	at org.testng.TestNG.run(TestNG.java:1018)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+Caused by: java.io.IOException: Output closed
+	at java.net.http/jdk.internal.net.http.websocket.MessageEncoder.encodePing(MessageEncoder.java:263)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask$1.onPing(TransportImpl.java:385)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask$1.onPing(TransportImpl.java:357)
+	at java.net.http/jdk.internal.net.http.websocket.MessageQueue.peek(MessageQueue.java:247)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.run(TransportImpl.java:545)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:147)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$SchedulableTask.run(SequentialScheduler.java:198)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:271)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:224)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.sendPing(TransportImpl.java:198)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl.sendPing(WebSocketImpl.java:247)
+	at PendingPingBinaryClose.lambda$pendingPingBinaryClose$0(PendingPingBinaryClose.java:63)
+	... 32 more
+```
+
+**java/net/httpclient/websocket/PendingPingTextClose.java**
+
+```
+java.util.concurrent.ExecutionException: java.io.IOException: Output closed
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:395)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2022)
+	at PendingPingTextClose.lambda$pendingPingTextClose$0(PendingPingTextClose.java:65)
+	at PendingPingTextClose$$Lambda$24.000000003BD317B0.call(Unknown Source)
+	at PendingOperations.repeatable(PendingOperations.java:84)
+	at PendingPingTextClose.pendingPingTextClose(PendingPingTextClose.java:53)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+	at org.testng.TestRunner.run(TestRunner.java:623)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+	at org.testng.TestNG.run(TestNG.java:1018)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+Caused by: java.io.IOException: Output closed
+	at java.net.http/jdk.internal.net.http.websocket.MessageEncoder.encodePing(MessageEncoder.java:263)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask$1.onPing(TransportImpl.java:385)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask$1.onPing(TransportImpl.java:357)
+	at java.net.http/jdk.internal.net.http.websocket.MessageQueue.peek(MessageQueue.java:247)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.run(TransportImpl.java:545)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:147)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$SchedulableTask.run(SequentialScheduler.java:198)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:271)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:224)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.sendPing(TransportImpl.java:198)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl.sendPing(WebSocketImpl.java:247)
+	at PendingPingTextClose.lambda$pendingPingTextClose$0(PendingPingTextClose.java:63)
+	... 32 more
+```
+
+**java/net/httpclient/websocket/PendingPongBinaryClose.java**
+
+```
+java.util.concurrent.ExecutionException: java.io.IOException: closed output
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:395)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2022)
+	at PendingPongBinaryClose.lambda$pendingPongBinaryClose$0(PendingPongBinaryClose.java:65)
+	at PendingPongBinaryClose$$Lambda$24.0000000023DBBF40.call(Unknown Source)
+	at PendingOperations.repeatable(PendingOperations.java:84)
+	at PendingPongBinaryClose.pendingPongBinaryClose(PendingPongBinaryClose.java:53)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+	at org.testng.TestRunner.run(TestRunner.java:623)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+	at org.testng.TestNG.run(TestNG.java:1018)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+Caused by: java.io.IOException: closed output
+	at java.net.http/jdk.internal.net.http.RawChannelTube.write(RawChannelTube.java:340)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.write(TransportImpl.java:114)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.tryCompleteWrite(TransportImpl.java:597)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.run(TransportImpl.java:547)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:147)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$SchedulableTask.run(SequentialScheduler.java:198)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:271)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:224)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.sendPong(TransportImpl.java:222)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl.sendPong(WebSocketImpl.java:268)
+	at PendingPongBinaryClose.lambda$pendingPongBinaryClose$0(PendingPongBinaryClose.java:63)
+	... 32 more
+
+java.util.concurrent.ExecutionException: java.io.IOException: Output closed
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:395)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2022)
+	at PendingPongBinaryClose.lambda$pendingPongBinaryClose$0(PendingPongBinaryClose.java:65)
+	at PendingPongBinaryClose$$Lambda$24.0000000023DBBF40.call(Unknown Source)
+	at PendingOperations.repeatable(PendingOperations.java:84)
+	at PendingPongBinaryClose.pendingPongBinaryClose(PendingPongBinaryClose.java:53)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+	at org.testng.TestRunner.run(TestRunner.java:623)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+	at org.testng.TestNG.run(TestNG.java:1018)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+Caused by: java.io.IOException: Output closed
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.tryCompleteWrite(TransportImpl.java:609)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.run(TransportImpl.java:547)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:147)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$SchedulableTask.run(SequentialScheduler.java:198)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:271)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:224)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.sendPong(TransportImpl.java:222)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl.sendPong(WebSocketImpl.java:268)
+	at PendingPongBinaryClose.lambda$pendingPongBinaryClose$0(PendingPongBinaryClose.java:63)
+	... 32 more
+```
+
+**java/net/httpclient/websocket/PendingPongTextClose.java**
+
+```
+java.util.concurrent.ExecutionException: java.io.IOException: Output closed
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:395)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2022)
+	at PendingPongTextClose.lambda$pendingPongTextClose$0(PendingPongTextClose.java:67)
+	at PendingPongTextClose$$Lambda$24.0000000079D93FF0.call(Unknown Source)
+	at PendingOperations.repeatable(PendingOperations.java:84)
+	at PendingPongTextClose.pendingPongTextClose(PendingPongTextClose.java:55)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+	at org.testng.TestRunner.run(TestRunner.java:623)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+	at org.testng.TestNG.run(TestNG.java:1018)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+Caused by: java.io.IOException: Output closed
+	at java.net.http/jdk.internal.net.http.websocket.MessageEncoder.encodePong(MessageEncoder.java:292)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask$1.onPong(TransportImpl.java:394)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask$1.onPong(TransportImpl.java:357)
+	at java.net.http/jdk.internal.net.http.websocket.MessageQueue.peek(MessageQueue.java:258)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.run(TransportImpl.java:545)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:147)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$SchedulableTask.run(SequentialScheduler.java:198)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:271)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:224)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.sendPong(TransportImpl.java:222)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl.sendPong(WebSocketImpl.java:268)
+	at PendingPongTextClose.lambda$pendingPongTextClose$0(PendingPongTextClose.java:65)
+	... 32 more
+	
+java.util.concurrent.ExecutionException: java.io.IOException: Output closed
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:395)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2022)
+	at PendingPongTextClose.lambda$pendingPongTextClose$0(PendingPongTextClose.java:67)
+	at PendingPongTextClose$$Lambda$24.0000000079D93FF0.call(Unknown Source)
+	at PendingOperations.repeatable(PendingOperations.java:84)
+	at PendingPongTextClose.pendingPongTextClose(PendingPongTextClose.java:55)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+	at org.testng.TestRunner.run(TestRunner.java:623)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+	at org.testng.TestNG.run(TestNG.java:1018)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+Caused by: java.io.IOException: Output closed
+	at java.net.http/jdk.internal.net.http.websocket.MessageEncoder.encodePong(MessageEncoder.java:292)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask$1.onPong(TransportImpl.java:394)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask$1.onPong(TransportImpl.java:357)
+	at java.net.http/jdk.internal.net.http.websocket.MessageQueue.peek(MessageQueue.java:258)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.run(TransportImpl.java:545)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:147)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$TryEndDeferredCompleter.complete(SequentialScheduler.java:315)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:149)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$SchedulableTask.run(SequentialScheduler.java:198)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:271)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:224)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.sendClose(TransportImpl.java:271)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl.sendClose0(WebSocketImpl.java:337)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl.sendCloseSilently(WebSocketImpl.java:652)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl$ReceiveTask.lambda$processClose$0(WebSocketImpl.java:541)
+	at jdk.internal.net.http.websocket.WebSocketImpl$ReceiveTask$$Lambda$176.000000007A1B2220.accept(Unknown Source)
+	at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:859)
+	at java.base/java.util.concurrent.CompletableFuture.uniWhenCompleteStage(CompletableFuture.java:883)
+	at java.base/java.util.concurrent.CompletableFuture.whenComplete(CompletableFuture.java:2251)
+	at java.base/java.util.concurrent.CompletableFuture.whenComplete(CompletableFuture.java:143)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl$ReceiveTask.processClose(WebSocketImpl.java:536)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl$ReceiveTask.run(WebSocketImpl.java:451)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:147)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$SchedulableTask.run(SequentialScheduler.java:198)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:271)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:224)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl.trySetState(WebSocketImpl.java:837)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl.signalClose(WebSocketImpl.java:763)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl$SignallingMessageConsumer.onComplete(WebSocketImpl.java:820)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$ReceiveTask.run(TransportImpl.java:705)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:147)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$SchedulableTask.run(SequentialScheduler.java:198)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:271)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:224)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$ReadEvent.handle(TransportImpl.java:762)
+	at java.net.http/jdk.internal.net.http.RawChannelTube$ReadSubscriber.checkEvents(RawChannelTube.java:174)
+	at java.net.http/jdk.internal.net.http.RawChannelTube$ReadSubscriber.onComplete(RawChannelTube.java:223)
+	at java.net.http/jdk.internal.net.http.SocketTube$InternalReadPublisher$ReadSubscription.signalCompletion(SocketTube.java:632)
+	at java.net.http/jdk.internal.net.http.SocketTube$InternalReadPublisher$InternalReadSubscription.read(SocketTube.java:833)
+	at jdk.internal.net.http.SocketTube$InternalReadPublisher$InternalReadSubscription$$Lambda$102.000000007A84EC20.run(Unknown Source)
+	at java.net.http/jdk.internal.net.http.SocketTube$SocketFlowTask.run(SocketTube.java:175)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$SchedulableTask.run(SequentialScheduler.java:198)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:271)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:224)
+	at java.net.http/jdk.internal.net.http.SocketTube$InternalReadPublisher$InternalReadSubscription.signalReadable(SocketTube.java:763)
+	at java.net.http/jdk.internal.net.http.SocketTube$InternalReadPublisher$ReadEvent.signalEvent(SocketTube.java:941)
+	at java.net.http/jdk.internal.net.http.SocketTube$SocketFlowEvent.handle(SocketTube.java:245)
+	at java.net.http/jdk.internal.net.http.HttpClientImpl$SelectorManager.handleEvent(HttpClientImpl.java:957)
+	at java.net.http/jdk.internal.net.http.HttpClientImpl$SelectorManager.lambda$run$3(HttpClientImpl.java:912)
+	at jdk.internal.net.http.HttpClientImpl$SelectorManager$$Lambda$128.000000007A8F5820.accept(Unknown Source)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+	at java.net.http/jdk.internal.net.http.HttpClientImpl$SelectorManager.run(HttpClientImpl.java:912)	
+```
+
+**java/net/httpclient/websocket/PendingTextPingClose.java**
+
+```
+java.util.concurrent.ExecutionException: java.io.IOException: closed output
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:395)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2022)
+	at PendingTextPingClose.lambda$pendingTextPingClose$0(PendingTextPingClose.java:64)
+	at PendingTextPingClose$$Lambda$24.0000000068487730.call(Unknown Source)
+	at PendingOperations.repeatable(PendingOperations.java:84)
+	at PendingTextPingClose.pendingTextPingClose(PendingTextPingClose.java:52)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+	at org.testng.TestRunner.run(TestRunner.java:623)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+	at org.testng.TestNG.run(TestNG.java:1018)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+Caused by: java.io.IOException: closed output
+	at java.net.http/jdk.internal.net.http.RawChannelTube.write(RawChannelTube.java:340)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.write(TransportImpl.java:114)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.tryCompleteWrite(TransportImpl.java:597)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.run(TransportImpl.java:547)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:147)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$TryEndDeferredCompleter.complete(SequentialScheduler.java:315)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:149)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$SchedulableTask.run(SequentialScheduler.java:198)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:271)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:224)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.sendText(TransportImpl.java:149)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl.sendText(WebSocketImpl.java:184)
+	at PendingTextPingClose.lambda$pendingTextPingClose$0(PendingTextPingClose.java:62)
+	... 32 more
+```
+
+**java/net/httpclient/websocket/PendingTextPongClose.java**
+
+```
+java.util.concurrent.ExecutionException: java.io.IOException: Output closed
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:395)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2022)
+	at PendingTextPongClose.lambda$pendingTextPongClose$0(PendingTextPongClose.java:64)
+	at PendingTextPongClose$$Lambda$24.0000000088547A20.call(Unknown Source)
+	at PendingOperations.repeatable(PendingOperations.java:84)
+	at PendingTextPongClose.pendingTextPongClose(PendingTextPongClose.java:52)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+	at org.testng.TestRunner.run(TestRunner.java:623)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+	at org.testng.TestNG.run(TestNG.java:1018)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+Caused by: java.io.IOException: Output closed
+	at java.net.http/jdk.internal.net.http.websocket.MessageEncoder.encodeText(MessageEncoder.java:136)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask$1.onText(TransportImpl.java:366)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask$1.onText(TransportImpl.java:357)
+	at java.net.http/jdk.internal.net.http.websocket.MessageQueue.peek(MessageQueue.java:223)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.run(TransportImpl.java:545)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:147)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$SchedulableTask.run(SequentialScheduler.java:198)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:271)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:224)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.sendText(TransportImpl.java:149)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl.sendText(WebSocketImpl.java:184)
+	at PendingTextPongClose.lambda$pendingTextPongClose$0(PendingTextPongClose.java:62)
+	... 32 more
+	
+java.util.concurrent.ExecutionException: java.io.IOException: closed output
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:395)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2022)
+	at PendingTextPongClose.lambda$pendingTextPongClose$0(PendingTextPongClose.java:64)
+	at PendingTextPongClose$$Lambda$24.0000000088547A20.call(Unknown Source)
+	at PendingOperations.repeatable(PendingOperations.java:84)
+	at PendingTextPongClose.pendingTextPongClose(PendingTextPongClose.java:52)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+	at org.testng.TestRunner.run(TestRunner.java:623)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+	at org.testng.TestNG.run(TestNG.java:1018)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+Caused by: java.io.IOException: closed output
+	at java.net.http/jdk.internal.net.http.RawChannelTube.write(RawChannelTube.java:340)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.write(TransportImpl.java:114)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.tryCompleteWrite(TransportImpl.java:597)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.run(TransportImpl.java:547)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:147)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$TryEndDeferredCompleter.complete(SequentialScheduler.java:315)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:149)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$SchedulableTask.run(SequentialScheduler.java:198)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:271)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:224)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.sendText(TransportImpl.java:149)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl.sendText(WebSocketImpl.java:184)
+	at PendingTextPongClose.lambda$pendingTextPongClose$0(PendingTextPongClose.java:62)
+	... 32 more	
+```	
+	
+```	
+Starting
+Accepting next connection at: sun.nio.ch.ServerSocketChannelImpl[/127.0.0.1:53481]
+Started at: ws://localhost:53481
+DEBUG: [MainThread] [292ms] HttpClientImpl(1) proxySelector is sun.net.spi.DefaultProxySelector@b9221b2 (user-supplied=false)
+DEBUG: [MainThread] [349ms] HttpClientImpl(1) ClientImpl (async) send http://localhost:53481 GET
+DEBUG: [HttpClient-1-Worker-0] [362ms] Exchange establishing exchange for http://localhost:53481 GET,
+	 proxy=null
+DEBUG: [HttpClient-1-Worker-0] [364ms] ExchangeImpl get: HTTP/1.1: new Http1Exchange
+DEBUG: [HttpClient-1-Worker-0] [422ms] PlainHttpConnection(?) Initial receive buffer size is: 131072
+DEBUG: [HttpClient-1-Worker-0] [466ms] Exchange checkFor407: all clear
+DEBUG: [HttpClient-1-Worker-0] [466ms] Http1Exchange Sending headers only
+DEBUG: [HttpClient-1-Worker-0] [473ms] Http1AsyncReceiver(SocketTube(1)) Subscribed pending jdk.internal.net.http.Http1Response$HeadersReader@ad1ef9dc queue.isEmpty: true
+DEBUG: [HttpClient-1-Worker-0] [475ms] Http1AsyncReceiver(SocketTube(1)) delegate is now jdk.internal.net.http.Http1Response$HeadersReader@ad1ef9dc, demand=1, canRequestMore=true, queue.isEmpty=true
+DEBUG: [HttpClient-1-Worker-0] [475ms] Http1AsyncReceiver(SocketTube(1)) downstream subscription demand is 1
+DEBUG: [HttpClient-1-Worker-0] [477ms] Http1AsyncReceiver(SocketTube(1)) checkRequestMore: canRequestMore=true, hasDemand=true
+DEBUG: [HttpClient-1-Worker-0] [477ms] Http1AsyncReceiver(SocketTube(1)) downstream subscription demand is 1
+DEBUG: [HttpClient-1-Worker-0] [477ms] Http1AsyncReceiver(SocketTube(1)) checkRequestMore: canRequestMore=true, hasDemand=true
+DEBUG: [HttpClient-1-Worker-0] [477ms] Http1Exchange response created in advance
+DEBUG: [HttpClient-1-Worker-0] [478ms] Http1Exchange initiating connect async
+Accepted: java.nio.channels.SocketChannel[connected local=/127.0.0.1:53481 remote=/127.0.0.1:53482]
+DEBUG: [HttpClient-1-Worker-0] [481ms] PlainHttpConnection(SocketTube(1)) registering connect event
+DEBUG: [HttpClient-1-SelectorManager] [484ms] SelectorAttachment Registering jdk.internal.net.http.PlainHttpConnection$ConnectEvent@e58a4f28 for 8 (true)
+DEBUG: [HttpClient-1-SelectorManager] [492ms] PlainHttpConnection(SocketTube(1)) ConnectEvent: finishing connect
+DEBUG: [HttpClient-1-SelectorManager] [493ms] PlainHttpConnection(SocketTube(1)) ConnectEvent: connect finished: true Local addr: /127.0.0.1:53482
+DEBUG: [HttpClient-1-Worker-1] [494ms] PlainHttpConnection(SocketTube(1)) finishConnect, setting connected=true
+DEBUG: [HttpClient-1-Worker-1] [496ms] Http1Exchange SocketTube(1) connecting flows
+DEBUG: [HttpClient-1-Worker-1] [496ms] SocketTube(1) connecting flows
+DEBUG: [HttpClient-1-Worker-1] [497ms] SocketTube(1) read publisher got subscriber
+DEBUG: [HttpClient-1-Worker-1] [497ms] SocketTube(1) registering subscribe event
+DEBUG: [HttpClient-1-Worker-1] [497ms] SocketTube(1) leaving read.subscribe:  Reading: [ops=0, demand=0, stopped=false], Writing: [ops=0, demand=0]
+DEBUG: [HttpClient-1-Worker-1] [498ms] Http1Publisher(SocketTube(1)) got subscriber: SocketTube(1)
+DEBUG: [HttpClient-1-Worker-1] [498ms] SocketTube(1) subscribed for writing
+DEBUG: [HttpClient-1-Worker-1] [498ms] SocketTube(1) write: registering startSubscription event
+DEBUG: [HttpClient-1-Worker-1] [498ms] Http1Exchange requestAction.headers
+DEBUG: [HttpClient-1-SelectorManager] [497ms] SocketTube(1) subscribe event raised
+DEBUG: [HttpClient-1-Worker-1] [500ms] Http1Exchange setting outgoing with headers
+DEBUG: [HttpClient-1-SelectorManager] [500ms] SocketTube(1) handling pending subscription for jdk.internal.net.http.Http1AsyncReceiver$Http1TubeSubscriber@17c6dcc9
+DEBUG: [HttpClient-1-SelectorManager] [501ms] SocketTube(1) read demand reset to 0
+DEBUG: [HttpClient-1-SelectorManager] [501ms] SocketTube(1) calling onSubscribe
+DEBUG: [HttpClient-1-SelectorManager] [501ms] Http1AsyncReceiver(SocketTube(1)) Received onSubscribed from upstream
+DEBUG: [HttpClient-1-SelectorManager] [501ms] SocketTube(1) onSubscribe called
+DEBUG: [HttpClient-1-SelectorManager] [501ms] SocketTube(1) pending subscriber subscribed
+DEBUG: [HttpClient-1-SelectorManager] [501ms] SocketTube(1) write: starting subscription
+DEBUG: [HttpClient-1-SelectorManager] [501ms] SocketTube(1) write: offloading requestMore
+DEBUG: [HttpClient-1-Worker-1] [502ms] Http1Exchange appending to outgoing DataPair [data=[java.nio.HeapByteBuffer[pos=0 lim=210 cap=210]], throwable=null]
+DEBUG: [HttpClient-1-Worker-1] [502ms] Http1Publisher(SocketTube(1)) WriteTask
+DEBUG: [HttpClient-1-Worker-2] [502ms] SocketTube(1) write: requesting more...
+DEBUG: [HttpClient-1-Worker-0] [502ms] Http1AsyncReceiver(SocketTube(1)) downstream subscription demand is 1
+DEBUG: [HttpClient-1-Worker-0] [502ms] Http1AsyncReceiver(SocketTube(1)) checkRequestMore: canRequestMore=true, hasDemand=true
+DEBUG: [HttpClient-1-Worker-0] [502ms] Http1AsyncReceiver(SocketTube(1)) Http1TubeSubscriber: requesting one more from upstream
+DEBUG: [HttpClient-1-Worker-0] [502ms] SocketTube(1) got some demand for reading
+DEBUG: [HttpClient-1-Worker-0] [502ms] SocketTube(1) resuming read event
+DEBUG: [HttpClient-1-Worker-1] [503ms] Http1Publisher(SocketTube(1)) hasOutgoing = true
+DEBUG: [HttpClient-1-Worker-1] [503ms] Http1Exchange initiating completion of headersSentCF
+DEBUG: [HttpClient-1-Worker-0] [503ms] SocketTube(1) leaving request(1):  Reading: [ops=1, demand=1, stopped=false], Writing: [ops=0, demand=1]
+DEBUG: [HttpClient-1-SelectorManager] [503ms] SelectorAttachment Registering jdk.internal.net.http.SocketTube$InternalReadPublisher$ReadEvent@926028e0 for 1 (true)
+DEBUG: [HttpClient-1-Worker-1] [504ms] Http1Publisher(SocketTube(1)) onNext with 210 bytes
+DEBUG: [HttpClient-1-Worker-1] [504ms] SocketTube(1) trying to write: 210
+DEBUG: [HttpClient-1-Worker-1] [506ms] SocketTube(1) wrote: 210
+DEBUG: [HttpClient-1-Worker-2] [506ms] Http1Publisher(SocketTube(1)) subscription request(1), demand=1
+DEBUG: [HttpClient-1-Worker-2] [506ms] SocketTube(1) leaving requestMore:  Reading: [ops=1, demand=1, stopped=false], Writing: [ops=0, demand=0]
+DEBUG: [HttpClient-1-Worker-1] [507ms] SocketTube(1) write: requesting more...
+DEBUG: [HttpClient-1-Worker-1] [507ms] Http1Publisher(SocketTube(1)) subscription request(1), demand=1
+DEBUG: [HttpClient-1-Worker-1] [508ms] SocketTube(1) leaving requestMore:  Reading: [ops=1, demand=1, stopped=false], Writing: [ops=0, demand=1]
+DEBUG: [HttpClient-1-Worker-1] [508ms] SocketTube(1) leaving w.onNext Reading: [ops=1, demand=1, stopped=false], Writing: [ops=0, demand=1]
+DEBUG: [HttpClient-1-Worker-1] [508ms] Http1Publisher(SocketTube(1)) WriteTask
+DEBUG: [HttpClient-1-Worker-1] [508ms] Http1Publisher(SocketTube(1)) hasOutgoing = false
+DEBUG: [HttpClient-1-Worker-1] [508ms] Exchange checkFor407: all clear
+DEBUG: [HttpClient-1-Worker-1] [508ms] Exchange sendRequestBody
+DEBUG: [HttpClient-1-Worker-1] [508ms] Http1Exchange sendBodyAsync
+DEBUG: [HttpClient-1-Worker-1] [508ms] Http1Exchange bodySubscriber is null
+DEBUG: [HttpClient-1-Worker-1] [508ms] Http1Exchange appending to outgoing DataPair [data=[java.nio.HeapByteBuffer[pos=0 lim=0 cap=0]], throwable=null]
+DEBUG: [HttpClient-1-Worker-1] [508ms] Http1Publisher(SocketTube(1)) WriteTask
+DEBUG: [HttpClient-1-Worker-1] [508ms] Http1Publisher(SocketTube(1)) hasOutgoing = true
+DEBUG: [HttpClient-1-Worker-1] [508ms] Http1Exchange initiating completion of bodySentCF
+DEBUG: [HttpClient-1-Worker-1] [574ms] Http1Publisher(SocketTube(1)) completed, stopping jdk.internal.net.http.common.SequentialScheduler@b16d2bb4
+DEBUG: [HttpClient-1-Worker-1] [575ms] Http1Exchange sendBodyAsync completed successfully
+DEBUG: [HttpClient-1-SelectorManager] [579ms] SelectorAttachment Registering jdk.internal.net.http.SocketTube$InternalReadPublisher$ReadEvent@926028e0 for 0 (false)
+DEBUG: [HttpClient-1-Worker-1] [580ms] Http1Exchange reading headers
+Closed: java.nio.channels.SocketChannel[connected local=/127.0.0.1:53481 remote=/127.0.0.1:53482]
+Accepting next connection at: sun.nio.ch.ServerSocketChannelImpl[/127.0.0.1:53481]
+DEBUG: [HttpClient-1-Worker-1] [583ms] Http1Response(id=1, PlainHttpConnection(SocketTube(1))) Reading Headers: (remaining: 0) READING_HEADERS
+DEBUG: [HttpClient-1-Worker-1] [583ms] Http1Response(id=1, PlainHttpConnection(SocketTube(1))) First time around
+DEBUG: [HttpClient-1-SelectorManager] [584ms] SocketTube(1) read bytes: 195
+DEBUG: [HttpClient-1-Worker-1] [584ms] Http1Response(id=1, PlainHttpConnection(SocketTube(1))) headersReader is not yet completed
+DEBUG: [HttpClient-1-SelectorManager] [584ms] Http1AsyncReceiver(SocketTube(1)) Putting 195 bytes into the queue
+DEBUG: [HttpClient-1-SelectorManager] [585ms] SocketTube(1) resuming read event
+DEBUG: [HttpClient-1-SelectorManager] [585ms] SelectorAttachment Registering jdk.internal.net.http.SocketTube$InternalReadPublisher$ReadEvent@926028e0 for 1 (false)
+DEBUG: [HttpClient-1-SelectorManager] [585ms] SocketTube(1) leaving read() loop after onNext:  Reading: [ops=1, demand=0, stopped=false], Writing: [ops=0, demand=1]
+DEBUG: [HttpClient-1-SelectorManager] [585ms] SelectorAttachment Registering jdk.internal.net.http.SocketTube$InternalReadPublisher$ReadEvent@926028e0 for 0 (false)
+DEBUG: [HttpClient-1-SelectorManager] [585ms] SocketTube(1) no more demand for reading
+DEBUG: [HttpClient-1-SelectorManager] [585ms] SocketTube(1) leaving read() loop with no demand Reading: [ops=0, demand=0, stopped=false], Writing: [ops=0, demand=1]
+DEBUG: [HttpClient-1-Worker-1] [585ms] Http1AsyncReceiver(SocketTube(1)) Got 195 bytes for delegate jdk.internal.net.http.Http1Response$HeadersReader@ad1ef9dc
+DEBUG: [HttpClient-1-Worker-1] [585ms] Http1AsyncReceiver(SocketTube(1)) downstream subscription demand is 1
+DEBUG: [HttpClient-1-Worker-1] [586ms] Http1AsyncReceiver(SocketTube(1)) Forwarding 195 bytes to delegate jdk.internal.net.http.Http1Response$HeadersReader@ad1ef9dc
+DEBUG: [HttpClient-1-Worker-1] [586ms] Http1Response(id=1, PlainHttpConnection(SocketTube(1))) Sending 195/195 bytes to header parser
+DEBUG: [HttpClient-1-Worker-1] [588ms] Http1Response(id=1, PlainHttpConnection(SocketTube(1))) Parsing headers completed. bytes=129
+DEBUG: [HttpClient-1-Worker-1] [588ms] Http1AsyncReceiver(SocketTube(1)) Unsubscribed jdk.internal.net.http.Http1Response$HeadersReader@ad1ef9dc
+DEBUG: [HttpClient-1-Worker-1] [589ms] Http1Response(id=1, PlainHttpConnection(SocketTube(1))) Reading Headers: creating Response object; state is now READING_BODY
+DEBUG: [HttpClient-1-Worker-1] [589ms] Http1Exchange getResponseAsync completed successfully
+DEBUG: [HttpClient-1-Worker-1] [596ms] Http1Response(id=1, PlainHttpConnection(SocketTube(1))) Operation started: incrementing ref count for jdk.internal.net.http.HttpClientImpl@4f94bbe2(1)
+DEBUG: [HttpClient-1-Worker-1] [598ms] Http1AsyncReceiver(SocketTube(1)) Subscribed pending jdk.internal.net.http.Http1Response$BodyReader@afa3ba6e/parser=jdk.internal.net.http.ResponseContent$FixedLengthBodyParser@4ec86ccf queue.isEmpty: false
+DEBUG: [HttpClient-1-Worker-1] [603ms] Http1AsyncReceiver(SocketTube(1)) Delegate done: 66
+DEBUG: [HttpClient-1-Worker-1] [607ms] PlainHttpConnection(SocketTube(1))/ResponseContent/FixedLengthBodyParser length=0, onSubscribe: jdk.internal.net.http.Http1Response$Http1BodySubscriber
+DEBUG: [HttpClient-1-Worker-1] [607ms] Http1AsyncReceiver(SocketTube(1)) cleared
+DEBUG: [HttpClient-1-Worker-1] [609ms] HttpClientImpl(1) ClientImpl (async) elapsed 259 millis for GET to http://localhost:53481
+DEBUG: [HttpClient-1-Worker-1] [610ms] Http1Response(id=1, PlainHttpConnection(SocketTube(1))) Finished reading body: READING_BODY
+DEBUG: [HttpClient-1-Worker-1] [610ms] Http1Response(id=1, PlainHttpConnection(SocketTube(1))) Operation finished: decrementing ref count for jdk.internal.net.http.HttpClientImpl@4f94bbe2(1)
+DEBUG: [HttpClient-1-Worker-1] [610ms] Http1AsyncReceiver(SocketTube(1)) delegate is now jdk.internal.net.http.Http1Response$BodyReader@afa3ba6e/parser=jdk.internal.net.http.ResponseContent$FixedLengthBodyParser@4ec86ccf, demand=9223372036854775807, canRequestMore=false, queue.isEmpty=false
+DEBUG: [HttpClient-1-Worker-1] [610ms] Http1AsyncReceiver(SocketTube(1)) Got 66 bytes for delegate jdk.internal.net.http.Http1Response$BodyReader@afa3ba6e/parser=jdk.internal.net.http.ResponseContent$FixedLengthBodyParser@4ec86ccf
+DEBUG: [HttpClient-1-Worker-1] [610ms] Http1AsyncReceiver(SocketTube(1)) downstream subscription demand is 9223372036854775807
+DEBUG: [HttpClient-1-Worker-1] [610ms] Http1AsyncReceiver(SocketTube(1)) Forwarding 66 bytes to delegate jdk.internal.net.http.Http1Response$BodyReader@afa3ba6e/parser=jdk.internal.net.http.ResponseContent$FixedLengthBodyParser@4ec86ccf
+DEBUG: [HttpClient-1-Worker-1] [610ms] Http1AsyncReceiver(SocketTube(1)) Delegate done: 66
+DEBUG: [HttpClient-1-Worker-1] [610ms] Http1AsyncReceiver(SocketTube(1)) Got 66 bytes for delegate jdk.internal.net.http.Http1Response$BodyReader@afa3ba6e/parser=jdk.internal.net.http.ResponseContent$FixedLengthBodyParser@4ec86ccf
+DEBUG: [HttpClient-1-Worker-1] [610ms] Http1AsyncReceiver(SocketTube(1)) downstream subscription demand is 9223372036854775807
+DEBUG: [HttpClient-1-Worker-1] [611ms] Http1AsyncReceiver(SocketTube(1)) Forwarding 66 bytes to delegate jdk.internal.net.http.Http1Response$BodyReader@afa3ba6e/parser=jdk.internal.net.http.ResponseContent$FixedLengthBodyParser@4ec86ccf
+DEBUG: [HttpClient-1-Worker-1] [611ms] Http1AsyncReceiver(SocketTube(1)) Delegate done: 66
+DEBUG: [Thread-7] [615ms] [WebSocket] RawChannelTube(SocketTube(1)) connectFlows
+DEBUG: [Thread-7] [615ms] SocketTube(1) connecting flows
+DEBUG: [Thread-7] [615ms] SocketTube(1) read publisher got subscriber
+DEBUG: [Thread-7] [615ms] SocketTube(1) registering subscribe event
+DEBUG: [Thread-7] [616ms] SocketTube(1) leaving read.subscribe:  Reading: [ops=0, demand=0, stopped=false], Writing: [ops=0, demand=1]
+DEBUG: [Thread-7] [616ms] [WebSocket] RawChannelTube(SocketTube(1)) WritePublisher::subscribe
+DEBUG: [HttpClient-1-SelectorManager] [617ms] SocketTube(1) subscribe event raised
+DEBUG: [HttpClient-1-SelectorManager] [617ms] SocketTube(1) handling pending subscription for jdk.internal.net.http.RawChannelTube$ReadSubscriber@40fdc47a
+DEBUG: [HttpClient-1-SelectorManager] [617ms] Http1AsyncReceiver(SocketTube(1)) Http1TubeSubscriber: dropSubscription
+DEBUG: [HttpClient-1-SelectorManager] [617ms] SocketTube(1) read demand reset to 0
+DEBUG: [HttpClient-1-SelectorManager] [618ms] SocketTube(1) calling onSubscribe
+DEBUG: [HttpClient-1-SelectorManager] [618ms] [WebSocket] RawChannelTube(SocketTube(1)) ReadSubscriber::onSubscribe
+DEBUG: [HttpClient-1-SelectorManager] [618ms] SocketTube(1) onSubscribe called
+DEBUG: [HttpClient-1-SelectorManager] [618ms] SocketTube(1) pending subscriber subscribed
+DEBUG: [Thread-7] [617ms] SocketTube(1) subscribed for writing
+DEBUG: [Thread-7] [618ms] SocketTube(1) write: resetting demand to 0
+DEBUG: [Thread-7] [618ms] SocketTube(1) write: registering startSubscription event
+DEBUG: [HttpClient-1-SelectorManager] [619ms] SocketTube(1) write: starting subscription
+DEBUG: [HttpClient-1-SelectorManager] [619ms] SocketTube(1) write: offloading requestMore
+DEBUG: [HttpClient-1-Worker-1] [619ms] SocketTube(1) write: requesting more...
+DEBUG: [HttpClient-1-Worker-1] [619ms] [WebSocket] RawChannelTube(SocketTube(1)) WriteSubscription::request 1
+DEBUG: [Thread-7] [625ms] [Transport] write buffer capacity 16384
+DEBUG: [HttpClient-1-Worker-1] [692ms] SocketTube(1) leaving requestMore:  Reading: [ops=0, demand=0, stopped=false], Writing: [ops=0, demand=1]
+DEBUG: [Thread-7] [694ms] Http1AsyncReceiver(SocketTube(1)) stopping
+DEBUG: [Thread-7] [695ms] Http1AsyncReceiver(SocketTube(1)) Flushing 66 bytes from queue into initial buffer (remaining=0, free=0)
+DEBUG: [Thread-7] [695ms] Http1AsyncReceiver(SocketTube(1)) Allocating new buffer for initial: 66
+DEBUG: [Thread-7] [696ms] Http1AsyncReceiver(SocketTube(1)) Initial buffer now has 66 pos=0 limit=66
+DEBUG: [Thread-7] [696ms] [WebSocket] signalOpen
+DEBUG: [Thread-7] [696ms] [WebSocket] enter receive task
+DEBUG: [Thread-7] [696ms] [WebSocket] receive state: OPEN
+DEBUG: [Thread-7] [697ms] [WebSocket] enter onOpen 1
+DEBUG: [Thread-7] [699ms] [WebSocket] exit onOpen 1
+DEBUG: [Thread-7] [699ms] [WebSocket] change state from OPEN to IDLE true
+DEBUG: [Thread-7] [699ms] [WebSocket] receive state: IDLE
+DEBUG: [Thread-7] [699ms] [WebSocket] exit receive task
+DEBUG: [Thread-7] [699ms] [WebSocket] enter receive task
+DEBUG: [Thread-7] [699ms] [WebSocket] receive state: IDLE
+DEBUG: [Thread-7] [699ms] [WebSocket] exit receive task
+DEBUG: [MainThread] [700ms] [WebSocket] enter send text 1 payload length=65536 last=true
+DEBUG: [MainThread] [700ms] [Transport] enter send text 1 message.length=65536 last=true
+DEBUG: [MainThread] [701ms] [Transport] enter send task
+DEBUG: [MainThread] [701ms] [Transport] load message
+DEBUG: [MainThread] [701ms] [Output] encode text src=[pos=0 lim=65536 cap=65536] last=true dst=java.nio.HeapByteBuffer[pos=0 lim=16384 cap=16384]
+DEBUG: [MainThread] [701ms] [Output] put
+DEBUG: [MainThread] [701ms] [Output] mask
+DEBUG: [MainThread] [701ms] [Output] moreText
+DEBUG: [MainThread] [707ms] [Output] frame #0
+DEBUG: [MainThread] [708ms] [Output] frame opcode=TEXT fin=false len=16384
+DEBUG: [MainThread] [708ms] [Output] put
+DEBUG: [MainThread] [708ms] [Output] mask
+DEBUG: [MainThread] [710ms] [Transport] enter writing
+DEBUG: [MainThread] [710ms] [Transport] write state: UNREGISTERED
+DEBUG: [MainThread] [710ms] [Transport] registering write event
+DEBUG: [MainThread] [710ms] [WebSocket] RawChannelTube(SocketTube(1)) register write event
+DEBUG: [MainThread] [710ms] [Transport] write event
+DEBUG: [MainThread] [711ms] [Transport] registered write event
+DEBUG: [MainThread] [711ms] [Transport] exit writing
+DEBUG: [MainThread] [711ms] [Transport] exit send task
+DEBUG: [MainThread] [711ms] [Transport] enter send task
+DEBUG: [MainThread] [711ms] [Transport] 16384 bytes remaining in buffer java.nio.HeapByteBuffer[pos=0 lim=16384 cap=16384]
+DEBUG: [MainThread] [711ms] [Transport] enter writing
+DEBUG: [MainThread] [711ms] [Transport] write state: AVAILABLE
+DEBUG: [MainThread] [711ms] [Transport] writing to the channel
+DEBUG: [MainThread] [711ms] [WebSocket] RawChannelTube(SocketTube(1)) write: writing 16384
+DEBUG: [MainThread] [712ms] SocketTube(1) trying to write: 16384
+DEBUG: [MainThread] [712ms] SocketTube(1) wrote: 16384
+DEBUG: [MainThread] [712ms] SocketTube(1) write: requesting more...
+DEBUG: [MainThread] [712ms] [WebSocket] RawChannelTube(SocketTube(1)) WriteSubscription::request 1
+DEBUG: [MainThread] [713ms] SocketTube(1) leaving requestMore:  Reading: [ops=0, demand=0, stopped=false], Writing: [ops=0, demand=1]
+DEBUG: [MainThread] [713ms] SocketTube(1) leaving w.onNext Reading: [ops=0, demand=0, stopped=false], Writing: [ops=0, demand=1]
+DEBUG: [MainThread] [713ms] [Transport] 16384 bytes written
+DEBUG: [MainThread] [713ms] [Transport] finished writing to the channel
+DEBUG: [MainThread] [713ms] [Transport] exit writing
+DEBUG: [MainThread] [713ms] [Output] encode text src=[pos=16384 lim=65536 cap=65536] last=true dst=java.nio.HeapByteBuffer[pos=0 lim=16384 cap=16384]
+DEBUG: [MainThread] [713ms] [Output] put
+DEBUG: [MainThread] [713ms] [Output] mask
+DEBUG: [MainThread] [713ms] [Output] moreText
+DEBUG: [MainThread] [718ms] [Output] frame #1
+DEBUG: [MainThread] [719ms] [Output] frame opcode=CONTINUATION fin=false len=16384
+DEBUG: [MainThread] [719ms] [Output] put
+DEBUG: [MainThread] [719ms] [Output] mask
+DEBUG: [MainThread] [720ms] [Transport] enter writing
+DEBUG: [MainThread] [720ms] [Transport] write state: AVAILABLE
+DEBUG: [MainThread] [720ms] [Transport] writing to the channel
+DEBUG: [MainThread] [720ms] [WebSocket] RawChannelTube(SocketTube(1)) write: writing 16384
+DEBUG: [MainThread] [721ms] SocketTube(1) trying to write: 16384
+DEBUG: [MainThread] [722ms] SocketTube(1) write error: java.io.IOException: Broken pipe
+DEBUG: [MainThread] [722ms] SocketTube(1) error signalled java.io.IOException: Broken pipe
+DEBUG: [MainThread] [723ms] SocketTube(1) pausing read event
+DEBUG: [HttpClient-1-SelectorManager] [723ms] SelectorAttachment Registering jdk.internal.net.http.SocketTube$InternalReadPublisher$ReadEvent@926028e0 for 0 (false)
+DEBUG: [MainThread] [724ms] SocketTube(1) Sending error java.io.IOException: Broken pipe to subscriber jdk.internal.net.http.RawChannelTube$ReadSubscriber@40fdc47a
+DEBUG: [MainThread] [724ms] SocketTube(1) forwarding error to subscriber: java.io.IOException: Broken pipe
+DEBUG: [MainThread] [725ms] [WebSocket] RawChannelTube(SocketTube(1)) ReadSubscriber::onError java.io.IOException: Broken pipe
+java.io.IOException: Broken pipe
+	at java.base/sun.nio.ch.FileDispatcherImpl.writev0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.writev(SocketDispatcher.java:51)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:182)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:130)
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:496)
+	at java.base/java.nio.channels.SocketChannel.write(SocketChannel.java:507)
+	at java.net.http/jdk.internal.net.http.SocketTube.writeAvailable(SocketTube.java:1219)
+	at java.net.http/jdk.internal.net.http.SocketTube$InternalWriteSubscriber.tryFlushCurrent(SocketTube.java:342)
+	at java.net.http/jdk.internal.net.http.SocketTube$InternalWriteSubscriber.onNext(SocketTube.java:309)
+	at java.net.http/jdk.internal.net.http.SocketTube.onNext(SocketTube.java:133)
+	at java.net.http/jdk.internal.net.http.SocketTube.onNext(SocketTube.java:56)
+	at java.net.http/jdk.internal.net.http.RawChannelTube.write(RawChannelTube.java:356)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.write(TransportImpl.java:114)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.tryCompleteWrite(TransportImpl.java:597)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl$SendTask.run(TransportImpl.java:547)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:147)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$TryEndDeferredCompleter.complete(SequentialScheduler.java:315)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$CompleteRestartableTask.run(SequentialScheduler.java:149)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler$SchedulableTask.run(SequentialScheduler.java:198)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:271)
+	at java.net.http/jdk.internal.net.http.common.SequentialScheduler.runOrSchedule(SequentialScheduler.java:224)
+	at java.net.http/jdk.internal.net.http.websocket.TransportImpl.sendText(TransportImpl.java:149)
+	at java.net.http/jdk.internal.net.http.websocket.WebSocketImpl.sendText(WebSocketImpl.java:184)
+	at BlowupOutputQueue.lambda$full$0(BlowupOutputQueue.java:113)
+	at BlowupOutputQueue$$Lambda$24.000000009A446A80.call(Unknown Source)
+	at PendingOperations.repeatable(PendingOperations.java:84)
+	at BlowupOutputQueue.full(BlowupOutputQueue.java:83)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+	at org.testng.TestRunner.run(TestRunner.java:623)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+	at org.testng.TestNG.run(TestNG.java:1018)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+DEBUG: [MainThread] [727ms] [WebSocket] RawChannelTube(SocketTube(1)) shutdownInput
+DEBUG: [MainThread] [727ms] SocketTube(1) leaving read() loop with error:  Reading: [ops=0, demand=0, stopped=true], Writing: [ops=0, demand=1]
+DEBUG: [MainThread] [727ms] SocketTube(1) Read scheduler stopped
+DEBUG: [MainThread] [727ms] SocketTube(1) write: cancel
+DEBUG: [MainThread] [727ms] SocketTube(1) write: resetting demand to 0
+DEBUG: [MainThread] [727ms] [WebSocket] RawChannelTube(SocketTube(1)) WriteSubscription::cancel
+DEBUG: [MainThread] [727ms] [WebSocket] RawChannelTube(SocketTube(1)) shutdownOutput
+DEBUG: [MainThread] [727ms] SocketTube(1) leaving w.onNext Reading: [ops=0, demand=0, stopped=true], Writing: [ops=0, demand=0]
+DEBUG: [MainThread] [727ms] [Transport] 16384 bytes written
+DEBUG: [MainThread] [727ms] [Transport] finished writing to the channel
+DEBUG: [MainThread] [727ms] [Transport] exit writing
+DEBUG: [MainThread] [728ms] [Output] encode text src=[pos=32768 lim=65536 cap=65536] last=true dst=java.nio.HeapByteBuffer[pos=0 lim=16384 cap=16384]
+DEBUG: [MainThread] [728ms] [Output] put
+DEBUG: [MainThread] [728ms] [Output] mask
+DEBUG: [MainThread] [728ms] [Output] moreText
+DEBUG: [MainThread] [733ms] [Output] frame #2
+DEBUG: [MainThread] [733ms] [Output] frame opcode=CONTINUATION fin=false len=16384
+DEBUG: [MainThread] [733ms] [Output] put
+DEBUG: [MainThread] [733ms] [Output] mask
+DEBUG: [MainThread] [735ms] [Transport] enter writing
+DEBUG: [MainThread] [735ms] [Transport] write state: AVAILABLE
+DEBUG: [MainThread] [735ms] [Transport] writing to the channel
+DEBUG: [MainThread] [735ms] [WebSocket] RawChannelTube(SocketTube(1)) write: CLOSED
+DEBUG: [MainThread] [735ms] [Transport] send task exception java.io.IOException: closed output
+DEBUG: [MainThread] [735ms] [Transport] removeAndComplete error=java.io.IOException: closed output
+DEBUG: [MainThread] [735ms] [Transport] exit send task
+DEBUG: [MainThread] [736ms] [Transport] exit send text 1 returned jdk.internal.net.http.common.MinimalFuture@a3d2d329[Completed exceptionally: java.io.IOException: closed output] (id=51)
+DEBUG: [MainThread] [736ms] [WebSocket] exit send text 1 returned jdk.internal.net.http.common.MinimalFuture@a3d2d329[Completed exceptionally: java.io.IOException: closed output] (id=51)
+Stopping: ws://localhost:53481
+DEBUG: [MainThread] [829ms] [WebSocket] abort
+DEBUG: [MainThread] [829ms] [WebSocket] close
+DEBUG: [MainThread] [829ms] [Transport] closeInput
+DEBUG: [MainThread] [829ms] [Transport] closeOutput
+DEBUG: [MainThread] [829ms] [WebSocket] RawChannelTube(SocketTube(1)) close
+DEBUG: [MainThread] [831ms] PlainHttpConnection(SocketTube(1)) Closing channel: channel registered with selector, key.interestOps=0, sa.interestOps=0
+DEBUG: [MainThread] [832ms] [Transport] enter send task
+DEBUG: [MainThread] [832ms] [Transport] exit send task
+Stopped at: ws://localhost:53481
+java.lang.Exception: failures: 1
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:96)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+```
+
+See https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/675/consoleText (releases) and https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/804/consoleText (nightly - at the time and working around the AOJDK API problem by using specific build URL).
+
+This 10x run shows the failures are consistent (and also archives the workspace, making it available for further investigation) - https://ci.adoptopenjdk.net/view/work%20in%20progress/job/SXA-BenWalsh-Grinder/14.
+
+This 10x run (with JVM option of "-Xint") shows JITing is triggering these problems - https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/806.
+
+For all these tests, it looks like the created WebSocket is being closed before any of the tests are expecting, preventing the sending of data (pings, pongs, text and bytes) when the tests expect to be able to. There doesn't appear to be any reason for the premature closure of the WebSocket.
+
+No such problems with these tests are observed against HotSpot - https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/687/testReport.
+
+No such problems with these tests are observed with OpenJ9 on other platforms - e.g. https://ci.adoptopenjdk.net/view/Test_openjdk/job/openjdk11_j9_openjdktest_x86-64_linux/237/#showFailuresLink

@@ -1,0 +1,15 @@
+Syntax:
+`jstat [ <jstat options> | <target option>+ <vmid> [  <period> [ iterations]] ] `
+
+jstat options:
+-help, -J<VM option> : generic options as with other j* commands
+-options: list the available commands
+
+options are:
+-gc : GC statistics: sizes of various heap areas, used & free, cumulative collection count & time, total number of compacts
+
+-class: report classloading statistics: classes currently loaded, unloaded, and cumulative number of classes loaded.
+
+if `period` is specified, print results every `period`.  period may end with "s" or "ms" to indicate seconds or milliseconds. Default is ms.
+
+This is part of https://github.com/eclipse/openj9/issues/4655

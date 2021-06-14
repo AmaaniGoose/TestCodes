@@ -1,0 +1,1 @@
+The implementation should not depend upon `com.ibm.jvm.Dump` but instead have its own native methods which can reuse code used by the native methods of `com.ibm.jvm.Dump`.

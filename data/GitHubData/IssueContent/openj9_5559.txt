@@ -1,0 +1,3 @@
+In a JITaaS setting `ResolvedMethod_getResolvedVirtualMethod` is by far the most frequent message for hot compilations (~ 450 such messages per compilation).
+The implementation takes a class and a virtualCallOffset and return a j9method.
+I think we can try to cache it globally. For each j9class we can keep another hash where the key is the virtualCallOffset. We have to be careful at the parameter `ignoreRtResolve`

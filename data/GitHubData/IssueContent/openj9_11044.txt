@@ -1,0 +1,11 @@
+Loop replicator will insert `asynccheck` at the entry of the loop it creates. `asynccheck` is a potential OSR point, where OSR invalidation can happen.
+
+https://github.com/eclipse/omr/blob/master/compiler/optimizer/LoopReplicator.cpp#L2067
+
+Loop replicator runs after OSRGuardInsertion, thus the inserted `asynccheck` can be the first invalidation point before a fear point in program execution order.
+
+If OSR invalidation happens at the inserted `asynccheck`, there is no guarantee we can transition to the VM before running into fear point.
+
+The bytecode info of the `asynccheck` is from loop header, not necessarily from an existing potential OSR point. 
+
+FYI @andrewcraik 

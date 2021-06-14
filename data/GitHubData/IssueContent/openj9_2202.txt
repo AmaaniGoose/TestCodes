@@ -1,0 +1,28 @@
+I follow the full set of build instructions at [OpenJ9 Build](https://www.eclipse.org/openj9/oj9_build.html) website.  
+Found error when running the configure script .  
+Actually, I have installed the freetype packages listed in  yum_install_aix-ppc64.txt.  But there is no libfreetype.so created. 
+-     freetype2-2.6.3-1.ppc
+-     freetype2-devel-2.6.3-1.ppc
+
+Also tried to install freetype(not freetype2) on mac and the dynamic library is created successfully.    Unfortunately,  I haven't found freetype package for AIX 7.1.  https://www.ibm.com/developerworks/aix/library/aix-toolbox/alpha.html
+
+checking for gethostbyname... yes
+checking for connect... yes
+checking for remove... yes
+checking for shmat... yes
+checking for IceConnectionNumber in -lICE... yes
+checking for X11/extensions/shape.h... yes
+checking for X11/extensions/Xrender.h... yes
+checking for X11/extensions/XTest.h... yes
+checking for X11/Intrinsic.h... yes
+checking if XlinearGradient is defined in Xrender.h... yes
+checking for cups headers... yes
+checking fontconfig/fontconfig.h usability... yes
+checking fontconfig/fontconfig.h presence... yes
+checking for fontconfig/fontconfig.h... yes
+checking for FREETYPE... no
+configure: Found freetype include files at /usr/include/freetype2 using well-known location
+**configure: Could not find /usr/lib/libfreetype.so. Ignoring location.**
+configure: Found freetype include files at /usr/include/freetype2 using well-known location
+**configure: Could not find /usr/lib/ppc64-linux-gnu/libfreetype.so. Ignoring location.**
+configure: error: Could not find freetype! You might be able to fix this by running 'sudo yum install freetype-devel'. 

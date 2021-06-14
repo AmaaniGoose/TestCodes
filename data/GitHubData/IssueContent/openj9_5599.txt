@@ -1,0 +1,7 @@
+As [#1428](https://github.com/eclipse/openj9/issues/1428) refers to the support for -Xmx,-Xms in terms of percentages, It might be a good step to take in specifying the new area limits -Xmn/-Xmnx/-Xmns in terms of percentages.
+
+The support can be of two ways like enhancing the current options to work with percentages or a respective -XX option for each of them which can be used to specify the limits in percentages.
+
+Note: Currently -Xmnx/-Xmns are 25% of -Xmx/-Xms respectively (if not given statically by user), by adding this support the user can specify the values in terms of percentages which will be more helpful in container environments.
+
+FYI - @dinogun @ashu-mehra @dmitripivkine @amicic 

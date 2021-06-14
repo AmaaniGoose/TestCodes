@@ -1,0 +1,3 @@
+J9::ARM64::TreeEvaluator::flushEvaluator() uses the dsb (Data Synchronization Barrier) instruction with the option SY (0xF, full system barrier) for TR::allocationFence conservatively.  With this option, "reads and writes are the required access types, both before and after the barrier instruction".
+
+Investigate use of weaker synchronization for improving the performance.

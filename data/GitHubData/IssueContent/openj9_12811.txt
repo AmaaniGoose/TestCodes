@@ -1,0 +1,8 @@
+Once OJDK MHs are successfully enabled everywhere, the following commits should be reverted:
+1. in #12779: **Add a system property to check if OJDK MHs are enabled**; and
+2. https://github.com/adoptium/TKG/pull/198.
+
+
+
+
+

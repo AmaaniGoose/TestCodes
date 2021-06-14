@@ -1,0 +1,6 @@
+There could be differences between the environment where a snapshot gets created and the environment where the snapshot gets restored and run. 
+
+These differences could be related to:
+1) Number of CPUs : affects thread counts in both the JVM (GC and JIT) and potentially the application (e.g. Liberty thread pool) if these are based on initialization done when the snapshot is created
+2) Amount of RAM : affects heuristics for how much Java heap the JVM could end up using at run time
+3) Locale : a snapshot can be restored in a locale that is different to the one where the snapshot was created, e.g. via something like http://jaredmarkell.com/docker-and-locales/

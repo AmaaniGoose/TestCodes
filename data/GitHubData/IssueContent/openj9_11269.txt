@@ -1,0 +1,8 @@
+`opt_panama`: `J9VM_OPT_PANAMA` surrounds the native code
+`Panama`: JCL flag surrounds the Java code
+
+The above flags highlight OpenJ9's implementation for the `NativeMethodHandle` and `Foreign Linker API` (JEP389). 
+
+The above OpenJ9 implementation can be deleted since it will be superseded by the OpenJDK implementation.
+
+The `MHInterpreter` code can be retained since it can be repurposed.

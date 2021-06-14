@@ -1,0 +1,1 @@
+The VM uses a staged bootstrapping mechanism; the compiler will initialize different parts depending on what stage of bootstrap the VM is in. Document this process of initialization.

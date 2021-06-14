@@ -1,0 +1,17 @@
+I noticed when launching testing on a PR, for example:
+
+```
+Jenkins test sanity all
+```
+
+The automation will trigger build + test pipelines as it should. However sometimes the committers do not want to waste machine resources by throwing all the tests at once, so they may come back later and trigger some more testing, perhaps:
+
+```
+Jenkins test special.system all
+```
+
+This automation will again trigger a build + test. However the build step here should not be required since the automation could be taught to determine that there has been no changes in the commits since the last trigger, and that it can reuse the JDK it already built for the `sanity` build + test triggered previously.
+
+This will both save machine resources and testing time as it will allow committers to have gradual testing performed on PRs, or add additional testing for free if they forgot to launch the right set originally.
+
+This is similar but not quite the same as #2316 and #2859.

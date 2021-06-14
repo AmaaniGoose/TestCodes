@@ -1,0 +1,74 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_special.system_ppc64_aix_Nightly/740
+MathLoadTest_bigdecimal_special_12
+variation: Mode351
+JVM_OPTIONS: -Xcompressedrefs -Xgcpolicy:metronome -Xcompressedrefs 
+```
+MLT 00:12:11.112 - Completed 99.3%. Number of tests started=3178 (+225)
+MLT 00:12:12.974 - Thread completed. Suite=0 thread=4
+MLT 00:12:13.056 - Thread completed. Suite=0 thread=6
+MLT 00:12:13.105 - Thread completed. Suite=0 thread=0
+MLT 00:12:13.116 - Thread completed. Suite=0 thread=1
+MLT 00:12:13.248 - Thread completed. Suite=0 thread=3
+MLT 00:12:13.249 - Thread completed. Suite=0 thread=5
+MLT 00:12:13.327 - Thread completed. Suite=0 thread=2
+MLT 00:12:13.389 - Load test completed
+MLT 00:12:13.389 -   Ran     : 3200
+MLT 00:12:13.390 -   Passed  : 3200
+MLT 00:12:13.390 -   Failed  : 0
+MLT 00:12:13.390 -   Result  : PASSED
+STF 00:13:09.346 - Heartbeat: Process MLT is still running
+STF 00:18:09.249 - Heartbeat: Process MLT is still running
+STF 00:23:09.302 - Heartbeat: Process MLT is still running
+STF 00:28:09.228 - Heartbeat: Process MLT is still running
+STF 00:33:09.111 - Heartbeat: Process MLT is still running
+STF 00:38:09.188 - Heartbeat: Process MLT is still running
+STF 00:43:09.135 - Heartbeat: Process MLT is still running
+STF 00:48:09.219 - Heartbeat: Process MLT is still running
+STF 00:53:09.229 - Heartbeat: Process MLT is still running
+STF 00:58:09.192 - Heartbeat: Process MLT is still running
+STF 01:03:09.051 - Heartbeat: Process MLT is still running
+STF 01:08:09.356 - Heartbeat: Process MLT is still running
+STF 01:08:10.359 - **FAILED** Process MLT has timed out
+STF 01:08:10.359 - Collecting dumps for: MLT
+STF 01:08:10.360 - Sending SIG 3 to the java process to generate a javacore
+STF 01:08:10.360 - Running command: kill -3 2097560
+STF 01:08:10.360 - Redirecting stderr to /home/u0020236/workspace/Test_openjdk8_j9_special.system_ppc64_aix_Nightly/openjdk-tests/TKG/test_output_15858884098425/MathLoadTest_bigdecimal_special_12/20200403-000806-MathLoadTest/results/1.MLT.kill_3.stderr
+STF 01:08:10.360 - Redirecting stdout to /home/u0020236/workspace/Test_openjdk8_j9_special.system_ppc64_aix_Nightly/openjdk-tests/TKG/test_output_15858884098425/MathLoadTest_bigdecimal_special_12/20200403-000806-MathLoadTest/results/1.MLT.kill_3.stdout
+STF 01:08:10.367 - Pausing for 30 seconds
+STF 01:08:40.369 - Sending SIG 3 to the java process to generate a javacore
+STF 01:08:40.379 - Running command: kill -3 2097560
+STF 01:08:40.379 - Redirecting stderr to /home/u0020236/workspace/Test_openjdk8_j9_special.system_ppc64_aix_Nightly/openjdk-tests/TKG/test_output_15858884098425/MathLoadTest_bigdecimal_special_12/20200403-000806-MathLoadTest/results/1.MLT.kill_3.stderr
+STF 01:08:40.379 - Redirecting stdout to /home/u0020236/workspace/Test_openjdk8_j9_special.system_ppc64_aix_Nightly/openjdk-tests/TKG/test_output_15858884098425/MathLoadTest_bigdecimal_special_12/20200403-000806-MathLoadTest/results/1.MLT.kill_3.stdout
+STF 01:08:40.384 - Pausing for 30 seconds
+STF 01:09:10.386 - Process MLT (pid 2097560) is no longer running. Abandoning dump collection.
+```
+
+There is no core.
+javacore shows
+```
+3XMTHREADINFO      Anonymous native thread
+3XMTHREADINFO1            (native thread ID:0x23704E1, native priority: 0x0, native policy:UNKNOWN)
+3XMTHREADINFO3           Native callstack:
+4XENATIVESTACK               omrintrospect_threads_startDo_with_signal+0x540 (0x0900000002DFCA84 [libj9prt29.so+0x66a84])
+4XENATIVESTACK               protectedStartDo+0x2c (0x0900000002EECAB0 [libj9dmp29.so+0x18ab0])
+4XENATIVESTACK               omrsig_protect+0x488 (0x0900000002DED0CC [libj9prt29.so+0x570cc])
+4XENATIVESTACK               writeThreadsWithNativeStacks__18JavaCoreDumpWriterFv+0xa78 (0x0900000002EE90DC [libj9dmp29.so+0x150dc])
+4XENATIVESTACK               protectedWriteThreadsWithNativeStacks+0x10 (0x0900000002EEB6D4 [libj9dmp29.so+0x176d4])
+4XENATIVESTACK               omrsig_protect+0x488 (0x0900000002DED0CC [libj9prt29.so+0x570cc])
+4XENATIVESTACK               writeThreadSection__18JavaCoreDumpWriterFv+0x454 (0x0900000002EE6A18 [libj9dmp29.so+0x12a18])
+4XENATIVESTACK               protectedWriteSection+0x28 (0x0900000002EE356C [libj9dmp29.so+0xf56c])
+4XENATIVESTACK               omrsig_protect+0x488 (0x0900000002DED0CC [libj9prt29.so+0x570cc])
+4XENATIVESTACK               __ct__18JavaCoreDumpWriterFPCcP16J9RASdumpContextP14J9RASdumpAgent+0x54c (0x0900000002EE22D0 [libj9dmp29.so+0xe2d0])
+4XENATIVESTACK               runJavadump+0x20 (0x0900000002EF3404 [libj9dmp29.so+0x1f404])
+4XENATIVESTACK               doJavaDump+0xd0 (0x0900000002ED8434 [libj9dmp29.so+0x4434])
+4XENATIVESTACK               protectedDumpFunction+0x30 (0x0900000002EDF334 [libj9dmp29.so+0xb334])
+4XENATIVESTACK               omrsig_protect+0x488 (0x0900000002DED0CC [libj9prt29.so+0x570cc])
+4XENATIVESTACK               runDumpAgent+0x6d4 (0x0900000002EDEFD8 [libj9dmp29.so+0xafd8])
+4XENATIVESTACK               triggerDumpAgents+0x3cc (0x0900000002F22DF0 [libj9dmp29.so+0x4edf0])
+4XENATIVESTACK               sigQuitHandler+0xe4 (0x090000000380B5E8 [libjclse29.so+0x435e8])
+4XENATIVESTACK               omrsig_protect+0x488 (0x0900000002DED0CC [libj9prt29.so+0x570cc])
+4XENATIVESTACK               sigQuitWrapper+0x44 (0x090000000380B388 [libjclse29.so+0x43388])
+4XENATIVESTACK               asynchSignalReporter+0x450 (0x0900000002DF15D4 [libj9prt29.so+0x5b5d4])
+4XENATIVESTACK               thread_wrapper+0x33c (0x09000000021AF700 [libj9thr29.so+0x4700])
+4XENATIVESTACK               _pthread_body+0xf0 (0x0900000002114E14 [libpthreads.a+0x3e14])
+```

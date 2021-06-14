@@ -1,0 +1,565 @@
+jdk16 aix extended.openjdk java/nio/channels/DatagramChannel/SendReceiveMaxSize.java fails.
+
+First failure seen (test machine test-osuosl-aix72-ppc64-2) was a 960s timeout, a rerun (test machine test-ibm-aix71-ppc64-1) failed with
+```
+java.net.SocketException: A message for a socket data transfer is too long.
+```
+
+Build:
+```
+openjdk version "16.0.1" 2021-04-20
+OpenJDK Runtime Environment AdoptOpenJDK-16.0.1+9 (build 16.0.1+9)
+Eclipse OpenJ9 VM AdoptOpenJDK-16.0.1+9 (build openj9-0.26.0, JRE 16 AIX ppc64-64-Bit Compressed References 20210421_25 (JIT enabled, AOT enabled)
+OpenJ9   - b4cc246d9
+OMR      - 162e6f729
+JCL      - cea22090ecf based on jdk-16.0.1+9)
+```
+Timeout failure output:
+```
+06:29:53  TEST: java/nio/channels/DatagramChannel/SendReceiveMaxSize.java
+06:29:53  TEST JDK: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image
+06:29:53  
+06:29:53  ACTION: build -- Passed. All files up to date
+06:29:53  REASON: User specified action: run build jdk.test.lib.net.IPSupport 
+06:29:53  TIME:   0.001 seconds
+06:29:53  messages:
+06:29:53  command: build jdk.test.lib.net.IPSupport
+06:29:53  reason: User specified action: run build jdk.test.lib.net.IPSupport 
+06:29:53  elapsed time (seconds): 0.001
+06:29:53  
+06:29:53  ACTION: build -- Passed. Build successful
+06:29:53  REASON: Named class compiled on demand
+06:29:53  TIME:   0.304 seconds
+06:29:53  messages:
+06:29:53  command: build SendReceiveMaxSize
+06:29:53  reason: Named class compiled on demand
+06:29:53  Test directory:
+06:29:53    compile: SendReceiveMaxSize
+06:29:53  elapsed time (seconds): 0.304
+06:29:53  
+06:29:53  ACTION: compile -- Passed. Compilation successful
+06:29:53  REASON: .class file out of date or does not exist
+06:29:53  TIME:   0.304 seconds
+06:29:53  messages:
+06:29:53  command: compile /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel/SendReceiveMaxSize.java
+06:29:53  reason: .class file out of date or does not exist
+06:29:53  Mode: agentvm
+06:29:53  Agent id: 1
+06:29:53  elapsed time (seconds): 0.304
+06:29:53  configuration:
+06:29:53  Boot Layer (javac runtime environment)
+06:29:53    class path: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/javatest.jar 
+06:29:53                /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+06:29:53    patch:      java.base /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work/patches/java.base
+06:29:53  
+06:29:53  javac compilation environment
+06:29:53    source path: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel
+06:29:53                 /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/lib
+06:29:53    class path:  /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel
+06:29:53                 /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work/classes/java/nio/channels/DatagramChannel/SendReceiveMaxSize.d
+06:29:53                 /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work/classes/test/lib
+06:29:53                 /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/testng.jar
+06:29:53                 /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/jcommander.jar
+06:29:53  
+06:29:53  rerun:
+06:29:53  cd /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work/scratch && \
+06:29:53  DISPLAY=:0 \
+06:29:53  HOME=/home/jenkins \
+06:29:53  LANG=en_US \
+06:29:53  PATH=/bin:/usr/bin:/usr/sbin \
+06:29:53  TZ=CST6CDT \
+06:29:53      /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/bin/javac \
+06:29:53          -J-ea \
+06:29:53          -J-esa \
+06:29:53          -J-Xmx512m \
+06:29:53          -J-XX:+UseCompressedOops \
+06:29:53          -J-Djava.library.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+06:29:53          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+06:29:53          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+06:29:53          -J-Dtest.compiler.opts= \
+06:29:53          -J-Dtest.java.opts= \
+06:29:53          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image \
+06:29:53          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image \
+06:29:53          -J-Dtest.timeout.factor=8.0 \
+06:29:53          -J-Dtest.nativepath=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+06:29:53          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+06:29:53          -J-Dtest.name=java/nio/channels/DatagramChannel/SendReceiveMaxSize.java \
+06:29:53          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel/SendReceiveMaxSize.java \
+06:29:53          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel \
+06:29:53          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/lib \
+06:29:53          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work/classes/java/nio/channels/DatagramChannel/SendReceiveMaxSize.d \
+06:29:53          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work/classes/java/nio/channels/DatagramChannel/SendReceiveMaxSize.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work/classes/test/lib \
+06:29:53          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work/classes/java/nio/channels/DatagramChannel/SendReceiveMaxSize.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work/classes/test/lib \
+06:29:53          -d /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work/classes/java/nio/channels/DatagramChannel/SendReceiveMaxSize.d \
+06:29:53          -sourcepath /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/lib \
+06:29:53          -classpath /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work/classes/java/nio/channels/DatagramChannel/SendReceiveMaxSize.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work/classes/test/lib:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/testng.jar:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/jcommander.jar /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel/SendReceiveMaxSize.java
+06:29:53  
+06:29:53  ACTION: testng -- Error. Program `/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/bin/java' timed out (timeout set to 960000ms, elapsed time including timeout handling was 962520ms).
+06:29:53  REASON: User specified action: run testng/othervm SendReceiveMaxSize 
+06:29:53  TIME:   962.539 seconds
+06:29:53  messages:
+06:29:53  command: testng SendReceiveMaxSize
+06:29:53  reason: User specified action: run testng/othervm SendReceiveMaxSize 
+06:29:53  Mode: othervm [/othervm specified]
+06:29:53  Timeout information:
+06:29:53  Running jstack on process 23986482
+06:29:53  2021-04-22T00:29:38.648414
+06:29:53  Virtual machine: 23986482 JVM information:
+06:29:53  JRE 16 AIX ppc64-64-Bit Compressed References 20210421_25 (JIT enabled, AOT enabled)
+06:29:53  OpenJ9   - b4cc246d9
+06:29:53  OMR      - 162e6f729
+06:29:53  JCL      - cea22090ecf based on jdk-16.0.1+9
+06:29:53  
+06:29:53  "main" prio=5 Id=1 WAITING
+06:29:53  	at java.base@16.0.1/java.lang.Object.wait(Native Method)
+06:29:53  	at java.base@16.0.1/java.lang.Object.wait(Object.java:221)
+06:29:53  	at java.base@16.0.1/java.lang.Thread.join(Thread.java:733)
+06:29:53  	at app//com.sun.javatest.regtest.agent.MainWrapper.main(MainWrapper.java:74)
+06:29:53  
+06:29:53  "JIT Compilation Thread-000" prio=10 Id=3 RUNNABLE
+06:29:53  
+06:29:53  "JIT Compilation Thread-001 Suspended" prio=10 Id=4 RUNNABLE
+06:29:53  
+06:29:53  "JIT Compilation Thread-002 Suspended" prio=10 Id=5 RUNNABLE
+06:29:53  
+06:29:53  "JIT Compilation Thread-003 Suspended" prio=10 Id=6 RUNNABLE
+06:29:53  
+06:29:53  "JIT Compilation Thread-004 Suspended" prio=10 Id=7 RUNNABLE
+06:29:53  
+06:29:53  "JIT Compilation Thread-005 Suspended" prio=10 Id=8 RUNNABLE
+06:29:53  
+06:29:53  "JIT Compilation Thread-006 Suspended" prio=10 Id=9 RUNNABLE
+06:29:53  
+06:29:53  "JIT Diagnostic Compilation Thread-007 Suspended" prio=10 Id=10 RUNNABLE
+06:29:53  
+06:29:53  "JIT-SamplerThread" prio=10 Id=11 TIMED_WAITING
+06:29:53  
+06:29:53  "IProfiler" prio=5 Id=12 RUNNABLE
+06:29:53  
+06:29:53  "Common-Cleaner" prio=8 Id=2 TIMED_WAITING
+06:29:53  	at java.base@16.0.1/java.lang.Object.wait(Native Method)
+06:29:53  	at java.base@16.0.1/java.lang.Object.wait(Object.java:221)
+06:29:53  	at java.base@16.0.1/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:138)
+06:29:53  	at java.base@16.0.1/jdk.internal.ref.CleanerImpl.run(CleanerImpl.java:140)
+06:29:53  	at java.base@16.0.1/java.lang.Thread.run(Thread.java:853)
+06:29:53  	at java.base@16.0.1/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:134)
+06:29:53  
+06:29:53  "Concurrent Mark Helper" prio=1 Id=13 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=14 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=15 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=16 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=17 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=18 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=19 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=20 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=21 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=22 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=23 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=24 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=25 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=26 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=27 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=28 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=29 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=30 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=31 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=32 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=33 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=34 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=35 RUNNABLE
+06:29:53  
+06:29:53  "GC Worker" prio=5 Id=36 RUNNABLE
+06:29:53  
+06:29:53  "Attach API wait loop" prio=10 Id=39 TIMED_WAITING
+06:29:53  	at java.base@16.0.1/java.lang.Thread.sleep(Native Method)
+06:29:53  	at java.base@16.0.1/java.lang.Thread.sleep(Thread.java:983)
+06:29:53  	at java.base@16.0.1/openj9.internal.tools.attach.target.WaitLoop.checkReplyAndCreateAttachment(WaitLoop.java:140)
+06:29:53  	at java.base@16.0.1/openj9.internal.tools.attach.target.WaitLoop.waitForNotification(WaitLoop.java:117)
+06:29:53  	at java.base@16.0.1/openj9.internal.tools.attach.target.WaitLoop.run(WaitLoop.java:154)
+06:29:53  
+06:29:53  "Finalizer thread" prio=5 Id=40 RUNNABLE
+06:29:53  
+06:29:53  "MainThread" prio=5 Id=42 RUNNABLE
+06:29:53  	at java.base@16.0.1/sun.nio.ch.DatagramChannelImpl.receive0(Native Method)
+06:29:53  	at java.base@16.0.1/sun.nio.ch.DatagramChannelImpl.receiveIntoNativeBuffer(DatagramChannelImpl.java:747)
+06:29:53  	at java.base@16.0.1/sun.nio.ch.DatagramChannelImpl.receive(DatagramChannelImpl.java:733)
+06:29:53  	at java.base@16.0.1/sun.nio.ch.DatagramChannelImpl.receive(DatagramChannelImpl.java:542)
+06:29:53  	at app//SendReceiveMaxSize.testSendReceiveMaxSize(SendReceiveMaxSize.java:152)
+06:29:53  	at java.base@16.0.1/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+06:29:53  	at java.base@16.0.1/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+06:29:53  	at java.base@16.0.1/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+06:29:53  	at java.base@16.0.1/java.lang.reflect.Method.invoke(Method.java:567)
+06:29:53  	at app//org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+06:29:53  	at app//org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+06:29:53  	at app//org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+06:29:53  	at app//org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+06:29:53  	at app//org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+06:29:53  	at app//org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+06:29:53  	at app//org.testng.TestRunner.privateRun(TestRunner.java:773)
+06:29:53  	at app//org.testng.TestRunner.run(TestRunner.java:623)
+06:29:53  	at app//org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+06:29:53  	at app//org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+06:29:53  	at app//org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+06:29:53  	at app//org.testng.SuiteRunner.run(SuiteRunner.java:259)
+06:29:53  	at app//org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+06:29:53  	at app//org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+06:29:53  	at app//org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+06:29:53  	at app//org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+06:29:53  	at app//org.testng.TestNG.run(TestNG.java:1018)
+06:29:53  	at app//com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+06:29:53  	at app//com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+06:29:53  	at java.base@16.0.1/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+06:29:53  	at java.base@16.0.1/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+06:29:53  	at java.base@16.0.1/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+06:29:53  	at java.base@16.0.1/java.lang.reflect.Method.invoke(Method.java:567)
+06:29:53  	at app//com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+06:29:53  	at java.base@16.0.1/java.lang.Thread.run(Thread.java:853)
+06:29:53  
+06:29:53  "Attachment 56949" prio=10 Id=43 RUNNABLE
+06:29:53  	at java.base@16.0.1/openj9.internal.tools.attach.target.DiagnosticUtils.dumpAllThreadsImpl(Native Method)
+06:29:53  	at java.base@16.0.1/openj9.internal.tools.attach.target.DiagnosticUtils.getThreadInfo(DiagnosticUtils.java:245)
+06:29:53  	at java.base@16.0.1/openj9.internal.tools.attach.target.DiagnosticUtils$$Lambda$18/0x0000000000000000.apply(Unknown Source)
+06:29:53  	at java.base@16.0.1/openj9.internal.tools.attach.target.DiagnosticUtils.executeDiagnosticCommand(DiagnosticUtils.java:181)
+06:29:53  	at java.base@16.0.1/openj9.internal.tools.attach.target.Attachment.doCommand(Attachment.java:249)
+06:29:53  	at java.base@16.0.1/openj9.internal.tools.attach.target.Attachment.run(Attachment.java:160)
+06:29:53  
+06:29:53  "file lock watchdog" prio=10 Id=44 TIMED_WAITING
+06:29:53  	at java.base@16.0.1/java.lang.Object.wait(Native Method)
+06:29:53  	at java.base@16.0.1/java.lang.Object.wait(Object.java:221)
+06:29:53  	at java.base@16.0.1/java.util.TimerThread.mainLoop(Timer.java:553)
+06:29:53  	at java.base@16.0.1/java.util.TimerThread.run(Timer.java:506)
+06:29:53  
+06:29:53  
+06:29:53  --- Timeout information end.
+06:29:53  elapsed time (seconds): 962.539
+06:29:53  configuration:
+06:29:53  STDOUT:
+06:29:53  Seed from RandomFactory = 7395149479816729791L
+06:29:53  [TestNG] Running:
+06:29:53    java/nio/channels/DatagramChannel/SendReceiveMaxSize.java
+06:29:53  
+06:29:53  config SendReceiveMaxSize.setUp(): success
+06:29:53  test SendReceiveMaxSize.testGetOption(SendReceiveMaxSize$$Lambda$43/0x0000000022f766c8@6e81a571, 65507, /140.211.9.36): success
+06:29:53  test SendReceiveMaxSize.testGetOption(SendReceiveMaxSize$$Lambda$44/0x0000000022f3c4c0@e6696354, 65507, /140.211.9.36): success
+06:29:53  test SendReceiveMaxSize.testGetOption(SendReceiveMaxSize$$Lambda$47/0x0000000022f3c948@b4a9824b, 65527, /0:0:0:0:0:0:0:1): success
+06:29:53  test SendReceiveMaxSize.testGetOption(SendReceiveMaxSize$$Lambda$48/0x0000000022f3caa8@9f557fc5, 65527, /0:0:0:0:0:0:0:1): success
+06:29:53  Timeout refired 960 times
+06:29:53  STDERR:
+06:29:53  rerun:
+06:29:53  cd /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work/scratch && \
+06:29:53  DISPLAY=:0 \
+06:29:53  HOME=/home/jenkins \
+06:29:53  LANG=en_US \
+06:29:53  PATH=/bin:/usr/bin:/usr/sbin \
+06:29:53  TZ=CST6CDT \
+06:29:53  CLASSPATH=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work/classes/java/nio/channels/DatagramChannel/SendReceiveMaxSize.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work/classes/test/lib:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/lib:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/testng.jar:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/jcommander.jar:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+06:29:53      /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/bin/java \
+06:29:53          -Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+06:29:53          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+06:29:53          -Dtest.compiler.opts= \
+06:29:53          -Dtest.java.opts= \
+06:29:53          -Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image \
+06:29:53          -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image \
+06:29:53          -Dtest.timeout.factor=8.0 \
+06:29:53          -Dtest.nativepath=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+06:29:53          -Dtest.root=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+06:29:53          -Dtest.name=java/nio/channels/DatagramChannel/SendReceiveMaxSize.java \
+06:29:53          -Dtest.file=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel/SendReceiveMaxSize.java \
+06:29:53          -Dtest.src=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel \
+06:29:53          -Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/lib \
+06:29:53          -Dtest.classes=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work/classes/java/nio/channels/DatagramChannel/SendReceiveMaxSize.d \
+06:29:53          -Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work/classes/java/nio/channels/DatagramChannel/SendReceiveMaxSize.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work/classes/test/lib \
+06:29:53          -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work/classes/java/nio/channels/DatagramChannel/SendReceiveMaxSize.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work/classes/test/lib \
+06:29:53          -ea \
+06:29:53          -esa \
+06:29:53          -Xmx512m \
+06:29:53          -XX:+UseCompressedOops \
+06:29:53          -Djava.library.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+06:29:53          com.sun.javatest.regtest.agent.MainWrapper /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work/java/nio/channels/DatagramChannel/SendReceiveMaxSize.d/testng.0.jta java/nio/channels/DatagramChannel/SendReceiveMaxSize.java false SendReceiveMaxSize
+06:29:53  
+06:29:53  TEST RESULT: Error. Program `/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/bin/java' timed out (timeout set to 960000ms, elapsed time including timeout handling was 962520ms).
+06:29:53  --------------------------------------------------
+06:53:48  Test results: passed: 424; error: 1
+06:53:49  Report written to /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/report/html/report.html
+06:53:49  Results written to /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16190482901156/jdk_nio_0/work
+06:53:49  Error: Some tests failed or other problems occurred.
+```
+java.net.SocketException failure message:
+```
+15:54:02  TEST: java/nio/channels/DatagramChannel/SendReceiveMaxSize.java
+15:54:02  TEST JDK: /home/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image
+15:54:02  
+15:54:02  ACTION: build -- Passed. Build successful
+15:54:02  REASON: User specified action: run build jdk.test.lib.net.IPSupport 
+15:54:02  TIME:   2.82 seconds
+15:54:02  messages:
+15:54:02  command: build jdk.test.lib.net.IPSupport
+15:54:02  reason: User specified action: run build jdk.test.lib.net.IPSupport 
+15:54:02  Library /test/lib:
+15:54:02    compile: jdk.test.lib.net.IPSupport
+15:54:02  elapsed time (seconds): 2.82
+15:54:02  
+15:54:02  ACTION: compile -- Passed. Compilation successful
+15:54:02  REASON: .class file out of date or does not exist
+15:54:02  TIME:   2.811 seconds
+15:54:02  messages:
+15:54:02  command: compile /home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/lib/jdk/test/lib/net/IPSupport.java
+15:54:02  reason: .class file out of date or does not exist
+15:54:02  Mode: agentvm
+15:54:02  Agent id: 1
+15:54:02  elapsed time (seconds): 2.811
+15:54:02  configuration:
+15:54:02  Boot Layer (javac runtime environment)
+15:54:02    class path: /home/jenkins/workspace/Grinder/jvmtest/openjdk/jtreg/lib/javatest.jar 
+15:54:02                /home/jenkins/workspace/Grinder/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+15:54:02    patch:      java.base /home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16191032257116/jdk_custom_0/work/patches/java.base
+15:54:02  
+15:54:02  javac compilation environment
+15:54:02    source path: /home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/lib
+15:54:02    class path:  /home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16191032257116/jdk_custom_0/work/classes/test/lib
+15:54:02                 /home/jenkins/workspace/Grinder/jvmtest/openjdk/jtreg/lib/testng.jar
+15:54:02                 /home/jenkins/workspace/Grinder/jvmtest/openjdk/jtreg/lib/jcommander.jar
+15:54:02  
+15:54:02  rerun:
+15:54:02  cd /home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16191032257116/jdk_custom_0/work/scratch && \
+15:54:02  DISPLAY=:0 \
+15:54:02  HOME=/home/jenkins \
+15:54:02  LANG=en_US \
+15:54:02  PATH=/bin:/usr/bin:/usr/sbin \
+15:54:02  TZ=EST5EDT \
+15:54:02      /home/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image/bin/javac \
+15:54:02          -J-ea \
+15:54:02          -J-esa \
+15:54:02          -J-Xmx512m \
+15:54:02          -J-XX:+UseCompressedOops \
+15:54:02          -J-Djava.library.path=/home/jenkins/workspace/Grinder/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+15:54:02          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+15:54:02          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+15:54:02          -J-Dtest.compiler.opts= \
+15:54:02          -J-Dtest.java.opts= \
+15:54:02          -J-Dtest.jdk=/home/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image \
+15:54:02          -J-Dcompile.jdk=/home/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image \
+15:54:02          -J-Dtest.timeout.factor=8.0 \
+15:54:02          -J-Dtest.nativepath=/home/jenkins/workspace/Grinder/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+15:54:02          -J-Dtest.root=/home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+15:54:02          -J-Dtest.name=java/nio/channels/DatagramChannel/SendReceiveMaxSize.java \
+15:54:02          -J-Dtest.file=/home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel/SendReceiveMaxSize.java \
+15:54:02          -J-Dtest.src=/home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel \
+15:54:02          -J-Dtest.src.path=/home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel:/home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/lib \
+15:54:02          -J-Dtest.classes=/home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16191032257116/jdk_custom_0/work/classes/java/nio/channels/DatagramChannel/SendReceiveMaxSize.d \
+15:54:02          -J-Dtest.class.path=/home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16191032257116/jdk_custom_0/work/classes/java/nio/channels/DatagramChannel/SendReceiveMaxSize.d:/home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16191032257116/jdk_custom_0/work/classes/test/lib \
+15:54:02          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel:/home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16191032257116/jdk_custom_0/work/classes/test/lib \
+15:54:02          -d /home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16191032257116/jdk_custom_0/work/classes/test/lib \
+15:54:02          -sourcepath /home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/lib \
+15:54:02          -classpath /home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16191032257116/jdk_custom_0/work/classes/test/lib:/home/jenkins/workspace/Grinder/jvmtest/openjdk/jtreg/lib/testng.jar:/home/jenkins/workspace/Grinder/jvmtest/openjdk/jtreg/lib/jcommander.jar /home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/lib/jdk/test/lib/net/IPSupport.java
+15:54:02  
+15:54:02  ACTION: build -- Passed. Build successful
+15:54:02  REASON: Named class compiled on demand
+15:54:02  TIME:   1.624 seconds
+15:54:02  messages:
+15:54:02  command: build SendReceiveMaxSize
+15:54:02  reason: Named class compiled on demand
+15:54:02  Test directory:
+15:54:02    compile: SendReceiveMaxSize
+15:54:02  elapsed time (seconds): 1.624
+15:54:02  
+15:54:02  ACTION: compile -- Passed. Compilation successful
+15:54:02  REASON: .class file out of date or does not exist
+15:54:02  TIME:   1.62 seconds
+15:54:02  messages:
+15:54:02  command: compile /home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel/SendReceiveMaxSize.java
+15:54:02  reason: .class file out of date or does not exist
+15:54:02  Mode: agentvm
+15:54:02  Agent id: 1
+15:54:02  elapsed time (seconds): 1.62
+15:54:02  configuration:
+15:54:02  Boot Layer (javac runtime environment)
+15:54:02    class path: /home/jenkins/workspace/Grinder/jvmtest/openjdk/jtreg/lib/javatest.jar 
+15:54:02                /home/jenkins/workspace/Grinder/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+15:54:02    patch:      java.base /home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16191032257116/jdk_custom_0/work/patches/java.base
+15:54:02  
+15:54:02  javac compilation environment
+15:54:02    source path: /home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel
+15:54:02                 /home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/lib
+15:54:02    class path:  /home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel
+15:54:02                 /home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16191032257116/jdk_custom_0/work/classes/java/nio/channels/DatagramChannel/SendReceiveMaxSize.d
+15:54:02                 /home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16191032257116/jdk_custom_0/work/classes/test/lib
+15:54:02                 /home/jenkins/workspace/Grinder/jvmtest/openjdk/jtreg/lib/testng.jar
+15:54:02                 /home/jenkins/workspace/Grinder/jvmtest/openjdk/jtreg/lib/jcommander.jar
+15:54:02  
+15:54:02  rerun:
+15:54:02  cd /home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16191032257116/jdk_custom_0/work/scratch && \
+15:54:02  DISPLAY=:0 \
+15:54:02  HOME=/home/jenkins \
+15:54:02  LANG=en_US \
+15:54:02  PATH=/bin:/usr/bin:/usr/sbin \
+15:54:02  TZ=EST5EDT \
+15:54:02      /home/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image/bin/javac \
+15:54:02          -J-ea \
+15:54:02          -J-esa \
+15:54:02          -J-Xmx512m \
+15:54:02          -J-XX:+UseCompressedOops \
+15:54:02          -J-Djava.library.path=/home/jenkins/workspace/Grinder/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+15:54:02          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+15:54:02          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+15:54:02          -J-Dtest.compiler.opts= \
+15:54:02          -J-Dtest.java.opts= \
+15:54:02          -J-Dtest.jdk=/home/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image \
+15:54:02          -J-Dcompile.jdk=/home/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image \
+15:54:02          -J-Dtest.timeout.factor=8.0 \
+15:54:02          -J-Dtest.nativepath=/home/jenkins/workspace/Grinder/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+15:54:02          -J-Dtest.root=/home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+15:54:02          -J-Dtest.name=java/nio/channels/DatagramChannel/SendReceiveMaxSize.java \
+15:54:02          -J-Dtest.file=/home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel/SendReceiveMaxSize.java \
+15:54:02          -J-Dtest.src=/home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel \
+15:54:02          -J-Dtest.src.path=/home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel:/home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/lib \
+15:54:02          -J-Dtest.classes=/home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16191032257116/jdk_custom_0/work/classes/java/nio/channels/DatagramChannel/SendReceiveMaxSize.d \
+15:54:02          -J-Dtest.class.path=/home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16191032257116/jdk_custom_0/work/classes/java/nio/channels/DatagramChannel/SendReceiveMaxSize.d:/home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16191032257116/jdk_custom_0/work/classes/test/lib \
+15:54:02          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16191032257116/jdk_custom_0/work/classes/java/nio/channels/DatagramChannel/SendReceiveMaxSize.d:/home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel:/home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16191032257116/jdk_custom_0/work/classes/test/lib \
+15:54:02          -d /home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16191032257116/jdk_custom_0/work/classes/java/nio/channels/DatagramChannel/SendReceiveMaxSize.d \
+15:54:02          -sourcepath /home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel:/home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/lib \
+15:54:02          -classpath /home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel:/home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16191032257116/jdk_custom_0/work/classes/java/nio/channels/DatagramChannel/SendReceiveMaxSize.d:/home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16191032257116/jdk_custom_0/work/classes/test/lib:/home/jenkins/workspace/Grinder/jvmtest/openjdk/jtreg/lib/testng.jar:/home/jenkins/workspace/Grinder/jvmtest/openjdk/jtreg/lib/jcommander.jar /home/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/DatagramChannel/SendReceiveMaxSize.java
+15:54:02  
+15:54:02  ACTION: testng -- Failed. Execution failed: `main' threw exception: java.lang.Exception: failures: 2
+15:54:02  REASON: User specified action: run testng/othervm SendReceiveMaxSize 
+15:54:02  TIME:   1.095 seconds
+15:54:02  messages:
+15:54:02  command: testng SendReceiveMaxSize
+15:54:02  reason: User specified action: run testng/othervm SendReceiveMaxSize 
+15:54:02  Mode: othervm [/othervm specified]
+15:54:02  elapsed time (seconds): 1.095
+15:54:02  configuration:
+15:54:02  STDOUT:
+15:54:02  Seed from RandomFactory = 153423846503545474L
+15:54:02  [TestNG] Running:
+15:54:02    java/nio/channels/DatagramChannel/SendReceiveMaxSize.java
+15:54:02  
+15:54:02  config SendReceiveMaxSize.setUp(): success
+15:54:02  test SendReceiveMaxSize.testGetOption(SendReceiveMaxSize$$Lambda$43/0x0000000022c982b8@ed37c974, 65507, /129.33.196.209): success
+15:54:02  test SendReceiveMaxSize.testGetOption(SendReceiveMaxSize$$Lambda$44/0x0000000022c98498@2af5ae5c, 65507, /129.33.196.209): success
+15:54:02  test SendReceiveMaxSize.testGetOption(SendReceiveMaxSize$$Lambda$47/0x0000000022c98920@4656d4e2, 65527, /0:0:0:0:0:0:0:1): success
+15:54:02  test SendReceiveMaxSize.testGetOption(SendReceiveMaxSize$$Lambda$48/0x0000000022c98a80@aca97686, 65527, /0:0:0:0:0:0:0:1): success
+15:54:02  sendBuf:    java.nio.HeapByteBuffer[pos=0 lim=65507 cap=65507]
+15:54:02  receiveBuf: java.nio.HeapByteBuffer[pos=0 lim=65507 cap=65507]
+15:54:02  sendBuf:    java.nio.HeapByteBuffer[pos=0 lim=65506 cap=65506]
+15:54:02  receiveBuf: java.nio.HeapByteBuffer[pos=0 lim=65506 cap=65506]
+15:54:02  test SendReceiveMaxSize.testSendReceiveMaxSize(SendReceiveMaxSize$$Lambda$43/0x0000000022c982b8@ed37c974, 65507, /129.33.196.209): success
+15:54:02  sendBuf:    java.nio.HeapByteBuffer[pos=0 lim=65507 cap=65507]
+15:54:02  receiveBuf: java.nio.HeapByteBuffer[pos=0 lim=65507 cap=65507]
+15:54:02  sendBuf:    java.nio.HeapByteBuffer[pos=0 lim=65506 cap=65506]
+15:54:02  receiveBuf: java.nio.HeapByteBuffer[pos=0 lim=65506 cap=65506]
+15:54:02  test SendReceiveMaxSize.testSendReceiveMaxSize(SendReceiveMaxSize$$Lambda$44/0x0000000022c98498@2af5ae5c, 65507, /129.33.196.209): success
+15:54:02  test SendReceiveMaxSize.testSendReceiveMaxSize(SendReceiveMaxSize$$Lambda$47/0x0000000022c98920@4656d4e2, 65527, /0:0:0:0:0:0:0:1): failure
+15:54:02  java.net.SocketException: A message for a socket data transfer is too long.
+15:54:02  	at java.base/sun.nio.ch.DatagramChannelImpl.send0(Native Method)
+15:54:02  	at java.base/sun.nio.ch.DatagramChannelImpl.sendFromNativeBuffer(DatagramChannelImpl.java:897)
+15:54:02  	at java.base/sun.nio.ch.DatagramChannelImpl.send(DatagramChannelImpl.java:874)
+15:54:02  	at java.base/sun.nio.ch.DatagramChannelImpl.send(DatagramChannelImpl.java:817)
+15:54:02  	at SendReceiveMaxSize.testSendReceiveMaxSize(SendReceiveMaxSize.java:150)
+15:54:02  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:54:02  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+15:54:02  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:54:02  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+15:54:02  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+15:54:02  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+15:54:02  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+15:54:02  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+15:54:02  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+15:54:02  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+15:54:02  	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+15:54:02  	at org.testng.TestRunner.run(TestRunner.java:623)
+15:54:02  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+15:54:02  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+15:54:02  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+15:54:02  	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+15:54:02  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+15:54:02  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+15:54:02  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+15:54:02  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+15:54:02  	at org.testng.TestNG.run(TestNG.java:1018)
+15:54:02  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+15:54:02  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+15:54:02  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:54:02  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+15:54:02  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:54:02  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+15:54:02  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+15:54:02  	at java.base/java.lang.Thread.run(Thread.java:853)
+15:54:02  test SendReceiveMaxSize.testSendReceiveMaxSize(SendReceiveMaxSize$$Lambda$48/0x0000000022c98a80@aca97686, 65527, /0:0:0:0:0:0:0:1): failure
+15:54:02  java.net.SocketException: A message for a socket data transfer is too long.
+15:54:02  	at java.base/sun.nio.ch.DatagramChannelImpl.send0(Native Method)
+15:54:02  	at java.base/sun.nio.ch.DatagramChannelImpl.sendFromNativeBuffer(DatagramChannelImpl.java:897)
+15:54:02  	at java.base/sun.nio.ch.DatagramChannelImpl.send(DatagramChannelImpl.java:874)
+15:54:02  	at java.base/sun.nio.ch.DatagramChannelImpl.send(DatagramChannelImpl.java:817)
+15:54:02  	at SendReceiveMaxSize.testSendReceiveMaxSize(SendReceiveMaxSize.java:150)
+15:54:02  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:54:02  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+15:54:02  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:54:02  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+15:54:02  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+15:54:02  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+15:54:02  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+15:54:02  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+15:54:02  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+15:54:02  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+15:54:02  	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+15:54:02  	at org.testng.TestRunner.run(TestRunner.java:623)
+15:54:02  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+15:54:02  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+15:54:02  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+15:54:02  	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+15:54:02  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+15:54:02  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+15:54:02  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+15:54:02  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+15:54:02  	at org.testng.TestNG.run(TestNG.java:1018)
+15:54:02  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+15:54:02  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+15:54:02  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:54:02  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+15:54:02  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:54:02  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+15:54:02  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+15:54:02  	at java.base/java.lang.Thread.run(Thread.java:853)
+15:54:02  
+15:54:02  ===============================================
+15:54:02  java/nio/channels/DatagramChannel/SendReceiveMaxSize.java
+15:54:02  Total tests run: 8, Failures: 2, Skips: 0
+15:54:02  ===============================================
+15:54:02  
+15:54:02  STDERR:
+15:54:02  java.lang.Exception: failures: 2
+15:54:02  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:96)
+15:54:02  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+15:54:02  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:54:02  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+15:54:02  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:54:02  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+15:54:02  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+15:54:02  	at java.base/java.lang.Thread.run(Thread.java:853)
+15:54:02  
+15:54:02  JavaTest Message: Test threw exception: java.lang.Exception: failures: 2
+15:54:02  JavaTest Message: shutting down test
+```

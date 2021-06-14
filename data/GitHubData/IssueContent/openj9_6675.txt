@@ -1,0 +1,43 @@
+Failure link
+------------
+https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/1850/
+https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/lang/System/LoggerFinder/internal/backend/LoggerFinderBackendTest.java
+Test Category: openjdk
+Test Suite Name: jdk_lang
+OS/Architecture: x86-64-windows, x86-64-linux, x86-64-osx, ...
+OpenJDK Version: 11.0.4+11
+Public Build SHAs:
+OpenJ9 - `85b0693e8`
+OMR - `6e99760b`
+JCL - `965d0c0df3`
+
+Optional info
+-------------
+intermittent failure: no
+regression or new test: regression
+Issue is failing with openj9, but not hotspot.
+Throwing NoSuchMethodException. Lines 1968-70 in the test file are:
+```
+Class<?> loggerFinderLoader =
+             Class.forName("java.lang.System$LoggerFinder");
+accessLoggerFinder = loggerFinderLoader.getDeclaredMethod("accessProvider");
+```
+
+Failure output
+--------------
+```
+java.lang.ExceptionInInitializerError
+        at LoggerFinderBackendTest.<clinit>(LoggerFinderBackendTest.java:1973)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+        at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+        at java.base/java.lang.Thread.run(Thread.java:831)
+Caused by: java.lang.NoSuchMethodException: java.lang.System$LoggerFinder.accessProvider()
+        at java.base/java.lang.Class.newNoSuchMethodException(Class.java:638)
+        at java.base/java.lang.Class.throwExceptionOrReturnNull(Class.java:1344)
+        at java.base/java.lang.Class.getMethodHelper(Class.java:1408)
+        at java.base/java.lang.Class.getDeclaredMethod(Class.java:1080)
+        at LoggerFinderBackendTest.<clinit>(LoggerFinderBackendTest.java:1970)
+```

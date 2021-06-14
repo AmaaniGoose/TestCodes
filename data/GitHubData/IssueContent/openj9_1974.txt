@@ -1,0 +1,8 @@
+I'm not sure J9UniqueBuildID is really a unique build id for OpenJ9 builds. #1967 removes usage of this constant from shared classes code. Other uses should be similarly fixed.
+
+runtime/vm/rasdump.c puts it into the rasStruct in the buildID field.
+
+There is DDR code which uses buildID here debugtools/DDR_VM/src/com/ibm/j9ddr/VMDataFactory.java
+Note the part about the length being at least 8.
+
+There is code in runtime/jextractnatives/jextractnatives.c which ensures jextract is running on a matching VM.

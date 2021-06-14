@@ -1,0 +1,7 @@
+While investigating #6403 I noted that we did not have to make the fix for Java 9+. The reason is because of the way we implement the `indexOf(String, int)` API in Java 9+ [1] using the helpers already available in `StringLatin1` and `StringUTF16`. These helper methods [2] [3] effectively reduce to the `JITHelpers` `intrinsicIndexOfStringLatin1` and `intrinsicIndexOfStringUTF16` APIs which already exist and which we already take advantage of for Java 8.
+
+We need to investigate whether we can map the `StringLatin1` and `StringUTF16` intrinsics to our existing JITHelper methods and make sure we intrinsically reduce the `java.lang.String.indexOf` API on Java 9+. We should also take this opportunity to see if we can map the character overload of the `indexOf` API to the APIs which exist in `StringLatin1` and `StringUTF16`.
+
+[1] https://github.com/eclipse/openj9/blob/eb860ecf4551c9982b0bc4ca9c6fed61fe70868c/jcl/src/java.base/share/classes/java/lang/String.java#L2033-L2066
+[2] https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/91be2043cf6c6008939b34e33ce381479638405c/src/java.base/share/classes/java/lang/StringLatin1.java#L232-L253
+[3] https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/91be2043cf6c6008939b34e33ce381479638405c/src/java.base/share/classes/java/lang/StringUTF16.java#L383-L388

@@ -1,0 +1,66 @@
+Failure link
+------------
+
+From an internal build `Test_openjdkNext_j9_extended.system_ppc64_aix_Nightly/317`:
+```
+23:28:21  OpenJDK Runtime Environment (build 17-internal+0-adhoc.jenkins.BuildJDKnextppc64aixNightly)
+23:28:21  Eclipse OpenJ9 VM (build master-c2ca4fa50de, JRE 17 AIX ppc64-64-Bit Compressed References 20210111_434 (JIT enabled, AOT enabled)
+23:28:21  OpenJ9   - c2ca4fa50de
+23:28:21  OMR      - bded46caf73
+23:28:21  JCL      - 35b412ece4d based on jdk-17+4)
+```
+To rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links:
+01:59:10  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=17&JDK_IMPL=openj9&BUILD_LIST=system&PLATFORM=ppc64_aix&TARGET=HCRLateAttachWorkload_previewEnabled_0
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+===============================================
+Running test HCRLateAttachWorkload_previewEnabled_0 ...
+===============================================
+HCRLateAttachWorkload_previewEnabled_0 Start Time: Tue Jan 12 01:06:17 2021 Epoch Time (ms): 1610431577214
+variation: Mode150
+JVM_OPTIONS:  -XX:+UseCompressedOops 
+LT  stderr Exception in thread "Attachment 41537" java.lang.reflect.InvocationTargetException
+LT  stderr 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+LT  stderr 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+LT  stderr 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+LT  stderr 	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+LT  stderr 	at java.instrument/sun.instrument.InstrumentationImpl.loadClassAndStartAgent(InstrumentationImpl.java:515)
+LT  stderr 	at java.instrument/sun.instrument.InstrumentationImpl.loadClassAndCallAgentmain(InstrumentationImpl.java:537)
+LT  stderr 	at java.base/openj9.internal.tools.attach.target.Attachment.loadAgentLibraryImpl(Native Method)
+LT  stderr 	at java.base/openj9.internal.tools.attach.target.Attachment.loadAgentLibrary(Attachment.java:356)
+LT  stderr 	at java.base/openj9.internal.tools.attach.target.Attachment.parseLoadAgent(Attachment.java:334)
+LT  stderr 	at java.base/openj9.internal.tools.attach.target.Attachment.doCommand(Attachment.java:200)
+LT  stderr 	at java.base/openj9.internal.tools.attach.target.Attachment.run(Attachment.java:160)
+LT  stderr Caused by: java.lang.Error: java.lang.Error: java.lang.IllegalArgumentException: Unsupported class file major version 61
+LT  stderr 	at net.adoptopenjdk.test.hcrAgent.agent.AgentLogger.throwErrors(AgentLogger.java:52)
+LT  stderr 	at net.adoptopenjdk.test.hcrAgent.agent.StringModifierAgent.agentmain(StringModifierAgent.java:131)
+LT  stderr 	... 11 more
+LT  stderr Caused by: java.lang.Error: java.lang.IllegalArgumentException: Unsupported class file major version 61
+LT  stderr 	at net.adoptopenjdk.test.hcrAgent.agent.StringTransformer.transform(StringTransformer.java:84)
+LT  stderr 	at java.instrument/java.lang.instrument.ClassFileTransformer.transform(ClassFileTransformer.java:244)
+LT  stderr 	at java.instrument/sun.instrument.TransformerManager.transform(TransformerManager.java:188)
+LT  stderr 	at java.instrument/sun.instrument.InstrumentationImpl.transform(InstrumentationImpl.java:565)
+LT  stderr 	at java.instrument/sun.instrument.InstrumentationImpl.retransformClasses0(Native Method)
+LT  stderr 	at java.instrument/sun.instrument.InstrumentationImpl.retransformClasses(InstrumentationImpl.java:168)
+LT  stderr 	at net.adoptopenjdk.test.hcrAgent.agent.TransformerMakerThread.run(TransformerMakerThread.java:68)
+LT  stderr Caused by: java.lang.IllegalArgumentException: Unsupported class file major version 61
+LT  stderr 	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:189)
+LT  stderr 	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:170)
+LT  stderr 	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:156)
+LT  stderr 	at net.adoptopenjdk.test.hcrAgent.agent.StringTransformer.transform(StringTransformer.java:70)
+LT  stderr 	... 6 more
+LT  stderr Agent failed to start!
+LT  stderr JVMJ9TI064E Agent initialization function Agent_OnAttach failed for library instrument, return code 102
+AG  stderr Exception in thread "main" com.sun.tools.attach.AgentInitializationException: ATTACH_ERR AgentInitializationException102
+AG  stderr 	at jdk.attach/com.ibm.tools.attach.attacher.OpenJ9VirtualMachine.parseResponse(OpenJ9VirtualMachine.java:372)
+AG  stderr 	at jdk.attach/com.ibm.tools.attach.attacher.OpenJ9VirtualMachine.loadAgent(OpenJ9VirtualMachine.java:265)
+AG  stderr 	at net.adoptopenjdk.test.hcrAgent.agent.Attacher.main(Attacher.java:75)
+STF 01:06:26.386 - **FAILED** Process AG  ended with exit code (1) and not the expected exit code/s (0)
+HCRLateAttachWorkload_previewEnabled_0_FAILED
+```

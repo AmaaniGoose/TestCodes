@@ -1,0 +1,7 @@
+Using the `!nativestacks` command in jdmpview doesn't work on OSX as getting the stack frames from the OSX core hasn't been implemented. Results in:
+```
+> !nativestacks
+Thread id: 0 (0x0)
+Problem running command:
+null
+```

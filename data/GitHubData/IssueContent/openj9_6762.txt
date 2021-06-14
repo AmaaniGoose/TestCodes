@@ -1,0 +1,5 @@
+When masterSynchSignalHandler() receives a signal, in normal case it will record the signal information and it can be retrieved using DDR command !gpinfo.
+
+It happened multiple times recently in zOS (or maybe in other platforms too).  When masterSynchSignalHandler() could not recognize the signal, it will simply call abort().  If this happens, then it would be hard for us to find out the parameters passed over to masterSynchSignalHandler(), especially from zOS system core files.
+
+Please consider record the parameters to masterSynchSignalHandler() (or other signal handling entry points) before processing them.

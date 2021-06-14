@@ -1,0 +1,9 @@
+In the current implementation, when a client needs to mirror a resolved method, i.e. create a resolved method locally, pack its parameters and send them to the server so that it can create its own resolved method, we duplicate most of the code for the appropriate `getResolved*Method`, instead of just calling the method directly. 
+Example:
+https://github.com/eclipse/openj9/blob/9e4aac7accb53681bda2c698ec40d0a117ef27a8/runtime/compiler/control/JITClientCompilationThread.cpp#L1174-L1221
+
+Such implementation seems redundant and prone to bugs if the code for the original method changes. If I remember correctly, the original reason it was implemented in such way is because we wanted to execute as much of `getResolved*Method` on the server as possible before sending a remote call, hoping that if we determine on the server that no resolved method is needed, we don't have to make a remote call at all. However, with all work done on caching, I think we can replace all such instances with simple calls to resolved method creation routines.
+
+We already implicitly do it for `getResolvedImplementorMethods`: 
+https://github.com/eclipse/openj9/blob/9e4aac7accb53681bda2c698ec40d0a117ef27a8/runtime/compiler/control/JITClientCompilationThread.cpp#L1665-L1701
+so doing it for cases where we mirror just one method should be simple enough. 

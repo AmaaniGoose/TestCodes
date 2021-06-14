@@ -1,0 +1,3 @@
+These tests use a 500ms sleep assuming that's long enough for a thread to resume execution. This is completely unreliable.
+
+Given the essential impossibility of suspend/resume not working, a better solution would be to simply wait until resumption is detected. The test will hang if we do somehow break these APIs, which is better than failing randomly.

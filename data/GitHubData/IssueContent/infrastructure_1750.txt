@@ -1,0 +1,11 @@
+Ref: https://github.com/AdoptOpenJDK/openjdk-infrastructure/pull/1743
+
+- [x] Missing install
+
+Details:
+The `libmpc-devel` and `libdwarf-devel` packages have moved to the CodeReady Linux Builder (CRB) repo, and the PowerTools repo for RHEL and CentOS respectively (though we may be able to use PowerTools for RHEL..?).
+The referred PR above will remove them from the list of packages to install in the meantime, however we need both the packages to build OpenJ9, so we need to find a way of getting them in. 
+
+Some useful resources, found by @sej-jackson :
+https://computingforgeeks.com/enable-powertools-repository-on-centos-rhel-linux/
+https://access.redhat.com/articles/4348511

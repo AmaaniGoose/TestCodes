@@ -1,0 +1,3 @@
+In #1913 @fjeremic suggests: 'we should run the entire JCL_TEST_Java-Lang with compact strings enabled explicitly and disabled explicitly. Or at the very least run all the String, StringBuffer, StringBuilder, Integer, Long, and StringCoding tests in both variations.'
+
+Although I think running the entire JCL_TEST_Java-Lang again would add too much overhead to the sanity testing.

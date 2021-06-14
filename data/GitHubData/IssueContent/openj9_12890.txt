@@ -1,0 +1,2 @@
+Due to JEP 403: Strongly Encapsulate JDK Internals, test `StaticAccessChecks-IllegalAccessDeny` needs another variation with `--illegal-access=permit`, based on https://github.com/eclipse-openj9/openj9/issues/12727#issuecomment-851647215. 
+But current JDK 17 nightly still allows `--illegal-access=permit`, so the newly added test will be disabled now, and enable after the release with JEP 403. This issue will be added in the disable comment as a reminder. Thanks.

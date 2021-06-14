@@ -1,0 +1,3 @@
+The IProfiler stands for Interpreter Profiler; it parses profiling information provided by the interpreter and stores it for use by the compiler when making certain decisions (for example, determining which implementation of an interface method should be inlined). Additionally the IProfiler has the ability to store its profiling information into the SCC for use in another JVM instance.
+
+The IProfiler and the structure of the raw buffer provided by the interpreter should be documented.

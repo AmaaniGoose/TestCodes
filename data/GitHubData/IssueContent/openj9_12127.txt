@@ -1,0 +1,45 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk16_j9_sanity.openjdk_x86-64_windows_Nightly/28
+jdk_util_0 (-XX:+UseCompressedOops)
+java/util/Calendar/CalendarRegression.java
+```
+00:31:49  STDOUT:
+00:31:49  CalendarRegression {
+00:31:49    Test4031502 Passed
+00:31:49    Test4035301 Passed
+00:31:49    Test4040996 {
+00:31:49      Uncaught exception thrown in test method Test4040996
+00:31:49  STDERR:
+00:31:49  java.lang.RuntimeException: Uncaught exception thrown in test method Test4040996
+00:31:49  	at IntlTest.errImpl(IntlTest.java:198)
+00:31:49  	at IntlTest.errln(IntlTest.java:185)
+00:31:49  	at IntlTest.run(IntlTest.java:126)
+00:31:49  	at CalendarRegression.main(CalendarRegression.java:59)
+00:31:49  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+00:31:49  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+00:31:49  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+00:31:49  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+00:31:49  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+00:31:49  	at java.base/java.lang.Thread.run(Thread.java:853)
+```
+
+java/util/Calendar/CalendarTest.java
+```
+00:31:49  STDOUT:
+00:31:49  CalendarTest {
+00:31:49    TestGregorianChangeover Passed
+00:31:49    TestMapping Passed
+00:31:49    TestGenericAPI {
+00:31:49      Uncaught exception thrown in test method TestGenericAPI
+00:31:49  STDERR:
+00:31:49  java.lang.RuntimeException: Uncaught exception thrown in test method TestGenericAPI
+00:31:49  	at IntlTest.errImpl(IntlTest.java:198)
+00:31:49  	at IntlTest.errln(IntlTest.java:185)
+00:31:49  	at IntlTest.run(IntlTest.java:126)
+00:31:49  	at CalendarTest.main(CalendarTest.java:57)
+00:31:49  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+00:31:49  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+00:31:49  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+00:31:49  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+00:31:49  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+00:31:49  	at java.base/java.lang.Thread.run(Thread.java:853)
+```

@@ -1,0 +1,7 @@
+If new external tests are straight-forward (and require very little special configuration or setup), they can be run via a generic target called external_custom that uses a couple of parameters (EXTERNAL_GIT_REPO, EXTERNAL_TEST_CMD).
+
+We can repurpose/rename the [example-test](https://github.com/AdoptOpenJDK/openjdk-tests/tree/master/external/example-test) for this purpose.  
+
+Currently info about external test repos is kept in [common_functions.sh](https://github.com/AdoptOpenJDK/openjdk-tests/blob/master/external/common_functions.sh#L175), including EXTERNAL_GIT_REPO and EXTERNAL_TEST_CMD.  Info for external_custom can be added where github_url=EXTERNAL_GIT_REPO, script=test.sh, and a new test_command=EXTERNAL_TEST_CMD gets added (so that within test.sh, test_command is executed).
+
+Creating this generic target, will allow for selecting a greater diversity of applications for spot testing our binaries and allow us to scale in a way that is not feasible if we continue to add a directory per application within the [external](https://github.com/AdoptOpenJDK/openjdk-tests/tree/master/external) directory.

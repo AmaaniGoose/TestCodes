@@ -1,0 +1,30 @@
+Ongoing issue tracking improvements for AOT
+
+- [x] Add Symbol Validation Manager https://github.com/eclipse/openj9/issues/3011
+- [x] Exploit Symbol Validation Manager https://github.com/eclipse/openj9/issues/3012
+- [x] Enable String Peepholes https://github.com/eclipse/openj9/issues/3013
+- [x] Enable CheckCast Inlining https://github.com/eclipse/openj9/issues/3014
+- [x] Other Misc AOT Improvements https://github.com/eclipse/openj9/issues/3015
+- [x] Validate Method Symbols https://github.com/eclipse/openj9/issues/3029
+- [x] Clean up the logic in `TR::SymbolValidationManager::storeValidationRecordIfNecessary` https://github.com/eclipse/openj9/issues/3032
+- [x] Don't retry an AOT compilation if it fails for certain reasons. https://github.com/eclipse/openj9/issues/3033
+- [x] Documentation to help developers understand when they need to add a new validation record. https://github.com/eclipse/openj9/pull/4762
+- [x] Add a Guaranteed ID for a NULL symbol (addressed in https://github.com/eclipse/openj9/issues/3752)
+- [ ] Enable SVM during startup https://github.com/eclipse/openj9/issues/5195
+- [ ] Enable Symbol Validation Manager on all platforms https://github.com/eclipse/openj9/issues/3028
+- [ ] Ensure code guarded by `canDevirtualizeDispatch` does not impact trivial devirtualization opportunities under AOT https://github.com/eclipse/openj9/issues/3030
+- [ ] Clean up AOT infrastructure https://github.com/eclipse/openj9/issues/3031
+- [ ] Add a validation record for `isClassVisible` to remember the answer https://github.com/eclipse/openj9/issues/4765
+- [ ] Implement class sub-chains https://github.com/eclipse/openj9/issues/4847
+- [ ] AOT support for JProfiling https://github.com/eclipse/openj9/issues/4848
+- [ ] AOT support for OSR https://github.com/eclipse/openj9/issues/4849
+- [x] AOT support for FSD https://github.com/eclipse/openj9/issues/11376
+- [ ] AOT support for NextGenHCR https://github.com/eclipse/openj9/issues/11377
+- [ ] AOT support for Method Handles https://github.com/eclipse/openj9/issues/4850
+- [ ] Minimize AOT load failures https://github.com/eclipse/openj9/issues/4897
+- [ ] Enable disabled loads of constants in AOT https://github.com/eclipse/openj9/issues/9106
+- [ ] TR_MethodObject is relocated incorrectly https://github.com/eclipse/openj9/issues/6479
+- [ ] Re-enable inlining of checkcast/instanceof tests https://github.com/eclipse/openj9/issues/12246
+
+Related OMR issue:
+https://github.com/eclipse/omr/issues/3029

@@ -1,0 +1,1 @@
+Code coverage provides very important piece of information about where to focus our testing. It will help to identify testing gaps which will help to reduce escaped defects, reduce the number of PMRs, and user-raised issues. We can also use this native code coverage to do changed-based testing in the future. This is especially useful during new feature development.

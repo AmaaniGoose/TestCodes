@@ -1,0 +1,3 @@
+See https://github.com/ibmruntimes/openj9-openjdk-jdk8/issues/67.
+
+jdmpview should find any required code in tools.jar instead of expecting it to be part of the runtime.

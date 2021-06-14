@@ -1,0 +1,60 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk11_j9_sanity.functional_x86-64_windows_Nightly/325`:
+```
+22:27:15  openjdk version "11.0.7-internal" 2020-04-14
+22:27:15  OpenJDK Runtime Environment (build 11.0.7-internal+0-adhoc.jenkins.BuildJDK11x86-64windowsNightly)
+22:27:15  Eclipse OpenJ9 VM (build ibm_sdk-6524ef4426, JRE 11 Windows Server 2016 amd64-64-Bit Compressed References 20200331_366 (JIT enabled, AOT enabled)
+22:27:15  OpenJ9   - 6524ef4426
+22:27:15  OMR      - f719b35c8
+22:27:15  JCL      - 34c3dd7d55b based on jdk-11.0.7+9)
+```
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+===============================================
+Running test cmdLineTester_getPid_0 ...
+===============================================
+cmdLineTester_getPid_0 Start Time: Tue Mar 31 23:18:23 2020 Epoch Time (ms): 1585711103102
+variation: NoOptions
+JVM_OPTIONS: -Xcompressedrefs 
+*** Starting test suite: getPid test ***
+Testing: Compare RuntimeMXBean.getPid() with getting PID from system
+Test start time: 2020/03/31 23:18:25 Eastern Standard Time
+Running command: perl C:/Users/jenkins/workspace/Test_openjdk11_j9_sanity.functional_x86-64_windows_Nightly/openjdk-tests///..//jvmtest/functional/cmdLineTests/runtimemxbeanTests/getPidTest.pl "C:/Users/jenkins/workspace/Test_openjdk11_j9_sanity.functional_x86-64_windows_Nightly/openjdkbinary/j2sdk-image\\bin\\java" -Xcompressedrefs  -cp C:/Users/jenkins/workspace/Test_openjdk11_j9_sanity.functional_x86-64_windows_Nightly/openjdk-tests///..//jvmtest/functional/cmdLineTests/runtimemxbeanTests/runtimemxbeanTests.jar GetPid
+Time spent starting: 52 milliseconds
+Time spent executing: 6253 milliseconds
+Test result: FAILED
+Output from test:
+ [OUT] FAIL: RuntimeMXBean.getPID() returned 4048 instead of 
+ [ERR] ERROR:
+ [ERR] 
+ [ERR] Description = Access denied
+ [ERR] 
+ [ERR] Argument "" isn't numeric in numeric eq (==) at C:/Users/jenkins/workspace/Test_openjdk11_j9_sanity.functional_x86-64_windows_Nightly/openjdk-tests///..//jvmtest/functional/cmdLineTests/runtimemxbeanTests/getPidTest.pl line 75, <GEN1> line 1.
+>> Success condition was not found: [Output match: PASS]
+>> Failure condition was found: [Output match: FAIL]
+
+
+---TEST RESULTS---
+Number of PASSED tests: 0 out of 1
+Number of FAILED tests: 1 out of 1
+
+---SUMMARY OF FAILED TESTS---
+Compare RuntimeMXBean.getPid() with getting PID from system
+-----------------------------
+
+
+cmdLineTester_getPid_0_FAILED
+```
+
+To rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links:  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&BUILD_LIST=functional&PLATFORM=x86-64_windows&TARGET=cmdLineTester_getPid_0
+
+It appears the failure was caused by `cmdLineTests/runtimemxbeanTests/getPidTest.pl `.

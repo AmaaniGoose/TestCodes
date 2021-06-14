@@ -1,0 +1,8 @@
+Implement OpenJ9 equivalents of `jps`, `jstack`, `jstat`, et al.
+
+- [x] jps #4650
+- [x] jstack #4858
+- [x] jmap https://github.com/eclipse/openj9/issues/5317
+- [ ] jcmd: https://github.com/eclipse/openj9/issues/5164
+- [ ] jstat : https://github.com/eclipse/openj9/issues/5558
+- [ ] jinfo :

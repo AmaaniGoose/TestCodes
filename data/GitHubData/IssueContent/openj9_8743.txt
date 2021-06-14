@@ -1,0 +1,91 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.system_ppc64_aix_Nightly/299
+NioLoadTest_0
+```
+NLT 01:36:20.930 - Completed 100.0%. Number of tests started=150 (+0)
+NLT 01:36:28.280 - First failure detected by thread: load-2. Not creating dumps as no dump generation is requested for this load test
+NLT 01:36:28.282 - suite.getInventory().getInventoryFileRef(): openjdk.test.load/config/inventories/nio/nio.xml
+NLT 01:36:28.282 - suite.isCreateDump() : false
+NLT 01:36:28.445 - Test failed
+NLT   Failure num.  = 1
+NLT   Test number   = 7
+NLT   Test details  = 'JUnit[net.adoptopenjdk.test.nio2.asyncio.client.MultipleReadWriteFutureTest]'
+NLT   Suite number  = 0
+NLT   Thread number = 2
+NLT >>> Captured test output >>>
+NLT testStarted : testFutureSequentialReadWriteSingle(net.adoptopenjdk.test.nio2.asyncio.client.MultipleReadWriteFutureTest)
+NLT Iteration 0
+NLT testFinished: testFutureSequentialReadWriteSingle(net.adoptopenjdk.test.nio2.asyncio.client.MultipleReadWriteFutureTest)
+NLT testStarted : testFutureSequentialReadWriteMultiple(net.adoptopenjdk.test.nio2.asyncio.client.MultipleReadWriteFutureTest)
+NLT Iteration 0
+NLT testFailure: testFutureSequentialReadWriteMultiple(net.adoptopenjdk.test.nio2.asyncio.client.MultipleReadWriteFutureTest): java.nio.channels.ClosedChannelException
+NLT Exception thrown during runFutureSequentialReadWriteMultiple, iteration 24, read 0
+NLT Incoming buffer: java.nio.HeapByteBuffer[pos=0 lim=32800 cap=32800]
+NLT ServerConnectionChannel: sun.nio.ch.UnixAsynchronousSocketChannelImpl[closed]
+NLT 
+NLT java.lang.Exception: java.nio.channels.ClosedChannelException
+NLT Exception thrown during runFutureSequentialReadWriteMultiple, iteration 24, read 0
+NLT Incoming buffer: java.nio.HeapByteBuffer[pos=0 lim=32800 cap=32800]
+NLT ServerConnectionChannel: sun.nio.ch.UnixAsynchronousSocketChannelImpl[closed]
+NLT 
+NLT Caused by: java.util.concurrent.ExecutionException: java.nio.channels.ClosedChannelException
+NLT 	at java.base/sun.nio.ch.CompletedFuture.get(CompletedFuture.java:78)
+NLT 	at net.adoptopenjdk.test.nio2.asyncio.RunFuture.get(RunFuture.java:47)
+NLT 	at net.adoptopenjdk.test.nio2.asyncio.client.MultipleReadWriteFutureTest.runFutureSequentialReadWriteMultiple(MultipleReadWriteFutureTest.java:253)
+NLT 	at net.adoptopenjdk.test.nio2.asyncio.client.MultipleReadWriteFutureTest.testFutureSequentialReadWriteMultiple(MultipleReadWriteFutureTest.java:94)
+NLT 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+NLT 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+NLT 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+NLT 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+NLT 	at junit.framework.TestCase.runTest(TestCase.java:176)
+NLT 	at junit.framework.TestCase.runBare(TestCase.java:141)
+NLT 	at junit.framework.TestResult$1.protect(TestResult.java:122)
+NLT 	at junit.framework.TestResult.runProtected(TestResult.java:142)
+NLT 	at junit.framework.TestResult.run(TestResult.java:125)
+NLT 	at junit.framework.TestCase.run(TestCase.java:129)
+NLT 	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+NLT 	at junit.framework.TestSuite.run(TestSuite.java:247)
+NLT 	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+NLT 	at org.junit.runners.Suite.runChild(Suite.java:128)
+NLT 	at org.junit.runners.Suite.runChild(Suite.java:27)
+NLT 	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+NLT 	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+NLT 	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+NLT 	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+NLT 	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+NLT 	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+NLT 	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+NLT 	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+NLT 	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+NLT 	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+NLT 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+NLT 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+NLT 	at java.base/java.lang.Thread.run(Thread.java:834)
+NLT Caused by: java.nio.channels.ClosedChannelException
+NLT 	at java.base/sun.nio.ch.AsynchronousSocketChannelImpl.read(AsynchronousSocketChannelImpl.java:234)
+NLT 	at java.base/sun.nio.ch.AsynchronousSocketChannelImpl.read(AsynchronousSocketChannelImpl.java:284)
+NLT 	at net.adoptopenjdk.test.nio2.asyncio.client.MultipleReadWriteFutureTest.runFutureSequentialReadWriteMultiple(MultipleReadWriteFutureTest.java:251)
+NLT 	... 29 more
+NLT testFinished: testFutureSequentialReadWriteMultiple(net.adoptopenjdk.test.nio2.asyncio.client.MultipleReadWriteFutureTest)
+NLT 
+NLT JUnit Test Results for: net.adoptopenjdk.test.nio2.asyncio.client.MultipleReadWriteFutureTest
+NLT   Ran    : 2
+NLT   Passed : 1
+NLT   Failed : 1
+NLT   Ignored: 0
+NLT   Result : FAILED
+NLT <<<
+NLT 
+NLT 01:36:28.446 - Thread completed. Suite=0 thread=2
+NLT 01:36:28.545 - Load test completed
+NLT 01:36:28.545 -   Ran     : 150
+NLT 01:36:28.545 -   Passed  : 149
+NLT 01:36:28.545 -   Failed  : 1
+NLT 01:36:28.545 -   Result  : FAILED
+STF 01:36:28.844 - **FAILED** Process NLT ended with exit code (1) and not the expected exit code/s (0)
+STF 01:36:28.844 - Monitoring Report Summary:
+STF 01:36:28.844 -   o Process NLT ended with exit code (1) and not the expected exit code/s (0)
+STF 01:36:28.845 - Killing processes: NLT
+STF 01:36:28.845 -   o Process NLT is not running
+**FAILED** at step 1 (Run nio load test). Expected return value=0 Actual=1 at /home/u0020236/workspace/Test_openjdk11_j9_sanity.system_ppc64_aix_Nightly/openjdk-tests/TKG/../TKG/test_output_15833020125303/NioLoadTest_0/20200304-012556-NioLoadTest/execute.pl line 92.
+STF 01:36:28.951 - **FAILED** execute script failed. Expected return value=0 Actual=1
+```

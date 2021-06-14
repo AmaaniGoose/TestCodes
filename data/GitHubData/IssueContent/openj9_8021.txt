@@ -1,0 +1,40 @@
+Failure link
+------------
+
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.functional_ppc64le_linux_Nightly/220/tapResults/
+
+Optional info
+-------------
+
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+Testing: jep178 testing dynamic linking
+Test start time: 2019/12/07 10:40:37 Coordinated Universal Time
+Running command: /home/jenkins/jenkins-agent/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_Nightly/openjdkbinary/openjdk-test-image/openj9/testjep178_dynamic -jvmpath:/home/jenkins/jenkins-agent/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_Nightly/openjdkbinary/j2sdk-image/jre/bin/../lib/ppc64le/j9vm -classpath:/home/jenkins/jenkins-agent/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_Nightly/openjdk-tests/TKG/../../jvmtest/functional/cmdLineTests/jep178staticLinkingTest/jep178staticLinkingTest.jar -Xcompressedrefs  com/ibm/j9/tests/jeptests/StaticLinking
+Time spent starting: 11 milliseconds
+Time spent executing: 14655 milliseconds
+Test result: FAILED
+Output from test:
+ [OUT] [MSG] Starting up JEP 178 test.
+ [OUT] [MSG] Opening jvm from /home/jenkins/jenkins-agent/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_Nightly/openjdkbinary/j2sdk-image/jre/bin/../lib/ppc64le/j9vm/libjvm.so
+ [OUT] [MSG] Reached OnLoad (testlibA): JNI_OnLoad [dynamically]
+ [OUT] [MSG] Reached OnLoad (testlibB): JNI_OnLoad [dynamically]
+ [OUT] [MSG] Calling native instance method fooImpl.
+ [OUT] [MSG] Reached native fooImpl() [dynamically]
+ [OUT] [MSG] Calling native static method barImpl.
+ [OUT] [MSG] Reached native barImpl() [dynamically]
+ [OUT] [MSG] Test jep178 passed with error code: 0
+>> Required condition was found: [Output match: [MSG] Reached OnLoad (testlibA): JNI_OnLoad [dynamically]]
+>> Required condition was found: [Output match: [MSG] Reached OnLoad (testlibB): JNI_OnLoad [dynamically]]
+>> Required condition was found: [Output match: [MSG] Reached native fooImpl() [dynamically]]
+>> Required condition was found: [Output match: [MSG] Reached native barImpl() [dynamically]]
+>> Required condition was not found: [Output match: [MSG] Reached OnUnload (testlibA): JNI_OnUnload [dynamically]]
+>> Required condition was not found: [Output match: [MSG] Reached OnUnload (testlibB): JNI_OnUnload [dynamically]]
+>> Failure condition was not found: [Output match: [ERR]]
+>> Failure condition was not found: [Output match: [statically]]
+>> Success condition was found: [Output match: [MSG] Test jep178 passed with error code: 0]
+```

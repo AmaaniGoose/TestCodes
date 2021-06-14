@@ -1,0 +1,5 @@
+We currently have 5 machines labelled with docker for use by test: https://ci.adoptopenjdk.net/label/ci.role.test&&hw.arch.x86&&sw.os.linux&&sw.tool.docker/ 
+
+Given that docker is in the ansible playbooks, I think there are actually more machines with docker installed than are labelled with sw.tool.docker.  We should go through the set of machines and try to run the external (docker-based tests from the openjdk-tests repo) to verify which additional test machines can be used for external tests.
+
+<img width="731" alt="Screen Shot 2019-12-16 at 10 40 34 AM" src="https://user-images.githubusercontent.com/2836948/70920393-8445cb00-1ff0-11ea-8fc9-0d9a83057d2a.png">

@@ -1,0 +1,1 @@
+In order to enable `snyk` analysis, I would need `nvm` installed, to use it for install `npm` and `snyk`

@@ -1,0 +1,38 @@
+Failure link
+------------
+
+From an internal build `Test_openjdkNext_j9_extended.functional_ppc64le_linux_Nightly/142`:
+cent7p8j91
+```
+23:03:04  openjdk version "15-internal" 2020-09-15
+23:03:04  OpenJDK Runtime Environment (build 15-internal+0-adhoc.jenkins.BuildJDKnextppc64lelinuxNightly)
+23:03:04  Eclipse OpenJ9 VM (build ibm_sdk-1403211629, JRE 15 Linux ppc64le-64-Bit Compressed References 20200315_161 (JIT enabled, AOT enabled)
+23:03:04  OpenJ9   - 1403211629
+23:03:04  OMR      - aa8f7559b
+23:03:04  JCL      - 563f19ad32b based on jdk-15+13)
+```
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+There was 1 error:
+1) testSharedCacheJvmtiAPI(tests.sharedclasses.options.junit.TestOptionsDefault)tests.sharedclasses.TestFailedException: iterateSharedCacheFunction ffailed, Invalid number of cache found	expected: 5	found: 6
+	at tests.sharedclasses.TestUtils.fail(TestUtils.java:598)
+	at tests.sharedclasses.options.TestSharedCacheJvmtiAPI.main(TestSharedCacheJvmtiAPI.java:111)
+	at tests.sharedclasses.options.junit.TestOptionsBase.testSharedCacheJvmtiAPI(TestOptionsBase.java:119)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+
+FAILURES!!!
+Tests run: 168,  Failures: 0,  Errors: 1
+
+testSCCacheManagement_0_FAILED
+```
+
+To rebuild the failed tests in <Jenkins URL>=https://ci.adoptopenjdk.net/job/Grinder, use the following links: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=15&JDK_IMPL=openj9&BUILD_LIST=functional&PLATFORM=ppc64le_linux&TARGET=testSCCacheManagement_0

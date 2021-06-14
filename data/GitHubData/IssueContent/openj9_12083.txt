@@ -1,0 +1,203 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk17_j9_extended.openjdk_x86-64_windows/1`
+```
+04:04:50  openjdk version "17" 2021-09-14
+04:04:50  OpenJDK Runtime Environment AdoptOpenJDK (build 17+11)
+04:04:50  Eclipse OpenJ9 VM AdoptOpenJDK (build master-f021812fb, JRE 17 Windows Server 2016 amd64-64-Bit Compressed References 20210227_10 (JIT enabled, AOT enabled)
+04:04:50  OpenJ9   - f021812fb
+04:04:50  OMR      - eb4f5a875
+04:04:50  JCL      - 6031ea3dbe based on jdk-17+11)
+```
+rebuild the failed tests in one link:
+10:57:01  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=17&JDK_IMPL=openj9&JDK_VENDOR=adoptopenjdk&BUILD_LIST=openjdk&PLATFORM=x86-64_windows_mixed&TARGET=testList%20TESTLIST=jdk_io_0,jdk_io_1,jdk_other_0,jdk_other_1,jdk_net_0,jdk_net_1,jdk_nio_0,jdk_nio_1,jdk_security1_0,jdk_security1_1
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+08:32:13  TEST: java/security/Signature/SignatureLength.java
+08:32:13  TEST JDK: C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdkbinary\j2sdk-image
+08:32:13  
+08:32:13  ACTION: build -- Passed. Build successful
+08:32:13  REASON: Named class compiled on demand
+08:32:13  TIME:   0.157 seconds
+08:32:13  messages:
+08:32:13  command: build SignatureLength
+08:32:13  reason: Named class compiled on demand
+08:32:13  Test directory:
+08:32:13    compile: SignatureLength
+08:32:13  elapsed time (seconds): 0.157
+08:32:13  
+08:32:13  ACTION: compile -- Passed. Compilation successful
+08:32:13  REASON: .class file out of date or does not exist
+08:32:13  TIME:   0.157 seconds
+08:32:13  messages:
+08:32:13  command: compile C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\security\Signature\SignatureLength.java
+08:32:13  reason: .class file out of date or does not exist
+08:32:13  Additional options from @modules: --add-modules jdk.crypto.ec
+08:32:13  Mode: agentvm
+08:32:13  Agent id: 1
+08:32:13  elapsed time (seconds): 0.157
+08:32:13  configuration:
+08:32:13  Boot Layer (javac runtime environment)
+08:32:13    class path: C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\javatest.jar 
+08:32:13                C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\jtreg.jar 
+08:32:13    patch:      java.base C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_security1_0\work\patches\java.base
+08:32:13  
+08:32:13  javac compilation environment
+08:32:13    add modules: jdk.crypto.ec
+08:32:13    source path: C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\security\Signature
+08:32:13    class path:  C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\security\Signature
+08:32:13                 C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_security1_0\work\classes\2\java\security\Signature\SignatureLength.d
+08:32:13  
+08:32:13  rerun:
+08:32:13  cd 'C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_security1_0\work\scratch\3' && \
+08:32:13  PATH='C:\cygwin64\bin;C:\cygwin64\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Strawberry\perl\bin;C:\openjdk\jdk-8\bin;C:\apache-ant\apache-ant-1.10.5\bin;C:\Program Files (x86)\IncrediBuild;C:\Program Files\Microsoft SQL Server\110\Tools\Binn;C:\Program Files\Microsoft SQL Server\120\Tools\Binn;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0;C:\Windows\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps' \
+08:32:13  SystemDrive=C: \
+08:32:13  SystemRoot='C:\Windows' \
+08:32:13  TEMP='C:\temp' \
+08:32:13  windir='C:\Windows' \
+08:32:13      'C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdkbinary\j2sdk-image\bin\javac' \
+08:32:13          -J-ea \
+08:32:13          -J-esa \
+08:32:13          -J-Xmx512m \
+08:32:13          -J-XX:+UseCompressedOops \
+08:32:13          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+08:32:13          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+08:32:13          -J-Dtest.compiler.opts= \
+08:32:13          -J-Dtest.java.opts= \
+08:32:13          -J-Dtest.jdk='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdkbinary\j2sdk-image' \
+08:32:13          -J-Dcompile.jdk='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdkbinary\j2sdk-image' \
+08:32:13          -J-Dtest.timeout.factor=8.0 \
+08:32:13          -J-Dtest.root='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk' \
+08:32:13          -J-Dtest.name=java/security/Signature/SignatureLength.java \
+08:32:13          -J-Dtest.file='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\security\Signature\SignatureLength.java' \
+08:32:13          -J-Dtest.src='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\security\Signature' \
+08:32:13          -J-Dtest.src.path='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\security\Signature' \
+08:32:13          -J-Dtest.classes='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_security1_0\work\classes\2\java\security\Signature\SignatureLength.d' \
+08:32:13          -J-Dtest.class.path='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_security1_0\work\classes\2\java\security\Signature\SignatureLength.d' \
+08:32:13          -J-Dtest.class.path.prefix='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_security1_0\work\classes\2\java\security\Signature\SignatureLength.d;C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\security\Signature' \
+08:32:13          -J-Dtest.modules=jdk.crypto.ec \
+08:32:13          --add-modules jdk.crypto.ec \
+08:32:13          -d 'C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_security1_0\work\classes\2\java\security\Signature\SignatureLength.d' \
+08:32:13          -sourcepath 'C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\security\Signature' \
+08:32:13          -classpath 'C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\security\Signature;C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_security1_0\work\classes\2\java\security\Signature\SignatureLength.d' 'C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\security\Signature\SignatureLength.java'
+08:32:13  
+08:32:13  ACTION: main -- Failed. Execution failed: `main' threw exception: java.security.ProviderException: java.security.KeyException: Access is denied.
+08:32:13  REASON: User specified action: run main SignatureLength 
+08:32:13  TIME:   2.268 seconds
+08:32:13  messages:
+08:32:13  command: main SignatureLength
+08:32:13  reason: User specified action: run main SignatureLength 
+08:32:13  Mode: agentvm
+08:32:13  Agent id: 15
+08:32:13  elapsed time (seconds): 2.268
+08:32:13  configuration:
+08:32:13  Boot Layer
+08:32:13    class path: C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\javatest.jar 
+08:32:13                C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\jtreg.jar 
+08:32:13                C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\junit.jar 
+08:32:13                C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\testng.jar 
+08:32:13                C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\jcommander.jar 
+08:32:13    patch:      java.base C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_security1_0\work\patches\java.base
+08:32:13  
+08:32:13  Test Layer
+08:32:13    class path: C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_security1_0\work\classes\2\java\security\Signature\SignatureLength.d
+08:32:13                C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\security\Signature
+08:32:13  
+08:32:13  rerun:
+08:32:13  cd 'C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_security1_0\work\scratch\3' && \
+08:32:13  PATH='C:\cygwin64\bin;C:\cygwin64\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Strawberry\perl\bin;C:\openjdk\jdk-8\bin;C:\apache-ant\apache-ant-1.10.5\bin;C:\Program Files (x86)\IncrediBuild;C:\Program Files\Microsoft SQL Server\110\Tools\Binn;C:\Program Files\Microsoft SQL Server\120\Tools\Binn;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0;C:\Windows\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps' \
+08:32:13  SystemDrive=C: \
+08:32:13  SystemRoot='C:\Windows' \
+08:32:13  TEMP='C:\temp' \
+08:32:13  windir='C:\Windows' \
+08:32:13      'C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdkbinary\j2sdk-image\bin\java' \
+08:32:13          -Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+08:32:13          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+08:32:13          -Dtest.compiler.opts= \
+08:32:13          -Dtest.java.opts= \
+08:32:13          -Dtest.jdk='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdkbinary\j2sdk-image' \
+08:32:13          -Dcompile.jdk='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdkbinary\j2sdk-image' \
+08:32:13          -Dtest.timeout.factor=8.0 \
+08:32:13          -Dtest.root='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk' \
+08:32:13          -Dtest.name=java/security/Signature/SignatureLength.java \
+08:32:13          -Dtest.file='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\security\Signature\SignatureLength.java' \
+08:32:13          -Dtest.src='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\security\Signature' \
+08:32:13          -Dtest.src.path='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\security\Signature' \
+08:32:13          -Dtest.classes='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_security1_0\work\classes\2\java\security\Signature\SignatureLength.d' \
+08:32:13          -Dtest.class.path='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_security1_0\work\classes\2\java\security\Signature\SignatureLength.d' \
+08:32:13          -Dtest.class.path.prefix='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_security1_0\work\classes\2\java\security\Signature\SignatureLength.d;C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\security\Signature' \
+08:32:13          -Dtest.modules=jdk.crypto.ec \
+08:32:13          -classpath 'C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_security1_0\work\classes\2\java\security\Signature\SignatureLength.d;C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\security\Signature;C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\javatest.jar;C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\jtreg.jar' \
+08:32:13          SignatureLength
+08:32:13  STDERR:
+08:32:13  java.security.ProviderException: java.security.KeyException: Access is denied.
+08:32:13  
+08:32:13  	at jdk.crypto.mscapi/sun.security.mscapi.CKeyPairGenerator$RSA.generateKeyPair(CKeyPairGenerator.java:126)
+08:32:13  	at java.base/java.security.KeyPairGenerator$Delegate.generateKeyPair(KeyPairGenerator.java:722)
+08:32:13  	at SignatureLength.main0(SignatureLength.java:97)
+08:32:13  	at SignatureLength.main(SignatureLength.java:63)
+08:32:13  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+08:32:13  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+08:32:13  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+08:32:13  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+08:32:13  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+08:32:13  	at java.base/java.lang.Thread.run(Thread.java:853)
+08:32:13  Caused by: java.security.KeyException: Access is denied.
+08:32:13  
+08:32:13  	at jdk.crypto.mscapi/sun.security.mscapi.CKeyPairGenerator$RSA.generateCKeyPair(Native Method)
+08:32:13  	at jdk.crypto.mscapi/sun.security.mscapi.CKeyPairGenerator$RSA.generateKeyPair(CKeyPairGenerator.java:121)
+08:32:13  	... 9 more
+08:32:13  
+08:32:13  JavaTest Message: Test threw exception: java.security.ProviderException
+08:32:13  JavaTest Message: shutting down test
+08:32:13  
+08:32:13  STDOUT:
+08:32:13  Generating DSA keypair using SUN JCE provider
+08:32:13  Signing using SUN JCE provider
+08:32:13  Invalidating signature ...
+08:32:13  Verifying using SUN JCE provider
+08:32:13  OK: caught expected exception: java.security.SignatureException: Invalid encoding for signature
+08:32:13  
+08:32:13  Generating RSA keypair using SunRsaSign JCE provider
+08:32:13  Signing using SunRsaSign JCE provider
+08:32:13  Invalidating signature ...
+08:32:13  Verifying using SunRsaSign JCE provider
+08:32:13  OK: caught expected exception: java.security.SignatureException: Signature length not correct: got 261 but was expecting 256
+08:32:13  
+08:32:13  Generating RSA keypair using SunRsaSign JCE provider
+08:32:13  Signing using SunRsaSign JCE provider
+08:32:13  Invalidating signature ...
+08:32:13  Verifying using SunMSCAPI JCE provider
+08:32:13  Valid? false
+08:32:13  OK: verification failed as expected
+08:32:13  
+08:32:13  Generating EC keypair using SunEC JCE provider
+08:32:13  Signing using SunEC JCE provider
+08:32:13  Invalidating signature ...
+08:32:13  Verifying using SunEC JCE provider
+08:32:13  OK: caught expected exception: java.security.SignatureException: Invalid encoding for signature
+08:32:13  
+08:32:13  Generating EC keypair using SunEC JCE provider
+08:32:13  Signing using SunEC JCE provider
+08:32:13  Invalidating signature ...
+08:32:13  Verifying using SunMSCAPI JCE provider
+08:32:13  OK: caught expected exception: java.security.SignatureException: Invalid encoding for signature
+08:32:13  
+08:32:13  Generating RSA keypair using SunMSCAPI JCE provider
+08:32:13  
+08:32:13  TEST RESULT: Failed. Execution failed: `main' threw exception: java.security.ProviderException: java.security.KeyException: Access is denied.
+08:32:13  --------------------------------------------------
+08:33:41  Test results: passed: 204; failed: 3
+08:34:04  Report written to C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\jvmtest\openjdk\report\html\report.html
+08:34:04  Results written to C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_security1_0\work
+08:34:04  Error: Some tests failed or other problems occurred.
+08:34:04  
+08:34:04  jdk_security1_0_FAILED
+```

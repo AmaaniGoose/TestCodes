@@ -1,0 +1,6 @@
+Consolidate all hardcoded prefixes of format `O\^O [a-z A-Z]+(:)?` into macro `OPT_DETAILS`.
+
+Example:
+`
+performTransformation(self()->comp(), "O^O LINKAGE REGISTER ALLOCATION: transforming %s into %s\n", self()->comp()->getDebug()->getName(node), self()->comp()->getDebug()->getName(regLoadOp)))
+`

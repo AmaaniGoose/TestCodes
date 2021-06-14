@@ -1,0 +1,10 @@
+With a JVMTI agent, it's generally possible to replace or wrap native methods using the NativeMethodBind event. When running on OpenJ9, I can't seem to do so for java.lang.Object.notify().
+
+The NativeMethodBind even is invoked whenever a native method is bound to a class. My expectation is that the agent gets a notification for all native method of all loaded classes. However, I don't seem to be getting an event for Object.notify().
+
+The sample project in https://gitlab.com/urisimchoni/agentbind demonstrates the issue - when running with HotSpot/OpenJDK, both Object.notify() and "my" method are detected. When running on OpenJ9/OpenJDK, only "my" method is detected.
+
+My end goal would be to wrap Object.notify() one way or another, in order to detect when it is invoked.
+
+Thanks,
+Uri.

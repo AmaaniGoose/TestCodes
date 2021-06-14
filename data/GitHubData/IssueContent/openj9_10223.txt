@@ -1,0 +1,46 @@
+Java -version output
+--------------------
+
+```
+openjdk version "1.8.0_262"
+OpenJDK Runtime Environment (build 1.8.0_262-b10)
+Eclipse OpenJ9 VM (build openj9-0.21.0, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20200715_715 (JIT enabled, AOT enabled)
+OpenJ9   - 34cf4c075
+OMR      - 113e54219
+JCL      - 4fe4692246 based on jdk8u262-b10)
+```
+
+Summary of problem
+------------------
+
+Building a fresh android project fails.
+
+Steps to reproduce:
+1. Download https://github.com/Unpublished/OpenJ9_android_example
+2. Execute `./gradlew assembleRelease`
+
+Output with OpenJ9:
+```
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+A problem occurred configuring project ':app'.
+> Failed to notify project evaluation listener.
+   > wrong number of arguments
+   > KotlinJvmAndroidCompilation with name 'debugAndroidTest' not found.
+```
+
+Output with Hotspot:
+```
+BUILD SUCCESSFUL in 1m 18s
+24 actionable tasks: 24 executed
+```
+
+A demo repo including `./gradlew assembleRelease --stacktrace` output can be found here:
+https://github.com/Unpublished/OpenJ9_android_example/actions/runs/178702350
+
+Workarounds based on @JasonFengJ9's analysis:
+------------------
+
+- Downgrade AGP to 3.5
+- Upgrade Gradle to 6.2+

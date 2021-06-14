@@ -1,0 +1,29 @@
+Failure link
+------------
+https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/lang/String/EqualsIgnoreCase.java
+Test Category: openjdk
+Test Suite Name: jdk_lang
+OS/Architecture: x86-64-windows, x86-64-linux, x86-64-osx, ...
+OpenJDK Version: 11.0.4+11
+Public Build SHAs:
+OpenJ9 - `1fcc869f3`
+OMR - `ee5b41ac`
+JCL - `965d0c0df3`
+
+Optional info
+-------------
+Test fails on jdk11 with openj9, passes on hotspot. Issue with `String.equalsIgnoreCase()` method where the string "?" is not equal to itself.
+
+Failure output
+--------------
+```
+java.lang.RuntimeException: Test Failed
+        at EqualsIgnoreCase.compareFuncs(EqualsIgnoreCase.java:73)
+        at EqualsIgnoreCase.main(EqualsIgnoreCase.java:40)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+        at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+        at java.base/java.lang.Thread.run(Thread.java:831)
+```

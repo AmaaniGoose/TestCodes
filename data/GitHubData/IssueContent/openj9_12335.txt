@@ -1,0 +1,3 @@
+A comment on the introduction of the TreeLowering optimization in pull request #11968 was deferred.  That suggested using `OMR::Block::createConditionalBlocksBeforeTree` to simplify splitting in `fastpathAcmpHelper`](https://github.com/eclipse/openj9/pull/11968#issuecomment-780165296).
+
+This issue is opened to track that clean up.

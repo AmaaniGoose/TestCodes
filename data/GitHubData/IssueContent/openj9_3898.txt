@@ -1,0 +1,81 @@
+Based on a stack overflow question:
+https://stackoverflow.com/questions/53452713/why-is-2-i-i-faster-than-2-i-i
+
+I took a quick sniff of what happens with OpenJ9 on the above test on Linux on Z [1] and I was pleasantly surprised that performance was really good vs. Hotspot. I ran the same test on x86 however and we are basically on par. The issue seems to boil down to Auto SIMD not kicking in for x86 when it does for Z.
+
+I took traces on both x86 and Z (attached below) using the following two builds:
+
+https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.1%2B13/OpenJDK11U-jdk_s390x_linux_openj9_jdk-11.0.1_13_openj9-0.11.0_11.0.1_13.tar.gz
+https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.1%2B13/OpenJDK11U-jdk_x64_linux_openj9_jdk-11.0.1_13_openj9-0.11.0_11.0.1_13.tar.gz
+
+I compared the trace of the main method and found the following difference between x86 vs. Z:
+
+```
+// x86
+<optimization id=126 name=SPMDKernelParallelization method=Test.main([Ljava/lang/String;)V>
+Performing 126: SPMDKernelParallelization
+            (Building use/def info)
+         PREPARTITION VN   (Building value number info)
+Checking data locality in loop 4 piv = 607
+   iv = 607
+   Visiting Tree Top [00007FE658D0B110] during detection mode
+   Visiting Tree Top [00007FE658D0B5C0] during detection mode
+   Visiting Tree Top [00007FE658D0B430] during detection mode
+   visitTreeTopToSIMDize: Created reductionInfo for node: 00007FE658D0B430, symRef: 00007FE658D55830
+   autoSIMDReductionSupported: getvelem is not supported for dataType: Int32
+
+// Z
+<optimization id=126 name=SPMDKernelParallelization method=Test.main([Ljava/lang/String;)V>
+Performing 126: SPMDKernelParallelization
+            (Building use/def info)
+         PREPARTITION VN   (Building value number info)
+Checking data locality in loop 4 piv = 612
+   iv = 612
+   Visiting Tree Top [000003FF7B006370] during detection mode
+   Visiting Tree Top [000003FF7B006820] during detection mode
+   Visiting Tree Top [000003FF7B006690] during detection mode
+   visitTreeTopToSIMDize: Created reductionInfo for node: 000003FF7B006690, symRef: 000003FF7B050830
+   isReduction: found potential reduction symRef. Node 000003FF7B006460
+   visitTreeTopToSIMDize: Reduction pattern match on node: 000003FF7B006690
+```
+
+It seems this is the problem:
+
+```
+   autoSIMDReductionSupported: getvelem is not supported for dataType: Int32
+```
+
+And indeed taking a look at the code in OMR:
+
+https://github.com/eclipse/omr/blob/7d06635076a9ca089d6533b05da078e0e221a761/compiler/x/codegen/OMRCodeGenerator.cpp#L1014-L1030
+
+we can see the optimization is disabled for `TR::getvelem` due to some GRA problems which are tracked in [2]. As a hack I recompiled the JVM with that check disabled but we run into another issue:
+
+```
+<optimization id=122 name=SPMDKernelParallelization method=Test.main([Ljava/lang/String;)V>
+Performing 122: SPMDKernelParallelization
+            (Building use/def info)
+         PREPARTITION VN   (Building value number info)
+Checking data locality in loop 4 piv = 618
+   iv = 618
+   Visiting Tree Top [00007F6FD282F420] during detection mode
+   Visiting Tree Top [00007F6FD282F8D0] during detection mode
+   Visiting Tree Top [00007F6FD282F740] during detection mode
+   visitTreeTopToSIMDize: Created reductionInfo for node: 00007F6FD282F740, symRef: 00007F6FD2879830
+   isReduction: found potential reduction symRef. Node 00007F6FD282F510
+   visitTreeTopToSIMDize: Reduction pattern match on node: 00007F6FD282F740
+   Visiting Node [00007F6FD282F6F0] during detection mode - iadd
+   Visiting Node [00007F6FD282F6A0] during detection mode - imul
+   Visiting Node [00007F6FD282F600] during detection mode - imul
+   Visiting Node [00007F6FD282F5B0] during detection mode - iload
+   Found use of induction variable at node [00007F6FD282F5B0] - platform does not support this vectorization
+```
+
+The problem seems to be that `TR::vsetelem` is not supported on x86. I'm sure this is just an implementation issue. So to get this working we would need to implement this evaluator. It seems we don't implement it on Power either.
+
+[source-and-jit-traces.zip](https://github.com/eclipse/openj9/files/2634783/source-and-jit-traces.zip)
+
+Related: #3894
+
+[1] https://openj9.slack.com/archives/C8312LCV9/p1543592009003500
+[2] https://github.com/eclipse/omr/pull/2280

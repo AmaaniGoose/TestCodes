@@ -1,0 +1,1 @@
+This issue tracks the work to enable arrayset optimizations in the AArch64 backend (enabled by clearing the option flag `TR_DisableArraySetOpts`).

@@ -1,0 +1,273 @@
+Build:
+```
+14:17:40  openjdk version "16" 2021-03-16
+14:17:40  OpenJDK Runtime Environment AdoptOpenJDK-16+36-202104050917 (build 16+36)
+14:17:40  Eclipse OpenJ9 VM AdoptOpenJDK-16+36-202104050917 (build openj9-0.26.0-m2, JRE 16 Linux ppc64le-64-Bit Compressed References 20210405_12 (JIT enabled, AOT enabled)
+14:17:40  OpenJ9   - 4ce9ec8a1
+14:17:40  OMR      - b8996ac2c
+14:17:40  JCL      - 8f1ec25575 based on jdk-16+36)
+```
+https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/54/consoleFull - test-docker-ubuntu2010-ppc64le-1
+```
+15:05:34  TEST: java/lang/invoke/VarHandles/VarHandleTestMethodHandleAccessInt.java
+15:05:34  TEST JDK: /home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image
+15:05:34  
+15:05:34  ACTION: build -- Passed. Build successful
+15:05:34  REASON: Named class compiled on demand
+15:05:34  TIME:   0.583 seconds
+15:05:34  messages:
+15:05:34  command: build VarHandleTestMethodHandleAccessInt
+15:05:34  reason: Named class compiled on demand
+15:05:34  Test directory:
+15:05:34    compile: VarHandleTestMethodHandleAccessInt
+15:05:34  elapsed time (seconds): 0.583
+15:05:34  
+15:05:34  ACTION: compile -- Passed. Compilation successful
+15:05:34  REASON: .class file out of date or does not exist
+15:05:34  TIME:   0.583 seconds
+15:05:34  messages:
+15:05:34  command: compile /home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/invoke/VarHandles/VarHandleTestMethodHandleAccessInt.java
+15:05:34  reason: .class file out of date or does not exist
+15:05:34  Mode: agentvm
+15:05:34  Agent id: 1
+15:05:34  elapsed time (seconds): 0.583
+15:05:34  configuration:
+15:05:34  Boot Layer (javac runtime environment)
+15:05:34    class path: /home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/javatest.jar 
+15:05:34                /home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+15:05:34    patch:      java.base /home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16176288057344/jdk_lang_0/work/patches/java.base
+15:05:34  
+15:05:34  javac compilation environment
+15:05:34    source path: /home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/invoke/VarHandles
+15:05:34    class path:  /home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/invoke/VarHandles
+15:05:34                 /home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16176288057344/jdk_lang_0/work/classes/1/java/lang/invoke/VarHandles/VarHandleTestMethodHandleAccessInt.d
+15:05:34                 /home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/testng.jar
+15:05:34                 /home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/jcommander.jar
+15:05:34  
+15:05:34  rerun:
+15:05:34  cd /home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16176288057344/jdk_lang_0/work/scratch/1 && \
+15:05:34  DISPLAY=:0 \
+15:05:34  HOME=/home/jenkins \
+15:05:34  PATH=/bin:/usr/bin:/usr/sbin \
+15:05:34      /home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image/bin/javac \
+15:05:34          -J-ea \
+15:05:34          -J-esa \
+15:05:34          -J-Xmx512m \
+15:05:34          -J-Xdump:system:none \
+15:05:34          -J-Xdump:heap:none \
+15:05:34          -J-Xdump:system:events=gpf+abort+traceassert+corruptcache \
+15:05:34          -J-XX:-JITServerTechPreviewMessage \
+15:05:34          -J-XX:+UseCompressedOops \
+15:05:34          -J-Djava.library.path=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+15:05:34          -J-Dtest.vm.opts='-ea -esa -Xmx512m -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache -XX:-JITServerTechPreviewMessage -XX:+UseCompressedOops' \
+15:05:34          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-Xdump:system:none -J-Xdump:heap:none -J-Xdump:system:events=gpf+abort+traceassert+corruptcache -J-XX:-JITServerTechPreviewMessage -J-XX:+UseCompressedOops' \
+15:05:34          -J-Dtest.compiler.opts= \
+15:05:34          -J-Dtest.java.opts= \
+15:05:34          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+15:05:34          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+15:05:34          -J-Dtest.timeout.factor=8.0 \
+15:05:34          -J-Dtest.nativepath=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+15:05:34          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+15:05:34          -J-Dtest.name=java/lang/invoke/VarHandles/VarHandleTestMethodHandleAccessInt.java \
+15:05:34          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/invoke/VarHandles/VarHandleTestMethodHandleAccessInt.java \
+15:05:34          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/invoke/VarHandles \
+15:05:34          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/invoke/VarHandles \
+15:05:34          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16176288057344/jdk_lang_0/work/classes/1/java/lang/invoke/VarHandles/VarHandleTestMethodHandleAccessInt.d \
+15:05:34          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16176288057344/jdk_lang_0/work/classes/1/java/lang/invoke/VarHandles/VarHandleTestMethodHandleAccessInt.d \
+15:05:34          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16176288057344/jdk_lang_0/work/classes/1/java/lang/invoke/VarHandles/VarHandleTestMethodHandleAccessInt.d:/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/invoke/VarHandles \
+15:05:34          -d /home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16176288057344/jdk_lang_0/work/classes/1/java/lang/invoke/VarHandles/VarHandleTestMethodHandleAccessInt.d \
+15:05:34          -sourcepath /home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/invoke/VarHandles \
+15:05:34          -classpath /home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/invoke/VarHandles:/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16176288057344/jdk_lang_0/work/classes/1/java/lang/invoke/VarHandles/VarHandleTestMethodHandleAccessInt.d:/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/testng.jar:/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/jcommander.jar /home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/invoke/VarHandles/VarHandleTestMethodHandleAccessInt.java
+15:05:34  
+15:05:34  ACTION: testng -- Error. Program `/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image/bin/java' timed out (timeout set to 960000ms, elapsed time including timeout handling was 980424ms).
+15:05:34  REASON: User specified action: run testng/othervm -Diters=20000 VarHandleTestMethodHandleAccessInt 
+15:05:34  TIME:   980.491 seconds
+15:05:34  messages:
+15:05:34  command: testng -Diters=20000 VarHandleTestMethodHandleAccessInt
+15:05:34  reason: User specified action: run testng/othervm -Diters=20000 VarHandleTestMethodHandleAccessInt 
+15:05:34  Mode: othervm [/othervm specified]
+15:05:34  Timeout information:
+15:05:34  Running jcmd on process 1276164
+15:05:34  Dump written to The core file created by child process with pid = 1277788 was not found. Expected to find core file with name "/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16176288057344/jdk_lang_0/work/scratch/1/core"
+15:05:34  Running jstack on process 1276164
+15:05:34  2021-04-05T14:05:18.692957500
+15:05:34  Virtual machine: 1276164 JVM information:
+15:05:34  JRE 16 Linux ppc64le-64-Bit Compressed References 20210405_12 (JIT enabled, AOT enabled)
+15:05:34  OpenJ9   - 4ce9ec8a1
+15:05:34  OMR      - b8996ac2c
+15:05:34  JCL      - 8f1ec25575 based on jdk-16+36
+15:05:34  
+15:05:34  "main" prio=5 Id=1 WAITING
+15:05:34  	at java.base@16/java.lang.Object.wait(Native Method)
+15:05:34  	at java.base@16/java.lang.Object.wait(Object.java:221)
+15:05:34  	at java.base@16/java.lang.Thread.join(Thread.java:733)
+15:05:34  	at app//com.sun.javatest.regtest.agent.MainWrapper.main(MainWrapper.java:74)
+15:05:34  
+15:05:34  "JIT Compilation Thread-000" prio=10 Id=3 RUNNABLE
+15:05:34  
+15:05:34  "JIT Compilation Thread-001 Suspended" prio=10 Id=4 RUNNABLE
+15:05:34  
+15:05:34  "JIT Compilation Thread-002 Suspended" prio=10 Id=5 RUNNABLE
+15:05:34  
+15:05:34  "JIT Compilation Thread-003 Suspended" prio=10 Id=6 RUNNABLE
+15:05:34  
+15:05:34  "JIT Compilation Thread-004 Suspended" prio=10 Id=7 RUNNABLE
+15:05:34  
+15:05:34  "JIT Compilation Thread-005 Suspended" prio=10 Id=8 RUNNABLE
+15:05:34  
+15:05:34  "JIT Compilation Thread-006 Suspended" prio=10 Id=9 RUNNABLE
+15:05:34  
+15:05:34  "JIT Diagnostic Compilation Thread-007 Suspended" prio=10 Id=10 RUNNABLE
+15:05:34  
+15:05:34  "JIT-SamplerThread" prio=10 Id=11 TIMED_WAITING
+15:05:34  
+15:05:34  "IProfiler" prio=5 Id=12 RUNNABLE
+15:05:34  
+15:05:34  "Common-Cleaner" prio=8 Id=2 TIMED_WAITING
+15:05:34  	at java.base@16/java.lang.Object.wait(Native Method)
+15:05:34  	at java.base@16/java.lang.Object.wait(Object.java:221)
+15:05:34  	at java.base@16/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:138)
+15:05:34  	at java.base@16/jdk.internal.ref.CleanerImpl.run(CleanerImpl.java:140)
+15:05:34  	at java.base@16/java.lang.Thread.run(Thread.java:853)
+15:05:34  	at java.base@16/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:134)
+15:05:34  
+15:05:34  "VM Runtime State Listener" prio=5 Id=13 RUNNABLE
+15:05:34  
+15:05:34  "Concurrent Mark Helper" prio=1 Id=14 RUNNABLE
+15:05:34  
+15:05:34  "GC Worker" prio=5 Id=15 RUNNABLE
+15:05:34  
+15:05:34  "Attach API wait loop" prio=10 Id=18 RUNNABLE
+15:05:34  	at java.base@16/openj9.internal.tools.attach.target.IPC.waitSemaphore(Native Method)
+15:05:34  	at java.base@16/openj9.internal.tools.attach.target.CommonDirectory.waitSemaphore(CommonDirectory.java:259)
+15:05:34  	at java.base@16/openj9.internal.tools.attach.target.WaitLoop.waitForNotification(WaitLoop.java:66)
+15:05:34  	at java.base@16/openj9.internal.tools.attach.target.WaitLoop.run(WaitLoop.java:154)
+15:05:34  
+15:05:34  "Finalizer thread" prio=5 Id=19 RUNNABLE
+15:05:34  
+15:05:34  "MainThread" prio=5 Id=21 RUNNABLE
+15:05:34  	at java.base@16/java.lang.invoke.AsTypeHandle.invokeExact_thunkArchetype_X(AsTypeHandle.java:49)
+15:05:34  	at java.base@16/java.lang.invoke.BruteArgumentMoverHandle.invokeExact_thunkArchetype_X(BruteArgumentMoverHandle.java:404)
+15:05:34  	at app//VarHandleTestMethodHandleAccessInt.testStaticField(VarHandleTestMethodHandleAccessInt.java:577)
+15:05:34  	at app//VarHandleTestMethodHandleAccessInt$$Lambda$20/0x00000000fc2091b0.action(Unknown Source)
+15:05:34  	at app//VarHandleBaseTest$AccessTestCase.testAccess(VarHandleBaseTest.java:405)
+15:05:34  	at app//VarHandleTestMethodHandleAccessInt.testAccess(VarHandleTestMethodHandleAccessInt.java:116)
+15:05:34  	at jdk.internal.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+15:05:34  	at java.base@16/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:05:34  	at java.base@16/java.lang.reflect.Method.invoke(Method.java:567)
+15:05:34  	at app//org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+15:05:34  	at app//org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+15:05:34  	at app//org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+15:05:34  	at app//org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+15:05:34  	at app//org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+15:05:34  	at app//org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+15:05:34  	at app//org.testng.TestRunner.privateRun(TestRunner.java:773)
+15:05:34  	at app//org.testng.TestRunner.run(TestRunner.java:623)
+15:05:34  	at app//org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+15:05:34  	at app//org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+15:05:34  	at app//org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+15:05:34  	at app//org.testng.SuiteRunner.run(SuiteRunner.java:259)
+15:05:34  	at app//org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+15:05:34  	at app//org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+15:05:34  	at app//org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+15:05:34  	at app//org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+15:05:34  	at app//org.testng.TestNG.run(TestNG.java:1018)
+15:05:34  	at app//com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+15:05:34  	at app//com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+15:05:34  	at java.base@16/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:05:34  	at java.base@16/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+15:05:34  	at java.base@16/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:05:34  	at java.base@16/java.lang.reflect.Method.invoke(Method.java:567)
+15:05:34  	at app//com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+15:05:34  	at java.base@16/java.lang.Thread.run(Thread.java:853)
+15:05:34  
+15:05:34  "file lock watchdog" prio=10 Id=23 TIMED_WAITING
+15:05:34  	at java.base@16/java.lang.Object.wait(Native Method)
+15:05:34  	at java.base@16/java.lang.Object.wait(Object.java:221)
+15:05:34  	at java.base@16/java.util.TimerThread.mainLoop(Timer.java:553)
+15:05:34  	at java.base@16/java.util.TimerThread.run(Timer.java:506)
+15:05:34  
+15:05:34  "Attachment 34387" prio=10 Id=24 RUNNABLE
+15:05:34  	at java.base@16/openj9.internal.tools.attach.target.DiagnosticUtils.dumpAllThreadsImpl(Native Method)
+15:05:34  	at java.base@16/openj9.internal.tools.attach.target.DiagnosticUtils.getThreadInfo(DiagnosticUtils.java:245)
+15:05:34  	at java.base@16/openj9.internal.tools.attach.target.DiagnosticUtils$$Lambda$51/0x00000000dc03af68.apply(Unknown Source)
+15:05:34  	at java.base@16/openj9.internal.tools.attach.target.DiagnosticUtils.executeDiagnosticCommand(DiagnosticUtils.java:181)
+15:05:34  	at java.base@16/openj9.internal.tools.attach.target.Attachment.doCommand(Attachment.java:249)
+15:05:34  	at java.base@16/openj9.internal.tools.attach.target.Attachment.run(Attachment.java:160)
+15:05:34  
+15:05:34  
+15:05:34  --- Timeout information end.
+15:05:34  elapsed time (seconds): 980.491
+15:05:34  configuration:
+15:05:34  STDOUT:
+15:05:34  [TestNG] Running:
+15:05:34    java/lang/invoke/VarHandles/VarHandleTestMethodHandleAccessInt.java
+15:05:34  
+15:05:34  config VarHandleTestMethodHandleAccessInt.setup(): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> VarHandle.toMethodHandle -> Instance field", VarHandleBaseTest$MethodHandleAccessTestCase@c483d1d8): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> VarHandle.toMethodHandle -> Instance field unsupported", VarHandleBaseTest$MethodHandleAccessTestCase@1f6092b0): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> VarHandle.toMethodHandle -> Static field", VarHandleBaseTest$MethodHandleAccessTestCase@565321bd): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> VarHandle.toMethodHandle -> Static field unsupported", VarHandleBaseTest$MethodHandleAccessTestCase@5ab5978d): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> VarHandle.toMethodHandle -> Array", VarHandleBaseTest$MethodHandleAccessTestCase@994c73c5): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> VarHandle.toMethodHandle -> Array unsupported", VarHandleBaseTest$MethodHandleAccessTestCase@871de9f): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> VarHandle.toMethodHandle -> Array index out of bounds", VarHandleBaseTest$MethodHandleAccessTestCase@e036b3b7): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> Lookup.findVirtual -> Instance field", VarHandleBaseTest$MethodHandleAccessTestCase@a884563d): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> Lookup.findVirtual -> Instance field unsupported", VarHandleBaseTest$MethodHandleAccessTestCase@d8bab8b2): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> Lookup.findVirtual -> Static field", VarHandleBaseTest$MethodHandleAccessTestCase@fea95078): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> Lookup.findVirtual -> Static field unsupported", VarHandleBaseTest$MethodHandleAccessTestCase@87ca632a): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> Lookup.findVirtual -> Array", VarHandleBaseTest$MethodHandleAccessTestCase@690920): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> Lookup.findVirtual -> Array unsupported", VarHandleBaseTest$MethodHandleAccessTestCase@ba127c79): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> Lookup.findVirtual -> Array index out of bounds", VarHandleBaseTest$MethodHandleAccessTestCase@a269357a): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> MethodHandles.varHandleInvoker -> Instance field", VarHandleBaseTest$MethodHandleAccessTestCase@84aa1a9e): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> MethodHandles.varHandleInvoker -> Instance field unsupported", VarHandleBaseTest$MethodHandleAccessTestCase@5623a5e3): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> MethodHandles.varHandleInvoker -> Static field", VarHandleBaseTest$MethodHandleAccessTestCase@f06cbbea): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> MethodHandles.varHandleInvoker -> Static field unsupported", VarHandleBaseTest$MethodHandleAccessTestCase@33d0a78): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> MethodHandles.varHandleInvoker -> Array", VarHandleBaseTest$MethodHandleAccessTestCase@c5eaf4ca): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> MethodHandles.varHandleInvoker -> Array unsupported", VarHandleBaseTest$MethodHandleAccessTestCase@6e2903c6): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> MethodHandles.varHandleInvoker -> Array index out of bounds", VarHandleBaseTest$MethodHandleAccessTestCase@518d4d34): success
+15:05:34  Timeout refired 960 times
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> MethodHandles.varHandleExactInvoker -> Instance field", VarHandleBaseTest$MethodHandleAccessTestCase@112a04dc): success
+15:05:34  test VarHandleTestMethodHandleAccessInt.testAccess("VarHandle -> MethodHandles.varHandleExactInvoker -> Instance field unsupported", VarHandleBaseTest$MethodHandleAccessTestCase@d40a4d60): success
+15:05:34  STDERR:
+15:05:34  JVMDUMP034I User requested System dump using '/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16176288057344/jdk_lang_0/work/scratch/1/core.20210405.140504.1276164.0001.dmp' through com.ibm.jvm.Dump.systemDumpToFile
+15:05:34  JVMPORT030W /proc/sys/kernel/core_pattern setting "|/usr/share/apport/apport %p %s %c %d %P %E" specifies that the core dump is to be piped to an external program.  Attempting to rename either core or core.1277788.
+15:05:34  
+15:05:34  JVMDUMP012E Error in System dump: The core file created by child process with pid = 1277788 was not found. Expected to find core file with name "/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16176288057344/jdk_lang_0/work/scratch/1/core"
+15:05:34  rerun:
+15:05:34  cd /home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16176288057344/jdk_lang_0/work/scratch/1 && \
+15:05:34  DISPLAY=:0 \
+15:05:34  HOME=/home/jenkins \
+15:05:34  PATH=/bin:/usr/bin:/usr/sbin \
+15:05:34  CLASSPATH=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16176288057344/jdk_lang_0/work/classes/1/java/lang/invoke/VarHandles/VarHandleTestMethodHandleAccessInt.d:/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/invoke/VarHandles:/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/testng.jar:/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/jcommander.jar:/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+15:05:34      /home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image/bin/java \
+15:05:34          -Dtest.vm.opts='-ea -esa -Xmx512m -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache -XX:-JITServerTechPreviewMessage -XX:+UseCompressedOops' \
+15:05:34          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-Xdump:system:none -J-Xdump:heap:none -J-Xdump:system:events=gpf+abort+traceassert+corruptcache -J-XX:-JITServerTechPreviewMessage -J-XX:+UseCompressedOops' \
+15:05:34          -Dtest.compiler.opts= \
+15:05:34          -Dtest.java.opts= \
+15:05:34          -Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+15:05:34          -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+15:05:34          -Dtest.timeout.factor=8.0 \
+15:05:34          -Dtest.nativepath=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+15:05:34          -Dtest.root=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+15:05:34          -Dtest.name=java/lang/invoke/VarHandles/VarHandleTestMethodHandleAccessInt.java \
+15:05:34          -Dtest.file=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/invoke/VarHandles/VarHandleTestMethodHandleAccessInt.java \
+15:05:34          -Dtest.src=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/invoke/VarHandles \
+15:05:34          -Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/invoke/VarHandles \
+15:05:34          -Dtest.classes=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16176288057344/jdk_lang_0/work/classes/1/java/lang/invoke/VarHandles/VarHandleTestMethodHandleAccessInt.d \
+15:05:34          -Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16176288057344/jdk_lang_0/work/classes/1/java/lang/invoke/VarHandles/VarHandleTestMethodHandleAccessInt.d \
+15:05:34          -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16176288057344/jdk_lang_0/work/classes/1/java/lang/invoke/VarHandles/VarHandleTestMethodHandleAccessInt.d:/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/invoke/VarHandles \
+15:05:34          -ea \
+15:05:34          -esa \
+15:05:34          -Xmx512m \
+15:05:34          -Xdump:system:none \
+15:05:34          -Xdump:heap:none \
+15:05:34          -Xdump:system:events=gpf+abort+traceassert+corruptcache \
+15:05:34          -XX:-JITServerTechPreviewMessage \
+15:05:34          -XX:+UseCompressedOops \
+15:05:34          -Djava.library.path=/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+15:05:34          -Diters=20000 \
+15:05:34          com.sun.javatest.regtest.agent.MainWrapper /home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16176288057344/jdk_lang_0/work/java/lang/invoke/VarHandles/VarHandleTestMethodHandleAccessInt.d/testng.0.jta java/lang/invoke/VarHandles/VarHandleTestMethodHandleAccessInt.java false VarHandleTestMethodHandleAccessInt
+15:05:34  
+15:05:34  TEST RESULT: Error. Program `/home/jenkins/workspace/Test_openjdk16_j9_sanity.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image/bin/java' timed out (timeout set to 960000ms, elapsed time including timeout handling was 980424ms).
+15:05:34  --------------------------------------------------
+```

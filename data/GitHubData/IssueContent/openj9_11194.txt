@@ -1,0 +1,14 @@
+**Blog:** https://blogs.perficient.com/2020/08/19/apache-sling-jvm-performance-comparison/
+
+**Apache Sling:** https://sling.apache.org/
+
+According to the above blog, **OpenJ9, with respect to OpenJDK Hotspot, takes** 
+
+1. **87% longer to startup** [negative]
+2. **35% longer to install** [negative]
+3. **14% less throughout** [negative]
+4. **55% less average memory** [positive]
+
+when running **Apache Sling**.
+
+

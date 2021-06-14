@@ -1,0 +1,6 @@
+According to openjdk8 testcase jdk/test/java/lang/String/CaseConvertSameInstance.java
+
+"foobar".toLowerCase()    should  return the same  "foobar" instance
+ie."foobar".toLowerCase() == "foobar"
+
+openj9 jcl java.lang.String.toLowerCase() does not seem to do that, maybe toUpperCase() too...?

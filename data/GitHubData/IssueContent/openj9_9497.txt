@@ -1,0 +1,33 @@
+Java -version output
+--------------------
+
+Output from `java -version`.
+openjdk version "1.8.0_222"
+OpenJDK Runtime Environment (build 1.8.0_222-b10)
+Eclipse OpenJ9 VM (build openj9-0.15.1, JRE 1.8.0 Windows 10 amd64-64-Bit Compressed References 20190717_421 (JIT enabled, AOT enabled)
+OpenJ9   - 0f66c6431
+OMR      - ec782f26
+JCL      - f147086df1e based on jdk8u222-b10)
+
+Summary of problem
+------------------
+
+I tried running a JUnit test within Eclipse using OpenJ9 with the following JVM arguments: -ea -Xms16g -Xmx30g
+(Running on an R7-3700X system with 32 GB RAM).
+
+The test crashes with _OutOfMemoryError: native memory exhausted._ But when I run it with the exact same arguments with Oracle JDK 14 or OpenJDK 8u202, it works fine. The test shouldn't exceed 8GB heap usage, for reference.
+
+The test in question can be found [here](https://git.eclipse.org/c/epsilon/org.eclipse.epsilon.git/tree/tests/org.eclipse.epsilon.evl.engine.test.acceptance/src/org/eclipse/epsilon/evl/engine/test/acceptance/equivalence/EvlParallelOperationsTests.java). Hopefully the diagnostic info should be sufficient.
+
+Diagnostic files
+----------------
+
+[Shared on Google Drive](https://drive.google.com/drive/folders/1PbYqWeIJjGs0YiMxl55Ba00Y01KbqvAm?usp=sharing)
+
+
+OutOfMemoryError: Java Heap Space
+---------------------------------
+
+See file "stderr" in shared folder above.
+
+

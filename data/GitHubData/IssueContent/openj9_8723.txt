@@ -1,0 +1,3 @@
+j9sysinfo_get_cache_info() in runtime/port/unix/j9sysinfo_get_cache_info() supports queries for J9PORT_CACHEINFO_QUERY_TYPES, J9PORT_CACHEINFO_QUERY_LEVELS, and J9PORT_CACHEINFO_QUERY_CACHESIZE on the following platforms only: J9X86, J9HAMMER, AIXPPC.
+
+Support those queries in j9sysinfo_get_cache_info() on other platforms, and enable the test j9sysinfo_test_get_levels_and_types() in runtime/tests/port/si.c.

@@ -1,0 +1,5 @@
+From b149 and later some Modularity options or APIs have changed test will also need to update. java test is under test/functional/cmdLineTests/jvmtitests/src_latest/com/ibm/jvmti/tests/modularityTests/, 
+c test is under runtime/tests/jvmtitests/src/com/ibm/jvmti/tests/modularityTests/
+which are basically copy of test for b148.
+
+The test will be temporarily excluded in #1927

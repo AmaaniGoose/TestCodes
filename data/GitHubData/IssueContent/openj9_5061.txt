@@ -1,0 +1,121 @@
+Failure link
+------------
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/openjdk8_j9_openjdktest_x86-64_macos/133/console
+
+- test category:  JTreg jdk_rim
+- test suite name: jdk_rmi
+- OS/architecture (macos): 
+- OpenJDK version (i.e. 8u202-b08): 
+- build level (i.e. -version output, with public shas): 
+
+```
+07:25:09  OpenJDK Runtime Environment (build 1.8.0_202-internal-201903120454-b08)
+07:25:09  Eclipse OpenJ9 VM (build master-1b67870e0, JRE 1.8.0 Mac OS X amd64-64-Bit Compressed References 20190312_182 (JIT enabled, AOT enabled)
+07:25:09  OpenJ9   - 1b67870e0
+07:25:09  OMR      - da32e2b9
+07:25:09  JCL      - 9dc1c4d81c based on )
+```
+Optional info
+-------------
+- intermittent failure (yes|no): yes
+- regression or new test:  regression
+
+Failure output
+--------------
+
+```
+09:03:12  /Users/jenkins/workspace/openjdk8_j9_openjdktest_x86-64_macos/openjdkbinary/j2sdk-image/jre/bin/../../bin/java -ea -esa -Xmx512m -Xcompressedrefs -Djava.ext.dirs=jars/sub -cp . Main
+09:03:12  PASS: succeeded as expected
+09:03:12  rm -rf pkg Main.java MainI.java Main.class MainI.class Main_Stub.class
+09:03:12  rm -rf jars MANIFEST.MF A.jar B.zip
+09:03:12  FAIL: 2 tests failed
+09:03:12  STDERR:
+09:03:12  Note: Main.java uses or overrides a deprecated API.
+09:03:12  Note: Recompile with -Xlint:deprecation for details.
+09:03:12  Unhandled exception
+09:03:12  Type=Segmentation error vmState=0x0005ffff
+09:03:12  J9Generic_Signal_Number=00000004 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000000
+09:03:12  Handler1=000000000DACF6A0 Handler2=000000000DCF23C0
+09:03:12  RDI=000000000F47CCB5 RSI=00000000B0110384 RAX=0000000000000000 RBX=000000000F47CCB5
+09:03:12  RCX=0000000000000000 RDX=00007FEC98D008D0 R8=00000000FFFFFFF3 R9=000000000000000D
+09:03:12  R10=00007FEC98D008D0 R11=2000000000000000 R12=000000002D2899A0 R13=000000002D2899A0
+09:03:12  R14=00000000FFFFFFF3 R15=0000000000000000
+09:03:12  RIP=00007FFF8E54CA93 GS=0000 FS=0000 RSP=00000000B0110358
+09:03:12  RFlags=0000000000010202 CS=002B RBP=00000000B0110370 ERR=2AE7000000000000
+09:03:12  TRAPNO=000000000000000D CPU=0000000000000000 FAULTVADDR=000000002AE70000
+09:03:12  XMM0 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+09:03:12  XMM1 000000ff00000000 (f: 0.000000, d: 5.411089e-312)
+09:03:12  XMM2 000000ff00000000 (f: 0.000000, d: 5.411089e-312)
+09:03:12  XMM3 0000025800000000 (f: 0.000000, d: 1.273197e-311)
+09:03:12  XMM4 0000009600000320 (f: 800.000000, d: 3.182994e-312)
+09:03:12  XMM5 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+09:03:12  XMM6 0000025800000000 (f: 0.000000, d: 1.273197e-311)
+09:03:12  XMM7 0000009600000320 (f: 800.000000, d: 3.182994e-312)
+09:03:12  XMM8 0000006400000008 (f: 8.000000, d: 2.121996e-312)
+09:03:12  XMM9 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+09:03:12  XMM10 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+09:03:12  XMM11 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+09:03:12  XMM12 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+09:03:12  XMM13 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+09:03:12  XMM14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+09:03:12  XMM15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+09:03:12  Module=/usr/lib/system/libsystem_c.dylib
+09:03:12  Module_base_address=00007FFF8E4EE000 Symbol=__findenv
+09:03:12  Symbol_address=00007FFF8E54CA39
+09:03:12  
+09:03:12  Method_being_compiled=sun/misc/Unsafe.setMemory(Ljava/lang/Object;JJB)V
+09:03:12  Target=2_90_20190312_182 (Mac OS X 10.10.5)
+09:03:12  CPU=amd64 (2 logical CPUs) (0x80000000 RAM)
+09:03:12  ----------- Stack Backtrace -----------
+09:03:12  ---------------------------------------
+09:03:12  JVMDUMP039I Processing dump event "gpf", detail "" at 2019/03/12 01:02:27 - please wait.
+09:03:12  JVMDUMP032I JVM requested System dump using '/Users/jenkins/workspace/openjdk8_j9_openjdktest_x86-64_macos/jvmtest/openjdk_regression/work/sun/rmi/rmic/manifestClassPath/run/core.20190312.010227.15203.0001.dmp' in response to an event
+09:03:12  JVMDUMP012E Error in System dump: The core file created by child process with pid = 15204 was not found. Expected to find core file with name "/cores/core.15204"
+09:03:12  JVMDUMP032I JVM requested Java dump using '/Users/jenkins/workspace/openjdk8_j9_openjdktest_x86-64_macos/jvmtest/openjdk_regression/work/sun/rmi/rmic/manifestClassPath/run/javacore.20190312.010227.15203.0002.txt' in response to an event
+09:03:12  JVMDUMP010I Java dump written to /Users/jenkins/workspace/openjdk8_j9_openjdktest_x86-64_macos/jvmtest/openjdk_regression/work/sun/rmi/rmic/manifestClassPath/run/javacore.20190312.010227.15203.0002.txt
+09:03:12  JVMDUMP032I JVM requested Snap dump using '/Users/jenkins/workspace/openjdk8_j9_openjdktest_x86-64_macos/jvmtest/openjdk_regression/work/sun/rmi/rmic/manifestClassPath/run/Snap.20190312.010227.15203.0003.trc' in response to an event
+09:03:12  JVMDUMP010I Snap dump written to /Users/jenkins/workspace/openjdk8_j9_openjdktest_x86-64_macos/jvmtest/openjdk_regression/work/sun/rmi/rmic/manifestClassPath/run/Snap.20190312.010227.15203.0003.trc
+09:03:12  JVMDUMP007I JVM Requesting JIT dump using '/Users/jenkins/workspace/openjdk8_j9_openjdktest_x86-64_macos/jvmtest/openjdk_regression/work/sun/rmi/rmic/manifestClassPath/run/jitdump.20190312.010227.15203.0004.dmp'
+09:03:12  JVMDUMP010I JIT dump written to /Users/jenkins/workspace/openjdk8_j9_openjdktest_x86-64_macos/jvmtest/openjdk_regression/work/sun/rmi/rmic/manifestClassPath/run/jitdump.20190312.010227.15203.0004.dmp
+09:03:12  JVMDUMP013I Processed dump event "gpf", detail "".
+09:03:12  Exception in thread "main" java.rmi.StubNotFoundException: Stub class not found: Main_Stub; nested exception is: 
+09:03:12  	java.lang.ClassNotFoundException: Main_Stub
+09:03:12  	at sun.rmi.server.Util.createStub(Util.java:297)
+09:03:12  	at sun.rmi.server.Util.createProxy(Util.java:142)
+09:03:12  	at sun.rmi.server.UnicastServerRef.exportObject(UnicastServerRef.java:225)
+09:03:12  	at java.rmi.server.UnicastRemoteObject.exportObject(UnicastRemoteObject.java:383)
+09:03:12  	at java.rmi.server.UnicastRemoteObject.exportObject(UnicastRemoteObject.java:301)
+09:03:12  	at Main.main(Main.java:10)
+09:03:12  Caused by: java.lang.ClassNotFoundException: Main_Stub
+09:03:12  	at java.lang.Class.forNameImpl(Native Method)
+09:03:12  	at java.lang.Class.forName(Class.java:403)
+09:03:12  	at sun.rmi.server.Util.createStub(Util.java:292)
+09:03:12  	... 5 more
+09:03:12  Note: Main.java uses or overrides a deprecated API.
+09:03:12  Note: Recompile with -Xlint:deprecation for details.
+09:03:12  rerun:
+09:03:12  cd /Users/jenkins/workspace/openjdk8_j9_openjdktest_x86-64_macos/jvmtest/openjdk_regression/work/sun/rmi/rmic/manifestClassPath/run && \
+09:03:12  HOME=/Users/jenkins \
+09:03:12  PATH=/bin:/usr/bin \
+09:03:12  TESTSRC=/Users/jenkins/workspace/openjdk8_j9_openjdktest_x86-64_macos/openjdk-tests/openjdk_regression/openjdk-jdk/jdk/test/sun/rmi/rmic/manifestClassPath \
+09:03:12  TESTSRCPATH=/Users/jenkins/workspace/openjdk8_j9_openjdktest_x86-64_macos/openjdk-tests/openjdk_regression/openjdk-jdk/jdk/test/sun/rmi/rmic/manifestClassPath \
+09:03:12  TESTCLASSES=/Users/jenkins/workspace/openjdk8_j9_openjdktest_x86-64_macos/jvmtest/openjdk_regression/work/classes/0/sun/rmi/rmic/manifestClassPath \
+09:03:12  TESTCLASSPATH=/Users/jenkins/workspace/openjdk8_j9_openjdktest_x86-64_macos/jvmtest/openjdk_regression/work/classes/0/sun/rmi/rmic/manifestClassPath \
+09:03:12  COMPILEJAVA=/Users/jenkins/workspace/openjdk8_j9_openjdktest_x86-64_macos/openjdkbinary/j2sdk-image/jre/bin/../.. \
+09:03:12  TESTJAVA=/Users/jenkins/workspace/openjdk8_j9_openjdktest_x86-64_macos/openjdkbinary/j2sdk-image/jre/bin/../.. \
+09:03:12  TESTVMOPTS='-ea -esa -Xmx512m -Xcompressedrefs' \
+09:03:12  TESTTOOLVMOPTS='-J-ea -J-esa -J-Xmx512m -J-Xcompressedrefs' \
+09:03:12  TESTJAVACOPTS= \
+09:03:12  TESTJAVAOPTS= \
+09:03:12  TESTTIMEOUTFACTOR=8.0 \
+09:03:12  TESTROOT=/Users/jenkins/workspace/openjdk8_j9_openjdktest_x86-64_macos/openjdk-tests/openjdk_regression/openjdk-jdk/jdk/test \
+09:03:12  FS=/ \
+09:03:12  PS=: \
+09:03:12  NULL=/dev/null \
+09:03:12      sh \
+09:03:12          /Users/jenkins/workspace/openjdk8_j9_openjdktest_x86-64_macos/openjdk-tests/openjdk_regression/openjdk-jdk/jdk/test/sun/rmi/rmic/manifestClassPath/run.sh
+09:03:12  
+09:03:12  TEST RESULT: Failed. Execution failed: exit code 1
+```
+
+Include the test name

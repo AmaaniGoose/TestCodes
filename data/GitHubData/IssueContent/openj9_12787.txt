@@ -1,0 +1,11 @@
+The code of `x86/libffi` in OpenJ9 remains unchanged since 2013 and becomes obsolete given the latest updated code occurs earlier this year at https://github.com/libffi/libffi/tree/master/src/x86 (most of code were rewritten & the code on Windows was totally replaced with the newer version). Even though the older version satisfies the needs of the existing code in OpenJ9 but it fails to correctly support the struct/nested struct with special handling in padding/alignment, which is required by the work on JEP389 at https://github.com/eclipse-openj9/openj9/issues/12412.
+
+The initial investigation on `Linux/x86_64` with looks very promising because it resolves the majority of the alignment issues detected with our test cases on Linux.
+
+Given there should be no impact on the existing code in terms of standard interface/public APIs exploited in OpenJ9, I propose to replace the older version in OpenJ9 with the latest one (the master branch by default). There is no 100% guarantee that the replacement fixes all issues detected in our tests but it is worth to do so to address as many struct-related issues as we can in this way. Thus, this issue is created to keep track of the replacement work and any issue/PR related to the work. 
+
+In addition, we might need to evaluate the results for the existing code with the newer version (In theory it shouldn't but we should keep any eye on this in case anything unexpected occurs after the replacement)
+
+The code is specific to Linux/x86_64 and Windows/x86_64.
+
+FYI:  @mstoodle, @tajila, @pshipton, @gacholio, @DanHeidinga, @dnakamura

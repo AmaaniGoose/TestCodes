@@ -1,0 +1,9 @@
+There are a few places in the VM where there is a need to generate native code for unique operations. A common use case is building thunks. 
+
+There is currently an open PR (https://github.com/eclipse/openj9/pull/17) that makes use of JITbuilder to generate native code that calls into the JVM using JNI callin functions.
+
+This is a first attempt at integrating JITBuilder and the native VM code. I would like to get feedback on whether the approach taken in the PR is the correct one, and if not, how can it be improved? In the future we would like to use JITBuilder in other areas of the VM. I would like to use the PR as a starting point so future work can make use of it.
+
+Update:
+Ideally, we would like something that can make use of the existing JIT, but I realize that it might not be possible to do right now and may take a considerable effort to make it happen. Given our current options, we would like to come up with the best approach to integrate JITbuilder and the JVM. 
+

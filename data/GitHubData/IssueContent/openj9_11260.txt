@@ -1,0 +1,45 @@
+We need to implement the following natives. We will need to test the RI to match the exact required behaviour. 
+
+More info can be found here, https://github.com/openjdk/panama-foreign/blob/d0e35dea8f77de9729972ba6ebd84d46f3807e3d/doc/panama_ffi.md 
+
+```
+class jdk.internal.loader.NativeLibraries {
+    //j9sl_open.. 
+    private static native boolean load(NativeLibraryImpl impl, String name, boolean isBuiltin, boolean isJNI);
+    
+    //j9sl_close..
+    private static native void unload(String name, boolean isBuiltin, boolean isJNI, long handle);
+    
+    private static native String findBuiltinLib(String name);
+
+    //j9sl_lookup_name
+    private static native long findEntry0(NativeLibraryImpl lib, String name);
+
+    //j9sl_lookup_name - I think its RTLD_DEFAULT, will need to confirm this
+    private static native long findEntryInProcess(String name);
+}
+```
+
+We will have to interact with this class:
+
+```
+class jdk.internal.loader.NativeLibraries$NativeLibraryImpl implements jdk.internal.loader.NativeLibrary {
+  final java.lang.Class<?> fromClass; //filled in from constructor
+  final java.lang.String name; //filled in from constructor
+  final boolean isBuiltin; //filled in from constructor
+  final boolean isJNI; //filled in from constructor - determines if we need to run JNI load/unload hooks
+  long handle; //handle returned by dlopen()
+  int jniVersion; //
+  static final boolean $assertionsDisabled;
+  jdk.internal.loader.NativeLibraries$NativeLibraryImpl(java.lang.Class<?>, java.lang.String, boolean, boolean);
+  public java.lang.String name();
+  public long find(java.lang.String);
+  java.lang.Runnable unloader();
+  boolean open();
+  static {};
+}
+```
+
+Some of this may already be functional as part of the JDK15 `jdk.internal.loader.NativeLibraries` work. We should try to re-use as much of that a possible.
+
+See https://github.com/eclipse/openj9/pull/10704, https://github.com/eclipse/openj9/pull/10653 and https://github.com/eclipse/openj9/pull/10735

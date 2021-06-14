@@ -1,0 +1,13 @@
+Currently Attach API uses world-writable files for certain operations such synchronization.  The files in question contain no content but must be writable for locking to succeed.  World-writable files associated with an application may be prohibited by certain standards such as https://www.niap-ccevs.org/Documents_and_Guidance/view_td.cfm?td_id=333.
+
+To conform, the attach API can use a specific common directory without world permissions, provided all applications using that directory using that directory are owned by the same group or user.
+
+In that case, the attach API should create files and directories without world, or possibly group, permissions.
+
+This issue adds an option, specified via a system property, to remove world or world+group permissions from files, in the same fashion as `umask`.
+
+`com.ibm.tools.attach.permissions=[owner|owner+group|all]`
+
+`owner+group` removes world permissions, `owner` removes group and world permissions.  The default is `all` which leaves permissions as currently coded. The attach API system checks the permissions of existing files and will not enable attachAPI if the permissions are broader than specified.
+
+This has no effect on Windows, where all files are accessible by the owner only.

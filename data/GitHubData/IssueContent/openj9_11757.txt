@@ -1,0 +1,37 @@
+Java -version output
+--------------------
+
+```
+openjdk version "1.8.0_282"
+OpenJDK Runtime Environment (build 1.8.0_282-b08)
+Eclipse OpenJ9 VM (build openj9-0.24.0, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20210120_930 (JIT enabled, AOT enabled)
+OpenJ9   - 345e1b09e
+OMR      - 741e94ea8
+JCL      - ab07c6a8fd based on jdk8u282-b08)
+```
+
+Summary of problem
+------------------
+
+Steps to reproduce:
+1. Download https://github.com/Unpublished/OpenJ9_getInputArguments
+2. Execute `./gradlew jar && java -jar build/libs/*.jar`
+
+Output with OpenJ9:
+```
+[-Xoptionsfile=/opt/hostedtoolcache/AdoptOpenJDK/1.0.0-ga-8-jdk-openj9-linux-x64-normal-latest/x64/jre/lib/amd64/compressedrefs/options.default, -Xlockword:mode=default,noLockword=java/lang/String,noLockword=java/util/MapEntry,noLockword=java/util/HashMap$Entry,noLockword=org/apache/harmony/luni/util/ModifiedMap$Entry,noLockword=java/util/Hashtable$Entry,noLockword=java/lang/invoke/MethodType,noLockword=java/lang/invoke/MethodHandle,noLockword=java/lang/invoke/CollectHandle,noLockword=java/lang/invoke/ConstructorHandle,noLockword=java/lang/invoke/ConvertHandle,noLockword=java/lang/invoke/ArgumentConversionHandle,noLockword=java/lang/invoke/AsTypeHandle,noLockword=java/lang/invoke/ExplicitCastHandle,noLockword=java/lang/invoke/FilterReturnHandle,noLockword=java/lang/invoke/DirectHandle,noLockword=java/lang/invoke/ReceiverBoundHandle,noLockword=java/lang/invoke/DynamicInvokerHandle,noLockword=java/lang/invoke/FieldHandle,noLockword=java/lang/invoke/FieldGetterHandle,noLockword=java/lang/invoke/FieldSetterHandle,noLockword=java/lang/invoke/StaticFieldGetterHandle,noLockword=java/lang/invoke/StaticFieldSetterHandle,noLockword=java/lang/invoke/IndirectHandle,noLockword=java/lang/invoke/InterfaceHandle,noLockword=java/lang/invoke/VirtualHandle,noLockword=java/lang/invoke/PrimitiveHandle,noLockword=java/lang/invoke/InvokeExactHandle,noLockword=java/lang/invoke/InvokeGenericHandle,noLockword=java/lang/invoke/VarargsCollectorHandle,noLockword=java/lang/invoke/ThunkTuple, -Xjcl:jclse29, -Dcom.ibm.oti.vm.bootstrap.library.path=/opt/hostedtoolcache/AdoptOpenJDK/1.0.0-ga-8-jdk-openj9-linux-x64-normal-latest/x64/jre/lib/amd64/compressedrefs:/opt/hostedtoolcache/AdoptOpenJDK/1.0.0-ga-8-jdk-openj9-linux-x64-normal-latest/x64/jre/lib/amd64, -Dsun.boot.library.path=/opt/hostedtoolcache/AdoptOpenJDK/1.0.0-ga-8-jdk-openj9-linux-x64-normal-latest/x64/jre/lib/amd64/compressedrefs:/opt/hostedtoolcache/AdoptOpenJDK/1.0.0-ga-8-jdk-openj9-linux-x64-normal-latest/x64/jre/lib/amd64, -Djava.library.path=/opt/hostedtoolcache/AdoptOpenJDK/1.0.0-ga-8-jdk-openj9-linux-x64-normal-latest/x64/jre/lib/amd64/compressedrefs:/opt/hostedtoolcache/AdoptOpenJDK/1.0.0-ga-8-jdk-openj9-linux-x64-normal-latest/x64/jre/lib/amd64:/usr/lib64:/usr/lib, -Djava.home=/opt/hostedtoolcache/AdoptOpenJDK/1.0.0-ga-8-jdk-openj9-linux-x64-normal-latest/x64/jre, -Djava.ext.dirs=/opt/hostedtoolcache/AdoptOpenJDK/1.0.0-ga-8-jdk-openj9-linux-x64-normal-latest/x64/jre/lib/ext, -Duser.dir=/home/runner/work/OpenJ9_getInputArguments/OpenJ9_getInputArguments, -Djava.class.path=., -Djava.class.path=build/libs/OpenJ9_getInputArguments-1.0-SNAPSHOT.jar, -Dsun.java.command=build/libs/OpenJ9_getInputArguments-1.0-SNAPSHOT.jar, -Dsun.java.launcher=SUN_STANDARD, -Dsun.java.launcher.pid=2646]
+Exception in thread "main" java.lang.IllegalStateException
+	at Main.assertArgs(Main.java:13)
+	at Main.main(Main.java:6)
+```
+
+Output with Hotspot:
+```
+[]
+```
+
+A demo repo can be found here:
+https://github.com/Unpublished/OpenJ9_getInputArguments/actions/runs/507922458
+
+Related issue: #2974 (closed)
+Related PR: #4822

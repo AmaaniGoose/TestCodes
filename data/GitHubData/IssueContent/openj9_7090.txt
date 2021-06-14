@@ -1,0 +1,34 @@
+Failure link
+------------
+https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder_Advanced/477/
+- test category: openjdk
+- OS/architecture: mac, linux (large heap only)
+- version: jdk11, 13
+- JVM: openj9 only
+
+Optional info
+-------------
+- intermittent failure: no
+- regression or new test: regression
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+11:44:12  test SpliteratorCollisions.testForEachWithNull("new java.util.HashMap.keySet().spliterator() {size=1001}", java.util.Collections$UnmodifiableRandomAccessList@aec48839, SpliteratorCollisions$SpliteratorDataBuilder$$Lambda$39/0000000000000000@b56a1b87): failure
+11:44:12  java.lang.AssertionError: Maps do not match for key:40 actual:1 expected:null expected [null] but found [1]
+11:44:12  	at org.testng.Assert.fail(Assert.java:94)
+11:44:12  	at org.testng.Assert.failNotEquals(Assert.java:496)
+11:44:12  	at org.testng.Assert.assertEquals(Assert.java:116)
+11:44:12  	at org.testng.Assert.assertEquals(Assert.java:837)
+11:44:12  	at java.base/java.util.stream.LambdaTestHelpers.assertContentsUnordered(LambdaTestHelpers.java:438)
+11:44:12  	at java.base/java.util.stream.LambdaTestHelpers.assertContentsUnordered(LambdaTestHelpers.java:434)
+11:44:12  	at java.base/java.util.SpliteratorTestHelper.assertContents(SpliteratorTestHelper.java:650)
+11:44:12  	at java.base/java.util.SpliteratorTestHelper$$Lambda$34.0000000000000000.assertContents(Unknown Source)
+11:44:12  	at java.base/java.util.SpliteratorTestHelper.testForEach(SpliteratorTestHelper.java:274)
+11:44:12  	at java.base/java.util.SpliteratorTestHelper.testForEach(SpliteratorTestHelper.java:174)
+11:44:12  	at SpliteratorCollisions.testForEachWithNull(SpliteratorCollisions.java:239)
+11:44:12  	at jdk.internal.reflect.GeneratedMethodAccessor4.invoke(Unknown Source)
+...
+```
+Tests failed: 21/765. Most (If not all) seem to have the same error message of 
+`Maps do not match for key:40 actual:1 expected:null expected [null] but found [1]`

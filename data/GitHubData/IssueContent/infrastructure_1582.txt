@@ -1,0 +1,4 @@
+Opening a new issue - to keep track/follow other playbook issues.
+
+As a first PR step I would like to add a new directory for the aix playbooks, with it's own README(.md) to document what is going on. This way the existing files will not be affected - and when complete - either copy the new files to the old locations - or point at the new playbook (from wherever that is managed).
+

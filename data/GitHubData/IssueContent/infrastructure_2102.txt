@@ -1,0 +1,12 @@
+Access level:
+
+- [x] Non-privileged
+- [ ] jenkins user
+- [ ] root/Administrative
+- [x] other (Please specify): docker group
+
+System for which access is needed:
+Linux ARMv7
+
+Please explain why you need this access including whether it is a temporary or permanent request:
+I need a temporary access to a linux armv7 machine to check the reason for docker image build failures described in this [issue](https://github.com/AdoptOpenJDK/openjdk-docker/issues/536). 

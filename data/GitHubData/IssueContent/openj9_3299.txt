@@ -1,0 +1,14 @@
+`realEstimateCodeSize` has this piece of code which is supposed to augment interpreter profiler information with entries for direct calls (invokeStatic, invokeSpecial) which are not tracked by IProfiler:
+```
+                  // if call-graph profiling is enabled and the call is special or static (!indirect)
+                  // then update the block frequency information because we don't profile predictable calls
+                  if (!callSites[i]->isIndirectCall())
+                     {
+                     profileManager->updateCallGraphProfilingCount( currentBlock, calltarget->_calleeMethod->getPersistentIdentifier(), i, comp());
+                     heuristicTrace(tracer(),"Depth %d: Updating Call Graph Profiling Count for calltarget %p count = %d",_recursionDepth, calltarget,profileManager->getCallGraphProfilingCount(calltarget->_calleeMethod->getPersistentIdentifier(), i, comp()));
+                     }
+```
+Instrumentation shows that `callSites[i]->isIndirectCall()` responds false to virtual invokes as well, which is wrong in my opinion.
+This results in IProfiler artificially creating entries for JBinvokevirtual bytecodes or overwriting existing entries by calling `TR_IProfiler::setCallCount(...)`. Moreover, the implementation of setCallCount destroys any information related to targets (j9classes) collected by IProfiler (presumably because for direct calls the target is known anyway)
+
+The problem shows even with a simple command like: "java -Xjit:disableAsyncCompilation,count=100 -version"

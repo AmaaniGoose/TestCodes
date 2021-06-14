@@ -1,0 +1,3 @@
+JVMTI Test ghftm001.java initiates GC cycle and waiting (sleeping) for GC Cycle End event.
+However current implementation of Concurrent Scavenger does not force final STW Scavenge to complete cycle but expect it to be triggered by next Allocation Failure. So, because there is no further allocation in the test it reached timeout and failed eventually.
+Concurrent Scavenger should force final STW Scavenge as soon as concurrent phase is complete. 

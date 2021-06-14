@@ -1,0 +1,4 @@
+There are two approaches that were brought up in the Portable SCC discussion regarding how to deal with the potential for the compressed refs shift changing with the heap size.
+
+1. Have the JIT assume that the compressed shift might be 4. The generated code then loads the shift value into a register. This load can then be relocated.
+2. Fix the shift value to 3 if the JVM is going to use AOT code.

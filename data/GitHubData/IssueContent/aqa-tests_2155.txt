@@ -1,0 +1,47 @@
+**Test Info**
+Test Name: renaissance-gauss-mix_0
+Test Duration: 5 sec
+Machine: build-ibmcloud-win2012r2-x64-2
+TRSS link for the test output: https://trss.adoptopenjdk.net/output/test?id=5ff9fb372bad785066074e0c
+
+
+**Build Info**
+Build Name: Test_openjdk11_hs_extended.perf_x86-32_windows
+Jenkins Build start time: Jan 09 2021, 01:09 pm
+Jenkins Build URL: https://ci.adoptopenjdk.net/job/Test_openjdk11_hs_extended.perf_x86-32_windows/3/
+TRSS link for the build: https://trss.adoptopenjdk.net/allTestsInfo?buildId=5ff9fa292bad785066074bca
+
+The targets **renaissance-als, renaissance-chi-square,  renaissance-db-shootout, renaissance-dec-tree, renaissance-gauss-mix,  renaissance-log-regression,  renaissance-movie-lens** fail on build-ibmcloud-win2012r2-x64-2  with the following msg:
+
+```
+[2021-01-09T18:19:47.966Z] 21/01/09 12:20:19 INFO PlatformDependent: Your platform does not provide complete low-level API for accessing direct buffers reliably. Unless explicitly requested, heap buffer will always be preferred to avoid potential system unstability.
+[2021-01-09T18:19:47.966Z] 21/01/09 12:20:19 INFO Utils: Successfully started service 'sparkDriver' on port 58321.
+[2021-01-09T18:19:48.506Z] 21/01/09 12:20:20 INFO SparkEnv: Registering MapOutputTracker
+[2021-01-09T18:19:48.506Z] 21/01/09 12:20:20 ERROR SparkContext: Error initializing SparkContext.
+[2021-01-09T18:19:48.506Z] java.lang.IllegalArgumentException: System memory 259522560 must be at least 471859200. Please increase heap size using the --driver-memory option or spark.driver.memory in Spark configuration.
+[2021-01-09T18:19:48.506Z] 	at org.apache.spark.memory.UnifiedMemoryManager$.getMaxMemory(UnifiedMemoryManager.scala:212)
+[2021-01-09T18:19:48.506Z] 	at org.apache.spark.memory.UnifiedMemoryManager$.apply(UnifiedMemoryManager.scala:194)
+[2021-01-09T18:19:48.506Z] 	at org.apache.spark.SparkEnv$.create(SparkEnv.scala:308)
+[2021-01-09T18:19:48.506Z] 	at org.apache.spark.SparkEnv$.createDriverEnv(SparkEnv.scala:165)
+[2021-01-09T18:19:48.506Z] 	at org.apache.spark.SparkContext.createSparkEnv(SparkContext.scala:259)
+[2021-01-09T18:19:48.506Z] 	at org.apache.spark.SparkContext.<init>(SparkContext.scala:423)
+[2021-01-09T18:19:48.506Z] 	at org.renaissance.apache.spark.GaussMix.setUpSpark(GaussMix.scala:68)
+[2021-01-09T18:19:48.506Z] 	at org.renaissance.apache.spark.GaussMix.setUpBeforeAll(GaussMix.scala:57)
+[2021-01-09T18:19:48.506Z] 	at org.renaissance.RenaissanceBenchmark.runBenchmark(RenaissanceBenchmark.java:74)
+[2021-01-09T18:19:48.506Z] 	at org.renaissance.RenaissanceSuite$.$anonfun$main$2(renaissance-suite.scala:308)
+[2021-01-09T18:19:48.506Z] 	at org.renaissance.RenaissanceSuite$.$anonfun$main$2$adapted(renaissance-suite.scala:306)
+[2021-01-09T18:19:48.506Z] 	at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)
+[2021-01-09T18:19:48.506Z] 	at scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)
+[2021-01-09T18:19:48.506Z] 	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)
+[2021-01-09T18:19:48.506Z] 	at org.renaissance.RenaissanceSuite$.main(renaissance-suite.scala:306)
+[2021-01-09T18:19:48.506Z] 	at org.renaissance.RenaissanceSuite.main(renaissance-suite.scala)
+[2021-01-09T18:19:48.506Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-01-09T18:19:48.506Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2021-01-09T18:19:48.506Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-01-09T18:19:48.506Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+[2021-01-09T18:19:48.506Z] 	at org.renaissance.Launcher.main(Launcher.java:18)
+[2021-01-09T18:19:48.506Z] 21/01/09 12:20:20 INFO SparkContext: Successfully stopped SparkContext
+```
+
+
+

@@ -1,0 +1,8 @@
+The issue is opened to include all changes in OpenJ9 for eclipse/openj9#5058 to enable RISCV 64 bit as follows:
+https://github.com/eclipse/openj9/pull/7440, https://github.com/eclipse/openj9/pull/7441, https://github.com/eclipse/openj9/pull/7442, https://github.com/eclipse/openj9/pull/7443, https://github.com/eclipse/openj9/pull/7444, https://github.com/eclipse/openj9/pull/7445, https://github.com/eclipse/openj9/pull/7446, https://github.com/eclipse/openj9/pull/7894, https://github.com/eclipse/openj9/pull/9262, https://github.com/eclipse/openj9/pull/9775
+
+Note: the test changes mainly with JIT excluded are not part of the config & code changes here as they are only used temporarily to verify the functionality of VM without JIT.
+
+In addition, another PR is created at https://github.com/eclipse/openj9/pull/7894 for the building steps (appended to the bottom of https://github.com/eclipse/openj9/blob/master/doc/build-instructions/Build_Instructions_V11.md) after the whole compilation/building process is confirmed with the latest cross-toolchain.
+
+FYI: @pshipton , @DanHeidinga, @tajila 

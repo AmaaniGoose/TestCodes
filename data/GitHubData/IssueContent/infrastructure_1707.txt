@@ -1,0 +1,7 @@
+https://ci.adoptopenjdk.net/view/Failing%20Builds/job/build-scripts/job/jobs/job/jdk15u/job/jdk15u-linux-ppc64le-openj9/118/console
+```
+21:58:02  BUILD_CONFIG[WORKSPACE_DIR]="/home/ubuntu/workspace/build-scripts/jobs/jdk15u/jdk15u-linux-ppc64le-openj9/workspace"
+21:58:02  [WARNING] Unable to find java to run gradle with, this build may fail with /bin/java: No such file or directory. Set JAVA_HOME, JDK8_BOOT_DIR or JDK11_BOOT_DIR to squash this warning: 
+
+```
+

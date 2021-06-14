@@ -1,0 +1,15 @@
+Copied from https://github.com/adoptium/adoptium-support/issues/301
+@tajila fyi
+
+macos: 11.3
+
+electronjs main process (start with click the program icon)
+spawn("java", ....)
+fail: openj9 jdk-16.0.1+9, jdk-15.0.2+7 and jdk-11.0.11+9
+ok: all HotSpot
+
+electronjs main process (start from command line)
+all ok
+
+nodejs
+all ok

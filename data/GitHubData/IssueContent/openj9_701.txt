@@ -1,0 +1,15 @@
+## Background
+
+Although this is likely to be a mammoth effort or it may not even be feasible I think it is worth discussing with a broad audience. One of the more time consuming aspects of development on the compiler component is the non-deterministic nature of compilations from one application run to the next. 
+
+This non-determinism effectively boils down to the JIT compiler behaving slightly differently, based on a multitude of time-sensitive factors. The non-determinism make it very difficult to track down problems as typically we need a compilation trace log to determine what steps the compiler took to perform an incorrect transformation. Collecting a trace log however has a [double-slit experiment-esque effect ](https://www.youtube.com/watch?v=DfPeprQ7oGc) in which the mere action of collecting a trace log will affect the timings in the JIT and the compilation can therefore be different. This means problems in large methods, and hence large trace logs, may be impossible to fix because we cannot reproduce the issue and collect a trace log at the same time.
+
+## Current Approach
+
+Our current approach to this problem is to throw massive amounts of machine time at the problem and run the same test hundreds and sometimes thousands of times to create a reproduction, and more likely to test whether a particular option will cause the issue to disappear. This is an incredibly expensive and time consuming task, both in machine and human resources invested in fixing these non-deterministic bugs.
+
+## Discussion
+
+I wanted to start this issue to discuss what prototypes have been performed in the past to try and tackle this issue and any other ideas of what else we can try. I know the likes of @mstoodle has attempted some form of serialization in the past, so even talking about the successes and failures of such projects can help drive the discussion towards a potential solution.
+
+I understand this issue is also present in OMR but I opened it up for OpenJ9 as the JDK is a dynamic runtime and any sort of serialization effort will need to capture such runtime information in a repeatable way.

@@ -1,0 +1,7 @@
+In #9614 we fixed an issue related to sign/zero extension problems when evaluating the children underneath a `TR::BNDCHKwithSpineCHK`. The problem has been band-aid fixed to avoid the issue, however the root cause is still there.
+
+The problem with doing this sort of evaluation of loads/stores is that it is incomplete. The load and store evaluators are non-trivial and take care of things like load extensions optimization and the setting of various register flags. The evaluator fixed in #9614 does not do all of that, so it is incomplete.
+
+In general we try to avoid "evaluating" load and store IL by generating load and store instructions because of this complexity. I believe that due to historical reasons this particular evaluator was not updated to do so.
+
+How to fix this? We should simply be calling `cg->evaluate(...)` to evaluate load and store nodes, which not only will simplify the `TR::BNDCHKwithSpineCHK` evaluator but it will also be functionally correct.

@@ -1,0 +1,7 @@
+There is a feature in VP guarded by a code generator flag `SupportsDynamicANewArray`.  The comment in VP claims support is not yet implemented on platforms other than x86, hence this transformation will not occur:
+
+https://github.com/eclipse/openj9/blob/582921ee5d7d99a01cdf1b98f0dfa92cad3a72cd/runtime/compiler/optimizer/J9ValuePropagation.cpp#L1419
+
+This comment pre-dates open sourcing.  Does anyone recall what this is about, and whether there is some work to do on P, Z, and ARM?
+
+@andrewcraik @gita-omr @fjeremic @knn-k 

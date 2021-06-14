@@ -1,0 +1,1 @@
+Document how the JITDump works, as well as how to configure it via the newly added `-Xdump` options.

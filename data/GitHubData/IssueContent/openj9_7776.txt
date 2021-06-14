@@ -1,0 +1,47 @@
+We've been doing some work to optimize stacktraces.  OpenJ9 currently generates stacktraces using two passes:
+* Pass 1 walks the stack and collects the PCs of the methods being executed storing them in the Thread
+* Pass 2 walks the array of PCs and converts them into StackTraceElements
+
+The current focus is on optimizing the Pass 2 part.
+
+Work so far:
+
+* [x] #7673 (merged)
+  * Avoid repeated allocations of Class names by interning them during stack traces and storing them back into the j.l.Class object, allowing the Class object to act as a cache.
+  * Avoid repeated filename string allocation when two consecutive methods are from the same source file
+  * May lead to minor increases in heap footprint due to more interned class names
+
+* [x] #7676 (merged)
+  * Avoid probing the string intern table if interned strings aren't being requested.  This may result in additional string allocations but avoids the overhead required to determine hashes and lock the string table.
+
+* [x] #7765 (merged)
+  * Fast path ascii string allocations in j9gc_createJavaLangString as most class & method names are in ascii.
+
+* [x] #7784  (merged)
+  * Cache the filename string directly on the j.l.Class object to avoid all repeated allocations
+  * Skip `packageNameLength` calls in JDK11 as the Module can be fetched directly from the Class
+  * Intern method names as well.  This matches behaviour of Reflection and StackWalker API
+  * Apply filename and classname opts to StackWalker API
+
+* [x] #8615 Pass the J9Class into the `iterateStackTrace` call back in addition to the current J9Classloader and name 
+  * https://github.com/eclipse/openj9/blob/4c32de596d1bb498b44d5e0b944035c63e7175cf/runtime/vm/exceptiondescribe.c#L366
+  * Would avoid `peekClassHashTable` calls in the iterator as the class would already be available
+  * Would allow faster iteration of methods as it would be possible to walk the fixed sized J9Method rather than the variable sized J9ROMMethods
+
+Future areas:
+
+* `stringComparatorFn` is expensive.  Optimize the lookup by passing both a comparator and equals function to the OMR collisionResilentHashTable
+
+* https://github.com/eclipse/openj9/issues/7766
+  * Experiment adding J9_STR_ASCII flag during startup for method & class names to optimize string allocation and avoid the overhead of determining if a string is compressible or not.
+
+Areas to circular back to once the above is complete:
+* Optimization of peeking the intern table for non-intern strings
+  * https://github.com/eclipse/openj9/pull/7676#issuecomment-554035250
+  * > BTW, you could go fancy and dynamically determine some of those factors: start lookup (even if not explicit interning) with a low sampling rate, and learn the lookup hit rate and dynamically adjust lookup rate further...
+
+Rejected approaches:
+* [ ] #8053
+  * Add caching in `iterateStackTrace`
+  * https://github.com/eclipse/openj9/blob/4c32de596d1bb498b44d5e0b944035c63e7175cf/runtime/vm/exceptiondescribe.c#L234-L399
+  * We may be able to cache the data passed to the callback as it is unique to a particular `methodPC`

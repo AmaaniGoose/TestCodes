@@ -1,0 +1,49 @@
+https://openj9-jenkins.osuosl.org/job/Build_JDK8_ppc64_aix_Nightly/17
+```
+22:23:12  /home/jenkins/workspace/Build_JDK8_ppc64_aix_Nightly/openj9/debugtools/DDR_VM/src/com/ibm/j9ddr/vm29/j9/gc/GCHeapRegionDescriptor_V1.java:31: error: cannot find symbol
+22:23:12  import com.ibm.j9ddr.vm29.pointer.generated.MM_MemoryPoolBumpPointerPointer;
+22:23:12                                             ^
+22:23:12    symbol:   class MM_MemoryPoolBumpPointerPointer
+22:23:12    location: package com.ibm.j9ddr.vm29.pointer.generated
+22:23:12  /home/jenkins/workspace/Build_JDK8_ppc64_aix_Nightly/openj9/debugtools/DDR_VM/src/com/ibm/j9ddr/vm29/pointer/helper/MM_HeapRegionDescriptorHelper.java:28: error: cannot find symbol
+22:23:12  import com.ibm.j9ddr.vm29.pointer.generated.MM_MemoryPoolBumpPointerPointer;
+22:23:12                                             ^
+22:23:12    symbol:   class MM_MemoryPoolBumpPointerPointer
+22:23:12    location: package com.ibm.j9ddr.vm29.pointer.generated
+22:23:16  /home/jenkins/workspace/Build_JDK8_ppc64_aix_Nightly/openj9/debugtools/DDR_VM/src/com/ibm/j9ddr/vm29/j9/gc/GCHeapRegionDescriptor_V1.java:145: error: cannot find symbol
+22:23:16  				return MM_MemoryPoolBumpPointerPointer.cast(heapRegionDescriptor._memoryPool())._allocatePointer();
+22:23:16  				       ^
+22:23:16    symbol:   variable MM_MemoryPoolBumpPointerPointer
+22:23:16    location: class GCHeapRegionDescriptor_V1
+22:23:16  /home/jenkins/workspace/Build_JDK8_ppc64_aix_Nightly/openj9/debugtools/DDR_VM/src/com/ibm/j9ddr/vm29/pointer/helper/MM_HeapRegionDescriptorHelper.java:109: error: cannot find symbol
+22:23:16  				top = MM_MemoryPoolBumpPointerPointer.cast(region._memoryPool())._allocatePointer();
+22:23:16  				      ^
+22:23:16    symbol:   variable MM_MemoryPoolBumpPointerPointer
+22:23:16    location: class MM_HeapRegionDescriptorHelper
+```
+
+https://openj9-jenkins.osuosl.org/job/Build_JDK11_ppc64_aix_Nightly/17
+```
+21:47:33  /home/jenkins/workspace/Build_JDK11_ppc64_aix_Nightly/build/aix-ppc64-normal-server-release/support/gensrc/openj9.dtfj/com/ibm/j9ddr/vm29/j9/gc/GCHeapRegionDescriptor_V1.java:31: error: cannot find symbol
+21:47:33  import com.ibm.j9ddr.vm29.pointer.generated.MM_MemoryPoolBumpPointerPointer;
+21:47:33                                             ^
+21:47:33    symbol:   class MM_MemoryPoolBumpPointerPointer
+21:47:33    location: package com.ibm.j9ddr.vm29.pointer.generated
+21:47:33  /home/jenkins/workspace/Build_JDK11_ppc64_aix_Nightly/build/aix-ppc64-normal-server-release/support/gensrc/openj9.dtfj/com/ibm/j9ddr/vm29/pointer/helper/MM_HeapRegionDescriptorHelper.java:28: error: cannot find symbol
+21:47:33  import com.ibm.j9ddr.vm29.pointer.generated.MM_MemoryPoolBumpPointerPointer;
+21:47:33                                             ^
+21:47:33    symbol:   class MM_MemoryPoolBumpPointerPointer
+21:47:33    location: package com.ibm.j9ddr.vm29.pointer.generated
+21:47:33  /home/jenkins/workspace/Build_JDK11_ppc64_aix_Nightly/build/aix-ppc64-normal-server-release/support/gensrc/openj9.dtfj/com/ibm/j9ddr/vm29/j9/gc/GCHeapRegionDescriptor_V1.java:145: error: cannot find symbol
+21:47:33  				return MM_MemoryPoolBumpPointerPointer.cast(heapRegionDescriptor._memoryPool())._allocatePointer();
+21:47:33  				       ^
+21:47:33    symbol:   variable MM_MemoryPoolBumpPointerPointer
+21:47:33    location: class GCHeapRegionDescriptor_V1
+21:47:33  /home/jenkins/workspace/Build_JDK11_ppc64_aix_Nightly/build/aix-ppc64-normal-server-release/support/gensrc/openj9.dtfj/com/ibm/j9ddr/vm29/pointer/helper/MM_HeapRegionDescriptorHelper.java:109: error: cannot find symbol
+21:47:33  				top = MM_MemoryPoolBumpPointerPointer.cast(region._memoryPool())._allocatePointer();
+21:47:33  				      ^
+21:47:33    symbol:   variable MM_MemoryPoolBumpPointerPointer
+21:47:33    location: class MM_HeapRegionDescriptorHelper
+```
+
+https://github.com/eclipse-openj9/openj9/compare/f6bdf7a...6bbaac6

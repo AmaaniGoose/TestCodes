@@ -1,0 +1,136 @@
+extended.functional test cmdLineTester_classesdbgddrext_1 fails on test-packet-win2012r2-x64-1 attempting to delete the shared classes file.
+
+Tested build:
+```
+21:53:18  openjdk version "15.0.1" 2020-10-20
+21:53:18  OpenJDK Runtime Environment AdoptOpenJDK (build 15.0.1+9-202101062035)
+21:53:18  Eclipse OpenJ9 VM AdoptOpenJDK (build master-aa9ca0070, JRE 15 Windows Server 2012 R2 amd64-64-Bit Compressed References 20210106_165 (JIT enabled, AOT enabled)
+21:53:18  OpenJ9   - aa9ca0070
+21:53:18  OMR      - 13926a736
+21:53:18  JCL      - 0e6bc58a45 based on jdk-15.0.1+9)
+```
+
+Job link: https://ci.adoptopenjdk.net/job/Test_openjdk15_j9_extended.functional_x86-64_windows/53/
+
+The test passed on  test-aws-win2019-x64-1: https://ci.adoptopenjdk.net/job/Test_openjdk15_j9_extended.functional_x86-64_windows/52
+
+Output of failing test:
+```
+22:27:09  ===============================================
+22:27:09  Running test cmdLineTester_classesdbgddrext_0 ...
+22:27:09  ===============================================
+22:27:09  cmdLineTester_classesdbgddrext_0 Start Time: Wed Jan  6 22:27:13 2021 Epoch Time (ms): 1609972033249
+22:27:09  Skipped due to jvm options ( -Xjit -Xgcpolicy:gencon -Xnocompressedrefs ) and/or platform requirements (^os.zos) => cmdLineTester_classesdbgddrext_0_SKIPPED
+22:27:10  cmdLineTester_classesdbgddrext_0 Finish Time: Wed Jan  6 22:27:13 2021 Epoch Time (ms): 1609972033446
+22:27:10  
+22:27:10  ===============================================
+22:27:10  Running test cmdLineTester_classesdbgddrext_1 ...
+22:27:10  ===============================================
+22:27:10  cmdLineTester_classesdbgddrext_1 Start Time: Wed Jan  6 22:27:13 2021 Epoch Time (ms): 1609972033875
+22:27:10  "C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java" -Xshareclasses:destroyAll; "C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+22:27:10  JVMSHRC005I No shared class caches available
+22:27:10  JVMSHRC005I No shared class caches available
+22:27:10  cache cleanup done
+22:27:10  variation: Mode610
+22:27:11  JVM_OPTIONS:  -Xcompressedrefs -Xjit -Xgcpolicy:gencon 
+22:27:11  { itercnt=1; \
+22:27:11  mkdir -p "C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdk-tests/\\TKG\\test_output_16099711108183\\cmdLineTester_classesdbgddrext_1"; \
+22:27:11  cd "C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdk-tests/\\TKG\\test_output_16099711108183\\cmdLineTester_classesdbgddrext_1"; \
+22:27:11  perl C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdk-tests///..//jvmtest\\TestConfig\\scripts\\tools\\sysvcleanup.pl all ; \
+22:27:11  "C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java"  -Xcompressedrefs -Xjit -Xgcpolicy:gencon  -Xmx1G \
+22:27:11  -DRESJAR="C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdk-tests///..//jvmtest\\functional\\cmdline_options_testresources\\cmdlinetestresources.jar" \
+22:27:11  -DEXE='"C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java"  -Xcompressedrefs -Xjit -Xgcpolicy:gencon ' \
+22:27:11  -DJDMPVIEW_EXE="C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\jdmpview.exe" \
+22:27:11  -DUTILSJAR="C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdk-tests///..//jvmtest\\functional\\cmdLineTests\\utils\\utils.jar" \
+22:27:11  -jar "C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdk-tests///..//jvmtest\\functional\\cmdline_options_tester\\cmdlinetester.jar" \
+22:27:11  -config "C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdk-tests///..//jvmtest\\functional\\cmdLineTests\\classesdbgddrext\\classesddrtests.xml" \
+22:27:11  -outputLimit 1000 -explainExcludes -xids all,win_x86-64_cr, -plats all,win_x86-64_cr, \
+22:27:11  -xlist "C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdk-tests///..//jvmtest\\functional\\cmdLineTests\\classesdbgddrext\\dbgextddrtests_excludes.xml" -nonZeroExitWhenError; \
+22:27:11  if [ $? -eq 0 ] ; then echo ""; echo "cmdLineTester_classesdbgddrext_1""_PASSED"; echo ""; cd C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdk-tests/;  else echo ""; echo "cmdLineTester_classesdbgddrext_1""_FAILED"; echo ""; fi; } 2>&1 | tee -a "C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdk-tests/\\TKG\\test_output_16099711108183\\TestTargetResult";
+22:27:11  Start SysV clean up for user:all 
+22:27:11  ipcs: msgctl: Function not implemented
+22:27:11  Error: could not execute ipcs! at C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdk-tests///..//jvmtest\TestConfig\scripts\tools\sysvcleanup.pl line 87.
+22:27:11  Parsing exclude list...
+22:27:11    add excludes for [all]
+22:27:11    add excludes for [win_x86-64_cr]
+22:27:11  DONE in 0 ms.
+22:27:11  
+22:27:11  No tests are excluded.
+22:27:11  
+22:27:11  *** Starting test suite: J9 shared cache dbgext Tests ***
+22:27:12  Testing: Create new shared cache with partition
+22:27:12  Test start time: 2021/01/06 22:27:15 Greenwich Mean Time
+22:27:12  Running command: "C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java"  -Xcompressedrefs -Xjit -Xgcpolicy:gencon  -Xaot:forceaot,count=0,disableAsyncCompilation -Xshareclasses:name=shareddbgext,reset,modified=mod1
+22:27:12  Time spent starting: 160 milliseconds
+22:27:35  Time spent executing: 20807 milliseconds
+22:27:35  Test result: PASSED
+22:27:35  
+22:27:35  Executing command: rm -f j9core.dmp
+22:27:35  
+22:27:35  Testing: Create core file
+22:27:35  Test start time: 2021/01/06 22:27:36 Greenwich Mean Time
+22:27:35  Running command: "C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java"  -Xcompressedrefs -Xjit -Xgcpolicy:gencon  -Xmx4m -Xaot:forceaot,count=0 -Xshareclasses:name=shareddbgext -cp C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdk-tests///..//jvmtest\functional\cmdLineTests\utils\utils.jar -Xdump:system:file=j9core.dmp,events=vmstop org.openj9.test.ivj.Hanoi 2
+22:27:35  Time spent starting: 4 milliseconds
+22:28:07  Time spent executing: 32581 milliseconds
+22:28:07  Test result: PASSED
+22:28:07  
+22:28:07  Testing: Remove shared cache
+22:28:07  Test start time: 2021/01/06 22:28:09 Greenwich Mean Time
+22:28:07  Running command: "C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java"  -Xcompressedrefs -Xjit -Xgcpolicy:gencon  -Xshareclasses:name=shareddbgext,destroy
+22:28:07  Time spent starting: 3 milliseconds
+22:28:07  Time spent executing: 102 milliseconds
+22:28:07  Test result: FAILED
+22:28:07   [ERR] JVMSHRC241E Error: unable to delete shared class cache file
+22:28:07   [ERR] JVMSHRC336E Port layer error code = -102
+22:28:07   [ERR] JVMSHRC337E Platform error message: (5) Access is denied.
+22:28:07   [ERR] JVMSHRC430I Failed to remove current generation of shared class cache "shareddbgext"
+22:28:07  >> Success condition was not found: [Output match: destroyed]
+22:28:07  
+22:28:07  Testing: Run !allclasses
+22:28:07  Test start time: 2021/01/06 22:28:09 Greenwich Mean Time
+22:28:07  Running command: C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdkbinary/j2sdk-image\bin\jdmpview.exe -core j9core.dmp
+22:28:07  Time spent starting: 11 milliseconds
+22:28:23  Time spent executing: 17414 milliseconds
+22:28:23  Test result: PASSED
+22:28:23  
+22:28:23  Testing: Run !dumpallromclasslinear 10
+22:28:23  Test start time: 2021/01/06 22:28:26 Greenwich Mean Time
+22:28:23  Running command: C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdkbinary/j2sdk-image\bin\jdmpview.exe -core j9core.dmp
+22:28:23  Time spent starting: 3 milliseconds
+22:32:02  Time spent executing: 206214 milliseconds
+22:32:02  Test result: PASSED
+22:32:02  
+22:32:02  Testing: Run !dumpallramclasslinear 10
+22:32:02  Test start time: 2021/01/06 22:31:53 Greenwich Mean Time
+22:32:02  Running command: C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdkbinary/j2sdk-image\bin\jdmpview.exe -core j9core.dmp
+22:32:02  Time spent starting: 2 milliseconds
+22:32:50  Time spent executing: 53343 milliseconds
+22:32:50  Test result: PASSED
+22:32:50  
+22:32:50  Testing: Run !romclasssummary
+22:32:50  Test start time: 2021/01/06 22:32:46 Greenwich Mean Time
+22:32:50  Running command: C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdkbinary/j2sdk-image\bin\jdmpview.exe -core j9core.dmp
+22:32:50  Time spent starting: 2 milliseconds
+22:33:37  Time spent executing: 49203 milliseconds
+22:33:37  Test result: PASSED
+22:33:37  
+22:33:37  Testing: Run !ramclasssummary
+22:33:37  Test start time: 2021/01/06 22:33:35 Greenwich Mean Time
+22:33:37  Running command: C:/Users/jenkins/workspace/Test_openjdk15_j9_extended.functional_x86-64_windows/openjdkbinary/j2sdk-image\bin\jdmpview.exe -core j9core.dmp
+22:33:37  Time spent starting: 2 milliseconds
+22:33:46  Time spent executing: 13841 milliseconds
+22:33:46  Test result: PASSED
+22:33:46  
+22:33:46  
+22:33:46  ---TEST RESULTS---
+22:33:46  Number of PASSED tests: 7 out of 8
+22:33:46  Number of FAILED tests: 1 out of 8
+22:33:46  
+22:33:46  ---SUMMARY OF FAILED TESTS---
+22:33:46  Remove shared cache
+22:33:46  -----------------------------
+22:33:46  
+22:33:46  
+22:33:46  cmdLineTester_classesdbgddrext_1_FAILED
+```
+Maybe something is holding on to files in the shared classes cache directory?

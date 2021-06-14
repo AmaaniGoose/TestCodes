@@ -1,0 +1,6 @@
+`ifInstanceOfEvaluator` in Power is not currently using the common API `calculateInstanceOfOrCheckCastSequences` to generate the tests, while the `instanceofEvaluator` is using. It lead to some duplicate codes and these evaluators needs refactoring.
+
+In Z, both `VMifInstanceOfEvaluator`[1] and `instanceofEvaluator`[2] will eventually call the common API to generate the tests. It might be an example to follow. 
+
+[1] https://github.com/eclipse/openj9/blob/3660a7b06627d0aebaa14abbecfb99dc70172eee/runtime/compiler/z/codegen/J9TreeEvaluator.cpp#L6420-L6463
+[2] https://github.com/eclipse/openj9/blob/3660a7b06627d0aebaa14abbecfb99dc70172eee/runtime/compiler/z/codegen/J9TreeEvaluator.cpp#L2403-L2424

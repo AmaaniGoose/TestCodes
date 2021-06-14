@@ -1,0 +1,93 @@
+https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_sanity.functional_aarch64_linux/59/consoleFull
+Build:
+```
+01:22:33  openjdk version "16" 2021-03-16
+01:22:33  OpenJDK Runtime Environment AdoptOpenJDK-16+36-202104122334 (build 16+36-202104122334)
+01:22:33  Eclipse OpenJ9 VM AdoptOpenJDK-16+36-202104122334 (build master-9b90f0a09, JRE 16 Linux aarch64-64-Bit Compressed References 20210412_18 (JIT enabled, AOT enabled)
+01:22:33  OpenJ9   - 9b90f0a09
+01:22:33  OMR      - 440f0991d
+01:22:33  JCL      - 073accb86d based on jdk-16+36)
+```
+```
+01:47:45  org.openj9.test.java.lang.
+01:47:59  Exception in thread "no-op thread" org.openj9.test.java.lang.Test_ThreadGroup$1UncaughtException
+01:47:59  	at org.openj9.test.java.lang.Test_ThreadGroup$14.uncaughtException(Test_ThreadGroup.java:1202) from jdk.internal.loader.ClassLoaders$AppClassLoader@a5f75111(file:/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/jvmtest/functional/Java8andUp/GeneralTest.jar)
+01:47:59  	at java.base/java.lang.Thread.uncaughtException(Thread.java:1396) from jrt:/java.base
+01:47:59  Unhandled exception
+01:47:59  Type=Segmentation error vmState=0x00000000
+01:47:59  J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000001
+01:47:59  Handler1=0000FFFFBA876DA8 Handler2=0000FFFFBA7EE3F0 InaccessibleAddress=0000000BFFE72BC3
+01:47:59  R0=0000000BFFE72BC3 R1=0000000400000003 R2=00000007FFE72BC0 R3=0000000680636D50
+01:47:59  R4=0000000000106388 R5=0000000000106358 R6=00000007FFE79AA8 R7=00000007FFE72BC0
+01:47:59  R8=0000FFFF95037428 R9=0000000000000001 R10=00000000001026E0 R11=04007E00716E6F69
+01:47:59  R12=00000007FFE72BC0 R13=0000000680634768 R14=0000000000000001 R15=0000000000062408
+01:47:59  R16=0000FFFFBAA03230 R17=0000FFFFBB62AB50 R18=2900000000004D01 R19=0000000000011200
+01:47:59  R20=0000000000106300 R21=00000000004D4D00 R22=0000000000000000 R23=00000000004D1B00
+01:47:59  R24=00000000FFFCF24D R25=000000000003F002 R26=000000005D1E0139 R27=00000000004E4500
+01:47:59  R28=0000000000028F00 R29=00000000004D4D00 R30=0000FFFFB9BA7E08 R31=0000FFFFBB56B930
+01:47:59  PC=0000FFFF95037560 SP=0000FFFFBB56B930 PSTATE=0000000020000000
+01:47:59  V0 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+01:47:59  V1 00000000cf000000 (f: 3472883712.000000, d: 1.715833e-314)
+01:47:59  V2 0000000040800000 (f: 1082130432.000000, d: 5.346435e-315)
+01:47:59  V3 3f013ababeebf644 (f: 3203134976.000000, d: 3.286250e-05)
+01:47:59  V4 bfd00ea348b88334 (f: 1220051712.000000, d: -2.508934e-01)
+01:47:59  V5 3fe62e42fefa39ef (f: 4277811712.000000, d: 6.931472e-01)
+01:47:59  V6 4034000000000000 (f: 0.000000, d: 2.000000e+01)
+01:47:59  V7 0000ffffbb56ba50 (f: 3143023104.000000, d: 1.390665e-309)
+01:47:59  V8 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+01:47:59  V9 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+01:47:59  V10 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+01:47:59  V11 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+01:47:59  V12 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+01:47:59  V13 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+01:47:59  V14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+01:47:59  V15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+01:47:59  V16 0000ffffbb56ba40 (f: 3143023104.000000, d: 1.390665e-309)
+01:47:59  V17 0000ffffbb56ba30 (f: 3143023104.000000, d: 1.390665e-309)
+01:47:59  V18 0000ffffbb56ba20 (f: 3143023104.000000, d: 1.390665e-309)
+01:47:59  V19 0000ffffbb56ba10 (f: 3143023104.000000, d: 1.390665e-309)
+01:47:59  V20 0000ffffbb56ba00 (f: 3143023104.000000, d: 1.390665e-309)
+01:47:59  V21 0000ffffbb56b9f0 (f: 3143023104.000000, d: 1.390665e-309)
+01:47:59  V22 0000ffffbb56b9e0 (f: 3143023104.000000, d: 1.390665e-309)
+01:47:59  V23 00000000000000f0 (f: 240.000000, d: 1.185758e-321)
+01:47:59  V24 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+01:47:59  V25 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+01:47:59  V26 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+01:47:59  V27 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+01:47:59  V28 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+01:47:59  V29 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+01:47:59  V30 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+01:47:59  V31 000000003f800000 (f: 1065353216.000000, d: 5.263544e-315)
+01:47:59  
+01:47:59  Compiled_method=java/io/ObjectStreamClass$FieldReflector.getObjFieldValues(Ljava/lang/Object;[Ljava/lang/Object;)V
+01:47:59  Target=2_90_20210412_18 (Linux 4.15.0-34-generic)
+01:47:59  CPU=aarch64 (64 logical CPUs) (0x1f699a1000 RAM)
+01:47:59  ----------- Stack Backtrace -----------
+01:47:59  (0x0000FFFFBA7EB048 [libj9prt29.so+0x26048])
+01:47:59  ---------------------------------------
+01:47:59  JVMDUMP039I Processing dump event "gpf", detail "" at 2021/04/13 00:47:58 - please wait.
+01:47:59  JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16182742544456/JCL_Test_none_SCC_1/core.20210413.004758.37728.0001.dmp' in response to an event
+01:48:00  JVMDUMP010I System dump written to /home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16182742544456/JCL_Test_none_SCC_1/core.20210413.004758.37728.0001.dmp
+01:48:00  JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16182742544456/JCL_Test_none_SCC_1/javacore.20210413.004758.37728.0002.txt' in response to an event
+01:48:00  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16182742544456/JCL_Test_none_SCC_1/javacore.20210413.004758.37728.0002.txt
+01:48:00  JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16182742544456/JCL_Test_none_SCC_1/Snap.20210413.004758.37728.0003.trc' in response to an event
+01:48:00  JVMDUMP010I Snap dump written to /home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16182742544456/JCL_Test_none_SCC_1/Snap.20210413.004758.37728.0003.trc
+01:48:01  JVMDUMP032I JVM requested JIT dump using '/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16182742544456/JCL_Test_none_SCC_1/jitdump.20210413.004758.37728.0004.dmp' in response to an event
+01:48:01  JVMDUMP051I JIT dump occurred in 'main' thread 0x0000000000011200
+01:48:01  JVMDUMP053I JIT dump is recompiling java/io/ObjectStreamClass$FieldReflector.getObjFieldValues(Ljava/lang/Object;[Ljava/lang/Object;)V
+01:48:01  JVMDUMP053I JIT dump is recompiling java/io/ObjectStreamClass$FieldReflector.getObjFieldValues(Ljava/lang/Object;[Ljava/lang/Object;)V
+01:48:01  JVMDUMP053I JIT dump is recompiling java/io/ObjectOutputStream.writeObject0(Ljava/lang/Object;Z)V
+01:48:01  JVMDUMP053I JIT dump is recompiling java/io/ObjectOutputStream.writeObject0(Ljava/lang/Object;Z)V
+01:48:02  JVMDUMP053I JIT dump is recompiling jdk/internal/reflect/NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+01:48:02  JVMDUMP053I JIT dump is recompiling java/lang/reflect/Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+01:48:02  JVMDUMP010I JIT dump written to /home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16182742544456/JCL_Test_none_SCC_1/jitdump.20210413.004758.37728.0004.dmp
+01:48:02  JVMDUMP013I Processed dump event "gpf", detail "".
+01:48:02  
+01:48:02  JCL_Test_none_SCC_1_FAILED
+01:48:02  
+01:48:02  "/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+01:48:02  JVMSHRC005I No shared class caches available
+01:48:03  JVMSHRC005I No shared class caches available
+01:48:03  cache cleanup done
+01:48:03  JCL_Test_none_SCC_1 Finish Time: Tue Apr 13 00:48:02 2021 Epoch Time (ms): 1618274882531
+```

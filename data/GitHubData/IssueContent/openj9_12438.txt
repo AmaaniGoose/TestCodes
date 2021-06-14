@@ -1,0 +1,79 @@
+Java -version output
+--------------------
+```
+openjdk version "16" 2021-03-16
+OpenJDK Runtime Environment AdoptOpenJDK (build 16+36)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.25.0, JRE 16 Mac OS X amd64-64-Bit Compressed References 20210311_66 (JIT enabled, AOT enabled)
+OpenJ9   - 022d65424
+OMR      - 09514431e
+JCL      - 0c11227a21a based on jdk-16+36)
+```
+
+Summary of problem
+------------------
+
+1. Download this IBM TMDA tool: https://public.dhe.ibm.com/software/websphere/appserv/support/tools/jca/jca469.jar
+1. Run it:
+   ```
+   % export PATH=/Users/kevin/work/adoptopenjdk/macos/java16_20210414/jdk-16+36/Contents/Home/bin:$PATH
+   % ulimit -c unlimited
+   % java -jar jca469.jar
+   ```
+1. In a separate window, request a system dump of that process:
+   ```
+   % export PATH=/Users/kevin/work/adoptopenjdk/macos/java16_20210414/jdk-16+36/Contents/Home/bin:$PATH
+   % jcmd $(pgrep -f jca469) Dump.system
+   ```
+1. jdmp hangs. The target process only shows the following in its output:
+   ```
+   JVMDUMP034I User requested System dump using '/Users/kevin/git/TMDA/builds/core.20210414.133751.2308.0001.dmp' through com.ibm.jvm.Dump.systemDumpToFile
+   ```
+1. ps shows an additional child process:
+   ```
+   % ps -elf | head -1; ps -elf | grep 2308
+   UID   PID  PPID        F CPU PRI NI       SZ    RSS WCHAN     S             ADDR TTY           TIME CMD              STIME
+   501  2308  2272     4006   0  46  0 11110760  42860 -      S+                  0 ttys001    0:08.33 java -jar jca469  1:29PM
+   501  2340  2308        6   0  46  0 10698080    420 -      U+                  0 ttys001    0:00.74 java -jar jca469  1:37PM
+   501  2339  2287     4006   0  31  0  9728256  20544 -      S+                  0 ttys002    0:00.37 jcmd 2308 Dump.s  1:37PM
+   501  2359  2342     4006   0  31  0  4268448    712 -      R+                  0 ttys003    0:00.00 grep 2308         1:38PM
+   ```
+1. The core file exists in the system and it's for that child process:
+   ```
+   % sysctl kern.corefile
+   kern.corefile: /cores/core.%P
+   % ls -l /cores/
+   total 2381168
+   -r--------  1 kevin  wheel  1189941248 Apr 14 13:37 core.2340
+   ```
+1. Trying to dump stacks of the jcmd process doesn't work:
+   ```
+   % echo "thread backtrace all" | lldb -p 2339
+   (lldb) process attach --pid 2339
+   Process 2339 stopped
+   * thread #1, stop reason = signal SIGSTOP
+       frame #0: 0xffffffffffffffff 
+   Target 0: (No executable module.) stopped.
+   
+   Architecture set to: .
+   (lldb) thread backtrace all
+   * thread #1, stop reason = signal SIGSTOP
+     frame #0: 0xffffffffffffffff 
+     thread #2
+       frame #0: 0xffffffffffffffff 
+     [...]
+     thread #30
+       frame #0: 0xffffffffffffffff 
+   ```
+1. I can't do basic things like `% cp /cores/core.2340 ~/` which hangs and does now show any increase in file size (and no error).
+1. Various things in the operating system are not working and I had to force reboot the machine.
+1. After rebooting, the core dump is 0 bytes:
+   ```
+   % ls -l /cores/
+   total 2340688
+   -r--------  1 kevin  wheel  0 Apr 14 13:37 core.2340
+   ```
+1. I tried this multiple times and got the same behavior each time. I looked into creating a kernel core dump but it seems that requires another machine and macOS has no capability like Linux to create a local kernel core dump.
+
+Diagnostic files
+----------------
+None available although as background here's a javacore before attempting jcmd: [javacore.20210414.135323.1905.0001.txt](https://github.com/eclipse/openj9/files/6313633/javacore.20210414.135323.1905.0001.txt)

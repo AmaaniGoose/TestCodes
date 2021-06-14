@@ -1,0 +1,13 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_special.system_ppc64_aix_Nightly/58/
+aix71-p8-5
+```
+OpenJ9: db73f46
+OMR: cfd6690
+OpenJDK11: 1553321 - openj9-openjdk-jdk11
+```
+Not sure if the above is the first occurrence. No longer have build results for the previous build, not sure if it passed the tests, but the shas are:
+```
+OpenJ9: 7d740b4
+OMR: e1ac81b
+OpenJDK11: 1553321 - openj9-openjdk-jdk11
+```

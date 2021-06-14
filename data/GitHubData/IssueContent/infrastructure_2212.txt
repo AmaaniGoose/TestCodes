@@ -1,0 +1,12 @@
+- [ ] Missing install
+- [ ] Bug in ansible playbook
+- [X] Request for new playbook addition
+
+Details:
+
+The Scaleway Host (docker-scaleway-ubuntu1604-armv7l-1 as an example) have their nameservers set to: 10.0.2.6 (some sort of internal name server) this was causing lookups to fail.  Swapping them to 
+
+10.194.3.2
+10.194.3.4
+
+Resolved the issue.  It may be the case that since we're getting rid of Scaleway that this isn't necessary.

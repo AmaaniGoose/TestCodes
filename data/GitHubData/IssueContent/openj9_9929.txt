@@ -1,0 +1,9 @@
+OpenJDK has clarified the specification for reflection to state that "Final fields in records are not reflectively modifiable" [0]
+
+We need to validate the OpenJ9 applies this constraint on reflection correctly and Unsafe.  
+
+MethodHandles and VarHandles already disallow setting final fields, though there may be a `setAccessible` path through MethodHandles.unreflect() that allows it - need some testing to confirm.
+
+This inability to reflectively write final fields also applies to JDK 15 hidden classes, to Records, and to static final fields in all classes and interfaces.
+
+[0] https://bugs.openjdk.java.net/browse/JDK-8247517

@@ -1,0 +1,6 @@
+We have fixed ratio of Nursery vs total heap space, for fully expanded heaps of 1/4. Tenure and Nursery independently grow (in generally, resize), and one may hit its limit much faster than the other, preventing the further growth while still not hitting the global (Xmx) limit and causing unnecessarily high GC overhead.
+
+Over the course of a few restarts, using existing GC-hints-in-SCC facitlity , we can learn the behavior and adjust this ratio and have it more balanced.
+
+As opposed to initial size (Xmns/Xmos) hints that we already adjust relatively quickly (typically a matter of few seconds), a snapshot of Xmnx as a stable point should be taken much latter, possibly a couple of minutes, and several global collections into the run. Clearly some experiments have to be done and establish reasonable heuristics.
+

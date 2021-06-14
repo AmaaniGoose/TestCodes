@@ -1,0 +1,4 @@
+Callsites in ECS are allocated on heap memory which is not ideal as they only exist in inliner. For exmaple: 
+https://github.com/eclipse/openj9/blob/b6ef15011c739cb15e48fa435780ddaeebf7222e/runtime/compiler/optimizer/J9EstimateCodeSize.cpp#L1396
+
+Should be changed to be allocated on stack region for inliner.

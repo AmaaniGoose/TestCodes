@@ -1,0 +1,1 @@
+The native code paths protected by `J9VM_OPT_PANAMA` and the Java code protected by `PANAMA` are stale: that code should be removed along with the configuration options.

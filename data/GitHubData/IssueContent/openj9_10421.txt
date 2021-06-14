@@ -1,0 +1,13 @@
+Each persistent allocation has a leading header defined as 
+```
+   struct Block
+      {
+      size_t _size;
+      Block * _next;
+      };
+```
+which occupies 16 bytes on 64-bit platforms.
+However, the `_next` pointer is not actually needed from memory blocks that are in use. This is only used to link memory blocks present in one of the free block lists.
+For a block present in the free block lists we can use the payload of that memory block to store the pointer to the next free block. This is possible because the payload is at least as big as the size of a pointer.
+
+This scheme would save 8 bytes for every persistent allocation and since most of the blocks are small blocks (to be verified) the savings could be noticeable. 

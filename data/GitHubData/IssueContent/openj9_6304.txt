@@ -1,0 +1,3 @@
+Fieldwatch tests were recently added here: https://github.com/eclipse/openj9/pull/6257. Unfortunately we were not able to add tests for _Large Heap_ variant JVMs. Additionally, the PR tests don't test on all 32-bit platforms. This issue is to discuss how/if we can test those platforms and what work is required.
+
+See https://github.com/eclipse/openj9/pull/6257#issuecomment-506511530 and https://github.com/eclipse/openj9/pull/6257#issuecomment-506512660 for examples. 

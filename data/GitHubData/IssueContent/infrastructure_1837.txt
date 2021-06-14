@@ -1,0 +1,8 @@
+Found as a part of https://github.com/AdoptOpenJDK/openjdk-infrastructure/issues/1716#issuecomment-755202080
+
+As suggested by @sxa (https://github.com/AdoptOpenJDK/openjdk-infrastructure/pull/1806#pullrequestreview-562539987), we should change the Jenkins name of the following machines, so they match the inventory.yml, i.e. remove the `l` from `armv(7|8)l`:
+
+- [ ]  build-packet-ubuntu1804-armv8l-1
+- [ ]  docker-scaleway-ubuntu1604-armv7l-1
+
+Should just be a case of changing their names, and restarting the Jenkins agent.

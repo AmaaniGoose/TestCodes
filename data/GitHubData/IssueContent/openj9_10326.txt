@@ -1,0 +1,5 @@
+I have no idea how to add tests that aren't in the JVMTI framework (which isn't appropriate here), so I suggest merging this and opening a new issue to get the test added.
+
+For the record, I modified the test to use wait/notify rather than the latch (which doesn't exist in java 8). This isn't realiable enough to put into an automated test, so perhaps the original test should be added for JDK11+.
+
+_Originally posted by @gacholio in https://github.com/eclipse/openj9/pull/10273#issuecomment-665722821_

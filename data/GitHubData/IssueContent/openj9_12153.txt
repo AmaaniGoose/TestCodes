@@ -1,0 +1,8 @@
+This issue is to track the progress of contributing the implementation of caching AOT methods at JITServer. Below is the outline of the main stages (the list will be updated with new and complete work items).
+
+- [x] Extend the class loader table to associate each class loader with the name of its first loaded class: #12154.
+- [x] Infrastructure to store and lookup cached serialized AOT methods at the JITServer: #12320.
+- [x] Infrastructure for AOT method deserialization at the JIT client: #12405.
+- [ ] Serializing and caching AOT methods during AOT compilations at the JITServer.
+- [ ] Serving cached AOT methods at the JITServer and deserializing and loading them at the JIT client.
+- [ ] ...

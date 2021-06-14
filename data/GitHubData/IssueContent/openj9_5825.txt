@@ -1,0 +1,1 @@
+This option was originally added to allow 32 bit JVMs on Windows to get a slightly larger heap by dividing the heap in 2. I do not believe any one is still using this option and it has been deprecated since Java 7 or Java 8. Removing this functionality will greatly reduce complexity around startup of the heap.

@@ -1,0 +1,93 @@
+extended.functional testDefaultDisclaimMemory_3 failed on the jdk-16+36_openj9-0.26.0-m1 win64 build.
+The test passed on other platforms.
+```
+openjdk version "1.8.0_292"
+OpenJDK Runtime Environment (build 1.8.0_292-202103091148-b05)
+Eclipse OpenJ9 VM (build openj9-0.26.0-m1, JRE 1.8.0 Windows Server 2012 R2 amd64-64-Bit Compressed References 20210309_1017 (JIT enabled, AOT enabled)
+OpenJ9   - b227feba2
+OMR      - 4665e2f72
+JCL      - 1780cbc92b based on jdk8u292-b05)```
+```
+
+Failing job link:
+https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_extended.functional_x86-64_windows/98/
+
+Failing test output:
+```
+18:01:50  ===============================================
+18:01:50  Running test testDefaultDisclaimMemory_3 ...
+18:01:51  ===============================================
+18:01:52  testDefaultDisclaimMemory_3 Start Time: Tue Mar  9 18:01:50 2021 Epoch Time (ms): 1615312910701
+18:01:52  "C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java" -Xshareclasses:destroyAll; "C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+18:01:52  JVMSHRC005I No shared class caches available
+18:01:53  JVMSHRC005I No shared class caches available
+18:01:53  cache cleanup done
+18:01:53  variation: Mode501
+18:01:53  JVM_OPTIONS:  -Xjit -Xgcpolicy:balanced -Xnocompressedrefs 
+18:01:53  { itercnt=1; \
+18:01:53  mkdir -p "C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_windows/openjdk-tests/\\TKG\\output_16153040757028\\testDefaultDisclaimMemory_3"; \
+18:01:53  cd "C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_windows/openjdk-tests/\\TKG\\output_16153040757028\\testDefaultDisclaimMemory_3"; \
+18:01:53  export PATH="/cygdrive/c/Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_windows/openjdkbinary/openjdk-test-image/openj9:/cygdrive/c/Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_windows/openjdkbinary/j2sdk-image/jre/bin/default:/cygdrive/c/Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_windows/openjdkbinary/j2sdk-image/jre/bin/j9vm:/usr/bin:/cygdrive/c/windows/system32:/cygdrive/c/windows:/cygdrive/c/windows/System32/Wbem:/cygdrive/c/windows/System32/WindowsPowerShell/v1.0:/cygdrive/c/Program Files (x86)/Microsoft SQL Server/100/Tools/Binn:/cygdrive/c/Program Files/Microsoft SQL Server/100/Tools/Binn:/cygdrive/c/Program Files/Microsoft SQL Server/100/DTS/Binn:/cygdrive/c/Users/adoptopenjdk/AppData/Local/Microsoft/WindowsApps:/cygdrive/c/Strawberry/perl/bin:/cygdrive/c/Program Files/Git/cmd:/cygdrive/c/openjdk/jdk-8/bin:/cygdrive/c/apache-ant/apache-ant-1.10.5/bin:/cygdrive/c/Program Files/IcedTeaWeb/WebStart/bin:/cygdrive/c/Program Files/Microsoft SQL Server/110/Tools/Binn:/cygdrive/c/Program Files (x86)/Microsoft SDKs/TypeScript/1.0:/cygdrive/c/Program Files/Microsoft SQL Server/120/Tools/Binn:/cygdrive/c/Program Files (x86)/IncrediBuild:/cygdrive/c/rust/bin:/cygdrive/c/Users/jenkins/AppData/Local/Microsoft/WindowsApps"; \
+18:01:53  "C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java"  -Xjit -Xgcpolicy:balanced -Xnocompressedrefs  \
+18:01:53  -Xsoftmx512m -Xmx1024m -Xmn1m -verbose:gc -Xverbosegclog:"C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_windows/openjdk-tests/\\TKG\\output_16153040757028\\testDefaultDisclaimMemory_3"\\vgc.log \
+18:01:53  -cp "C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_windows/openjdk-tests///..//jvmtest\\TestConfig\\resources;C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_windows/openjdk-tests/\\TKG\\lib\\testng.jar;C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_windows/openjdk-tests/\\TKG\\lib\\jcommander.jar;C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_windows/openjdk-tests///..//jvmtest\\functional\\JLM_Tests\\jlm_tests.jar" \
+18:01:53  org.testng.TestNG -d "C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_windows/openjdk-tests/\\TKG\\output_16153040757028\\testDefaultDisclaimMemory_3" "C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_windows/openjdk-tests///..//jvmtest\\functional\\JLM_Tests\\testng.xml" \
+18:01:53  -testnames testSoftMxDisclaimMemory \
+18:01:53  -groups level.extended \
+18:01:53  -excludegroups d.*.win_x86-64_mxdptrs,d.*.arch.x86,d.*.os.win,d.*.bits.64,d.*.generic-all; \
+18:01:53  if [ $? -eq 0 ] ; then echo ""; echo "testDefaultDisclaimMemory_3""_PASSED"; echo ""; cd C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_windows/openjdk-tests/; rm -f -r "C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_windows/openjdk-tests/\\TKG\\output_16153040757028\\testDefaultDisclaimMemory_3"; else echo ""; echo "testDefaultDisclaimMemory_3""_FAILED"; echo ""; fi; } 2>&1 | tee -a "C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_windows/openjdk-tests/\\TKG\\output_16153040757028\\TestTargetResult";
+18:01:54  [IncludeExcludeTestAnnotationTransformer] [INFO] exclude file is C:/Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_windows/openjdk-tests/\\TestConfig\\resources\\excludes\\latest_exclude_8.txt
+18:01:54  ...
+18:01:54  ... TestNG 6.14.2 by Cédric Beust (cedric@beust.com)
+18:01:54  ...
+18:01:54  
+18:02:04  [SoftmxAdvanceTest] [ERROR] 	FAIL: Memory didn't release back to OS! Post memory size 5871591424 is less than or equal to previous memory size 5867188224
+18:02:12  [SoftmxAdvanceTest] [ERROR] 	FAIL: Memory didn't release back to OS! Post memory size 5882908672 is less than or equal to previous memory size 5871591424
+18:02:18  [SoftmxAdvanceTest] [ERROR] 	FAIL: Memory didn't release back to OS! Post memory size 5877559296 is less than or equal to previous memory size 5882908672
+18:02:26  [SoftmxAdvanceTest] [ERROR] 	FAIL: Memory didn't release back to OS! Post memory size 5879709696 is less than or equal to previous memory size 5877559296
+18:02:32  [SoftmxAdvanceTest] [ERROR] 	FAIL: Memory didn't release back to OS! Post memory size 5880467456 is less than or equal to previous memory size 5879709696
+18:02:32  FAILED: testDisclaimMemoryEffects(5)
+18:02:32  java.lang.AssertionError: Test has failed after 5 attempts
+18:02:32  	at org.testng.AssertJUnit.fail(AssertJUnit.java:59)
+18:02:32  	at org.testng.AssertJUnit.assertTrue(AssertJUnit.java:24)
+18:02:32  	at j9vm.test.softmx.SoftmxAdvanceTest.testDisclaimMemoryEffects(SoftmxAdvanceTest.java:70)
+18:02:32  	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+18:02:32  	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+18:02:32  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+18:02:32  	at java.lang.reflect.Method.invoke(Method.java:498)
+18:02:32  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+18:02:32  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+18:02:32  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+18:02:32  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+18:02:32  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+18:02:32  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+18:02:32  	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+18:02:32  	at org.testng.TestRunner.run(TestRunner.java:505)
+18:02:32  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+18:02:32  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+18:02:32  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+18:02:32  	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+18:02:32  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+18:02:32  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+18:02:32  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+18:02:32  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+18:02:32  	at org.testng.TestNG.runSuites(TestNG.java:1049)
+18:02:32  	at org.testng.TestNG.run(TestNG.java:1017)
+18:02:32  	at org.testng.TestNG.privateMain(TestNG.java:1354)
+18:02:32  	at org.testng.TestNG.main(TestNG.java:1323)
+18:02:32  
+18:02:32  
+18:02:32  ===============================================
+18:02:32      testSoftMxDisclaimMemory
+18:02:32      Tests run: 1, Failures: 1, Skips: 0
+18:02:32  ===============================================
+18:02:32  
+18:02:32  
+18:02:32  ===============================================
+18:02:32  JLM_Tests_Suite
+18:02:32  Total tests run: 1, Failures: 1, Skips: 0
+18:02:32  ===============================================
+18:02:32  
+18:02:32  
+18:02:32  testDefaultDisclaimMemory_3_FAILED
+```

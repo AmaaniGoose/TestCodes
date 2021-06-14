@@ -1,0 +1,1 @@
+Packet hosting became Equinix some time ago but we have not updated out naming convention to reflect that.

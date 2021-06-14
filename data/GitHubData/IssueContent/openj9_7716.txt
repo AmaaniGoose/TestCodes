@@ -1,0 +1,49 @@
+Failing on the internal nightly jdk8 win32 build. Seems to be fine on win64 across versions.
+4 tests
+- testOSMXBeanLocal_0
+- testOSMXBeanLocal_1
+- testOSMXBeanRemote_0
+- testOSMXBeanRemote_1
+
+All failing with he same error. Doesn't seem to be machine specific. 100% failure rate.
+
+```
+[2019-11-07T08:44:46.180Z] [TestOperatingSystemMXBean] [INFO]  ----------------------------------------------------------
+[2019-11-07T08:44:46.180Z] [TestOperatingSystemMXBean] [INFO]  Starting the OperatingSystemMXBean usage API tests........
+[2019-11-07T08:44:46.180Z] [TestOperatingSystemMXBean] [INFO]  ----------------------------------------------------------
+[2019-11-07T08:44:46.180Z] [TestOperatingSystemMXBean] [INFO] Tests starting at: 1573116269230 ms.
+[2019-11-07T08:44:46.180Z] [TestOperatingSystemMXBean] [INFO] Testing getTotalPhysicalMemory() & getFreePhysicalMemorySize() APIs
+[2019-11-07T08:44:46.180Z] [TestOperatingSystemMXBean] [INFO] Testing getTotalSwapSpaceSize() & getFreeSwapSpaceSize() APIs
+[2019-11-07T08:44:46.180Z] [TestOperatingSystemMXBean] [INFO] Tests finished at: 1573116269245 ms.
+[2019-11-07T08:44:46.180Z] FAILED: runTestOSMXBean
+[2019-11-07T08:44:46.180Z] java.lang.AssertionError: Error: getTotalSwapSpaceSize() API returned -1, test failed
+[2019-11-07T08:44:46.180Z] 	at org.testng.Assert.fail(Assert.java:96)
+[2019-11-07T08:44:46.180Z] 	at org.openj9.test.management.TestOperatingSystemMXBean.test_SwapSpaceSizeAPIs(TestOperatingSystemMXBean.java:227)
+[2019-11-07T08:44:46.180Z] 	at org.openj9.test.management.TestOperatingSystemMXBean.runTestOSMXBean(TestOperatingSystemMXBean.java:171)
+[2019-11-07T08:44:46.180Z] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2019-11-07T08:44:46.180Z] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2019-11-07T08:44:46.180Z] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2019-11-07T08:44:46.180Z] 	at java.lang.reflect.Method.invoke(Method.java:498)
+[2019-11-07T08:44:46.180Z] 	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+[2019-11-07T08:44:46.180Z] 	at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+[2019-11-07T08:44:46.180Z] 	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+[2019-11-07T08:44:46.180Z] 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+[2019-11-07T08:44:46.180Z] 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+[2019-11-07T08:44:46.180Z] 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+[2019-11-07T08:44:46.180Z] 	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+[2019-11-07T08:44:46.180Z] 	at org.testng.TestRunner.run(TestRunner.java:505)
+[2019-11-07T08:44:46.180Z] 	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+[2019-11-07T08:44:46.180Z] 	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+[2019-11-07T08:44:46.180Z] 	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+[2019-11-07T08:44:46.180Z] 	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+[2019-11-07T08:44:46.180Z] 	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+[2019-11-07T08:44:46.180Z] 	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+[2019-11-07T08:44:46.180Z] 	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+[2019-11-07T08:44:46.180Z] 	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+[2019-11-07T08:44:46.180Z] 	at org.testng.TestNG.runSuites(TestNG.java:1049)
+[2019-11-07T08:44:46.180Z] 	at org.testng.TestNG.run(TestNG.java:1017)
+[2019-11-07T08:44:46.180Z] 	at org.testng.TestNG.privateMain(TestNG.java:1354)
+[2019-11-07T08:44:46.180Z] 	at org.testng.TestNG.main(TestNG.java:1323)
+```
+
+Seeing as this passes on the external build I would assume it is something on machine config side. I will just need someone to tell help me figure out what to change.

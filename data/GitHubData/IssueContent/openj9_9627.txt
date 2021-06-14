@@ -1,0 +1,145 @@
+Runtime helpers:
+```
+/**
+ * Performs a getfield operation on an object. Handles flattened and non-flattened cases.
+ * This helper assumes that the cpIndex points to the fieldRef of a resolved Qtype. This helper
+ * also assumes that the cpIndex points to an instance field.
+ *
+ * If you can guarantee that receiverObject will never be null then it
+ * doesnt need to throw.
+ *
+ * @param[in] currentThread thread token
+ * @param[in] ramFieldRef the fieldRef referred to by getfield
+ * @param[in] recieverObject obj where getfield is being applied to
+ *
+ * @return returns valueType
+ */
+jitGetField(...);
+
+/**
+ * Performs a withfield operation on an object. Handles flattened and non-flattened cases.
+ * This helper assumes that the cpIndex points to the fieldRef of a resolved Qtype. This helper
+ * also assumes that the cpIndex points to an instance field.
+ *
+ * If you can guarantee that receiverObject will never be null then it
+ * doesnt need to throw.
+ *
+ * @param[in] currentThread thread token
+ * @param[in] ramFieldRef the fieldRef referred to by withfield
+ * @param[in] recieverObject obj where withfield is being applied to
+ * @param[in] operandObject operand to withffield instruction, must be a valuetype
+ *
+ * @return new valuetype with updated field
+ */
+jitWithField(...);
+
+/**
+ * Performs a putfield operation on an object. Handles flattened and non-flattened cases.
+ * This helper assumes that the cpIndex points to the fieldRef of a resolved Qtype. This helper
+ * also assumes that the cpIndex points to an instance field.
+ * 
+ * If you can guarantee that receiverObject will never be null then it
+ * doesnt need to throw.
+ *
+ * @param[in] currentThread thread token
+ * @param[in] ramFieldRef the fieldRef referred to by putfield
+ * @param[in] recieverObject obj where putfield is being applied to
+ * @param[in] operandObject operand to putfield instruction, must be a valuetype
+ *
+ */
+jitPutField(...);
+
+/**
+ * Performs an aastore operation on an object. Handles flattened and non-flattened cases.
+ * 
+ * If you can guarantee that receiverObject and paramObj will never be null then it
+ * doesnt need to throw.
+ * 
+ * @param[in] currentThread thread token
+ * @param[in] receiverObject arrayobject
+ * @param[in] index array index
+ * @param[in] paramObject obj arg
+ *
+ */
+jitAastore(...)
+
+/**
+ * Performs an aaload operation on an object. Handles flattened and non-flattened cases. 
+ * 
+ * If you can guarantee that receiverObject will never be null then it
+ * doesnt need to throw.
+ * 
+ * @param[in] currentThread thread token
+ * @param[in] receiverObject arrayobject
+ * @param[in] index array index
+ * 
+ * @return array element
+ */
+jitAaload(...)
+```
+
+Static helpers:
+```
+/**
+ * Returns the offset of a qtype field.
+ * 
+ * @param[in] fieldOwner the J9class that defines the field
+ * @param[in] field romfieldshape of the field
+ * @param[in] instance flag indicate if its an instance or static field
+ *
+ * @return field offset
+ */
+UDATA
+getFlattenableFieldOffset(J9Class *fieldOwner, J9ROMFieldShape *field, BOOLEAN instanceField);
+
+
+/**
+ * Returns if a field is flattened. `J9_IS_J9CLASS_FLATTENED` will be deprecated.
+ * This helper assumes field is a qtype.
+ *
+ * @param[in] fieldOwner the J9class that defines the field
+ * @param[in] field romfieldshape of the field
+ * @param[in] instance flag indicate if its an instance or static field
+ *
+ * @return TRUE if field is flattened, false otherwise
+ */
+BOOLEAN
+isFlattenableFieldFlattened(J9Class *fieldOwner, J9ROMFieldShape *field, BOOLEAN instanceField);
+
+/**
+ * Returns the type of an instance field. `J9_IS_J9CLASS_FLATTENED` will be deprecated.
+ * This helper assumes field is a qtype.
+ *
+ * @param[in] fieldOwner the J9class that defines the field
+ * @param[in] field romfieldshape of the field
+ * @param[in] instance flag indicate if its an instance or static field
+ *
+ * @return TRUE if field is flattened, false otherwise
+ */
+J9Class *
+getFlattenableFieldType(J9Class *fieldOwner, J9ROMFieldShape *field, BOOLEAN instanceField);
+
+/**
+ * Returns the size of an instance field. `J9_VALUETYPE_FLATTENED_SIZE` will be deprecated.
+ * This helper assumes field is a qtype.
+ *
+ * @param[in] currentThread thread token
+ * @param[in] fieldref cp ref of the field
+ * @param[in] instance flag indicate if its an instance or static field
+ *
+ * @return TRUE if field is flattened, false otherwise
+ */
+UDATA
+getFlattenableFieldSize(J9Class *fieldOwner, J9ROMFieldShape *field, BOOLEAN instanceField);
+
+/**
+ * Returns the size of an array element field. `J9_VALUETYPE_FLATTENED_SIZE` will be deprecated.
+ * This will just be a macro as since we have a slot on the array class,  `J9ArrayClass->flattenedElementSize`. The
+ * name is misleading, its the real size even if the array is not flattened or if its not a valueType.
+ *
+ * @return size of array element
+ */
+J9_ARRAY_ELEMENT_SIZE(arrayClass)
+```
+
+Currently, we do not flatten static fields, we have the capability to do so with a bit of work, but we are currently unsure as to whether it will be beneficial.

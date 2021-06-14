@@ -1,0 +1,91 @@
+Failure link
+------------
+https://ci.adoptopenjdk.net/job/Test_openjdk15_j9_sanity.openjdk_aarch64_linux_xl/22/#showFailuresLink
+Platform: only aarch64XL
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+13:41:50  Unhandled exception
+13:41:50  Type=Segmentation error vmState=0x00000000
+13:41:50  J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000001
+13:41:50  Handler1=0000FFFFB4FD2504 Handler2=0000FFFFB4EAE3C0 InaccessibleAddress=0000000099669888
+13:41:50  R0=0000FFFFB0748700 R1=0000000000000000 R2=0000000000000000 R3=0000000000000001
+13:41:50  R4=0000000000000003 R5=0000000000000000 R6=0000FFFFAF580718 R7=0000FFFF902A73A0
+13:41:50  R8=0000FFFFB0749000 R9=FFFFFFFFFFFFFF88 R10=0000FFFFB0EB5BE8 R11=0000FFFFAF57D810
+13:41:50  R12=0000FFFFAF57D870 R13=0000000000000040 R14=0000000000000011 R15=0000000000000001
+13:41:50  R16=0000FFFFAFD90A10 R17=0000FFFFB5A8B100 R18=0000FFFFB0748700 R19=0000FFFFB01F9C00
+13:41:50  R20=0000FFFFB0EBF3E0 R21=0000FFFF8FA3F5F8 R22=0000FFFFAF5802B0 R23=0000FFFFAF580718
+13:41:50  R24=0000000099669900 R25=0000FFFFAF5802B0 R26=0000FFFFAF580FB8 R27=0000FFFFAF5810D8
+13:41:50  R28=0000000000000003 R29=0000000000000004 R30=0000FFFF77A46A6C R31=0000FFFFB5932E30
+13:41:50  PC=0000FFFF77A45FE4 SP=0000FFFFB5932E30 PSTATE=0000000060000000
+13:41:50  V0 000000003f400000 (f: 1061158912.000000, d: 5.242822e-315)
+13:41:50  V1 000000004a2be058 (f: 1244389504.000000, d: 6.148101e-315)
+13:41:50  V2 000000003f800000 (f: 1065353216.000000, d: 5.263544e-315)
+13:41:50  V3 000000003cc9df35 (f: 1019862848.000000, d: 5.038792e-315)
+13:41:50  V4 000000003c4835ef (f: 1011365376.000000, d: 4.996809e-315)
+13:41:50  V5 000000003717f7d1 (f: 924317632.000000, d: 4.566736e-315)
+13:41:50  V6 00000000391c9451 (f: 958174272.000000, d: 4.734010e-315)
+13:41:50  V7 0000000041a00000 (f: 1101004800.000000, d: 5.439686e-315)
+13:41:50  V8 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+13:41:50  V9 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+13:41:50  V10 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+13:41:50  V11 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+13:41:50  V12 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+13:41:50  V13 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+13:41:50  V14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+13:41:50  V15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+13:41:50  V16 000000003f2aaaab (f: 1059760832.000000, d: 5.235914e-315)
+13:41:50  V17 000000003e924925 (f: 1049774400.000000, d: 5.186575e-315)
+13:41:50  V18 000000003e638e29 (f: 1046711872.000000, d: 5.171444e-315)
+13:41:50  V19 000000003e3a3325 (f: 1044001600.000000, d: 5.158053e-315)
+13:41:50  V20 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+13:41:50  V21 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+13:41:50  V22 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+13:41:50  V23 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+13:41:50  V24 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+13:41:50  V25 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+13:41:50  V26 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+13:41:50  V27 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+13:41:50  V28 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+13:41:50  V29 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+13:41:50  V30 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+13:41:50  V31 000000003f400000 (f: 1061158912.000000, d: 5.242822e-315)
+13:41:50  
+13:41:50  Compiled_method=com/sun/tools/javac/comp/Infer$GraphSolver.solve(Lcom/sun/tools/javac/comp/Infer$GraphStrategy;)V
+13:41:50  Target=2_90_20200911_33 (Linux 4.10.0-26-generic)
+13:41:50  CPU=aarch64 (96 logical CPUs) (0x7d699c000 RAM)
+13:41:50  ----------- Stack Backtrace -----------
+13:41:50  (0x0000FFFFB4ECD760 [libj9prt29.so+0x39760])
+13:41:50  ---------------------------------------
+
+```
+
+Crashes in various tests:
+```
+java/lang/ClassLoader/getResource/automaticmodules/Driver.java.Driver
+java/lang/Enum/ValueOf.java.ValueOf
+java/lang/StackWalker/GetCallerClassTest.java.GetCallerClassTest
+java/lang/annotation/UnitTest.java.UnitTest
+java/lang/constant/boottest/java.base/java/lang/constant/ConstantUtilsTest.java.ConstantUtilsTest
+java/lang/invoke/CallSiteTest.java.CallSiteTest
+java/lang/invoke/condy/CondyBSMValidationTest.java.CondyBSMValidationTest
+java/lang/invoke/defineHiddenClass/UnloadingTest.java.UnloadingTest
+java/lang/invoke/lambda/LambdaClassLoaderSerialization.java.LambdaClassLoaderSerialization
+java/lang/module/ModuleReader/ModuleReaderTest.java.ModuleReaderTest
+java/lang/module/ModuleReferenceTest.java.ModuleReferenceTest
+jdk/lambda/separate/SourceModel.java.SourceModel
+jdk/modules/etc/UpgradeableModules.java.UpgradeableModules
+jdk/modules/incubator/ServiceBinding.java.ServiceBinding
+java/util/Collection/MOAT.java.MOAT
+java/util/EnumSet/EnumSetClassSerialization.java.EnumSetClassSerialization
+java/util/Map/FunctionalCMEs.java.FunctionalCMEs
+java/util/Optional/BasicInt.java.BasicInt
+java/util/ResourceBundle/getBaseBundleName/TestGetBaseBundleName.java.TestGetBaseBundleName
+java/util/concurrent/CompletableFuture/ThenComposeExceptionTest.java.ThenComposeExceptionTest
+java/util/concurrent/FutureTask/DoneMeansDone.java.DoneMeansDone
+java/util/concurrent/ThreadPoolExecutor/ThreadRestarts.java.ThreadRestarts
+java/util/concurrent/locks/ReentrantLock/LockOncePerThreadLoops.java.LockOncePerThreadLoops
+java/util/concurrent/locks/ReentrantReadWriteLock/Count.java.Count
+java/util/regex/PatternStreamTest.java.PatternStreamTest
+```

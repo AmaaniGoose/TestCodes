@@ -1,0 +1,15 @@
+See https://github.com/eclipse/openj9/pull/11786#issuecomment-767862614 and the following comments.
+
+Last night:
+OpenJ9: d132a6b
+OMR: b38b0b7
+OpenJDK11: b608a89
+
+Later build:
+19:22:51 OpenJ9 - fb8c08c
+19:22:51 OMR - 5ad82738f7e
+19:22:51 JCL - f7475ea97ee based on jdk-11.0.10+9)
+
+https://github.com/eclipse/openj9/compare/d132a6b...fb8c08c7db2
+https://github.com/eclipse/openj9-omr/compare/b38b0b7...5ad82738f7e
+https://github.com/ibmruntimes/openj9-openjdk-jdk11/compare/b608a89...f7475ea97ee 

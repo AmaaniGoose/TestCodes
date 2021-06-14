@@ -1,0 +1,1 @@
+Currently, JITaaS can make use of interpreter profiling information, but does not exploit JIT profiling or jProfiling. This item serves as a placeholder for a solution regarding the profiling story in JITaaS world. 

@@ -1,0 +1,42 @@
+From the JDK developer's view it would be nice to know if the change has been covered by existing tests. If not we will need to create a new test to cover the change.
+
+From https://wiki.openjdk.java.net/display/CodeTools/JCov+FAQ we know:
+1. run existing test with JCov to obtain result.xml file with coverage information
+2. get a patch file for the change
+3. use a JCov DiffCoverage utility to see which lines of changed code were not touched by tests
+
+As running with JCov reporting can be very memory intensive we haven't seen any existing build or github action workflow enabled jcov reporting. We'd like to try to automate the process by several steps.
+1. setup [a jenkins job](https://ci.adoptopenjdk.net/view/work-in-progress/job/openjdk8_jcov/) to generate coverage information. The job grab the specified JDK, run the specified test (e.g. jdk_math) and archive the jcov result.
+ Note:
+
+- Currently the job will hit the memory exception for some target. Just update with `-Xmx4g` to see if it help
+- the job currently using jtreg to trigger the jcov dynamically, which generates the jcov report. However it delete the mete data `result.xml`. Need to update to use jcov directory and generate the `result.xml`, which can be consumed by diffCoverage.
+- Job grab a specified JDK to avoid the building step. So the job need to be updated archive the openjdk source commit|sha information, which is defined as `SOURCE` in release file. `SOURCE=" .:OpenJDK: d5ef2af266:"`
+
+2. **get a patch file for the change**: compare the PR with the build jdk commit|sha 
+3. **use a JCov DiffCoverage utility**: 
+
+```
+java -jar jcov.jar DiffCoverage -h
+Try "-help-verbose" for more detailed help
+Usage:
+> java -jar jcov.jar diffcoverage result.xml diff
+    options:
+    Manage replacing
+        -replaceDiff 'string value'
+        -replaceClass 'string value'
+    Manage output
+        -all
+    Basic options
+        -help(h, ?)
+        -help-verbose(hv)
+        -print-env(env)
+        -propfile 'string value'
+        -plugindir 'string value' (By default is: plugins)
+        -log.file 'string value'
+        -log.level(log) 'string value' (By default is: )
+Example: java -jar jcov.jar diffcoverage -replace src/classes/: result.xml diff
+```
+
+
+

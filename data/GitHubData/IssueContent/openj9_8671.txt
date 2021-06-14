@@ -1,0 +1,238 @@
+# **Supporting Hotspot Large Page Options**
+## **Goals**
+
+1. To allow ease of migration from OpenJDK + Hotspot to OpenJDK + OpenJ9, this activity will focus implementing support for Hotspot large page options on OpenJ9
+
+2. There are a number of inconsistencies with the existing large page `-Xlp` options (`-Xlp`, `-Xlp<size>`, `-Xlp:objectheap`, and `-Xlp:codecache`) this issue will resolve these inconsistencies. These inconsistencies will be resolved by:
+     * Identifying and fix current Issues with `-Xlp` options.
+     * Deprecate the existing `-Xlp` large page options.
+     * Implement new paging options that are backwards compatible with `-Xlp` options allowing the `-Xlp` options to be mapped to the new options until their removal, while preserving legacy behavior.
+
+**Parent Issue**: https://github.com/eclipse/openj9/issues/4930
+
+## **Design**
+
+**Design Doc:** https://ibm.box.com/s/rys4fllji6ji0h1a6tvw79j16w8cum5g
+
+## **Implementation**
+
+**Parsing**
+
+Currently, all `-Xlp` options parsing is done within the CodeCache[1], and ObjectHeap[2] somewhat redundantly. This needs to be removed in favor for a centralized solution, where the options are parsed within the VM rather than each component that they affect. Each component should only need to read the parsed results within shared data structure, and configure large pages. Thus the parsing code in [1], and [2] will be removed in favor for a centralized VM implementation.
+
+**Centralized Parsing**
+
+The solution to this issue will be centralized parsing. The VM will parse all large command line arguments(`-XX`, & `-Xlp` options) within jvminit.c[3], and save the net result into shared data structure. The net parsing result consists of the combined affect of all active large page options, neglecting those that are overwritten due to precedence rules. The parsing result will be stored within a new struct inside J9JavaVM[4]. We can name this structure `J9LargePageOptionsInfo`.
+
+`J9LargePageOptionsInfo` will consist of the following:
+```
+BOOLEAN isEnabledForCodeCache /* Enabled LP on CodeCache */
+BOOLEAN isEnabledForObjectHeap /* Enabled LP on ObjectHeap */
+UDATA pageSizeForCodeCache /* Specified LP size on CodeCache */
+UDATA pageSizeForObjectHeap  /* Specified LP size on ObjectHeap */
+J9LargePageCautionLevel lpCautionLevel /* Specify if Warnings, Errors, or Neither have been enabled */
+UDATA pageTypeForObjectHeap /* Z/OS Only: Specify if user desires a specific page type on ObjectHeap*/
+```
+
+Where `J9LargePageCautionLevel` is an enum to specify the following states:
+```
+J9CautionUnset /* User has not enabled Warnings, or Errors */
+J9CautionWarning /* Enabled Warnings */
+J9CautionError /* Enabled Errors */
+```
+
+and `pageTypeObjectHeap` can be the following:
+```
+J9PORT_VMEM_PAGE_FLAG_PAGEABLE_PREFERABLE /* User does not specify to explicitly use a page type. */
+J9PORT_VMEM_PAGE_FLAG_PAGEABLE /* User explicitly asks for pageable large pages */
+J9PORT_VMEM_PAGE_FLAG_FIXED /* User explicitly asks for fixed large pages */
+```
+
+**Populating J9LargePageOptionsInfo**
+
+Specifically, this section will focus on the implementation of parsing all -XX, and -Xlp large page options within jvminit.c[3]. 
+This is an area of discussion, since we have two possible implementations.
+
+Firstly, to understand what options are passed in and their position among the user arguments each option variation will need to be searched and consumed[10].  The macro `FIND_AND_CONSUME` will return the right-most index of an option and if a match is not found the index will return -1. The option will also be consumed if it is found. FIND_AND_CONSUME will be called for each option that is being supported, including all newly proposed -XX options and -Xlp options.
+
+Since each -XX option relates to only a specific subset of `J9LargePageOptionsInfo`, the implementation can be partitioned to focus on one subset at a time.
+
+An example of this to analyze all options that enable, or disable large pages. Namely these are `-XX:[+/-]UseLargePages`, `-XX:[+/-]UseLargePagesCodeCache`, `-XX:[+/-]UseLargePagesObjectHeap`, `-Xlp(-Xlp, -Xlp<size>, -Xlp:[codecache/objectheap]`.
+
+```
+/* -XX:[-/+]UseLargePages[/CodeCache/ObjectHeap] */
+{
+    IDATA argUseLargePagesEnable = FIND_AND_CONSUME_ARG(EXACT_MATCH, '-XX:+UseLargePages', NULL);
+    IDATA argUseLargePagesDisable = FIND_AND_CONSUME_ARG(EXACT_MATCH, '-XX:-UseLargePages', NULL);
+    IDATA argUseLargePagesCodeCacheEnable = FIND_AND_CONSUME_ARG(EXACT_MATCH, '-XX:+UseLargePagesCodeCache', NULL);
+    IDATA argUseLargePagesCodeCacheDisable = FIND_AND_CONSUME_ARG(EXACT_MATCH, '-XX:-UseLargePagesCodeCache', NULL);
+    IDATA argUseLargePagesObjectHeapEnable = FIND_AND_CONSUME_ARG(EXACT_MATCH, '-XX:+UseLargePagesObjectHeap', NULL);
+    IDATA argUseLargePagesObjectHeapDisable = FIND_AND_CONSUME_ARG(EXACT_MATCH, '-XX:-UseLargePagesObjectHeap', NULL);
+
+    /* Simplify to Codecache, and ObjectHeap components */
+    argUseLargePagesCodeCacheEnable = OMR_MAX(argUseLargePagesCodeCacheEnable, argUseLargePagesEnable);
+    argUseLargePagesCodeCacheDisable = OMR_MAX(argUseLargePagesCodeCacheDisable, argUseLargePagesDisable);
+    argUseLargePagesObjectHeapEnable = OMR_MAX(argUseLargePagesObjectHeapEnable, argUseLargePagesEnable);
+    argUseLargePagesObjectHeapDisable = OMR_MAX(argUseLargePagesObjectHeapDisable, argUseLargePagesDisable);
+
+    /* Apply -Xlp mapping */
+    argUseLargePagesCodeCacheEnable = OMR_MAX(argUseLargePagesCodeCacheEnable, argXlpEnableLargePagesCodeCache);
+    argUseLargePagesObjectHeapEnable = OMR_MAX(argUseLargePagesObjectHeapEnable, argXlpEnableLargePagesObjectHeap);
+
+    /* Set Lp Status Flags */
+    lpInfo->isEnabledForCodeCache = argUseLargePagesCodeCacheEnable > argUseLargePagesCodeCacheDisable;
+    lpInfo->isEnabledForObjectHeap = argUseLargePagesObjectHeapEnable > argUseLargePagesObjectHeapDisable;
+}
+```
+
+**Parsing -Xlp options**
+A contrary to the preceding -Xlp ruins the party, since it may impact all members at the same time. Hence it's best to parse `-Xlp`, `-Xlp<size>`, `-Xlp:[codecache/objectheap]:pagesize=<size>,[strict/warn],[pageable/nonpageable]` ahead of parsing -XX options.
+
+Xlp options will be parsed together. A set of front-facing (-XX large page compatabile) arguments can be used to translate and integrate the xlp options into how we parse the -XX large page options. The Xlp options can be parsed and simplified to the following variables.
+
+```
+IDATA argXlpEnableLargePagesCodeCache = -1;  // Index of right-most Xlp option that enables large pages on the codecache
+IDATA argXlpEnableLargePagesObjectHeap = -1; // Index of right-most Xlp option that enables large pages on the objectheap
+
+IDATA argXlpLargePageSizeInBytesCodeCache = -1; // Index of right-most Xlp option specifies a large page size for the codecache
+UDATA xlpLargePageSizeCodeCache = -1;           // Value of that page size
+IDATA argXlpLargePageSizeInBytesObjectHeap = -1; // Index of right-most Xlp option specifies a large page size for the objectheap
+UDATA xlpLargePageSizeObjectHeap = -1;          // Value of that page size
+
+IDATA argXlpPageWarningsEnable = -1;            // Index of right-most Xlp option specifies a "warn"
+IDATA argXlpPageErrorsEnable = -1;            // Index of right-most Xlp option specifies a "strict"
+
+#if defined(J9ZOS390)
+IDATA argXlpObjectHeapPageType = -1;            // Index of right-most Xlp option specifies a [non]pageable
+IDATA xlpObjectHeapPageType = -1;               // The value of non[pageable]
+#endif
+```
+
+Specifics of `Xlp`, and `-Xlp<size>` are parsed using straight forward memory mapping. 
+`-Xlp:[codecache/objectheap]:pagesize=<size>,[strict/warn],[pageable/nonpageable]` will need to be parsed by a sub option parser. Thankfully one already exists within the GC[9]. Since -Xlp parsing can be removed from the GC, the `xlpSubOptionsParser` can be moved to jvminit.c and used to parse any combination of this option.
+
+Similarly, there will be isolated code to handle and populate other members of this instance. Including `-XX:LargePageInBytes[/CodeCache/ObjectHeap]=<size>`, `-XX:[+/-]LargePageWarnings` and `-XX:[+/-]LargePageErrors`, and `-XX:zOSLargePagesObjectHeapType=<type>`
+
+**isEnabledForCodeCache**
+This member will be enabled only when an option that enables large pages on the codecache is either on the right of an option to disable it, or in absence of such option. As shown in the example above, we know the indices of each option variation this can easily be calculated. 
+
+**isEnabledForObjectHeap**
+The Above can be applied for the ObjectHeap as well.
+
+**pageSizeForCodeCache**
+This will be set in accordance with the size specified on the right most index of any option that impacts the codecache page size. Namely, these are `-Xlp<Size>`, `-Xlp:codecache:pagesize<size>`, `-XX:LargePageInBytes=<size>` and `-XX:LargePageInBytesCodeCache=<size>`. 
+
+**pageSizeForObjectHeap**
+The Above can be applied for the ObjectHeap as well. Namely, the options that impact the objectheap pagesize are `-Xlp<Size>`, `-Xlp:codecache:pagesize<size>`, `-XX:LargePageInBytes<size>` and `-XX:LargePageInBytesObjectHeap=<size>`.
+
+**lpCautionLevel**
+Warnings, will be enabled if options to enable it are to the right or in the absence of any option to disable it. The same applies to Errors. 
+Options that enable Warnings include: `-XX:+LargePageWarnings`, `-Xlp:[codecache/objectheap]:pagesize=<size>,warn`.
+Options that disable Warnings include: `-XX:-LargePageWarnings`
+
+Options that enable Errors include: `-XX:+LargePageErrors`, `-Xlp:[codecache/objectheap]:pagesize=<size>,strict`
+Options that disable Errors include: `-XX:-LargePageErrors`.
+
+**(Z/OS only) pageTypeForObjectHeap**
+As, before in the absence of any option to specify the page type this will be set to `J9PORT_VMEM_PAGE_FLAG_PAGEABLE_PREFERABLE`, which will attempt for pageable variations but will fall back to fixed large pages. Otherwise, if an option that specifies the pagetype (`-XX:zOSLargePagesObjectHeap=[pageable/nonpageable]`, or `-XX:objectheap:pagesize=<size>,[non]pageable`) exists the page type specified by the right-most index will be saved. (Pageable - `J9PORT_VMEM_PAGE_FLAG_PAGEABLE`, NonPageable - `J9PORT_VMEM_PAGE_FLAG_FIXED`). 
+
+**(Common) Post-Parsing Implementation Details**
+
+In both options, the following checks will be necessary:
+- When Xlp is detected a deprecation warning will be shown. 
+- When warnings, or errors are specified notify if large pages are enabled without specifying a large page size.
+
+**CodeCache Implementation**
+
+All Parsing will be removed from the codecache.[1]
+Removing unused Xlp JIT .nls macros. Modify, and move to VM .nls for use within the VM. 
+Instead, large page configuration variables will be read from J9LargePageOptionsInfo.[5]
+How the codecache verifies, and configures the large pages will not change. [6]
+
+**ObjectHeap Implementation**
+
+All Parsing will be removed from the objectheap. [2]
+Removing unused Xlp GC .nls macros. 
+Instead, large page configuration variables will be read from J9LargePAgeOptionsInfo. [7]
+How the objectheap verifies, and configures the large pages will not change, other than to accompany using data extracted from J9LargePAgeOptionsInfo. [8]
+
+**Related**
+
+An undocumented `-Xlp` option that manages the gc meta data page size is to be removed. `-Xlp:gcmetadata` will not be deprecated, rather it will be fully removed. All other -Xlp options, as were covered in this design will be deprecated.
+
+Mainly this is just includes where the option is parsed, as all it's doing is overwriting the current gc metadata page size.
+https://github.com/eclipse/openj9/blob/491cde3d0b8383a30689fba244f547d6b9315fce/runtime/gc_modron_startup/mmparse.cpp#L815
+
+Removing the capability of the user specifying the meta data page size, means that the metadata page size will always be set to use the system default page size of the system.
+https://github.com/eclipse/omr/blob/637f10724dd3de1d4845bd2bc38d9c25456941f3/gc/base/GCExtensionsBase.cpp#L129-L131
+
+This validation would not be necessary.
+https://github.com/eclipse/omr/blob/637f10724dd3de1d4845bd2bc38d9c25456941f3/gc/base/GCExtensionsBase.cpp#L153-L156
+
+**Testing Implementation**
+
+CodeCache Testing is implemented here: [XlpCodeCacheOptionsTestRunner.java](https://github.com/eclipse/openj9/blob/e879da4f02ea9b7bc570164b6810f54ecb25b4dd/test/functional/VM_Test/src/j9vm/test/xlpcodecache/XlpCodeCacheOptionsTestRunner.java)
+
+Objectheap Testing is implemented here: [XlpOptionsTest.java](https://github.com/eclipse/openj9/blob/e879da4f02ea9b7bc570164b6810f54ecb25b4dd/test/functional/VM_Test/src/j9vm/test/xlp/XlpOptionsTest.java)
+
+These CodeCache/ObjectHeap Tests use `-verbose:sizes` output to determine what page size was used to verify each large page size test case. As discussed, -verbose:sizes will need to be changed from displaying -Xlp attributes, to attributes that closely model the new -XX proposed options. 
+
+Particularity it's purposed that the verbose output be changed from
+```
+  -Xlp:objectheap:pagesize=<Page Size Used>,<Page Type Used on Z/OS>	 large page size
+                  available large page sizes:
+                  < List of pages avaialble on obejct heap >
+  -Xlp:codecache:pagesize=<Page Size Used>,<Page Type Used on Z/OS>	 large page size for JIT code cache
+                  available large page sizes for JIT code cache:
+                  < List of pages avaialble on code cache>
+```
+
+To:
+
+```
+-XX:[+/-]UseLargePagesCodeCache
+   Page Size Used: <Page Size Used By Code Cache>
+   Page Type Used: <Page Type used on Z/OS>
+   Available Page Sizes on Code Cache:
+   <List of avaialble page sizes on the code cache>
+-XX:[+/-]UseLargePagesObjectHeap
+   Page Size Used: <Page Size Used by Object Heap>
+   Page Type Used: <Page type used by Object Heap on Z/OS>
+   Available Page Sizes on Object Heap:
+   < List of avaialble page sizes on the object heap>
+```
+
+As each the codecache, and object heap test expects the output to be in the former -Xlp form, this needs to be adapted to conform with the verbose layout changes. 
+The test will also need to be adapted to recongize expected warnings when warnings are enabled.
+
+## **Summary of Changes**
+**Doc Changes**
+| Description | PR |
+| -------------| -------------|
+| Add Docs for new -XX Options | TBD |
+| Changes to -Xlp, -Xlp:codecache, and -Xlp:objectheap | TBD |
+
+**Test Changes**
+| Description | PR | 
+| ------------- | ------------- |
+| Add Tests for new -XX options | TBD |
+| Add j9vmemtests to verify `omrvmem_find_valid_page_size` & `omrvmem_default_large_page_size_ex` with `OMRPORT_VMEM_PAGE_FLAG_PREFER_PAGEABLE` | https://github.com/eclipse/omr/pull/4918   https://github.com/eclipse/openj9/pull/8791 |
+
+**Related Changes**
+| Description | PR | 
+| ------------- | ------------- |
+| Enable XlpOptions, and XlpCodeCache tests | https://github.com/eclipse/openj9/pull/8576 |
+| Expand XlpCodeCache tests to include variations | https://github.com/eclipse/openj9/pull/8025 |
+
+## **References and Footnotes**
+
+[1] https://github.com/eclipse/openj9/blob/f7c40c6c6ac97c5bdad13336ab2360f3efb9ff8b/runtime/compiler/control/J9Options.cpp#L1465-L1694
+[2] https://github.com/eclipse/openj9/blob/c560cd75ea7ca9c9f2442d2eab7b1afa8a15af1e/runtime/gc_modron_startup/mmparse.cpp#L587-L670
+[3] https://github.com/eclipse/openj9/blob/6a33c82664bdc5c0ac8860c85ab8fdcf18bee1ec/runtime/vm/jvminit.c#L1614
+[4] https://github.com/eclipse/openj9/blob/491cde3d0b8383a30689fba244f547d6b9315fce/runtime/oti/j9nonbuilder.h#L4780
+[5] https://github.com/eclipse/openj9/blob/f7c40c6c6ac97c5bdad13336ab2360f3efb9ff8b/runtime/compiler/control/J9Options.cpp#L1458-L1461
+[6] https://github.com/eclipse/openj9/blob/f7c40c6c6ac97c5bdad13336ab2360f3efb9ff8b/runtime/compiler/control/J9Options.cpp#L1696-L1784
+[7] https://github.com/eclipse/openj9/blob/c560cd75ea7ca9c9f2442d2eab7b1afa8a15af1e/runtime/gc_modron_startup/mmparse.cpp#L583-L584
+[8] https://github.com/eclipse/openj9/blob/c560cd75ea7ca9c9f2442d2eab7b1afa8a15af1e/runtime/gc_modron_startup/mmparse.cpp#L674-L719
+[9] https://github.com/eclipse/openj9/blob/8e50c296bba256a5280e4529a6995b3e5e200b9e/runtime/gc_modron_startup/mmparse.cpp#L356-L357
+[10] Consumed Arguments: Unique command line arguments must be marked as consumed for control purposes. Duplicate arguments that are later re-defined are automatically consumed. Each option will have at most one unconsumed argument that needs to be consumed when that argument is processed. 

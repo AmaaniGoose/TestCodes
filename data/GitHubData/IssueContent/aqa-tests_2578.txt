@@ -1,0 +1,46 @@
+com/sun/jndi/dns/ConfigTests/Timeout.java test failed with an exception similar to:
+```
+23:31:09  STDOUT:
+23:31:09  Skip local DNS Server creation 
+23:31:09  Elapsed (ms):  14309
+23:31:09  Expected (ms): 7750
+23:31:09  STDERR:
+23:31:09  java.lang.RuntimeException: Failed: timeout in 14309 ms, expected7750ms
+23:31:09  	at Timeout.handleException(Timeout.java:108)
+23:31:09  	at TestBase.launch(TestBase.java:84)
+23:31:09  	at TestBase.run(TestBase.java:50)
+23:31:09  	at Timeout.main(Timeout.java:61)
+23:31:09  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+23:31:09  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+23:31:09  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+23:31:09  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+23:31:09  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:312)
+23:31:09  	at java.base/java.lang.Thread.run(Thread.java:861)
+```
+The test case (https://github.com/AdoptOpenJDK/openjdk-jdk11u/blob/master/test/jdk/com/sun/jndi/dns/ConfigTests/Timeout.java) expects to get a `SocketTimeoutException` and when it gets it compares the elapsed time against an expected time calculated from the socket API request timeout and the number of retries.  The test fails because the elapsed time is deemed to be 'too long' with respect to the expected time.
+
+The rule for 'too long' looks to be arbitrary.  It may simply be that on the failing machine this is how long the API calls take.
+
+I've only seen the test fail on `test-azure-win2016-x64-1`.  Other tests fail on that machine with resource issues (e.g. insufficient resources to load jdk libraries), so maybe these timeouts are a side effect of a generally constrained machine.
+
+To rerun the test on the failing machine:  [Rerun in Grinder on same machine](https://ci.adoptopenjdk.net/job/Grinder/parambuild/?SDK_RESOURCE=nightly&amp;TARGET=jdk_custom&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=&amp;VENDOR_TEST_DIRS=&amp;EXTRA_DOCKER_ARGS=-v+%24%7BTEST_JDK_HOME%7D%3A%2Fopt%2Fjava%2Fopenjdk&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;TEST_PARALLELIZATION_PARAMS=&amp;PLATFORM=x86-64_windows&amp;GENERATE_JOBS=false&amp;KEEP_REPORTDIR=true&amp;PERSONAL_BUILD=true&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=test-azure-win2016-x64-1&amp;TEST_OPTIONS_PARAMS=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=&amp;BUILD_IDENTIFIER=&amp;NON_AQA_TEST_REPOS_HELP_TEXT=&amp;ADOPTOPENJDK_BRANCH=master&amp;LIGHT_WEIGHT_CHECKOUT=false&amp;NON_AQA_TEST_REPOS=&amp;ARTIFACTORY_SERVER=&amp;TEST_REPO_PARAMS=&amp;TEST_SELECTION_PARAMS=&amp;TEST_PARALLELIZATION_PARAMS_HELP_TEXT=&amp;JDK_SELECTION_PARAMS=&amp;KEEP_WORKSPACE=false&amp;USER_CREDENTIALS_ID=&amp;JDK_VERSION=11&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=&amp;JDK_REPO=&amp;PLATFORM_AND_MACHINE_HELP_TEXT=&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;UPSTREAM_JOB_NAME=&amp;PLATFORM_AND_MACHINE=&amp;CUSTOM_TARGET=test%2Fjdk%2Fcom%2Fsun%2Fjndi%2Fdns%2FConfigTests%2FTimeout.java&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;POST_RUN_PARAMS_HELP_TEXT=&amp;UPSTREAM_TEST_JOB_NUMBER=&amp;DOCKERIMAGE_TAG=&amp;JDK_SELECTION_PARAMS_HELP_TEXT=&amp;JDK_IMPL=openj9&amp;SSH_AGENT_CREDENTIAL=&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;TEST_SELECTION_PARAMS_HELP_TEXT=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=&amp;OPENJDK_SHA=&amp;NUM_MACHINES=&amp;BUILD_LIST=openjdk&amp;UPSTREAM_JOB_NUMBER=&amp;TEST_REPO_PARAMS_HELP_TEXT=&amp;POST_RUN_PARAMS=&amp;TIME_LIMIT=10&amp;TEST_OPTIONS_PARAMS_HELP_TEXT=&amp;JVM_OPTIONS=&amp;PARALLEL=None)
+
+---------------------------
+
+
+Failed: timeout in xxxxx ms, expected7750ms
+
+**Describe the bug**
+A clear and concise description of what the bug is.
+
+**To Reproduce**
+Steps to reproduce the behavior (or Grinder rerun link):
+
+**Expected behavior**
+A clear and concise description of what you expected to happen.
+
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
+
+**Additional context**
+Add any other context about the problem here.

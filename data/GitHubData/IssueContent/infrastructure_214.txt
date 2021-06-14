@@ -1,0 +1,6 @@
+By way of AWX (Ansible Tower) configure a weekly schedule to deploy the latest Ansible playbooks to all systems.
+- This will ensure there isn't any drift between how the systems are configured and the latest changes to the playbooks are applied.
+
+* This is easily setup using AWX's scheduler, however we need away to ensure they are not currently in use by Jenkins. A method to temporarily disable the system(s) (take off-line) run the playbook then re-enable the system(s).
+
+

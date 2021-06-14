@@ -1,0 +1,5 @@
+Since ctest is no longer able to run without running java code, it doesn't serve much purpose.
+
+Move as many of the alignment checks in structures like J9VMThread to static assertions in the header file (when C++ is enabled).
+
+This will make alignment failures a compile error instead of relying on the runtime.

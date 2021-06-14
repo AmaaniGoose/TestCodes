@@ -1,0 +1,26 @@
+While building TensorFlow from source on s390x Ubuntu 16.04 with AdoptJDK facing below error:
+
+```
+bazel build -c opt //tensorflow/tools/pip_package:build_pip_package  
+.
+.
+.
+ERROR: /root/tensorflow/tensorflow/tools/pip_package/BUILD:117:1: no such package '@nasm//': java.io.IOException: block overrun and referenced by '//tensorflow/tools/pip_package:licenses'
+ERROR: Analysis of target '//tensorflow/tools/pip_package:build_pip_package' failed; build aborted: no such package '@nasm//': java.io.IOException: block overrun
+INFO: Elapsed time: 14.837s
+FAILED: Build did NOT complete successfully (137 packages loaded)
+    currently loading: tensorflow/core/kernels ... (2 packages)
+```
+It seems this is related to AdoptOpenJDK on s390x. I have verified that the build with OpenJDK 8 works.
+Further, verified the nasm file is valid. More discussion can be found here:
+https://issues.apache.org/jira/browse/COMPRESS-453
+tensorflow/tensorflow#16862 (comment)
+
+Tried with `jdk8u162-b12_openj9-0.8.0` as well as` jdk8u181-b13_openj9-0.9.0`
+
+Could someone please help in resolving the issue?
+
+Original issue for reference : https://github.com/AdoptOpenJDK/openjdk-build/issues/486
+Steps to reproduce the issue: [build steps.txt](https://github.com/eclipse/openj9/files/2392678/build.steps.txt)
+
+

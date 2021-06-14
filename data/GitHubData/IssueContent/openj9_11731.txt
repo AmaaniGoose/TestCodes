@@ -1,0 +1,115 @@
+Java -version output
+--------------------
+openjdk version "11.0.10" 2021-01-19
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.10+9)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.24.0, JRE 11 Windows 10 amd64-64-Bit Compressed References 20210120_899 (JIT enabled, AOT enabled)
+OpenJ9   - 345e1b09e
+OMR      - 741e94ea8
+JCL      - 0a86953833 based on jdk-11.0.10+9)
+
+
+Summary of problem
+------------------
+
+J9 crashes on project combining applicationinsights-web-2.6.2.jar and liquibase in teststs.
+Seems happens only on Windows.
+Looks like if Liquibase not in tests J9 don't crash.
+Disabling JIT prevents crash.
+
+Reproducible on many versions at least from 11.0.7 up to 2021-01-13 nightly.
+
+Repository with repro example: https://github.com/pkunk/openj9-kill run `./gradlew test`
+Logs: https://github.com/pkunk/openj9-kill/runs/1743189045
+
+```
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.microsoft.applicationinsights.core.dependencies.xstream.core.util.Fields (file:/C:/Users/runneradmin/.gradle/caches/modules-2/files-2.1/com.microsoft.azure/applicationinsights-web/2.6.2/689b4af8d82bd54d8ba694fff77c63ddaa89afc/applicationinsights-web-2.6.2.jar) to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.microsoft.applicationinsights.core.dependencies.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+    2021-01-21 16:25:05.610  INFO 2152 --- [    Test worker] liquibase.executor.jvm.JdbcExecutor      : SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOGLOCK
+    2021-01-21 16:25:05.625  INFO 2152 --- [    Test worker] liquibase.executor.jvm.JdbcExecutor      : CREATE TABLE PUBLIC.DATABASECHANGELOGLOCK (ID INT NOT NULL, LOCKED BOOLEAN NOT NULL, LOCKGRANTED TIMESTAMP, LOCKEDBY VARCHAR(255), CONSTRAINT PK_DATABASECHANGELOGLOCK PRIMARY KEY (ID))
+    2021-01-21 16:25:05.632  INFO 2152 --- [    Test worker] liquibase.executor.jvm.JdbcExecutor      : SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOGLOCK
+    2021-01-21 16:25:05.636  INFO 2152 --- [    Test worker] liquibase.executor.jvm.JdbcExecutor      : DELETE FROM PUBLIC.DATABASECHANGELOGLOCK
+    2021-01-21 16:25:05.638  INFO 2152 --- [    Test worker] liquibase.executor.jvm.JdbcExecutor      : INSERT INTO PUBLIC.DATABASECHANGELOGLOCK (ID, LOCKED) VALUES (1, FALSE)
+    2021-01-21 16:25:05.642  INFO 2152 --- [    Test worker] liquibase.executor.jvm.JdbcExecutor      : SELECT LOCKED FROM PUBLIC.DATABASECHANGELOGLOCK WHERE ID=1
+    2021-01-21 16:25:05.653  INFO 2152 --- [    Test worker] l.lockservice.StandardLockService        : Successfully acquired change log lock
+Unhandled exception
+Type=Segmentation error vmState=0x000514ff
+Windows_ExceptionCode=c0000005 J9Generic_Signal=00000004 ExceptionAddress=00007FF944322A69 ContextFlags=0010005f
+Handler1=00007FF9442D0D80 Handler2=00007FF96747AC10 InaccessibleReadAddress=0000000000000008
+RDI=0000020AE4361B00 RSI=0000000000000027 RAX=000000000029B960 RBX=0000020AE4308B10
+RCX=0000020AEBC8CFC0 RDX=0000020AEBC8CFC0 R8=0000000000000002 R9=0000000000000000
+R10=0000000000018A00 R11=0000000000000000 R12=0000000000000001 R13=0000000000299B38
+R14=0000000000000001 R15=000000000029B960
+RIP=00007FF944322A69 RSP=00000032597F73F0 RBP=00007FF4E7520000 GS=002B
+FS=0053 ES=002B DS=002B
+XMM0 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+XMM1 0000ff00ff00ff00 (f: 4278255360.000000, d: 1.385260e-309)
+XMM2 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+XMM3 2929292929292929 (f: 690563392.000000, d: 2.092453e-110)
+XMM4 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+XMM5 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+XMM6 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+XMM7 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+XMM8 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+XMM9 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+XMM10 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+XMM11 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+XMM12 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+XMM13 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+XMM14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+XMM15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+Module=C:\Users\runneradmin\.gradle\jdks\jdk-11.0.9+11\bin\compressedrefs\j9jit29.dll
+Module_base_address=00007FF944240000 Offset_in_DLL=00000000000e2a69
+
+Unhandled exception in signal handler. Protected function: writeCrashDataToConsole (0x0)
+
+----------- Stack Backtrace -----------
+Java_java_lang_invoke_MutableCallSite_invalidate+0x124a9 (0x00007FF944322A69 [j9jit29+0xe2a69])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x11170 (0x00007FF944321730 [j9jit29+0xe1730])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x110ae (0x00007FF94432166E [j9jit29+0xe166e])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x1e2843 (0x00007FF9444F2E03 [j9jit29+0x2b2e03])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x1e2654 (0x00007FF9444F2C14 [j9jit29+0x2b2c14])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x1e9375 (0x00007FF9444F9935 [j9jit29+0x2b9935])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x53a014 (0x00007FF94484A5D4 [j9jit29+0x60a5d4])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x518023 (0x00007FF9448285E3 [j9jit29+0x5e85e3])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x555ae1 (0x00007FF9448660A1 [j9jit29+0x6260a1])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x53d998 (0x00007FF94484DF58 [j9jit29+0x60df58])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x53df8a (0x00007FF94484E54A [j9jit29+0x60e54a])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x518023 (0x00007FF9448285E3 [j9jit29+0x5e85e3])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x5155c1 (0x00007FF944825B81 [j9jit29+0x5e5b81])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x47fc0c (0x00007FF9447901CC [j9jit29+0x5501cc])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x47e11d (0x00007FF94478E6DD [j9jit29+0x54e6dd])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x47f7c4 (0x00007FF94478FD84 [j9jit29+0x54fd84])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x47f5d1 (0x00007FF94478FB91 [j9jit29+0x54fb91])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x47f4c5 (0x00007FF94478FA85 [j9jit29+0x54fa85])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x47e0b2 (0x00007FF94478E672 [j9jit29+0x54e672])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x47f7c4 (0x00007FF94478FD84 [j9jit29+0x54fd84])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x47f5d1 (0x00007FF94478FB91 [j9jit29+0x54fb91])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x47f4c5 (0x00007FF94478FA85 [j9jit29+0x54fa85])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x47e0b2 (0x00007FF94478E672 [j9jit29+0x54e672])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x47dcb6 (0x00007FF94478E276 [j9jit29+0x54e276])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x4297c9 (0x00007FF944739D89 [j9jit29+0x4f9d89])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x42828f (0x00007FF94473884F [j9jit29+0x4f884f])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x426125 (0x00007FF9447366E5 [j9jit29+0x4f66e5])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x275b89 (0x00007FF944586149 [j9jit29+0x346149])
+(0x00007FF9442BD87E [j9jit29+0x7d87e])
+(0x00007FF9442C0A3C [j9jit29+0x80a3c])
+j9port_isCompatible+0x18946 (0x00007FF96747B656 [j9prt29+0x1b656])
+j9port_isCompatible+0x1a044 (0x00007FF96747CD54 [j9prt29+0x1cd54])
+(0x00007FF9442BCF9E [j9jit29+0x7cf9e])
+(0x00007FF9442C2EBC [j9jit29+0x82ebc])
+(0x00007FF9442C289A [j9jit29+0x8289a])
+(0x00007FF9442D0B3F [j9jit29+0x90b3f])
+j9port_isCompatible+0x1a07f (0x00007FF96747CD8F [j9prt29+0x1cd8f])
+(0x00007FF9442D075D [j9jit29+0x9075d])
+omrthread_get_category+0xa42 (0x00007FF9674D4452 [J9THR29+0x4452])
+_o_exp+0x5a (0x00007FF97955268A [ucrtbase+0x2268a])
+BaseThreadInitThunk+0x14 (0x00007FF97B267974 [KERNEL32+0x17974])
+RtlUserThreadStart+0x21 (0x00007FF97C57A0B1 [ntdll+0x5a0b1])
+---------------------------------------
+JVMDUMP039I Processing dump event "gpf", detail "" at 2021/01/21 16:25:06 - please wait.
+JVMDUMP032I JVM requested System dump using 'D:\a\openj9-kill\openj9-kill\core.20210121.162506.2152.0001.dmp' in response to an event
+Unexpected exception thrown.
+```

@@ -1,0 +1,1 @@
+The sequence in which global options in the compiler are set is not easy to understand; this is partly because some of the code that runs is in OMR, and partly because there are some options that are pre-set before parsing the options string, and then some that are post-set. This whole sequence should be documented.

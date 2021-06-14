@@ -1,0 +1,7 @@
+A collection of future (necessary for performance) enhancements to `createPrologue` in ARM64PrivateLinkage.cpp:
+
+- [ ] spill linkage registers based on RA
+- [ ] why is ResolvedMethodSymbol->localMappingCursor an uint32?  StackIndices are stored zero or negative.
+- [ ] reverse order of registers in RSD to make stack walk scanning more efficient
+- [ ] use store pairs for register preservation
+- [ ] initialized locals should be done more efficiently for larger numbers of locals in a loop in the prologue

@@ -1,0 +1,110 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.functional_x86-64_mac_Nightly/153/
+```
+===============================================
+Running test testvmcheck_6 ...
+===============================================
+testvmcheck_6 Start Time: Thu Sep 26 00:28:11 2019 Epoch Time (ms): 1569472091218
+variation: Mode551
+JVM_OPTIONS: -Xcompressedrefs -XX:+UseCompressedOops -Xjit -Xgcpolicy:balanced 
+[IncludeExcludeTestAnnotationTransformer] [INFO] exclude file is /Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_mac_Nightly/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/TestConfig/resources/excludes/latest_exclude_8.txt
+...
+... TestNG 6.14.2 by Cédric Beust (cedric@beust.com)
+...
+
+[TestLoadingClassesFromJarfile] [WARN] /Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_mac_Nightly/openjdkbinary/j2sdk-image/jre/lib/compressedrefs/jclSC180/vm.jar does not exist
+[TestLoadingClassesFromJarfile] [WARN] /Users/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_mac_Nightly/openjdkbinary/j2sdk-image/jre/lib/se-service.jar does not exist
+FAILED: testLoadingClasses
+java.lang.AssertionError: Child exited with non-zero stats expected:<0> but was:<255>
+	at org.testng.AssertJUnit.fail(AssertJUnit.java:59)
+	at org.testng.AssertJUnit.failNotEquals(AssertJUnit.java:364)
+	at org.testng.AssertJUnit.assertEquals(AssertJUnit.java:80)
+	at org.testng.AssertJUnit.assertEquals(AssertJUnit.java:245)
+	at org.openj9.test.vmcheck.TestLoadingClassesFromJarfile.createAndRunNewClassloadingTester(TestLoadingClassesFromJarfile.java:203)
+	at org.openj9.test.vmcheck.TestLoadingClassesFromJarfile.loadClassesFromJarfile(TestLoadingClassesFromJarfile.java:115)
+	at org.openj9.test.vmcheck.TestLoadingClassesFromJarfile.testLoadingClasses(TestLoadingClassesFromJarfile.java:80)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+	at org.testng.TestRunner.run(TestRunner.java:505)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+	at org.testng.TestNG.runSuites(TestNG.java:1049)
+	at org.testng.TestNG.run(TestNG.java:1017)
+	at org.testng.TestNG.privateMain(TestNG.java:1354)
+	at org.testng.TestNG.main(TestNG.java:1323)
+```
+```
+1XHEXCPMODULE  Module: /usr/lib/system/libsystem_c.dylib
+1XHEXCPMODULE  Module_base_address: 00007FFF83189000
+1XHEXCPMODULE  Symbol: __findenv
+1XHEXCPMODULE  Symbol_address: 00007FFF831E8780
+NULL           
+1XHREGISTERS   Registers:
+2XHREGISTER      RDI: 000000001076D36B
+2XHREGISTER      RSI: 00007000002DC394
+2XHREGISTER      RAX: 0000000000000000
+2XHREGISTER      RBX: 000000001076D36B
+2XHREGISTER      RCX: 000000000000004A
+2XHREGISTER      RDX: 00007FC7B37295B0
+2XHREGISTER      R8: 00000000FFFFFFF3
+2XHREGISTER      R9: 000000000000000D
+2XHREGISTER      R10: 00007FC7B3729828
+2XHREGISTER      R11: 000800000E950A30
+2XHREGISTER      R12: 00000000FFFFFFF3
+2XHREGISTER      R13: 000000002E597740
+2XHREGISTER      R14: 000000000000004A
+2XHREGISTER      R15: 0000000000000054
+2XHREGISTER      XMM0: 0000000000000000
+2XHREGISTER      XMM1: 000000057FFFFFFF
+2XHREGISTER      XMM2: 000000001074D3DD
+2XHREGISTER      XMM3: 0000000000000000
+2XHREGISTER      XMM4: 0000009600000320
+2XHREGISTER      XMM5: 0000000000000000
+2XHREGISTER      XMM6: 0000000000000000
+2XHREGISTER      XMM7: 0000000000000000
+2XHREGISTER      XMM8: 0000000000000000
+2XHREGISTER      XMM9: 0000000000000000
+2XHREGISTER      XMM10: 0000000000000000
+2XHREGISTER      XMM11: 0000000000000000
+2XHREGISTER      XMM12: 0000000000000000
+2XHREGISTER      XMM13: 0000000000000000
+2XHREGISTER      XMM14: 0000000000000000
+2XHREGISTER      XMM15: 0000000000000000
+2XHREGISTER      RIP: 00007FFF831E87D4
+2XHREGISTER      GS: 0000
+2XHREGISTER      FS: 0000
+2XHREGISTER      RSP: 00007000002DC360
+2XHREGISTER      RFlags: 0000000000010202
+2XHREGISTER      CS: 002B
+2XHREGISTER      RBP: 00007000002DC380
+2XHREGISTER      ERR: FFF7700000000000
+2XHREGISTER      TRAPNO: 000000000000000D
+2XHREGISTER      CPU: 7000000000000000
+2XHREGISTER      FAULTVADDR: 00000000FFF77000
+1XHEXCPMODULE  Compiling method: java/lang/Integer.toUnsignedLong(I)J
+NULL           
+1XHFLAGS       VM flags:000000000005FFFF
+```
+
+Possible dup of https://github.com/eclipse/openj9/issues/5153
+```
+00:38:07  To rebuild the failed test in a jenkins job, copy the following link and fill out the <Jenkins URL> and <FAILED test target>:
+00:38:07  <Jenkins URL>/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=functional&JenkinsFile=openjdk_x86-64_mac&TARGET=<FAILED test target>
+00:38:07  
+00:38:07  For example, to rebuild the failed tests in <Jenkins URL>=https://ci.adoptopenjdk.net/job/Grinder, use the following links:
+00:38:07  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=functional&JenkinsFile=openjdk_x86-64_mac&TARGET=testvmcheck_6
+```

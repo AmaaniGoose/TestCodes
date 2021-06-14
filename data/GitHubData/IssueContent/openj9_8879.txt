@@ -1,0 +1,50 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_sanity.openjdk_x86-32_windows_Personal/2
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_sanity.openjdk_x86-64_windows_Personal/3
+jdk_security1_0
+java/security/KeyPairGenerator/FinalizeHalf.java.FinalizeHalf
+```
+java.security.ProviderException: java.security.KeyException: Access is denied.
+
+	at sun.security.mscapi.CKeyPairGenerator$RSA.generateKeyPair(CKeyPairGenerator.java:126)
+	at java.security.KeyPairGenerator$Delegate.generateKeyPair(KeyPairGenerator.java:697)
+	at FinalizeHalf.test(FinalizeHalf.java:76)
+	at FinalizeHalf.main(FinalizeHalf.java:54)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+	at java.lang.Thread.run(Thread.java:821)
+Caused by: java.security.KeyException: Access is denied.
+
+	at sun.security.mscapi.CKeyPairGenerator$RSA.generateCKeyPair(Native Method)
+	at sun.security.mscapi.CKeyPairGenerator$RSA.generateKeyPair(CKeyPairGenerator.java:121)
+	... 9 more
+
+JavaTest Message: Test threw exception: java.security.ProviderException
+JavaTest Message: shutting down test
+```
+
+java/security/Signature/SignatureLength.java.SignatureLength
+```
+java.security.ProviderException: java.security.KeyException: Access is denied.
+
+	at sun.security.mscapi.CKeyPairGenerator$RSA.generateKeyPair(CKeyPairGenerator.java:126)
+	at java.security.KeyPairGenerator$Delegate.generateKeyPair(KeyPairGenerator.java:697)
+	at SignatureLength.main0(SignatureLength.java:97)
+	at SignatureLength.main(SignatureLength.java:63)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+	at java.lang.Thread.run(Thread.java:821)
+Caused by: java.security.KeyException: Access is denied.
+
+	at sun.security.mscapi.CKeyPairGenerator$RSA.generateCKeyPair(Native Method)
+	at sun.security.mscapi.CKeyPairGenerator$RSA.generateKeyPair(CKeyPairGenerator.java:121)
+	... 9 more
+
+JavaTest Message: Test threw exception: java.security.ProviderException
+JavaTest Message: shutting down test
+```

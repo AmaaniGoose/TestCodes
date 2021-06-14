@@ -1,0 +1,31 @@
+Failure link
+------------
+Test: https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/lang/Thread/UncaughtExceptions.sh
+Build: https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/1855/
+Test Category: openjdk
+Test Suite Name: jdk_lang
+OS/Architecture: x86-64-windows, x86-64-linux, x86-64-osx, ...
+OpenJDK Version: 11.0.4+11
+Public Build SHAs:
+OpenJ9 - `85b0693e8`
+OMR - `6e99760b`
+JCL - `965d0c0df3`
+
+Optional info
+-------------
+- intermittent failure: no 
+- regression or new test: regression
+Test is part of the triaged jdk11 openj9 jtreg tests: https://github.com/AdoptOpenJDK/openjdk-tests/issues/585
+
+Failure output (captured from console output)
+---------------------------------------------
+Failing test is called: "A thread is never alive after you've join()ed it."
+```
+==> /root/bootjdk11/bin/java Seppuku (rc=0)
+Exception in thread "Thread-2" java.lang.RuntimeException: Seppuku!
+        at Seppuku.seppuku(Seppuku.java:17)
+        at Seppuku.run(Seppuku.java:19)
+FAIL: Expected "Exception in thread "Thread-0".*Seppuku", got Exception in thread "Thread-2" java.lang.RuntimeException: Seppuku!
+        at Seppuku.seppuku(Seppuku.java:17)
+        at Seppuku.run(Seppuku.java:19)
+```

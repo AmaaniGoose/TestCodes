@@ -1,0 +1,16 @@
+Hi all, 
+deployment technologies for applications and runtimes have progressed a lot. Kubernetes(K8s) and OpenShift(OCP) based deployments are now common. Do you think, we should add these deployment options to  OpenJ9? With JIT Server technology now being available - easy deployment to K8s and OCP allow better consumability for OpenJ9 technologies in various hybrid cloud platforms.
+
+This can include
+ - Helm Chart for K8s 
+ - Operator for OpenShift4+
+ - And various platform support in them.
+
+There may be support for other platforms we have to add but K8s powering most hybrid cloud platforms I think it helps to start from there and OpenShift4 is a natural option as well being an open Hybrid Cloud platform.
+
+Please refer to the User Story and Roadmap:
+V1
+[JITServer Deployment User Story.pdf](https://github.com/eclipse/openj9/files/5403322/JITServer.Deployment.User.Story.pdf)
+V2
+[JITServer Deployment User Storyv2.pdf](https://github.com/eclipse/openj9/files/5472945/JITServer.Deployment.User.Storyv2.pdf)
+

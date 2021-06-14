@@ -1,0 +1,17 @@
+Currently, multiple environment variables need to be set to enable debugging in OpenJ9.
+
+Reference: https://blog.openj9.org/2018/06/05/debugging-openj9-in-docker-with-gdb/
+
+```
+export UMA_DO_NOT_OPTIMIZE_CCODE="1"
+export VMDEBUG="-g3 -fno-inline -O0"
+export VMLINK="-g -O0"
+export enable_debug=yes
+export enable_optimized=no
+export enable_optimize=no
+export CXXFLAGS="-O0 -g3"
+export CFLAGS="-O0 -g3"
+export BUILD_CONFIG=debug
+```
+
+It's tedious to keep track of all the environment variables. So, a global environment variable or configure option can be added to set all the required environment variables ... to enable debugging for OpenJ9.

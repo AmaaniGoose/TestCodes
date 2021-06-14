@@ -1,0 +1,46 @@
+Failure link
+------------
+
+From an internal build:
+
+```
+21:47:03  openjdk version "1.8.0_252-internal"
+21:47:03  OpenJDK Runtime Environment (build 1.8.0_252-internal-jenkins_2020_02_20_18_16-b00)
+21:47:03  Eclipse OpenJ9 VM (build ibm_sdk-df22f7ee4f, JRE 1.8.0 Linux amd64-64-Bit 20200220_324 (JIT enabled, AOT enabled)
+21:47:03  OpenJ9   - df22f7ee4f
+21:47:03  OMR      - 83ba4e770
+21:47:03  JCL      - c291dbef83 based on jdk8u252-b00)
+```
+
+Optional info
+-------------
+
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
++++ j9vm.test.nestedJar.NestedJarFileTest: +++
+command: /home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_linux_xl_Nightly/openjdkbinary/j2sdk-image/bin/java -Xnocompressedrefs -Xgcpolicy:metronome -Xnocompressedrefs  -Xdump -Xms64m -Xmx64m -Xshareclasses:name=nestedjarfiletest,reset,verboseHelper   -Xbootclasspath:/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_linux_xl_Nightly/openjdkbinary/j2sdk-image/jre/lib/amd64/default/jclSC180/vm.jar:/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_linux_xl_Nightly/openjdkbinary/j2sdk-image/jre/lib/se-service.jar:/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_linux_xl_Nightly/openjdkbinary/j2sdk-image/jre/lib/rt.jar:/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_linux_xl_Nightly/openjdkbinary/j2sdk-image/jre/lib/resources.jar:/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_linux_xl_Nightly/openjdkbinary/j2sdk-image/jre/lib/jsse.jar:/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_linux_xl_Nightly/openjdkbinary/j2sdk-image/jre/lib/charsets.jar:/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_linux_xl_Nightly/openjdkbinary/j2sdk-image/jre/lib/jce.jar -classpath /home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_linux_xl_Nightly/openjdk-tests/TKG/../../jvmtest/functional/VM_Test/VM_Test.jar:/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_linux_xl_Nightly/openjdk-tests/TKG/../TKG/lib/asm-all.jar  j9vm.test.nestedJar.NestedJarFileTest load3Classes
+
+NestedJarFileTest> loadded TestC1
+Failed to find class java/util/IdentityHashMap$KeySet in shared cache for class-loader id 0.
+Stored class java/util/IdentityHashMap$KeySet in shared cache for class-loader id 0 with URL /home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_linux_xl_Nightly/openjdkbinary/j2sdk-image/jre/lib/rt.jar (index 2).
+Failed to find class java/util/IdentityHashMap$KeyIterator in shared cache for class-loader id 0.
+Stored class java/util/IdentityHashMap$KeyIterator in shared cache for class-loader id 0 with URL /home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_linux_xl_Nightly/openjdkbinary/j2sdk-image/jre/lib/rt.jar (index 2).
+Failed to find class java/util/IdentityHashMap$IdentityHashMapIterator in shared cache for class-loader id 0.
+Stored class java/util/IdentityHashMap$IdentityHashMapIterator in shared cache for class-loader id 0 with URL /home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_linux_xl_Nightly/openjdkbinary/j2sdk-image/jre/lib/rt.jar (index 2).
+Failed to find class openj9/internal/tools/attach/target/AttachHandler$1 in shared cache for class-loader id 0.
+Stored class openj9/internal/tools/attach/target/AttachHandler$1 in shared cache for class-loader id 0 with URL /home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_linux_xl_Nightly/openjdkbinary/j2sdk-image/jre/lib/rt.jar (index 2).
+Failed to find class java/util/Vector$Itr in shared cache for class-loader id 0.
+Stored class java/util/Vector$Itr in shared cache for class-loader id 0 with URL /home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_linux_xl_Nightly/openjdkbinary/j2sdk-image/jre/lib/rt.jar (index 2).
+Failed to find class java/lang/Thread$State in shared cache for class-loader id 0.
+Stored class java/lang/Thread$State in shared cache for class-loader id 0 with URL /home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_linux_xl_Nightly/openjdkbinary/j2sdk-image/jre/lib/rt.jar (index 2).
+Error: Class TestA2 should be found in the shared cache
+*** Test FAILED *** (j9vm.test.nestedJar.NestedJarFileTest)
+
+J9vmTest_1_FAILED
+```
+
+Rebuild the failed tests in <Jenkins URL>=https://ci.adoptopenjdk.net/job/Grinder, use the following links: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=functional&PLATFORM=x86-64_linux_xl&TARGET=J9vmTest_1

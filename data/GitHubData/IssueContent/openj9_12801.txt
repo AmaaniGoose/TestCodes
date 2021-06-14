@@ -1,0 +1,3 @@
+Recognize ForceInline annotation in JIT using helpers implemented in [1]
+
+[1] https://github.com/eclipse-openj9/openj9/pull/12679

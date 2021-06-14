@@ -1,0 +1,14 @@
+
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_extended.external_x86-64_linux_wycheproof/5/console
+
+```
+12:37:34  FAIL: //:BouncyCastleTest (see /root/.cache/bazel/_bazel_root/4af82d3e9bd7b193f65dd70758adcba4/execroot/__main__/bazel-out/k8-fastbuild/testlogs/BouncyCastleTest/test.log)
+12:37:34  Target //:BouncyCastleTest up-to-date:
+12:37:34    bazel-bin/BouncyCastleTest.jar
+12:37:34    bazel-bin/BouncyCastleTest
+12:37:34  INFO: Elapsed time: 291.111s, Critical Path: 290.40s
+12:37:34  INFO: 3 processes: 3 local.
+12:37:34  INFO: Build completed, 1 test FAILED, 7 total actions
+12:37:34  //:BouncyCastleTest                                                      FAILED in 284.2s
+12:37:34    /root/.cache/bazel/_bazel_root/4af82d3e9bd7b193f65dd70758adcba4/execroot/__main__/bazel-out/k8-fastbuild/testlogs/BouncyCastleTest/test.log
+```

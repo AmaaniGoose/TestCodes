@@ -1,0 +1,17 @@
+Set of 5 ipv6 tests have failed for the second time on the same machine since 3rd Jan.
+Only seems to be affecting this machine on jdk8.
+
+Last passing build on this machine (3rd Jan)
+https://ci.adoptopenjdk.net/user/adam-thorpe/my-views/view/Nightly%20test%20openjdk%20openJ9/job/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_xl/109/
+
+Most recent failure (10th Jan)
+https://ci.adoptopenjdk.net/user/adam-thorpe/my-views/view/Nightly%20test%20openjdk%20openJ9/job/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_xl/115/
+
+Failing tests:
+```
+java/net/Inet6Address/B6206527.java.B6206527
+java/net/InetAddress/CheckJNI.java.CheckJNI
+java/net/Socket/LinkLocal.java.LinkLocal
+java/net/ipv6tests/B6521014.java.B6521014
+java/net/ipv6tests/TcpTest.java.TcpTest
+```

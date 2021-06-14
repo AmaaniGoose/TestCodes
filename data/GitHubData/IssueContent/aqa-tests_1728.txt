@@ -1,0 +1,7 @@
+- [x] there is no need to [iterationCount](https://github.com/AdoptOpenJDK/openjdk-tests/blob/481fb72c1030a2693af9d7b078c252f3d457a450/buildenv/jenkins/JenkinsfileBase#L393), we can just use variable `i`
+
+- [x] we do not have `native-test-lib` anymore, following code can be removed
+https://github.com/AdoptOpenJDK/openjdk-tests/blob/481fb72c1030a2693af9d7b078c252f3d457a450/get.sh#L349
+
+- [ ] due to [Merge compressedrefs and non-compressedrefs tests builds into one](https://github.com/eclipse/openj9/issues/9231) work, `*_xl` should be removed (pending on https://github.com/eclipse/openj9/issues/9257). For example, 
+https://github.com/AdoptOpenJDK/openjdk-tests/blob/481fb72c1030a2693af9d7b078c252f3d457a450/buildenv/jenkins/openjdk_tests#L12

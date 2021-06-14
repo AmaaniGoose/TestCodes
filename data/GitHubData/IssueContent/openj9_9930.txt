@@ -1,0 +1,3 @@
+Take care of some cosmetic changes like:
+
+https://github.com/eclipse/openj9/pull/9866#discussion_r441208955

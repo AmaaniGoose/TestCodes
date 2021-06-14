@@ -1,0 +1,9 @@
+Please put the name of the software product (and affected platforms if relevant) in the title of this issue
+
+- [x] Missing install
+- [ ] Bug in ansible playbook
+- [x] Request for new playbook addition
+
+Details: The default setting in `/proc/sys/kernel/core_pattern` on Ubuntu is to have it set to `|/usr/share/apport/apport %p %s %c %d %P %E`. This prevents processes dumping core in docker by default. A fix is to set it to `core` which appears to cause the behavior we want. We should probably understand the implications and any side effects of doing this before implementing it, but it gives us a viable solution that I've implemented on three machines I've been experimenting with as part of https://github.com/AdoptOpenJDK/openjdk-infrastructure/issues/1809 (test-ibmcloud-ubuntu1604-x64-1, test-packet-ubuntu1804-armv8-1, and the new 20.04 host I'm working with)
+
+If added to the playbooks it will need to be done in a way that persists across reboots (what I've done on the two referenced machines will not at the moment, so it will get lost if they are restarted)

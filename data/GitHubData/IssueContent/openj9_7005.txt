@@ -1,0 +1,18 @@
+Hello,
+
+I have been using openj9 replacing hotspot, and the services we are running have significantly improved both in terms of memory usage and responsiveness.  Currently, I am facing an issue.
+I am running an application with openj9 using following flags.
+
+"-Xminf0.2",
+"-Xmaxf0.4",
+
+[According to doc](https://www.ibm.com/support/knowledgecenter/en/SSYKE2_8.0.0/openj9/xminf/index.html) these flags specifies the minimum and maximum proportion of the heap that must remain free after a global garbage collection cycle.
+
+If the free space is above or below these limits, the OpenJ9 VM attempts to adjust the heap size so that: -Xminf ≤ free space ≤ -Xmaxf.
+
+But it does not seem to shrink enough space after a gc
+![screenshot-gceasy io-2019 09 06-14_45_58](https://user-images.githubusercontent.com/55003540/64462478-6265af80-d0b5-11e9-923c-115ab634a2a8.png)
+
+Am I missing something?
+
+Regards

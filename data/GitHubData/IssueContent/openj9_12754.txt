@@ -1,0 +1,47 @@
+Java -version output
+--------------------
+
+```
+openjdk version "16.0.1" 2021-04-20
+OpenJDK Runtime Environment AdoptOpenJDK-16.0.1+9 (build 16.0.1+9)
+Eclipse OpenJ9 VM AdoptOpenJDK-16.0.1+9 (build openj9-0.26.0, JRE 16 Windows 7 amd64-64-Bit Compressed References 20210421_24 (JIT enabled, AOT enabled)
+OpenJ9   - b4cc246d9
+OMR      - 162e6f729
+JCL      - cea22090ecf based on jdk-16.0.1+9)
+
+```
+
+Summary of problem
+-------------------
+I get wrong gc information by using [spark](https://github.com/lucko/spark) .This problem happen on JDK11_openj9 and JDK16_openj9.
+![2021-05-22_14 53 06](https://user-images.githubusercontent.com/40121560/119218104-2dabbd00-bb11-11eb-8f7d-f4a32b8c0355.jpg)
+
+
+
+Diagnostic files
+----------------
+
+Part spark GC Monitoring print(using JDK8):
+```
+[14:50:42] [spark-fabric-async-worker/INFO]: [CHAT] [??] GC monitor enabled.
+[14:50:43] [spark-fabric-async-worker/INFO]: [CHAT] [??] Young Gen GC lasting 7 ms. (cause = collect due to normal GC activity)
+[14:50:43] [spark-fabric-async-worker/INFO]: [CHAT]   2.1 MB moved to tenured-SOA
+[14:50:43] [spark-fabric-async-worker/INFO]: [CHAT]     282.7 MB → 284.8 MB
+[14:50:43] [spark-fabric-async-worker/INFO]: [CHAT]   2.6 MB freed from nursery-survivor
+[14:50:43] [spark-fabric-async-worker/INFO]: [CHAT]     19.1 MB → 16.6 MB (13%)
+[14:50:43] [spark-fabric-async-worker/INFO]: [CHAT]   5.9 KB freed from JIT code cache
+[14:50:43] [spark-fabric-async-worker/INFO]: [CHAT]     15.2 MB → 15.2 MB (0%)
+[14:50:43] [spark-fabric-async-worker/INFO]: [CHAT]   124.9 MB freed from nursery-allocate
+[14:50:43] [spark-fabric-async-worker/INFO]: [CHAT]     129.6 MB → 4.7 MB (96%)
+```
+GC Monitoring print(Using JDK16):
+```
+[14:52:45] [spark-fabric-async-worker/INFO]: [CHAT] [?] Young Gen GC lasting 5 ms. (cause = collect due to normal GC activity)
+[14:52:45] [spark-fabric-async-worker/INFO]: [CHAT]   307.8 KB moved to class storage
+[14:52:45] [spark-fabric-async-worker/INFO]: [CHAT]     281.8 MB → 282.1 MB
+[14:52:45] [spark-fabric-async-worker/INFO]: [CHAT]   1.8 MB freed from nursery-survivor
+[14:52:45] [spark-fabric-async-worker/INFO]: [CHAT]     14.4 MB → 12.7 MB (12%)
+[14:52:45] [spark-fabric-async-worker/INFO]: [CHAT]   110.3 MB freed from tenured-LOA
+[14:52:45] [spark-fabric-async-worker/INFO]: [CHAT]     112.2 MB → 1.9 MB (98%)
+
+```

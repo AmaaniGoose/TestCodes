@@ -1,0 +1,5 @@
+There was some discussion in https://github.com/eclipse/openj9/issues/12357#issuecomment-814395603 about improving the DDR compatibility story for fields, somewhat similar to the work done for constants via https://github.com/eclipse/openj9/pull/12210.
+
+One idea is to limit generation of methods for new fields at build time, requiring them to be added to a compatibility file. The compatibility file contains instructions to developers that use of fields added to the file need to handle NoSuchFieldError / NoSuchMethodError since the field doesn't exist in older core files. Adding to the compatibility file is also a reminder to reviewers to ensure that new fields are handled properly for compatibility.
+
+Another idea is for the code generated for newer fields to throw a checked Exception that needs to be handled by callers. This ensures that callers added either when the field is added or later need to think about it and handle the exception. Reviewers would see the exception handling and know to check the fields are handled properly for compatibility.

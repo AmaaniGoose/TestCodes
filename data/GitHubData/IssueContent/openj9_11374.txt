@@ -1,0 +1,17 @@
+I'm trying to fix the `xlpTests` test on Mac, to run properly and pass. ATM it prints the following, doesn't test any large pages, and passes.
+```
+[2020-12-04T04:07:35.529Z] Runner couldn't determine underlying OS. Got OS Name:mac os x
+[2020-12-04T04:07:35.529Z] WARNING: Failed to determine underlying OS. This test needs to know underlying OS.
+```
+
+After adding Mac into the list of platforms, I've run into a snag. The OMR port library for Mac hard codes 3 page sizes into the supported page size table.
+
+1) 4k
+2) 0 (zero) with flags OMRPORT_VMEM_PAGE_FLAG_SUPERPAGE_ANY
+3) #if defined(VM_FLAGS_SUPERPAGE_SIZE_2MB) - which it is - 2m
+
+The problem is that the `-verbose:sizes` implementation stops when it finds the 0 entry and doesn't include the `2m` entry in the output. https://github.com/eclipse/openj9/blob/master/runtime/gc_verbose_java/VerboseJava.cpp#L307
+
+However, when the user specifies a large page size, it's validated via vmem_find_valid_page_size() which iterates using the flags field and finds 2m to be a valid size.
+https://github.com/eclipse/openj9-omr/blob/openj9/port/osx/omrvmem.c#L614
+

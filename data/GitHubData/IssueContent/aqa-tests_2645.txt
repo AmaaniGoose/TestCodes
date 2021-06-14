@@ -1,0 +1,3 @@
+Related to the now stale pull request for https://github.com/adoptium/aqa-tests/pull/1833, this enhancement issue is to add support for using Docker images from other registries (besides where we currently pull from... the AdoptOpenJDK Docker repo).
+
+This is not urgent, but wanted to create it so we do not lose the request, as we will close the stale PR that has no associated issue.

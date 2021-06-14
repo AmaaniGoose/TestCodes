@@ -1,0 +1,45 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk14_j9_extended.functional_ppc64le_linux_Nightly/64`
+cent7p8j91
+```
+00:54:59  openjdk version "14-internal" 2020-03-17
+00:54:59  OpenJDK Runtime Environment (build 14-internal+0-adhoc.jenkins.BuildJDK14ppc64lelinuxNightly)
+00:54:59  Eclipse OpenJ9 VM (build ibm_sdk-0852f80a4a, JRE 14 Linux ppc64le-64-Bit Compressed References 20200328_75 (JIT enabled, AOT enabled)
+00:54:59  OpenJ9   - 0852f80a4a
+00:54:59  OMR      - e9bed7888
+00:54:59  JCL      - 77c5e421a5e based on jdk-14+36)
+```
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+There was 1 error:
+1) testSharedCacheJavaAPI(tests.sharedclasses.options.junit.TestOptionsDefault)tests.sharedclasses.TestFailedException: SharedClassUtilities.getSharedCacheInfo failed: Invalid number of cache found	expected: 7	found: 8
+ oldCacheCount is 0
+ persistentGroupAccessCount is 1
+ nonpersistentGroupAccessCount is 1
+ persistentCount is 3
+ nonpersistentCount is 1
+ snapshotCount is 1
+	at tests.sharedclasses.TestUtils.fail(TestUtils.java:598)
+	at tests.sharedclasses.options.TestSharedCacheJavaAPI.main(TestSharedCacheJavaAPI.java:208)
+	at tests.sharedclasses.options.junit.TestOptionsBase.testSharedCacheJavaAPI(TestOptionsBase.java:120)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+
+FAILURES!!!
+Tests run: 168,  Failures: 0,  Errors: 1
+
+
+testSCCacheManagement_0_FAILED
+```
+
+To rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links: https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=14&JDK_IMPL=openj9&BUILD_LIST=functional&PLATFORM=ppc64le_linux&TARGET=testSCCacheManagement_0

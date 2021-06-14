@@ -1,0 +1,2 @@
+See #8311
+JIT still replaces readObject() with redirectedReadObject(ObjectInputStream iStream, Class caller). Notice this opt currently doesn't apply to the new API readString() but it's easy to apply with some work.

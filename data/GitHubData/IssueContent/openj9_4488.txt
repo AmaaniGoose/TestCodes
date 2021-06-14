@@ -1,0 +1,15 @@
+Problem: When jlinking, I noticed the resulting directories have distinctly different sizes.
+
+This is a footprint bug, as one of jlinking's primary advantages is disk size, and this negates part of that advantage.
+
+Details: Dinakar discovered that the main difference (on Linux at least) is in the properties and dat files.
+
+Example:
+
+```jlink --add-modules java.base --output C:\output_folder```
+
+Hotspot 11 result on Windows: 38.0mb
+OpenJ9 11 result on Windows: 50.6mb
+
+Hotspot 11 result on Linux: 46.8mb
+OpenJ9 11 result on Linux: 52.6mb

@@ -1,0 +1,7 @@
+The `CpuUtilization` class currently uses the `j9sysinfo_get_CPU_utilization` API to extract the CPU utilization times for the entire system, and then uses these utilization times to calculate the CPU load based on the number of active cores.
+
+This is fine, except it does not work on z/OS, where there is no way to extract the CPU utilization times for the entire system. Instead we've delivered the `omrsysinfo_get_CPU_load` as part of eclipse/omr#4702 which returns the instantaneous CPU load for the entire system. On non-z/OS platforms it effectively utilizes the `j9sysinfo_get_CPU_utilization` API and calculates the same value currently computed in `CpuUtilization`, but on z/OS we query a system value which extracts the system CPU load.
+
+We should migrate to using the new API so we can support z/OS.
+
+[1] https://github.com/eclipse/openj9/blob/14d688fb3f49e75e73a3155aa71cafea906ce076/runtime/compiler/env/CpuUtilization.cpp#L66

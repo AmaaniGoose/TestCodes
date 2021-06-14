@@ -1,0 +1,3 @@
+Vijay @vijaysun-omr pointed out off-line that the JIT compiler applies optimizations for `arraycopy` operations that will need to account for the possibility of flattenable arrays whose component types are value types.
+
+This issue is intended to track investigation into optimizations on `arraycopy`, and ensure they are disabled when value types are enabled for correctness, or only applied for arrays whose components types are known not to be value types.

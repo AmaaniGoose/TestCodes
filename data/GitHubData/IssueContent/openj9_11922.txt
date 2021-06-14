@@ -1,0 +1,35 @@
+### Errors
+
+`MethodHandles.collectArguments` issues that are seen when OJDK MHs are enabled in OpenJ9.
+
+```
+java.lang.IndexOutOfBoundsException: bad index: 3
+	at java.base/java.lang.invoke.MethodType.newIndexOutOfBoundsException(MethodType.java:233) from jrt:/java.base
+	at java.base/java.lang.invoke.MethodType.insertParameterTypes(MethodType.java:438) from jrt:/java.base
+	at java.base/java.lang.invoke.MethodType.insertParameterTypes(MethodType.java:479) from jrt:/java.base
+	at java.base/java.lang.invoke.MethodHandles.collectArgumentsChecks(MethodHandles.java:5752) from jrt:/java.base
+	at java.base/java.lang.invoke.MethodHandles.collectArguments(MethodHandles.java:5732) from jrt:/java.base
+```
+
+```
+java.lang.ArrayIndexOutOfBoundsException
+	at java.base/java.lang.invoke.MethodType.parameterType(MethodType.java:775) from jrt:/java.base
+	at java.base/java.lang.invoke.MethodHandles.collectArgumentsChecks(MethodHandles.java:5754) from jrt:/java.base
+	at java.base/java.lang.invoke.MethodHandles.collectArguments(MethodHandles.java:5732) from jrt:/java.base
+```
+
+### Failing Test Targets
+
+1. `JCL_Test_*` [sanity.functional] 
+    - `test_CollectArgumentsNegative`
+    - `test_VoidCollectArgumentsNegative`
+
+Repetitions of the above error are seen because the test target is run with different JVM arguments.
+
+### How-to Run Tests?
+
+https://github.com/eclipse/openj9/blob/master/test/docs/OpenJ9TestUserGuide.md
+
+### Steps to build an OpenJ9 JDK with OJDK MHs enabled
+
+Refer to #11458.

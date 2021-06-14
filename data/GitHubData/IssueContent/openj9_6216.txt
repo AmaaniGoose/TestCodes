@@ -1,0 +1,8 @@
+As part of [this](https://github.com/eclipse/openj9/pull/5926)  we added a feature to JIT to compress the data (meta data + code data) each method before storing it into the shared class cache.  
+When we write data for a method into shared class cache it calls following function,
+https://github.com/eclipse/openj9/blob/b44844b02466ddf195eb9d8d6587ed89374a5f2a/runtime/shared_common/CompiledMethodManager.hpp#L88
+Which writes both metadata and codedata in contiguous block of memory. When we request data for method to do relocation in AOT load run we get the whole buffer and from the information we already have in the data header we access metadata and codedata. 
+
+With the [changes]((https://github.com/eclipse/openj9/pull/5926) we combine the codedata and metadata before compressing it so that `zlib` deflate facility has larger sized of buffer to deflate and we can get better compression ratio as well as minimize the penalty of deflating two buffers.
+
+I am opening up this issue to keep track of this clean up work as well as adding a documentation for the `AOTCompression` feature.   

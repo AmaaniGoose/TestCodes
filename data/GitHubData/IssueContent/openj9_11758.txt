@@ -1,0 +1,7 @@
+```
+[2021-01-23T06:31:14.824Z] /home/jenkins/workspace/Build_JDKnext_ppc64_aix_OpenJDK/build/aix-ppc64-server-release/support/j9jcl/java.base/share/classes/java/lang/String.java:537: error: cannot find symbol
+[2021-01-23T06:31:14.824Z] 			StringCoding.Result scResult = StringCoding.decode(data, start, length);
+[2021-01-23T06:31:14.824Z] 			            ^
+[2021-01-23T06:31:14.824Z]   symbol:   class Result
+[2021-01-23T06:31:14.824Z]   location: class StringCoding
+```

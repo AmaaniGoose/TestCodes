@@ -1,0 +1,9 @@
+`testDefaultValueWithNonValueType` has been disabled in PR https://github.com/eclipse/openj9/pull/11560 to allow hotspot to run ValueTypeTests. The test is disabled because the change performed to make it work with hotspot has made it to longer work with OpenJ9.
+
+When `makeValueTypeDefaultValue` is called in the ValueTypeGenerator, it now passes the classname as either an L-type or a Q-type to defaultvalue, instead of always a Q-type. 
+
+`mv.visitTypeInsn(DEFAULTVALUE, getSigFromSimpleName(valueName, isRef));`
+instead of
+`mv.visitTypeInsn(DEFAULTVALUE, getSigFromSimpleName(valueName, false));`
+
+This results in a `java.lang.NoClassDefFoundError` in OpenJ9.

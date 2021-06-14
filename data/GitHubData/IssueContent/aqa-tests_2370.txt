@@ -1,0 +1,6 @@
+As we run more and more test builds nightly and weekly with different jvm and versions and parallelization, the machine issue (i.e., space issue, git issue, network issue, etc) on one machine could tank the whole nightly run on that platform. I would like to investigate to see if we can mark Jenkins node offline automatically due to machine issues.
+
+example of a bad run:
+![image](https://user-images.githubusercontent.com/19273206/110704206-a5c93e80-81c2-11eb-9f8b-794207a33dbf.png)
+
+It looks like there is a Jenkins plugin for it https://plugins.jenkins.io/offlineonfailure-plugin/

@@ -1,0 +1,16 @@
+The issue is created to keep track of all PRs specific to this new feature, which also covers the failing jtreg test suites originally raised at https://github.com/eclipse/openj9/issues/11195
+
+**[1]  DownCall**
+(1) Phase 1: primitive type support on X86_64 & Aarch64 (ARM8 is Aarch64 as confirmed by Joe), which includes Linux/x86_64, Windows/x86_64 and Linux/Aarch64.
+https://github.com/ibmruntimes/openj9-openjdk-jdk16/pull/46 (OpenJDK16) and https://github.com/eclipse/openj9/pull/12413 (OpenJ9)
+
+(2) Phase 2 & 3: struct support on arguments and return value.
+[to be updated]
+
+(3) Phase 4: support on PPC64/s390x, which includes Linux/PPC64LE,  AIX/PPC64, and Linux/s390.
+[to be updated]
+
+**[2]  UpCall**
+[to be updated]
+
+FYI:  @tajila, @pshipton, @DanHeidinga

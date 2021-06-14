@@ -1,0 +1,1 @@
+The sequence that occurs for an async compile is different from a sync compile. The process for both of these types of compilation should be documented.

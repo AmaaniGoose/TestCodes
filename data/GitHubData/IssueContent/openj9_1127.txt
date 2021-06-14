@@ -1,0 +1,51 @@
+Test results from the openjdk regression test group run against the nightly openjdk8-openj9 build at AdoptOpenJDK:  Test results: passed: 323; error: 1
+
+https://ci.adoptopenjdk.net/view/work%20in%20progress/job/test_personal/183/testReport/junit/java_io_Serializable_clearHandleTable_ClearHandleTable/java/ClearHandleTable/
+
+https://ci.adoptopenjdk.net/view/work%20in%20progress/job/test_personal/lastSuccessfulBuild/artifact/jvmtest/openjdk_regression/work/java/io/Serializable/clearHandleTable/ClearHandleTable.jtr.xml
+
+Error in java/io/Serializable/clearHandleTable with Agent communication error: java.io.EOFException
+
+02:51:47 [2018-02-08 01:51:47,456] Agent[0]: stderr: JVMDUMP010I Heap dump written to /home/jenkins/workspace/test_personal/jvmtest/openjdk_regression/work/scratch/2/heapdump.20180208.015146.25476.0011.phd
+02:51:47 [2018-02-08 01:51:47,457] Agent[0]: stderr: JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/test_personal/jvmtest/openjdk_regression/work/scratch/2/javacore.20180208.015146.25476.0012.txt' in response to an event
+02:51:47 [2018-02-08 01:51:47,558] Agent[0]: stderr: JVMDUMP010I Java dump written to /home/jenkins/workspace/test_personal/jvmtest/openjdk_regression/work/scratch/2/javacore.20180208.015146.25476.0012.txt
+02:51:47 [2018-02-08 01:51:47,558] Agent[0]: stderr: JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/test_personal/jvmtest/openjdk_regression/work/scratch/2/Snap.20180208.015146.25476.0013.trc' in response to an event
+02:51:47 [2018-02-08 01:51:47,558] Agent[0]: stderr: JVMDUMP010I Snap dump written to /home/jenkins/workspace/test_personal/jvmtest/openjdk_regression/work/scratch/2/Snap.20180208.015146.25476.0013.trc
+02:51:47 [2018-02-08 01:51:47,558] Agent[0]: stderr: JVMDUMP013I Processed dump event "systhrow", detail "java/lang/OutOfMemoryError".
+02:51:47 [2018-02-08 01:51:47,558] Agent[0]: stderr: java.lang.OutOfMemoryError: Java heap space
+02:51:47 [2018-02-08 01:51:47,559] Agent[0]: stderr: 	at com.sun.javatest.regtest.agent.MainActionHelper$SameVMThreadGroup.liveThreads(MainActionHelper.java:324)
+02:51:47 [2018-02-08 01:51:47,559] Agent[0]: stderr: 	at com.sun.javatest.regtest.agent.MainActionHelper$SameVMThreadGroup.cleanup(MainActionHelper.java:291)
+02:51:47 [2018-02-08 01:51:47,559] Agent[0]: stderr: 	at com.sun.javatest.regtest.agent.MainActionHelper$SameVMThreadGroup.access$000(MainActionHelper.java:262)
+02:51:47 [2018-02-08 01:51:47,559] Agent[0]: stderr: 	at com.sun.javatest.regtest.agent.MainActionHelper.runClass(MainActionHelper.java:139)
+02:51:47 [2018-02-08 01:51:47,559] Agent[0]: stderr: 	at com.sun.javatest.regtest.agent.AgentServer.doMain(AgentServer.java:237)
+02:51:47 [2018-02-08 01:51:47,559] Agent[0]: stderr: 	at com.sun.javatest.regtest.agent.AgentServer.run(AgentServer.java:183)
+02:51:47 [2018-02-08 01:51:47,559] Agent[0]: stderr: 	at com.sun.javatest.regtest.agent.AgentServer.main(AgentServer.java:59)
+02:51:47 [2018-02-08 01:51:47,560] Agent[0]: stderr: Exception in thread "main" java.lang.SecurityException: System.exit() forbidden by JT Harness
+02:51:47 [2018-02-08 01:51:47,560] Agent[0]: stderr: 	at com.sun.javatest.regtest.agent.JavaTestSecurityManager.checkExit(JavaTestSecurityManager.java:116)
+02:51:47 [2018-02-08 01:51:47,560] Agent[0]: stderr: 	at java.lang.Runtime.exit(Runtime.java:107)
+02:51:47 [2018-02-08 01:51:47,560] Agent[0]: stderr: 	at java.lang.System.exit(System.java:352)
+02:51:47 [2018-02-08 01:51:47,560] Agent[0]: stderr: 	at com.sun.javatest.regtest.agent.AgentServer.main(AgentServer.java:62)
+02:51:48 TEST: java/io/Serializable/clearHandleTable/ClearHandleTable.java
+
+---------------------
+
+As links above expire, steps to reproduce locally (on x86-64_linux machine and assume cloned into /tmp):
+
+Get test materials and SDK:
+cd /tmp
+git clone https://github.com/AdoptOpenJDK/openjdk-tests.git
+cd /tmp/openjdk-tests
+./get.sh -s /tmp/openjdk8_j9_nightlybuild -t /tmp/openjdk-tests -p x64_linux -v openjdk8-openj9 -r nightly
+
+Update the excludes file to reinclude the test you want to retry: 
+/tmp/openjdk-tests/openjdk_regression/ProblemList_openjdk8-openj9.txt
+
+Configure/compile/execute tests:
+cd /tmp/openjdk-tests/TestConfig
+export JAVA_BIN=/tmp/openjdk8_j9_nightlybuild/jre/bin 
+export SPEC=linux_x86-64_cmprssptrs
+export JAVA_VERSION=SE80
+export BUILD_LIST=openjdk_regression
+make -f run_configure.mk
+make compile
+make jdk_io

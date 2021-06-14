@@ -1,0 +1,8 @@
+In the OpenJDK build instructions "Setting up your build environment without Docker" section (e.g. [v16](https://github.com/eclipse-openj9/openj9/blob/master/doc/build-instructions/Build_Instructions_V16.md#setting-up-your-build-environment-without-docker)) step 2 did not work for me. gcc-9 and g++-9 versions were still used in the build. What I did instead was run the following:  
+
+```
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 1
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 1
+```  
+
+[Source](https://askubuntu.com/questions/1229774/how-to-use-an-older-version-of-gcc)

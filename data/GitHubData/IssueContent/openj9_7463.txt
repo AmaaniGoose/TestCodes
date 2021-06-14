@@ -1,0 +1,1 @@
+Implement #2673 for ARM 32-bit.

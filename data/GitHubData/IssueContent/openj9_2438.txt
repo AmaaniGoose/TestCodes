@@ -1,0 +1,3 @@
+`-javaagent` behaves differently if the main class is run from a named module.  We need a test project in which the code is compiled into a module.
+
+This is to test issue #2030.

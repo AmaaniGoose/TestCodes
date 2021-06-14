@@ -1,0 +1,27 @@
+Issue for tracking perf regressions on cmake builds
+
+|          | xlinux | plinux|  aix  |  zlinux  | windows |
+|----------|--------|-------|-------|----------|--------|
+|Startup   |  0%    |  0%   |   0%  |   0%     |  0%    |
+|Footprint |  0%    |  0%   |   0%  |   0%     |  0%    |
+|Throughput|  0%    |   *1  |   0%  |   0%     |  0%    |
+
+Simplified so perf gains, or measurements within noise are 0
+
+*1 - Instability in benchmark environment.
+
+
+
+Known / Suspected Issues:
+- [ ] By default the jit gets compiled with `-O0` (this has been patched out for the xlinux and plinux benchmarks)
+- [ ] Not all libraries are using split debug info
+- [x] Symbol visibility is not properly being handled on gcc, ie all symbols are being marked as public. This will negatively dynamic link time during program startup/ `dlopen()` eclipse/omr#4676 ~
+- [ ] We likely aren't building with identical configuration options. Need to compare ddr blobs  to check for diffs
+- [ ]  #8314
+
+Platforms with perf >= uma:
+- [x] xlinux
+- [ ] plinux
+- [x] zlinux
+- [x] aix
+- [ ] windows

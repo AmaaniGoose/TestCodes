@@ -1,0 +1,3 @@
+Both test folders are JSR292 related, we should merge them together by separating Java9 and Java8 src code into src90 and src80. As we don't need to take care of Java9 b148, we should update tests to suit Java9 b181 or delete tests which only applies to b148.
+
+This issue depends on the PR (#281)

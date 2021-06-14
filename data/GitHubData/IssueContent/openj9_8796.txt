@@ -1,0 +1,66 @@
+Failure link
+------------
+sanity.openjdk run: https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/22/consoleFull
+Griner run: https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/2462/console
+- test category: sanity.openjdk
+- OS/architecture: jdk14 mac
+
+Optional info
+-------------
+- intermittent failure (yes|no): no
+- regression or new test: old regression
+
+Failure output (captured from console output)
+---------------------------------------------
+Firstly, it's worth pointing out that the results of this test seem to be very inconsistent. In the sanity.openjdk nightly runs, this test fails 3/7 tests.. which I will detail below. In a grinder, 6/7 tests fail, but these are timeouts. Seems to only be affecting the 10.12 and 10.13 machines at adopt, not sure if this is because it a machine dependant problem or an OS problem.
+
+This test was changed in a recent jdk14 update, to include new tests (none of 3 failures below). However, trying to run this test on previous versions reports `Test results: no tests selected` so I believe this may have been a problem for a while and affect older openJ9 versions but we've never noticed before as these tests haven't actually been running.
+
+These tests pass hotspot in both a grinder and sanity.openjdk job
+
+Test output from sanity.openjdk run:
+```
+1)
+23:50:28  TCP echo test passed.
+23:50:28  java.net.SocketTimeoutException: Receive timed out
+23:50:28  	at java.base/sun.nio.ch.DatagramChannelImpl.trustedBlockingReceive(DatagramChannelImpl.java:665)
+23:50:28  	at java.base/sun.nio.ch.DatagramChannelImpl.blockingReceive(DatagramChannelImpl.java:595)
+23:50:28  	at java.base/sun.nio.ch.DatagramSocketAdaptor.receive(DatagramSocketAdaptor.java:219)
+23:50:28  	at EchoTest.UDPEchoTest(EchoTest.java:150)
+23:50:28  	at EchoTest.main(EchoTest.java:172)
+23:50:28  java.net.SocketTimeoutException: Receive timed out
+23:50:28  Exception in thread "main" java.lang.RuntimeException: Test failed - see log for details
+23:50:28  	at EchoTest.main(EchoTest.java:181)
+
+23:50:28  test InheritedChannelTest.test("EchoTest", [EchoTest]): failure
+23:50:28  java.lang.RuntimeException: Expected to get exit value of [0]
+23:50:28  
+23:50:28  	at jdk.test.lib.process.OutputAnalyzer.shouldHaveExitValue(OutputAnalyzer.java:455)
+23:50:28  	at InheritedChannelTest.test(InheritedChannelTest.java:121)
+
+2)
+23:50:28  test InheritedChannelTest.test("StateTest run with /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/spi/SelectorProvider/inheritedChannel/java.policy.pass", java.util.ImmutableCollections$ListN@7a51d0d0): failure
+23:50:28  org.testng.internal.thread.ThreadTimeoutException: Method org.testng.internal.TestNGMethod.test() didn't finish within the time-out 30000
+23:50:28  	at java.base/java.lang.ProcessHandleImpl.destroyProcess(ProcessHandleImpl.java:339)
+23:50:28  	at java.base/java.lang.ProcessImpl.destroy(ProcessImpl.java:518)
+23:50:28  	at java.base/java.lang.ProcessImpl.destroyForcibly(ProcessImpl.java:594)
+23:50:28  	at jdk.test.lib.process.ProcessTools.executeProcess(ProcessTools.java:395)
+23:50:28  	at jdk.test.lib.process.ProcessTools.executeProcess(ProcessTools.java:363)
+23:50:28  	at jdk.test.lib.process.ProcessTools.executeProcess(ProcessTools.java:351)
+23:50:28  	at jdk.test.lib.process.ProcessTools.executeCommand(ProcessTools.java:488)
+23:50:28  	at InheritedChannelTest.test(InheritedChannelTest.java:121)
+
+3)
+23:50:28  test InheritedChannelTest.test("StateTest run with /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/nio/channels/spi/SelectorProvider/inheritedChannel/java.policy.fail", java.util.ImmutableCollections$ListN@6ba81b0d): failure
+23:50:28  org.testng.internal.thread.ThreadTimeoutException: Method org.testng.internal.TestNGMethod.test() didn't finish within the time-out 30000
+23:50:28  	at java.base/java.lang.Object.wait(Native Method)
+23:50:28  	at java.base/java.lang.Object.wait(Object.java:192)
+23:50:28  	at java.base/java.lang.ProcessImpl.waitFor(ProcessImpl.java:474)
+23:50:28  	at jdk.test.lib.process.ProcessTools.executeProcess(ProcessTools.java:395)
+23:50:28  	at jdk.test.lib.process.ProcessTools.executeProcess(ProcessTools.java:363)
+23:50:28  	at jdk.test.lib.process.ProcessTools.executeProcess(ProcessTools.java:351)
+23:50:28  	at jdk.test.lib.process.ProcessTools.executeCommand(ProcessTools.java:488)
+23:50:28  	at InheritedChannelTest.test(InheritedChannelTest.java:121)
+```
+
+(There is a bunch more info about processes in the test log that I didn't put here for simplicity)

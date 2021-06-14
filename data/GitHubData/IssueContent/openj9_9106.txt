@@ -1,0 +1,3 @@
+https://github.com/eclipse/openj9/pull/9071 prevents AOT compilation of methods that have Constant Dynamic, Method Handle Constant, or Method Type Constant loads. This issue tracks enabling this functionality.
+
+The idea would be (to quote @andrewcraik ) "[to disable] the code that would fold these so that we just leave them as loads. They would need a relocation to load them from the constant pool, but assuming we did that then it should work, just the scope of optimization will be limited because we cannot treat them as constant."

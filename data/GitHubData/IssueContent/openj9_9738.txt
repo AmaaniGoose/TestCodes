@@ -1,0 +1,82 @@
+Failure link
+------------
+
+From an internal build `Build_JDK8_x86-64_mac_cm_Nightly/29`:
+
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+21:48:28  Compiling 816 files for BUILD_J9DDR_TEST_CLASSES
+21:48:39  /Users/jenkins/workspace/Build_JDK8_x86-64_mac_cm_Nightly/openj9/debugtools/DDR_VM/src/com/ibm/j9ddr/vm29/j9/gc/GCMarkMapStandard.java:50: error: cannot find symbol
+21:48:39  				UDATA pageIndex = heapBaseOffset.div(MM_CompactScheme.sizeof_page).mult(2);	// pairs of UDATA, so *2
+21:48:39  				                                                     ^
+21:48:39    symbol:   variable sizeof_page
+21:48:39    location: class MM_CompactScheme
+21:48:39  /Users/jenkins/workspace/Build_JDK8_x86-64_mac_cm_Nightly/openj9/debugtools/DDR_VM/src/com/ibm/j9ddr/vm29/j9/gc/GCMarkMapStandard.java:53: error: cannot find symbol
+21:48:39  					result = (int)MM_CompactScheme.sizeof_page;
+21:48:39  					                              ^
+21:48:39    symbol:   variable sizeof_page
+21:48:39    location: class MM_CompactScheme
+21:48:39  /Users/jenkins/workspace/Build_JDK8_x86-64_mac_cm_Nightly/openj9/debugtools/DDR_VM/src/com/ibm/j9ddr/vm29/j9/gc/GCMarkMapStandard.java:82: error: cannot find symbol
+21:48:39  			UDATA pageIndex = heapBaseOffset.div(MM_CompactScheme.sizeof_page).mult(2);	// pairs of UDATA, so *2
+21:48:39  			                                                     ^
+21:48:39    symbol:   variable sizeof_page
+21:48:39    location: class MM_CompactScheme
+21:48:39  /Users/jenkins/workspace/Build_JDK8_x86-64_mac_cm_Nightly/openj9/debugtools/DDR_VM/src/com/ibm/j9ddr/vm29/j9/gc/GCMarkMapStandard.java:92: error: cannot find symbol
+21:48:39  				UDATA offset = heapBaseOffset.mod(MM_CompactScheme.sizeof_page).div(2 * MM_HeapMap.J9MODRON_HEAP_SLOTS_PER_HEAPMAP_BIT * UDATA.SIZEOF);
+21:48:39  				                                                  ^
+21:48:39    symbol:   variable sizeof_page
+21:48:39    location: class MM_CompactScheme
+21:48:39  /Users/jenkins/workspace/Build_JDK8_x86-64_mac_cm_Nightly/openj9/debugtools/DDR_VM/src/com/ibm/j9ddr/vm29/j9/StringTable.java:291: error: cannot find symbol
+21:48:39  		return new UDATA(MM_StringTable.cacheSize);
+21:48:39  		                               ^
+21:48:39    symbol:   variable cacheSize
+21:48:39    location: class MM_StringTable
+21:48:40  Note: Some input files use or override a deprecated API.
+21:48:40  Note: Recompile with -Xlint:deprecation for details.
+21:48:40  Note: Some input files use unchecked or unsafe operations.
+21:48:40  Note: Recompile with -Xlint:unchecked for details.
+21:48:40  5 errors
+21:48:40  make[3]: *** [/Users/jenkins/workspace/Build_JDK8_x86-64_mac_cm_Nightly/build/macosx-x86_64-normal-server-release/jdk/ddr/test/_the.BUILD_J9DDR_TEST_CLASSES_batch] Error 1
+21:48:40  make[3]: *** Waiting for unfinished jobs....
+21:49:04  /Users/jenkins/workspace/Build_JDK8_x86-64_mac_cm_Nightly/openj9/debugtools/DDR_VM/src/com/ibm/j9ddr/vm29/j9/StringTable.java:291: error: cannot find symbol
+21:49:04  		return new UDATA(MM_StringTable.cacheSize);
+21:49:04  		                               ^
+21:49:04    symbol:   variable cacheSize
+21:49:04    location: class MM_StringTable
+21:49:04  /Users/jenkins/workspace/Build_JDK8_x86-64_mac_cm_Nightly/openj9/debugtools/DDR_VM/src/com/ibm/j9ddr/vm29/j9/gc/GCMarkMapStandard.java:50: error: cannot find symbol
+21:49:04  				UDATA pageIndex = heapBaseOffset.div(MM_CompactScheme.sizeof_page).mult(2);	// pairs of UDATA, so *2
+21:49:04  				                                                     ^
+21:49:04    symbol:   variable sizeof_page
+21:49:04    location: class MM_CompactScheme
+21:49:04  /Users/jenkins/workspace/Build_JDK8_x86-64_mac_cm_Nightly/openj9/debugtools/DDR_VM/src/com/ibm/j9ddr/vm29/j9/gc/GCMarkMapStandard.java:53: error: cannot find symbol
+21:49:04  					result = (int)MM_CompactScheme.sizeof_page;
+21:49:04  					                              ^
+21:49:04    symbol:   variable sizeof_page
+21:49:04    location: class MM_CompactScheme
+21:49:04  /Users/jenkins/workspace/Build_JDK8_x86-64_mac_cm_Nightly/openj9/debugtools/DDR_VM/src/com/ibm/j9ddr/vm29/j9/gc/GCMarkMapStandard.java:82: error: cannot find symbol
+21:49:04  			UDATA pageIndex = heapBaseOffset.div(MM_CompactScheme.sizeof_page).mult(2);	// pairs of UDATA, so *2
+21:49:04  			                                                     ^
+21:49:04    symbol:   variable sizeof_page
+21:49:04    location: class MM_CompactScheme
+21:49:04  /Users/jenkins/workspace/Build_JDK8_x86-64_mac_cm_Nightly/openj9/debugtools/DDR_VM/src/com/ibm/j9ddr/vm29/j9/gc/GCMarkMapStandard.java:92: error: cannot find symbol
+21:49:04  				UDATA offset = heapBaseOffset.mod(MM_CompactScheme.sizeof_page).div(2 * MM_HeapMap.J9MODRON_HEAP_SLOTS_PER_HEAPMAP_BIT * UDATA.SIZEOF);
+21:49:04  				                                                  ^
+21:49:04    symbol:   variable sizeof_page
+21:49:04    location: class MM_CompactScheme
+21:49:04  Note: Some input files use or override a deprecated API.
+21:49:04  Note: Recompile with -Xlint:deprecation for details.
+21:49:04  Note: Some input files use unchecked or unsafe operations.
+21:49:04  Note: Recompile with -Xlint:unchecked for details.
+21:49:04  5 errors
+21:49:04  make[3]: *** [/Users/jenkins/workspace/Build_JDK8_x86-64_mac_cm_Nightly/build/macosx-x86_64-normal-server-release/jdk/ddr/compile.done] Error 1
+21:49:04  make[2]: *** [openj9.ddr-jar] Error 2
+21:49:04  make[1]: *** [images] Error 2
+21:49:04  make: *** [images-only] Error 2
+```

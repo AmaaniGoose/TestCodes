@@ -1,0 +1,36 @@
+java/foreign/TestMismatch.java.TestMismatch (from java_foreign_TestMismatch.java)
+
+**Test Info**
+Test Name: jdk_foreign_0
+Test Duration: 2 min 52 sec
+Machine: test-sxamb-armv7l-raspbian-pi4
+TRSS link for the test output: https://trss.adoptopenjdk.net/output/test?id=5f86492f11d26031c107a5c7
+
+
+**Build Info**
+Build Name: Test_openjdk15_hs_sanity.openjdk_arm_linux
+Jenkins Build start time: Oct 13 2020, 06:09 pm
+Jenkins Build URL: https://ci.adoptopenjdk.net/job/Test_openjdk15_hs_sanity.openjdk_arm_linux/16/
+TRSS link for the build: https://trss.adoptopenjdk.net/allTestsInfo?buildId=5f8648ad11d26031c107a466
+
+
+**Java Version**
+openjdk version "15" 2020-09-15
+OpenJDK Runtime Environment Hotspot (build 15+8-202010132044)
+OpenJDK Server VM Hotspot (build 15+8-202010132044, mixed mode)
+
+
+**This test has been failed 16 times since Sep 28 2020, 06:09 pm**
+**Java Version when the issue first seen**
+openjdk version "15" 2020-09-15
+OpenJDK Runtime Environment Hotspot (build 15+8-202009282045)
+OpenJDK Server VM Hotspot (build 15+8-202009282045, mixed mode)
+Jenkins Build URL: https://ci.adoptopenjdk.net/job/Test_openjdk15_hs_sanity.openjdk_arm_linux/1/
+
+The test failed on machine test-sxamb-armv7l-raspbian-pi4 6 times 
+The test failed on machine build-scaleway-ubuntu1604-armv7-1 2 times 
+The test failed on machine test-aahlenst-armv7-raspbian-pi4-2 2 times 
+The test failed on machine build-scaleway-ubuntu1604-armv7-2 2 times 
+The test failed on machine test-aahlenst-armv7-raspbian-pi4-1 4 times 
+
+[Rerun in Grinder](https://ci.adoptopenjdk.net/job/Grinder/parambuild/?TARGET=jdk_foreign_0&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=&amp;DOCKER_REQUIRED=false&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;PLATFORM=arm_linux&amp;KEEP_REPORTDIR=true&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;ARTIFACTORY_SERVER=&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=15&amp;USER_CREDENTIALS_ID=&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=&amp;JDK_REPO=https%3A%2F%2Fgithub.com%2Fadoptopenjdk%2Fopenjdk-jdk15u&amp;RELEASE_TAG=&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=&amp;UPSTREAM_JOB_NAME=build-scripts%2Fjobs%2Fjdk15u%2Fjdk15u-linux-arm-hotspot&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=dev&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=hotspot&amp;SSH_AGENT_CREDENTIAL=&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=openjdk&amp;UPSTREAM_JOB_NUMBER=66&amp;TIME_LIMIT=10&amp;JVM_OPTIONS=&amp;PARALLEL=None)

@@ -1,0 +1,5 @@
+Harmony code is required for certain legacy builds, but not Java 9 or OpenJ9.
+Request a configuration parameter, e.g. INCLUDE_HARMONY, which is false by default,
+in the cmake build system.
+@pshipton FYI
+@dnakamura will our cmake build system handle different configurations depending on the Java spec version?

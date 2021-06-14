@@ -1,0 +1,47 @@
+Failure link
+------------
+
+From an internal build `Test_openjdkNext_j9_extended.functional_x86-64_windows_Nightly/377`:
+```
+23:37:40  openjdk version "17-internal" 2021-09-14
+23:37:40  OpenJDK Runtime Environment (build 17-internal+0-adhoc.jenkins.buildjdknextx86-64windowsnightly)
+23:37:40  Eclipse OpenJ9 VM (build master-d132a6b28b5, JRE 17 Windows Server 2016 amd64-64-Bit Compressed References 20210125_449 (JIT enabled, AOT enabled)
+23:37:40  OpenJ9   - d132a6b28b5
+23:37:40  OMR      - b38b0b77c99
+23:37:40  JCL      - fba167cf63c based on jdk-17+5)
+```
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+===============================================
+Running test testRASAPI_0 ...
+===============================================
+testRASAPI_0 Start Time: Tue Jan 26 01:29:59 2021 Epoch Time (ms): 1611642599888
+variation: NoOptions
+JVM_OPTIONS:  
+Buildfile: C:\Users\jenkins\workspace\Test_openjdkNext_j9_extended.functional_x86-64_windows_Nightly_testList_1\jvmtest\functional\RasapiTest\test.xml
+
+[test]     [junit] JVMDUMP010I Java dump written to /STDOUT/
+     [test]     [junit] JVMDUMP034I User requested Java dump using 'C:\Users\jenkins\workspace\Test_openjdkNext_j9_extended.functional_x86-64_windows_Nightly_testList_1\jvmtest\functional\RasapiTest\javacore.testJavaDumpWithSameFile.1611642614599.txt' through com.ibm.jvm.Dump.javaDumpToFile
+     [test]     [junit] JVMDUMP010I Java dump written to C:\Users\jenkins\workspace\Test_openjdkNext_j9_extended.functional_x86-64_windows_Nightly_testList_1\jvmtest\functional\RasapiTest\javacore.testJavaDumpWithSameFile.1611642614599.txt
+     [test]     [junit] JVMDUMP030W Cannot write dump to file C:\Users\jenkins\workspace\Test_openjdkNext_j9_extended.functional_x86-64_windows_Nightly_testList_1\jvmtest\functional\RasapiTest\javacore.testJavaDumpWithSameFile.1611642614599.txt: (80) The file exists.
+     [test]     [junit] JVMDUMP034I User requested Java dump using 'C:\Temp\javacore.testJavaDumpWithSameFile.1611642614599.txt' through com.ibm.jvm.Dump.javaDumpToFile
+     [test]     [junit] JVMDUMP010I Java dump written to C:\Temp\javacore.testJavaDumpWithSameFile.1611642614599.txt
+     [test]     [junit] com.ibm.jvm.InvalidDumpOptionException: Error in dump options.
+     [test]     [junit] reach here
+     [test]     [junit] JVMDUMP030W Cannot write dump to file C:\Users\jenkins\workspace\Test_openjdkNext_j9_extended.functional_x86-64_windows_Nightly_testList_1\jvmtest\functional\RasapiTest\javacore.testJavaDumpWithSameFile.1611642614599.txt: (80) The file exists.
+
+BUILD FAILED
+C:\Users\jenkins\workspace\Test_openjdkNext_j9_extended.functional_x86-64_windows_Nightly_testList_1\jvmtest\functional\RasapiTest\test.xml:52: Timeout: killed the sub-process
+
+Total time: 15 minutes 1 second
+
+testRASAPI_0_FAILED
+```
+
+Need determine if the test removes existing dump files before starting the run, or the cleanup failed due to machine issue.

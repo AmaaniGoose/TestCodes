@@ -1,0 +1,1 @@
+When runtime assumptions are serialized, the data in each record are currently pointers. This works right now because we run with ASLR disabled. However, these should be converted into offsets from the start of the image.

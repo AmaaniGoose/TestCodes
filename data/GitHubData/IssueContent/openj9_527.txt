@@ -1,0 +1,5 @@
+On openjdk we have VM options -XX:+PrintFlagsFinal and -XX:+PrintFlagsInitial which helps user check the final and the initial VM options used by the running Java. Although the javacore displays only subset of these options , it would be nice to explicitly list all when needed .
+
+For instance , if we need to check whether any option is supported/ignored by VM as in case of say -XX:+UseConcMarkSweepGC , we could simply use PrintFlagsFinal option to see whether UseConcMarkSweepGC option is listed in first place and if yes then what is its value .
+
+We could also use this facility to compare the initial(options provided to VM initially before VM has made its own tweaks and before any argument processing) and the final values to see what optimizations the VM has made . This would be helpful if the openj9 jvm makes further optimizations or platform-specific tweaks to the options .

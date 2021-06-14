@@ -1,0 +1,22 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_special.system_x86-64_windows_Nightly_mauveLoadTest/46
+MauveMultiThreadLoadTest_special_*
+```
+Can't open
+	C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x86-64_windows_Nightly_mauveLoadTest/openjdk-tests/\TKG\test_output_15928867413628\MauveMultiThreadLoadTest_special_13/20200622-233231-MauveMultiThreadLoadTestWithTraceOption/generation/generation.stdout: No such file or directory (#1)
+    (S inplace) The implicit opening of a file through use of the <>
+    filehandle, either implicitly under the -n or -p command-line
+    switches, or explicitly, failed for the indicated reason.  Usually
+    this is because you don't have read permission for a file which
+    you named on the command line.
+    
+    (F) You tried to call perl with the -e switch, but /dev/null (or
+    your operating system's equivalent) could not be opened.
+    
+Uncaught exception from user code:
+	Can't open C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x86-64_windows_Nightly_mauveLoadTest/openjdk-tests/\TKG\test_output_15928867413628\MauveMultiThreadLoadTest_special_13/20200622-233231-MauveMultiThreadLoadTestWithTraceOption/generation/generation.stdout: No such file or directory
+	stf::ProcessMgmt::Windows::start(stf::ProcessMgmt::Windows=HASH(0x158d1e8)) called at C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x86-64_windows_Nightly_mauveLoadTest/jvmtest/system/stf/stf.core/scripts/stf/Commands.pm line 268
+	stf::Commands::start_process("stf::Commands", "mnemonic", "GEN", "command", "C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x8"..., "logName", "C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x8"..., "uid", ...) called at C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x86-64_windows_Nightly_mauveLoadTest/jvmtest/system/stf/stf.core/scripts/stf/Commands.pm line 864
+	stf::Commands::run_process("stf::Commands", "mnemonic", "GEN", "command", "C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x8"..., "logName", "C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x8"..., "uid", ...) called at C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x86-64_windows_Nightly_mauveLoadTest/openjdk-tests///..//jvmtest\system\mauveLoadTest/../\stf\stf.core\scripts\stf.pl line 440
+```
+
+This seems related to https://github.com/AdoptOpenJDK/openjdk-systemtest/pull/353 and https://github.com/AdoptOpenJDK/openjdk-tests/pull/1839

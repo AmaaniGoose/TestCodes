@@ -1,0 +1,4 @@
+Currently `varHandleMethodTypeTableEntryAddress` is made into a remote call to the client, and client sends back the final result to the server. We could potentially have the server do all the calculations and eliminate the remote call.
+
+Also we could make `varHandleMethodTypeTableEntryAddress` and `isUnresolvedVarHandleMethodTypeTableEntry` into one remote call instead of two.
+May also apply to other methods like `callSiteTableEntryAddress` and `isUnresolvedCallSiteTableEntry` for example.

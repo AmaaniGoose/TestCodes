@@ -1,0 +1,30 @@
+Failure link
+------------
+
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.openjdk_aarch64_linux/101/testReport/junit/java_net_httpclient_websocket_ReaderDriver/java/ReaderDriver/
+
+- test category: sanity.openjdk
+- OS/architecture: aarch64
+
+```
+09:11:02  openjdk version "11.0.7" 2020-04-14
+09:11:02  OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.7+9-202003282325)
+09:11:02  Eclipse OpenJ9 VM AdoptOpenJDK (build master-76a961cb3, JRE 11 Linux aarch64-64-Bit Compressed References 20200328_253 (JIT enabled, AOT enabled)
+09:11:02  OpenJ9   - 76a961cb3
+09:11:02  OMR      - 2394d6578
+09:11:02  JCL      - 34c3dd7d55 based on jdk-11.0.7+9)
+```
+
+Optional info
+-------------
+
+- intermittent failure: yes
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+10:58:40  ACTION: testng -- Error. Program `/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux/openjdkbinary/j2sdk-image/jdk-11.0.7+9/bin/../bin/java' timed out (timeout set to 960000ms, elapsed time including timeout handling was 962206ms).
+```
+
+This test is known to intermittently timeout on aarch64. We will add this test to the exclude list and revisit later.

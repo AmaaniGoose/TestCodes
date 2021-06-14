@@ -1,0 +1,78 @@
+Environment: Fedora 28
+Using: https://github.com/AdoptOpenJDK/openjdk9-openj9-nightly/releases/download/jdk-9.0.4%2B12-201819061047/OpenJDK9-OPENJ9_x64_Linux_201819061047.tar.gz
+Command:
+```
+/home/mistria/sandbox/eclipse/features/org.eclipse.epp.runtime.openj9.feature_4.8.0.201806201617/jre/bin/java -Dosgi.requiredJavaVersion=1.8 -Dosgi.instance.area.default=@user.home/eclipse-workspace -XX:+UseG1GC -XX:+UseStringDeduplication -Dosgi.requiredJavaVersion=1.8 -Dosgi.dataAreaRequiresExplicitInit=true -Xms256m -Xmx1024m -jar /home/mistria/sandbox/eclipse//plugins/org.eclipse.equinox.launcher_1.5.0.v20180512-1130.jar -os linux -ws gtk -arch x86_64 -showsplash /home/mistria/sandbox/eclipse//plugins/org.eclipse.epp.package.common_4.8.0.20180616-1200/splash.bmp -launcher /home/mistria/sandbox/eclipse/eclipse -name Eclipse --launcher.library /home/mistria/sandbox/eclipse//plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.1.700.v20180518-1200/eclipse_1705.so -startup /home/mistria/sandbox/eclipse//plugins/org.eclipse.equinox.launcher_1.5.0.v20180512-1130.jar --launcher.appendVmargs -exitdata 4780058 -product org.eclipse.epp.package.rust.product -vm /home/mistria/sandbox/eclipse/features/org.eclipse.epp.runtime.openj9.feature_4.8.0.201806201617/jre/bin/java -vmargs -Dosgi.requiredJavaVersion=1.8 -Dosgi.instance.area.default=@user.home/eclipse-workspace -XX:+UseG1GC -XX:+UseStringDeduplication -Dosgi.requiredJavaVersion=1.8 -Dosgi.dataAreaRequiresExplicitInit=true -Xms256m -Xmx1024m -jar /home/mistria/sandbox/eclipse//plugins/org.eclipse.equinox.launcher_1.5.0.v20180512-1130.jar
+```
+Where `/home/mistria/sandbox/eclipse/features/org.eclipse.epp.runtime.openj9.feature_4.8.0.201806201617/jre/bin/java` is the java binary from package linked above
+
+Expected: It all works ;)
+Got:
+```
+Unhandled exception
+Type=Segmentation error vmState=0x00040000
+J9Generic_Signal_Number=00000004 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000001
+Handler1=00007F3A50F085D0 Handler2=00007F3A50063330 InaccessibleAddress=0000000000007210
+RDI=000000000000002D RSI=00007FFF76FE37D8 RAX=0000000000000001 RBX=00007F39E79F3680
+RCX=00007F3A4C502B00 RDX=00007F3A4C502B00 R8=00007F3A4C5012A0 R9=000000000000002F
+R10=00007F3A4C38F290 R11=00007F3A4C05A8D8 R12=00007FFF76FE37D8 R13=00007F3A4C502B00
+R14=00007F39E79F3690 R15=0000000000000000
+RIP=0000000000007210 GS=0000 FS=0000 RSP=00007F3A51E5AD18
+EFlags=0000000000010202 CS=0033 RBP=000000000000002D ERR=0000000000000014
+TRAPNO=000000000000000E OLDMASK=0000000000000000 CR2=0000000000007210
+xmm0 00007f3a52c933e8 (f: 1388917760.000000, d: 6.911409e-310)
+xmm1 00007f3a4c058c88 (f: 1275432064.000000, d: 6.911403e-310)
+xmm2 6369746174735f72 (f: 1953718144.000000, d: 7.685180e+170)
+xmm3 6369746174735f72 (f: 1953718144.000000, d: 7.685180e+170)
+xmm4 656e5f6c616e6769 (f: 1634625408.000000, d: 3.938506e+180)
+xmm5 00007f3a4c504360 (f: 1280328576.000000, d: 6.911404e-310)
+xmm6 00007f3a52c92990 (f: 1388915072.000000, d: 6.911409e-310)
+xmm7 00007f3a4c5017b0 (f: 1280317312.000000, d: 6.911404e-310)
+xmm8 00007f3a4c0b55d0 (f: 1275811328.000000, d: 6.911403e-310)
+xmm9 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm10 3bbcc86800000000 (f: 0.000000, d: 6.095003e-21)
+xmm11 3c76541148cbb8a2 (f: 1221310592.000000, d: 1.936679e-17)
+xmm12 bfd5be02466294dc (f: 1180865792.000000, d: -3.397222e-01)
+xmm13 3c72c00000000000 (f: 0.000000, d: 1.626303e-17)
+xmm14 bbc396ecc5eda344 (f: 3320685312.000000, d: -8.296497e-21)
+xmm15 4033687a9f1af100 (f: 2669342976.000000, d: 1.940812e+01)
+Target=2_90_20180315_120 (Linux 4.16.13-300.fc28.x86_64)
+CPU=amd64 (4 logical CPUs) (0x2db351000 RAM)
+----------- Stack Backtrace -----------
+(0x00007F3A5007CBD2 [libj9prt29.so+0x38bd2])
+(0x00007F3A50063F13 [libj9prt29.so+0x1ff13])
+(0x00007F3A5007CC4C [libj9prt29.so+0x38c4c])
+(0x00007F3A5007CD56 [libj9prt29.so+0x38d56])
+(0x00007F3A50063F13 [libj9prt29.so+0x1ff13])
+(0x00007F3A5007CAA1 [libj9prt29.so+0x38aa1])
+(0x00007F3A50F08103 [libj9vm29.so+0x9e103])
+(0x00007F3A50063F13 [libj9prt29.so+0x1ff13])
+(0x00007F3A50F08350 [libj9vm29.so+0x9e350])
+(0x00007F3A50063531 [libj9prt29.so+0x1f531])
+(0x00007F3A52084FC0 [libpthread.so.0+0x11fc0])
+---------------------------------------
+JVMDUMP039I Processing dump event "gpf", detail "" at 2018/06/20 18:30:55 - please wait.
+JVMDUMP032I JVM requested System dump using '/home/mistria/sandbox/eclipse/core.20180620.183055.1671.0001.dmp' in response to an event
+JVMPORT030W /proc/sys/kernel/core_pattern setting "|/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h %e" specifies that the core dump is to be piped to an external program.  Attempting to rename either core or core.1710.
+
+JVMDUMP012E Error in System dump: The core file created by child process with pid = 1710 was not found. Expected to find core file with name "/home/mistria/sandbox/eclipse/core.1710"
+JVMDUMP032I JVM requested Java dump using '/home/mistria/sandbox/eclipse/javacore.20180620.183055.1671.0002.txt' in response to an event
+JVMDUMP010I Java dump written to /home/mistria/sandbox/eclipse/javacore.20180620.183055.1671.0002.txt
+JVMDUMP032I JVM requested Snap dump using '/home/mistria/sandbox/eclipse/Snap.20180620.183055.1671.0003.trc' in response to an event
+JVMDUMP010I Snap dump written to /home/mistria/sandbox/eclipse/Snap.20180620.183055.1671.0003.trc
+JVMDUMP007I JVM Requesting JIT dump using '/home/mistria/sandbox/eclipse/jitdump.20180620.183055.1671.0004.dmp'
+JVMDUMP010I JIT dump written to /home/mistria/sandbox/eclipse/jitdump.20180620.183055.1671.0004.dmp
+JVMDUMP013I Processed dump event "gpf", detail "".
+JVMDUMP039I Processing dump event "abort", detail "" at 2018/06/20 18:31:51 - please wait.
+JVMDUMP032I JVM requested System dump using '/home/mistria/sandbox/eclipse/core.20180620.183151.1671.0005.dmp' in response to an event
+JVMPORT030W /proc/sys/kernel/core_pattern setting "|/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h %e" specifies that the core dump is to be piped to an external program.  Attempting to rename either core or core.1872.
+
+JVMDUMP012E Error in System dump: The core file created by child process with pid = 1872 was not found. Expected to find core file with name "/home/mistria/sandbox/eclipse/core.1872"
+JVMDUMP032I JVM requested Java dump using '/home/mistria/sandbox/eclipse/javacore.20180620.183151.1671.0006.txt' in response to an event
+JVMDUMP010I Java dump written to /home/mistria/sandbox/eclipse/javacore.20180620.183151.1671.0006.txt
+JVMDUMP032I JVM requested Snap dump using '/home/mistria/sandbox/eclipse/Snap.20180620.183151.1671.0007.trc' in response to an event
+JVMDUMP010I Snap dump written to /home/mistria/sandbox/eclipse/Snap.20180620.183151.1671.0007.trc
+JVMDUMP007I JVM Requesting JIT dump using '/home/mistria/sandbox/eclipse/jitdump.20180620.183151.1671.0008.dmp'
+JVMDUMP010I JIT dump written to /home/mistria/sandbox/eclipse/jitdump.20180620.183151.1671.0008.dmp
+JVMDUMP013I Processed dump event "abort", detail "".
+```

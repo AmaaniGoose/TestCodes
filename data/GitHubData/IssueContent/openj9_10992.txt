@@ -1,0 +1,17 @@
+Failure link
+------------
+- Grinder Link: https://ci.adoptopenjdk.net/job/Grinder/4307/testReport/
+- test category: extended.openjdk
+- test target name: jvm_compiler_0
+- OS/architecture: openjdk_x86-64_linux
+
+The failed tests can mainly be classified into following reasons:
+- aot failure, because openj9 does not provide aot material, e.g. [compiler/aot/DeoptimizationTest.java.DeoptimizationTest](https://ci.adoptopenjdk.net/job/Grinder/4307/testReport/compiler_aot_DeoptimizationTest/java/DeoptimizationTest/).
+- UnsatisfiedLinkError, when file does not exist in native folder, e.g. [TestFloatJNIArgs](https://ci.adoptopenjdk.net/job/Grinder/4307/testReport/compiler_floatingpoint_TestFloatJNIArgs/java/TestFloatJNIArgs/).
+- VM option does not exist, e.g. [TestSplitIfUnswitchedLoopsEliminated](https://ci.adoptopenjdk.net/job/Grinder/4307/testReport/compiler_loopopts_TestSplitIfUnswitchedLoopsEliminated/java/TestSplitIfUnswitchedLoopsEliminated/).
+- invalid boolean value: `null' for expression `vm.xxx’, e.g. [rtm/cli/TestRTMAbortThresholdOption](https://ci.adoptopenjdk.net/job/Grinder/4307/testReport/compiler_rtm_cli_TestRTMAbortThresholdOption/java/TestRTMAbortThresholdOption/).
+- Compilation failed, e.g. [compilercontrol/parser/DirectiveParserTest](https://ci.adoptopenjdk.net/job/Grinder/4307/testReport/compiler_compilercontrol_parser_DirectiveParserTest/java/DirectiveParserTest/)
+- RuntimeException: Expected to get exit value of X, e.g. [arguments/CheckCICompilerCount](https://ci.adoptopenjdk.net/job/Grinder/4307/testReport/compiler_arguments_CheckCICompilerCount/java/CheckCICompilerCount/).
+- missing from stdout/stderr, e.g. [c2/Test6857159](https://ci.adoptopenjdk.net/job/Grinder/4307/testReport/compiler_c2_Test6857159/java/Test6857159/)
+
+Related to issue: eclipse/openj9#10757

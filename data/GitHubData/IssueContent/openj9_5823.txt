@@ -1,0 +1,1 @@
+This option was added in Java 7 GA as a deprecated option to revert the verbose:gc output to the previous format. This option should have been removed in Java 8 GA but it was missed. This option keeps a lot of legacy code around that slows down OpenJ9 startup even when the option is not used. I would like to remove the option and all of the code related to it.

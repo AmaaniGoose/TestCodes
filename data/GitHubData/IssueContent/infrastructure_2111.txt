@@ -1,0 +1,10 @@
+Please put the name of the software product (and affected platforms if relevant) in the title of this issue
+
+- [x] Missing install
+- [x] Bug in ansible playbook
+- [ ] Request for new playbook addition
+
+Details:
+This is suppossed to be arranged in the playbooks already - but a review of the systems shows an inconsistent value.
+
+This issue is to track and repair AIX ansible playbook for AIX so that it is stable.

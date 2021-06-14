@@ -1,0 +1,6 @@
+Related to the goals identified in https://github.com/AdoptOpenJDK/openjdk-tests/issues/1522 and https://github.com/AdoptOpenJDK/openjdk-build/issues/2522, we will like to take the information from the SHA.txt file (which test jobs already create), augment it with any other information needed to rerun the exact same set of tests against a build.
+
+This work includes:
+- prototype by writing a script that can take the contents of a SHA.txt file and/or a "Rerun in Grinder link" to rerun a test job with the appropriate environment variables (input parameters) set (see https://github.com/AdoptOpenJDK/openjdk-tests/issues/2511)
+- creating an AQA BoM https://github.com/AdoptOpenJDK/openjdk-tests/issues/1169 (right now is SHA.txt, but can rename to .testInfo, to align with .buildInfo naming)
+- Investigate using the "Rerun in Grinder" functionality that TKG provides to be able to feed in the AQA BoM for test reproduction

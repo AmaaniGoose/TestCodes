@@ -1,0 +1,2 @@
+The test runtime/tests/vm_lifecycle/main.c uses the invocation API to launch and terminate VMs.
+ It appears to depend on the structure of the IBM SDK and fails in OpenJ9; with a moderate amount of work it could be made to work with OpenJ9.

@@ -1,0 +1,96 @@
+Test failure at https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/util/concurrent/forkjoin/FJExceptionTableLeak.java#L103 ...
+
+```
+test FJExceptionTableLeak.exceptionTableCleanup(): failure
+java.lang.NullPointerException
+	at FJExceptionTableLeak.retainedExceptions(FJExceptionTableLeak.java:103)
+	at FJExceptionTableLeak.failedTasks(FJExceptionTableLeak.java:145)
+	at FJExceptionTableLeak.exceptionTableCleanup(FJExceptionTableLeak.java:118)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+	at org.testng.TestRunner.run(TestRunner.java:623)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+	at org.testng.TestNG.run(TestNG.java:1018)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:115)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+```
+
+Digging deeper, execution of this ...
+
+```
+import java.lang.invoke.VarHandle;
+import java.lang.invoke.MethodHandles;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.ForkJoinTask;
+
+public class Test {
+
+   public static void main(String args[]) throws ReflectiveOperationException {
+
+      MethodHandles.Lookup lookup = MethodHandles.privateLookupIn(ForkJoinTask.class, MethodHandles.lookup());
+      VarHandle exceptionTableLockHandle = lookup.findStaticVarHandle(ForkJoinTask.class, "exceptionTableLock", ReentrantLock.class);
+      ReentrantLock exceptionTableLock = (ReentrantLock) exceptionTableLockHandle.get();
+      System.out.println("exceptionTableLock : " + exceptionTableLock);
+	  
+   }
+
+}
+```
+... yields ...
+```
+walshbp@bendev:~/jtreg_testing$ /home/walshbp/openjdk11-openj9-binary/jdk-11+28/bin/javac Test.java
+walshbp@bendev:~/jtreg_testing$ /home/walshbp/openjdk11-openj9-binary/jdk-11+28/bin/java Test
+exceptionTableLock : null
+walshbp@bendev:~/jtreg_testing$ /home/walshbp/openjdk11-hotspot-binary/jdk-11/bin/javac Test.java
+walshbp@bendev:~/jtreg_testing$ /home/walshbp/openjdk11-hotspot-binary/jdk-11/bin/java Test
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access using Lookup on Test (file:/home/walshbp/jtreg_testing/) to class java.util.concurrent.ForkJoinTask
+WARNING: Please consider reporting this to the maintainers of Test
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+exceptionTableLock : java.util.concurrent.locks.ReentrantLock@5fe5c6f[Unlocked]
+```
+
+I don't see anything in the source code to explain why the exceptionTableLock variable set in the JCL ForkJoinTask impl is nullified ...
+
+```
+walshbp@bendev:~/jep_testing/openj9-openjdk-jdk11$ egrep -r "exceptionTableLock"
+test/jdk/java/util/concurrent/forkjoin/FJExceptionTableLeak.java:    final ReentrantLock exceptionTableLock;
+test/jdk/java/util/concurrent/forkjoin/FJExceptionTableLeak.java:        VarHandle exceptionTableLockHandle = lookup.findStaticVarHandle(
+test/jdk/java/util/concurrent/forkjoin/FJExceptionTableLeak.java:            ForkJoinTask.class, "exceptionTableLock", ReentrantLock.class);
+test/jdk/java/util/concurrent/forkjoin/FJExceptionTableLeak.java:        exceptionTableLock = (ReentrantLock) exceptionTableLockHandle.get();
+test/jdk/java/util/concurrent/forkjoin/FJExceptionTableLeak.java:        exceptionTableLock.lock();
+test/jdk/java/util/concurrent/forkjoin/FJExceptionTableLeak.java:            exceptionTableLock.unlock();
+src/java.base/share/classes/java/util/concurrent/ForkJoinTask.java:    private static final ReentrantLock exceptionTableLock
+src/java.base/share/classes/java/util/concurrent/ForkJoinTask.java:            final ReentrantLock lock = exceptionTableLock;
+src/java.base/share/classes/java/util/concurrent/ForkJoinTask.java:        final ReentrantLock lock = exceptionTableLock;
+src/java.base/share/classes/java/util/concurrent/ForkJoinTask.java:        final ReentrantLock lock = exceptionTableLock;
+src/java.base/share/classes/java/util/concurrent/ForkJoinTask.java:        final ReentrantLock lock = exceptionTableLock;
+```
+
+Log archive : [FJExTabLeak.tar.gz](https://github.com/eclipse/openj9/files/2465027/FJExTabLeak.tar.gz)
+
+
+This test passes against Hotspot.

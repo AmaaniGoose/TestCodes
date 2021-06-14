@@ -1,0 +1,29 @@
+**Describe the bug**
+https://github.com/AdoptOpenJDK/openjdk-jdk11u/blob/master/test/jdk/java/lang/ProcessBuilder/checkHandles/CheckHandles.java is failing on [JDK11/HS/x86_32-windows](https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk11_hs_sanity.openjdk_x86-32_windows)
+
+**To Reproduce**
+Steps to reproduce the behavior (or Grinder rerun link):
+https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=hotspot&BUILD_LIST=openjdk&PLATFORM=x86-32_windows&TARGET=jdk_lang_0
+
+**Expected behavior**
+test passes
+
+**Screenshots**
+```
+java.lang.UnsatisfiedLinkError: 'long CheckHandles.getProcessHandleCount()'
+	at CheckHandles.getProcessHandleCount(Native Method)
+	at CheckHandles.main(CheckHandles.java:64)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+JavaTest Message: Test threw exception: java.lang.UnsatisfiedLinkError
+JavaTest Message: shutting down test
+```
+
+**Additional context**
+- Started failing on the 30th April
+- Doesn't look like an machine issue, it's been seen across all the windows boxes in the nightlies

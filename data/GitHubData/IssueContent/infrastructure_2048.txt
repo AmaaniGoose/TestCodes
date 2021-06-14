@@ -1,0 +1,20 @@
+https://adoptopenjdk.slack.com/archives/C09NW3L2J/p1615983472006900
+>gdams
+hmm so looking at travis, it seems that the builds are still not running (they changed their OSS rules recently to limit minutes.) Let me take a look
+>
+>Andreas Ahlenstorf
+Did you cancel our plan?
+Because otherwise you have to mail them. Minutes aren't replenished automatically.
+>
+>gdams
+we cancelled a while back thinking that we would no longer be exceeding the free allowance
+>
+>Andreas Ahlenstorf
+There's no such thing as a free allowance with Travis CI. You have to mail them each time and request minutes. And recently they even stopped giving them out on request.  So in the worst case we have to go through IBM (they provide a lot of hardware to Travis under the provision that projects like ours can use it free of charge).
+>
+>gdams
+We should probably just move to using our jenkins ci to build then
+
+https://github.com/AdoptOpenJDK/openjdk-infrastructure/blob/master/.travis.yml
+
+We need these docker images rebuilt with recent changes (i.e. https://github.com/AdoptOpenJDK/openjdk-infrastructure/pull/2036) as it is blocking our docker based builds.

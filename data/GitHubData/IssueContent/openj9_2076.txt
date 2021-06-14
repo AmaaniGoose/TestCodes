@@ -1,0 +1,10 @@
+Inspired by [1] OpenJDK currently annotates methods which have intrinsics with a `@HotSpotIntrinsicCandidate` annotation in the Java code to warn the reader that the method they are looking at has special consideration in the JVM.
+
+I'm finding that keeping track of methods which we accelerate in OpenJ9 to be hard as the list is rather huge [2]. This is problematic when looking at some of the clean-room implemented classes in OpenJ9 such as String, Class, Thread, etc. where having JIT intrinsic for performance is quite common to inform the reader to be careful about modifying the signatures and semantics of such methods.
+
+I wanted to open up a discussion on the possibility of introducing an `@OpenJ9IntrinsicCandidate` annotation that will be placed on all methods in classes implemented by OpenJ9 that the JIT may accelerate.
+
+The only downside I see is that we will not have such annotation on methods the JIT may accelerate which we get from OpenJDK, but we can't modify those sources at the moment anyway so it is not much for a cause for concern.
+
+[1] https://bugs.openjdk.java.net/browse/JDK-8076112
+[2] https://github.com/eclipse/openj9/blob/365ef6a59642bd6bee98be7ce3eb2d20adf17a3f/runtime/compiler/codegen/J9RecognizedMethodsEnum.hpp

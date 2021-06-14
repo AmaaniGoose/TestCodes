@@ -1,0 +1,3 @@
+![image](https://user-images.githubusercontent.com/7497587/62437321-42b92f80-b775-11e9-8152-27f415386b78.png)
+
+I use the arm-linux-aarch64/Dockerfile to build a arm64 base image， then use it to build app image. When I start an container using the app image, I got an error， as shown in FIG

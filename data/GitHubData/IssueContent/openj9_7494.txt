@@ -1,0 +1,121 @@
+ # Overview
+
+Currently there is no efficient way to determine the appropriate size of the shared cache for an application. The process involves trial and error, which means the user must start up/shut down their application and check the cache statistics to figure out the correct shared cache size. Then destroy the existing one and create a new cache with the correct size. This is undesirable.
+We can introduce new command line utility options to let users resize the cache.
+
+# Externals  
+
+- The new command utility options need to be documented.  
+
+- New NLS messages and tracepoints with detailed error information will be added. If the JVM cannot change the cache size, new NLS message with error information will be printed out.
+- DDR change: If depends on whether we change the offsets used in the shared cache metadata area and the layout of the shared cache. (Will talk about this later in the High Level Implementation Plan section). If either is changed, DDR needs to be updated accordingly and the cache generation needs to be incremented.
+
+
+# Detail
+
+The following new command line options will be introduced:
+1. -Xshareclasses:resizeCache =<_newSize_>. User can specify a new shared cache size using this option. User can use this option either to increase or decrease the cache size.
+2. -Xshareclasses:minimizeCacheSize. This option will shrink the shared cache size to the minimal possible size, make the shared cache 100%. 
+
+The old cache file will be deleted and a new cache file with the same name but the correct size will be created. (This is for persistent cache. For non-persistent cache, it will be a bit different as we also need to deleted and recreate control files. We can implement this feature on persistent cache first, then extend to non-persistent cache if necessary.) Thus, user can start up their application first with a shared cache that is large enough, then use the new command line option to shrink the cache to the appropriate size.
+
+# High Level Implementation Plan  
+
+The resize operation will change the size of 2 free spaces in the shared cache proportionally.
+
+1. Free space in the middle of the shared cache:
+https://github.com/eclipse/openj9/blob/6c7b5015c3c7b702bbe26377bc75406beeeb912b/runtime/shared_common/CompositeCache.cpp#L48toL56
+2. Free space in the debug data area:
+https://github.com/eclipse/openj9/blob/6c7b5015c3c7b702bbe26377bc75406beeeb912b/runtime/shared_common/ClassDebugDataProvider.cpp#L23toL31
+
+As a result, any offsets or SRPs across either of these free spaces needs to be fixed. 
+There are 3 types of offsets/SRPs that need to be fixed:
+
+1). Currently, the metadata are using J9ShrOffset to cache head to reference address in the shared cache.
+```
+typedef struct J9ShrOffset {
+	U_32 cacheLayer;
+	U_32 offset;
+} J9ShrOffset;
+```
+The offset need to be fixed if it is pointing to address after the shared cache free space. e.g. the `theCpOffset` in `ROMClassWrapper`.
+```
+typedef struct ROMClassWrapper {
+	J9ShrOffset theCpOffset;
+	I_16 cpeIndex;
+	J9ShrOffset romClassOffset;	
+	I_64 timestamp;
+} ROMClassWrapper;
+```
+
+2). The rom methods are using SPRs pointing to its debug info (LNT and LVT). The rom methods are in the romclass segment. If the debug data are stored out-of-line in the debug data area, such SRPs needs to be fixed. We don’t need to fix such SRPs if the debug data are stored inline with the romclass (Debug data can be stored inline if the debug debug area is full). Also LNT is using SRP pointing to the corresponding LVT (J9MethodDebugInfo->srpToVarInfo).
+
+3). The LVT are using SFPs, which need to be fixed:
+```
+typedef struct J9VariableInfoValues {
+    struct J9UTF8* name;
+    struct J9UTF8* signature;
+    struct J9UTF8* genericSignature;
+    U_32 startVisibility;
+    U_32 visibilityLength;
+    U_32 slotNumber;
+} J9VariableInfoValues;
+```
+`name, signature and genericSignature` are all SRPs. If LVT are stored out-of-line, they are pointing to UTF8s in romclass segment area/readwrite area, across the shared cache free space and debug data free space. They need to be fixed.
+
+### Possible solutions to 1)
+
+A). Iterate through all the metadata and fix the J9ShrOffset one by one when necessary.
+
+B). Instead of using offset to cache head, change J9ShrOffset to use offset to the end of metadata region if we are referencing address in the metadata region. This means DDR needs to be updated accordingly. 
+
+I prefer B).
+
+### Possible solutions to 2) and 3)
+
+A). Iterate through debug data (LVT) of every method in every romclass and fix those SRPs one by one. (Least desirable solution)
+
+B). Force the debug data to be stored inline with the romclass if the cache needs to be resized later. We can introduce a new sub-option like `-Xshareclasses:resizable`. Only when this sub-option is used to create the cache, the debug data will be stored inline with the romclass and the cache is resizable. Caches created without this option are not resizable.
+
+C). Change the cache layout. Put the debug data area before the read write area. In this way, we don’t need to fix the SRPs 3), as the position of LVT and romclass segment area won't be affected by resizing. 
+We still need to fix 2). 
+
+| Header | LNT | <- resizable freespace -> | LVT | RW area | ROM segment | <- resizable freespace -> | metadata |
+
+But this will require code change on the JIT side. We expose the following struct to JIT: https://github.com/eclipse/openj9/blob/master/runtime/oti/j9nonbuilder.h#L1224toL1233
+
+```
+typedef struct J9SharedClassCacheDescriptor {
+	struct J9SharedCacheHeader* cacheStartAddress;
+	void* romclassStartAddress;
+	void* metadataStartAddress;
+	struct J9MemorySegment* metadataMemorySegment;
+	UDATA cacheSizeBytes;
+	void* deployedROMClassStartAddress;
+	struct J9SharedClassCacheDescriptor* next;
+	struct J9SharedClassCacheDescriptor* previous;
+} J9SharedClassCacheDescriptor;
+```
+
+JIT code is using offset to `cacheStartAddress` to reference address in the romclass segment area. Those JIT offsets will be invalid after the change of free space in the debug data area.  I guess JIT/AOT does not reference any debug data (LNT), so they can simply change to use offset to `romclassStartAddress` instead. 
+
+I prefer C).
+
+Also the values like totalBytes, debugRegionSize,updateSRP etc. in the cache header need to be updated.
+
+
+# Performance
+
+No impact to performance as the new options are command line utility options. 
+
+# Migration  
+
+If the cache generation number is incremented (if we change either the offset in the metadata or the shared layout). User needs to destroy the older generation caches after migration. 
+
+# Security
+
+Negligible impact.
+
+# Test Plan  
+
+New Command line tests will be added to exercise those new commands. An existing shared cache will be expanded and shrunk. The resized shared cache will be started up again to make sure things are still working.

@@ -1,0 +1,12 @@
+When computing the set of CHTable modifications that need to be sent to the server
+we use a monitor lock/unlock pair:
+```
+compInfo->getSequencingMonitor()->enter();
+...
+auto table = (JITClientPersistentCHTable*)compInfo->getPersistentInfo()->getPersistentCHTable();
+std::pair<std::string, std::string> chtableUpdates = table->serializeUpdates();
+...
+compInfo->getSequencingMonitor()->exit();
+```
+This may throw bad_alloc which is caught at an outer level, but the sequencing monitor remains locked.
+To avoid this scenario, it's better to use a CriticalSection.

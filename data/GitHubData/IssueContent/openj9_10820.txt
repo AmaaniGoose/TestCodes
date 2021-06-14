@@ -1,0 +1,5 @@
+This won't be a priority unless there is a such feature request.
+
+Changing the existing dump options is a different operation, which could also be added, but separately from this change.
+
+_Originally posted by @pshipton in https://github.com/eclipse/openj9/pull/10774#discussion_r499665331_

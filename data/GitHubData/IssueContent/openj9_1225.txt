@@ -1,0 +1,5 @@
+This is to test issue #1196 .
+Test:
+1) default agent
+2) replacement agent specified via system property javax.management.builder.initial
+3) bogus value of javax.management.builder.initial

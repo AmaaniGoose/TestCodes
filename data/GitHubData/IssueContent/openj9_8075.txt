@@ -1,0 +1,104 @@
+Initially, there was an issue with Class.getMethod() detected at https://github.com/eclipse/openj9/issues/7897, in which it failed to retrieve the specified interface method for the superclasses. e.g.
+```
+interface I { void m(); }
+interface J { void m(); }
+interface K extends I, J {  }
+abstract class C {  }
+abstract class D extends C implements I {  }
+abstract class E extends D implements J, K {  }
+
+public class getMethodTest {
+    public static void main(String[] args) {
+      try {
+		Method testMethod = E.class.getMethod("m");
+		System.out.println("testMethod.class = " + testMethod.toString());
+	} catch (NoSuchMethodException e) {
+ ...
+}
+
+# jdk_11.0.5_10_hotspot/bin/java  -cp .   getMethodTest
+testMethod.class = public abstract void I.m()
+
+# jdk_11.0.5_10_openj9/bin/java  -cp .   getMethodTest
+testMethod.class = public abstract void J.m()  <------
+```
+When refactoring the code to address the issue above at https://github.com/eclipse/openj9/pull/7985, we also discovered other issues which need to be covered as follows:
+1. one of superclasses (not the top super class) implemented the method (from another interface) whose return type is the subtype of that of the direct interface method. e.g.
+```
+class A_1 {}
+class A_2 extends A_1 {}
+class A_3 extends A_2 {}
+class A_4 extends A_3 {}
+
+interface H { A_4 m(); }
+interface I { A_3 m(); }
+interface J { A_2 m(); }
+interface L { A_1 m(); }
+
+abstract class C implements J {  }
+abstract class D extends C implements H {  } ---> it was supposed to return H.m()
+abstract class E extends D implements J, I {  }
+
+public class getMethodTest4 {
+    public static void main(String[] args) {
+      try {
+                Method testMethod = E.class.getMethod("m");
+
+# ../jdk_11.0.5_10_hotspot/bin/java  -cp  .  getMethodTest4
+testMethod.classMethod = public abstract A_4 H.m()
+
+# ../jdk_11.0.5_10_openj9/bin/java  -cp  .  getMethodTest4  (openj9 without my changes)
+testMethod.classMethod = public abstract A_3 I.m()
+
+# ../jdk11_openj9/bin/java  -cp  .  getMethodTest4   (openj9 with my changes)
+testMethod.classMethod = public abstract A_3 I.m()
+```
+2. retrieve the most specific method from the one of direct interfaces instead of from the first direct interface. e.g.
+```
+class A_1 {}
+class A_2 extends A_1 {}
+class A_3 extends A_2 {}
+class A_4 extends A_3 {}
+
+interface I { A_3 m(); }
+interface J { A_2 m(); }
+
+abstract class E implements J, I {  }  
+---> it was supposed to return I.m as the return type A_3 is the subtype of A_2
+
+public class getMethodTest6 {
+    public static void main(String[] args) {
+      try {
+                Method testMethod = E.class.getMethod("m");
+...
+# ../jdk_11.0.5_10_hotspot/bin/java  -cp  .  getMethodTest6
+testMethod.classMethod = public abstract A_3 I.m()
+6
+# ../jdk_11.0.5_10_openj9/bin/java  -cp  .  getMethodTest6
+testMethod.classMethod = public abstract A_2 J.m()
+
+# ../jdk11_openj9/bin/java  -cp  .  getMethodTest6
+testMethod.classMethod = public abstract A_2 J.m()
+```
+So, it turns out our existing code relies on the native method `getMethodImpl` (which only returns the **first** method found matching the passed-in arguments in one of the superclasses or direct interfaces) to get the specified method and do the further comparison in the method's declaring class/interface at Java level.  But Class.getMethod() requires the most specific method (by comparing the return type) from one of the superclasses and direct interfaces if not declared in the current class, which means it needs to search all superclasses and direct interfaces for the the most specific method by comparing their return type.
+For example:
+```
+class A_1 {}
+class A_2 extends A_1 {}
+class A_3 extends A_2 {}
+class A_4 extends A_3 {}
+
+interface H { A_4 m(); }
+interface I { A_3 m(); }
+interface J { A_2 m(); }
+interface L { A_1 m(); }
+
+abstract class C implements J {  }
+abstract class D extends C implements H {  }
+abstract class E extends D implements J, I {  }
+```
+Technically, it should compare the return type of H.m (A_4) from the super class D, the return type of J.m (A_2) from the super class C,  the return type of J.m (A_2) from the direct interface J, and the return type of I.m (A_3) from the direct interface I to determine the most specific method is H.m() with the return type A_4.
+
+Given that the complexity of refactoring `getMethodImpl` to satisfy our requirements, I'd like to open up this issue for further evaluation and discussion as to whether it is logically reasonable and technically feasible to do so in the native level instead of hacking the code in `getMethodHelper().`
+
+FYI: @DanHeidinga, @pshipton, @JasonFengJ9.

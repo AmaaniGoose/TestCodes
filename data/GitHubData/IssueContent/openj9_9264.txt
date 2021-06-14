@@ -1,0 +1,23 @@
+### JVM Option: -Xnosigint 
+
+`-Xnosigint` is undocumented. It looks like ... it was added for development/test support in `IBM-J9 JCL`. `IBM-J9 JCL` no longer uses the custom implementation of `sun.misc.Signal`, and relies on the default implementation. So, `-Xnosigint` won't work anymore since the custom implementation of `sun.misc.Signal` was removed. Since it is undocumented, no customer should be using `-Xnosigint`. Can `-Xnosigint` be removed?
+
+### Java System Properties: "ibm.signalhandling.*"
+
+With the removal of the custom `sun.misc.Signal` implementation, I also feel that the following Java system properties should no longer be used in `IBM-J9 JCL`:
+
+1. `ibm.signalhandling.sigchain`
+2. `ibm.signalhandling.sigint`
+3. `ibm.signalhandling.rs`
+
+It looks like ... these were explicitly added to pass information from the JVM to JCL code. Since these system properties are undocumented, no customers should rely upon them.
+
+Can we remove the below code from J9 if the above Java system properties are no longer used in `IBM-J9 JCL`?
+https://github.com/eclipse/openj9/blob/d5f021f8ba0e1f56b1f0ed46ce93df65069beeee/runtime/jcl/common/system.c#L267-L290
+
+### Concerns
+
+There were concerns about IBM customers relying upon the above options.
+
+A counter argument for the above concern would be ... no customers should use or rely upon them since the above options are undocumented.
+

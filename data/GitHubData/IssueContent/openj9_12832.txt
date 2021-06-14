@@ -1,0 +1,191 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk16_j9_sanity.functional_aarch64_linux/31/`:
+```
+openjdk version "16.0.1" 2021-04-20
+OpenJDK Runtime Environment Temurin-16.0.1+9-202106021901 (build 16.0.1+9-202106021901)
+Eclipse OpenJ9 VM Temurin-16.0.1+9-202106021901 (build master-5530af2e1, JRE 16 Linux aarch64-64-Bit Compressed References 20210602_40 (JIT enabled, AOT enabled)
+OpenJ9   - 5530af2e1
+OMR      - 76bff2099
+JCL      - 9fcf6fbf01 based on jdk-16.0.1+9)
+```
+[Rerun in Grinder](https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?TARGET=J9vmTest_3&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=functional&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;PLATFORM=aarch64_linux&amp;KEEP_REPORTDIR=false&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk16u%2Fjdk16u-linux-aarch64-openj9%2F40%2FOpenJDK16U-jre_aarch64_linux_openj9_2021-06-01-03-59.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk16u%2Fjdk16u-linux-aarch64-openj9%2F40%2FOpenJDK16U-testimage_aarch64_linux_openj9_2021-06-01-03-59.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk16u%2Fjdk16u-linux-aarch64-openj9%2F40%2FOpenJDK16U-jdk_aarch64_linux_openj9_2021-06-01-03-59.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk16u%2Fjdk16u-linux-aarch64-openj9%2F40%2FOpenJDK16U-debugimage_aarch64_linux_openj9_2021-06-01-03-59.tar.gz&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;LIGHT_WEIGHT_CHECKOUT=true&amp;ARTIFACTORY_SERVER=na.artifactory.swg-devops&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=16&amp;USER_CREDENTIALS_ID=83181e25-eea4-4f55-8b3e-e79615733226&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=git%40github.ibm.com%3Aruntimes%2Ftest.git&amp;JDK_REPO=https%3A%2F%2Fgithub.com%2Fibmruntimes%2Fopenj9-openjdk-jdk16&amp;RELEASE_TAG=&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=master&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;UPSTREAM_JOB_NAME=&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=openj9&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=openj9&amp;SSH_AGENT_CREDENTIAL=83181e25-eea4-4f55-8b3e-e79615733226&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=4e18ffe7-b1b1-4272-9979-99769b68bcc2&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=functional&amp;UPSTREAM_JOB_NUMBER=&amp;TIME_LIMIT=10&amp;JVM_OPTIONS=&amp;PARALLEL=)
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+[2021-06-03T01:13:49.710Z] Running test J9vmTest_3 ...
+[2021-06-03T01:13:49.710Z] ===============================================
+[2021-06-03T01:13:49.710Z] J9vmTest_3 Start Time: Wed Jun  2 21:13:48 2021 Epoch Time (ms): 1622682828609
+[2021-06-03T01:13:49.711Z] "/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+[2021-06-03T01:13:49.711Z] JVMSHRC005I No shared class caches available
+[2021-06-03T01:13:49.711Z] JVMSHRC005I No shared class caches available
+[2021-06-03T01:13:49.711Z] cache cleanup done
+[2021-06-03T01:13:49.711Z] variation: Mode501
+[2021-06-03T01:13:49.711Z] JVM_OPTIONS:  -Xjit -Xgcpolicy:balanced -Xnocompressedrefs 
+
+[2021-06-03T01:14:44.848Z] +++ j9vm.test.arraylets.ArrayletAllocateTest: +++
+[2021-06-03T01:14:44.849Z] Runner couldn't determine underlying architecture. Got OS Arch:aarch64
+[2021-06-03T01:14:44.849Z] command: /home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java  -Xjit -Xgcpolicy:balanced -Xnocompressedrefs  -Xdump -Xms65m -Xmx65m  -Xdisableexcessivegc   -classpath /home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/../../jvmtest/functional/VM_Test/VM_Test.jar:/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/../TKG/lib/asm-all.jar  j9vm.test.arraylets.ArrayletAllocateTest 
+[2021-06-03T01:14:44.849Z] 
+[2021-06-03T01:14:45.725Z] Testing array allocation...
+[2021-06-03T01:14:45.725Z] 	Testing arrays from 1 to 32...
+[2021-06-03T01:14:45.725Z] 	Testing arrays from 32 to 64...
+[2021-06-03T01:14:45.725Z] 	Testing arrays from 96 to 128...
+[2021-06-03T01:14:45.725Z] 	Testing arrays from 224 to 256...
+[2021-06-03T01:14:45.725Z] 	Testing arrays from 480 to 512...
+[2021-06-03T01:14:45.725Z] 	Testing arrays from 992 to 1024...
+[2021-06-03T01:14:45.725Z] 	Testing arrays from 2016 to 2048...
+[2021-06-03T01:14:45.725Z] 	Testing arrays from 4064 to 4096...
+[2021-06-03T01:14:45.725Z] 	Testing arrays from 8160 to 8192...
+[2021-06-03T01:14:45.725Z] 	Testing arrays from 16352 to 16384...
+[2021-06-03T01:14:45.725Z] 	Testing arrays from 32736 to 32768...
+[2021-06-03T01:14:45.725Z] 	Testing arrays from 65504 to 65536...
+[2021-06-03T01:14:45.725Z] 	Testing arrays from 131040 to 131072...
+[2021-06-03T01:14:45.725Z] 	Testing arrays from 262112 to 262144...
+[2021-06-03T01:14:45.725Z] 	Testing arrays from 524256 to 524288...
+[2021-06-03T01:14:45.725Z] 	Testing arrays from 1048544 to 1048576...
+[2021-06-03T01:14:45.725Z] Unhandled exception
+[2021-06-03T01:14:45.725Z] Type=Segmentation error vmState=0x00000000
+[2021-06-03T01:14:45.725Z] J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000001
+[2021-06-03T01:14:45.725Z] Handler1=0000FFFF8EC4B9C8 Handler2=0000FFFF8EBC2570 InaccessibleAddress=0000000086C80000
+[2021-06-03T01:14:45.725Z] R0=0000FFFF86E8C500 R1=00000000000FFFE5 R2=00000000007FFF40 R3=0000000000000000
+[2021-06-03T01:14:45.725Z] R4=0000000086C80000 R5=0000FFFF8877FFA8 R6=00000000007FFF48 R7=0000FFFF8DFCFD01
+[2021-06-03T01:14:45.725Z] R8=0000FFFF6B46B644 R9=003B9ACA00000000 R10=0000000060B82D04 R11=0000000000000014
+[2021-06-03T01:14:45.725Z] R12=0000000000100000 R13=00000000000FFFE6 R14=0000000000000000 R15=0000FFFF87E00000
+[2021-06-03T01:14:45.725Z] R16=0000FFFF8DF87848 R17=0000FFFF8F9CDF90 R18=0000000000000000 R19=0000FFFF8840A200
+[2021-06-03T01:14:45.725Z] R20=0000FFFF8856E040 R21=000000010000001A R22=0000FFFF86EC8540 R23=0000FFFF87ED0038
+[2021-06-03T01:14:45.725Z] R24=0000FFFF886C1300 R25=0000000088416CC0 R26=0000FFFF886C1300 R27=0000FFFF88415D00
+[2021-06-03T01:14:45.725Z] R28=0000FFFF886C1300 R29=0000FFFF8F918538 R30=0000FFFF6B46D84C R31=0000FFFF8F918220
+[2021-06-03T01:14:45.725Z] PC=0000FFFF6B46BA0C SP=0000FFFF8F918220 PSTATE=0000000020000000
+[2021-06-03T01:14:45.725Z] V0 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:14:45.725Z] V1 0000000000000001 (f: 1.000000, d: 4.940656e-324)
+[2021-06-03T01:14:45.725Z] V2 0000ffff8f115b38 (f: 2400279296.000000, d: 1.390662e-309)
+[2021-06-03T01:14:45.725Z] V3 0000ffff8edd64f0 (f: 2396873984.000000, d: 1.390662e-309)
+[2021-06-03T01:14:45.725Z] V4 0000ffff8f915fc0 (f: 2408669184.000000, d: 1.390662e-309)
+[2021-06-03T01:14:45.725Z] V5 0000ffff8f915c60 (f: 2408668160.000000, d: 1.390662e-309)
+[2021-06-03T01:14:45.725Z] V6 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:14:45.725Z] V7 8020080280200802 (f: 2149582848.000000, d: -4.458850e-308)
+[2021-06-03T01:14:45.725Z] V8 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:14:45.725Z] V9 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:14:45.725Z] V10 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:14:45.725Z] V11 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:14:45.725Z] V12 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:14:45.725Z] V13 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:14:45.725Z] V14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:14:45.725Z] V15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:14:45.725Z] V16 4010040140100401 (f: 1074791424.000000, d: 4.003911e+00)
+[2021-06-03T01:14:45.725Z] V17 fcfdfe00fe00feff (f: 4261478144.000000, d: -1.197193e+294)
+[2021-06-03T01:14:45.725Z] V18 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:14:45.725Z] V19 0000ffff8f916ad0 (f: 2408672000.000000, d: 1.390662e-309)
+[2021-06-03T01:14:45.725Z] V20 0000ffff8f916ac0 (f: 2408672000.000000, d: 1.390662e-309)
+[2021-06-03T01:14:45.725Z] V21 0000ffff8f916ab0 (f: 2408672000.000000, d: 1.390662e-309)
+[2021-06-03T01:14:45.725Z] V22 0000ffff8f916aa0 (f: 2408672000.000000, d: 1.390662e-309)
+[2021-06-03T01:14:45.725Z] V23 00000000000000f0 (f: 240.000000, d: 1.185758e-321)
+[2021-06-03T01:14:45.725Z] V24 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:14:45.725Z] V25 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:14:45.725Z] V26 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:14:45.725Z] V27 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:14:45.725Z] V28 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:14:45.725Z] V29 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:14:45.725Z] V30 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:14:45.725Z] V31 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:14:45.725Z] 
+[2021-06-03T01:14:45.725Z] Compiled_method=j9vm/test/arraylets/ArrayletAllocateTest.main([Ljava/lang/String;)V
+[2021-06-03T01:14:45.725Z] Target=2_90_20210602_40 (Linux 4.15.0-112-generic)
+[2021-06-03T01:14:45.725Z] CPU=aarch64 (8 logical CPUs) (0x1f2617000 RAM)
+[2021-06-03T01:14:45.725Z] ----------- Stack Backtrace -----------
+[2021-06-03T01:14:45.725Z] (0x0000FFFF8EBBF1C8 [libj9prt29.so+0x261c8])
+[2021-06-03T01:14:45.725Z] ---------------------------------------
+[2021-06-03T01:14:45.725Z] JVMDUMP039I Processing dump event "gpf", detail "" at 2021/06/02 21:14:44 - please wait.
+[2021-06-03T01:14:45.725Z] JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16226759307343/J9vmTest_3/core.20210602.211444.2490.0001.dmp' in response to an event
+[2021-06-03T01:14:48.771Z] JVMPORT030W /proc/sys/kernel/core_pattern setting "|/usr/share/apport/apport %p %s %c %d %P %E" specifies that the core dump is to be piped to an external program.  Attempting to rename either core or core.2518.
+[2021-06-03T01:14:48.771Z] 
+[2021-06-03T01:14:48.771Z] JVMDUMP010I System dump written to /home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16226759307343/J9vmTest_3/core.20210602.211444.2490.0001.dmp
+[2021-06-03T01:14:48.771Z] JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16226759307343/J9vmTest_3/javacore.20210602.211444.2490.0002.txt' in response to an event
+[2021-06-03T01:14:48.771Z] JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16226759307343/J9vmTest_3/javacore.20210602.211444.2490.0002.txt
+[2021-06-03T01:14:48.771Z] JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16226759307343/J9vmTest_3/Snap.20210602.211444.2490.0003.trc' in response to an event
+[2021-06-03T01:14:48.771Z] JVMDUMP010I Snap dump written to /home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16226759307343/J9vmTest_3/Snap.20210602.211444.2490.0003.trc
+[2021-06-03T01:14:48.771Z] JVMDUMP032I JVM requested JIT dump using '/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16226759307343/J9vmTest_3/jitdump.20210602.211444.2490.0004.dmp' in response to an event
+[2021-06-03T01:14:48.771Z] JVMDUMP051I JIT dump occurred in 'main' thread 0x0000FFFF8840A200
+[2021-06-03T01:14:48.771Z] JVMDUMP010I JIT dump written to /home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16226759307343/J9vmTest_3/jitdump.20210602.211444.2490.0004.dmp
+[2021-06-03T01:14:48.771Z] JVMDUMP013I Processed dump event "gpf", detail "".
+[2021-06-03T01:14:48.771Z] no-zero exit value: 255
+[2021-06-03T01:14:48.771Z] *** Test FAILED *** (j9vm.test.arraylets.ArrayletAllocateTest)
+```
+
+**Edit:** another Segmentation error in this test run.
+```
+[2021-06-03T01:15:02.280Z] +++ j9vm.test.hash.ManyHashCodeTest: +++
+[2021-06-03T01:15:02.280Z] Runner couldn't determine underlying architecture. Got OS Arch:aarch64
+[2021-06-03T01:15:02.280Z] command: /home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java  -Xjit -Xgcpolicy:balanced -Xnocompressedrefs  -Xdump -Xms64m -Xmx64m    -classpath /home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/../../jvmtest/functional/VM_Test/VM_Test.jar:/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/../TKG/lib/asm-all.jar  j9vm.test.hash.ManyHashCodeTest 
+[2021-06-03T01:15:02.280Z] 
+[2021-06-03T01:15:03.155Z] Unhandled exception
+[2021-06-03T01:15:03.155Z] Type=Segmentation error vmState=0x00000000
+[2021-06-03T01:15:03.155Z] J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000001
+[2021-06-03T01:15:03.155Z] Handler1=0000FFFFA5BF99C8 Handler2=0000FFFFA5B70570 InaccessibleAddress=000000009FD550E0
+[2021-06-03T01:15:03.155Z] R0=0000FFFFA0024DE0 R1=0000FFFFA06AA610 R2=000000000000000A R3=000000009FD550E0
+[2021-06-03T01:15:03.155Z] R4=0000FFFFA06AACD0 R5=0000FFFFA0562B78 R6=000000009FD550E0 R7=000000009FD550E0
+[2021-06-03T01:15:03.155Z] R8=0000FFFF8346A498 R9=0000FFFF8346A88C R10=0000FFFFA055DD80 R11=0000000000000001
+[2021-06-03T01:15:03.155Z] R12=0000000000000001 R13=0000FFFFA001D664 R14=0000000000164170 R15=0000FFFFA06AAF0A
+[2021-06-03T01:15:03.155Z] R16=0000FFFFA5D85248 R17=0000FFFFA697BF80 R18=0000FFFFA68C6420 R19=0000FFFFA5D646CC
+[2021-06-03T01:15:03.155Z] R20=0000FFFFA5D84000 R21=0000000000010700 R22=0000FFFFA03FE900 R23=0000FFFFA5D88168
+[2021-06-03T01:15:03.155Z] R24=0000000000000001 R25=0000FFFFA0562B70 R26=0000FFFFA06AAB00 R27=0000FFFF80BD1332
+[2021-06-03T01:15:03.155Z] R28=0000FFFFA5C63328 R29=0000FFFFA68C5E40 R30=0000FFFFA5C64040 R31=0000FFFFA68C5E40
+[2021-06-03T01:15:03.155Z] PC=0000FFFFA5C710E4 SP=0000FFFFA68C5E40 PSTATE=0000000060000000
+[2021-06-03T01:15:03.155Z] V0 0000ffffa0562bb0 (f: 2690001920.000000, d: 1.390663e-309)
+[2021-06-03T01:15:03.155Z] V1 ffffffffffffffff (f: 4294967296.000000, d: -nan)
+[2021-06-03T01:15:03.155Z] V2 0000ffffa60c3180 (f: 2785817088.000000, d: 1.390664e-309)
+[2021-06-03T01:15:03.155Z] V3 0000ffffa5d844f0 (f: 2782414080.000000, d: 1.390664e-309)
+[2021-06-03T01:15:03.155Z] V4 0000ffffa68c4800 (f: 2794211328.000000, d: 1.390664e-309)
+[2021-06-03T01:15:03.155Z] V5 0000ffffa68c44a0 (f: 2794210560.000000, d: 1.390664e-309)
+[2021-06-03T01:15:03.155Z] V6 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:15:03.155Z] V7 8020080280200802 (f: 2149582848.000000, d: -4.458850e-308)
+[2021-06-03T01:15:03.155Z] V8 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:15:03.155Z] V9 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:15:03.155Z] V10 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:15:03.155Z] V11 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:15:03.155Z] V12 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:15:03.155Z] V13 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:15:03.155Z] V14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:15:03.155Z] V15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:15:03.155Z] V16 4010040140100401 (f: 1074791424.000000, d: 4.003911e+00)
+[2021-06-03T01:15:03.155Z] V17 fcfdfe00fe00feff (f: 4261478144.000000, d: -1.197193e+294)
+[2021-06-03T01:15:03.155Z] V18 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:15:03.155Z] V19 0000ffffa68c4ad0 (f: 2794212096.000000, d: 1.390664e-309)
+[2021-06-03T01:15:03.155Z] V20 0000ffffa68c4ac0 (f: 2794212096.000000, d: 1.390664e-309)
+[2021-06-03T01:15:03.155Z] V21 0000ffffa68c4ab0 (f: 2794212096.000000, d: 1.390664e-309)
+[2021-06-03T01:15:03.155Z] V22 0000ffffa68c4aa0 (f: 2794212096.000000, d: 1.390664e-309)
+[2021-06-03T01:15:03.155Z] V23 00000000000000f0 (f: 240.000000, d: 1.185758e-321)
+[2021-06-03T01:15:03.155Z] V24 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:15:03.155Z] V25 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:15:03.155Z] V26 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:15:03.155Z] V27 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:15:03.155Z] V28 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:15:03.155Z] V29 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:15:03.155Z] V30 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:15:03.155Z] V31 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-03T01:15:03.155Z] Module=/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdkbinary/j2sdk-image/lib/default/libj9vm29.so
+[2021-06-03T01:15:03.155Z] Module_base_address=0000FFFFA5BC5000
+[2021-06-03T01:15:03.155Z] Target=2_90_20210602_40 (Linux 4.15.0-112-generic)
+[2021-06-03T01:15:03.155Z] CPU=aarch64 (8 logical CPUs) (0x1f2617000 RAM)
+[2021-06-03T01:15:03.155Z] ----------- Stack Backtrace -----------
+[2021-06-03T01:15:03.156Z] (0x0000FFFFA5B6D1C8 [libj9prt29.so+0x261c8])
+[2021-06-03T01:15:03.156Z] ---------------------------------------
+[2021-06-03T01:15:03.156Z] JVMDUMP039I Processing dump event "gpf", detail "" at 2021/06/02 21:15:02 - please wait.
+[2021-06-03T01:15:03.156Z] JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16226759307343/J9vmTest_3/core.20210602.211502.3401.0001.dmp' in response to an event
+[2021-06-03T01:15:06.015Z] JVMPORT030W /proc/sys/kernel/core_pattern setting "|/usr/share/apport/apport %p %s %c %d %P %E" specifies that the core dump is to be piped to an external program.  Attempting to rename either core or core.3429.
+[2021-06-03T01:15:06.015Z] 
+
+[2021-06-03T01:15:06.889Z] JVMDUMP013I Processed dump event "gpf", detail "".
+[2021-06-03T01:15:06.889Z] no-zero exit value: 255
+[2021-06-03T01:15:06.889Z] *** Test FAILED *** (j9vm.test.hash.ManyHashCodeTest)
+```
+
+Note: this was in same test run as https://github.com/eclipse-openj9/openj9/issues/12831
+fyi @knn-k 

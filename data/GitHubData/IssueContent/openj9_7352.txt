@@ -1,0 +1,39 @@
+Research the effect of using OpenJDK MethodHandle implementation in OpenJ9, this work requires update to existing code structure inorder to satisify the dependencies.
+
+Prototyping with following changes:
+
+- [ ] Replace **MethodType** class (#7625) 
+    - Replace **MethodType** & **MethodTypeForm**
+    - Update **vmconstantpool.xml** references
+    - Move OpenJ9 MethodType API to new **MethodTypeHelper** class
+- [ ] JIT support for OpenJDK MethodType class
+    - Update references to MethodType fields (#7628)
+    - Fix methodDescriptor assumption (#8066)
+        - Currently assmue field is initialized during MethodType creation/intern
+        - New case: only initalized after first call to `MethodType.toMethodDescriptorString()`
+- [x] support scanning CP during scavenges (https://github.com/eclipse/openj9/issues/7486)
+- [x] support ConstantPool patching (#8460)
+    - **sum.misc.Unsafe.defineAnonymousClass**
+    - refer to #8396 for support non-String CP types
+- [ ] support MemberName (#7680)
+    - Needed by:
+      - **LambdaForm**
+      - **MethodHandle**
+      - **Invokers**
+- [ ] support **LambdaForm**
+    - Requires:
+        - **BoundMethodHandle**
+        - **InvokerBytecodeGenerator**
+        - **LambdaFormEditor**
+- [ ] separate MH resolution code into new helper class
+- [ ] support MHNatives.linkTo intrinsic
+- [ ] Add an `invokebasic` bytecode based on `@polymorphicSignature invokeBasic()` method
+
+ 
+**Note:**
+1. resolution approaches for MH:
+    - [x] single slot result (memberName/appendix in `Object[]`) #10893 
+    - [ ] double slot sturct (single resolve thread/lock on appendix slot) #10762 
+
+**TODO:**
+- Clean up of `J9VM_OPT_METHODHANDLE` flag

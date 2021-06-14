@@ -1,0 +1,16 @@
+This problem is being investigated in the context of the IBM SDK, so I apologize for the version info that relates to that particular incarnation.
+
+The performance of StringBuilder.append() when appending small strings in the range of 1 to 20 characters is significantly worse than it was in earlier versions. Limited testing so far shows that performance was good in IBM 8 SR5 FP1 (OMR - b033a01) and is bad in IBM 8 SR5 FP36 (OMR - 06a046a). It has been suggested that a major part of the regression was introduced in FP7 but I have not confirmed this myself.
+
+Initial profiling suggests that the problem may be related to the use of REP MOVSD to encode the copy, however there have been many changes in this area of the code and it is possible that other factors are involved.
+
+A testcase is attached which demonstrates the problem by timing the creation of 10MByte strings by appending small strings of different lengths to an initially empty (but appropriately sized) StringBuilder.
+[SBAppendTest.zip](https://github.com/eclipse/openj9/files/3382691/SBAppendTest.zip)
+
+Example results:
+
+![StringBuilder append-perf](https://user-images.githubusercontent.com/26579150/61062938-1eb03b80-a3cd-11e9-98a9-7c657f8fd90d.jpg)
+
+When appending single char strings, the new code is nearly 10x slower than the old code.
+
+(I first opened this issue against eclipse/omr but was asked to close it and reopen here. Linking in case we eventually need an omr issue and want to re-use it: https://github.com/eclipse/omr/issues/4123)

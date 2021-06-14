@@ -1,0 +1,14 @@
+Original issue: https://github.com/AdoptOpenJDK/openjdk-tests/issues/1597
+
+Machines:
+test-packet-ubuntu1604-x64-2
+test-softlayer-ubuntu1604-x64-​1
+(There are definitely more but no way of determining unless I ran on every single linux and aix machine)
+
+Hangs on:
+```
+11:42:34  Wait for initial Pump
+11:42:34  Start pumping refuser ...
+```
+
+I think there may just be some old processes running on these machines that need clearing out. I don't believe it's a setup problem as `test-packet-ubuntu1604-x64-1` passes the test just fine

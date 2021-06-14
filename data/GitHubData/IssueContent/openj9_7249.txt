@@ -1,0 +1,19 @@
+Failure link
+------------
+rebuild: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&BUILD_LIST=openjdk&JenkinsFile=openjdk_x86-64_linux&CUSTOM_TARGET=test/jdk/jdk/internal/reflect/constantPool/ConstantPoolTest.java&TARGET=jdk_custom_0
+- test category: openjdk
+- OS/architecture: all
+- version: 11, 13
+- JVM: openj9 only
+
+Optional info
+-------------
+- intermittent failure (yes|no): no
+- regression or new test: regression
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+TEST RESULT: Error. Agent communication error: java.io.EOFException; check console log for any additional details
+```
+Test doesn't throw any sort of error other than this which isn't exactly helpful.

@@ -1,0 +1,40 @@
+### OpenJ9 does not generate sufficient JVMTI sampling object allocation events when the sampling interval is set to zero  ###
+
+This is a JTreg test failure against JEP 331 implementation.
+
+Failure link
+------------
+
+N/A - local runs
+
+Optional info
+-------------
+
+- intermittent failure (no): 
+- new feature test:  
+
+Failure output
+--------------
+
+```
+Exception in thread "main" java.lang.RuntimeException: Could not set the sampler
+	at MyPackage.HeapMonitor.sampleEverything(HeapMonitor.java:187)
+	at MyPackage.HeapMonitorVMEventsTest.main(HeapMonitorVMEventsTest.java:100)
+```
+
+Notes:
+-------
+
+The failed test code snippet is in [1]. This test sets the sampling interval to `0`, then attempts to allocate `400` integer arrays `int[1000]`, and expects `400` sampling events which is considered as PASS. Repeat this `10` times until a pass, otherwise a failure. 
+`OpenJ9` seems only generate sampling events `12 - 38` for  such `400` array allocation, which is quite far from the number of events required.
+
+I built a standalone testcase [TestSampleEverything.zip](https://github.com/eclipse/openj9/files/3258730/TestSampleEverything.zip) without `JVMTI` agent, this issue  can be demonstrated via following:
+```
+java -Xgc:allocationSamplingGranularity=1 -Xtrace:print={j9mm.394-395} -jar TestSampleEverything.zip 2>&1 | grep elements=1000 | wc -l
+```
+The expected number of trace output for `object size=4008; number of elements=1000` is close to `10 * 400`, i.e., `4000`, but usually just got below `400`. 
+
+[1] https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/1c55bba834d441d680298c240ac241ec9aa0b668/test/hotspot/jtreg/serviceability/jvmti/HeapMonitor/MyPackage/HeapMonitor.java#L164-L188
+
+
+fyi: @charliegracie @DanHeidinga 

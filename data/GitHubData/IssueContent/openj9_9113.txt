@@ -1,0 +1,43 @@
+When I was working on an issue about UnresolvedDataSnippet in `loadaddrEvaluator`, I found that Z, Power and X86 handle UnresolvedDataSnippet in different way. Ideally, the unresolved filed should be an OpenJ9 concept, so it should be processed only in OpenJ9. However, currently on Z, Power and X86 platforms, it seems that OMR code has some handling about unresolved data snippet. 
+
+Currently on Z, `loadaddrEvaluator` has a guarded code which seems the same as the code in `createUnresolvedDataSnippet`[1] and `createPatchableDataInLitpool`[2]. However, when we generate a memory reference there, it will also call memory reference constructor in OMR, where UnresolvedDataSnippet can be also created and handled by calling those two functions[3].
+The branch and load instruction will be generated in `createPatchableDataInLitpool`. The branch instruction will branch to a helper, which can help the it load instruction know where to load. 
+
+On Power, the general idea of the UnresolvedDataSnippet is similar. The difference is that Power create the snippet in memory reference constructor in OMR, and then it generate the branch instruction at the point when they start encoding the memory reference which is guarded by the ifdef[4].
+
+On X86, the memory reference is generated in `loadaddrEvaluator`. And its constructor calls the `initialize` function which then handles unresolved fields by creating the snippet[5]. X86 seems to emit some space in the snippet via a call to `emitUnresolvedInstructionDescriptor` and then they pass the cursor the `fixupDataReferenceInstruction` which saves the bytes from the mainline into the snippet via a `memcpy` call. I traced the program in gdb and I find that the original instructions looks like: 
+```
+=> 0x7f7f3da000cb:	nop    DWORD PTR [rax+rax*1+0x0]
+   0x7f7f3da000d0:	call   0x7f7f3da006f5
+   0x7f7f3da000d5:	add    BYTE PTR [rax],al
+   0x7f7f3da000d7:	add    BYTE PTR [rax],al
+   0x7f7f3da000d9:	add    BYTE PTR [rbp+0xd0c],cl
+   0x7f7f3da000df:	add    BYTE PTR [rax],al
+   0x7f7f3da000e1:	cmp    rdi,QWORD PTR [rcx+0x30]
+   0x7f7f3da000e5:	je     0x7f7f3da001bf
+```
+While after executing the `call` instructions, the mainline becomes:
+```
+   0x7f7f3da000cb:	nop    DWORD PTR [rax+rax*1+0x0]
+   0x7f7f3da000d0:	movabs rcx,0x65f700
+   0x7f7f3da000da:	lea    ecx,[rcx*1+0x0]
+=> 0x7f7f3da000e1:	cmp    rdi,QWORD PTR [rcx+0x30]
+   0x7f7f3da000e5:	je     0x7f7f3da001bf
+```
+The `call` instructions will call the helper `interpreterUnresolvedClassGlue` in my case. After that, it will sequentially call `commonUnresolvedCode` and `mergePatch8ByteResolution`. The change in mainline happens in `mergePatch8ByteResolution`. Details to the instruction, it would be when executing the instruction [6]. I've examined the registers. None of the registers change the value before/after executing `lea` instruction. It seems that `lea` does nothing here. 
+
+I have some questions here to ask:
+
+- What does `lea` do in X86? It seems that it's doing nothing to me.
+- Does the `UnresolvedDataSnippet` even belong in OMR? Should we remove the all relevant keyword/code in OMR?
+- What piece of code should be responsible for creating the branch to the unresolved snippet? Should it happen inside of the `loadAddrEvaluator` override in OpenJ9? Should it happen when we are generating the memory reference binary encoding? Or maybe there are some other ways?
+
+
+
+
+[1] https://github.com/eclipse/openj9/blob/ffece8e6c10a1b403c4bc8c93e32ca4fb7af9b98/runtime/compiler/z/codegen/J9MemoryReference.cpp#L262-L275
+[2] https://github.com/eclipse/openj9/blob/ffece8e6c10a1b403c4bc8c93e32ca4fb7af9b98/runtime/compiler/z/codegen/J9MemoryReference.cpp#L345-L375
+[3] https://github.com/eclipse/omr/blob/master/compiler/z/codegen/OMRMemoryReference.cpp#L589-L590
+[4] https://github.com/eclipse/omr/blob/0a58d1e2e810fcee44356c43ca5c21e45dc9930e/compiler/p/codegen/OMRMemoryReference.cpp#L1094-L1138
+[5] https://github.com/eclipse/omr/blob/4b35927373b984646a043c63336d3d8f12d32d92/compiler/x/codegen/OMRMemoryReference.cpp#L326-L331
+[6] https://github.com/eclipse/openj9/blob/78627dd0b4eec98df7943481e4ab113ddb591534/runtime/compiler/x/runtime/X86Unresolveds.nasm#L1468

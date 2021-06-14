@@ -1,0 +1,3 @@
+Disallow flattening for any value type that contains a Phantom, Weak, Soft References or Ownable Synchronizers due to GC complexity.
+
+The `J9AccClassReferenceMask`, `J9AccClassGCSpecial` & `J9AccClassOwnableSynchronizer` flags can be used to detect these cases

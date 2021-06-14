@@ -1,0 +1,1 @@
+Our AWX server does not currently have a template for deploying to Windows systems. We should add that and ensure that it is "safe" to deploy across all machines. There was one available on the original AIX server, but we need to ensure that the credentials used for connecting to the machine can be kept adequately secure and not published in the logs.

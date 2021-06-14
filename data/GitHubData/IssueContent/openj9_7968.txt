@@ -1,0 +1,64 @@
+Failure link
+------------
+
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_sanity.functional_ppc64le_linux_xl_OMR/5/console
+
+Optional info
+-------------
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+21:33:30      [javac] java.lang.NoSuchFieldError: java/lang/String.
+21:33:30      [javac] 	at java.lang.String.compareTo(String.java:1401)
+21:33:30      [javac] 	at com.sun.tools.javac.file.ZipFileIndex$Entry.compareTo(ZipFileIndex.java:1129)
+21:33:30      [javac] 	at com.sun.tools.javac.file.ZipFileIndex$Entry.compareTo(ZipFileIndex.java:1059)
+21:33:30      [javac] 	at java.util.ComparableTimSort.binarySort(ComparableTimSort.java:262)
+21:33:30      [javac] 	at java.util.ComparableTimSort.sort(ComparableTimSort.java:207)
+21:33:30      [javac] 	at java.util.Arrays.sort(Arrays.java:1246)
+21:33:30      [javac] 	at com.sun.tools.javac.file.ZipFileIndex$ZipDirectory.buildIndex(ZipFileIndex.java:590)
+21:33:30      [javac] 	at com.sun.tools.javac.file.ZipFileIndex$ZipDirectory.access$000(ZipFileIndex.java:483)
+21:33:30      [javac] 	at com.sun.tools.javac.file.ZipFileIndex.checkIndex(ZipFileIndex.java:191)
+21:33:30      [javac] 	at com.sun.tools.javac.file.ZipFileIndex.<init>(ZipFileIndex.java:136)
+21:33:30      [javac] 	at com.sun.tools.javac.file.ZipFileIndexCache.getZipFileIndex(ZipFileIndexCache.java:100)
+21:33:30      [javac] 	at com.sun.tools.javac.file.JavacFileManager.openArchive(JavacFileManager.java:529)
+21:33:30      [javac] 	at com.sun.tools.javac.file.JavacFileManager.openArchive(JavacFileManager.java:462)
+21:33:30      [javac] 	at com.sun.tools.javac.file.JavacFileManager.listContainer(JavacFileManager.java:348)
+21:33:30      [javac] 	at com.sun.tools.javac.file.JavacFileManager.list(JavacFileManager.java:624)
+21:33:30      [javac] 	at com.sun.tools.javac.jvm.ClassReader.fillIn(ClassReader.java:2750)
+21:33:30      [javac] 	at com.sun.tools.javac.jvm.ClassReader.complete(ClassReader.java:2446)
+21:33:30      [javac] 	at com.sun.tools.javac.jvm.ClassReader.access$000(ClassReader.java:76)
+21:33:30      [javac] 	at com.sun.tools.javac.jvm.ClassReader$1.complete(ClassReader.java:240)
+21:33:30      [javac] 	at com.sun.tools.javac.code.Symbol.complete(Symbol.java:574)
+21:33:30      [javac] 	at com.sun.tools.javac.comp.Enter.visitTopLevel(Enter.java:300)
+21:33:30      [javac] 	at com.sun.tools.javac.tree.JCTree$JCCompilationUnit.accept(JCTree.java:518)
+21:33:30      [javac] 	at com.sun.tools.javac.comp.Enter.classEnter(Enter.java:258)
+21:33:30      [javac] 	at com.sun.tools.javac.comp.Enter.classEnter(Enter.java:272)
+21:33:30      [javac] 	at com.sun.tools.javac.comp.Enter.complete(Enter.java:486)
+21:33:30      [javac] 	at com.sun.tools.javac.comp.Enter.main(Enter.java:471)
+21:33:30      [javac] 	at com.sun.tools.javac.main.JavaCompiler.enterTrees(JavaCompiler.java:982)
+21:33:30      [javac] 	at com.sun.tools.javac.main.JavaCompiler.compile(JavaCompiler.java:857)
+21:33:30      [javac] 	at com.sun.tools.javac.main.Main.compile(Main.java:523)
+21:33:30      [javac] 	at com.sun.tools.javac.main.Main.compile(Main.java:381)
+21:33:30      [javac] 	at com.sun.tools.javac.main.Main.compile(Main.java:370)
+21:33:30      [javac] 	at com.sun.tools.javac.main.Main.compile(Main.java:361)
+21:33:30      [javac] 	at com.sun.tools.javac.Main.compile(Main.java:56)
+21:33:30      [javac] 	at com.sun.tools.javac.Main.main(Main.java:42)
+21:33:30      [javac] Exception in thread "Attach API teardown" java.lang.NoSuchFieldError: java/lang/StringCoding$StringDecoder.
+21:33:30      [javac] 	at java.lang.StringCoding$StringDecoder.decode(StringCoding.java:148)
+21:33:30      [javac] 	at java.lang.StringCoding.decode(StringCoding.java:193)
+21:33:30      [javac] 	at java.lang.String.<init>(String.java:494)
+21:33:30      [javac] 	at java.lang.String.<init>(String.java:545)
+21:33:30      [javac] 	at java.io.UnixFileSystem.list(Native Method)
+21:33:30      [javac] 	at java.io.File.list(File.java:1122)
+21:33:30      [javac] 	at java.io.File.listFiles(File.java:1207)
+21:33:30      [javac] 	at openj9.internal.tools.attach.target.CommonDirectory.countTargetDirectories(CommonDirectory.java:314)
+21:33:30      [javac] 	at openj9.internal.tools.attach.target.AttachHandler.terminateWaitLoop(AttachHandler.java:447)
+21:33:30      [javac] 	at openj9.internal.tools.attach.target.AttachHandler.terminate(AttachHandler.java:388)
+21:33:30      [javac] 	at openj9.internal.tools.attach.target.AttachHandler$teardownHook.run(AttachHandler.java:508)
+21:33:30  
+21:33:30  BUILD FAILED
+```
+
+This probably was caused by new JCL level. Will have a look.

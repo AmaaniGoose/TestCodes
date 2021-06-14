@@ -1,0 +1,139 @@
+Looks like a hotspot Graal setup issue?
+https://ci.adoptopenjdk.net/job/Test_openjdk16_hs_extended.openjdk_x86-64_linux/9/consoleFull
+```
+11:46:43  TEST: compiler/graalunit/ApiDirectivesTest.java
+11:46:43  TEST JDK: /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image
+11:46:43  
+11:46:43  ACTION: build -- Passed. Build successful
+11:46:43  REASON: Named class compiled on demand
+11:46:43  TIME:   0.105 seconds
+11:46:43  messages:
+11:46:43  command: build compiler.graalunit.common.GraalUnitTestLauncher
+11:46:43  reason: Named class compiled on demand
+11:46:43  Library /:
+11:46:43    compile: compiler.graalunit.common.GraalUnitTestLauncher
+11:46:43  elapsed time (seconds): 0.105
+11:46:43  
+11:46:43  ACTION: compile -- Passed. Compilation successful
+11:46:43  REASON: .class file out of date or does not exist
+11:46:43  TIME:   0.105 seconds
+11:46:43  messages:
+11:46:43  command: compile /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/graalunit/common/GraalUnitTestLauncher.java
+11:46:43  reason: .class file out of date or does not exist
+11:46:43  Additional options from @modules: --add-modules jdk.internal.vm.compiler
+11:46:43  Mode: agentvm
+11:46:43  Agent id: 1
+11:46:43  elapsed time (seconds): 0.105
+11:46:43  configuration:
+11:46:43  Boot Layer (javac runtime environment)
+11:46:43    class path: /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/javatest.jar 
+11:46:43                /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+11:46:43    patch:      java.base /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/patches/java.base
+11:46:43  
+11:46:43  javac compilation environment
+11:46:43    add modules: jdk.internal.vm.compiler
+11:46:43    source path: /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib
+11:46:43                 /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/graalunit
+11:46:43                 /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg
+11:46:43    class path:  /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0/test/lib
+11:46:43                 /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0/compiler/graalunit
+11:46:43                 /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0
+11:46:43  
+11:46:43  rerun:
+11:46:43  cd /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/scratch/0 && \
+11:46:43  DISPLAY=:0 \
+11:46:43  HOME=/home/jenkins \
+11:46:43  PATH=/bin:/usr/bin:/usr/sbin \
+11:46:43      /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image/bin/javac \
+11:46:43          -J-ea \
+11:46:43          -J-esa \
+11:46:43          -J-Xmx512m \
+11:46:43          -J-XX:-UseCompressedOops \
+11:46:43          -J-Djava.library.path=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdkbinary/openjdk-test-image/hotspot/jtreg/native \
+11:46:43          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:-UseCompressedOops' \
+11:46:43          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:-UseCompressedOops' \
+11:46:43          -J-Dtest.compiler.opts= \
+11:46:43          -J-Dtest.java.opts= \
+11:46:43          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+11:46:43          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+11:46:43          -J-Dtest.timeout.factor=8.0 \
+11:46:43          -J-Dtest.nativepath=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdkbinary/openjdk-test-image/hotspot/jtreg/native \
+11:46:43          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg \
+11:46:43          -J-Dtest.name=compiler/graalunit/ApiDirectivesTest.java \
+11:46:43          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/graalunit/ApiDirectivesTest.java \
+11:46:43          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/graalunit \
+11:46:43          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/graalunit:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/graalunit:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg \
+11:46:43          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0/compiler/graalunit/ApiDirectivesTest.d \
+11:46:43          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0/compiler/graalunit/ApiDirectivesTest.d:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0/test/lib:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0/compiler/graalunit:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0 \
+11:46:43          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/graalunit:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0/test/lib:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0/compiler/graalunit:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0 \
+11:46:43          -J-Dtest.modules=jdk.internal.vm.compiler \
+11:46:43          --add-modules jdk.internal.vm.compiler \
+11:46:43          -d /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0 \
+11:46:43          -sourcepath /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/graalunit:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg \
+11:46:43          -classpath /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0/test/lib:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0/compiler/graalunit:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0 /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/graalunit/common/GraalUnitTestLauncher.java
+11:46:43  direct:
+11:46:43  Note: /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/graalunit/common/GraalUnitTestLauncher.java uses unchecked or unsafe operations.
+11:46:43  Note: Recompile with -Xlint:unchecked for details.
+11:46:43  
+11:46:43  ACTION: main -- Failed. Execution failed: `main' threw exception: java.lang.ExceptionInInitializerError
+11:46:43  REASON: User specified action: run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCI compiler.graalunit.common.GraalUnitTestLauncher -prefix org.graalvm.compiler.api.directives.test -exclude ${test.root}/ProblemList-graal.txt 
+11:46:43  TIME:   0.291 seconds
+11:46:43  messages:
+11:46:43  command: main -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCI compiler.graalunit.common.GraalUnitTestLauncher -prefix org.graalvm.compiler.api.directives.test -exclude /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/ProblemList-graal.txt
+11:46:43  reason: User specified action: run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCI compiler.graalunit.common.GraalUnitTestLauncher -prefix org.graalvm.compiler.api.directives.test -exclude ${test.root}/ProblemList-graal.txt 
+11:46:43  Mode: othervm [/othervm specified]
+11:46:43  Additional options from @modules: --add-modules jdk.internal.vm.compiler
+11:46:43  elapsed time (seconds): 0.291
+11:46:43  configuration:
+11:46:43  Boot Layer
+11:46:43    add modules: jdk.internal.vm.compiler
+11:46:43  
+11:46:43  STDOUT:
+11:46:43  STDERR:
+11:46:43  java.lang.ExceptionInInitializerError
+11:46:43  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+11:46:43  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+11:46:43  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+11:46:43  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+11:46:43  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+11:46:43  	at java.base/java.lang.Thread.run(Thread.java:831)
+11:46:43  Caused by: java.lang.RuntimeException: ERROR: Graal library directory is not specified, use -Dgraalunit.libs or TEST_IMAGE_GRAAL_DIR environment variable.
+11:46:43  	at compiler.graalunit.common.GraalUnitTestLauncher.<clinit>(GraalUnitTestLauncher.java:61)
+11:46:43  	... 6 more
+11:46:43  STATUS:Failed.`main' threw exception: java.lang.ExceptionInInitializerError
+11:46:43  rerun:
+11:46:43  cd /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/scratch/0 && \
+11:46:43  DISPLAY=:0 \
+11:46:43  HOME=/home/jenkins \
+11:46:43  PATH=/bin:/usr/bin:/usr/sbin \
+11:46:43  CLASSPATH=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/graalunit:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0/test/lib:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0/compiler/graalunit:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+11:46:43      /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image/bin/java \
+11:46:43          -Dtest.vm.opts='-ea -esa -Xmx512m -XX:-UseCompressedOops' \
+11:46:43          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:-UseCompressedOops' \
+11:46:43          -Dtest.compiler.opts= \
+11:46:43          -Dtest.java.opts= \
+11:46:43          -Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+11:46:43          -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+11:46:43          -Dtest.timeout.factor=8.0 \
+11:46:43          -Dtest.nativepath=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdkbinary/openjdk-test-image/hotspot/jtreg/native \
+11:46:43          -Dtest.root=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg \
+11:46:43          -Dtest.name=compiler/graalunit/ApiDirectivesTest.java \
+11:46:43          -Dtest.file=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/graalunit/ApiDirectivesTest.java \
+11:46:43          -Dtest.src=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/graalunit \
+11:46:43          -Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/graalunit:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/graalunit:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg \
+11:46:43          -Dtest.classes=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0/compiler/graalunit/ApiDirectivesTest.d \
+11:46:43          -Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0/compiler/graalunit/ApiDirectivesTest.d:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0/test/lib:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0/compiler/graalunit:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0 \
+11:46:43          -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/graalunit:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0/test/lib:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0/compiler/graalunit:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/classes/0 \
+11:46:43          -Dtest.modules=jdk.internal.vm.compiler \
+11:46:43          --add-modules jdk.internal.vm.compiler \
+11:46:43          -ea \
+11:46:43          -esa \
+11:46:43          -Xmx512m \
+11:46:43          -XX:-UseCompressedOops \
+11:46:43          -Djava.library.path=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdkbinary/openjdk-test-image/hotspot/jtreg/native \
+11:46:43          -XX:+UnlockExperimentalVMOptions \
+11:46:43          -XX:+EnableJVMCI \
+11:46:43          com.sun.javatest.regtest.agent.MainWrapper /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16154626346082/jvm_compiler_1/work/compiler/graalunit/ApiDirectivesTest.d/main.0.jta -prefix org.graalvm.compiler.api.directives.test -exclude /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/ProblemList-graal.txt
+11:46:43  
+11:46:43  TEST RESULT: Failed. Execution failed: `main' threw exception: java.lang.ExceptionInInitializerError
+```

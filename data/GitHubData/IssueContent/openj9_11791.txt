@@ -1,0 +1,5 @@
+There are a number of places in the JIT guarded with `TR::Compiler->cls.classesOnHeap()`.  This query is hardcoded to always return `true`.  J9 classes have resided on the heap for many years now and this is unlikely to change.  I doubt this flexibility is still needed.
+
+Assume `TR::Compiler->cls.classesOnHeap()` is always `true` and fold and remove code as necessary.
+
+Leave the `classesOnHeap()` query in `env/J9ClassEnv.hpp` for now.  There is some re-work that needs to happen in the OMR project before it can be removed.

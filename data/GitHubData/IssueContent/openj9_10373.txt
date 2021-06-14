@@ -1,0 +1,6 @@
+When JIT compiling and running of the VM is it possible to ensure, perhaps through additional tests, that the bytecode gets compiled and VM implementation, is the best possible set of instruction. This can include ensuring:
+- vectorisation
+- SIMD instructions
+- GPU acceleration
+- Other platform-specific instruction
+in the compiled VM code and JIT-compiled code corresponds to a set of independently written platform-specific optimal assembly instructions. 

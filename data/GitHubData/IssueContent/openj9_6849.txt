@@ -1,0 +1,46 @@
+Java -version output
+--------------------
+openjdk version "1.8.0_222"
+OpenJDK Runtime Environment (build 1.8.0_222-b10)
+Eclipse OpenJ9 VM (build openj9-0.15.1, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20190717_368 (JIT enabled, AOT enabled)
+OpenJ9   - 0f66c6431
+OMR      - ec782f26
+JCL      - f147086df1e based on jdk8u222-b10)
+
+Summary of problem
+------------------
+Running the attached test case that uses a JVMTI agent causes an assertion. 
+https://github.com/eclipse/openj9/blob/master/runtime/jvmti/jvmtiHook.c#L2473
+
+This problem occurs only using the option -XX:-JITInlineWatches which disables JIT compilation of methods that contain watched fields. Passes adding -Xint.
+
+I've been able to reproduce this assertion on Linux X86, and PPC64LE Linux. My concern is this might be an issue on aarch64, and arm where JITInlineWatches is disabled by default. 
+
+Steps to reproduce:
+```
+g++ -I<path to sdk>/include/ -I<path to sdk>/include/linux/ -fPIC -c test.cpp
+g++ -shared -fPIC -o libtest.so test.o -lc
+
+<path to sdk>/bin/javac Test.java
+<path to sdk>/jre/bin/java -agentpath:./libtest.so -XX:-JITInlineWatches -Djava.library.path=<workspace path> Test
+```
+
+Diagnostic files
+----------------
+15:32:58.662 0x2361600 j9jvmti.424    *   ** ASSERTION FAILED ** at jvmtiHook.c:2473: ((fieldID) != NULL)
+JVMDUMP039I Processing dump event "traceassert", detail "" at 2019/08/26 08:32:58 - please wait.
+JVMDUMP032I JVM requested System dump using '/root/ws/testfromgac/core.20190826.083258.23261.0001.dmp' in response to an event
+JVMPORT030W /proc/sys/kernel/core_pattern setting "|/usr/share/apport/apport %p %s %c %d %P" specifies that the core dump is to be piped to an external program.  Attempting to rename either core or core.23290.
+
+JVMDUMP010I System dump written to /root/ws/testfromgac/core.20190826.083258.23261.0001.dmp
+JVMDUMP032I JVM requested Java dump using '/root/ws/testfromgac/javacore.20190826.083258.23261.0002.txt' in response to an event
+JVMDUMP010I Java dump written to /root/ws/testfromgac/javacore.20190826.083258.23261.0002.txt
+JVMDUMP032I JVM requested Snap dump using '/root/ws/testfromgac/Snap.20190826.083258.23261.0003.trc' in response to an event
+JVMDUMP010I Snap dump written to /root/ws/testfromgac/Snap.20190826.083258.23261.0003.trc
+JVMDUMP013I Processed dump event "traceassert", detail "".
+
+Test case:
+[benchmark.zip](https://github.com/eclipse/openj9/files/3541874/benchmark.zip)
+
+Diagnostic files:
+[diag.zip](https://github.com/eclipse/openj9/files/3541883/diag.zip)

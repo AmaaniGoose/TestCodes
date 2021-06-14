@@ -1,0 +1,7 @@
+I'm implementing a JVMTI extensions event with behavior similar to `--patch-module` but available at `Agent_OnLoad` so classes can be defined into java.base early in startup. When the event is triggered it will run a callback function with the class name giving the user the option to respond whether or not this class should be loaded into java.base or the unnamed module. Something along the lines of:
+
+`jboolean JNICALL  PatchToJavaBase(jvmtiEnv *jvmti_env, JNIEnv* jni_env, char* className)`
+
+this event was first discussed as a solution to #2751. the benefits of this event are in making the class's module an explicit choice rather than an implementation detail.
+
+fyi @DanHeidinga 

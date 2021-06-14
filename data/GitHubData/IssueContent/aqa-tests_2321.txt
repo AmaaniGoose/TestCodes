@@ -1,0 +1,179 @@
+**Describe the bug**
+Initially reported at https://github.com/eclipse/openj9/issues/12087
+
+```
+06:04:43  --------------------------------------------------
+06:04:43  TEST: javax/imageio/spi/AppletContextTest/BadPluginConfigurationTest.sh
+06:04:43  TEST JDK: /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image
+06:04:43  
+06:04:43  ACTION: compile -- Passed. Compilation successful
+06:04:43  REASON: User specified action: run compile IIOPluginTest.java 
+06:04:43  TIME:   1.358 seconds
+06:04:43  messages:
+06:04:43  command: compile /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest/IIOPluginTest.java
+06:04:43  reason: User specified action: run compile IIOPluginTest.java 
+06:04:43  Mode: othervm
+06:04:43  elapsed time (seconds): 1.358
+06:04:43  configuration:
+06:04:43  javac compilation environment
+06:04:43    source path: /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest
+06:04:43    class path:  /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest
+06:04:43                 /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16144120941027/jdk_imageio_0/work/classes/javax/imageio/spi/AppletContextTest
+06:04:43                 /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/lib/tools.jar
+06:04:43  
+06:04:43  rerun:
+06:04:43  cd /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16144120941027/jdk_imageio_0/work/javax/imageio/spi/AppletContextTest/BadPluginConfigurationTest && \
+06:04:43  DISPLAY=:0 \
+06:04:43  HOME=/home/jenkins \
+06:04:43  LANG=en_US \
+06:04:43  PATH=/bin:/usr/bin:/usr/sbin \
+06:04:43  TZ=America/Toronto \
+06:04:43      /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/bin/javac \
+06:04:43          -J-ea \
+06:04:43          -J-esa \
+06:04:43          -J-Xmx512m \
+06:04:43          -J-XX:+UseCompressedOops \
+06:04:43          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+06:04:43          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+06:04:43          -J-Dtest.compiler.opts= \
+06:04:43          -J-Dtest.java.opts= \
+06:04:43          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image \
+06:04:43          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image \
+06:04:43          -J-Dtest.timeout.factor=8.0 \
+06:04:43          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test \
+06:04:43          -J-Dtest.name=javax/imageio/spi/AppletContextTest/BadPluginConfigurationTest.sh \
+06:04:43          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest/BadPluginConfigurationTest.sh \
+06:04:43          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest \
+06:04:43          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest \
+06:04:43          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16144120941027/jdk_imageio_0/work/classes/javax/imageio/spi/AppletContextTest \
+06:04:43          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16144120941027/jdk_imageio_0/work/classes/javax/imageio/spi/AppletContextTest \
+06:04:43          -d /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16144120941027/jdk_imageio_0/work/classes/javax/imageio/spi/AppletContextTest \
+06:04:43          -sourcepath /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest \
+06:04:43          -classpath /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16144120941027/jdk_imageio_0/work/classes/javax/imageio/spi/AppletContextTest:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/lib/tools.jar /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest/IIOPluginTest.java
+06:04:43  STDOUT:
+06:04:43  STDERR:
+06:04:43  
+06:04:43  ACTION: compile -- Passed. Compilation successful
+06:04:43  REASON: User specified action: run compile DummyReaderPluginSpi.java 
+06:04:43  TIME:   1.119 seconds
+06:04:43  messages:
+06:04:43  command: compile /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest/DummyReaderPluginSpi.java
+06:04:43  reason: User specified action: run compile DummyReaderPluginSpi.java 
+06:04:43  Mode: othervm
+06:04:43  elapsed time (seconds): 1.119
+06:04:43  configuration:
+06:04:43  javac compilation environment
+06:04:43    source path: /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest
+06:04:43    class path:  /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest
+06:04:43                 /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16144120941027/jdk_imageio_0/work/classes/javax/imageio/spi/AppletContextTest
+06:04:43                 /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/lib/tools.jar
+06:04:43  
+06:04:43  rerun:
+06:04:43  cd /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16144120941027/jdk_imageio_0/work/javax/imageio/spi/AppletContextTest/BadPluginConfigurationTest && \
+06:04:43  DISPLAY=:0 \
+06:04:43  HOME=/home/jenkins \
+06:04:43  LANG=en_US \
+06:04:43  PATH=/bin:/usr/bin:/usr/sbin \
+06:04:43  TZ=America/Toronto \
+06:04:43      /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/bin/javac \
+06:04:43          -J-ea \
+06:04:43          -J-esa \
+06:04:43          -J-Xmx512m \
+06:04:43          -J-XX:+UseCompressedOops \
+06:04:43          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+06:04:43          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+06:04:43          -J-Dtest.compiler.opts= \
+06:04:43          -J-Dtest.java.opts= \
+06:04:43          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image \
+06:04:43          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image \
+06:04:43          -J-Dtest.timeout.factor=8.0 \
+06:04:43          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test \
+06:04:43          -J-Dtest.name=javax/imageio/spi/AppletContextTest/BadPluginConfigurationTest.sh \
+06:04:43          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest/BadPluginConfigurationTest.sh \
+06:04:43          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest \
+06:04:43          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest \
+06:04:43          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16144120941027/jdk_imageio_0/work/classes/javax/imageio/spi/AppletContextTest \
+06:04:43          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16144120941027/jdk_imageio_0/work/classes/javax/imageio/spi/AppletContextTest \
+06:04:43          -d /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16144120941027/jdk_imageio_0/work/classes/javax/imageio/spi/AppletContextTest \
+06:04:43          -sourcepath /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest \
+06:04:43          -classpath /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16144120941027/jdk_imageio_0/work/classes/javax/imageio/spi/AppletContextTest:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/lib/tools.jar /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest/DummyReaderPluginSpi.java
+06:04:43  STDOUT:
+06:04:43  STDERR:
+06:04:43  Note: /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest/DummyReaderPluginSpi.java uses or overrides a deprecated API.
+06:04:43  Note: Recompile with -Xlint:deprecation for details.
+06:04:43  
+06:04:43  ACTION: shell -- Failed. Execution failed: exit code 1
+06:04:43  REASON: User specified action: run shell BadPluginConfigurationTest.sh 
+06:04:43  TIME:   0.024 seconds
+06:04:43  messages:
+06:04:43  command: shell BadPluginConfigurationTest.sh
+06:04:43  reason: User specified action: run shell BadPluginConfigurationTest.sh 
+06:04:43  elapsed time (seconds): 0.024
+06:04:43  STDOUT:
+06:04:43  Unrecognized system!  AIX
+06:04:43  The test failed :-(
+06:04:43  exit status was 1
+06:04:43  Removing PLUGINDST_DIR 
+06:04:43  STDERR:
+06:04:43  Unrecognized system!  AIX
+06:04:43  rerun:
+06:04:43  cd /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16144120941027/jdk_imageio_0/work/javax/imageio/spi/AppletContextTest/BadPluginConfigurationTest && \
+06:04:43  DISPLAY=:0 \
+06:04:43  HOME=/home/jenkins \
+06:04:43  LANG=en_US \
+06:04:43  PATH=/bin:/usr/bin:/usr/sbin \
+06:04:43  TZ=America/Toronto \
+06:04:43  TESTFILE=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest/BadPluginConfigurationTest.sh \
+06:04:43  TESTSRC=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest \
+06:04:43  TESTSRCPATH=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest \
+06:04:43  TESTCLASSES=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16144120941027/jdk_imageio_0/work/classes/javax/imageio/spi/AppletContextTest \
+06:04:43  TESTCLASSPATH=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16144120941027/jdk_imageio_0/work/classes/javax/imageio/spi/AppletContextTest \
+06:04:43  COMPILEJAVA=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image \
+06:04:43  TESTJAVA=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image \
+06:04:43  TESTVMOPTS='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+06:04:43  TESTTOOLVMOPTS='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+06:04:43  TESTJAVACOPTS= \
+06:04:43  TESTJAVAOPTS= \
+06:04:43  TESTTIMEOUTFACTOR=8.0 \
+06:04:43  TESTROOT=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test \
+06:04:43  FS=/ \
+06:04:43  PS=: \
+06:04:43  NULL=/dev/null \
+06:04:43      sh \
+06:04:43          /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/imageio/spi/AppletContextTest/BadPluginConfigurationTest.sh
+06:04:43  
+06:04:43  TEST RESULT: Failed. Execution failed: exit code 1
+06:04:43  --------------------------------------------------
+06:06:48  Test results: passed: 141; failed: 1
+06:06:54  Report written to /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/report/html/report.html
+06:06:54  Results written to /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16144120941027/jdk_imageio_0/work
+06:06:54  Error: Some tests failed or other problems occurred.
+06:06:54  
+06:06:54  jdk_imageio_0_FAILED
+```
+
+**To Reproduce**
+Steps to reproduce the behavior (or Grinder rerun link):
+rebuild the failed tests in one link:
+06:11:58 https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&JDK_VENDOR=adoptopenjdk&BUILD_LIST=openjdk&PLATFORM=ppc64_aix_mixed&TARGET=testList%20TESTLIST=jdk_other_0,jdk_other_1,jdk_security4_0,jdk_security4_1,jdk_imageio_0,jdk_imageio_1
+
+**Expected behavior**
+Determine if this test can pass in `AIX` platform or has to be excluded.
+
+https://github.com/eclipse/openj9/issues/12087#issuecomment-788216521
+Noticed the same failure in hotspot: https://ci.adoptopenjdk.net/job/Test_openjdk8_hs_extended.openjdk_ppc64_aix/10/console
+```
+04:36:33.747  REASON: User specified action: run shell BadPluginConfigurationTest.sh 
+04:36:33.747  TIME:   0.022 seconds
+04:36:33.747  messages:
+04:36:33.747  command: shell BadPluginConfigurationTest.sh
+04:36:33.747  reason: User specified action: run shell BadPluginConfigurationTest.sh 
+04:36:33.747  elapsed time (seconds): 0.022
+04:36:33.747  STDOUT:
+04:36:33.747  Unrecognized system!  AIX
+04:36:33.747  The test failed :-(
+04:36:33.747  exit status was 1
+04:36:33.747  Removing PLUGINDST_DIR 
+04:36:33.747  STDERR:
+04:36:33.747  Unrecognized system!  AIX
+```

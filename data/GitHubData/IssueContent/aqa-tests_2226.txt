@@ -1,0 +1,3 @@
+From the 2021 January Release Retrospective it was noted we were missing Test log console output for some failed tests due to insufficient JTHarness log output: https://github.com/AdoptOpenJDK/TSC/issues/195#issuecomment-764535852
+
+Current value is 100,000

@@ -1,0 +1,131 @@
+Link to failing job:  https://ci.adoptopenjdk.net/job/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/28/
+
+Test failed on jdk14 GA build:
+```
+java -version
+15:19:47  openjdk version "14" 2020-03-17
+15:19:47  OpenJDK Runtime Environment AdoptOpenJDK (build 14+36)
+15:19:47  Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.19.0, JRE 14 Mac OS X amd64-64-Bit Compressed References 20200313_47 (JIT enabled, AOT enabled)
+15:19:47  OpenJ9   - 0133ba037
+15:19:47  OMR      - 1c04e0ef9
+15:19:47  JCL      - a73be60649 based on jdk-14+36)
+```
+May be intermittent (the test has not failed on later nightly jdk14 builds, though they build with openj9 master, not the openj9-0.19.0 tag).
+
+Only seen in the GA build on x86-64_mac.
+
+Test output for the failure:
+```
+15:49:19  STDOUT:
+15:49:19  [TestNG] Running:
+15:49:19    java/lang/invoke/VarHandles/VarHandleTestAccessString.java
+15:49:19  
+15:49:19  config VarHandleTestAccessString.setup(): success
+15:49:19  test VarHandleTestAccessString.testAccess("VarHandle -> Instance final field", VarHandleBaseTest$VarHandleAccessTestCase@334f9163): success
+15:49:19  test VarHandleTestAccessString.testAccess("VarHandle -> Instance final field unsupported", VarHandleBaseTest$VarHandleAccessTestCase@82495ba8): success
+15:49:19  test VarHandleTestAccessString.testAccess("VarHandle -> Static final field", VarHandleBaseTest$VarHandleAccessTestCase@2830aa86): success
+15:49:19  test VarHandleTestAccessString.testAccess("VarHandle -> Static final field unsupported", VarHandleBaseTest$VarHandleAccessTestCase@867d15d6): success
+15:49:19  test VarHandleTestAccessString.testAccess("VarHandle -> Instance field", VarHandle -> Instance field): success
+15:49:19  test VarHandleTestAccessString.testAccess("VarHandle -> Instance field unsupported", VarHandleBaseTest$VarHandleAccessTestCase@3abdff97): success
+15:49:19  test VarHandleTestAccessString.testAccess("VarHandle -> Static field", VarHandle -> Static field): success
+15:49:19  test VarHandleTestAccessString.testAccess("VarHandle -> Static field unsupported", VarHandleBaseTest$VarHandleAccessTestCase@ecf1f5a9): success
+15:49:19  test VarHandleTestAccessString.testAccess("VarHandle -> Array", VarHandle -> Array): success
+15:49:19  test VarHandleTestAccessString.testAccess("VarHandle -> Array Object[]", VarHandle -> Array Object[]): success
+15:49:19  test VarHandleTestAccessString.testAccess("VarHandle -> Array unsupported", VarHandle -> Array unsupported): success
+15:49:19  test VarHandleTestAccessString.testAccess("VarHandle -> Array index out of bounds", VarHandleBaseTest$VarHandleAccessTestCase@95b1d3b9): success
+15:49:19  test VarHandleTestAccessString.testAccess("VarHandle -> Array store exception", VarHandleBaseTest$VarHandleAccessTestCase@6073dbc2): success
+15:49:19  test VarHandleTestAccessString.testEquals(): success
+15:49:19  test VarHandleTestAccessString.testIsAccessModeSupported(java.lang.invoke.InstanceFieldVarHandle@55151b34): success
+15:49:19  test VarHandleTestAccessString.testIsAccessModeSupported(java.lang.invoke.StaticFieldVarHandle@7dd3313a): success
+15:49:19  test VarHandleTestAccessString.testIsAccessModeSupported(java.lang.invoke.ArrayVarHandle@bb4d56a8): success
+15:49:19  test VarHandleTestAccessString.testLookupInstanceToStatic(): success
+15:49:19  test VarHandleTestAccessString.testLookupStaticToInstance(): success
+15:49:19  test VarHandleTestAccessString.testTypes(java.lang.invoke.InstanceFieldVarHandle@55151b34, java.util.Arrays$ArrayList@6761a151): success
+15:49:19  test VarHandleTestAccessString.testTypes(java.lang.invoke.StaticFieldVarHandle@7dd3313a, []): success
+15:49:19  test VarHandleTestAccessString.testTypes(java.lang.invoke.ArrayVarHandle@bb4d56a8, java.util.Arrays$ArrayList@f2471d52): success
+15:49:19  
+15:49:19  ===============================================
+15:49:19  java/lang/invoke/VarHandles/VarHandleTestAccessString.java
+15:49:19  Total tests run: 22, Failures: 0, Skips: 0
+15:49:19  ===============================================
+15:49:19  
+15:49:19  STDERR:
+15:49:19  Unhandled exception
+15:49:19  Type=Segmentation error vmState=0x0005ffff
+15:49:19  J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000001
+15:49:19  Handler1=000000000DE8FF90 Handler2=000000000E095AB0 InaccessibleAddress=0000000000029008
+15:49:19  RDI=000000000FEE3A00 RSI=00000000100A3300 RAX=00007F9D59812620 RBX=0000000035E6B420
+15:49:19  RCX=0000000000000008 RDX=0000000000029000 R8=0000000000000008 R9=00000000B01D4118
+15:49:19  R10=0000000000000000 R11=0000000000000001 R12=000000000FEE3A00 R13=0000000000000006
+15:49:19  R14=0000000000000006 R15=00000000100A2810
+15:49:19  RIP=000000000DEBB1D3 GS=0000 FS=0000 RSP=00000000B01D3FF0
+15:49:19  RFlags=0000000000010206 CS=002B RBP=00000000B01D40C0 ERR=0002900800000004
+15:49:19  TRAPNO=000000040000000E CPU=9008000000040000 FAULTVADDR=0000000000029008
+15:49:19  XMM0 ffffffffffffffff (f: 4294967296.000000, d: nan)
+15:49:19  XMM1 6570695065636e65 (f: 1701015168.000000, d: 4.256206e+180)
+15:49:19  XMM2 000000326e742000 (f: 1853104128.000000, d: 1.070153e-312)
+15:49:19  XMM3 894800000370e9fd (f: 57731580.000000, d: -5.954497e-264)
+15:49:19  XMM4 000000e962320be8 (f: 1647447040.000000, d: 4.952390e-312)
+15:49:19  XMM5 000000326e742000 (f: 1853104128.000000, d: 1.070153e-312)
+15:49:19  XMM6 894800000370e9fd (f: 57731580.000000, d: -5.954497e-264)
+15:49:19  XMM7 000000e962320be8 (f: 1647447040.000000, d: 4.952390e-312)
+15:49:19  XMM8 000000326e742000 (f: 1853104128.000000, d: 1.070153e-312)
+15:49:19  XMM9 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+15:49:19  XMM10 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+15:49:19  XMM11 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+15:49:19  XMM12 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+15:49:19  XMM13 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+15:49:19  XMM14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+15:49:19  XMM15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+15:49:19  Module=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/lib/compressedrefs/libj9vm29.dylib
+15:49:19  Module_base_address=000000000DE00000 Symbol=resolveStaticFieldRefInto
+15:49:19  Symbol_address=000000000DEBB0B0
+15:49:19  
+15:49:19  Method_being_compiled=java/util/stream/ReferencePipeline.anyMatch(Ljava/util/function/Predicate;)Z
+15:49:19  Target=2_90_20200313_47 (Mac OS X 10.10.5)
+15:49:19  CPU=amd64 (2 logical CPUs) (0x80000000 RAM)
+15:49:19  ----------- Stack Backtrace -----------
+15:49:19  ---------------------------------------
+15:49:19  JVMDUMP039I Processing dump event "gpf", detail "" at 2020/03/13 08:49:07 - please wait.
+15:49:19  JVMDUMP032I JVM requested System dump using '/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdk-tests/TKG/test_output_15841129274433/jdk_lang_0/work/scratch/core.20200313.084907.12138.0001.dmp' in response to an event
+15:49:19  JVMDUMP012E Error in System dump: The core file created by child process with pid = 12141 was not found. Expected to find core file with name "/cores/core.12141"
+15:49:19  JVMDUMP032I JVM requested Java dump using '/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdk-tests/TKG/test_output_15841129274433/jdk_lang_0/work/scratch/javacore.20200313.084907.12138.0002.txt' in response to an event
+15:49:19  JVMDUMP010I Java dump written to /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdk-tests/TKG/test_output_15841129274433/jdk_lang_0/work/scratch/javacore.20200313.084907.12138.0002.txt
+15:49:19  JVMDUMP032I JVM requested Snap dump using '/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdk-tests/TKG/test_output_15841129274433/jdk_lang_0/work/scratch/Snap.20200313.084907.12138.0003.trc' in response to an event
+15:49:19  JVMDUMP010I Snap dump written to /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdk-tests/TKG/test_output_15841129274433/jdk_lang_0/work/scratch/Snap.20200313.084907.12138.0003.trc
+15:49:19  JVMDUMP007I JVM Requesting JIT dump using '/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdk-tests/TKG/test_output_15841129274433/jdk_lang_0/work/scratch/jitdump.20200313.084907.12138.0004.dmp'
+15:49:19  JVMDUMP010I JIT dump written to /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdk-tests/TKG/test_output_15841129274433/jdk_lang_0/work/scratch/jitdump.20200313.084907.12138.0004.dmp
+15:49:19  JVMDUMP013I Processed dump event "gpf", detail "".
+15:49:19  rerun:
+15:49:19  cd /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdk-tests/TKG/test_output_15841129274433/jdk_lang_0/work/scratch && \
+15:49:19  HOME=/Users/jenkins \
+15:49:19  PATH=/bin:/usr/bin:/usr/sbin \
+15:49:19  CLASSPATH=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdk-tests/TKG/test_output_15841129274433/jdk_lang_0/work/classes/java/lang/invoke/VarHandles/VarHandleTestAccessString.d:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/invoke/VarHandles:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/jvmtest/openjdk/jtreg/lib/testng.jar:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/jvmtest/openjdk/jtreg/lib/jcommander.jar:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/jvmtest/openjdk/jtreg/lib/javatest.jar:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+15:49:19      /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/../bin/java \
+15:49:19          -Dtest.class.path.prefix=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdk-tests/TKG/test_output_15841129274433/jdk_lang_0/work/classes/java/lang/invoke/VarHandles/VarHandleTestAccessString.d:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/invoke/VarHandles \
+15:49:19          -Dtest.file=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/invoke/VarHandles/VarHandleTestAccessString.java \
+15:49:19          -Dtest.src=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/invoke/VarHandles \
+15:49:19          -Dtest.src.path=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/invoke/VarHandles \
+15:49:19          -Dtest.classes=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdk-tests/TKG/test_output_15841129274433/jdk_lang_0/work/classes/java/lang/invoke/VarHandles/VarHandleTestAccessString.d \
+15:49:19          -Dtest.class.path=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdk-tests/TKG/test_output_15841129274433/jdk_lang_0/work/classes/java/lang/invoke/VarHandles/VarHandleTestAccessString.d \
+15:49:19          -Dtest.vm.opts='-ea -esa -Xmx512m -Xcompressedrefs' \
+15:49:19          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-Xcompressedrefs' \
+15:49:19          -Dtest.compiler.opts= \
+15:49:19          -Dtest.java.opts= \
+15:49:19          -Dtest.jdk=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/.. \
+15:49:19          -Dcompile.jdk=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/.. \
+15:49:19          -Dtest.timeout.factor=8.0 \
+15:49:19          -Dtest.root=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+15:49:19          -Dtest.nativepath=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+15:49:19          -ea \
+15:49:19          -esa \
+15:49:19          -Xmx512m \
+15:49:19          -Xcompressedrefs \
+15:49:19          -Djava.library.path=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+15:49:19          -Diters=20000 \
+15:49:19          -XX:-TieredCompilation \
+15:49:19          com.sun.javatest.regtest.agent.MainWrapper /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac/openjdk-tests/TKG/test_output_15841129274433/jdk_lang_0/work/java/lang/invoke/VarHandles/VarHandleTestAccessString.d/testng.3.jta java/lang/invoke/VarHandles/VarHandleTestAccessString.java false VarHandleTestAccessString
+15:49:19  
+15:49:19  TEST RESULT: Failed. Unexpected exit from test [exit code: 255]
+```
+Can be rerun via https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=14&JDK_IMPL=openj9&BUILD_LIST=openjdk&PLATFORM=x86-64_mac&TARGET=jdk_lang_0

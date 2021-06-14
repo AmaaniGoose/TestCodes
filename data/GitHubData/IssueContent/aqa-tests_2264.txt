@@ -1,0 +1,96 @@
+**Describe the bug**
+This test fails to load - and grinder reports unstable as result.
+
+The java executable (or .jar code) defeat the normal AIX rtld behavior.
+
+```
+JVMJ9TI001E Agent library jvmtitest could not be opened (Could not load module .
+System error: No such file or directory)
+JVMJ9VM015W Initialization error for library j9jvmti29(-3): JVMJ9VM009E J9VMDllMain failed
+```
+Note: JAVA messages - with an AIX rtld message embedded - see below for a pure AIX example of rtld messaging
+
+**To Reproduce**
+Steps to reproduce the behavior (or Grinder rerun link):
+The key command - from a Grinder job - with workspace saved:
+`"/home/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image/bin/java"  -Xgcpolicy:metronome -Xcompressedrefs  -Xdump    -agentlib:jvmtitest=test:rnwr001 -cp "/home/jenkins/workspace/Grinder/openjdk-tests/TKG/../../jvmtest/functional/cmdLineTests/jvmtitests/jvmtitest.jar" com.ibm.jvmti.tests.util.TestRunner`
+
+
+**Expected behavior**
+That the test runs and finishes with status 0
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
+
+**Additional context**
+To assist with understanding the error message above:
+1. `JVMJ9TI001E Agent library jvmtitest could not be opened`: This bit is from java - what follows (#2 and 3) is the AIX rtld messages - note: jvmitest is a .jar file
+2. (Could not load module .`: specifically - a module named '.' is not loading - this is probably the error - wrong argument in something.
+2. `System error: No such file or directory)`: the error at OS level
+3. `JVMJ9VM015W Initialization error for library j9jvmti29(-3)`: (java message)
+4.  JVMJ9VM009E J9VMDllMain failed` - multiple messages: JVM messages - related to the shared library j9jvmti29 (libj9jvmti29.so). I am guessing the java routine J9VMDIMain (in C main() ?) does not load - because it could not load the Agent (.jar)
+
+To further help reading: an example using a simple application (/usr/bin/python)
+
+PYTHON has the following library dependency:
+```
+/usr/bin/python needs:
+         /opt/freeware/lib/libpython2.7.so
+         /opt/freeware/lib/libexpat.a(libexpat.so.1)
+         /opt/freeware/lib/libffi.a(libffi.so.6)
+         /opt/freeware/lib/libncurses.so
+         /opt/freeware/lib/libsqlite3.so
+         /opt/freeware/lib/libstdc++.a(libstdc++.so.6)
+         /opt/freeware/lib/libgcc_s.a(shr.o)
+         /usr/lib/libc.a(shr.o)
+         /usr/lib/librtl.a(shr.o)
+         /usr/lib/libdl.a(shr.o)
+         /usr/lib/libpthreads.a(shr_comm.o)
+         /usr/lib/libpthreads.a(shr_xpg5.o)
+         /usr/lib/libpthread.a(shr_xpg5.o)
+         /unix
+         /usr/lib/libcrypt.a(shr.o)
+```
+The first library it needs is `/opt/freeware/lib/libpython2.7.so`. It's dependencies are:
+```
+/opt/freeware/lib/libpython2.7.so needs:
+         /usr/lib/libdl.a(shr.o)
+         /opt/freeware/lib/libexpat.a(libexpat.so.1)
+         /opt/freeware/lib/libffi.a(libffi.so.6)
+         /opt/freeware/lib/libncurses.so
+         /opt/freeware/lib/libsqlite3.so
+         /usr/lib/libpthreads.a(shr_comm.o)
+         /usr/lib/libpthreads.a(shr_xpg5.o)
+         /usr/lib/libc.a(shr.o)
+         /usr/lib/librtl.a(shr.o)
+         /opt/freeware/lib/libgcc_s.a(shr.o)
+         /usr/lib/libpthread.a(shr_xpg5.o)
+         /unix
+         /usr/lib/libcrypt.a(shr.o)
+```
+To get a similar message as this test - rather than rename libpython2.7.so I rename one of it's dependencies - and then try to start python.
+```
+# mv          /opt/freeware/lib/libgcc_s.a          /opt/freeware/lib/libgcc_s.a.save
+# python
+Could not load program python:
+        Dependent module libgcc_s.a(shr.o) could not be loaded.
+Could not load module libgcc_s.a(shr.o).
+System error: No such file or directory
+```
+
+Note: this message is known to IBM - but for a differnt case:
+```
+JVMJ9TI001E Agent library am_ibm_16 could not be opened (Could not load module .
+System error: No such file or directory)
+JVMJ9VM015W Initialization error for library j9jvmti29(-3): JVMJ9VM009E J9VMDllMain failed
+```
+
+My first thoughts is that  it can be resolved by xml files - currently not available in the test directories:
+
+```
+3) The last place to check is the server.xml file itself.   Look at the genericJvmarguments line in the file and check the -Xbootclasspath/p:${ITCAMDCHOME}/toolkit/lib/bcm-bootstrap.jar line.
+4) Lastly, check the variables.xml file.  In this file, specifically check the  AM_CONFIG_JVM_ARGS variable.  In the value section, check the -Xbootclasspath and the agentlib parms specified here.
+```
+
+Or, perhaps an additional argument - something like -Xbootclasspath/p:/home/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image/jre/lib/ppc64/compressedrefs/ (I do not know java - so this may include a syntax error)
+
+

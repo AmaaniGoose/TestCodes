@@ -1,0 +1,63 @@
+**Describe the bug**
+renaissance-akka-uct_0 testcase is either hung or just very very slow...
+See: https://ci.adoptopenjdk.net/job/Test_openjdk15_hs_sanity.perf_x86-32_windows/
+
+```
+23:07:06  final height= 9
+23:07:08  [ERROR] [10/02/2020 17:07:08.697] [UCT-akka.actor.default-dispatcher-2] [ActorSystem(UCT)] Failed to run termination callback, due to [Futures timed out after [5000 milliseconds]]
+23:07:08  java.util.concurrent.TimeoutException: Futures timed out after [5000 milliseconds]
+23:07:08  	at scala.concurrent.impl.Promise$DefaultPromise.ready(Promise.scala:219)
+23:07:08  	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:223)
+23:07:08  	at scala.concurrent.Await$$anonfun$result$1.apply(package.scala:190)
+23:07:08  	at akka.dispatch.MonitorableThreadFactory$AkkaForkJoinWorkerThread$$anon$3.block(ThreadPoolBuilder.scala:169)
+23:07:08  	at scala.concurrent.forkjoin.ForkJoinPool.managedBlock(ForkJoinPool.java:3640)
+23:07:08  	at akka.dispatch.MonitorableThreadFactory$AkkaForkJoinWorkerThread.blockOn(ThreadPoolBuilder.scala:167)
+23:07:08  	at akka.dispatch.BatchingExecutor$BlockableBatch.blockOn(BatchingExecutor.scala:106)
+23:07:08  	at scala.concurrent.Await$.result(package.scala:190)
+23:07:08  	at akka.actor.LightArrayRevolverScheduler.close(Scheduler.scala:280)
+23:07:08  	at akka.actor.ActorSystemImpl.stopScheduler(ActorSystem.scala:689)
+23:07:08  	at akka.actor.ActorSystemImpl$$anonfun$liftedTree2$1$1.apply$mcV$sp(ActorSystem.scala:618)
+23:07:08  	at akka.actor.ActorSystemImpl$$anonfun$liftedTree2$1$1.apply(ActorSystem.scala:618)
+23:07:08  	at akka.actor.ActorSystemImpl$$anonfun$liftedTree2$1$1.apply(ActorSystem.scala:618)
+23:07:08  	at akka.actor.ActorSystemImpl$$anon$3.run(ActorSystem.scala:642)
+23:07:08  	at akka.actor.ActorSystemImpl$TerminationCallbacks$$anonfun$run$1.runNext$1(ActorSystem.scala:809)
+23:07:08  	at akka.actor.ActorSystemImpl$TerminationCallbacks$$anonfun$run$1.apply$mcV$sp(ActorSystem.scala:812)
+23:07:08  	at akka.actor.ActorSystemImpl$TerminationCallbacks$$anonfun$run$1.apply(ActorSystem.scala:805)
+23:07:08  	at akka.actor.ActorSystemImpl$TerminationCallbacks$$anonfun$run$1.apply(ActorSystem.scala:805)
+23:07:08  	at akka.util.ReentrantGuard.withGuard(LockUtil.scala:15)
+23:07:08  	at akka.actor.ActorSystemImpl$TerminationCallbacks.run(ActorSystem.scala:805)
+23:07:08  	at akka.actor.ActorSystemImpl$$anonfun$terminationCallbacks$1.apply(ActorSystem.scala:639)
+23:07:08  	at akka.actor.ActorSystemImpl$$anonfun$terminationCallbacks$1.apply(ActorSystem.scala:639)
+23:07:08  	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32)
+23:07:08  	at akka.dispatch.BatchingExecutor$AbstractBatch.processBatch(BatchingExecutor.scala:55)
+23:07:08  	at akka.dispatch.BatchingExecutor$BlockableBatch$$anonfun$run$1.apply$mcV$sp(BatchingExecutor.scala:91)
+23:07:08  	at akka.dispatch.BatchingExecutor$BlockableBatch$$anonfun$run$1.apply(BatchingExecutor.scala:91)
+23:07:08  	at akka.dispatch.BatchingExecutor$BlockableBatch$$anonfun$run$1.apply(BatchingExecutor.scala:91)
+23:07:08  	at scala.concurrent.BlockContext$.withBlockContext(BlockContext.scala:72)
+23:07:08  	at akka.dispatch.BatchingExecutor$BlockableBatch.run(BatchingExecutor.scala:90)
+23:07:08  	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:40)
+23:07:08  	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:397)
+23:07:08  	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+23:07:08  	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+23:07:08  	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+23:07:08  	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+23:07:08  
+23:07:12  final size= 199991
+23:07:12  final height= 9
+```
+
+```
+23:34:00  final size= 199991
+23:34:00  final height= 9
+23:34:07  final size= 199991
+23:34:07  final height= 9
+23:34:14  final size= 199991
+23:34:14  final height= 9
+23:34:16  ====== akka-uct (actors), final iteration completed (66736.84 ms) ======
+Cancelling nested steps due to timeout
+09:03:32  Sending interrupt signal to process
+09:03:46  
+09:03:46  renaissance-akka-uct_0_FAILED
+```
+
+

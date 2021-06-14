@@ -1,0 +1,221 @@
+Persist Application state
+
+This is a large PR and consists of many different changes, they are
+described below:
+
+Persist portlibrary in image file
+-------------------------------------
+Even with ASLR disabled shared libs files can be mapped into different
+memory addresses from run to run. This can happen if there are
+differences (difference from snapshot to restore run) in the way java
+launcher (java.c) allocates memory before it calls createJavaVM. Any
+difference can cause the libj9vm.so to be loaded at a different address.
+I have been able to observe this consistently by simply varying the
+length of cmdline args (which is necessary since snapshot args will be
+longer than restore).
+
+The problem with shared libs moving around is that there are persisted
+structures which have pointers to code, if the address of code changes
+then these pointers need to be updated.
+
+This PR specifically addresses the cases where structures (such as
+hashtables) have direct references to the portlib which has pointer to
+code. This PR persists the portlib so that on a restore run only the
+portlib has to be fixed up and not all the places that referred to it.
+
+This PR also removes the MAP_FIXED arg to mmap and verifies that the
+mapped address is what is expected, if not JVM startup fails. I am yet
+to observe a startup failure due to this with ASLR turned off.
+
+Snapshot Trigger
+------------------
+Snapshots snapshot creation occurs while the application is running.
+Snapshots can be triggered by providing the commandline arg below:
+
+-Xsnapshot:file=[imageName],trigger=[className].[methodName]
+
+The `imageName` specifies the name of the file which will containe the
+snapshot image. The `,trigger` with the `className` and `methodName`
+specifies the method which will trigger the snapshot. The snapshot is
+triggered on method entry. The trigger clause is currently a requirement
+to create a snapshot, in the future we can pick a suitable default and
+not make it a requirement.
+
+Example
+`-Xsnapshot:file=image,trigger=Hello.snapshot`
+`-Xrestore:file=image`
+
+Internally, the triggering mechanism works by making use of the vmhook
+mechanism (this is also what the method trace engine uses). The JVM will
+parse the options and register a classload hook to find the trigger
+method when its loaded. When the method is found the JVM will register a
+method entry hook and call the snapshot code once the method is entered.
+
+Application State snapshot/restore
+------------------------------------
+When a snapshot is triggered the following steps occur:
+
+1) JVM will acquire exclusive access on the thread that triggered the
+snapshot.
+
+2) GC hook enter snapshot mode is called
+
+3) GC hook registerGCForSnapshot is called
+
+4) The JVM will save the required J9JavaVM structures, like jitconfig
+(not really necessary) the portlibrary (important) and the vm struct in
+the snapshot header (very important) so it can be found again on the
+restore.
+
+5) PreWriteToImage hook:
+- pop special stack frame (this is the frame built for method hook
+events) and push an internalnativestack frame (we need this to allocat
+jni localrefs on the initjavavm phase in the restore) and save bp in
+`tempSlot`.
+- detach VMthread from OMr
+- detach javaVM from OMR
+- unresolve all native methods (inls, jni, etc)
+- null out custom spin options (will be repopulated on restore)
+
+6) Write image to file - same as before
+- this is that state that will be restored
+
+7) PostWriteToImage hooks
+- attach javaVM to omr
+- attach thread to OMR
+- pop nativeinternal stack frame
+- push special frame
+
+8) Call GC leaveSnapshotMode hook
+
+9) Release exclusive VM access
+
+When a snapshot is restored the following steps occur:
+1) Read image from file and re-init snapshotimple monitors -- same as
+before
+
+2) Restore J9JavaVM structures
+- Null out state that couldnt be persisted (zip cache, mgmfuncs,
+deadthread list, sharedcache API, etc.)
+- memset omrVM and omrRuntime structs
+
+3) Restore classloaders
+- reset all native lib handles
+- reset jniRedirection blocks
+- reset gclinks (maybe not required)
+- reset zip file handle in cpentries
+
+4) Re-init memory segment monitors
+
+5) Restore portlib, fixup all portlib functions pointers
+- this could be a relocation but not really worth doing that since
+portlib functions are always called indirectly so its easier and more
+efficient to just update the table.
+
+6) init invalid itables - same as before
+- shoud revisit this, may not be needed any more
+
+7) Restore thread that triggered snapshot as main thread
+- this is why only single threaded apps are supported right now
+
+8) Run modified javaVM initstage
+- All init stages are run normally except JCL init, a modified version
+is run which doesnt call the class lib init code, see
+`restoreRunStandardInit`.
+
+9) Intercept call to main function from java launcher and restore thread
+instead
+
+Limitations
+--------------
+- single threaded
+- interpreter only
+- -Xms needs to be 1m larger on restore
+- unsafe.realloc isnot supported (currently not used by the jcl)
+- only java8 is supported
+- only optthruput gc is supported
+
+
+Life Cycle API (SnapshotControl)
+------------------------------------
+This API allows a user to register hooks that will run before a snapshot
+is created (registerPreSnapshotHooks) and hooks that will run
+immediately after the snapshot is restored before re-entering the
+application. This API will also allow users to programmatically create
+snapshots. Currently, only `registerPostRestoreHooks` are supported.
+
+The snapshot hooks are essentially wrappers around `Runnable` objects.
+The hooks have a priority asoociated with default (low, med, high). The
+priority will determine which order the hooks are run in. Default
+priority is med.
+
+Restoring JCL
+--------------------
+The fundamental challenge with this snapshot/restore approach is that
+the JVM has very little control over the state that belongs to the OS
+(ie. file handles, native threads, sockets, static memory, etc.). In
+many of these cases the JVM cannot persist that state, it must recreate
+it on the restore run.
+
+In the JCL there are any classes that stash JNImethod/fieldIDs in static
+memory which the JVM knows nothing about. This static memory is
+initialized during the static init of the class. Since the static init
+of the class will not be re-run on the restore run (re-running them
+could potentially mutate the application state), the functions that set
+up the JNI ids must be explicitly run before the application is
+restored. The list of classes that are affected by this are in
+`listOfClassesThatRequireJNIIDInit`. These are run with post restore
+hooks on med priority.
+
+Similarly, there are native lib that the JCL requires. These libs are
+open y the JVM with `dlopen` in the snapshot run. The JVM must re-open
+them on the restore run so resolve native methods can be found again.
+Post restore hooks are used to re-load the native libs. These hooks are
+high priority as some of the libraries are need very early in the JVM
+lifecycle.
+
+Example
+----------
+On ubuntu18,
+
+Demo app
+
+```
+public class Hello {
+	static double d  = Math.random();
+
+	static void snapshot() {}
+
+	public static void main(String args[]) throws Throwable  {
+		System.out.print("Do bunch of init .");
+		Thread.sleep(1500);
+		System.out.print(" .");
+                Thread.sleep(1500);
+		System.out.print(" .");
+                Thread.sleep(1500);
+		System.out.print(" .");
+                Thread.sleep(1500);
+		System.out.println("\n finished init");
+		snapshot();//<--- snapshot here
+		System.out.println("Starting receiving requests");
+	}
+}
+```
+
+
+turn off ASLR:
+```
+`setarch `uname -m` -R /bin/bash`
+```
+
+get demo.jar from [redacted] - you can use example code to build it
+
+create snapshot: `./java -Xint -Xmx16m -Xms8m -Xgcpolicy:optthruput
+-Xshare:off -Xsnapshot:file=image,trigger=Hello.snapshot -cp ~/. Hello`
+
+restore snapshot: `./java -Xint -Xmx16m -Xms9m -Xgcpolicy:optthruput
+-Xshare:off -Xrestore:file=image -cp ~/. Hello`
+
+Let me know if there are any issues
+
+Signed-off-by: Tobi Ajila <atobia@ca.ibm.com>

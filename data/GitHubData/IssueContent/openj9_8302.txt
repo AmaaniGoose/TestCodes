@@ -1,0 +1,55 @@
+Seems to be a 10MB limit when converting snaptraces to a readable format. Testing on an AIX and Linux machine.
+
+Issue happens on IBM Java 19_03u1, not tested on OpenJ9
+
+_Linux_
+_rhel6x64vm3_
+```
+java version "1.8.0"
+Java(TM) SE Runtime Environment (build 1.8.0-foreman_2019_07_12_08_50-b00)
+IBM J9 VM (build 2.9, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20190802_424001 (JIT enabled, AOT enabled)
+OpenJ9   - 106f6ce
+OMR      - fe07f6f
+IBM      - af2a365)
+```
+
+```
+j9build@rhel6x64vm3 /service/pmrs/sdks/829/x86_linux/jvmxa6480sr5fp40-20190807_01/test $ ls -lt snaptrace_v2.30720.20200114.143829_vmstop_all
+-rw-r--r-- 1 j9build bluebird 15076328 Jan 14 14:38 snaptrace_v2.30720.20200114.143829_vmstop_all
+```
+
+```
+j9build@rhel6x64vm3 /service/pmrs/sdks/829/x86_linux/jvmxa6480sr5fp40-20190807_01/test $ ../jre/bin/java com.ibm.jvm.TraceFormat snaptrace_v2.30720.20200114.143829_vmstop_all
+Writing formatted trace output to file snaptrace_v2.30720.20200114.143829_vmstop_all.fmt
+Processing 14.375Mb of binary trace data
+Processed 10.0Mb (71%)
+Completed processing of 343557 tracepoints with 110 warnings and 20 errors
+```
+
+_AIX_
+_aix72p7vm33_
+```
+java version "1.8.0"
+Java(TM) SE Runtime Environment (build 1.8.0-foreman_2019_09_18_06_25-b00)
+IBM J9 VM (build 2.9, JRE 1.8.0 AIX ppc64-64-Bit Compressed References 20190911_427071 (JIT enabled, AOT enabled)
+OpenJ9   - d581d49
+OMR      - ca4db84
+IBM      - 5cfdf9c)
+```
+
+```
+j9build@aix72p7vm33 /service/pmrs/sdks/829/aix/jvmap6480sr5fp41-20190919_01/test $ ls -lt snaptrace_v2.9765194.20200114.151208_vmstop_all
+-rw-rw-r--    1 j9build  bluebird   13798548 Jan 14 15:12 snaptrace_v2.9765194.20200114.151208_vmstop_all
+```
+
+```
+j9build@aix72p7vm33 /service/pmrs/sdks/829/aix/jvmap6480sr5fp41-20190919_01/test $ ../jre/bin/java com.ibm.jvm.TraceFormat snaptrace_v2.9765194.20200114.151208_vmstop_all
+Writing formatted trace output to file snaptrace_v2.9765194.20200114.151208_vmstop_all.fmt
+Processing 13.15625Mb of binary trace data
+Processed 10.0Mb (76%)
+Completed processing of 312163 tracepoints with 73 warnings and 17 errors
+```
+
+There is no problem converting a snaptrace that is smaller than 10 MB
+
+Is there a hard limit of 10MB when converting the file?

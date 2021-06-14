@@ -1,0 +1,176 @@
+The following JDK 11/16 tests fail on AArch64.
+
+(JDK 11)
+- com/sun/crypto/provider/Cipher/AEAD/GCMLargeDataKAT.java.GCMLargeDataKAT
+- com/sun/crypto/provider/Cipher/AEAD/SameBuffer.java.SameBuffer
+
+(JDK 16)  -- [Update] Ignore these JDK16 failures. They are not specific to AArch64.
+- com/sun/crypto/provider/Cipher/AEAD/Encrypt.java.Encrypt
+- com/sun/crypto/provider/Cipher/AEAD/GCMBufferTest.java.GCMBufferTest
+- com/sun/crypto/provider/Cipher/AEAD/OverlapByteBuffer.java.OverlapByteBuffer
+- com/sun/crypto/provider/Cipher/AEAD/SameBuffer.java.SameBuffer
+
+Failure link
+------------
+
+- https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_sanity.openjdk_aarch64_linux/24/ (on build-docker-fedora33-armv8-5)
+- https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_sanity.openjdk_aarch64_linux/23/ (on build-docker-fedora33-armv8-2)
+- https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_sanity.openjdk_aarch64_linux/22/ (on test-packet-ubuntu1604-armv8-1)
+- https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_sanity.openjdk_aarch64_linux/21/ (on build-docker-ubuntu1804-armv8-3)
+- https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_sanity.openjdk_aarch64_linux/20/ (on test-sxad-ubuntu1604-armv8l-1)
+- https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.openjdk_aarch64_linux/379 (on test-packet-ubuntu1604-armv8-1)
+
+Failure output (captured from console output)
+---------------------------------------------
+
+From https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.openjdk_aarch64_linux/379/consoleText :
+
+```
+[2021-02-04T19:48:25.691Z]         GCMLargeDataKAT
+[2021-02-04T19:48:25.691Z] STDOUT:
+[2021-02-04T19:48:25.691Z] ---------------------------------------------
+[2021-02-04T19:48:25.691Z] Encrypt data size 65537 	Result: Pass
+[2021-02-04T19:48:25.691Z] Decrypt data size 65537 	Result: Pass
+[2021-02-04T19:48:25.691Z] ---------------------------------------------
+( snip )
+[2021-02-04T19:48:25.691Z] ---------------------------------------------
+[2021-02-04T19:48:25.691Z] Encrypt data size 102400 	Result: Pass
+[2021-02-04T19:48:25.691Z] Decrypt data size 102400 	Result: Pass
+[2021-02-04T19:48:25.691Z] ---------------------------------------------
+[2021-02-04T19:48:25.691Z] Encrypt data size 102403 	Result: Fail
+[2021-02-04T19:48:25.691Z] 	Expected: 4a6b4af55b7d9016b64114d6813d639c
+[2021-02-04T19:48:25.691Z] 	Returned: 8883095b94b4d638f1fe757c5fb17e1f
+[2021-02-04T19:48:25.691Z] ---------------------------------------------
+[2021-02-04T19:48:25.691Z] Encrypt data size 102402 	Result: Pass
+[2021-02-04T19:48:25.691Z] Decrypt data size 102402 	Result: Pass
+[2021-02-04T19:48:25.691Z] ---------------------------------------------
+( snip )
+[2021-02-04T19:48:25.692Z] ---------------------------------------------
+[2021-02-04T19:48:25.692Z] Encrypt data size 65535 	Result: Pass
+[2021-02-04T19:48:25.692Z] Decrypt data size 65535 	Result: Pass
+[2021-02-04T19:48:25.692Z] STDERR:
+[2021-02-04T19:48:25.692Z] java.lang.Exception: Tests failed
+[2021-02-04T19:48:25.692Z] 	at GCMLargeDataKAT.test(GCMLargeDataKAT.java:189)
+[2021-02-04T19:48:25.692Z] 	at GCMLargeDataKAT.main(GCMLargeDataKAT.java:210)
+[2021-02-04T19:48:25.692Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-02-04T19:48:25.692Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2021-02-04T19:48:25.692Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-02-04T19:48:25.692Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+[2021-02-04T19:48:25.692Z] 	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:312)
+[2021-02-04T19:48:25.692Z] 	at java.base/java.lang.Thread.run(Thread.java:836)
+[2021-02-04T19:48:25.692Z] 
+[2021-02-04T19:48:25.692Z] JavaTest Message: Test threw exception: java.lang.Exception
+[2021-02-04T19:48:25.692Z] JavaTest Message: shutting down test
+```
+
+```
+[2021-02-04T19:48:25.692Z]         SameBuffer
+[2021-02-04T19:48:25.692Z] STDOUT:
+[2021-02-04T19:48:25.693Z] Testing 128 key length; 0 text lenght; 0 AAD length; 0 offset
+[2021-02-04T19:48:25.693Z] offsetA: 0 offsetB: 0 bytesToCompare: 16
+[2021-02-04T19:48:25.693Z] offsetA: 0 offsetB: 0 bytesToCompare: 0
+[2021-02-04T19:48:25.693Z] offsetA: 0 offsetB: 0 bytesToCompare: 16
+[2021-02-04T19:48:25.693Z] offsetA: 0 offsetB: 0 bytesToCompare: 0
+[2021-02-04T19:48:25.693Z] Testing 128 key length; 0 text lenght; 0 AAD length; 2 offset
+[2021-02-04T19:48:25.693Z] offsetA: 2 offsetB: 2 bytesToCompare: 16
+[2021-02-04T19:48:25.693Z] offsetA: 2 offsetB: 2 bytesToCompare: 0
+[2021-02-04T19:48:25.693Z] offsetA: 2 offsetB: 2 bytesToCompare: 16
+[2021-02-04T19:48:25.693Z] offsetA: 2 offsetB: 2 bytesToCompare: 0
+[2021-02-04T19:48:25.693Z] Testing 128 key length; 0 text lenght; 0 AAD length; 4 offset
+[2021-02-04T19:48:25.693Z] offsetA: 4 offsetB: 4 bytesToCompare: 16
+[2021-02-04T19:48:25.693Z] offsetA: 4 offsetB: 4 bytesToCompare: 0
+[2021-02-04T19:48:25.693Z] offsetA: 4 offsetB: 4 bytesToCompare: 16
+[2021-02-04T19:48:25.693Z] offsetA: 4 offsetB: 4 bytesToCompare: 0
+[2021-02-04T19:48:25.693Z] Testing 128 key length; 0 text lenght; 0 AAD length; 6 offset
+[2021-02-04T19:48:25.693Z] offsetA: 6 offsetB: 6 bytesToCompare: 16
+[2021-02-04T19:48:25.693Z] offsetA: 6 offsetB: 6 bytesToCompare: 0
+[2021-02-04T19:48:25.693Z] offsetA: 6 offsetB: 6 bytesToCompare: 16
+[2021-02-04T19:48:25.693Z] offsetA: 6 offsetB: 6 bytesToCompare: 0
+[2021-02-04T19:48:25.693Z] Testing 128 key length; 0 text lenght; 1024 AAD length; 0 offset
+[2021-02-04T19:48:25.693Z] offsetA: 0 offsetB: 0 bytesToCompare: 16
+[2021-02-04T19:48:25.693Z] offsetA: 0 offsetB: 0 bytesToCompare: 0
+[2021-02-04T19:48:25.693Z] offsetA: 1024 offsetB: 1024 bytesToCompare: 16
+[2021-02-04T19:48:25.693Z] offsetA: 1024 offsetB: 1024 bytesToCompare: 0
+[2021-02-04T19:48:25.693Z] Testing 128 key length; 0 text lenght; 1024 AAD length; 2 offset
+[2021-02-04T19:48:25.693Z] offsetA: 2 offsetB: 2 bytesToCompare: 16
+[2021-02-04T19:48:25.693Z] offsetA: 2 offsetB: 2 bytesToCompare: 0
+[2021-02-04T19:48:25.693Z] offsetA: 1026 offsetB: 1026 bytesToCompare: 16
+[2021-02-04T19:48:25.693Z] offsetA: 1026 offsetB: 1026 bytesToCompare: 0
+[2021-02-04T19:48:25.693Z] Testing 128 key length; 0 text lenght; 1024 AAD length; 4 offset
+[2021-02-04T19:48:25.693Z] offsetA: 4 offsetB: 4 bytesToCompare: 16
+[2021-02-04T19:48:25.693Z] offsetA: 4 offsetB: 4 bytesToCompare: 0
+[2021-02-04T19:48:25.693Z] offsetA: 1028 offsetB: 1028 bytesToCompare: 16
+[2021-02-04T19:48:25.693Z] offsetA: 1028 offsetB: 1028 bytesToCompare: 0
+[2021-02-04T19:48:25.693Z] Testing 128 key length; 0 text lenght; 1024 AAD length; 6 offset
+[2021-02-04T19:48:25.693Z] offsetA: 6 offsetB: 6 bytesToCompare: 16
+[2021-02-04T19:48:25.693Z] offsetA: 6 offsetB: 6 bytesToCompare: 0
+[2021-02-04T19:48:25.693Z] offsetA: 1030 offsetB: 1030 bytesToCompare: 16
+[2021-02-04T19:48:25.693Z] offsetA: 1030 offsetB: 1030 bytesToCompare: 0
+[2021-02-04T19:48:25.693Z] Testing 128 key length; 1024 text lenght; 0 AAD length; 0 offset
+[2021-02-04T19:48:25.693Z] offsetA: 0 offsetB: 0 bytesToCompare: 1040
+[2021-02-04T19:48:25.693Z] offsetA: 0 offsetB: 0 bytesToCompare: 1024
+[2021-02-04T19:48:25.693Z] offsetA: 0 offsetB: 0 bytesToCompare: 1040
+[2021-02-04T19:48:25.693Z] offsetA: 0 offsetB: 0 bytesToCompare: 1024
+[2021-02-04T19:48:25.693Z] STDERR:
+[2021-02-04T19:48:25.693Z] java.lang.RuntimeException: Two results are not equal, mode:1
+[2021-02-04T19:48:25.693Z] 	at SameBuffer.runGCMWithSeparateBuffers(SameBuffer.java:331)
+[2021-02-04T19:48:25.693Z] 	at SameBuffer.doTestWithSeparatedBuffer(SameBuffer.java:195)
+[2021-02-04T19:48:25.693Z] 	at SameBuffer.runTest(SameBuffer.java:124)
+[2021-02-04T19:48:25.693Z] 	at SameBuffer.main(SameBuffer.java:88)
+[2021-02-04T19:48:25.693Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-02-04T19:48:25.693Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2021-02-04T19:48:25.693Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-02-04T19:48:25.693Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+[2021-02-04T19:48:25.693Z] 	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:312)
+[2021-02-04T19:48:25.693Z] 	at java.base/java.lang.Thread.run(Thread.java:836)
+[2021-02-04T19:48:25.693Z] 
+[2021-02-04T19:48:25.693Z] JavaTest Message: Test threw exception: java.lang.RuntimeException
+[2021-02-04T19:48:25.693Z] JavaTest Message: shutting down test
+```
+
+From https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_sanity.openjdk_aarch64_linux/24/consoleText :
+
+```
+[2021-02-07T07:03:36.132Z]         OverlapByteBuffer
+[2021-02-07T07:03:36.132Z] STDERR:
+[2021-02-07T07:03:36.132Z] java.lang.Exception: Error with base offset -1
+[2021-02-07T07:03:36.132Z] 	at OverlapByteBuffer.main(OverlapByteBuffer.java:147)
+[2021-02-07T07:03:36.132Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-02-07T07:03:36.132Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+[2021-02-07T07:03:36.132Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-02-07T07:03:36.132Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+[2021-02-07T07:03:36.132Z] 	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+[2021-02-07T07:03:36.132Z] 	at java.base/java.lang.Thread.run(Thread.java:853)
+[2021-02-07T07:03:36.132Z] Caused by: java.lang.UnsupportedOperationException: ByteBuffer not supported
+[2021-02-07T07:03:36.132Z] 	at java.base/com.sun.crypto.provider.FeedbackCipher.encryptFinal(FeedbackCipher.java:261)
+[2021-02-07T07:03:36.132Z] 	at java.base/com.sun.crypto.provider.CipherCore.gcmDoFinal(CipherCore.java:1313)
+[2021-02-07T07:03:36.132Z] 	at java.base/com.sun.crypto.provider.AESCipher.engineDoFinal(AESCipher.java:671)
+[2021-02-07T07:03:36.132Z] 	at java.base/javax.crypto.Cipher.doFinal(Cipher.java:2500)
+[2021-02-07T07:03:36.132Z] 	at OverlapByteBuffer.main(OverlapByteBuffer.java:116)
+[2021-02-07T07:03:36.132Z] 	... 6 more
+[2021-02-07T07:03:36.132Z] 
+[2021-02-07T07:03:36.132Z] JavaTest Message: Test threw exception: java.lang.Exception
+[2021-02-07T07:03:36.132Z] JavaTest Message: shutting down test
+```
+```
+[2021-02-07T07:03:36.128Z]         Encrypt
+[2021-02-07T07:03:36.128Z] STDERR:
+[2021-02-07T07:03:36.128Z] java.lang.UnsupportedOperationException: ByteBuffer not supported
+[2021-02-07T07:03:36.128Z] 	at java.base/com.sun.crypto.provider.FeedbackCipher.encryptFinal(FeedbackCipher.java:261)
+[2021-02-07T07:03:36.128Z] 	at java.base/com.sun.crypto.provider.CipherCore.gcmDoFinal(CipherCore.java:1313)
+[2021-02-07T07:03:36.128Z] 	at java.base/com.sun.crypto.provider.AESCipher.engineDoFinal(AESCipher.java:671)
+[2021-02-07T07:03:36.128Z] 	at java.base/javax.crypto.Cipher.doFinal(Cipher.java:2500)
+[2021-02-07T07:03:36.128Z] 	at Encrypt.combination_13(Encrypt.java:607)
+[2021-02-07T07:03:36.128Z] 	at Encrypt.execute(Encrypt.java:227)
+[2021-02-07T07:03:36.128Z] 	at Encrypt.doTest(Encrypt.java:156)
+[2021-02-07T07:03:36.128Z] 	at Encrypt.main(Encrypt.java:140)
+[2021-02-07T07:03:36.128Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-02-07T07:03:36.128Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+[2021-02-07T07:03:36.128Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-02-07T07:03:36.128Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+[2021-02-07T07:03:36.128Z] 	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+[2021-02-07T07:03:36.128Z] 	at java.base/java.lang.Thread.run(Thread.java:853)
+[2021-02-07T07:03:36.128Z] 
+[2021-02-07T07:03:36.128Z] JavaTest Message: Test threw exception: java.lang.UnsupportedOperationException
+[2021-02-07T07:03:36.128Z] JavaTest Message: shutting down test
+```

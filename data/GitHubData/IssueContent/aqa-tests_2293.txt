@@ -1,0 +1,44 @@
+systemtest target MauveMultiThrdLoad_5m fails on jdk11 hotspot s390x
+
+Last good test run was Feb 9, 2021 7:18:44 PM on test-marist-ubuntu1604-s390x-3: 
+https://ci.adoptopenjdk.net/job/Test_openjdk11_hs_sanity.system_s390x_linux/450/consoleFull
+```
+openjdk version "11.0.11" 2021-04-20
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.11+1-202102091807)
+OpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.11+1-202102091807, mixed mode)
+```
+
+First failed test run was Feb 11, 2021 7:40:24 PM, also on test-marist-ubuntu1604-s390x-3: 
+https://ci.adoptopenjdk.net/job/Test_openjdk11_hs_sanity.system_s390x_linux/451/
+```
+openjdk version "11.0.11" 2021-04-20
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.11+2-202102111829)
+OpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.11+2-202102111829, mixed mode)
+```
+Test has failed consistently since that build.
+
+Test output at point of failure:
+```
+22:54:03  LT  22:54:01.449 - Test failed
+22:54:03  LT    Failure num.  = 1
+22:54:03  LT    Test number   = 2668
+22:54:03  LT    Test details  = 'Mauve[gnu.testlet.java.lang.StringIndexOutOfBoundsException.constructor]'
+22:54:03  LT    Suite number  = 0
+22:54:03  LT    Thread number = 1
+22:54:03  LT  >>> Captured test output >>>
+22:54:03  LT  PASS: gnu.testlet.java.lang.StringIndexOutOfBoundsException.constructor (number 0)
+22:54:03  LT  PASS: gnu.testlet.java.lang.StringIndexOutOfBoundsException.constructor (number 1)
+22:54:03  LT  PASS: gnu.testlet.java.lang.StringIndexOutOfBoundsException.constructor (number 2)
+22:54:03  LT  PASS: gnu.testlet.java.lang.StringIndexOutOfBoundsException.constructor (number 3)
+22:54:03  LT  PASS: gnu.testlet.java.lang.StringIndexOutOfBoundsException.constructor (number 4)
+22:54:03  LT  PASS: gnu.testlet.java.lang.StringIndexOutOfBoundsException.constructor (number 5)
+22:54:03  LT  PASS: gnu.testlet.java.lang.StringIndexOutOfBoundsException.constructor (number 6)
+22:54:03  LT  PASS: gnu.testlet.java.lang.StringIndexOutOfBoundsException.constructor (number 7)
+22:54:03  LT  PASS: gnu.testlet.java.lang.StringIndexOutOfBoundsException.constructor (number 8)
+22:54:03  LT  PASS: gnu.testlet.java.lang.StringIndexOutOfBoundsException.constructor (number 9)
+22:54:03  LT  PASS: gnu.testlet.java.lang.StringIndexOutOfBoundsException.constructor (number 10)
+22:54:03  LT  FAIL: gnu.testlet.java.lang.StringIndexOutOfBoundsException.constructor (number 11)
+22:54:03  LT  got java.lang.StringIndexOutOfBoundsException: String index out of range: -2 but expected java.lang.StringIndexOutOfBoundsException: String index out of range: -2147483648
+22:54:03  LT  <<<
+```
+To rerun the failing target: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=hotspot&JDK_VENDOR=adoptopenjdk&BUILD_LIST=system&PLATFORM=s390x_linux&TARGET=MauveMultiThrdLoad_5m_0

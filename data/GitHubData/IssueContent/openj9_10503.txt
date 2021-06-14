@@ -1,0 +1,9 @@
+I am trying to start a simple RMI server with AdoptOpenJDK's OpenJ9 JVM but, the program exits with no error/exception and the RMI server doesn't start. The exact same program works with AdoptOpenJDK's HotSpot JVM and other oracle variants.
+
+Sample code:
+```
+Registry registry = LocateRegistry.createRegistry(9002);
+   RMIServer myServerInstance = new RMIServer();
+   <<MyClassStub>>stub = <<MyClassStub>> UnicastRemoteObject.exportObject(myServerInstance, 9002);
+            registry.rebind("RMIServer", stub);
+```

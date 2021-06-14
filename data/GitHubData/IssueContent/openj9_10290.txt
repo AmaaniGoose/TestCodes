@@ -1,0 +1,1 @@
+As mentioned in https://github.com/eclipse/omr/pull/5432#discussion_r462597522, There are J9_PROJECT_SPECIFIC part of code related to construction of BCD node which adds more information to node regarding to precision. We should have an OverRide for OMR::Node::create for such nodes to clean up the J9_PROJECT_SPECIFIC changes in OMR. I am opening up this issue to tracks the work.

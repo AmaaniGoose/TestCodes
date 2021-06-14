@@ -1,0 +1,8 @@
+This is a list of objects that are enqueued for finalization, but are not finalized yet.
+
+If (a new) GC occurs before they are finalized, they have to be kept alive. Hence this list is treated as hard root.
+
+Currently we scan this list single threaded, but in theory it could be parallel (we need to split the list in multiple sublists).
+
+Additionally, a couple of collectors (like Scavenger and CopyForwardScheme) seem to enforce this single threaded operation via sync point, what is overkill since it could be done with HANDLE_NEXT_WORK_UNIT (what actually default RootScanner does).
+

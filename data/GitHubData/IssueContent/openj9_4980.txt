@@ -1,0 +1,132 @@
+**Description :**
+*I was a running a memory consuming program for NUMA tests and found out that in a specific docker restriction for memory node, OpenJ9 is Asserting
+`** ASSERTION FAILED ** omrport.0 at ../../omr/port/linux/omrvmem.c:1485 Assert_PRT_true((((BOOLEAN) 0)))`*
+
+**Program**
+```
+import java.util.ArrayList;
+import java.util.List;
+
+public final class JvmKill
+{
+    @SuppressWarnings("InfiniteLoopStatement")
+    public static void main(String[] args)
+            throws Exception
+    {
+        System.out.println("triggering OutOfMemory...");
+        List<Object> list = new ArrayList<>();
+        try {
+            while (true) {
+                byte[] bytes = new byte[1024 * 1024 * 1024];
+                list.add(bytes);
+                System.out.println("list size: " + list.size());
+            }
+        }
+        catch (Throwable t) {
+            System.out.println(t.toString());
+        }
+    }
+}
+```
+**Host Config (Memory and CPU'S)**
+```
+available: 2 nodes (0-1)
+node 0 cpus: 0 1 2 3 8 9 10 11
+node 0 size: 9204 MB
+node 0 free: 622 MB
+node 1 cpus: 4 5 6 7 12 13 14 15
+node 1 size: 9216 MB
+node 1 free: 4127 MB
+node distances:
+node   0   1 
+  0:  10  21 
+  1:  21  10 
+```
+
+**Docker version**
+```
+-bash-4.2$ docker version
+Client:
+ Version:      17.05.0-ce
+ API version:  1.29
+ Go version:   go1.7.5
+ Git commit:   89658be
+ Built:        Thu May  4 22:06:25 2017
+ OS/Arch:      linux/amd64
+
+Server:
+ Version:      17.05.0-ce
+ API version:  1.29 (minimum version 1.12)
+ Go version:   go1.7.5
+ Git commit:   89658be
+ Built:        Thu May  4 22:06:25 2017
+ OS/Arch:      linux/amd64
+ Experimental: false
+
+```
+
+**Java Version**
+```
+openjdk version "1.8.0_202"
+OpenJDK Runtime Environment (build 1.8.0_202-b08)
+Eclipse OpenJ9 VM (build openj9-0.12.0, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20190130_202 (JIT enabled, AOT enabled)
+OpenJ9   - 04890c300
+OMR      - d2f4534b
+JCL      - 6501440d7a based on jdk8u202-b08)
+
+```
+**Docker Settings**
+```
+docker run --cpuset-mems=1 --security-opt seccomp=unconfined -it -v $PWD:/home/openj9-stuff ubuntu:16.04
+```
+`--cpuset-mems=1` **-** *Docker bound to memory node 1*
+` --security-opt seccomp=unconfined` **-** *Given to make docker perform the syscalls (OpenJ9 does `mbind`)*
+
+**Note :**
+*Assert is seen only if bound to memory node other than `0`, No assert when bound to memory node `0`*
+
+**Complete Output**
+```
+** ASSERTION FAILED ** omrport.0 at ../../omr/port/linux/omrvmem.c:1485 Assert_PRT_true((((BOOLEAN) 0)))
+Unhandled exception
+Type=Segmentation error vmState=0xffffffff
+J9Generic_Signal_Number=00000004 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000001
+Handler1=00007FE9DD9718D0 Handler2=00007FE9DD26F450 InaccessibleAddress=0000000000000000
+RDI=0000000000000000 RSI=00007FE9DE8CA0C0 RAX=0000000000000001 RBX=0000000000000000
+RCX=0000000000000000 RDX=0000000000000000 R8=00007FE9DD289F40 R9=0000000000000001
+R10=0000000000000011 R11=0000000000000297 R12=00007FE9D8038550 R13=00007FE9D8041D80
+R14=00007FE9D734A318 R15=00007FE9D800D4B0
+RIP=00007FE9D6FAB6FD GS=0000 FS=0000 RSP=00007FE9DE8CA000
+EFlags=0000000000010206 CS=0033 RBP=00007FE9D8011F60 ERR=0000000000000004
+TRAPNO=000000000000000E OLDMASK=0000000000000000 CR2=0000000000000000
+xmm0 000000000000ff00 (f: 65280.000000, d: 3.225261e-319)
+xmm1 2525252525252525 (f: 623191360.000000, d: 9.532824e-130)
+xmm2 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm3 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm4 000000000000ff00 (f: 65280.000000, d: 3.225261e-319)
+xmm5 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm6 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm7 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm8 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm9 616c2f6176616a3d (f: 1986095616.000000, d: 1.981285e+161)
+xmm10 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm11 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm12 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm13 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+Module=/home/openj9-stuff/aoj9/aoj9-build/jre/lib/amd64/compressedrefs/libj9gc29.so
+Module_base_address=00007FE9D6E88000
+Target=2_90_20190130_202 (Linux 3.10.0-862.14.4.el7.x86_64)
+CPU=amd64 (16 logical CPUs) (0x45dfc5000 RAM)
+JVMDUMP039I Processing dump event "gpf", detail "" at 2019/03/05 08:30:57 - please wait.
+JVMDUMP032I JVM requested System dump using '/home/openj9-stuff/core.20190305.083057.13.0001.dmp' in response to an event
+JVMPORT030W /proc/sys/kernel/core_pattern setting "|/usr/libexec/abrt-hook-ccpp %s %c %p %u %g %t e %P %I %h" specifies that the core dump is to be piped to an external program.  Attempting to rename either core or core.16.
+
+JVMDUMP012E Error in System dump: The core file created by child process with pid = 16 was not found. Expected to find core file with name "/home/openj9-stuff/core.16"
+JVMDUMP032I JVM requested Java dump using '/home/openj9-stuff/javacore.20190305.083057.13.0002.txt' in response to an event
+JVMDUMP032I JVM requested Snap dump using '/home/openj9-stuff/Snap.20190305.083057.13.0003.trc' in response to an event
+JVMDUMP009I Snap dump not available
+JVMDUMP013I Processed dump event "gpf", detail "".
+
+```

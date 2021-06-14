@@ -1,0 +1,5 @@
+`EUC-JP` (Extended UNIX Code for Japanese language) used to be the default character encoding in many Linux environments for Japanese language.  There is a special handling for `EUC_JP` in jcl/unix/syshelp.c:
+https://github.com/eclipse/openj9/blob/149dd6186effd483b06b96a1908990bea48dd540/runtime/jcl/unix/syshelp.c#L276-L286
+
+Now the majority of the Linux distributions use `ja_JP.UTF-8` as the default locale for Japanese language instead of `ja_JP.eucJP`.
+I think we don't need the special handling for `EUC-JP` any longer.

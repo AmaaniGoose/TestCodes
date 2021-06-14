@@ -1,0 +1,42 @@
+sanity.functional test cmdLineTester_SCURLHelperTests_90_1 failed on the jdk16 osx release build.
+
+Build:
+```
+openjdk version "16.0.1" 2021-04-20
+OpenJDK Runtime Environment AdoptOpenJDK-16.0.1+9 (build 16.0.1+9)
+Eclipse OpenJ9 VM AdoptOpenJDK-16.0.1+9 (build openj9-0.26.0, JRE 16 Mac OS X amd64-64-Bit Compressed References 20210421_24 (JIT enabled, AOT enabled)
+OpenJ9   - b4cc246d9
+OMR      - 162e6f729
+JCL      - cea22090ecf based on jdk-16.0.1+9)
+```
+
+Output of failing test:
+```
+19:16:57  ===============================================
+19:16:57  Running test cmdLineTester_SCURLHelperTests_90_1 ...
+19:16:57  ===============================================
+19:16:57  cmdLineTester_SCURLHelperTests_90_1 Start Time: Wed Apr 21 19:16:57 2021 Epoch Time (ms): 1619029017426
+19:16:57  "/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/..//bin/java" -Xshareclasses:destroyAll; "/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/..//bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+19:16:57  JVMSHRC005I No shared class caches available
+19:16:57  JVMSHRC005I No shared class caches available
+19:16:57  cache cleanup done
+19:16:57  variation: Mode610
+19:16:57  JVM_OPTIONS:  -Xcompressedrefs -Xjit -Xgcpolicy:gencon 
+19:16:57  { itercnt=1; \
+19:16:57  	mkdir -p "/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_mac/openjdk-tests/TKG/../TKG/output_16190262615894/cmdLineTester_SCURLHelperTests_90_1"; \
+19:16:57  	cd "/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_mac/openjdk-tests/TKG/../TKG/output_16190262615894/cmdLineTester_SCURLHelperTests_90_1"; \
+19:16:57  	cp -r "/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_mac/openjdk-tests/TKG/../../jvmtest/functional/cmdLineTests/shareClassTests/URLHelperTests/URLHelperTests.jar" .; \
+19:16:57  	"/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/..//bin/jar" -xf URLHelperTests.jar; \
+19:16:57  	 \
+19:16:57  	"/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/..//bin/java"  -Xcompressedrefs -Xjit -Xgcpolicy:gencon  -DJAVA_HOME='/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/../' -DPATHSEP="/" -DRUN_SCRIPT=sh -DPROPS_DIR=props_unix -DSCRIPT_SUFFIX=.sh -DEXECUTABLE_SUFFIX= -DJAVA_EXE='"/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/..//bin/java"  -Xcompressedrefs -Xjit -Xgcpolicy:gencon ' -DCPDL=":" -DSCMODE=210 -DTEST_JVM_OPTIONS=" -Xcompressedrefs -Xjit -Xgcpolicy:gencon " \
+19:16:57  	-jar "/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_mac/openjdk-tests/TKG/../../jvmtest/functional/cmdline_options_tester/cmdlinetester.jar" \
+19:16:57  	-config "/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_mac/openjdk-tests/TKG/../../jvmtest/functional/cmdLineTests/shareClassTests/URLHelperTests/URLHelperTests.xml" -xids all,osx_x86-64_mr,16 -xlist "/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_mac/openjdk-tests/TKG/../../jvmtest/functional/cmdLineTests/shareClassTests/URLHelperTests/exclude.xml" \
+19:16:57  	-nonZeroExitWhenError \
+19:16:57  	-outputLimit 300; \
+19:16:57  	if [ $? -eq 0 ] ; then echo ""; echo "cmdLineTester_SCURLHelperTests_90_1""_PASSED"; echo ""; cd /Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_mac/openjdk-tests/TKG/..; rm -f -r "/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_mac/openjdk-tests/TKG/../TKG/output_16190262615894/cmdLineTester_SCURLHelperTests_90_1"; else echo ""; echo "cmdLineTester_SCURLHelperTests_90_1""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/Users/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_mac/openjdk-tests/TKG/../TKG/output_16190262615894/TestTargetResult";
+19:16:58  Error: Port Library failed to initialize: -1
+19:16:58  Error: Could not create the Java Virtual Machine.
+19:16:58  Error: A fatal exception has occurred. Program will exit.
+19:16:58  
+19:16:58  cmdLineTester_SCURLHelperTests_90_1_FAILED
+```

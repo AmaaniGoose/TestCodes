@@ -1,0 +1,12 @@
+### Proposed Changes
+
+I would request to enable huge pages on the perf machines. This would enhance our footprint measurements for Open Liberty with Daytrader7. Thanks!
+
+Currently, we just have to machine labelled with `ci.role.perf`: https://ci.adoptopenjdk.net/label/ci.role.perf/
+
+### Justification
+
+Please refer to this prerequisite for perf testing: https://github.com/AdoptOpenJDK/openjdk-tests/issues/1136. 
+### Related Machines 
+https://ci.adoptopenjdk.net/computer/test-packet-ubuntu1604-x64-2/
+https://ci.adoptopenjdk.net/computer/test-softlayer-ubuntu1604-x64-1/

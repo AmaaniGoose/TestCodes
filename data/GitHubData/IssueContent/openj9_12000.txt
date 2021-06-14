@@ -1,0 +1,3 @@
+`MutableCallsiteTargetOperand` is created to represent result of `java/lang/invoke/MutableCallSite.getTarget`, which is not a constant as the target can change.
+
+However, we treat `MutableCallsiteTargetOperand` the same as `KnownObjOperand` while maintaining the stack state. Problems can occur if we create `KnownObjOperand` for a final field of `MutableCallsiteTargetOperand`, then choose to inline a target without guard on the field.

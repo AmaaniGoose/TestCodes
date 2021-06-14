@@ -1,0 +1,2 @@
+I observed that footprint during the steady state of AcmeAir increases with the number of compilation threads. This is unexpected because, once a compilation is over, we free all scratch memory. Moreover, persistent memory should not depend on the number of compilation threads. If we understand this issue we might be able to reduce footprint somewhat.
+First step would be to determine what kind of memory increases when more compilation threads are used.

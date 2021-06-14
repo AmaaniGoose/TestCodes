@@ -1,0 +1,31 @@
+Jenkins tag jenkins-2.235
+Passing on openj9, see FunctionsTest.printThrowable:516 failure on both jdk8/jdk11 hotspot
+
+jdk8 output:
+[2020-11-22T03:13:29.358Z] [ERROR] Failures: 
+[2020-11-22T03:13:29.359Z] [ERROR]   FunctionsTest.printThrowable:516->assertPrintThrowable:531 expected:<....method2(C.java:27)
+[2020-11-22T03:13:29.359Z] [Caused by: [CIRCULAR REFERENCE: ]p.Exc1]
+[2020-11-22T03:13:29.359Z] > but was:<....method2(C.java:27)
+[2020-11-22T03:13:29.359Z] [	[CIRCULAR REFERENCE:]p.Exc1]
+[2020-11-22T03:13:29.359Z] >
+[2020-11-22T03:13:29.359Z] [INFO] 
+[2020-11-22T03:13:29.359Z] [ERROR] Tests run: 3728, Failures: 1, Errors: 0, Skipped: 17
+
+jdk11 output: (failing since at least Oct 24th, was passing in Sept)
+[2020-11-22T02:01:32.938Z] [ERROR] Failures: 
+[2020-11-22T02:01:32.938Z] [ERROR]   FunctionsTest.printThrowable:516->assertPrintThrowable:531 expected:<....method2(C.java:27)
+[2020-11-22T02:01:32.938Z] [Caused by: [CIRCULAR REFERENCE: ]p.Exc1]
+[2020-11-22T02:01:32.938Z] > but was:<....method2(C.java:27)
+[2020-11-22T02:01:32.938Z] [	[CIRCULAR REFERENCE:]p.Exc1]
+[2020-11-22T02:01:32.938Z] >
+[2020-11-22T02:01:32.938Z] [INFO] 
+[2020-11-22T02:01:32.938Z] [ERROR] Tests run: 14900, Failures: 1, Errors: 0, Skipped: 17
+
+https://ci.adoptopenjdk.net/job/Test_openjdk11_hs_extended.external_x86-64_linux_jenkins/
+https://ci.adoptopenjdk.net/job/Test_openjdk8_hs_extended.external_x86-64_linux_jenkins/
+
+TRSS links:
+https://trss.adoptopenjdk.net/output/test?id=5fda73dd2bad7850669769fa
+https://trss.adoptopenjdk.net/output/test?id=5fda75312bad785066976afd
+
+Noting that these tests pass against OpenJ9, indicating this may be a Hotspot issue that was introduced sometime in October (as they were previously passing against Hotspot builds in September).

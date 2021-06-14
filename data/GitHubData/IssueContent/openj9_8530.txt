@@ -1,0 +1,70 @@
+While working on the Power binary encoding refactor, I encountered numerous inconsistent test failures arising due to a newly added assert firing on instructions generated from an `arraycopy` node on non-compressedrefs builds:
+
+```
+Assertion failed at /tmp/bld_439195/bld_linux_ppc-64_le/compiler/../omr/compiler/p/codegen/PPCBinaryEncoding.cpp:299: isValidInSignExtendedField(val, 0xffffu)
+VMState: 0x0005ff09
+	Instruction 0x7bb525e35ee0 [li] (generated from node 0x7bb525aceba0 [arraycopy]): 0xb441dd50 is out-of-range for SI field
+compiling sun/reflect/annotation/AnnotationInvocationHandler.<init>(Ljava/lang/Class;Ljava/util/Map;)V at level: warm
+#0: /home/thomasbc/tmp/badarraycopy/jvmxl6480/jre/lib/ppc64le/default/libj9jit29.so(+0x1249944) [0x7bb68e049944]
+#1: /home/thomasbc/tmp/badarraycopy/jvmxl6480/jre/lib/ppc64le/default/libj9jit29.so(+0x1268270) [0x7bb68e068270]
+#2: /home/thomasbc/tmp/badarraycopy/jvmxl6480/jre/lib/ppc64le/default/libj9jit29.so(+0xb366cc) [0x7bb68d9366cc]
+#3: /home/thomasbc/tmp/badarraycopy/jvmxl6480/jre/lib/ppc64le/default/libj9jit29.so(+0xb362c0) [0x7bb68d9362c0]
+#4: /home/thomasbc/tmp/badarraycopy/jvmxl6480/jre/lib/ppc64le/default/libj9jit29.so(+0x134e848) [0x7bb68e14e848]
+#5: /home/thomasbc/tmp/badarraycopy/jvmxl6480/jre/lib/ppc64le/default/libj9jit29.so(+0x134965c) [0x7bb68e14965c]
+#6: /home/thomasbc/tmp/badarraycopy/jvmxl6480/jre/lib/ppc64le/default/libj9jit29.so(+0x12df920) [0x7bb68e0df920]
+#7: /home/thomasbc/tmp/badarraycopy/jvmxl6480/jre/lib/ppc64le/default/libj9jit29.so(+0xa1137c) [0x7bb68d81137c]
+#8: /home/thomasbc/tmp/badarraycopy/jvmxl6480/jre/lib/ppc64le/default/libj9jit29.so(+0xa12bf8) [0x7bb68d812bf8]
+#9: /home/thomasbc/tmp/badarraycopy/jvmxl6480/jre/lib/ppc64le/default/libj9jit29.so(+0x9fa69c) [0x7bb68d7fa69c]
+#10: /home/thomasbc/tmp/badarraycopy/jvmxl6480/jre/lib/ppc64le/default/libj9jit29.so(+0xa3beb0) [0x7bb68d83beb0]
+#11: /home/thomasbc/tmp/badarraycopy/jvmxl6480/jre/lib/ppc64le/default/libj9jit29.so(+0x3e9454) [0x7bb68d1e9454]
+#12: /home/thomasbc/tmp/badarraycopy/jvmxl6480/jre/lib/ppc64le/default/libj9jit29.so(+0x3e7054) [0x7bb68d1e7054]
+#13: /home/thomasbc/tmp/badarraycopy/jvmxl6480/jre/lib/ppc64le/default/libj9prt29.so(+0x5e948) [0x7bb68ed6e948]
+#14: /home/thomasbc/tmp/badarraycopy/jvmxl6480/jre/lib/ppc64le/default/libj9jit29.so(+0x3deae0) [0x7bb68d1deae0]
+#15: /home/thomasbc/tmp/badarraycopy/jvmxl6480/jre/lib/ppc64le/default/libj9jit29.so(+0x3ddf10) [0x7bb68d1ddf10]
+#16: /home/thomasbc/tmp/badarraycopy/jvmxl6480/jre/lib/ppc64le/default/libj9jit29.so(+0x3dc358) [0x7bb68d1dc358]
+#17: /home/thomasbc/tmp/badarraycopy/jvmxl6480/jre/lib/ppc64le/default/libj9jit29.so(+0x3dc148) [0x7bb68d1dc148]
+#18: /home/thomasbc/tmp/badarraycopy/jvmxl6480/jre/lib/ppc64le/default/libj9prt29.so(+0x5e948) [0x7bb68ed6e948]
+#19: /home/thomasbc/tmp/badarraycopy/jvmxl6480/jre/lib/ppc64le/default/libj9jit29.so(+0x3d97b4) [0x7bb68d1d97b4]
+#20: /home/thomasbc/tmp/badarraycopy/jvmxl6480/jre/lib/ppc64le/default/libj9thr29.so(+0x9954) [0x7bb68ee69954]
+#21: /lib/powerpc64le-linux-gnu/libpthread.so.0(+0x885c) [0x7bb68fe7885c]
+#22: function clone+0x98 [0x7bb68fd19028]
+
+
+Instruction context:
+
+...
+    0x7bb6577b0668 000005f4 [    0x7bb525e56c80] 61440000          56 	ori 	gr4, gr10, 0x0
+    0x7bb6577b066c 000005f8 [    0x7bb525e56be0] 61830000          56 	ori 	gr3, gr12, 0x0
+    0x7bb6577b0670 000005fc [    0x7bb525e35470]                   56 	fence 	Relative[ 25b43d54 ] (BBEnd (block_23))
+    0x7bb6577b0670 000005fc [    0x7bb525e35590]                   56 	fence 	Relative[ 25c86180 ] (BBStart (block_93))
+    0x7bb6577b0670 000005fc [    0x7bb525e35680]                   56 	Label L0560:	
+ [    0x7bb525e35ee0]	56 	li 	gr0, FFFFFFFFB441DD50
+ [    0x7bb525e35f80]	56 	mtctr 	gr0
+ [    0x7bb525e36080]	56 	Label L0562:	
+ [    0x7bb525e361b0]	56 	lfd 	fp3, [gr4, 0]
+ [    0x7bb525e362f0]	56 	lfd 	fp2, [gr4, 8]
+ [    0x7bb525e36430]	56 	lfd 	fp1, [gr4, 16]
+...
+(Set env var TR_AssertFullContext for full context)
+
+Node context:
+
+...
+n807n     treetop                                                                             [    0x7bb525acebf0] bci=[1,56,1163] rc=0 vc=1899 vn=- li=93 udi=- nc=1
+n806n       arraycopy  <arraycopy>[#233  helper Method] [flags 0x400 0x0 ] (Unsigned cannotOverflow forwardArrayCopy noArrayStoreCheckArrayCopy referenceArrayCopy wordElementArrayCopy )  [    0x7bb525aceba0] bci=[1,56,1163] rc=0 vc=1899 vn=- li=93 udi=- nc=5 flg=0xd020
+n401n         ==>aloadi
+n235n         ==>anewarray
+n547n         ==>aladd
+n549n         ==>aladd
+n834n         ==>lconst 0x7bb6883baa00
+...
+(Set env var TR_AssertFullContext for full context)
+```
+
+The issue regarding invalid instructions being generated here is fixed by #8529 and eclipse/omr#4819. However, this raises a larger issue: why is an `arraycopy` node with such an absurdly long length appearing at all? From the [jitdump](https://github.com/eclipse/openj9/files/4172928/jitdump.20200206.145413.78417.0004.log), I've found that this particular `arraycopy` node was generated by specializing an `arraycopy` node using IProfiler data, that node itself having been generated by global value propagation inlining a call to `Object.clone` on an array.
+
+In this case, it seems that the IProfiler data actually corresponds to J9Class pointers from the original call to `Object.clone` and not (as the compiler currently wrongly assumes) profiled lengths of an arraycopy. As a result, we use a J9Class pointer as if it were the byte length of an arraycopy, resulting in generation of a redundant specialized arraycopy node that can never be executed. Note that despite the crash being restricted to non-compressedrefs builds only, the issue here is common between compressedrefs and non-compressedrefs: the crash was not occurring in compressedrefs builds due to their J9Class pointers being 32 bits and thus not causing the arraycopy evaluator to misbehave.
+
+To correct this, we likely need to keep track of what kind of profiling information is represented by an IProfiler buffer and check that information before using it.
+
+@andrewcraik @dsouzai @mpirvu FYI

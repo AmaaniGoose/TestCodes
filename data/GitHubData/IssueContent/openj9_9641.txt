@@ -1,0 +1,84 @@
+### Background
+**See related options docs**:
+[-Xlp](https://www.eclipse.org/openj9/docs/xlp/)
+[-Xlp:codecache](https://www.eclipse.org/openj9/docs/xlpcodecache/)
+[-Xlp:objectheap](https://www.eclipse.org/openj9/docs/xlpobjectheap/)
+
+**Xlp options and their respective impacted components.**
+| Option  | CodeCache |  Objectheap |
+| ------------- | ------------- | ------------- |
+| `-Xlp `| N/A  | X |
+| `-Xlp<Size>`  | X | X |
+| `-Xlp:codecache:pagesize=<size>` | X | N/A
+| `-Xlp:objectheap:pagesize=<size>` | N/A | X
+
+### Option Parsing
+
+Currently, these options are parsed in both the JIT(Codecache)[1] and GC(Objectheap)[2]. At a high level, the parsing code for each component for the most part identifies which option to the right-most index impacts it and sets the respective page size based on the option*. This can be centralized. 
+*The only exception is with `-Xlp`, which is solely parsed inside the objectheap. `-Xlp` is always ignored if any other `-Xlp:<size>` or `-Xlp:objectheap:pagesize=<size>` is used no matter of it's argument position. 
+
+### Implementation
+This can be commonly implemented in `jvminit.c`, as a lot of other centralized parsing [3]. 
+
+**Option Precedence**
+A large page option is used when the component it impacts is not impacted by any other large page option at a later index. (Right-Most Option Wins). 
+Therefore at most, there could be two large page options used at once since some options target only the codecache(-Xlp:codecache:pagesize=<size>) and objectheap(-Xlp:objectheap:pageszie=<size>) while others target both components at once(-Xlp<Size>). This means that a most two options will need to be parsed at once, all others will be ignored. 
+
+** I'm still investigating if this is intended, but -Xlp is overwritten and is ignored if any other variation of -Xlp* option is used. Right-Most Wins does not apply here. 
+
+Iterating through the vmargs we can isolate these two indecies and consume all others that will be ignored.
+
+This would look like this. 
+https://github.com/AlenBadel/openj9/blob/c19aa3f19d1b8e203a6cc9953f7d1e021074cac1/runtime/vm/jvminit.c#L1670-L1719
+
+**Parsing**
+
+There are two flavors of large page options used within OpenJ9.
+
+- Default Options. E.g `-Xlp`, and the proposed `-XX:[+/-]UseLargePages`. These options request that the default large page size be used. This value is specified per hardware specification and can be found [here](https://www.eclipse.org/openj9/docs/xlp/). 
+- Size - Specifying Options. E.g `-Xlp<Size>`, `-XX:LargePageInBytes=<size>`, `-Xlp:codecache:pagesize=<size>`, `-Xlp:objectheap:pagesize=<size>`.  These options request that a specific page size be configured. 
+
+- The latter two options can also specify the page-type on zOS(-Xlp:objectheap:pageszie=<size>,[non]pageable). The former two assume pageable is preferred but will fallback to fixed if not configured. 
+
+We'll need to parse and store the following. This can be stored within J9JavaVM as a struct. 
+```
+J9LargePageOptions
+    bool  isCodecacheOptionRequested;
+    UDATA codecachePageSizeRequested;
+    bool isObjectheapOptionRequested; 
+    UDATA objectheapPageSizeRequested;
+    bool objectheapIsPageable; (Z/OS Only)
+```
+
+**Parsing -Xlp:**
+Easiest one to parse. Nothing needs to be done. 
+Set isObjectheapOptionRequested = true, while keeping objectheapPageSizeRequested to 0.
+
+**Parsing -Xlp<Size>**
+Just as simply. GET_MEMORY_VALUE works perfectly. 
+Set isObjectheapOptionRequested = true, isCodecacheOptionRequested = true, codecachePageSizeRequested = <size>, and objectheapPageSizeRequested = <size>
+```
+char *lpOption = VMOPT_XLP;
+GET_MEMORY_VALUE(xlpSizeIndex, lpOption, optionConfig->objectheapPageSizeRequested);
+```
+
+**Parsing -Xlp:codecache, -Xlp:objectheap:**
+The objectheap mmparse.cpp has a very elegant way of parsing -Xlp:* options. This method can be called from jvminit.c to effectively parse -Xlp:codecache:*, and -Xlp:objectheap:* options. 
+All previous fields will be set, with an additional page type when requested.
+https://github.com/eclipse/openj9/blob/8b45427a87ffb484492dc2c1b76e69e08585192d/runtime/gc_modron_startup/mmparse.cpp#L352-L560
+
+**CodeCache (JIT)**
+All parsing related code can be removed. The codecache will strictly process if large pages are requested, verify and configure any requested default sizes or user specified page sizes.
+
+** z/OS Codecache does not support fixed large pages.
+_TODO_: I need to double check if the argument is ignored when using -Xlp:codecache:pagesize=<size>,[non]pageable. I will ensure original behaviour is kept, and will add flag pass to the codecache if it is needed.
+
+**Objectheap (GC)**
+All -Xlp:* parsing related code calls can be removed. (With the exception of gcmetadata). The objectheap will strigtly process if large pages are requested, verify and configure any requested default sizes or user specified page sizes.
+
+[1]
+https://github.com/eclipse/openj9/blob/0db90cec566c58a923a4e63c82adb92c806fffaa/runtime/compiler/control/J9Options.cpp#L1453-L1784
+[2] 
+https://github.com/eclipse/openj9/blob/c560cd75ea7ca9c9f2442d2eab7b1afa8a15af1e/runtime/gc_modron_startup/mmparse.cpp#L562-L826
+[3]
+https://github.com/eclipse/openj9/blob/491cde3d0b8383a30689fba244f547d6b9315fce/runtime/vm/jvminit.c#L1621-L1633

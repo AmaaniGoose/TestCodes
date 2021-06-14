@@ -1,0 +1,3 @@
+Using slim JRE builds builds available at https://hub.docker.com/r/adoptopenjdk/openjdk8-openj9/ for example may be an easier way of reducing on-disk footprint for container images than using Jarmin when we are in snapshot mode. 
+
+This is because use of Jarmin in a container environment may not be as straightforward as it is outside of a container environment, where one does not have immutable lower layers (including both a JRE and app server layers in addition to others potentially) to deal with. Since a bulk of the classes that are expected to be stripped out by Jarmin are expected to come from the JCL and app server layers, any solution that may not work well for those packages in containers may be less attractive. 

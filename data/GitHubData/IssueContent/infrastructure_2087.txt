@@ -1,0 +1,45 @@
+- Please put the system name in the title of this issue. https://ci.adoptopenjdk.net/computer/build-scaleway-ubuntu1604-armv7-2/
+
+- Link to any log file showing the problem: Appeared to stop in the middle of https://ci.adoptopenjdk.net/view/Failing%20Builds/job/build-scripts/job/jobs/job/jdk11u/job/jdk11u-linux-arm-hotspot/
+```
+18:23:05  Compiling 1 properties into resource bundles for jdk.jlink
+18:24:28  ./src/hotspot/cpu/arm/c1_LIRGenerator_arm.cpp: In member function ‘void LIRGenerator::do_ArithmeticOp_Int(ArithmeticOp*)’:
+18:24:28  ./src/hotspot/cpu/arm/c1_LIRGenerator_arm.cpp:831:14: warning: ‘out_reg’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+18:24:28         __ move(out_reg, result);
+18:24:28                ^
+18:24:28  ./src/hotspot/cpu/arm/c1_LIRGenerator_arm.cpp: In member function ‘void LIRGenerator::do_ArithmeticOp_Long(ArithmeticOp*)’:
+18:24:28  ./src/hotspot/cpu/arm/c1_LIRGenerator_arm.cpp:761:75: warning: ‘entry’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+18:24:28         LIR_Opr result = call_runtime(x->y(), x->x(), entry, x->type(), NULL);
+18:24:28                                                                             ^
+18:25:09  Compiling 11 properties into resource bundles for java.base
+18:25:09  Compiling 6 properties into resource bundles for java.base
+18:27:53  Cannot contact build-scaleway-ubuntu1604-armv7-2: java.lang.InterruptedException
+02:06:35  Cancelling nested steps due to timeout
+02:06:35  Could not connect to build-scaleway-ubuntu1604-armv7-2 to send interrupt signal to process
+[Pipeline] }
+```
+Output from the new [ARM32 STATUS CHECK](https://github.com/AdoptOpenJDK/openjdk-build/pull/2539/files) logging is as follows and doesn't look to have been problematic.
+```
+18:06:38  === START OF ARM32 STATUS CHECK
+18:06:38   17:06:38 up 7 days,  5:08,  0 users,  load average: 0.71, 0.26, 0.11
+18:06:38                total        used        free      shared  buff/cache   available
+18:06:38  Mem:        2068856      105552     1407980       12904      555324     1583736
+18:06:38  Swap:       2097148       86664     2010484
+18:06:38  UID        PID  PPID  C STIME TTY          TIME CMD
+18:06:38  jenkins   9710     1  0 17:06 ?        00:00:00 sh -c ({ while [ -d '/home/jenkins/workspace/build-scripts/jobs/jdk11u/jdk11u-linux-arm-hotspot@tmp/durable-0e3f489f' -a \! -f '/home/jenkins/workspace/build-scripts/jobs/jdk11u/jdk11u-linux-arm-hotspot@tmp/durable-0e3f489f/jenkins-result.txt' ]; do touch '/home/jenkins/workspace/build-scripts/jobs/jdk11u/jdk11u-linux-arm-hotspot@tmp/durable-0e3f489f/jenkins-log.txt'; sleep 3; done } & jsc=durable-8e81ebbfc086e52e4d6a3ade53022be6; JENKINS_SERVER_COOKIE=$jsc 'sh' -xe  '/home/jenkins/workspace/build-scripts/jobs/jdk11u/jdk11u-linux-arm-hotspot@tmp/durable-0e3f489f/script.sh' > '/home/jenkins/workspace/build-scripts/jobs/jdk11u/jdk11u-linux-arm-hotspot@tmp/durable-0e3f489f/jenkins-log.txt' 2>&1; echo $? > '/home/jenkins/workspace/build-scripts/jobs/jdk11u/jdk11u-linux-arm-hotspot@tmp/durable-0e3f489f/jenkins-result.txt.tmp'; mv '/home/jenkins/workspace/build-scripts/jobs/jdk11u/jdk11u-linux-arm-hotspot@tmp/durable-0e3f489f/jenkins-result.txt.tmp' '/home/jenkins/workspace/build-scripts/jobs/jdk11u/jdk11u-linux-arm-hotspot@tmp/durable-0e3f489f/jenkins-result.txt'; wait) >&- 2>&- &
+18:06:38  jenkins   9711  9710  0 17:06 ?        00:00:00 sh -c ({ while [ -d '/home/jenkins/workspace/build-scripts/jobs/jdk11u/jdk11u-linux-arm-hotspot@tmp/durable-0e3f489f' -a \! -f '/home/jenkins/workspace/build-scripts/jobs/jdk11u/jdk11u-linux-arm-hotspot@tmp/durable-0e3f489f/jenkins-result.txt' ]; do touch '/home/jenkins/workspace/build-scripts/jobs/jdk11u/jdk11u-linux-arm-hotspot@tmp/durable-0e3f489f/jenkins-log.txt'; sleep 3; done } & jsc=durable-8e81ebbfc086e52e4d6a3ade53022be6; JENKINS_SERVER_COOKIE=$jsc 'sh' -xe  '/home/jenkins/workspace/build-scripts/jobs/jdk11u/jdk11u-linux-arm-hotspot@tmp/durable-0e3f489f/script.sh' > '/home/jenkins/workspace/build-scripts/jobs/jdk11u/jdk11u-linux-arm-hotspot@tmp/durable-0e3f489f/jenkins-log.txt' 2>&1; echo $? > '/home/jenkins/workspace/build-scripts/jobs/jdk11u/jdk11u-linux-arm-hotspot@tmp/durable-0e3f489f/jenkins-result.txt.tmp'; mv '/home/jenkins/workspace/build-scripts/jobs/jdk11u/jdk11u-linux-arm-hotspot@tmp/durable-0e3f489f/jenkins-result.txt.tmp' '/home/jenkins/workspace/build-scripts/jobs/jdk11u/jdk11u-linux-arm-hotspot@tmp/durable-0e3f489f/jenkins-result.txt'; wait) >&- 2>&- &
+18:06:38  jenkins   9712  9710  0 17:06 ?        00:00:00 sh -xe /home/jenkins/workspace/build-scripts/jobs/jdk11u/jdk11u-linux-arm-hotspot@tmp/durable-0e3f489f/script.sh
+18:06:38  jenkins   9714  9712  0 17:06 ?        00:00:00 /bin/bash ./build-farm/make-adopt-build-farm.sh
+18:06:38  jenkins   9715  9711  0 17:06 ?        00:00:00 sleep 3
+18:06:38  jenkins   9736  9714  0 17:06 ?        00:00:00 ps -fu jenkins
+18:06:38  jenkins  12678 12497  0 Mar24 ?        00:29:48 sshd: jenkins@notty
+18:06:38  jenkins  12771 12678  0 Mar24 ?        00:00:00 bash -c cd "/home/jenkins" && java  -jar remoting.jar -workDir /home/jenkins -jar-cache /home/jenkins/remoting/jarCache
+18:06:38  jenkins  12772 12771  4 Mar24 ?        03:10:26 java -jar remoting.jar -workDir /home/jenkins -jar-cache /home/jenkins/remoting/jarCache
+18:06:38  jenkins  18181     1  0 Mar24 ?        00:00:08 /lib/systemd/systemd --user
+18:06:38  jenkins  18182 18181  0 Mar24 ?        00:00:00 (sd-pam)
+18:06:38  === END OF ARM32 STATUS CHECK
+```
+
+
+- Please describe the issue: Jenkins cannot launch agent on the machine as it is offline. Assigning to myself as access to the scaleway console to reboot it is restricted, but if anyone else with access gets to it they're welcome to do the reboot :-)
+

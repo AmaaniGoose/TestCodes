@@ -1,0 +1,3 @@
+The current tests we have for the getConstantPool JVMTI method are outdated, and in https://github.com/eclipse/openj9/blob/master/runtime/tests/jvmtitests/src/com/ibm/jvmti/tests/getConstantPool/gcp001.c the code is all ifdef'd out.
+
+The tests need to be updated to work with the current test framework since there are now use cases that exercise the JVMTI api such as https://github.com/eclipse/openj9/issues/7591.

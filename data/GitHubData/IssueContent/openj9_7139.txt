@@ -1,0 +1,10 @@
+Enable inlining of the following rotate methods:
+```
+java_lang_Long_rotateRight
+java_lang_Integer_rotateRight
+java_lang_Long_rotateLeft
+java_lang_Integer_rotateLeft
+```
+Some investigation will be needed to determine the best way to do this.  x86 and Z do higher-level inlining (see [1]), whereas Power does its own inlining at the backend.  I'm not sure why Power does it differently.  My preference would be for the higher-level inlining unless there's a good reason otherwise.
+
+[1] https://github.com/eclipse/openj9/blob/10ba6a66b2709e35d0b7b90ed9108db14ccb3ab8/runtime/compiler/optimizer/J9RecognizedCallTransformer.cpp#L369

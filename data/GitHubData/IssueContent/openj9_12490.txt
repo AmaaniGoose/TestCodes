@@ -1,0 +1,9 @@
+Restoring from a given snapshot that has a java/util/Random seeded with the same value will result in the same sequence of random numbers generated when using the `nextInt` API as one example (there are others). This is guaranteed by the API doc at : https://docs.oracle.com/javase/8/docs/api/java/util/Random.html
+
+This makes the behaviour of java/util/Random tricky for the default constructor API that says:
+
+`Creates a new random number generator. This constructor sets the seed of the random number generator to a value very likely to be distinct from any other invocation of this constructor.`
+
+This can cause issues from an end user perspective in that a seed chosen during the snapshot run is reused in every run based on a restore from a given snapshot. Note that the non-default constructor that passes in a seed expects the same sequence of random numbers to be generated from this class. 
+
+So we need to examine what can be done to preserve the necessary determinism for the non-default constructor case while still preserving the desired random-ness for the default constructor case when running in snapshot mode. 

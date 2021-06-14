@@ -1,0 +1,3 @@
+In #23, it was discovered minor changes to the docker file can break it 
+
+I suspect switching to [`update-alternative`](http://manpages.ubuntu.com/manpages/trusty/man8/update-alternatives.8.html) will fix this. 

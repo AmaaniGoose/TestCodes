@@ -1,0 +1,11 @@
+Access level:
+- [ ] Non-privileged
+- [x] jenkins user
+- [ ] root/Administrative
+- [ ] other (Please specify):
+
+System for which access is needed: 
+Need access for the systems where the [jenkins jobs](https://ci.adoptopenjdk.net/view/Docker%20Images/job/openjdk_build_docker_multiarch/136/) run. 
+
+Please explain why you need this access including whether it is a temporary or permanent request:
+Need a temporary jenkins user access to investigate the failures for docker nightly builds

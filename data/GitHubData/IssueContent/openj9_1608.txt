@@ -1,0 +1,13 @@
+Failures on Windows64 extended testing in : 
+cmdLineTester_verbosetest_0
+cmdLineTester_verbosetest_3
+cmdLineTester_verbosetest_6
+
+```
+[ERR] [TestNG] [ERROR] java.lang.IllegalArgumentException: InputStream cannot be null
+[ERR] Exception in thread "main" java.lang.NullPointerException
+[ERR] 	at org.testng.TestNG.getStatus(TestNG.java:211)
+[ERR] 	at org.testng.TestNG.main(TestNG.java:1324)
+```
+
+This is using JDK8/9 variants using the latest from openj9, openj9-omr and openjdk extensions repos.  I haven't tested on jdk10. 

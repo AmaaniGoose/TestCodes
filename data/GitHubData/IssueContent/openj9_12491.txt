@@ -1,0 +1,1 @@
+The process of starting a compilation involves an intricate dance of these three means of concurrency control; incorrectly acquiring/releasing them can lead to extremely hard to debug race conditions. Therefore, the current process and subtleties should be documented.

@@ -1,0 +1,88 @@
+Steps to reproduce the crash by following the instruction at https://github.com/eclipse/openj9/blob/master/doc/build-instructions/Build_Instructions_V16.md#aarch64
+
+export JAVA_HOME=../aarch64_jdk (downloaded from AdoptOpenJDK)
+export PATH="$JAVA_HOME/bin:$PATH"
+
+git clone https://github.com/ibmruntimes/openj9-openjdk-jdk16.git
+cd openj9-openjdk-jdk16
+git revert 5d554a114d64937d59f432c5e0ac3b4e6e691531 (OpenJ9 support for the Foreign Memory Access API)
+bash get_source.sh
+ bash configure --disable-warnings-as-errors --enable-openjdk-methodhandles
+make all
+
+It ended up with the following dump:
+```
+...
+[100%] Built target j9ddr
+
+ERROR: Build failed for target 'all' in configuration 'linux-aarch64-server-release' (exit code 2)
+=== Output from failing command(s) repeated here ===
+* For target support_gensrc_jdk.localedata__cldr-gensrc.marker:
+0000000000019200: Invalid class pointer in stack allocated object in thread main
+0000000000019200:       O-Slot=000000000010F408
+0000000000019200:       O-Slot value=000000000010F220
+0000000000019200:       PC=00004000290F009C
+0000000000019200:       framesWalked=7
+0000000000019200:       arg0EA=000000000010F460
+0000000000019200:       walkSP=000000000010CAE8
+0000000000019200:       literals=0000000000000000
+0000000000019200:       jitInfo=000040003B7D0038
+0000000000019200:       method=00000000001DBDF8 (build/tools/cldrconverter/ResourceBundleGenerator.generateBundle(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZLjava/util/Map;Lbuild/tools/cldrconverter/BundleGenerator$BundleType;)V) (JIT)
+0000000000019200:       stack=0000000000109700-000000000010F5F0
+16:27:22.758 0x19200    j9mm.479    *   ** ASSERTION FAILED ** at ../../../../../../openj9/runtime/gc_glue_java/ScavengerRootScanner.hpp:108: 
+((MM_StackSlotValidator(MM_StackSlotValidator::NOT_ON_HEAP, *slotPtr, stackLocation, walkState).validate(_env)))
+JVMDUMP039I Processing dump event "traceassert", detail "" at 2021/04/10 12:27:22 - please wait.
+JVMDUMP032I JVM requested System dump using '/.../openj9-openjdk-jdk16/make
+/core.20210410.122722.23666.0001.dmp' in response to an event
+JVMDUMP010I System dump written to /.../openj9-openjdk-jdk16/make/core.20210410.122722.23666.0001.dmp
+   ... (rest of output omitted)
+```
+along with the backtrace:
+```
+(gdb) bt
+#0  0x00004000182ed02c in pthread_kill () from /lib64/libpthread.so.0
+#1  0x0000400018bd8654 in omrdump_create ()
+   from /.../jdk16_openj9_aarch64/lib/default/libj9prt29.so
+#2  0x0000400018e68910 in doSystemDump ()
+   from /.../jdk16_openj9_aarch64/lib/default/libj9dmp29.so
+#3  0x0000400018e64770 in protectedDumpFunction ()
+   from /.../jdk16_openj9_aarch64/lib/default/libj9dmp29.so
+#4  0x0000400018bda238 in omrsig_protect ()
+   from /.../jdk16_openj9_aarch64/lib/default/libj9prt29.so
+#5  0x0000400018e67d68 in runDumpFunction ()
+   from /.../jdk16_openj9_aarch64/lib/default/libj9dmp29.so
+#6  0x0000400018e67f10 in runDumpAgent ()
+   from /.../jdk16_openj9_aarch64/lib/default/libj9dmp29.so
+#7  0x0000400018e7f1b4 in triggerDumpAgents ()
+   from /.../jdk16_openj9_aarch64/lib/default/libj9dmp29.so
+#8  0x0000400018edf188 in triggerHit ()
+   from /.../jdk16_openj9_aarch64/lib/default/libj9trc29.so
+#9  0x0000400018ed228c in doTracePoint ()
+   from /.../jdk16_openj9_aarch64/lib/default/libj9trc29.so
+#10 0x0000400018eca138 in javaTrace ()
+   from /.../jdk16_openj9_aarch64/lib/default/libj9trc29.so
+#11 0x0000400019a83928 in MM_ScavengerRootScanner::doStackSlot(J9Object**, void*, void const*) ()
+   from /.../jdk16_openj9_aarch64/lib/default/libj9gc29.so
+#12 0x00004000192871f0 in walkJITFrameSlotsForInternalPointers ()
+   from /.../jdk16_openj9_aarch64/lib/default/libj9jit29.so
+#13 0x0000400019686e80 in walkJITFrameSlots.isra.5 ()
+   from /.../jdk16_openj9_aarch64/lib/default/libj9jit29.so
+#14 0x00004000196872dc in jitWalkFrame ()
+---Type <return> to continue, or q <return> to quit---
+   from /.../jdk16_openj9_aarch64/lib/default/libj9jit29.so
+#15 0x00004000196880c0 in jitWalkStackFrames ()
+   from /.../jdk16_openj9_aarch64/lib/default/libj9jit29.so
+#16 0x0000400018a53aa4 in walkStackFrames ()
+   from /.../jdk16_openj9_aarch64/lib/default/libj9vm29.so
+#17 0x00004000199422b8 in GC_VMThreadStackSlotIterator::scanSlots(J9VMThread*, J9VMThread*, void*, void (*)(J9JavaVM*, J9Object**, void*, J9StackWalkState*, void const*), bool, bool) ()
+   from /.../jdk16_openj9_aarch64/lib/default/libj9gc29.so
+#18 0x00004000199422b8 in GC_VMThreadStackSlotIterator::scanSlots(J9VMThread*, J9VMThread*, void*, void (*)(J9JavaVM*, J9Object**, void*, J9StackWalkState*, void const*), bool, bool) ()
+   from /.../jdk16_openj9_aarch64/lib/default/libj9gc29.so
+#19 0x00004000199422b8 in GC_VMThreadStackSlotIterator::scanSlots(J9VMThread*, J9VMThread*, void*, void (*)(J9JavaVM*, J9Object**, void*, J9StackWalkState*, void const*), bool, bool) ()
+   from /.../jdk16_openj9_aarch64/lib/default/libj9gc29.so
+#20 0x00004000199422b8 in GC_VMThreadStackSlotIterator::scanSlots(J9VMThread*, J9VMThread*, void*, void (*)(J9JavaVM*, J9Object**, void*, J9StackWalkState*, void const*), bool, bool) ()
+   from /.../jdk16_openj9_aarch64/lib/default/libj9gc29.so
+...
+```
+
+FYI:   @dmitripivkine

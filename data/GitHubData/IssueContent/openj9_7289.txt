@@ -1,0 +1,22 @@
+Discovered two parts of the code that could be refactored in PR #7236 but also requires proper test: 
+
+1.  In `TR_RelocationRuntime::relocateAOTCodeAndData()`,  JITServer adds the follow fixes for FSD. When removing the `JITSERVER_SUPPORT` flag, need to make sure it applies to the master code as well for FSD on all platforms. 
+```
+#if defined(JITSERVER_SUPPORT)
+         if (_comp->getOption(TR_FullSpeedDebug))
+            numExcptionRanges &= ~(J9_JIT_METADATA_WIDE_EXCEPTIONS | J9_JIT_METADATA_HAS_BYTECODE_PC);
+#endif /* defined(JITSERVER_SUPPORT) */
+...
+#if defined(JITSERVER_SUPPORT)
+            if (_comp->getOption(TR_FullSpeedDebug))
+               excptEntry32 = (J9JIT32BitExceptionTableEntry *) ((uint8_t *) excptEntry32 + 4);
+#endif /* defined(JITSERVER_SUPPORT) */
+```
+
+2. In `TR_RelocationRuntime::relocateMethodMetaData()`, JITServer adds the follow fixes for OSR, need to assess if it applies to non-JITServer mode.
+
+```
+#if defined(JITSERVER_SUPPORT)
+   if (_exceptionTable->osrInfo)
+      _exceptionTable->osrInfo = (void *) (((U_8 *)_exceptionTable->osrInfo) + dataRelocationAmount);
+```

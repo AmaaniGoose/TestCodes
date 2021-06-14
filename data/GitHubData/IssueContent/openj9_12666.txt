@@ -1,0 +1,59 @@
+- [ ] New functionality
+  - [ ] Support for new method handles
+    - [x] #11933 Add JITServer support for new invokedynamic and invokehandle
+    - [x] #12011 JITServer support for transforming OpenJDK MethodHandles
+    - [x] #12525 Add JITServer support for LambdaForm methods inlining
+  - [ ] Storing AOT methods at JITServer
+    - [x] #12154 Extend class loader table to support JITServer AOT cache
+    - [x] #12320 JITServer AOT cache storage infrastructure
+    - [ ] #12405 JITServer AOT cache deserializer
+    - [ ] Serializing and caching AOT methods during AOT compilations at the JITServer
+    - [ ] Serving cached AOT methods at the JITServer and deserializing and loading them at the JIT client
+  - [ ] Optional: Support for JProfiling #9974
+    - [x] eclipse/omr#5201 Support for serialization of data structures
+    - [x] #9590 Serialization of block frequency data structures
+    - [x] #9591 Add new relocation records for data structures to support AOT compilation of profiled code
+    - [x] eclipse/omr#5202 Changes to create new relocation records
+    - [ ] #11625 Enable block frequency profiling in JITServer
+- [x] Performance
+  - [x] Improve memory utilization at JITServer
+    - [x] #11686 Use per-client persistent allocators on JITServer
+    - [x] #11865 Create smaller code and data caches on JITServer
+    - [x] #11777 Store a single copy of each distinct ROMClass at JITServer
+    - [x] #11628 Improve JITServer client compilation thread activation policy
+    - [x] #12626 Prevent expensive compilations from exhausting available memory at JITServer
+    - [x] #12659 Investigate possible memory leak at JITServer
+  - [x] Improve JITServer scalability
+    - [x] #11844 Do not hold compilation monitor in postCompilationTasks on the server
+    - [x] #12626 Sending Client feedback about number of active compilations threads
+  - [x] Support for scaling down to 0. #12375
+- [ ] RAS
+  - [x] Make JITServer heart-beat more useful
+    - [x] #12033 Update the values of JVM Cpu in the compilation msgs in server's verbose
+    - [x] #12658 Add timestamps to information printed by JITServer heart beat
+   - [x] JITDump support
+     - [x] #12386 Re-enable JIT helpers on JITServer
+     - [x] #12439 Enable JitDump support on JITServer
+   - [ ] Snap file support
+     - [ ] Make sure Snap file are useful
+     - [ ] Add new trace points for rare paths that may create problems
+   - [ ]  #12921 Add MethodMetaData flag indicating remote compilation
+- [ ] Cleanup existing issues
+  - [ ] #12701
+  - [ ] #10331
+  - [ ] #11185
+  - [ ] #10920
+  - [ ] #8770
+  - [ ] #4382 Crash when running JITaaS with SSL 
+- [ ] Documentation
+  - [ ] Provide recommendations when to use JITServer
+  - [ ] Update documentation on how to debug it
+  - [ ] Describe heart-beat and information in vlogs
+  - [ ] Document JITServer specific options like `-Xjit:enableJITServerHeuristics`, how to enable ROMClass sharing, etc.
+  - [ ] Write blog about performance in OpenShift
+
+  
+
+
+
+  

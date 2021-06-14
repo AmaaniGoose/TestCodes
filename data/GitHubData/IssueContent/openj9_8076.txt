@@ -1,0 +1,14 @@
+Implement and accelerate Vector API. 
+
+Background info:
+[1] https://openjdk.java.net/jeps/338
+[2] https://software.intel.com/en-us/articles/vector-api-developer-program-for-java
+
+Issues and PRs:
+[3] Testing: https://github.com/eclipse/openj9/issues/10627
+[4] Native stubs: https://github.com/eclipse/openj9/pull/10061
+[5] `@Stable` annotation: https://github.com/eclipse/openj9/issues/11990
+[6] `@ForceInline` annotation: https://github.com/eclipse/openj9/issues/11993
+[7] Power helper calling conventions: https://github.com/eclipse/openj9/issues/11752
+
+@tajila @mstoodle 

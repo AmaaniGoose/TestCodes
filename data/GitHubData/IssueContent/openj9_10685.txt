@@ -1,0 +1,51 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk15_j9_sanity.openjdk_x86-64_mac_Nightly/54
+java/util/logging/LoggingDeadlock2.java
+osx1014-x86-2
+```
+00:56:33  STDOUT:
+00:56:33  [/Users/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_mac_Nightly/openjdkbinary/j2sdk-image/bin/java, -classpath, /Users/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_mac_Nightly/openjdk-tests/TKG/test_output_16009229383933/jdk_util_j9_0/work/classes/3/java/util/logging/LoggingDeadlock2.d:/Users/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_mac_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging:/Users/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_mac_Nightly/jvmtest/openjdk/jtreg/lib/javatest.jar:/Users/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_mac_Nightly/jvmtest/openjdk/jtreg/lib/jtreg.jar:/Users/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_mac_Nightly/jvmtest/openjdk/jtreg/lib/junit.jar:/Users/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_mac_Nightly/jvmtest/openjdk/jtreg/lib/testng.jar:/Users/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_mac_Nightly/jvmtest/openjdk/jtreg/lib/jcommander.jar, LoggingDeadlock2$JavaChild]
+00:56:33  Waiting for child process to exit
+00:56:33  JavaChild started
+00:56:33  seed=7135637152576364776
+00:56:33  dojoin=false
+00:56:33  iters1=562
+00:56:33  iters2=462
+00:56:33  exiter started
+00:56:33  $
+00:56:33  Child exited with status: 255
+00:56:33  255 not equal to 99
+00:56:33  
+00:56:33  Passed = 4, failed = 1
+00:56:33  
+00:56:33  STDERR:
+00:56:33  java.lang.Throwable
+00:56:33  	at java.base/java.lang.Thread.dumpStack(Thread.java:518)
+00:56:33  	at LoggingDeadlock2.fail(LoggingDeadlock2.java:324)
+00:56:33  	at LoggingDeadlock2.fail(LoggingDeadlock2.java:325)
+00:56:33  	at LoggingDeadlock2.equal(LoggingDeadlock2.java:331)
+00:56:33  	at LoggingDeadlock2.realMain(LoggingDeadlock2.java:79)
+00:56:33  	at LoggingDeadlock2.main(LoggingDeadlock2.java:333)
+00:56:33  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+00:56:33  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+00:56:33  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+00:56:33  	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+00:56:33  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+00:56:33  	at java.base/java.lang.Thread.run(Thread.java:845)
+00:56:33  java.lang.AssertionError: Some tests failed
+00:56:33  	at LoggingDeadlock2.main(LoggingDeadlock2.java:335)
+00:56:33  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+00:56:33  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+00:56:33  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+00:56:33  	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+00:56:33  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+00:56:33  	at java.base/java.lang.Thread.run(Thread.java:845)
+
+00:56:33  JavaTest Message: Test threw exception: java.lang.AssertionError
+00:56:33  JavaTest Message: shutting down test
+00:56:33  
+00:56:33  
+00:56:33  TEST RESULT: Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Some tests failed
+00:56:33  --------------------------------------------------
+01:01:06  Cannot contact osx1014-x86-2: java.lang.InterruptedException
+01:02:04  Test results: passed: 855; failed: 1
+```

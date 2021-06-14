@@ -1,0 +1,6 @@
+jdk18 sanity.functional testing is failing for various reasons. Some of which we see every time there is a version change (missing exclude file, version / preview feature issues), but there are some I don't recognize.
+
+https://openj9-jenkins.osuosl.org/job/Pipeline-OpenJDK-Acceptance/14/
+https://openj9-jenkins.osuosl.org/job/Test_openjdknext_j9_sanity.functional_s390x_linux_OpenJDK/1/
+
+@jason @keithc-ca fyi

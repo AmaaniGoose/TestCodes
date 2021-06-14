@@ -1,0 +1,111 @@
+https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_extended.functional_ppc64_aix/17/console
+```
+07:27:48  ===============================================
+07:27:48  Running test testOpenJ9DiagnosticsMXBean_0 ...
+07:27:48  ===============================================
+07:27:48  testOpenJ9DiagnosticsMXBean_0 Start Time: Tue Feb  2 02:27:48 2021 Epoch Time (ms): 1612250868514
+07:27:48  "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+07:27:48  JVMSHRC005I No shared class caches available
+07:27:48  JVMSHRC005I No shared class caches available
+07:27:48  cache cleanup done
+07:27:48  variation: NoOptions
+07:27:48  JVM_OPTIONS:  
+07:27:48  { itercnt=1; \
+07:27:48  mkdir -p "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/../TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0"; \
+07:27:48  cd "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/../TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0"; \
+07:27:48  export LIBPATH="/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdkbinary/openjdk-test-image/openj9:/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdkbinary/j2sdk-image/bin/../lib/compressedrefs:/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdkbinary/j2sdk-image/bin/../lib/j9vm:/usr/jdk-11.0.7+10-jre/lib/server:/usr/jdk-11.0.7+10-jre/lib:/usr/jdk-11.0.7+10-jre/lib/jli:/usr/jdk-11.0.7+10-jre/../lib:/usr/lib"; \
+07:27:48  "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdkbinary/j2sdk-image/bin/java"   \
+07:27:48  -Xdump:dynamic \
+07:27:48  -Dremote.server.option="  -Dcom.sun.management.jmxremote.port=9999 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false" \
+07:27:48  -cp "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/../../jvmtest/TestConfig/resources:/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/../TKG/lib/testng.jar:/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/../TKG/lib/jcommander.jar:/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/../../jvmtest/functional/JLM_Tests/jlm_tests.jar" \
+07:27:48  org.testng.TestNG -d "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/../TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0" "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/../../jvmtest/functional/JLM_Tests/testng.xml" \
+07:27:48  -testnames testOpenJ9DiagnosticsMXBean \
+07:27:48  -groups level.extended \
+07:27:48  -excludegroups d.*.aix_ppc-64_cmprssptrs,d.*.arch.ppc,d.*.os.aix,d.*.bits.64,d.*.generic-all; \
+07:27:48  if [ $? -eq 0 ] ; then echo ""; echo "testOpenJ9DiagnosticsMXBean_0""_PASSED"; echo ""; cd /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/..; rm -f -r "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/../TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0"; else echo ""; echo "testOpenJ9DiagnosticsMXBean_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/../TKG/output_1612249293372/TestTargetResult";
+07:27:49  [IncludeExcludeTestAnnotationTransformer] [INFO] exclude file is /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/../TestConfig/resources/excludes/latest_exclude_16.txt
+07:27:49  ...
+07:27:49  ... TestNG 6.14.2 by Cédric Beust (cedric@beust.com)
+07:27:49  ...
+07:27:49  
+07:27:51  [TestOpenJ9DiagnosticsMXBean] [INFO] Starting Remote Server to Monitor!
+07:27:51  [TestOpenJ9DiagnosticsMXBean] [INFO] [/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdkbinary/j2sdk-image/bin/java, -Xdump:dynamic, -classpath, /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/../../jvmtest/TestConfig/resources:/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/../TKG/lib/testng.jar:/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/../TKG/lib/jcommander.jar:/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/../../jvmtest/functional/JLM_Tests/jlm_tests.jar, -Dcom.sun.management.jmxremote.port=9999, -Dcom.sun.management.jmxremote.authenticate=false, -Dcom.sun.management.jmxremote.ssl=false, -Djava.lock.file=/tmp/tmp9644253418377381860.lock, org.openj9.test.java.lang.management.RemoteProcess]
+07:27:51  [RemoteProcess] [INFO] =========RemoteProcess Starts!=========
+07:27:52  [JvmCpuMonitorMXBeanTest] [INFO] child started
+07:27:52  [TestOpenJ9DiagnosticsMXBean] [INFO] Staring remote server finished
+07:27:52  JVMDUMP039I Processing dump event "allocation", detail "4976 bytes, type byte[]" at 2021/02/02 02:27:52 - please wait.
+07:27:52  JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/./local/javacore_alloc.txt' in response to an event
+07:27:52  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/./local/javacore_alloc.txt
+07:27:52  JVMDUMP013I Processed dump event "allocation", detail "4976 bytes, type byte[]".
+07:27:52  JVMDUMP039I Processing dump event "catch", detail "java/io/UnsupportedEncodingException" at 2021/02/02 02:27:52 - please wait.
+07:27:52  JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/./local/javacore_unsupported.txt' in response to an event
+07:27:52  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/./local/javacore_unsupported.txt
+07:27:52  JVMDUMP013I Processed dump event "catch", detail "java/io/UnsupportedEncodingException".
+07:27:52  JVMDUMP007I JVM Requesting Heap dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/heapdump.20210202.022752.16121876.0003.txt'
+07:27:54  JVMDUMP010I Heap dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/heapdump.20210202.022752.16121876.0003.txt
+07:27:54  JVMDUMP034I User requested Java dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/javacore.20210202.022753.16121876.0004.txt' through com.ibm.jvm.Dump.JavaDump
+07:27:54  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/javacore.20210202.022753.16121876.0004.txt
+07:27:54  JVMDUMP034I User requested Heap dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/heapdump.20210202.022753.16121876.0005.phd' through com.ibm.jvm.Dump.HeapDump
+07:27:54  JVMDUMP010I Heap dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/heapdump.20210202.022753.16121876.0005.phd
+07:27:54  JVMDUMP034I User requested Snap dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/Snap.20210202.022754.16121876.0006.trc' through com.ibm.jvm.Dump.SnapDump
+07:27:54  JVMDUMP010I Snap dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/Snap.20210202.022754.16121876.0006.trc
+07:27:54  JVMDUMP034I User requested System dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/core.20210202.022754.16121876.0007.dmp' through com.ibm.jvm.Dump.SystemDump
+07:28:05  JVMDUMP010I System dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/core.20210202.022754.16121876.0007.dmp
+07:28:06  JVMDUMP034I User requested Java dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/./local_dumps/javacore.20210202.022805' through com.ibm.jvm.Dump.javaDumpToFile
+07:28:06  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/./local_dumps/javacore.20210202.022805
+07:28:06  JVMDUMP034I User requested Heap dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/./local_dumps/heapdump.022806' through com.ibm.jvm.Dump.heapDumpToFile
+07:28:06  JVMDUMP010I Heap dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/./local_dumps/heapdump.022806
+07:28:06  JVMDUMP034I User requested Snap dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/./local_dumps/Snap.16121876.trc' through com.ibm.jvm.Dump.snapDumpToFile
+07:28:06  JVMDUMP010I Snap dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/./local_dumps/Snap.16121876.trc
+07:28:06  JVMDUMP034I User requested System dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/./local_dumps/core.16121876.dmp' through com.ibm.jvm.Dump.systemDumpToFile
+07:28:19  JVMDUMP010I System dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/./local_dumps/core.16121876.dmp
+07:28:20  JVMDUMP039I Processing dump event "allocation", detail "1040 bytes, type byte[]" at 2021/02/02 02:28:20 - please wait.
+07:28:20  JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/./remote/javacore_alloc.txt' in response to an event
+07:28:20  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/./remote/javacore_alloc.txt
+07:28:20  JVMDUMP013I Processed dump event "allocation", detail "1040 bytes, type byte[]".
+07:28:21  [JvmCpuMonitorMXBeanTest] [INFO] dump settings done
+07:28:21  JVMDUMP039I Processing dump event "catch", detail "java/io/UnsupportedEncodingException" at 2021/02/02 02:28:21 - please wait.
+07:28:21  JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/./remote/javacore_unsupported.txt' in response to an event
+07:28:21  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/./remote/javacore_unsupported.txt
+07:28:21  JVMDUMP013I Processed dump event "catch", detail "java/io/UnsupportedEncodingException".
+07:28:23  [JvmCpuMonitorMXBeanTest] [INFO] events occurred
+07:28:23  JVMDUMP007I JVM Requesting Heap dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/heapdump.20210202.022822.19791976.0003.txt'
+07:28:24  JVMDUMP010I Heap dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/heapdump.20210202.022822.19791976.0003.txt
+07:28:24  JVMDUMP034I User requested Java dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/javacore.20210202.022823.19791976.0004.txt' through com.ibm.jvm.Dump.JavaDump
+07:28:24  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/javacore.20210202.022823.19791976.0004.txt
+07:28:24  JVMDUMP034I User requested Heap dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/heapdump.20210202.022824.19791976.0005.phd' through com.ibm.jvm.Dump.HeapDump
+07:28:24  JVMDUMP010I Heap dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/heapdump.20210202.022824.19791976.0005.phd
+07:28:24  JVMDUMP034I User requested Snap dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/Snap.20210202.022824.19791976.0006.trc' through com.ibm.jvm.Dump.SnapDump
+07:28:24  JVMDUMP010I Snap dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/Snap.20210202.022824.19791976.0006.trc
+07:28:24  JVMDUMP034I User requested System dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/core.20210202.022824.19791976.0007.dmp' through com.ibm.jvm.Dump.SystemDump
+07:28:38  gmake[4]: *** Waiting for unfinished jobs....
+07:28:38  gmake[1]: *** Waiting for unfinished jobs....
+07:28:38  gmake: *** Waiting for unfinished jobs....
+07:28:38  gmake[3]: *** Waiting for unfinished jobs....
+07:28:38  gmake[2]: *** Waiting for unfinished jobs....
+07:28:38  JVMDUMP010I System dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_1612249293372/testOpenJ9DiagnosticsMXBean_0/core.20210202.022824.19791976.0007.dmp
+07:28:38  /bin/sh[5]: 16121876 Killed
+07:28:38  
+07:28:38  testOpenJ9DiagnosticsMXBean_0_FAILED
+07:28:38  
+
+Aborted by Andrew Leonard
+09:05:20  Sending interrupt signal to process
+
+09:05:33  gmake[4]: *** [autoGen.mk:1544: testOpenJ9DiagnosticsMXBean_0] Terminated
+09:05:33  gmake[4]: *** wait: There are no child processes..  Stop.
+09:05:33  gmake[4]: Leaving directory '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/functional/JLM_Tests'
+09:05:33  gmake[3]: *** [/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/../TKG/settings.mk:250: extended.functional-JLM_Tests] Error 2
+09:05:33  gmake[3]: *** wait: There are no child processes..  Stop.
+09:05:33  gmake[3]: Leaving directory '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/functional'
+09:05:33  gmake[2]: *** [/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/../TKG/settings.mk:250: extended.functional-functional] Error 2
+09:05:33  gmake[2]: *** wait: There are no child processes..  Stop.
+09:05:33  gmake[2]: Leaving directory '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests'
+09:05:33  gmake[1]: *** [settings.mk:250: extended.functional-..] Error 2
+09:05:33  gmake[1]: *** wait: There are no child processes..  Stop.
+09:05:33  gmake[1]: Leaving directory '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG'
+09:05:33  gmake: *** [makefile:48: _extended.functional] Error 2
+09:05:33  gmake: *** wait: There are no child processes..  Stop.
+09:05:33  script returned exit code 2
+```
+Machine: test-ibm-aix71-ppc64-1

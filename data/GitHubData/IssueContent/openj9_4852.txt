@@ -1,0 +1,5 @@
+TKG runs test targets and [summarizes them at the end of the test run](https://github.com/eclipse/openj9/blob/master/test/TestConfig/scripts/testKitGen/resultsSummary/resultsSum.pl#L139).
+
+We will add a final test at the end of a TKG run that checks if more than zero test targets were run (total of pass+fail > 0, we will have to decide if we should also include skipped), if so, this test passes.  If not, this test fails and will report the test run as failed.
+
+This should address #4834 (and alerted us immediately to the problem noted in #4851).

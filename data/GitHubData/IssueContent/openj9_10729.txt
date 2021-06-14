@@ -1,0 +1,6 @@
+With the ability to serialize runtime assumptions. However, the serialized data contains pointers that should be converted to offsets, specifically, when serializing the following fields:
+
+OMR::RuntimeAssumption::_key
+TR_PatchJNICallSite::_pc
+TR_UnloadedClassPicSite::_picLocation
+OMR::SentinelRuntimeAssumption::_owningMetaData

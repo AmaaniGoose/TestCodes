@@ -1,0 +1,4 @@
+AArch64 registers x16 and x17 are marked as ARM64_Reserved, and not used in ARM64PrivateLinkage.
+They are intra-procedure-call scratch registers, IP0 and IP1, and they don't need to be preserved across calls.
+
+Consider using these registers in ARM64PrivateLinkage.

@@ -1,0 +1,6 @@
+Other systems seem ok running the suite, but this one has now twice run a lot longer than it usually does.
+
+Job 73 hit the 10 hour timeout and 77 looks like it's going to do the same. Marked offline for now so overnight runs won't get scheduled on it until we can analyse the machine and/or resolve this
+
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.functional_aarch64_linux/
+https://ci.adoptopenjdk.net/computer/test-aws-ubuntu1804-armv8-1

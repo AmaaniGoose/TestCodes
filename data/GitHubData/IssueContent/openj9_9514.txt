@@ -1,0 +1,119 @@
+Failure link
+------------
+
+From an internal build `OpenJ9 acceptance build 446441 - job 642439837`
+```
+p> 20200510-10:01:41 java version "1.8.0_251"
+p> 20200510-10:01:41 Java(TM) SE Runtime Environment (build 8.0.7.0 - pxz6480sr7-20200428_02(SR7))
+p> 20200510-10:01:41 IBM J9 VM (build 2.9, JRE 1.8.0 Linux s390x-64-Bit 20200510_446441 (JIT enabled, AOT enabled)
+p> 20200510-10:01:41 OpenJ9   - 0712ae8
+p> 20200510-10:01:41 OMR      - 295075e
+p> 20200510-10:01:41 IBM      - ddee647)
+p> 20200510-10:01:41 JCL - 20200407_01 based on Oracle jdk8u251-b08
+```
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+p> 20200510-10:01:41 java version "1.8.0_251"
+p> 20200510-10:01:41 Java(TM) SE Runtime Environment (build 8.0.7.0 - pxz6480sr7-20200428_02(SR7))
+p> 20200510-10:01:41 IBM J9 VM (build 2.9, JRE 1.8.0 Linux s390x-64-Bit 20200510_446441 (JIT enabled, AOT enabled)
+p> 20200510-10:01:41 OpenJ9   - 0712ae8
+p> 20200510-10:01:41 OMR      - 295075e
+p> 20200510-10:01:41 IBM      - ddee647)
+p> 20200510-10:01:41 JCL - 20200407_01 based on Oracle jdk8u251-b08
+
+j> 10:02:09 
+j> 10:02:09 *** Invalid JIT return address 6966696573207468 in 000003FF6E4F1D10
+j> 10:02:09 
+j> 10:02:09 
+j> 10:02:09 
+j> 10:02:09 *** Invalid JIT return address 0000000000000000 in 000003FF6E4F1D10
+j> 10:02:09 
+
+p> 20200510-10:02:58 <gdb> #12 <signal handler called>
+p> 20200510-10:02:58 <gdb> #13 0x000003ff75150324 in ?? ()
+p> 20200510-10:02:58 <gdb> #14 0x000003ffb1fa571c in jitFillOSRBuffer () from /j9vm/ascii/builds/bld_446441/sdk/xz6480/jre/lib/s390x/default/libj9vm29.so
+p> 20200510-10:02:58 <gdb> #15 0x000003ffb16d385a in performOSR () from /j9vm/ascii/builds/bld_446441/sdk/xz6480/jre/lib/s390x/default/libj9jit29.so
+p> 20200510-10:02:58 <gdb> #16 0x000003ffb16dabc6 in induceOSROnCurrentThread () from /j9vm/ascii/builds/bld_446441/sdk/xz6480/jre/lib/s390x/default/libj9jit29.so
+p> 20200510-10:02:58 <gdb> #17 0x000003ffb16d1506 in old_slow_jitInduceOSRAtCurrentPC () from /j9vm/ascii/builds/bld_446441/sdk/xz6480/jre/lib/s390x/default/libj9jit29.so
+p> 20200510-10:02:58 <gdb> #18 0x000003ffb16e3c5e in jitInduceOSRAtCurrentPC () from /j9vm/ascii/builds/bld_446441/sdk/xz6480/jre/lib/s390x/default/libj9jit29.so
+p> 20200510-10:02:58 <gdb> #19 0x000003ffb1f9fe88 in runJavaThread () from /j9vm/ascii/builds/bld_446441/sdk/xz6480/jre/lib/s390x/default/libj9vm29.so
+p> 20200510-10:02:58 <gdb> #20 0x000003ffb1ffb0fe in javaProtectedThreadProc () from /j9vm/ascii/builds/bld_446441/sdk/xz6480/jre/lib/s390x/default/libj9vm29.so
+p> 20200510-10:02:58 <gdb> #21 0x000003ffb1da24e0 in omrsig_protect () from /j9vm/ascii/builds/bld_446441/sdk/xz6480/jre/lib/s390x/default/libj9prt29.so
+p> 20200510-10:02:58 <gdb> #22 0x000003ffb1ff7254 in javaThreadProc () from /j9vm/ascii/builds/bld_446441/sdk/xz6480/jre/lib/s390x/default/libj9vm29.so
+p> 20200510-10:02:58 <gdb> #23 0x000003ffb1e85958 in thread_wrapper () from /j9vm/ascii/builds/bld_446441/sdk/xz6480/jre/lib/s390x/default/libj9thr29.so
+p> 20200510-10:02:58 <gdb> #24 0x0000004d3a546556 in start_thread () from /lib64/libpthread.so.0
+p> 20200510-10:02:58 <gdb> #25 0x0000004d3a3df8a6 in thread_start () from /lib64/libc.so.6
+p> 20200510-10:02:58 
+```
+
+There is another similar failure at `job 642440153`:
+```
+Attempting to redefine instrumented classs with new method added...
+Unhandled exception
+Type=Illegal instruction vmState=0x00040000
+J9Generic_Signal_Number=00000048 Signal_Number=00000004 Error_Value=00000000 Signal_Code=00000001
+Handler1=7C91A5B0 Handler2=7CB624B8
+gpr0=00000016 gpr1=10056488 gpr2=10577210 gpr3=00000000
+gpr4=7A7E1BDC gpr5=77980838 gpr6=00000001 gpr7=00000000
+gpr8=00000000 gpr9=00000000 gpr10=7CA0AD00 gpr11=7D5E5F70
+gpr12=7B654000 gpr13=7CA5F400 gpr14=FB62DD02 gpr15=7D5E5D68
+hgpr0=00000000 hgpr1=77980838 hgpr2=781D6950 hgpr3=00000000
+hgpr4=00000000 hgpr5=00000000 hgpr6=00000076 hgpr7=00000200
+hgpr8=00000040 hgpr9=7CAEBF00 hgpr10=7C547000 hgpr11=7C2CAD3C
+hgpr12=FC5262EA hgpr13=00000000 hgpr14=00000000 hgpr15=00000000
+psw=FA7E1BF8 mask=070DD000 fpc=00080000 bea=77980838
+fpr0 42a014dd7c9d9424 (f: 2090701824.000000, d: 8.840901e+12)
+fpr1 bd189a287c9d9424 (f: 2090701824.000000, d: -2.185113e-14)
+fpr2 3e3ab283000000dc (f: 220.000000, d: 6.215952e-09)
+fpr3 3d1aac007c9d9424 (f: 2090701824.000000, d: 2.368939e-14)
+fpr4 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+fpr5 33fd3be07c9d9424 (f: 2090701824.000000, d: 2.910768e-58)
+fpr6 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+fpr7 3c97ce3f00000000 (f: 0.000000, d: 8.259244e-17)
+fpr8 39b409e900000000 (f: 0.000000, d: 9.879848e-31)
+fpr9 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+fpr10 3c07528400000000 (f: 0.000000, d: 1.580382e-19)
+fpr11 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+fpr12 388f3d0900000000 (f: 0.000000, d: 2.937647e-36)
+fpr13 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+fpr14 3e17cee700000000 (f: 0.000000, d: 1.385820e-09)
+fpr15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+Compiled_method=sun/instrument/InstrumentationImpl.redefineClasses([Ljava/lang/instrument/ClassDefinition;)V
+Target=2_90_20200510_446441 (Linux 2.6.32-754.23.1.el6.s390x)
+CPU=s390 (4 logical CPUs) (0xf34e0000 RAM)
+----------- Stack Backtrace -----------
+(0x7CB80270 [libj9prt29.so+0x37270])
+(0x7CB637E6 [libj9prt29.so+0x1a7e6])
+(0x7CB80304 [libj9prt29.so+0x37304])
+(0x7CB803FA [libj9prt29.so+0x373fa])
+(0x7CB800C2 [libj9prt29.so+0x370c2])
+(0x7CB637E6 [libj9prt29.so+0x1a7e6])
+(0x7CB8015A [libj9prt29.so+0x3715a])
+(0x7C91A510 [libj9vm29.so+0x91510])
+(0x7CB637E6 [libj9prt29.so+0x1a7e6])
+(0x7C91A6CC [libj9vm29.so+0x916cc])
+(0x7CB62712 [libj9prt29.so+0x19712])
+(0x7D5E5B70 [<unknown>+0x0])
+(0x7A7E1BF8 [<unknown>+0x0])
+---------------------------------------
+JVMDUMP039I Processing dump event "gpf", detail "" at 2020/05/10 10:00:32 - please wait.
+JVMDUMP032I JVM requested System dump using '/tmp/bld_446441/javaagentASMBCITest/642440153/core.20200510.100032.7542.0001.dmp' in response to an event
+JVMPORT030W /proc/sys/kernel/core_pattern setting "|/usr/libexec/abrt-hook-ccpp %s %c %p %u %g %t e" specifies that the core dump is to be piped to an external program.  Attempting to rename either core or core.7560.
+
+JVMDUMP010I System dump written to /tmp/bld_446441/javaagentASMBCITest/642440153/core.20200510.100032.7542.0001.dmp
+JVMDUMP032I JVM requested Java dump using '/tmp/bld_446441/javaagentASMBCITest/642440153/javacore.20200510.100032.7542.0002.txt' in response to an event
+
+
+*** Invalid JIT return address 726F7065 in 7D5E1060
+
+```
+
+These two failures are intermittent, first one wasn't reproduced in a 10x grinder, the second one failed 1/10 in another 10x grinder.

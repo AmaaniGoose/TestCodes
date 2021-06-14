@@ -1,0 +1,21 @@
+Hello,
+
+To run our Java server-side applications, we have been using for many years the ORACLE Server JRE binaries.
+
+AdoptOpenJDK distributions come as JDK or JRE, but no Server JRE distribution is currently available.
+
+The notion of Server JRE is roughly defined here: https://blogs.oracle.com/java-platform-group/understanding-the-server-jre
+
+The neat idea is that a JDK is kind of overkill on a production system, in term of surface of attack.
+
+Pure "JRE" is though as "client-side JRE", i.e., including JavaFX (yes I know it's not part of Java 11) and by default performance tuned for client-side interactive applications.
+
+A "Server JRE" should be optimized by default for server applications, i.e., long-running ones, and have things needed by app servers, such as javac (for runtime compilation of JSP, etc.), tools.jar (whatever is the equivalent name in Java 11) and monitoring features.
+
+I also know that in theory, using jlink could be a way to generate a something close to a "Server JRE", but unless I am mistaking, it requires to have a module-based application, and is not quite convenient for 'applications stacks with varying selection of apps'.
+
+Would it be possible to revive the notion of "Server JRE" with AdoptOpenJDK with OpenJ9 (I don't bother about HotSpot) ?
+
+Kind regards,
+Alexandre Vermeerbergen
+ 

@@ -1,0 +1,63 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.openjdk_x86-64_windows_Nightly/241/
+java/util/Collections/EmptyCollectionSerialization.java
+win2012-x86-4
+```
+23:25:25  test EmptyCollectionSerialization.serializableSingletons("Collections.emptySet()", EmptyCollectionSerialization$$Lambda$110/0x0000000000000000@ed122d6b): success
+23:25:25  test EmptyCollectionSerialization.serializableSingletons("Collections.EMPTY_SET", EmptyCollectionSerialization$$Lambda$107/0x0000000000000000@3869e311): success
+23:25:25  test EmptyCollectionSerialization.serializableSingletons("Collections.EMPTY_LIST", EmptyCollectionSerialization$$Lambda$105/0x0000000000000000@3dd86df0): failure
+23:25:25  java.lang.AssertionError: Collections.EMPTY_LIST: Unexpected Exception
+23:25:25  	at org.testng.Assert.fail(Assert.java:83)
+23:25:25  	at EmptyCollectionSerialization.serializableSingletons(EmptyCollectionSerialization.java:74)
+23:25:25  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+23:25:25  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+23:25:25  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+23:25:25  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+23:25:25  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+23:25:25  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+23:25:25  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+23:25:25  	at org.testng.internal.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:75)
+23:25:25  	at org.testng.internal.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:14)
+23:25:25  	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+23:25:25  	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+23:25:25  	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+23:25:25  	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+23:25:25  	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+23:25:25  	at java.base/java.lang.Thread.run(Thread.java:836)
+23:25:25  Caused by: java.lang.ClassNotFoundException: java.util.Collections$EmptyList
+23:25:25  	at java.base/java.lang.Class.forNameImpl(Native Method)
+23:25:25  	at java.base/java.lang.Class.forName(Class.java:426)
+23:25:25  	at java.base/java.io.ClassCache$FutureValue.get(ClassCache.java:190)
+23:25:25  	at java.base/java.io.ClassCache.get(ClassCache.java:161)
+23:25:25  	at java.base/java.io.ObjectInputStream.resolveClass(ObjectInputStream.java:877)
+23:25:25  	at java.base/java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:2117)
+23:25:25  	at java.base/java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1984)
+23:25:25  	at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2291)
+23:25:25  	at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1801)
+23:25:25  	at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:577)
+23:25:25  	at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:487)
+23:25:25  	at EmptyCollectionSerialization.patheticDeepCopy(EmptyCollectionSerialization.java:60)
+23:25:25  	at EmptyCollectionSerialization.serializableSingletons(EmptyCollectionSerialization.java:68)
+23:25:25  	... 15 more
+23:25:25  test EmptyCollectionSerialization.serializableSingletons("Collections.EMPTY_MAP", EmptyCollectionSerialization$$Lambda$106/0x0000000000000000@f40e47e6): success
+23:25:25  test EmptyCollectionSerialization.serializableSingletons("Collections.emptyMap()", EmptyCollectionSerialization$$Lambda$109/0x0000000000000000@8730e7f0): success
+23:25:25  test EmptyCollectionSerialization.serializableSingletons("Collections.emptySortedMap()", EmptyCollectionSerialization$$Lambda$112/0x0000000000000000@eaef5689): success
+23:25:25  test EmptyCollectionSerialization.serializableSingletons("Collections.emptyNavigableMap()", EmptyCollectionSerialization$$Lambda$114/0x0000000000000000@797fdeec): success
+23:25:25  test EmptyCollectionSerialization.serializableSingletons("Collections.emptySortedSet()", EmptyCollectionSerialization$$Lambda$111/0x0000000000000000@37bf3d43): success
+23:25:25  test EmptyCollectionSerialization.serializableSingletons("Collections.emptyList()", EmptyCollectionSerialization$$Lambda$108/0x0000000000000000@e756a01e): success
+23:25:25  test EmptyCollectionSerialization.serializableSingletons("Collections.emptyNavigableSet()", EmptyCollectionSerialization$$Lambda$113/0x0000000000000000@1b642aca): success
+23:25:25  
+23:25:25  ===============================================
+23:25:25  java/util/Collections/EmptyCollectionSerialization.java
+23:25:25  Total tests run: 10, Failures: 1, Skips: 0
+23:25:25  ===============================================
+23:25:25  
+23:25:25  STDERR:
+23:25:25  java.lang.Exception: failures: 1
+23:25:25  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:96)
+23:25:25  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+23:25:25  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+23:25:25  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+23:25:25  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+23:25:25  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:312)
+23:25:25  	at java.base/java.lang.Thread.run(Thread.java:836)
+```

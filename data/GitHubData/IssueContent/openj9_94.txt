@@ -1,0 +1,1 @@
+The javacore for z/OS shows "OS Level" like "z/OS 02.02.00", and "Architecture   : s390x" but no other details about the hardware being used. @joransiu has suggested adding in the raw STFLE bits.

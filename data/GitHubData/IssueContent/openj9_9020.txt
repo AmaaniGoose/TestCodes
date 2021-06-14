@@ -1,0 +1,146 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk11_j9_sanity.functional_ppc64le_linux_Nightly/341/`
+rhel7lert1
+```
+22:57:35  openjdk version "11.0.7-internal" 2020-04-14
+22:57:35  OpenJDK Runtime Environment (build 11.0.7-internal+0-adhoc.jenkins.BuildJDK11ppc64lelinuxNightly)
+22:57:35  Eclipse OpenJ9 VM (build ibm_sdk-0852f80a4a, JRE 11 Linux ppc64le-64-Bit Compressed References 20200328_362 (JIT enabled, AOT enabled)
+22:57:35  OpenJ9   - 0852f80a4a
+22:57:35  OMR      - e9bed7888
+22:57:35  JCL      - 34c3dd7d55b based on jdk-11.0.7+9)
+```
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+Corrupt cache with corruption type: 21(CACHE_DATA_NULL_TYPE)
+openTestCache: Opening test cache
+openTestCache: Done opening test cache
+openCorruptCache: Opening test cache
+JVMSHRC226E Error opening shared class cache file 
+JVMSHRC336E Port layer error code = -108
+JVMSHRC337E Platform error message: No such file or directory
+JVMSHRC840E Failed to start up the shared cache.
+openCorruptCache: Done opening test cache
+	ERROR: CorruptCacheTest.cpp(737) verifyCorruptionContext incorrect corruption context. 
+	Expected code: -16	 found: 0
+testCorruptCache: corruption context verification failed
+
+Result of test CorruptCacheTest: FAILED
+```
+
+In addition, there was a GPF at end of the test.
+```
+Unhandled exception
+Type=Segmentation error vmState=0x00000000
+J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000001
+Handler1=00003FFF74578100 Handler2=00003FFF7B5671C0
+R0=0000000010052A84 R1=00003FFFFBD76C60 R2=0000000010147D00 R3=0000000000000000
+R4=00000100031E3568 R5=0000000000000000 R6=00000100030FC530 R7=0000000000000000
+R8=00000100031E35E0 R9=0000000000000000 R10=0000000000000000 R11=0000000000000000
+R12=0000000000002200 R13=00003FFF7B69EAB0 R14=0000000000018200 R15=0000000000018200
+R16=0000000000000000 R17=0000000000000000 R18=0000000000000000 R19=00003FFFFBD770E8
+R20=00000000000003FC R21=0000000000000000 R22=00000100030FC530 R23=0000000000000000
+R24=0000010002F970C0 R25=0000000000000000 R26=0000000000000000 R27=0000000000000000
+R28=0000000000000000 R29=0000000000018200 R30=0000000010144D40 R31=000001000320E478
+NIP=0000000010052A90 MSR=800000010280F033 ORIG_GPR3=C00000000000A910 CTR=00003FFF7B35FC40
+LINK=0000000010052A84 XER=0000000000000000 CCR=0000000044022222 SOFTE=0000000000000001
+TRAP=0000000000000300 DAR=00000000000000E0 dsisr=0000000040000000 RESULT=0000000000000000
+FPR0 00003fff74710b58 (f: 1953565568.000000, d: 3.476562e-310)
+FPR1 ffffffffffffffff (f: 4294967296.000000, d: -nan)
+FPR2 656a624f5f676e61 (f: 1600614016.000000, d: 3.421279e+180)
+FPR3 676e616c5f617661 (f: 1600222848.000000, d: 1.692011e+190)
+FPR4 3fe3333340000000 (f: 1073741824.000000, d: 6.000000e-01)
+FPR5 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR6 00000000100e2880 (f: 269363328.000000, d: 1.330832e-315)
+FPR7 00000000100e31d0 (f: 269365696.000000, d: 1.330843e-315)
+FPR8 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR9 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR10 0000000000000001 (f: 1.000000, d: 4.940656e-324)
+FPR11 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR12 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR13 3fdb9b2820000000 (f: 536870912.000000, d: 4.313450e-01)
+FPR14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR16 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR17 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR18 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR19 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR20 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR21 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR22 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR23 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR24 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR25 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR26 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR27 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR28 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR29 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR30 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR31 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+Module=/home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_ppc64le_linux_Nightly/openjdkbinary/openjdk-test-image/openj9/shrtest
+Module_base_address=0000000010000000
+Target=2_90_20200328_362 (Linux 3.10.0-693.17.1.el7.ppc64le)
+CPU=ppc64le (8 logical CPUs) (0x3fdd50000 RAM)
+----------- Stack Backtrace -----------
+(0x00003FFF7B5AF184 [libj9prt29.so+0x6f184])
+(0x00003FFF7B5685C8 [libj9prt29.so+0x285c8])
+(0x00003FFF7B5AF248 [libj9prt29.so+0x6f248])
+(0x00003FFF7B5AF3B0 [libj9prt29.so+0x6f3b0])
+(0x00003FFF7B5AEE84 [libj9prt29.so+0x6ee84])
+(0x00003FFF7B5685C8 [libj9prt29.so+0x285c8])
+(0x00003FFF7B5AEF78 [libj9prt29.so+0x6ef78])
+(0x00003FFF74577F80 [libj9vm29.so+0xa7f80])
+(0x00003FFF7B5685C8 [libj9prt29.so+0x285c8])
+(0x00003FFF745782B4 [libj9vm29.so+0xa82b4])
+(0x00003FFF7B567420 [libj9prt29.so+0x27420])
+__kernel_sigtramp_rt64+0x0 (0x00003FFF7B630478)
+(0x0000000010052A84 [shrtest+0x52a84])
+(0x000000001009F24C [shrtest+0x9f24c])
+(0x00000000100D3AC8 [shrtest+0xd3ac8])
+(0x00003FFF745FC798 [libj9vm29.so+0x12c798])
+(0x00003FFF745FDCEC [libj9vm29.so+0x12dcec])
+(0x00003FFF74565AB0 [libj9vm29.so+0x95ab0])
+(0x00003FFF7456779C [libj9vm29.so+0x9779c])
+(0x00003FFF74569868 [libj9vm29.so+0x99868])
+(0x00003FFF744FCAC0 [libj9vm29.so+0x2cac0])
+(0x00003FFF745ABE2C [libj9vm29.so+0xdbe2c])
+(0x00003FFF7455A04C [libj9vm29.so+0x8a04c])
+(0x00003FFF745683D8 [libj9vm29.so+0x983d8])
+(0x00003FFF7456995C [libj9vm29.so+0x9995c])
+(0x00003FFF745B1AF8 [libj9vm29.so+0xe1af8])
+(0x00003FFF744F3208 [libj9vm29.so+0x23208])
+(0x00003FFF745ABE2C [libj9vm29.so+0xdbe2c])
+(0x00003FFF7455A4CC [libj9vm29.so+0x8a4cc])
+(0x00003FFF745C8C74 [libj9vm29.so+0xf8c74])
+(0x00003FFF7458824C [libj9vm29.so+0xb824c])
+(0x00003FFF7B5685C8 [libj9prt29.so+0x285c8])
+(0x00003FFF74588D38 [libj9vm29.so+0xb8d38])
+(0x00003FFF74589188 [libj9vm29.so+0xb9188])
+(0x00003FFF746C7444 [libjvm.so+0x17444])
+(0x0000000010087F7C [shrtest+0x87f7c])
+(0x00003FFF7B5685C8 [libj9prt29.so+0x285c8])
+(0x00000000100024F4 [shrtest+0x24f4])
+(0x00003FFF7B185280 [libc.so.6+0x25280])
+__libc_start_main+0xc4 (0x00003FFF7B185474 [libc.so.6+0x25474])
+---------------------------------------
+JVMDUMP039I Processing dump event "gpf", detail "" at 2020/03/29 01:37:15 - please wait.
+JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_ppc64le_linux_Nightly/openjdk-tests/TKG/test_output_15854523224169/shrtest_linux_0/core.20200329.013715.5506.0001.dmp' in response to an event
+JVMDUMP010I System dump written to /home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_ppc64le_linux_Nightly/openjdk-tests/TKG/test_output_15854523224169/shrtest_linux_0/core.20200329.013715.5506.0001.dmp
+JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_ppc64le_linux_Nightly/openjdk-tests/TKG/test_output_15854523224169/shrtest_linux_0/javacore.20200329.013715.5506.0002.txt' in response to an event
+JVMDUMP012E Error in Java dump: /home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_ppc64le_linux_Nightly/openjdk-tests/TKG/test_output_15854523224169/shrtest_linux_0/javacore.20200329.013715.5506.0002.txt
+JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_ppc64le_linux_Nightly/openjdk-tests/TKG/test_output_15854523224169/shrtest_linux_0/Snap.20200329.013715.5506.0003.trc' in response to an event
+JVMDUMP010I Snap dump written to /home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_ppc64le_linux_Nightly/openjdk-tests/TKG/test_output_15854523224169/shrtest_linux_0/Snap.20200329.013715.5506.0003.trc
+JVMDUMP013I Processed dump event "gpf", detail "".
+
+shrtest_linux_0_FAILED
+```
+
+To rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links: https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&BUILD_LIST=functional&PLATFORM=ppc64le_linux&TARGET=shrtest_linux_0

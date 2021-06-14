@@ -1,0 +1,56 @@
+From wikipedia:
+`cgroups (abbreviated from control groups) is a Linux kernel feature that limits, accounts for, and isolates the resource usage (CPU, memory, disk I/O, network, etc.) of a collection of processes.`
+
+Cgroup provides subsystems to handle management of various system resources. Subsystems expose parameters (which can be used to set or read limits/usage) as pseudo files within the cgroup filesystem.
+
+Docker containers use cgroups to impose constraints on resource usage by the containers. This [link](https://docs.docker.com/engine/admin/resource_constraints/) provides ways in which docker can control memory, CPU, or block IO a container can use.
+Essentially options provided by docker is only a sub-set of the limits imposed by cgroups.
+
+From JVM perspective, I have found three subsystems of interest and below is the list of parameters in each of those which may be of interest to JVM:
+
+1) `memory` subsystem of cgroup can be used to control following parameters:
+`memory.limit_in_bytes`		 # set/show limit of memory usage
+`memory.memsw.limit_in_bytes`	 # set/show limit of memory+Swap usage
+`memory.soft_limit_in_bytes`	 # set/show soft limit of memory usage
+`memory.kmem.tcp.limit_in_bytes`  # set/show hard limit for tcp buf memory
+
+Documentation about memory subsystem can be seen at https://www.kernel.org/doc/Documentation/cgroup-v1/memory.txt
+
+2) `cpuset` subsystem of cgroup can be used to control following parameters:
+`cpuset.cpus`: list of CPUs in that cpuset
+`cpuset.mems`: list of Memory Nodes in that cpuset
+
+Documentation about cpuset subsystem can be seen at https://www.kernel.org/doc/Documentation/cgroup-v1/cpusets.txt
+
+3) `cpu` subsystem of cgroup can be used to control following parameters:
+`cpu.cfs_quota_us`
+`cpu.shares`
+
+This subsystem is not well documented, but Redhat provides explanation of some of the parameters here: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/resource_management_guide/sec-cpu
+
+
+OpenJDK-Hotspot already provides support for Docker CPU and memory limits: https://blogs.oracle.com/java-platform-group/java-se-support-for-docker-cpu-and-memory-limits
+Currently they are taking into consideration "memory.limit_in_bytes" and "cpuset.cpus" for adjusting internal parameters.
+
+There is also this [JEP](http://openjdk.java.net/jeps/8182070) (in draft state) that talks about making JVM and Core libraries aware of limits imposed by containers.
+
+OpenJ9 also uses memory and CPUs to determine internal parameters, just like OpenJDK-Hotspot does:
+
+1. uses available physical memory returned by API omrsysinfo_get_physical_memory() (in eclipse/omr) to 
+   - calculate the maximum size of the object heap in absence of -Xmx option in MM_GCExtensionsBase::initialize() and MM_GCExtensions::initialize()
+
+2. uses available CPUs returned by API omrsysinfo_get_number_CPUs_by_type() (in eclipse/omr) to
+   - determine number of helper threads created by GC (MM_GCExtensionsBase::gcThreadCount)
+   - determine number of compilation threads (OMR::Options::_numUsableCompilationThreads)
+
+Ideally, when running in a cgroup (either through Docker container, or diectly on bare metal/VM), OpenJ9 should be using limits imposed on memory and CPU by the cgroup to determine above parameters.
+Currently, OpenJ9 uses port library APIs (as mentioned above) in eclipse OMR to get these resource limits. Therefore, it makes sense to update the port library to support cgroup system.
+This can be done in two ways:
+1) Adding new port library APIs that return limits imposed by the runtime process's cgroup, and then updating the runtime to use the new APIs.
+2) Updating existing API(s) to return cgroup limits. This should be protected by a flag which would be set by the runtime if it wishes to use cgroup limits. With this approach minimal changes would be required in the runtime for using the cgroup limits.
+
+For the work required in port library, I have opened issue in eclipse OMR https://github.com/eclipse/omr/issues/1281.
+I am opening this issue to discuss and track any changes required in OpenJ9 to enable and use cgroup limits via OMR port library.
+
+Cgroup provides many more resource controllers, 12 to be precise. I have only looked at 3 of them and how they can impact JVM.
+If you are aware of other resource limits that can be controlled by the cgroup and can potentially impact JVM, please feel free to comment here.

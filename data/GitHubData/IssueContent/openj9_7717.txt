@@ -1,0 +1,38 @@
+Test doesn't seem to run on jdk8
+Last passed jdk11 Aug 8 33b1de73de60067f496ddcb9a71f837b2abdc17b
+Last passed jdk13 Aug 28 98547b0f469695731da1ba45d7880295e9b195af
+
+Doesn't seem to be machine specific. 100% failure rate. Seeing as this passes externally I would guess it's a machine config difference. Will just need someone to help me figure out what to change.
+
+```
+===============================================
+Running test cmdLineTester_getPid_0 ...
+===============================================
+cmdLineTester_getPid_0 Start Time: Thu Nov  7 00:56:58 2019 Epoch Time (ms): 1573106218135
+variation: NoOptions
+JVM_OPTIONS: -Xcompressedrefs 
+*** Starting test suite: getPid test ***
+Testing: Compare RuntimeMXBean.getPid() with getting PID from system
+Test start time: 2019/11/07 00:56:59 Eastern Standard Time
+Running command: perl C:/Users/jenkins/workspace/Test_openjdk13_j9_sanity.functional_x86-64_windows_Nightly/openjdk-tests///..//jvmtest/functional/cmdLineTests/runtimemxbeanTests/getPidTest.pl "C:/Users/jenkins/workspace/Test_openjdk13_j9_sanity.functional_x86-64_windows_Nightly/openjdkbinary/j2sdk-image\\bin\\java" -Xcompressedrefs  -cp C:/Users/jenkins/workspace/Test_openjdk13_j9_sanity.functional_x86-64_windows_Nightly/openjdk-tests///..//jvmtest/functional/cmdLineTests/runtimemxbeanTests/runtimemxbeanTests.jar GetPid
+Time spent starting: 47 milliseconds
+Time spent executing: 6641 milliseconds
+Test result: FAILED
+Output from test:
+ [OUT] FAIL: RuntimeMXBean.getPID() returned 652 instead of 
+ [ERR] ERROR:
+ [ERR] 
+ [ERR] Description = Access denied
+ [ERR] 
+ [ERR] Argument "" isn't numeric in numeric eq (==) at C:/Users/jenkins/workspace/Test_openjdk13_j9_sanity.functional_x86-64_windows_Nightly/openjdk-tests///..//jvmtest/functional/cmdLineTests/runtimemxbeanTests/getPidTest.pl line 58, <GEN1> line 1.
+>> Success condition was not found: [Output match: PASS]
+>> Failure condition was found: [Output match: FAIL]
+
+
+---TEST RESULTS---
+Number of PASSED tests: 0 out of 1
+Number of FAILED tests: 1 out of 1
+
+---SUMMARY OF FAILED TESTS---
+Compare RuntimeMXBean.getPid() with getting PID from system
+```

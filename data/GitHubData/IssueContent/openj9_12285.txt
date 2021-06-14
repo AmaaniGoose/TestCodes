@@ -1,0 +1,2 @@
+There is an IllegalAccessError regression in internal testing, caused by https://github.com/eclipse/openj9/pull/11708
+Internal reference 145127.

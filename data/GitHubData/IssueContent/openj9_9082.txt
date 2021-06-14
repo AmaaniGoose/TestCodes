@@ -1,0 +1,30 @@
+Failure link
+------------
+
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.openjdk_aarch64_linux/104/testReport/junit/java_math_BigInteger_LargeValueExceptions/java/LargeValueExceptions/
+
+- test category, sanity.openjdk
+- OS/architecture, aarch_64
+
+```
+09:47:53  openjdk version "11.0.7" 2020-04-14
+09:47:53  OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.7+9-202003310000)
+09:47:53  Eclipse OpenJ9 VM AdoptOpenJDK (build master-c529318aa, JRE 11 Linux aarch64-64-Bit Compressed References 20200331_256 (JIT enabled, AOT enabled)
+09:47:53  OpenJ9   - c529318aa
+09:47:53  OMR      - 0ecff81ea
+09:47:53  JCL      - 34c3dd7d55 based on jdk-11.0.7+9)
+```
+
+Optional info
+-------------
+
+- intermittent failure: yes
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+10:52:43  ACTION: testng -- Error. Program `/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux/openjdkbinary/j2sdk-image/jdk-11.0.7+9/bin/../bin/java' timed out (timeout set to 960000ms, elapsed time including timeout handling was 962420ms).
+```
+
+This test is known to intermittently timeout on aarch64. We will add this test to the exclude list and revisit later.

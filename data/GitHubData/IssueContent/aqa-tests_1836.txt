@@ -1,0 +1,60 @@
+Both j9 and hs have the same failure on JDK11 - java.lang.IllegalArgumentException: this version does not support 32Bit: V4_0:Linux:B32
+
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_extended.external_ppc64le_linux_quarkus/23/consoleFull
+
+```
+15:20:31  [INFO] Running io.quarkus.mongodb.reactive.ReactiveMongoClientTest
+15:20:31  [ERROR] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.137 s <<< FAILURE! - in io.quarkus.mongodb.reactive.ReactiveMongoClientTest
+15:20:31  [ERROR] io.quarkus.mongodb.reactive.ReactiveMongoClientTest  Time elapsed: 0.137 s  <<< ERROR!
+15:20:31  java.lang.IllegalArgumentException: this version does not support 32Bit: V4_0:Linux:B32
+15:20:31  	at de.flapdoodle.embed.mongo.Paths.getBitSize(Paths.java:157)
+15:20:31  	at de.flapdoodle.embed.mongo.Paths.getPath(Paths.java:97)
+15:20:31  	at de.flapdoodle.embed.process.store.LocalArtifactStore.getArtifact(LocalArtifactStore.java:71)
+15:20:31  	at de.flapdoodle.embed.process.store.LocalArtifactStore.checkArtifact(LocalArtifactStore.java:38)
+15:20:31  	at de.flapdoodle.embed.process.store.ArtifactStore.checkDistribution(ArtifactStore.java:65)
+15:20:31  	at de.flapdoodle.embed.process.store.ExtractedArtifactStore.checkDistribution(ExtractedArtifactStore.java:60)
+15:20:31  	at de.flapdoodle.embed.process.runtime.Starter.prepare(Starter.java:52)
+15:20:31  	at de.flapdoodle.embed.process.runtime.Starter.prepare(Starter.java:45)
+15:20:31  	at io.quarkus.mongodb.reactive.MongoTestBase.startMongoDatabase(MongoTestBase.java:62)
+15:20:31  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:20:31  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+15:20:31  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:20:31  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+15:20:31  	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:686)
+15:20:31  	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+15:20:31  	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+15:20:31  	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:149)
+15:20:31  	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptLifecycleMethod(TimeoutExtension.java:126)
+15:20:31  	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptBeforeAllMethod(TimeoutExtension.java:68)
+15:20:31  	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor$$Lambda$283/00000000ECF8D620.apply(Unknown Source)
+15:20:31  	at org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(ExecutableInvoker.java:115)
+15:20:31  	at org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall$$Lambda$164/00000000ECEA0190.apply(Unknown Source)
+15:20:31  	at org.junit.jupiter.engine.execution.ExecutableInvoker.lambda$invoke$0(ExecutableInvoker.java:105)
+15:20:31  	at org.junit.jupiter.engine.execution.ExecutableInvoker$$Lambda$284/00000000ECF8DCF0.apply(Unknown Source)
+15:20:31  	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+15:20:31  	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+15:20:31  	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+15:20:31  	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+15:20:31  	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:104)
+15:20:31  	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:98)
+15:20:31  	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeBeforeAllMethods$8(ClassBasedTestDescriptor.java:375)
+15:20:31  	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor$$Lambda$282/00000000ECF8CA90.execute(Unknown Source)
+15:20:31  	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+15:20:31  	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeBeforeAllMethods(ClassBasedTestDescriptor.java:373)
+15:20:31  	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.before(ClassBasedTestDescriptor.java:193)
+15:20:31  	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.before(ClassBasedTestDescriptor.java:78)
+15:20:31  	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:132)
+15:20:31  	at org.junit.platform.engine.support.hierarchical.NodeTestTask$$Lambda$230/00000000ECF48D50.execute(Unknown Source)
+15:20:31  	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+15:20:31  	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:125)
+15:20:31  	at org.junit.platform.engine.support.hierarchical.NodeTestTask$$Lambda$229/00000000ECF488C0.invoke(Unknown Source)
+15:20:31  	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)
+15:20:31  	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)
+15:20:31  	at org.junit.platform.engine.support.hierarchical.NodeTestTask$$Lambda$228/00000000ECF48450.execute(Unknown Source)
+15:20:31  	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+15:20:31  	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)
+15:20:31  	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)
+```
+
+
+https://ci.adoptopenjdk.net/job/Test_openjdk11_hs_extended.external_ppc64le_linux_quarkus/23/consoleFull

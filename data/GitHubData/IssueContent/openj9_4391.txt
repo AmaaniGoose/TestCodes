@@ -1,0 +1,1 @@
+As per discussion in https://github.com/eclipse/openj9/pull/4310, Currently on Z, whenever we are loading a constant address, we use snippet in case we are generating relocatable code. We should add relocation support in instructions which can be used to load constant address (J9Class or J9Method) from immediate field so we can have better AOT compiled body. 

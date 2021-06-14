@@ -1,0 +1,5 @@
+With TKG auto-detecting SPEC, I think we can remove all SPEC in openjdk_tests. For example, https://github.com/AdoptOpenJDK/openjdk-tests/blob/master/buildenv/jenkins/openjdk_tests#L5
+
+This may affect special builds like Valhalla. 
+
+FYI @renfeiw 

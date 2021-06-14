@@ -1,0 +1,60 @@
+Failure link
+------------
+
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_special.system_s390x_linux_xl_Nightly_mauveLoadTest/110/tapResults/
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+===============================================
+Running test MauveMultiThreadLoadTest_special_7 ...
+===============================================
+LT  02:49:18.453 - Starting thread. Suite=0 thread=0
+LT  02:49:18.495 - Starting thread. Suite=0 thread=1
+LT  02:49:18.495 - Starting thread. Suite=0 thread=2
+LT  02:49:23.827 - First failure detected by thread: load-2. Not creating dumps as no dump generation is requested for this load test
+LT  stderr JVMDUMP039I Processing dump event "throw", detail "net/adoptopenjdk/loadTest/reporting/MauveTestFailureException" at 2020/08/26 02:49:23 - please wait.
+LT  stderr JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test_openjdk8_j9_special.system_s390x_linux_xl_Nightly_mauveLoadTest/openjdk-tests/TKG/test_output_15984085204728/MauveMultiThreadLoadTest_special_7/20200826-024851-MauveMultiThreadTestTrc/results/core.20200826.024923.14833.0001.dmp' in response to an event
+LT  02:49:25.324 - suite.getInventory().getInventoryFileRef(): openjdk.test.load/config/inventories/mauve/mauve_multiThread.xml
+LT  02:49:25.331 - suite.isCreateDump() : false
+LT  02:49:25.394 - Test failed
+LT    Failure num.  = 1
+LT    Test number   = 3593
+LT    Test details  = 'Mauve[gnu.testlet.javax.print.attribute.EnumSyntax.serialize]'
+LT    Suite number  = 0
+LT    Thread number = 2
+LT  >>> Captured test output >>>
+LT  PASS: gnu.testlet.javax.print.attribute.EnumSyntax.serialize: serialize error (number 0)
+LT  PASS: gnu.testlet.javax.print.attribute.EnumSyntax.serialize: serialize no error (number 0)
+LT  FAIL: gnu.testlet.javax.print.attribute.EnumSyntax.serialize: identity test (number 0)
+LT  FAIL: gnu.testlet.javax.print.attribute.EnumSyntax.serialize: equality test (number 0)
+LT  FAIL: gnu.testlet.javax.print.attribute.EnumSyntax.serialize: serialize no error (number 0)
+LT  <<<
+LT  
+LT  stderr JVMPORT030W /proc/sys/kernel/core_pattern setting "|/usr/share/apport/apport %p %s %c %d %P %E" specifies that the core dump is to be piped to an external program.  Attempting to rename either core or core.14877.
+LT  stderr 
+LT  stderr JVMDUMP010I System dump written to /home/jenkins/workspace/Test_openjdk8_j9_special.system_s390x_linux_xl_Nightly_mauveLoadTest/openjdk-tests/TKG/test_output_15984085204728/MauveMultiThreadLoadTest_special_7/20200826-024851-MauveMultiThreadTestTrc/results/core.20200826.024923.14833.0001.dmp
+LT  stderr JVMDUMP013I Processed dump event "throw", detail "net/adoptopenjdk/loadTest/reporting/MauveTestFailureException".
+STF 02:49:25.534 - Found dump at: /home/jenkins/workspace/Test_openjdk8_j9_special.system_s390x_linux_xl_Nightly_mauveLoadTest/openjdk-tests/TKG/test_output_15984085204728/MauveMultiThreadLoadTest_special_7/20200826-024851-MauveMultiThreadTestTrc/results/core.20200826.024923.14833.0001.dmp
+LT  stderr core file generated - /home/jenkins/workspace/Test_openjdk8_j9_special.system_s390x_linux_xl_Nightly_mauveLoadTest/openjdk-tests/TKG/test_output_15984085204728/MauveMultiThreadLoadTest_special_7/20200826-024851-MauveMultiThreadTestTrc/results/core.20200826.024923.14833.0001.dmp
+LT  02:49:38.791 - Completed 0.2%. Number of tests started=1380 (with 1 failure(s))
+LT  02:49:58.390 - Completed 2.7%. Number of tests started=19005 (+17625) (with 1 failure(s))
+LT  02:50:18.354 - Completed 17.5%. Number of tests started=123409 (+104404) (with 1 failure(s))
+LT  02:50:38.869 - Completed 41.0%. Number of tests started=288531 (+165122) (with 1 failure(s))
+LT  02:50:58.438 - Completed 79.2%. Number of tests started=558030 (+269499) (with 1 failure(s))
+LT  02:51:05.863 - Thread completed. Suite=0 thread=2
+LT  02:51:05.893 - Thread completed. Suite=0 thread=0
+LT  02:51:05.893 - Thread completed. Suite=0 thread=1
+LT  02:51:06.068 - Load test completed
+LT  02:51:06.068 -   Ran     : 704500
+LT  02:51:06.068 -   Passed  : 704499
+LT  02:51:06.068 -   Failed  : 1
+LT  02:51:06.068 -   Result  : FAILED
+```
+For example, to rebuild the failed tests in <Jenkins URL>=https://ci.eclipse.org/openj9/job/Grinder, use the following links:
+23:20:40  https://ci.eclipse.org/openj9/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&PLATFORM=s390x_linux_xl&TARGET=MauveMultiThreadLoadTest_special_7

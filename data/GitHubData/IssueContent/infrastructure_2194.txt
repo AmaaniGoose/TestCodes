@@ -1,0 +1,4 @@
+ref: https://github.com/adoptium/infrastructure/pull/2190#pullrequestreview-664298418 
+
+Currently, in QPC, the machine is booted and then `sleep 180` is run, assuming the machines are booted correctly after 3 minutes. This is not a particularly elegant solution. 
+Now that the VM boot output is being logged, a check of that log file every 10-15 seconds could be made that will carry on with the script once the `login:` message has come up, indicating that it has booted. A timeout should probably be put in as well, to stop the Jenkins Jobs hanging if the VM boot fails. 

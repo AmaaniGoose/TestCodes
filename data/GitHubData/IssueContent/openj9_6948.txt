@@ -1,0 +1,4 @@
+#6828 leftover changes that need to be addressed
+
+If `JITServerHelpers::romMethodOfRamMethod` does the right thing, then we don't need to override `archetypeArgPlaceholderSlot` inside `TR_ResolvedJ9JITaaSServerMethod`. Instead we could just fix `TR_ResolvedJ9Method` to use `JITServerHelpers::romMethodOfRamMethod`.
+In that case it is not ideal to have `TR_ResolvedJ9Method` calling something that looks specific for JITServer. Instead we could have an implementation of `romMethodOfRamMethod` that belongs to the J9VMMethodEnv.cpp file.

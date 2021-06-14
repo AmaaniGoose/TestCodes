@@ -1,0 +1,27 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_special.system_x86-64_windows_Nightly/893
+MathLoadTest_autosimd_special_27
+variation: Mode612-OSRG
+JVM_OPTIONS: -Xcompressedrefs -Xcompressedrefs -Xgcpolicy:gencon -Xjit:enableOSR,enableOSROnGuardFailure,count=1,disableAsyncCompilation 
+```
+MLT 03:22:25.902 - First failure detected by thread: load-5. Not creating dumps as no dump generation is requested for this load test
+MLT 03:22:26.058 - Test failed
+MLT   Failure num.  = 1
+MLT   Test number   = 12
+MLT   Test details  = 'ArbitraryJava[net.adoptopenjdk.test.autosimd.AutoSIMDTestDouble testAdd]'
+MLT   Suite number  = 0
+MLT   Thread number = 5
+MLT >>> Captured test output >>>
+MLT Test failed:
+MLT java.lang.NullPointerException
+MLT 	at net.adoptopenjdk.test.autosimd.AutoSIMDTestDouble.testSimpleBinary(AutoSIMDTestDouble.java:405)
+MLT 	at net.adoptopenjdk.test.autosimd.AutoSIMDTestDouble.testAdd(AutoSIMDTestDouble.java:257)
+MLT 	at sun.reflect.GeneratedMethodAccessor29.invoke(Unknown Source)
+MLT 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+MLT 	at java.lang.reflect.Method.invoke(Method.java:498)
+MLT 	at net.adoptopenjdk.loadTest.adaptors.ArbitraryJavaAdaptor.executeTest(ArbitraryJavaAdaptor.java:102)
+MLT 	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+MLT 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+MLT 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+MLT 	at java.lang.Thread.run(Thread.java:821)
+MLT <<<
+```

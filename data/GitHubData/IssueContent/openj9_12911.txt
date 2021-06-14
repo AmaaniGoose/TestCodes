@@ -1,0 +1,4 @@
+Many of the evaluators here are OpenJ9 specific:
+https://github.com/eclipse-openj9/openj9/blob/6e8c9c19c2b510e6bcc4ef0fbfdcffc4255b6e2a/runtime/compiler/z/codegen/J9CodeGenerator.cpp#L3716-L3745
+
+However they are sometimes defined in OMR. They shouldn't be declared in J9CodeGenerator.cpp or defined in OMR. The declarations + definitions should be moved to J9TreeEvaluator (or OMRTreeEvaluator if needed). This issue is to track that work.

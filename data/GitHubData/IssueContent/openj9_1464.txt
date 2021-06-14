@@ -1,0 +1,44 @@
+Summary: Direct-X-Buffer.java.template has an extension that calls Direct-Byte-Buffer-only variants of native memory allocation methods in Unsafe.java. This allows us to track native memory allocations used for DBBs, and to print that information in javacores and the oputput from the !nativememinfo DTFJ command. This allows debugging developers and service teams to identify the source of native memory leaks far quicker.
+
+We want to remove this extension, to bring us closer to having no extensions.
+
+- Method 1: Add code into javadump.cpp, plus the native code for nativememinfo, which extracts the values of "reservedMemory" and "count" from java/nio/Bits.java. This should be achieved without running Java code so that the javacore can still produce the information when we're in no fit state to run Java code.
+
+
+    * Pros: Quick, straightforward, and we get to use standard OpenJDK code.
+
+    * Cons: Complicated, arguably hacky.
+
+Notes: vmconstantpool.xml contains constants that could be used to populate these values, however I've yet to figure out how. Since the variables in Bits.java are both static AtomicLong objects, we need to find a way to access the value of the "volatile long value" field inside them.
+
+This gives us a link to those static objects, I think, but trial-and-error has yet to produce a way to get the values of the "value" variable inside those objects.
+
+Here's what I have so far: https://github.com/eclipse/openj9/pull/1508
+
+
+- Method 2: Keep the current javacore and !nativememoryinfo code, and instead make the allocate_native_memory methods able to determine when it's a DBB that's being allocated by analysing the stack trace.
+
+    * Pros: Clear and easy to impliment. Also, standard OpenJDK code.
+
+    * Cons: Very slow.
+
+
+- Method 3: Keep the current javacore and !nativememoryinfo code, and instead make the Unsafe.java allocate_native_memory methods update a plain, static variable with the current value of Bits.java's static reservedMemory.value variable, this allowing us to use Method 1 and simply extract the value of the static variable, rather than trying to access a variable inside a static object.
+
+    * Pros: Simpler than method 1, faster than method 3.
+
+    * Cons: Still slower than method 1 because we're running extra java code every time we allocate native memory via this method.
+
+
+- Method 4: Get OpenJDK to add this feature.
+
+    * Pros: Allows us to use OpenJDK code to trigger OpenJ9 code, so no changes will be required on the OpenJ9 side.
+
+    * Cons: Hotspot doesn't have javacores, so this has less value to them. Plus OpenJDK contributions take a long time. Will still attempt to push this.
+
+
+- Method 5: Get the debugging developers and service teams to exclusively use the Bits.java variable value, as determined from core file analysis, to determine DBB native memory usage. This means the value would not appear in javacores anymore.
+
+    * Pros: Easy, simple.
+
+    * Cons: I've yet to meet someone who wants this method.

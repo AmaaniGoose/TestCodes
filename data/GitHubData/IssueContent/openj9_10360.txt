@@ -1,0 +1,95 @@
+Failure link
+------------
+
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.functional_x86-64_linux_Nightly/450/tapResults/
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+[java] !j9sharedcacheheader 0x00007F5C8D4000F0    (layer 0)
+     [java] cache size       : 314544128
+     [java] free bytes       : 64319072
+     [java] softmx bytes     : 67108864
+     [java] read write area  : 0x00007F5C8D400260 - 0x00007F5C8D400260 size 28432 used 0
+     [java] segment area     : 0x00007F5C8D407000 - 0x00007F5C8D58D908 size 1599752
+     [java] metadata area    : 0x00007F5C9E70A600 - 0x00007F5C9E801000 size 1010176
+     [java] class debug area : 0x00007F5C9E801000 - 0x00007F5CA0000000 size 25161728 used 151192 (% used 0)
+     [java] Meta data region to be used: 0x00007F5C9E70A600..0x00007F5C9E800FFC
+     [java] No entry found in the cache
+     [java] 
+     [java] Cache contains 555 classes, 9 orphans, 3 classpaths, 0 URLs, 0 tokens
+     [java] 2 AOT, 52 SCOPES, 28 BYTE data, 0 UNINDEXED DATA, 0 CHARARRAY, 0 stale
+     [java] stale bytes 0
+     [java] 0 JITPROFILE, 516 JITHINT
+     [java] AOT data length 12360 code length 13824 metadata 56 total 26184
+     [java] JITPROFILE data length 0 metadata 0 
+     [java] JITHINT data length 2064 metadata 16512 
+     [java] ROMClass data 1599752 metadata 24600
+     [java] SCOPE data 7215 metadata 624 total 7839
+     [java] BYTE data 926524 metadata 1008 rwarea 0
+     [java] UNINDEXEDBYTE data 0 metadata 0
+     [java] CHARARRAY data 0 metadata 0
+     [java] BYTEDATA Summary
+     [java] 	UNKNOWN 0  HELPER 0  POOL 0  AOTHEADER 256
+     [java] 	JCL 0  VM 0  ROMSTRING 0  ZIPCACHE 925448  STARTUPHINTS 96
+     [java] 	JITHINT 0  AOTCLASSCHAIN 544 AOTTHUNK 180
+     [java] DEBUG Area Summary
+     [java] 	LineNumberTable bytes    : 150474
+     [java] 	LocalVariableTable bytes : 718
+     [java] 
+     [java] junit.framework.AssertionFailedError
+     [java] 	at junit.framework.Assert.fail(Assert.java:48)
+     [java] 	at junit.framework.Assert.assertTrue(Assert.java:20)
+     [java] 	at junit.framework.Assert.assertTrue(Assert.java:27)
+     [java] 	at j9vm.test.ddrext.junit.TestSharedClassesExt.testShrcJITPStatsExt(TestSharedClassesExt.java:375)
+     [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+     [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+     [java] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+     [java] 	at java.lang.reflect.Method.invoke(Method.java:498)
+     [java] 	at junit.framework.TestCase.runTest(TestCase.java:168)
+     [java] 	at junit.framework.TestCase.runBare(TestCase.java:134)
+     [java] 	at junit.framework.TestResult$1.protect(TestResult.java:110)
+     [java] 	at junit.framework.TestResult.runProtected(TestResult.java:128)
+     [java] 	at junit.framework.TestResult.run(TestResult.java:113)
+     [java] 	at junit.framework.TestCase.run(TestCase.java:124)
+     [java] 	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+     [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:74)
+     [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:69)
+     [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:55)
+     [java] 	at j9vm.test.ddrext.AutoRun.runTest(AutoRun.java:275)
+     [java] 	at j9vm.test.ddrext.AutoRun.main(AutoRun.java:110)
+     [java] junit.framework.AssertionFailedError: Failed to extract j9rommethod name for JITPROFILE. Can not proceed with test
+     [java] 	at junit.framework.Assert.fail(Assert.java:50)
+     [java] 	at j9vm.test.ddrext.junit.TestSharedClassesExt.testShrcFindJITPext(TestSharedClassesExt.java:392)
+     [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+     [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+     [java] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+     [java] 	at java.lang.reflect.Method.invoke(Method.java:498)
+     [java] 	at junit.framework.TestCase.runTest(TestCase.java:168)
+     [java] 	at junit.framework.TestCase.runBare(TestCase.java:134)
+     [java] 	at junit.framework.TestResult$1.protect(TestResult.java:110)
+     [java] 	at junit.framework.TestResult.runProtected(TestResult.java:128)
+     [java] 	at junit.framework.TestResult.run(TestResult.java:113)
+     [java] 	at junit.framework.TestCase.run(TestCase.java:124)
+     [java] 	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+     [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:74)
+     [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:69)
+     [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:55)
+     [java] 	at j9vm.test.ddrext.AutoRun.runTest(AutoRun.java:275)
+     [java] 	at j9vm.test.ddrext.AutoRun.main(AutoRun.java:110)
+
+BUILD FAILED
+/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_linux_Nightly_testList_0/jvmtest/functional/DDR_Test/tck_ddrext.xml:103: Java returned: 254
+
+Total time: 22 seconds
+
+testDDRExt_SharedClasses_0_FAILED
+```
+
+For example, to rebuild the failed tests in <Jenkins URL>=https://ci.eclipse.org/openj9/job/Grinder, use the following links:
+00:54:33  https://ci.eclipse.org/openj9/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=functional&PLATFORM=x86-64_linux&TARGET=testDDRExt_SharedClasses_0

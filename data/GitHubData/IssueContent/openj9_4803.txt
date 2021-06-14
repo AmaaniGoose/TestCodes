@@ -1,0 +1,22 @@
+This is the general plan as discussed with @mstoodle and @jdmpapin :
+
+1. Move the platform specific (but mostly common) code out from the various `J9AheadOfTimeCompile.cpp` files and into the common `J9AheadOfTimeCompile.cpp`.
+2. Use `TR_RelocationRecord` (or more specifically, the appropriate sub types) to write the relocation data into the buffer that gets written out to the SCC.
+3. Remove the (again per platform but common) tables of sizes of Relocation Record Binary Templates. Given that the virtual function `bytesInHeaderAndPayload` returns exactly the data in the tables, perhaps there's a way of having only canonical method of getting this information.
+4. Move the various Relocation Record Binary Template definitions back into RelocationRecord.cpp.
+
+The plan is to do this one relocation record at a time in order to both simplify the code review process as well as testing.
+
+- [x] https://github.com/eclipse/openj9/pull/3324
+- [x] https://github.com/eclipse/openj9/pull/3679
+- [x] https://github.com/eclipse/openj9/pull/4182
+- [x] https://github.com/eclipse/openj9/pull/5745
+- [x] https://github.com/eclipse/openj9/pull/6007
+- [x] https://github.com/eclipse/openj9/pull/7601
+- [x] https://github.com/eclipse/openj9/pull/9467
+- [x] https://github.com/eclipse/openj9/pull/10298
+- [x] https://github.com/eclipse/openj9/pull/10451
+- [x] https://github.com/eclipse/openj9/pull/10545
+- [x] https://github.com/eclipse/openj9/pull/10916
+- [x] https://github.com/eclipse/openj9/pull/11235
+- [ ] https://github.com/eclipse/openj9/issues/11201

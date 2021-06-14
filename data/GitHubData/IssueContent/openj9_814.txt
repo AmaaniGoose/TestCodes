@@ -1,0 +1,2 @@
+The interpreter implementation of String (de)compressedArrayCopy methods are very slow.
+This leads to regression in -Xint starup Day Trader runs. We need to implement native(s) similar to System.arraycopy for all variants of String (de)compressedArrayCopy.

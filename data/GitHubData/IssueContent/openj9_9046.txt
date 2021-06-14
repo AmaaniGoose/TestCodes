@@ -1,0 +1,50 @@
+Failure link
+------------
+- test category, sanity.system
+- OS/architecture, aarch_64
+```
+openjdk version "11.0.7" 2020-04-14
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.7+9)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.20.0-m2, JRE 11 Linux aarch64-64-Bit 20200330_133 (JIT enabled, AOT enabled)
+OpenJ9   - c93e4dabc
+OMR      - 1b6abd044
+JCL      - 644e9abfc0 based on jdk-11.0.7+9)
+```
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.system_aarch64_linux_xl/73
+
+
+Optional info
+-------------
+
+- intermittent failure (yes):   
+- Part of the jdk11-m2 triage https://github.com/AdoptOpenJDK/openjdk-tests/issues/1705
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+STF 16:44:08.898 - +------ Step 5 - Wait for the processes to complete
+STF 16:44:08.899 - | Wait for processes to meet expectations
+STF 16:44:08.899 - |   Processes: [LT1, CL1]
+STF 16:44:08.899 - |
+STF 16:44:08.899 - Monitoring processes: CL1 LT1
+CL1 j> 2020/03/30 16:44:09.614 ServerURL=service:jmx:rmi:///jndi/rmi://localhost:1234/jmxrmi
+CL1 j> 2020/03/30 16:44:15.507 Monitored VM not ready at Mar 30, 2020, 4:44:15 PM (attempt 0).
+CL1 j> 2020/03/30 16:44:15.509 Wait 5 secs and trying again...
+CL1 j> 2020/03/30 16:44:18.157 Connection established!
+CL1 j> 2020/03/30 16:44:18.811 Starting to write data
+CL1 ...j> 2020/03/30 16:44:51.548 Exiting as JVM we are connected to has finished
+CL1 stderr Exception in thread "main" java.lang.AssertionError
+CL1 stderr 	at org.junit.Assert.fail(Assert.java:86)
+CL1 stderr 	at org.junit.Assert.fail(Assert.java:95)
+CL1 stderr 	at net.adoptopenjdk.test.jlm.remote.MemoryProfiler.getStatsViaProxy(MemoryProfiler.java:208)
+CL1 stderr 	at net.adoptopenjdk.test.jlm.remote.MemoryProfiler.main(MemoryProfiler.java:110)
+STF 16:44:51.784 - **FAILED** Process CL1 ended with exit code (1) and not the expected exit code/s (0)
+STF 16:44:51.784 - Monitoring Report Summary:
+STF 16:44:51.785 -   o Process CL1 ended with exit code (1) and not the expected exit code/s (0)
+STF 16:44:51.785 -   o Process LT1 is still running as expected
+STF 16:44:51.792 - Killing processes: CL1 LT1
+STF 16:45:02.796 -   o Process LT1 killed
+STF 16:45:02.796 -   o Process CL1 is not running
+**FAILED** at step 5 (Wait for the processes to complete). Expected return value=0 Actual=1 at /home/jenkins/workspace/Test_openjdk11_j9_sanity.system_aarch64_linux_xl/openjdk-tests/TKG/../TKG/test_output_15855859707042/TestJlmRemoteMemoryAuth_0/20200330-164402-TestJlmRemoteMemoryAuth/execute.pl line 175.
+STF 16:45:02.894 - **FAILED** execute script failed. Expected return value=0 Actual=1
+```

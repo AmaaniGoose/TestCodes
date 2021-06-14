@@ -1,0 +1,59 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk16_j9_extended.functional_ppc64_aix_Nightly_testList_0/86
+testDDRExtJunit_MonitorsAndDeadlock6_1
+```
+     [exec] JVMDUMP039I Processing dump event "throw", detail "j9vm/test/corehelper/HelperExceptionForCoreGeneration" at 2021/05/09 23:22:49 - please wait.
+     [exec] JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix_Nightly_testList_0/openjdk-tests/TKG/../TKG/output_16206157323654/testDDRExtJunit_MonitorsAndDeadlock6_1/DDREXT.J9CORE.DMP' in response to an event
+     [exec] HelperExceptionForCoreGeneration is thrown and caught successfuly.
+     [exec] Forcefully terminating process.
+     [exec] addTestJitHint adding hint to openj9/internal/tools/attach/target/AttachHandler$1.<clinit>
+     [exec] JVMDUMP010I System dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix_Nightly_testList_0/openjdk-tests/TKG/../TKG/output_16206157323654/testDDRExtJunit_MonitorsAndDeadlock6_1/DDREXT.J9CORE.DMP
+     [exec] JVMDUMP013I Processed dump event "throw", detail "j9vm/test/corehelper/HelperExceptionForCoreGeneration".
+     [exec] addTestJitHint adding hint to java/util/Vector$Itr.<init>
+     [exec] addTestJitHint adding hint to java/lang/Thread$State.values
+
+TCK.destroy.cache:
+     [echo] Destroying cache
+     [echo] Running j9vm.test.corehelper.StackMapCoreGenerator to destroy the cache
+     [echo] Using JVM : /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix_Nightly_testList_0/openjdkbinary/j2sdk-image/bin/java
+     [echo] classname = "j9vm.test.corehelper.StackMapCoreGenerator"
+     [echo] Java VM Args:
+     [echo]   jvmarg = -Xshareclasses:name=ddrextjunitSCC,destroy
+     [java] JVMSHRC806I Compressed references persistent shared cache "ddrextjunitSCC" has been destroyed. Use option -Xnocompressedrefs if you want to destroy a non-compressed references cache.
+     [java] Java Result: 1
+
+TCK.run.tests.ddrext:
+     [echo] Running the DDR Extension Test
+     [java] [SetupConfig] [INFO] Created new DDR Interactive instance using core file : /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix_Nightly_testList_0/openjdk-tests/TKG/../TKG/output_16206157323654/testDDRExtJunit_MonitorsAndDeadlock6_1/DDREXT.J9CORE.DMP
+     [java] [AutoRun] [INFO] Running 1 tests for /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix_Nightly_testList_0/openjdk-tests/TKG/../TKG/output_16206157323654/testDDRExtJunit_MonitorsAndDeadlock6_1/DDREXT.J9CORE.DMP
+     [java] [AutoRun] [INFO] Starting testDeadlock6(j9vm.test.ddrext.junit.deadlock.TestDeadlockCase6)
+     [java] [DDRExtTesterBase] [INFO] Validation started for : '!monitors  deadlock'
+     [java] [AutoRun] [INFO] Finished testDeadlock6(j9vm.test.ddrext.junit.deadlock.TestDeadlockCase6)
+     [java] 
+     [java] [AutoRun] [INFO] ================Test Result for /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix_Nightly_testList_0/openjdk-tests/TKG/../TKG/output_16206157323654/testDDRExtJunit_MonitorsAndDeadlock6_1/DDREXT.J9CORE.DMP==================
+     [java] [AutoRun] [INFO] Errors:   0 out of 1 test cases.
+     [java] [AutoRun] [INFO] Failures: 1 out of 1 test cases.
+     [java] [AutoRun] [INFO] Total Error/Failures: 1
+     [java] [DDRExtTesterBase] [ERROR] '!monitors  deadlock' output is null or empty
+     [java] junit.framework.AssertionFailedError
+     [java] 	at junit.framework.Assert.fail(Assert.java:48)
+     [java] 	at junit.framework.Assert.assertTrue(Assert.java:20)
+     [java] 	at junit.framework.Assert.assertTrue(Assert.java:27)
+     [java] 	at j9vm.test.ddrext.junit.deadlock.TestDeadlockCase6.testDeadlock6(TestDeadlockCase6.java:47)
+     [java] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+     [java] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+     [java] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+     [java] 	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+     [java] 	at junit.framework.TestCase.runTest(TestCase.java:168)
+     [java] 	at junit.framework.TestCase.runBare(TestCase.java:134)
+     [java] 	at junit.framework.TestResult$1.protect(TestResult.java:110)
+     [java] 	at junit.framework.TestResult.runProtected(TestResult.java:128)
+     [java] 	at junit.framework.TestResult.run(TestResult.java:113)
+     [java] 	at junit.framework.TestCase.run(TestCase.java:124)
+     [java] 	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+     [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:74)
+     [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:69)
+     [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:55)
+     [java] 	at j9vm.test.ddrext.AutoRun.runTest(AutoRun.java:275)
+     [java] 	at j9vm.test.ddrext.AutoRun.main(AutoRun.java:110)
+     [java] [AutoRun] [ERROR] testDeadlock6(j9vm.test.ddrext.junit.deadlock.TestDeadlockCase6)
+```

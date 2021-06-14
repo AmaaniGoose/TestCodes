@@ -1,0 +1,8 @@
+Current external tests are supposed to run with dockers, which lets people focus on setting up test running rather than correctly configuring machines.
+
+There is an increasing requirement to run the tests on local or native environment without docker installed. 
+For example:
+
+- running tests on mac or windows.
+- running directly against pre-build jdk (no docker image available) , could use EXTRA_DOCKER_ARGS to set jdk as default java. Need to double check if it still work.
+

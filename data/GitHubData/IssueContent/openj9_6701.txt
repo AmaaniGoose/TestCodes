@@ -1,0 +1,30 @@
+Failure link
+------------
+- Test: https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/lang/annotation/loaderLeak/Main.java
+- Build: https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/1870
+- Test Category: openjdk
+- Test Suite Name: jdk_lang
+- OS/Architecture: x86-64-windows, x86-64-linux, x86-64-osx, ...
+- OpenJDK Version: 11.0.4+11
+- Public Build SHAs:
+- OpenJ9 - `4baf3d7e4`
+- OMR - `6e99760b`
+- JCL - `965d0c0df3`
+
+Optional info
+-------------
+- Intermittent failure: No
+- Regression or new test: Regression 
+- Part of the excluded jdk11 openj9 JTReg Tests: https://github.com/AdoptOpenJDK/openjdk-tests/issues/585
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+Note: Main.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Main.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+Exception in thread "main" java.lang.AssertionError
+        at Main.doTest(Main.java:56)
+        at Main.main(Main.java:41)
+```

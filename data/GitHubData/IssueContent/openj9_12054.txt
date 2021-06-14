@@ -1,0 +1,27 @@
+In the "Balanced" gc policy, the current total heap sizing logic, primarily aims to keep the free memory % in the heap between `heapFreeMinimumRatioMultiplier` (30% default), and  ` heapFreeMinimumRatioMultiplier ` (60% default. Once the free memory criteria is satisfied (ie, 30% < current free mem % < 60%), the heap sizing logic will then consider overall GC overhead (% of time spent in gc relative to application) to determine whether the heap should expand or contract. This logic can be problematic – At global sweep points, the free memory in the heap can drastically increase, causing heap contraction (in order to keep free memory % between 30-60%). If the GC ratio for an application happens to be too high, then the heap will expand almost immediately after contracting to meet free memory targets. This can cause unnecessary oscillations in heap size. The image below shows a specjbb2015 PRESET run, with a 5000IR, and a 5G max heap. (See top left for legend). Note that time spent in GC for this run was ~14%, and the mean PGC pause time in steady state was 280ms.
+![image](https://user-images.githubusercontent.com/28404014/109354512-e8e2f380-784b-11eb-943d-fb06936133f5.png)
+
+
+In a steady workload like specjbb2015, there should be no such oscillation in heap size. Again, the current implementation for heap sizing, allows for free memory to suggest expansion/contraction, while GC overhead, suggests the opposite, which creates these oscillations.
+
+A better approach to heap sizing, would be to use a hybrid blend of free memory and GC overhead, rather than first satisfying free memory, and only then, considering gc cpu overhead. By using a more comprehensive blend of the 2 values, and not looking at each metric independently, heap oscillations can be mitigated in steady workloads. Additionally, gc overhead will likely be given a change to decrease (improve) if the gc is under a lot of stress, while free memory might not be.
+
+
+
+The second major issue with heap sizing logic, is that the size of eden is fixed to 25% of the heap by default. If -Xmn(s|x) are specified from the command line, eden size is very tightly related to -Xmx/s. See https://github.com/eclipse/openj9/issues/11866 for an example of where this might be problematic.
+
+Keeping eden size dependant on total heap size has a few major weaknesses:
+
+1.	Some workloads can benefit from increasing/decreasing the size of eden away from 25%, depending on the allocation characteristics. If a workload creates lots of short lived objects, and the heap has enough free space for eden to grow, increasing eden gives these objects more chance to die, and decreases (improves) the pgc cpu overhead (% of time pgc is active vs inactive). On the other size, if an application is using a large heap (16GB<), then the pgc pause times may be higher than desired, due to a large eden. Shrinking eden in this case, might result in a more satisfactory average pgc pause time, while still providing good pgc cpu overhead. Shrinking eden below 25% might also be wise, if 80% of the heap contains live objects. In this case, eden might be ideally suited at 10% of the total heap, so that there is enough room for objects surviving an eden collection.
+
+2. As briefly touched on above, fixing the heap to 25% may cause PGC time to increase. In certain applications, the cost of PGC, is proportional to the size of eden. The image below shows how different eden sizes, affected the mean pause times in specjbb2015. Note however, that the “total time (ms)” **improved** as eden increased. 
+![image](https://user-images.githubusercontent.com/28404014/109354584-0dd76680-784c-11eb-9e48-d76a79ff046d.png)
+
+
+That being said, there certainly exists a balanced between pgc cpu overhead/total time spent in gc, and the mean pause time for pgc collection.
+
+3. Since eden is currently dependant on total heap size, it is unable to resize itself based on a different set of measurements. Making eden size **independent** of the heap size, would allow eden to be sized according to pgc cpu overhead, and pgc pause times, rather than being dependant on free memory and total gc overhead (as indirectly provided by heap sizing logic).
+
+As shown in the image above, there is a balance between pgc pause times and pgc cpu overhead. In some applications, pgc average time is related to eden size (such as specjbb2015), while in others (such as the Heapothesys benchmark), eden size does not affect pgc pause time. It would be greatly beneficial for eden to be resized in order to get a good blend of pgc pause times, and pgc cpu overhead. Keeping in mind that for different applications, the pause time requirements, and gc cpu requirements might be drastically different, giving users the option to fine tune the max pause time, and gc overhead, would be incredibly beneficial for those who are using the balanced gc policy. As an example, some users might want pgc average times to stay small, say 50ms, as their main goal, while other users might be willing to increase the pause time goal, in order to minimize pgc cpu overhead
+
+

@@ -1,0 +1,25 @@
+When generating a `TR_RelativeMethodAddress` relo reocrd, the eipRelative flag is set.
+https://github.com/eclipse-openj9/openj9/blob/e1d5e6bfb405ded8ddd863116b26ff69c374465b/runtime/compiler/codegen/J9AheadOfTimeCompile.cpp#L231
+
+When relocating, the `TR_RelocationRecordMethodAddress` API class is used:
+https://github.com/eclipse-openj9/openj9/blob/e1d5e6bfb405ded8ddd863116b26ff69c374465b/runtime/compiler/runtime/RelocationRecord.cpp#L655-L658
+
+Because the eipRelative flag is set, `loadCallTarget` is called:
+https://github.com/eclipse-openj9/openj9/blob/e1d5e6bfb405ded8ddd863116b26ff69c374465b/runtime/compiler/runtime/RelocationRecord.cpp#L1873-L1879
+https://github.com/eclipse-openj9/openj9/blob/e1d5e6bfb405ded8ddd863116b26ff69c374465b/runtime/compiler/runtime/RelocationTarget.cpp#L70-L74
+
+which in turn calls `loadPointer`:
+https://github.com/eclipse-openj9/openj9/blob/e1d5e6bfb405ded8ddd863116b26ff69c374465b/runtime/compiler/runtime/RelocationTarget.hpp#L80
+
+So, in 64 bit, it loads a 64bit value out of the instruction in the code. It relocates it via the call to `currentMethodAddress`:
+https://github.com/eclipse-openj9/openj9/blob/e1d5e6bfb405ded8ddd863116b26ff69c374465b/runtime/compiler/runtime/RelocationRecord.cpp#L1866-L1870
+
+and then updates the code via:
+https://github.com/eclipse-openj9/openj9/blob/e1d5e6bfb405ded8ddd863116b26ff69c374465b/runtime/compiler/runtime/RelocationRecord.cpp#L1887-L1888
+which calls `storeCallTarget`:
+https://github.com/eclipse-openj9/openj9/blob/e1d5e6bfb405ded8ddd863116b26ff69c374465b/runtime/compiler/x/runtime/X86RelocationTarget.cpp#L54-L58
+However, `storeCallTarget` stores a 32-bit unsigned value.
+
+The fact that a 32-bit value is stored is not necessarily the problem, but it's the fact that a 64 bit value was loaded, had arithmetic performed on it, and then a 32-bit value is stored back. As such, I don't think this relocation is correct.
+
+The only place this relocation is generated is in https://github.com/eclipse/omr/blob/83e28dc0dcdcf8d9a751cc2b8567fcc8acc30e84/compiler/x/codegen/X86BinaryEncoding.cpp#L1111

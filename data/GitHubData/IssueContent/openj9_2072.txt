@@ -1,0 +1,17 @@
+Along with my investigation into Issue #2070 I also noticed some opportunities for stack allocation that I believe are being missed.
+
+The tight loop in the [benchmark](https://www.excelsiorjet.com/memory-manager-scalability) is using boxed double objects to perform some math operations.
+```
+public void run() {
+      Double result = 1d;
+      Double bound = Main.until;
+      for (Double f = 0d; f < bound; f++) {
+        result += f / (result + 1);
+      }
+      if (log) System.out.println(result);
+    }
+```
+
+In this loop only the final value for result actually escapes.  I can verify that even at a scorching compile that loop still allocates some of the intermediate Double objects per iteration.  I would have hoped that when running this test with `-verbose:gc` that at some point GCs would basically stop since no more objects were being created.
+
+@vijaysun-omr this is the test I was discussing with you the other day.

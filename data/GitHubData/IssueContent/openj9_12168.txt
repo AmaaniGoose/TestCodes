@@ -1,0 +1,34 @@
+javax/rmi/ssl/SSLSocketParametersTest.sh.SSLSocketParametersTest
+https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_extended.openjdk_ppc64_aix/17/consoleFull
+```
+13:27:44  openjdk version "1.8.0_292"
+13:27:44  OpenJDK Runtime Environment (build 1.8.0_292-202103091149-b05)
+13:27:44  Eclipse OpenJ9 VM (build openj9-0.26.0-m1, JRE 1.8.0 AIX ppc64-64-Bit Compressed References 20210309_991 (JIT enabled, AOT enabled)
+13:27:44  OpenJ9   - b227feba2
+13:27:44  OMR      - 4665e2f72
+13:27:44  JCL      - 1780cbc92b based on jdk8u292-b05)
+```
+```
+14:00:34  -------------------------------------------------------------
+14:00:34  Launching test for SSLSocketParametersTest
+14:00:34  -------------------------------------------------------------
+14:00:34  KeyStore = /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/rmi/ssl/keystore
+14:00:34  TrustStore = /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/rmi/ssl/truststore
+14:00:34  Running SSLSocketParametersTest [1]
+14:00:34  ServerFactory::Calling createServerSocket(0)
+14:00:34  Inside HelloImpl::runServer
+14:00:34  Stub = Proxy[SSLSocketParametersTest$Hello,RemoteObjectInvocationHandler[UnicastRef2 [liveRef: [endpoint:[140.211.9.28:44417,SSLSocketParametersTest$ServerFactory@3f98c7f7,SSLSocketParametersTest$ClientFactory@bb7579f1](local),objID:[-1a3aaedf:1781749f858:-7fff, 8154199408189112208]]]]]
+14:00:34  Inside HelloClient::runClient
+14:00:34  ClientFactory::Calling createSocket(140.211.9.28,44417)
+14:00:34  SSLSocketParametersTest [1] FAILED! Exception: java.rmi.NoSuchObjectException: no such object in table
+14:00:34  java.rmi.NoSuchObjectException: no such object in table
+14:00:34  	at sun.rmi.transport.StreamRemoteCall.exceptionReceivedFromServer(StreamRemoteCall.java:303)
+14:00:34  	at sun.rmi.transport.StreamRemoteCall.executeCall(StreamRemoteCall.java:279)
+14:00:34  	at sun.rmi.server.UnicastRef.invoke(UnicastRef.java:164)
+14:00:34  	at java.rmi.server.RemoteObjectInvocationHandler.invokeRemoteMethod(RemoteObjectInvocationHandler.java:235)
+14:00:34  	at java.rmi.server.RemoteObjectInvocationHandler.invoke(RemoteObjectInvocationHandler.java:180)
+14:00:34  	at com.sun.proxy.$Proxy0.sayHello(Unknown Source)
+14:00:34  	at SSLSocketParametersTest$HelloClient.runClient(SSLSocketParametersTest.java:75)
+14:00:34  	at SSLSocketParametersTest.runTest(SSLSocketParametersTest.java:137)
+14:00:34  	at SSLSocketParametersTest.main(SSLSocketParametersTest.java:286)
+```

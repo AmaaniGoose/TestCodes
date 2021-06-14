@@ -1,0 +1,6 @@
+Hello,
+
+It would be great if OpenJ9 had a command like hotspot has `jstat -gc` which allows retrieving information like heap usage and GC time of a specified process.
+
+For hotspot, I'm using munin plugins linked below to monitor the java processes, unfortunately I'm not able to find a way to do that with OpenJ9.
+https://github.com/munin-monitoring/contrib/tree/master/plugins/jvm

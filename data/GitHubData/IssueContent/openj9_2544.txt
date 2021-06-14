@@ -1,0 +1,19 @@
+Related: https://github.com/eclipse/openj9/pull/2192
+
+This is a discussion on whether or not I should make a new `J9ModuleIterator` and new `J9PackageIterator` to iterate through all modules & packages in jvm. 
+
+The iterator would go through all class loaders and the module/package hash tables in the them. 
+The pattern would look like:
+```				
+GCClassLoaderIterator iterator = GCClassLoaderIterator.from();
+while (iterator.hasNext()) {
+	J9ClassLoaderPointer classLoaderPointer = iterator.next();
+	HashTable<J9ModulePointer> moduleHashTable = ModuleHashTable
+		.fromJ9HashTable(classLoaderPointer.moduleHashTable());
+	SlotIterator<J9ModulePointer> slotIterator = moduleHashTable.iterator();
+	while (slotIterator.hasNext()) {
+		J9ModulePointer modulePtr = slotIterator.next();
+	}
+```
+
+Currently the common code pattern appeared three times in https://github.com/eclipse/openj9/pull/2192 (one for `Package` and two for `Module`)

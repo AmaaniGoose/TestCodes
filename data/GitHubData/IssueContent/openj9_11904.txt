@@ -1,0 +1,252 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_special.system_x86-32_windows_Personal_testList_0/10
+ParallelStreamsLoadTest_special_J9_24
+variation: Mode107-OSRG
+JVM_OPTIONS:  -Xgcpolicy:optthruput -Xdebug -Xrunjdwp:transport=dt_socket,address=8888,server=y,onthrow=no.pkg.foo,launch=echo -Xjit:enableOSR,enableOSROnGuardFailure,count=1,disableAsyncCompilation 
+There are 3 core files
+https://140-211-168-230-openstack.osuosl.org/artifactory/ci-eclipse-openj9/Test/Test_openjdk8_j9_special.system_x86-32_windows_Personal_testList_0/10/system_test_output.tar.gz
+```
+LT  15:57:20.024 - Completed 100.0%. Number of tests started=2
+LT  15:57:40.540 - Completed 100.0%. Number of tests started=2 (+0)
+LT  15:58:00.024 - Completed 100.0%. Number of tests started=2 (+0)
+...
+LT  16:55:00.073 - Completed 100.0%. Number of tests started=2 (+0)
+LT  16:55:19.979 - Completed 100.0%. Number of tests started=2 (+0)
+LT  16:55:40.026 - Completed 100.0%. Number of tests started=2 (+0)
+STF 16:55:53.387 - Heartbeat: Process LT  is still running
+STF 16:55:55.449 - **FAILED** Process LT  has timed out
+STF 16:55:55.449 - Collecting dumps for: LT 
+```
+
+First core shows these interesting threads:
+```
+  thread id: 14080
+   registers:
+    gs     = 0x0000002b   fs     = 0x00000053   es     = 0x0000002b   ds     = 0x0000002b
+    edi    = 0x436a0630   esi    = 0x436add48   ebx    = 0x7155f3c8   edx    = 0x00000000
+    ecx    = 0x00000000   eax    = 0x00000000   ebp    = 0x49a6eb14   eip    = 0x7709c38c
+    cs     = 0x00000023   flags  = 0x00000202   esp    = 0x49a6eaf8   ss     = 0x0000002b
+   native stack sections:
+    0x49a6eaf4 to 0x49a70000 (length 0x150c)
+   native stack frames:
+    bp: 0x49a6eb14 pc: 0x7709c38c C:\Windows\System32\ntdll.dll::NtQueryPerformanceCounter+0xc
+    bp: 0x49a6eb98 pc: 0x7137c9fd F:\Users\jenkins\workspace\Test_openjdk8_j9_special.system_x86-32_windows_Personal_testList_0\openjdkbinary\j2sdk-image\jre\bin\default\j9prt29.dll::j9port_isCompatible+0xa44d
+    bp: 0x7125ec98 pc: 0x712dc90a F:\Users\jenkins\workspace\Test_openjdk8_j9_special.system_x86-32_windows_Personal_testList_0\openjdkbinary\j2sdk-image\jre\bin\default\j9trc29.dll::JVM_OnUnload+0x621a
+   properties:
+    Affinity=0x00000000000000FF                CreateTime=132572086201027120
+    CreateTime_Formatted=2021/02/07 16:57:00   DumpError=0x00000000
+    DumpFlags=0x00000000                       ExitStatus=0x00000103
+    ExitTime=0                                 KernelTime=30770937500
+    StartAddress=0x7163BFB4                    UserTime=2567187500
+    priority=0                                 priorityClass=32
+   associated Java thread: 
+    name:          load-0
+    Thread object: java/lang/Thread @ 0x1e0b290
+    Native info:   !j9vmthread 0x436a0100  !stack 0x436a0100
+    Daemon:        false
+    ID:            25 (0x19)
+    Priority:      5
+    Thread.State:  RUNNABLE 
+    JVMTI state:   ALIVE RUNNABLE 
+    Java stack frames: 
+     bp: 0x47fcd7d4  method: void java/util/regex/Pattern$Start.<init>(java.util.regex.Pattern$Node)  source: Pattern.java:3465
+      objects: 0x15243f00 0x15243de8 0x15243f10 0x15243de8 0x15243f10
+     bp: 0x47fcd818  method: void java/util/regex/Pattern.compile()  source: Pattern.java:1722
+      objects: 0x15243cb8 0x15243f00 0x15243cb8 0x15243f00 0x15243cb8
+     bp: 0x47fcd860  method: void java/util/regex/Pattern.<init>(String, int)  source: Pattern.java:1352
+      objects: 0x3674ec8 0x15243cb8
+     bp: 0x47fcd874  method: java.util.regex.Pattern java/util/regex/Pattern.compile(String)  source: Pattern.java:1028
+      objects: 0x3674ec8 0x15243cb8 0x15243cb8
+     bp: 0x47fcd8d8  method: String java/lang/String.replaceAll(String, String)  source: String.java:3589
+      objects: 0x184cee8 0x3674ec8 0x1523e1a8 0x184cee8
+     bp: 0x47fcd9bc  method: java.util.ArrayList net/adoptopenjdk/test/streams/support/Line.getWords()  source: Line.java:62
+      objects: 0x1ad1d18 0x1523e3a8 0x1523e3a8 0x1523e6f0 0x1523e6f0 0x1523e6f0 0x1523e6f0 0x1523e188 0x1523e1a8 0x1523e320 0x1523e3a8 0x1523e3a8 0x1523e320 0x1ad1d28
+     bp: 0x00000000  method: java.util.stream.Stream net/adoptopenjdk/test/streams/TestParallelStreamOperations.lambda$null$25(net.adoptopenjdk.test.streams.support.Line)  source: TestParallelStreamOperations.java:311
+      objects: <no objects in this frame>
+     bp: 0x47fcd9e4  method: Object net/adoptopenjdk/test/streams/TestParallelStreamOperations$$Lambda$59/0x00000000.apply(Object)  source: null:<data unavailable>
+      objects: 0x1ad1d18 0x14432558 0x1ad1d18
+     bp: 0x47fcda18  method: void java/util/stream/ReferencePipeline$7$1.accept(Object)  source: ReferencePipeline.java:269
+      objects: 0x1ad1d18 0x109571b8 0x109571b8
+     bp: 0x47fcda50  method: void java/util/ArrayList$ArrayListSpliterator.forEachRemaining(java.util.function.Consumer)  source: ArrayList.java:1384
+      objects: 0x109571b8 0x10957048 0x1ad1d18 0x5440050 0x1a529f0
+     bp: 0x00000000  method: void java/util/stream/AbstractPipeline.copyInto(java.util.stream.Sink, java.util.Spliterator)  source: AbstractPipeline.java:497
+      objects: <no objects in this frame>
+     bp: 0x47fcda88  method: java.util.stream.Sink java/util/stream/AbstractPipeline.wrapAndCopyInto(java.util.stream.Sink, java.util.Spliterator)  source: AbstractPipeline.java:487
+      objects: 0x10957048 0x109571a0 0x10957098 0x109571b8 0x109571b8 0x10957098 0x10957098 0x109571b8
+     bp: 0x47fcdaa8  method: Object java/util/stream/ReduceOps$ReduceOp.evaluateSequential(java.util.stream.PipelineHelper, java.util.Spliterator)  source: ReduceOps.java:708
+      objects: 0x10957048 0x10957098 0x10957180 0x10957098
+     bp: 0x47fcdac0  method: Object java/util/stream/AbstractPipeline.evaluate(java.util.stream.TerminalOp)  source: AbstractPipeline.java:241
+      objects: 0x10957098 0x10957180
+     bp: 0x47fcdadc  method: Object java/util/stream/ReferencePipeline.collect(java.util.stream.Collector)  source: ReferencePipeline.java:566
+      objects: <no objects in this frame>
+     bp: 0x47fcdb44  method: void net/adoptopenjdk/test/streams/TestParallelStreamOperations.lambda$testCommonWord$27()  source: TestParallelStreamOperations.java:312
+      objects: 0x1a529f0 0x59ae0c0 0x50d09d0 0x4a96f00 0x4a96f18 0x106c5d88 0x110f20e0 0xf2513c8
+     bp: 0x47fcdb50  method: void net/adoptopenjdk/test/streams/TestParallelStreamOperations$$Lambda$39/0x00000000.run()  source: null:<data unavailable>
+      objects: 0x4ee7350
+     bp: 0x47fcdb8c  method: void net/adoptopenjdk/test/streams/TestParallelStreamOperations.runTest(net.adoptopenjdk.test.streams.TestParallelStreamOperations$LimitedTest)  source: TestParallelStreamOperations.java:343
+      objects: 0x4ee7350 0x4835810
+     bp: 0x47fcdb9c  method: void net/adoptopenjdk/test/streams/TestParallelStreamOperations.testCommonWord()  source: TestParallelStreamOperations.java:244
+      objects: 0x4835810
+     bp: 0x47fcdbd0  method: Object sun/reflect/NativeMethodAccessorImpl.invoke0(reflect.Method, Object, Object[])  (Native Method)
+      objects: 0x1da9178 0x4835810 0x4835840
+     bp: 0x47fcdc3c  method: Object sun/reflect/NativeMethodAccessorImpl.invoke(Object, Object[])  source: NativeMethodAccessorImpl.java:62
+      objects: 0x4835840 0x4835810 0x50c6278
+     bp: 0x47fcdc5c  method: Object sun/reflect/DelegatingMethodAccessorImpl.invoke(Object, Object[])  source: DelegatingMethodAccessorImpl.java:43
+      objects: 0x4835840 0x4835810 0x50c6290
+     bp: 0x00000000  method: Object java/lang/reflect/Method.invoke(Object, Object[])  source: Method.java:498
+      objects: <no objects in this frame>
+     bp: 0x47fcdc88  method: Object org/junit/runners/model/FrameworkMethod$1.runReflectiveCall()  source: FrameworkMethod.java:50
+      objects: 0x4835850 0x1da1a40 0x50c6290 0x4835840 0x4835810
+     bp: 0x47fcdcc0  method: Object org/junit/internal/runners/model/ReflectiveCallable.run()  source: ReflectiveCallable.java:12
+      objects: 0x4835850
+     bp: 0x00000000  method: Object org/junit/runners/model/FrameworkMethod.invokeExplosively(Object, Object[])  source: FrameworkMethod.java:47
+      objects: <no objects in this frame>
+     bp: 0x47fcdcec  method: void org/junit/internal/runners/statements/InvokeMethod.evaluate()  source: InvokeMethod.java:17
+      objects: 0x4835820 0x4835850 0x4835810 0x1ddadd0 0x4835840
+     bp: 0x47fcdd28  method: void org/junit/runners/ParentRunner.runLeaf(org.junit.runners.model.Statement, org.junit.runner.Description, org.junit.runner.notification.RunNotifier)  source: ParentRunner.java:325
+      objects: 0x191a590 0x198c508 0x4835820 0x1d12918 0x4835830 0x4835830 0x4835830
+     bp: 0x00000000  method: void org/junit/runners/BlockJUnit4ClassRunner.runChild(org.junit.runners.model.FrameworkMethod, org.junit.runner.notification.RunNotifier)  source: BlockJUnit4ClassRunner.java:78
+      objects: <no objects in this frame>
+     bp: 0x47fcdd54  method: void org/junit/runners/BlockJUnit4ClassRunner.runChild(Object, org.junit.runner.notification.RunNotifier)  source: BlockJUnit4ClassRunner.java:57
+      objects: 0x191a590 0x1ddadd0 0x1d12918 0x1d12918 0x198c508 0x1ddadd0 0x1d12918
+     bp: 0x47fcdd60  method: void org/junit/runners/ParentRunner$3.run()  source: ParentRunner.java:290
+      objects: 0x48357f8
+     bp: 0x47fcdd70  method: void org/junit/runners/ParentRunner$1.schedule(Runnable)  source: ParentRunner.java:71
+      objects: 0x48357f8 0x1d23f20
+     bp: 0x47fcddbc  method: void org/junit/runners/ParentRunner.runChildren(org.junit.runner.notification.RunNotifier)  source: ParentRunner.java:288
+      objects: 0x191a590 0x1d12918 0x48357f8 0x1d23f20 0x1ddadd0 0x19f9690 0x1d23f20 0x19f9690
+     bp: 0x00000000  method: void org/junit/runners/ParentRunner.access$000(org.junit.runners.ParentRunner, org.junit.runner.notification.RunNotifier)  source: ParentRunner.java:58
+      objects: <no objects in this frame>
+     bp: 0x47fcddd0  method: void org/junit/runners/ParentRunner$2.evaluate()  source: ParentRunner.java:268
+      objects: 0x19f8e48 0x191a590 0x1d12918
+     bp: 0x47fcde1c  method: void org/junit/runners/ParentRunner.run(org.junit.runner.notification.RunNotifier)  source: ParentRunner.java:363
+      objects: 0x191a590 0x1d12918 0x19f8e48 0x19f8d98 0x191a590 0x19f8d98 0x19f8d98
+     bp: 0x47fcde38  method: void org/junit/runners/Suite.runChild(org.junit.runner.Runner, org.junit.runner.notification.RunNotifier)  source: Suite.java:128
+      objects: 0x1c52738 0x1d12918 0x191a590
+     bp: 0x47fcde50  method: void org/junit/runners/Suite.runChild(Object, org.junit.runner.notification.RunNotifier)  source: Suite.java:27
+      objects: 0x1c52738 0x1d12918 0x191a590
+     bp: 0x47fcde60  method: void org/junit/runners/ParentRunner$3.run()  source: ParentRunner.java:290
+      objects: 0x19f5df0
+     bp: 0x47fcde74  method: void org/junit/runners/ParentRunner$1.schedule(Runnable)  source: ParentRunner.java:71
+      objects: 0x190ac68 0x19f5df0
+     bp: 0x47fcde98  method: void org/junit/runners/ParentRunner.runChildren(org.junit.runner.notification.RunNotifier)  source: ParentRunner.java:288
+      objects: 0x1c52738 0x191a590 0x190ac68 0x19d2e50 0x1d12918
+     bp: 0x47fcdeac  method: void org/junit/runners/ParentRunner.access$000(org.junit.runners.ParentRunner, org.junit.runner.notification.RunNotifier)  source: ParentRunner.java:58
+      objects: 0x1c52738 0x191a590
+     bp: 0x47fcdebc  method: void org/junit/runners/ParentRunner$2.evaluate()  source: ParentRunner.java:268
+      objects: 0x19bdad8
+     bp: 0x47fcded8  method: void org/junit/runners/ParentRunner.run(org.junit.runner.notification.RunNotifier)  source: ParentRunner.java:363
+      objects: 0x1c52738 0x191a590 0x19bbda0 0x19bdad8
+     bp: 0x47fcdef8  method: org.junit.runner.Result org/junit/runner/JUnitCore.run(org.junit.runner.Runner)  source: JUnitCore.java:137
+      objects: 0x19059d8 0x1c52738 0x1933208 0x1941510
+     bp: 0x47fcdf0c  method: org.junit.runner.Result org/junit/runner/JUnitCore.run(org.junit.runner.Request)  source: JUnitCore.java:115
+      objects: 0x19059d8 0x190ef30
+     bp: 0x47fcdf44  method: net.adoptopenjdk.loadTest.adaptors.AdaptorInterface$ResultStatus net/adoptopenjdk/loadTest/adaptors/JUnitAdaptor.executeTest()  source: JUnitAdaptor.java:130
+      objects: 0x1d71778 0x1d71778 0x18b7358 0x18c3fa8 0x18c3fc0 0x18c55c8 0x19059d8 0x190ef30
+     bp: 0x47fcdfa8  method: void net/adoptopenjdk/loadTest/LoadTestRunner$2.run()  source: LoadTestRunner.java:182
+      objects: 0x1e04648 0x1e0cb78 0x1e0eb58 0x1892bd0 0x1d71778
+     bp: 0x47fce054  method: void java/util/concurrent/ThreadPoolExecutor.runWorker(java.util.concurrent.ThreadPoolExecutor$Worker)  source: ThreadPoolExecutor.java:1149
+      objects: 0x1e0b258 0x1dfbda0 0x1e04648 0x1e0b290 0x1dfbda0
+     bp: 0x47fce064  method: void java/util/concurrent/ThreadPoolExecutor$Worker.run()  source: ThreadPoolExecutor.java:624
+      objects: 0x1e0b258
+     bp: 0x47fce074  method: void java/lang/Thread.run()  source: Thread.java:823
+      objects: 0x1e0b290
+
+  thread id: 9904
+   registers:
+    gs     = 0x0000002b   fs     = 0x00000053   es     = 0x0000002b   ds     = 0x0000002b
+    edi    = 0x000002b4   esi    = 0x7125ec98   ebx    = 0x00000048   edx    = 0x00000004
+    ecx    = 0x7c4afed4   eax    = 0x480c60bc   ebp    = 0x4369df00   eip    = 0x479f707f
+    cs     = 0x00000023   flags  = 0x00000206   esp    = 0x480c60f4   ss     = 0x0000002b
+   native stack sections:
+    0x49ac0000 to 0x49b00000 (length 0x40000)
+   native stack frames:
+   properties:
+    Affinity=0x00000000000000FF                CreateTime=132572086203683382
+    CreateTime_Formatted=2021/02/07 16:57:00   DumpError=0x00000000
+    DumpFlags=0x00000000                       ExitStatus=0x00000103
+    ExitTime=0                                 KernelTime=30476875000
+    StartAddress=0x7163BFB4                    UserTime=2491093750
+    priority=0                                 priorityClass=32
+   associated Java thread: 
+    name:          load-1
+    Thread object: java/lang/Thread @ 0x187dc70
+    Native info:   !j9vmthread 0x4369df00  !stack 0x4369df00
+    Daemon:        false
+    ID:            26 (0x1a)
+    Priority:      5
+    Thread.State:  RUNNABLE 
+    JVMTI state:   ALIVE RUNNABLE 
+    Java stack frames: 
+     bp: 0x480c6128  method: boolean java/util/regex/Pattern$Start.match(java.util.regex.Matcher, int, CharSequence)  source: Pattern.java:3469
+      objects: 0x1523cd58 0x152420c0 0x15242088
+     bp: 0x00000000  method: boolean java/util/regex/Matcher.search(int)  source: Matcher.java:1248
+      objects: <no objects in this frame>
+     bp: 0x480c6164  method: boolean java/util/regex/Matcher.find()  source: Matcher.java:637
+      objects: 0xdddddddd 0x711fb938 0x152420c0
+     <corrupt data encountered>
+```
+
+Next two cores show the following:
+```
+  thread id: 14080
+   registers:
+    gs     = 0x0000002b   fs     = 0x00000053   es     = 0x0000002b   ds     = 0x0000002b
+    edi    = 0x436a0630   esi    = 0x436add48   ebx    = 0x7155f3c8   edx    = 0x00000000
+    ecx    = 0x00000000   eax    = 0x00000000   ebp    = 0x49a6eec4   eip    = 0x7709c38c
+    cs     = 0x00000023   flags  = 0x00000202   esp    = 0x49a6eea8   ss     = 0x0000002b
+   native stack sections:
+    0x49a6eea4 to 0x49a70000 (length 0x115c)
+   native stack frames:
+    bp: 0x49a6eec4 pc: 0x7709c38c C:\Windows\System32\ntdll.dll::NtQueryPerformanceCounter+0xc
+    bp: 0x49a6ef4c pc: 0x7137c9fd F:\Users\jenkins\workspace\Test_openjdk8_j9_special.system_x86-32_windows_Personal_testList_0\openjdkbinary\j2sdk-image\jre\bin\default\j9prt29.dll::j9port_isCompatible+0xa44d
+    bp: 0x7125ec98 pc: 0x712dc90a F:\Users\jenkins\workspace\Test_openjdk8_j9_special.system_x86-32_windows_Personal_testList_0\openjdkbinary\j2sdk-image\jre\bin\default\j9trc29.dll::JVM_OnUnload+0x621a
+   properties:
+    Affinity=0x00000000000000FF                CreateTime=132572086201027120
+    CreateTime_Formatted=2021/02/07 16:57:00   DumpError=0x00000000
+    DumpFlags=0x00000000                       ExitStatus=0x00000103
+    ExitTime=0                                 KernelTime=31290312500
+    StartAddress=0x7163BFB4                    UserTime=2615937500
+    priority=0                                 priorityClass=32
+   associated Java thread: 
+    name:          load-0
+    Thread object: java/lang/Thread @ 0x1e0b280
+    Native info:   !j9vmthread 0x436a0100  !stack 0x436a0100
+    Daemon:        false
+    ID:            25 (0x19)
+    Priority:      5
+    Thread.State:  RUNNABLE 
+    JVMTI state:   ALIVE RUNNABLE 
+    Java stack frames: 
+     <corrupt data encountered>
+
+  thread id: 9904
+   registers:
+    gs     = 0x0000002b   fs     = 0x00000053   es     = 0x0000002b   ds     = 0x0000002b
+    edi    = 0x4369e430   esi    = 0x436b6568   ebx    = 0x7155f3c8   edx    = 0x00000000
+    ecx    = 0x00000000   eax    = 0x00000000   ebp    = 0x49aff4a4   eip    = 0x7709c38c
+    cs     = 0x00000023   flags  = 0x00000206   esp    = 0x49aff488   ss     = 0x0000002b
+   native stack sections:
+    0x49aff484 to 0x49b00000 (length 0xb7c)
+   native stack frames:
+    bp: 0x49aff4a4 pc: 0x7709c38c C:\Windows\System32\ntdll.dll::NtQueryPerformanceCounter+0xc
+    bp: 0x49aff528 pc: 0x7137c9fd F:\Users\jenkins\workspace\Test_openjdk8_j9_special.system_x86-32_windows_Personal_testList_0\openjdkbinary\j2sdk-image\jre\bin\default\j9prt29.dll::j9port_isCompatible+0xa44d
+    bp: 0x7125ec98 pc: 0x712dc90a F:\Users\jenkins\workspace\Test_openjdk8_j9_special.system_x86-32_windows_Personal_testList_0\openjdkbinary\j2sdk-image\jre\bin\default\j9trc29.dll::JVM_OnUnload+0x621a
+   properties:
+    Affinity=0x00000000000000FF                CreateTime=132572086203683382
+    CreateTime_Formatted=2021/02/07 16:57:00   DumpError=0x00000000
+    DumpFlags=0x00000000                       ExitStatus=0x00000103
+    ExitTime=0                                 KernelTime=30996250000
+    StartAddress=0x7163BFB4                    UserTime=2542968750
+    priority=0                                 priorityClass=32
+   associated Java thread: 
+    name:          load-1
+    Thread object: java/lang/Thread @ 0x187dc30
+    Native info:   !j9vmthread 0x4369df00  !stack 0x4369df00
+    Daemon:        false
+    ID:            26 (0x1a)
+    Priority:      5
+    Thread.State:  RUNNABLE 
+    JVMTI state:   ALIVE RUNNABLE 
+    Java stack frames: 
+     <corrupt data encountered>
+```

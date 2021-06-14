@@ -1,0 +1,119 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk17_j9_extended.openjdk_x86-64_windows/1`
+```
+04:04:50  openjdk version "17" 2021-09-14
+04:04:50  OpenJDK Runtime Environment AdoptOpenJDK (build 17+11)
+04:04:50  Eclipse OpenJ9 VM AdoptOpenJDK (build master-f021812fb, JRE 17 Windows Server 2016 amd64-64-Bit Compressed References 20210227_10 (JIT enabled, AOT enabled)
+04:04:50  OpenJ9   - f021812fb
+04:04:50  OMR      - eb4f5a875
+04:04:50  JCL      - 6031ea3dbe based on jdk-17+11)
+```
+rebuild the failed tests in one link:
+10:57:01  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=17&JDK_IMPL=openj9&JDK_VENDOR=adoptopenjdk&BUILD_LIST=openjdk&PLATFORM=x86-64_windows_mixed&TARGET=testList%20TESTLIST=jdk_io_0,jdk_io_1,jdk_other_0,jdk_other_1,jdk_net_0,jdk_net_1,jdk_nio_0,jdk_nio_1,jdk_security1_0,jdk_security1_1
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+06:13:41  --------------------------------------------------
+06:40:44  TEST: java/net/MulticastSocket/IPMulticastIF.java
+06:40:44  TEST JDK: C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdkbinary\j2sdk-image
+06:40:44  
+06:40:46  ACTION: main -- Failed. Execution failed: `main' threw exception: java.io.UncheckedIOException: java.net.SocketException: Invalid argument: no further information
+06:40:46  REASON: User specified action: run main/othervm NoSetNetworkInterface 
+06:40:46  TIME:   2.969 seconds
+06:40:46  messages:
+06:40:46  command: main NoSetNetworkInterface
+06:40:46  reason: User specified action: run main/othervm NoSetNetworkInterface 
+06:40:46  Mode: othervm [/othervm specified]
+06:40:46  elapsed time (seconds): 2.969
+06:40:46  configuration:
+06:40:46  STDOUT:
+06:40:46  STDERR:
+06:40:46  java.io.UncheckedIOException: java.net.SocketException: Invalid argument: no further information
+06:40:46  	at NoSetNetworkInterface.checkSetInterface(NoSetNetworkInterface.java:74)
+06:40:46  	at NoSetNetworkInterface.lambda$main$0(NoSetNetworkInterface.java:55)
+06:40:46  	at NoSetNetworkInterface$$Lambda$18/0x00000000e534fe18.accept(Unknown Source)
+06:40:46  	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+06:40:46  	at java.base/java.util.stream.DistinctOps$1$2.accept(DistinctOps.java:174)
+06:40:46  	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator$$Lambda$142/0x0000000000000000.accept(Unknown Source)
+06:40:46  	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+06:40:46  	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+06:40:46  	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+06:40:46  	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+06:40:46  	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1801)
+06:40:46  	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:497)
+06:40:46  	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:487)
+06:40:46  	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:312)
+06:40:46  	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:739)
+06:40:46  	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:497)
+06:40:46  	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:487)
+06:40:46  	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+06:40:46  	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+06:40:46  	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:239)
+06:40:46  	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+06:40:46  	at NoSetNetworkInterface.main(NoSetNetworkInterface.java:54)
+06:40:46  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+06:40:46  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+06:40:46  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+06:40:46  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+06:40:46  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+06:40:46  	at java.base/java.lang.Thread.run(Thread.java:853)
+06:40:46  Caused by: java.net.SocketException: Invalid argument: no further information
+06:40:46  	at java.base/sun.nio.ch.Net.setInterface6(Native Method)
+06:40:46  	at java.base/sun.nio.ch.DatagramChannelImpl.setOption(DatagramChannelImpl.java:364)
+06:40:46  	at java.base/sun.nio.ch.DatagramSocketAdaptor.setOption(DatagramSocketAdaptor.java:418)
+06:40:46  	at java.base/sun.nio.ch.DatagramSocketAdaptor.setNetworkInterface(DatagramSocketAdaptor.java:600)
+06:40:46  	at java.base/sun.nio.ch.DatagramSocketAdaptor.setInterface(DatagramSocketAdaptor.java:565)
+06:40:46  	at java.base/java.net.MulticastSocket.setInterface(MulticastSocket.java:398)
+06:40:46  	at NoSetNetworkInterface.checkSetInterface(NoSetNetworkInterface.java:70)
+06:40:46  	... 27 more
+06:40:46  
+06:40:46  JavaTest Message: Test threw exception: java.io.UncheckedIOException: java.net.SocketException: Invalid argument: no further information
+06:40:46  JavaTest Message: shutting down test
+06:40:46  
+06:40:46  STATUS:Failed.`main' threw exception: java.io.UncheckedIOException: java.net.SocketException: Invalid argument: no further information
+06:40:46  rerun:
+06:40:46  cd 'C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_net_0\work\scratch\1' && \
+06:40:46  PATH='C:\cygwin64\bin;C:\cygwin64\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Strawberry\perl\bin;C:\openjdk\jdk-8\bin;C:\apache-ant\apache-ant-1.10.5\bin;C:\Program Files (x86)\IncrediBuild;C:\Program Files\Microsoft SQL Server\110\Tools\Binn;C:\Program Files\Microsoft SQL Server\120\Tools\Binn;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0;C:\Windows\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps' \
+06:40:46  SystemDrive=C: \
+06:40:46  SystemRoot='C:\Windows' \
+06:40:46  TEMP='C:\temp' \
+06:40:46  windir='C:\Windows' \
+06:40:46  CLASSPATH='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_net_0\work\classes\0\java\net\MulticastSocket\NoSetNetworkInterface.d;C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\net\MulticastSocket;C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_net_0\work\classes\0\test\lib;C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\lib;C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\javatest.jar;C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\jtreg.jar' \
+06:40:46      'C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdkbinary\j2sdk-image\bin\java' \
+06:40:46          -Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+06:40:46          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+06:40:46          -Dtest.compiler.opts= \
+06:40:46          -Dtest.java.opts= \
+06:40:46          -Dtest.jdk='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdkbinary\j2sdk-image' \
+06:40:46          -Dcompile.jdk='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdkbinary\j2sdk-image' \
+06:40:46          -Dtest.timeout.factor=8.0 \
+06:40:46          -Dtest.root='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk' \
+06:40:46          -Dtest.name=java/net/MulticastSocket/NoSetNetworkInterface.java \
+06:40:46          -Dtest.file='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\net\MulticastSocket\NoSetNetworkInterface.java' \
+06:40:46          -Dtest.src='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\net\MulticastSocket' \
+06:40:46          -Dtest.src.path='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\net\MulticastSocket;C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\lib' \
+06:40:46          -Dtest.classes='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_net_0\work\classes\0\java\net\MulticastSocket\NoSetNetworkInterface.d' \
+06:40:46          -Dtest.class.path='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_net_0\work\classes\0\java\net\MulticastSocket\NoSetNetworkInterface.d;C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_net_0\work\classes\0\test\lib' \
+06:40:46          -Dtest.class.path.prefix='C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_net_0\work\classes\0\java\net\MulticastSocket\NoSetNetworkInterface.d;C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\net\MulticastSocket;C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_net_0\work\classes\0\test\lib' \
+06:40:46          -ea \
+06:40:46          -esa \
+06:40:46          -Xmx512m \
+06:40:46          -XX:+UseCompressedOops \
+06:40:46          com.sun.javatest.regtest.agent.MainWrapper 'C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_net_0\work\java\net\MulticastSocket\NoSetNetworkInterface.d\main.0.jta'
+06:40:46  
+06:40:46  TEST RESULT: Failed. Execution failed: `main' threw exception: java.io.UncheckedIOException: java.net.SocketException: Invalid argument: no further information
+06:40:46  --------------------------------------------------
+06:57:22  Test results: passed: 785; failed: 5
+06:57:33  Report written to C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\jvmtest\openjdk\report\html\report.html
+06:57:33  Results written to C:\Users\jenkins\workspace\Test_openjdk17_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16144210622825\jdk_net_0\work
+06:57:33  Error: Some tests failed or other problems occurred.
+06:57:33  
+06:57:33  jdk_net_0_FAILED
+```

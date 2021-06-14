@@ -1,0 +1,6 @@
+#11033 introduced new build configs to test the support for OpenJDK
+JSR292 until it is confirmed to be stable. After confirmation of
+stability, 
+1. the support for OpenJDK JSR292 should be **enabled in the default
+configs**; and
+2. the **new build configs** added in #11033 should be **deleted**.

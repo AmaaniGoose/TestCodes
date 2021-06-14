@@ -1,0 +1,7 @@
+Many of the J9 Porttests have already been migrated to OMR. This issue is to verify that porttest coverage is fully implemented within OMR, and migrate any tests that have not been migrated. Any coverage that may have some sort of Java Spec should not be migrated, and should remain in `Pltest`. Finally with the removal of these tests the OMR standalone test `omrporttest` will need to be added to Sanity.functional in place of the removed pltests. 
+
+J9 Port tests:
+https://github.com/eclipse/openj9/blob/b7b7aaccd9abdeab8ad8549f9417bf2a7fd67ce3/runtime/tests/port/j9vmemTest.c
+
+OMR Port Tests:
+https://github.com/eclipse/omr/blob/fd82a51b1eeb3903f72dcbbfbb84ecfeb6d0fa36/fvtest/porttest/omrvmemTest.cpp

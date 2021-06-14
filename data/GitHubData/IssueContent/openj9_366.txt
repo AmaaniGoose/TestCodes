@@ -1,0 +1,49 @@
+cmdLineTester_jep178_staticLinking_SE90 failed due to  cannot find `/lib/amd64/compressedrefs/testjep178_static`
+
+java -version:
+```
+root@1c569afa5e3e:/test/TestConfig# /java/bin/java -version
+openjdk version "9-internal"
+OpenJDK Runtime Environment (build 9-internal+0-adhoc.openj9.openjdk)
+Eclipse OpenJ9 VM (build 2.9, JRE 9 Linux amd64-64 Compressed References 20171011_366953 (JIT enabled, AOT enabled)
+OpenJ9   - 26f4ca3
+OMR      - 5d625a3
+OpenJDK  - a4765a5 based on jdk-9+181)
+```
+test error message:
+```
+Running command: /java/bin/../lib/amd64/compressedrefs/testjep178_static -jvmpath:/java/bin/j9vm -classpath:/test/TestConfig/../../jvmtest/cmdLineTests/jep178staticLinkingTest/jep178staticLinkingTest.jar  -Xcompressedrefs  com/ibm/j9/tests/jeptests/StaticLinking
+***[TEST INFO 2017/10/17 18:41:50] Error during test case: jep178 testing static linking***
+***[TEST INFO 2017/10/17 18:41:50] java.io.IOException: Cannot run program "/java/bin/../lib/amd64/compressedrefs/testjep178_static" (in directory "/test/TestConfig"): error=2, No such file or directory***
+***[TEST INFO 2017/10/17 18:41:50] 	at java.lang.ProcessBuilder.start(java.base@9-internal/ProcessBuilder.java:1128)***
+***[TEST INFO 2017/10/17 18:41:50] 	at java.lang.ProcessBuilder.start(java.base@9-internal/ProcessBuilder.java:1071)***
+***[TEST INFO 2017/10/17 18:41:50] 	at java.lang.Runtime.exec(java.base@9-internal/Runtime.java:635)***
+***[TEST INFO 2017/10/17 18:41:50] 	at Test.run(Test.java:169)***
+***[TEST INFO 2017/10/17 18:41:50] 	at TestSuite.runTest(TestSuite.java:84)***
+***[TEST INFO 2017/10/17 18:41:50] 	at TestIterator.addTest(TestIterator.java:84)***
+***[TEST INFO 2017/10/17 18:41:50] 	at TestConfigParser$TestConfigDocumentHandler.xmlEndElement(TestConfigParser.java:284)***
+***[TEST INFO 2017/10/17 18:41:50] 	at com.oti.j9.exclude.XMLParser._scan_element_close(XMLParser.java:370)***
+***[TEST INFO 2017/10/17 18:41:50] 	at com.oti.j9.exclude.XMLParser._scan_element_or_instruction(XMLParser.java:391)***
+***[TEST INFO 2017/10/17 18:41:50] 	at com.oti.j9.exclude.XMLParser.parseXML(XMLParser.java:442)***
+***[TEST INFO 2017/10/17 18:41:50] 	at com.oti.j9.exclude.XMLParser.parse(XMLParser.java:470)***
+***[TEST INFO 2017/10/17 18:41:50] 	at com.oti.j9.exclude.XMLParser.parse(XMLParser.java:459)***
+***[TEST INFO 2017/10/17 18:41:50] 	at TestConfigParser.runTests(TestConfigParser.java:75)***
+***[TEST INFO 2017/10/17 18:41:50] 	at MainTester.main(MainTester.java:106)***
+***[TEST INFO 2017/10/17 18:41:50] Caused by: java.io.IOException: error=2, No such file or directory***
+***[TEST INFO 2017/10/17 18:41:50] 	at java.lang.ProcessImpl.forkAndExec(java.base@9-internal/Native Method)***
+***[TEST INFO 2017/10/17 18:41:50] 	at java.lang.ProcessImpl.<init>(java.base@9-internal/ProcessImpl.java:339)***
+***[TEST INFO 2017/10/17 18:41:50] 	at java.lang.ProcessImpl.start(java.base@9-internal/ProcessImpl.java:270)***
+***[TEST INFO 2017/10/17 18:41:50] 	at java.lang.ProcessBuilder.start(java.base@9-internal/ProcessBuilder.java:1107)***
+***[TEST INFO 2017/10/17 18:41:50] 	... 13 more***
+Test result: FAILED
+Output from test:
+>> Required condition was not found: [Output match: [MSG] Reached OnLoad: JNI_OnLoad_testlibA [statically]]
+>> Required condition was not found: [Output match: [MSG] Reached OnLoad: JNI_OnLoad_testlibB [statically]]
+>> Required condition was not found: [Output match: [MSG] Reached native fooImpl() [statically]]
+>> Required condition was not found: [Output match: [MSG] Reached native barImpl() [statically]]
+>> Required condition was not found: [Output match: [MSG] Reached OnUnload: JNI_OnUnload_testlibA [statically]]
+>> Required condition was not found: [Output match: [MSG] Reached OnUnload: JNI_OnUnload_testlibB [statically]]
+>> Failure condition was not found: [Output match: [ERR]]
+>> Failure condition was not found: [Output match: [dynamically]]
+>> Success condition was not found: [Output match: [MSG] Test jep178 passed with error code: 0]
+```

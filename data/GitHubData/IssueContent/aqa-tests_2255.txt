@@ -1,0 +1,80 @@
+jdk16 extended.perf test target renaissance-dec-tree_0 fails with java.lang.StringIndexOutOfBoundsException
+
+The test fails in the same way on both hotspot and openj9 builds.
+
+Test output:
+```
+07:20:10  ===============================================
+07:20:12  Running test renaissance-dec-tree_0 ...
+07:20:14  ===============================================
+07:20:14  renaissance-dec-tree_0 Start Time: Sun Feb  7 07:20:11 2021 Epoch Time (ms): 1612682411299
+07:20:14  Nothing to be done for setup.
+07:20:14  variation: NoOptions
+07:20:14  JVM_OPTIONS:  
+07:20:14  { itercnt=1; \
+07:20:14  mkdir -p "C:/Users/jenkins/workspace/Test_openjdk16_hs_extended.perf_x86-64_windows/openjdk-tests/\\TKG\\output_16126822706614\\renaissance-dec-tree_0"; \
+07:20:14  cd "C:/Users/jenkins/workspace/Test_openjdk16_hs_extended.perf_x86-64_windows/openjdk-tests/\\TKG\\output_16126822706614\\renaissance-dec-tree_0"; \
+07:20:14  "C:/Users/jenkins/workspace/Test_openjdk16_hs_extended.perf_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java" -jar "C:/Users/jenkins/workspace/Test_openjdk16_hs_extended.perf_x86-64_windows/openjdk-tests///..//jvmtest\\perf\\renaissance\\renaissance-mit.jar" --json ""C:/Users/jenkins/workspace/Test_openjdk16_hs_extended.perf_x86-64_windows/openjdk-tests/\\TKG\\output_16126822706614\\renaissance-dec-tree_0"\\dec-tree.json" dec-tree; \
+07:20:14  	if [ $? -eq 0 ] ; then echo ""; echo "renaissance-dec-tree_0""_PASSED"; echo ""; cd C:/Users/jenkins/workspace/Test_openjdk16_hs_extended.perf_x86-64_windows/openjdk-tests/; rm -f -r "C:/Users/jenkins/workspace/Test_openjdk16_hs_extended.perf_x86-64_windows/openjdk-tests/\\TKG\\output_16126822706614\\renaissance-dec-tree_0"; else echo ""; echo "renaissance-dec-tree_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "C:/Users/jenkins/workspace/Test_openjdk16_hs_extended.perf_x86-64_windows/openjdk-tests/\\TKG\\output_16126822706614\\TestTargetResult";
+07:20:21  Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+07:20:21  21/02/07 07:20:20 INFO SparkContext: Running Spark version 2.0.0
+07:20:22  21/02/07 07:20:21 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+07:20:22  21/02/07 07:20:21 WARN SparkConf: In Spark 1.0 and later spark.local.dir will be overridden by the value set by the cluster manager (via SPARK_LOCAL_DIRS in mesos/standalone and LOCAL_DIRS in YARN).
+07:20:22  21/02/07 07:20:21 INFO SecurityManager: Changing view acls to: jenkins
+07:20:22  21/02/07 07:20:21 INFO SecurityManager: Changing modify acls to: jenkins
+07:20:22  21/02/07 07:20:21 INFO SecurityManager: Changing view acls groups to: 
+07:20:22  21/02/07 07:20:21 INFO SecurityManager: Changing modify acls groups to: 
+07:20:22  21/02/07 07:20:21 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(jenkins); groups with view permissions: Set(); users  with modify permissions: Set(jenkins); groups with modify permissions: Set()
+07:20:22  21/02/07 07:20:21 INFO PlatformDependent: Your platform does not provide complete low-level API for accessing direct buffers reliably. Unless explicitly requested, heap buffer will always be preferred to avoid potential system unstability.
+07:20:23  21/02/07 07:20:21 INFO Utils: Successfully started service 'sparkDriver' on port 59585.
+07:20:23  21/02/07 07:20:21 INFO SparkEnv: Registering MapOutputTracker
+07:20:23  21/02/07 07:20:21 INFO SparkEnv: Registering BlockManagerMaster
+07:20:24  21/02/07 07:20:22 INFO DiskBlockManager: Created local directory at C:\Users\jenkins\workspace\Test_openjdk16_hs_extended.perf_x86-64_windows\openjdk-tests\TKG\output_16126822706614\renaissance-dec-tree_0\dec_tree2260048470906807888\blockmgr-9157dc15-89a7-4ecc-974d-5361e5a56f5f
+07:20:24  21/02/07 07:20:22 INFO MemoryStore: MemoryStore started with capacity 434.4 MB
+07:20:24  21/02/07 07:20:22 INFO SparkEnv: Registering OutputCommitCoordinator
+07:20:24  21/02/07 07:20:23 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+07:20:24  21/02/07 07:20:23 INFO SparkUI: Bound SparkUI to 0.0.0.0, and started at http://10.0.0.7:4040
+07:20:24  21/02/07 07:20:23 INFO Executor: Starting executor ID driver on host localhost
+07:20:25  21/02/07 07:20:23 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 59596.
+07:20:25  21/02/07 07:20:23 INFO NettyBlockTransferService: Server created on 10.0.0.7:59596
+07:20:25  21/02/07 07:20:23 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 10.0.0.7, 59596)
+07:20:25  21/02/07 07:20:23 INFO BlockManagerMasterEndpoint: Registering block manager 10.0.0.7:59596 with 434.4 MB RAM, BlockManagerId(driver, 10.0.0.7, 59596)
+07:20:25  21/02/07 07:20:23 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 10.0.0.7, 59596)
+07:20:27  Exception occurred in org.renaissance.apache.spark.DecTree@c732e1c: null
+07:20:27  java.lang.ExceptionInInitializerError
+07:20:27  	at org.apache.spark.sql.execution.datasources.PartitioningUtils$.<init>(PartitioningUtils.scala:415)
+07:20:27  	at org.apache.spark.sql.execution.datasources.PartitioningUtils$.<clinit>(PartitioningUtils.scala)
+07:20:27  	at org.apache.spark.sql.execution.datasources.PartitioningAwareFileCatalog.inferPartitioning(PartitioningAwareFileCatalog.scala:126)
+07:20:27  	at org.apache.spark.sql.execution.datasources.ListingFileCatalog.partitionSpec(ListingFileCatalog.scala:60)
+07:20:27  	at org.apache.spark.sql.execution.datasources.PartitioningAwareFileCatalog.allFiles(PartitioningAwareFileCatalog.scala:74)
+07:20:27  	at org.apache.spark.sql.execution.datasources.DataSource$$anonfun$15.apply(DataSource.scala:395)
+07:20:27  	at org.apache.spark.sql.execution.datasources.DataSource$$anonfun$15.apply(DataSource.scala:392)
+07:20:27  	at scala.Option.orElse(Option.scala:289)
+07:20:27  	at org.apache.spark.sql.execution.datasources.DataSource.resolveRelation(DataSource.scala:391)
+07:20:27  	at org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:149)
+07:20:27  	at org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:132)
+07:20:27  	at org.renaissance.apache.spark.DecTree.prepareAndLoadInput(DecTree.scala:84)
+07:20:27  	at org.renaissance.apache.spark.DecTree.setUpBeforeAll(DecTree.scala:116)
+07:20:27  	at org.renaissance.RenaissanceBenchmark.runBenchmark(RenaissanceBenchmark.java:74)
+07:20:27  	at org.renaissance.RenaissanceSuite$.$anonfun$main$2(renaissance-suite.scala:308)
+07:20:27  	at org.renaissance.RenaissanceSuite$.$anonfun$main$2$adapted(renaissance-suite.scala:306)
+07:20:27  	at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)
+07:20:27  	at scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)
+07:20:27  	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)
+07:20:27  	at org.renaissance.RenaissanceSuite$.main(renaissance-suite.scala:306)
+07:20:27  	at org.renaissance.RenaissanceSuite.main(renaissance-suite.scala)
+07:20:27  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+07:20:27  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+07:20:27  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+07:20:27  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+07:20:27  	at org.renaissance.Launcher.main(Launcher.java:18)
+07:20:27  Caused by: java.lang.StringIndexOutOfBoundsException: begin 0, end 3, length 2
+07:20:27  	at java.base/java.lang.String.checkBoundsBeginEnd(String.java:3751)
+07:20:27  	at java.base/java.lang.String.substring(String.java:1907)
+07:20:27  	at org.apache.hadoop.util.Shell.<clinit>(Shell.java:48)
+07:20:27  	... 26 more
+07:20:27  The following benchmarks failed: dec-tree
+07:20:28  
+07:20:28  renaissance-dec-tree_0_FAILED
+```
+To rerun: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=16&JDK_IMPL=hotspot&JDK_VENDOR=adoptopenjdk&BUILD_LIST=perf&PLATFORM=x86-64_windows&TARGET=renaissance-dec-tree_0

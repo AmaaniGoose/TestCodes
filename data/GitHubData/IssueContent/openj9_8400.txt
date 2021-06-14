@@ -1,0 +1,1 @@
+This issue tracks the work to exploit the cached `lastITable` field in `J9Class` to improve interface dispatch on AArch64.  See #8390.

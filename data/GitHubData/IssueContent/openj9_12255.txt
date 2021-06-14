@@ -1,0 +1,6 @@
+Hi,
+
+https://github.com/eclipse/openj9/pull/2862 added the use's home as cache dump which I think is a really bad idea. There's a hidden ~/.cache/ directory for such purposes.
+
+I hope this can be easily fixed, thx
+Michi

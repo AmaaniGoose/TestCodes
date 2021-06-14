@@ -1,0 +1,6 @@
+It would be really useful for new-comers if we include the workflow for contributing to OpenJ9 in CONTRIBUTING.md. IMO at present OpenJ9 is clearly missing that and is currently relying on the individual to figure that out.
+I noticed detail build instructions were added at https://github.com/eclipse/openj9/blob/master/buildenv/Build_Instructions_V9.md but it does not cover the workflow for contributing to OpenJ9 yet.
+For example, running get_source.sh would download the source code from eclipse/openj9 which is not what a contributor would want.
+
+I was looking at CONTRIBUTING.md for nodejs https://github.com/nodejs/node/blob/master/CONTRIBUTING.md which details out the contribution process very clearly.
+I think we should either extend Build_Instructions_V9.md or update CONTRIBUTING.md with such details.

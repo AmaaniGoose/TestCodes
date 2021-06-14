@@ -1,0 +1,17 @@
+When trying to load an agent jar using attach api, I noticed the OpenJ9 target VM prints errors to the console, while OpenJDK give meaningful error messages to the attacher.
+
+OpenJ9 target console
+```
+Failed to find Agent-Class manifest attribute from t:\peter\premain.jar
+JVMJ9TI064E Agent initialization function Agent_OnAttach failed for library instrument, return code 100
+```
+
+OpenJ9 attach exception
+```
+Exception in thread "main" com.sun.tools.attach.AgentInitializationException: ATTACH_ERR AgentInitializationException100
+```
+
+OpenJDK console shows nothing. OpenJDK attach exception
+```
+Exception in thread "main" com.sun.tools.attach.AgentLoadException: Agent JAR not found or no Agent-Class attribute
+```

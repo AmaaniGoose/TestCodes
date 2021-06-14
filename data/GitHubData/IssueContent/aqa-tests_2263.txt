@@ -1,0 +1,92 @@
+**Test Info**
+Test Name: jdk_util_2
+Test Duration: 1 hr 2 min 5 sec
+Machine: test-sxamb-armv7l-raspbian-pi4
+TRSS link for the test output: https://trss.adoptopenjdk.net/output/test?id=6023fc3d5730424dbc6f337c
+
+
+**Build Info**
+Build Name: Test_openjdk8_hs_sanity.openjdk_arm_linux
+Jenkins Build start time: Feb 10 2021, 08:41 am
+Jenkins Build URL: https://ci.adoptopenjdk.net/job/Test_openjdk8_hs_sanity.openjdk_arm_linux/165/
+TRSS link for the build: https://trss.adoptopenjdk.net/allTestsInfo?buildId=6023fb7c5730424dbc6f2d13
+
+
+**Java Version**
+openjdk version "1.8.0_282"
+OpenJDK Runtime Environment (build 1.8.0_282-b08)
+OpenJDK Client VM (build 25.282-b08, mixed mode)
+
+
+**This test has been failed 10 times since Jan 27 2021, 05:48 am**
+**Java Version when the issue first seen**
+openjdk version "1.8.0_282-internal"
+OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_282-internal-202101270913-b01)
+OpenJDK Client VM (AdoptOpenJDK)(build 25.282-b01, mixed mode)
+Jenkins Build URL: https://ci.adoptopenjdk.net/job/Test_openjdk8_hs_sanity.openjdk_arm_linux/156/
+
+The test failed on machine test-sxamb-armv7l-raspbian-pi4 2 times 
+The test failed on machine build-scaleway-ubuntu1604-armv7-2 2 times 
+The test failed on machine build-scaleway-ubuntu1604-armv7-1 2 times 
+The test failed on machine test-aahlenst-armv7-raspbian-pi4-2 3 times 
+The test failed on machine test-aahlenst-armv7-raspbian-pi4-1 1 times 
+
+
+[Rerun in Grinder](https://ci.adoptopenjdk.net/job/Grinder/parambuild/?TARGET=jdk_util_2&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;PLATFORM=arm_linux&amp;KEEP_REPORTDIR=true&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;ARTIFACTORY_SERVER=&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=8&amp;USER_CREDENTIALS_ID=&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=&amp;JDK_REPO=https%3A%2F%2Fgithub.com%2Fadoptopenjdk%2Fopenjdk-jdk8u&amp;RELEASE_TAG=jdk8u282-b08-aarch32-20210125&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=&amp;UPSTREAM_JOB_NAME=build-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-linux-arm-hotspot&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=jdk8u282-b08&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=hotspot&amp;SSH_AGENT_CREDENTIAL=&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=openjdk&amp;UPSTREAM_JOB_NUMBER=566&amp;TIME_LIMIT=10&amp;JVM_OPTIONS=&amp;PARALLEL=None)
+
+
+
+
+```
+[2021-02-10T14:41:58.263Z] test org.openjdk.tests.java.util.stream.DistinctOpTest.testDistinctDistinct("HashSet:0..1000", RefTestData[HashSet:0..1000]): failure
+[2021-02-10T14:41:58.263Z] java.lang.AssertionError: 1 failure(s) for test data: RefTestData[HashSet:0..1000]
+[2021-02-10T14:41:58.263Z] 1: java.lang.Error: PAR_STREAM_FOR_EACH_CLEAR_SIZED: java.lang.ArrayIndexOutOfBoundsException
+[2021-02-10T14:41:58.263Z] java.lang.ArrayIndexOutOfBoundsException
+[2021-02-10T14:41:58.263Z] 	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+[2021-02-10T14:41:58.263Z] 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+[2021-02-10T14:41:58.263Z] 	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+[2021-02-10T14:41:58.263Z] 	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+[2021-02-10T14:41:58.263Z] 	at java.util.concurrent.ForkJoinTask.getThrowableException(ForkJoinTask.java:598)
+[2021-02-10T14:41:58.263Z] 	at java.util.concurrent.ForkJoinTask.reportException(ForkJoinTask.java:677)
+[2021-02-10T14:41:58.263Z] 	at java.util.concurrent.ForkJoinTask.invoke(ForkJoinTask.java:735)
+[2021-02-10T14:41:58.263Z] 	at java.util.stream.ForEachOps$ForEachOp.evaluateParallel(ForEachOps.java:159)
+[2021-02-10T14:41:58.263Z] 	at java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateParallel(ForEachOps.java:173)
+[2021-02-10T14:41:58.263Z] 	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:233)
+[2021-02-10T14:41:58.263Z] 	at java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:485)
+[2021-02-10T14:41:58.263Z] 	at java.util.stream.StreamTestScenario$19._run(StreamTestScenario.java:224)
+[2021-02-10T14:41:58.263Z] 	at java.util.stream.StreamTestScenario.run(StreamTestScenario.java:264)
+[2021-02-10T14:41:58.263Z] 	at java.util.stream.OpTestCase$ExerciseDataStreamBuilder.exercise(OpTestCase.java:395)
+[2021-02-10T14:41:58.263Z] 	at java.util.stream.OpTestCase.exerciseOpsMulti(OpTestCase.java:117)
+[2021-02-10T14:41:58.263Z] 	at java.util.stream.OpTestCase.exerciseOpsInt(OpTestCase.java:139)
+[2021-02-10T14:41:58.263Z] 	at org.openjdk.tests.java.util.stream.DistinctOpTest.testDistinctDistinct(DistinctOpTest.java:144)
+[2021-02-10T14:41:58.263Z] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-02-10T14:41:58.263Z] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2021-02-10T14:41:58.263Z] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-02-10T14:41:58.263Z] 	at java.lang.reflect.Method.invoke(Method.java:498)
+[2021-02-10T14:41:58.263Z] 	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+[2021-02-10T14:41:58.263Z] 	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+[2021-02-10T14:41:58.263Z] 	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+[2021-02-10T14:41:58.263Z] 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+[2021-02-10T14:41:58.263Z] 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+[2021-02-10T14:41:58.263Z] 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+[2021-02-10T14:41:58.263Z] 	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+[2021-02-10T14:41:58.263Z] 	at org.testng.TestRunner.run(TestRunner.java:623)
+[2021-02-10T14:41:58.263Z] 	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+[2021-02-10T14:41:58.263Z] 	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+[2021-02-10T14:41:58.263Z] 	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+[2021-02-10T14:41:58.263Z] 	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+[2021-02-10T14:41:58.263Z] 	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+[2021-02-10T14:41:58.263Z] 	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+[2021-02-10T14:41:58.263Z] 	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+[2021-02-10T14:41:58.263Z] 	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+[2021-02-10T14:41:58.263Z] 	at org.testng.TestNG.run(TestNG.java:1018)
+[2021-02-10T14:41:58.263Z] 	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+[2021-02-10T14:41:58.263Z] 	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+[2021-02-10T14:41:58.263Z] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-02-10T14:41:58.263Z] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2021-02-10T14:41:58.263Z] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-02-10T14:41:58.263Z] 	at java.lang.reflect.Method.invoke(Method.java:498)
+[2021-02-10T14:41:58.263Z] 	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+[2021-02-10T14:41:58.263Z] 	at java.lang.Thread.run(Thread.java:748)
+[2021-02-10T14:41:58.263Z] Caused by: java.lang.ArrayIndexOutOfBoundsException: 49
+```

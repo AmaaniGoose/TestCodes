@@ -1,0 +1,33 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_sanity.functional_s390x_linux_xl_OMR_testList_0/4
+testSCCMLTests1_openj9_0
+ub16-390-1
+```
+Testing: Test 60 clean-up
+Test start time: 2020/05/29 21:12:29 Coordinated Universal Time
+Running command: "/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_s390x_linux_xl_OMR_testList_0/openjdkbinary/j2sdk-image/bin/java"  -Xjit -Xgcpolicy:gencon -Xnocompressedrefs  -Xshareclasses:name=ShareClassesCMLTests,destroy
+Time spent starting: 8 milliseconds
+Time spent executing: 128 milliseconds
+Test result: PASSED
+
+Testing: Test 61-a: Make sure that when shared lambdas are disabled, no lambda classes are stored in the cache 
+Test start time: 2020/05/29 21:12:29 Coordinated Universal Time
+Running command: "/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_s390x_linux_xl_OMR_testList_0/openjdkbinary/j2sdk-image/bin/java"  -Xjit -Xgcpolicy:gencon -Xnocompressedrefs  -Xshareclasses:name=ShareClassesCMLTests -Xtrace:print={j9shr.2259} -XX:-ShareAnonymousClasses -cp /home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_s390x_linux_xl_OMR_testList_0/openjdk-tests/TKG/../../jvmtest/functional/cmdLineTests/utils/utils.jar org.openj9.test.lambdatests.Test1 0
+Time spent starting: 1 milliseconds
+Time spent executing: 712 milliseconds
+Test result: PASSED
+
+Testing: Test 61-b: Make sure that no lambda classes are in the cache
+Test start time: 2020/05/29 21:12:30 Coordinated Universal Time
+Running command: "/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_s390x_linux_xl_OMR_testList_0/openjdkbinary/j2sdk-image/bin/java"  -Xjit -Xgcpolicy:gencon -Xnocompressedrefs  -Xshareclasses:name=ShareClassesCMLTests,printstats=orphan
+Time spent starting: 2 milliseconds
+Time spent executing: 33 milliseconds
+Test result: FAILED
+ [ERR] JVMSHRC023E Cache does not exist
+ [ERR] JVMSHRC023E Cache does not exist
+>> Success condition was not found: [Output match: ORPHAN: org/openj9/test/lambdatests/Test1 at]
+>> Failure condition was not found: [Output match: ORPHAN: org/openj9/test/lambdatests/Test1..Lambda.([\d]+)/(00000000|0000000000000000) at]
+>> Failure condition was not found: [Output match: Unhandled Exception]
+>> Failure condition was not found: [Output match: Exception:]
+>> Failure condition was not found: [Output match: corrupt]
+>> Failure condition was not found: [Output match: Processing dump event]
+```

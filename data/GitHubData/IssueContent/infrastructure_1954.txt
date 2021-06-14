@@ -1,0 +1,1 @@
+#1925 introduced Dockerfiles in `ansible/playbooks/AdoptOpenJDK_Unix_Playbook/roles/DockerStatic/Dockerfiles/` that download a couple of things (ant, ant-contrib). We should check their checksums after downloading.

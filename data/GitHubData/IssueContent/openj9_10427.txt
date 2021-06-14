@@ -1,0 +1,5 @@
+We are trying out OpenJ9 in hopes it helps improve startup times for the webapps we have deployed in Tomcat.  We have around 30 webapps (Spring based WARs) deployed in Tomcat.  I noticed when inspecting the cache only Tomcat lib is cached, none of the classes or lib folders of the various web apps are in the cache.  Is there a fix for this or setting?  When trying the fat jar equivalent of the WAR files I do see that works fine, but our deployment is Tomcat with WARs.  How do I get the webapps / WARs to get cached so they start up quicker.  I noticed a 30% increase in startup time for fat jars I am hoping WARs would also benefit but because they are not cached deployment times are worse with OpenJ9 than hotspot.
+
+We are using Tomcat 9
+openjdk 1.8.0_265
+openj9-0.21.0

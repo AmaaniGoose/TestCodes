@@ -1,0 +1,11 @@
+There is a number of messages about unreleased malloc'ed memory segments from JIT in run with -Xcheck:memory. Would you please check that non of them might be a reason for memory leak?
+
+There are some of them:
+MethodMetaData.c:149 (mapTable in TR_StackMapTable())
+CompilationThread.cpp:758 (_activeThreadName in CompilationInfoPerThread())
+CompilationThread.cpp:759 (_suspendedThreadName in CompilationInfoPerThread())
+rossa.cpp:1264 (codeCacheManager in initializePersistentMemory())
+
+Also there are a few allocations from RawAllocator.hpp:71 which I did not track to the consumer.
+
+An ultimate goal is cleanup code to eliminate these messages. Currently it prevents to run tests with -Xcheck:memory with JIT enabled modes.

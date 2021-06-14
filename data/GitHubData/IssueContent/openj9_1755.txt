@@ -1,0 +1,7 @@
+I recently tried to find where the `SharedCPEntryInvokerTests` were being run and couldn't find them.  They get built in both the `extended` and `sanity` builds, but are never run.  Looking in the test directory didn't provide any clues as to why they didn't run.
+
+Thankfully, @llxia pointed me to https://github.com/eclipse/openj9/blob/71cf84548a84e46d5a61473fe8a92558f615f0f0/test/TestConfig/scripts/testKitGen/makeGenTool/mkgen.pl#L115 which is a list of excluded tests.  Most of which have been excluded since before the initial OpenJ9 contribution.
+
+This is a feature request to use a `.excluded` file in each of those test directories instead of using a list in mkgen.pl file.
+
+This would make it immediately obvious looking at the test source that its excluded and provide a place to store the rationale for why it was excluded.

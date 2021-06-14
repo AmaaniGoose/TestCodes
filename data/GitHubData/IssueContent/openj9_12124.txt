@@ -1,0 +1,529 @@
+sanity.system test LambdaLoadTest_CS_5m on the aarch64 jdk16 milestone 3 build with various `Method xxx not found` exceptions.
+
+jdk build:
+```
+13:57:56  openjdk version "16" 2021-03-16
+13:57:56  OpenJDK Runtime Environment AdoptOpenJDK (build 16+36-202103031126)
+13:57:56  Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.25.0-m3, JRE 16 Linux aarch64-64-Bit Compressed References 20210303_71 (JIT enabled, AOT enabled)
+13:57:56  OpenJ9   - 0283464fb
+13:57:56  OMR      - 09514431e
+13:57:56  JCL      - 43e8dfa8a5 based on jdk-16+36)
+```
+
+Failing job link: https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_sanity.system_aarch64_linux/42/consoleFull
+
+The failure is intermittent - it did not occur on a rerun of the same test machine or a different test machine.
+The failure has not been seen on hotspot jdks.
+
+Output of the failing test:
+```
+13:57:56  STF 13:57:56.462 - +------ Step 1 - Run lambda and stream load test
+13:57:56  STF 13:57:56.462 - | Run foreground process
+13:57:56  STF 13:57:56.462 - |   Program:     /home/jenkins/workspace/Test_openjdk16_j9_sanity.system_aarch64_linux/openjdkbinary/j2sdk-image/bin/java
+13:57:56  STF 13:57:56.462 - |   Mnemonic:    LT
+13:57:56  STF 13:57:56.462 - |   Echo:        ECHO_ON
+13:57:56  STF 13:57:56.462 - |   Expectation: CLEAN_RUN within 1h5m
+13:57:56  STF 13:57:56.462 - |
+13:57:56  STF 13:57:56.464 - Running command: /home/jenkins/workspace/Test_openjdk16_j9_sanity.system_aarch64_linux/openjdkbinary/j2sdk-image/bin/java -Xss3192K -Xgcpolicy:gencon -Xgc:concurrentScavenge -classpath /home/jenkins/workspace/Test_openjdk16_j9_sanity.system_aarch64_linux/jvmtest/system/stf/stf.load/bin:/home/jenkins/workspace/Test_openjdk16_j9_sanity.system_aarch64_linux/jvmtest/system/stf/stf.core/bin:/home/jenkins/workspace/Test_openjdk16_j9_sanity.system_aarch64_linux/jvmtest/system/systemtest_prereqs/log4j/log4j-api.jar:/home/jenkins/workspace/Test_openjdk16_j9_sanity.system_aarch64_linux/jvmtest/system/systemtest_prereqs/log4j/log4j-core.jar:/home/jenkins/workspace/Test_openjdk16_j9_sanity.system_aarch64_linux/jvmtest/system/systemtest_prereqs/junit/junit.jar:/home/jenkins/workspace/Test_openjdk16_j9_sanity.system_aarch64_linux/jvmtest/system/systemtest_prereqs/junit/hamcrest-core.jar:/home/jenkins/workspace/Test_openjdk16_j9_sanity.system_aarch64_linux/jvmtest/system/openjdk-systemtest/openjdk.test.lambdasAndStreams/bin net.adoptopenjdk.loadTest.LoadTest -resultsDir /home/jenkins/workspace/Test_openjdk16_j9_sanity.system_aarch64_linux/openjdk-tests/TKG/output_1614774014302/LambdaLoadTest_CS_5m_0/20210303-135753-LambdaLoadTest/results -resultsPrefix 1.LT. -timeLimit 5m -inactivityLimit 60m -reportFailureLimit 1 -abortAtFailureLimit 10 -maxTotalLogFileSpace 200M -maxSingleLogSize 1/25 -suite.lambda.threadCount 6 -suite.lambda.inventoryFile /home/jenkins/workspace/Test_openjdk16_j9_sanity.system_aarch64_linux/openjdk-tests/TKG/output_1614774014302/LambdaLoadTest_CS_5m_0/20210303-135753-LambdaLoadTest/results/1.LT.inventory/openjdk.test.load/config/inventories/lambdasAndStreams/lambda.xml -suite.lambda.inventoryExcludeFile none -suite.lambda.selection random -suite.lambda.seed -1 -suite.lambda.repeatCount 1 -suite.lambda.thinkingTime 0ms..0ms
+13:57:56  STF 13:57:56.464 - Redirecting stderr to /home/jenkins/workspace/Test_openjdk16_j9_sanity.system_aarch64_linux/openjdk-tests/TKG/output_1614774014302/LambdaLoadTest_CS_5m_0/20210303-135753-LambdaLoadTest/results/1.LT.stderr
+13:57:56  STF 13:57:56.464 - Redirecting stdout to /home/jenkins/workspace/Test_openjdk16_j9_sanity.system_aarch64_linux/openjdk-tests/TKG/output_1614774014302/LambdaLoadTest_CS_5m_0/20210303-135753-LambdaLoadTest/results/1.LT.stdout
+13:57:56  STF 13:57:56.481 - Monitoring processes: LT 
+13:57:59  LT  13:57:58.711 - Load test parameters
+13:57:59  LT  13:57:58.718 -   Time limited         = true
+13:57:59  LT  13:57:58.719 -   Time limit         = 5m
+13:57:59  LT  13:57:58.720 -   abortIfOutOfMemory   = true
+13:57:59  LT  13:57:58.720 -   reportFailureLimit   = 1
+13:57:59  LT  13:57:58.721 -   abortAtFailureLimit  = 10
+13:57:59  LT  13:57:58.723 -   maxTotalLogFileSpace = 209715200
+13:57:59  LT  13:57:58.724 -   maxSingleLogSize     = 8388608
+13:57:59  LT  13:57:58.725 - Parameters for suite 0
+13:57:59  LT  13:57:58.726 -   Suite name     = lambda
+13:57:59  LT  13:57:58.727 -   Number threads = 6
+13:57:59  LT  13:57:58.728 -   Supplied seed  = -1
+13:57:59  LT  13:57:58.728 -   Inventory file = /home/jenkins/workspace/Test_openjdk16_j9_sanity.system_aarch64_linux/openjdk-tests/TKG/output_1614774014302/LambdaLoadTest_CS_5m_0/20210303-135753-LambdaLoadTest/results/1.LT.inventory/openjdk.test.load/config/inventories/lambdasAndStreams/lambda.xml
+13:57:59  LT  13:57:58.729 -   Exclude file   = none
+13:57:59  LT  13:57:58.733 -   Number tests   = -1
+13:57:59  LT  13:57:58.734 -   Repeat count   = 1
+13:57:59  LT  13:57:58.735 -   Thinking time  = 0ms..0ms
+13:57:59  LT  13:57:58.736 -   Selection mode = random
+13:57:59  LT  13:57:58.738 -   Actual seed    = 1616113235167
+13:57:59  LT  13:57:58.757 - Parsing inventory file. Root=/home/jenkins/workspace/Test_openjdk16_j9_sanity.system_aarch64_linux/openjdk-tests/TKG/output_1614774014302/LambdaLoadTest_CS_5m_0/20210303-135753-LambdaLoadTest/results/1.LT.inventory File=openjdk.test.load/config/inventories/lambdasAndStreams/lambda.xml
+13:57:59  LT  13:57:58.774 - Final test list:
+13:57:59  LT  13:57:58.777 -   0 JUnit[net.adoptopenjdk.test.lambda.ClassLibraryLambdaTests]  Weighting=1 
+13:57:59  LT  13:57:58.778 -   1 JUnit[net.adoptopenjdk.test.lambda.TestLambdaCapture]  Weighting=1 
+13:57:59  LT  13:57:58.778 -   2 JUnit[net.adoptopenjdk.test.lambda.TestLambdaContexts]  Weighting=1 
+13:57:59  LT  13:57:58.779 -   3 JUnit[net.adoptopenjdk.test.lambda.TestLambdaDefaultsAndStatics]  Weighting=1 
+13:57:59  LT  13:57:58.779 -   4 JUnit[net.adoptopenjdk.test.lambda.TestLambdaInferredTyping]  Weighting=1 
+13:57:59  LT  13:57:58.780 -   5 JUnit[net.adoptopenjdk.test.lambda.TestLambdaJavaInterfaces]  Weighting=1 
+13:57:59  LT  13:57:58.780 -   6 JUnit[net.adoptopenjdk.test.lambda.TestLambdaLexicalScoping]  Weighting=1 
+13:57:59  LT  13:57:58.781 -   7 JUnit[net.adoptopenjdk.test.lambda.TestLambdaMethodReferences]  Weighting=1 
+13:57:59  LT  13:57:58.781 -   8 JUnit[net.adoptopenjdk.test.lambda.TestLambdaMultithreaded]  Weighting=1 
+13:57:59  LT  13:57:58.781 -   9 JUnit[net.adoptopenjdk.test.lambda.TestLambdaNested]  Weighting=1 
+13:57:59  LT  13:57:58.782 -   10 JUnit[net.adoptopenjdk.test.lambda.TestLambdaRecursive]  Weighting=1 
+13:57:59  LT  13:57:58.782 -   11 JUnit[net.adoptopenjdk.test.lambda.TestLambdasUserDefinedInterface]  Weighting=1 
+13:57:59  LT  13:57:58.782 -   12 JUnit[net.adoptopenjdk.test.streams.TestStreamOperations]  Weighting=1 
+13:57:59  LT  13:57:58.894 - Starting thread. Suite=0 thread=0
+13:57:59  LT  13:57:58.896 - Starting thread. Suite=0 thread=1
+13:57:59  LT  13:57:58.897 - Starting thread. Suite=0 thread=2
+13:57:59  LT  13:57:58.897 - Starting thread. Suite=0 thread=3
+13:57:59  LT  13:57:58.897 - Starting thread. Suite=0 thread=4
+13:57:59  LT  13:57:58.898 - Starting thread. Suite=0 thread=5
+13:58:20  LT  13:58:19.033 - Completed 6.7%. Number of tests started=315
+13:58:33  LT  13:58:31.358 - First failure detected by thread: load-2. Not creating dumps as no dump generation is requested for this load test
+13:58:33  LT  13:58:32.268 - suite.getInventory().getInventoryFileRef(): openjdk.test.load/config/inventories/lambdasAndStreams/lambda.xml
+13:58:33  LT  13:58:32.270 - suite.isCreateDump() : false
+13:58:33  LT  13:58:32.360 - Test failed
+13:58:33  LT    Failure num.  = 1
+13:58:33  LT    Test number   = 5
+13:58:33  LT    Test details  = 'JUnit[net.adoptopenjdk.test.lambda.TestLambdaJavaInterfaces]'
+13:58:33  LT    Suite number  = 0
+13:58:33  LT    Thread number = 2
+13:58:33  LT  >>> Captured test output >>>
+13:58:33  LT  testStarted : testSupplierMotorbike(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testFailure: testSupplierMotorbike(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences): Method "testSupplierMotorbike" not found
+13:58:33  LT  junit.framework.AssertionFailedError: Method "testSupplierMotorbike" not found
+13:58:33  LT  	at junit.framework.Assert.fail(Assert.java:57)
+13:58:33  LT  	at junit.framework.TestCase.fail(TestCase.java:227)
+13:58:33  LT  	at junit.framework.TestCase.runTest(TestCase.java:169)
+13:58:33  LT  	at junit.framework.TestCase.runBare(TestCase.java:141)
+13:58:33  LT  	at junit.framework.TestResult$1.protect(TestResult.java:122)
+13:58:33  LT  	at junit.framework.TestResult.runProtected(TestResult.java:142)
+13:58:33  LT  	at junit.framework.TestResult.run(TestResult.java:125)
+13:58:33  LT  	at junit.framework.TestCase.run(TestCase.java:129)
+13:58:33  LT  	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+13:58:33  LT  	at junit.framework.TestSuite.run(TestSuite.java:247)
+13:58:33  LT  	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:128)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:27)
+13:58:33  LT  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+13:58:33  LT  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+13:58:33  LT  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+13:58:33  LT  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+13:58:33  LT  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+13:58:33  LT  	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+13:58:33  LT  	at java.base/java.lang.Thread.run(Thread.java:853)
+13:58:33  LT  testFinished: testSupplierMotorbike(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testStarted : testComparatorString(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testFailure: testComparatorString(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences): Method "testComparatorString" not found
+13:58:33  LT  junit.framework.AssertionFailedError: Method "testComparatorString" not found
+13:58:33  LT  	at junit.framework.Assert.fail(Assert.java:57)
+13:58:33  LT  	at junit.framework.TestCase.fail(TestCase.java:227)
+13:58:33  LT  	at junit.framework.TestCase.runTest(TestCase.java:169)
+13:58:33  LT  	at junit.framework.TestCase.runBare(TestCase.java:141)
+13:58:33  LT  	at junit.framework.TestResult$1.protect(TestResult.java:122)
+13:58:33  LT  	at junit.framework.TestResult.runProtected(TestResult.java:142)
+13:58:33  LT  	at junit.framework.TestResult.run(TestResult.java:125)
+13:58:33  LT  	at junit.framework.TestCase.run(TestCase.java:129)
+13:58:33  LT  	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+13:58:33  LT  	at junit.framework.TestSuite.run(TestSuite.java:247)
+13:58:33  LT  	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:128)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:27)
+13:58:33  LT  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+13:58:33  LT  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+13:58:33  LT  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+13:58:33  LT  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+13:58:33  LT  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+13:58:33  LT  	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+13:58:33  LT  	at java.base/java.lang.Thread.run(Thread.java:853)
+13:58:33  LT  testFinished: testComparatorString(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testStarted : testSupplierPerson(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testFailure: testSupplierPerson(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences): Method "testSupplierPerson" not found
+13:58:33  LT  junit.framework.AssertionFailedError: Method "testSupplierPerson" not found
+13:58:33  LT  	at junit.framework.Assert.fail(Assert.java:57)
+13:58:33  LT  	at junit.framework.TestCase.fail(TestCase.java:227)
+13:58:33  LT  	at junit.framework.TestCase.runTest(TestCase.java:169)
+13:58:33  LT  	at junit.framework.TestCase.runBare(TestCase.java:141)
+13:58:33  LT  	at junit.framework.TestResult$1.protect(TestResult.java:122)
+13:58:33  LT  	at junit.framework.TestResult.runProtected(TestResult.java:142)
+13:58:33  LT  	at junit.framework.TestResult.run(TestResult.java:125)
+13:58:33  LT  	at junit.framework.TestCase.run(TestCase.java:129)
+13:58:33  LT  	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+13:58:33  LT  	at junit.framework.TestSuite.run(TestSuite.java:247)
+13:58:33  LT  	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:128)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:27)
+13:58:33  LT  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+13:58:33  LT  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+13:58:33  LT  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+13:58:33  LT  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+13:58:33  LT  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+13:58:33  LT  	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+13:58:33  LT  	at java.base/java.lang.Thread.run(Thread.java:853)
+13:58:33  LT  testFinished: testSupplierPerson(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testStarted : testSupplierString(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testFailure: testSupplierString(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences): Method "testSupplierString" not found
+13:58:33  LT  junit.framework.AssertionFailedError: Method "testSupplierString" not found
+13:58:33  LT  	at junit.framework.Assert.fail(Assert.java:57)
+13:58:33  LT  	at junit.framework.TestCase.fail(TestCase.java:227)
+13:58:33  LT  	at junit.framework.TestCase.runTest(TestCase.java:169)
+13:58:33  LT  	at junit.framework.TestCase.runBare(TestCase.java:141)
+13:58:33  LT  	at junit.framework.TestResult$1.protect(TestResult.java:122)
+13:58:33  LT  	at junit.framework.TestResult.runProtected(TestResult.java:142)
+13:58:33  LT  	at junit.framework.TestResult.run(TestResult.java:125)
+13:58:33  LT  	at junit.framework.TestCase.run(TestCase.java:129)
+13:58:33  LT  	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+13:58:33  LT  	at junit.framework.TestSuite.run(TestSuite.java:247)
+13:58:33  LT  	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:128)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:27)
+13:58:33  LT  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+13:58:33  LT  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+13:58:33  LT  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+13:58:33  LT  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+13:58:33  LT  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+13:58:33  LT  	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+13:58:33  LT  	at java.base/java.lang.Thread.run(Thread.java:853)
+13:58:33  LT  testFinished: testSupplierString(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testStarted : testFunctionMotorbike(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testFailure: testFunctionMotorbike(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences): Method "testFunctionMotorbike" not found
+13:58:33  LT  junit.framework.AssertionFailedError: Method "testFunctionMotorbike" not found
+13:58:33  LT  	at junit.framework.Assert.fail(Assert.java:57)
+13:58:33  LT  	at junit.framework.TestCase.fail(TestCase.java:227)
+13:58:33  LT  	at junit.framework.TestCase.runTest(TestCase.java:169)
+13:58:33  LT  	at junit.framework.TestCase.runBare(TestCase.java:141)
+13:58:33  LT  	at junit.framework.TestResult$1.protect(TestResult.java:122)
+13:58:33  LT  	at junit.framework.TestResult.runProtected(TestResult.java:142)
+13:58:33  LT  	at junit.framework.TestResult.run(TestResult.java:125)
+13:58:33  LT  	at junit.framework.TestCase.run(TestCase.java:129)
+13:58:33  LT  	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+13:58:33  LT  	at junit.framework.TestSuite.run(TestSuite.java:247)
+13:58:33  LT  	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:128)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:27)
+13:58:33  LT  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+13:58:33  LT  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+13:58:33  LT  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+13:58:33  LT  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+13:58:33  LT  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+13:58:33  LT  	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+13:58:33  LT  	at java.base/java.lang.Thread.run(Thread.java:853)
+13:58:33  LT  testFinished: testFunctionMotorbike(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testStarted : testUnaryOP(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testFailure: testUnaryOP(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences): Method "testUnaryOP" not found
+13:58:33  LT  junit.framework.AssertionFailedError: Method "testUnaryOP" not found
+13:58:33  LT  	at junit.framework.Assert.fail(Assert.java:57)
+13:58:33  LT  	at junit.framework.TestCase.fail(TestCase.java:227)
+13:58:33  LT  	at junit.framework.TestCase.runTest(TestCase.java:169)
+13:58:33  LT  	at junit.framework.TestCase.runBare(TestCase.java:141)
+13:58:33  LT  	at junit.framework.TestResult$1.protect(TestResult.java:122)
+13:58:33  LT  	at junit.framework.TestResult.runProtected(TestResult.java:142)
+13:58:33  LT  	at junit.framework.TestResult.run(TestResult.java:125)
+13:58:33  LT  	at junit.framework.TestCase.run(TestCase.java:129)
+13:58:33  LT  	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+13:58:33  LT  	at junit.framework.TestSuite.run(TestSuite.java:247)
+13:58:33  LT  	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:128)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:27)
+13:58:33  LT  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+13:58:33  LT  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+13:58:33  LT  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+13:58:33  LT  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+13:58:33  LT  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+13:58:33  LT  	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+13:58:33  LT  	at java.base/java.lang.Thread.run(Thread.java:853)
+13:58:33  LT  testFinished: testUnaryOP(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testStarted : testBiConsumer(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testFailure: testBiConsumer(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences): Method "testBiConsumer" not found
+13:58:33  LT  junit.framework.AssertionFailedError: Method "testBiConsumer" not found
+13:58:33  LT  	at junit.framework.Assert.fail(Assert.java:57)
+13:58:33  LT  	at junit.framework.TestCase.fail(TestCase.java:227)
+13:58:33  LT  	at junit.framework.TestCase.runTest(TestCase.java:169)
+13:58:33  LT  	at junit.framework.TestCase.runBare(TestCase.java:141)
+13:58:33  LT  	at junit.framework.TestResult$1.protect(TestResult.java:122)
+13:58:33  LT  	at junit.framework.TestResult.runProtected(TestResult.java:142)
+13:58:33  LT  	at junit.framework.TestResult.run(TestResult.java:125)
+13:58:33  LT  	at junit.framework.TestCase.run(TestCase.java:129)
+13:58:33  LT  	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+13:58:33  LT  	at junit.framework.TestSuite.run(TestSuite.java:247)
+13:58:33  LT  	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:128)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:27)
+13:58:33  LT  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+13:58:33  LT  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+13:58:33  LT  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+13:58:33  LT  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+13:58:33  LT  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+13:58:33  LT  	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+13:58:33  LT  	at java.base/java.lang.Thread.run(Thread.java:853)
+13:58:33  LT  testFinished: testBiConsumer(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testStarted : testBiPredicate(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testFailure: testBiPredicate(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences): Method "testBiPredicate" not found
+13:58:33  LT  junit.framework.AssertionFailedError: Method "testBiPredicate" not found
+13:58:33  LT  	at junit.framework.Assert.fail(Assert.java:57)
+13:58:33  LT  	at junit.framework.TestCase.fail(TestCase.java:227)
+13:58:33  LT  	at junit.framework.TestCase.runTest(TestCase.java:169)
+13:58:33  LT  	at junit.framework.TestCase.runBare(TestCase.java:141)
+13:58:33  LT  	at junit.framework.TestResult$1.protect(TestResult.java:122)
+13:58:33  LT  	at junit.framework.TestResult.runProtected(TestResult.java:142)
+13:58:33  LT  	at junit.framework.TestResult.run(TestResult.java:125)
+13:58:33  LT  	at junit.framework.TestCase.run(TestCase.java:129)
+13:58:33  LT  	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+13:58:33  LT  	at junit.framework.TestSuite.run(TestSuite.java:247)
+13:58:33  LT  	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:128)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:27)
+13:58:33  LT  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+13:58:33  LT  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+13:58:33  LT  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+13:58:33  LT  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+13:58:33  LT  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+13:58:33  LT  	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+13:58:33  LT  	at java.base/java.lang.Thread.run(Thread.java:853)
+13:58:33  LT  testFinished: testBiPredicate(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testStarted : testStringConsumer(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testFailure: testStringConsumer(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences): Method "testStringConsumer" not found
+13:58:33  LT  junit.framework.AssertionFailedError: Method "testStringConsumer" not found
+13:58:33  LT  	at junit.framework.Assert.fail(Assert.java:57)
+13:58:33  LT  	at junit.framework.TestCase.fail(TestCase.java:227)
+13:58:33  LT  	at junit.framework.TestCase.runTest(TestCase.java:169)
+13:58:33  LT  	at junit.framework.TestCase.runBare(TestCase.java:141)
+13:58:33  LT  	at junit.framework.TestResult$1.protect(TestResult.java:122)
+13:58:33  LT  	at junit.framework.TestResult.runProtected(TestResult.java:142)
+13:58:33  LT  	at junit.framework.TestResult.run(TestResult.java:125)
+13:58:33  LT  	at junit.framework.TestCase.run(TestCase.java:129)
+13:58:33  LT  	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+13:58:33  LT  	at junit.framework.TestSuite.run(TestSuite.java:247)
+13:58:33  LT  	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:128)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:27)
+13:58:33  LT  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+13:58:33  LT  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+13:58:33  LT  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+13:58:33  LT  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+13:58:33  LT  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+13:58:33  LT  	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+13:58:33  LT  	at java.base/java.lang.Thread.run(Thread.java:853)
+13:58:33  LT  testFinished: testStringConsumer(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testStarted : testDoublePredicate(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testFailure: testDoublePredicate(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences): Method "testDoublePredicate" not found
+13:58:33  LT  junit.framework.AssertionFailedError: Method "testDoublePredicate" not found
+13:58:33  LT  	at junit.framework.Assert.fail(Assert.java:57)
+13:58:33  LT  	at junit.framework.TestCase.fail(TestCase.java:227)
+13:58:33  LT  	at junit.framework.TestCase.runTest(TestCase.java:169)
+13:58:33  LT  	at junit.framework.TestCase.runBare(TestCase.java:141)
+13:58:33  LT  	at junit.framework.TestResult$1.protect(TestResult.java:122)
+13:58:33  LT  	at junit.framework.TestResult.runProtected(TestResult.java:142)
+13:58:33  LT  	at junit.framework.TestResult.run(TestResult.java:125)
+13:58:33  LT  	at junit.framework.TestCase.run(TestCase.java:129)
+13:58:33  LT  	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+13:58:33  LT  	at junit.framework.TestSuite.run(TestSuite.java:247)
+13:58:33  LT  	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:128)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:27)
+13:58:33  LT  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+13:58:33  LT  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+13:58:33  LT  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+13:58:33  LT  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+13:58:33  LT  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+13:58:33  LT  	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+13:58:33  LT  	at java.base/java.lang.Thread.run(Thread.java:853)
+13:58:33  LT  testFinished: testDoublePredicate(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testStarted : testBinaryOp(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testFailure: testBinaryOp(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences): Method "testBinaryOp" not found
+13:58:33  LT  junit.framework.AssertionFailedError: Method "testBinaryOp" not found
+13:58:33  LT  	at junit.framework.Assert.fail(Assert.java:57)
+13:58:33  LT  	at junit.framework.TestCase.fail(TestCase.java:227)
+13:58:33  LT  	at junit.framework.TestCase.runTest(TestCase.java:169)
+13:58:33  LT  	at junit.framework.TestCase.runBare(TestCase.java:141)
+13:58:33  LT  	at junit.framework.TestResult$1.protect(TestResult.java:122)
+13:58:33  LT  	at junit.framework.TestResult.runProtected(TestResult.java:142)
+13:58:33  LT  	at junit.framework.TestResult.run(TestResult.java:125)
+13:58:33  LT  	at junit.framework.TestCase.run(TestCase.java:129)
+13:58:33  LT  	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+13:58:33  LT  	at junit.framework.TestSuite.run(TestSuite.java:247)
+13:58:33  LT  	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:128)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:27)
+13:58:33  LT  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+13:58:33  LT  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+13:58:33  LT  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+13:58:33  LT  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+13:58:33  LT  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+13:58:33  LT  	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+13:58:33  LT  	at java.base/java.lang.Thread.run(Thread.java:853)
+13:58:33  LT  testFinished: testBinaryOp(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testStarted : testLongUnaryOp(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testFailure: testLongUnaryOp(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences): Method "testLongUnaryOp" not found
+13:58:33  LT  junit.framework.AssertionFailedError: Method "testLongUnaryOp" not found
+13:58:33  LT  	at junit.framework.Assert.fail(Assert.java:57)
+13:58:33  LT  	at junit.framework.TestCase.fail(TestCase.java:227)
+13:58:33  LT  	at junit.framework.TestCase.runTest(TestCase.java:169)
+13:58:33  LT  	at junit.framework.TestCase.runBare(TestCase.java:141)
+13:58:33  LT  	at junit.framework.TestResult$1.protect(TestResult.java:122)
+13:58:33  LT  	at junit.framework.TestResult.runProtected(TestResult.java:142)
+13:58:33  LT  	at junit.framework.TestResult.run(TestResult.java:125)
+13:58:33  LT  	at junit.framework.TestCase.run(TestCase.java:129)
+13:58:33  LT  	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+13:58:33  LT  	at junit.framework.TestSuite.run(TestSuite.java:247)
+13:58:33  LT  	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:128)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:27)
+13:58:33  LT  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+13:58:33  LT  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+13:58:33  LT  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+13:58:33  LT  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+13:58:33  LT  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+13:58:33  LT  	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+13:58:33  LT  	at java.base/java.lang.Thread.run(Thread.java:853)
+13:58:33  LT  testFinished: testLongUnaryOp(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testStarted : testFunction(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  testFailure: testFunction(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences): Method "testFunction" not found
+13:58:33  LT  junit.framework.AssertionFailedError: Method "testFunction" not found
+13:58:33  LT  	at junit.framework.Assert.fail(Assert.java:57)
+13:58:33  LT  	at junit.framework.TestCase.fail(TestCase.java:227)
+13:58:33  LT  	at junit.framework.TestCase.runTest(TestCase.java:169)
+13:58:33  LT  	at junit.framework.TestCase.runBare(TestCase.java:141)
+13:58:33  LT  	at junit.framework.TestResult$1.protect(TestResult.java:122)
+13:58:33  LT  	at junit.framework.TestResult.runProtected(TestResult.java:142)
+13:58:33  LT  	at junit.framework.TestResult.run(TestResult.java:125)
+13:58:33  LT  	at junit.framework.TestCase.run(TestCase.java:129)
+13:58:33  LT  	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+13:58:33  LT  	at junit.framework.TestSuite.run(TestSuite.java:247)
+13:58:33  LT  	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:128)
+13:58:33  LT  	at org.junit.runners.Suite.runChild(Suite.java:27)
+13:58:33  LT  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+13:58:33  LT  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+13:58:33  LT  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+13:58:33  LT  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+13:58:33  LT  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+13:58:33  LT  	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+13:58:33  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+13:58:33  LT  	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+13:58:33  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+13:58:33  LT  	at java.base/java.lang.Thread.run(Thread.java:853)
+13:58:33  LT  testFinished: testFunction(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+13:58:33  LT  
+13:58:33  LT  JUnit Test Results for: net.adoptopenjdk.test.lambda.TestLambdaJavaInterfaces
+13:58:33  LT    Ran    : 13
+13:58:33  LT    Passed : 0
+13:58:33  LT    Failed : 13
+13:58:33  LT    Ignored: 0
+13:58:33  LT    Result : FAILED
+13:58:33  LT  <<<
+13:58:33  LT  
+13:58:36  LT  13:58:35.765 - suite.getInventory().getInventoryFileRef(): openjdk.test.load/config/inventories/lambdasAndStreams/lambda.xml
+13:58:36  LT  13:58:35.766 - suite.isCreateDump() : false
+13:58:36  LT  13:58:35.767 - Test failed. Details recorded in execution log.
+13:58:37  LT  13:58:36.022 - suite.getInventory().getInventoryFileRef(): openjdk.test.load/config/inventories/lambdasAndStreams/lambda.xml
+13:58:37  LT  13:58:36.022 - suite.isCreateDump() : false
+13:58:37  LT  13:58:36.022 - Test failed. Details recorded in execution log.
+13:58:37  LT  13:58:36.254 - suite.getInventory().getInventoryFileRef(): openjdk.test.load/config/inventories/lambdasAndStreams/lambda.xml
+13:58:37  LT  13:58:36.255 - suite.isCreateDump() : false
+13:58:37  LT  13:58:36.255 - Test failed. Details recorded in execution log.
+13:58:37  LT  13:58:36.265 - suite.getInventory().getInventoryFileRef(): openjdk.test.load/config/inventories/lambdasAndStreams/lambda.xml
+13:58:37  LT  13:58:36.264 - suite.getInventory().getInventoryFileRef(): openjdk.test.load/config/inventories/lambdasAndStreams/lambda.xml
+13:58:37  LT  13:58:36.266 - suite.isCreateDump() : false
+13:58:37  LT  13:58:36.266 - suite.isCreateDump() : false
+13:58:37  LT  13:58:36.266 - Test failed. Details recorded in execution log.
+13:58:37  LT  13:58:36.266 - Test failed. Details recorded in execution log.
+13:58:40  LT  13:58:38.957 - Completed 13.4%. Number of tests started=549 (+234) (with 6 failure(s))
+13:58:40  LT  13:58:39.758 - suite.getInventory().getInventoryFileRef(): openjdk.test.load/config/inventories/lambdasAndStreams/lambda.xml
+13:58:40  LT  13:58:39.758 - suite.isCreateDump() : false
+13:58:40  LT  13:58:39.758 - Test failed. Details recorded in execution log.
+13:58:41  LT  13:58:40.549 - suite.getInventory().getInventoryFileRef(): openjdk.test.load/config/inventories/lambdasAndStreams/lambda.xml
+13:58:41  LT  13:58:40.550 - suite.isCreateDump() : false
+13:58:41  LT  13:58:40.550 - Test failed. Details recorded in execution log.
+13:58:43  LT  13:58:42.766 - suite.getInventory().getInventoryFileRef(): openjdk.test.load/config/inventories/lambdasAndStreams/lambda.xml
+13:58:43  LT  13:58:42.766 - suite.isCreateDump() : false
+13:58:43  LT  13:58:42.766 - Test failed. Details recorded in execution log.
+13:58:44  LT  13:58:43.362 - suite.getInventory().getInventoryFileRef(): openjdk.test.load/config/inventories/lambdasAndStreams/lambda.xml
+13:58:44  LT  13:58:43.363 - suite.isCreateDump() : false
+13:58:44  LT  13:58:43.363 - Test failed. Details recorded in execution log.
+13:58:44  LT  13:58:43.364 - Number of test failures has reached 'AbortAtFailureLimit' (10). Terminating load test
+13:58:44  LT  13:58:43.365 - Thread completed. Suite=0 thread=0
+13:58:44  LT  13:58:43.599 - Thread completed. Suite=0 thread=5
+13:58:44  LT  13:58:43.632 - Thread completed. Suite=0 thread=4
+13:58:45  LT  13:58:44.872 - Thread completed. Suite=0 thread=1
+13:58:45  LT  13:58:44.876 - Thread completed. Suite=0 thread=3
+13:58:45  LT  13:58:44.951 - Thread completed. Suite=0 thread=2
+13:58:45  LT  13:58:44.956 - Load test completed
+13:58:45  LT  13:58:44.957 -   Ran     : 620
+13:58:45  LT  13:58:44.957 -   Passed  : 610
+13:58:45  LT  13:58:44.958 -   Failed  : 10
+13:58:45  LT  13:58:44.958 -   Result  : FAILED
+13:58:45  LT  13:58:44.959 - Note that only the first 1 failures have been reported
+13:58:45  STF 13:58:45.207 - **FAILED** Process LT  ended with exit code (1) and not the expected exit code/s (0)
+13:58:45  STF 13:58:45.207 - Monitoring Report Summary:
+13:58:45  STF 13:58:45.207 -   o Process LT  ended with exit code (1) and not the expected exit code/s (0)
+13:58:45  STF 13:58:45.208 - Killing processes: LT 
+13:58:45  STF 13:58:45.208 -   o Process LT  pid 62789 is not running
+13:58:45  **FAILED** at step 1 (Run lambda and stream load test). Expected return value=0 Actual=1 at /home/jenkins/workspace/Test_openjdk16_j9_sanity.system_aarch64_linux/openjdk-tests/TKG/../TKG/output_1614774014302/LambdaLoadTest_CS_5m_0/20210303-135753-LambdaLoadTest/execute.pl line 95.
+13:58:45  STF 13:58:45.599 - **FAILED** execute script failed. Expected return value=0 Actual=1
+```

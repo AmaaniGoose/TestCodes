@@ -1,0 +1,43 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk8_j9_sanity.functional_x86-32_windows_Nightly_testList_1/39`:
+```
+03:10:12  openjdk version "1.8.0_265-internal"
+03:10:12  OpenJDK Runtime Environment (build 1.8.0_265-internal-jenkins_2020_08_03_21_19-b00)
+03:10:12  Eclipse OpenJ9 VM (build master-1c194db6e72, JRE 1.8.0 Windows Server 2016 x86-32-Bit 20200803_480 (JIT enabled, AOT enabled)
+03:10:12  OpenJ9   - 1c194db6e72
+03:10:12  OMR      - 7b76a160bc7
+03:10:12  JCL      - bf6e4d1cc0b based on jdk8u265-b01)
+```
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+
+=============================================== 
+Running test J9vmTest_0 ... 
+===============================================
+
+JVMJ9GC032E System configuration does not support option '-Xlp'
+JVMJ9VM015W Initialization error for library j9gc29(2): Failed to initialize; unable to parse command line
+Error: Could not create the Java Virtual Machine.
+Error: A fatal exception has occurred. Program will exit.
+no-zero exit value: 1
+Xlp is not supported on this machine. Skipping Test.
+command: C:/Users/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-32_windows_Nightly_testList_1/openjdkbinary/j2sdk-image\\bin\\java  -Xjit -Xgcpolicy:gencon -Xnocompressedrefs  -Xdump -Xms64m -Xmx64m -verbose:sizes -Xlp4K -Xlp  -Xbootclasspath:C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.functional_x86-32_windows_Nightly_testList_1\openjdkbinary\j2sdk-image\jre\bin\default\jclSC180\vm.jar;C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.functional_x86-32_windows_Nightly_testList_1\openjdkbinary\j2sdk-image\jre\lib\se-service.jar;C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.functional_x86-32_windows_Nightly_testList_1\openjdkbinary\j2sdk-image\jre\lib\rt.jar;C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.functional_x86-32_windows_Nightly_testList_1\openjdkbinary\j2sdk-image\jre\lib\resources.jar;C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.functional_x86-32_windows_Nightly_testList_1\openjdkbinary\j2sdk-image\jre\lib\jsse.jar;C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.functional_x86-32_windows_Nightly_testList_1\openjdkbinary\j2sdk-image\jre\lib\charsets.jar;C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.functional_x86-32_windows_Nightly_testList_1\openjdkbinary\j2sdk-image\jre\lib\jce.jar -classpath C:/Users/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-32_windows_Nightly_testList_1/openjdk-tests///..//jvmtest\functional\VM_Test\VM_Test.jar;C:/Users/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-32_windows_Nightly_testList_1/openjdk-tests/\TKG\lib\asm-all.jar  j9vm.test.xlpcodecache.XlpCodeCacheOptionsTest 
+
+72 passed / 1 failed
+
+J9vmTest_0_FAILED72 passed / 1 failed
+
+J9vmTest_0_FAILED
+```
+
+For example, to rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links:
+04:23:41  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=functional&PLATFORM=x86-32_windows&TARGET=J9vmTest_0

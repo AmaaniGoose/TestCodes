@@ -1,0 +1,7 @@
+Test results from the openjdk regression test group run against the nightly openjdk9-openj9 build at AdoptOpenJDK:  Test results: passed: 342; failed: 3
+https://ci.adoptopenjdk.net/view/OpenJDK%20tests/job/openjdk9_j9_openjdktest_x86-64_linux/31/consoleFull
+https://ci.adoptopenjdk.net/view/OpenJDK%20tests/job/openjdk9_j9_openjdktest_x86-64_linux/31/artifact/jvmtest/openjdk_regression/work/java/io/
+
+java/io/Serializable/serialFilter/FilterWithSecurityManagerTest.java
+java/io/Serializable/serialFilter/GlobalFilterTest.java
+java/io/Serializable/subclassGC/SubclassGC.java

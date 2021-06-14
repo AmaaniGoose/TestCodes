@@ -1,0 +1,6 @@
+Current test project names in OpenJ9 are not standardized. We would like to rename test project names by following the rules below:
+- all test project are named with lower-case with underscore
+- change TestExample to example
+- change OpenJDK_Playlist to openjdk_regression
+- group projects by category (i.e., SVT_LoadTest and SVT_Modularity should be under svt)
+- avoid repeating word "test" in project name if possible

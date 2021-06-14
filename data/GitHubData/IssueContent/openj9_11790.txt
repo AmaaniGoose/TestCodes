@@ -1,0 +1,5 @@
+There is an OMR codegen flag that needs to be set to enable this optimization:
+
+https://github.com/eclipse/omr/blob/5ad82738f7ecbbee5295083369b96b1bc75cb317/compiler/codegen/OMRCodeGenerator.hpp#L1705
+
+However, some investigation is required as to what codegen support is actually required.

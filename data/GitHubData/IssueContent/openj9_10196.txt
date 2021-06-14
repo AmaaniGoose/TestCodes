@@ -1,0 +1,65 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.system_x86-64_linux_Release/41
+SC_Softmx_JitAot_Linux_0
+```
+11:49:54.925 0x4fce00    j9vm.225    *   ** ASSERTION FAILED ** at ObjectMonitor.cpp:331: (!(8 == (lock & (8 | 1))))
+JVMDUMP039I Processing dump event "traceassert", detail "" at 2020/07/18 07:49:54 - please wait.
+
+
+*** Invalid JIT return address 0000000000000000 in 00007F8BE08DF690
+
+JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_linux_Release/openjdk-tests/TKG/test_output_15950721769791/SC_Softmx_JitAot_Linux_0/20200718-074826-SharedClassesWorkloadTest_Softmx_Increase_JitAot/results/core.20200718.074954.12594.0001.dmp' in response to an event
+JVMDUMP010I System dump written to /home/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_linux_Release/openjdk-tests/TKG/test_output_15950721769791/SC_Softmx_JitAot_Linux_0/20200718-074826-SharedClassesWorkloadTest_Softmx_Increase_JitAot/results/core.20200718.074954.12594.0001.dmp
+Unhandled exception
+Type=Segmentation error vmState=0x00020015
+J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000080
+Handler1=00007F8BFF8C5FC0 Handler2=00007F8BFF1B5A60 InaccessibleAddress=0000000000000000
+RDI=0000000000504500 RSI=0000000000000001 RAX=0000000000000001 RBX=00007F8C000A2A10
+RCX=0000000000000006 RDX=0000000000000000 R8=2F474B542F737473 R9=0000000000000006
+R10=0000000000500A00 R11=0000000000000246 R12=00007F8BFFFFC360 R13=0000000000000001
+R14=0005AAB5DF56446A R15=00007F8C00040A68
+RIP=00007F8BF79B6834 GS=0000 FS=0000 RSP=00007F8B9B3CDEE8
+EFlags=0000000000010202 CS=0033 RBP=0000000000504500 ERR=0000000000000000
+TRAPNO=000000000000000D OLDMASK=0000000000000000 CR2=0000000000000000
+xmm0 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm1 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm2 000000000019ac98 (f: 1682584.000000, d: 8.313070e-318)
+xmm3 0000000000000001 (f: 1.000000, d: 4.940656e-324)
+xmm4 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm5 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm6 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm7 006e006f00690074 (f: 6881396.000000, d: 1.335120e-306)
+xmm8 bfc340f78097b760 (f: 2157426432.000000, d: -1.504201e-01)
+xmm9 0000000047a01400 (f: 1201673216.000000, d: 5.937055e-315)
+xmm10 0000000040000000 (f: 1073741824.000000, d: 5.304989e-315)
+xmm11 40d82f9c37780d48 (f: 930614592.000000, d: 2.476644e+04)
+xmm12 000000003d6552a0 (f: 1030050432.000000, d: 5.089125e-315)
+xmm13 000000004481674d (f: 1149331328.000000, d: 5.678451e-315)
+xmm14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm15 411558bfe0f9a96c (f: 3774458112.000000, d: 3.497440e+05)
+Module=/home/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_linux_Release/openjdkbinary/j2sdk-image/jre/lib/amd64/compressedrefs/libj9jit29.so
+Module_base_address=00007F8BF7835000
+Target=2_90_20200718_43 (Linux 2.6.32-754.29.1.el6.x86_64)
+CPU=amd64 (4 logical CPUs) (0x1f4100000 RAM)
+----------- Stack Backtrace -----------
+(0x00007F8BF79B6834 [libj9jit29.so+0x181834])
+(0x00007F8BF79B696F [libj9jit29.so+0x18196f])
+(0x00007F8BFF41237E [libj9hookable29.so+0x137e])
+(0x00007F8BF74C94FD [libj9gc29.so+0x1774fd])
+(0x00007F8BF74C9EAC [libj9gc29.so+0x177eac])
+(0x00007F8BF752F140 [libj9gc29.so+0x1dd140])
+(0x00007F8BF7480CDE [libj9gc29.so+0x12ecde])
+(0x00007F8BF74815B3 [libj9gc29.so+0x12f5b3])
+(0x00007F8BF7495DDA [libj9gc29.so+0x143dda])
+(0x00007F8BF748F43A [libj9gc29.so+0x13d43a])
+(0x00007F8BF750055C [libj9gc29.so+0x1ae55c])
+(0x00007F8BF7506984 [libj9gc29.so+0x1b4984])
+(0x00007F8BF7481607 [libj9gc29.so+0x12f607])
+(0x00007F8BF754BF7E [libj9gc29.so+0x1f9f7e])
+(0x00007F8BF756405C [libj9gc29.so+0x21205c])
+(0x00007F8BF74A6FA7 [libj9gc29.so+0x154fa7])
+(0x00007F8BF74C4BFD [libj9gc29.so+0x172bfd])
+(0x00007F8BF739827F [libj9gc29.so+0x4627f])
+(0x00007F8BF817F0CA [libj9jit29.so+0x94a0ca])
+(0x00007F8BF8191081 [libj9jit29.so+0x95c081])
+---------------------------------------
+```

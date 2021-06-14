@@ -1,0 +1,6 @@
+Investigate and implement the following recognized Java methods to byte reversal instructions on AArch32:
+```
+TR::java_lang_Long_reverseBytes
+TR::java_lang_Integer_reverseBytes
+TR::java_lang_Short_reverseBytes
+```

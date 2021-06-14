@@ -1,0 +1,36 @@
+All test cases with `foldArguments` failed with `NoSuchMethodException` with OpenJDK MH enabled.
+
+e.g.
+```
+FAILED: test_foldArguments_ArgIndices_CombinerHandle_IntReturnType_IntParam_FoldAtEnd
+java.lang.NoSuchMethodException: java.lang.invoke.MethodHandles.foldArguments(java.lang.invoke.MethodHandle, int, java.lang.invoke.MethodHandle, [I)
+	at java.base/java.lang.Class.newNoSuchMethodException(Class.java:653)
+	at java.base/java.lang.Class.throwExceptionOrReturnNull(Class.java:1416)
+	at java.base/java.lang.Class.getMethodHelper(Class.java:1502)
+	at java.base/java.lang.Class.getDeclaredMethod(Class.java:1125)
+	at com.ibm.j9.jsr292.api.MethodHandleAPI_foldArguments.test_foldArguments_ArgIndices_CombinerHandle_IntReturnType_IntParam_FoldAtEnd(MethodHandleAPI_foldArguments.java:331)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+	at org.testng.TestRunner.run(TestRunner.java:505)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+	at org.testng.TestNG.runSuites(TestNG.java:1049)
+	at org.testng.TestNG.run(TestNG.java:1017)
+	at org.testng.TestNG.privateMain(TestNG.java:1354)
+	at org.testng.TestNG.main(TestNG.java:1323)
+```

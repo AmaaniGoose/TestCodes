@@ -1,0 +1,11 @@
+Multiple reasons
+- [They are unreliable](https://github.com/adoptium/infrastructure/issues/2087)
+- [They are currently running Ubuntu 16.04](https://github.com/adoptium/infrastructure/issues/1986)
+- Scaleway have indicated that new image creation will be limited from June 1st
+-- **July 1st** will be end of support
+-- **August 1st** will block new C1 instance creations completely, and also BLOCK RESTARTS
+-- **September 1** = final end of life - IPs will be detached from the instance
+
+Based on the instability of the scaleway systems and our need to regularly restart them this means an effective absolute end date of August 1st - just over two months from the date I'm opening this issue.
+
+I have already been looking at alternate options, but clearly the preferred one is to get the pis at the colocation setup at Nine fully up and running.

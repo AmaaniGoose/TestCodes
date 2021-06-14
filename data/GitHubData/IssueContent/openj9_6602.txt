@@ -1,0 +1,52 @@
+Low Throughput  is observed with AcmeAir when running with containers with OpenJ9 when compared against OpenJDK. This behaviour is observed in both JDK8 and JDK11.
+
+Did different set of runs with different options. But still see the regression with OpenJ9.
+
+Below are the % scores of OpenJDK8-OpenJ9 vs OpenJDK8
+
+**OpenJDK8-OpenJ9 Vs OpenJ9**
+
+Instances | % Throughput | %jMEM_max | %jMEM_last5min
+-- | -- | -- | --
+1 | 98.79% | 78.61% | 120.81%
+2 | 90.79% | 84.61% | 135.13%
+3 | 91.23% | 90.32% | 125.90%
+4 | 89.05% | 86.23% | 128.35%
+5 | 91.28% | 85.45% | 130.53%
+6 | 91.79% | 83.49% | 133.71%
+
+
+Below is the individual data:
+
+Openjdk8 |   |   |   |  
+-- | -- | -- | -- | --
+Instances | Throughput | CPU_avg | jMEM_max | jMEM_avg | jMEM_last5min
+1 | 4867 | 69.87 | 316 | 302.51 | 309.32
+2 | 4993 | 79.83 | 632 | 605.91 | 618.47
+3 | 4687 | 81.69 | 933 | 898.8 | 894
+4 | 4584 | 81.86 | 1209 | 1181.67 | 1194.71
+5 | 4451 | 81.69 | 1539 | 1493.8 | 1488.03
+6 | 4336 | 81.52 | 1836 | 1779.43 | 1833.91
+
+
+OpenJDK8-OpenJ9 |   |   |   |  
+-- | -- | -- | -- | --
+Instances | Throughput | CPU_avg | jMEM_max | jMEM_avg | jMEM_last5min
+1 | 4808 | 75.59 | 402 | 226.26 | 256.04
+2 | 4533 | 81.09 | 747 | 452.46 | 457.7
+3 | 4276 | 82.72 | 1033 | 687.25 | 710.11
+4 | 4082 | 81.92 | 1402 | 915.64 | 930.85
+5 | 4063 | 82.07 | 1801 | 1137.13 | 1139.97
+6 | 3980 | 82.57 | 2199 | 1370.65 | 1371.56
+
+
+
+Steps to run the benchmark:
+- Create AcmeAir-liberty docker image.
+- AcmeAir benchmark used :  -b microservice_changes https://github.com/sabkrish/acmeair.git
+- The benchmark is run with 1 to multiple instances. The scores above gives until 6.  
+- Benchmark uses mongoDB as database. 
+- Benchmark is run with 100users and for 900 secs. Requires 4-5 warmups and 3 measurement runs to complete an iteration.  Requires atleast 3 iterations to complete a single run.
+
+Uses jmeter to drive the load. Uploaded the jmx file which we use.
+[AcmeAir.zip](https://github.com/eclipse/openj9/files/3446624/AcmeAir.zip)

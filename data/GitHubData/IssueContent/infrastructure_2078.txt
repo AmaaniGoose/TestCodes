@@ -1,0 +1,19 @@
+I need to request a new machine:
+
+- New machine operating system One CentOS, one Ubuntu
+- New machine architecture: aarch64
+- Provider (leave blank if it does not matter): Equinix
+- Desired usage: test and dockerBuild
+- Any unusual specification/setup required: Machines are already resetved so just need to be installed and set up
+- How many of them are required: 3 (Although I'll start with 2 :-) ) 160 core (2 socket) 3GHz Ampere Altra
+
+Please explain what this machine is needed for: Replacement of previous ThunderX and D05 servers.
+
+NOTE: There is a current issue with Ubuntu 20.04 systems that may cause reboot failures. To avoid the problem, run the following sequence of commands ([taken from here](https://gist.github.com/vielmetti/dafb5128ef7535c218f6d963c5bc624e)) after deploying the OS
+```
+$ apt-get update
+$ apt-get install grub2-common
+$ grub-install --bootloader-id=ubuntu
+Installing for arm64-efi platform.
+Installation finished. No error reported.
+```

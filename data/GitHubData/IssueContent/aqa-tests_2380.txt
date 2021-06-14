@@ -1,0 +1,314 @@
+jdk_instrument_1 and jdk_management_1 look like they require -nativepath ?
+https://ci.adoptopenjdk.net/job/Test_openjdk16_hs_extended.openjdk_s390x_linux/9/consoleFull
+```
+17:29:09  ===============================================
+17:29:09  Running test jdk_instrument_1 ...
+17:29:09  ===============================================
+17:29:09  jdk_instrument_1 Start Time: Thu Mar 11 17:29:09 2021 Epoch Time (ms): 1615483749497
+17:29:09  Nothing to be done for setup.
+17:29:09  variation: Mode650
+17:29:09  JVM_OPTIONS:  -XX:-UseCompressedOops 
+17:29:09  { itercnt=1; \
+17:29:09  mkdir -p "/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/../TKG/output_16154757488369/jdk_instrument_1"; \
+17:29:09  cd "/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/../TKG/output_16154757488369/jdk_instrument_1"; \
+17:29:09  "/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/java" -Xmx512m -jar "/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/../../jvmtest/openjdk/jtreg/lib/jtreg.jar" \
+17:29:09  -agentvm -a -ea -esa -v:fail,error,time,nopass -retain:fail,error,*.dmp,javacore.*,heapdump.*,*.trc -ignore:quiet -timeoutFactor:8 -xml:verify -concurrency:2 -vmoptions:"-Xmx512m  -XX:-UseCompressedOops " \
+17:29:09  -w ""/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/../TKG/output_16154757488369/jdk_instrument_1"/work" \
+17:29:09  -r "/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/../../jvmtest/openjdk/report" \
+17:29:09  -jdk:"/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image" \
+17:29:09  -exclude:"/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/../openjdk/openjdk-jdk/test/jdk/ProblemList.txt" \
+17:29:09  -exclude:"/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/../../jvmtest/openjdk/ProblemList_openjdk16.txt" \
+17:29:09  "/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/../openjdk/openjdk-jdk/test/jdk:jdk_instrument"; \
+17:29:09  if [ $? -eq 0 ] ; then echo ""; echo "jdk_instrument_1""_PASSED"; echo ""; cd /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/..;  else echo ""; echo "jdk_instrument_1""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/../TKG/output_16154757488369/TestTargetResult";
+17:29:09  Directory "/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/../TKG/output_16154757488369/jdk_instrument_1/work" not found: creating
+17:29:12  XML output with verification to /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work
+17:29:22  --------------------------------------------------
+17:29:22  TEST: java/lang/instrument/HiddenClass/HiddenClassAgent.java
+17:29:22  TEST JDK: /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image
+17:29:22  
+17:29:22  ACTION: build -- Passed. Build successful
+17:29:22  REASON: User specified action: run build jdk.test.lib.compiler.CompilerUtils jdk.test.lib.Utils * 
+17:29:22  TIME:   0.481 seconds
+17:29:22  messages:
+17:29:22  command: build jdk.test.lib.compiler.CompilerUtils jdk.test.lib.Utils *
+17:29:22  reason: User specified action: run build jdk.test.lib.compiler.CompilerUtils jdk.test.lib.Utils * 
+17:29:22  Library /test/lib:
+17:29:22    compile: jdk.test.lib.compiler.CompilerUtils, jdk.test.lib.Utils, RedefineClassHelper, ClassFileInstaller
+17:29:22  Test directory:
+17:29:22    compile: HiddenClassAgent, HiddenClassApp
+17:29:22  elapsed time (seconds): 0.481
+17:29:22  
+17:29:22  ACTION: compile -- Passed. Compilation successful
+17:29:22  REASON: .class file out of date or does not exist
+17:29:22  TIME:   0.405 seconds
+17:29:22  messages:
+17:29:22  command: compile /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib/jdk/test/lib/compiler/CompilerUtils.java /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib/jdk/test/lib/Utils.java /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib/RedefineClassHelper.java /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib/ClassFileInstaller.java
+17:29:22  reason: .class file out of date or does not exist
+17:29:22  Additional options from @modules: --add-modules java.instrument,jdk.compiler
+17:29:22  Mode: agentvm
+17:29:22  Agent id: 2
+17:29:22  elapsed time (seconds): 0.405
+17:29:22  configuration:
+17:29:22  Boot Layer (javac runtime environment)
+17:29:22    class path: /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/jvmtest/openjdk/jtreg/lib/javatest.jar 
+17:29:22                /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+17:29:22    patch:      java.base /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/patches/java.base
+17:29:22  
+17:29:22  javac compilation environment
+17:29:22    add modules: java.instrument jdk.compiler
+17:29:22    source path: /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib
+17:29:22    class path:  /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/classes/0/test/lib
+17:29:22  
+17:29:22  rerun:
+17:29:22  cd /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/scratch/0 && \
+17:29:22  DISPLAY=:0 \
+17:29:22  HOME=/home/jenkins \
+17:29:22  LANG=en_US.UTF-8 \
+17:29:22  PATH=/bin:/usr/bin:/usr/sbin \
+17:29:22      /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/javac \
+17:29:22          -J-ea \
+17:29:22          -J-esa \
+17:29:22          -J-Xmx512m \
+17:29:22          -J-XX:-UseCompressedOops \
+17:29:22          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:-UseCompressedOops' \
+17:29:22          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:-UseCompressedOops' \
+17:29:22          -J-Dtest.compiler.opts= \
+17:29:22          -J-Dtest.java.opts= \
+17:29:22          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image \
+17:29:22          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image \
+17:29:22          -J-Dtest.timeout.factor=8.0 \
+17:29:22          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+17:29:22          -J-Dtest.name=java/lang/instrument/HiddenClass/HiddenClassAgent.java \
+17:29:22          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass/HiddenClassAgent.java \
+17:29:22          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass \
+17:29:22          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib \
+17:29:22          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/classes/0/java/lang/instrument/HiddenClass/HiddenClassAgent.d \
+17:29:22          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/classes/0/java/lang/instrument/HiddenClass/HiddenClassAgent.d:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/classes/0/test/lib \
+17:29:22          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/classes/0/test/lib \
+17:29:22          -J-Dtest.modules='java.instrument jdk.compiler' \
+17:29:22          --add-modules java.instrument,jdk.compiler \
+17:29:22          -d /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/classes/0/test/lib \
+17:29:22          -sourcepath /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib \
+17:29:22          -classpath /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/classes/0/test/lib /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib/jdk/test/lib/compiler/CompilerUtils.java /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib/jdk/test/lib/Utils.java /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib/RedefineClassHelper.java /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib/ClassFileInstaller.java
+17:29:22  direct:
+17:29:22  Note: /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib/jdk/test/lib/compiler/InMemoryJavaCompiler.java uses unchecked or unsafe operations.
+17:29:22  Note: Recompile with -Xlint:unchecked for details.
+17:29:22  
+17:29:22  ACTION: compile -- Passed. Compilation successful
+17:29:22  REASON: .class file out of date or does not exist
+17:29:22  TIME:   0.074 seconds
+17:29:22  messages:
+17:29:22  command: compile /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass/HiddenClassAgent.java /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass/HiddenClassApp.java
+17:29:22  reason: .class file out of date or does not exist
+17:29:22  Additional options from @modules: --add-modules java.instrument,jdk.compiler
+17:29:22  Mode: agentvm
+17:29:22  Agent id: 2
+17:29:22  elapsed time (seconds): 0.074
+17:29:22  configuration:
+17:29:22  Boot Layer (javac runtime environment)
+17:29:22    class path: /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/jvmtest/openjdk/jtreg/lib/javatest.jar 
+17:29:22                /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+17:29:22    patch:      java.base /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/patches/java.base
+17:29:22  
+17:29:22  javac compilation environment
+17:29:22    add modules: java.instrument jdk.compiler
+17:29:22    source path: /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass
+17:29:22                 /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib
+17:29:22    class path:  /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass
+17:29:22                 /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/classes/0/java/lang/instrument/HiddenClass/HiddenClassAgent.d
+17:29:22                 /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/classes/0/test/lib
+17:29:22  
+17:29:22  rerun:
+17:29:22  cd /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/scratch/0 && \
+17:29:22  DISPLAY=:0 \
+17:29:22  HOME=/home/jenkins \
+17:29:22  LANG=en_US.UTF-8 \
+17:29:22  PATH=/bin:/usr/bin:/usr/sbin \
+17:29:22      /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/javac \
+17:29:22          -J-ea \
+17:29:22          -J-esa \
+17:29:22          -J-Xmx512m \
+17:29:22          -J-XX:-UseCompressedOops \
+17:29:22          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:-UseCompressedOops' \
+17:29:22          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:-UseCompressedOops' \
+17:29:22          -J-Dtest.compiler.opts= \
+17:29:22          -J-Dtest.java.opts= \
+17:29:22          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image \
+17:29:22          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image \
+17:29:22          -J-Dtest.timeout.factor=8.0 \
+17:29:22          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+17:29:22          -J-Dtest.name=java/lang/instrument/HiddenClass/HiddenClassAgent.java \
+17:29:22          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass/HiddenClassAgent.java \
+17:29:22          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass \
+17:29:22          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib \
+17:29:22          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/classes/0/java/lang/instrument/HiddenClass/HiddenClassAgent.d \
+17:29:22          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/classes/0/java/lang/instrument/HiddenClass/HiddenClassAgent.d:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/classes/0/test/lib \
+17:29:22          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/classes/0/java/lang/instrument/HiddenClass/HiddenClassAgent.d:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/classes/0/test/lib \
+17:29:22          -J-Dtest.modules='java.instrument jdk.compiler' \
+17:29:22          --add-modules java.instrument,jdk.compiler \
+17:29:22          -d /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/classes/0/java/lang/instrument/HiddenClass/HiddenClassAgent.d \
+17:29:22          -sourcepath /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib \
+17:29:22          -classpath /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/classes/0/java/lang/instrument/HiddenClass/HiddenClassAgent.d:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/classes/0/test/lib /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass/HiddenClassAgent.java /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass/HiddenClassApp.java
+17:29:22  direct:
+17:29:22  Note: /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass/HiddenClassApp.java uses or overrides a deprecated API.
+17:29:22  Note: Recompile with -Xlint:deprecation for details.
+17:29:22  
+17:29:22  ACTION: shell -- Passed. Execution successful
+17:29:22  REASON: User specified action: run shell ../MakeJAR3.sh HiddenClassAgent 'Can-Retransform-Classes: true' 
+17:29:22  TIME:   0.699 seconds
+17:29:22  messages:
+17:29:22  command: shell ../MakeJAR3.sh HiddenClassAgent 'Can-Retransform-Classes: true'
+17:29:22  reason: User specified action: run shell ../MakeJAR3.sh HiddenClassAgent 'Can-Retransform-Classes: true' 
+17:29:22  elapsed time (seconds): 0.699
+17:29:22  STDOUT:
+17:29:22  TESTSRC=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass
+17:29:22  TESTJAVA=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image
+17:29:22  COMPILEJAVA=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image
+17:29:22  added manifest
+17:29:22  adding: HiddenClassAgent.class(in = 5283) (out= 2471)(deflated 53%)
+17:29:22  STDERR:
+17:29:22  rerun:
+17:29:22  cd /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/scratch/0 && \
+17:29:22  DISPLAY=:0 \
+17:29:22  HOME=/home/jenkins \
+17:29:22  LANG=en_US.UTF-8 \
+17:29:22  PATH=/bin:/usr/bin:/usr/sbin \
+17:29:22  TESTFILE=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass/HiddenClassAgent.java \
+17:29:22  TESTSRC=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass \
+17:29:22  TESTSRCPATH=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib \
+17:29:22  TESTCLASSES=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/classes/0/java/lang/instrument/HiddenClass/HiddenClassAgent.d \
+17:29:22  TESTCLASSPATH=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/classes/0/java/lang/instrument/HiddenClass/HiddenClassAgent.d:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_instrument_1/work/classes/0/test/lib \
+17:29:22  COMPILEJAVA=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image \
+17:29:22  TESTJAVA=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image \
+17:29:22  TESTVMOPTS='-ea -esa -Xmx512m -XX:-UseCompressedOops' \
+17:29:22  TESTTOOLVMOPTS='-J-ea -J-esa -J-Xmx512m -J-XX:-UseCompressedOops' \
+17:29:22  TESTJAVACOPTS= \
+17:29:22  TESTJAVAOPTS= \
+17:29:22  TESTTIMEOUTFACTOR=8.0 \
+17:29:22  TESTROOT=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+17:29:22  TESTMODULES='java.instrument jdk.compiler' \
+17:29:22  FS=/ \
+17:29:22  PS=: \
+17:29:22  NULL=/dev/null \
+17:29:22      sh \
+17:29:22          /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/instrument/HiddenClass/../MakeJAR3.sh HiddenClassAgent 'Can-Retransform-Classes: true'
+17:29:22  
+17:29:22  ACTION: build -- Passed. All files up to date
+17:29:22  REASON: Named class compiled on demand
+17:29:22  TIME:   0.001 seconds
+17:29:22  messages:
+17:29:22  command: build HiddenClassApp
+17:29:22  reason: Named class compiled on demand
+17:29:22  elapsed time (seconds): 0.001
+17:29:22  
+17:29:22  TEST RESULT: Error. Use -nativepath to specify the location of native code
+17:29:22  --------------------------------------------------
+17:30:26  Test results: passed: 73; error: 1
+```
+
+```
+16:30:14  ===============================================
+16:30:14  Running test jdk_management_1 ...
+16:30:14  ===============================================
+16:30:14  jdk_management_1 Start Time: Thu Mar 11 16:30:10 2021 Epoch Time (ms): 1615480210013
+16:30:14  Nothing to be done for setup.
+16:30:14  variation: Mode650
+16:30:14  JVM_OPTIONS:  -XX:-UseCompressedOops 
+16:30:14  { itercnt=1; \
+16:30:14  mkdir -p "/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/../TKG/output_16154757488369/jdk_management_1"; \
+16:30:14  cd "/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/../TKG/output_16154757488369/jdk_management_1"; \
+16:30:14  "/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/java" -Xmx512m -jar "/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/../../jvmtest/openjdk/jtreg/lib/jtreg.jar" \
+16:30:14  -agentvm -a -ea -esa -v:fail,error,time,nopass -retain:fail,error,*.dmp,javacore.*,heapdump.*,*.trc -ignore:quiet -timeoutFactor:8 -xml:verify -concurrency:2 -vmoptions:"-Xmx512m  -XX:-UseCompressedOops " \
+16:30:14  -w ""/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/../TKG/output_16154757488369/jdk_management_1"/work" \
+16:30:14  -r "/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/../../jvmtest/openjdk/report" \
+16:30:14  -jdk:"/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image" \
+16:30:14  -exclude:"/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/../openjdk/openjdk-jdk/test/jdk/ProblemList.txt" \
+16:30:14  -exclude:"/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/../../jvmtest/openjdk/ProblemList_openjdk16.txt" \
+16:30:14  "/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/../openjdk/openjdk-jdk/test/jdk:jdk_management"; \
+16:30:14  if [ $? -eq 0 ] ; then echo ""; echo "jdk_management_1""_PASSED"; echo ""; cd /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/..;  else echo ""; echo "jdk_management_1""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/../TKG/output_16154757488369/TestTargetResult";
+16:30:14  Directory "/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/../TKG/output_16154757488369/jdk_management_1/work" not found: creating
+16:30:14  XML output with verification to /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_management_1/work
+16:30:52  --------------------------------------------------
+16:30:52  TEST: sun/management/jmxremote/bootstrap/CustomLauncherTest.java
+16:30:52  TEST JDK: /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image
+16:30:52  
+16:30:52  ACTION: build -- Passed. Build successful
+16:30:52  REASON: User specified action: run build TestManager TestApplication CustomLauncherTest 
+16:30:52  TIME:   0.158 seconds
+16:30:52  messages:
+16:30:52  command: build TestManager TestApplication CustomLauncherTest
+16:30:52  reason: User specified action: run build TestManager TestApplication CustomLauncherTest 
+16:30:52  Test directory:
+16:30:52    compile: TestManager, TestApplication, CustomLauncherTest
+16:30:52  elapsed time (seconds): 0.158
+16:30:52  
+16:30:52  ACTION: compile -- Passed. Compilation successful
+16:30:52  REASON: .class file out of date or does not exist
+16:30:52  TIME:   0.158 seconds
+16:30:52  messages:
+16:30:52  command: compile /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/management/jmxremote/bootstrap/TestManager.java /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/management/jmxremote/bootstrap/TestApplication.java /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/management/jmxremote/bootstrap/CustomLauncherTest.java
+16:30:52  reason: .class file out of date or does not exist
+16:30:52  Additional options from @modules: --add-modules java.management,jdk.attach,jdk.management.agent --add-exports jdk.management.agent/jdk.internal.agent=ALL-UNNAMED
+16:30:52  Mode: agentvm
+16:30:52  Agent id: 2
+16:30:52  elapsed time (seconds): 0.158
+16:30:52  configuration:
+16:30:52  Boot Layer (javac runtime environment)
+16:30:52    class path: /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/jvmtest/openjdk/jtreg/lib/javatest.jar 
+16:30:52                /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+16:30:52    patch:      java.base /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_management_1/work/patches/java.base
+16:30:52  
+16:30:52  javac compilation environment
+16:30:52    add modules: java.management jdk.attach jdk.management.agent 
+16:30:52    add exports: jdk.management.agent/jdk.internal.agent ALL-UNNAMED
+16:30:52    source path: /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/management/jmxremote/bootstrap 
+16:30:52                 /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib 
+16:30:52    class path:  /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/management/jmxremote/bootstrap 
+16:30:52                 /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_management_1/work/classes/0/sun/management/jmxremote/bootstrap/CustomLauncherTest.d 
+16:30:52                 /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_management_1/work/classes/0/test/lib 
+16:30:52  
+16:30:52  rerun:
+16:30:52  cd /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_management_1/work/scratch/0 && \
+16:30:52  DISPLAY=:0 \
+16:30:52  HOME=/home/jenkins \
+16:30:52  LANG=en_US.UTF-8 \
+16:30:52  PATH=/bin:/usr/bin:/usr/sbin \
+16:30:52      /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/javac \
+16:30:52          -J-ea \
+16:30:52          -J-esa \
+16:30:52          -J-Xmx512m \
+16:30:52          -J-XX:-UseCompressedOops \
+16:30:52          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:-UseCompressedOops' \
+16:30:52          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:-UseCompressedOops' \
+16:30:52          -J-Dtest.compiler.opts= \
+16:30:52          -J-Dtest.java.opts= \
+16:30:52          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image \
+16:30:52          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image \
+16:30:52          -J-Dtest.timeout.factor=8.0 \
+16:30:52          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+16:30:52          -J-Dtest.name=sun/management/jmxremote/bootstrap/CustomLauncherTest.java \
+16:30:52          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/management/jmxremote/bootstrap/CustomLauncherTest.java \
+16:30:52          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/management/jmxremote/bootstrap \
+16:30:52          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/management/jmxremote/bootstrap:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib \
+16:30:52          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_management_1/work/classes/0/sun/management/jmxremote/bootstrap/CustomLauncherTest.d \
+16:30:52          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_management_1/work/classes/0/sun/management/jmxremote/bootstrap/CustomLauncherTest.d:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_management_1/work/classes/0/test/lib \
+16:30:52          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_management_1/work/classes/0/sun/management/jmxremote/bootstrap/CustomLauncherTest.d:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/management/jmxremote/bootstrap:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_management_1/work/classes/0/test/lib \
+16:30:52          -J-Dtest.modules='java.management jdk.attach jdk.management.agent/jdk.internal.agent' \
+16:30:52          --add-modules java.management,jdk.attach,jdk.management.agent \
+16:30:52          --add-exports jdk.management.agent/jdk.internal.agent=ALL-UNNAMED \
+16:30:52          -d /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_management_1/work/classes/0/sun/management/jmxremote/bootstrap/CustomLauncherTest.d \
+16:30:52          -sourcepath /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/management/jmxremote/bootstrap:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib \
+16:30:52          -classpath /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/management/jmxremote/bootstrap:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_management_1/work/classes/0/sun/management/jmxremote/bootstrap/CustomLauncherTest.d:/home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16154757488369/jdk_management_1/work/classes/0/test/lib /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/management/jmxremote/bootstrap/TestManager.java /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/management/jmxremote/bootstrap/TestApplication.java /home/jenkins/workspace/Test_openjdk16_hs_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/management/jmxremote/bootstrap/CustomLauncherTest.java
+16:30:52  
+16:30:52  ACTION: build -- Passed. All files up to date
+16:30:52  REASON: Named class compiled on demand
+16:30:52  TIME:   0.0 seconds
+16:30:52  messages:
+16:30:52  command: build CustomLauncherTest
+16:30:52  reason: Named class compiled on demand
+16:30:52  elapsed time (seconds): 0.0
+16:30:52  
+16:30:52  TEST RESULT: Error. Use -nativepath to specify the location of native code
+16:30:52  --------------------------------------------------
+16:31:30  Test results: passed: 126; error: 1
+```

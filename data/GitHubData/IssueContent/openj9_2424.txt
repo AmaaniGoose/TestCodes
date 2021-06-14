@@ -1,0 +1,6 @@
+Support inlining of 2 dimensional reference arrays where the second dimension is 0. The inlining sequence allocates N+1 array objects (N being the length of first dimension): 1 "large" array of length N and N "small" arrays of length 0; and the elements of the "large" array of length N point to their respective "small" arrays to form the two dimensions.
+
+Performance implication:
+We observed in benchmarks a large number of multi-dimension array allocations. Further investigation shows much of these are 2-dimensional, and the second dimension is 0. Inlining of these types of arrays would be beneficial as no helper calls would be needed. We observed day trade throughout to improved by ~0.5%.
+
+Support for X implemented in https://github.com/eclipse/openj9/pull/2408

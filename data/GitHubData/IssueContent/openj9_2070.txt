@@ -1,0 +1,23 @@
+A [blog post](https://www.excelsiorjet.com/memory-manager-scalability) by the Excelsior Jet team comparing the performance of OpenJDK with Hotspot, Excelsior Jet 14 and OpenJDK with OpenJ9 claimed that OpenJ9 was not scaling as well as the other two JVMs.  I dug into the results as I wanted to see why OpenJ9s allocator was not scaling as well as the other JVMs.  
+
+After replicating the performance differences I noticed that the main difference in the was actually the time spent performing double math operations.  The benchmark provided a version of the code using boxed Double objects to stress the Memory Manager and one with primitive doubles.  The delta between OpenJ9 and Hotspot on my machine was the same when running the primitive and boxed operations.  This lead me to believe that maybe the issue was actually with double math.
+
+To test my theory I created a new small benchmark that uses approximately the same loop as the original benchmark.  In the modified version I test double, float, long and int primitive types to see how OpenJ9 performs.  You can get a copy of the modified benchmark [here](https://github.com/charliegracie/code-examples/tree/master/java/PrimitiveMathTest).  When running the modified benchmark OpenJ9 was slightly faster than HotSpot for long and int types but slower on double and float types.
+
+This is the loop in question (for the other primitive types the `double` keyword is just replaces with the type being tested):
+```
+public double doDoubleMath(long iterationCount) {
+    double result = 1d;
+    double end = (double)iterationCount;
+    for (double f = 0d; f < end; f++) {
+        result += f / (result + 1);
+    }
+    return result;
+}
+```
+
+My initial theory was that maybe OpenJ9 was not using the most optimized instructions for performing the double math.  After lots of googling and reading the intel hand book I am not sure OpenJ9 could perform any better by just changing the instructions generated.
+
+After some more thought and analysis I realized that with loop unrolling the int and long paths were able to perform some constant folding per unrolled iteration of the loop.  Doubles and floats do not seem to have these same optimizations.  
+
+I think it would be valuable to have these types of optimizations available in OpenJ9 for doubles and floats.

@@ -1,0 +1,94 @@
+jdk_net (HttpURLConWithProxy test) failed with error `java.lang.RuntimeException: Connection not retried with proxy` in Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/4 (internal Jenkins). The failure is intermittent. Failure rate is 9/10. (Grinder_iteration_0/185/)
+
+
+```
+00:43:08.263  TEST: java/net/HttpURLConnection/HttpURLConWithProxy.java
+00:43:08.263  TEST JDK: /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdkbinary/j2sdk-image
+00:43:08.263  
+00:43:08.263  ACTION: build -- Passed. Build successful
+00:43:08.263  REASON: Named class compiled on demand
+00:43:08.263  TIME:   0.11 seconds
+00:43:08.263  messages:
+00:43:08.263  command: build HttpURLConWithProxy
+00:43:08.263  reason: Named class compiled on demand
+00:43:08.263  Test directory:
+00:43:08.263    compile: HttpURLConWithProxy
+00:43:08.263  elapsed time (seconds): 0.11
+00:43:08.263  
+00:43:08.263  ACTION: compile -- Passed. Compilation successful
+00:43:08.263  REASON: .class file out of date or does not exist
+00:43:08.263  TIME:   0.108 seconds
+00:43:08.263  messages:
+00:43:08.263  command: compile /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/HttpURLConnection/HttpURLConWithProxy.java
+00:43:08.263  reason: .class file out of date or does not exist
+00:43:08.263  Mode: agentvm
+00:43:08.263  Agent id: 2
+00:43:08.263  elapsed time (seconds): 0.108
+00:43:08.263  configuration:
+00:43:08.263  Boot Layer (javac runtime environment)
+00:43:08.263    class path: /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/jvmtest/openjdk/jtreg/lib/javatest.jar 
+00:43:08.263                /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+00:43:08.263    patch:      java.base /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdk-tests/TKG/test_output_16017153664273/jdk_net_0/work/patches/java.base
+00:43:08.263  
+00:43:08.263  javac compilation environment
+00:43:08.263    source path: /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/HttpURLConnection
+00:43:08.263    class path:  /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/HttpURLConnection
+00:43:08.264                 /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdk-tests/TKG/test_output_16017153664273/jdk_net_0/work/classes/1/java/net/HttpURLConnection/HttpURLConWithProxy.d
+00:43:08.264  
+00:43:08.264  rerun:
+00:43:08.264  cd /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdk-tests/TKG/test_output_16017153664273/jdk_net_0/work/scratch/0 && \
+00:43:08.264  DISPLAY=:2 \
+00:43:08.264  HOME=/home/jenkins \
+00:43:08.264  LANG=en_US.UTF-8 \
+00:43:08.264  PATH=/bin:/usr/bin:/usr/sbin \
+00:43:08.264      /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdkbinary/j2sdk-image/bin/javac \
+00:43:08.264          -J-ea \
+00:43:08.264          -J-esa \
+00:43:08.264          -J-Xmx512m \
+00:43:08.264          -J-Dtest.vm.opts='-ea -esa -Xmx512m' \
+00:43:08.264          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m' \
+00:43:08.264          -J-Dtest.compiler.opts= \
+00:43:08.264          -J-Dtest.java.opts= \
+00:43:08.264          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdkbinary/j2sdk-image \
+00:43:08.264          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdkbinary/j2sdk-image \
+00:43:08.264          -J-Dtest.timeout.factor=8.0 \
+00:43:08.264          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+00:43:08.264          -J-Dtest.name=java/net/HttpURLConnection/HttpURLConWithProxy.java \
+00:43:08.264          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/HttpURLConnection/HttpURLConWithProxy.java \
+00:43:08.264          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/HttpURLConnection \
+00:43:08.264          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/HttpURLConnection \
+00:43:08.264          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdk-tests/TKG/test_output_16017153664273/jdk_net_0/work/classes/1/java/net/HttpURLConnection/HttpURLConWithProxy.d \
+00:43:08.264          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdk-tests/TKG/test_output_16017153664273/jdk_net_0/work/classes/1/java/net/HttpURLConnection/HttpURLConWithProxy.d \
+00:43:08.264          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdk-tests/TKG/test_output_16017153664273/jdk_net_0/work/classes/1/java/net/HttpURLConnection/HttpURLConWithProxy.d:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/HttpURLConnection \
+00:43:08.264          -d /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdk-tests/TKG/test_output_16017153664273/jdk_net_0/work/classes/1/java/net/HttpURLConnection/HttpURLConWithProxy.d \
+00:43:08.264          -sourcepath /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/HttpURLConnection \
+00:43:08.264          -classpath /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/HttpURLConnection:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdk-tests/TKG/test_output_16017153664273/jdk_net_0/work/classes/1/java/net/HttpURLConnection/HttpURLConWithProxy.d /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/net/HttpURLConnection/HttpURLConWithProxy.java
+00:43:08.264  
+00:43:08.264  ACTION: main -- Failed. Execution failed: `main' threw exception: java.lang.RuntimeException: Connection not retried with proxy
+00:43:08.264  REASON: User specified action: run main/othervm HttpURLConWithProxy 
+00:43:08.264  TIME:   20.778 seconds
+00:43:08.264  messages:
+00:43:08.264  command: main HttpURLConWithProxy
+00:43:08.264  reason: User specified action: run main/othervm HttpURLConWithProxy 
+00:43:08.264  Mode: othervm [/othervm specified]
+00:43:08.264  elapsed time (seconds): 20.778
+00:43:08.264  configuration:
+00:43:08.264  STDOUT:
+00:43:08.264  STDERR:
+00:43:08.264  java.lang.RuntimeException: Connection not retried with proxy
+00:43:08.264  	at HttpURLConWithProxy.main(HttpURLConWithProxy.java:79)
+00:43:08.264  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+00:43:08.264  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+00:43:08.264  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+00:43:08.264  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+00:43:08.264  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+00:43:08.264  	at java.base/java.lang.Thread.run(Thread.java:836)
+00:43:08.264  
+00:43:08.264  JavaTest Message: Test threw exception: java.lang.RuntimeException: Connection not retried with proxy
+00:43:08.264  JavaTest Message: shutting down test
+```
+
+It looks like this is related to https://bugs.openjdk.java.net/browse/JDK-8251361 
+This fix was in on Aug 10, 2020, but it looks like the extension repo has not updated since Mar.
+
+https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/b8c70bbad23e605d20e65cd260f4d4b8ea76da9e/test/jdk/java/net/HttpURLConnection/HttpURLConWithProxy.java

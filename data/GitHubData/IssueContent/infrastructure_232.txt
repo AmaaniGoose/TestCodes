@@ -1,0 +1,5 @@
+I think it would be a good idea to add some more contributing guidelines to the [CONTRIBUTING.md](https://github.com/AdoptOpenJDK/openjdk-infrastructure/blob/master/CONTRIBUTING.md).
+Similar to what what done at eclipse/omr#124.
+It would be nice if we could just copy/paste the relevant sections we want from [OMR's CONTRIBUTING.md](https://github.com/eclipse/omr/blob/master/CONTRIBUTING.md). We would just have to figure out the license/copyright hoops to jump through to do that.
+
+Perhaps @tellison has some insights on the legal aspects?

@@ -1,0 +1,26 @@
+The `MiniMix` load test runs a [mixed load](https://github.com/AdoptOpenJDK/openjdk-systemtest/blob/master/openjdk.test.load/config/inventories/mix/mix-more.xml) of bigdecimal(math), mauve, lang, nio, and concurrent loads.  
+
+@pshipton suggested that we can expand this "MiniMix" example and have a similar but larger, "BigMix" load - which combines loads run by some of the other individual `5m` loads (such as DAA, Math, etc).  
+
+This new `BigMix` can then be run for a longer period of time (e.g. 10m, 20m etc. Moreover, it can replace the individual `5m` variants, whose loads will have been incorporated in the `BigMix`. 
+
+Potential loads for BigMix may include the following (..and more): 
+- [Daa](https://github.com/eclipse/openj9-systemtest/blob/master/openj9.test.load/config/inventories/daa)
+- [GC](https://github.com/eclipse/openj9-systemtest/tree/master/openj9.test.load/config/inventories/gc)
+- [Lang](https://github.com/AdoptOpenJDK/openjdk-systemtest/blob/master/openjdk.test.load/config/inventories/lang/lang.xml)
+- [Math](https://github.com/AdoptOpenJDK/openjdk-systemtest/tree/master/openjdk.test.load/config/inventories/math)
+- [Mauve](https://github.com/AdoptOpenJDK/openjdk-systemtest/tree/master/openjdk.test.load/config/inventories/mauve)
+- [Util](https://github.com/AdoptOpenJDK/openjdk-systemtest/tree/master/openjdk.test.load/config/inventories/util)
+
+**Note:** The "BigMix" may not include STF tests that need to run for specific features such as SharedClasses, Modularity, etc. It may only combine loads that are already running some form of "stress" loads. 
+
+**Pros:** 
+
+- System test builds become faster.
+- We run a combined load for a long period of time which should exercise the JIT in a more "realistic" way (potential for new bugs). 
+
+**Cons:** 
+
+- We _might_ lose on coverage by not running each load separately for `5m`. Need to investigate this further to know for sure. 
+
+@llxia @lumpfish @ShelleyLambert @pshipton - Requesting for your comments on the above. 

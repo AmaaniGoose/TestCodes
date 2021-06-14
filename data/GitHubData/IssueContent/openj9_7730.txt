@@ -1,0 +1,3 @@
+OMR mirrored all of the J9 defines (OMR_x rather than J9VM_x) when it was created, so now we have two versions of a lot of defines, which leads to porting errors, etc.
+
+Wherever an identical OMR define exists, the J9 code should use it, and the J9VM define should be permanently deleted to prevent future uses.

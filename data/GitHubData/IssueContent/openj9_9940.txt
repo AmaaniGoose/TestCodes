@@ -1,0 +1,59 @@
+[A build working with HotSpot fails reproducibly with OpenJ9 8/11/14](https://travis-ci.com/github/DanySK/upgradle/builds/172081040).
+
+This is  a shortened version of the stack error
+```
+Exception in thread "kotest-engine-0" java/lang/StackOverflowError
+	at io/mockk/proxy/jvm/dispatcher/JvmMockKDispatcher.get (java.base@9/JvmMockKDispatcher.java:16)
+	at java/lang/Object.hashCode (java.base@9/Object.java:122)
+	at java/util/HashMap.hash (java.base@9/HashMap.java:340)
+	at java/util/HashMap.get (java.base@9/HashMap.java:558)
+	at jdk/internal/reflect/Reflection.filterMethods (java.base@9/Reflection.java:300)
+	at java/lang/Class.getMethodHelper (java.base@9/Class.java:1417)
+	at java/lang/Class.getMethod (java.base@9/Class.java:1343)
+	at java/lang/Object.hashCode (java.base@9/Object.java:122)
+[...]
+	at java/util/HashMap.hash (java.base@9/HashMap.java:340)
+	at java/util/HashMap.get (java.base@9/HashMap.java:558)
+	at jdk/internal/reflect/Reflection.filterMethods (java.base@9/Reflection.java:300)
+	at java/lang/Class.getMethodHelper (java.base@9/Class.java:1417)
+	at java/lang/Class.getDeclaredMethod (java.base@9/Class.java:1087)
+	at java/lang/Object.clone (java.base@9/Object.java:58)
+	at java/lang/Class.getMethodHelper (java.base@9/Class.java:1406)
+	at java/lang/Class.getMethod (java.base@9/Class.java:1343)
+	at java/lang/Object.equals (java.base@9/Object.java:78)
+	at java/util/ArrayList.remove (java.base@9/ArrayList.java:623)
+	at org/gradle/internal/remote/internal/hub/queue/MultiEndPointQueue.flush (java.base@9/MultiEndPointQueue.java:93)
+	at org/gradle/internal/remote/internal/hub/queue/MultiEndPointQueue.dispatch (java.base@9/MultiEndPointQueue.java:48)
+	at org/gradle/internal/remote/internal/hub/MessageHub$ChannelDispatch.dispatch (java.base@9/MessageHub.java:373)
+	at org/gradle/internal/dispatch/ProxyDispatchAdapter$DispatchingInvocationHandler.invoke (java.base@9/ProxyDispatchAdapter.java:94)
+	at com/sun/proxy/$Proxy5.output (java.base@9/Unknown Source:4294967295)
+	at org/gradle/api/internal/tasks/testing/processors/TestOutputRedirector$Forwarder.onOutput (java.base@9/TestOutputRedirector.java:75)
+	at org/gradle/api/internal/tasks/testing/processors/DefaultStandardOutputRedirector$WriteAction.text (java.base@9/DefaultStandardOutputRedirector.java:89)
+	at org/gradle/internal/io/LineBufferingOutputStream.flush (java.base@9/LineBufferingOutputStream.java:98)
+	at org/gradle/internal/io/LineBufferingOutputStream.write (java.base@9/LineBufferingOutputStream.java:82)
+	at java/io/OutputStream.write (java.base@9/OutputStream.java:162)
+	at java/io/PrintStream.write (java.base@9/PrintStream.java:568)
+	at sun/nio/cs/StreamEncoder.writeBytes (java.base@9/StreamEncoder.java:242)
+	at sun/nio/cs/StreamEncoder.implFlushBuffer (java.base@9/StreamEncoder.java:321)
+	at sun/nio/cs/StreamEncoder.flushBuffer (java.base@9/StreamEncoder.java:110)
+	at java/io/OutputStreamWriter.flushBuffer (java.base@9/OutputStreamWriter.java:181)
+	at java/io/PrintStream.newLine (java.base@9/PrintStream.java:742)
+	at java/io/PrintStream.println (java.base@9/PrintStream.java:890)
+	at org/gradle/internal/io/LinePerThreadBufferingOutputStream.println (java.base@9/LinePerThreadBufferingOutputStream.java:158)
+	at com/ibm/oti/util/Util.appendLnTo (java.base@9/Util.java:272)
+	at java/lang/Throwable.printStackTrace (java.base@9/Throwable.java:562)
+	at java/lang/Throwable.printStackTraceHelper (java.base@9/Throwable.java:334)
+	at java/lang/Throwable.printStackTrace (java.base@9/Throwable.java:303)
+	at java/lang/ThreadGroup.uncaughtException (java.base@9/ThreadGroup.java:873)
+	at java/lang/Thread.uncaughtException (java.base@9/Thread.java:1345)
+```
+
+I'm still trying to figure out how to produce a smaller example.
+Meanwhile, reproduce by:
+```bash
+git clone git@github.com:DanySK/upgradle.git
+git checkout ffb36bb
+./gradlew clean check jacocoTestReport
+```
+
+The issue is reproducible across all OpenJ9 versions, on MacOS, Linux, and Windows.

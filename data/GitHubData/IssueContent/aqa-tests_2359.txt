@@ -1,0 +1,63 @@
+https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_extended.openjdk_x86-64_linux/25/consoleFull
+Hotspot and OpenJ9:
+```
+12:30:22  openjdk version "1.8.0_292"
+12:30:22  OpenJDK Runtime Environment (build 1.8.0_292-202103091156-b05)
+12:30:22  Eclipse OpenJ9 VM (build openj9-0.26.0-m1, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20210309_972 (JIT enabled, AOT enabled)
+12:30:22  OpenJ9   - b227feba2
+12:30:22  OMR      - 4665e2f72
+12:30:22  JCL      - 1780cbc92b based on jdk8u292-b05)
+```
+```
+13:24:56  TEST: java/rmi/registry/readTest/readTest.sh
+13:24:56  TEST JDK: /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image
+13:24:56  
+13:24:56  ACTION: build -- Passed. All files up to date
+13:24:56  REASON: User specified action: run build TestLibrary 
+13:24:56  TIME:   0.0 seconds
+13:24:56  messages:
+13:24:56  command: build TestLibrary
+13:24:56  reason: User specified action: run build TestLibrary 
+13:24:56  elapsed time (seconds): 0.0
+13:24:56  
+13:24:56  ACTION: shell -- Failed. Execution failed: exit code 1
+13:24:56  REASON: User specified action: run shell readTest.sh 
+13:24:56  TIME:   37.995 seconds
+13:24:56  messages:
+13:24:56  command: shell readTest.sh
+13:24:56  reason: User specified action: run shell readTest.sh 
+13:24:56  elapsed time (seconds): 37.995
+13:24:56  STDOUT:
+13:24:56  Test output : 
+13:24:56  ==============
+13:24:56  rmiregistry output  : 
+13:24:56  ==============
+13:24:56  Failed
+13:24:56  STDERR:
+13:24:56  rerun:
+13:24:56  cd /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16152931037345/jdk_rmi_1/work/java/rmi/registry/readTest/readTest && \
+13:24:56  DISPLAY=:0 \
+13:24:56  HOME=/home/jenkins \
+13:24:56  PATH=/bin:/usr/bin:/usr/sbin \
+13:24:56  TESTFILE=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/rmi/registry/readTest/readTest.sh \
+13:24:56  TESTSRC=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/rmi/registry/readTest \
+13:24:56  TESTSRCPATH=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/rmi/registry/readTest:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/rmi/testlibrary \
+13:24:56  TESTCLASSES=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16152931037345/jdk_rmi_1/work/classes/10/java/rmi/registry/readTest \
+13:24:56  TESTCLASSPATH=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16152931037345/jdk_rmi_1/work/classes/10/java/rmi/registry/readTest:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_linux/openjdk-tests/TKG/output_16152931037345/jdk_rmi_1/work/classes/10/java/rmi/testlibrary \
+13:24:56  COMPILEJAVA=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+13:24:56  TESTJAVA=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+13:24:56  TESTVMOPTS='-ea -esa -Xmx512m -XX:-UseCompressedOops' \
+13:24:56  TESTTOOLVMOPTS='-J-ea -J-esa -J-Xmx512m -J-XX:-UseCompressedOops' \
+13:24:56  TESTJAVACOPTS= \
+13:24:56  TESTJAVAOPTS= \
+13:24:56  TESTTIMEOUTFACTOR=8.0 \
+13:24:56  TESTROOT=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test \
+13:24:56  FS=/ \
+13:24:56  PS=: \
+13:24:56  NULL=/dev/null \
+13:24:56      sh \
+13:24:56          /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/rmi/registry/readTest/readTest.sh
+13:24:56  
+13:24:56  TEST RESULT: Failed. Execution failed: exit code 1
+```
+

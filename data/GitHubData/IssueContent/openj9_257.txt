@@ -1,0 +1,5 @@
+OpenJ9 testing requires that you set the `SPEC` environment variable. That variable is also used by JDK compilation, but not with the same value. Testing uses values like `linux_x86-64`, while compilation uses the path to the `spec.gmk` file.
+
+The result is that I can’t run a compile after testing. There are obvious workarounds, but the user has no reason to know that compilation uses the `SPEC` variable or what its value should be.
+
+I think testing should use a different variable name.

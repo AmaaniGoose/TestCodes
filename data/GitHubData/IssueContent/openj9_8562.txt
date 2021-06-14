@@ -1,0 +1,5 @@
+Do it in a similar way as:  https://github.com/ibmruntimes/openj9-openjdk-jdk8/pull/366
+LDR_CNTRL=TEXTPSIZE=64K@DATAPSIZE=64K@STACKPSIZE=64K
+64KB pages will be used for data/text/stack.  you can append @SHMPSIZE=64K as well for shared memory pagesize.
+
+This is for performance.

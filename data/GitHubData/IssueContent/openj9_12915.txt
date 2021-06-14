@@ -1,0 +1,169 @@
+Native stack trace:
+
+```
+4XENATIVESTACK               (0x00002B7CA661E3FA [libj9prt29.so+0x263fa]) : 0x263fa <mainSynchSignalHandler+554> [../../omr/port/unix/omrsignal.c:1070]
+4XENATIVESTACK               (0x00002B7CA46D4630 [libpthread.so.0+0xf630])
+4XENATIVESTACK               (0x00002B7CA5ED528C [libj9vm29.so+0x9c28c]) : 0x9c28c <iterateStackTrace+1804> [exceptiondescribe.c:380]
+4XENATIVESTACK               (0x00002B7CB39D34D5 [libjclse29.so+0x1e4d5]) : 0x1e4d5 <getStackTrace+165> [common/jclexception.c:361]
+4XENATIVESTACK               Java_java_lang_J9VMInternals_getStackTrace+0x30 (0x00002B7CB39D03F0 [libjclse29.so+0x1b3f0])
+4XENATIVESTACK               (0x00002B7CB91E30A1 [<unknown>+0x0])
+```
+```
+> gpinfo
+Failing Thread: !j9vmthread 0x4d26200
+Failing Thread ID: 0x105a6 (66982)
+gpInfo:
+J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000001
+Handler1=00002B7CA5EDD4E0 Handler2=00002B7CA661E1D0 InaccessibleAddress=00000000000001F4
+RDI=000000000041F208 RSI=00000000000001F8 RAX=0000000000416300 RBX=00002B7CA80B60C0
+RCX=000000000041F1E8 RDX=0000000000000000 R8=0000000000000016 R9=000000000041F400
+R10=00000000000001E4 R11=00002B7CF03D93E0 R12=00002B7CF03D9AE0 R13=00002B7CF03AC528
+R14=0000000004D26200 R15=00000000051E4348
+RIP=00002B7CA5ED528C GS=0000 FS=0000 RSP=00002B7CC96208E0
+```
+Relevant source code in file exceptiondescribe.c :
+```
+    277                         /* write as for or move currentElement++ to very end */
+    278                         UDATA methodPC = J9JAVAARRAYOFUDATA_LOAD(vmThread, J9VMJAVALANGTHROWABLE_WALKBACK(vmThread, (*exception)), currentElement);
+
+    346                                         romClass = findROMClassFromPC(vmThread, methodPC, &classLoader);
+    347                                         if (NULL != romClass) {
+    348                                                 J9UTF8 const *utfClassName = J9ROMCLASS_CLASSNAME(romClass);
+    349
+    350                                                 ramClass = peekClassHashTable(vmThread, classLoader, J9UTF8_DATA(utfClassName), J9UTF8_LENGTH(utfClassName));
+    351                                                 if (ramClass == NULL) {
+
+    369                                                 }
+    370
+    371                                                 while (NULL != ramClass) {
+    372                                                         U_32 i = 0;
+    373                                                         J9Method *methods = ramClass->ramMethods;
+    374                                                         for (i = 0; i < romClass->romMethodCount; ++i) {
+    375                                                                 J9ROMMethod *possibleMethod = J9_ROM_METHOD_FROM_RAM_METHOD(&methods[i]);
+    376
+    377                                                                 /* Note that we cannot use `J9_BYTECODE_START_FROM_ROM_METHOD` here because native method PCs
+    378                                                                  * point to the start of the J9ROMMethod data structure
+    379                                                                  */
+    380                                                                 if ((methodPC >= (UDATA)possibleMethod) && (methodPC < (UDATA)J9_BYTECODE_END_FROM_ROM_METHOD(possibleMethod))) {
+    381                                                                         romMethod = possibleMethod;
+    382                                                                         methodPC -= (UDATA)J9_BYTECODE_START_FROM_ROM_METHOD(romMethod);
+    383                                                                         goto foundROMMethod;
+    384                                                                 }
+    385                                                         }
+    386
+    387                                                         ramClass = ramClass->replacedClass;
+    388                                                 }
+
+```
+Listed below are what was happening:
+
+1. At the time of the crash, we are processing the following Exception object:
+
+> j9object 0x00000007DABA84D8
+!J9Object 0x00000007DABA84D8 {
+        struct J9Class* clazz = !j9class 0x2D5F200 // org/xml/sax/SAXParseException
+        Object flags = 0x00000008;
+        I lockword = 0x00000000 (offset = 0) (java/lang/Object) <hidden>
+        Ljava/lang/String; detailMessage = !fj9object 0xfb575061 (offset = 4) (java/lang/Throwable)
+        Ljava/lang/Object; walkback = !fj9object 0xfb5750a2 (offset = 8) (java/lang/Throwable)
+
+
+> stackslots 0x04d26200
+<4d26200> *** BEGIN STACK WALK, flags = 00400001 walkThread = 0x0000000004D26200 ***
+<4d26200>       ITERATE_O_SLOTS
+<4d26200>       RECORD_BYTECODE_PC_OFFSET
+<4d26200> Initial values: walkSP = 0x00000000051E42E0, PC = 0x0000000000000006, literals = 0x0000000000000008, A0 = 0x00000000051E43E0, j2iFrame = 0x00000000051E43D0, ELS = 0x00002B7CC9620BC0, decomp = 0x0000000000000000
+<4d26200> JIT JNI call-out frame: bp = 0x00000000051E4308, sp = 0x00000000051E42E0, pc = 0x0000000000000006, cp = 0x000000000003CEA0, arg0EA = 0x00000000051E43E0, flags = 0x0000000020000000
+<4d26200>       Method: java/lang/J9VMInternals.getStackTrace(Ljava/lang/Throwable;Z)[Ljava/lang/StackTraceElement; !j9method 0x000000000003D7D0
+<4d26200>       Object pushes starting at 0x00000000051E42E0 for 1 slots
+<4d26200>               Push[0x00000000051E42E0] = 0x00000007DABBA190
+<4d26200> JIT frame: bp = 0x00000000051E4338, pc = 0x00002B7CB91E30A4, unwindSP = 0x00000000051E4310, cp = 0x000000000003CEA0, arg0EA = 0x00000000051E4348, jitInfo = 0x00002B7CCC400438
+<4d26200>       Method: java/lang/J9VMInternals.getStackTrace(Ljava/lang/Throwable;Z)[Ljava/lang/StackTraceElement; !j9method 0x000000000003D7D0
+<4d26200>       Bytecode index = -1, inlineDepth = 0, PC offset = 0x00000000000000C8
+<4d26200>       stackMap=0x00002B7CCC400531, slots=I16(0x0002) parmBaseOffset=I16(0x0010), parmSlots=U16(0x0001), localBaseOffset=I16(0x0000)
+<4d26200>       Described JIT args starting at 0x00000000051E4348 for U16(0x0001) slots
+<4d26200>               O-Slot: : a0[0x00000000051E4348] = 0x00000007DABA84D8       <---- This is the object of type org/xml/sax/SAXParseException
+<4d26200>       Described JIT temps starting at 0x00000000051E4338 for IDATA(0x0000000000000000) slots
+	
+	
+2. methodPC was obtained from the walkBack array at line 278, which is still saved in r12:
+
+> findmethodfrompc 0x2b7cf03d9ae0
+Searching for PC=0x00002B7CF03D9AE0 in VM=0x00002B7CA8020720...
+!j9method 0x0000000002D787A8 org/apache/xerces/impl/XMLErrorReporter.reportError(Lorg/apache/xerces/xni/XMLLocator;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;SLjava/lang/Exception;)Ljava/lang/String;
+Bytecode PC offset = 0x0000000000000110
+>
+
+> fj9object 0xfb5750a2
+!J9IndexableObject 0x00000007DABA8510 {
+    struct J9Class* clazz = !j9arrayclass 0x46000   // [J
+    Object flags = 0x00000000;
+    U_32 size = 0x00000031;
+        [0] = 47815606658660, 0x00002b7cf03fe664, 0.00000000F
+        [1] = 47815606658536, 0x00002b7cf03fe5e8, 0.00000000F
+        [2] = 47815606508256, 0x00002b7cf03d9ae0, 0.00000000F  <---
+ 
+
+Note, This methodPC was from  j9class 0x0000000002D78400 which was loaded by j9classloader 0x00002B7D0C1A7868 of type com/ibm/ws/classloader/CompoundClassLoader
+
+
+3. At line 346, we retrieved the romClass and the classLoader from the methodPC (0x2b7cf03d9ae0):
+
+    346                                         romClass = findROMClassFromPC(vmThread, methodPC, &classLoader);
+    
+There exist 2 copies of class XMLErrorReporter :
+
+
+> allclasses | grep org/apache/xerces/impl/XMLErrorReporter
+0x0000000002D78400      0x0000000000000A60      0x00002B7D0C1A7868      0x00002B7CF03D93E0      0       org/apache/xerces/impl/XMLErrorReporter
+0x000000000041F400      0x00000000000009F0      0x00002B7CA809F9C8      0x00002B7CEC7197A8      0       org/apache/xerces/impl/XMLErrorReporter
+0x00002B7CF03D93E0      0x00000C50      0x00002B7CA809F9C8      0x00000021      0x0C010000      org/apache/xerces/impl/XMLErrorReporter
+0x00002B7CEC7197A8      0x00000BE0      0x00002B7CA809F9C8      0x00000021      0x0C010000      org/apache/xerces/impl/XMLErrorReporter
+>
+
+Method findROMClassFromPC() will return j9romclass 0x00002B7CF03D93E0  for romClass, and j9classloader 0x00002B7CA809F9C8 of type com/ibm/oti/vm/BootstrapClassLoader
+
+```
+J9ROMClass * 
+findROMClassFromPC(J9VMThread *vmThread, UDATA methodPC, J9ClassLoader **resultClassLoader)
+{
+	J9JavaVM *javaVM = vmThread->javaVM;
+	J9MemorySegment *segmentForClass;
+	J9ROMClass *romClass = NULL;
+
+	omrthread_monitor_enter(javaVM->classTableMutex);
+	omrthread_monitor_enter(javaVM->classMemorySegments->segmentMutex);
+
+	segmentForClass = findMemorySegment(javaVM, javaVM->classMemorySegments, methodPC);
+	if (segmentForClass != NULL && (segmentForClass->type & MEMORY_TYPE_ROM_CLASS) != 0) {
+		romClass = findROMClassInSegment(vmThread, segmentForClass, methodPC);   <--- Find the first one from the segment (happened to be the correct one).
+		/* Note, for classes from the SharedClasses cache, this will *always* be the vm->systemLoader */
+		*resultClassLoader = segmentForClass->classLoader;	<-- Pretend the classloader is the BootstrapClassLoader (which is wrong!).
+	}
+
+	omrthread_monitor_exit(javaVM->classMemorySegments->segmentMutex);
+	omrthread_monitor_exit(javaVM->classTableMutex);
+
+	return romClass;
+}
+```
+
+4. At line 350, ramClass will be j9class 0x000000000041F400 (survived in r9) from the j9classloader 0x00002B7CA809F9C8 of type com/ibm/oti/vm/BootstrapClassLoader
+
+    350                                                 ramClass = peekClassHashTable(vmThread, classLoader, J9UTF8_DATA(utfClassName), J9UTF8_LENGTH(utfClassName));
+
+Note, we have a mis-match between the ramClass and the romClass here.
+
+5. Crash will happen at line 380 because size of the loop at line 374 (romClass->romMethodCount) is :
+
+> j9romclass 0x00002B7CF03D93E0 | grep romMethodCount
+        0x20: U32 romMethodCount = 0x00000016 (22)
+>
+
+but the ramClass (j9class 0x000000000041F400) only has 20 methods:
+
+> j9class 0x000000000041F400 | grep romclass
+        0x8: struct J9ROMClass * romClass = !j9romclass 0x00002B7CEC7197A8
+> j9romclass 0x00002B7CEC7197A8  | grep romMethodCount
+        0x20: U32 romMethodCount = 0x00000014 (20)
+>

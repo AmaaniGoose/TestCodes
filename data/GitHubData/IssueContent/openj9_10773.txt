@@ -1,0 +1,94 @@
+## Background
+In Skylake and later, the PAUSE instruction takes an order of magnitude more cycles than it did in previous architectures.
+https://aloiskraus.wordpress.com/2018/06/16/why-skylakex-cpus-are-sometimes-50-slower-how-intel-has-broken-existing-code/ provides good background information on this.
+
+From Agner Fog's [instructions table](https://www.agner.org/optimize/instruction_tables.pdf), here are the latencies of the PAUSE instructions on Skylake and previous generations:
+```
+Sandy Bridge    11
+Ivy Bridege     10
+Haswell          9
+Broadwell        9
+SkylakeX       141
+```
+
+## Potential Impact On Locking Code
+Conceptually, the PAUSE instruction should allow other threads to do work, and not block the other threads. However, if PAUSE takes 10x longer, then more time will be spent on spinning. A unit step in the spin code will take more time proportionate to the slowdown in the PAUSE instruction. This will increase the time to acquire a lock between unit steps, thus decreasing the throughput of lock acquiring operations. In this case, CAS might be cheaper than PAUSE instructions in low contention cases.
+
+## Uses of PAUSE insn in OpenJ9/OMR
+In OpenJ9/OMR, PAUSE instruction is used in AtomicOperations::yieldCPU(). 
+Here are the places, where yieldCPU is used:
+
+OpenJ9: https://github.com/eclipse/openj9/search?q=yieldCPU&unscoped_q=yieldCPU
+     BytecodeInterpreter.hpp::inlThreadOnSpinWait
+     FastJNI_java_lang_Thread.cpp::Fast_java_lang_Thread_onSpinWait
+     ObjectMonitor.cpp::spinOnFlatLock [Controllable by cmdline option: spin1/2/yield]
+    ObjectMonitor.cpp::spinOnTryEnter [Controllable by cmdline option: tryenterspin1/2/yield]
+
+OMR: https://github.com/eclipse/omr/search?q=yieldCPU&unscoped_q=yieldCPU
+     LightweightNonReentrantReaderWriterLock.cpp::enterRead 
+     LightweightNonReentrantReaderWriterLock.cpp::enterWrite
+     gcspinlock.cpp::omrgc_spinlock_acquire [Disabled]
+     threadhelpers.cpp::omrthread_mcs_lock
+     threadhelpers.cpp::omrthread_spinlock_acquire [Controllable by cmdline option: threetierspin1/2/3]
+
+## Nested vs Non-Nested Mode
+In the nested mode, the number of PAUSE insns = (yieldCount * spinCount2):
+
+```
+    for (yieldCount) // value = 45
+        for (spinCount2) // value = 32
+            CAS
+            PAUSE
+            for (spinCount1) // value = 256
+                nop
+        sched_yield or usleep
+```
+
+In the non-nested mode, the number of PAUSE insns = spinCount2:
+
+```
+    for (spinCount2) // value = 32
+            CAS
+            PAUSE
+            for (spinCount1) // value = 256
+                nop
+    for (yieldCount - 1) // value = 45 - 1
+        CAS
+        sched_yield or usleep
+```
+
+Note: Non-nested mode is only available for spinOnFlatLock and spinOnTryEnter. 
+
+## Experiments to verify the impact of the PAUSE instruction change
+Currently, we don't have evidence that the PAUSE instruction change has caused a performance regression, so we will run experiments varying the number of PAUSE instructions to see the performance impact. We do this by using command line options to control the number of instructions as mentioned in the above two sections.
+
+Default spin counts:
+`-Xthr:spin1=256,spin2=32,yield=45,tryEnterSpin1=256,tryEnterSpin2=32,tryEnterYield=45,threeTierSpinCount1=256,threeTierSpinCount2=32,threeTierSpinCount3=45`
+
+The below experiments will show if changing the number of PAUSE insns will improve performance:
+[Experiment 1] No spinning (spin-loops may execute ~1 pause per acquire):
+`-Xthr:minimizeUserCPU`
+
+[Experiment 2] Enable non-nested modes:
+`-Xthr:noNestedSpinning,noTryEnterNestedSpinning`
+
+[Experiment 3] Reduce spinCount2 by a factor of 10-15 to account for the slow down in the PAUSE insn:
+`-Xthr:spin1=256,spin2=3,yield=45,tryEnterSpin1=256,tryEnterSpin2=3,tryEnterYield=45,threeTierSpinCount1=256,threeTierSpinCount2=3,threeTierSpinCount3=45`
+
+[Experiment 4] Reduce yieldCount by a factor of 10-15 to account for the slow down in the PAUSE insn:
+`-Xthr:spin1=256,spin2=32,yield=4,tryEnterSpin1=256,tryEnterSpin2=32,tryEnterYield=4,threeTierSpinCount1=256,threeTierSpinCount2=32,threeTierSpinCount3=4`
+
+[Experiment 5] Reduce spinCount2 (by a factor of 3) and yieldCount (by a factor of 5) to account for 15x slow down in PAUSE:
+ `-Xthr:spin1=256,spin2=11,yield=9,tryEnterSpin1=256,tryEnterSpin2=11,tryEnterYield=9,threeTierSpinCount1=256,threeTierSpinCount2=11,threeTierSpinCount3=9`
+
+[Experiment 6] Double the number of PAUSE insn to verify regression:
+` -Xthr:spin1=256,spin2=48,yield=60,tryEnterSpin1=256,tryEnterSpin2=48,tryEnterYield=60,threeTierSpinCount1=256,threeTierSpinCount2=48,threeTierSpinCount3=60`
+
+[Experiment 7] Default parameters
+
+## Benchmarks to be used
+Bumblebench will be used as the framework for these experiments: https://github.com/AdoptOpenJDK/bumblebench/tree/master/net/adoptopenjdk/bumblebench
+Specific benchmark TBD
+
+## Machines to be used
+TBD, but will involve one Skylake machine and one pre-Skylake.

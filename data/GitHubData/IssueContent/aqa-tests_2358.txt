@@ -1,0 +1,72 @@
+https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_extended.openjdk_x86-64_linux/25/consoleFull
+Hotspot and OpenJ9:
+```
+12:30:22  openjdk version "1.8.0_292"
+12:30:22  OpenJDK Runtime Environment (build 1.8.0_292-202103091156-b05)
+12:30:22  Eclipse OpenJ9 VM (build openj9-0.26.0-m1, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20210309_972 (JIT enabled, AOT enabled)
+12:30:22  OpenJ9   - b227feba2
+12:30:22  OMR      - 4665e2f72
+12:30:22  JCL      - 1780cbc92b based on jdk8u292-b05)
+```
+```
+12:57:20  opened: Socket[unconnected]
+12:57:20          java.nio.channels.SocketChannel[unconnected]
+12:57:20  connected: Socket[addr=f097c0fac40a/172.17.0.4,port=41865,localport=58538]
+12:57:20             java.nio.channels.SocketChannel[connected local=localhost/127.0.0.1:58538 remote=f097c0fac40a/172.17.0.4:41865]
+12:57:20  f097c0fac40a/172.17.0.4:41865 says: "Tue Mar 09 12:57:19 UTC 20"
+12:57:20  ishut: java.nio.channels.SocketChannel[connected ishut local=localhost/127.0.0.1:58538 remote=f097c0fac40a/172.17.0.4:41865]
+12:57:20  oshut: java.nio.channels.SocketChannel[connected ishut oshut local=localhost/127.0.0.1:58538 remote=f097c0fac40a/172.17.0.4:41865]
+12:57:20  closed: Socket[unconnected]
+12:57:20          java.nio.channels.SocketChannel[closed]
+12:57:20  
+12:57:20  opened: Socket[unconnected]
+12:57:20          java.nio.channels.SocketChannel[unconnected]
+12:57:20  connected: Socket[addr=f097c0fac40a/172.17.0.4,port=41865,localport=58546]
+12:57:20             java.nio.channels.SocketChannel[connected local=localhost/127.0.0.1:58546 remote=f097c0fac40a/172.17.0.4:41865]
+12:57:20  f097c0fac40a/172.17.0.4:41865 says: "Tue Mar 09 12:57:19 UTC 20"
+12:57:20  ishut: java.nio.channels.SocketChannel[connected ishut local=localhost/127.0.0.1:58546 remote=f097c0fac40a/172.17.0.4:41865]
+12:57:20  oshut: java.nio.channels.SocketChannel[connected ishut oshut local=localhost/127.0.0.1:58546 remote=f097c0fac40a/172.17.0.4:41865]
+12:57:20  closed: Socket[unconnected]
+12:57:20          java.nio.channels.SocketChannel[closed]
+12:57:20  
+12:57:20  opened: Socket[unconnected]
+12:57:20          java.nio.channels.SocketChannel[unconnected]
+12:57:20  connected: Socket[addr=f097c0fac40a/172.17.0.4,port=45183,localport=56156]
+12:57:20             java.nio.channels.SocketChannel[connected local=localhost/127.0.0.1:56156 remote=f097c0fac40a/172.17.0.4:45183]
+12:57:20  f097c0fac40a/172.17.0.4:45183 says: "Tue Mar 09 12:57:19 UTC 20"
+12:57:20  ishut: java.nio.channels.SocketChannel[connected ishut local=localhost/127.0.0.1:56156 remote=f097c0fac40a/172.17.0.4:45183]
+12:57:20  oshut: java.nio.channels.SocketChannel[connected ishut oshut local=localhost/127.0.0.1:56156 remote=f097c0fac40a/172.17.0.4:45183]
+12:57:20  closed: Socket[unconnected]
+12:57:20          java.nio.channels.SocketChannel[closed]
+12:57:20  
+12:57:20  connected: Socket[addr=f097c0fac40a/172.17.0.4,port=38291,localport=58244]
+12:57:20             java.nio.channels.SocketChannel[connected local=localhost/127.0.0.1:58244 remote=f097c0fac40a/172.17.0.4:38291]
+12:57:20  timeout: 0
+12:57:20  
+12:57:20  connected: Socket[addr=f097c0fac40a/172.17.0.4,port=38291,localport=58250]
+12:57:20             java.nio.channels.SocketChannel[connected local=localhost/127.0.0.1:58250 remote=f097c0fac40a/172.17.0.4:38291]
+12:57:20  timeout: 8000
+12:57:20  
+12:57:20  connected: Socket[addr=f097c0fac40a/172.17.0.4,port=33377,localport=45088]
+12:57:20             java.nio.channels.SocketChannel[connected local=localhost/127.0.0.1:45088 remote=f097c0fac40a/172.17.0.4:33377]
+12:57:20  timeout: 10
+12:57:20  Read timed out, as expected
+12:57:20  Read timed out, as expected
+12:57:20  Read timed out, as expected
+12:57:20  Read timed out, as expected
+12:57:20  STDERR:
+12:57:20  java.lang.Exception: Incorrect number of bytes read: 15
+12:57:20  	at AdaptSocket.testRead(AdaptSocket.java:104)
+12:57:20  	at AdaptSocket.testRead(AdaptSocket.java:138)
+12:57:20  	at AdaptSocket.main(AdaptSocket.java:168)
+12:57:20  	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+12:57:20  	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+12:57:20  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+12:57:20  	at java.lang.reflect.Method.invoke(Method.java:498)
+12:57:20  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:312)
+12:57:20  	at java.lang.Thread.run(Thread.java:823)
+12:57:20  
+12:57:20  JavaTest Message: Test threw exception: java.lang.Exception
+```
+
+

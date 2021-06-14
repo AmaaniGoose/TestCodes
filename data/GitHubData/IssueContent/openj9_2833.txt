@@ -1,0 +1,9 @@
+java/lang/Integer has a static compare function which takes two ints and does something like:
+```
+if (x < y)
+  return -1;
+if (x == y)
+  return 0;
+return 1;
+```
+We should recognize this method and just compare x and y once and use the condition codes to compute the result (0, 1, -1). I believe there are similar methods for the other primitive integer types. This would probably be a recognized method, a dontInline if codegen supported, and a case in the codegens to handle the specific assembly sequence.

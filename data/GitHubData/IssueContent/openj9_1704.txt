@@ -1,0 +1,216 @@
+root@user-Aspire-ES1-431:~# docker run -d -p 8080:8080 -e DOCKER_HOST_IP=192.168.100.132 -e IBM_JAVA_OPTIONS="-Dcom.ibm.tools.attach.logging=yes" --ipc=host --net=host -v /tmp:/tmp kubaseai/bw-time
+
+I'm able to connect with jconsole using Attach API (/tmp directory + semaphore + TCP/IP).
+
+When I remove --net=host JVM inside has got different meaning of localhost than jconsole.
+I guess that something like this should help:
+
+```
+diff --git a/jdk/src/jdk.management.agent/share/classes/sun/management/jmxremote/ConnectorBootstrap.java b/jdk/src/jdk.management.agent/share/classes/sun/management/jmxremote/ConnectorBootstrap.java
+index d161593401..cc83a2b8c4 100644
+--- a/jdk/src/jdk.management.agent/share/classes/sun/management/jmxremote/ConnectorBootstrap.java
++++ b/jdk/src/jdk.management.agent/share/classes/sun/management/jmxremote/ConnectorBootstrap.java
+@@ -535,7 +535,12 @@ public final class ConnectorBootstrap {
+ 
+         MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
+         try {
+-            JMXServiceURL url = new JMXServiceURL("rmi", localhost, 0);
++           int port = 0;
++           try {
++               port = Integer.valueOf(System.getProperty("java.rmi.server.port"));
++           }
++           catch (Exception exc) {}
++            JMXServiceURL url = new JMXServiceURL("rmi", localhost, port);
+             // Do we accept connections from local interfaces only?
+             Properties props = Agent.getManagementProperties();
+             if (props ==  null) {
+
+
+diff --git a/jcl/src/java.base/share/classes/com/ibm/tools/attach/target/Attachment.java b/jcl/src/java.base/share/classes/com/ibm/tools/attach
+/target/Attachment.java
+index 82325437..1c494176 100644
+--- a/jcl/src/java.base/share/classes/com/ibm/tools/attach/target/Attachment.java
++++ b/jcl/src/java.base/share/classes/com/ibm/tools/attach/target/Attachment.java
+@@ -61,6 +61,7 @@ final class Attachment extends Thread implements Response {
+        private final String key;
+        private static final String START_REMOTE_MANAGEMENT_AGENT = "startRemoteManagementAgent"; //$NON-NLS-1$
+        private static final String START_LOCAL_MANAGEMENT_AGENT = "startLocalManagementAgent"; //$NON-NLS-1$
++       private static final String HOSTNAME_OVERRIDE_PROPERTY = "com.ibm.tools.attach.target.hostname"; //$NON-NLS-1$
+ 
+        private static final class MethodRefsHolder {
+                static Method startLocalManagementAgentMethod = null;
+@@ -109,6 +110,19 @@ final class Attachment extends Thread implements Response {
+                setDaemon(true);
+        }
+ 
++       static String getOverridenLocalHostName() {
++               /** In case we are crossing (Docker) container boundaries
++                 * we have two different localhosts - the one we
++                 * are attaching from into container is 'external' localhost.
++                 * Let's allow for accessing it with overriden hostname */
++
++               /** from JavaDoc InetAddress.getByName: If the host is null then an InetAddress
++                 * representing an address of the loopback interface is returned */
++
++               return System.getProperty(HOSTNAME_OVERRIDE_PROPERTY);
++       }
++       
++           
+        /**
+         * Create an attachment with a socket connection to the attacher
+         * 
+@@ -118,7 +132,7 @@ final class Attachment extends Thread implements Response {
+         */
+        boolean connectToAttacher(int portNum) {
+                try {
+-                       InetAddress localHost = InetAddress.getLoopbackAddress();
++                       InetAddress localHost = InetAddress.getByName(getOverridenLocalHostName());
+                        attacherSocket = new Socket(localHost, portNum);
+                        IPC.logMessage("connectToAttacher localPort=",  attacherSocket.getLocalPort(), " remotePort=", Integer.toString(attacherSocket.getPort())); //$NON-NLS-1$//$NON-NLS-2$
+                        responseStream = attacherSocket.getOutputStream();
+```
+root@user-Aspire-ES1-431:~# docker run -d -p 8080:8080 -p 10200:10200 -e DOCKER_HOST_IP=192.168.100.132 -e IBM_JAVA_OPTIONS="-Dcom.ibm.tools.attach.logging=yes -Djava.rmi.server.port=10200 -Dcom.sun.management.jmxremote.local.only=false" --ipc=host -v /tmp:/tmp -v /root/tmp/openj9-openjdk-jdk9/build/linux-x86_64-normal-server-release/images/jdk:/opt/java/openjdk/jdk-9 kubaseai/bw-time
+3a6e21ca59194231cc5e31d2b291e6f6b03ce3e6b950a12d65c83394d4bd029e
+```
+root@user-Aspire-ES1-431:~# docker logs 3a6
+Starting Tibco EAI stack with projects/BW-HTTP-Time
+JAVA_HOME is /opt/java/openjdk/jdk-9
+Using property file /opt/tibco/project.tra
+Using work space directory /opt/tibco/bw/5.13/bin/working/3a6e21ca5919
+Creating trace file /opt/tibco/bw/5.13/bin/logs/3a6e21ca5919.log
+Using XMLReader org.apache.xerces.jaxp.SAXParserImpl$JAXPSAXParser
+2018 Apr 18 18:29:46:038 GMT +0000 BW.3a6e21ca5919 Info [BW-Core] BWENGINE-300001 Process Engine version 5.13.0, build V24, 2015-8-11 
+2018 Apr 18 18:29:46:057 GMT +0000 BW.3a6e21ca5919 Info [BW-Core] BWENGINE-300009 BW Plugins: version 5.13.0, build V24, 2015-8-11 
+2018 Apr 18 18:29:46:067 GMT +0000 BW.3a6e21ca5919 Info [BW-Core] BWENGINE-300010 XML Support: TIBCOXML Version 5.60.0.003 
+2018 Apr 18 18:29:46:068 GMT +0000 BW.3a6e21ca5919 Info [BW-Core] BWENGINE-300011 Java version: Eclipse OpenJ9 VM master-4c8cdb8 
+2018 Apr 18 18:29:46:069 GMT +0000 BW.3a6e21ca5919 Info [BW-Core] BWENGINE-300012 OS version: amd64 Linux 4.15.0-13-generic 
+2018 Apr 18 18:29:48:550 GMT +0000 BW.3a6e21ca5919 Info [BW-Core] BWENGINE-300013 Tibrv string encoding: UTF-8 
+2018 Apr 18 18:29:48:834 GMT +0000 BW.3a6e21ca5919 Warn [BW_Core]  Duplicate message map entry for BW-HTTP-100118 
+2018 Apr 18 18:29:48:834 GMT +0000 BW.3a6e21ca5919 Warn [BW_Core]  Duplicate message map entry for BW-HTTP-100206 
+2018 Apr 18 18:29:49:914 GMT +0000 BW.3a6e21ca5919 Info [BW_Plugin] BW-HTTP-100500 Using the following HTTP minProcessors/maxProcessors [host=localhost  port=8080]: 10/75 
+creating file: /opt/tibco/bw/5.13/bin/working/3a6e21ca5919/internal/nextJobidBlock
+2018 Apr 18 18:29:50:784 GMT +0000 BW.3a6e21ca5919 Info [BW-Core] BWENGINE-300002 Engine 3a6e21ca5919 started 
+Using JMX MBean name [com.tibco.bw:key=engine,name="3a6e21ca5919"]
+Create web.xml file structure in: /opt/tibco/bw/5.13/bin/working/3a6e21ca5919
+Creating Host for: /opt/tibco/bw/5.13/bin/working/3a6e21ca5919/tomcat/webapps
+root@user-Aspire-ES1-431:~# 
+
+root@user-Aspire-ES1-431:~# docker container exec 3a6 cat /opt/tibco/bw/5.13/bin/25.log
+1524076184204 25: 23 [Attach API initializer]: AttachHandler initialize
+1524076184211 25: 23 [Attach API initializer]: IPC Directory=/tmp/.com_ibm_tools_attach
+1524076184212 25: 23 [Attach API initializer]: createDirectoryAndSemaphore /tmp/.com_ibm_tools_attach
+1524076184214 25: 23 [Attach API initializer]: non-blocking locking file /tmp/.com_ibm_tools_attach/_master
+1524076184216 25: 23 [Attach API initializer]: deleteStaleDirectories checking _master
+1524076184217 25: 23 [Attach API initializer]: AttachHandler obtained master lock
+1524076184221 25: 23 [Attach API initializer]: locking file /tmp/.com_ibm_tools_attach/_attachlock
+1524076184224 25: 23 [Attach API initializer]: createAdvertisementFile /tmp/.com_ibm_tools_attach/25/attachInfo
+1524076184225 25: 23 [Attach API initializer]: unlocking file /tmp/.com_ibm_tools_attach/_attachlock
+1524076184226 25: 23 [Attach API initializer]: unlocking file /tmp/.com_ibm_tools_attach/_master
+1524076184228 25: 25 [Attach API wait loop]: iteration 0 waitForNotification ignoreNotification entering
+1524076184229 25: 25 [Attach API wait loop]: iteration 0 waitForNotification ignoreNotification entered
+1524076184230 25: 25 [Attach API wait loop]: iteration 0 waitForNotification starting wait
+1524076335212 25: 25 [Attach API wait loop]: iteration 0 waitForNotification ended wait
+1524076335214 25: 25 [Attach API wait loop]: 0 connectToAttacher reply on port 35543
+1524076335217 25: 25 [Attach API wait loop]: checkReplyAndCreateAttachment iteration 0 waitForNotification obtainLock
+1524076335218 25: 25 [Attach API wait loop]: locking file /tmp/.com_ibm_tools_attach/25/attachNotificationSync
+1524076335219 25: 93 [Attachment 35543]: Attachment run
+1524076335220 25: 25 [Attach API wait loop]: lock failed, trying blocking lock
+1524076335229 25: 93 [Attachment 35543]: connectToAttacher localPort=42672 remotePort=35543
+1524076335232 25: 93 [Attachment 35543]: streamSend ATTACH_CONNECTED 3ee8072a 
+1524076335236 25: 25 [Attach API wait loop]: Blocking lock succeeded
+1524076335236 25: 25 [Attach API wait loop]: iteration 0 checkReplyAndCreateAttachment releaseLock
+1524076335237 25: 25 [Attach API wait loop]: unlocking file /tmp/.com_ibm_tools_attach/25/attachNotificationSync
+1524076335237 25: 25 [Attach API wait loop]: closing /tmp/.com_ibm_tools_attach/25/attachNotificationSync
+1524076335237 25: 93 [Attachment 35543]: doCommand ATTACH_GETAGENTPROPERTIES
+1524076335344 25: 93 [Attachment 35543]: doCommand ATTACH_DETACH
+1524076335346 25: 93 [Attachment 35543]: streamSend ATTACH_DETACHED
+1524076336239 25: 25 [Attach API wait loop]: iteration 1 waitForNotification ignoreNotification entering
+1524076336240 25: 25 [Attach API wait loop]: iteration 1 waitForNotification ignoreNotification entered
+1524076336240 25: 25 [Attach API wait loop]: iteration 1 waitForNotification starting wait
+1524076336240 25: 25 [Attach API wait loop]: iteration 1 waitForNotification ended wait
+1524076336241 25: 25 [Attach API wait loop]: 1 connectToAttacher reply on port 40657
+1524076336242 25: 25 [Attach API wait loop]: checkReplyAndCreateAttachment iteration 1 waitForNotification obtainLock
+1524076336242 25: 95 [Attachment 40657]: Attachment run
+1524076336245 25: 95 [Attachment 40657]: connectToAttacher localPort=54314 remotePort=40657
+1524076336246 25: 95 [Attachment 40657]: streamSend ATTACH_CONNECTED 6ba9c1cb 
+1524076336248 25: 25 [Attach API wait loop]: locking file /tmp/.com_ibm_tools_attach/25/attachNotificationSync
+1524076336249 25: 25 [Attach API wait loop]: lock failed, trying blocking lock
+1524076336250 25: 25 [Attach API wait loop]: Blocking lock succeeded
+1524076336250 25: 25 [Attach API wait loop]: iteration 1 checkReplyAndCreateAttachment releaseLock
+1524076336251 25: 25 [Attach API wait loop]: unlocking file /tmp/.com_ibm_tools_attach/25/attachNotificationSync
+1524076336252 25: 95 [Attachment 40657]: doCommand ATTACH_GETAGENTPROPERTIES
+1524076336252 25: 25 [Attach API wait loop]: closing /tmp/.com_ibm_tools_attach/25/attachNotificationSync
+1524076336340 25: 95 [Attachment 40657]: doCommand ATTACH_DETACH
+1524076336341 25: 95 [Attachment 40657]: streamSend ATTACH_DETACHED
+1524076337253 25: 25 [Attach API wait loop]: iteration 2 waitForNotification ignoreNotification entering
+1524076337255 25: 25 [Attach API wait loop]: iteration 2 waitForNotification ignoreNotification entered
+1524076337257 25: 25 [Attach API wait loop]: iteration 2 waitForNotification starting wait
+1524076341925 25: 25 [Attach API wait loop]: iteration 2 waitForNotification ended wait
+1524076341926 25: 25 [Attach API wait loop]: 2 connectToAttacher reply on port 33093
+1524076341927 25: 96 [Attachment 33093]: Attachment run
+1524076341927 25: 25 [Attach API wait loop]: checkReplyAndCreateAttachment iteration 2 waitForNotification obtainLock
+1524076341928 25: 25 [Attach API wait loop]: locking file /tmp/.com_ibm_tools_attach/25/attachNotificationSync
+1524076341928 25: 96 [Attachment 33093]: connectToAttacher localPort=39448 remotePort=33093
+1524076341929 25: 96 [Attachment 33093]: streamSend ATTACH_CONNECTED 472cf783 
+1524076341931 25: 25 [Attach API wait loop]: lock failed, trying blocking lock
+1524076341936 25: 25 [Attach API wait loop]: Blocking lock succeeded
+1524076341936 25: 25 [Attach API wait loop]: iteration 2 checkReplyAndCreateAttachment releaseLock
+1524076341937 25: 25 [Attach API wait loop]: unlocking file /tmp/.com_ibm_tools_attach/25/attachNotificationSync
+1524076341937 25: 25 [Attach API wait loop]: closing /tmp/.com_ibm_tools_attach/25/attachNotificationSync
+1524076341938 25: 96 [Attachment 33093]: doCommand ATTACH_GETAGENTPROPERTIES
+1524076342024 25: 96 [Attachment 33093]: doCommand ATTACH_DETACH
+1524076342026 25: 96 [Attachment 33093]: streamSend ATTACH_DETACHED
+1524076342938 25: 25 [Attach API wait loop]: iteration 3 waitForNotification ignoreNotification entering
+1524076342938 25: 25 [Attach API wait loop]: iteration 3 waitForNotification ignoreNotification entered
+1524076342939 25: 25 [Attach API wait loop]: iteration 3 waitForNotification starting wait
+1524076342939 25: 25 [Attach API wait loop]: iteration 3 waitForNotification ended wait
+1524076342940 25: 25 [Attach API wait loop]: 3 connectToAttacher reply on port 46631
+1524076342940 25: 97 [Attachment 46631]: Attachment run
+1524076342941 25: 25 [Attach API wait loop]: checkReplyAndCreateAttachment iteration 3 waitForNotification obtainLock
+1524076342941 25: 25 [Attach API wait loop]: locking file /tmp/.com_ibm_tools_attach/25/attachNotificationSync
+1524076342941 25: 97 [Attachment 46631]: connectToAttacher localPort=51716 remotePort=46631
+1524076342942 25: 25 [Attach API wait loop]: lock failed, trying blocking lock
+1524076342942 25: 97 [Attachment 46631]: streamSend ATTACH_CONNECTED e2fbae18 
+1524076342947 25: 25 [Attach API wait loop]: Blocking lock succeeded
+1524076342947 25: 25 [Attach API wait loop]: iteration 3 checkReplyAndCreateAttachment releaseLock
+1524076342947 25: 25 [Attach API wait loop]: unlocking file /tmp/.com_ibm_tools_attach/25/attachNotificationSync
+1524076342948 25: 25 [Attach API wait loop]: closing /tmp/.com_ibm_tools_attach/25/attachNotificationSync
+1524076342953 25: 97 [Attachment 46631]: doCommand ATTACH_START_LOCAL_MANAGEMENT_AGENT
+1524076342953 25: 97 [Attachment 46631]: startLocalAgent
+1524076342956 25: 97 [Attachment 46631]: com.sun.management.jmxremote.localConnectorAddress=service:jmx:rmi://127.0.0.1:10200/stub/rO0ABXNyAC5qYXZheC5tYW5hZ2VtZW50LnJlbW90ZS5ybWkuUk1JU2VydmVySW1wbF9TdHViAAAAAAAAAAICAAB4cgAaamF2YS5ybWkuc2VydmVyLlJlbW90ZVN0dWLp/tzJi+FlGgIAAHhyABxqYXZhLnJtaS5zZXJ2ZXIuUmVtb3RlT2JqZWN002G0kQxhMx4DAAB4cHczAApVbmljYXN0UmVmAAoxNzIuMTcuMC4yAAAn2N1ZdpGTkTMNe2nJCwAAAWLaBQHYgAIAeA==
+1524076342956 25: 97 [Attachment 46631]: streamSend ATTACH_RESULT=service:jmx:rmi://192.168.100.132:10200/stub/rO0ABXNyAC5qYXZheC5tYW5hZ2VtZW50LnJlbW90ZS5ybWkuUk1JU2VydmVySW1wbF9TdHViAAAAAAAAAAICAAB4cgAaamF2YS5ybWkuc2VydmVyLlJlbW90ZVN0dWLp/tzJi+FlGgIAAHhyABxqYXZhLnJtaS5zZXJ2ZXIuUmVtb3RlT2JqZWN002G0kQxhMx4DAAB4cHczAApVbmljYXN0UmVmAAoxNzIuMTcuMC4yAAAn2N1ZdpGTkTMNe2nJCwAAAWLaBQHYgAIAeA==
+1524076343043 25: 97 [Attachment 46631]: doCommand ATTACH_GETAGENTPROPERTIES
+1524076343132 25: 97 [Attachment 46631]: doCommand ATTACH_DETACH
+1524076343132 25: 97 [Attachment 46631]: streamSend ATTACH_DETACHED
+1524076343949 25: 25 [Attach API wait loop]: iteration 4 waitForNotification ignoreNotification entering
+1524076343951 25: 25 [Attach API wait loop]: iteration 4 waitForNotification ignoreNotification entered
+1524076343952 25: 25 [Attach API wait loop]: iteration 4 waitForNotification starting wait
+1524076447926 25: 25 [Attach API wait loop]: iteration 4 waitForNotification ended wait
+1524076447927 25: 25 [Attach API wait loop]: connectToAttacher 4 waitForNotification no reply file
+1524076447927 25: 25 [Attach API wait loop]: checkReplyAndCreateAttachment iteration 4 waitForNotification obtainLock
+1524076447928 25: 25 [Attach API wait loop]: locking file /tmp/.com_ibm_tools_attach/25/attachNotificationSync
+1524076447928 25: 25 [Attach API wait loop]: iteration 4 checkReplyAndCreateAttachment releaseLock
+1524076447929 25: 25 [Attach API wait loop]: unlocking file /tmp/.com_ibm_tools_attach/25/attachNotificationSync
+1524076447929 25: 25 [Attach API wait loop]: closing /tmp/.com_ibm_tools_attach/25/attachNotificationSync
+1524076447930 25: 25 [Attach API wait loop]: IOException unlocking file /tmp/.com_ibm_tools_attach/25/attachNotificationSync
+java.nio.channels.ClosedChannelException
+	at sun.nio.ch.FileLockImpl.release(java.base@9.0.4-internal/FileLockImpl.java:58)
+	at com.ibm.tools.attach.target.FileLock.unlockFile(java.base@9.0.4-internal/FileLock.java:130)
+	at com.ibm.tools.attach.target.WaitLoop.checkReplyAndCreateAttachment(java.base@9.0.4-internal/WaitLoop.java:135)
+	at com.ibm.tools.attach.target.WaitLoop.waitForNotification(java.base@9.0.4-internal/WaitLoop.java:115)
+	at com.ibm.tools.attach.target.WaitLoop.run(java.base@9.0.4-internal/WaitLoop.java:152)
+1524076448932 25: 25 [Attach API wait loop]: iteration 5 waitForNotification ignoreNotification entering
+1524076448933 25: 25 [Attach API wait loop]: iteration 5 waitForNotification ignoreNotification entered
+1524076448934 25: 25 [Attach API wait loop]: iteration 5 waitForNotification starting wait
+root@user-Aspire-ES1-431:~# 
+
+```
+Returned RMI address is of stub form:
+service:jmx:rmi://127.0.0.1/stub/rO0ABXNyAC5qYXZheC5tYW5hZ2VtZW50LnJlbW90ZS5ybWkuUk1JU2VydmVySW1wbF9TdHViAAAAAAAAAAICAAB4cgAaamF2YS5ybWkuc2VydmVyLlJlbW90ZVN0dWLp/tzJi+FlGgIAAHhyABxqYXZhLnJtaS5zZXJ2ZXIuUmVtb3RlT2JqZWN002G0kQxhMx4DAAB4cHc4AApVbmljYXN0UmVmAA8xOTIuMTY4LjEwMC4xMzIAAKjrq6UxzCqdRssPFdVZAAABYtC1HbGAAgB4
+
+After base64 -d:
+��sr.javax.management.remote.rmi.RMIServerImpl_Stubxrjava.rmi.server.RemoteStub���ɋ�exrjava.rmi.server.RemoteObject�a��
+                                             a3xpw8
+UnicastRef192.168.100.132�뫥1�*�F��Ybе��x
+
+Would it be possible to pass object implementing specific access?

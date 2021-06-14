@@ -1,0 +1,63 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk16_j9_special.system_s390x_linux_Personal_testList_2/13
+ub18-390-1
+ParallelStreamsLoadTest_special_J9_15
+variation: Mode555
+JVM_OPTIONS:  -XX:+UseCompressedOops -Xgcpolicy:balanced -Xjit:counts=- - - - - - 1 1 1 1000 250 250 - - - 10000 100000 10000,gcOnResolve,rtResolve,sampleInterval=2,scorchingSampleThreshold=10000,quickProfile -Xcheck:gc:vmthreads:all:quiet 
+
+https://140-211-168-230-openstack.osuosl.org/artifactory/ci-eclipse-openj9/Test/Test_openjdk16_j9_special.system_s390x_linux_Personal_testList_2/13/system_test_output.tar.gz
+https://140-211-168-230-openstack.osuosl.org/artifactory/ci-eclipse-openj9/Build_JDK16_s390x_linux_Personal/92/OpenJ9-JDK16-s390x_linux-20210515-063703.tar.gz
+https://140-211-168-230-openstack.osuosl.org/artifactory/ci-eclipse-openj9/Build_JDK16_s390x_linux_Personal/92//debug-image.tar.gz
+```
+LT  14:29:16.178 - Completed 100.0%. Number of tests started=2 (+0)
+LT  stderr 14:29:35.149 0x16d8900j9codertvm(j9ji.105    *   ** ASSERTION FAILED ** at /home/jenkins/workspace/Build_JDK16_s390x_linux_Personal/openj9/runtime/codert_vm/cnathelp.cpp:125: (!((0 != (((iTableOffset)) & ((1))))))
+LT  stderr JVMDUMP039I Processing dump event "traceassert", detail "" at 2021/05/15 14:29:35 - please wait.
+LT  stderr JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test_openjdk16_j9_special.system_s390x_linux_Personal_testList_2/openjdk-tests/TKG/output_16210796471323/ParallelStreamsLoadTest_special_J9_15/20210515-142812-ParallelStreamsLoadTest/results/core.20210515.142935.9275.0001.dmp' in response to an event
+LT  stderr JVMPORT030W /proc/sys/kernel/core_pattern setting "|/usr/share/apport/apport %p %s %c %d %P %E" specifies that the core dump is to be piped to an external program.  Attempting to rename either core or core.9371.
+LT  stderr 
+LT  stderr JVMDUMP010I System dump written to /home/jenkins/workspace/Test_openjdk16_j9_special.system_s390x_linux_Personal_testList_2/openjdk-tests/TKG/output_16210796471323/ParallelStreamsLoadTest_special_J9_15/20210515-142812-ParallelStreamsLoadTest/results/core.20210515.142935.9275.0001.dmp
+LT  stderr Unhandled exception
+LT  stderr Type=Segmentation error vmState=0x0002000f
+LT  stderr J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000001
+LT  stderr Handler1=000003FFB54C7410 Handler2=000003FFB53B2190 InaccessibleAddress=01414EFFFFFFF000
+LT  stderr gpr0=00000000016E09F8 gpr1=0000000000000060 gpr2=01414F0000000000 gpr3=000000002CE976D8
+LT  stderr gpr4=FEBEB10010BD8270 gpr5=0000000000000060 gpr6=000003FFB56B1949 gpr7=00000000016E0578
+LT  stderr gpr8=0000000004600006 gpr9=0000000000000000 gpr10=0000000001344600 gpr11=000003FFB46FE170
+LT  stderr gpr12=000003FFB68A6000 gpr13=0000000000000000 gpr14=2CE976E800000000 gpr15=000003FFB46FDFE0
+LT  stderr psw=000003FFB550F9D4 mask=0705100180000000 fpc=00c80000 bea=000003FFB550F942
+LT  stderr fpr0 4194a00000000000 (f: 0.000000, d: 8.650752e+07)
+LT  stderr fpr1 4194a00000000000 (f: 0.000000, d: 8.650752e+07)
+LT  stderr fpr2 41d4a00000000000 (f: 0.000000, d: 1.384120e+09)
+LT  stderr fpr3 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+LT  stderr fpr4 4030000000000000 (f: 0.000000, d: 1.600000e+01)
+LT  stderr fpr5 0000000000001000 (f: 4096.000000, d: 2.023693e-320)
+LT  stderr fpr6 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+LT  stderr fpr7 000002aa157d3730 (f: 360527680.000000, d: 1.447379e-311)
+LT  stderr fpr8 0000000000041000 (f: 266240.000000, d: 1.315400e-318)
+LT  stderr fpr9 000003ffdfafbbe0 (f: 3752836096.000000, d: 2.172656e-311)
+LT  stderr fpr10 000003ffb46bf000 (f: 3026972672.000000, d: 2.172297e-311)
+LT  stderr fpr11 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+LT  stderr fpr12 0005c25f2bb11bbc (f: 733027264.000000, d: 8.009243e-309)
+LT  stderr fpr13 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+LT  stderr fpr14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+LT  stderr fpr15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+LT  stderr Module=/home/jenkins/workspace/Test_openjdk16_j9_special.system_s390x_linux_Personal_testList_2/openjdkbinary/j2sdk-image/lib/default/libj9vm29.so
+LT  stderr Module_base_address=000003FFB5480000
+LT  stderr Target=2_90_20210515_92 (Linux 4.15.0-135-generic)
+LT  stderr CPU=s390x (4 logical CPUs) (0x1f710c000 RAM)
+LT  stderr ----------- Stack Backtrace -----------
+LT  stderr (0x000003FFB550F9D4 [libj9vm29.so+0x8f9d4])
+LT  stderr (0x000003FFB43488E4 [libj9gc29.so+0x488e4])
+LT  stderr (0x000003FFB433F34A [libj9gc29.so+0x3f34a])
+LT  stderr (0x000003FFB433DC6A [libj9gc29.so+0x3dc6a])
+LT  stderr (0x000003FFB43FF3C4 [libj9gc29.so+0xff3c4])
+LT  stderr (0x000003FFB4400990 [libj9gc29.so+0x100990])
+LT  stderr (0x000003FFB444B788 [libj9gc29.so+0x14b788])
+LT  stderr (0x000003FFB444ADF8 [libj9gc29.so+0x14adf8])
+LT  stderr (0x000003FFB53B32FE [libj9prt29.so+0x332fe])
+LT  stderr (0x000003FFB444A7B8 [libj9gc29.so+0x14a7b8])
+LT  stderr (0x000003FFB5305A14 [libj9thr29.so+0x5a14])
+LT  stderr (0x000003FFB6687AA8 [libpthread.so.0+0x7aa8])
+LT  stderr (0x000003FFB64FA896 [libc.so.6+0xfa896])
+LT  stderr (0x0000000000000000 [<unknown>+0x0])
+LT  stderr ---------------------------------------
+```

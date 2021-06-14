@@ -1,0 +1,19 @@
+AOT in OpenJ9 is Dynamic AOT. Therefore, when a method is compiled depends (mostly) on the invocation count. By default, a method will be AOT compiled at count=1000/bcount=250. However, on the load run, a method is loaded at scount=20. This can result in load failures. The reason is because, with count=1000/bcount=250 there is more time for classes to get loaded and resolved. At count=20, fewer classes are loaded or resolved - this is the reason the counts are set at count=3000,bcount=3000 for non AOT compiles.
+
+Before going forward, some clarification of what the various counts mean:
+`count` refers to the number of invocations of non-loopy methods before compilation is triggered
+`bcount` refers to the number of invocations of loopy methods before compilation is triggered
+`scount` refers to the number of invocations of methods stored in the SCC before a load is performed
+
+In the past, scount=20 was good enough. However, with the SVM, AOT code quality is closer (and theoretically can get almost<sup>1</sup> equivalent) to JIT code quality. The consequence of better code is that validation and relocation depends on being able to retry the queries performed in the compile run, which, because of scount=20, may not be possible, resulting in load failures.
+
+Potential solutions:
+1. Increasing the scount
+2. Retry the load (see https://github.com/eclipse/openj9/pull/3888).
+3. Have AOT "recompilations": we generate two different AOT bodies; the first is a sub-optimal body compiled at count=20, the other is a more optimized body compiled at a higher count. In the load run, the JIT first loads the sub-optimal body that is very likely to succeed at count=20. Later, we load the more optimized body, which has the benefit of a higher likelihood of succeeding validation/relocation while also minimizing the cost of doing a JIT recompilation.
+4. Use the SVM but hobble AOT during startup; the idea here is to reuse the `vettedForAOT` flag in certain frontend queries and change it to mean a heuristic decision rather than a functionally correct verification.
+
+This issue is opened to investigate the best solution, where best might mean it achieves the fairest set of compromises :slightly_smiling_face:.
+
+<hr />
+1. Almost, because there are some assumptions (such as whether an address can fit in 32-bits) that cannot be guaranteed across JVM instances.

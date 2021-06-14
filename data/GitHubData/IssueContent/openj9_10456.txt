@@ -1,0 +1,75 @@
+Failure link
+------------
+
+From an internal build `Test_openjdknext_j9_sanity.openjdk_ppc64_aix_Nightly/222`:
+```
+22:35:10  openjdk version "16-internal" 2021-03-16
+22:35:10  OpenJDK Runtime Environment (build 16-internal+0-adhoc.jenkins.BuildJDKnextppc64aixNightly)
+22:35:10  Eclipse OpenJ9 VM (build master-04a8b9eb903, JRE 16 AIX ppc64-64-Bit Compressed References 20200824_306 (JIT enabled, AOT enabled)
+22:35:10  OpenJ9   - 04a8b9eb903
+22:35:10  OMR      - 97452b48be2
+22:35:10  JCL      - d286fa99214 based on jdk-16+11)
+```
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+23:12:03  test EqualsIgnoreCase.testEqualsIgnoreCase("???A", "???a", true): failure
+23:12:03  java.lang.AssertionError: testing String(\ud801\udc00\ud801\udc01\uff21A).equalsIgnoreCase(\ud801\udc28\ud801\udc29\uff41a), source : source from byte array with charset,  expected [true] but found [false]
+23:12:03  	at org.testng.Assert.fail(Assert.java:94)
+23:12:03  	at org.testng.Assert.failNotEquals(Assert.java:496)
+23:12:03  	at org.testng.Assert.assertEquals(Assert.java:125)
+23:12:03  	at org.testng.Assert.assertEquals(Assert.java:288)
+23:12:03  	at EqualsIgnoreCase.lambda$testEqualsIgnoreCase$0(EqualsIgnoreCase.java:68)
+23:12:03  	at EqualsIgnoreCase$$Lambda$13/00000000233F2E98.accept(Unknown Source)
+23:12:03  	at java.base/java.util.HashMap.forEach(HashMap.java:1425)
+23:12:03  	at EqualsIgnoreCase.testEqualsIgnoreCase(EqualsIgnoreCase.java:66)
+23:12:03  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+23:12:03  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+23:12:03  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+23:12:03  	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+23:12:03  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+23:12:03  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+23:12:03  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+23:12:03  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+23:12:03  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+23:12:03  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+23:12:03  	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+23:12:03  	at org.testng.TestRunner.run(TestRunner.java:623)
+23:12:03  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+23:12:03  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+23:12:03  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+23:12:03  	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+23:12:03  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+23:12:03  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+23:12:03  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+23:12:03  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+23:12:03  	at org.testng.TestNG.run(TestNG.java:1018)
+23:12:03  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+23:12:03  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+23:12:03  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+23:12:03  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+23:12:03  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+23:12:03  	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+23:12:03  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+23:12:03  	at java.base/java.lang.Thread.run(Thread.java:851)
+23:12:03  
+23:12:03  ===============================================
+23:12:03  java/lang/String/CompactString/EqualsIgnoreCase.java
+23:12:03  Total tests run: 15, Failures: 1, Skips: 0
+23:12:03  ===============================================
+
+23:12:20  ===============================================
+23:12:20  java/lang/String/CompactString/RegionMatches.java
+23:12:20  Total tests run: 37, Failures: 2, Skips: 0
+23:12:20  ===============================================
+
+23:22:32  jdk_lang_j9_0_FAILED
+```
+For example, to rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links:
+00:36:21  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=16&JDK_IMPL=openj9&BUILD_LIST=openjdk&PLATFORM=ppc64_aix&TARGET=jdk_lang_j9_0

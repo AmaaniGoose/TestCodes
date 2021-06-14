@@ -1,0 +1,23 @@
+This has been observed for at least sun.misc.unsafe.compareAndSwapInt, as used by AtomicInteger, in OpenJ9 .
+
+We've implemented wrapping of sun.misc.unsafe.compareAndSwapInt() using native method prefixing technique (cf. https://docs.oracle.com/javase/8/docs/platform/jvmti/jvmti.html#SetNativeMethodPrefix). The purpose is to instrument this function, so the result is to call an agent whenever compareAndSwapInt() gets called.
+
+In a nutshell, we modify sun.misc.Unsafe as follows:
+1. rename native method compareAndSwapInt() to wrapped_compareAndSwapInt()
+2. add a non-native compareAndSwapInt() that would call the agent and then call wrapped_compareAndSwapInt().
+
+We then use JVMTI's SetNativeMethodPrefix() to have the wrapped_compareAndSwapInt() call reach the original native compareAndSwapInt().
+
+Things seem to work well at first, but when running a performance test with AtomicInteger, the events stop arriving after several thousands (supposedly, when the AtomicInteger is JIT-compiled).
+
+When running with -Xint (no JIT), things work correctly.
+
+Initial analysis by the OpenJ9 team suggests that as AtomicInteger gets compiled, a heuristic is applied to inline calls to some known native methods. So if the compiled method has a call to Unsafe.compareAndSwapInt(), the compiler emits code that does the actual CAS instead of calling the function, but in the process the wrapper is bypassed.
+
+Version information:
+openjdk version "1.8.0_212"
+OpenJDK Runtime Environment (build 1.8.0_212-b04)
+Eclipse OpenJ9 VM (build openj9-0.14.2, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20190521_315 (JIT enabled, AOT enabled)
+OpenJ9   - 4b1df46fe
+OMR      - b56045d2                                                                                                                                                                          
+JCL      - a8c217d402 based on jdk8u212-b04

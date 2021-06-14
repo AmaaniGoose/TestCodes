@@ -1,0 +1,6 @@
+For Adopting OpenJDK MH work, `class->methodTypes` table have been renamed to `invokeCache` table.
+
+The issue is for tracking the clean up for GC methodTypes iterator rename work.
+
+From #10893
+Part of #7352 

@@ -1,0 +1,81 @@
+This is a high level proposal, with main aspects elaborated (proposed approaches to be taken, listed possible challenges and alternatives). 
+
+ 
+- PGC (Partial GC) what is an evacuating style of GC will be made concurrent. Load Reference Barrier will be triggered on region check via a look up table. 
+
+As it's the case already (with STW variant), it will be by default an one-pass GC, where references outside of CS (Collection Set) are fixed during the RS (Remembered Set) scan phase. 
+
+An advantage of one pass is low throughput overhead 
+
+A possible downside of one pass concurrent copy-forward GC is that the evacuate space is reclaimed only at the very end of the GC cycle. Mark-compact-fixup type of GC will generally start reclaiming memory sooner (within a cycle) but the cycle will be significantly longer (roughly 2x) so some of memory reclamation will be delayed. For, partial GC (where live set is rather small and reclamation is significant) none of the approaches is significantly better from ‘reclamation delay‘ point of view, but one pass GC still has lower CPU overhead due to shorter cycle times. (For global GCs where live set is rather large and reclamation rate is low, mark-compact is likely preferred).
+
+Another possible downside is that one pass GC is not usable in cases when object from a collection set is pinned. See more in a later section for Mark-Compact. 
+
+Implementation-wise, we already have Concurrent Scavenger (that is also one pass) as a reference implementation, so it will be significantly smaller development effort relative to developing mark-compact style. 
+
+
+- GMP (Global Marking Phase) will be converted to use SATB (Snapshot-At-The-Beginning)  style Write barrier to avoid final STW Card Clearing phase 
+
+GMP in Balanced is currently capable to deal with concurrently marking the whole heap (including Eden regions), so that there is no additional STW phase to complete tracing associated with Eden (unlike Gencon that concurrently marks only Tenure, and does Nursery in STW fashion). SATB style however will impose more challenges (see later for PGC-GMP interaction). 
+
+
+
+ - Remembered Set (RS) organization (a set of incoming references for each region, represented by cards) will initially will be unchanged, but it may be re-visited at a later point.  
+ 
+
+ - Beside new SATB write barrier, card dirtying barrier is to stay to support RS
+ 
+
+ - Sweep (as an explicit STW operation piggybacked to first PGC after GMP is completed) will eliminated.  
+
+GMP will be enhanced to maintain occupancy information of regions, what will be later used for heuristics for Collection Set Selection of older regions. 
+
+Some regions that are mostly occupied, but still have large fragments of free memory, may still be subject to Sweep, but not necessarily done at first PGC after GMP, and should be done concurrently. 
+  
+
+- Global and Partial GC interaction
+
+As it's the case now, GMP cycle will overlap with PGC cycles. As PGC moves objects and update references to point to new object locations, it will additional need to obey SATB barrier and so mark and remember old non-marked reference values for further scanning by GMP (this needs to be scrutinized more - perhaps we can avoid remembering objects outside of current CS). All copied objects will also be marked (treated as newly allocated objects from GMP perspective) in GMP (Next) mark map. Pre-marking of copy caches will be used. PGC already marks all copied object, but only in its own (Previous) mark map. 
+
+Both GMP and PGC currently use MainGCThread facility (a way to run GC with explicit Main GC thread) and Parallel Task Dispatcher, but only one of them can run at a given time (even if they overlap). Since PGC cycle will be active 2-3x longer, we may need to allow for parallel GMP and PGC operation (have 2 active Parallel Task at a time). Various changes in MainGCThread/Task/Dispatcher may be needed to accommodate it. 
+
+Alternatively, we would not allow full overlap, and run them exclusively, where GMP increments would interleave with PGC cycles 
+
+(in Gencon, we do allow full overlap of Concurrent Scavenger and Concurrent Mark). 
+ 
+
+- Root set scanning
+
+Thread stacks (and some other minor roots) for either GMP and PGC will be scanned in STW (Stop-The-World) fashion. 
+
+To get a low pause GC, due to its size (relative to Threads Stacks) it's paramount to do RS scanning in PGC concurrently. The scanning is done in two STW steps: flushing RS of regions in CS by dirtying cards in CT (Card Table), and then cleaning dirty cards (scanning live objects within those cards). Both of those steps (especially the latter one) will need to be done concurrently. While doing it, Card Dirtying barrier may dirty cards in parts of table that has been already cleaned. ATM (but to be more scrutinized) , it's not considered as a problem so that new Card Cleaning passes will not be needed, since newly introduced/stored reference that triggered Write Barrier, in some recent past was read from a root/heap slot at which point it was scanned or triggered Load Barrier, which evacuated the object (essentially already did the work that would have been done by cleaning that new dirty card). 
+  
+
+- RS pruning in PGC 
+
+This is another major STW operation done early in PGC cycle that needs to be done concurrently. While main scanning phase in PGC will rebuild RS for region in CS (newly created ones) this step takes care of regions outside of CS. We walk nonCS RS lists and remove cards if they come from CS regions or from a dirty card. Similarly like before, if this step is done concurrently, while we are consuming CT, new dirty cards are being added by mutator threads. So, during that pass we may miss to see some of those new dirty cards, and miss to remove some cards from nonCS RS lists. This may latter lead to duplicate entries in RS, but ATM does not seem to be correctness issue. Effects of duplicate entries may be considered analog to creation of floating garbage of heap as any concurrent GC would do. 
+  
+
+- Mark-Compact PGC 
+
+This is variant of PGC that is infrequently executed, when for various reason objects cannot be evacuated and must stay at the same position (JNI critical API) or at least stay in the same region (no enough free space for survivor regions) when we are forced to do a sliding style of compaction. Extra care needs to be done (more conservative GMP scheduling etc) to make sure sliding compaction is minimized, since it is not doable with Load Barrier used for Evacuation (where Evacuate is a fixed set of regions). 
+
+We do have a hybrid variant of PGC, that will simultaneously evacuate one subset of Collection Set regions, and will only mark (and possibly sweep) the remaining subset of regions, that is STW. Making it concurrent might also not be possible with just a region check, since the objects in mark regions would repetitively trigger the barrier. 
+
+This argument should be re-visited, since this alone might be enough not to proceed with one-pass  evacuating approach. 
+ 
+
+- Weak (Clearable) Roots scanning 
+
+This is likely doable concurrently, although yet to be scrutinized.  
+
+One known exception is Ownable Synchronizers. We proactively find them during GC time, and connect into a list. For concurrent marking we have a pruning pass at the end of a cycle, that is STW. We have to eliminate it. The solution is to change how we maintain this list altogether (not for just concurrent mark). Instead of doing at GC time, we would do it passively, only on demand when it's requested: we would walk the heap and build the list (it would be rather slow, but Java spec warns about it, already). 
+ 
+
+ - Misc STW steps  
+
+For various reasons like CS selection, GMP scheduling etc. we need to walk region table (approximately 20-30 times during a PGC cycle). (TBD if those can be done concurrently) 
+
+-  While most of the work is under GC code base, there is also work in JIT code base: inlining read and write barrier. 
+
+While SATB should be relatively straightforward (we'll likely do what Metronome does), for read barrier we need to experiment if the whole barrier is inlined or we have an intermediate out-of-line helper. In CS in Gencon, we have the whole barrier inlined and we do not explicitly check if CS cycle is active or not. In region lookup check, that might be too slow, and we might prefer to put the check in helper and only inline a check if marking cycle is active.

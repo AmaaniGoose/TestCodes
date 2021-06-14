@@ -1,0 +1,24 @@
+I'm opening this issue to discuss a few technical details regarding AOT support for Method Handles.
+
+After some discussion with @liqunl, @andrewcraik, and @vijaysun-omr, my understanding of how this works is that the bytecodes get generated on the fly, as is the case with lambda forms. However, it is possible that constant pool entry for a `ldc` bytecode could get patched to hold an arbitrary object. If this generated class is to be stored in the SCC, then the bytecodes in the J9ROMClass itself can't be updated [1]. Therefore, just having the class chain of the generated class would not be sufficient, since the RAM ConstantPool entry would get patched at runtime. 
+
+Therefore, what we would need is:
+
+1. Generate class chain of the generated class
+2. Generate class chain of the class of the arb object patched in the constant pool
+3. Verify that the class of the arb object is named by the generated class
+
+Some point of discussion:
+
+If 1. fails, then we can simply abort the compile, since this is equivalent to trying to compile a method who's ROMClass doesn't exist in the SCC
+
+If 2. fails, then we could abort the compile. However, I was wondering; could we just restrict the compiler's knowledge of the object? That is, can we continue with the compile, but state that the class of the object is just `java/lang/Object`? Optimization will be limited, but we won't have to abort the compile.
+
+Regarding 3., the reason for this is to ensure that what we think is the class of the object that was patched in the constant pool in the compile run is still visible to the generated class in the load run. By this I mean, if in the compile run an object of Class `A` was patched in the cp entry, and in the load run an object of Class `A'` was patched in the cp entry, where `A` and `A'` have the same ROMClass hierarchy but diff class loaders such that if you were to do a lookup by name you would get `A` and not `A'`, then we need a way of checking that [2]. With the SVM, it's sufficient to just store a classByName validation record. ~Without the SVM, it's harder to see how one might do this as the `getClassFromSignature` front end query doesn't actually do a visibility check; if the class of the arb object is named somewhere in the bytecodes of the generated class, then perhaps we could find the cpIndex where it is named and do a `getClassFromCPIndex` validation instead?~ Actually I just realized; even though `getClassFromSignature` doesn't do a visibility check, we can always compare the answer returned by `getClassFromSignature` against the class of the arb object.
+
+A more general discussion point. @liqunl had mentioned the KOT; do we hard code the pointer to the object anywhere in the code, or do we just use it to make optimization decisions? If the former is true, then we'd also need a relocation record to pull out the object point from the constant pool and update appropriate locations.
+
+@liqunl @andrewcraik @vijaysun-omr I'd appreciate your thoughts on this matter.
+
+[1] @hangshao0 is my statement true?
+[2] @DanHeidinga is it possible for the cp entry to get patched with an object who's class is not visible to the generated class? Will the class of the arb object be named somewhere in the ROMClass of the generated class?

@@ -1,0 +1,58 @@
+Failure link
+------------
+
+From an internal cmake build:
+```
+01:07:19  openjdk version "1.8.0_252-internal"
+01:07:19  OpenJDK Runtime Environment (build 1.8.0_252-internal-jenkins_2020_02_25_21_15-b00)
+01:07:19  Eclipse OpenJ9 VM (build ibm_sdk-e649a669ba, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20200225_1 (JIT enabled, AOT enabled)
+01:07:19  OpenJ9   - unknown
+01:07:19  OMR      - 4ef97da3b
+01:07:19  JCL      - 39c21e45680 based on jdk8u252-b03)
+```
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+Testing: Test 11: Restore a non-persistent cache that has a different buildID
+Test start time: 2020/02/26 00:27:52 Pacific Standard Time
+Running command: "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_linux_cm_Nightly/openjdkbinary/j2sdk-image/bin/java" -Xcompressedrefs -Xcompressedrefs -Xjit -Xgcpolicy:gencon  -Xshareclasses:name=ShareClassesCMLTests,nonpersistent,restoreFromSnapshot
+Time spent starting: 1 milliseconds
+Time spent executing: 306 milliseconds
+Test result: FAILED
+ [ERR] JVMSHRC698I Non-persistent shared cache "ShareClassesCMLTests" has been restored successfully from the snapshot
+>> Success condition was not found: [Output match: The snapshot was created by a different JVM build and doesn't match the running JVM]
+>> Required condition was not found: [Output match: Failed to restore the non-persistent shared cache "ShareClassesCMLTests" from the snapshot]
+>> Failure condition was not found: [Output match: error]
+>> Failure condition was found: [Output match: has been restored successfully]
+>> Failure condition was not found: [Output match: Unhandled Exception]
+>> Failure condition was not found: [Output match: Exception:]
+>> Failure condition was not found: [Output match: corrupt]
+>> Failure condition was not found: [Output match: Processing dump event]
+
+Testing: Test 12: Restore a non-persistent cache that has a different buildID with noAutoPunt option
+Test start time: 2020/02/26 00:27:52 Pacific Standard Time
+Running command: "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_linux_cm_Nightly/openjdkbinary/j2sdk-image/bin/java" -Xcompressedrefs -Xcompressedrefs -Xjit -Xgcpolicy:gencon  -Xshareclasses:name=ShareClassesCMLTests,nonpersistent,noAutoPunt,restoreFromSnapshot
+Time spent starting: 3 milliseconds
+Time spent executing: 29 milliseconds
+Test result: FAILED
+ [ERR] JVMSHRC726E Non-persistent shared cache "ShareClassesCMLTests" already exists. It cannot be restored from the snapshot.
+ [ERR] JVMSHRC726E Non-persistent shared cache "ShareClassesCMLTests" already exists. It cannot be restored from the snapshot.
+>> Success condition was not found: [Output match: Non-persistent shared cache "ShareClassesCMLTests" has been restored successfully from the snapshot]
+>> Failure condition was not found: [Output match: Failed to restore]
+>> Failure condition was not found: [Output match: error]
+>> Failure condition was not found: [Output match: Unhandled Exception]
+>> Failure condition was not found: [Output match: Exception:]
+>> Failure condition was not found: [Output match: corrupt]
+>> Failure condition was not found: [Output match: Processing dump event]
+```
+
+ To rebuild the failed tests in <Jenkins URL>=https://ci.adoptopenjdk.net/job/Grinder, use the following links:
+04:37:16  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=functional&PLATFORM=x86-64_linux&TARGET=testSCCMLSnapshot_1
+
+Note: this is a cmake issue so the link about is just for reference.

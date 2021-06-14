@@ -1,0 +1,44 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_special.system_ppc64le_linux_Nightly/385
+MathLoadTest_bigdecimal_special_20
+variation: Mode610
+JVM_OPTIONS: -Xcompressedrefs -Xcompressedrefs -Xjit -Xgcpolicy:gencon 
+```
+MLT testStarted : testItem_0609(net.adoptopenjdk.test.bigdecimal.TestSuite020)
+MLT testFailure: testItem_0609(net.adoptopenjdk.test.bigdecimal.TestSuite020): null
+MLT java.lang.NullPointerException
+MLT 	at java.base/java.lang.VMAccess.addPackageToList(VMAccess.java:183)
+MLT 	at java.base/jdk.internal.misc.Unsafe.defineClass(Unsafe.java:1511)
+MLT 	at java.base/jdk.internal.reflect.ClassDefiner.defineClass(ClassDefiner.java:63)
+MLT 	at java.base/jdk.internal.reflect.MethodAccessorGenerator$1.run(MethodAccessorGenerator.java:400)
+MLT 	at java.base/jdk.internal.reflect.MethodAccessorGenerator$1.run(MethodAccessorGenerator.java:394)
+MLT 	at java.base/java.security.AccessController.doPrivileged(AccessController.java:678)
+MLT 	at java.base/jdk.internal.reflect.MethodAccessorGenerator.generate(MethodAccessorGenerator.java:393)
+MLT 	at java.base/jdk.internal.reflect.MethodAccessorGenerator.generateMethod(MethodAccessorGenerator.java:75)
+MLT 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:53)
+MLT 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+MLT 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+MLT 	at junit.framework.TestCase.runTest(TestCase.java:176)
+MLT 	at junit.framework.TestCase.runBare(TestCase.java:141)
+MLT 	at junit.framework.TestResult$1.protect(TestResult.java:122)
+MLT 	at junit.framework.TestResult.runProtected(TestResult.java:142)
+MLT 	at junit.framework.TestResult.run(TestResult.java:125)
+MLT 	at junit.framework.TestCase.run(TestCase.java:129)
+MLT 	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+MLT 	at junit.framework.TestSuite.run(TestSuite.java:247)
+MLT 	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+MLT 	at org.junit.runners.Suite.runChild(Suite.java:128)
+MLT 	at org.junit.runners.Suite.runChild(Suite.java:27)
+MLT 	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+MLT 	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+MLT 	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+MLT 	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+MLT 	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+MLT 	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+MLT 	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+MLT 	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+MLT 	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+MLT 	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+MLT 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+MLT 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+MLT 	at java.base/java.lang.Thread.run(Thread.java:834)
+```

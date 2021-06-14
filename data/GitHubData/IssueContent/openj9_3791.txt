@@ -1,0 +1,59 @@
+The following tests in the `GCCheck` test suite are failing:
+```
+23:36:25 ---SUMMARY OF FAILED TESTS---
+23:36:25 Create core file
+23:36:25 Run gccheck
+```
+
+Test **Create core file** fails because core is generated at `/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15427729963309/cmdLineTester_GCCheck_SE80_1/j9core.dmp`. But, the test expects the core at `/cores/core.86566`. fyi - @llxia 
+
+Test **Run gccheck** fails because there is no DDR/`jdmpview` support on OSX. fyi - @mikezhang1234567890 
+
+**OSX JDK8 Test Output:**
+```
+23:35:57 Executing command: rm -f j9core.dmp
+23:35:57 
+23:35:57 Testing: Create core file
+23:35:57 Test start time: 2018/11/20 23:35:58 Eastern Standard Time
+23:35:57 Running command: "/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/bin/java" -Xcompressedrefs -Xcompressedrefs -Xjit -Xgcpolicy:gencon  -cp /Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/bin/../lib/ddr/j9ddr.jar:/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/functional/cmdline_options_testresources/cmdlinetestresources.jar:/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/functional/IBM_Internal/cmdLineTests_IBM_Internal/gcCheck/caffeine.jar -Xdump:system:file=j9core.dmp,events=vmstop,request=exclusive+compact CaffeineMarkEmbeddedApp
+23:35:57 Time spent starting: 3 milliseconds
+23:36:25 Time spent executing: 25660 milliseconds
+23:36:25 Test result: FAILED
+23:36:25 Output from test:
+23:36:25  [OUT] Sieve score = 144484
+23:36:25  [OUT] Loop score = 664160
+23:36:25  [OUT] Logic score = 964228
+23:36:25  [OUT] String score = 701153
+23:36:25  [OUT] Float score = 271646
+23:36:25  [OUT] Method score = 300068
+23:36:25  [OUT] Overall score = 417398
+23:36:25  [ERR] JVMDUMP039I Processing dump event "vmstop", detail "#0000000000000000" at 2018/11/20 23:36:18 - please wait.
+23:36:25  [ERR] JVMDUMP032I JVM requested System dump using '/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15427729963309/cmdLineTester_GCCheck_SE80_1/j9core.dmp' in response to an event
+23:36:25  [ERR] JVMDUMP012E Error in System dump: The core file created by child process with pid = 86566 was not found. Expected to find core file with name "/cores/core.86566"
+23:36:25  [ERR] JVMDUMP013I Processed dump event "vmstop", detail "#0000000000000000".
+23:36:25 >> Success condition was not found: [Output match: System dump written]
+23:36:25 
+
+23:36:25 Testing: Run gccheck
+23:36:25 Test start time: 2018/11/20 23:36:24 Eastern Standard Time
+23:36:25 Running command: "/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/bin/java" -Xcompressedrefs -Xcompressedrefs -Xjit -Xgcpolicy:gencon  -showversion -cp /Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/bin/../lib/ddr/j9ddr.jar:/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/functional/cmdline_options_testresources/cmdlinetestresources.jar:/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/functional/IBM_Internal/cmdLineTests_IBM_Internal/gcCheck/caffeine.jar com.ibm.j9ddr.tools.ddrinteractive.DDRInteractive j9core.dmp
+23:36:25 Time spent starting: 3 milliseconds
+23:36:25 Time spent executing: 145 milliseconds
+23:36:25 Test result: FAILED
+23:36:25 Output from test:
+23:36:25  [ERR] openjdk version "1.8.0_192-internal"
+23:36:25  [ERR] OpenJDK Runtime Environment (build 1.8.0_192-internal-jenkins_2018_11_20_22_32-b00)
+23:36:25  [ERR] Eclipse OpenJ9 VM (build disable_pltest_osx-9c3f38a96, JRE 1.8.0 Mac OS X amd64-64-Bit Compressed References 20181120_26 (JIT enabled, AOT enabled)
+23:36:25  [ERR] OpenJ9   - 9c3f38a96
+23:36:25  [ERR] OMR      - 6f232a31
+23:36:25  [ERR] JCL      - 8ef74afc707 based on jdk8u192-b12)
+23:36:25  [ERR] 
+23:36:25  [ERR] Error: Could not find or load main class com.ibm.j9ddr.tools.ddrinteractive.DDRInteractive
+23:36:25 >> Success condition was not found: [Output match: Checking HEAP...done]
+23:36:25 >> Failure condition was not found: [Output match: gc check]
+23:36:25 >> Failure condition was not found: [Output match: unable to read]
+23:36:25 >> Failure condition was not found: [Output match: Exception]
+23:36:25 
+```
+
+Not verified but the above errors may also be seen with JDK11 OSX. Currently, the test sanity/extended jobs can't run the above tests on OSX because of hangs and test infra failures documented in https://github.com/eclipse/openj9/issues/3787, https://github.com/eclipse/openj9/issues/3789 and https://github.com/eclipse/openj9/issues/3685. Disabling the following tests will allow the test sanity jobs to run the above failing tests: https://github.com/eclipse/openj9/pull/3751/files.

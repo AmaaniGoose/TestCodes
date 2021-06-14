@@ -1,0 +1,22 @@
+The trace output for call snippets on x86 is badly broken and very misleading.
+e.g. the following trace
+
+> 00007F5B023DD8AC 000000a4                                                 Snippet Label L0066:		# Call Snippet
+> 0x7f5b023dd8ac 000000a4                      48 89 44 24 30                 mov 	qword ptr[rsp+40], rax		#save registers for interpreter call snippet
+> 0x7f5b023dd8b1 000000a9                      48 89 74 24 28                 mov 	qword ptr[rsp+32], rsi		#save registers for interpreter call snippet
+> 0x7f5b023dd8b6 000000ae                      48 89 54 24 18                 mov 	qword ptr[rsp+24], rdx		#save registers for interpreter call snippet
+> 0x7f5b023dd8bb 000000b3                      48 89 4c 24 10                 mov 	qword ptr[rsp+16], rcx		#save registers for interpreter call snippet
+> 0x7f5b023dd8c0 000000b8                      48 bf 90 f0 ac                 mov 	qword ptr[rsp+8], mov			#save registers for interpreter call snippet
+> 0x7f5b023dd8c5 000000bd                      00 00 00 00 00 e9 21 18 e9 15  mov 	rdi, 0xacf090		# MOV8RegImm64
+> 0x7f5b023dd8cf 000000c7                      00 00 00 00 00                 jmp 	interpreterIntStaticGlue		# jump out of snippet code</snippets>
+
+Note the `mov 	qword ptr[rsp+8], mov` and the 0s for the hex of the jmp instruction. Other errors have been seen including mov dword instead of mov qword.
+
+The disassembled code from the core file for the above was
+
+> 0x7f5b023dd8ac +164          4889442430           mov       qword ptr [rsp+0x30], rax <<< +64
+> 0x7f5b023dd8b1 +169          4889742428           mov       qword ptr [rsp+0x28], rsi
+> 0x7f5b023dd8b6 +174          4889542418           mov       qword ptr [rsp+0x18], rdx
+> 0x7f5b023dd8bb +179          48894c2410           mov       qword ptr [rsp+0x10], rcx
+> 0x7f5b023dd8c0 +184          48bf90f0ac0000000000 mov       rdi, 0x0acf090 J9Method - {TestUnsafe.jbkCompareAndSwapObject}
+> 0x7f5b023dd8ca +194          e92118e915           jmp       0x7f5b1826f0f0 {libj9jit29.so}{interpreterEAXStaticGlue} +0

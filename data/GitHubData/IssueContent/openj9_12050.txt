@@ -1,0 +1,122 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk8_j9_extended.functional_aarch64_linux/4`:
+```
+00:10:01  openjdk version "1.8.0_292-internal"
+00:10:01  OpenJDK Runtime Environment (build 1.8.0_292-internal-202102240230-b03)
+00:10:01  Eclipse OpenJ9 VM (build master-0acfe8a93, JRE 1.8.0 Linux aarch64-64-Bit Compressed References 20210224_54 (JIT enabled, AOT enabled)
+00:10:01  OpenJ9   - 0acfe8a93
+00:10:01  OMR      - ea18302c3
+00:10:01  JCL      - 3cd2db6c based on jdk8u292-b03)
+```
+to rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links:
+02:36:49  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&JDK_VENDOR=adoptopenjdk&BUILD_LIST=functional&PLATFORM=aarch64_linux_mixed&TARGET=cmdLineTester_jep178_staticLinking_SE80_0
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+===============================================
+Running test cmdLineTester_jep178_staticLinking_SE80_0 ...
+===============================================
+cmdLineTester_jep178_staticLinking_SE80_0 Start Time: Wed Feb 24 05:27:30 2021 Epoch Time (ms): 1614144450135
+variation: NoOptions
+JVM_OPTIONS:  
+*** Starting test suite: JEP178 static linking tests ***
+Testing: jep178 testing static linking
+Test start time: 2021/02/24 05:27:30 Greenwich Mean Time
+Running command: /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/openjdk-test-image/openj9/testjep178_static -jvmpath:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/jre/bin/../lib/aarch64/j9vm -classpath:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../../jvmtest/functional/cmdLineTests/jep178staticLinkingTest/jep178staticLinkingTest.jar   com/ibm/j9/tests/jeptests/StaticLinking
+Time spent starting: 72 milliseconds
+Time spent executing: 310 milliseconds
+Test result: FAILED
+Output from test:
+ [OUT] [MSG] Starting up JEP 178 test.
+ [OUT] [MSG] Opening jvm from /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/jre/bin/../lib/aarch64/j9vm/libjvm.so
+ [OUT] [MSG] Reached OnLoad (testlibA): JNI_OnLoad [dynamically]
+ [OUT] [MSG] Reached OnLoad (testlibB): JNI_OnLoad [dynamically]
+ [OUT] [MSG] Calling native instance method fooImpl.
+ [OUT] [MSG] Reached native fooImpl() [dynamically]
+ [OUT] [MSG] Calling native static method barImpl.
+ [OUT] [MSG] Reached native barImpl() [dynamically]
+ [OUT] [MSG] Reached OnUnload (testlibA): JNI_OnUnload [dynamically]
+ [OUT] [MSG] Reached OnUnload (testlibB): JNI_OnUnload [dynamically]
+ [OUT] [MSG] Test jep178 passed with error code: 0
+>> Required condition was not found: [Output match: [MSG] Reached OnLoad: JNI_OnLoad_testlibA [statically]]
+>> Required condition was not found: [Output match: [MSG] Reached OnLoad: JNI_OnLoad_testlibB [statically]]
+>> Required condition was not found: [Output match: [MSG] Reached native fooImpl() [statically]]
+>> Required condition was not found: [Output match: [MSG] Reached native barImpl() [statically]]
+>> Required condition was not found: [Output match: [MSG] Reached OnUnload: JNI_OnUnload_testlibA [statically]]
+>> Required condition was not found: [Output match: [MSG] Reached OnUnload: JNI_OnUnload_testlibB [statically]]
+>> Failure condition was not found: [Output match: [ERR]]
+>> Failure condition was found: [Output match: [dynamically]]
+>> Success condition was found: [Output match: [MSG] Test jep178 passed with error code: 0]
+
+Testing: jep178 native (jvmti) agent testing static linking at startup (OnLoad)
+Test start time: 2021/02/24 05:27:31 Greenwich Mean Time
+Running command: /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/openjdk-test-image/openj9/testjep178_static -agentlib:testjvmtiA -agentlib:testjvmtiB -jvmpath:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/jre/bin/../lib/aarch64/j9vm -Xbootclasspath/a:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/lib/tools.jar -classpath:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../../jvmtest/functional/cmdLineTests/jep178staticLinkingTest/jep178staticLinkingTest.jar   com/ibm/j9/tests/jeptests/StaticAgents
+Time spent starting: 2 milliseconds
+Time spent executing: 122 milliseconds
+Test result: FAILED
+Output from test:
+ [OUT] [MSG] Starting up JEP 178 test.
+ [OUT] [MSG] Opening jvm from /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/jre/bin/../lib/aarch64/j9vm/libjvm.so
+ [OUT] [MSG] Reached OnLoad (testjvmtiA): Agent_OnLoad [dynamically]
+ [OUT] [MSG] Reached OnLoad (testjvmtiB): Agent_OnLoad [dynamically]
+ [OUT] [MSG] Testing jep178 for native agents at JVM startup (OnLoad)
+ [OUT] [MSG] Reached OnUnload (testjvmtiA): Agent_OnUnload [dynamically]
+ [OUT] [MSG] Reached OnUnload (testjvmtiB): Agent_OnUnload [dynamically]
+ [OUT] [MSG] Test jep178 passed with error code: 0
+>> Required condition was not found: [Output match: [MSG] Reached OnLoad: Agent_OnLoad_testjvmtiA [statically]]
+>> Required condition was not found: [Output match: [MSG] Reached OnLoad: Agent_OnLoad_testjvmtiB [statically]]
+>> Required condition was found: [Output match: [MSG] Testing jep178 for native agents at JVM startup (OnLoad)]
+>> Required condition was not found: [Output match: [MSG] Reached OnUnload: Agent_OnUnload_testjvmtiB [statically]]
+>> Required condition was not found: [Output match: [MSG] Reached OnUnload: Agent_OnUnload_testjvmtiA [statically]]
+>> Failure condition was not found: [Output match: [ERR]]
+>> Failure condition was found: [Output match: [dynamically]]
+>> Success condition was found: [Output match: [MSG] Test jep178 passed with error code: 0]
+
+Testing: jep178 native (jvmti) agent testing static linking during live (OnAttach)
+Test start time: 2021/02/24 05:27:31 Greenwich Mean Time
+Running command: /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/openjdk-test-image/openj9/testjep178_static -jvmpath:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/jre/bin/../lib/aarch64/j9vm -Xbootclasspath/a:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/lib/tools.jar -classpath:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../../jvmtest/functional/cmdLineTests/jep178staticLinkingTest/jep178staticLinkingTest.jar   com/ibm/j9/tests/jeptests/StaticAgents --attach
+Time spent starting: 2 milliseconds
+Time spent executing: 441 milliseconds
+Test result: FAILED
+Output from test:
+ [OUT] [MSG] Starting up JEP 178 test.
+ [OUT] [MSG] Opening jvm from /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/jre/bin/../lib/aarch64/j9vm/libjvm.so
+ [OUT] [MSG] Attaching native agent testjvmtiA
+ [OUT] [MSG] Reached OnLoad (testjvmtiA): Agent_OnAttach [dynamically]
+ [OUT] [MSG] Attaching native agent testjvmtiB
+ [OUT] [MSG] Reached OnLoad (testjvmtiB): Agent_OnAttach [dynamically]
+ [OUT] [MSG] Testing jep178 for native agents during Live phase (OnAttach)
+ [OUT] [MSG] Reached OnUnload (testjvmtiA): Agent_OnUnload [dynamically]
+ [OUT] [MSG] Reached OnUnload (testjvmtiB): Agent_OnUnload [dynamically]
+ [OUT] [MSG] Test jep178 passed with error code: 0
+>> Required condition was found: [Output match: [MSG] Attaching native agent testjvmtiA]
+>> Required condition was not found: [Output match: [MSG] Reached OnAttach: Agent_OnAttach_testjvmtiA [statically]]
+>> Required condition was found: [Output match: [MSG] Attaching native agent testjvmtiB]
+>> Required condition was not found: [Output match: [MSG] Reached OnAttach: Agent_OnAttach_testjvmtiB [statically]]
+>> Required condition was found: [Output match: [MSG] Testing jep178 for native agents during Live phase (OnAttach)]
+>> Required condition was not found: [Output match: [MSG] Reached OnUnload: Agent_OnUnload_testjvmtiA [statically]]
+>> Required condition was not found: [Output match: [MSG] Reached OnUnload: Agent_OnUnload_testjvmtiB [statically]]
+>> Failure condition was not found: [Output match: [ERR]]
+>> Failure condition was found: [Output match: [dynamically]]
+>> Success condition was found: [Output match: [MSG] Test jep178 passed with error code: 0]
+
+---TEST RESULTS---
+Number of PASSED tests: 3 out of 6
+Number of FAILED tests: 3 out of 6
+
+---SUMMARY OF FAILED TESTS---
+jep178 testing static linking
+jep178 native (jvmti) agent testing static linking at startup (OnLoad)
+jep178 native (jvmti) agent testing static linking during live (OnAttach)
+-----------------------------
+
+
+cmdLineTester_jep178_staticLinking_SE80_0_FAILED
+```

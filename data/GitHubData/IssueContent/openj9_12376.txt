@@ -1,0 +1,1 @@
+A number of jobs/machines failed Tues night, and I see there are still problems Wed night. Looking at https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.system_ppc64le_linux_Nightly_testList_1/97/console the job appears hung. There was another the same I didn't record on xlinux as well. I'm taking the bad machines offline.

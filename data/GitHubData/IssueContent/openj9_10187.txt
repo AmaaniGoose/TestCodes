@@ -1,0 +1,4 @@
+This issue comes from the discussion in https://github.com/eclipse/omr/pull/5401.
+
+- Insert allocationFence node only when the target architecture requires it.
+- There is a query `getEnforceStoreOrder()` in `CodeGenerator` now.  That should be asked to `TR::Compiler->target.cpu` instead.

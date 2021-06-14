@@ -1,0 +1,32 @@
+https://ci.adoptopenjdk.net/job/Test_openjdk14_j9_sanity.perf_x86-64_windows/134/console
+```
+23:19:22  Using scaled threading model. 2 processors detected, 2 threads used to drive the workload, in a possible range of [1,64]
+23:19:22  ===== DaCapo 9.12-MR1 lusearch-fix starting =====
+23:19:23  4 query batches completed
+23:19:23  8 query batches completed
+23:19:23  12 query batches completed
+23:19:23  16 query batches completed
+23:19:23  20 query batches completed
+23:19:23  24 query batches completed
+23:19:23  28 query batches completed
+23:19:23  32 query batches completed
+23:19:24  36 query batches completed
+23:19:24  40 query batches completed
+23:19:24  org.apache.lucene.store.AlreadyClosedException: this Directory is closed
+23:19:24  	at org.apache.lucene.store.Directory.ensureOpen(Directory.java:220)
+23:19:24  	at org.apache.lucene.store.FSDirectory.list(FSDirectory.java:320)
+23:19:24  	at org.apache.lucene.index.SegmentInfos$FindSegmentsFile.run(SegmentInfos.java:533)
+23:19:24  	at org.apache.lucene.index.DirectoryIndexReader.open(DirectoryIndexReader.java:115)
+23:19:24  	at org.apache.lucene.index.IndexReader.open(IndexReader.java:316)
+23:19:24  	at org.apache.lucene.index.IndexReader.open(IndexReader.java:206)
+23:19:24  	at org.dacapo.lusearchFix.Search$QueryProcessor.<init>(Search.java:207)
+23:19:24  	at org.dacapo.lusearchFix.Search$QueryThread.run(Search.java:179)
+23:19:24  java.lang.NullPointerException
+23:19:24  	at org.dacapo.lusearchFix.Search$QueryProcessor.run(Search.java:226)
+23:19:24  	at org.dacapo.lusearchFix.Search$QueryThread.run(Search.java:179)
+23:19:24  44 query batches completed
+23:19:24  48 query batches completed
+23:19:24  52 query batches completed
+Cancelling nested steps due to timeout
+09:16:30  Sending interrupt signal to process
+```

@@ -1,0 +1,17 @@
+AIX 7.1 TL4 SP4 (or SP8)
+
+- [ ] Missing install
+- [ ] Bug in ansible playbook
+- [ ] Request for new playbook addition
+- [x] Non-reproducible setup of build system
+
+Details:
+* These systems were originally installed in June 2017
+* The base OS has never been updated since.
+* Recently the OSS packages have been updated, but, again, not the base OS.
+* Over the years - the have been manual tweaks to the system - undocumented, or poorly documented, in many cases - which implies these systems are not reproducible - cannot be rebuilt into the current setup.
+
+* My proposal is to save the current images (as backup) and to rebuild the systems from scratch.
+* Depending on AdoptOpenJDK needs this could still be at AIX 7.1 TL4 SP4 (current in 2017) or continue with AIX 7.1 TL4 but with the latest SP (iirc, SP8)
+* These systems would then be further configured using the current playbook (AIX version2 using roles rather than flatfile `aix.yml` -- this should ensure reproducibility of these `build` systems.
+* After acceptance of the new builds - delete the saved images as no longer relevant.

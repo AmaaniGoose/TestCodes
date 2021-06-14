@@ -1,0 +1,10 @@
+In order to be able to build certain artefacts i.e. code-tools related (e.g. SigTest) we need to have the following JDKs installed:
+- version 5
+- version 6
+- version 9
+
+As version 7 and 8 are already installed.
+
+Note OpenJDK version 5 and 6 are not easily installable via ansible scripts. So an alternative source will need to be sought after. Which might add to the complications of our artefacts being built using different flavours of JDK (a bit inconsistent).
+
+We could download from Oracle but with the latest changes, we will need a login and password to be able to download old versions of the JDK. Which means passing these details into the ansible script.

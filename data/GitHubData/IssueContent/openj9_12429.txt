@@ -1,0 +1,5 @@
+`releaseFence` ensures that loads/stores before the fence will not be reordered with stores after the fence, but javadoc states differently.
+https://github.com/eclipse/openj9/blob/1e99073506816bc24da835e4185ea78bd218d6c6/jcl/src/java.base/share/classes/java/lang/invoke/VarHandle.java#L885-L892
+
+Similarly, `setRelease` sets the value using `release` semantics, which ensures that preceding loads/stores will not be reordered after the store, but javadoc states differently.
+https://github.com/eclipse/openj9/blob/1e99073506816bc24da835e4185ea78bd218d6c6/jcl/src/java.base/share/classes/java/lang/invoke/VarHandle.java#L985-L993

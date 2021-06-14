@@ -1,0 +1,11 @@
+Related #1017 
+Our space is limited on our Jenkins master. Eclipse has asked us to target 100G and we are currently using almost double of that [[1]](https://ci.eclipse.org/openj9/view/Infrastructure/job/Check-Master-Disk-Usage/). [Artifactory](https://jfrog.com/artifactory/) is an artifact repository manager and could allow us to stash (temporarily) our SDKs somewhere other than master. They offer a [free version](https://jfrog.com/open-source/) ([Apply](https://jfrog.com/artifactory/saas-gcp/)). This would allow us to keep more builds (logs) on master and more artifacts on a separate server. There is also an Artifactory plugin for Jenkins that would allow us to easily switch to archivingLast time I looked I believe there was an option to setup Artifactory yourself for "free"?
+
+We have an existing machine ([proxy_worker](https://ci.eclipse.org/openj9/computer/proxy_worker/)) attached to Jenkins that we already use for running infra type builds as well as a proxy into other machines we use that are behind a vpn. We could try setting up Artifactory on it. This machine is provisioned via an OpenStack service and has the option to create volumes (up to 1T total) and attach them to running instance(s). This would give us the storage.
+
+**NOTE**: 
+- [x] We need to determine if this type of usage of the plinux machine is aligned with and doesn't break any agreement with the machine provider (OSU)
+
+Joe already has a Pull Request open to add Artifactory support to the builds.
+#2272 
+AdoptOpenJDK/openjdk-tests#512

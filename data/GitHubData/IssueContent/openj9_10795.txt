@@ -1,0 +1,108 @@
+I am opening up this issue to document the current implementation details for interface call dispatch in OpenJ9 which uses PIC slots (Polymerhic Inline Cache).
+
+Basic idea is to cache the class address and corresponding method address for compiled jit code in the PIC slot and check it at the call-site in the JIT compiled code to quickly dispatch the calls.  With the minor implementation difference, all the supported platforms in OpenJ9 achieves this more or less similarly but I am documenting the implementation details on Z here with highlighting differences I have observed with x86 implementation.
+
+Per call-site in the JIT compiled method on Z we lay out following data[1].
+ 1. Call Site Return Address(In JIT compiled code)
+ 2. Constant Pool Address
+ 3. Constant Pool Index
+ 4. Interface Class
+ 5. MethodIndex in ITable
+ 6. J2I Thunk Address
+ 7. Flags
+ 8. Address of the last cached slot
+ 9. Address of the first cache slot
+10. Address of the last slot
+11. Slot - 1 : J9Class Pointer
+					Method Address 
+...
+	 Slot - n : J9ClassPointer
+	 				Method Address
+
+JIT compiled code for that particular call sites, checks the PIC slot one after another to see if it has a hit and dispatches the call using the cached method address against the hit cache slot. In case none the cache slot matches, it calls a helper resided in `PICBuilder.m4` through the snippet[2].
+
+Following pseudo code describes roughly how Z updates PIC slots.
+
+```
+interfaceCallHelperMultiSlots {
+	If method is not resolved
+		call jitResolveInterfaceMethod
+
+	If method is privateInterfaceMethod
+		call AssemblyToDispatchPrivateInterfaceMethod
+	
+	// Regular method
+	Call jitLookupInterfaceMethod
+
+	If method is not compiled
+		goto CommonJitDispatch
+LoopToUpdateCache:
+        // All the PIC slots are populated. Jump to Common JIT Dispatch
+	If lastCachedSlot == lastSlot
+		goto CommonJitDispatch
+
+	// PIC Slot is available and method is compiled
+	// Try to acquire the slot and update the data
+	tempSlotVar = lastCachedSlot
+	If atomic operation to update lastCachedSlot with lastCachedSlot+1 is successfull
+		Update the slot with class pointer and method address
+		goto CommonJitDispatch
+	
+	// Slot is occupied, wait in loop for the slot to get updated.
+	while @(tempSlotVar) == 0 ;
+	
+	// Check if the slot we were trying to acquire was updated with same class
+	If ClassPointer == @(tempSlotVar)
+		GoTo CommonJitDispatch
+
+	GoTo LoopToUpdateCache:
+
+CommonJitDisptach:
+...
+}
+```
+
+Most of the time current implementation should work fine but I can think of one case where it can yield to sub-optimal performance by having duplicate entries in the slots. Consider following case where `foo` contains interface call `bar` and multiple threads are running compiled method `foo` trying to access and update the same PIC slots for interface call site `bar`.
+```
+...
+	public void foo(SomeInterface obj) {
+		obj.bar()
+		}
+...
+```
+
+Now consider a scenario where Thread 1 and Thread 2 are calling `bar` from Class C1 and C2 respectively and Thread 3 is calling `bar` from C1.
+
+
+|	Thread 1									| 		Thread 2								|  Thread 3							  	|
+|-----------------------------------|-----------------------------------|--------------------------------|
+|	If obj.class == slot1.class		|												|										  	|
+|		Call slot1.method					|	If obj.class == slot1.class		|										  	|
+|	If obj.class == slot2.class		|		Call slot1.method					| If obj.class == slot1.class		|
+|		Call slot2.method					|	If obj.class == slot2.class		|		Call slot1.method				|
+|	If obj.class == slot3.class		|		Call slot2.method					| If obj.class == slot2.class		|
+|		Call slot3.method					|	If obj.class == slot3.class		| 		Call slot2.method				|
+|	InterfaceCallHelper:					|		Call slot3.method					| If obj.class == slot3.class		|
+|		ResolveAndLookupCall				|	InterfaceCallHelper:					| 		Call slot3.method				|
+|		Update Slot 1 with C1			|		ResolveAndLookupCall				| InterfaceCallHelper:				|
+|												|		Update Slot 1 with C2			|		ResolveAndLookupCall			|
+|												|												|		Update Slot 3 with C1		|
+
+
+On Z we check the J9Class in the last cached slot only if there is contention and some other thread was upgrading a same slot. If there is no contention then it might be possible that multiple slots contains same methods wasting a slot effectively which might lead sub-optimal performance.
+Looking at the implementation on x86 (I have checked read only mode only, but I believe only difference is the location of PICData) and it would not suffer from this issue.
+
+For the implementation of PICs on different platform, I found following differences so far with the x86 implementation for read only mode.
+
+1. In the PICBuilder, once it has find the method through `jitLookUpInterfaceMethod` it updates the PIC slot with the ClassPointer, it tries to update the slot atomically one after another by comparing slot value with the default expected value (-1) [3]  while also checks the populated slot to make sure that it is not trying to update slot with the class which was already populated.
+2. Now in the JIT compiled code, upon successfull cache hit call is dispatched through helpers like `dispatchIPicSlot*MethodReadOnly` [4] this snippet updates the method address field in the PICSlot with jit-to-jit entry point address for target method once it is compiled. In a nut shell, On Z first `n` compiled methods are cached while on x86 first `n` encountered method (Whether they are compiled or not) are cached.
+
+
+[1]. https://github.com/eclipse/openj9/blob/809e4e3355b89f44e66991b0cf1e6c6434de3689/runtime/compiler/z/codegen/S390J9CallSnippet.cpp#L966
+[2]. https://github.com/eclipse/openj9/blob/761497476fa57eadcd72a00de91472ebc373a6d8/runtime/compiler/z/runtime/PicBuilder.m4#L1852
+[3]. https://github.com/eclipse/openj9/blob/0bfc9b8607a0cc52765e8295c6778b7f6d2bcb37/runtime/compiler/x/runtime/X86PicBuilder.nasm#L2388-L2406
+[4]. https://github.com/eclipse/openj9/blob/0bfc9b8607a0cc52765e8295c6778b7f6d2bcb37/runtime/compiler/x/runtime/X86PicBuilder.nasm#L2460
+
+I have described the implementation here on Z now working on fixing the implementation for both `snapshot+restore` and regular configuration,  given that Z is not handling PIC slots efficiently. 
+@0xdaryl  I have just put the major differences I have found between two platforms (x86 and Z) here in the issue. If I have missed anything, please let me know. @aviansie-ben  @ymanton  This might be good issue to summarize Power implementation. 
+FYI @fjeremic @joransiu 

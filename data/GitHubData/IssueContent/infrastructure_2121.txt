@@ -1,0 +1,7 @@
+Ref: https://ci.adoptopenjdk.net/job/QEMUPlaybookCheck/229/
+
+With the latest QPC run, all platforms have failed to some degree. 4 have failed due calling `buildJDK.sh` in an incorrect way (incorrect as of #1962 ). 
+
+The `risc-v` platform is still blocked by #1483 
+
+And the `arm32` platform seems to be running out of space during the playbook execution.

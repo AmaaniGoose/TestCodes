@@ -1,0 +1,9 @@
+This issue is a bit of a mini-epic in that it involves re-architecting the code surrounding the AOT infrastructure. The recent addition of the Symbol Validation Manager (SVM), while a good thing, both exposed and worsened problems in the current infrastructure. 
+
+- [ ] Consolidate writing of relocation record headers (https://github.com/eclipse/openj9/issues/4803)
+- [ ] Clean up TR_Thunks and TR_J2IVirtualThunkPointer relocations (https://github.com/eclipse/openj9/issues/2903)
+- [ ] Provide common implementation of AheadOfTimeCompile::processRelocations (https://github.com/eclipse/openj9/issues/6265)
+- [ ] Separate Validation Records from Relocation Records (https://github.com/eclipse/openj9/issues/12455)
+- [x] ~Decouple relocation of the metadata's inlined table from relocation for guards (https://github.com/eclipse/openj9/issues/4621)~
+- [x] Remove dependence of Inlining table relocations on the existence of virtual guards  https://github.com/eclipse/openj9/issues/11060
+- [ ] Clean up relocation record binary templates https://github.com/eclipse/openj9/issues/11659

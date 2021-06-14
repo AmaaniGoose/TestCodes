@@ -1,0 +1,50 @@
+Java -version output
+--------------------
+
+```
+openjdk version "1.8.0_282"
+OpenJDK Runtime Environment (build 1.8.0_282-b08)
+Eclipse OpenJ9 VM (build openj9-0.24.0, JRE 1.8.0 Windows 7 amd64-64-Bit Compres
+sed References 20210120_972 (JIT enabled, AOT enabled)
+OpenJ9   - 345e1b09e
+OMR      - 741e94ea8
+JCL      - ab07c6a8fd based on jdk8u282-b08)
+```
+
+Summary of problem
+------------------
+[Canvas](https://github.com/grondag/canvas) is a minecraft render mod.       The chunk render was broke and crashed when using balanced gc(-Xgcpolicy:balanced)
+
+The chunk render is normal when I using gencon gc. If set -Xmx2048M or set -Xgc:regionSize=1M ,The chunk can render. Maybe it is arraylets problem.
+
+
+Diagnostic files
+----------------
+[crash report](https://gist.github.com/1a2s3d4f1/d66de3cf112243c4e84e87bfd4080927)
+
+[Area.java#L132](https://github.com/grondag/canvas/blob/eafac824fd9f6489b272d948669377433c6e6467/src/main/java/grondag/canvas/terrain/occlusion/geometry/Area.java#L132)
+[AreaFinder.java#L187](https://github.com/grondag/canvas/blob/eafac824fd9f6489b272d948669377433c6e6467/src/main/java/grondag/canvas/terrain/occlusion/geometry/AreaFinder.java#L187)
+
+gc log(default region size):
+[verbosegc.20210205.211006.2804.zip](https://github.com/eclipse/openj9/files/5932634/verbosegc.20210205.211006.2804.zip)
+gc log(1MB region size):
+[verbosegc.20210205.211552.3260.zip](https://github.com/eclipse/openj9/files/5932636/verbosegc.20210205.211552.3260.zip)
+
+
+
+```
+[14:15:01] [Canvas Render Thread - 0/ERROR]: Unhandled error during rendering. Impact unknown.
+java.lang.ArrayIndexOutOfBoundsException: null
+	at Not Enough Crashes deobfuscated stack trace.(1.16.5+build.3) ~[?:?]
+	at grondag.canvas.terrain.occlusion.geometry.Area.keyToIndex(Area.java:132) ~[canvas-mc116-1.0.1267.jar:?]
+	at grondag.canvas.terrain.occlusion.geometry.AreaFinder.find(AreaFinder.java:187) ~[canvas-mc116-1.0.1267.jar:?]
+	at grondag.canvas.terrain.occlusion.geometry.BoxFinder.markBoxSlices(BoxFinder.java:217) ~[canvas-mc116-1.0.1267.jar:?]
+	at grondag.canvas.terrain.occlusion.geometry.BoxFinder.findBoxes(BoxFinder.java:57) ~[canvas-mc116-1.0.1267.jar:?]
+	at grondag.canvas.terrain.occlusion.geometry.OcclusionRegion.computeOcclusion(OcclusionRegion.java:463) ~[canvas-mc116-1.0.1267.jar:?]
+	at grondag.canvas.terrain.occlusion.geometry.OcclusionRegion.build(OcclusionRegion.java:507) ~[canvas-mc116-1.0.1267.jar:?]
+	at grondag.canvas.terrain.region.BuiltRenderRegion.buildRegionData(BuiltRenderRegion.java:513) ~[canvas-mc116-1.0.1267.jar:?]
+	at grondag.canvas.terrain.region.BuiltRenderRegion.rebuildOnWorkerThread(BuiltRenderRegion.java:473) ~[canvas-mc116-1.0.1267.jar:?]
+	at grondag.canvas.terrain.region.BuiltRenderRegion$$Lambda$6296/0x0000000000000000.accept(Unknown Source) ~[?:?]
+	at grondag.canvas.terrain.util.TerrainExecutor$Worker.run(TerrainExecutor.java:116) [canvas-mc116-1.0.1267.jar:?]
+	at java.lang.Thread.run(Thread.java:823) [?:1.8.0_282]
+```

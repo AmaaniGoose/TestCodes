@@ -1,0 +1,711 @@
+sanity.openjdk test target jdk_foreign_0 failed on the jdk15 openj9-0.24.0 release build in test java/foreign/TestMismatch.java
+
+Build under test:
+```
+10:03:55  openjdk version "15.0.2" 2021-01-19
+10:03:55  OpenJDK Runtime Environment AdoptOpenJDK (build 15.0.2+7)
+10:03:55  Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.24.0, JRE 15 Linux amd64-64-Bit Compressed References 20210121_172 (JIT enabled, AOT enabled)
+10:03:55  OpenJ9   - 345e1b09e
+10:03:55  OMR      - 741e94ea8
+10:03:55  JCL      - 863b523566 based on jdk-15.0.2+7)
+```
+
+Link to failing job: https://ci.adoptopenjdk.net/job/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/162/console
+
+Output from failing test target:
+```
+11:18:12  ===============================================
+11:18:12  Running test jdk_foreign_0 ...
+11:18:12  ===============================================
+11:18:12  jdk_foreign_0 Start Time: Thu Jan 21 11:18:11 2021 Epoch Time (ms): 1611227891492
+11:18:12  "/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+11:18:12  JVMSHRC005I No shared class caches available
+11:18:12  JVMSHRC005I No shared class caches available
+11:18:12  cache cleanup done
+11:18:12  variation: Mode150
+11:18:12  JVM_OPTIONS:  -XX:+UseCompressedOops 
+11:18:12  { itercnt=1; \
+11:18:12  mkdir -p "/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/../TKG/test_output_16112235107017/jdk_foreign_0"; \
+11:18:12  cd "/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/../TKG/test_output_16112235107017/jdk_foreign_0"; \
+11:18:12  "/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image/bin/java" -Xmx512m -jar "/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/../../jvmtest/openjdk/jtreg/lib/jtreg.jar" \
+11:18:12  -agentvm -a -ea -esa -v:fail,error,time,nopass -retain:fail,error,*.dmp,javacore.*,heapdump.*,*.trc -ignore:quiet -timeoutFactor:8 -xml:verify -concurrency:28 -nativepath:"/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native" -vmoptions:"-Xmx512m --add-modules jdk.incubator.foreign  -XX:+UseCompressedOops " \
+11:18:12  -w ""/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/../TKG/test_output_16112235107017/jdk_foreign_0"/work" \
+11:18:12  -r "/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/../../jvmtest/openjdk/report" \
+11:18:12  -jdk:"/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image" \
+11:18:12  -exclude:"/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/../openjdk/openjdk-jdk/test/jdk/ProblemList.txt" \
+11:18:12  -exclude:"/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/../../jvmtest/openjdk/ProblemList_openjdk15-openj9.txt" \
+11:18:12  "/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/../openjdk/openjdk-jdk/test/jdk:jdk_foreign"; \
+11:18:12  if [ $? -eq 0 ] ; then echo ""; echo "jdk_foreign_0""_PASSED"; echo ""; cd /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/..;  else echo ""; echo "jdk_foreign_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/../TKG/test_output_16112235107017/TestTargetResult";
+11:18:12  Directory "/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/../TKG/test_output_16112235107017/jdk_foreign_0/work" not found: creating
+11:18:19  WARNING: Using incubator modules: jdk.incubator.foreign
+11:18:19  XML output with verification to /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/test_output_16112235107017/jdk_foreign_0/work
+11:18:20  WARNING: Using incubator modules: jdk.incubator.foreign
+11:19:51  --------------------------------------------------
+11:19:51  TEST: java/foreign/TestMismatch.java
+11:19:51  TEST JDK: /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image
+11:19:51  
+11:19:51  ACTION: build -- Passed. Build successful
+11:19:51  REASON: Named class compiled on demand
+11:19:51  TIME:   16.374 seconds
+11:19:51  messages:
+11:19:51  command: build TestMismatch
+11:19:51  reason: Named class compiled on demand
+11:19:51  Test directory:
+11:19:51    compile: TestMismatch
+11:19:51  elapsed time (seconds): 16.374
+11:19:51  
+11:19:51  ACTION: compile -- Passed. Compilation successful
+11:19:51  REASON: .class file out of date or does not exist
+11:19:51  TIME:   16.357 seconds
+11:19:51  messages:
+11:19:51  command: compile /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign/TestMismatch.java
+11:19:51  reason: .class file out of date or does not exist
+11:19:51  Additional options from @modules: --add-modules jdk.incubator.foreign
+11:19:51  Mode: agentvm
+11:19:51  Agent id: 5
+11:19:51  elapsed time (seconds): 16.357
+11:19:51  configuration:
+11:19:51  Boot Layer (javac runtime environment)
+11:19:51    add modules: jdk.incubator.foreign 
+11:19:51    class path:  /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/javatest.jar 
+11:19:51                 /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+11:19:51    patch:       java.base /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/test_output_16112235107017/jdk_foreign_0/work/patches/java.base
+11:19:51  
+11:19:51  javac compilation environment
+11:19:51    add modules: jdk.incubator.foreign
+11:19:51    source path: /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign
+11:19:51    class path:  /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign
+11:19:51                 /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/test_output_16112235107017/jdk_foreign_0/work/classes/4/java/foreign/TestMismatch.d
+11:19:51                 /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/testng.jar
+11:19:51                 /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/jcommander.jar
+11:19:51  
+11:19:51  rerun:
+11:19:51  cd /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/test_output_16112235107017/jdk_foreign_0/work/scratch/2 && \
+11:19:51  DISPLAY=:0 \
+11:19:51  HOME=/home/jenkins \
+11:19:51  LANG=C.UTF-8 \
+11:19:51  PATH=/bin:/usr/bin:/usr/sbin \
+11:19:51      /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image/bin/javac \
+11:19:51          -J-ea \
+11:19:51          -J-esa \
+11:19:51          -J-Xmx512m \
+11:19:51          -J--add-modules \
+11:19:51          -Jjdk.incubator.foreign \
+11:19:51          -J-XX:+UseCompressedOops \
+11:19:51          -J-Djava.library.path=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+11:19:51          -J-Dtest.vm.opts='-ea -esa -Xmx512m --add-modules jdk.incubator.foreign -XX:+UseCompressedOops' \
+11:19:51          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J--add-modules -Jjdk.incubator.foreign -J-XX:+UseCompressedOops' \
+11:19:51          -J-Dtest.compiler.opts= \
+11:19:51          -J-Dtest.java.opts= \
+11:19:51          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+11:19:51          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+11:19:51          -J-Dtest.timeout.factor=8.0 \
+11:19:51          -J-Dtest.nativepath=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+11:19:51          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+11:19:51          -J-Dtest.name=java/foreign/TestMismatch.java \
+11:19:51          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign/TestMismatch.java \
+11:19:51          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign \
+11:19:51          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign \
+11:19:51          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/test_output_16112235107017/jdk_foreign_0/work/classes/4/java/foreign/TestMismatch.d \
+11:19:51          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/test_output_16112235107017/jdk_foreign_0/work/classes/4/java/foreign/TestMismatch.d \
+11:19:51          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/test_output_16112235107017/jdk_foreign_0/work/classes/4/java/foreign/TestMismatch.d:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign \
+11:19:51          -J-Dtest.modules=jdk.incubator.foreign \
+11:19:51          --add-modules jdk.incubator.foreign \
+11:19:51          -d /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/test_output_16112235107017/jdk_foreign_0/work/classes/4/java/foreign/TestMismatch.d \
+11:19:51          -sourcepath /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign \
+11:19:51          -classpath /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/test_output_16112235107017/jdk_foreign_0/work/classes/4/java/foreign/TestMismatch.d:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/testng.jar:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/jcommander.jar /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign/TestMismatch.java
+11:19:51  direct:
+11:19:51  warning: using incubating module(s): jdk.incubator.foreign
+11:19:51  1 warning
+11:19:51  
+11:19:51  ACTION: testng -- Error. Agent communication error: java.io.EOFException; check console log for any additional details
+11:19:51  REASON: User specified action: run testng TestMismatch 
+11:19:51  TIME:   65.114 seconds
+11:19:51  messages:
+11:19:51  command: testng TestMismatch
+11:19:51  reason: User specified action: run testng TestMismatch 
+11:19:51  Mode: agentvm
+11:19:51  Agent id: 22
+11:19:51  elapsed time (seconds): 65.114
+11:19:51  configuration:
+11:19:51  Boot Layer
+11:19:51    add modules: jdk.incubator.foreign 
+11:19:51    class path:  /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/javatest.jar 
+11:19:51                 /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+11:19:51                 /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/junit.jar 
+11:19:51                 /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/testng.jar 
+11:19:51                 /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/jcommander.jar 
+11:19:51    patch:       java.base /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/test_output_16112235107017/jdk_foreign_0/work/patches/java.base
+11:19:51  
+11:19:51  Test Layer
+11:19:51    class path: /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/test_output_16112235107017/jdk_foreign_0/work/classes/4/java/foreign/TestMismatch.d
+11:19:51                /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign
+11:19:51  
+11:19:51  rerun:
+11:19:51  cd /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/test_output_16112235107017/jdk_foreign_0/work/scratch/2 && \
+11:19:51  DISPLAY=:0 \
+11:19:51  HOME=/home/jenkins \
+11:19:51  LANG=C.UTF-8 \
+11:19:51  PATH=/bin:/usr/bin:/usr/sbin \
+11:19:51      /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image/bin/java \
+11:19:51          -Dtest.vm.opts='-ea -esa -Xmx512m --add-modules jdk.incubator.foreign -XX:+UseCompressedOops' \
+11:19:51          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J--add-modules -Jjdk.incubator.foreign -J-XX:+UseCompressedOops' \
+11:19:51          -Dtest.compiler.opts= \
+11:19:51          -Dtest.java.opts= \
+11:19:51          -Dtest.jdk=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+11:19:51          -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+11:19:51          -Dtest.timeout.factor=8.0 \
+11:19:51          -Dtest.nativepath=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+11:19:51          -Dtest.root=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+11:19:51          -Dtest.name=java/foreign/TestMismatch.java \
+11:19:51          -Dtest.file=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign/TestMismatch.java \
+11:19:51          -Dtest.src=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign \
+11:19:51          -Dtest.src.path=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign \
+11:19:51          -Dtest.classes=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/test_output_16112235107017/jdk_foreign_0/work/classes/4/java/foreign/TestMismatch.d \
+11:19:51          -Dtest.class.path=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/test_output_16112235107017/jdk_foreign_0/work/classes/4/java/foreign/TestMismatch.d \
+11:19:51          -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/test_output_16112235107017/jdk_foreign_0/work/classes/4/java/foreign/TestMismatch.d:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign \
+11:19:51          -Dtest.modules=jdk.incubator.foreign \
+11:19:51          -classpath /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/test_output_16112235107017/jdk_foreign_0/work/classes/4/java/foreign/TestMismatch.d:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/testng.jar:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/jcommander.jar:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+11:19:51          com.sun.javatest.regtest.agent.TestNGRunner java/foreign/TestMismatch.java false TestMismatch
+11:19:51  STDOUT:
+11:19:51  [TestNG] Running:
+11:19:51    java/foreign/TestMismatch.java
+11:19:51  
+11:19:51  test TestMismatch.testClosed(): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x7f84c02f limit: 16 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.NativeMemorySegmentImpl@a595c8ff): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x7f84c02f limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.NativeMemorySegmentImpl@bd638e74): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x7f84bf37 limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.NativeMemorySegmentImpl@d2320821): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x7f84c02f limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.NativeMemorySegmentImpl@2cec1fe2): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x7f84c04e limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.NativeMemorySegmentImpl@7a50f572): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x7f84bff1 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.NativeMemorySegmentImpl@125646bb): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x7f84c010 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.NativeMemorySegmentImpl@85392e14): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x7f84c0ab limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.NativeMemorySegmentImpl@ceaa9af4): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x7f84c0ca limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.NativeMemorySegmentImpl@d5535635): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x7f84c06d limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.NativeMemorySegmentImpl@a492de20): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x7f84c08c limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.NativeMemorySegmentImpl@5c65fcc8): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x7f84bf37 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.NativeMemorySegmentImpl@ffd855c6): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x7f84bf56 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.NativeMemorySegmentImpl@b05b1bcb): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x7f84bef9 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.NativeMemorySegmentImpl@31fe585): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x7f84bf18 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.NativeMemorySegmentImpl@2519987e): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x7f84bfb3 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.NativeMemorySegmentImpl@b0e58718): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x7f84bfd2 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.NativeMemorySegmentImpl@79d3e6aa): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x7f84bf75 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.NativeMemorySegmentImpl@5ba96127): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x7f84bf94 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.NativeMemorySegmentImpl@93e5f5a9): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x22d94696 limit: 16 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.HeapMemorySegmentImpl@c2b3a1a1): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x22d94696 limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.HeapMemorySegmentImpl@bb39418a): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x22d9478e limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.HeapMemorySegmentImpl@f22e88b3): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x22d94696 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.HeapMemorySegmentImpl@a8baf9da): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x22d946b5 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.HeapMemorySegmentImpl@54c22a9e): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x22d946d4 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.HeapMemorySegmentImpl@f3d56734): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x22d946f3 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.HeapMemorySegmentImpl@43650c7d): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x22d94712 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.HeapMemorySegmentImpl@b5984356): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x22d94731 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.HeapMemorySegmentImpl@d9a622b3): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x22d94750 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.HeapMemorySegmentImpl@83166183): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x22d9476f limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.HeapMemorySegmentImpl@eb6087c9): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x22d9478e limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.HeapMemorySegmentImpl@cfb06b11): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x22d947ad limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.HeapMemorySegmentImpl@ad29d6b6): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x22d947cc limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.HeapMemorySegmentImpl@7c4752a7): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x22d947eb limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.HeapMemorySegmentImpl@5693fc2a): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x22d9480a limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.HeapMemorySegmentImpl@f4a419a2): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x22d94829 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.HeapMemorySegmentImpl@b3d27211): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x22d94848 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.HeapMemorySegmentImpl@4013160f): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 16 }, s2:MemorySegment{ id=0x22d94867 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@dfd06c83, jdk.internal.foreign.HeapMemorySegmentImpl@6b7d6774): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x7f84c02f limit: 16 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.NativeMemorySegmentImpl@a595c8ff): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x7f84c02f limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.NativeMemorySegmentImpl@bd638e74): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x7f84bf37 limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.NativeMemorySegmentImpl@d2320821): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x7f84c02f limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.NativeMemorySegmentImpl@2cec1fe2): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x7f84c04e limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.NativeMemorySegmentImpl@7a50f572): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x7f84bff1 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.NativeMemorySegmentImpl@125646bb): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x7f84c010 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.NativeMemorySegmentImpl@85392e14): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x7f84c0ab limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.NativeMemorySegmentImpl@ceaa9af4): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x7f84c0ca limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.NativeMemorySegmentImpl@d5535635): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x7f84c06d limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.NativeMemorySegmentImpl@a492de20): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x7f84c08c limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.NativeMemorySegmentImpl@5c65fcc8): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x7f84bf37 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.NativeMemorySegmentImpl@ffd855c6): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x7f84bf56 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.NativeMemorySegmentImpl@b05b1bcb): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x7f84bef9 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.NativeMemorySegmentImpl@31fe585): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x7f84bf18 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.NativeMemorySegmentImpl@2519987e): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x7f84bfb3 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.NativeMemorySegmentImpl@b0e58718): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x7f84bfd2 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.NativeMemorySegmentImpl@79d3e6aa): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x7f84bf75 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.NativeMemorySegmentImpl@5ba96127): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x7f84bf94 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.NativeMemorySegmentImpl@93e5f5a9): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x22d94696 limit: 16 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.HeapMemorySegmentImpl@c2b3a1a1): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x22d94696 limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.HeapMemorySegmentImpl@bb39418a): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x22d9478e limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.HeapMemorySegmentImpl@f22e88b3): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x22d94696 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.HeapMemorySegmentImpl@a8baf9da): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x22d946b5 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.HeapMemorySegmentImpl@54c22a9e): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x22d946d4 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.HeapMemorySegmentImpl@f3d56734): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x22d946f3 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.HeapMemorySegmentImpl@43650c7d): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x22d94712 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.HeapMemorySegmentImpl@b5984356): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x22d94731 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.HeapMemorySegmentImpl@d9a622b3): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x22d94750 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.HeapMemorySegmentImpl@83166183): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x22d9476f limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.HeapMemorySegmentImpl@eb6087c9): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x22d9478e limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.HeapMemorySegmentImpl@cfb06b11): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x22d947ad limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.HeapMemorySegmentImpl@ad29d6b6): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x22d947cc limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.HeapMemorySegmentImpl@7c4752a7): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x22d947eb limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.HeapMemorySegmentImpl@5693fc2a): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x22d9480a limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.HeapMemorySegmentImpl@f4a419a2): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x22d94829 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.HeapMemorySegmentImpl@b3d27211): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x22d94848 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.HeapMemorySegmentImpl@4013160f): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 8 }, s2:MemorySegment{ id=0x22d94867 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@52d61156, jdk.internal.foreign.HeapMemorySegmentImpl@6b7d6774): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x7f84c02f limit: 16 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.NativeMemorySegmentImpl@a595c8ff): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x7f84c02f limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.NativeMemorySegmentImpl@bd638e74): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x7f84bf37 limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.NativeMemorySegmentImpl@d2320821): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x7f84c02f limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.NativeMemorySegmentImpl@2cec1fe2): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x7f84c04e limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.NativeMemorySegmentImpl@7a50f572): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x7f84bff1 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.NativeMemorySegmentImpl@125646bb): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x7f84c010 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.NativeMemorySegmentImpl@85392e14): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x7f84c0ab limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.NativeMemorySegmentImpl@ceaa9af4): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x7f84c0ca limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.NativeMemorySegmentImpl@d5535635): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x7f84c06d limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.NativeMemorySegmentImpl@a492de20): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x7f84c08c limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.NativeMemorySegmentImpl@5c65fcc8): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x7f84bf37 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.NativeMemorySegmentImpl@ffd855c6): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x7f84bf56 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.NativeMemorySegmentImpl@b05b1bcb): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x7f84bef9 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.NativeMemorySegmentImpl@31fe585): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x7f84bf18 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.NativeMemorySegmentImpl@2519987e): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x7f84bfb3 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.NativeMemorySegmentImpl@b0e58718): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x7f84bfd2 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.NativeMemorySegmentImpl@79d3e6aa): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x7f84bf75 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.NativeMemorySegmentImpl@5ba96127): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x7f84bf94 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.NativeMemorySegmentImpl@93e5f5a9): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x22d94696 limit: 16 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.HeapMemorySegmentImpl@c2b3a1a1): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x22d94696 limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.HeapMemorySegmentImpl@bb39418a): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x22d9478e limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.HeapMemorySegmentImpl@f22e88b3): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x22d94696 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.HeapMemorySegmentImpl@a8baf9da): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x22d946b5 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.HeapMemorySegmentImpl@54c22a9e): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x22d946d4 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.HeapMemorySegmentImpl@f3d56734): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x22d946f3 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.HeapMemorySegmentImpl@43650c7d): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x22d94712 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.HeapMemorySegmentImpl@b5984356): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x22d94731 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.HeapMemorySegmentImpl@d9a622b3): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x22d94750 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.HeapMemorySegmentImpl@83166183): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x22d9476f limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.HeapMemorySegmentImpl@eb6087c9): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x22d9478e limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.HeapMemorySegmentImpl@cfb06b11): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x22d947ad limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.HeapMemorySegmentImpl@ad29d6b6): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x22d947cc limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.HeapMemorySegmentImpl@7c4752a7): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x22d947eb limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.HeapMemorySegmentImpl@5693fc2a): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x22d9480a limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.HeapMemorySegmentImpl@f4a419a2): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x22d94829 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.HeapMemorySegmentImpl@b3d27211): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x22d94848 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.HeapMemorySegmentImpl@4013160f): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2bd9 limit: 8 }, s2:MemorySegment{ id=0x22d94867 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@64e494b0, jdk.internal.foreign.HeapMemorySegmentImpl@6b7d6774): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 1 }, s2:MemorySegment{ id=0x7f84c02f limit: 16 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@ba300081, jdk.internal.foreign.NativeMemorySegmentImpl@a595c8ff): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 1 }, s2:MemorySegment{ id=0x7f84c02f limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@ba300081, jdk.internal.foreign.NativeMemorySegmentImpl@bd638e74): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 1 }, s2:MemorySegment{ id=0x7f84bf37 limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@ba300081, jdk.internal.foreign.NativeMemorySegmentImpl@d2320821): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 1 }, s2:MemorySegment{ id=0x7f84c02f limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@ba300081, jdk.internal.foreign.NativeMemorySegmentImpl@2cec1fe2): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 1 }, s2:MemorySegment{ id=0x7f84c04e limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@ba300081, jdk.internal.foreign.NativeMemorySegmentImpl@7a50f572): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 1 }, s2:MemorySegment{ id=0x7f84bff1 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@ba300081, jdk.internal.foreign.NativeMemorySegmentImpl@125646bb): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 1 }, s2:MemorySegment{ id=0x7f84c010 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@ba300081, jdk.internal.foreign.NativeMemorySegmentImpl@85392e14): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 1 }, s2:MemorySegment{ id=0x7f84c0ab limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@ba300081, jdk.internal.foreign.NativeMemorySegmentImpl@ceaa9af4): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 1 }, s2:MemorySegment{ id=0x7f84c0ca limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@ba300081, jdk.internal.foreign.NativeMemorySegmentImpl@d5535635): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 1 }, s2:MemorySegment{ id=0x7f84c06d limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@ba300081, jdk.internal.foreign.NativeMemorySegmentImpl@a492de20): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 1 }, s2:MemorySegment{ id=0x7f84c08c limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@ba300081, jdk.internal.foreign.NativeMemorySegmentImpl@5c65fcc8): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2ae1 limit: 1 }, s2:MemorySegment{ id=0x7f84bf37 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.NativeMemorySegmentImpl@ba300081, jdk.internal.foreign.NativeMemorySegmentImpl@ffd855c6): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x7fcf2a
+11:19:51  
+11:19:51  ...
+11:19:51  Output overflow:
+11:19:51  JT Harness has limited the test output to the text
+11:19:51  at the beginning and the end, so that you can see how the
+11:19:51  test began, and how it completed.
+11:19:51  
+11:19:51  If you need to see more of the output from the test,
+11:19:51  set the system property javatest.maxOutputSize to a higher
+11:19:51  value. The current value is 100000
+11:19:51  ...
+11:19:51  
+11:19:51  ismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@2fd84909, jdk.internal.foreign.HeapMemorySegmentImpl@4013160f): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe22 limit: 1 }, s2:MemorySegment{ id=0x22d94867 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@2fd84909, jdk.internal.foreign.HeapMemorySegmentImpl@6b7d6774): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x7f84c02f limit: 16 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.NativeMemorySegmentImpl@a595c8ff): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x7f84c02f limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.NativeMemorySegmentImpl@bd638e74): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x7f84bf37 limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.NativeMemorySegmentImpl@d2320821): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x7f84c02f limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.NativeMemorySegmentImpl@2cec1fe2): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x7f84c04e limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.NativeMemorySegmentImpl@7a50f572): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x7f84bff1 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.NativeMemorySegmentImpl@125646bb): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x7f84c010 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.NativeMemorySegmentImpl@85392e14): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x7f84c0ab limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.NativeMemorySegmentImpl@ceaa9af4): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x7f84c0ca limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.NativeMemorySegmentImpl@d5535635): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x7f84c06d limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.NativeMemorySegmentImpl@a492de20): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x7f84c08c limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.NativeMemorySegmentImpl@5c65fcc8): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x7f84bf37 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.NativeMemorySegmentImpl@ffd855c6): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x7f84bf56 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.NativeMemorySegmentImpl@b05b1bcb): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x7f84bef9 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.NativeMemorySegmentImpl@31fe585): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x7f84bf18 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.NativeMemorySegmentImpl@2519987e): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x7f84bfb3 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.NativeMemorySegmentImpl@b0e58718): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x7f84bfd2 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.NativeMemorySegmentImpl@79d3e6aa): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x7f84bf75 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.NativeMemorySegmentImpl@5ba96127): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x7f84bf94 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.NativeMemorySegmentImpl@93e5f5a9): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x22d94696 limit: 16 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.HeapMemorySegmentImpl@c2b3a1a1): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x22d94696 limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.HeapMemorySegmentImpl@bb39418a): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x22d9478e limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.HeapMemorySegmentImpl@f22e88b3): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x22d94696 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.HeapMemorySegmentImpl@a8baf9da): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x22d946b5 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.HeapMemorySegmentImpl@54c22a9e): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x22d946d4 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.HeapMemorySegmentImpl@f3d56734): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x22d946f3 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.HeapMemorySegmentImpl@43650c7d): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x22d94712 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.HeapMemorySegmentImpl@b5984356): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x22d94731 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.HeapMemorySegmentImpl@d9a622b3): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x22d94750 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.HeapMemorySegmentImpl@83166183): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x22d9476f limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.HeapMemorySegmentImpl@eb6087c9): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x22d9478e limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.HeapMemorySegmentImpl@cfb06b11): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x22d947ad limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.HeapMemorySegmentImpl@ad29d6b6): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x22d947cc limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.HeapMemorySegmentImpl@7c4752a7): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x22d947eb limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.HeapMemorySegmentImpl@5693fc2a): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x22d9480a limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.HeapMemorySegmentImpl@f4a419a2): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x22d94829 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.HeapMemorySegmentImpl@b3d27211): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x22d94848 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.HeapMemorySegmentImpl@4013160f): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fe03 limit: 1 }, s2:MemorySegment{ id=0x22d94867 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@46ec8e1c, jdk.internal.foreign.HeapMemorySegmentImpl@6b7d6774): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x7f84c02f limit: 16 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.NativeMemorySegmentImpl@a595c8ff): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x7f84c02f limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.NativeMemorySegmentImpl@bd638e74): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x7f84bf37 limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.NativeMemorySegmentImpl@d2320821): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x7f84c02f limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.NativeMemorySegmentImpl@2cec1fe2): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x7f84c04e limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.NativeMemorySegmentImpl@7a50f572): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x7f84bff1 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.NativeMemorySegmentImpl@125646bb): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x7f84c010 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.NativeMemorySegmentImpl@85392e14): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x7f84c0ab limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.NativeMemorySegmentImpl@ceaa9af4): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x7f84c0ca limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.NativeMemorySegmentImpl@d5535635): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x7f84c06d limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.NativeMemorySegmentImpl@a492de20): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x7f84c08c limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.NativeMemorySegmentImpl@5c65fcc8): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x7f84bf37 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.NativeMemorySegmentImpl@ffd855c6): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x7f84bf56 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.NativeMemorySegmentImpl@b05b1bcb): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x7f84bef9 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.NativeMemorySegmentImpl@31fe585): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x7f84bf18 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.NativeMemorySegmentImpl@2519987e): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x7f84bfb3 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.NativeMemorySegmentImpl@b0e58718): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x7f84bfd2 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.NativeMemorySegmentImpl@79d3e6aa): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x7f84bf75 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.NativeMemorySegmentImpl@5ba96127): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x7f84bf94 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.NativeMemorySegmentImpl@93e5f5a9): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x22d94696 limit: 16 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.HeapMemorySegmentImpl@c2b3a1a1): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x22d94696 limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.HeapMemorySegmentImpl@bb39418a): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x22d9478e limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.HeapMemorySegmentImpl@f22e88b3): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x22d94696 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.HeapMemorySegmentImpl@a8baf9da): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x22d946b5 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.HeapMemorySegmentImpl@54c22a9e): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x22d946d4 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.HeapMemorySegmentImpl@f3d56734): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x22d946f3 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.HeapMemorySegmentImpl@43650c7d): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x22d94712 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.HeapMemorySegmentImpl@b5984356): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x22d94731 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.HeapMemorySegmentImpl@d9a622b3): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x22d94750 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.HeapMemorySegmentImpl@83166183): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x22d9476f limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.HeapMemorySegmentImpl@eb6087c9): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x22d9478e limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.HeapMemorySegmentImpl@cfb06b11): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x22d947ad limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.HeapMemorySegmentImpl@ad29d6b6): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x22d947cc limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.HeapMemorySegmentImpl@7c4752a7): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x22d947eb limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.HeapMemorySegmentImpl@5693fc2a): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x22d9480a limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.HeapMemorySegmentImpl@f4a419a2): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x22d94829 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.HeapMemorySegmentImpl@b3d27211): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x22d94848 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.HeapMemorySegmentImpl@4013160f): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fde4 limit: 1 }, s2:MemorySegment{ id=0x22d94867 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@13d05565, jdk.internal.foreign.HeapMemorySegmentImpl@6b7d6774): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x7f84c02f limit: 16 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.NativeMemorySegmentImpl@a595c8ff): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x7f84c02f limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.NativeMemorySegmentImpl@bd638e74): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x7f84bf37 limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.NativeMemorySegmentImpl@d2320821): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x7f84c02f limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.NativeMemorySegmentImpl@2cec1fe2): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x7f84c04e limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.NativeMemorySegmentImpl@7a50f572): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x7f84bff1 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.NativeMemorySegmentImpl@125646bb): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x7f84c010 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.NativeMemorySegmentImpl@85392e14): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x7f84c0ab limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.NativeMemorySegmentImpl@ceaa9af4): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x7f84c0ca limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.NativeMemorySegmentImpl@d5535635): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x7f84c06d limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.NativeMemorySegmentImpl@a492de20): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x7f84c08c limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.NativeMemorySegmentImpl@5c65fcc8): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x7f84bf37 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.NativeMemorySegmentImpl@ffd855c6): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x7f84bf56 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.NativeMemorySegmentImpl@b05b1bcb): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x7f84bef9 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.NativeMemorySegmentImpl@31fe585): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x7f84bf18 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.NativeMemorySegmentImpl@2519987e): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x7f84bfb3 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.NativeMemorySegmentImpl@b0e58718): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x7f84bfd2 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.NativeMemorySegmentImpl@79d3e6aa): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x7f84bf75 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.NativeMemorySegmentImpl@5ba96127): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x7f84bf94 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.NativeMemorySegmentImpl@93e5f5a9): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x22d94696 limit: 16 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.HeapMemorySegmentImpl@c2b3a1a1): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x22d94696 limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.HeapMemorySegmentImpl@bb39418a): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x22d9478e limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.HeapMemorySegmentImpl@f22e88b3): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x22d94696 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.HeapMemorySegmentImpl@a8baf9da): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x22d946b5 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.HeapMemorySegmentImpl@54c22a9e): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x22d946d4 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.HeapMemorySegmentImpl@f3d56734): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x22d946f3 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.HeapMemorySegmentImpl@43650c7d): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x22d94712 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.HeapMemorySegmentImpl@b5984356): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x22d94731 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.HeapMemorySegmentImpl@d9a622b3): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x22d94750 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.HeapMemorySegmentImpl@83166183): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x22d9476f limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.HeapMemorySegmentImpl@eb6087c9): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x22d9478e limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.HeapMemorySegmentImpl@cfb06b11): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x22d947ad limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.HeapMemorySegmentImpl@ad29d6b6): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x22d947cc limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.HeapMemorySegmentImpl@7c4752a7): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x22d947eb limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.HeapMemorySegmentImpl@5693fc2a): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x22d9480a limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.HeapMemorySegmentImpl@f4a419a2): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x22d94829 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.HeapMemorySegmentImpl@b3d27211): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x22d94848 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.HeapMemorySegmentImpl@4013160f): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fdc5 limit: 1 }, s2:MemorySegment{ id=0x22d94867 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@61fb88e0, jdk.internal.foreign.HeapMemorySegmentImpl@6b7d6774): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fda6 limit: 1 }, s2:MemorySegment{ id=0x7f84c02f limit: 16 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@e213b4f2, jdk.internal.foreign.NativeMemorySegmentImpl@a595c8ff): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fda6 limit: 1 }, s2:MemorySegment{ id=0x7f84c02f limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@e213b4f2, jdk.internal.foreign.NativeMemorySegmentImpl@bd638e74): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fda6 limit: 1 }, s2:MemorySegment{ id=0x7f84bf37 limit: 8 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@e213b4f2, jdk.internal.foreign.NativeMemorySegmentImpl@d2320821): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fda6 limit: 1 }, s2:MemorySegment{ id=0x7f84c02f limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@e213b4f2, jdk.internal.foreign.NativeMemorySegmentImpl@2cec1fe2): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fda6 limit: 1 }, s2:MemorySegment{ id=0x7f84c04e limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@e213b4f2, jdk.internal.foreign.NativeMemorySegmentImpl@7a50f572): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fda6 limit: 1 }, s2:MemorySegment{ id=0x7f84bff1 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@e213b4f2, jdk.internal.foreign.NativeMemorySegmentImpl@125646bb): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fda6 limit: 1 }, s2:MemorySegment{ id=0x7f84c010 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@e213b4f2, jdk.internal.foreign.NativeMemorySegmentImpl@85392e14): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fda6 limit: 1 }, s2:MemorySegment{ id=0x7f84c0ab limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@e213b4f2, jdk.internal.foreign.NativeMemorySegmentImpl@ceaa9af4): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fda6 limit: 1 }, s2:MemorySegment{ id=0x7f84c0ca limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@e213b4f2, jdk.internal.foreign.NativeMemorySegmentImpl@d5535635): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fda6 limit: 1 }, s2:MemorySegment{ id=0x7f84c06d limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@e213b4f2, jdk.internal.foreign.NativeMemorySegmentImpl@a492de20): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fda6 limit: 1 }, s2:MemorySegment{ id=0x7f84c08c limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@e213b4f2, jdk.internal.foreign.NativeMemorySegmentImpl@5c65fcc8): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fda6 limit: 1 }, s2:MemorySegment{ id=0x7f84bf37 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@e213b4f2, jdk.internal.foreign.NativeMemorySegmentImpl@ffd855c6): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fda6 limit: 1 }, s2:MemorySegment{ id=0x7f84bf56 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@e213b4f2, jdk.internal.foreign.NativeMemorySegmentImpl@b05b1bcb): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fda6 limit: 1 }, s2:MemorySegment{ id=0x7f84bef9 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@e213b4f2, jdk.internal.foreign.NativeMemorySegmentImpl@31fe585): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fda6 limit: 1 }, s2:MemorySegment{ id=0x7f84bf18 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@e213b4f2, jdk.internal.foreign.NativeMemorySegmentImpl@2519987e): success
+11:19:51  testDifferentValues s1:MemorySegment{ id=0x6612fda6 limit: 1 }, s2:MemorySegment{ id=0x7f84bfb3 limit: 1 }
+11:19:51  test TestMismatch.testDifferentValues(jdk.internal.foreign.HeapMemorySegmentImpl@e213b4f2, jdk.internal.foreign.NativeMemorySegmentImpl@b0e58718): success
+11:19:51  testD
+11:19:51  TEST RESULT: Error. Agent communication error: java.io.EOFException; check console log for any additional details
+11:19:51  --------------------------------------------------
+11:19:59  Test results: passed: 18; error: 1
+11:21:30  Report written to /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/report/html/report.html
+11:21:30  Results written to /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/test_output_16112235107017/jdk_foreign_0/work
+11:21:30  Error: Some tests failed or other problems occurred.
+11:21:30  
+11:21:30  jdk_foreign_0_FAILED

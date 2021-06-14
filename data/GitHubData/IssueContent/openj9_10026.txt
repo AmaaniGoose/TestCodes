@@ -1,0 +1,28 @@
+There is a window in the code between when the annotations are fetched from the `J9Class` and when they are processed during which the class can be redefined.  This can lead to `Wrong type at constant pool index` errors.
+
+Problematic code is:
+https://github.com/eclipse/openj9/blob/1e504101295ed6f569a29741466546bb9cdcfa3a/jcl/src/java.base/share/classes/java/lang/Class.java#L2940-L2948
+
+We need to change the code to ensure that the J9Class matching the annotation date is used to process the constantpool indexes.
+
+Currently, we can specify the `J9Class` to be used in `getConstantPool` by converting the `J9Class` pointer with `public Object createInternalRamClass(long addr);` to create something we can pass to ConstantPool.
+
+Some options for addressing this
+* Hack getDeclaredAnnotationsData to include the j9class pointer in the byte array in some way so we have the matching j9class for the data.  Appending it would be the simplest if we can lie about the size of the data.
+* look up the j9class just prior to calling getDeclaredAnnotationsData() and have a smaller window for inconsistent data
+* something else?
+
+Example stacktrace:
+```
+java.lang.annotation.AnnotationFormatError: java.lang.IllegalArgumentException: Wrong type at constant pool index
+        at java.base/sun.reflect.annotation.AnnotationParser.parseAnnotations(AnnotationParser.java:78)
+        at java.base/java.lang.Class.getAnnotationCache(Class.java:2789)
+        at java.base/java.lang.Class.getAnnotation(Class.java:2437)
+        at ....
+Caused by: java.lang.IllegalArgumentException: Wrong type at constant pool index
+        at java.base/jdk.internal.reflect.ConstantPool.getUTF8At0(Native Method)
+        at java.base/jdk.internal.reflect.ConstantPool.getUTF8At(ConstantPool.java:65)
+        at java.base/sun.reflect.annotation.AnnotationParser.parseAnnotation2(AnnotationParser.java:280)
+        at java.base/sun.reflect.annotation.AnnotationParser.parseAnnotations2(AnnotationParser.java:121)
+        at java.base/sun.reflect.annotation.AnnotationParser.parseAnnotations(AnnotationParser.java:73)
+        ... 34 more

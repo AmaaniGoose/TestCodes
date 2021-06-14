@@ -1,0 +1,8 @@
+@tellison, would it be possible to get an additional 25G added to the System/Boot Disk for these systems? Under the device, its under `Storage` in the left menu, then at the bottom in the `Other storage details` section, action/modify for the System type.  That is all I can see with the privileges you have granted me.
+
+win2012r2-x86-1
+win2012r2-x86-2
+win2012r2-x86-3
+win2012r2-x86-4
+win2012r2-x86-5
+win2012r2-x86-6

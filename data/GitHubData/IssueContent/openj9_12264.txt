@@ -1,0 +1,8 @@
+In #9416, it was discovered that when a call to `findSharedData()` fails (i.e. returns error), it can put the JIT in an inconsistent state. In that particular issue, the defining class of a field (also looked up through `findSharedData()`) is found to be NULL (see https://github.com/eclipse/openj9/issues/9416#issuecomment-797672719 and https://github.com/eclipse/openj9/issues/9416#issuecomment-797716371). 
+
+Although that particular issue can be resolved by changing the assert into a `failCompilation()` call, there is a more fundamental issue that needs to be investigated and resolved. When compiling a method, it seems reasonable to assume that if a field was successfully looked up then looking up its defining class should also be successful, since looking up the latter is required when looking up the first. The assert mentioned in #9416 was introduced precisely because of this assumption. As such, it is possible that other parts of the code operate under similar assumptions. It's also possible that future code will make such assumptions. As #9416 demonstrated, failures resulting from violations of such assumptions can be highly intermittent and difficult to debug, and even more so if the code does not use asserts. Therefore, having `findSharedData()` violate those assumptions is quite dangerous.
+
+I think the basic solution should be to make it so that any APIs used in the JIT like `fieldAttributes()` and `definingClassFromCPFieldRef()` never return inconsistent answers. Consistency could be achieved in several ways, including: 
+
+- Caching results from API calls
+- Improving handling of errors when `findSharedData()` is called so that inconsistent states cannot be reached (e.g. by aborting compilation immediately)

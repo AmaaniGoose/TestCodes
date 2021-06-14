@@ -1,0 +1,13 @@
+I recently tried running Eclipse Photon on the latest jdk 8 build from AdoptOpenJDK. Within one afternoon, Eclipse crashed repeatedly with the attached core dumps. Version is: 
+
+```./java -version
+openjdk version "1.8.0_192"
+OpenJDK Runtime Environment (build 1.8.0_192-b12)
+Eclipse OpenJ9 VM (build openj9-0.11.0, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20181019_64 (JIT enabled, AOT enabled)
+OpenJ9   - 090ff9dc
+OMR      - ea548a66
+JCL      - 51609250b5 based on jdk8u192-b12)```
+
+
+
+

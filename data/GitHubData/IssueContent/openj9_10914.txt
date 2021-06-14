@@ -1,0 +1,11 @@
+While working on CMake support for RISC-V, I noticed that some code use `#ifdef J9VM_INTERP_NATIVE_SUPPORT` inconsistently, causing compilation to fail if `J9VM_INTERP_NATIVE_SUPPORT` is not `#define`'d.
+
+For example, definition of `newJitVTable` and `newJitVTable` is guarded
+
+https://github.com/eclipse/openj9/blob/3caadd433c8157b403f337ecd7a057ae188d8297/runtime/util/hshelp.c#L1345-L1355
+
+but (some of) their use not:
+
+https://github.com/eclipse/openj9/blob/3caadd433c8157b403f337ecd7a057ae188d8297/runtime/util/hshelp.c#L1389-L1393
+
+I spotted similar problem JVMTI component and possibly elsewhere. 

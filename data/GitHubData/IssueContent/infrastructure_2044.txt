@@ -1,0 +1,2 @@
+We had intended to add in a CentOS dockerfile as part of https://github.com/AdoptOpenJDK/openjdk-infrastructure/issues/1809 but for reasons I can't recall just now the Dockerfile was not suitable. It needs to be investigated and added so we have coverage on this OS.
+

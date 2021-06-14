@@ -1,0 +1,11 @@
+There is an increasing requirement to auto exclude openjdk specific test (.java) by issue_comment, which can be done in a similar way to `auto exclude testCaseName( target)`. The point is excluding  per testcase, which has a smaller size of the granularity than testCaseName. 
+
+One  scenario example would be:
+
+1. Issue opened for specific tests https://github.com/AdoptOpenJDK/openjdk-tests/issues/2360 ( could be more than one problematic testcase in one issue)
+2. Investigation and comments show the testcase can be excluded 
+3. Comment according to some pattern which provides affected jdk_version, impl, platform
+4. Comment trigger workflow checkout the openjdk-tests repo and update the right problemlist*.txt file(files) and create the exclude PR
+5. update workflow status to the issue so people interested in this could be notified the PR update.
+
+We can do like this not sure if it's helpful or if it's necessary to enable this feature. FYI @lumpfish @andrew-m-leonard @adamfarley 

@@ -1,0 +1,43 @@
+Inconsistent Help Output For Heap Dump Defaults
+
+The help output for heap dump defaults is incorrect (and does not match the output of -Xdump:what):
+```
+## ./java -Xdump:heap:defaults  -version
+Default -Xdump:heap settings:
+
+  events=gpf+user
+  filter=
+  file=/root/openj9-openjdk-jdk9/build/linux-x86_64-normal-server-release/jdk/bin/heapdump.%Y%m%d.%H%M%S.%pid.%seq.phd
+  range=1..0
+  priority=500
+  request=exclusive+compact+prepwalk
+  opts=PHD
+
+openjdk version "9-internal"
+OpenJDK Runtime Environment (build 9-internal+0-adhoc..openj9-openjdk-jdk9)
+Eclipse OpenJ9 VM (build 2.9, JRE 9 Linux amd64-64 Compressed References 20171105_000000 (JIT enabled, AOT enabled)
+OpenJ9   - 3bbc78d
+OMR      - 6abf600
+OpenJDK  - ae4d07b based on jdk-9+181)''
+```
+
+Whereas -Xdump:what does show the correct heapdump defaults:
+```
+## ./java -Xdump:what -version
+
+Registered dump agents
+----------------------
+...
+...
+-Xdump:heap:
+    events=systhrow,
+    filter=java/lang/OutOfMemoryError,
+    file=/root/openj9-openjdk-jdk9/build/linux-x86_64-normal-server-release/jdk/bin/heapdump.%Y%m%d.%H%M%S.%pid.%seq.phd,
+    range=1..4,
+    priority=500,
+    request=exclusive+compact+prepwalk,
+    opts=PHD
+----------------------
+...
+...
+```

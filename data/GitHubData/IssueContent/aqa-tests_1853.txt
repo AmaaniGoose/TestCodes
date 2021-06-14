@@ -1,0 +1,11 @@
+This test pipeline could check state of the issue that the test was disabled under and then run all disabled test targets whose issues are resolved to check if they really are in a state to reinclude/reenable.
+
+Since there are various granularities on how we can and do disable tests, this work would look at several parts:
+
+- [x] disabled test targets in playlists
+- [ ] disabled openjdk tests in openjdk subdirectory (in problemlist*.txt files)
+- [ ] disabled functional tests in openj9 repo (several types of exclusions, testNG, cmdlinetester, others?)
+
+Likely do it as a pipeline that launched Grinders (similar to Grinder of Grinders, see https://github.com/AdoptOpenJDK/openjdk-tests/issues/1816).  
+
+One job was already added, but is a WIP, see https://ci.adoptopenjdk.net/view/Test_grinder/job/Test_jdk8_j9_Disabled_Weekly/

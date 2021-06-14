@@ -1,0 +1,1 @@
+In some places, this relocation is just added (for example `TR::X86ImmInstruction::addMetaDataForCodeAddress`); there appears to be an implicit assumption about the instruction being generated and the relocation needed.

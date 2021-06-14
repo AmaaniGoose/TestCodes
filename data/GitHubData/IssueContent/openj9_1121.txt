@@ -1,0 +1,11 @@
+portLib_getARMLinuxProcessor() in ProcessorDetection.cpp parses /proc/cpuinfo to determine the processor type. In the event that it can't determine the type from the cpuinfo it returns TR_DefaultARMProcessor. Unfortunately the format of /proc/cpuinfo isn't particularly uniform, and in particular the parser does not recognize the content of any 64bit distributions that I have used.
+
+In order to tolerate 64 bit OSs I suggest we extend the existing implementation to detect 
+
+`CPU architecture:`
+
+ lines.
+
+Should we also change the behaviour when unable to parse /proc/cpuinfo? Returning TR_DefaultARMProcessor is likely to be bad in most cases as it suppresses the generation of memory barriers. We could consider returning TR_ARMv7 (the most commonly used variant at the current time), TR_ARMv6 (the conservative choice) or perhaps aborting the JVM.
+
+Longer term, it would be great to switch to a more robust way of determining the processor type than parsing cpuinfo. Any ideas?

@@ -1,0 +1,33 @@
+I regularly use the Xdump `stack` option for debugging. This agent makes it very easy to see all the Exceptions that are being thrown, regardless of whether they are caught. The ability to expose swallowed Exceptions can be _extremely_ useful.
+
+However, the usefulness is severely limited by the fact that the Exception message is not printed. So for example, you can't tell which class the JVM was looking for when a ClassNotFoundException is thrown.
+
+Javacores contain the Exception message, so a workaround is to trigger a javacore (using Xdump's `java` agent) instead of a stack trace. This is fine when targeting a specific Exception, but it's not great when browsing through lots of them - going through 50 javacores is much slower than scrolling through 50 stack traces...
+
+Example stack trace from Xdump as it is now:
+
+```
+JVMDUMP039I Processing dump event "throw", detail "java/lang/ClassNotFoundException" at 2020/01/28 10:21:43 - please wait.
+Thread=main (00000000012E6FB0) Status=Running
+	at java/io/ObjectInputStream.resolveClass(Ljava/io/ObjectStreamClass;)Ljava/lang/Class; (ObjectInputStream.java:841)
+	at java/io/ObjectInputStream.readNonProxyDesc(Z)Ljava/io/ObjectStreamClass; (ObjectInputStream.java:2017) (Compiled Code)
+	at java/io/ObjectInputStream.readClassDesc(Z)Ljava/io/ObjectStreamClass; (ObjectInputStream.java:1900)
+	...
+```
+
+Example output from an equivalent javacore:
+
+```
+1TISIGINFO     Dump Event "throw" (00000010) Detail "java/lang/ClassNotFoundException" "com.example.MissingClass" received
+```
+
+For the `stack` agent something closer to the javacore's 1TISIGINFO output would be better:
+
+```
+JVMDUMP039I Processing dump event "throw", detail "java/lang/ClassNotFoundException" "com.example.MissingClass" at 2020/01/28 10:21:43 - please wait.
+Thread=main (00000000012E6FB0) Status=Running
+	at java/io/ObjectInputStream.resolveClass(Ljava/io/ObjectStreamClass;)Ljava/lang/Class; (ObjectInputStream.java:841)
+	at java/io/ObjectInputStream.readNonProxyDesc(Z)Ljava/io/ObjectStreamClass; (ObjectInputStream.java:2017) (Compiled Code)
+	at java/io/ObjectInputStream.readClassDesc(Z)Ljava/io/ObjectStreamClass; (ObjectInputStream.java:1900)
+	...
+```

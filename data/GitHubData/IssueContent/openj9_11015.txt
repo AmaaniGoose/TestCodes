@@ -1,0 +1,29 @@
+- 10% throughput gap for this particular experiement with Liberty Daytrader7
+```
+Results for JDK=/home/harryayu2/sdks/java8_new jvmOpts=-Xmx512m -Xshareclasses:name=liberty -Xscmx500m -Xscmaxaot200m
+StartupTime	avg=3535	min=3328	max=3719	stdDev=91.3	maxVar=11.8%	confInt=0.69%	samples= 40
+Footprint	avg=256408	min=227168	max=271728	stdDev=9900.6	maxVar=19.6%	confInt=1.03%	samples= 40
+CThreadTime	avg= 669	min= 575	max= 760	stdDev=39.7	maxVar=32.2%	confInt=1.64%	samples= 37
+	Outlier values:  953 1023 882
+ProcessTime	avg=6513	min=5700	max=7390	stdDev=450.0	maxVar=29.6%	confInt=1.84%	samples= 40
+Stats for cold run:
+StartupTime	avg=9115	min=8914	max=9328	stdDev=160.8	maxVar=4.6%	confInt=1.68%	samples=  5
+Footprint	avg=262723	min=259040	max=265588	stdDev=2442.4	maxVar=2.5%	confInt=0.89%	samples=  5
+CThreadTime	avg=7564	min=7468	max=7620	stdDev=61.9	maxVar=2.0%	confInt=0.78%	samples=  5
+ProcessTime	avg=19456	min=19230	max=19770	stdDev=229.3	maxVar=2.8%	confInt=1.12%	samples=  5
+```
+
+```
+Results for JDK=/home/harryayu2/sdks/java11_new jvmOpts=-Xmx512m -Xshareclasses:name=liberty -Xscmx500m -Xscmaxaot200m
+StartupTime	avg=3946	min=3644	max=4141	stdDev=103.6	maxVar=13.6%	confInt=0.70%	samples= 40
+Footprint	avg=257620	min=228896	max=281172	stdDev=16879.8	maxVar=22.8%	confInt=1.74%	samples= 40
+CThreadTime	avg= 926	min= 753	max=1212	stdDev=109.0	maxVar=61.0%	confInt=3.13%	samples= 40
+ProcessTime	avg=6915	min=6150	max=8020	stdDev=488.0	maxVar=30.4%	confInt=1.88%	samples= 40
+Stats for cold run:
+StartupTime	avg=10132	min=10029	max=10210	stdDev=76.4	maxVar=1.8%	confInt=0.72%	samples=  5
+Footprint	avg=277718	min=271576	max=281340	stdDev=3781.2	maxVar=3.6%	confInt=1.30%	samples=  5
+CThreadTime	avg=8176	min=8135	max=8199	stdDev=28.2	maxVar=0.8%	confInt=0.41%	samples=  4
+	Outlier values:  8303
+ProcessTime	avg=21174	min=21020	max=21390	stdDev=149.1	maxVar=1.8%	confInt=0.67%	samples=  5
+```
+

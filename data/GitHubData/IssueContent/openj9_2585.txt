@@ -1,0 +1,26 @@
+Dear All,
+
+I'm trying to build OpenJ9 on the PPC SoC equipped with e500v2 core. This core doesn't have the AltiVec IP block (Instead it uses the SPE extension for floating point calculation).
+
+The problem seems to be with the OpenJ9 assumption that all supported cores support AltiVec instructions. One of the assembly tuned files:
+./openj9/runtime/compiler/p/runtime/J9PPCCRC32.spp
+
+This is the __crc32_vpmsum [1] optimized implementation of CRC32 calculation for 16B data blocks.
+
+Is there any C implementation of this function available? Or maybe one for SPE assembler?
+
+Please correct me if I'm wrong, but it seems to me that one would need to:
+
+- Rewrite the [1] in C and then allow gcc to optimize it for e500_v2 core 
+
+or 
+
+- Rewrite from scratch the [1] to support SPE assembler instructions instead of altivec
+
+Personally, I would prefer the first option with C, but I'm not sure what would be the performance impact
+on OpenJ9.
+
+Has anybody tried to run OpenJ9 on e500_v2? 
+
+Thanks in advance,
+Łukasz

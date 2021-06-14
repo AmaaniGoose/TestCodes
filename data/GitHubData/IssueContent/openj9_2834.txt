@@ -1,0 +1,1 @@
+As per https://github.com/eclipse/openj9-docs/pull/74#discussion_r216712038, OpenJ9 can implement support for -XX:MaxHeapSize= as an equivalent to -Xmx.

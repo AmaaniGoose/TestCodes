@@ -1,0 +1,7 @@
+Upon discussion with the Dragonwell team and a demo of their Unsafe Checker tool, we should consider where this tool can be contributed for use by the community and whether we can or should incorporate it in any of our test workflows.
+
+What is it?  Unsafe checker is a Java agent that verifies the correctness of the usage of Unsafe API.  It can be used for:
+- Memory Leak Check
+- Range and Offset Check
+- Type Check
+

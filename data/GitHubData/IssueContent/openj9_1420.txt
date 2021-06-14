@@ -1,0 +1,3 @@
+Using the Ansible scripts from Adopt to configure the OpenJ9 build machines will ensure that everything builds for us will build at Adopt as well.
+
+We should investigate whether we can use the existing scripts, what modifications would be needed to them, and how we could control running them regularly.

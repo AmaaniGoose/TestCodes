@@ -1,0 +1,104 @@
+**Describe the bug**
+On mac machines for 11 and 14 hotspot the following tests are failing due to pretty much the same error 
+```
+com/sun/jdi/ProcessAttachTest.java => JDK11 & 14
+jdk/jfr/jcmd/TestJcmdStartStopDefault.java => JDK11 & 14
+com/sun/jdi/ProcessAttachTest.sh => JDK8 only
+```
+
+**To Reproduce**
+Steps to reproduce the behavior (or Grinder rerun link):
+1. Go to https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder
+2. Kick off a grinder with these parameters 
+- JDK8: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=hotspot&BUILD_LIST=openjdk&PLATFORM=x86-64_mac&TARGET=jdk_custom&CUSTOM_TARGET=jdk/test/com/sun/jdi/ProcessAttachTest.sh
+- JDK11: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=hotspot&BUILD_LIST=openjdk&PLATFORM=x86-64_mac&TARGET=jdk_svc_sanity_0
+- JDK14: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=14&JDK_IMPL=hotspot&BUILD_LIST=openjdk&PLATFORM=x86-64_mac&TARGET=jdk_svc_sanity_0
+3. See error in console log
+
+**Expected behavior**
+Tests pass
+
+**Screenshots**
+ProcessAttachTest.java
+```
+01:55:19  java.io.IOException: well-known file /var/folders/rt/8_by_h8n5g9d5jhp66cf_7d80000gr/T/.java_pid18038 is not secure: file's group should be the current group (which is -1) but the group is 0
+01:55:19  	at jdk.jdi/com.sun.tools.jdi.ProcessAttachingConnector.attach(ProcessAttachingConnector.java:106)
+01:55:19  	at ProcessAttachTest.tryDebug(ProcessAttachTest.java:107)
+01:55:19  	at ProcessAttachTest.runTest(ProcessAttachTest.java:87)
+01:55:19  	at ProcessAttachTest.main(ProcessAttachTest.java:66)
+01:55:19  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+01:55:19  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+01:55:19  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+01:55:19  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+01:55:19  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+01:55:19  	at java.base/java.lang.Thread.run(Thread.java:834)
+```
+
+TestJcmdStartStopDefault.java
+```
+Standard Output: 
+
+Running DCMD 'JFR.start' through 'PidJcmdExecutor'
+Executing command '[/Users/jenkins/workspace/Test_openjdk11_hs_sanity.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/../bin/jcmd, 18106, JFR.start]'
+Command returned with exit code 1
+---------------- stdout ----------------
+18106:
+
+---------------- stderr ----------------
+java.io.IOException: well-known file /var/folders/rt/8_by_h8n5g9d5jhp66cf_7d80000gr/T/.java_pid18106 is not secure: file's group should be the current group (which is -1) but the group is 0
+	at jdk.attach/sun.tools.attach.VirtualMachineImpl.checkPermissions(Native Method)
+	at jdk.attach/sun.tools.attach.VirtualMachineImpl.<init>(VirtualMachineImpl.java:108)
+	at jdk.attach/sun.tools.attach.AttachProviderImpl.attachVirtualMachine(AttachProviderImpl.java:58)
+	at jdk.attach/com.sun.tools.attach.VirtualMachine.attach(VirtualMachine.java:207)
+	at jdk.jcmd/sun.tools.jcmd.JCmd.executeCommandForPid(JCmd.java:114)
+	at jdk.jcmd/sun.tools.jcmd.JCmd.main(JCmd.java:98)
+
+----------------------------------------
+    
+Standard Error:
+
+ stdout: [18106:
+];
+ stderr: [java.io.IOException: well-known file /var/folders/rt/8_by_h8n5g9d5jhp66cf_7d80000gr/T/.java_pid18106 is not secure: file's group should be the current group (which is -1) but the group is 0
+	at jdk.attach/sun.tools.attach.VirtualMachineImpl.checkPermissions(Native Method)
+	at jdk.attach/sun.tools.attach.VirtualMachineImpl.<init>(VirtualMachineImpl.java:108)
+	at jdk.attach/sun.tools.attach.AttachProviderImpl.attachVirtualMachine(AttachProviderImpl.java:58)
+	at jdk.attach/com.sun.tools.attach.VirtualMachine.attach(VirtualMachine.java:207)
+	at jdk.jcmd/sun.tools.jcmd.JCmd.executeCommandForPid(JCmd.java:114)
+	at jdk.jcmd/sun.tools.jcmd.JCmd.main(JCmd.java:98)
+]
+ exitValue = 1
+
+java.lang.RuntimeException: Expected to get exit value of [0]
+
+	at jdk.test.lib.process.OutputAnalyzer.shouldHaveExitValue(OutputAnalyzer.java:396)
+	at jdk.jfr.jcmd.JcmdHelper.jcmd(JcmdHelper.java:111)
+	at jdk.jfr.jcmd.JcmdHelper.jcmd(JcmdHelper.java:116)
+	at jdk.jfr.jcmd.TestJcmdStartStopDefault.main(TestJcmdStartStopDefault.java:50)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+```
+
+com/sun/jdi/ProcessAttachTest.sh
+```
+19:29:52  Exception in thread "main" java.io.IOException: well-known file /var/folders/rc/_hq7pkh54kb0dk8vvlt34pz00000gr/T/.java_pid88080 is not secure: file's group should be the current group (which is -1) but the group is 0
+19:29:52  	at com.sun.tools.jdi.ProcessAttachingConnector.attach(ProcessAttachingConnector.java:104)
+19:29:52  	at ProcessAttachDebugger.main(ProcessAttachDebugger.java:68)
+19:29:52  Waiting for port file to be written...
+19:29:52  Waiting 1 second(s) ...
+19:29:52  Waiting 2 second(s) ...
+19:29:52  Waiting 3 second(s) ...
+19:29:52  Waiting 4 second(s) ...
+19:29:52  Waiting 5 second(s) ...
+...
+Timeout!
+```
+
+
+**Additional context**
+It appears to be a perm issue on the surface. The test is creating items in the `/var/`directory which is a sensitive directory to be creating files in. Its possible that this is likely caused by the the debugger that the test creates [not having the same perms as the java_pid file](https://stackoverflow.com/questions/9100149/jstack-well-known-file-is-not-secure). 
+

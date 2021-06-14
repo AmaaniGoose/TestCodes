@@ -1,0 +1,25 @@
+Subtest j9vmem_test_numa within the test target cmdLineTester_pltest_0 fails with:
+```
+18:24:59   [ERR] Starting test j9vmem_test_numa
+18:24:59   [ERR] j9vmemTest.c line 1810: j9vmem_test_numa Found zero nodes with memory even after NUMA was reported as supported (FAIL)
+18:24:59   [ERR] 
+18:24:59   [ERR] 		LastErrorNumber: -252
+18:24:59   [ERR] 		LastErrorMessage: Unknown error -1
+18:24:59   [ERR] 
+18:24:59   [ERR] Ending test j9vmem_test_numa
+```
+
+jdk version under test:
+```
+17:45:47  openjdk version "1.8.0_282-internal"
+17:45:47  OpenJDK Runtime Environment (build 1.8.0_282-internal-202101051708-b07)
+17:45:47  Eclipse OpenJ9 VM (build master-1910cfa3a, JRE 1.8.0 Linux amd64-64-Bit 20210105_860 (JIT enabled, AOT enabled)
+17:45:47  OpenJ9   - 1910cfa3a
+17:45:47  OMR      - a9b64bdc8
+17:45:47  JCL      - 722ab284 based on jdk8u282-b07)
+17:45:47  =JAVA VERSION OUTPUT END=
+```
+Failing test machine: docker-packet-ubuntu2004-x64-1f1.
+Test passed on test-ibmcloud-rhel6-x64-1 - maybe related to running on docker? (https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_sanity.functional_x86-64_linux/63/)
+
+Link to failing job: https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_sanity.functional_x86-64_linux_xl/68/

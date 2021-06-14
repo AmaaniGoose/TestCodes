@@ -1,0 +1,1 @@
+Some jvmti tests are named jvmti_extended but are tagged as "sanity" level.  In general, we should avoid using the level in the name of a test, as it is confusing when it doesn't match the level its in, and it makes for more changes if we wish to move a test into a different level.

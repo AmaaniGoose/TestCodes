@@ -1,0 +1,20 @@
+We are enabling extended.openjdk tests which contain jdk_awt, jdk_swing tests.  Many tests require x11 DISPLAY variable to be set.  There is already an open request to ensure Macs have this enabled (see https://github.com/AdoptOpenJDK/openjdk-infrastructure/issues/211).  x11 server has been installed/enabled on most Linux systems and AIX, but is still missing on Macs, and aarch64.  This issue is to ensure we have the ability to enable it on all platforms (as we currently will have to disable many tests if it is not enabled).
+
+Details (from [jdk11 aarch64 extended.openjdk test job](https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk11_hs_extended.openjdk_aarch64_linux/1/testReport/sun_java2d_DirectX_InfiniteValidationLoopTest_InfiniteValidationLoopTest/java/InfiniteValidationLoopTest/)):
+java.awt.HeadlessException: 
+No X11 DISPLAY variable was set, but this program performed an operation which requires it.
+	at java.desktop/java.awt.GraphicsEnvironment.checkHeadless(GraphicsEnvironment.java:208)
+	at java.desktop/java.awt.Window.<init>(Window.java:548)
+	at java.desktop/java.awt.Frame.<init>(Frame.java:423)
+	at InfiniteValidationLoopTest.<init>(InfiniteValidationLoopTest.java:49)
+	at InfiniteValidationLoopTest.main(InfiniteValidationLoopTest.java:96)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+JavaTest Message: Test threw exception: java.awt.HeadlessException: 
+No X11 DISPLAY variable was set, but this program performed an operation which requires it.
+JavaTest Message: shutting down test

@@ -1,0 +1,5 @@
+We should investigate and potentially add some basic container-structure-tests to verify the containers (docker images) produced at the project.
+
+https://github.com/GoogleContainerTools/container-structure-test
+
+These could potentially be added as another subdir in openjdk-tests/external or added to openjdk-docker repo as a smoke test when containers are produced.  

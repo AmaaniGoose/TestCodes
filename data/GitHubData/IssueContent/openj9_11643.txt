@@ -1,0 +1,6 @@
+For any method with the internal profiling info, we currently cache `best` and `recent` profiling information to the persistent method info [1]. Where in cases there are multiple profiling information available, it will use the best profile info. Current heuristic just replaces the `bestProfileInfo` if recent is non-null. We should replace the best only if the recent has a useful data [2]. Opening up this issue to keep track of the work needed to implement a heuristic to update the best profiling information only when recent has enough data.  
+
+
+
+[1]. https://github.com/eclipse/openj9/blob/2caa56bcb6f417c9499602c3b0c30bef1d54d3f6/runtime/compiler/control/RecompilationInfo.hpp#L302-L303
+[2]. https://github.com/eclipse/openj9/blob/2caa56bcb6f417c9499602c3b0c30bef1d54d3f6/runtime/compiler/runtime/J9Profiler.cpp#L2881-L2909

@@ -1,0 +1,6 @@
+Further to issue https://github.com/eclipse/openj9/pull/3564
+If the JAR manifest contains `OpenJ9-Java-Options` it will ignore `IBM-Java-Options`.
+
+- update vmargs.c.
+- Update VmArgumentTests.java to test both flavours
+- Java8andUp/build.xml will build two JARs, one for each option.

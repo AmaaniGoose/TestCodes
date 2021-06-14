@@ -1,0 +1,5 @@
+https://github.com/eclipse/openj9/blob/master/runtime/compiler/control/HookedByTheJit.cpp#L3018
+
+When jitClassesRedefined is called with an empty list, the JIT falls back to mimicInterpreterFrameShape.
+
+I can't recall or think of any reason for this.

@@ -1,0 +1,7 @@
+Is there a document with coding standards for OpenJ9? If not, do we plan to add one?
+
+Similar to OMR coding standards: https://github.com/eclipse/omr/blob/master/doc/CodingStandard.md.
+
+Or are we supposed to refer to OMR coding standards? If so, should we explicitly mention usage of OMR coding standards here: [openj9/doc/README.md](https://github.com/eclipse/openj9/blob/master/doc/README.md)? The current comment in [openj9/doc/README.md](https://github.com/eclipse/openj9/blob/master/doc/README.md) doesn't indicate the location of **CodingStandards**.
+
+> 📝 Developer documentation about OpenJ9 technology or components is best considered in tandem with the documentation from Eclipse OMR, as OpenJ9 is built upon the foundational technologies provided by OMR.

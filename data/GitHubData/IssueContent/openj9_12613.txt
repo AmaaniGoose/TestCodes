@@ -1,0 +1,28 @@
+Currently Dynamic Field Ordering uses one byte to store Hot field offset (in slots). Looks like it can be extended to two bytes without growing of memory footprint for 64-bit systems.
+
+Please note this item does not discuss effectiveness of such extension but technical possibility to do it.
+
+C++ structures are always aligned (start address and size) to native word size, so 8 bytes for 64-bit platforms
+
+For `struct J9HotField` utilize last unused byte:
+```
+typedef struct J9HotField {
+	struct J9HotField* next;
+	uint32_t hotness;
+	uint16_t cpuUtil;
+	uint8_t hotFieldOffset;  <--- can be uint16_t
+} J9HotField;
+```
+For `struct J9ClassHotFieldsInfo` utilize last three unused bytes:
+```
+typedef struct J9ClassHotFieldsInfo {
+	struct J9HotField* hotFieldListHead;
+	struct J9ClassLoader* classLoader;
+	BOOLEAN isClassHotFieldListDirty;	<--- actually uses uint64_t
+	uint8_t hotFieldOffset1;  <--- can be uint16_t
+	uint8_t hotFieldOffset2;  <--- can be uint16_t
+	uint8_t hotFieldOffset3;  <--- can be uint16_t
+	uint8_t consecutiveHotFieldSelections; 
+	uint8_t hotFieldListLength;  
+ } J9ClassHotFieldsInfo;
+```

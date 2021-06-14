@@ -1,0 +1,1 @@
+All Solaris sparcv9 nodes are offline: https://ci.adoptopenjdk.net/label/build&&solaris&&sparcv9/

@@ -1,0 +1,24 @@
+We have nightly and weekly targets defined in the build pipelines.  We eventually want to enable the entire 'grid' of test levels x groups at the project for all platforms that we release.  We will embrace some notion of [graduated testing](https://github.com/AdoptOpenJDK/openjdk-tests/wiki/Graduated-Testing-&-Test-Numbers) to conserve machines, as we can not run all testing every night.
+
+<img width="161" alt="grid" src="https://user-images.githubusercontent.com/2836948/98045766-000e5900-1df7-11eb-84cd-abcbb9024396.png">
+
+This issue will gather test duration times for all top-level test targets on all platforms for all versions to attempt to develop a schedule that works with the current machine capacity (and/or advice where we are needing to augment capacity), ideally creating a script where this can be rerun/revisited on a quarterly cadence.
+
+**Average Duration for [Nightly test targets](https://github.com/AdoptOpenJDK/openjdk-build/blob/master/pipelines/build/common/build_base_file.groovy#L64-L71):**
+|version|target| xlinux avgDuration (mins) | mac avgDuration (mins) | aix avgDuration (mins) | aarch64 | win64 | s390x |
+|---|---|---|---|---|---|---|---|
+|jdk8|sanity.openjdk| [22.78](https://trss.adoptopenjdk.net/api/getTestAvgDuration?level=sanity&jdkVersion=8&group=openjdk&platform=x86-64_linux) | [41.04](https://trss.adoptopenjdk.net/api/getTestAvgDuration?level=sanity&jdkVersion=8&group=openjdk&platform=x86-64_mac) | 101 | 21 | 85 | 120 |
+||sanity.system| [135.49](https://trss.adoptopenjdk.net/api/getTestAvgDuration?level=sanity&jdkVersion=8&group=system&platform=x86-64_linux) | [158.79](https://trss.adoptopenjdk.net/api/getTestAvgDuration?level=sanity&jdkVersion=8&group=system&platform=x86-64_mac)|   135| 76| 66 | 210 |
+||extended.system| [91.29](https://trss.adoptopenjdk.net/api/getTestAvgDuration?level=extended&jdkVersion=8&group=system&platform=x86-64_linux) |[128.88](https://trss.adoptopenjdk.net/api/getTestAvgDuration?level=extended&jdkVersion=8&group=system&platform=x86-64_mac) |75 | 14 | 95 | 150 |
+||sanity.perf| [47.02](https://trss.adoptopenjdk.net/api/getTestAvgDuration?level=sanity&jdkVersion=8&group=perf&platform=x86-64_linux) | [33.08](https://trss.adoptopenjdk.net/api/getTestAvgDuration?level=sanity&jdkVersion=8&group=perf&platform=x86-64_mac)|8 | 14| 55 | 127 |
+| |sanity.functional| [81.5](https://trss.adoptopenjdk.net/api/getTestAvgDuration?level=sanity&jdkVersion=8&jdkImpl=hotspot&group=functional&platform=x86-64_linux) | [83](https://trss.adoptopenjdk.net/api/getTestAvgDuration?level=sanity&jdkVersion=8&jdkImpl=hotspot&group=functional&platform=x86-64_mac) |120 | 223 | 83 | 128 |
+| |extended.functional| [221](https://trss.adoptopenjdk.net/api/getTestAvgDuration?level=extended&jdkVersion=8&jdkImpl=hotspot&group=functional&platform=x86-64_linux) | [112](https://trss.adoptopenjdk.net/api/getTestAvgDuration?level=extended&jdkVersion=8&jdkImpl=hotspot&group=functional&platform=x86-64_mac) | 270 | 120| 141 | 174 |
+| | |~599 min (~10hrs)| ~557 min (~9.2hrs)| ~694 (~11.5hrs) | ~468 (~7.8hrs) | ~525 (~8.75hrs) | ~909 (~15hrs)|
+
+**Average Duration for [Weekly test targets](https://github.com/AdoptOpenJDK/openjdk-build/blob/master/pipelines/build/common/build_base_file.groovy#L64-L71):** (TBD)
+|version|target| xlinux avgDuration (TRSS query)|
+|---|---|---|
+|jdk8|extended.openjdk|  TBD [query](https://trss.adoptopenjdk.net/api/getTestAvgDuration?level=extended&jdkVersion=8&group=openjdk&platform=x86-64_linux) |
+||special.functional| TBD [query](https://trss.adoptopenjdk.net/api/getTestAvgDuration?level=special&jdkVersion=8&group=functional&platform=x86-64_linux) |
+||extended.perf| TBD [query](https://trss.adoptopenjdk.net/api/getTestAvgDuration?level=extended&jdkVersion=8&group=perf&platform=x86-64_linux) |
+| |sanity.external| ||

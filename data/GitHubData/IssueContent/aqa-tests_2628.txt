@@ -1,0 +1,11 @@
+Join via https://bluejeans.com/724807178/2833?src=calendarLink
+
+Add the [recurring bi-weekly AQAvit meeting to your calendar](https://calendar.google.com/event?action=TEMPLATE&tmeid=MHA0ODE3bTJsYnIybHA3MXMxdm81c2swbzdfMjAyMTAzMTBUMTYzMDAwWiBjX3Vhbm5vdW1zNWhvMG9saGprM3VsZWNka2JjQGc&tmsrc=c_uannoums5ho0olhjk3ulecdkbc%40group.calendar.google.com&scp=ALL).
+
+**Proposed Agenda**:
+- Overview of [Tweetest](https://github.com/adoptium/aqa-tests/wiki/Outreachy-Simplify-and-Gamify-External-Tests-Project:-Tweetest) project plan for summer term - FYI @SAY-droid427 @sophia-guo @llxia 
+- Review of (WIP) AQAvit Zenhub board - all
+  - add browser extension (https://www.zenhub.com/extension) for better viewing experience 
+  - direct [link to AQAvit board ](https://app.zenhub.com/workspaces/aqavit-606f76fe40c80b0013eab66e/board)if no browser extension 
+- [AQA lightning talk series](https://github.com/eclipse-openj9/openj9/wiki/AQA-Lightning-Talk-Series) for OpenJ9 community call - @llxia @smlambert 
+- AOB

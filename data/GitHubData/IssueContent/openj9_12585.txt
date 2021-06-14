@@ -1,0 +1,6 @@
+To support vectorization, the entire 16-byte contents of each XMM register must be preserved in the JIT helpers (currently only 64 bits of FPR parameter registers are preserved).
+
+The helpers will be divided as they were on P into method call and non-method call points. At method call points, only 8 bytes of the parameter XMMs will be preserved so the decompiler can see the contents properly. All non-paramteter XMMs will have all 16 bytes preserved.
+
+There is no need to check the vector flag on X as all supported processors support the full-width XMM registers.
+

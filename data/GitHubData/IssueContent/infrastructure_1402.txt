@@ -1,0 +1,7 @@
+**Test_openjdk8_j9_sanity.openjdk_x86-64_mac_xl:**
+https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_xl/240/console
+```
+20:04:27  Cannot contact test-macincloud-macos1013-x64-1: java.lang.InterruptedException
+20:12:32  wrapper script does not seem to be touching the log file in /Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_xl@tmp/durable-4c07c72e
+20:12:32  (JENKINS-48300: if on an extremely laggy filesystem, consider -Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400)
+```

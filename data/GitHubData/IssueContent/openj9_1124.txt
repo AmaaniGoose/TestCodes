@@ -1,0 +1,9 @@
+I'm looking at a workload in which lock reservation on `StringBuffer` objects causes a significant slowdown, because a relatively small number of them move repeatedly from thread to thread, causing repeated cancellations. I'd like to deal with this by preventing reservation of an object's monitor after it has been cancelled for the first time.
+
+Currently, a reserving monitor entry will happily reserve any unowned and unreserved object (lock word value 0). In order to prevent reservation, the lock word must specify somehow whether or not an available lock is reservable. Specially marking the unreservable locks would require all monitor operations to preserve the distinction, which would probably require an additional flag in the lock word. Marking the *reservable* locks, OTOH, can be done with a much smaller change to the lock word state space.
+
+Say a lock is reservable iff it belongs to a class using reservation, and it hasn't been locked yet. Initialize the lock words of instances of these classes to a previously unused bit pattern that indicates the lock is both available and reservable. The first successful operation on a lock takes that lock, after which it will naturally never return to the reservable bit pattern. This is similar to the reservation strategy put forth in [Kiyokuni Kawachiya's dissertation](http://researcher.watson.ibm.com/researcher/files/jp-KAWATIYA/Kawachiya05phd.pdf). From page 64:
+
+> When an object is created, the lock is *anonymously reserved*. That is, the lock word is in the reserve mode, but not reserved for or held by any particular thread. [...] we use the *initial-locker policy* in our algorithm. [...] When the reservation is canceled, the LRV bit is cleared, and the lockword is put in the base mode. The structure is completely defined by the base algorithm.
+
+Note that with this strategy, if a reservable lock is first taken via a non-reserving path, then it will not be eligible for reservation.

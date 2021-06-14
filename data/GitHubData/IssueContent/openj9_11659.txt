@@ -1,0 +1,7 @@
+The `TR_RelocationRecordBinaryTemplate` and related types are used to write data into a buffer that is stored into the SCC. This data is used at AOT load time to materialize the new value for relocation. Prior to https://github.com/eclipse/openj9/pull/11235, this data was written into the buffer using raw pointer manipulation. However, since this will no longer be the case, requiring fields in the various templates to be UDATA, as well as fields such as
+```
+#if defined(TR_HOST_64BIT)
+   uint32_t _extra;
+#endif
+```
+are no longer needed. The templates should be cleaned up to use types that better represent the data in each field.

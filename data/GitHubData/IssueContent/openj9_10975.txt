@@ -1,0 +1,171 @@
+Test failure on the win32 jdk8u Oct 2020 release build:
+```
+12:42:39  openjdk version "1.8.0_272"
+12:42:39  OpenJDK Runtime Environment (build 1.8.0_272-b10)
+12:42:39  Eclipse OpenJ9 VM (build openj9-0.23.0, JRE 1.8.0 Windows Server 2016 x86-32-Bit 20201022_733 (JIT enabled, AOT enabled)
+12:42:39  OpenJ9   - 0394ef754
+12:42:39  OMR      - 582366ae5
+12:42:39  JCL      - 41f03341d5 based on jdk8u272-b10)
+```
+Job link: https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_sanity.openjdk_x86-32_windows/349/console
+The test ran OK on nightly build (https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_sanity.openjdk_x86-32_windows/348/console):
+```
+18:51:39  openjdk version "1.8.0_272"
+18:51:39  OpenJDK Runtime Environment (build 1.8.0_272-202010211708-b09)
+18:51:39  Eclipse OpenJ9 VM (build master-4d4350a61, JRE 1.8.0 Windows Server 2019 x86-32-Bit 20201021_732 (JIT enabled, AOT enabled)
+18:51:39  OpenJ9   - 4d4350a61
+18:51:39  OMR      - 72240e260
+18:51:39  JCL      - adb247da based on jdk8u272-b09)
+```
+
+Output from the failing test:
+```
+13:26:44  TEST: java/lang/ProcessBuilder/Basic.java
+13:26:44  TEST JDK: C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdkbinary\j2sdk-image
+13:26:44  
+13:26:44  ACTION: build -- Passed. Build successful
+13:26:44  REASON: Named class compiled on demand
+13:26:44  TIME:   0.419 seconds
+13:26:44  messages:
+13:26:44  command: build Basic
+13:26:44  reason: Named class compiled on demand
+13:26:44  Test directory:
+13:26:44    compile: Basic
+13:26:44  elapsed time (seconds): 0.419
+13:26:44  
+13:26:44  ACTION: compile -- Passed. Compilation successful
+13:26:44  REASON: .class file out of date or does not exist
+13:26:44  TIME:   0.419 seconds
+13:26:44  messages:
+13:26:44  command: compile -XDignore.symbol.file=true C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\java\lang\ProcessBuilder\Basic.java
+13:26:44  reason: .class file out of date or does not exist
+13:26:44  Mode: agentvm
+13:26:44  Agent id: 1
+13:26:44  elapsed time (seconds): 0.419
+13:26:44  configuration:
+13:26:44  Boot Layer (javac runtime environment)
+13:26:44    class path: C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdkbinary\j2sdk-image\lib\tools.jar
+13:26:44                C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\jvmtest\openjdk\jtreg\lib\javatest.jar
+13:26:44                C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\jvmtest\openjdk\jtreg\lib\jtreg.jar
+13:26:44  
+13:26:44  javac compilation environment
+13:26:44    source path: C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\java\lang\ProcessBuilder
+13:26:44    class path:  C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\java\lang\ProcessBuilder
+13:26:44                 C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\TKG\test_output_16033670574396\jdk_lang_j9_0\work\classes\0\java\lang\ProcessBuilder
+13:26:44                 C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdkbinary\j2sdk-image\lib\tools.jar
+13:26:44  
+13:26:44  rerun:
+13:26:44  cd 'C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\TKG\test_output_16033670574396\jdk_lang_j9_0\work\scratch\0' && \
+13:26:44  PATH='C:\cygwin64\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn;C:\Program Files\Microsoft SQL Server\100\Tools\Binn;C:\Program Files\Microsoft SQL Server\100\DTS\Binn;C:\Users\adoptopenjdk\AppData\Local\Microsoft\WindowsApps;C:\Strawberry\perl\bin;C:\Program Files\Git\cmd;C:\openjdk\jdk-8\bin;C:\apache-ant\apache-ant-1.10.5\bin;C:\Program Files\Microsoft SQL Server\110\Tools\Binn;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0;C:\Program Files\Microsoft SQL Server\120\Tools\Binn;C:\Program Files (x86)\IncrediBuild;C:\rust\bin;C:\Program Files\IcedTeaWEB\bin;C:\Users\jenkins\AppData\Local\Microsoft\WindowsApps' \
+13:26:44  SystemDrive=C: \
+13:26:44  SystemRoot='C:\Windows' \
+13:26:44  TEMP='C:\Users\jenkins\AppData\Local\Temp' \
+13:26:44  TMP='C:\Users\jenkins\AppData\Local\Temp' \
+13:26:44  windir='C:\Windows' \
+13:26:44      'C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdkbinary\j2sdk-image\bin\javac' \
+13:26:44          -J-ea \
+13:26:44          -J-esa \
+13:26:44          -J-Xmx512m \
+13:26:44          -J-Xdump:system:none \
+13:26:44          -J-Xdump:heap:none \
+13:26:44          -J-Xdump:system:events=gpf+abort+traceassert+corruptcache \
+13:26:44          -J-XX:-JITServerTechPreviewMessage \
+13:26:44          -J-Xdump:system+java:events=throw,filter=java/lang/NullPointerException#*java/lang/invoke/BruteArgumentMoverHandle.permuteArguments* \
+13:26:44          -J-Dtest.vm.opts='-ea -esa -Xmx512m -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache -XX:-JITServerTechPreviewMessage -Xdump:system+java:events=throw,filter=java/lang/NullPointerException#*java/lang/invoke/BruteArgumentMoverHandle.permuteArguments*' \
+13:26:44          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-Xdump:system:none -J-Xdump:heap:none -J-Xdump:system:events=gpf+abort+traceassert+corruptcache -J-XX:-JITServerTechPreviewMessage -J-Xdump:system+java:events=throw,filter=java/lang/NullPointerException#*java/lang/invoke/BruteArgumentMoverHandle.permuteArguments*' \
+13:26:44          -J-Dtest.compiler.opts= \
+13:26:44          -J-Dtest.java.opts= \
+13:26:44          -J-Dtest.jdk='C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdkbinary\j2sdk-image' \
+13:26:44          -J-Dcompile.jdk='C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdkbinary\j2sdk-image' \
+13:26:44          -J-Dtest.timeout.factor=8.0 \
+13:26:44          -J-Dtest.root='C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test' \
+13:26:44          -J-Dtest.name=java/lang/ProcessBuilder/Basic.java \
+13:26:44          -J-Dtest.file='C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\java\lang\ProcessBuilder\Basic.java' \
+13:26:44          -J-Dtest.src='C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\java\lang\ProcessBuilder' \
+13:26:44          -J-Dtest.src.path='C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\java\lang\ProcessBuilder' \
+13:26:44          -J-Dtest.classes='C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\TKG\test_output_16033670574396\jdk_lang_j9_0\work\classes\0\java\lang\ProcessBuilder' \
+13:26:44          -J-Dtest.class.path='C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\TKG\test_output_16033670574396\jdk_lang_j9_0\work\classes\0\java\lang\ProcessBuilder' \
+13:26:44          -J-Dtest.class.path.prefix='C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\TKG\test_output_16033670574396\jdk_lang_j9_0\work\classes\0\java\lang\ProcessBuilder;C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\java\lang\ProcessBuilder' \
+13:26:44          -d 'C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\TKG\test_output_16033670574396\jdk_lang_j9_0\work\classes\0\java\lang\ProcessBuilder' \
+13:26:44          -sourcepath 'C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\java\lang\ProcessBuilder' \
+13:26:44          -classpath 'C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\java\lang\ProcessBuilder;C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\TKG\test_output_16033670574396\jdk_lang_j9_0\work\classes\0\java\lang\ProcessBuilder;C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdkbinary\j2sdk-image\lib\tools.jar' \
+13:26:44          -XDignore.symbol.file=true 'C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\java\lang\ProcessBuilder\Basic.java'
+13:26:44  direct:
+13:26:44  Note: C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\java\lang\ProcessBuilder\Basic.java uses or overrides a deprecated API.
+13:26:44  Note: Recompile with -Xlint:deprecation for details.
+13:26:44  
+13:26:44  ACTION: main -- Error. Program `C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdkbinary\j2sdk-image\bin\java' timed out (timeout set to 2400000ms, elapsed time including timeout handling was 2423720ms).
+13:26:44  REASON: User specified action: run main/othervm/timeout=300 Basic 
+13:26:44  TIME:   2423.728 seconds
+13:26:44  messages:
+13:26:44  command: main Basic
+13:26:44  reason: User specified action: run main/othervm/timeout=300 Basic 
+13:26:44  Mode: othervm [/othervm specified]
+13:26:44  Timeout information:
+13:26:44  Could not find process id for the process that timed out.
+13:26:44  Skipping timeout handling.
+13:26:44  elapsed time (seconds): 2423.728
+13:26:44  configuration:
+13:26:44  STDOUT:
+13:26:44  This appears to be a Windows system.
+13:26:44  This appears to be a Unicode-based OS.
+13:26:44  Testing ASCII environment values
+13:26:44  Testing Latin1 environment values
+13:26:44  Testing directory .
+13:26:44  Testing directory ..
+13:26:44  Testing directory \
+13:26:44  Testing directory C:
+13:26:44  Testing directory c:
+13:26:44  Testing directory C:\
+13:26:44  Testing directory c:\
+13:26:44  Testing directory \
+13:26:44  Testing directory c:\windows  
+13:26:44  Testing directory c:\Program Files
+13:26:44  Testing directory c:\Program Files
+13:26:44  Testing Unicode directory:.\ProcessBuilderDir??
+13:26:44  Timeout refired 2400 times
+13:26:44  STDERR:
+13:26:44  rerun:
+13:26:44  cd 'C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\TKG\test_output_16033670574396\jdk_lang_j9_0\work\scratch\0' && \
+13:26:44  PATH='C:\cygwin64\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn;C:\Program Files\Microsoft SQL Server\100\Tools\Binn;C:\Program Files\Microsoft SQL Server\100\DTS\Binn;C:\Users\adoptopenjdk\AppData\Local\Microsoft\WindowsApps;C:\Strawberry\perl\bin;C:\Program Files\Git\cmd;C:\openjdk\jdk-8\bin;C:\apache-ant\apache-ant-1.10.5\bin;C:\Program Files\Microsoft SQL Server\110\Tools\Binn;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0;C:\Program Files\Microsoft SQL Server\120\Tools\Binn;C:\Program Files (x86)\IncrediBuild;C:\rust\bin;C:\Program Files\IcedTeaWEB\bin;C:\Users\jenkins\AppData\Local\Microsoft\WindowsApps' \
+13:26:44  SystemDrive=C: \
+13:26:44  SystemRoot='C:\Windows' \
+13:26:44  TEMP='C:\Users\jenkins\AppData\Local\Temp' \
+13:26:44  TMP='C:\Users\jenkins\AppData\Local\Temp' \
+13:26:44  windir='C:\Windows' \
+13:26:44  CLASSPATH='C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\TKG\test_output_16033670574396\jdk_lang_j9_0\work\classes\0\java\lang\ProcessBuilder;C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\java\lang\ProcessBuilder;C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdkbinary\j2sdk-image\lib\tools.jar;C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\jvmtest\openjdk\jtreg\lib\javatest.jar;C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\jvmtest\openjdk\jtreg\lib\jtreg.jar' \
+13:26:44      'C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdkbinary\j2sdk-image\bin\java' \
+13:26:44          -Dtest.vm.opts='-ea -esa -Xmx512m -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache -XX:-JITServerTechPreviewMessage -Xdump:system+java:events=throw,filter=java/lang/NullPointerException#*java/lang/invoke/BruteArgumentMoverHandle.permuteArguments*' \
+13:26:44          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-Xdump:system:none -J-Xdump:heap:none -J-Xdump:system:events=gpf+abort+traceassert+corruptcache -J-XX:-JITServerTechPreviewMessage -J-Xdump:system+java:events=throw,filter=java/lang/NullPointerException#*java/lang/invoke/BruteArgumentMoverHandle.permuteArguments*' \
+13:26:44          -Dtest.compiler.opts= \
+13:26:44          -Dtest.java.opts= \
+13:26:44          -Dtest.jdk='C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdkbinary\j2sdk-image' \
+13:26:44          -Dcompile.jdk='C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdkbinary\j2sdk-image' \
+13:26:44          -Dtest.timeout.factor=8.0 \
+13:26:44          -Dtest.root='C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test' \
+13:26:44          -Dtest.name=java/lang/ProcessBuilder/Basic.java \
+13:26:44          -Dtest.file='C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\java\lang\ProcessBuilder\Basic.java' \
+13:26:44          -Dtest.src='C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\java\lang\ProcessBuilder' \
+13:26:44          -Dtest.src.path='C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\java\lang\ProcessBuilder' \
+13:26:44          -Dtest.classes='C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\TKG\test_output_16033670574396\jdk_lang_j9_0\work\classes\0\java\lang\ProcessBuilder' \
+13:26:44          -Dtest.class.path='C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\TKG\test_output_16033670574396\jdk_lang_j9_0\work\classes\0\java\lang\ProcessBuilder' \
+13:26:44          -Dtest.class.path.prefix='C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\TKG\test_output_16033670574396\jdk_lang_j9_0\work\classes\0\java\lang\ProcessBuilder;C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\openjdk\openjdk-jdk\jdk\test\java\lang\ProcessBuilder' \
+13:26:44          -ea \
+13:26:44          -esa \
+13:26:44          -Xmx512m \
+13:26:44          -Xdump:system:none \
+13:26:44          -Xdump:heap:none \
+13:26:44          -Xdump:system:events=gpf+abort+traceassert+corruptcache \
+13:26:44          -XX:-JITServerTechPreviewMessage \
+13:26:44          -Xdump:system+java:events=throw,filter=java/lang/NullPointerException#*java/lang/invoke/BruteArgumentMoverHandle.permuteArguments* \
+13:26:44          com.sun.javatest.regtest.agent.MainWrapper 'C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\TKG\test_output_16033670574396\jdk_lang_j9_0\work\java\lang\ProcessBuilder\Basic.d\main.0.jta'
+13:26:44  
+13:26:44  TEST RESULT: Error. Program `C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdkbinary\j2sdk-image\bin\java' timed out (timeout set to 2400000ms, elapsed time including timeout handling was 2423720ms).
+13:26:44  --------------------------------------------------
+13:26:44  Test results: passed: 434; error: 1
+13:26:47  Report written to C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\jvmtest\openjdk\report\html\report.html
+13:26:47  Results written to C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.openjdk_x86-32_windows\openjdk-tests\TKG\test_output_16033670574396\jdk_lang_j9_0\work
+13:26:47  Error: Some tests failed or other problems occurred.
+13:26:47  
+13:26:47  jdk_lang_j9_0_FAILED
+```

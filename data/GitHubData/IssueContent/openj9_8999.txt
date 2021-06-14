@@ -1,0 +1,26 @@
+While reviewing #8154 I wanted to convince myself of my understanding of virtual dispatches on Z. I went through a simple virtual call and documented the call flow. I'm copying the comment here for further discussion. Two questions arise at the end:
+
+Sorry I'm still not following. What is this `LA` instruction you are referring to? I just debugged this with an example to convince myself of how it works. Here is the call flow:
+
+1. We load the VFT offset into `GPR0`
+2. We branch to the target method stored in the VFT offset memory location (some negative offset off the `J9Class*`) via the `BASR` instruction in the JIT mainline code
+3. If the target method has not been compiled the pointer stored in the VFT offset will be the pointer of the `icallVMprJavaSendPatchupVirtual` function [1]. This function stores the value of `GPR0` into `J9VMThread.tempSlot` and then makes a call to `old_slow_icallVMprJavaSendPatchupVirtual` [2]
+4. The `old_slow_icallVMprJavaSendPatchupVirtual` function takes the `J9VMThread.tempSlot` which is the VFT offset and the return address and calls `jitVTableIndex` which should return the VFT index. Notice how on z/Architecture this function just returns the second parameter [3]? We do not decode the instruction stream on Z, so it appears. This is not true on other platforms.
+5. Execution returns back to `old_slow_icallVMprJavaSendPatchupVirtual` which then takes the VFT index and looks up the thunk based on the signature of the method we want to call. These thunks are one per signature and dispatch the calls from JIT to interpreter. The rest of this function call looks up the thunk for the particular call we want to make and then it overwrites the VFT entry in the `J9Class*` with the address of the thunk. This is so we don't have to pay the cost of looking up the thunk the next time we have to dispatch this virtual call. The last thing this method does is store the thunk value to `J9VMThread.tempSlot` [4].
+6. Execution returns to `icallVMprJavaSendPatchupVirtual` which then dispatches a call to the thunk via an indirect branch off of `J9VMThread.tempSlot` [5]
+7. The thunk in my case is just a simple instruction sequence which takes care of putting arguments in the right place on the stack, and then it calls `j2iVirtual` [6]. This ends up branching to the interpreter loop to execute the method.
+
+As far as I can see the only reason why we are loading the VFT offset in a register is because looking at the implementation of `j2iVirtual` [6] the VM seems to want this VFT offset to be in `J9VMThread.tempSlot` [7]. It seems because of the possibility of having to dispatch via an interface. I don't quite understand the details of how this works, but I definitely would like to.
+
+For me two questions arise:
+
+1. Why is the implementation of `jitVTableIndex` more complicated on non-Z platforms? What is this API supposed to do exactly?
+2. Why does the VM need the VFT offset in `J9VMThread.tempSlot`? For resolved calls we should be able to decode this value from the JIT instruction stream. Given that JIT to interpreter calls are supposed to be rare, I'd like to know if there is an opportunity to remove the VFT load prior to virtual calls on all platforms as that can save quite a bit of path length.
+
+[1] https://github.com/eclipse/openj9/blob/dd96e6747e1a51ca757d501a7c6bf110f108f192/runtime/codert_vm/znathelp.m4#L621-L633
+[2] https://github.com/eclipse/openj9/blob/dd96e6747e1a51ca757d501a7c6bf110f108f192/runtime/codert_vm/cnathelp.cpp#L2733-L2752
+[3] https://github.com/eclipse/openj9/blob/dd96e6747e1a51ca757d501a7c6bf110f108f192/runtime/oti/JITInterface.hpp#L217-L219
+[4] https://github.com/eclipse/openj9/blob/dd96e6747e1a51ca757d501a7c6bf110f108f192/runtime/codert_vm/cnathelp.cpp#L2751
+[5] https://github.com/eclipse/openj9/blob/dd96e6747e1a51ca757d501a7c6bf110f108f192/runtime/codert_vm/znathelp.m4#L632
+[6] https://github.com/eclipse/openj9/blob/dd96e6747e1a51ca757d501a7c6bf110f108f192/runtime/codert_vm/znathelp.m4#L604-L619
+[7] https://github.com/eclipse/openj9/blob/dd96e6747e1a51ca757d501a7c6bf110f108f192/runtime/codert_vm/znathelp.m4#L615-L617

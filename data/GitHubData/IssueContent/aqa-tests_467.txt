@@ -1,0 +1,13 @@
+https://ci.adoptopenjdk.net/view/work%20in%20progress/job/test_personal
+
+Note: the the above build fails with following test failures: 
+
+```
+16:43:23    [junit4] Tests with failures [seed: E5783DE2DDD096EC]:
+16:43:23    [junit4]   - org.apache.solr.cloud.autoscaling.IndexSizeTriggerTest.testSplitIntegration
+16:43:23    [junit4]   - org.apache.solr.cloud.api.collections.ShardSplitTest.testSplitWithChaosMonkey
+16:43:23    [junit4]   - org.apache.solr.cloud.autoscaling.sim.TestGenericDistributedQueue.testDistributedQueue
+16:43:23    [junit4]   - org.apache.solr.cloud.autoscaling.sim.TestGenericDistributedQueue (suite)
+```
+
+However, the junit report shows all tests passed. For some reason the report is not listing failed tests. This needs to be investigated in a separate issue. 

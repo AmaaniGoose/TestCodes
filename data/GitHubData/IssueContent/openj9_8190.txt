@@ -1,0 +1,24 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk13_j9_sanity.system_ppc64_aix_Nightly/62
+UpgradeModPathTest_ExpDirImg_0
+```
+STF 02:59:58.923 - Monitoring processes: OT16
+STF 03:00:59.056 - **FAILED** Process OT16 has timed out
+STF 03:00:59.056 - Collecting dumps for: OT16
+STF 03:00:59.056 - Sending SIG 3 to the java process to generate a javacore
+STF 03:00:59.056 - Running command: kill -3 17498290
+STF 03:00:59.056 - Redirecting stderr to /home/u0020236/workspace1/Test_openjdk13_j9_sanity.system_ppc64_aix_Nightly/openjdk-tests/TKG/test_output_15778645902940/UpgradeModPathTest_ExpDirImg_0/20200101-025949-UpgradeModPathTest/results/8.OT16.kill_3.stderr
+STF 03:00:59.056 - Redirecting stdout to /home/u0020236/workspace1/Test_openjdk13_j9_sanity.system_ppc64_aix_Nightly/openjdk-tests/TKG/test_output_15778645902940/UpgradeModPathTest_ExpDirImg_0/20200101-025949-UpgradeModPathTest/results/8.OT16.kill_3.stdout
+STF 03:00:59.061 - Pausing for 30 seconds
+STF 03:01:29.062 - Process OT16 (pid 17498290) is no longer running. Abandoning dump collection.
+OT16 stderr java.lang.module.FindException: Unable to compute the hash of module java.logging
+OT16 stderr 	at java.base/java.lang.module.Resolver.findFail(Resolver.java:877)
+OT16 stderr 	at java.base/java.lang.module.Resolver.checkHashes(Resolver.java:459)
+OT16 stderr 	at java.base/java.lang.module.Resolver.finish(Resolver.java:360)
+OT16 stderr 	at java.base/java.lang.module.Configuration.<init>(Configuration.java:141)
+OT16 stderr 	at java.base/java.lang.module.Configuration.resolveAndBind(Configuration.java:316)
+OT16 stderr 	at java.base/java.lang.module.ModuleDescriptor$1.resolveAndBind(ModuleDescriptor.java:2693)
+OT16 stderr 	at java.base/jdk.internal.module.ModuleBootstrap.boot(ModuleBootstrap.java:361)
+OT16 stderr 	at java.base/java.lang.ClassLoader.initializeClassLoaders(ClassLoader.java:211)
+OT16 stderr 	at java.base/java.lang.Thread.initialize(Thread.java:433)
+OT16 stderr 	at java.base/java.lang.Thread.<init>(Thread.java:158)
+```

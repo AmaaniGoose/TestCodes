@@ -1,0 +1,2 @@
+When cross compiling for arm from OpenJDK the SPEC variable doesn't have an appropriate value in tr.source/trj9/Makefile, resulting in the JIT being compiled for the host platform instead of the target. As a workaround, forcing SPEC=linux_arm just before the conditional seems to achieve more appropriate behaviour, but this is clearly not the right fix.
+I'm not sure how SPEC is supposed to get set in this scenario, so this issue may turn out to be more appropriately raised against openj9-openjdk-jdk9.

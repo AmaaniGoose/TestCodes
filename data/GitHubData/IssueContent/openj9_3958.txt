@@ -1,0 +1,22 @@
+```
+* Create DirectHandle
+* Restrict receiver if not internalPrivilegedLookup  (new MH creation)
+* Convert to varargs (new MH)
+* cache
+```
+
+and then in `bind`,
+```
+* findSpecial
+* Remove varargs (grr!)
+* call bindTo which
+**  If DirectHandle, replace with ReceiverBoundHandle, else MHs.InsertArgs
+```
+
+By not using the `internalPrivilegedLookup`, we add an extra MH creation that will be effectively removed later if we hit the DH->RBH case in `bind`.
+
+While I'm not 100% happy with this approach, it does make use consistent with the RI.
+
+I'll launch testing on it and if it passes, we'll merge this and we can look at improving that path in the future.
+
+_Originally posted by @DanHeidinga in https://github.com/eclipse/openj9/pull/3423#issuecomment-444942957_

@@ -1,0 +1,1 @@
+Looking at the Blue Ocean view for https://ci.eclipse.org/openj9/view/Pipelines/job/Pipeline-OpenJDK-Acceptance/54/ it shows `Waiting for run to start` but looking at console output the build has progressed well beyond that.

@@ -1,0 +1,16 @@
+We've been using an [Artifactory instance sponsored by JFrog](https://adoptopenjdk.jfrog.io/) for roughly half a year to host Linux packages of AdoptOpenJDK. There's work underway to host our flavour of JMC there, too. I'd like to reconsider whether we're on the right track here:
+
+* What are our needs?
+* Do we favour a managed solution like Artifactory?
+  * Is Artifactory the right solution, after all?
+* Do we favour to host it oursevles? 
+
+There are various reason I'd like to reconsider our choice of Artifactory:
+
+* We're dependant on the external provider, in this case JFrog. 
+* We don't have full control over the URL (it's `https://adoptopenjdk.jfrog.io/`). As a consequence, migrating to a different service (if we ever have to do it) is going to be a pain and take a long time.
+* [The automatic generation of Debian package indices is broken](https://github.com/AdoptOpenJDK/openjdk-installer/issues/173) ([upstream issue](https://www.jfrog.com/jira/browse/RTFACT-18754)) rendering our automation inoperative. The ETA for a fix is in the next two quarters (according to JFrog).
+* The support for Eclipse update sites (JMC) isn't great.
+* We might want to host things that don't fit into Artifactory at all, like packages for Alpine Linux.
+
+My objective is to collect a list of requirements first so that we can check the various options out before coming up with an actionable proposal.

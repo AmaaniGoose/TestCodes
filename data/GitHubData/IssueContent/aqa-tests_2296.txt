@@ -1,0 +1,10 @@
+Recently, we enabled comment-triggered PR builds https://github.com/AdoptOpenJDK/openjdk-tests/issues/2199 (Thanks @Icohedron). There are a couple of enhancements that we would like to add:
+
+- `--sdk_resource` can be a URL. It is the same as `CUSTOMIZED_SDK_URL ` in Grinder that users can provide a URL for downloading SDK. We should use this SDK for testing. We can ignore credentials for now.
+```
+--sdk_resource=customized --customized_sdk_url=https://xxx
+```
+- build SDK using github action at https://github.com/AdoptOpenJDK/build-jdk or https://github.com/eclipse/build-openj9. Users should provide jdk/openj9 repo and branch for now.
+```
+--sdk_resource=build
+```

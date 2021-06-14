@@ -1,0 +1,13 @@
+Parent #4221 
+
+- Need to determine what all we can/should capture
+- [ ] Jenkins machine name
+- [ ] hostname
+- [ ] ip
+- [ ] geography & provider
+- [ ] cpu
+- [ ] memory
+- [ ] disk(s)
+- [ ] arch & os
+- [ ] firewalled (y/n)
+- [ ] Default (Jenkins) java version

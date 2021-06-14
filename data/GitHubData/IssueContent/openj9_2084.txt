@@ -1,0 +1,26 @@
+The DTFJ interface classes used to be in a separate jar file in Java 8. As part of the work to move to OpenJ9 and Java 9 modules, the DTFJ interface classes were all moved into a single dtfj.jar file, and the openj9.dtfj module for Java 9 and later. It seems they need to be separated again so they can be used by the Eclipse DTFJ plugin.
+
+The Eclipse DTFJ plugin [1], used by Eclipse MAT [2] and perhaps other things, needs the interface classes. The interface classes were separated out and included in the plugin. When trying to use the plugin with MAT, https://bugs.eclipse.org/bugs/show_bug.cgi?id=535351 results:
+```
+Opening a core dump using the DTFJ reader fails under OpenJ9 Java 10:
+
+java.lang.ClassCastException: com.ibm.dtfj.image.j9.ImageFactory incompatible with com.ibm.dtfj.image.ImageFactory
+	at org.eclipse.mat.dtfj.DTFJIndexBuilder.getDynamicDTFJDump(DTFJIndexBuilder.java:8529)
+	at org.eclipse.mat.dtfj.DTFJIndexBuilder.getUncachedDump(DTFJIndexBuilder.java:8492)
+	at org.eclipse.mat.dtfj.DTFJIndexBuilder.getDump(DTFJIndexBuilder.java:8305)
+	at org.eclipse.mat.dtfj.DTFJIndexBuilder.fill(DTFJIndexBuilder.java:888)
+	at org.eclipse.mat.parser.internal.SnapshotFactoryImpl.parse(SnapshotFactoryImpl.java:222)
+	at org.eclipse.mat.parser.internal.SnapshotFactoryImpl.openSnapshot(SnapshotFactoryImpl.java:126)
+	at org.eclipse.mat.snapshot.SnapshotFactory.openSnapshot(SnapshotFactory.java:145)
+	at org.eclipse.mat.ui.snapshot.ParseHeapDumpJob.run(ParseHeapDumpJob.java:83)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+	
+This seems to be because of a class loader problem – ImageFactory came from a VM class loader, and j9.ImageFactory from a plugin:
+factory com.ibm.dtfj.image.j9.ImageFactory@da9ca2cc class com.ibm.dtfj.image.j9.ImageFactory org.eclipse.osgi.internal.loader.EquinoxClassLoader@b4a04aa7[com.ibm.dtfj.j9:1.12.29003.201710051509(id=3)]
+interface com.ibm.dtfj.image.ImageFactory jdk.internal.loader.ClassLoaders$AppClassLoader@8405452d
+```
+
+@ajohnson1 what is the test case to recreate this?
+
+[1] http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/runtimes/tools/dtfj/
+[2] Memory Analyzer standalone https://www.eclipse.org/mat/snapshotBuilds.php

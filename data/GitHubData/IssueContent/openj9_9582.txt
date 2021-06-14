@@ -1,0 +1,49 @@
+TR is an optimizing compiler that can perform numerous optimizations (with supporting data structures) and uses a sophisticated intermediary language.
+
+This means that its threshold for compilation must be chosen to avoid over-eager compilation. The supporting data structures also increase the memory footprint of a compilation.
+
+A templated JIT compiler would allow for compilation to begin earlier and would require less memory to perform compilations, making it a suitable compiler for memory-constrained environment.
+
+If the templated JIT compiler emits profiling instructions and does not prevent TR from compiling, it could also be used to improve start-up time.
+
+A templated JIT compiler that uses a stack-allocated local array and computation stack would be relatively quick to compile bytecodes and develop for.
+
+Any templated JIT will need to reuse as much as it can from TRs infrastructure to improve maintainability.
+
+A prototype might not need to initially support On-stack replacement or full speed debugging, but should be designed such that it is easy to add such features in the future.
+
+A templated JIT will not likely need to save its code for for reuse in ahead-of-time compilation, due to the unoptimized nature of its output. More importantly, it should not override any code that is loaded from ahead-of-time compilation caches, as those code caches will likely contain more efficient code.
+
+The stack might look something like the following on X86-64:
+```
+    /*
+     * MJIT stack frames must conform to TR stack frame shapes. However, so long as we are able to have our frames walked, we should be
+     * free to allocate more things on the stack before the required data which is used for walking. The following is the general shape of the
+     * initial MJIT stack frame
+     * +-----------------------------+
+     * |             ...             |
+     * | Parameters passed by caller | <-- The space for saving params passed in registers is also here
+     * |             ...             |
+     * +-----------------------------+
+     * |        Return Address       | <-- RSP points here before we allocate space for templated JIT
+     * +-----------------------------+ <-- Caller/Callee stack boundary. (caller is template JITed)
+     * |             ...             |
+     * |     Preserved Registers     |
+     * |             ...             |
+     * +-----------------------------+
+     * |             ...             |
+     * |       Local Variables       |
+     * |             ...             | <-- R10 points here at the end of the prologue, R14 always points here.
+     * +-----------------------------+ 
+     * |             ...             |
+     * |      Computation Stack      | <-- sub from R10 to allocate space on computation stack
+     * |             ...             |
+     * +-----------------------------+ <-- End of the stack frame for leaf methods
+     * |             ...             |
+     * | Parameters passed to callee |
+     * |             ...             |
+     * +-----------------------------+
+     * |        Return Address       | <-- Caller is templated JITEd
+     * +-----------------------------+ <-- End of the stack frame for non-leaf methods
+     */
+```

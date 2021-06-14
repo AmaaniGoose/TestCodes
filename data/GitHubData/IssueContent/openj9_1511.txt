@@ -1,0 +1,6 @@
+j9ddr.jar has been enabled on z, x and p linux. 
+https://github.com/ibmruntimes/openj9-openjdk-jdk8/pull/66
+https://github.com/ibmruntimes/openj9-openjdk-jdk9/pull/143
+
+Some open sourced OpenJ9 tests will be re-enabled on supported platforms. 
+Windows does not support j9ddr.jar yet, so exclude running ddr related tests from win platforms. 

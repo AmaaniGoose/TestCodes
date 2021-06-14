@@ -1,0 +1,12 @@
+The compiler maintains a state machine to represent various execution states:
+```
+enum JitStates {
+   UNDEFINED_STATE = 0,
+   IDLE_STATE,
+   STARTUP_STATE,
+   RAMPUP_STATE,
+   STEADY_STATE,
+   DEEPSTEADY_STATE,
+};
+```
+The control logic will vary depending on what state the JIT thinks the execution is in. Therefore, the states and what they represent should be documented.

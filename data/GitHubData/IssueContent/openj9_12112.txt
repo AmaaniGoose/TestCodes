@@ -1,0 +1,203 @@
+Failure link
+------------
+
+From an internal ibuild `466720` (`job_output.php?id=671240326`)
+```
+java version "1.8.0_281"
+Java(TM) SE Runtime Environment (build 8.0.7.0 - pap6480sr7-20210122_01(SR7))
+IBM J9 VM (build 2.9, JRE 1.8.0 AIX ppc64-64-Bit Compressed References 20210302_466720 (JIT enabled, AOT enabled)
+OpenJ9   - 82a5b6c
+OMR      - d1d1317
+IBM      - 95e95a7)
+JCL - 20210108_01 based on Oracle jdk8u281-b09
+```
+
+Optional info
+-------------
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+===============================================
+Running test TestAttachAPI_SE80_0 ...
+===============================================
+TestAttachAPI_SE80_0 Start Time: Tue Mar  2 23:18:43 2021 Epoch Time (ms): 1614745123771
+"/bluebird/builds/bld_466720/sdk/ap6480/bin/java" -Xshareclasses:destroyAll; "/bluebird/builds/bld_466720/sdk/ap6480/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+JVMSHRC005I No shared class caches available
+JVMSHRC005I No shared class caches available
+cache cleanup done
+variation: NoOptions
+JVM_OPTIONS:  
+{ itercnt=1; \
+        mkdir -p "/tmp/bld_466720/TestAttachAPI_SE80_0"; \
+        cd "/tmp/bld_466720/TestAttachAPI_SE80_0"; \
+        export LIBPATH="/usr/lib:/bluebird/builds/bld_466720/sdk/ap6480/jre/bin/../lib/default:/bluebird/builds/bld_466720/sdk/ap6480/jre/bin/../lib/ppc64/default:/bluebird/builds/bld_466720/sdk/ap6480/jre/bin/j9vm"; \
+        "/bluebird/builds/bld_466720/sdk/ap6480/bin/java"   \
+        -cp "/bluebird/builds/bld_466720/jvmtest/test/SE80/TestConfig/resources:/bluebird/builds/bld_466720/jvmtest/test/SE80/TKG/lib/testng.jar:/bluebird/builds/bld_466720/jvmtest/test/SE80/TKG/lib/jcommander.jar:/bluebird/builds/bld_466720/sdk/ap6480/lib/tools.jar:/bluebird/builds/bld_466720/jvmtest/test/SE80/functional/Java8andUp/GeneralTest.jar" \
+        -Dcom.ibm.tools.attach.enable=yes \
+        -Dcom.ibm.tools.attach.timeout=15000 \
+        org.testng.TestNG -d "/tmp/bld_466720/TestAttachAPI_SE80_0" "/bluebird/builds/bld_466720/jvmtest/test/SE80/functional/Java8andUp/testng.xml" -testnames TestAttachAPI \
+        -groups level.extended \
+        -excludegroups d.*.aix_ppc-64,d.*.arch.ppc,d.*.os.aix,d.*.bits.64,d.*.generic-all; \
+        if [ $? -eq 0 ] ; then echo ""; echo "TestAttachAPI_SE80_0""_PASSED"; echo ""; cd /bluebird/builds/bld_466720/jvmtest/test/SE80;  else perl "-I/bluebird/builds/bld_466720/../../javatest/HEAD_382595/test/lib/perl" -mResultStore::Uploader -e "ResultStore::Uploader::upload('.',466720,671240326,'vmfarm.ottawa.ibm.com:31','results-671240326')"; echo ""; echo "TestAttachAPI_SE80_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/tmp/bld_466720/TestTargetResult";
+[IncludeExcludeTestAnnotationTransformer] [INFO] exclude file is /bluebird/builds/bld_466720/jvmtest/test/SE80/TestConfig/resources/excludes/current_exclude_8.txt
+...
+... TestNG 6.14.2 by C�dric Beust (cedric@beust.com)
+...
+
+[TargetManager] [ERROR] Unhandled exception
+
+[TargetManager] [ERROR] Type=Segmentation error vmState=0x00040000
+
+[TargetManager] [ERROR] J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000033
+
+[TargetManager] [ERROR] Handler1=09001000A04F2DA8 Handler2=09001000A04CEE30
+
+[TargetManager] [ERROR] R0=7C9B02A67CF242A5 R1=0000010022E0AC20 R2=09001000A05F1468 R3=7C9B02A67CF242A6
+
+[TargetManager] [ERROR] R4=00000100104165C0 R5=0000010022E0C888 R6=0000000000000000 R7=000000000000E000
+
+[TargetManager] [ERROR] R8=0000010022E0AE90 R9=0000000000000000 R10=0000000000000004 R11=0000000000000000
+
+[TargetManager] [ERROR] R12=09001000A0140278 R13=0000010022E16800 R14=00000000301A98F0 R15=0000010022E0B9E8
+
+[TargetManager] [ERROR] R16=00000100210282D8 R17=0000000000000001 R18=09001000A04AB688 R19=0000010010021EB8
+
+[TargetManager] [ERROR] R20=0000000000000016 R21=0000000000000000 R22=0000010022E0ADD8 R23=0000000000000000
+
+[TargetManager] [ERROR] R24=09001000A04AB688 R25=09001000A04AAC68 R26=00000100101C0B50 R27=09001000A0580F90
+
+[TargetManager] [ERROR] R28=0000000000000000 R29=0000000000000000 R30=00000100104165C0 R31=0000000000000000
+
+[TargetManager] [ERROR] IAR=0900000002E60838 LR=0900000002E5D2B0 MSR=A00000000000D032 CTR=090000000053ACE0
+
+[TargetManager] [ERROR] CR=220008042000000C FPSCR=8200200000000000 XER=2000000C82002000
+
+[TargetManager] [ERROR] FPR0 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+[TargetManager] [ERROR] FPR1 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+[TargetManager] [ERROR] FPR2 412e848000000000 (f: 0.000000, d: 1.000000e+06)
+
+[TargetManager] [ERROR] FPR3 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+[TargetManager] [ERROR] FPR4 4530000000000000 (f: 0.000000, d: 1.934281e+25)
+
+[TargetManager] [ERROR] FPR5 412e848000000000 (f: 0.000000, d: 1.000000e+06)
+
+[TargetManager] [ERROR] FPR6 43300000000f4240 (f: 1000000.000000, d: 4.503600e+15)
+
+[TargetManager] [ERROR] FPR7 4530000000000000 (f: 0.000000, d: 1.934281e+25)
+
+[TargetManager] [ERROR] FPR8 be980aa8abf48606 (f: 2884929024.000000, d: -3.582483e-07)
+
+[TargetManager] [ERROR] FPR9 bf539ce6f5070500 (f: 4110877952.000000, d: -1.197076e-03)
+
+[TargetManager] [ERROR] FPR10 402f29c667fdd4b0 (f: 1744688256.000000, d: 1.558159e+01)
+
+[TargetManager] [ERROR] FPR11 3fd55555555450ef (f: 1431589120.000000, d: 3.333333e-01)
+
+[TargetManager] [ERROR] FPR12 3c7abc9e3b39803f (f: 993624128.000000, d: 2.319047e-17)
+
+[TargetManager] [ERROR] FPR13 4046000000000000 (f: 0.000000, d: 4.400000e+01)
+
+[TargetManager] [ERROR] FPR14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+[TargetManager] [ERROR] FPR15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+[TargetManager] [ERROR] FPR16 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+[TargetManager] [ERROR] FPR17 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+[TargetManager] [ERROR] FPR18 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+[TargetManager] [ERROR] FPR19 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+[TargetManager] [ERROR] FPR20 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+[TargetManager] [ERROR] FPR21 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+[TargetManager] [ERROR] FPR22 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+[TargetManager] [ERROR] FPR23 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+[TargetManager] [ERROR] FPR24 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+[TargetManager] [ERROR] FPR25 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+[TargetManager] [ERROR] FPR26 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+[TargetManager] [ERROR] FPR27 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+[TargetManager] [ERROR] FPR28 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+[TargetManager] [ERROR] FPR29 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+[TargetManager] [ERROR] FPR30 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+[TargetManager] [ERROR] FPR31 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+[TargetManager] [ERROR] Module=/bluebird/builds/bld_466720/sdk/ap6480/jre/bin/../lib/ppc64/default/libj9thr29.so
+
+[TargetManager] [ERROR] Module_base_address=0900000002E59000
+
+[TargetManager] [ERROR] Target=2_90_20210302_466720 (AIX 6.1)
+
+[TargetManager] [ERROR] CPU=ppc64 (48 logical CPUs) (0x600000000 RAM)
+
+[TargetManager] [ERROR] ----------- Stack Backtrace -----------
+
+[TargetManager] [ERROR] (0x0900000002E5D2B0 [libj9thr29.so+0x42b0])
+
+[TargetManager] [ERROR] JVM_GetSystemPackage_Impl+0x380 (0x0900000002BDE9A4 [libjclse29.so+0x8d9a4])
+
+[TargetManager] [ERROR] JVM_GetSystemPackage+0x4c (0x0900000000D48AD0 [libjvm.so+0xfad0])
+
+[TargetManager] [ERROR] JVM_GetSystemPackage+0x44 (0x0900000000D0C2C8 [libjvm.so+0x52c8])
+
+[TargetManager] [ERROR] Java_java_lang_Package_getSystemPackage0+0x10 (0x0900000002C24094 [libjava.so+0x16094])
+
+[TargetManager] [ERROR] (0x0900000000F3A4BC [libj9vm29.so+0x1a14bc])
+
+[TargetManager] [ERROR] ffi_call+0x98 (0x0900000000F39A3C [libj9vm29.so+0x1a0a3c])
+
+[TargetManager] [ERROR] (0x0900000000F0324C [libj9vm29.so+0x16a24c])
+
+[TargetManager] [ERROR] (0x0900000000E0407C [libj9vm29.so+0x6b07c])
+
+[TargetManager] [ERROR] runJavaThread+0x1d0 (0x0900000000DF7974 [libj9vm29.so+0x5e974])
+
+[TargetManager] [ERROR] javaProtectedThreadProc+0x118 (0x0900000000D9B43C [libj9vm29.so+0x243c])
+
+[TargetManager] [ERROR] (0x09000000010768A8 [libj9prt29.so+0x528a8])
+
+[TargetManager] [ERROR] javaThreadProc+0x68 (0x0900000000D9B22C [libj9vm29.so+0x222c])
+
+[TargetManager] [ERROR] (0x090000000100CB24 [libj9thr29.so+0x3b24])
+
+[TargetManager] [ERROR] _pthread_body+0xf0 (0x0900000000515D34 [libpthreads.a+0x3d34])
+
+[TargetManager] [ERROR] ---------------------------------------
+
+[TargetManager] [ERROR] JVMDUMP039I Processing dump event "gpf", detail "" at 2021/03/02 23:18:49 - please wait.
+
+[TargetManager] [ERROR] JVMDUMP032I JVM requested System dump using '/tmp/bld_466720/TestAttachAPI_SE80_0/core.20210302.231849.13435086.0001.dmp' in response to an event
+
+[TargetManager] [ERROR] JVMDUMP010I System dump written to /tmp/bld_466720/TestAttachAPI_SE80_0/core.20210302.231849.13435086.0001.dmp
+
+[TargetManager] [ERROR] JVMDUMP032I JVM requested Java dump using '/tmp/bld_466720/TestAttachAPI_SE80_0/javacore.20210302.231849.13435086.0002.txt' in response to an event
+
+[TargetManager] [ERROR] JVMDUMP010I Java dump written to /tmp/bld_466720/TestAttachAPI_SE80_0/javacore.20210302.231849.13435086.0002.txt
+
+[TargetManager] [ERROR] JVMDUMP032I JVM requested Snap dump using '/tmp/bld_466720/TestAttachAPI_SE80_0/Snap.20210302.231849.13435086.0003.trc' in response to an event
+
+[TargetManager] [ERROR] JVMDUMP010I Snap dump written to /tmp/bld_466720/TestAttachAPI_SE80_0/Snap.20210302.231849.13435086.0003.trc
+
+[TargetManager] [ERROR] JVMDUMP032I JVM requested JIT dump using '/tmp/bld_466720/TestAttachAPI_SE80_0/jitdump.20210302.231849.13435086.0004.dmp' in response to an event
+
+[TargetManager] [ERROR] JVMDUMP010I JIT dump written to /tmp/bld_466720/TestAttachAPI_SE80_0/jitdump.20210302.231849.13435086.0004.dmp
+
+[TargetManager] [ERROR] JVMDUMP013I Processed dump event "gpf", detail "".
+```
+
+This failure was marked by another failure. This could be another manifestation of recent AIX related issues.

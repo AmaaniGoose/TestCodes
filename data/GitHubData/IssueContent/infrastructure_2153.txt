@@ -1,0 +1,32 @@
+ref https://github.com/AdoptOpenJDK/openjdk-infrastructure/issues/2149
+
+I thought id create a separate issue since https://github.com/AdoptOpenJDK/openjdk-infrastructure/issues/2149 seems to only affect test-ibm-aix71-ppc64-1 and -2.
+
+`MBCS_Tests_annotation_Ja_JP_aix_0` appears to fail on both IBM and OSUOSL boxes, with the following error log
+
+```
+[2021-04-20T22:17:20.884Z] Running test MBCS_Tests_annotation_Ja_JP_aix_0 ...
+[2021-04-20T22:17:20.884Z] ===============================================
+[2021-04-20T22:17:20.884Z] MBCS_Tests_annotation_Ja_JP_aix_0 Start Time: Tue Apr 20 18:17:20 2021 Epoch Time (ms): 1618957040143
+[2021-04-20T22:17:20.884Z] Nothing to be done for setup.
+[2021-04-20T22:17:20.884Z] variation: NoOptions
+[2021-04-20T22:17:20.884Z] JVM_OPTIONS:  
+[2021-04-20T22:17:20.884Z] { itercnt=1; \
+[2021-04-20T22:17:20.884Z] mkdir -p "/home/jenkins/workspace/Test_openjdk8_hs_special.functional_ppc64_aix/openjdk-tests/TKG/../TKG/output_16189570312245/MBCS_Tests_annotation_Ja_JP_aix_0"; \
+[2021-04-20T22:17:20.884Z] cd "/home/jenkins/workspace/Test_openjdk8_hs_special.functional_ppc64_aix/openjdk-tests/TKG/../TKG/output_16189570312245/MBCS_Tests_annotation_Ja_JP_aix_0"; \
+[2021-04-20T22:17:20.884Z] LANG=Ja_JP ksh /home/jenkins/workspace/Test_openjdk8_hs_special.functional_ppc64_aix/openjdk-tests/TKG/../../jvmtest/functional/MBCS_Tests/annotation/test.sh > output.txt 2>error.txt; \
+[2021-04-20T22:17:20.884Z] if [ $? -eq 0 ] ; then echo ""; echo "MBCS_Tests_annotation_Ja_JP_aix_0""_PASSED"; echo ""; cd /home/jenkins/workspace/Test_openjdk8_hs_special.functional_ppc64_aix/openjdk-tests/TKG/..; rm -f -r "/home/jenkins/workspace/Test_openjdk8_hs_special.functional_ppc64_aix/openjdk-tests/TKG/../TKG/output_16189570312245/MBCS_Tests_annotation_Ja_JP_aix_0"; else echo ""; echo "MBCS_Tests_annotation_Ja_JP_aix_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/home/jenkins/workspace/Test_openjdk8_hs_special.functional_ppc64_aix/openjdk-tests/TKG/../TKG/output_16189570312245/TestTargetResult";
+[2021-04-20T22:17:34.306Z] 
+[2021-04-20T22:17:34.306Z] MBCS_Tests_annotation_Ja_JP_aix_0_FAILED
+[2021-04-20T22:17:34.306Z] 
+[2021-04-20T22:17:34.306Z] Nothing to be done for teardown.
+[2021-04-20T22:17:34.306Z] MBCS_Tests_annotation_Ja_JP_aix_0 Finish Time: Tue Apr 20 18:17:33 2021 Epoch Time (ms): 1618957053916
+```
+
+The test failure was noticed in https://ci.adoptopenjdk.net/view/Test_functional/job/Test_openjdk8_hs_special.functional_ppc64_aix/28/
+
+Reproducible in a grinder here
+
+https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/236/console
+
+I have only tested this so far with jdk 8 hotspot

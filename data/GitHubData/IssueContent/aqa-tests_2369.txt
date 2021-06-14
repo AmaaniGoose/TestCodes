@@ -1,0 +1,7 @@
+Label bot can add multi labeler for title, body, comments, commit messages, branch, author or files with automated status checks.
+
+https://github.com/fuxingloh/multi-labeler
+
+Similar to https://github.com/AdoptOpenJDK/ci-jenkins-pipelines/pull/76/. Though we can extend the label based on title to body, comments, commit messages, etc.
+
+related with https://github.com/AdoptOpenJDK/openjdk-tests/issues/1766

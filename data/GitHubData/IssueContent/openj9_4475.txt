@@ -1,0 +1,26 @@
+Currently we have intermittent failures with test https://github.com/eclipse/openj9/blob/master/test/functional/JLM_Tests/src/j9vm/test/softmx/SoftmxAdvanceTest.java
+The reason for them that test assumes that if application release some memory it can be seen in OS free  eventually. Unfortunately it is not true in general case.
+
+The original test idea was to check GC reaction to -Xsoftmx command sent run time: the size of object heap should drop below threshold in reasonable period of time. This is valuable part we should continue to test. However there is another part of this test which expect to released memory show up in OS free memory report. This adds too much moving particles to the test:
+- GC reacts to -Xsoftmx command and shrink heap (with Decommit of released pages)
+- Port Library Decommit function has multiple implementations for different platforms. Also there might be different behaviour for memory allocated in Large Pages, application run in Hypervisor or Container.
+
+I believe we should separate -Xsoftmx and Disclaim Memory functionality. There is test https://github.com/eclipse/openj9/blob/master/test/functional/JLM_Tests/src/j9vm/test/softmx/SoftmxAdvanceTest_GC_Only.java with stripped out Disclaim memory functionality. This is reliable part and it should failed in a case of real problem only. 
+
+Also we should review test cases and decide is this test for -Xsoftmx or for Disclaim memory functionality. For example all variations of run test using Large Pages are Disclaim memory tests.
+
+Based on functionality, the new Disclaim memory test should be part of OMR Port testing and probably be native. We can trace test execution down to Decommit call - this is reliable part. However the reaction of running environment (OS, Hyperviser, Container) is hard to predict for 100% considering number of test platforms.  
+
+For example we know that test failed constantly on OSX. 
+
+Also for example for Linux Decommit is implemented as madvise() with MADV_DONTNEED http://man7.org/linux/man-pages/man2/madvise.2.html
+Looks like an approach to test free OS memory is not accurate however Resident Set Size (RSS) might help:
+```
+              Note that, when applied to shared mappings, MADV_DONTNEED
+              might not lead to immediate freeing of the pages in the range.
+              The kernel is free to delay freeing the pages until an
+              appropriate moment.  The resident set size (RSS) of the
+              calling process will be immediately reduced however.
+```
+Also madvise() with `MADV_DONTNEED cannot be applied to ... Huge TLB pages` and this is case of Large Pages on Linux.
+

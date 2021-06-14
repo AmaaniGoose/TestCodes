@@ -1,0 +1,12 @@
+Inspired by #9452 
+
+JNI check should verify that incoming UTF-8 strings are validly encoded, similar to:
+https://github.com/eclipse/openj9/blob/875226b3db8cc5cdbcf0ca5f73419e800d7963ed/runtime/vm/jnimisc.cpp#L239-L261
+Two things should be checked:
+
+- is the encoding valid at all?
+- is the encoding in its most compact form?
+
+One we're in the VM, we assume that UTF data is correct and canonical, which allows the VM to use a byte-for-byte comparision of UTF strings.
+
+Once complete, we should consider deleting the verify/compact code from `FindClass`.

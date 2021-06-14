@@ -1,0 +1,14 @@
+https://ci.eclipse.org/openj9/job/Test-sanity.system-JDK8-osx_x86-64_cmprssptrs/44/tapResults/
+
+```
+STF 02:53:29.889 - Redirecting stderr to /Users/jenkins/workspace/Test-sanity.system-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../TestConfig/test_output_15484083128497/MauveSingleThreadLoadTest_0/20190125-023626-MauveSingleThreadLoadTest/results/1.LT.kill_24.stderr
+STF 02:53:29.889 - Redirecting stdout to /Users/jenkins/workspace/Test-sanity.system-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../TestConfig/test_output_15484083128497/MauveSingleThreadLoadTest_0/20190125-023626-MauveSingleThreadLoadTest/results/1.LT.kill_24.stdout
+LT  02:51:34.511 - **POSSIBLE HANG DETECTED**
+LT  02:51:39.617 - **POSSIBLE HANG DETECTED**
+LT  02:51:44.639 - **POSSIBLE HANG DETECTED**
+LT  02:51:49.327 - Completed 0.0%. Number of tests started=8 (+0)
+```
+
+Similar failure reported before:
+https://github.com/eclipse/openj9/issues/4064 (Dec. 14, 2018) - LambdaLoadTest
+https://github.com/eclipse/openj9/issues/4091 (Dec. 18, 2018) - MauveMultiThreadLoadTest_0 

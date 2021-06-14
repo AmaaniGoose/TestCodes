@@ -1,0 +1,13 @@
+> It would be good to confirm in case we decide to go with this option.
+
+For existing OpenJ9 `System.mapLibraryName(userLibName)` returning `.so`, I tested `ClassLoaderHelper.mapAlternativeName()` patch as following at https://github.com/ibmruntimes/openj9-openjdk-jdk/pull/204:
+1. rename `libnio.so` to `libnio.a`;
+2. `-version` failed with `UnsatisfiedLinkError`;
+3. `-version` succeeds with the patch `ClassLoaderHelper.mapAlternativeName()` which returns `.a`.
+
+Building a JDK15 AIX to verify that the similar patch (returning `.so`) also works when `System.mapLibraryName(userLibName)` returning `.a`.
+
+**Update:**
+Verified that `JDK15 AIX` still builds with `System.mapLibraryName(userLibName)` returning `.a` like `JDK 8 & 11`, and adding `aix/classes/jdk/internal/loader/ClassLoaderHelper.java` in which `mapAlternativeName()` returns `.so`.
+
+_Originally posted by @JasonFengJ9 in https://github.com/eclipse/openj9/pull/9632#issuecomment-631710003_

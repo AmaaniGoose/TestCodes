@@ -1,0 +1,1 @@
+The ARM32 JIT needs to enable the CodeGenerator feature `SupportsAutoSIMD`. This issue will track the work to ensure what the requirements are and to complete any work on ARM32.

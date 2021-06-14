@@ -1,0 +1,31 @@
+Java -version output
+--------------------
+
+openjdk version "1.8.0_212"
+OpenJDK Runtime Environment (build 1.8.0_212-b03)
+Eclipse OpenJ9 VM (build openj9-0.14.0, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20190417_286 (JIT enabled, AOT enabled)
+OpenJ9   - bad1d4d06
+OMR      - 4a4278e6
+JCL      - 5590c4f818 based on jdk8u212-b03)
+
+
+Summary of problem
+------------------
+elasticserach6.5.4 jvm.conf ：
+# Xms represents the initial size of total heap space
+# Xmx represents the maximum size of total heap space
+
+-Xms8g
+-Xmx8g
+
+when i start up es , es top info like this:
+top es info 
+
+![图片](https://user-images.githubusercontent.com/12193885/119065173-8c890d80-ba0f-11eb-80bc-2957dcce9970.png)
+
+。
+when i use openjdk8,       startup es6.5.4,   query top es info ,   es memory use about 8G,
+why ?   cloud you help me ?  
+
+
+

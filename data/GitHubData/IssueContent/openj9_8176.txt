@@ -1,0 +1,65 @@
+Failure link
+------------
+
+```
+00:06:25  openjdk version "11.0.6-internal" 2020-01-14
+00:06:25  OpenJDK Runtime Environment (build 11.0.6-internal+0-adhoc.jenkins.BuildJDK11s390xlinuxNightly)
+00:06:25  Eclipse OpenJ9 VM (build ibm_sdk-be96c7eec3, JRE 11 Linux s390x-64-Bit Compressed References 20191222_268 (JIT enabled, AOT enabled)
+00:06:25  OpenJ9   - be96c7eec3
+00:06:25  OMR      - 614d68a5b
+00:06:25  JCL      - c18c113ad0 based on jdk-11.0.6+8)
+```
+
+Optional info
+-------------
+
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+00:52:51  rerun:
+00:52:51  cd /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/test_output_15770778259032/jdk_nio_0/work/scratch/0 && \
+00:52:51  HOME=/home/jenkins \
+00:52:51  LANG=C \
+00:52:51  PATH=/bin:/usr/bin:/usr/sbin \
+00:52:51      /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/j2sdk-image/bin/java \
+00:52:51          -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/test_output_15770778259032/jdk_nio_0/work/classes/0/sun/nio/cs/TestMiscEUC_JP.d:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/nio/cs \
+00:52:51          -Dtest.src=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/nio/cs \
+00:52:51          -Dtest.src.path=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/nio/cs \
+00:52:51          -Dtest.classes=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/test_output_15770778259032/jdk_nio_0/work/classes/0/sun/nio/cs/TestMiscEUC_JP.d \
+00:52:51          -Dtest.class.path=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/test_output_15770778259032/jdk_nio_0/work/classes/0/sun/nio/cs/TestMiscEUC_JP.d \
+00:52:51          -Dtest.vm.opts='-ea -esa -Xmx512m -Xcompressedrefs' \
+00:52:51          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-Xcompressedrefs' \
+00:52:51          -Dtest.compiler.opts= \
+00:52:51          -Dtest.java.opts= \
+00:52:51          -Dtest.jdk=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/j2sdk-image \
+00:52:51          -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/j2sdk-image \
+00:52:51          -Dtest.timeout.factor=8.0 \
+00:52:51          -Dtest.root=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+00:52:51          -Dtest.nativepath=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+00:52:51          -classpath /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/test_output_15770778259032/jdk_nio_0/work/classes/0/sun/nio/cs/TestMiscEUC_JP.d:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/nio/cs:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+00:52:51          TestMiscEUC_JP
+00:52:51  STDERR:
+00:52:51  java.lang.NullPointerException
+00:52:51  	at java.base/sun.nio.cs.StandardCharsets.cache(StandardCharsets.java:1332)
+00:52:51  	at java.base/sun.nio.cs.StandardCharsets.lookup(StandardCharsets.java:1323)
+00:52:51  	at java.base/sun.nio.cs.StandardCharsets.charsetForName(StandardCharsets.java:1338)
+00:52:51  	at java.base/java.nio.charset.Charset.lookup2(Charset.java:473)
+00:52:51  	at java.base/java.nio.charset.Charset.lookup(Charset.java:462)
+00:52:51  	at java.base/java.nio.charset.Charset.forName(Charset.java:526)
+00:52:51  	at TestMiscEUC_JP.main(TestMiscEUC_JP.java:36)
+00:52:51  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+00:52:51  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+00:52:51  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+00:52:51  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+00:52:51  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+00:52:51  	at java.base/java.lang.Thread.run(Thread.java:834)
+00:52:51  
+00:52:51  JavaTest Message: Test threw exception: java.lang.NullPointerException
+00:52:51  JavaTest Message: shutting down test
+00:52:51  
+00:52:51  
+00:52:51  TEST RESULT: Failed. Execution failed: `main' threw exception: java.lang.NullPointerException
+```

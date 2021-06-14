@@ -1,0 +1,1 @@
+https://ci.eclipse.org/openj9/job/Promote_OpenJDK/46 failed due to `error: index-pack died of signal 15` but I didn't see the failure reported to Slack. This means that promotion jobs could fail to promote, but nobody would notice.

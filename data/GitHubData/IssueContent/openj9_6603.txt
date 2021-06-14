@@ -1,0 +1,10 @@
+OOM errors occurs intermittently when running the AcmeAir bench with containers and using memlimit.
+It uses no swap by using :
+ -m '${memorylimit}'  --memory-swap='${memorylimit}' --memory-swappiness=0
+
+This behaviour is observed in both JDK8 and JDK11 on different set of machines.
+
+From the experiments on a VM I used 
+
+OpenJDK8OpenJ9-0.11 shows no OOM with 300mb.
+OpenJDK8OpenJ9-0.14 shows OOM with 300mb. And even setting memlimit-500mb , there are OOMs.

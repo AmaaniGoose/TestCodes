@@ -1,0 +1,30 @@
+While printing relocation records during tracing, we dump some records incorrectly. For example, in the printout below:
+```
+1015 Address           Size Type                           Width EIP Index Offsets
+1016         4437f088  10   TR_HelperAddress (1)           2     Rel 91    00c6
+1017 Helper method address of jitStackOverflow(91)
+1018         4437f092  26   TR_ConstantPool (0)            2     Abs       0082
+1019 Inlined site index = -1, Constant pool = 940a0
+1020         4437f0ac  16   TR_AbsoluteMethodAddress (3)   2     Abs       0076 008a 0092 009a
+1021         4437f0bc  10   TR_AbsoluteHelperAddress (8)   2     Abs 152   000a 0800 0000 0098 006e
+1022 Helper method address of _interpreterUnresolvedInstanceDataStoreGlue(152)
+1023         4437f0c6  18   TR_MethodCallAddress (99)      2     Rel       0012 6340 0020 000a 0000
+1024                                                                        03ff 99e8 0218 0038
+```
+
+Notice that the offsets on line 1021 and 1023 are incorrect. Instead of printing the offsets, we end up printing the entire relocation record. Here is a snippet of the code that prints this:
+https://github.com/eclipse/openj9/blob/dbc3c1755e38a8e828ab7bfefaabc5fe946ee5e9/runtime/compiler/codegen/J9AheadOfTimeCompile.cpp#L405-L421
+
+It's possible that `getSizeOfAOTRelocationHeader` is somehow returning an incorrect value with is causing us to print the entire record from the beginning (instead of doing a print starting at the offset).
+
+The problem is easily reproducible on JITaaS. However the problem exists outside of JITaaS as well. Here's the client side command to reproduce:
+```
+java -Xdump:none -XXjitdirectory=$JITDIR/compiler_debug/ -XX:JITaaSClient -X    jit:verbose,vlog=vlog,disableSuffixLogs,disableAsyncCompilation,count=0,{'java/util/HashMap.<init>()V'}\(traceFull,traceCG,lastOpt    Index=0,traceRelocatableDataCG,traceRelocatableDataDetailsCG,traceRelocatableDataDetailsRT,traceRelocatableDataRT,traceReloCG,log=    trace.log,optLevel=cold\),rtlog=rtlog_name,aotrtDebugLevel=30 -version
+```
+
+And here's the server command:
+```
+java  -XXjitdirectory=$JITDIR/compiler_debug/ -XX:JITaaSServer
+```
+
+Note: `-XXjitdirectory` is optional

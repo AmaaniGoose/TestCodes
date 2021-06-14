@@ -1,0 +1,9 @@
+From #714
+
+Gave a run of openj9 sanity functional tests in docker container and below tests fail in docker container:
+
+FAILED test targets:
+
+cmdLineTester_callsitedbgddrext_openj9_0
+cmdLineTester_SCCommandLineOptionTests_1
+

@@ -1,0 +1,38 @@
+Failure link
+------------
+Rebuild link: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&BUILD_LIST=openjdk&JenkinsFile=openjdk_x86-64_linux&CUSTOM_TARGET=test/jdk/sun/misc/SunMiscSignalTest.java&TARGET=jdk_custom_0
+- test category: sanity openjdk
+- OS/architecture: all
+- version: 11, 13
+- JVM: openj9 only
+
+Optional info
+-------------
+- intermittent failure: no
+- regression or new test: regression
+
+Failure output (captured from console output)
+---------------------------------------------
+Multiple tests fail with the error:
+```
+java.lang.AssertionError: handle failed for: ABRT: Signal already used by VM or OS: SIGABRT
+        at org.testng.Assert.fail(Assert.java:94)
+        at org.testng.Assert.assertNotEquals(Assert.java:856)
+        at SunMiscSignalTest.testSunMisc(SunMiscSignalTest.java:249)
+```
+The issue seems to be with whenever this line is ran:
+```
+SignalHandler orig = null;
+orig = Signal.handle(signal, SignalHandler.SIG_DFL);
+```
+Whenever this line is ran anywhere in this file, it causes an IllegalArguementException, which is caught by the tests, and then sometimes fails an assert as shown. 
+
+The list of tests that fail (with an assert) are `testSunMisc` tests and have the `CanRegister` field set to YES
+eg.
+```
+test SunMiscSignalTest.testSunMisc("ABRT", YES, YES, YES, NO): failure
+                                                ^^^
+```
+I believe however, that they are all throwing the same error, but tests with the CanRegister field set to NO are expected to throw an IAE (so therefore pass). Whether this is the expected error or not I do not know.
+
+Furthermore, the test `SunMiscSignalTest.testRaiseNoConsumer()` reports success, however has the line above throw an IAE, which is expected but for a different reason. The reason it throws the IAE is the same as above.

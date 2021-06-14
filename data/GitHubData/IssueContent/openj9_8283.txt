@@ -1,0 +1,50 @@
+Failure link
+------------
+
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_extended.functional_ppc64le_linux_xl_Release/7/tapResults/
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+===============================================
+Running test cmdLineTester_vmRuntimeState_0 ...
+===============================================
+cmdLineTester_vmRuntimeState_0 Start Time: Sat Jan 11 16:21:11 2020 Epoch Time (ms): 1578759671634
+variation: NoOptions
+JVM_OPTIONS: -Xnocompressedrefs 
+*** Starting test suite: VM Runtime State Command-Line Option Tests ***
+Testing: Test triggering of J9HOOK_VM_RUNTIME_STATE_CHANGED event
+Test start time: 2020/01/11 16:21:12 Coordinated Universal Time
+Running command: "/home/jenkins/jenkins-agent/workspace/Test_openjdk11_j9_extended.functional_ppc64le_linux_xl_Release/openjdkbinary/j2sdk-image/bin/java" -Xnocompressedrefs  -Xdump -Xjit:samplingFrequencyInDeepIdleMode=30000 -XX:IdleTuningMinIdleWaitTime=60 -cp /home/jenkins/jenkins-agent/workspace/Test_openjdk11_j9_extended.functional_ppc64le_linux_xl_Release/openjdk-tests/TKG/../../jvmtest/functional/cmdLineTests/vmRuntimeState/vmruntimestate.jar -agentlib:vmruntimestateagent29=appClass:ActiveIdleTest,triggerHook:yes ActiveIdleTest --busy-period=30 --idle-period=120
+Time spent starting: 59 milliseconds
+Time spent executing: 181317 milliseconds
+Test result: FAILED
+Output from test:
+ [OUT] Busy looping ... 
+ [OUT] Prime numbers in the list: 79 
+
+[OUT] Prime numbers in the list: 76
+ [OUT] Busy loop done
+ [OUT] Idling ... 
+ [OUT] Idling done
+ [OUT] Busy looping ... 
+ [OUT] Prime numbers in the list: 78
+
+ [OUT] Prime numbers in the list: 76
+ [OUT] Busy loop done
+ [ERR] ERROR: Expected J9HOOK_VM_RUNTIME_STATE_CHANGED to be triggered
+>> Success condition was not found: [Output match: All Tests Completed and Passed]
+>> Required condition was found: [Output match: Busy looping]
+>> Required condition was found: [Output match: Idling]
+>> Required condition was not found: [Output match: PASS]
+>> Failure condition was found: [Output match: ERROR]
+>> Failure condition was not found: [Output match: Unhandled Exception]
+>> Failure condition was not found: [Output match: Exception:]
+>> Failure condition was not found: [Output match: corrupt]
+>> Failure condition was not found: [Output match: Processing dump event]
+```

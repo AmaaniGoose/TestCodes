@@ -1,0 +1,5 @@
+As pointed out by @keithc-ca in https://github.com/eclipse/openj9/pull/1786#issuecomment-389915950 once #1786 gets merged there will be quite a bit of duplication in String.java for Java 8 and other Java versions. We effectively split the file into two with the preprocessor macros.
+
+Are there any alternatives to doing this? Would it be more clean to partition these ifdefs into separate files? How would this work? Would this be more intuitive than what we have today?
+
+Any suggestions or comments are welcome!

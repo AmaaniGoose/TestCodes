@@ -1,0 +1,11 @@
+Failure link
+------------
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.openjdk_x86-64_windows/251/testReport/junit/java_math_BigInteger_DivisionOverflow/java/DivisionOverflow/
+test-softlayer-win2012r2-x64-1
+```
+Program `C:\Users\jenkins\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows\openjdkbinary\j2sdk-image\bin\java' timed out (timeout set to 960000ms, elapsed time including timeout handling was 960327ms).    
+```
+
+Optional info
+-------------
+- intermittent failure (yes|no): YES, about 1 in 3 fails

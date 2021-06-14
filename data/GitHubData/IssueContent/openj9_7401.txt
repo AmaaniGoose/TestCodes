@@ -1,0 +1,8 @@
+Currently GC allocates extra leaf pointer in Arraylet spine in case if size of Array is times of Arraylet leaf size. GC initializes this pointer to NULL. This hack was necessary because Builder helper caches next leaf pointer if reading of current leaf is complete. In the case if Arraylet spine is a last object in the heap "next" address might be not in committed memory.  
+We are not using Builder for many years and seems nothing in GC or VM requires this hack any more. I would like to delete this code if possible.
+
+May I ask JIT Team double check is any code rely on this "dummy for read" pointer?
+
+Removing this hack is a part of cleaning Arraylet logic required for Arraylet Double Mapping optimization. 
+
+@DanHeidinga @pshipton @andrewcraik FYI

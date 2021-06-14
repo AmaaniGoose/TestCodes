@@ -1,0 +1,24 @@
+**Platform:**
+linux ubuntu16.04
+
+**Architecture:**
+intel x64
+
+Please describe the issue that you are having with our binaries and if possible how to recreate it.
+```
+sudo date -s "2019-5-3 11:33:38"
+./jdk8u212-b03/bin/java WeekDateTest
+
+
+expecte result:
+date: 2008-11-31
+
+actual result:
+date: 2039-0-5
+```
+
+
+![image](https://user-images.githubusercontent.com/36258307/57118994-82006a80-6d99-11e9-9c16-d95867877f54.png)
+
+
+[WeekDateTest.java.txt](https://github.com/AdoptOpenJDK/openjdk-build/files/3140593/WeekDateTest.java.txt)

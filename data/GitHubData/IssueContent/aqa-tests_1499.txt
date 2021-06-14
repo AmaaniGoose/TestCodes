@@ -1,0 +1,5 @@
+So I've just noticed the huge number of test failures on ARM64 openj9 builds, most of which are timeouts. I know that this is a WIP by the openj9 team but should these tests still be running (now on large heap as well) or should they be triaged? Theres roughly 50 failing tests on the latest job (but have to be manually recorded as the whole job is timing out).
+
+eg.
+https://ci.adoptopenjdk.net/user/adam-thorpe/my-views/view/Nightly%20test%20openjdk%20openJ9/job/Test_openjdk11_j9_sanity.openjdk_aarch64_linux/ (hasn't ran for a while due to other build problems)
+https://ci.adoptopenjdk.net/user/adam-thorpe/my-views/view/Nightly%20test%20openjdk%20openJ9/job/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/

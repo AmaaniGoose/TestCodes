@@ -1,0 +1,6 @@
+Provide an inlined version of the recognized methods:
+```
+java_nio_Bits_keepAlive
+java_lang_ref_Reference_reachabilityFence
+```
+Consult the semantics on other architectures to understand what needs to be done.

@@ -1,0 +1,73 @@
+### Section 1: Uber Issue
+
+Foreign Memory Access, Third Incubator (JEP 393): https://github.com/eclipse/openj9/issues/11027
+
+### Section 2: Background
+
+The goal of this issue is to implement native method `ScopedMemoryAccess.closeScope0` in OpenJ9:
+```
+native boolean closeScope0(Scope scope, Scope.ScopedAccessError exception);
+```
+
+`ScopedMemoryAccess`'s behaviour: [LINK](https://github.com/ibmruntimes/openj9-openjdk-jdk/blob/cc7ff53f34c856466561beb96d73149bc7371410/src/java.base/share/classes/jdk/internal/misc/X-ScopedMemoryAccess.java.template#L41-L70)
+
+`public interface ScopedMemoryAccess.Scope`: [LINK](https://github.com/ibmruntimes/openj9-openjdk-jdk/blob/cc7ff53f34c856466561beb96d73149bc7371410/src/java.base/share/classes/jdk/internal/misc/X-ScopedMemoryAccess.java.template#L95-L119)
+
+`boolean ScopedMemoryAccess.closeScope(Scope scope)`: [LINK](https://github.com/openjdk/jdk/blob/3b576ed99d7664ea0fc851e66f9480a6f4638197/src/java.base/share/classes/jdk/internal/misc/X-ScopedMemoryAccess.java.template#L81-L85)
+
+`ScopedMemoryAccess.closeScope` is invoked from `MemoryScope.SharedScope.justClose()` ([LINK](https://github.com/ibmruntimes/openj9-openjdk-jdk/blob/3e28a0228e766804effa5168a60a88a87909f86b/src/jdk.incubator.foreign/share/classes/jdk/internal/foreign/MemoryScope.java#L279)).
+
+> A shared scope, which can be shared across multiple threads. Closing a shared scope has to ensure that
+.... (i) only one thread can successfully close a scope (e.g. in a close vs. close race); and
+.... **(ii) no other thread is accessing the memory associated with this scope while the segment is being closed.**
+To ensure (i), a CAS is performed on the liveness bit.
+**Ensuring (ii) is trickier, and requires a complex synchronization protocol.**
+This approach prioritizes the performance of memory access over that of releasing a shared memory resource.
+
+`ScopedMemoryAccess.closeScope0` performs the complex synchronization protocol to enforce **(ii)**.
+
+OpenJ9 implementation of `Java_jdk_internal_misc_ScopedMemoryAccess_closeScope0`: [LINK](https://github.com/eclipse/openj9/blob/b66ab3415644abc0bee82b4d6cf3b031a8a20505/runtime/jcl/common/jdk_internal_misc_ScopedMemoryAccess.cpp#L37-L42)
+
+### Section 3: Pseudocode of `ScopedMemoryAccess.closeScope0`
+
+`ScopedMemoryAccess.closeScope0` returns `TRUE` if the `Scope` can be closed i.e. the `Scope` instance is not found in the `Java stack` of any `Java thread`; otherwise, it returns `FALSE`.
+```
+Step 1 -> Halt all the Java threads at a safe point, which is similar to a GC pause
+Step 2 -> For each Java thread, walk the Java stack and look for the Scope instance, which is passed as a parameter to ScopedMemoryAccess.closeScope
+  thread_operation:
+    foreach frame in the Java thread stack:
+      Method method = frame.getMethod()
+      if method has "@Scoped" annotation:
+        foreach local in method.getLocals():
+          if (local_reference == Scope_reference):
+            Scope_found = TRUE
+
+Step 3 -> Wait until do_thread has been performed for all Java threads
+Step 4 -> Wake all the halted Java threads
+Step 5 -> Return TRUE if Scope_found == FALSE across all Java threads; otherwise, return TRUE
+```
+
+**Notes:**
+1. `Halt all the Java threads at a safe point`: can be performed by acquiring exclusive VM access.
+2. `if method has "@Scoped" annotation`: `J9Method` does not have spare flags for tagging. Tagging methods will require an `extended` bitset field which will increase the method size and should be avoided. Instead of tagging methods, we can tag classes which contain methods with `@Scoped` annotation.
+3. `Wake all the halted Java threads`: can be performed by releasing exclusive VM access.
+4. `GC_VMThreadStackSlotIterator` ([LINK](https://github.com/eclipse/openj9/blob/55587c0cfc3b819139bbc297938fe7aea1d33ae8/runtime/gc_structs/VMThreadStackSlotIterator.cpp#L65-L77)) can be used to implement the Java stack walk mechanism, which is described in the above pseudocode.
+> Walk all slots of the walk thread which contain object references. For every object slot found in `walkThread` call the `oSlotIterator` function. If `includeStackFrameClassReferences` is true, calls the `oSlotIterator` function for every running method's class. The contents of the slot can be changed by the iterator function.
+
+### Section 4: Tests for `ScopedMemoryAccess.closeScope0`
+
+The following tests invoke `ScopedMemoryAccess.closeScope0`:
+- `java/foreign/TestByteBuffer.java`: [LINK](https://github.com/ibmruntimes/openj9-openjdk-jdk/blob/openj9/test/jdk/java/foreign/TestByteBuffer.java)
+- `java/foreign/TestCleaner.java`: [LINK](https://github.com/ibmruntimes/openj9-openjdk-jdk/blob/openj9/test/jdk/java/foreign/TestCleaner.java)
+- `java/foreign/TestHandshake.java`: [LINK](https://github.com/ibmruntimes/openj9-openjdk-jdk/blob/openj9/test/jdk/java/foreign/TestHandshake.java)
+- `java/foreign/TestNativeScope.java`: [LINK](https://github.com/ibmruntimes/openj9-openjdk-jdk/blob/openj9/test/jdk/java/foreign/TestNativeScope.java)
+- `java/foreign/TestSharedAccess.java`: [LINK](https://github.com/ibmruntimes/openj9-openjdk-jdk/blob/openj9/test/jdk/java/foreign/TestSharedAccess.java)
+- `java/foreign/TestSpliterator.java`: [LINK](https://github.com/ibmruntimes/openj9-openjdk-jdk/blob/openj9/test/jdk/java/foreign/TestSpliterator.java)
+
+### Section 5: Running the above tests from the extensions repo
+- **Format:** `make test TEST=<TEST_NAME>`
+     - **Example:** `make test TEST=java/foreign/TestByteBuffer.java`
+
+### Section 6: Hack
+
+If `JNI_TRUE` is returned from `Java_jdk_internal_misc_ScopedMemoryAccess_closeScope0`, all the tests listed in **Section 4** pass. This means that the tests fail to _**verify if any thread is accessing the memory associated with a scope while the segment is being closed**_ **(ii)**.

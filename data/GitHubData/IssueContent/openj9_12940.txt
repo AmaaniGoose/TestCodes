@@ -1,0 +1,175 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk8_j9_sanity.functional_aarch64_linux/53/` (`ub18-aarch64-3`):
+```
+openjdk version "1.8.0_302-beta"
+OpenJDK Runtime Environment (build 1.8.0_302-beta-202106110233-b05)
+Eclipse OpenJ9 VM (build master-d8104c46a, JRE 1.8.0 Linux aarch64-64-Bit Compressed References 20210611_133 (JIT enabled, AOT enabled)
+OpenJ9   - d8104c46a
+OMR      - 99f008c99
+JCL      - 6281fa10 based on jdk8u302-b05)
+```
+[Rerun in Grinder](https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?TARGET=jit_jitt_array_compress_3&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=functional&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;PLATFORM=aarch64_linux&amp;KEEP_REPORTDIR=false&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-linux-aarch64-openj9%2F133%2FOpenJDK8U-jdk_aarch64_linux_openj9_2021-06-11-02-30.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-linux-aarch64-openj9%2F133%2FOpenJDK8U-jre_aarch64_linux_openj9_2021-06-11-02-30.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-linux-aarch64-openj9%2F133%2FOpenJDK8U-testimage_aarch64_linux_openj9_2021-06-11-02-30.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-linux-aarch64-openj9%2F133%2FOpenJDK8U-debugimage_aarch64_linux_openj9_2021-06-11-02-30.tar.gz&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;LIGHT_WEIGHT_CHECKOUT=true&amp;ARTIFACTORY_SERVER=na.artifactory.swg-devops&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=8&amp;USER_CREDENTIALS_ID=83181e25-eea4-4f55-8b3e-e79615733226&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=git%40github.ibm.com%3Aruntimes%2Ftest.git&amp;JDK_REPO=https%3A%2F%2Fgithub.com%2Fibmruntimes%2Fopenj9-openjdk-jdk8&amp;RELEASE_TAG=&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=master&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;UPSTREAM_JOB_NAME=&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=openj9&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=openj9&amp;SSH_AGENT_CREDENTIAL=83181e25-eea4-4f55-8b3e-e79615733226&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=4e18ffe7-b1b1-4272-9979-99769b68bcc2&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=functional&amp;UPSTREAM_JOB_NUMBER=&amp;TIME_LIMIT=10&amp;JVM_OPTIONS=&amp;PARALLEL=)
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+[2021-06-11T04:10:27.134Z] Running test jit_jitt_array_compress_3 ...
+[2021-06-11T04:10:27.134Z] ===============================================
+[2021-06-11T04:10:27.134Z] jit_jitt_array_compress_3 Start Time: Fri Jun 11 00:10:26 2021 Epoch Time (ms): 1623384626938
+[2021-06-11T04:10:27.134Z] "/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+[2021-06-11T04:10:27.134Z] JVMSHRC005I No shared class caches available
+[2021-06-11T04:10:27.134Z] JVMSHRC005I No shared class caches available
+[2021-06-11T04:10:27.134Z] cache cleanup done
+[2021-06-11T04:10:27.134Z] variation: -Xjit:disableAsyncCompilation,count=1 -XXgc:forcedShiftingCompressionAmount=4
+[2021-06-11T04:10:27.134Z] JVM_OPTIONS:  -Xjit:disableAsyncCompilation,count=1 -XXgc:forcedShiftingCompressionAmount=4 
+
+[2021-06-11T04:10:41.642Z] Unhandled exception
+[2021-06-11T04:10:41.642Z] Type=Segmentation error vmState=0x00040000
+[2021-06-11T04:10:41.642Z] J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000001
+[2021-06-11T04:10:41.642Z] Handler1=0000FFFF91C684E0 Handler2=0000FFFF91BDF570 InaccessibleAddress=0000000000000008
+[2021-06-11T04:10:41.642Z] R0=0000000000000000 R1=0000000000030F00 R2=0000000000000020 R3=0000000040000000
+[2021-06-11T04:10:41.642Z] R4=0000FFFF79C1BFA8 R5=0000FFFF8C0C9690 R6=0000000000000001 R7=0000FFFF91E0A400
+[2021-06-11T04:10:41.642Z] R8=0000000000000001 R9=0000000000000002 R10=00000000000CA458 R11=0000FFFF79C1A0B8
+[2021-06-11T04:10:41.642Z] R12=0000000FFFE961C0 R13=0000000FFFE962B0 R14=00000000000BC790 R15=0000000000000000
+[2021-06-11T04:10:41.642Z] R16=0000FFFF90BB6AB0 R17=0000FFFF92B22ED0 R18=0000FFFF8C000DA8 R19=0000FFFF41485890
+[2021-06-11T04:10:41.642Z] R20=0000000000040920 R21=0000000F8369F2E0 R22=000000007C816398 R23=0000000FFFE96400
+[2021-06-11T04:10:41.642Z] R24=000000000040E000 R25=00000000000CD9F0 R26=0000000FFFE95C50 R27=0000FFFF91DD4918
+[2021-06-11T04:10:41.642Z] R28=0000FFFF91CB7508 R29=0000FFFF92942750 R30=0000FFFF91D49F10 R31=0000FFFF92942750
+[2021-06-11T04:10:41.642Z] PC=0000FFFF91CC26CC SP=0000FFFF92942750 PSTATE=0000000020000000
+[2021-06-11T04:10:41.642Z] V0 0000000000000005 (f: 5.000000, d: 2.470328e-323)
+[2021-06-11T04:10:41.642Z] V1 0000000000000001 (f: 1.000000, d: 4.940656e-324)
+[2021-06-11T04:10:41.642Z] V2 0000ffff92142168 (f: 2450792704.000000, d: 1.390662e-309)
+[2021-06-11T04:10:41.642Z] V3 bfdf9244fb7e3d2d (f: 4219354368.000000, d: -4.933026e-01)
+[2021-06-11T04:10:41.642Z] V4 bfd00ea348b88334 (f: 1220051712.000000, d: -2.508934e-01)
+[2021-06-11T04:10:41.642Z] V5 3fd5575b0be00b6a (f: 199232368.000000, d: 3.334568e-01)
+[2021-06-11T04:10:41.642Z] V6 bfdffffef20a4123 (f: 4060758272.000000, d: -4.999997e-01)
+[2021-06-11T04:10:41.642Z] V7 3fe62e42fefa39ef (f: 4277811712.000000, d: 6.931472e-01)
+[2021-06-11T04:10:41.642Z] V8 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T04:10:41.642Z] V9 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T04:10:41.642Z] V10 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T04:10:41.642Z] V11 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T04:10:41.642Z] V12 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T04:10:41.642Z] V13 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T04:10:41.642Z] V14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T04:10:41.642Z] V15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T04:10:41.642Z] V16 bff0000000000000 (f: 0.000000, d: -1.000000e+00)
+[2021-06-11T04:10:41.642Z] V17 aaa8000000000000 (f: 0.000000, d: -3.348596e-103)
+[2021-06-11T04:10:41.642Z] V18 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T04:10:41.642Z] V19 0000ffff92945a40 (f: 2459195904.000000, d: 1.390662e-309)
+[2021-06-11T04:10:41.642Z] V20 0000ffff92945a30 (f: 2459195904.000000, d: 1.390662e-309)
+[2021-06-11T04:10:41.642Z] V21 0000ffff92945a20 (f: 2459195904.000000, d: 1.390662e-309)
+[2021-06-11T04:10:41.642Z] V22 0000ffff92945a10 (f: 2459195904.000000, d: 1.390662e-309)
+[2021-06-11T04:10:41.642Z] V23 00000000000000f0 (f: 240.000000, d: 1.185758e-321)
+[2021-06-11T04:10:41.642Z] V24 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T04:10:41.642Z] V25 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T04:10:41.642Z] V26 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T04:10:41.642Z] V27 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T04:10:41.642Z] V28 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T04:10:41.642Z] V29 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T04:10:41.643Z] V30 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T04:10:41.643Z] V31 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T04:10:41.643Z] Module=/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_aarch64_linux/openjdkbinary/j2sdk-image/jre/lib/aarch64/default/libj9vm29.so
+[2021-06-11T04:10:41.643Z] Module_base_address=0000FFFF91C34000
+[2021-06-11T04:10:41.643Z] Target=2_90_20210611_133 (Linux 4.15.0-112-generic)
+[2021-06-11T04:10:41.643Z] CPU=aarch64 (8 logical CPUs) (0x1f2617000 RAM)
+[2021-06-11T04:10:41.643Z] ----------- Stack Backtrace -----------
+[2021-06-11T04:10:41.643Z] (0x0000FFFF91BDC1C8 [libj9prt29.so+0x261c8])
+[2021-06-11T04:10:41.643Z] ---------------------------------------
+[2021-06-11T04:10:41.643Z] JVMDUMP039I Processing dump event "gpf", detail "" at 2021/06/11 00:10:40 - please wait.
+[2021-06-11T04:10:41.643Z] JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16233810007651/jit_jitt_array_compress_3/core.20210611.001040.18454.0001.dmp' in response to an event
+[2021-06-11T04:10:44.539Z] JVMPORT030W /proc/sys/kernel/core_pattern setting "|/usr/share/apport/apport %p %s %c %d %P %E" specifies that the core dump is to be piped to an external program.  Attempting to rename either core or core.18489.
+[2021-06-11T04:10:44.539Z] 
+[2021-06-11T04:10:44.539Z] JVMDUMP010I System dump written to /home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16233810007651/jit_jitt_array_compress_3/core.20210611.001040.18454.0001.dmp
+[2021-06-11T04:10:44.539Z] JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16233810007651/jit_jitt_array_compress_3/javacore.20210611.001040.18454.0002.txt' in response to an event
+[2021-06-11T04:10:44.539Z] JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16233810007651/jit_jitt_array_compress_3/javacore.20210611.001040.18454.0002.txt
+[2021-06-11T04:10:44.539Z] JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16233810007651/jit_jitt_array_compress_3/Snap.20210611.001040.18454.0003.trc' in response to an event
+[2021-06-11T04:10:44.539Z] JVMDUMP010I Snap dump written to /home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16233810007651/jit_jitt_array_compress_3/Snap.20210611.001040.18454.0003.trc
+[2021-06-11T04:10:44.539Z] JVMDUMP032I JVM requested JIT dump using '/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16233810007651/jit_jitt_array_compress_3/jitdump.20210611.001040.18454.0004.dmp' in response to an event
+[2021-06-11T04:10:44.539Z] JVMDUMP051I JIT dump occurred in 'main' thread 0x0000000000011200
+[2021-06-11T04:10:44.539Z] JVMDUMP053I JIT dump is recompiling java/lang/invoke/MethodType.createMethodDescriptorString()Ljava/lang/String;
+[2021-06-11T04:10:44.539Z] JVMDUMP053I JIT dump is recompiling java/lang/invoke/MethodType.intern()Ljava/lang/invoke/MethodType;
+[2021-06-11T04:10:47.441Z] JVMDUMP053I JIT dump is recompiling java/lang/invoke/MethodType.methodType(Ljava/lang/Class;Ljava/util/List;)Ljava/lang/invoke/MethodType;
+[2021-06-11T04:10:47.441Z] JVMDUMP053I JIT dump is recompiling java/lang/invoke/MethodType.fromMethodDescriptorString(Ljava/lang/String;Ljava/lang/ClassLoader;)Ljava/lang/invoke/MethodType;
+[2021-06-11T04:10:47.441Z] JVMDUMP053I JIT dump is recompiling java/lang/invoke/MethodTypeHelper.vmResolveFromMethodDescriptorString(Ljava/lang/String;Ljava/lang/ClassLoader;Ljava/lang/Class;)Ljava/lang/invoke/MethodType;
+[2021-06-11T04:10:47.441Z] JVMDUMP010I JIT dump written to /home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_aarch64_linux/openjdk-tests/TKG/output_16233810007651/jit_jitt_array_compress_3/jitdump.20210611.001040.18454.0004.dmp
+[2021-06-11T04:10:47.441Z] JVMDUMP013I Processed dump event "gpf", detail "".
+[2021-06-11T04:10:47.441Z] 
+[2021-06-11T04:10:47.441Z] jit_jitt_array_compress_3_FAILED
+```
+
+Also failed at JDK 11 `Test_openjdk11_j9_sanity.functional_aarch64_linux/55/` (`ub18-aarch64-7`)
+```
+[2021-06-11T03:12:45.191Z] Running test jit_jitt_array_compress_3 ...
+[2021-06-11T03:12:45.191Z] ===============================================
+[2021-06-11T03:12:45.191Z] jit_jitt_array_compress_3 Start Time: Thu Jun 10 23:12:43 2021 Epoch Time (ms): 1623381163611
+[2021-06-11T03:12:45.191Z] "/home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+[2021-06-11T03:12:45.191Z] JVMSHRC005I No shared class caches available
+[2021-06-11T03:12:45.191Z] JVMSHRC005I No shared class caches available
+[2021-06-11T03:12:45.191Z] cache cleanup done
+[2021-06-11T03:12:45.191Z] variation: -Xjit:disableAsyncCompilation,count=1 -XXgc:forcedShiftingCompressionAmount=4
+[2021-06-11T03:12:45.191Z] JVM_OPTIONS:  -Xjit:disableAsyncCompilation,count=1 -XXgc:forcedShiftingCompressionAmount=4 
+
+[2021-06-11T03:12:52.720Z] Unhandled exception
+[2021-06-11T03:12:52.720Z] Type=Segmentation error vmState=0x00000000
+[2021-06-11T03:12:52.720Z] J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000001
+[2021-06-11T03:12:52.720Z] Handler1=0000FFFF9CA78558 Handler2=0000FFFF9C9EF570 InaccessibleAddress=0000000000000000
+[2021-06-11T03:12:52.720Z] R0=0000000000011200 R1=0000000000000000 R2=0000000000000000 R3=0000000000000000
+[2021-06-11T03:12:52.720Z] R4=0000000000000001 R5=0000000000000004 R6=0000000000000006 R7=00000000000F6670
+[2021-06-11T03:12:52.720Z] R8=0000FFFF97D98EDC R9=0000000010000000 R10=00000000000F25F0 R11=0000FFFF7C22CD60
+[2021-06-11T03:12:52.720Z] R12=0000000000000001 R13=0000FFFF9801D4F4 R14=00000000000E53B8 R15=0000000000000000
+[2021-06-11T03:12:52.720Z] R16=0000FFFF979A5A50 R17=0000FFFF9D7FAF80 R18=0000000000011200 R19=0000FFFF9CBE1B9C
+[2021-06-11T03:12:52.720Z] R20=0000FFFF9CC03000 R21=0000000000010700 R22=0000000000000000 R23=0000FFFF9CC07158
+[2021-06-11T03:12:52.720Z] R24=0000000000000004 R25=00000000000F65C8 R26=0000000FFFFBEE20 R27=0000FFFF414DE155
+[2021-06-11T03:12:52.720Z] R28=0000FFFF9CAC7EF8 R29=0000FFFF9D743D40 R30=0000FFFF9CB5A980 R31=0000FFFF9D743D40
+[2021-06-11T03:12:52.720Z] PC=0000FFFF9CACACB0 SP=0000FFFF9D743D40 PSTATE=0000000060000000
+[2021-06-11T03:12:52.720Z] V0 0000000000000005 (f: 5.000000, d: 2.470328e-323)
+[2021-06-11T03:12:52.720Z] V1 ffffffffffffffff (f: 4294967296.000000, d: -nan)
+[2021-06-11T03:12:52.720Z] V2 000000003f800000 (f: 1065353216.000000, d: 5.263544e-315)
+[2021-06-11T03:12:52.720Z] V3 bfdf887b2d55a2df (f: 760586944.000000, d: -4.927051e-01)
+[2021-06-11T03:12:52.720Z] V4 bfd00ea348b88334 (f: 1220051712.000000, d: -2.508934e-01)
+[2021-06-11T03:12:52.720Z] V5 3fd5575b0be00b6a (f: 199232368.000000, d: 3.334568e-01)
+[2021-06-11T03:12:52.720Z] V6 bfdffffef20a4123 (f: 4060758272.000000, d: -4.999997e-01)
+[2021-06-11T03:12:52.720Z] V7 3fe62e42fefa39ef (f: 4277811712.000000, d: 6.931472e-01)
+[2021-06-11T03:12:52.720Z] V8 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T03:12:52.720Z] V9 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T03:12:52.720Z] V10 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T03:12:52.720Z] V11 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T03:12:52.720Z] V12 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T03:12:52.720Z] V13 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T03:12:52.721Z] V14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T03:12:52.721Z] V15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T03:12:52.721Z] V16 bff0000000000000 (f: 0.000000, d: -1.000000e+00)
+[2021-06-11T03:12:52.721Z] V17 fcfd000000000000 (f: 0.000000, d: -1.157587e+294)
+[2021-06-11T03:12:52.721Z] V18 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T03:12:52.721Z] V19 0000ffff9d743ad0 (f: 2641640192.000000, d: 1.390663e-309)
+[2021-06-11T03:12:52.721Z] V20 0000ffff9d743ac0 (f: 2641640192.000000, d: 1.390663e-309)
+[2021-06-11T03:12:52.721Z] V21 0000ffff9d743ab0 (f: 2641640192.000000, d: 1.390663e-309)
+[2021-06-11T03:12:52.721Z] V22 0000ffff9d743aa0 (f: 2641640192.000000, d: 1.390663e-309)
+[2021-06-11T03:12:52.721Z] V23 00000000000000f0 (f: 240.000000, d: 1.185758e-321)
+[2021-06-11T03:12:52.721Z] V24 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T03:12:52.721Z] V25 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T03:12:52.721Z] V26 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T03:12:52.721Z] V27 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T03:12:52.721Z] V28 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T03:12:52.721Z] V29 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T03:12:52.721Z] V30 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2021-06-11T03:12:52.721Z] V31 0000000040400000 (f: 1077936128.000000, d: 5.325712e-315)
+[2021-06-11T03:12:52.721Z] Module=/home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_aarch64_linux/openjdkbinary/j2sdk-image/lib/default/libj9vm29.so
+[2021-06-11T03:12:52.721Z] Module_base_address=0000FFFF9CA44000
+[2021-06-11T03:12:52.721Z] Target=2_90_20210611_150 (Linux 4.15.0-112-generic)
+[2021-06-11T03:12:52.721Z] CPU=aarch64 (8 logical CPUs) (0x1f2617000 RAM)
+[2021-06-11T03:12:52.721Z] ----------- Stack Backtrace -----------
+[2021-06-11T03:12:52.721Z] (0x0000FFFF9C9EC1C8 [libj9prt29.so+0x261c8])
+[2021-06-11T03:12:52.721Z] ---------------------------------------
+[2021-06-11T03:12:52.721Z] JVMDUMP039I Processing dump event "gpf", detail "" at 2021/06/10 23:12:52 - please wait.
+```
+[Rerun in Grinder](https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?TARGET=jit_jitt_array_compress_3&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=functional&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;PLATFORM=aarch64_linux&amp;KEEP_REPORTDIR=false&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-linux-aarch64-openj9%2F150%2FOpenJDK11U-debugimage_aarch64_linux_openj9_2021-06-11-01-00.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-linux-aarch64-openj9%2F150%2FOpenJDK11U-jdk_aarch64_linux_openj9_2021-06-11-01-00.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-linux-aarch64-openj9%2F150%2FOpenJDK11U-testimage_aarch64_linux_openj9_2021-06-11-01-00.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-linux-aarch64-openj9%2F150%2FOpenJDK11U-jre_aarch64_linux_openj9_2021-06-11-01-00.tar.gz&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;LIGHT_WEIGHT_CHECKOUT=true&amp;ARTIFACTORY_SERVER=na.artifactory.swg-devops&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=11&amp;USER_CREDENTIALS_ID=83181e25-eea4-4f55-8b3e-e79615733226&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=git%40github.ibm.com%3Aruntimes%2Ftest.git&amp;JDK_REPO=https%3A%2F%2Fgithub.com%2Fibmruntimes%2Fopenj9-openjdk-jdk11&amp;RELEASE_TAG=&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=master&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;UPSTREAM_JOB_NAME=&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=openj9&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=openj9&amp;SSH_AGENT_CREDENTIAL=83181e25-eea4-4f55-8b3e-e79615733226&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=4e18ffe7-b1b1-4272-9979-99769b68bcc2&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=functional&amp;UPSTREAM_JOB_NUMBER=&amp;TIME_LIMIT=10&amp;JVM_OPTIONS=&amp;PARALLEL=)
+
+This is a new test though.
+fyi @knn-k 

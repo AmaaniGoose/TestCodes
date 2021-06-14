@@ -1,0 +1,36 @@
+I got the Assertion Failure when I tried to compile the JIT under debug mode in Power 64 LE.
+Here is the backtrace:
+```
+Assertion failed at /team/simonam/dev/jvm/jre/lib/ppc64le/default/compiler/..//omr/compiler/il/OMRNode_inlines.hpp:213: self()->getNumChildren() >= 1
+j> 15:25:36 VMState: 0x000535ff
+j> 15:25:36     getFirstChild() called on node     0x3ffe97081540 with no children
+j> 15:25:36 compiling java/lang/System.getProperty(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String; at level: warm
+j> 15:25:36 #0: function TR_LinuxCallStackIterator::printStackBacktrace(TR::Compilation*)+0x48 [0x3fffa5902be0]
+j> 15:25:36 #1: function TR_Debug::printStackBacktrace()+0x40 [0x3fffa591c900]
+j> 15:25:36 #2: /team/simonam/dev/jvm/jre/lib/ppc64le/default/libj9jit29.so(+0xddf874) [0x3fffa544f874]
+j> 15:25:36 #3: function TR::fatal_assertion(char const*, int, char const*, char const*, ...)+0x68 [0x3fffa544fad0]
+j> 15:25:36 #4: function TR::assertion(char const*, int, char const*, char const*, ...)+0xc0 [0x3fffa544fa44]
+j> 15:25:36 #5: function OMR::node::getFirstChild()+0x74 [0x3fffa4d33308]
+j> 15:25:36 #6: function TR_StringPeepholes::removeAllocationFenceOfNew(TR::TreeTop*)+0x88 [0x3fffa52f79f8]
+j> 15:25:36 #7: function TR_StringPeepholes::detectPattern(TR::Block*, TR::TreeTop*, bool)+0x1e8c [0x3fffa52f7044]
+j> 15:25:36 #8: function TR_StringPeepholes::processBlock(TR::Block*)+0x3f8 [0x3fffa52ecd9c]
+j> 15:25:36 #9: function TR_StringPeepholes::process(TR::TreeTop*, TR::TreeTop*)+0x84 [0x3fffa52ec960]
+j> 15:25:36 #10: function TR_StringPeepholes::perform()+0x1cc [0x3fffa52ec400]
+j> 15:25:36 #11: function OMR::Optimizer::performOptimization(OptimizationStrategy const*, int, int, int)+0x3888 [0x3fffa56b89f0]
+j> 15:25:36 #12: function OMR::Optimizer::optimize()+0xafc [0x3fffa56b43b8]
+j> 15:25:36 #13: function OMR::Compilation::performOptimizations()+0x8c [0x3fffa5363d30]
+j> 15:25:36 #14: function OMR::Compilation::compile()+0xf08 [0x3fffa5362868]
+j> 15:25:36 #15: function TR::CompilationInfoPerThreadBase::compile(J9VMThread*, TR::Compilation*, TR_ResolvedMethod*, TR_J9VMBase&, TR_OptimizationPlan*, TR::SegmentAllocator const&)+0xd08 [0x3fffa4dd66c0]
+j> 15:25:36 #16: function TR::CompilationInfoPerThreadBase::wrappedCompile(J9PortLibrary*, void*)+0x2b2c [0x3fffa4dd4c28]
+j> 15:25:36 #17: /team/simonam/dev/jvm/jre/lib/ppc64le/default/libj9prt29.so(+0x5e5e8) [0x3fffa64be5e8]
+j> 15:25:36 #18: function TR::CompilationInfoPerThreadBase::compile(J9VMThread*, TR_MethodToBeCompiled*, J9::J9SegmentProvider&)+0x628 [0x3fffa4dd1cb4]
+j> 15:25:36 #19: function TR::CompilationInfoPerThread::processEntry(TR_MethodToBeCompiled&, J9::J9SegmentProvider&)+0x54c [0x3fffa4dc6ef0]
+j> 15:25:36 #20: function TR::CompilationInfoPerThread::processEntries()+0x2a0 [0x3fffa4dc5fb4]
+j> 15:25:36 #21: function TR::CompilationInfoPerThread::run()+0x60 [0x3fffa4dc5644]
+j> 15:25:36 #22: function protectedCompilationThreadProc(J9PortLibrary*, TR::CompilationInfoPerThread*)+0x260 [0x3fffa4dc53a0]
+j> 15:25:36 #23: /team/simonam/dev/jvm/jre/lib/ppc64le/default/libj9prt29.so(+0x5e5e8) [0x3fffa64be5e8]
+j> 15:25:36 #24: function compilationThreadProc(void*)+0x5d8 [0x3fffa4dc50b0]
+j> 15:25:36 #25: /team/simonam/dev/jvm/jre/lib/ppc64le/default/libj9thr29.so(+0x9934) [0x3fffa65a9934]
+j> 15:25:36 #26: /lib/powerpc64le-linux-gnu/libpthread.so.0(+0x833c) [0x3fffa750833c]
+j> 15:25:36 #27: function clone+0xe4 [0x3fffa73cb1d4]
+```

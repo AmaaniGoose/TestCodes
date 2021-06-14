@@ -1,0 +1,27 @@
+Dump ROM method and check for type annotations failed with jdk11. Haven't tried other jdk version.
+Test is under openj9/test/functional/cmdLineTests/dumpromtests/dumpromclasstests.xml
+
+Testing: Dump ROM method and check for type annotations
+Test start time: 2018/09/26 14:38:21 Coordinated Universal Time
+Running command: /home/j9build/workspace/Grinder_Sandbox/openjdkbinary/j2sdk-image/bin/../bin/jdmpview -core j9core.dmp
+Time spent starting: 2 milliseconds
+Time spent executing: 4335 milliseconds
+Test result: FAILED
+Output from test:
+ [OUT] DTFJView version 4.29.5, using DTFJ version 1.12.29003
+ [OUT] Loading image from DTFJ...
+ [OUT] 
+ [OUT] For a list of commands, type "help"; for how to use "help", type "help help"
+ [OUT] Available contexts (* = currently selected context) : 
+ [OUT] 
+ [OUT] Source : file:///home/j9build/workspace/Grinder_Sandbox/openjdk-tests/TestConfig/j9core.dmp
+ [OUT] 	*0 : PID: 11903 : JRE 11 Linux amd64-64 (build 11-internal+0-adhoc.j9build.Build-JDK11-linuxx86-64cmprssptrs)
+ [OUT] 
+ [OUT] > > 
+>> Success condition was not found: [Output match: Method Type Annotations]
+>> Required condition was not found: [Output match: (.)*Code Type Annotations(.)*0x[0-9a-fA-F]*]
+>> Failure condition was not found: [Output match: DDRInteractiveCommandException]
+>> Failure condition was not found: [Output match: unable to read]
+>> Failure condition was not found: [Output match: could not read]
+>> Failure condition was not found: [Output match: dump event]
+

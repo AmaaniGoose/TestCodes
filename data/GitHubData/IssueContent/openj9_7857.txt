@@ -1,0 +1,3 @@
+The toolchains we grab from adopt appear to be configured with  `--disable-multiarch`. However the docker images are based on ubuntu which does use the multiarch method for organizing its libraries. (this is why we have to the hack of ` ln -s /usr/lib/x86_64-linux-gnu /usr/lib64` etc). This causes an issue with cmake as it no longer detects the proper folder to find libraries. I've worked around the issue for now (eclipse/omr#4591). 
+
+Created the issue to see if we want to rebuild the toolchain, or live with it

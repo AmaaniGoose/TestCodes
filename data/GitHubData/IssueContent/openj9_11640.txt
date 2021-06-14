@@ -1,0 +1,14 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.functional_x86-32_windows_Nightly_testList_1/220/
+testDDRExtJunit_FindExtThread_0
+```
+     [java] [AutoRun] [INFO] Starting testLocalmap(j9vm.test.ddrext.junit.TestThread)
+     [java] [AutoRun] [INFO] Finished testLocalmap(j9vm.test.ddrext.junit.TestThread)
+     [java] 
+     [java] [AutoRun] [INFO] ================Test Result for F:\Users\jenkins\workspace\Test_openjdk8_j9_extended.functional_x86-32_windows_Nightly_testList_1\openjdk-tests\TKG\test_output_16105113056287\testDDRExtJunit_FindExtThread_0\DDREXT.J9CORE.DMP==================
+     [java] [AutoRun] [INFO] Errors:   1 out of 13 test cases.
+     [java] [AutoRun] [INFO] Failures: 0 out of 13 test cases.
+     [java] [AutoRun] [INFO] Total Error/Failures: 1
+     [java] java.lang.NullPointerException
+     [java] 	at j9vm.test.ddrext.junit.TestThread.getStackSlotsValues(TestThread.java:234)
+     [java] 	at j9vm.test.ddrext.junit.TestThread.testLocalmap(TestThread.java:196)
+```

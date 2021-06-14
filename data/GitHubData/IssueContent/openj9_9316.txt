@@ -1,0 +1,31 @@
+I'd like to float an idea a few of us have been bandying about, to see what the community thinks of it. I'll mention this issue at today's Community call, and I'll bring the feedback collected here to next week's meeting. It would be nice to reach a consensus after the week, but let's see where we are at that point.
+
+# More frequent releases
+
+OpenJ9 currently produces six releases a year - two corresponding to the new OpenJDK releases and four corresponding to the OpenJDK quarterly releases.  All of these releases are supported on a single code stream.  For example our April update produced JDK8, JDK11, and JDK14 binaries from the same OpenJ9 0.20 source code release.
+
+Some stakeholders have expressed interest in more frequent releases.  A more frequent release cadence - monthly in fact - has historically worked well for IBM allowing users faster access to fixes and improvements.  It also provides a faster way to get critical fixes into production releases.  
+
+For those reasons, I would like to propose that we produce "interim" release builds (better name welcome) that would include important bug fixes on top of the most recent quarterly release.  We've re-spun releases in the past to include fixes for issues found very late in the release cycle or even immediately after release; this proposal is to make these releases a regular feature of the OpenJ9 project to provide quicker access to critical fixes. This isn’t a radical suggestion, though I suppose it’s more typically done in projects with longer release cycles. 
+
+As a straw person proposal, we could consider producing two point releases one month and two months after the last quarterly release. For example, the 0.20.0 release in April could be followed by 0.20.1 in May and 0.20.2 in June leading up to 0.21 being released in July. Then 0.21.1 in August, 0.21.2 in September, etc. Bug fixes would always be delivered to our master branch first with some fixes being selectively ported to an interim release branch. The September (and March) releases would be more troublesome, since we're already doing new feature releases (i.e. new JDK level) releases in those months.
+
+This change would have some costs for the community associated with it, of course:
+    - process to propose and accept bug fixes
+    - person to cherry-pick fixes into the new release branch
+    - person to assemble release notes (propose we keep it as simple as possible), documentation, and web site update
+    - CI work to build the new release branch
+    - increased pressure on our machine farm
+    - people to triage and cope with any test failures on the release branch
+    - more versions for team to be aware of when investigating problems
+...but I think the value of monthly releases might be worth these costs, especially if we think about how we could minimize their impact.
+
+There would also clearly need to be a discussion with the AdoptOpenJDK community, who would have to agree to produce binaries for these interim releases, which will introduce a similar set of costs for them too. I think we can only decide to do this in collaboration with AdoptOpenJDK, but I think the OpenJ9 project should agree on this as a desirable direction before we approach AdoptOpenJDK to begin that discussion.
+
+**Do we think the benefits of interim releases are worth the costs to manage those releases? I would especially welcome input from our users on whether they would see value in such releases.**
+
+Some alternatives:
+    - status quo
+    - move to continuous monthly releases (maybe reduces problem, but probably increases release management effort?)
+    - only release “on demand” (harder to coordinate and plan with AdoptOpenJDK)
+    - something else?

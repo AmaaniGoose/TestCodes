@@ -1,0 +1,166 @@
+This issue may already have been resolved, I haven't reproduced with 0.26.0 M1.
+
+1. Create a java file JythonIssue.java with below code
+```
+import org.python.core.PyList;
+import org.python.core.PyObject;
+import org.python.core.PyString;
+import org.python.util.InteractiveInterpreter;
+
+public class JythonIssue {
+
+public static void main(String[] arg) throws Throwable{
+  InteractiveInterpreter interp = new InteractiveInterpreter();
+  interp.exec("print('Hello Python World!')");
+}
+}
+```
+
+2. Download jython-standalone-2.7.2.jar
+
+3. compile the code
+
+javac -classpath jython-standalone-2.7.2.jar:. JythonIssue.java
+
+4. Run the test with below command
+```
+java -XshowSettings:vm -Dpython.options.showJavaExceptions=true -Dpython.options.includeJavaStackInExceptions=true -Dpython.options.showPythonProxyExceptions=true -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n -cp jython-standalone-2.7.2.jar:.  JythonIssue
+```
+
+Expected output: (output is taken with JDK8 )
+```
+Listening for transport dt_socket at address: 8787
+VM settings:
+  Max. Heap Size (Estimated): 512.00M
+  Ergonomics Machine Class: client
+  Using VM: IBM J9 VM
+
+Hello Python World!
+```
+
+Crash on AIX 7200-01-03-1720 with 
+```
+openjdk version "11.0.10" 2021-01-19
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.10+9)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.24.0, JRE 11 AIX ppc64-64-Bit Compressed References 20210120_896 (JIT enabled, AOT enabled)
+OpenJ9   - 345e1b09e
+OMR      - 741e94ea8
+JCL      - 0a86953833 based on jdk-11.0.10+9)
+```
+
+```
+Unhandled exception
+Type=Segmentation error vmState=0x00000000
+J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000032
+Handler1=09001000A1141AE8 Handler2=09001000A1117230
+R0=382101007C0803A6 R1=000001001002A220 R2=09001000A008F3A8 R3=000001001001CFB0
+R4=00000100107EEDE0 R5=E8410028E8010120 R6=090000000EA306C8 R7=0000000000000020
+R8=0000010011709E60 R9=09001000A009EFC0 R10=09001000A009EFD0 R11=09001000A009EFD0
+R12=0000000000000060 R13=0000010010057800 R14=000000000000001B R15=000000003000E700
+R16=0000000000000000 R17=000001001002E8F0 R18=0000000000000001 R19=000001001002E9F0
+R20=09001000A10F8AB0 R21=090000000EB0E7F8 R22=09001000A009EFE0 R23=0000000000000000
+R24=09001000A0006D00 R25=0000010010608A20 R26=0000000000000500 R27=0000010010608F20
+R28=0000000000000500 R29=09001000A009DBA8 R30=0000010010608A20 R31=0000010010608A30
+IAR=0900000000047EFC LR=0900000000047894 MSR=A00000000000D032 CTR=09000000005C8480
+CR=42A8442820000008 FPSCR=8200000000000000 XER=2000000882000000
+FPR0 0000000000000001 (f: 1.000000, d: 4.940656e-324)
+FPR1 c3e0000000000000 (f: 0.000000, d: -9.223372e+18)
+FPR2 3ff0000000000000 (f: 0.000000, d: 1.000000e+00)
+FPR3 433000000004c141 (f: 311617.000000, d: 4.503600e+15)
+FPR4 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR5 4330000000000000 (f: 0.000000, d: 4.503600e+15)
+FPR6 4113050400000000 (f: 0.000000, d: 3.116170e+05)
+FPR7 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR8 433000000002a615 (f: 173589.000000, d: 4.503600e+15)
+FPR9 402da0ba1bf945c0 (f: 469321152.000000, d: 1.481392e+01)
+FPR10 412e848000000000 (f: 0.000000, d: 1.000000e+06)
+FPR11 43300000000f4240 (f: 1000000.000000, d: 4.503600e+15)
+FPR12 4530000000000000 (f: 0.000000, d: 1.934281e+25)
+FPR13 0000000000000003 (f: 3.000000, d: 1.482197e-323)
+FPR14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR16 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR17 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR18 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR19 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR20 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR21 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR22 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR23 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR24 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR25 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR26 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR27 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR28 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR29 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR30 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR31 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+Module=/usr/lib/libc.a
+Module_base_address=0900000000000E00
+Target=2_90_20210120_896 (AIX 7.2)
+CPU=ppc64 (16 logical CPUs) (0x200000000 RAM)
+----------- Stack Backtrace -----------
+free_common+0xc0 (0x090000000002E144 [libc.a+0x2d344])
+omrmem_free_memory_basic+0x10 (0x090000000EBA91F4 [libj9prt29.so+0x2a1f4])
+omrmem_free_memory+0x70 (0x090000000EBA6B54 [libj9prt29.so+0x27b54])
+hashTableGrow+0x18c (0x090000000ED87910 [libj9gc29.so+0x4f910])
+hashTableAdd+0x370 (0x090000000ED876D4 [libj9gc29.so+0x4f6d4])
+addStringToInternTable__14MM_StringTableFP10J9VMThreadP8J9Object+0x220 (0x090000000EF38564 [libj9gc29.so+0x200564])
+j9gc_createJavaLangString+0x4fc (0x090000000EF3BD80 [libj9gc29.so+0x203d80])
+resolveStringRef+0xd8 (0x090000000E95FF3C [libj9vm29.so+0x81f3c])
+debugBytecodeLoopCompressed+0x251c0 (0x090000000EA81244 [libj9vm29.so+0x1a3244])
+(0x090000000E94E1FC [libj9vm29.so+0x701fc])
+sendClinit+0x260 (0x090000000E947964 [libj9vm29.so+0x69964])
+initializeImpl+0x3fc (0x090000000E943B80 [libj9vm29.so+0x65b80])
+classInitStateMachine__FP10J9VMThreadP7J9Class16J9ClassInitState+0xe98 (0x090000000E944D9C [libj9vm29.so+0x66d9c])
+resolveClassRef+0x3b4 (0x090000000E960718 [libj9vm29.so+0x82718])
+debugBytecodeLoopCompressed+0x43fc8 (0x090000000EAA004C [libj9vm29.so+0x1c204c])
+(0x090000000E94E1FC [libj9vm29.so+0x701fc])
+sendClinit+0x260 (0x090000000E947964 [libj9vm29.so+0x69964])
+initializeImpl+0x3fc (0x090000000E943B80 [libj9vm29.so+0x65b80])
+classInitStateMachine__FP10J9VMThreadP7J9Class16J9ClassInitState+0xe98 (0x090000000E944D9C [libj9vm29.so+0x66d9c])
+resolveStaticMethodRefInto+0x200 (0x090000000E960F44 [libj9vm29.so+0x82f44])
+resolveStaticMethodRef+0x30 (0x090000000E961474 [libj9vm29.so+0x83474])
+debugBytecodeLoopCompressed+0x5c30 (0x090000000EA61CB4 [libj9vm29.so+0x183cb4])
+(0x090000000E94E1FC [libj9vm29.so+0x701fc])
+sendClinit+0x260 (0x090000000E947964 [libj9vm29.so+0x69964])
+initializeImpl+0x3fc (0x090000000E943B80 [libj9vm29.so+0x65b80])
+classInitStateMachine__FP10J9VMThreadP7J9Class16J9ClassInitState+0xe98 (0x090000000E944D9C [libj9vm29.so+0x66d9c])
+classInitStateMachine__FP10J9VMThreadP7J9Class16J9ClassInitState+0xdc8 (0x090000000E944CCC [libj9vm29.so+0x66ccc])
+resolveClassRef+0x3b4 (0x090000000E960718 [libj9vm29.so+0x82718])
+debugBytecodeLoopCompressed+0x43fc8 (0x090000000EAA004C [libj9vm29.so+0x1c204c])
+(0x090000000E94E1FC [libj9vm29.so+0x701fc])
+sendClinit+0x260 (0x090000000E947964 [libj9vm29.so+0x69964])
+initializeImpl+0x3fc (0x090000000E943B80 [libj9vm29.so+0x65b80])
+classInitStateMachine__FP10J9VMThreadP7J9Class16J9ClassInitState+0xe98 (0x090000000E944D9C [libj9vm29.so+0x66d9c])
+classInitStateMachine__FP10J9VMThreadP7J9Class16J9ClassInitState+0xdc8 (0x090000000E944CCC [libj9vm29.so+0x66ccc])
+classInitStateMachine__FP10J9VMThreadP7J9Class16J9ClassInitState+0xdc8 (0x090000000E944CCC [libj9vm29.so+0x66ccc])
+resolveClassRef+0x3b4 (0x090000000E960718 [libj9vm29.so+0x82718])
+debugBytecodeLoopCompressed+0x43fc8 (0x090000000EAA004C [libj9vm29.so+0x1c204c])
+(0x090000000E94E1FC [libj9vm29.so+0x701fc])
+sendClinit+0x260 (0x090000000E947964 [libj9vm29.so+0x69964])
+initializeImpl+0x3fc (0x090000000E943B80 [libj9vm29.so+0x65b80])
+classInitStateMachine__FP10J9VMThreadP7J9Class16J9ClassInitState+0xe98 (0x090000000E944D9C [libj9vm29.so+0x66d9c])
+classInitStateMachine__FP10J9VMThreadP7J9Class16J9ClassInitState+0xdc8 (0x090000000E944CCC [libj9vm29.so+0x66ccc])
+resolveStaticMethodRefInto+0x200 (0x090000000E960F44 [libj9vm29.so+0x82f44])
+resolveStaticMethodRef+0x30 (0x090000000E961474 [libj9vm29.so+0x83474])
+debugBytecodeLoopCompressed+0x5c30 (0x090000000EA61CB4 [libj9vm29.so+0x183cb4])
+(0x090000000E94E1FC [libj9vm29.so+0x701fc])
+sendClinit+0x260 (0x090000000E947964 [libj9vm29.so+0x69964])
+initializeImpl+0x3fc (0x090000000E943B80 [libj9vm29.so+0x65b80])
+classInitStateMachine__FP10J9VMThreadP7J9Class16J9ClassInitState+0xe98 (0x090000000E944D9C [libj9vm29.so+0x66d9c])
+resolveStaticMethodRefInto+0x200 (0x090000000E960F44 [libj9vm29.so+0x82f44])
+resolveStaticMethodRef+0x30 (0x090000000E961474 [libj9vm29.so+0x83474])
+debugBytecodeLoopCompressed+0x5c30 (0x090000000EA61CB4 [libj9vm29.so+0x183cb4])
+(0x090000000E94E1FC [libj9vm29.so+0x701fc])
+runCallInMethod+0x264 (0x090000000E94ACC8 [libj9vm29.so+0x6ccc8])
+gpProtectedRunCallInMethod__FPv+0x48 (0x090000000E93B2CC [libj9vm29.so+0x5d2cc])
+signalProtectAndRunGlue+0x28 (0x090000000E934FAC [libj9vm29.so+0x56fac])
+omrsig_protect+0x488 (0x090000000EBD8CCC [libj9prt29.so+0x59ccc])
+gpProtectAndRun+0xf8 (0x090000000E9350FC [libj9vm29.so+0x570fc])
+gpCheckCallin+0x114 (0x090000000E93B238 [libj9vm29.so+0x5d238])
+callStaticVoidMethod+0x48 (0x090000000E99658C [libj9vm29.so+0xb858c])
+JavaMain+0xd6c (0x0000010000007450 [java+0x7450])
+_pthread_body+0xe8 (0x0900000000599FEC [libpthreads.a+0x3fec])
+---------------------------------------
+```

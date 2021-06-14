@@ -1,0 +1,7 @@
+In the prototype implementation of value types support, the letter `Q` is used as a prefix in the bytecode for the signatures of classes that are value types, as distinguished from concrete identity type classes, interfaces and abstract classes, whose signatures are prefixed with the letter `L`.
+
+Minimal changes to handle the `Q` prefix in the JIT compiler were merged into OpenJ9 in [pull request #9030](https://github.com/eclipse/openj9/pull/9030).
+
+Charlene @Charlmzz prototyped additional changes in the JIT compiler for places in OpenJ9 and OMR where the JIT compiler checks for a prefix of `L` that likely should also check for a prefix of `Q`.
+
+These changes need to be double-checked for correctness and completeness, and should be delivered with any necessary corrections.  They can be found in commit https://github.com/eclipse/openj9/commit/6fa5892419325b0d773a427210736e0967bb24bb and OMR commit https://github.com/eclipse/omr/commit/b12967f6f5a341ed5ed9cb7ae72d44f9144895e9

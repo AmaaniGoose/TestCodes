@@ -1,0 +1,42 @@
+Hello OpenJ9 developers,
+
+I have been warned that Apache Kafka fails to generate GC (Garbage Collection) logs when ran with an OpenJ9-based Java distribution when Java version is >=9.
+
+The reason for this issue is because, as far as I known, OpenJ9 does not comply with JEP 158, while other HotSpot-based distributions do.
+
+To reproduce the issue, run the following with latest AdopOpenJDK11 OpenJ9 binaries:
+
+`java -Xlog:gc*:file=/tmp/foo.log:time,tags:filecount=10,filesize=102400 -version`
+
+and you will get this error:
+
+```
+JVMJ9VM085W Malformed option: '-Xlog:gc*:file=/tmp/foo.log:time'
+openjdk version "11.0.5" 2019-10-15
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.5+10)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.17.0, JRE 11 Linux amd64-64-Bit Compressed References 20191016_358 (JIT enabled, AOT enabled)
+OpenJ9   - 77c1cf708
+OMR      - 20db4fbc
+JCL      - 2a7af5674b based on jdk-11.0.5+10)
+```
+
+whereas with latest AdoptOpenJDK11 Hotpot flavor, we get this excepted result:
+
+```
+openjdk version "11.0.5" 2019-10-15
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.5+10)
+OpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.5+10, mixed mode)
+```
+
+and `/tmp/foo.log` file contains some GC logs, needless to say.
+
+I have created the following JIRA to by-pass this issue on Apache Kafka side: https://issues.apache.org/jira/browse/KAFKA-9362 but honestly I doubt this is a durable solution.
+
+Indeed, with time, more and more Java applications are supporting Java 11, and like it or not, HotSpot based JVMs are more widely in use than OpenJ9 ones.
+
+If one has to make a specific change in all applications to support OpenJ9, then it can contribute to lesser OpenJ9  adoption than HotSpot's.
+
+Unless there's a technical issue, wouldn't it be possible for OpenJ9 to support JEP 158 for Java 11 and above versions?
+
+Kind regards,
+Alexandre Vermeerbergen

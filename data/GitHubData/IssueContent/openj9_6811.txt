@@ -1,0 +1,5 @@
+Fedora 31 to be GA-ed on 22 Oct, 2019 (as per the schedule https://fedoraproject.org/wiki/Releases/31/Schedule) would enable cgroup v2 by default: https://fedoraproject.org/wiki/Releases/31/ChangeSet#Modify_Fedora_31_to_use_CgroupsV2_by_default
+Currently OpenJ9 only recognizes cgroup v1. It would be good if it can provide support for cgroup v2 as well, by the time Fedora 31 is released.
+RHEL 8 released in May 2019 already supports cgroup v2, though by default it uses cgroup v1 (https://www.redhat.com/en/blog/world-domination-cgroups-rhel-8-welcome-cgroups-v2).
+
+I believe most of the changes for supporting cgroup v2 would be required in port library in Eclipse OMR project. This issue can be used as the anchor for the changes required for supporting cgroup v2.

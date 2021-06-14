@@ -1,0 +1,6 @@
+Vector registers need to be preserved like it is being done in PowerPC.
+
+A few clarifications:
+- There are 32 VRs, with 16-bytes long, the alignment required for preserving them is 16-bytes in AArch64.
+- All the VRs overlap with the FPRs.
+- For load/store instructions, `vldrimmq` & `vstrimmq` are used respectively.

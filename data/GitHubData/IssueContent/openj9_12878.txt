@@ -1,0 +1,5 @@
+Use this issue to track tests temporarily excluded in `x86-64_linux_vt_standard` build. 
+
+See https://github.com/eclipse-openj9/openj9/issues/12039#issuecomment-856032220.  Currently `AnnotationInvocationHandler` enforces annotation type to have `java.lang.annotation.Annotation.class` as its only super interface. This is not true anymore after #12039.
+`org.openj9.test.annotationPackage.Test_PackageAnnotation` and `org.openj9.test.annotationPackage.Test_PackageAnnotation2` are excluded in x86-64_linux_vt_standard build for now. 
+They can be re-enabled after `AnnotationInvocationHandler` is changed in JCL for value type.

@@ -1,0 +1,4 @@
+https://github.com/eclipse-openj9/openj9/blob/cef51dfd748a15b6f8ceb9be065d8a9eb8389a6b/runtime/compiler/z/codegen/J9BCDTreeEvaluator.cpp#L7569
+
+Every value is bigger than 0 and lower than 31.
+`||` should be replaced with `&&`

@@ -1,0 +1,1 @@
+Like all projects, OpenJ9 builds on the shoulders of Giants. As a potential contributor, one of my concerns is understanding how I make a contribution to OpenJ9 that might span OpenJ9, [OMR]( https://github.com/eclipse/omr), an/or the [OpenJDK extensions](https://github.com/ibmruntimes/openj9-openjdk-jdk9)

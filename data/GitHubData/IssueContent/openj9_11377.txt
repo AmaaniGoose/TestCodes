@@ -1,0 +1,8 @@
+This issue outlines a general roadmap to enable NextGenHCR on AOT compilations.
+
+1. - [ ]  Implement https://github.com/eclipse/openj9/issues/4849
+2. - [ ] Allow NextGenHCR to be enabled for AOT compilations
+
+1 is a necessary prerequisite as the entirety of NextGenHCR depends on voluntary OSR.
+
+2 is fairly straightforward. However, NextGenHCR should be enabled for AOT compilations even during startup (it is currently disabled for JIT compilations during startup) as the code run is generally discarded, and the warm run will contain all the benefits of OSR.

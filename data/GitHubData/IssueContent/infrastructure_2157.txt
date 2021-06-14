@@ -1,0 +1,17 @@
+[Pipeline] wrap
+01:28:30  $ Xvfb -displayfd 2 -screen 0 1024x768x24 -fbdir /home/jenkins/xvfb-71-..fbdir10289954228434509120
+[Pipeline] // wrap
+[Pipeline] }
+Looks like something wrong with xvfb.
+
+Which leads to test failures
+
+-----
+
+06:01:51  + tar -cf benchmark_test_output.tar.gz ./openjdk-tests/TKG/output_*
+06:01:52  tar: ./openjdk-tests/TKG/output_*: Cannot stat: No such file or directory
+06:01:52  tar: Exiting with failure status due to previous errors
+This occurred because no tests ran, root cause suspect is:
+
+
+

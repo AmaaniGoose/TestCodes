@@ -1,0 +1,47 @@
+**No issues in JBS:**
+java/net/InetAddress/BadDottedIPAddress.java failed with 'UnknownHostException was not thrown for: 999.999.999.999'
+
+```
+Stacktrace
+
+Execution failed: `main' threw exception: java.lang.Exception: UnknownHostException was not thrown for: 999.999.999.999    
+
+Standard Output
+
+    
+
+Standard Error
+
+java.lang.Exception: UnknownHostException was not thrown for: 999.999.999.999
+	at BadDottedIPAddress.main(BadDottedIPAddress.java:49)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+	at java.lang.Thread.run(Thread.java:748)
+
+```
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/openjdk8_hs_openjdktest_x86-64_linux/306/testReport/junit/java_net_InetAddress_BadDottedIPAddress/java/BadDottedIPAddress/
+
+
+**With issue opened in JBS:**
+java/net/InetAddress/CachedUnknownHostName.java failed with 'java.lang.Exception: Missing java.net.UnknownHostException    '
+
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/openjdk8_hs_openjdktest_x86-64_linux/306/testReport/junit/java_net_InetAddress_CachedUnknownHostName/java/CachedUnknownHostName/
+
+```
+Standard Error
+
+Missing java.net.UnknownHostException for host bogusHostName
+java.lang.Exception: Missing java.net.UnknownHostException
+	at CachedUnknownHostName.main(CachedUnknownHostName.java:41)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+	at java.lang.Thread.run(Thread.java:748)
+
+```
+https://bugs.openjdk.java.net/browse/JDK-8056988 opened for window, should update with linux too.

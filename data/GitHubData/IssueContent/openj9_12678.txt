@@ -1,0 +1,1 @@
+It seems all the ppcle machines at OSU are Power 8, but we have the option to create Power 9 as well. We should have a mix of Power 8 and Power 9 for better testing. Atm there is only one machine used for testing, ub16-ppcle-1, so it can be converted if possible.

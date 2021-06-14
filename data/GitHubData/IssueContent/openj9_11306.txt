@@ -1,0 +1,70 @@
+The `InvalidArrayStoreNotCaught` test found in the `crashesTest` class of tests throws an `ArrayStoreException` when run with `-Xjit:count=1,disableAsyncCompilation` under the `jit_jitt` test bucket. Here is the crash:
+
+```
+[2020-11-27T16:42:41.459Z] PASSED: testnestedExceptions
+[2020-11-27T16:42:41.459Z] PASSED: testCharacterConverterInt3
+[2020-11-27T16:42:41.459Z] PASSED: testDivideByZero
+[2020-11-27T16:42:41.459Z] PASSED: testHangOnFloatPrint
+[2020-11-27T16:42:41.459Z] PASSED: testLongDivideByZero
+[2020-11-27T16:42:41.459Z] PASSED: testLongRemainderByZero
+[2020-11-27T16:42:41.459Z] PASSED: testRemainderByZero
+[2020-11-27T16:42:41.459Z] FAILED: testInvalidArrayStoreNotCaught
+[2020-11-27T16:42:41.459Z] java.lang.ArrayStoreException
+[2020-11-27T16:42:41.459Z] 	at jit.test.jitt.crashes.InvalidArrayStoreNotCaught.tstInvalidArrayStoreNotCaught(InvalidArrayStoreNotCaught.java:43)
+[2020-11-27T16:42:41.459Z] 	at jit.test.jitt.crashes.InvalidArrayStoreNotCaught.testInvalidArrayStoreNotCaught(InvalidArrayStoreNotCaught.java:57)
+[2020-11-27T16:42:41.459Z] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2020-11-27T16:42:41.459Z] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2020-11-27T16:42:41.459Z] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2020-11-27T16:42:41.459Z] 	at java.lang.reflect.Method.invoke(Method.java:498)
+[2020-11-27T16:42:41.459Z] 	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+[2020-11-27T16:42:41.459Z] 	at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+[2020-11-27T16:42:41.459Z] 	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+[2020-11-27T16:42:41.459Z] 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+[2020-11-27T16:42:41.459Z] 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+[2020-11-27T16:42:41.459Z] 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+[2020-11-27T16:42:41.459Z] 	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+[2020-11-27T16:42:41.459Z] 	at org.testng.TestRunner.run(TestRunner.java:505)
+[2020-11-27T16:42:41.459Z] 	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+[2020-11-27T16:42:41.459Z] 	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+[2020-11-27T16:42:41.459Z] 	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+[2020-11-27T16:42:41.459Z] 	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+[2020-11-27T16:42:41.459Z] 	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+[2020-11-27T16:42:41.459Z] 	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+[2020-11-27T16:42:41.459Z] 	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+[2020-11-27T16:42:41.459Z] 	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+[2020-11-27T16:42:41.459Z] 	at org.testng.TestNG.runSuites(TestNG.java:1049)
+[2020-11-27T16:42:41.459Z] 	at org.testng.TestNG.run(TestNG.java:1017)
+[2020-11-27T16:42:41.459Z] 	at org.testng.TestNG.privateMain(TestNG.java:1354)
+[2020-11-27T16:42:41.459Z] 	at org.testng.TestNG.main(TestNG.java:1323)
+[2020-11-27T16:42:41.459Z] 
+[2020-11-27T16:42:41.459Z] 
+```
+
+Below is a summary of my findings:
+
+I'm not able to reproduce this failure when I isolate the `crashesTest` and try to reproduce this crash by itself (running with `-Xjit:disableAsyncCompilation,count=1`). It's only reproducible when running `jit_jitt_4` (i.e. when `-Xjit:disableAsyncCompilation,count=1` is the 5th variation of `jit_jitt`).
+
+I'm able to narrow this down to the following method below:
+```
+jit/test/jitt/crashes/InvalidArrayStoreNotCaught.tstInvalidArrayStoreNotCaught(Z)V
+```
+
+This routine can be found here:
+https://github.com/eclipse/openj9/blob/9c5708ae3686156291455e1f7bcec1f52aa2b8c5/test/functional/JIT_Test/src/jit/test/jitt/crashes/InvalidArrayStoreNotCaught.java#L37-L49
+
+The problem happens because we remove the following block under globalValuePropagation:
+```
+n9n       BBStart <block_8> (freq 3) (catches java/lang/ArrayStoreException) (cold)           [     0x3ff691ff930] bci=[-1,28,46] rc=0 vc=139 vn=- li=- udi=- nc=0
+n63n      asynccheck  jitCheckAsyncMessages[#23  helper Method] [flags 0x400 0x0 ]            [     0x3ff6927b370] bci=[-1,28,46] rc=0 vc=139 vn=- li=- udi=- nc=0
+n68n      astore  ExceptionMeta[#314  MethodMeta +64] [flags 0x207 0x0 ] (X==0 sharedMemory )  [     0x3ff6927b500] bci=[-1,28,46] rc=0 vc=139 vn=- li=- udi=- nc=1 flg=0x2
+n67n        aconst NULL (X==0 sharedMemory )                                                  [     0x3ff6927b4b0] bci=[-1,28,46] rc=1 vc=139 vn=- li=1 udi=- nc=0 flg=0x2
+n71n      return                                                                              [     0x3ff6927b5f0] bci=[-1,29,46] rc=0 vc=139 vn=- li=- udi=- nc=0
+n10n      BBEnd </block_8> (cold) =====                                                       [     0x3ff691ff980] bci=[-1,29,46] rc=0 vc=139 vn=- li=- udi=- nc=0
+```
+
+This is the `catch` block code in the java method above that catches the `ArrayStoreException`. This would explain why we see this exception. The test purposefully tries to throw this exception. The reason provided by GVP is that this block is unreachable. I don't see any jumps to this code starting from ilgen. So I'm not sure why that is. Also attaching the log here for reference.
+
+
+[trace.txt](https://github.com/eclipse/openj9/files/5617073/trace.txt)
+
+Currently the variation mentioned above is not part of this bucket. We discovered this issue when trying to add this variation as part of the work in https://github.com/eclipse/openj9/pull/11088.

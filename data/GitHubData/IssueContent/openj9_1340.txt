@@ -1,0 +1,17 @@
+One of the tests in testSCCMLTests2 fails with a message "Persistent cache cannot be located on a networked file system". Possibly the problem is the `cacheDir=. ` option.
+
+```
+        Testing: Test 116: utilities test: iterate and destroy cache when running with different cacheDir option
+        Test start time: 2018/03/04 07:31:56 Eastern Standard Time
+        Running command: "/cardhu5/seagate/sdks/jdk/bin/java"  -Xjit -Xgcpolicy:gencon -Xnocompressedrefs -Xrs  -cp /cardhu5/seagate/arm/tests/openj9/test/TestConfig/scripts/testKitGen/../../../../jvmtest/VM_Test/VM_Test.jar -Xshareclasses:name=ShareClassesCMLTests,cacheDir=. com.ibm.j9.sharedCacheAPI.tests.SharedUtilsTest
+        Time spent starting: 5 milliseconds
+        Time spent executing: 1140 milliseconds
+        Test result: FAILED
+         [OUT] read Processor   : AArch64 Processor rev 4 (aarch64)
+         [OUT]
+         [ERR] JVMSHRC287E Persistent cache cannot be located on a networked file system. Either select "nonpersistent" or a different cacheDir.
+         [ERR] JVMJ9VM015W Initialization error for library j9shr29(11): JVMJ9VM009E J9VMDllMain failed
+         [ERR] Error: Could not create the Java Virtual Machine.
+         [ERR] Error: A fatal exception has occurred. Program will exit.
+
+```

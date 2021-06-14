@@ -1,0 +1,9 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.functional_x86-64_linux_Personal/534/
+testJITServer_1
+```
+FAILED: testServerGoesDown
+java.lang.IllegalThreadStateException: process hasn't exited
+	at java.base/java.lang.ProcessImpl.exitValue(ProcessImpl.java:521)
+	at jit.test.jitserver.JITServerTest.destroyAndCheckProcess(JITServerTest.java:116)
+	at jit.test.jitserver.JITServerTest.testServerGoesDown(JITServerTest.java:202)
+```

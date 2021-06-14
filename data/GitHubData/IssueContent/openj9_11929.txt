@@ -1,0 +1,11 @@
+As reported via https://adoptopenjdk.slack.com/archives/C09NLQQAV/p1612886824110700
+
+All versions? I tried it on 11.0.8, 11.0.9, 11.0.10, jdk8u252, jdk8u272 on xLinux, but not sure it's specific to any platform. 
+That goes back to the 0.20.0 release but I suspect it goes back further.
+
+`keytool -J-Xmn8m` causes `JVMJ9GC019E -Xmn too large for -Xms`.
+Using -Xmn7m works. It's not specific to keytool, other tools (all tools?) have the same issue (i.e. jar, jdmpview, jcmd, etc).
+
+This can be a problem for users who set the option via the `JAVA_OPTIONS` (or `OPENJ9_JAVA_OPTIONS`) environment variable. Setting `JAVA_OPTIONS` is supported by OpenJ9 since the 0.24 release.
+
+However `java  -Xmn8m` starts up fine. Not sure what the difference is. The -verbose:sizes output appears the same for both.

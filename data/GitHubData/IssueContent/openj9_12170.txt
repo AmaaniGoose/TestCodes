@@ -1,0 +1,9 @@
+Running some benchmarks with value types support enabled in OpenJ9 has shown performance degradation of 25% to 75% over OpenJ9 without value types support.
+
+Preliminary analysis has shown that all or very nearly all of the performance degradation can be attributed to overhead introduced in handling `acmp` operations in JIT-compiled code using a call to the `jitAcmpHelper`, and in handling of `aaload` and `aastore` operations by calling `jit{Load|Store}FlattenableArrayElement` helpers.
+
+This epic issue will track work for performance improvements with value types enabled.  Initial tasks:
+
+- [x] [Implement additional fast paths for acmp with value types enabled](https://github.com/eclipse/openj9/issues/12173)
+- [x] [Implement inline array element load or store for identity types when value types are enabled](https://github.com/eclipse/openj9/issues/12174)
+- [x] [Have VP check for non-value types in acmp and aaload/aastore operations](https://github.com/eclipse/openj9/issues/12175)

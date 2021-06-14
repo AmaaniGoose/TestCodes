@@ -1,0 +1,27 @@
+It would be good to measure performance on various Spark workloads. We can run benchmarks such as [Hibench](https://github.com/Intel-bigdata/HiBench) and [Databricks](https://github.com/databricks/spark-perf). 
+
+> HiBench is a big data benchmark suite that helps evaluate different big data frameworks in terms of speed, throughput and system resource utilizations. It contains a set of Hadoop, Spark and streaming workloads, including Sort, WordCount, TeraSort, Sleep, SQL, PageRank, Nutch indexing, Bayes, Kmeans, NWeight and enhanced DFSIO, etc. It also contains several streaming workloads for Spark Streaming, Flink, Storm and Gearpump.
+
+### Packages to Use
+
+We'll need the following packages in order to run perf tests. 
+
+Hadoop: https://hadoop.apache.org/
+
+Spark: https://spark.apache.org/
+
+HiBench: https://github.com/Intel-bigdata/HiBench
+
+
+
+### Supported Hadoop & Spark releases for HiBench
+
+- Hadoop: Apache Hadoop 2.x
+- Spark: Spark 1.6.x, Spark 2.0.x, Spark 2.1.x, Spark 2.2.x
+
+I have experience in using the following: hadoop-2.7.3, spark-dk-2.0.2.0 and hibench-6.0 and tests work without any issues. Though it would be preferred to use the latest compatible binaries.
+
+### TODO
+
+I wrote a script few years back that we still use for our internal perf analysis. We'll need to create the build and playlist files in order to get all the dependencies needed to runs the tests.
+

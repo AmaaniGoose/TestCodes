@@ -1,0 +1,6 @@
+PR #12893 is going to introduce a new frontend query: 
+`virtual bool isStable(int cpIndex, TR_ResolvedMethod *owningMethod, TR::Compilation *comp);`
+but the implementation for JITServer is going to be just a stub:
+`virtual bool isStable(int cpIndex, TR_ResolvedMethod *owningMethod, TR::Compilation *comp) { return false; } // safe answer, might change in the future`
+We need to provide a more detailed implementation which involves sending a message to the client to find the outcome of this call: `bool isStable = jitIsFieldStable(comp->fej9()->vmThread(), fieldClass, cpIndex);`
+In the future, if performance requires it, we may implement some caching {ramClass --> {cpIndex --> isStable}}

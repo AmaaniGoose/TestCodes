@@ -1,0 +1,21 @@
+Given that all the low level support on RI was removed, RI isn't going to work for openj9.
+In such case, it should be feasible to turn off jit_runtimeInstrumentation and port_runtimeInstrumentation in specs on zOS.
+
+However, the compilation result indicates it fails with the following error in JIT after turning off these two flags:
+CCN0793(I) Compilation failed for file openj9/runtime/compiler/../compiler/trj9/z/codegen/J9TreeEvaluator.cpp.  Object file not created.
+openj9/runtime/compiler/../compiler/trj9/build/rules/zos-xlc/common.mk:99: recipe for target 'openj9/runtime/compiler/../objs/compiler/trj9/z/codegen/J9TreeEvaluator.o' failed
+make[3]: *** [openj9/runtime/compiler/../objs/compiler/trj9/z/codegen/J9TreeEvaluator.o] Error 12
+make[3]: *** Waiting for unfinished jobs....
+make[3]: Leaving directory 'openj9/runtime/compiler/trj9'
+Makefile:83: recipe for target 'trj9' failed
+make[2]: *** [trj9] Error 2
+make[2]: Leaving directory 'openj9/runtime/compiler/trj9'
+makefile:57: recipe for target 'default' failed
+make[1]: *** [default] Error 2
+make[1]: Leaving directory 'openj9/runtime/compiler'
+makefile:1138: recipe for target 'j9jitlauncher' failed
+make: *** [j9jitlauncher] Error 2
+
+It was compiled with the changes at https://github.com/eclipse/openj9/pull/903
+
+We are not sure what's going to happen at runtime if the JIT tries to use it

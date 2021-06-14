@@ -1,0 +1,2 @@
+I'm interested in trying out OpenJ9 on e.g Raspberry Pi. It doesn't look like armv7l is supported out-of-the-box although the codebase certainly has some references to ARM arch. 
+What's the timeline for getting ARM support and/or can I already try and hack something together? If the latter, some initial pointers would be appreciated :-)

@@ -1,0 +1,13 @@
+There are some references to Github organizations and repos that need updating in this repository.  Now that all test materials are moved to Adoptium, we should search for and replace the references to any that are no longer valid (even though Github forwarding will mostly handle it, we should update nonetheless).  Org names and repo names need to be searched for and updated.
+
+Test repos moved/renamed:
+adoptopenjdk/openjdk-tests -> adoptium/aqa-tests
+adoptopenjdk/openjdk-systemtest -> adoptium/aqa-systemtest
+adoptopenjdk/openjdk-test-tools -> adoptium/aqa-test-tools
+adoptopenjdk/STF -> adoptium/STF
+adoptopenjdk/TKG -> adoptium/TKG
+adoptopenjdk/bumblebench -> adoptium/bumblebench
+adoptopenjdk/run-aqa -> adoptium/run-aqa
+
+Other potentially referenced repos moved/renamed:
+adoptopenjdk/build-jdk -> adoptium/build-jdk

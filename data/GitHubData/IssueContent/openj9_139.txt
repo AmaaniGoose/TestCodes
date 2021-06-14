@@ -1,0 +1,3 @@
+As noted by @andrewcraik the `javac` compiler that comes with the Java 9 JDK will generate a method handle sequence for a chained StringBuilder append sequence. We should investigate how the new sequence looks like in Java 9 and what changes are needed to the StringBuilderTransformer [1] optimization to make it functional again.
+
+[1] https://github.com/eclipse/openj9/blob/bb3304d389a16cf96be27cebc160d92eced087d7/runtime/tr.source/trj9/optimizer/StringBuilderTransformer.hpp

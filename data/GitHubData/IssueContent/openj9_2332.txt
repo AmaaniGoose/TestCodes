@@ -1,0 +1,7 @@
+`-XX:+HeapDumpOnOutOfMemoryError`
+
+This is the default behaviour for OpenJ9.  The `-` form may be a shorter alias for disabling this behaviour.
+
+`-XX:HeapDumpPath=<directory>`
+
+We should consider aliasing this to `-Xdump:directory`, though that would change the directory for all java+system cores as well as snap+heap dumps.

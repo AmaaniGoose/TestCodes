@@ -1,0 +1,55 @@
+Failure link
+------------
+
+From an internal ibuild `466720` (`job_output.php?id=671248299`)
+```
+java version "1.8.0_281"
+Java(TM) SE Runtime Environment (build 8.0.7.0 - pmz3180sr7-20210122_01(SR7))
+IBM J9 VM (build 2.9, JRE 1.8.0 z/OS s390-31-Bit 20210302_466720 (JIT enabled, AOT enabled)
+OpenJ9   - 82a5b6c
+OMR      - d1d1317
+IBM      - 95e95a7)
+JCL - 20210108_01 based on Oracle jdk8u281-b09
+```
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+Testing: Test 3-a: Add ROMClasses, AOT methods and JITHints into the cache
+Test start time: 2021/03/02 21:26:10 Pacific Standard Time
+Running command: "/j9vm/ebcdic/builds/bld_466720/sdk/mz3180/bin/java"  -Xjit -Xgcpolicy:gencon -Xnocompressedrefs  -Xshareclasses:name=ShareClassesCMLTests,verboseAOT,verboseJITDATA,addtestjithints -Xaot:forceAot,count=1 -Xjit:disableAsyncCompilation -version
+Time spent starting: 58 milliseconds
+Time spent executing: 27236 milliseconds
+Test result: FAILED
+ [OUT] addTestJitHint class java/lang/Object not in the cache
+ [OUT] addTestJitHint class java/lang/J9VMInternals not in the cache
+
+ [OUT] addTestJitHint class java/io/ExpiringCache$Entry not in the cache
+ [OUT] addTestJitHint class sun/nio/cs/ext/IBM1047$Decoder not in the cache
+
+	...........................................................
+	  ............ 13239 lines of output is removed ............
+	...........................................................
+
+>> Required condition was found: [Output match: Stored AOT code for ROMMethod]
+>> Required condition was not found: [Output match: Stored JITHINT attached data]
+>> Success condition was found: [Output match: (java|openjdk) version]
+>> Failure condition was not found: [Output match:  error ]
+>> Failure condition was not found: [Output match: Unhandled Exception]
+>> Failure condition was not found: [Output match: Exception:]
+>> Failure condition was not found: [Output match: corrupt]
+>> Failure condition was not found: [Output match: Processing dump event]
+
+Testing: Test 3-b: Verify in the cache stats that ROMClasses, AOT methods and JIT data have been added into the cache
+Test start time: 2021/03/02 21:28:58 Pacific Standard Time
+Running command: "/j9vm/ebcdic/builds/bld_466720/sdk/mz3180/bin/java"  -Xjit -Xgcpolicy:gencon -Xnocompressedrefs  -Xshareclasses:name=ShareClassesCMLTests,printDetails
+Time spent starting: 73 milliseconds
+Time spent executing: 22309 milliseconds
+Test result: FAILED
+```
+
+fyi @hangshao0 

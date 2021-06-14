@@ -1,0 +1,105 @@
+## Overview of JEP 331 : Low-Overhead Heap Profiling
+
+Provide a low-overhead way to sample Java heap allocations via `JVMTI` interface.
+Specifically, this feature is low-overhead enough to be enabled by default, allocation sampling interval can be set via a new `JVMTI API`, and a callback can provide heap object info being allocated.  
+When the event is generated and the callback is invoked, a stack trace can be captured with an existing `JVMTI GetStackTrace` method, in addition, the `jobect` reference from the callback can be wrapped into a `JNI weak reference` which can be used later to determine if the object is still alive.
+
+Note: this feature is optional for VM implementations, a new capability is introduced to indicate if VM has implemented this JEP.
+
+## Details
+
+`VM/GC/OMR` changes are required to support this JEP feature.
+
+### VM changes proposed:
+
+Add following new define and API from [JVMTI v11](https://docs.oracle.com/en/java/javase/11/docs/specs/jvmti.html)
+- `JVMTI v11` version define:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`#define JVMTI_VERSION_11_0 0x300b0000` 
+
+- A new capability:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`unsigned int can_generate_sampled_object_alloc_events : 1;`
+
+- A new event:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`JVMTI_EVENT_SAMPLED_OBJECT_ALLOC = 86,`
+
+- A new callback:
+```
+	void JNICALL SampledObjectAlloc(
+		jvmtiEnv *jvmti_env,
+        	JNIEnv* jni_env,
+        	jthread thread,
+        	jobject object,
+        	jclass object_klass,
+        	jlong size)
+```     
+
+- A new JVMTI method:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`jvmtiError  SetHeapSamplingInterval(jvmtiEnv* env, jint sampling_interval)`
+
+- A new callback:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`jvmtiError  SetHeapSamplingInterval(jvmtiEnv* env, jint sampling_interval)`
+
+Add a new hook event: 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`J9HOOK_SAMPLED_OBJECT_ALLOCATE` which can be trigged via `TRIGGER_J9HOOK_SAMPLED_OBJECT_ALLOCATE`.
+
+### GC changes proposed:
+
+Add a method to set sampling interval:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`void j9gc_set_allocation_sampling_interval(J9VMThread *vmThread, UDATA samplingInterval)`
+	
+Disable inline TLH allocation:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Force `JIT/Interpreter` to perform out of line allocation if the event `J9HOOK_SAMPLED_OBJECT_ALLOCATE` is registered, i.e., call `J9AllocateObject` or `J9AllocateIndexableObject`. This is similar with existing `J9HOOK_VM_OBJECT_ALLOCATE_INSTRUMENTABLE` or `J9HOOK_VM_OBJECT_ALLOCATE_WITHIN_THRESHOLD`.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `MM_GCExtensions::getExtensions(env)->instrumentableAllocateHookEnabled` can be reused as the flag to disable inline TLH allocation. Also noticed that `instrumentableAllocateHookEnabled` is only referred within `mgcalloc.cpp:memoryManagerTLHAsyncCallbackHandler()`, maybe it can be replaced with a local variable?
+
+Invoke the callback:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Within `J9AllocateObject()` or `J9AllocateIndexableObject()`, following trigger method for the event callback is going to be called according to `extensions->allocationSamplingInterval` and `extensions->currentAllocationRemainder` (to be added within `OMR GCExtensionsBase.hpp`).
+```
+	TRIGGER_J9HOOK_SAMPLED_OBJECT_ALLOCATE(
+		vmThread->javaVM->hookInterface, 
+		vmThread,
+		objectPtr, 
+		sizeInBytesRequired);
+```
+Note that the sampling interval is not precise hence not introducing lock to ensure exclusive update of  `currentAllocationRemainder`.
+
+### OMR changes proposed:
+Add two variables within `GCExtensionsBase.hpp` which can be get/set via `MM_GCExtensions`:
+```
+	uintptr_t allocationSamplingInterval; /**< the heap sampling interval */
+	uintptr_t currentAllocationRemainder; /**< the remainder of current allocation size modulo the heap sampling interval */
+```	
+
+## Performance target:
+If the event `J9HOOK_SAMPLED_OBJECT_ALLOCATE` is not registered, there is no noticeable performance overhead;
+If the event `J9HOOK_SAMPLED_OBJECT_ALLOCATE` is registered but the callback `SampledAllocEvent` is empty and no callback is performed with default 512K interval, the overhead is `~1%`;
+If the event `J9HOOK_SAMPLED_OBJECT_ALLOCATE` is registered and the callback `SampledAllocEvent` captures a `StackTrace` and/or create a a `JNI weak reference` to the `jobject` returned by the callback, the overhead is `~3%`.
+
+Note: these targets aim to match `RI` that was described in [JEP 331](http://openjdk.java.net/jeps/331). The benchmark in question might be `Dacapo` or `DayTrader` about `throughput` or `startup`.
+
+## Test Plan
+
+Add `OpenJ9` tests:
+
+- Verify that `capability can_generate_sampled_object_alloc_events` presents;
+-  Verify that `JVMTI_EVENT_SAMPLED_OBJECT_ALLOC`can be turned on or off, i.e., the callback is invoked or not accordingly;
+-  Verify that callback returns correct objects being allocated;
+-  Verify that sampling interval is respected;
+-  Verify that `StackTrace` captured is as expected;
+-  Verify that a `JNI weak reference` to the `jobject` reference returned by the callback can be used to determine if the object is alive;
+
+## Potential enhancements
+
+Trigger the event `J9HOOK_SAMPLED_OBJECT_ALLOCATE` according to `ClassLoader` (`BOOT_LOADER`, `PLATFORM_LOADER`, `APP_LOADER` or customer classloaders), `thread`, `object_klass` and/or `size`. Could work with existing `lowAllocationThreshold`, `highAllocationThreshold`, `oolObjectSamplingBytesGranularity`, `frequentObjectAllocationSamplingRate`, etc. 
+
+## Documentation
+
+Document update, blog creation, etc.
+
+## Others
+
+This feature doesn't affect existing application. There is no migration effort required for this specific feature. No security issue is expected.
+Overall the risk is medium.
+
+issue: #2679 
+
+FYI: @DanHeidinga @charliegracie @pshipton please comment.

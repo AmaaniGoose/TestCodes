@@ -1,0 +1,3 @@
+There was an experimental allocation prefetch strategy implemented more than a decade ago (I think it was mine!) that was never enabled and never went past the experimental stage.  It has long been deprecated.  Remove it.
+
+Look for code guarded with `TR_EnableNewX86PrefetchTLH` and remove dead code produced from that exercise.  A followup PR in OMR to remove the option is in order as well.

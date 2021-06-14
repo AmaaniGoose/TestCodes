@@ -1,0 +1,3 @@
+Since we have a single code base for all versions, it makes sense to enable the extended NPE messages for all releases.  It appears we'll need a class library patch to enable this in older releases but it should be straightforward with minimal conflicts.
+
+https://github.com/ibmruntimes/openj9-openjdk-jdk14/blob/3a9789908591a6025ad3547187cdaceb53b458b8/src/java.base/share/classes/java/lang/NullPointerException.java#L89-L102

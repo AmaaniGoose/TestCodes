@@ -1,0 +1,11 @@
+I have a personal build [Test_openjdk16_j9_sanity.system_x86-64_linux_Personal/5](https://hyc-runtimes-jenkins.swg-devops.com/job/Test_openjdk16_j9_sanity.system_x86-64_linux_Personal/5) which failed to complete. In order to find the downstream jobs, I need to click on"`Console Output`" => go to the bottom of the log => click the links inside the console output log [1]. It would be more convenient if the downstream job links exist in the build description page. Could the links to the downstream jobs be added to the build description page? 
+
+[1]
+```
+Started by upstream project "Pipeline_Build_Test_JDK16_x86-64_linux" build number 46
+....
+....
+Starting building: Test_openjdk16_j9_sanity.system_x86-64_linux_Personal_testList_1 #5
+Starting building: Test_openjdk16_j9_sanity.system_x86-64_linux_Personal_testList_0 #5
+[Pipeline] }
+```

@@ -1,0 +1,5 @@
+Based on experience of at least several developers, building debug JVM and JIT is quite non-trivial. See https://blog.openj9.org/2018/06/05/debugging-openj9-in-docker-with-gdb/ as an example.
+
+We need to make sure there is a simple way to get symbols, line number info, and non-optimized code for both VM and JIT.
+
+This should help all the platforms. Please share your experience and ideas.

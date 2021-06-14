@@ -1,0 +1,30 @@
+Test category: openjdk
+Testsuite name: jdk_net
+Test name(s):
+  
+ java/util/Locale/LocaleProviders.sh
+
+Product(s) tested: 
+               openjdk version "1.8.0_222"
+06:10:18  OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_222-201908080335-b10)
+06:10:18  OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.222-b10, mixed mode)
+
+OS/architecture: windows
+Platform specific: yes
+
+Reproducibility: yes
+
+Exception/Error from Log:
+
+```
+Stacktrace
+
+Execution failed: exit code 1    
+
+Standard Output
+```
+
+JBS:
+https://bugs.openjdk.java.net/browse/JDK-8013233
+
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/18/testReport/java_util_Locale_LocaleProviders/sh/LocaleProviders/

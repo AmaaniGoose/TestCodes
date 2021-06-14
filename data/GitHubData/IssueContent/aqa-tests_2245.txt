@@ -1,0 +1,47 @@
+**Describe the bug**
+SetGetSendBufferSize failed on mac machine with jdk 11 for both hotspot and openj9.
+
+**To Reproduce**
+Steps to reproduce the behavior (or Grinder rerun link): https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/6461/testReport/java_net_DatagramSocket_SetGetSendBufferSize/java/SetGetSendBufferSize/
+
+**Additional context**
+```
+10:24:54    java/net/DatagramSocket/SetGetSendBufferSize.java
+10:24:54  
+10:24:54  test SetGetSendBufferSize.testInitialSendBufferSize("DatagramSocket", SetGetSendBufferSize$$Lambda$67/0x0000000000000000@40be6667): success
+10:24:54  test SetGetSendBufferSize.testInitialSendBufferSize("MulticastSocket", SetGetSendBufferSize$$Lambda$68/0x0000000000000000@41fa47e5): success
+10:24:54  test SetGetSendBufferSize.testInitialSendBufferSize("DatagramSocketAdaptor", SetGetSendBufferSize$$Lambda$69/0x0000000000000000@2b8be523): failure
+10:24:54  java.lang.AssertionError: DatagramSocketAdaptor expected [true] but found [false]
+10:24:54  	at org.testng.Assert.fail(Assert.java:94)
+10:24:54  	at org.testng.Assert.failNotEquals(Assert.java:496)
+10:24:54  	at org.testng.Assert.assertTrue(Assert.java:42)
+10:24:54  	at SetGetSendBufferSize.testInitialSendBufferSize(SetGetSendBufferSize.java:95)
+10:24:54  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+10:24:54  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+10:24:54  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+10:24:54  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+10:24:54  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+10:24:54  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+10:24:54  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+10:24:54  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+10:24:54  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+10:24:54  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+10:24:54  	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+10:24:54  	at org.testng.TestRunner.run(TestRunner.java:623)
+10:24:54  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+10:24:54  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+10:24:54  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+10:24:54  	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+10:24:54  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+10:24:54  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+10:24:54  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+10:24:54  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+10:24:54  	at org.testng.TestNG.run(TestNG.java:1018)
+10:24:54  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+10:24:54  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+10:24:54  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+10:24:54  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+10:24:54  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+10:24:54  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:312)
+10:24:54  	at java.base/java.lang.Thread.run(Thread.java:836)
+```

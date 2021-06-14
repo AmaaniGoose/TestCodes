@@ -1,0 +1,88 @@
+Java -version output
+--------------------
+```
+openjdk version "11.0.9-internal" 2020-10-20
+OpenJDK Runtime Environment (build 11.0.9-internal+0-adhoc.keithc.jdk11)
+Eclipse OpenJ9 VM (build pr10774-a7fd9f03fc1, JRE 11 Linux amd64-64-Bit Compressed References 20201007_000000 (JIT enabled, AOT enabled)
+OpenJ9   - a7fd9f03fc1
+OMR      - 9a61ecc52a9
+JCL      - cf49ddabb9e based on jdk-11.0.9+10)
+```
+This is a build including a preview of #10774.
+
+Summary of problem
+------------------
+The second request for a heap dump with `request=exclusive` encounters a SEGV
+```
+$ jcmd 27328 Dump.heap request=exclusive heap10
+Dump written to /home/keithc/space/openj9/jdk11/build/linux-x86_64-normal-server-release/images/heap10
+$ jcmd 27328 Dump.heap request=exclusive heap11
+```
+context from gdb:
+```
+Thread 28 "Attachment 3503" received signal SIGSEGV, Segmentation fault.
+[Switching to Thread 0x7fffccdbb700 (LWP 27470)]
+0x00007ffff4e3cc69 in BinaryHeapDumpWriter::writeObjectRecord (this=this@entry=0x7fffccdb7d40, objectDescriptor=0x7fffccdb7190) at ../../../../../../openj9/runtime/rasdump/heapdump.cpp:1406
+1406		} else if (J9ROMCLASS_IS_ARRAY(currentClass->romClass)) {
+(gdb) bt
+#0  0x00007ffff4e3cc69 in BinaryHeapDumpWriter::writeObjectRecord (this=this@entry=0x7fffccdb7d40, objectDescriptor=0x7fffccdb7190) at ../../../../../../openj9/runtime/rasdump/heapdump.cpp:1406
+#1  0x00007ffff4e3ccac in binaryHeapDumpObjectIteratorCallback (vm=<optimized out>, objectDescriptor=<optimized out>, userData=0x7fffccdb7d40)
+    at ../../../../../../openj9/runtime/rasdump/heapdump.cpp:2458
+#2  0x00007fffeed387ae in iterateRegionObjects (vm=0x7ffff000f690, region=0x7fffccdb7af0, flags=<optimized out>, 
+    func=0x7ffff4e3cca0 <binaryHeapDumpObjectIteratorCallback(J9JavaVM*, J9MM_IterateObjectDescriptor*, void*)>, userData=0x7fffccdb7d40)
+    at ../../../../../../openj9/runtime/gc_api/HeapIteratorAPI.cpp:716
+#3  0x00007ffff4e3b970 in binaryHeapDumpRegionIteratorCallback (vm=<optimized out>, regionDescription=<optimized out>, userData=0x7fffccdb7d40)
+    at ../../../../../../openj9/runtime/rasdump/heapdump.cpp:2451
+#4  0x00007fffeed37cd6 in iterateRegions (space=<optimized out>, flags=<optimized out>, userData=0x7fffccdb7d40, 
+    func=0x7ffff4e3b930 <binaryHeapDumpRegionIteratorCallback(J9JavaVM*, J9MM_IterateRegionDescriptor*, void*)>, vm=0x7ffff000f690) at ../../../../../../openj9/runtime/gc_api/HeapIteratorAPI.cpp:678
+#5  j9mm_iterate_regions (vm=0x7ffff000f690, portLibrary=<optimized out>, space=<optimized out>, flags=<optimized out>, 
+    func=0x7ffff4e3b930 <binaryHeapDumpRegionIteratorCallback(J9JavaVM*, J9MM_IterateRegionDescriptor*, void*)>, userData=0x7fffccdb7d40)
+    at ../../../../../../openj9/runtime/gc_api/HeapIteratorAPI.cpp:245
+#6  0x00007ffff4e3f8c0 in BinaryHeapDumpWriter::openNewDumpFile (this=this@entry=0x7fffccdb7d40, spaceDescriptor=0x7fffccdb7c60, 
+    spaceDescriptor@entry=<error reading variable: value has been optimized out>) at ../../../../../../openj9/runtime/rasdump/heapdump.cpp:1237
+#7  0x00007ffff4e412ac in binaryHeapDumpSpaceIteratorCallback (vm=<error reading variable: value has been optimized out>, spaceDescriptor=<error reading variable: value has been optimized out>, 
+    userData=0x7fffccdb7d40, userData@entry=<error reading variable: value has been optimized out>) at ../../../../../../openj9/runtime/rasdump/heapdump.cpp:2439
+#8  0x00007fffeed37a5b in j9mm_iterate_spaces (vm=<optimized out>, portLibrary=<optimized out>, heap=<optimized out>, flags=<optimized out>, func=<optimized out>, userData=<optimized out>)
+    at ../../../../../../openj9/runtime/gc_api/HeapIteratorAPI.cpp:189
+#9  0x00007ffff4e3b914 in binaryHeapDumpHeapIteratorCallback (vm=<error reading variable: value has been optimized out>, heapDescriptor=<error reading variable: value has been optimized out>, 
+    userData=0x7fffccdb7d40, userData@entry=<error reading variable: value has been optimized out>) at ../../../../../../openj9/runtime/rasdump/heapdump.cpp:2432
+#10 0x00007fffeed379d0 in j9mm_iterate_heaps (vm=<optimized out>, portLibrary=<optimized out>, flags=<optimized out>, func=<optimized out>, userData=<optimized out>)
+    at ../../../../../../openj9/runtime/gc_api/HeapIteratorAPI.cpp:143
+#11 0x00007ffff4e3f323 in BinaryHeapDumpWriter::BinaryHeapDumpWriter (this=0x7fffccdb7d40, 
+    fileName=0x7fffccdb8050 "/home/keithc/space/openj9/jdk11/build/linux-x86_64-normal-server-release/images/heap11", context=<optimized out>, agent=<optimized out>)
+    at ../../../../../../openj9/runtime/rasdump/heapdump.cpp:1156
+#12 0x00007ffff4e412dc in writePHD (label=label@entry=0x7fffccdb8050 "/home/keithc/space/openj9/jdk11/build/linux-x86_64-normal-server-release/images/heap11", context=context@entry=0x7fffccdb8560, 
+    agent=agent@entry=0x7fff74003d30) at ../../../../../../openj9/runtime/rasdump/heapdump.cpp:2483
+#13 0x00007ffff4e4139d in runHeapdump (label=label@entry=0x7fffccdb8050 "/home/keithc/space/openj9/jdk11/build/linux-x86_64-normal-server-release/images/heap11", context=context@entry=0x7fffccdb8560, 
+    agent=agent@entry=0x7fff74003d30) at ../../../../../../openj9/runtime/rasdump/heapdump.cpp:2504
+#14 0x00007ffff4e34718 in doHeapDump (agent=0x7fff74003d30, label=0x7fffccdb8050 "/home/keithc/space/openj9/jdk11/build/linux-x86_64-normal-server-release/images/heap11", context=0x7fffccdb8560)
+    at ../../../../../../openj9/runtime/rasdump/dmpagent.c:947
+#15 0x00007ffff4e33e35 in protectedDumpFunction (portLibrary=portLibrary@entry=0x7ffff6778360 <j9portLibrary>, userData=userData@entry=0x7fffccdb7fb0)
+    at ../../../../../../openj9/runtime/rasdump/dmpagent.c:2904
+#16 0x00007ffff5585083 in omrsig_protect (portLibrary=0x7ffff6778360 <j9portLibrary>, fn=0x7ffff4e33e20 <protectedDumpFunction>, fn_arg=0x7fffccdb7fb0, handler=0x7ffff4e33e40 <signalHandler>, 
+    handler_arg=0x0, flags=505, result=0x7fffccdb7fa8) at ../../../../../../../omr/port/unix/omrsignal.c:425
+#17 0x00007ffff4e3745b in runDumpFunction (agent=<optimized out>, label=0x7fffccdb8050 "/home/keithc/space/openj9/jdk11/build/linux-x86_64-normal-server-release/images/heap11", context=<optimized out>)
+    at ../../../../../../openj9/runtime/rasdump/dmpagent.c:2878
+#18 0x00007ffff4e375ef in runDumpAgent (vm=vm@entry=0x7ffff000f690, agent=0x7fff74003d30, context=context@entry=0x7fffccdb8560, state=state@entry=0x7fffccdb84a8, detail=detail@entry=0x7ffff4e68fbc "", 
+    timeNow=timeNow@entry=1602084713813) at ../../../../../../openj9/runtime/rasdump/dmpagent.c:2804
+#19 0x00007ffff4e37ca4 in createAndRunOneOffDumpAgent (vm=vm@entry=0x7ffff000f690, context=context@entry=0x7fffccdb8560, kind=kind@entry=5, optionString=<optimized out>)
+    at ../../../../../../openj9/runtime/rasdump/dmpagent.c:2711
+#20 0x00007ffff4e4efb6 in triggerOneOffDump (vm=0x7ffff000f690, optionString=<optimized out>, caller=0x7fff74000ba0 "com.ibm.jvm.Dump.heapDumpToFile", fileName=0x7fffccdb85f0 "", fileNameLength=1025)
+    at ../../../../../../openj9/runtime/rasdump/trigger.c:915
+#21 0x00007fffee2f63a2 in Java_com_ibm_jvm_Dump_triggerDumpsImpl (env=0x29a600, clazz=<optimized out>, jopts=0x2f3298, jevent=0x2f3290) at ../../../../../../openj9/runtime/jcl/common/dump.c:252
+#22 0x00007fffd45f7790 in ?? ()
+#23 0x00000000836d83a8 in ?? ()
+#24 0x000000000029a600 in ?? ()
+#25 0x000000000029a600 in ?? ()
+#26 0x00007fffccdb8b90 in ?? ()
+#27 0x00000000000cc400 in ?? ()
+#28 0x00000000fff997e0 in ?? ()
+#29 0x00007fffd46018a0 in ?? ()
+#30 0x00007fffd460167c in ?? ()
+#31 0x00000000000cc400 in ?? ()
+#32 0x00007fffd46018b0 in ?? ()
+#33 0x0000000000004010 in ?? ()
+#34 0x0000000000004000 in ?? ()
+#35 0x00000000000cc400 in ?? ()
+#36 0x0000000000000000 in ?? ()
+```

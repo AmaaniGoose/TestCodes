@@ -1,0 +1,13 @@
+Currently in codegen checkcast evaluator only supports inline evaluation for
+constant cast classes. If the cast class is not known at compile time a VM
+helper call is generated. This is true for X, and should also be true on P/Z, as 
+up until now we do not generate checkcast nodes where the cast class child
+is dynamic.
+
+With upcoming optimizer changes where certain
+instanceOf nodes are transformed into checkcast with dynamic cast class,
+there is a need to support the inline evaluation for these new cases. 
+
+The X support is implemented in https://github.com/eclipse/openj9/pull/5176
+We now need P/Z codegen to inspect their respective evaluator code and 
+implement the support if it has not been implemented.

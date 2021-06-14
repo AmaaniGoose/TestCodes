@@ -1,0 +1,14 @@
+```
+/**
+ * Queries whether field of type clazz can ever contain a valueType
+ * 
+ * @param[in] clazz type to query 
+ * 
+ * 
+ * @return TRUE, if type can refer to valuetype, FALSE otherwise
+ */
+BOOLEAN
+canReferToAValueType(J9Class *clazz);
+```
+
+This is a static helper

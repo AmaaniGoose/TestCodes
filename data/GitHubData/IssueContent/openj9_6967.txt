@@ -1,0 +1,37 @@
+### Summary
+
+`TestSignalSupport` was run on Linux, AIX, MacOS and Windows. While comparing the test output between Hotspot and OpenJ9, it was found that the following platform specific signals are supported by Hotspot but not by OpenJ9:
+
+- **Linux:** `SIGCLD`, `SIGPWR`, `SIGSTKFLT`.
+- **AIX:** `SIGCLD`, `SIGCPUFAIL`, `SIGDANGER`, `SIGEMT`, `SIGGRANT`, `SIGLOST`, `SIGMIGRATE`, `SIGMSG`, `SIGPRE`, `SIGPWR`, `SIGRETRACT`, `SIGSAK`, `SIGSOUND`.
+- **MacOS:** `SIGEMT`.
+- **Windows:** None.
+
+### TestSignalSupport.java
+```
+import sun.misc.Signal;
+
+public class TestSignalSupport {
+	private static String[] signals = {"ABRT", "ALRM", "BREAK", "BUS", "CHLD", "CLD", "CONT", "CPUFAIL", "DANGER", "EMT", "FPE", "FREEZE", "GRANT", "HUP", "ILL", "INFO", "INT", "IO", "IOT", "KILL", "LOST", "LWP", "MIGRATE", "MSG", "PIPE", "POLL", "PRE", "PROF", "PWR", "QUIT", "RECONFIG", "RETRACT", "SAK", "SEGV", "SOUND", "STKFLT", "STOP", "SYS", "TERM", "THAW", "TRAP", "TSTP", "TTIN", "TTOU", "UNUSED", "URG", "USR1", "USR2", "VTALRM", "WATIING", "WINCH", "XCPU", "XFSZ", "XRES", "RTMIN", "RTMAX"};
+
+	public static void main(String args[]) {
+   		for (String signal : signals) {
+			try {
+				Signal sig = new Signal(signal);
+				System.out.println("Supported signal: SIG" + signal);
+			} catch (IllegalArgumentException e) {
+				System.out.println("Unsupported signal: SIG" + signal);
+			}
+		}
+	}
+}
+```
+
+### Test Output
+
+| Operating System | Hotspot Test Output | OpenJ9 Test Output |
+| ------------- | ------------- | ------------- |
+| Linux | [hotspot_linux_signals.txt](https://github.com/eclipse/openj9/files/3575759/hotspot_linux_signals.txt) | [openj9_linux_signals.txt](https://github.com/eclipse/openj9/files/3575763/openj9_linux_signals.txt) |
+| AIX | [hotspot_aix_signals.txt](https://github.com/eclipse/openj9/files/3575758/hotspot_aix_signals.txt) | [openj9_aix_signals.txt](https://github.com/eclipse/openj9/files/3575762/openj9_aix_signals.txt) |
+| MacOS | [hotspot_mac_signals.txt](https://github.com/eclipse/openj9/files/3575760/hotspot_mac_signals.txt) | [openj9_mac_signals.txt](https://github.com/eclipse/openj9/files/3575764/openj9_mac_signals.txt) |
+| Windows | [hotspot_win64_signals.txt](https://github.com/eclipse/openj9/files/3575761/hotspot_win64_signals.txt) | [openj9_win64_signals.txt](https://github.com/eclipse/openj9/files/3575765/openj9_win64_signals.txt) |

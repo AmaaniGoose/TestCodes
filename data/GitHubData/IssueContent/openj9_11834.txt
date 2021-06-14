@@ -1,0 +1,7 @@
+https://ci.eclipse.org/openj9/job/Build_JDKnext_x86-64_mac_OpenJDK/393
+osx1014-x86-2
+```
+01:42:47  [100%] Generating /Users/jenkins/workspace/Build_JDKnext_x86-64_mac_OpenJDK/build/macosx-x86_64-server-release/vm/ddr_info/sets/j9ddr.macros
+01:42:47  [100%] Generating /Users/jenkins/workspace/Build_JDKnext_x86-64_mac_OpenJDK/build/macosx-x86_64-server-release/vm/runtime/j9ddr.dat, /Users/jenkins/workspace/Build_JDKnext_x86-64_mac_OpenJDK/build/macosx-x86_64-server-release/vm/superset.dat
+01:42:49  Error: /Users/jenkins/workspace/Build_JDKnext_x86-64_mac_OpenJDK/omr/ddr/lib/ddr-scanner/dwarf/DwarfScanner.cpp:1622 scanFile - Failed to initialize libDwarf scanning /Users/jenkins/workspace/Build_JDKnext_x86-64_mac_OpenJDK/build/macosx-x86_64-server-release/vm/runtime/libj9gc29.dylib.dSYM/Contents/Resources/DWARF/libj9gc29.dylib: DW_DLE_VMM (9) dwarf format/library version mismatch
+```

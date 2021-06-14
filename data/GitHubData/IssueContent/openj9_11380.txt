@@ -1,0 +1,1 @@
+The list of excluded tests in the defaults.yml should only take affect for a nightly build. When running a custom build, personal build, or PR testing, the excluded test list should be ignored. In these cases it's up to the user to decide which tests to run.

@@ -1,0 +1,82 @@
+```
+> !vmcheck
+<vm check: Checking threads>
+<vm check: Checking 30 threads done>
+<vm check: Checking classes>
+<vm check: FAILED - Error class=0xe83c400 not found in classLoader=0x7ff285856368>
+<vm check: FAILED - Error class=0xe83ba00 not found in classLoader=0x7ff285856368>
+<vm check: FAILED - Error class=0xe83b100 not found in classLoader=0x7ff285856368>
+<vm check: FAILED - Error class=0xe83a800 not found in classLoader=0x7ff285856368>
+<vm check: FAILED - Error class=0xe7c9b00 not found in classLoader=0x7ff285856068>
+<vm check: FAILED - Error class=0xe7c9700 not found in classLoader=0x7ff285856068>
+<vm check: FAILED - Error class=0xe7c1100 not found in classLoader=0x7ff285856068>
+<vm check: FAILED - Error class=0xe7b8c00 not found in classLoader=0x7ff285856068>
+<vm check: FAILED - Error class=0xe531600 not found in classLoader=0x7ff285856068>
+<vm check: Checking 3392 classes (0 obsolete) done>
+<vm check: Checking ROM classes>
+<vm check: Checking 3392 ROM classes done>
+<vm check: Checking methods>
+<vm check: Checking 45320 methods done>
+<vm check: Checking ROM intern string nodes>
+<vm check: Checking 2345 ROM intern string nodes done>
+
+>!j9class 0xe83c400
+J9Class at 0xe83c400 {
+  Fields for J9Class:
+	0x0: UDATA eyecatcher = 0x0000000099669966 (2573637990)
+	0x8: struct J9ROMClass* romClass = !j9romclass 0x000000002AEE18A0
+	0x10: void** superclasses = !j9x 0x000000000E83CA38
+	0x18: UDATA classDepthAndFlags = 0x00000000000E0001 (917505)
+	0x20: U32 classDepthWithFlags = 0x00000000 (0)
+	0x24: U32 classFlags = 0x00000040 (64)
+	0x28: struct J9ClassLoader* classLoader = !j9classloader 0x00007FF285856368
+	0x30: struct J9Object* classObject = !j9object 0x0000000700194090 // java/lang/Class
+	0x38: volatile UDATA initializeStatus = 0x0000000000000001 (1)
+	0x40: struct J9Method* ramMethods = !j9method 0x000000000E83C9B8 // org/renaissance/RenaissanceSuite$$$Lambda$94/0x0000000000000000.<init>()V
+	0x48: UDATA* ramStatics = !j9x 0x0000000000000000
+	0x50: struct J9Class* arrayClass = !j9class 0x0000000000000000
+	0x58: UDATA totalInstanceSize = 0x0000000000000004 (4)
+	0x60: struct J9ITable* lastITable = !j9itable 0x000000000E83C690
+	0x68: UDATA* instanceDescription = !j9x 0x0000000000000001
+	0x70: UDATA* instanceLeafDescription = !j9x 0x0000000000000001
+	0x78: UDATA instanceHotFieldDescription = 0x0000000000000000 (0)
+	0x80: UDATA selfReferencingField1 = 0x0000000000000000 (0)
+	0x88: UDATA selfReferencingField2 = 0x0000000000000000 (0)
+	0x90: struct J9Method* initializerCache = !j9method 0x0000000000000000
+	0x98: UDATA romableAotITable = 0x0000000006427000 (105017344)
+	0xa0: UDATA packageID = 0x00007FF285064821 (140679590594593)
+	0xa8: struct J9Module* module = !j9module 0x0000000000000000
+	0xb0: struct J9Class* subclassTraversalLink = !j9class 0x000000000E83BA00 // org/renaissance/RenaissanceSuite$$$Lambda$93/0x0000000000000000
+	0xb8: struct J9Class* subclassTraversalReverseLink = !j9class 0x000000000E833400 // scala/reflect/ClassTag$
+	0xc0: void** iTable = !j9x 0x000000000E83C690
+	0xc8: UDATA castClassCache = 0x000000000E519500 (240227584)
+	0xd0: void** jniIDs = !j9x 0x00007FF284F046C0
+	0xd8: UDATA lockOffset = 0x0000000000000004 (4)
+	0xe0: U32 paddingForGLRCounters = 0x00000000 (0)
+	0xe4: U16 reservedCounter = 0x0000 (0)
+	0xe6: U16 cancelCounter = 0x0000 (0)
+	0xe8: UDATA newInstanceCount = 0x00000000000003E8 (1000)
+	0xf0: IDATA backfillOffset = 0x0000000000000008 (8)
+	0xf8: struct J9Class* replacedClass = !j9class 0x0000000000000000
+	0x100: UDATA finalizeLinkOffset = 0x0000000000000000 (0)
+	0x108: struct J9Class* nextClassInSegment = !j9class 0x0000000000000000
+	0x110: UDATA* ramConstantPool = !j9x 0x000000000E83C8B0
+	0x118: struct J9Object** callSites = !j9x 0x0000000000000000
+	0x120: struct J9Object** methodTypes = !j9x 0x0000000000000000
+	0x128: struct J9Object** varHandleMethodTypes = !j9x 0x0000000000000000
+	0x130: struct J9VMCustomSpinOptions* customSpinOption = !j9vmcustomspinoptions 0x0000000000000000
+	0x138: void** staticSplitMethodTable = !j9x 0x0000000000000000
+	0x140: void** specialSplitMethodTable = !j9x 0x0000000000000000
+	0x148: struct J9JITExceptionTable* jitMetaDataList = !j9jitexceptiontable 0x0000000000000000
+	0x150: struct J9Class* gcLink = !j9class 0x0000000000000000
+	0x158: struct J9Class* hostClass = !j9class 0x000000000E52F900 // org/renaissance/RenaissanceSuite$
+	0x160: struct J9FlattenedClassCache* flattenedClassCache = !j9flattenedclasscache 0x0000000000000000
+	0x168: struct J9ClassHotFieldsInfo* hotFieldsInfo = !j9classhotfieldsinfo 0x0000000000000000
+}
+Class name: org/renaissance/RenaissanceSuite$$$Lambda$94/0x0000000000000000
+To view static fields, use !j9statics 0x000000000E83C400
+To view instance shape, use !j9classshape 0x000000000E83C400
+```
+This particular instance is from Java 8.
+
+The same error appears to exist in the runtime vmcheck (by inspection - I haven't run it).

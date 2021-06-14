@@ -1,0 +1,54 @@
+Failure link
+------------
+
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_extended.functional_aarch64_linux/37/console
+
+```
+03:13:45  ===============================================
+03:13:45  Running test testSCCacheManagement_0 ...
+03:13:45  ===============================================
+03:13:45  testSCCacheManagement_0 Start Time: Wed Nov 18 03:13:45 2020 Epoch Time (ms): 1605669225936
+03:13:45  "/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+03:13:46  JVMSHRC005I No shared class caches available
+03:13:46  JVMSHRC005I No shared class caches available
+03:13:46  cache cleanup done
+03:13:46  variation: NoOptions
+03:13:46  JVM_OPTIONS:  
+03:13:46  { itercnt=1; \
+03:13:46  mkdir -p "/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/test_output_16056600509485/testSCCacheManagement_0"; \
+03:13:46  cd "/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/test_output_16056600509485/testSCCacheManagement_0"; \
+03:13:46  export LD_LIBRARY_PATH="/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdkbinary/openjdk-test-image/openj9:/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/../lib/compressedrefs:/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/../lib/j9vm:"; \
+03:13:46  	perl /home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../../jvmtest/TestConfig/scripts/tools/sysvcleanup.pl all ; \
+03:13:46  	cp "/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../../jvmtest/functional/CacheManagement/CacheManagement.jar" .; \
+03:13:46  	cp "/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/lib/junit4.jar" .; \
+03:13:46  	cp "/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../../jvmtest/functional/cmdLineTests/utils/utils.jar" .; \
+03:13:46  	true CacheManagement.jar ; \
+03:13:46  	true junit4.jar ; \
+03:13:46  	true utils.jar ; \
+03:13:46  	"/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/jar" xf CacheManagement.jar; \
+03:13:46  	 \
+03:13:46  	"/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java"   \
+03:13:46  	-Dtest.target.config=config.defaults \
+03:13:46  	-agentlib:jvmtitest=test:sca001 \
+03:13:46  	-DREALTIME=FALSE \
+03:13:46  	-DEXECUTABLE_SUFFIX= \
+03:13:46  	-DJAVA_TEST_COMMAND=""/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java"  "\
+03:13:46  	-DJAVA5_HOME=/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image \
+03:13:46  	"-DTEST_JVM_OPTIONS= " \
+03:13:46  	-cp "CacheManagement.jar:/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/lib/junit4.jar" \
+03:13:46  	junit.textui.TestRunner tests.sharedclasses.options.junit.AllTests; \
+03:13:46  if [ $? -eq 0 ] ; then echo ""; echo "testSCCacheManagement_0""_PASSED"; echo ""; cd /home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/..;  else echo ""; echo "testSCCacheManagement_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/test_output_16056600509485/TestTargetResult";
+03:13:46  Start SysV clean up for user:all 
+03:13:46  Clean up is finished:
+03:13:46  	Shared Memory Segments Removed:6
+03:13:46  	Shared Semaphores Removed:7
+03:13:47  Please set either defaultCacheLocation or cacheDir or controlDir in the config file or with -D!
+03:13:47  
+03:13:47  --------- PROGRAM RUN COMMANDLINE INFO ---------
+03:13:47  java_exe =	/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java  
+03:13:47  cmd.runProgramSimpleApp =	null
+03:13:47  .Running  :testCacheCreationListingDestroying01  (Test suite : TestOptionsDefault)
+
+REST API
+Jenkins 2.249.3
+```

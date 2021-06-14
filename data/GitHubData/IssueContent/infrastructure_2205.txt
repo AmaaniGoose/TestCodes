@@ -1,0 +1,12 @@
+Please put the name of the software product (and affected platforms if relevant) in the title of this issue
+
+- [ ] Missing install
+- [ ] Bug in ansible playbook
+- [x] Request for new playbook addition
+
+Details:
+Recent security scans at OSUOSL show potential vulerabilities.
+
+This issue is to track the changes being tested - before being put into a new playbook, or modifying an existing playbook.
+
+Deeper details are discussed within the security related slack channel.

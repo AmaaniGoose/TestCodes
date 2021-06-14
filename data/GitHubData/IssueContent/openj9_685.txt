@@ -1,0 +1,14 @@
+When running on a 64 bit OS the JVM will crash with a gpf on a non-aligned address:
+
+```
+1XHEXCPCODE    J9Generic_Signal_Number: 00000008
+1XHEXCPCODE    Signal_Number: 00000007
+1XHEXCPCODE    Error_Value: 00000000
+1XHEXCPCODE    Signal_Code: 00000001
+1XHEXCPCODE    Handler1: F6421D38
+1XHEXCPCODE    Handler2: F6364D4C
+1XHEXCPCODE    InaccessibleAddress: F65B2015
+```
+The crash can be avoided by using -Xjit:disableInterpreterProfiling
+
+NB Some kernels have a trap handler that emulates the un-aligned memory accesses. This avoids the crash but presumably has a significant performance impact.

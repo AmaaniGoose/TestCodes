@@ -1,0 +1,11 @@
+We see Kafka tests failing with java.lang.AssertionError when ran with latest OpenJDK-OpenJ9 80 builds.
+
+openjdk version "1.8.0_181-adoptopenjdk"
+OpenJDK Runtime Environment (build 1.8.0_181-adoptopenjdk-13)
+Eclipse OpenJ9 VM (build master-92b34592, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20180906_11 (JIT enabled, AOT enabled)
+OpenJ9   - 92b34592
+OMR      - 97818b41
+JCL      - 2b004fdb based on jdk8u181-b13)
+
+
+

@@ -1,0 +1,1 @@
+We need to investigate how we can improve testing of different aspects related with GC Verbose log (creation process, content etc.). There is one known case we should cover: test for creation of multiple GC Verbose logs while command line option contain `%` characters (`%s` combination to be precise). 

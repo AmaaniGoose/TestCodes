@@ -1,0 +1,5 @@
+Issue raised on twitter: https://twitter.com/lemmster/status/1089658388038836229 shows that OpenJ9 has lower throughput on this workload.
+
+Details on how to reproduce the issue: https://twitter.com/lemmster/status/1089913646577119232
+
+> To reproduce, download the jar from https://tla.msr-inria.inria.fr/kuppe/tla2tools-j9.jar Forget about the "-workers 1" parameter as a single worker is the default anyway: Run java -jar tla2tools-j9.jar. The metric to look out for shows up after five minutes as the final "XXXX states generated,...". By the way, on 11 I ran with '-XX:+UseParallelGC'.

@@ -1,0 +1,6 @@
+Test prereqs needed are listed here: 
+https://github.com/eclipse/openj9/blob/master/test/docs/Prerequisites.md
+
+Based on [console output of grinder run](https://ci.adoptopenjdk.net/view/work%20in%20progress/job/Grinder_SandboxExtra/10/console), test-inspira-solaris10u11-sparcv9-1 is missing **ant** (and perhaps other prereqs on that list).
+
+fyi @gdams 

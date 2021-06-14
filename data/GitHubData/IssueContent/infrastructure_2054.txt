@@ -1,0 +1,5 @@
+Missing from the aixPB - new style - is a README.md.
+
+I propose this issue - to be fixed multiple times - as documentation does not happen all at once - to make the AIX playbook more accessible to those who are not working with it regularly.
+
+The first PR will be - just a start - to get the file into the system. And over time, it can be updated as roles get added/updated and as our experience with AIX and AdoptOpenJDK grows - and need not be lost.

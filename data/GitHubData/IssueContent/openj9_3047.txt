@@ -1,0 +1,8 @@
+>A class or interface C is accessible to a class or interface D if and only if one of the following is true:
+• C is public, and a member of the same run-time module as D (§5.3.6).
+• C is public, and a member of a different run-time module than D, and C's run- time module is read by D's run-time module, and C's run-time module exports C's run-time package to D's run-time module.
+• C is not public, and C and D are members of the same run-time package.
+
+http://cr.openjdk.java.net/~iris/se/11/latestSpec/java-se-11-jvms-draft-diffs.pdf
+
+_Originally posted by @DanHeidinga in https://github.com/eclipse/openj9/issues/3037#issuecomment-424706869_

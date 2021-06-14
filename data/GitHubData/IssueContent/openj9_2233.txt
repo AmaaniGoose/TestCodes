@@ -1,0 +1,4 @@
+Needed for a legacy version of Java 8 on ARM.
+
+@pshipton or @DanHeidinga do you know if the ARM JCL has been updated?
+If you don't know, I can run a personal build to check.

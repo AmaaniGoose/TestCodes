@@ -1,0 +1,74 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk11_j9_extended.functional_ppc64le_linux/9`:
+```
+23:40:27  openjdk version "11.0.10" 2021-01-19
+23:40:27  OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.10+9-202101250344)
+23:40:27  Eclipse OpenJ9 VM AdoptOpenJDK (build master-6485d7550, JRE 11 Linux ppc64le-64-Bit Compressed References 20210124_14 (JIT enabled, AOT enabled)
+23:40:27  OpenJ9   - 6485d7550
+23:40:27  OMR      - 4aa961a4c
+23:40:27  JCL      - 99ebc53c68 based on jdk-11.0.10+9)
+```
+to rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links:
+01:56:47  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&JDK_VENDOR=adoptopenjdk&BUILD_LIST=functional&PLATFORM=ppc64le_linux&TARGET=testSoftMxUserScenario_2
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+===============================================
+Running test testSoftMxUserScenario_2 ...
+===============================================
+testSoftMxUserScenario_2 Start Time: Mon Jan 25 01:09:52 2021 Epoch Time (ms): 1611554992780
+variation: Mode601
+JVM_OPTIONS:  -Xcompressedrefs -Xjit -Xgcpolicy:optthruput 
+FAILED: testSoftmxUserScenario
+java.lang.AssertionError: FAIL: JVM did not start up and run ok when we set a -Xmx larger than (memory available + swap) and then set a softmx 1/2 that value which is less than ( memory available + swap) 
+	at org.testng.AssertJUnit.fail(AssertJUnit.java:59)
+	at org.testng.AssertJUnit.assertTrue(AssertJUnit.java:24)
+	at org.openj9.test.softmx.SoftmxUserScenarioTest.testSoftmxUserScenario(SoftmxUserScenarioTest.java:68)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+	at org.testng.TestRunner.run(TestRunner.java:505)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+	at org.testng.TestNG.runSuites(TestNG.java:1049)
+	at org.testng.TestNG.run(TestNG.java:1017)
+	at org.testng.TestNG.privateMain(TestNG.java:1354)
+	at org.testng.TestNG.main(TestNG.java:1323)
+
+
+===============================================
+    testSoftMxUserScenario
+    Tests run: 1, Failures: 1, Skips: 0
+===============================================
+
+
+===============================================
+JLM_Tests_Suite
+Total tests run: 1, Failures: 1, Skips: 0
+===============================================
+
+
+testSoftMxUserScenario_2_FAILED
+```
+Note: this test is excluded recently for `AArch64` https://github.com/eclipse/openj9/pull/9176

@@ -1,0 +1,36 @@
+Failure link
+------------
+https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/lang/StackTraceElement/PublicConstructor.java
+
+Consistent test failure for JDK11-openj9 for x86_linux, windows and osx (test pass fine on hotspot for all platforms). Cause is due to an `assertEqual failure` when testing the constructor with a module attached.
+
+Optional info
+-------------
+Investigation reveal the cause is the ``ToString()`` function in the ``StackTraceElement`` Class. The function doesn't take into account the class loader name and module version when converting the instance to a string. 
+
+Digging deeper, the compiler generates its own version of the `StackTraceElement` class and `ToString` function from the `com.ibm.oti.util` package:
+
+The fourth parameter in the caller function is potentially why it won't recognise the missing fields in the `ToString`.
+
+Failure output
+--------------
+```
+PublicConstructor
+15:46:02  STDERR:
+15:46:02  java.lang.RuntimeException: Expected: app/jdk.module@9.0/com.acme.Widget.frobnicate(Widget.java:42) but found: jdk.module/com.acme.Widget.frobnicate(Widget.java:42)
+15:46:02  	at PublicConstructor.assertEquals(PublicConstructor.java:92)
+15:46:02  	at PublicConstructor.testConstructorWithModule(PublicConstructor.java:86)
+15:46:02  	at PublicConstructor.main(PublicConstructor.java:36)
+15:46:02  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:46:02  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+15:46:02  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:46:02  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+15:46:02  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+15:46:02  	at java.base/java.lang.Thread.run(Thread.java:831)
+15:46:02  
+15:46:02  JavaTest Message: Test threw exception: java.lang.RuntimeException
+15:46:02  JavaTest Message: shutting down test
+15:46:02  
+15:46:02  
+15:46:02  TEST RESULT: Failed. Execution failed: `main' threw exception: java.lang.RuntimeException: Expected: app/jdk.module@9.0/com.acme.Widget.frobnicate(Widget.java:42) but found: jdk.module/com.acme.Widget.frobnicate(Widget.java:42)
+```

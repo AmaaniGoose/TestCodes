@@ -1,0 +1,17 @@
+- cmdLineTester_SCCommandLineOptionTests_1 
+```
+---SUMMARY OF FAILED TESTS---
+nameOption
+nameOption14
+verboseOption
+-----------------------------
+```
+
+- cmdLineTester_SCURLClassLoaderNPTests_1
+```
+---SUMMARY OF FAILED TESTS---
+FindStore.FindClassfile
+FindStore.FindDiffcpClassfile
+-----------------------------
+```
+PR build link: https://ci.eclipse.org/openj9/job/PullRequest-Sanity-JDK10-win_x86-64_cmprssptrs-OpenJ9/2/

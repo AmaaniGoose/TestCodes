@@ -1,0 +1,10 @@
+This issue has happened previously (see infra issue #145) -  /usr/bin/dockerd (deleted) 
+This is causing Docker-based tests to fail (see [openjdk8_hs_externaltest_x86-64_linux/52](https://ci.adoptopenjdk.net/view/External%20tests/job/openjdk8_hs_externaltest_x86-64_linux/52/console))
+
+Comment from previous infra issue: 
+"Apparently the error fork/exec /usr/bin/dockerd (deleted): no such file or directory can be caused by something deleting and recreating /usr/bin/dockerd whilst it's still running, so that the inode of /usr/bin/dockerd doesn't match the inode of the existing dockerd process."
+
+The quick fix is to restart Docker on the machine.  
+
+The longer term solution is to correct the Ansible scripts to restart Docker after an update occurs (or some similar approach).
+

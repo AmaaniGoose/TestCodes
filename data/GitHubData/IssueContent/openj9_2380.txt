@@ -1,0 +1,61 @@
+OpenJ9 has added a new option `-XX:+UseContainerSupport` to enable tuning some aspects of JVM when running in container. See https://github.com/eclipse/openj9/issues/2263#issuecomment-404507941 for the features enabled by `-XX:+UseContainerSupport`.
+It would be good to enable this option by default. But before we do that, we need to add support for container based tests in our builds.
+I am opening this issue to discuss how to go about doing that.
+
+As for the tests to run I am thinking some of [openjdk-systemtest](https://github.com/AdoptOpenJDK/openjdk-systemtest) should be sufficient for now - specifically tests in [openjdk.test.mauve](https://github.com/AdoptOpenJDK/openjdk-systemtest/tree/master/openjdk.test.mauve) and [openjdk.test.jck](https://github.com/AdoptOpenJDK/openjdk-systemtest/tree/master/openjdk.test.jck) projects.
+We can add/subtract tests later once we have the infrastructure and process in place.
+
+I tried running `test.ClassloadingLoadTest` present in `openjdk-systemtest` locally in a docker container. I followed the steps mentioned [here](https://github.com/AdoptOpenJDK/openjdk-systemtest#unix). But before the last step of running the test (using `make test.IClassloadingLoadTest`) I did following steps:
+
+1) I created a docker image `openj9-buildandtest` using this [Dockerfile](https://github.com/eclipse/openj9/blob/master/buildenv/docker/test/Dockerfile)
+
+2) Updated `openjdk-systemtest/openjdk.build/makefile` as:
+   2.1) Added new env variables to be used for mounting relevant directories in the docker container:
+```
+DOCKER_STF_ROOT:=/root/stf
+DOCKER_OPENJDK_SYSTEMTEST_TARGET_ROOT:=/root/openjdk-systemtest
+DOCKER_RESOLVED_PREREQS_ROOT:=/root/systemtest_prereqs
+DOCKER_JAVA_HOME:=/root/java
+DOCKER_STF_COMMAND_PARAMETERS:=$(DOCKER_STF_ROOT)$(D)stf.core$(D)scripts$(D)stf.pl $(JAVA_ARGS_ARG) -test-root="$(DOCKER_STF_ROOT);$(DOCKER_OPENJDK_SYSTEMTEST_TARGET_ROOT)" -systemtest-prereqs="$(DOCKER_RESOLVED_PREREQS_ROOT)" $(REPEAT_ARG_ARG) $(RESULTS_ROOT_ARG) $(RETAIN_ARG) $(RETAIN_LIMIT_ARG) $(RM_PASS_ARG)
+```
+    2.2) Created a new target `test.ClassloadingLoadTestInDocker` in makefile which runs the test in docker container using docker image created in 1) above.
+```
+test.ClassloadingLoadTestInDocker:
+        echo Running target $@
+        docker run --rm -v $(STF_ROOT):$(DOCKER_STF_ROOT) -v $(OPENJDK_SYSTEMTEST_TARGET_ROOT):$(DOCKER_OPENJDK_SYSTEMTEST_TARGET_ROOT) -v $(RESOLVED_PREREQS_ROOT):$(DOCKER_RESOLVED_PREREQS_ROOT) -v $(JAVA_HOME):$(DOCKER_JAVA_HOME) --env STF_ROOT=$(DOCKER_STF_ROOT) --env OPENJDK_SYSTEMTEST_TARGET_ROOT=$(DOCKER_OPENJDK_SYSTEMTEST_TARGET_ROOT) --env RESOLVED_PREREQS_ROOT=$(RESOLVED_PREREQS_ROOT) --env JAVA_HOME=$(DOCKER_JAVA_HOME) --entrypoint perl openj9-buildandtest $(DOCKER_STF_COMMAND_PARAMETERS) -test=ClassloadingLoadTest $(LOG)
+        echo Target $@ completed
+```
+
+3) Added a new entry in `openjdk-systemtest/openjdk.build/playlist.xml` for the new target:
+```
+        <test>
+                <testCaseName>ClassLoadingTestInDocker</testCaseName>
+                <variations>
+                        <variation>-XX:+UseContainerSupport</variation>
+                </variations>
+                <command>cd $(OPENJDK_SYSTEMTEST_ROOT)/openjdk.build && make test.ClassloadingLoadTestInDocker JAVA_ARGS=$(Q)$(JVM_OPTIONS)$(Q); \
+                $(TEST_STATUS)</command>
+                <tags>
+                        <tag>extended</tag>
+                </tags>
+                <subsets>
+                        <subset>SE80</subset>
+                        <subset>SE90</subset>
+                </subsets>
+        </test>
+```
+
+After this setup, I was able to run the test by executing `make test.ClassLoadingTestInDocker`, however, I didn't see `-XX:+UseContainerSupport` option (which I added as the `variation` in the playlist entry for the test) in the java command used to run the test. I guess something more needs to be done to be able to run the test with the given variation.
+
+I have only tried running openjdk-systemtest, but I think similar steps would be needed to run OpenJ9's functional tests in containers, if required.
+
+I am not sure if this is the best way to run a test in docker container, but it worked for me.
+
+Based on my experiment I see following requirements for enabling docker based testing:
+1. Installing docker: As Dan mentioned [here](https://github.com/eclipse/openj9/issues/2263#issuecomment-404531290) we would need our build / test machines to have Docker installed.
+2. Docker as new platform: I guess requirement for running in docker container can be exposed as a new `platformRequirements` in our playlists.
+3. Docker image for running tests: We need to have a docker image that can be used to run the test. Probably we can include a Dockerfile in our test repo and create an image when building the tests. OpenJ9 already has one for running the tests that I used above. I guess we can add similar Dockerfile in adopt as well, if it is not already available.
+4. Running tests in docker container: Updating makefiles and playlists for running the test in docker container.
+
+@smlambert @AdamBrousseau @jdekonin @DanHeidinga 
+what are your thoughts on this?

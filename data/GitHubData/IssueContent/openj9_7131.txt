@@ -1,0 +1,1 @@
+At present, only x86 specializes this method.  Research the semantics of `sun_nio_ch_NativeThread_current`, its current relevance, and consider implementing a fast version on Power, Z, AArch64, and AArch32.

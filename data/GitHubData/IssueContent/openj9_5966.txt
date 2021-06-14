@@ -1,0 +1,9 @@
+The `!jitstack` and `!jitstackslots` command in DDR are used to start the stack walk at a JIT frame by providing sufficient root values to walk the stack.
+
+Currently, the root values are `vmThread`, `SP`, `PC` and (optionally) `ELS`. For a complete walk, values for `j2iFrame` and `i2jState` must also be provided (like `ELS`, they are currently inferred from the vmThread). The two new args should be added as optional.
+
+`j2iFrame` is either `NULL` (if no jit->interp transition has ever taken place) or the `BP` value of the `j2i` frame.
+
+`i2jState` starts off pointing to the `ELS i2jState`, but is updated to point into the `j2i` frame each time one is seen.
+
+Almost all real-world uses of these extensions target a JIT frame very near the top of the stack, so this has not been an issue.

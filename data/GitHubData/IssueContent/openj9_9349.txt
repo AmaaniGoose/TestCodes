@@ -1,0 +1,5 @@
+> The above reminds me we don't have Pull Request testing capability (`jenkins ...`) for branches. Backports either need to be tested manually before merging, or merged with subsequent release branch testing. The latter is what we do now for the quarterlies, but 99% of the time the change to the release branch is identical to the head stream change.
+
+_Originally posted by @pshipton in https://github.com/eclipse/openj9/issues/9316#issuecomment-618589552_
+
+We should update our pipelines and CI to allow building the release branches.  Our current approach is mostly OK for the quarterly releases but becomes problematic the earlier we branch and the more late changes have to be made in the release streams.

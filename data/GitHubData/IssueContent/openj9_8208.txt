@@ -1,0 +1,30 @@
+Failure link
+------------
+This [test](https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/15f5dcd507b974d4a2a10d35adbcfce62b4f5b8f/test/jdk/java/lang/invoke/MethodHandlesSpreadArgumentsTest.java#L1) has been failing intermittently on jdk11-openj9 for a while and should be investigated more closely
+See: https://github.com/AdoptOpenJDK/openjdk-tests/issues/1511#issuecomment-566061712
+
+- test category, openjdk
+- OS/architecture, openjdk_x86-64_windows
+```
+FIRST FAILING
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.6+4-201912022223)
+Eclipse OpenJ9 VM AdoptOpenJDK (build master-fc545f28f, JRE 11 Mac OS X amd64-64-Bit Compressed References 20191202_401 (JIT enabled, AOT enabled)
+OpenJ9   - fc545f28f
+OMR      - 97da8ad70
+JCL      - 682588fef2 based on jdk-11.0.6+4)
+```
+Optional info
+-------------
+- intermittent failure (yes): 
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+junit -XX:+IgnoreUnrecognizedVMOptions -XX:-VerifyDependencies -esa test.java.lang.invoke.MethodHandlesSpreadArgumentsTest
+Unhandled exception
+Type=Segmentation error vmState=0x00000000
+Windows_ExceptionCode=c0000005 J9Generic_Signal=00000004 ExceptionAddress=00007FFD2D4EB95D ContextFlags=0010005f
+...
+TEST RESULT: Failed. Unexpected exit from test [exit code: -1]
+```
+Currently running a 200 iteration grinder to determine the rate of failure...

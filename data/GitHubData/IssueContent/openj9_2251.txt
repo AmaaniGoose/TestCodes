@@ -1,0 +1,54 @@
+In Java 10 OpenJDK was using minimum of cpu shares, cpu quota and cpuset. In https://bugs.openjdk.java.net/browse/JDK-8197589 there is a discussion that this approach of using minimum of the three would result in under-utilization of cpu resources if both cpu shares and cpu quota is set as is the case in kubernetes. To work around this issue, OpenJDK has added a new flag `PreferContainerQuotaForCPUCount`. If this flag is set, JVM would only use cpu quota and ignore cpu shares. If this flag is not set, it would fallback to previous mechansim of using minimum of the three. By default the flag is set.
+
+**What to do in OpenJ9?**
+OpenJ9 already uses cpu quota and cpuset to determine available CPUs. So we need to decide about `PreferContainerQuotaForCPUCount` and whether to use cpu shares or not when making any decision.
+* Considering the way OpenJ9 uses available cpus, I feel basing decision on cpu quota (and ignoring cpu shares as dictated by `-XX:+PreferContainerQuotaForCPUCount` which happens to be the current behavior of OpenJ9) may work fine if the containers cpu share and cpu quota value does not differ by a large value. For example, if cpu shares is for 1 cpu  and cpu quota is for 2 cpus then using 2 (instead of 1) as available CPUs is not going to have any measurable difference in performance IMO.
+However, if the difference is very large, for example cpu share is for 1 cpu and cpu quota is set to 8 cpus, in such case should the decision be based on cpu quota alone? But then again, I feel such an example is more likely to be due to incorrect configuration, in which case any perceived performance degradation cannot be attributed to JVM alone.
+* Downside of using `-XX:+PreferContainerQuotaForCPUCount` (or OpenJ9's current behavior) is if all containers become highly active at the same time, then the performance is likely to suffer.
+* We have tried to support same options as OpenJDK. So from that point of view, we would have to add support for `-XX:-PreferContainerQuotaForCPUCount` which takes minimum of cpu share, quota and cpuset.
+
+Having said this, providing an option to choose one or the other doesn't help much as the things are very dynamic in kubernetes kind of environment (see below). Providing a mechanism to tune itself dynamically based on certain events would be a better way for JVM to adapt to dynamic environment like this. But I guess this would be a long term plan requiring significant effort. And then this shouldn't be just limited to JVM; applications higher up the stack would also need to adapt accordingly to best utilize the available resources across the stack.
+
+**Background**
+I did some study on how cpu shares and quota are being used in kubernetes. Sharing that information here:
+
+Currently cgroup provides 3 mechanisms to limit CPUs available to the processes:
+1) cpuset
+2) cpu.cfs_quota_us
+3) cpu.shares
+
+By reading up on cpu.shares [here](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/resource_management_guide/sec-cpu), it looks like a process cannot determine the absolute quantity of cpus available solely based on cpu.shares.
+As the link states:
+```
+Using relative shares to specify CPU access has two implications on resource management
+that should be considered:
+
+1. Because the CFS does not demand equal usage of CPU, it is hard to predict how much CPU 
+time a group will be allowed to utilize. 
+When tasks in one cgroup are idle and are not using any CPU time, the leftover time is
+collected in a global pool of unused CPU cycles. 
+Other cgroups are allowed to borrow CPU cycles from this pool.
+
+2.The actual amount of CPU time that is available to a cgroup can vary depending on the 
+number of cgroups that exist on the system.
+```
+
+**Kubernetes and cpu.shares**
+So, how are cpu.shares actually used in Kubernetes?
+The mechanism is well documented at https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/. Note that it may not be the only way to use cpu.shares in practice, but at this point I don't know of any other way.
+
+I will try to summarize the kubernetes mechanism here based on above link:
+Kubernetes has a concept of resource `requests` and `limits` for the containers. Each container can specify `requests` and `limits` for cpu and memory resources. Resource `requests` are used by kubernetes for scheduling the pod (for simplicity consider a pod as collection of containers) to node. Each node has certain amount of memory and cpu. While scheduling a pod to the node, kubernetes ensures the sum of resource (memory and cpu) `requests` of scheduled containers does not exceed the resource capacity of the node.
+Note that only `requests` are used for scheduling, not `limits`. The resource `limits` provide upper limit on the resource usage of the container during runtime, exceeding which container may not work properly (eg if it exceeds memory limit, it gets killed, or if it exceeds cpu limit, it may get stalled for that period).
+So, the `requests` can be seen as a soft limit, and `limits` as a hard limit on the resource usage of the container.
+
+Internally the cpu `requests` is actually translated to `cpu.shares`, and cpu `limits` is translated to `cpu.cfs_quota_us`.
+
+Given this information, I think we can conclude following points:
+1) sum of cpu.shares of all containers on the node would never exceed cpu capacity of the node
+2) if the node is packed to its maximum and processes in the containers are trying to use 100% cpu, then each container will get cpus in ratio of cpu.shares
+3) if the node is not packed to its maximum, and/or processes in the containers are idle, then active containers can get more cpu than their cpu.shares indicate, but limited by cpu.cfs_quota_us
+
+In addition, Kubernetes also classifies pods into QoS classes (`Guaranteed`, `Burstable`, and `BestEffort`) based on whether `requests` and `limits` are specified or not. More on this can be read at https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod/ and https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/.
+
+The dynamism that cloud provides makes it difficult to determine how many resources will be available to JVM at any point. New containers can come and existing ones can go down - both of these events can change the resources available to other containers.

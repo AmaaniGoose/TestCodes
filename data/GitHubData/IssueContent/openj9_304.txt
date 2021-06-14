@@ -1,0 +1,4 @@
+`Unsafe.ensureClassInitialized()` is a jni method to initialize a class if it hasn't been initialized. Calling to this method will always land in the VM regardless of the class' initialization status. Since a class will only need initialization once, one potential optimization is to emit a check on the initialization status of the class in the jit and skip the call to `Unsafe.ensureClassInitialized()` if it has been initialized. This optimization might not help the performance since we don't expect it to be called very often during steady state, but it might help start up.
+Investigations on some benchmarks such as daytrader and spark are also needed.
+
+This item is inspired by the discussion in https://github.com/eclipse/openj9/pull/210

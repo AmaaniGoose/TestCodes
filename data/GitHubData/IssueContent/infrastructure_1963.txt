@@ -1,0 +1,28 @@
+The following openj9 shared classed test targets may fail when they land on test-azure-win2012r2-x64-2 or test-azure-win2016-x64-1.
+```
+SharedClassesAPI
+SharedClasses.SCM01.MultiCL
+SharedClasses.SCM01.MultiThread
+SharedClasses.SCM01.MultiThreadMultiCL
+SharedClasses.SCM23.MultiCL
+SharedClasses.SCM23.MultiThread
+SharedClasses.SCM23.MultiThreadMultiCL
+```
+The symptoms are various out of memory exceptions - e.g.
+```
+11:52:21  MT4 stderr JVMDUMP032I JVM requested Snap dump using 'C:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_1613993216963\SharedClasses.SCM23.MultiThread_1\20210222-114232-SharedClasses\results\Snap.20210222.114552.7872.0004.trc' in response to an event
+11:52:21  MT4 stderr JVMDUMP010I Snap dump written to C:\Users\jenkins\workspace\Grinder\openjdk-tests\TKG\output_1613993216963\SharedClasses.SCM23.MultiThread_1\20210222-114232-SharedClasses\results\Snap.20210222.114552.7872.0004.trc
+11:52:21  MT4 stderr JVMDUMP013I Processed dump event "systhrow", detail "java/lang/OutOfMemoryError".
+11:52:21  MT4 stderr Exception in thread "main" java.lang.OutOfMemoryError: Failed to create a thread: retVal -1073741830, errno 22
+11:52:21  MT4 stderr 	at java.lang.Thread.startImpl(Native Method)
+11:52:21  MT4 stderr 	at java.lang.Thread.start(Thread.java:993)
+11:52:21  MT4 stderr 	at net.openj9.test.sc.LoaderSlaveMultiThread.run(LoaderSlaveMultiThread.java:130)
+11:52:21  MT4 stderr 	at net.openj9.test.sc.LoaderSlaveMultiThread.main(LoaderSlaveMultiThread.java:59)
+```
+Their Jenkins links show the machines have 4Gb RAM:
+https://ci.adoptopenjdk.net/computer/test-azure-win2012r2-x64-2/ - Failed
+https://ci.adoptopenjdk.net/computer/test-azure-win2016-x64-1/ - Failed
+
+The links for two other machines also show them as having 4Gb memory, but the tests pass on those machines:
+https://ci.adoptopenjdk.net/computer/test-azure-win2012r2-x64-1/ - Passed
+https://ci.adoptopenjdk.net/computer/test-azure-win2012r2-x64-3/ - Passed

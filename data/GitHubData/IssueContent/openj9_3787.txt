@@ -1,0 +1,57 @@
+Tests, `libpathTestRtf` and `libpathTestRtfChild`, hang on OSX. The tests are terminated via a timeout of **6000** seconds. Details about running these tests: [test/functional/cmdLineTests/libpathTest/playlist.xml](https://github.com/eclipse/openj9/blob/master/test/functional/cmdLineTests/libpathTest/playlist.xml).
+
+```
+16:56:54 ===============================================
+16:56:54 Running test cmdLineTester_libpathTestRtf_0 ...
+16:56:54 ===============================================
+16:56:54 cmdLineTester_libpathTestRtf_0 Start Time: Tue Nov 20 16:56:54 2018 Epoch Time (ms): 1542751014149
+16:56:54 variation: NoOptions
+16:56:54 JVM_OPTIONS: -Xcompressedrefs 
+16:56:54 { mkdir -p "/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../TestConfig/test_output_15427493171587/cmdLineTester_libpathTestRtf_0"; \
+16:56:54 	cd "/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../TestConfig/test_output_15427493171587/cmdLineTester_libpathTestRtf_0"; \
+16:56:54 	"/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/bin/java" -Xcompressedrefs  -DJAVA_EXE="/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/bin/java" -DJAVA_HOME="/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/bin/.." -DJAVATEST_ROOT= -DJVM_TEST_ROOT=/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest \
+16:56:54 	-DTESTSJARPATH="/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/functional/cmdLineTests/libpathTest/libpathTest.jar" \
+16:56:54 	-DRESJAR="/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/functional/cmdline_options_testresources/cmdlinetestresources.jar" -jar "/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/functional/cmdline_options_tester/cmdlinetester.jar" \
+16:56:54 	-config "/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/functional/cmdLineTests/libpathTest/libpathRtf.xml" \
+16:56:54 	-xids all,osx_x86-64_cr -xlist "/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/functional/cmdLineTests/libpathTest/exclude.xml" \
+16:56:54 	-nonZeroExitWhenError; \
+16:56:54 	if [ $? -eq 0 ] ; then echo ""; echo "cmdLineTester_libpathTestRtf_0""_PASSED"; echo ""; cd /Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../..;  else echo ""; echo "cmdLineTester_libpathTestRtf_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../TestConfig/test_output_15427493171587/TestTargetResult";
+16:56:54 Parsing exclude list...
+16:56:54   add excludes for [all]
+16:56:54   add excludes for [osx_x86-64_cr]
+16:56:54 DONE in 0 ms.
+16:56:54 *** Starting test suite: LIBPATH Rtf test intended for PMR56610 (CMVC 201272) ***
+16:56:54 Testing: PMR testcase with Rtf/RtfChild involved
+16:56:54 Test start time: 2018/11/20 16:56:54 Eastern Standard Time
+16:56:54 Running command: /Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/bin/java -Xcompressedrefs -Dcom.sun.management.jmxremote -cp /Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/functional/cmdLineTests/libpathTest/libpathTest.jar org.openj9.test.libpath.Rtf /Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/bin/java /Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/functional/cmdLineTests/libpathTest/libpathTest.jar
+16:56:55 Time spent starting: 25 milliseconds
+16:56:55 	Match (success): com.ibm.oti.vm.bootstrap.library.path=/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/lib/compressedrefs:/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/lib
+16:56:55 	Match (required): sun.boot.library.path=/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/lib/compressedrefs:/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/lib
+16:56:55 	Match (required): java.library.path=/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/lib/compressedrefs:/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/lib:/usr/lib
+18:44:49 ***[TEST INFO 2018/11/20 18:44:40] ProcessKiller detected a timeout after 6000000 milliseconds!***
+18:44:49 INFO: The current OS is 'Mac OS X'. 'Debug on timeout' is currently only supported on Linux.
+18:44:49 ***[TEST INFO 2018/11/20 18:44:40] executing kill -ABRT 18719***
+18:44:49 ***[TEST INFO 2018/11/20 18:44:40] kill -ABRT signal sent***
+18:44:49 Time spent executing: 6471900 milliseconds
+18:44:49 Test result: FAILED
+18:44:49 Output from test:
+18:44:49  [OUT] com.ibm.oti.vm.bootstrap.library.path=/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/lib/compressedrefs:/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/lib
+18:44:49  [OUT] sun.boot.library.path=/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/lib/compressedrefs:/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/lib
+18:44:49  [OUT] java.library.path=/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/lib/compressedrefs:/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/jre/lib:/usr/lib
+18:44:49  [OUT] fontmanger LIB: libfontmanager.dylib
+18:44:49  [ERR] _RegisterApplication(), FAILED TO establish the default connection to the WindowServer, _CGSDefaultConnection() is NULL.
+18:44:49  [ERR] 2018-11-20 16:56:55.292 java[18719:4668681] CFPasteboardRef CFPasteboardCreate(CFAllocatorRef, CFStringRef) : failed to create global data
+18:44:49  [ERR] 2018-11-20 16:56:55.293 java[18719:4668681] CFPasteboardRef CFPasteboardCreate(CFAllocatorRef, CFStringRef) : failed to create global data
+18:44:49  [ERR] 2018-11-20 16:56:55.293 java[18719:4668681] CFPasteboardRef CFPasteboardCreate(CFAllocatorRef, CFStringRef) : failed to create global data
+18:44:49  [ERR] 2018-11-20 16:56:55.295 java[18719:4668681] CFPasteboardRef CFPasteboardCreate(CFAllocatorRef, CFStringRef) : failed to create global data
+18:44:49  [ERR] JVMDUMP039I Processing dump event "abort", detail "" at 2018/11/20 18:44:40 - please wait.
+18:44:49  [ERR] JVMDUMP032I JVM requested System dump using '/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15427493171587/cmdLineTester_libpathTestRtf_0/core.20181120.184440.18719.0001.dmp' in response to an event
+18:44:49  [ERR] JVMDUMP012E Error in System dump: The core file created by child process with pid = 22817 was not found. Expected to find core file with name "/cores/core.22817"
+18:44:49  [ERR] JVMDUMP032I JVM requested Java dump using '/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15427493171587/cmdLineTester_libpathTestRtf_0/javacore.20181120.184440.18719.0002.txt' in response to an event
+18:44:49  [ERR] JVMDUMP010I Java dump written to /Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15427493171587/cmdLineTester_libpathTestRtf_0/javacore.20181120.184440.18719.0002.txt
+18:44:49  [ERR] JVMDUMP032I JVM requested Snap dump using '/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15427493171587/cmdLineTester_libpathTestRtf_0/Snap.20181120.184440.18719.0003.trc' in response to an event
+18:44:49  [ERR] JVMDUMP010I Snap dump written to /Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15427493171587/cmdLineTester_libpathTestRtf_0/Snap.20181120.184440.18719.0003.trc
+18:44:49  [ERR] JVMDUMP007I JVM Requesting JIT dump using '/Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15427493171587/cmdLineTester_libpathTestRtf_0/jitdump.20181120.184440.18719.0004.dmp'
+18:44:49  [ERR] JVMDUMP010I JIT dump written to /Users/jenkins/workspace/Test-sanity.functional-JDK8-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15427493171587/cmdLineTester_libpathTestRtf_0/jitdump.20181120.184440.18719.0004.dmp
+18:44:49  [ERR] JVMDUMP013I Processed dump event "abort", detail "".
+```

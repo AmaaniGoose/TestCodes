@@ -1,0 +1,7 @@
+Now that the playbooks are more stable, it would be good to have regular and visible machine refreshes, to ensure that new updates to the playbooks will be picked up and deployed on a regular basis. (related: https://github.com/AdoptOpenJDK/openjdk-infrastructure/pull/624 submitted 2 weeks ago, and needs deployment to test machines).  In addition to 'full set of machines' refreshes, for one-off updates to a particular machine, it should also be made known/visible, and part of some easy to find communication.  
+
+Benefits include faster test triage and easier on-boarding of new helpers to the infra team.  Visibility to all interested parties.
+
+At present, what are the tools used for deployment, Ansible Tower? (not visible to non-infra folks).  I ask because this request for scheduled/visible machine refreshes could possibly be addressed using the ansible plugins for Jenkins and scheduling a set of infra jobs to run regularly.   These jobs would then be visible to more than the infra team, and the infra tasks would be dealt with similarly to the build and test tasks.  But maybe Ansible tower gives other benefits, which would be good to understand (as its at the cost of visibility/transparency).
+
+I know its already been discussed by infra and was possibly already in plan, so if this is already being done, please point me to it, I will like to help.  

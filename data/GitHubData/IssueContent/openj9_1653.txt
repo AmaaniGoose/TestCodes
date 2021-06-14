@@ -1,0 +1,5 @@
+The values of `J9CPTYPE_INTERFACE_STATIC_METHOD` and `J9CPTYPE_INTERFACE_INSTANCE_METHOD` changed from 17 & 18 to 18 & 19, respectively with the merge of #1426.
+
+The method `J9BCUtil.dumpCPShapeDescription()` implicitly uses the new values via the local array, `symbols`, without regard to the vintage of the core file being examined.
+
+Instead, it should be using the constants of the same names from `J9ConstantPool` to interpret a constant pool description. Note that the new type, `J9CPTYPE_CONSTANT_DYNAMIC`, will not be present in old core files; a fact that will need to be considered when designing a fix.

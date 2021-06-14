@@ -1,0 +1,7 @@
+- [x] x86_64: https://github.com/eclipse/openj9/issues/2919
+- [ ] x86_32: https://github.com/eclipse/openj9/issues/4827
+- [x] Power_64: https://github.com/eclipse/openj9/issues/4242
+- [ ] Power_32
+- [x] Z_64: https://github.com/eclipse/openj9/pull/4575
+- [ ] Z_32
+- [ ] Arm

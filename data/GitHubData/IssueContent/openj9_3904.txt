@@ -1,0 +1,9 @@
+The redirector only processes IBM_JAVA_OPTIONS if the OPENJ9 version isn't set:
+https://github.com/eclipse/openj9/blob/9258a5aa4d1839d9df92d268dd4588a699576bdd/runtime/redirector/redirector.c#L534-L538
+
+The vmargs.c code processes both options unconditionally:
+https://github.com/eclipse/openj9/blob/a43aee9d618b9335d0a36f4b47eb0056ad8a8995/runtime/util/vmargs.c#L1394-L1395
+
+The vmargs.c code should be updated to only read IBM_JAVA_OPTIONS if OPENJ9_JAVA_OPTIONS is not set.
+
+Related to #3513

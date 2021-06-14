@@ -1,0 +1,1 @@
+If AOT is ever to be supported, we will have to add support for TR_PersistentClassLoaderTable. I'm opening this issue simple for the "FYI" purposes.

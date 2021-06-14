@@ -1,0 +1,8 @@
+When a `StackTraceElement` constructed by `StackFrame.toStackTraceElement()` is printed, the output should conditionally contain the classloader name and module version. This behaviour should match the changes introduced in #11601 for `Throwable`.
+
+Fixing this problem was explored in #11601, but was deferred to a future PR since more investigation is needed. Access to the StackFrame's declaring class's classloader is needed, in order to determine if the classloader name should be included. However, we can't rely on `StackFrameImpl.getDeclaringClass()` since the `StackWalker` may not have been constructed with `RETAIN_CLASS_REFERENCE` (which causes an exception). 
+
+#11601 modifies `StackFrame.toStackTraceElement()`, but retains existing (incorrect) stack trace output for `StackFrame`. The disabling of the include flags and `StackTraceElement.disableIncludeInfoFlags()`should be removed in the fix to this issue.
+
+Mentioned in https://github.com/eclipse/openj9/pull/11601#issuecomment-766503565, one way to approach fixing this issue is to:
+> change StackFrameImpl.toStackTraceElement() to construct the StackTraceElement() natively, similar to how the Throwable StackTraceElement array is created, but only for an individual element.

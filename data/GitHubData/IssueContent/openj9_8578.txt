@@ -1,0 +1,3 @@
+`J9VM_INTERP_NATIVE_SUPPORT` & the corresponding flag `interp_nativeSupport` in the existing implementation of OpenJ9 is outdated for a quite long time and doesn't work to disable JIT. Given that the flag is never used properly over years, it should be totally removed in our code to avoid any misunderstanding & misuse on this flag in the future.
+
+FYI: @keithc-ca , @DanHeidinga, @pshipton, @gacholio.

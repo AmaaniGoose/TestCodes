@@ -1,0 +1,8 @@
+ref: https://github.com/AdoptOpenJDK/openjdk-infrastructure/issues/1862#issuecomment-770674426 , #1670 
+
+- [ ] Missing install
+- [x] Bug in ansible playbook
+- [x] Request for new playbook addition
+
+Details:
+Currently the tool runs on the root user of the Nagios Server, which is not ideal. This issue may be irrelevant if #1670 is looked at first, but if this can be fixed easily, it's probably better to get this done in the meanwhile :-)

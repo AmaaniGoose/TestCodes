@@ -1,0 +1,41 @@
+Java -version output
+--------------------
+
+openjdk version "11.0.7" 2020-04-14
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.7+10)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.20.0, JRE 11 Linux amd64-64-Bit Compressed References 20200416_574 (JIT enabled, AOT enabled)
+OpenJ9   - 05fa2d361
+OMR      - d4365f371
+JCL      - 838028fc9d based on jdk-11.0.7+10)
+
+Summary of problem
+------------------
+
+This problem looks similar to #8454, however happens under different circumstances. We can confirm that the #8454 was fixed, and our test case for that instance still works.
+
+When our code attempts to deserialise, we get the following stack trace (abbreviated:)
+
+```
+Caused by: java.lang.ClassNotFoundException: <our class name>
+	at java.base/java.lang.Class.forNameImpl(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:412)
+	at java.base/java.io.ClassCache$FutureValue.get(ClassCache.java:190)
+	at java.base/java.io.ClassCache.get(ClassCache.java:161)
+	at java.base/java.io.ObjectInputStream.resolveClass(ObjectInputStream.java:848)
+	at java.base/java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:2065)
+	at java.base/java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1951)
+	at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2239)
+	at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1768)
+	at java.base/java.io.ObjectInputStream.defaultReadFields(ObjectInputStream.java:2541)
+	at java.base/java.io.ObjectInputStream.readSerialData(ObjectInputStream.java:2433)
+	at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2266)
+```
+
+Diagnostic files
+----------------
+
+No crash happens, so no files are produced. It just fails to load the class.
+
+Running this under 11.05 works, or running 11.07 with `-Dcom.ibm.enableClassCaching=false` also works.
+
+We have not yet been able to recreate a "simple" test case for this, but will try to spend some time next week. Ay suggestions on what we might need to do differently to #8454 to trigger this would be appreciated! We can trigger this at will on our (large) code base, so we could also potentially provide logging and/or testing of a pre-release for that.

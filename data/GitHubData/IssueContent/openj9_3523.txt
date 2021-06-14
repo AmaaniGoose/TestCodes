@@ -1,0 +1,2 @@
+Following the instructions on https://www.eclipse.org/openj9/oj9_build.html#version-11,
+run `make all`, then run `make all` again.  No source files are changed, but all C/C++ files are recompiled.

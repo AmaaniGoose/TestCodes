@@ -1,0 +1,9 @@
+BenefitInliner description: https://github.com/eclipse/omr/issues/5488
+
+In order to make BenefitInliner work, we need the language-specific implementations of the abstract interpretation. Therefore, the Java implementations will be contributed to OpenJ9.
+
+## Parts to be contributed to OpenJ9:
+
+J9AbsInterpreter.cpp
+J9IDTBuilder.cpp
+

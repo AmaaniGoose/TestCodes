@@ -1,0 +1,44 @@
+VarHandle has been added as a feature of Java9, to replace Unsafe. 
+
+In openj9, VarHandle is implemented using MethodHandle. In the JIT, we recognize and transform a VarHandle call into an invokeGeneric on a MethodHandle object which is an element of `Varhandle.handleTable`. The invokeGeneric becomes a invokeExact on a MethodHandle after conversion in the trees.
+
+In simplified trees, the call is transformed from
+```
+call VarHandle.set
+   aload VH
+```
+to
+```
+acall MethodHandle.asType
+   aloadi VarHandle.handleTable[i]
+      aload VH
+   aload <call site MethodType>
+call MethodHandle.invokeExact
+   ==>acall MethodHandle.asType
+```
+
+As stated in http://openjdk.java.net/jeps/193, users of VarHandle is encouraged to store VarHandle objects into static final fields to allow constant folding to fold away some checks.
+
+> For predictable behaviour and performance at runtime VarHandle instances should be held in static final fields
+
+Currently, our goal is to optimize VarHandle calls on VarHandle instances that are held in static final fields. The following are the main things we need,
+
+- [x] Guarded static final field folding #3018
+- [x]  Inline the MethodHandle call chain in targeted inlining
+- [ ] Enhanced MethodHandle inlining opt strategy.
+- [ ]  Optimization to Unsafe calls made by VarHandle access methods, depends on https://github.com/eclipse/omr/issues/2958
+
+Other optimizations include
+
+- [ ]  Try to replace `acall MethodHandle.asType` with conversion trees for invoke generic. 
+   `asType` will create a new MethodHandle for invoke generic, stopping the JIT from targeted inlining.
+- [ ]  More optimized java code in VarHandle subclasses.
+
+Changes we have made
+https://github.com/eclipse/openj9/pull/671
+https://github.com/eclipse/openj9/pull/663
+https://github.com/eclipse/openj9/pull/264
+https://github.com/eclipse/openj9/pull/235
+https://github.com/eclipse/openj9/pull/210
+https://github.com/eclipse/openj9/pull/2121
+https://github.com/eclipse/omr/pull/1796

@@ -1,0 +1,693 @@
+jdk/dynalink/TypeConverterFactoryMemoryLeakTest.java and jdk/dynalink/TypeConverterFactoryRetentionTests.java were added to jdk-16.0.1 and committed on Mar 4 2021. 
+
+They assume the VM being run is hotspot and fails when run against openj9.  The tests should be excluded from running against openj9.
+
+Output from jdk/dynalink/TypeConverterFactoryMemoryLeakTest.java:
+```
+18:30:44  ===============================================
+18:30:44  Running test jdk_other_0 ...
+18:30:44  ===============================================
+18:30:44  jdk_other_0 Start Time: Wed Apr 21 17:30:43 2021 Epoch Time (ms): 1619026243352
+18:30:44  "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+18:30:44  JVMSHRC005I No shared class caches available
+18:30:44  JVMSHRC005I No shared class caches available
+18:30:44  cache cleanup done
+18:30:44  variation: Mode150
+18:30:44  JVM_OPTIONS:  -XX:+UseCompressedOops 
+18:30:44  { itercnt=1; \
+18:30:44  mkdir -p "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/../TKG/output_16190258447716/jdk_other_0"; \
+18:30:44  cd "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/../TKG/output_16190258447716/jdk_other_0"; \
+18:30:44  "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image/bin/java" -Xmx512m -jar "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/../../jvmtest/openjdk/jtreg/lib/jtreg.jar" \
+18:30:44  -agentvm -a -ea -esa -v:fail,error,time,nopass -retain:fail,error,*.dmp,javacore.*,heapdump.*,*.trc -ignore:quiet -timeoutFactor:8 -xml:verify -concurrency:2 -nativepath:"/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native" -vmoptions:"-Xmx512m  -XX:+UseCompressedOops " \
+18:30:44  -w ""/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/../TKG/output_16190258447716/jdk_other_0"/work" \
+18:30:44  -r "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/../../jvmtest/openjdk/report" \
+18:30:44  -jdk:"/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image" \
+18:30:44  -exclude:"/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/../openjdk/openjdk-jdk/test/jdk/ProblemList.txt" \
+18:30:44  -exclude:"/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/../../jvmtest/openjdk/excludes/ProblemList_openjdk16-openj9.txt" \
+18:30:44  "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/../openjdk/openjdk-jdk/test/jdk:jdk_other"; \
+18:30:44  if [ $? -eq 0 ] ; then echo ""; echo "jdk_other_0""_PASSED"; echo ""; cd /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/..;  else echo ""; echo "jdk_other_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/../TKG/output_16190258447716/TestTargetResult";
+18:30:45  Directory "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/../TKG/output_16190258447716/jdk_other_0/work" not found: creating
+18:30:51  XML output with verification to /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work
+18:34:35  --------------------------------------------------
+18:34:35  TEST: jdk/dynalink/TypeConverterFactoryMemoryLeakTest.java#with_G1GC
+18:34:35  
+18:34:35  TEST RESULT: Error. Error evaluating expression: invalid boolean value: `null' for expression `vm.gc.G1'
+18:34:35  --------------------------------------------------
+18:34:35  TEST: jdk/dynalink/TypeConverterFactoryMemoryLeakTest.java#with_ParallelGC
+18:34:35  
+18:34:35  TEST RESULT: Error. Error evaluating expression: invalid boolean value: `null' for expression `vm.gc.Parallel'
+18:34:35  --------------------------------------------------
+18:34:35  TEST: jdk/dynalink/TypeConverterFactoryMemoryLeakTest.java#with_SerialGC
+18:34:35  
+18:34:35  TEST RESULT: Error. Error evaluating expression: invalid boolean value: `null' for expression `vm.gc.Serial'
+18:34:35  --------------------------------------------------
+18:34:35  TEST: jdk/dynalink/TypeConverterFactoryMemoryLeakTest.java#with_ShenandoahGC
+18:34:35  
+18:34:35  TEST RESULT: Error. Error evaluating expression: invalid boolean value: `null' for expression `vm.gc.Shenandoah'
+18:34:35  --------------------------------------------------
+18:34:35  TEST: jdk/dynalink/TypeConverterFactoryMemoryLeakTest.java#with_ZGC
+18:34:35  
+18:34:35  TEST RESULT: Error. Error evaluating expression: invalid boolean value: `null' for expression `vm.gc.Z'
+18:34:35  --------------------------------------------------
+18:34:45  TEST: jdk/dynalink/TypeConverterFactoryRetentionTests.java#with_G1GC
+18:34:45  TEST JDK: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image
+18:34:45  
+18:34:45  ACTION: build -- Passed. Build successful
+18:34:45  REASON: Named class compiled on demand
+18:34:45  TIME:   0.144 seconds
+18:34:45  messages:
+18:34:45  command: build TypeConverterFactoryRetentionTests
+18:34:45  reason: Named class compiled on demand
+18:34:45  Test directory:
+18:34:45    compile: TypeConverterFactoryRetentionTests
+18:34:45  elapsed time (seconds): 0.144
+18:34:45  
+18:34:45  ACTION: compile -- Passed. Compilation successful
+18:34:45  REASON: .class file out of date or does not exist
+18:34:45  TIME:   0.143 seconds
+18:34:45  messages:
+18:34:45  command: compile /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink/TypeConverterFactoryRetentionTests.java
+18:34:45  reason: .class file out of date or does not exist
+18:34:45  Mode: agentvm
+18:34:45  Agent id: 2
+18:34:45  elapsed time (seconds): 0.143
+18:34:45  configuration:
+18:34:45  Boot Layer (javac runtime environment)
+18:34:45    class path: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/javatest.jar 
+18:34:45                /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+18:34:45    patch:      java.base /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/patches/java.base
+18:34:45  
+18:34:45  javac compilation environment
+18:34:45    source path: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink
+18:34:45    class path:  /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink
+18:34:45                 /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_G1GC.d
+18:34:45  
+18:34:45  rerun:
+18:34:45  cd /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/scratch/1 && \
+18:34:45  DISPLAY=:0 \
+18:34:45  HOME=/home/jenkins \
+18:34:45  LANG=en_US.UTF-8 \
+18:34:45  PATH=/bin:/usr/bin:/usr/sbin \
+18:34:45      /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image/bin/javac \
+18:34:45          -J-ea \
+18:34:45          -J-esa \
+18:34:45          -J-Xmx512m \
+18:34:45          -J-XX:+UseCompressedOops \
+18:34:45          -J-Djava.library.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+18:34:45          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+18:34:45          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+18:34:45          -J-Dtest.compiler.opts= \
+18:34:45          -J-Dtest.java.opts= \
+18:34:45          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+18:34:45          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+18:34:45          -J-Dtest.timeout.factor=8.0 \
+18:34:45          -J-Dtest.nativepath=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+18:34:45          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+18:34:45          -J-Dtest.name=jdk/dynalink/TypeConverterFactoryRetentionTests.java#with_G1GC \
+18:34:45          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink/TypeConverterFactoryRetentionTests.java \
+18:34:45          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:45          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:45          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_G1GC.d \
+18:34:45          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_G1GC.d \
+18:34:45          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_G1GC.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:45          -d /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_G1GC.d \
+18:34:45          -sourcepath /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:45          -classpath /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_G1GC.d /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink/TypeConverterFactoryRetentionTests.java
+18:34:45  
+18:34:45  ACTION: main -- Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Should have GCd a class loader by now
+18:34:45  REASON: User specified action: run main/othervm -XX:+UseG1GC TypeConverterFactoryRetentionTests 
+18:34:45  TIME:   13.504 seconds
+18:34:45  messages:
+18:34:45  command: main -XX:+UseG1GC TypeConverterFactoryRetentionTests
+18:34:45  reason: User specified action: run main/othervm -XX:+UseG1GC TypeConverterFactoryRetentionTests 
+18:34:45  Mode: othervm [/othervm specified]
+18:34:45  elapsed time (seconds): 13.504
+18:34:45  configuration:
+18:34:45  STDOUT:
+18:34:45  STDERR:
+18:34:45  java.lang.AssertionError: Should have GCd a class loader by now
+18:34:45  	at TypeConverterFactoryRetentionTests.testFromOneClassToClassLoader(TypeConverterFactoryRetentionTests.java:183)
+18:34:45  	at TypeConverterFactoryRetentionTests.testSystemLoaderToOtherLoader(TypeConverterFactoryRetentionTests.java:149)
+18:34:45  	at TypeConverterFactoryRetentionTests.main(TypeConverterFactoryRetentionTests.java:131)
+18:34:45  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+18:34:45  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+18:34:45  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+18:34:45  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+18:34:45  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+18:34:45  	at java.base/java.lang.Thread.run(Thread.java:853)
+18:34:45  
+18:34:45  JavaTest Message: Test threw exception: java.lang.AssertionError: Should have GCd a class loader by now
+18:34:45  JavaTest Message: shutting down test
+18:34:45  
+18:34:45  STATUS:Failed.`main' threw exception: java.lang.AssertionError: Should have GCd a class loader by now
+18:34:45  rerun:
+18:34:45  cd /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/scratch/1 && \
+18:34:45  DISPLAY=:0 \
+18:34:45  HOME=/home/jenkins \
+18:34:45  LANG=en_US.UTF-8 \
+18:34:45  PATH=/bin:/usr/bin:/usr/sbin \
+18:34:45  CLASSPATH=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_G1GC.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+18:34:45      /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image/bin/java \
+18:34:45          -Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+18:34:45          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+18:34:45          -Dtest.compiler.opts= \
+18:34:45          -Dtest.java.opts= \
+18:34:45          -Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+18:34:45          -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+18:34:45          -Dtest.timeout.factor=8.0 \
+18:34:45          -Dtest.nativepath=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+18:34:45          -Dtest.root=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+18:34:45          -Dtest.name=jdk/dynalink/TypeConverterFactoryRetentionTests.java#with_G1GC \
+18:34:45          -Dtest.file=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink/TypeConverterFactoryRetentionTests.java \
+18:34:45          -Dtest.src=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:45          -Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:45          -Dtest.classes=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_G1GC.d \
+18:34:45          -Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_G1GC.d \
+18:34:45          -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_G1GC.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:45          -ea \
+18:34:45          -esa \
+18:34:45          -Xmx512m \
+18:34:45          -XX:+UseCompressedOops \
+18:34:45          -Djava.library.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+18:34:45          -XX:+UseG1GC \
+18:34:45          com.sun.javatest.regtest.agent.MainWrapper /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/jdk/dynalink/TypeConverterFactoryRetentionTests_with_G1GC.d/main.0.jta
+18:34:45  
+18:34:45  TEST RESULT: Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Should have GCd a class loader by now
+18:34:45  --------------------------------------------------
+18:34:45  TEST: jdk/dynalink/TypeConverterFactoryRetentionTests.java#with_ParallelGC
+18:34:45  TEST JDK: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image
+18:34:45  
+18:34:45  ACTION: build -- Passed. Build successful
+18:34:45  REASON: Named class compiled on demand
+18:34:45  TIME:   0.053 seconds
+18:34:45  messages:
+18:34:45  command: build TypeConverterFactoryRetentionTests
+18:34:45  reason: Named class compiled on demand
+18:34:45  Test directory:
+18:34:45    compile: TypeConverterFactoryRetentionTests
+18:34:45  elapsed time (seconds): 0.053
+18:34:45  
+18:34:45  ACTION: compile -- Passed. Compilation successful
+18:34:45  REASON: .class file out of date or does not exist
+18:34:45  TIME:   0.053 seconds
+18:34:45  messages:
+18:34:45  command: compile /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink/TypeConverterFactoryRetentionTests.java
+18:34:45  reason: .class file out of date or does not exist
+18:34:45  Mode: agentvm
+18:34:45  Agent id: 1
+18:34:45  elapsed time (seconds): 0.053
+18:34:45  configuration:
+18:34:45  Boot Layer (javac runtime environment)
+18:34:45    class path: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/javatest.jar 
+18:34:45                /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+18:34:45    patch:      java.base /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/patches/java.base
+18:34:45  
+18:34:45  javac compilation environment
+18:34:45    source path: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink
+18:34:45    class path:  /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink
+18:34:45                 /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/0/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ParallelGC.d
+18:34:45  
+18:34:45  rerun:
+18:34:45  cd /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/scratch/0 && \
+18:34:45  DISPLAY=:0 \
+18:34:45  HOME=/home/jenkins \
+18:34:45  LANG=en_US.UTF-8 \
+18:34:45  PATH=/bin:/usr/bin:/usr/sbin \
+18:34:45      /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image/bin/javac \
+18:34:45          -J-ea \
+18:34:45          -J-esa \
+18:34:45          -J-Xmx512m \
+18:34:45          -J-XX:+UseCompressedOops \
+18:34:45          -J-Djava.library.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+18:34:45          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+18:34:45          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+18:34:45          -J-Dtest.compiler.opts= \
+18:34:45          -J-Dtest.java.opts= \
+18:34:45          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+18:34:45          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+18:34:45          -J-Dtest.timeout.factor=8.0 \
+18:34:45          -J-Dtest.nativepath=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+18:34:45          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+18:34:45          -J-Dtest.name=jdk/dynalink/TypeConverterFactoryRetentionTests.java#with_ParallelGC \
+18:34:45          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink/TypeConverterFactoryRetentionTests.java \
+18:34:45          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:45          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:45          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/0/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ParallelGC.d \
+18:34:45          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/0/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ParallelGC.d \
+18:34:45          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/0/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ParallelGC.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:45          -d /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/0/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ParallelGC.d \
+18:34:45          -sourcepath /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:45          -classpath /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/0/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ParallelGC.d /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink/TypeConverterFactoryRetentionTests.java
+18:34:45  
+18:34:45  ACTION: main -- Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Should have GCd a class loader by now
+18:34:45  REASON: User specified action: run main/othervm -XX:+UseParallelGC TypeConverterFactoryRetentionTests 
+18:34:45  TIME:   13.517 seconds
+18:34:45  messages:
+18:34:45  command: main -XX:+UseParallelGC TypeConverterFactoryRetentionTests
+18:34:45  reason: User specified action: run main/othervm -XX:+UseParallelGC TypeConverterFactoryRetentionTests 
+18:34:45  Mode: othervm [/othervm specified]
+18:34:45  elapsed time (seconds): 13.517
+18:34:45  configuration:
+18:34:45  STDOUT:
+18:34:45  STDERR:
+18:34:45  java.lang.AssertionError: Should have GCd a class loader by now
+18:34:45  	at TypeConverterFactoryRetentionTests.testFromOneClassToClassLoader(TypeConverterFactoryRetentionTests.java:183)
+18:34:45  	at TypeConverterFactoryRetentionTests.testSystemLoaderToOtherLoader(TypeConverterFactoryRetentionTests.java:149)
+18:34:45  	at TypeConverterFactoryRetentionTests.main(TypeConverterFactoryRetentionTests.java:131)
+18:34:45  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+18:34:45  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+18:34:45  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+18:34:45  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+18:34:45  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+18:34:45  	at java.base/java.lang.Thread.run(Thread.java:853)
+18:34:45  
+18:34:45  JavaTest Message: Test threw exception: java.lang.AssertionError: Should have GCd a class loader by now
+18:34:45  JavaTest Message: shutting down test
+18:34:45  
+18:34:45  STATUS:Failed.`main' threw exception: java.lang.AssertionError: Should have GCd a class loader by now
+18:34:45  rerun:
+18:34:45  cd /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/scratch/0 && \
+18:34:45  DISPLAY=:0 \
+18:34:45  HOME=/home/jenkins \
+18:34:45  LANG=en_US.UTF-8 \
+18:34:45  PATH=/bin:/usr/bin:/usr/sbin \
+18:34:45  CLASSPATH=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/0/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ParallelGC.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+18:34:45      /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image/bin/java \
+18:34:45          -Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+18:34:45          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+18:34:45          -Dtest.compiler.opts= \
+18:34:45          -Dtest.java.opts= \
+18:34:45          -Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+18:34:45          -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+18:34:45          -Dtest.timeout.factor=8.0 \
+18:34:45          -Dtest.nativepath=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+18:34:45          -Dtest.root=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+18:34:45          -Dtest.name=jdk/dynalink/TypeConverterFactoryRetentionTests.java#with_ParallelGC \
+18:34:45          -Dtest.file=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink/TypeConverterFactoryRetentionTests.java \
+18:34:45          -Dtest.src=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:45          -Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:45          -Dtest.classes=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/0/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ParallelGC.d \
+18:34:45          -Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/0/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ParallelGC.d \
+18:34:45          -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/0/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ParallelGC.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:45          -ea \
+18:34:45          -esa \
+18:34:45          -Xmx512m \
+18:34:45          -XX:+UseCompressedOops \
+18:34:45          -Djava.library.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+18:34:45          -XX:+UseParallelGC \
+18:34:45          com.sun.javatest.regtest.agent.MainWrapper /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ParallelGC.d/main.0.jta
+18:34:45  
+18:34:45  TEST RESULT: Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Should have GCd a class loader by now
+18:34:45  --------------------------------------------------
+18:34:56  TEST: jdk/dynalink/TypeConverterFactoryRetentionTests.java#with_SerialGC
+18:34:56  TEST JDK: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image
+18:34:56  
+18:34:56  ACTION: build -- Passed. Build successful
+18:34:56  REASON: Named class compiled on demand
+18:34:56  TIME:   0.115 seconds
+18:34:56  messages:
+18:34:56  command: build TypeConverterFactoryRetentionTests
+18:34:56  reason: Named class compiled on demand
+18:34:56  Test directory:
+18:34:56    compile: TypeConverterFactoryRetentionTests
+18:34:56  elapsed time (seconds): 0.115
+18:34:56  
+18:34:56  ACTION: compile -- Passed. Compilation successful
+18:34:56  REASON: .class file out of date or does not exist
+18:34:56  TIME:   0.115 seconds
+18:34:56  messages:
+18:34:56  command: compile /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink/TypeConverterFactoryRetentionTests.java
+18:34:56  reason: .class file out of date or does not exist
+18:34:56  Mode: agentvm
+18:34:56  Agent id: 2
+18:34:56  elapsed time (seconds): 0.115
+18:34:56  configuration:
+18:34:56  Boot Layer (javac runtime environment)
+18:34:56    class path: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/javatest.jar 
+18:34:56                /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+18:34:56    patch:      java.base /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/patches/java.base
+18:34:56  
+18:34:56  javac compilation environment
+18:34:56    source path: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink
+18:34:56    class path:  /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink
+18:34:56                 /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_SerialGC.d
+18:34:56  
+18:34:56  rerun:
+18:34:56  cd /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/scratch/1 && \
+18:34:56  DISPLAY=:0 \
+18:34:56  HOME=/home/jenkins \
+18:34:56  LANG=en_US.UTF-8 \
+18:34:56  PATH=/bin:/usr/bin:/usr/sbin \
+18:34:56      /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image/bin/javac \
+18:34:56          -J-ea \
+18:34:56          -J-esa \
+18:34:56          -J-Xmx512m \
+18:34:56          -J-XX:+UseCompressedOops \
+18:34:56          -J-Djava.library.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+18:34:56          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+18:34:56          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+18:34:56          -J-Dtest.compiler.opts= \
+18:34:56          -J-Dtest.java.opts= \
+18:34:56          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+18:34:56          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+18:34:56          -J-Dtest.timeout.factor=8.0 \
+18:34:56          -J-Dtest.nativepath=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+18:34:56          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+18:34:56          -J-Dtest.name=jdk/dynalink/TypeConverterFactoryRetentionTests.java#with_SerialGC \
+18:34:56          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink/TypeConverterFactoryRetentionTests.java \
+18:34:56          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:56          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:56          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_SerialGC.d \
+18:34:56          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_SerialGC.d \
+18:34:56          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_SerialGC.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:56          -d /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_SerialGC.d \
+18:34:56          -sourcepath /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:56          -classpath /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_SerialGC.d /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink/TypeConverterFactoryRetentionTests.java
+18:34:56  
+18:34:56  ACTION: main -- Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Should have GCd a class loader by now
+18:34:56  REASON: User specified action: run main/othervm -XX:+UseSerialGC TypeConverterFactoryRetentionTests 
+18:34:56  TIME:   12.115 seconds
+18:34:56  messages:
+18:34:56  command: main -XX:+UseSerialGC TypeConverterFactoryRetentionTests
+18:34:56  reason: User specified action: run main/othervm -XX:+UseSerialGC TypeConverterFactoryRetentionTests 
+18:34:56  Mode: othervm [/othervm specified]
+18:34:56  elapsed time (seconds): 12.115
+18:34:56  configuration:
+18:34:56  STDOUT:
+18:34:56  STDERR:
+18:34:56  java.lang.AssertionError: Should have GCd a class loader by now
+18:34:56  	at TypeConverterFactoryRetentionTests.testFromOneClassToClassLoader(TypeConverterFactoryRetentionTests.java:183)
+18:34:56  	at TypeConverterFactoryRetentionTests.testSystemLoaderToOtherLoader(TypeConverterFactoryRetentionTests.java:149)
+18:34:56  	at TypeConverterFactoryRetentionTests.main(TypeConverterFactoryRetentionTests.java:131)
+18:34:56  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+18:34:56  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+18:34:56  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+18:34:56  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+18:34:56  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+18:34:56  	at java.base/java.lang.Thread.run(Thread.java:853)
+18:34:56  
+18:34:56  JavaTest Message: Test threw exception: java.lang.AssertionError: Should have GCd a class loader by now
+18:34:56  JavaTest Message: shutting down test
+18:34:56  
+18:34:56  STATUS:Failed.`main' threw exception: java.lang.AssertionError: Should have GCd a class loader by now
+18:34:56  rerun:
+18:34:56  cd /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/scratch/1 && \
+18:34:56  DISPLAY=:0 \
+18:34:56  HOME=/home/jenkins \
+18:34:56  LANG=en_US.UTF-8 \
+18:34:56  PATH=/bin:/usr/bin:/usr/sbin \
+18:34:56  CLASSPATH=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_SerialGC.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+18:34:56      /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image/bin/java \
+18:34:56          -Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+18:34:56          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+18:34:56          -Dtest.compiler.opts= \
+18:34:56          -Dtest.java.opts= \
+18:34:56          -Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+18:34:56          -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+18:34:56          -Dtest.timeout.factor=8.0 \
+18:34:56          -Dtest.nativepath=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+18:34:56          -Dtest.root=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+18:34:56          -Dtest.name=jdk/dynalink/TypeConverterFactoryRetentionTests.java#with_SerialGC \
+18:34:56          -Dtest.file=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink/TypeConverterFactoryRetentionTests.java \
+18:34:56          -Dtest.src=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:56          -Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:56          -Dtest.classes=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_SerialGC.d \
+18:34:56          -Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_SerialGC.d \
+18:34:56          -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_SerialGC.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:56          -ea \
+18:34:56          -esa \
+18:34:56          -Xmx512m \
+18:34:56          -XX:+UseCompressedOops \
+18:34:56          -Djava.library.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+18:34:56          -XX:+UseSerialGC \
+18:34:56          com.sun.javatest.regtest.agent.MainWrapper /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/jdk/dynalink/TypeConverterFactoryRetentionTests_with_SerialGC.d/main.0.jta
+18:34:56  
+18:34:56  TEST RESULT: Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Should have GCd a class loader by now
+18:34:56  --------------------------------------------------
+18:34:57  TEST: jdk/dynalink/TypeConverterFactoryRetentionTests.java#with_ShenandoahGC
+18:34:57  TEST JDK: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image
+18:34:57  
+18:34:57  ACTION: build -- Passed. Build successful
+18:34:57  REASON: Named class compiled on demand
+18:34:57  TIME:   0.095 seconds
+18:34:57  messages:
+18:34:57  command: build TypeConverterFactoryRetentionTests
+18:34:57  reason: Named class compiled on demand
+18:34:57  Test directory:
+18:34:57    compile: TypeConverterFactoryRetentionTests
+18:34:57  elapsed time (seconds): 0.095
+18:34:57  
+18:34:57  ACTION: compile -- Passed. Compilation successful
+18:34:57  REASON: .class file out of date or does not exist
+18:34:57  TIME:   0.095 seconds
+18:34:57  messages:
+18:34:57  command: compile /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink/TypeConverterFactoryRetentionTests.java
+18:34:57  reason: .class file out of date or does not exist
+18:34:57  Mode: agentvm
+18:34:57  Agent id: 1
+18:34:57  elapsed time (seconds): 0.095
+18:34:57  configuration:
+18:34:57  Boot Layer (javac runtime environment)
+18:34:57    class path: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/javatest.jar 
+18:34:57                /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+18:34:57    patch:      java.base /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/patches/java.base
+18:34:57  
+18:34:57  javac compilation environment
+18:34:57    source path: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink
+18:34:57    class path:  /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink
+18:34:57                 /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/0/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ShenandoahGC.d
+18:34:57  
+18:34:57  rerun:
+18:34:57  cd /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/scratch/0 && \
+18:34:57  DISPLAY=:0 \
+18:34:57  HOME=/home/jenkins \
+18:34:57  LANG=en_US.UTF-8 \
+18:34:57  PATH=/bin:/usr/bin:/usr/sbin \
+18:34:57      /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image/bin/javac \
+18:34:57          -J-ea \
+18:34:57          -J-esa \
+18:34:57          -J-Xmx512m \
+18:34:57          -J-XX:+UseCompressedOops \
+18:34:57          -J-Djava.library.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+18:34:57          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+18:34:57          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+18:34:57          -J-Dtest.compiler.opts= \
+18:34:57          -J-Dtest.java.opts= \
+18:34:57          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+18:34:57          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+18:34:57          -J-Dtest.timeout.factor=8.0 \
+18:34:57          -J-Dtest.nativepath=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+18:34:57          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+18:34:57          -J-Dtest.name=jdk/dynalink/TypeConverterFactoryRetentionTests.java#with_ShenandoahGC \
+18:34:57          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink/TypeConverterFactoryRetentionTests.java \
+18:34:57          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:57          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:57          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/0/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ShenandoahGC.d \
+18:34:57          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/0/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ShenandoahGC.d \
+18:34:57          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/0/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ShenandoahGC.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:57          -d /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/0/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ShenandoahGC.d \
+18:34:57          -sourcepath /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:57          -classpath /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/0/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ShenandoahGC.d /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink/TypeConverterFactoryRetentionTests.java
+18:34:57  
+18:34:57  ACTION: main -- Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Should have GCd a class loader by now
+18:34:57  REASON: User specified action: run main/othervm -XX:+UseShenandoahGC TypeConverterFactoryRetentionTests 
+18:34:57  TIME:   12.269 seconds
+18:34:57  messages:
+18:34:57  command: main -XX:+UseShenandoahGC TypeConverterFactoryRetentionTests
+18:34:57  reason: User specified action: run main/othervm -XX:+UseShenandoahGC TypeConverterFactoryRetentionTests 
+18:34:57  Mode: othervm [/othervm specified]
+18:34:57  elapsed time (seconds): 12.269
+18:34:57  configuration:
+18:34:57  STDOUT:
+18:34:57  STDERR:
+18:34:57  java.lang.AssertionError: Should have GCd a class loader by now
+18:34:57  	at TypeConverterFactoryRetentionTests.testFromOneClassToClassLoader(TypeConverterFactoryRetentionTests.java:183)
+18:34:57  	at TypeConverterFactoryRetentionTests.testSystemLoaderToOtherLoader(TypeConverterFactoryRetentionTests.java:149)
+18:34:57  	at TypeConverterFactoryRetentionTests.main(TypeConverterFactoryRetentionTests.java:131)
+18:34:57  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+18:34:57  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+18:34:57  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+18:34:57  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+18:34:57  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+18:34:57  	at java.base/java.lang.Thread.run(Thread.java:853)
+18:34:57  
+18:34:57  JavaTest Message: Test threw exception: java.lang.AssertionError: Should have GCd a class loader by now
+18:34:57  JavaTest Message: shutting down test
+18:34:57  
+18:34:57  STATUS:Failed.`main' threw exception: java.lang.AssertionError: Should have GCd a class loader by now
+18:34:57  rerun:
+18:34:57  cd /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/scratch/0 && \
+18:34:57  DISPLAY=:0 \
+18:34:57  HOME=/home/jenkins \
+18:34:57  LANG=en_US.UTF-8 \
+18:34:57  PATH=/bin:/usr/bin:/usr/sbin \
+18:34:57  CLASSPATH=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/0/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ShenandoahGC.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+18:34:57      /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image/bin/java \
+18:34:57          -Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+18:34:57          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+18:34:57          -Dtest.compiler.opts= \
+18:34:57          -Dtest.java.opts= \
+18:34:57          -Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+18:34:57          -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+18:34:57          -Dtest.timeout.factor=8.0 \
+18:34:57          -Dtest.nativepath=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+18:34:57          -Dtest.root=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+18:34:57          -Dtest.name=jdk/dynalink/TypeConverterFactoryRetentionTests.java#with_ShenandoahGC \
+18:34:57          -Dtest.file=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink/TypeConverterFactoryRetentionTests.java \
+18:34:57          -Dtest.src=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:57          -Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:57          -Dtest.classes=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/0/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ShenandoahGC.d \
+18:34:57          -Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/0/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ShenandoahGC.d \
+18:34:57          -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/0/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ShenandoahGC.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:34:57          -ea \
+18:34:57          -esa \
+18:34:57          -Xmx512m \
+18:34:57          -XX:+UseCompressedOops \
+18:34:57          -Djava.library.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+18:34:57          -XX:+UseShenandoahGC \
+18:34:57          com.sun.javatest.regtest.agent.MainWrapper /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ShenandoahGC.d/main.0.jta
+18:34:57  
+18:34:57  TEST RESULT: Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Should have GCd a class loader by now
+18:34:57  --------------------------------------------------
+18:35:05  TEST: jdk/dynalink/TypeConverterFactoryRetentionTests.java#with_ZGC
+18:35:05  TEST JDK: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image
+18:35:05  
+18:35:05  ACTION: build -- Passed. Build successful
+18:35:05  REASON: Named class compiled on demand
+18:35:05  TIME:   0.106 seconds
+18:35:05  messages:
+18:35:05  command: build TypeConverterFactoryRetentionTests
+18:35:05  reason: Named class compiled on demand
+18:35:05  Test directory:
+18:35:05    compile: TypeConverterFactoryRetentionTests
+18:35:05  elapsed time (seconds): 0.106
+18:35:05  
+18:35:05  ACTION: compile -- Passed. Compilation successful
+18:35:05  REASON: .class file out of date or does not exist
+18:35:05  TIME:   0.106 seconds
+18:35:05  messages:
+18:35:05  command: compile /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink/TypeConverterFactoryRetentionTests.java
+18:35:05  reason: .class file out of date or does not exist
+18:35:05  Mode: agentvm
+18:35:05  Agent id: 2
+18:35:05  elapsed time (seconds): 0.106
+18:35:05  configuration:
+18:35:05  Boot Layer (javac runtime environment)
+18:35:05    class path: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/javatest.jar 
+18:35:05                /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+18:35:05    patch:      java.base /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/patches/java.base
+18:35:05  
+18:35:05  javac compilation environment
+18:35:05    source path: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink
+18:35:05    class path:  /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink
+18:35:05                 /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ZGC.d
+18:35:05  
+18:35:05  rerun:
+18:35:05  cd /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/scratch/1 && \
+18:35:05  DISPLAY=:0 \
+18:35:05  HOME=/home/jenkins \
+18:35:05  LANG=en_US.UTF-8 \
+18:35:05  PATH=/bin:/usr/bin:/usr/sbin \
+18:35:05      /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image/bin/javac \
+18:35:05          -J-ea \
+18:35:05          -J-esa \
+18:35:05          -J-Xmx512m \
+18:35:05          -J-XX:+UseCompressedOops \
+18:35:05          -J-Djava.library.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+18:35:05          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+18:35:05          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+18:35:05          -J-Dtest.compiler.opts= \
+18:35:05          -J-Dtest.java.opts= \
+18:35:05          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+18:35:05          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+18:35:05          -J-Dtest.timeout.factor=8.0 \
+18:35:05          -J-Dtest.nativepath=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+18:35:05          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+18:35:05          -J-Dtest.name=jdk/dynalink/TypeConverterFactoryRetentionTests.java#with_ZGC \
+18:35:05          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink/TypeConverterFactoryRetentionTests.java \
+18:35:05          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:35:05          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:35:05          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ZGC.d \
+18:35:05          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ZGC.d \
+18:35:05          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ZGC.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:35:05          -d /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ZGC.d \
+18:35:05          -sourcepath /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:35:05          -classpath /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ZGC.d /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink/TypeConverterFactoryRetentionTests.java
+18:35:05  
+18:35:05  ACTION: main -- Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Should have GCd a class loader by now
+18:35:05  REASON: User specified action: run main/othervm -XX:+UseZGC TypeConverterFactoryRetentionTests 
+18:35:05  TIME:   8.317 seconds
+18:35:05  messages:
+18:35:05  command: main -XX:+UseZGC TypeConverterFactoryRetentionTests
+18:35:05  reason: User specified action: run main/othervm -XX:+UseZGC TypeConverterFactoryRetentionTests 
+18:35:05  Mode: othervm [/othervm specified]
+18:35:05  elapsed time (seconds): 8.317
+18:35:05  configuration:
+18:35:05  STDOUT:
+18:35:05  STDERR:
+18:35:05  java.lang.AssertionError: Should have GCd a class loader by now
+18:35:05  	at TypeConverterFactoryRetentionTests.testFromOneClassToClassLoader(TypeConverterFactoryRetentionTests.java:183)
+18:35:05  	at TypeConverterFactoryRetentionTests.testSystemLoaderToOtherLoader(TypeConverterFactoryRetentionTests.java:149)
+18:35:05  	at TypeConverterFactoryRetentionTests.main(TypeConverterFactoryRetentionTests.java:131)
+18:35:05  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+18:35:05  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+18:35:05  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+18:35:05  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+18:35:05  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+18:35:05  	at java.base/java.lang.Thread.run(Thread.java:853)
+18:35:05  
+18:35:05  JavaTest Message: Test threw exception: java.lang.AssertionError: Should have GCd a class loader by now
+18:35:05  JavaTest Message: shutting down test
+18:35:05  
+18:35:05  STATUS:Failed.`main' threw exception: java.lang.AssertionError: Should have GCd a class loader by now
+18:35:05  rerun:
+18:35:05  cd /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/scratch/1 && \
+18:35:05  DISPLAY=:0 \
+18:35:05  HOME=/home/jenkins \
+18:35:05  LANG=en_US.UTF-8 \
+18:35:05  PATH=/bin:/usr/bin:/usr/sbin \
+18:35:05  CLASSPATH=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ZGC.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+18:35:05      /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image/bin/java \
+18:35:05          -Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+18:35:05          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+18:35:05          -Dtest.compiler.opts= \
+18:35:05          -Dtest.java.opts= \
+18:35:05          -Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+18:35:05          -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image \
+18:35:05          -Dtest.timeout.factor=8.0 \
+18:35:05          -Dtest.nativepath=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+18:35:05          -Dtest.root=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+18:35:05          -Dtest.name=jdk/dynalink/TypeConverterFactoryRetentionTests.java#with_ZGC \
+18:35:05          -Dtest.file=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink/TypeConverterFactoryRetentionTests.java \
+18:35:05          -Dtest.src=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:35:05          -Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:35:05          -Dtest.classes=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ZGC.d \
+18:35:05          -Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ZGC.d \
+18:35:05          -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/classes/1/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ZGC.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/jdk/dynalink \
+18:35:05          -ea \
+18:35:05          -esa \
+18:35:05          -Xmx512m \
+18:35:05          -XX:+UseCompressedOops \
+18:35:05          -Djava.library.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+18:35:05          -XX:+UseZGC \
+18:35:05          com.sun.javatest.regtest.agent.MainWrapper /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work/jdk/dynalink/TypeConverterFactoryRetentionTests_with_ZGC.d/main.0.jta
+18:35:05  
+18:35:05  TEST RESULT: Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Should have GCd a class loader by now
+18:35:05  --------------------------------------------------
+18:35:05  Test results: passed: 261; failed: 5; error: 5
+18:35:15  Report written to /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/jvmtest/openjdk/report/html/report.html
+18:35:15  Results written to /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdk-tests/TKG/output_16190258447716/jdk_other_0/work
+18:35:15  Error: Some tests failed or other problems occurred.
+18:35:15  
+18:35:15  jdk_other_0_FAILED
+18:35:15  
+18:35:15  "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_ppc64le_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+18:35:15  
+18:35:15  Attempting to destroy all caches in cacheDir /home/jenkins/javasharedresources/
+18:35:15  
+18:35:15  JVMSHRC806I Compressed references persistent shared cache "sharedcc_jenkins" has been destroyed. Use option -Xnocompressedrefs if you want to destroy a non-compressed references cache.
+18:35:15  JVMSHRC005I No shared class caches available
+18:35:15  cache cleanup done
+18:35:15  jdk_other_0 Finish Time: Wed Apr 21 17:35:15 2021 Epoch Time (ms): 1619026515092
+18:35:15  
+```

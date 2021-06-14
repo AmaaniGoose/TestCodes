@@ -1,0 +1,237 @@
+Placeholder issue as we triage and determine where to report issues.
+
+hotspot: 
+jdk8: 22 of 2818 failures [jdk8 hs Grinder link](https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder_Advanced/21/)
+jdk11: 24 of 2818 failures [jdk11 hs Grinder link](https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder_Advanced/23/)
+
+openj9: 
+jdk8: 2 of 2818 failures [jdk8 j9 Grinder link](https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder_Advanced/20/)
+jdk11: 4 of 2818 failures [jdk11 j9 Grinder link](https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder_Advanced/22/)
+
+- test group: external
+- test target name: scala_test
+- OS/architecture: x86-64_linux
+- OpenJDK version: jdk8u222-b08
+
+Optional info
+-------------
+- intermittent failure (yes|no): no
+- regression or new test:  likely failing for a long while, tests are just now being triaged
+
+Sample failure output:
+jdk8 hotspot:
+-------------
+19:10:51  Selected 2818 tests drawn from 3 named test categories
+19:10:51  
+19:10:51  # starting 1625 tests in pos
+19:11:31  ........................................................................
+19:12:55  .....................[[syntax trees at end of                     typer]] // t10344.scala
+19:12:55  package <empty> {
+19:12:55    object t10344 extends scala.AnyRef {
+19:12:55      def <init>(): t10344.type = {
+19:12:55        t10344.super.<init>();
+19:12:55        ()
+19:12:55      };
+19:12:55      def unwrap[F[_] >: [_]Nothing <: [_]Any](f: F[Unit] => Unit): Unit = ();
+19:12:55      private[this] val f: (=> Unit) => Unit = ((x$1: => Unit) => ());
+19:12:55      <stable> <accessor> def f: (=> Unit) => Unit = t10344.this.f;
+19:12:55      t10344.this.unwrap[<byname>](t10344.this.f)
+19:12:55    }
+19:12:55  }
+19:12:55  
+19:13:04  ...................................................
+19:13:16  ......................................Name table size after compilation: 73597 chars
+19:13:32  ..................................
+19:17:18  .........................................
+19:17:18  
+19:17:18  # starting 1112 tests in neg
+19:17:23  ........................................................................
+19:17:33  ........................................................................
+19:17:41  ........................................................................
+19:17:49  ........................................................................
+19:17:55  ........................................................................
+19:17:59  ...........X............................................................
+19:18:04  ........................................................................
+19:18:08  ........................................................................
+19:18:13  ........................................................................
+19:18:19  ........................................................................
+19:18:26  ..........X.............................................................
+19:18:35  ........................................................................
+19:18:41  ........................................................................
+19:18:47  ........................................................................
+19:18:53  ........................................................................
+19:18:55  ................................
+19:18:55  !!    1 - neg/t10701                                [output differs]
+19:18:55  !!    2 - neg/t6289                                 [output differs]
+19:18:55  # 1110/1112 passed, 2 failed in neg
+19:18:55  
+19:18:55  # starting 81 tests in jvm
+19:18:55  Note: test execution will be non-parallel under -Dpartest.exec.in.process
+19:20:49  ....X..XX.X..........X..X.................XXX.X..XX..XX....X....X...X.X.
+19:21:07  .......XX
+19:21:07  !!  2 - jvm/deprecation                           [output differs][duration 6.05s]
+19:21:07  !!  1 - jvm/duration-java                         [output differs]
+19:21:07  !!  3 - jvm/inner.scala                           [output differs][duration 7.86s]
+19:21:07  !!  4 - jvm/innerClassAttribute                   [output differs][duration 6.34s]
+19:21:07  !!  6 - jvm/methvsfield                           [output differs][duration 9.14s]
+19:21:07  !!  5 - jvm/natives.scala                         [output differs][duration 5.36s]
+19:21:07  !!  7 - jvm/t11321b                               [output differs]
+19:21:07  !!  8 - jvm/t1143-2                               [output differs]
+19:21:07  !!  9 - jvm/t1342                                 [output differs]
+19:21:07  !! 10 - jvm/t1464                                 [output differs]
+19:21:07  !! 12 - jvm/t1600.scala                           [output differs][duration 7.76s]
+19:21:07  !! 11 - jvm/t2163                                 [output differs]
+19:21:07  !! 13 - jvm/t2570                                 [output differs]
+19:21:07  !! 14 - jvm/t2585                                 [output differs]
+19:21:07  !! 15 - jvm/t3415                                 [output differs]
+19:21:07  !! 16 - jvm/t7253                                 [output differs]
+19:21:07  !! 17 - jvm/t8689.scala                           [output differs][duration 6.00s]
+19:21:07  !! 18 - jvm/t8786                                 [output differs][duration 5.43s]
+19:21:07  !! 19 - jvm/value-class-in-jannotation            [output differs]
+19:21:07  !! 20 - jvm/varargs                               [output differs]
+19:21:07  # 61/81 passed, 20 failed in jvm
+19:21:07  
+19:21:07  # Failed test paths (this command will update checkfiles)
+19:21:07  partest --update-check \
+19:21:07    /scala/test/files/neg/t10701 \
+19:21:07    /scala/test/files/neg/t6289 \
+19:21:07    /scala/test/files/jvm/deprecation \
+19:21:07    /scala/test/files/jvm/duration-java \
+19:21:07    /scala/test/files/jvm/inner.scala \
+19:21:07    /scala/test/files/jvm/innerClassAttribute \
+19:21:07    /scala/test/files/jvm/methvsfield \
+19:21:07    /scala/test/files/jvm/natives.scala \
+19:21:07    /scala/test/files/jvm/t11321b \
+19:21:07    /scala/test/files/jvm/t1143-2 \
+19:21:07    /scala/test/files/jvm/t1342 \
+19:21:07    /scala/test/files/jvm/t1464 \
+19:21:07    /scala/test/files/jvm/t1600.scala \
+19:21:07    /scala/test/files/jvm/t2163 \
+19:21:07    /scala/test/files/jvm/t2570 \
+19:21:07    /scala/test/files/jvm/t2585 \
+19:21:07    /scala/test/files/jvm/t3415 \
+19:21:07    /scala/test/files/jvm/t7253 \
+19:21:07    /scala/test/files/jvm/t8689.scala \
+19:21:07    /scala/test/files/jvm/t8786 \
+19:21:07    /scala/test/files/jvm/value-class-in-jannotation \
+19:21:07    /scala/test/files/jvm/varargs
+19:21:07  
+19:21:09  [error] Failed: Total 2818, Failed 22, Errors 0, Passed 2796
+19:21:09  [error] Failed tests:
+19:21:09  [error] 	partest
+19:21:13  [error] (test / IntegrationTest / testOnly) sbt.TestsFailedException: Tests unsuccessful
+19:21:13  [error] Total time: 701 s, completed Jul 10, 2019 5:21:12 PM
+19:21:14  
+19:21:14  scala_test_0_FAILED
+
+jdk11 hs:
+--------
+20:00:48  # Failed test paths (this command will update checkfiles)
+20:00:48  partest --update-check \
+20:00:48    /scala/test/files/pos/t10641 \
+20:00:48    /scala/test/files/neg/checksensible.scala \
+20:00:48    /scala/test/files/neg/t10701 \
+20:00:48    /scala/test/files/neg/t6289 \
+20:00:48    /scala/test/files/jvm/deprecation \
+20:00:48    /scala/test/files/jvm/duration-java \
+20:00:48    /scala/test/files/jvm/inner.scala \
+20:00:48    /scala/test/files/jvm/innerClassAttribute \
+20:00:48    /scala/test/files/jvm/methvsfield \
+20:00:48    /scala/test/files/jvm/natives.scala \
+20:00:48    /scala/test/files/jvm/t11321b \
+20:00:48    /scala/test/files/jvm/t1143-2 \
+20:00:48    /scala/test/files/jvm/t1342 \
+20:00:48    /scala/test/files/jvm/t1464 \
+20:00:48    /scala/test/files/jvm/t1600.scala \
+20:00:48    /scala/test/files/jvm/t2163 \
+20:00:48    /scala/test/files/jvm/t2570 \
+20:00:48    /scala/test/files/jvm/t2585 \
+20:00:48    /scala/test/files/jvm/t3415 \
+20:00:48    /scala/test/files/jvm/t7253 \
+20:00:48    /scala/test/files/jvm/t8689.scala \
+20:00:48    /scala/test/files/jvm/t8786 \
+20:00:48    /scala/test/files/jvm/value-class-in-jannotation \
+20:00:48    /scala/test/files/jvm/varargs
+20:00:48  
+20:00:49  [error] Failed: Total 2818, Failed 24, Errors 0, Passed 2794
+
+
+jdk8 openj9:
+--------------
+18:28:17  Selected 2818 tests drawn from 3 named test categories
+18:28:17  
+18:28:17  # starting 1625 tests in pos
+18:29:37  ........................................................................
+18:32:06  ........................................................................
+18:32:11  .....................[[syntax trees at end of                     typer]] // t10344.scala
+18:32:11  package <empty> {
+18:32:11    object t10344 extends scala.AnyRef {
+18:32:11      def <init>(): t10344.type = {
+18:32:11        t10344.super.<init>();
+18:32:11        ()
+18:32:11      };
+18:32:11      def unwrap[F[_] >: [_]Nothing <: [_]Any](f: F[Unit] => Unit): Unit = ();
+18:32:11      private[this] val f: (=> Unit) => Unit = ((x$1: => Unit) => ());
+18:32:11      <stable> <accessor> def f: (=> Unit) => Unit = t10344.this.f;
+18:32:11      t10344.this.unwrap[<byname>](t10344.this.f)
+18:32:11    }
+18:32:11  }
+18:32:11  
+18:32:21  ...................................................
+18:32:40  ......................................Name table size after compilation: 75102 chars
+18:33:00  ..................................
+18:33:24  ........................................................................
+18:37:25  .........................................
+18:37:25  
+18:37:25  # starting 1112 tests in neg
+18:37:31  .................................................X......................
+18:37:41  .........................................................................
+18:37:50  ........................................................................
+18:37:59  ........................................................................
+18:38:07  ........................................................................
+18:38:12  ........................................................................
+18:38:17  ........................................................................
+18:38:22  ........................................................................
+18:38:27  ........................................................................
+18:38:34  ........................................................................
+18:38:41  ........................................................................
+18:38:49  ........................................................................
+18:38:54  ........................................................................
+18:39:00  ........................................................................
+18:39:07  ........................................................................
+18:39:08  ...............................
+18:39:08  !!    1 - neg/constant-warning.scala                [output differs]
+18:39:08  # 1111/1112 passed, 1 failed in neg
+18:39:08  
+18:39:08  # starting 81 tests in jvm
+18:39:08  Note: test execution will be non-parallel under -Dpartest.exec.in.process
+18:41:02  ..............X.........................................................
+18:41:17  .........
+18:41:17  !!  1 - jvm/javaReflection                        [output differs][duration 6.10s]
+18:41:17  # 80/81 passed, 1 failed in jvm
+18:41:17  
+18:41:17  # Failed test paths (this command will update checkfiles)
+18:41:17  partest --update-check \
+18:41:17    /scala/test/files/neg/constant-warning.scala \
+18:41:17    /scala/test/files/jvm/javaReflection
+18:41:17  
+18:41:19  [error] Failed: Total 2818, Failed 2, Errors 0, Passed 2816
+18:41:19  [error] Failed tests:
+18:41:19  [error] 	partest
+18:41:22  [error] (test / IntegrationTest / testOnly) sbt.TestsFailedException: Tests unsuccessful
+18:41:22  [error] Total time: 909 s, completed Jul 10, 2019 4:41:21 PM
+18:41:23  
+18:41:23  scala_test_0_FAILED
+
+jdk11 j9:
+--------
+20:15:38  # Failed test paths (this command will update checkfiles)
+20:15:38  partest --update-check \
+20:15:38    /scala/test/files/pos/t10641 \
+20:15:38    /scala/test/files/neg/checksensible.scala \
+20:15:38    /scala/test/files/neg/constant-warning.scala \
+20:15:38    /scala/test/files/jvm/javaReflection
+20:15:38  
+20:15:39  [error] Failed: Total 2818, Failed 4, Errors 0, Passed 2814
+
+

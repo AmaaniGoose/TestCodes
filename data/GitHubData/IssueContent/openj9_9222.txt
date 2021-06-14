@@ -1,0 +1,2 @@
+* Remove these functions from `x/codegen/J9TreeEvaluator.cpp` as they are no longer used
+* Remove references to `lowerAtcCheck`

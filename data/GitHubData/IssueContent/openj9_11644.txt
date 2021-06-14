@@ -1,0 +1,78 @@
+Failure link
+------------
+
+From an internal build `ibuild 463567`:
+```
+java version "1.8.0_281"
+Java(TM) SE Runtime Environment (build 8.0.7.0 - pap3280sr7-20201221_01(SR7))
+IBM J9 VM (build 2.9, JRE 1.8.0 AIX ppc-32-Bit 20210112_463567 (JIT enabled, AOT enabled)
+OpenJ9   - 4bd457e
+OMR      - a4fd831
+IBM      - 2edc62a)
+JCL - 20201217_01 based on Oracle jdk8u281-b09
+```
+
+Optional info
+-------------
+
+- intermittent failure (yes|no): yes 2/10
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+Testing: Running threads stack size info test
+Test start time: 2021/01/12 22:32:47 Eastern Standard Time
+Running command: "/bluebird/builds/bld_463567/sdk/ap3280/bin/java"   -verbose:stack -cp "/bluebird/builds/bld_463567/jvmtest/test/SE80/functional/cmdline_options_testresources/cmdlinetestresources.jar" j9vm.test.printstacktest.RunningThreadsStackSizeTest
+Time spent starting: 57 milliseconds
+Exception in thread "Thread-7" java.lang.StackOverflowError
+        at java.util.regex.Pattern$GroupTail.match(Pattern.java:4742)
+...
+        at java.util.regex.Pattern$GroupTail.match(Pattern.java:4742)
+        at java.util.regex.Pattern$BranchConn.match(Pattern.java:4593)
+        at java.util.regex.Pattern$BmpCharProperty.match(Pattern.java:3823)
+        at java.util.regex.Pattern$Branch.match(Pattern.java:4629)
+        at java.util.regex.Pattern$GroupHead.match(Pattern.java:4683)
+        at java.util.regex.Pattern$Slice.match(Pattern.java:3997)
+        at java.util.regex.Pattern$GroupCurly.match0(Pattern.java:4488)
+        at java.util.regex.Pattern$GroupCurly.match(Pattern.java:4430)
+        at java.util.regex.Pattern$BnM.match(Pattern.java:5494)
+        at java.util.regex.Matcher.search(Matcher.java:1259)
+        at java.util.regex.Matcher.find(Matcher.java:648)
+        at OutputRegexHelper.ContainsMatches(OutputRegexHelper.java:41)
+        at Output.match(Output.java:84)
+        at Test$StreamMatcher.run(Test.java:516)
+Time spent executing: 1918 milliseconds
+Test result: FAILED
+Output from test:
+ [ERR] JVMVERB000I Verbose stack: "Attach API initializer" used 1292/0 bytes on Java/C stacks
+ [ERR] JVMVERB000I Verbose stack: "Attach API wait loop" used 212/0 bytes on Java/C stacks
+ [ERR] JVMVERB000I Verbose stack: "Attach API teardown" used 408/0 bytes on Java/C stacks
+ [ERR] JVMVERB027I Verbose stack: Running thread "RunningThread1" is using 132/0 bytes on Java/C stacks
+ [ERR] JVMVERB027I Verbose stack: Running thread "RunningThread2" is using 132/0 bytes on Java/C stacks
+ [ERR] JVMVERB000I Verbose stack: "main" used 1560/0 bytes on Java/C stacks
+ [ERR] JVMVERB000I Verbose stack: "JIT Compilation Thread-001" used 160/0 bytes on Java/C stacks
+ [ERR] JVMVERB000I Verbose stack: "JIT Compilation Thread-002" used 160/0 bytes on Java/C stacks
+ [ERR] JVMVERB000I Verbose stack: "JIT Compilation Thread-003" used 160/0 bytes on Java/C stacks
+ [ERR] JVMVERB000I Verbose stack: "JIT Compilation Thread-004" used 160/0 bytes on Java/C stacks
+ [ERR] JVMVERB000I Verbose stack: "JIT Compilation Thread-005" used 160/0 bytes on Java/C stacks
+ [ERR] JVMVERB000I Verbose stack: "JIT Compilation Thread-006" used 160/0 bytes on Java/C stacks
+ [ERR] JVMVERB000I Verbose stack: "JIT Diagnostic Compilation Thread-007" used 160/0 bytes on Java/C stacks
+ [ERR] JVMVERB000I Verbose stack: "JIT Compilation Thread-000" used 224/0 bytes on Java/C stacks
+ [ERR] JVMVERB000I Verbose stack: "IProfiler" used 160/0 bytes on Java/C stacks
+ [ERR] JVMVERB000I Verbose stack: "JIT-SamplerThread" used 160/0 bytes on Java/C stacks
+>> Success condition was not found: [Output match: Verbose stack: Unable to print the stack info for currently running threads]
+>> Success condition was not found: [Output match: \[ERR\](\s)*JVMVERB027I Verbose stack: Running thread "RunningThread(1|2)" is using(\n|.)*(\s)+\[ERR\](\s)*JVMVERB027I Verbose stack: Running thread "RunningThread(1|2)" is using]
+>> Failure condition was not found: [Output match: Verbose stack: Unable to print the stack info for currently running threads(\n|.)*\[ERR\](\s)*JVMVERB027I Verbose stack: Running thread "(.)*" is using]
+>> Failure condition was not found: [Output match: \[ERR\](\s)*JVMVERB027I Verbose stack: Running thread "(.)*" is using(.|\n)*Verbose stack: Unable to print the stack info for currently running threads]
+>> Failure condition was not found: [Output match: The thread should not have been interrupted!]
+>> Failure condition was not found: [Output match: Unhandled Exception]
+>> Failure condition was not found: [Output match: Exception:]
+
+
+---TEST RESULTS---
+Number of PASSED tests: 1 out of 2
+Number of FAILED tests: 1 out of 2
+
+---SUMMARY OF FAILED TESTS---
+Running threads stack size info test
+```

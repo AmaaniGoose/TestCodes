@@ -1,0 +1,82 @@
+Names of z/OS transaction dumps generated from multiple threads at the same instant in time should be appropriately differentiated.
+
+The jvm default format (JAVA_DUMP_TDUMP_PATTERN) for z/os TDUMP names is as follows : "%uid.JVM.%job.D%y%m%d.T%H" "%M" "%S.X&DS"
+
+For e.g. on a 54-core z/os box, 4 threads received s0c4 abends (i.e. gpfs) at the same instant in time. While javacores were correctly generated with different names (javacore*.005.txt, javacore*.005.txt, etc),  the generation of TDUMPs failed due to duplicate dataset names being generated.
+
+10.56.50 S0089639  JVMDUMP039I Processing dump event "gpf", detail "" at                
+2017/01/27  316                                                                         
+   316             15:56:50 - please wait.                                              
+   316                                                                                  
+****10.56.50 S0089639  JVMDUMP032I JVM requested System dump using                          
+'SETUP.JVM.CIN3ZL1.D170127  317                                                         
+   317             .T155650.X&DS' in response to an event****                               
+   317                                                                                  
+10.56.50 S0089639  JVMDUMP039I Processing dump event "gpf", detail "" at                
+2017/01/27  318                                                                         
+   318             15:56:50 - please wait.                                              
+   318                                                                                  
+10.56.50 S0089639  JVMDUMP039I Processing dump event "gpf", detail "" at                
+2017/01/27  319                                                                         
+   319             15:56:50 - please wait.                                              
+   319                                                                                  
+10.56.50 S0089639  JVMDUMP039I Processing dump event "gpf", detail "" at                
+2017/01/27  320                                                                         
+   320             15:56:50 - please wait.                                              
+   320                                                                                  
+10.56.50 S0089639  IGD100I 1310 ALLOCATED TO DDNAME SYS00013 DATACLAS (                 
+)                                                                                       
+10.56.57 S0089639  IEA827I COMPLETE TRANSACTION DUMP WRITTEN TO 00001                   
+DATASETS  323                                                                           
+   323             STARTING FROM                                                        
+'SETUP.JVM.CIN3ZL1.D170127.T155650.X001'                                                
+   323             PLEASE COMBINE USING COPYDUMP PRIOR TO VIEWING IN                    
+IPCS                                                                                    
+10.56.57 S0089639  JVMDUMP032I JVM requested Java dump using                            
+'/SN0/tmp/javacore.20170127.  324                                                       
+   324             155650.84084746.0005.txt' in response to an event                    
+   324                                                                                  
+**10.56.57 S0089639  JVMDUMP032I JVM requested System dump using                          
+'SETUP.JVM.CIN3ZL1.D170127  325                                                         
+   325             .T155650.X&DS' in response to an event**                               
+   325                                                                                  
+**10.56.57 S0089639  IKJ56229I DATA SET                                                   
+SETUP.JVM.CIN3ZL1.D170127.T155650.X001 NOT ALLOCATED, CATALOG ERROR+                    
+10.56.57 S0089639  IKJ56229I DATA SET NAME CONFLICTS WITH EXISTING DATA                 
+SET NAME OR USER IS NOT AUTHORIZED TO PERFORM THE OPERATION.                            
+10.56.57 S0089639  IGD100I A687 ALLOCATED TO DDNAME SYS00014 DATACLAS (                 
+)**                                                                                       
+10.56.57 S0089639  IEA820I TRANSACTION DUMP REQUESTED BUT NOT TAKEN  329                
+   329                     AUTOMATIC ALLOCATION OF DUMP DATA SET FAILED                 
+10.56.57 S0089639  JVMDMP025I IEATDUMP failed RC=0x00000008                             
+RSN=0x00000026 DSN=SETUP.JVM.CIN3ZL1.D170127.T155650.X&DS                               
+10.56.57 S0089639  JVMPORT024E IEATDUMP failed because we couldn't                      
+allocate the dump  331                                                                  
+   331             dataset (check disk space and field permissions).
+   331                                                                                  
+10.56.57 S0089639  JVMDUMP012E Error in System dump:                                    
+SETUP.JVM.CIN3ZL1.D170127.T155650.X&  332                                               
+   332             DS                                                                   
+   332                                                                                  
+10.56.57 S0089639  JVMDUMP032I JVM requested Java dump using                            
+'/SN0/tmp/javacore.20170127.  333                                                       
+   333             155650.84084746.0006.txt' in response to an event                    
+   333                                                                                  
+**10.56.57 S0089639  JVMDUMP032I JVM requested System dump using                          
+'SETUP.JVM.CIN3ZL1.D170127  334                                                         
+   334             .T155650.X&DS' in response to an event**                               
+   334                                                                                  
+**10.56.58 S0089639  IKJ56229I DATA SET                                                   
+SETUP.JVM.CIN3ZL1.D170127.T155650.X001 NOT ALLOCATED, CATALOG ERROR+                    
+10.56.58 S0089639  IKJ56229I DATA SET NAME CONFLICTS WITH EXISTING DATA                 
+SET NAME OR USER IS NOT AUTHORIZED TO PERFORM THE OPERATION.**
+...
+...
+...
+
+
+For 64-bit jvms, as per [OA24232](http://m.ibm.com/http/publibz.boulder.ibm.com/cgi-bin/bookmgr_OS390/BOOKS/zidocms2/72.1?SHELF=ZDOCAPAR&DT=20120831070418&wirelessshow=1), we use &DS to tell the IEATDUMP to auto-allocate datasets which have &DS in the name pattern. It's unlikely that the duplicate dataset name could be caused by the IEATDUMP routine failing to correctly increment the &DS suffix.
+
+The 4 javacores generated (notice the timestamps in their names above) show that 4 different threads received gpfs at the same instant in time.
+
+The jvm needs to be modified to include thread/TCB id  in some form in the dataset name pattern. (We also need to keep in mind the limitation of 44 characters for a z/OS dataset name.)

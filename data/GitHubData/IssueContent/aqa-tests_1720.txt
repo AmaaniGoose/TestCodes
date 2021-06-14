@@ -1,0 +1,27 @@
+**Describe the bug**
+When building Elasticsearch(v7.6.2), I get an error when using any version of Java under 13. The error below is when I was using Java 11. 
+
+```
+FAILURE: Build failed with an exception.
+
+* Where:
+Build file '/elasticsearch/build.gradle' line: 38
+
+* What went wrong:
+An exception occurred applying plugin request [id: 'elasticsearch.global-build-info']
+> Failed to apply plugin [id 'elasticsearch.global-build-info']
+   > The compiler java.home must be set to a JDK installation directory for Java 13 but is [/opt/java/openjdk] corresponding to [11]
+```
+
+**To Reproduce**
+Build an image of elasticsearch on have version of Java below 13.
+
+`./build_image.sh  elasticsearch 11 hotspot debianslim jdk full`
+
+Then run that image. 
+
+**Expected behavior**
+Expected any version of Java to work when building Elasticsearch.
+
+**Additional context**
+This might have something to do with the version of Elasticsearch I picked. Trying a lower version might over. We would need to figure out what the cut off would be. 

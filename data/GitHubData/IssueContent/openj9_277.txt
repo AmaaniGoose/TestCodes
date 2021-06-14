@@ -1,0 +1,200 @@
+Enabling the ILValidator, via the JIT option `useIlValidator`, exposes a number IL validation errors when running something as simple as `java -version`. 
+
+These should be investigated and resolved.
+
+E.g.
+
+```
+$ ./java -Xjit:useIlValidator,count=0,paranoidoptcheck -version                                                                                                                                                                               [0] :)
+*** VALIDATION ERROR ***
+Node: iloadi n221n
+Method: java/lang/Object.hashCode()I
+Child 0 has unexpected type Int32 (expected Address)
+*** VALIDATION ERROR ***
+Node: iloadi n98n
+Method: java/lang/J9VMInternals.fastIdentityHashCode(Ljava/lang/Object;)I
+Child 0 has unexpected type Int32 (expected Address)
+*** VALIDATION ERROR ***
+Node: lshl n3929n
+Method: java/lang/Class.getPrimitiveClass(Ljava/lang/String;)Ljava/lang/Class;
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n775n
+Method: java/lang/String.startsWith(Ljava/lang/String;I)Z
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n628n
+Method: java/lang/String.regionMatches(ILjava/lang/String;II)Z
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n173n
+Method: java/lang/StringBuilder.append(C)Ljava/lang/StringBuilder;
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n237n
+Method: java/lang/String.replace(CC)Ljava/lang/String;
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n215n
+Method: java/lang/String.indexOf(II)I
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n111n
+Method: java/lang/String.decompressedArrayCopy([BI[BII)V
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n383n
+Method: java/lang/String.<init>([BIIZ)V
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n398n
+Method: java/lang/String.<init>([BIIZZ)V
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n1414n
+Method: java/security/BasicPermission.init(Ljava/lang/String;)V
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n100n
+Method: java/lang/String.charAt(I)C
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n1363n
+Method: java/lang/StringBuffer.initFromSystemProperties(Ljava/util/Properties;)V
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n1362n
+Method: java/lang/StringBuilder.initFromSystemProperties(Ljava/util/Properties;)V
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n73n
+Method: java/lang/String.charAtInternal(I[B)C
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n1608n
+Method: jdk/internal/misc/VM.saveAndRemoveProperties(Ljava/util/Properties;)V
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n1157n
+Method: java/lang/System.getProperty(Ljava/lang/String;)Ljava/lang/String;
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n2868n
+Method: java/lang/System.getProperty(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n1070n
+Method: java/nio/charset/Charset.lookup(Ljava/lang/String;)Ljava/nio/charset/Charset;
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n1413n
+Method: java/nio/charset/Charset.lookup2(Ljava/lang/String;)Ljava/nio/charset/Charset;
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n1037n
+Method: java/nio/charset/Charset.atBugLevel(Ljava/lang/String;)Z
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lloadi n5n
+Method: com/ibm/jit/JITHelpers.getBackfillOffsetFromJ9Class64(J)J
+Child 0 has unexpected type Int64 (expected Address)
+*** VALIDATION ERROR ***
+Node: lshl n1828n
+Method: java/lang/StringCoding.encode(Ljava/lang/String;B[B)[B
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n2794n
+Method: java/lang/ClassLoader.initializeClassLoaders()V
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n888n
+Method: java/lang/String.equalsIgnoreCase(Ljava/lang/String;)Z
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n764n
+Method: java/lang/String.indexOf(Ljava/lang/String;I)I
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: bstorei n219n
+Method: sun/nio/fs/NativeBuffers.copyCStringToNativeBuffer([BLsun/nio/fs/NativeBuffer;)V
+Child 0 has unexpected type Int64 (expected Address)
+*** VALIDATION ERROR ***
+Node: lshl n192n
+Method: java/lang/String.lastIndexOf(II)I
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n905n
+Method: java/lang/String.endsWith(Ljava/lang/String;)Z
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n1262n
+Method: java/lang/String.regionMatches(ZILjava/lang/String;II)Z
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n1556n
+Method: java/lang/String.toLowerCaseCore(Ljava/lang/String;)Ljava/lang/String;
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lshl n56n
+Method: java/lang/String.charAtInternal(I)C
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: aloadi n140n
+Method: com/ibm/jit/JITHelpers.getSuperclass(Ljava/lang/Class;)Ljava/lang/Class;
+Child 0 has unexpected type Int32 (expected Address)
+*** VALIDATION ERROR ***
+Node: aloadi n5n
+Method: com/ibm/jit/JITHelpers.getClassFromJ9Class64(J)Ljava/lang/Class;
+Child 0 has unexpected type Int64 (expected Address)
+*** VALIDATION ERROR ***
+Node: lshl n373n
+Method: java/lang/String.<init>(Ljava/lang/String;I)V
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: lloadi n12n
+Method: java/nio/DirectLongBufferU.get(I)J
+Child 0 has unexpected type Int64 (expected Address)
+*** VALIDATION ERROR ***
+Node: lstorei n63n
+Method: java/nio/DirectLongBufferU.put(IJ)Ljava/nio/LongBuffer;
+Child 0 has unexpected type Int64 (expected Address)
+*** VALIDATION ERROR ***
+Node: iloadi n174n
+Method: java/lang/Enum.hashCode()I
+Child 0 has unexpected type Int32 (expected Address)
+*** VALIDATION ERROR ***
+Node: sloadi n2187n
+Method: java/lang/invoke/MethodHandle.resolveInvokeDynamic(Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;J)Ljava/lang/invoke/MethodHandle;
+Child 0 has unexpected type Int64 (expected Address)
+*** VALIDATION ERROR ***
+Node: iloadi n245n
+Method: java/lang/invoke/MethodType.hashCode()I
+Child 0 has unexpected type Int32 (expected Address)
+*** VALIDATION ERROR ***
+Node: iloadi n244n
+Method: java/lang/invoke/MethodCacheKey.calculateHashcode(Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/Class;)I
+Child 0 has unexpected type Int32 (expected Address)
+*** VALIDATION ERROR ***
+Node: lshl n81n
+Method: java/lang/StringBuilder.charAt(I)C
+Child 1 has unexpected type Int64 (expected Int32)
+*** VALIDATION ERROR ***
+Node: iloadi n203n
+Method: java/lang/module/ResolvedModule.hashCode()I
+Child 0 has unexpected type Int32 (expected Address)
+*** VALIDATION ERROR ***
+Node: iloadi n208n
+Method: java/lang/System.identityHashCode(Ljava/lang/Object;)I
+Child 0 has unexpected type Int32 (expected Address)
+*** VALIDATION ERROR ***
+Node: lshl n96n
+Method: java/lang/String.valueOf(C)Ljava/lang/String;
+Child 1 has unexpected type Int64 (expected Int32)
+openjdk version "9-internal"
+OpenJDK Runtime Environment (build 9-internal+0-adhoc.jenkins.openjdk)
+Eclipse OpenJ9 VM (build 2.9, JRE 9 Linux amd64-64 Compressed References 20170915_6 (JIT enabled, AOT enabled)
+J9VM - cea1ed7
+JIT  - cea1ed7
+OMR  - 617de12
+OpenJDK  - 83f5cd0 based on )
+```

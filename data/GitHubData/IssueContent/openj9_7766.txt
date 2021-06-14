@@ -1,0 +1,5 @@
+As noted in [1] there is a potential for further throughput improvement in the area taking advantage of the `J9_STR_ASCII` flag by attempting to add the flag during class loading/startup. There is a startup vs. throughput performance tradeoff here which will need to be evaluated once such a change is prototyped.
+
+The task here is to avoid examining the UTF8 characters to determine whether the input string is ASCII within the `j9gc_createJavaLangString` and instead do it at class load time. We can use the string flags to annotate whether a string is ASCII and cache such a value for reuse. The value can also be stored in the SCC as a further improvement.
+
+[1] https://github.com/eclipse/openj9/pull/7765#discussion_r346377760

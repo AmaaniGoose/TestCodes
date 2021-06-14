@@ -1,0 +1,12 @@
+Related to the work of combining compressedrefs and non-compressedrefs SPECS into the same build, we are planning to merge two tests builds into one (removing _xl). Below are some todos:
+
+- [x] No jvm option will be added for `NoOptions`. Remove the logic in TKG that adds jvm option -Xcompressedrefs or -Xnocompressedrefs
+https://github.com/AdoptOpenJDK/TKG/blob/6ad0667a194152ba7a5a98d68b39731d6c2922a3/openj9Settings.mk#L23-L29
+
+- [x] Update ottawa.csv to merge compressedrefs and non-compressedrefs into one SPEC. 
+
+- [ ] And clean up ottawa.csv if possible (not required for this issue)
+
+- [ ] Check to see if we can use the same ottawa.csv for internal vmfarm build
+
+FYI @jdekonin @AdamBrousseau @pshipton @smlambert @DanHeidinga 

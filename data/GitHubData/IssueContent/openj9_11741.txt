@@ -1,0 +1,7 @@
+There is no break so `isIndirectCall` is reassigned
+https://github.com/eclipse-openj9/openj9/blob/8394cffecaf5ea67e60c837a3b8f27e8c7d5c290/runtime/compiler/optimizer/InterpreterEmulator.cpp#L444-L449
+
+Also unlike here
+https://github.com/eclipse-openj9/openj9/blob/a1cfdc2866fe91f5eb5d775ff58a47bd7687a723/runtime/compiler/p/codegen/J9TreeEvaluator.cpp#L8982-L8997
+there is no break in this code
+https://github.com/eclipse-openj9/openj9/blob/a1cfdc2866fe91f5eb5d775ff58a47bd7687a723/runtime/compiler/p/codegen/J9TreeEvaluator.cpp#L9540-L9554

@@ -1,0 +1,47 @@
+Test category: openjdk
+Testsuite name: jdk_net
+Test name(s): 
+
+- java/net/InetAddress/CheckJNI.java
+
+- java/net/Socket/LinkLocal.java
+
+- java/net/ipv6tests/B6521014.java
+
+- java/net/ipv6tests/TcpTest.java
+
+- java/rmi/transport/dgcDeadLock/DGCDeadLock.java
+
+- java/util/concurrent/locks/Lock/TimedAcquireLeak.java
+
+
+
+Product(s) tested: OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_222-201907290328-b10)
+OS/architecture: macosx
+Platform specific: yes
+
+Reproducibility: intermittent
+
+Exception/Error from Log:
+
+```
+06:11:18  JavaTest Message: Test threw exception: java.net.ConnectException: Operation timed out (Connection timed out)
+06:11:18  JavaTest Message: shutting down test
+06:11:18  
+06:11:18  STATUS:Failed.`main' threw exception: java.net.ConnectException: Operation timed out (Connection timed out)
+```
+JBS: 
+
+- https://bugs.openjdk.java.net/browse/JDK-8178789
+
+- https://bugs.openjdk.java.net/browse/JDK-6459313
+
+- https://bugs.openjdk.java.net/browse/JDK-8006560
+
+- https://bugs.openjdk.java.net/browse/JDK-8151260
+
+- https://bugs.openjdk.java.net/browse/JDK-8029360
+
+- https://bugs.openjdk.java.net/browse/JDK-8155727
+
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk8_hs_sanity.openjdk_x86-64_mac/13/

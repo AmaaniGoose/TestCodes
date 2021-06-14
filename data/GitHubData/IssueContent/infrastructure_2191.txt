@@ -1,0 +1,93 @@
+https://ci.adoptopenjdk.net/job/Test_openjdk16_hs_sanity.openjdk_x86-64_windows/69/consoleFull
+
+The failing tests specify a 5Gb java heap.
+```
+02:14:13  TEST: java/lang/StringBuffer/HugeCapacity.java
+02:14:13  TEST JDK: E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdkbinary\j2sdk-image
+02:14:13  
+02:14:13  ACTION: build -- Passed. Build successful
+02:14:13  REASON: Named class compiled on demand
+02:14:13  TIME:   0.036 seconds
+02:14:13  messages:
+02:14:13  command: build HugeCapacity
+02:14:13  reason: Named class compiled on demand
+02:14:13  Test directory:
+02:14:13    compile: HugeCapacity
+02:14:13  elapsed time (seconds): 0.036
+02:14:13  
+02:14:13  ACTION: compile -- Passed. Compilation successful
+02:14:13  REASON: .class file out of date or does not exist
+02:14:13  TIME:   0.036 seconds
+02:14:13  messages:
+02:14:13  command: compile E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\StringBuffer\HugeCapacity.java
+02:14:13  reason: .class file out of date or does not exist
+02:14:13  Mode: agentvm
+02:14:13  Agent id: 2
+02:14:13  elapsed time (seconds): 0.036
+02:14:13  configuration:
+02:14:13  Boot Layer (javac runtime environment)
+02:14:13    class path: E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\javatest.jar 
+02:14:13                E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\jtreg.jar 
+02:14:13    patch:      java.base E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\output_16214728337777\jdk_lang_1\work\patches\java.base
+02:14:13  
+02:14:13  javac compilation environment
+02:14:13    source path: E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\StringBuffer
+02:14:13    class path:  E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\StringBuffer
+02:14:13                 E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\output_16214728337777\jdk_lang_1\work\classes\3\java\lang\StringBuffer\HugeCapacity.d
+02:14:13  
+02:14:13  rerun:
+02:14:13  cd 'E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\output_16214728337777\jdk_lang_1\work\scratch\1' && \
+02:14:13  PATH='C:\cygwin64\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn;C:\Program Files\Microsoft SQL Server\100\Tools\Binn;C:\Program Files\Microsoft SQL Server\100\DTS\Binn;C:\Strawberry\perl\bin;C:\Program Files\Git\cmd;C:\openjdk\jdk-8\bin;C:\apache-ant\apache-ant-1.10.5\bin;C:\Program Files\Microsoft SQL Server\110\Tools\Binn;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0;C:\Program Files\Microsoft SQL Server\120\Tools\Binn;C:\Program Files (x86)\IncrediBuild;C:\rust\bin;C:\Program Files\IcedTeaWEB\bin' \
+02:14:13  SystemDrive=C: \
+02:14:13  SystemRoot='C:\Windows' \
+02:14:13  TEMP='C:\Users\JENKIN~1.TST\AppData\Local\Temp' \
+02:14:13  TMP='E:\jenkinstmp' \
+02:14:13  windir='C:\Windows' \
+02:14:13      'E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdkbinary\j2sdk-image\bin\javac' \
+02:14:13          -J-ea \
+02:14:13          -J-esa \
+02:14:13          -J-Xmx512m \
+02:14:13          -J-XX:-UseCompressedOops \
+02:14:13          -J'-Djava.library.path=E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdkbinary\openjdk-test-image\jdk\jtreg\native' \
+02:14:13          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:-UseCompressedOops' \
+02:14:13          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:-UseCompressedOops' \
+02:14:13          -J-Dtest.compiler.opts= \
+02:14:13          -J-Dtest.java.opts= \
+02:14:13          -J-Dtest.jdk='E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdkbinary\j2sdk-image' \
+02:14:13          -J-Dcompile.jdk='E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdkbinary\j2sdk-image' \
+02:14:13          -J-Dtest.timeout.factor=8.0 \
+02:14:13          -J-Dtest.nativepath='E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdkbinary\openjdk-test-image\jdk\jtreg\native' \
+02:14:13          -J-Dtest.root='E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk' \
+02:14:13          -J-Dtest.name=java/lang/StringBuffer/HugeCapacity.java \
+02:14:13          -J-Dtest.file='E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\StringBuffer\HugeCapacity.java' \
+02:14:13          -J-Dtest.src='E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\StringBuffer' \
+02:14:13          -J-Dtest.src.path='E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\StringBuffer' \
+02:14:13          -J-Dtest.classes='E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\output_16214728337777\jdk_lang_1\work\classes\3\java\lang\StringBuffer\HugeCapacity.d' \
+02:14:13          -J-Dtest.class.path='E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\output_16214728337777\jdk_lang_1\work\classes\3\java\lang\StringBuffer\HugeCapacity.d' \
+02:14:13          -J-Dtest.class.path.prefix='E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\output_16214728337777\jdk_lang_1\work\classes\3\java\lang\StringBuffer\HugeCapacity.d;E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\StringBuffer' \
+02:14:13          -d 'E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\output_16214728337777\jdk_lang_1\work\classes\3\java\lang\StringBuffer\HugeCapacity.d' \
+02:14:13          -sourcepath 'E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\StringBuffer' \
+02:14:13          -classpath 'E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\StringBuffer;E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\output_16214728337777\jdk_lang_1\work\classes\3\java\lang\StringBuffer\HugeCapacity.d' 'E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\lang\StringBuffer\HugeCapacity.java'
+02:14:13  
+02:14:13  ACTION: main -- Failed. Unexpected exit from test [exit code: 1]
+02:14:13  REASON: User specified action: run main/othervm -Xms5G -Xmx5G HugeCapacity 
+02:14:13  TIME:   0.188 seconds
+02:14:13  messages:
+02:14:13  command: main -Xms5G -Xmx5G HugeCapacity
+02:14:13  reason: User specified action: run main/othervm -Xms5G -Xmx5G HugeCapacity 
+02:14:13  Mode: othervm [/othervm specified]
+02:14:13  elapsed time (seconds): 0.188
+02:14:13  configuration:
+02:14:13  STDOUT:
+02:14:13  #
+02:14:13  # There is insufficient memory for the Java Runtime Environment to continue.
+02:14:13  # Native memory allocation (mmap) failed to map 5368709120 bytes for G1 virtual space
+02:14:13  # An error report file with more information is saved as:
+02:14:13  # E:\workspace\Test_openjdk16_hs_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\output_16214728337777\jdk_lang_1\work\scratch\1\hs_err_pid6432.log
+02:14:13  STDERR:
+02:14:13  OpenJDK 64-Bit Server VM warning: INFO: os::commit_memory(0x0000005963c00000, 5368709120, 0) failed; error='The paging file is too small for this operation to complete' (DOS error/errno=1455)
+```
+```
+TEST: java/util/BitSet/HugeToString.java
+```
+fails in the same way.

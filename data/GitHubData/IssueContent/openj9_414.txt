@@ -1,0 +1,1 @@
+An issue was discovered in extended testing of arraylets modes which caused the backout in PR #413 we should add more arraylets testing to the sanity builds to prevent future breaks in this area that is often missed in testing since it requires running with a non-default GC policy (eg balanced).

@@ -1,0 +1,20 @@
+- [x] ub16-ppcle-1
+- [x] ub16-ppcle-2
+- [x] ub16-ppcle-3
+- [x] ub16-ppcle-4
+- [x] ub16-x86-1
+- [x] ub16-x86-2
+- [x] ub16-x86-3
+- [x] ub16-x86-4
+- [x] ub16-x86-5
+- [x] ub16-x86-6
+
+- [x] aix71-p8-1
+- [x] aix71-p8-2
+- [x] aix71-p8-3
+- [x] aix71-p8-4
+
+- [ ] win2012r2-x86-1
+- [ ] win2012r2-x86-2
+- [ ] win2012r2-x86-3
+- [ ] win2012r2-x86-4

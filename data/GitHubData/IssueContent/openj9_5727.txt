@@ -1,0 +1,7 @@
+The original PR: 
+> Enhance the handling of indexOf in ValuePropagation #5444
+
+was reverted in this PR:
+> Revert "Enhance the handling of indexOf in ValuePropagation" #5723
+
+We need to determine if / how this should be restored.

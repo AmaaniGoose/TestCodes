@@ -1,0 +1,12 @@
+Please set the title to indicate the test name and machine name where known.
+
+To make it easy for the infrastructure team to repeat and diagnose, please
+answer the following questions:
+
+- test suite/name? Test_openjdk17_j9_extended.functional_aarch64_linux testJCMMXBeanRemote_1
+- Is there an existing issue elsewhere covering this? https://github.com/eclipse/openj9/issues/12189
+- Which machine(s) does it work on? build-docker-ubuntu1804-armv8-3
+- Which machine(s) does it fail on? build-alibaba-ubuntu1804-armv8-1 
+- Do you have a link to a Grinder re-run if the test with the failure? https://ci.adoptopenjdk.net/job/Grinder/8023/console
+
+Any other details:

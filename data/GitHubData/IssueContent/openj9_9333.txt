@@ -1,0 +1,3 @@
+There is logic in the private linkage virtual dispatch path of the X, P, and Z code generators to detect when devirtualization is possible and to generate the appropriate virtual guards.  They look to be largely identical except for implementation differences.  The bulk of this logic should be commoned across the backends so they can share a single implementation.
+
+AArch64 and ARM do not yet have support for guarded devirtualization, so a shared implementation would make the implementation of this on new platforms easier.

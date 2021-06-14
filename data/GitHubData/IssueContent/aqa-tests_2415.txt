@@ -1,0 +1,18 @@
+This test also fails on zLinux for a different problem here: https://github.com/AdoptOpenJDK/openjdk-tests/issues/2408
+
+https://trss.adoptopenjdk.net/output/test?id=605ba25b5730424dbcb67d31
+
+The ShellScaffold.sh script tries to create a tmp file using the wrong slashes for CYGWIN environment:
+https://github.com/AdoptOpenJDK/openjdk-jdk8u/blob/a1d853a5d797f38f7be8c260f4a83c1b3fe48adc/jdk/test/com/sun/jdi/ShellScaffold.sh#L271
+
+causing:
+```
+[2021-03-24T19:20:22.349Z] ShellScaffold.sh: Version
+[2021-03-24T19:20:22.349Z] E:/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdk-tests/openjdk/openjdk-jdk/jdk/test/com/sun/jdi/ShellScaffold.sh: line 277: C:\Windows/tmp.6102: Permission denied
+[2021-03-24T19:20:22.349Z] cat: 'C:\Windows/tmp.6102': No such file or directory
+[2021-03-24T19:20:22.349Z] mkdir: cannot create directory '/aa6102': Permission denied
+[2021-03-24T19:20:22.349Z] touch: cannot touch '/aa6102/jxdbOutput.txt': No such file or directory
+[2021-03-24T19:20:22.349Z] E:/workspace/Test_openjdk8_hs_sanity.openjdk_x86-64_windows/openjdk-tests/openjdk/openjdk-jdk/jdk/test/com/sun/jdi/ShellScaffold.sh: line 380: cd: /aa6102: No such file or directory
+```
+The logic needs to use correct slashes depending on Windows or Cygwin.
+

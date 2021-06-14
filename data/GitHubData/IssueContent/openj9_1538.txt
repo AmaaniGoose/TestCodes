@@ -1,0 +1,86 @@
+Tried it on Windows, installing the wa64-3.0.14.20171017 agent.
+
+java -Xhealthcenter results in the following 
+```
+Mar 26, 2018 10:58:35 AM com.ibm.java.diagnostics.healthcenter.agent.mbean.HCLaunchMBean <init>
+INFO: Agent version "3.0.14.20171017"
+Mar 26, 2018 10:58:35 AM com.ibm.java.diagnostics.healthcenter.agent.mbean.HCLaunchMBean createJMXConnector
+INFO: IIOP will be listening on the next available system assigned port. Use com.ibm.java.diagnostics.healthcenter.agent.iiop.port to specify a port
+Mar 26, 2018 10:58:35 AM java.io.ObjectInputStream filterCheck
+INFO: ObjectInputFilter REJECTED: class javax.rmi.CORBA.Stub, array length: -1, nRefs: 5, depth: 2, bytes: 157, ex: n/a
+Mar 26, 2018 10:58:35 AM com.ibm.java.diagnostics.healthcenter.agent.mbean.HCLaunchMBean createJMXConnector
+SEVERE: Health Center agent failed to start.
+java.io.IOException: Cannot bind to URL [rmi://MYLAPTOP:1972/jmxrmi]: javax.naming.CommunicationException [Root exception is java.rmi.ServerException: RemoteException occurred in server thread; nested exception is:
+        java.rmi.UnmarshalException: error unmarshalling arguments; nested exception is:
+        java.io.InvalidClassException: filter status: REJECTED]
+        at javax.management.remote.rmi.RMIConnectorServer.newIOException(RMIConnectorServer.java:828)
+        at javax.management.remote.rmi.RMIConnectorServer.start(RMIConnectorServer.java:433)
+        at com.ibm.java.diagnostics.healthcenter.agent.mbean.HCLaunchMBean.createJMXConnector(HCLaunchMBean.java:678)
+        at com.ibm.java.diagnostics.healthcenter.agent.mbean.HCLaunchMBean.startMBeanServer(HCLaunchMBean.java:462)
+        at com.ibm.java.diagnostics.healthcenter.agent.mbean.HCLaunchMBean$JmxStarterThread.run(HCLaunchMBean.java:267)
+Caused by: javax.naming.CommunicationException [Root exception is java.rmi.ServerException: RemoteException occurred in server thread; nested exception is:
+        java.rmi.UnmarshalException: error unmarshalling arguments; nested exception is:
+        java.io.InvalidClassException: filter status: REJECTED]
+        at com.sun.jndi.rmi.registry.RegistryContext.bind(RegistryContext.java:161)
+        at com.sun.jndi.toolkit.url.GenericURLContext.bind(GenericURLContext.java:228)
+        at javax.naming.InitialContext.bind(InitialContext.java:425)
+        at javax.management.remote.rmi.RMIConnectorServer.bind(RMIConnectorServer.java:645)
+        at javax.management.remote.rmi.RMIConnectorServer.start(RMIConnectorServer.java:428)
+        ... 3 more
+Caused by: java.rmi.ServerException: RemoteException occurred in server thread; nested exception is:
+        java.rmi.UnmarshalException: error unmarshalling arguments; nested exception is:
+        java.io.InvalidClassException: filter status: REJECTED
+        at sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:393)
+        at sun.rmi.transport.Transport$1.run(Transport.java:200)
+        at sun.rmi.transport.Transport$1.run(Transport.java:197)
+        at java.security.AccessController.doPrivileged(AccessController.java:732)
+        at sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+        at sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:568)
+        at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:826)
+        at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:683)
+        at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler$$Lambda$7.00000000140AEBA0.run(Unknown Source)
+        at java.security.AccessController.doPrivileged(AccessController.java:666)
+        at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:682)
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+        at java.lang.Thread.run(Thread.java:812)
+        at sun.rmi.transport.StreamRemoteCall.exceptionReceivedFromServer(StreamRemoteCall.java:283)
+        at sun.rmi.transport.StreamRemoteCall.executeCall(StreamRemoteCall.java:260)
+        at sun.rmi.server.UnicastRef.invoke(UnicastRef.java:375)
+        at sun.rmi.registry.RegistryImpl_Stub.bind(RegistryImpl_Stub.java:68)
+        at com.sun.jndi.rmi.registry.RegistryContext.bind(RegistryContext.java:155)
+        ... 7 more
+Caused by: java.rmi.UnmarshalException: error unmarshalling arguments; nested exception is:
+        java.io.InvalidClassException: filter status: REJECTED
+        at sun.rmi.registry.RegistryImpl_Skel.dispatch(RegistryImpl_Skel.java:78)
+        at sun.rmi.server.UnicastServerRef.oldDispatch(UnicastServerRef.java:472)
+        at sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:299)
+        at sun.rmi.transport.Transport$1.run(Transport.java:200)
+        at sun.rmi.transport.Transport$1.run(Transport.java:197)
+        at java.security.AccessController.doPrivileged(AccessController.java:732)
+        at sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+        at sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:568)
+        at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:826)
+        at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:683)
+        at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler$$Lambda$7.00000000140AEBA0.run(Unknown Source)
+        at java.security.AccessController.doPrivileged(AccessController.java:666)
+        at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:682)
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+        at java.lang.Thread.run(Thread.java:812)
+Caused by: java.io.InvalidClassException: filter status: REJECTED
+        at java.io.ObjectInputStream.filterCheck(ObjectInputStream.java:1355)
+        at java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:1975)
+        at java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1851)
+        at java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:1982)
+        at java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1851)
+        at java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2139)
+        at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1673)
+        at java.io.ObjectInputStream.readObjectImpl(ObjectInputStream.java:514)
+        at java.io.ObjectInputStream.readObject(ObjectInputStream.java:452)
+        at sun.rmi.registry.RegistryImpl_Skel.dispatch(RegistryImpl_Skel.java:76)
+        ... 15 more
+
+Mar 26, 2018 10:58:35 AM com.ibm.java.diagnostics.healthcenter.agent.mbean.HCLaunchMBean startAgent
+INFO: Health Center agent did not start correctly.
+```

@@ -1,0 +1,2 @@
+AArch64 has supported `OLD_DUAL_MODE_HELPER` only.
+We need to add support for `NEW_DUAL_MODE_HELPER`.

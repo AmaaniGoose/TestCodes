@@ -1,0 +1,1 @@
+At the moment (discovered while looking at request #1326) the TRSS server is running as root through `forever` and started by the `TRSS*` scripts in `/etc/init.d`. Running such services as root unnecessarily is undesirable from a security standpoint so we should look at reworking this to run as a non-root user and manage access accordingly.

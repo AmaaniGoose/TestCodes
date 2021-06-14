@@ -1,0 +1,8 @@
+Very often in Service, we have received system core files from customers without the native libraries, and we have to go back to customer asking them to do jextract again. 
+
+The jextracted files can be huge (and often a few gb) and it is not easy for customer to upload the huge file.  If jextract provides a special option (such as "-excludeCore") to exclude the system core file from the jextract result, then the jextract file normally only a few mb. This would make it much easier for customers to upload the jextract result.
+
+If the system core file is excluded from the jextract result, it would be better if we can add a text file which document the system core file filename, target system info (something similar to the output from Jdmpview command "info sys").  This will avoid confusions.
+
+Of course, this new option should be off by default.  And this option is to be used only after we have had the un-jextracted system core file from customer.  Unfortunately this scenario is very often in service world.
+

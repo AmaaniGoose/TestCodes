@@ -1,0 +1,30 @@
+This is part of https://github.com/eclipse/openj9/issues/4655.
+
+jcmd <target> <command> <options>
+
+- target: Attach API virtual machine ID of the target process
+- \<command\>: `jcmd`-specific instruction to the target VM
+- \<options\>: options specific to \<command\>
+
+Other options:
+- [x] -h, --help
+- [x] `-l` option to list processes (like `jps`)
+- [ ] -f `<file>`: read commands from `<file>`
+- [x] -J JVM options
+
+Specific commands:
+- [x] help: print list of commands
+- [x] `<command>` help: print help for `<command>`
+- [x] GC.class_histogram: print the number of objects of each class and their sizes
+- [x] GC.heap_dump: do a heap dump
+- [x] GC.run: run a GC
+- [ ] GC.run_finalization
+- [ ] VM.flags: print JVM options
+- [ ] VM.system_properties
+- [ ] VM.command_line
+- [x] VM.javacore
+- [x] VM.heapdump (alias of GC.heap_dump)
+- [x] VM.snapdump
+- [x] VM.systemdump
+- [x] VM.javacore
+- [x] Thread.print

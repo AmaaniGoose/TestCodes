@@ -1,0 +1,68 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/569
+SC_Softmx_JitAot_0
+```
+STF 23:13:34.770 - +------ Step 16 - Run Jvm4 workload process
+STF 23:13:34.770 - | Run foreground process
+STF 23:13:34.770 - |   Program:     F:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1/openjdkbinary/j2sdk-image/bin/java
+STF 23:13:34.770 - |   Mnemonic:    jvm4
+STF 23:13:34.770 - |   Echo:        ECHO_OFF
+STF 23:13:34.770 - |   Expectation: NON_ZERO_EXIT [0, 1] within 30m
+STF 23:13:34.770 - |
+STF 23:13:34.771 - Running command: F:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1/openjdkbinary/j2sdk-image/bin/java -Xshareclasses:addtestjithints,verbose,name=SCC_SysTest_Workload_Cache,cacheDir=F:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1\openjdk-tests\TKG\test_output_16074902494416\SC_Softmx_JitAot_0\20201208-231303-SharedClassesWorkloadTest_Softmx_Increase_JitAot\results\cache -Xaot:forceAot,disableAsyncCompilation,count=0 -classpath F:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1\jvmtest\system\stf\stf.load\bin;F:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1\jvmtest\system\stf\stf.core\bin;F:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1/jvmtest/system/systemtest_prereqs/log4j-2.13.3/log4j-api-2.13.3.jar;F:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1/jvmtest/system/systemtest_prereqs/log4j-2.13.3/log4j-core-2.13.3.jar;F:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1/jvmtest/system/systemtest_prereqs/junit-4.12/junit-4.12.jar;F:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1/jvmtest/system/systemtest_prereqs/junit-4.12/hamcrest-core-1.3.jar;F:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1\jvmtest\system\openjdk-systemtest\openjdk.test.lang\bin;F:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1\jvmtest\system\openjdk-systemtest\openjdk.test.util\bin;F:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1\jvmtest\system\openjdk-systemtest\openjdk.test.math\bin;F:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1\jvmtest\system\openjdk-systemtest\openjdk.test.classloading\bin;F:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1\jvmtest\system\openjdk-systemtest\openjdk.test.nio\bin;F:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1\jvmtest\system\openj9-systemtest\openj9.test.daa\bin net.adoptopenjdk.loadTest.LoadTest -resultsDir F:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1\openjdk-tests\TKG\test_output_16074902494416\SC_Softmx_JitAot_0\20201208-231303-SharedClassesWorkloadTest_Softmx_Increase_JitAot\results -resultsPrefix 16.jvm4. -dumpRequested false -reportFailureLimit 1 -abortAtFailureLimit 10 -maxTotalLogFileSpace 200M -maxSingleLogSize 1/25 -suite.sharedclasses-mix.inventoryFile F:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1/openjdk-tests/TKG/test_output_16074902494416/SC_Softmx_JitAot_0/20201208-231303-SharedClassesWorkloadTest_Softmx_Increase_JitAot/results/16.jvm4.inventory/openj9.test.load/config/inventories/mix/sharedclasses-mix.xml -suite.sharedclasses-mix.inventoryExcludeFile F:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1/openjdk-tests/TKG/test_output_16074902494416/SC_Softmx_JitAot_0/20201208-231303-SharedClassesWorkloadTest_Softmx_Increase_JitAot/results/16.jvm4.inventory/openjdk.test.load/config/inventories/mix/mini-mix_exclude.xml -suite.sharedclasses-mix.inventoryExcludeFile F:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1/openjdk-tests/TKG/test_output_16074902494416/SC_Softmx_JitAot_0/20201208-231303-SharedClassesWorkloadTest_Softmx_Increase_JitAot/results/16.jvm4.inventory/openjdk.test.load/config/inventories/util/util_exclude.xml -suite.sharedclasses-mix.threadCount 7 -suite.sharedclasses-mix.totalNumberTests 500 -suite.sharedclasses-mix.selection sequential -suite.sharedclasses-mix.seed -1 -suite.sharedclasses-mix.repeatCount 1 -suite.sharedclasses-mix.thinkingTime 0ms..0ms
+STF 23:13:34.771 - Redirecting stderr to F:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1/openjdk-tests/TKG/test_output_16074902494416/SC_Softmx_JitAot_0/20201208-231303-SharedClassesWorkloadTest_Softmx_Increase_JitAot/results/16.jvm4.stderr
+STF 23:13:34.771 - Redirecting stdout to F:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1/openjdk-tests/TKG/test_output_16074902494416/SC_Softmx_JitAot_0/20201208-231303-SharedClassesWorkloadTest_Softmx_Increase_JitAot/results/16.jvm4.stdout
+STF 23:13:34.773 - Monitoring processes: jvm4
+STF 23:14:11.771 - **FAILED** Process jvm4 ended with exit code (4294967295) and not the expected exit code/s (0,1)
+STF 23:14:11.771 - Monitoring Report Summary:
+STF 23:14:11.771 -   o Process jvm4 ended with exit code (4294967295) and not the expected exit code/s (0,1)
+STF 23:14:11.772 - Killing processes: jvm4
+STF 23:14:11.772 -   o Process jvm4 pid 5264 is not running
+**FAILED** at step 16 (Run Jvm4 workload process). Expected return value=0 Actual=1 at F:/Users/jenkins/workspace/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1/openjdk-tests/\TKG\test_output_16074902494416\SC_Softmx_JitAot_0/20201208-231303-SharedClassesWorkloadTest_Softmx_Increase_JitAot/execute.pl line 569.
+STF 23:14:11.959 - **FAILED** execute script failed. Expected return value=0 Actual=1
+```
+
+4294967295 is 0xFFFFFFFF
+There are diagnostic files, core, javacore, etc.
+https://140-211-168-230-openstack.osuosl.org/artifactory/ci-eclipse-openj9/Test/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1/6/system_test_output.tar.gz
+
+16.jvm4.stderr
+```
+Unhandled exception
+Type=Segmentation error vmState=0x00000000
+Windows_ExceptionCode=c0000005 J9Generic_Signal=00000004 ExceptionAddress=00007FFAA3F6D444 ContextFlags=0010005f
+Handler1=00007FFAA3F92840 Handler2=00007FFAA3ECEFF0 InaccessibleReadAddress=FFFFFFFFFFFFFFFF
+RDI=0000000000582000 RSI=0000000000000100 RAX=FFED2AE800000000 RBX=00000000FFDAC2E5
+RCX=0000000000000000 RDX=00000000FFDAC2E5 R8=00000000FFDAC2E0 R9=000000A7477BEBC0
+R10=0000000000000002 R11=0000000000581D48 R12=000000000000002D R13=0000000000000001
+R14=00000000FFDAC2E0 R15=0000000000000020
+RIP=00007FFAA3F6D444 RSP=0000000000581CD0 RBP=00000000FFDAC201 GS=002B
+FS=0053 ES=002B DS=002B
+XMM0 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM1 3fa2dd1353883390 (f: 1401435008.000000, d: 3.684292e-002)
+XMM2 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM3 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM4 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM5 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM6 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM7 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM8 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM9 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM10 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM11 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM12 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM13 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM14 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM15 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+Module=F:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly_testList_1\openjdkbinary\j2sdk-image\jre\bin\compressedrefs\j9vm29.dll
+Module_base_address=00007FFAA3F10000 Offset_in_DLL=000000000005d444
+Target=2_90_20201208_597 (Windows Server 2012 R2 6.3 build 9600)
+CPU=amd64 (8 logical CPUs) (0x1ffb9c000 RAM)
+----------- Stack Backtrace -----------
+(0x00007FFAA3F6D444 [j9vm29+0x5d444])
+(0x00007FFAA3F6D309 [j9vm29+0x5d309])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x5df357 (0x00007FFAA318A517 [j9jit29+0x6aa517])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x5c1acb (0x00007FFAA316CC8B [j9jit29+0x68cc8b])
+(0x00000000FFE5CBD0)
+(0x000000008031C500)
+---------------------------------------
+```

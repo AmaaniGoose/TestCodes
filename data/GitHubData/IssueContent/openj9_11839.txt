@@ -1,0 +1,128 @@
+Failure link
+------------
+
+From an internal build `ibuild 464729`:
+```
+java version "1.8.0_281"
+Java(TM) SE Runtime Environment (build 8.0.7.0 - pap6480sr7-20210122_01(SR7))
+IBM J9 VM (build 2.9, JRE 1.8.0 AIX ppc64-64-Bit Compressed References 20210129_464729 (JIT enabled, AOT enabled)
+OpenJ9   - 9b52265
+OMR      - c4bb8c5
+IBM      - 358762e)
+JCL - 20210108_01 based on Oracle jdk8u281-b09
+```
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+===============================================
+Running test TestSunAttachClasses_SE80_0 ...
+===============================================
+TestSunAttachClasses_SE80_0 Start Time: Fri Jan 29 23:21:04 2021 Epoch Time (ms): 1611980464331
+"/bluebird/builds/bld_464729/sdk/ap6480/bin/java" -Xshareclasses:destroyAll; "/bluebird/builds/bld_464729/sdk/ap6480/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+JVMSHRC005I No shared class caches available
+JVMSHRC005I No shared class caches available
+cache cleanup done
+variation: NoOptions
+JVM_OPTIONS:  
+{ itercnt=1; \
+        mkdir -p "/tmp/bld_464729/TestSunAttachClasses_SE80_0"; \
+        cd "/tmp/bld_464729/TestSunAttachClasses_SE80_0"; \
+        export LIBPATH="/usr/lib:/bluebird/builds/bld_464729/sdk/ap6480/jre/bin/../lib/default:/bluebird/builds/bld_464729/sdk/ap6480/jre/bin/../lib/ppc64/default:/bluebird/builds/bld_464729/sdk/ap6480/jre/bin/j9vm"; \
+        "/bluebird/builds/bld_464729/sdk/ap6480/bin/java"   \
+        -cp "/bluebird/builds/bld_464729/jvmtest/test/SE80/TestConfig/resources:/bluebird/builds/bld_464729/jvmtest/test/SE80/TKG/lib/testng.jar:/bluebird/builds/bld_464729/jvmtest/test/SE80/TKG/lib/jcommander.jar:/bluebird/builds/bld_464729/sdk/ap6480/lib/tools.jar:/bluebird/builds/bld_464729/jvmtest/test/SE80/functional/Java8andUp/GeneralTest.jar" \
+        -Dcom.ibm.tools.attach.enable=yes \
+        -Dcom.ibm.tools.attach.timeout=15000 \
+        org.testng.TestNG -d "/tmp/bld_464729/TestSunAttachClasses_SE80_0" "/bluebird/builds/bld_464729/jvmtest/test/SE80/functional/Java8andUp/testng.xml" -testnames TestSunAttachClasses \
+        -groups level.extended \
+        -excludegroups d.*.aix_ppc-64,d.*.arch.ppc,d.*.os.aix,d.*.bits.64,d.*.generic-all; \
+        if [ $? -eq 0 ] ; then echo ""; echo "TestSunAttachClasses_SE80_0""_PASSED"; echo ""; cd /bluebird/builds/bld_464729/jvmtest/test/SE80;  else perl "-I/bluebird/builds/bld_464729/../../javatest/HEAD_382595/test/lib/perl" -mResultStore::Uploader -e "ResultStore::Uploader::upload('.',464729,668834993,'vmfarm.ottawa.ibm.com:31','results-668834993')"; echo ""; echo "TestSunAttachClasses_SE80_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/tmp/bld_464729/TestTargetResult";
+[IncludeExcludeTestAnnotationTransformer] [INFO] exclude file is /bluebird/builds/bld_464729/jvmtest/test/SE80/TestConfig/resources/excludes/current_exclude_8.txt
+...
+... TestNG 6.14.2 by C�dric Beust (cedric@beust.com)
+...
+
+Unhandled exception
+Type=Segmentation error vmState=0x00000000
+J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000033
+Handler1=09001000A02A8DE0 Handler2=09001000A0284EB0
+R0=7C9B02A67CF242A5 R1=0000010022B566C0 R2=09001000A04A0468 R3=7C9B02A67CF242A6
+R4=000001001039FC20 R5=0000010022B14000 R6=0000000000000000 R7=000000000000E000
+R8=0000010022B56930 R9=0000000000000000 R10=0000000000000004 R11=0000000000000000
+R12=09001000A0140278 R13=0000010022B5F800 R14=00000000303F4DE8 R15=00000000303EF800
+R16=0000010020E5F698 R17=00000000FFD13E88 R18=0000000000000016 R19=00000100221D93F8
+R20=0000000000000016 R21=0000000000000000 R22=0000010022B56878 R23=0000000000000000
+R24=09001000A0261688 R25=09001000A0260C68 R26=000001001017C1F0 R27=09001000A0403C68
+R28=0000000000000000 R29=0000000000000000 R30=000001001039FC20 R31=0000000000000000
+IAR=0900000002E97838 LR=0900000002E942B0 MSR=A00000000200D032 CTR=090000000053ACE0
+CR=220002042000000C FPSCR=8200000000000000 XER=2000000C82000000
+FPR0 0000001700000017 (f: 23.000000, d: 4.880590e-313)
+FPR1 4037000000000000 (f: 0.000000, d: 2.300000e+01)
+FPR2 4037000000000000 (f: 0.000000, d: 2.300000e+01)
+FPR3 3ff0000000000000 (f: 0.000000, d: 1.000000e+00)
+FPR4 3ff0000000000000 (f: 0.000000, d: 1.000000e+00)
+FPR5 412e848000000000 (f: 0.000000, d: 1.000000e+06)
+FPR6 43300000000f4240 (f: 1000000.000000, d: 4.503600e+15)
+FPR7 4530000000000000 (f: 0.000000, d: 1.934281e+25)
+FPR8 00730075006e002e (f: 7209006.000000, d: 1.691215e-306)
+FPR9 007500740069006c (f: 6881388.000000, d: 1.869220e-306)
+FPR10 002e007200650073 (f: 6619251.000000, d: 8.344511e-308)
+FPR11 006f007500720063 (f: 7471203.000000, d: 1.379625e-306)
+FPR12 3c7abc9e3b39803f (f: 993624128.000000, d: 2.319047e-17)
+FPR13 4046000000000000 (f: 0.000000, d: 4.400000e+01)
+FPR14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR16 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR17 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR18 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR19 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR20 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR21 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR22 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR23 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR24 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR25 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR26 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR27 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR28 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR29 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR30 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+FPR31 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+Module=/bluebird/builds/bld_464729/sdk/ap6480/jre/bin/../lib/ppc64/default/libj9thr29.so
+Module_base_address=0900000002E90000
+Target=2_90_20210129_464729 (AIX 6.1)
+CPU=ppc64 (16 logical CPUs) (0x400000000 RAM)
+----------- Stack Backtrace -----------
+(0x0900000002E942B0 [libj9thr29.so+0x42b0])
+JVM_GetSystemPackage_Impl+0x380 (0x0900000002BAC724 [libjclse29.so+0x8d724])
+JVM_GetSystemPackage+0x4c (0x0900000000D0CAD0 [libjvm.so+0xfad0])
+JVM_GetSystemPackage+0x44 (0x0900000000CD02C8 [libjvm.so+0x52c8])
+Java_java_lang_Package_getSystemPackage0+0x10 (0x0900000002BF2094 [libjava.so+0x16094])
+(0x00000100105BAD00)
+runJavaThread+0x1d0 (0x0900000000DBB974 [libj9vm29.so+0x5e974])
+javaProtectedThreadProc+0x118 (0x0900000000D5F43C [libj9vm29.so+0x243c])
+(0x0900000001040928 [libj9prt29.so+0x52928])
+javaThreadProc+0x68 (0x0900000000D5F22C [libj9vm29.so+0x222c])
+(0x0900000000FD0B24 [libj9thr29.so+0x3b24])
+_pthread_body+0xf0 (0x0900000000515D34 [libpthreads.a+0x3d34])
+---------------------------------------
+JVMDUMP039I Processing dump event "gpf", detail "" at 2021/01/29 23:21:14 - please wait.
+JVMDUMP032I JVM requested System dump using '/tmp/bld_464729/TestSunAttachClasses_SE80_0/core.20210129.232114.5505212.0001.dmp' in response to an event
+JVMDUMP010I System dump written to /tmp/bld_464729/TestSunAttachClasses_SE80_0/core.20210129.232114.5505212.0001.dmp
+JVMDUMP032I JVM requested Java dump using '/tmp/bld_464729/TestSunAttachClasses_SE80_0/javacore.20210129.232114.5505212.0002.txt' in response to an event
+JVMDUMP010I Java dump written to /tmp/bld_464729/TestSunAttachClasses_SE80_0/javacore.20210129.232114.5505212.0002.txt
+JVMDUMP032I JVM requested Snap dump using '/tmp/bld_464729/TestSunAttachClasses_SE80_0/Snap.20210129.232114.5505212.0003.trc' in response to an event
+JVMDUMP010I Snap dump written to /tmp/bld_464729/TestSunAttachClasses_SE80_0/Snap.20210129.232114.5505212.0003.trc
+JVMDUMP032I JVM requested JIT dump using '/tmp/bld_464729/TestSunAttachClasses_SE80_0/jitdump.20210129.232114.5505212.0004.dmp' in response to an event
+JVMDUMP010I JIT dump written to /tmp/bld_464729/TestSunAttachClasses_SE80_0/jitdump.20210129.232114.5505212.0004.dmp
+JVMDUMP013I Processed dump event "gpf", detail "".
+Running compression command: jar cvf /tmp/results-6688349930.jar .
+Compression was successful.Attempting to upload compressed file.Upload appears to have been successful.
+TestSunAttachClasses_SE80_0_FAILED
+```
+
+The native stack trace looks similar with an old issue https://github.com/eclipse/openj9/issues/9495

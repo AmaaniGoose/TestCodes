@@ -1,0 +1,20 @@
+There are multiple areas in the codebase that define 
+```
+   TR_FrontEnd *fe();
+   TR_J9VMBase *fej9();
+``` 
+
+Here are some examples:
+https://github.com/eclipse/openj9/blob/3b6cb12977ffd6e72b4ab3e9e5417317ecb4a3fe/runtime/compiler/runtime/J9CodeCacheManager.hpp#L67-L68
+
+https://github.com/eclipse/openj9/blob/3b6cb12977ffd6e72b4ab3e9e5417317ecb4a3fe/runtime/compiler/runtime/RelocationRuntime.hpp#L135-L136
+
+https://github.com/eclipse/openj9/blob/3b6cb12977ffd6e72b4ab3e9e5417317ecb4a3fe/runtime/compiler/codegen/J9CodeGenerator.hpp#L66
+
+https://github.com/eclipse/openj9/blob/3b6cb12977ffd6e72b4ab3e9e5417317ecb4a3fe/runtime/compiler/env/j9method.h#L193-L194
+
+https://github.com/eclipse/openj9/blob/3b6cb12977ffd6e72b4ab3e9e5417317ecb4a3fe/runtime/compiler/ilgen/ClassLookahead.hpp#L52-L53
+
+https://github.com/eclipse/openj9/blob/3b6cb12977ffd6e72b4ab3e9e5417317ecb4a3fe/runtime/compiler/compile/J9Compilation.hpp#L101
+
+These queries should be refactored into a common place. Most likely in `J9Compilation.hpp`.

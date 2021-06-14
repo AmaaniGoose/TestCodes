@@ -1,0 +1,80 @@
+Failure link
+------------
+
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.openjdk_aarch64_linux/103/testReport/junit/java_lang_ProcessBuilder_Basic/java_id0/Basic_id0/
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+java.lang.Throwable
+	at java.base/java.lang.Thread.dumpStack(Thread.java:511)
+	at Basic.fail(Basic.java:2730)
+	at Basic.check(Basic.java:2733)
+	at Basic.realMain(Basic.java:1777)
+	at Basic.main(Basic.java:2740)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+java.lang.Throwable
+	at java.base/java.lang.Thread.dumpStack(Thread.java:511)
+	at Basic.fail(Basic.java:2730)
+	at Basic.check(Basic.java:2733)
+	at Basic.realMain(Basic.java:1778)
+	at Basic.main(Basic.java:2740)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+java.lang.Throwable
+	at java.base/java.lang.Thread.dumpStack(Thread.java:511)
+	at Basic.fail(Basic.java:2730)
+	at Basic.check(Basic.java:2733)
+	at Basic.realMain(Basic.java:1779)
+	at Basic.main(Basic.java:2740)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+>'0'< not equal to '1'
+java.lang.Throwable
+	at java.base/java.lang.Thread.dumpStack(Thread.java:511)
+	at Basic.fail(Basic.java:2730)
+	at Basic.fail(Basic.java:2731)
+	at Basic.equal(Basic.java:2737)
+	at Basic.realMain(Basic.java:1780)
+	at Basic.main(Basic.java:2740)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+java.lang.AssertionError: Some tests failed
+	at Basic.main(Basic.java:2742)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+JavaTest Message: Test threw exception: java.lang.AssertionError: Some tests failed
+JavaTest Message: shutting down test
+
+STATUS:Failed.`main' threw exception: java.lang.AssertionError: Some tests failed
+```
+
+This test launches a child process and expects it to throw OOM, but the child process does not always throw OOM on the aarch64 test machine simply because the machine has large memory (128GB)
+
+https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/34c3dd7d55b36a29d76f5708f6bc299844455e20/test/jdk/java/lang/ProcessBuilder/Basic.java#L354-L361
+
+The child process creates an array with `Integer.MAX_VALUE` elements, but this is not large enough to always trigger OOM on the machine with 128GB memory.

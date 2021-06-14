@@ -1,0 +1,24 @@
+Failure link
+------------
+- test category, sanity.openjdk
+- OS/architecture, aarch_64
+```
+17:48:19  openjdk version "11.0.7" 2020-04-14
+17:48:19  OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.7+9)
+17:48:19  Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.20.0-m2, JRE 11 Linux aarch64-64-Bit Compressed References 20200330_255 (JIT enabled, AOT enabled)
+17:48:19  OpenJ9   - c93e4dabc
+17:48:19  OMR      - 1b6abd044
+17:48:19  JCL      - 644e9abfc0 based on jdk-11.0.7+9)
+```
+
+Optional info
+-------------
+- intermittent failure (no): 
+- Part of the jdk11-m2 triage https://github.com/AdoptOpenJDK/openjdk-tests/issues/1705
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+Program `/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux/openjdkbinary/j2sdk-image/jdk-11.0.7+9/bin/../bin/java' timed out (timeout set to 960000ms, elapsed time including timeout handling was 961669ms).    
+```
+https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&BUILD_LIST=openjdk&PLATFORM=aarch64_linux&CUSTOM_TARGET=test/jdk/java/net/httpclient/http2/HpackHuffmanDriver.java&TARGET=jdk_custom_0

@@ -1,0 +1,60 @@
+Failure link
+------------
+
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.openjdk_x86-64_windows_Nightly/154/consoleFull
+win2012r2-x86-3
+For example, to rebuild the failed tests in <Jenkins URL>=https://ci.eclipse.org/openj9/job/Grinder, use the following links:
+04:00:03  https://ci.eclipse.org/openj9/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&BUILD_LIST=openjdk&PLATFORM=x86-64_windows&TARGET=jdk_lang_j9_0
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+03:29:27  ===============================================
+03:29:27  java/lang/ProcessHandle/OnExitTest.java
+03:29:27  Total tests run: 3, Failures: 1, Skips: 0
+03:29:27  ===============================================
+
+03:29:27  Unhandled exception
+03:29:27  Type=Segmentation error vmState=0x00050bb0
+03:29:27  Windows_ExceptionCode=c0000005 J9Generic_Signal=00000004 ExceptionAddress=00007FF8C76DBC4E ContextFlags=0010005f
+03:29:27  Handler1=00007FF8C7520C30 Handler2=00007FF8C886AC30 InaccessibleReadAddress=0000000000000008
+03:29:27  RDI=000000C1E3B0FF50 RSI=0000000000000000 RAX=0000000000000000 RBX=000000C1E3B0FF50
+03:29:27  RCX=000000C1E3B0FF50 RDX=0000000000000010 R8=0000000000000001 R9=000000C1DBDEBF70
+03:29:27  R10=00000000000000C8 R11=000000C1E4E09FA0 R12=0000000000000001 R13=0000000000000002
+03:29:27  R14=000000C1E3B10E20 R15=0000000000000001
+03:29:27  RIP=00007FF8C76DBC4E RSP=000000C1E4E0A0A0 RBP=0000000000000000 GS=002B
+03:29:27  FS=0053 ES=002B DS=002B
+03:29:27  XMM0 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:29:27  XMM1 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:29:27  XMM2 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:29:27  XMM3 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:29:27  XMM4 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:29:27  XMM5 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:29:27  XMM6 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:29:27  XMM7 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:29:27  XMM8 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:29:27  XMM9 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:29:27  XMM10 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:29:27  XMM11 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:29:27  XMM12 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:29:27  XMM13 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:29:27  XMM14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:29:27  XMM15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:29:27  Module=C:\Users\jenkins\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_Nightly\openjdkbinary\j2sdk-image\bin\compressedrefs\j9jit29.dll
+03:29:27  Module_base_address=00007FF8C7490000 Offset_in_DLL=000000000024bc4e
+03:29:27  
+03:29:27  Method_being_compiled=java/util/ImmutableCollections$SetN.probe(Ljava/lang/Object;)I
+03:29:27  Target=2_90_20200916_509 (Windows Server 2012 R2 6.3 build 9600)
+03:29:27  CPU=amd64 (8 logical CPUs) (0x1ffb9c000 RAM)
+03:29:27  ----------- Stack Backtrace -----------
+03:29:27  (0x00007FF8C76DBC4E)
+03:29:27  (0x000000C1E3B0FF50)
+03:29:27  ---------------------------------------
+```
+
+Might be related to https://github.com/eclipse/openj9/issues/9010, https://github.com/eclipse/openj9/issues/8796 as per the test and the vmstate code.

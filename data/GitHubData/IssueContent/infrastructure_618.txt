@@ -1,0 +1,3 @@
+Related to new test contributions: https://github.com/AdoptOpenJDK/openjdk-tests/issues/726
+
+Note: A PR for this issue will follow shortly

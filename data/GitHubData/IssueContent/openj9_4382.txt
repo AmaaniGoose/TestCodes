@@ -1,0 +1,59 @@
+The crash happens on the server, in `SSLInputStream::Read`, inside `BIO_read(_ssl, buffer, size)`. The latter is a SSL library method.
+Stacktrace below:
+```
+#JITaaS: Server received request for stream 00007F1DCBF00558reading from ssl stream: ssl=0x7f1eac03fd20, buffer=0x7f1fb4006fe0, size=8192
+Unhandled exception
+Type=Segmentation error vmState=0x00000000
+J9Generic_Signal_Number=00000004 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000001
+Handler1=00007F1FDB6ECC90 Handler2=00007F1FDAFD3F50 InaccessibleAddress=0000000000000030
+RDI=0000000000000000 RSI=00007F1FB4006FE0 RAX=0000000000000000 RBX=00007F1EAC03FD20
+RCX=00007F1FB4006FE0 RDX=0000000000002000 R8=00007F1FD82A1700 R9=00007F1FDCDB30FD
+R10=000000000000006B R11=0000000000000000 R12=0000000000002000 R13=0000000000000000
+R14=00007F1EAC03C240 R15=00007F1FD82B35D0
+RIP=00007F1FCD07E974 GS=0000 FS=0000 RSP=00007F1FD829E270
+EFlags=0000000000010246 CS=0033 RBP=00007F1FB4006FE0 ERR=0000000000000004
+TRAPNO=000000000000000E OLDMASK=0000000000000000 CR2=0000000000000030
+xmm0 000000000000ff00 (f: 65280.000000, d: 3.225261e-319)
+xmm1 2525252525252525 (f: 623191360.000000, d: 9.532824e-130)
+xmm2 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm3 ffffffff00000000 (f: 0.000000, d: -nan)
+xmm4 2c90d8bdbfcca971 (f: 3217860864.000000, d: 5.047715e-94)
+xmm5 08090a0b0c0d0e0f (f: 202182160.000000, d: 5.924543e-270)
+xmm6 5bb8398042fadf58 (f: 1123737472.000000, d: 6.877886e+133)
+xmm7 aebf7eb216a53c31 (f: 379927616.000000, d: -1.621218e-83)
+xmm8 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm9 3c00000000000000 (f: 0.000000, d: 1.084202e-19)
+xmm10 70e84a25bc67f977 (f: 3160930560.000000, d: 7.723029e+235)
+xmm11 e9a2c971dcecd2c5 (f: 3706508032.000000, d: -7.190219e+200)
+xmm12 0000000000000001 (f: 1.000000, d: 4.940656e-324)
+xmm13 08090a0b0c0d0e0f (f: 202182160.000000, d: 5.924543e-270)
+xmm14 7fa7d0f972053771 (f: 1912944512.000000, d: 8.362189e+306)
+xmm15 7333f363a7b520ca (f: 2813665536.000000, d: 8.718373e+246)
+Module=/home/dmitry-ten/xa6480sr6-1206/jre/lib/amd64/compressedrefs/libj9jit29.so
+Module_base_address=00007F1FCB919000
+Target=2_90_20181204_404088 (Linux 3.10.0-862.11.6.el7.x86_64)
+CPU=amd64 (56 logical CPUs) (0xfa8290000 RAM)
+----------- Stack Backtrace -----------
+(0x00007F1FCD07E974 [libj9jit29.so+0x1765974])
+(0x00007F1FCD070232 [libj9jit29.so+0x1757232])
+(0x00007F1FCD0B1DF3 [libj9jit29.so+0x1798df3])
+_ZN14SSLInputStream4ReadEPvi+0x8d (0x00007F1FCC71013B [libj9jit29.so+0xdf713b])
+_ZN6google8protobuf2io25CopyingInputStreamAdaptor4NextEPPKvPi+0xdc (0x00007F1FCCF42776 [libj9jit29.so+0x1629776])
+(0x00007F1FCCF3E809 [libj9jit29.so+0x1625809])
+_ZN6google8protobuf2io16CodedInputStream7RefreshEv+0x116 (0x00007F1FCCF4076C [libj9jit29.so+0x162776c])
+_ZN6google8protobuf2io16CodedInputStreamC2EPNS1_19ZeroCopyInputStreamE+0xdf (0x00007F1FCC4CB90B [libj9jit29.so+0xbb290b])
+_ZN6JITaaS8J9Stream12readBlockingINS_15J9ClientMessageEEEvRT_+0x52 (0x00007F1FCC4CCFAC [libj9jit29.so+0xbb3fac])
+_ZN6JITaaS14J9ServerStream4readIJmjP8J9MethodP7J9Class10TR_HotnessNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEN2J928IlGeneratorMethodDetailsTypeESt6vectorIP19TR_OpaqueClassBlockSaISH_EESt5tupleIJSC_S3_SH_iSH_SJ_SF_IhSaIhEEbmbjSH_PvSH_SH_SH_mEESC_SC_jEEESK_IJDpT_EEv+0x35 (0x00007F1FCC736D03 [libj9jit29.so+0xe1dd03])
+_ZN2TR30CompilationInfoPerThreadRemote12processEntryER21TR_MethodToBeCompiledRN2J917J9SegmentProviderE+0x172 (0x00007F1FCC72945A [libj9jit29.so+0xe1045a])
+_ZN2TR24CompilationInfoPerThread14processEntriesEv+0x247 (0x00007F1FCC4DA06D [libj9jit29.so+0xbc106d])
+_ZN2TR24CompilationInfoPerThread3runEv+0x60 (0x00007F1FCC4D990E [libj9jit29.so+0xbc090e])
+_Z30protectedCompilationThreadProcP13J9PortLibraryPN2TR24CompilationInfoPerThreadE+0x1e6 (0x00007F1FCC4D96CA [libj9jit29.so+0xbc06ca])
+(0x00007F1FDAFD4E18 [libj9prt29.so+0x21e18])
+_Z21compilationThreadProcPv+0x48d (0x00007F1FCC4D9488 [libj9jit29.so+0xbc0488])
+(0x00007F1FDB4422C6 [libj9thr29.so+0xe2c6])
+(0x00007F1FDD555DD5 [libpthread.so.0+0x7dd5])
+clone+0x6d (0x00007F1FDCE64B3D [libc.so.6+0xfeb3d])
+---------------------------------------
+```
+The crash is intermittent.
+At the moment I don't know the reason for this crash. I suspected, that it could be related to not properly freeing `SSL` struct at the end of each compilation, but when I tried freeing it, I got some new crashes, so maybe that's not the issue after all.

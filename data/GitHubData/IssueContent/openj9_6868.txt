@@ -1,0 +1,66 @@
+Failure link
+------------
+Consistently failing test https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/lang/invoke/FindAccessTest.java on JDK11/13-openj9 (hotspot unaffected) 
+- test category, openjdk
+- OS/architecture, All Platforms
+```
+Eclipse OpenJ9 VM AdoptOpenJDK (build master-28cb7545d, JRE 11 Linux amd64-64-Bit Compressed References 20190821_315 (JIT enabled, AOT enabled)
+11:20:32  OpenJ9   - 28cb7545d
+11:20:32  OMR      - c46dfdbf
+11:20:32  JCL      - 4d41e016d2 based on jdk-11.0.5+3)
+```
+
+Optional info
+-------------
+
+- intermittent failure (no): 
+- new test:  
+- Potentially related to #6802 and #6800 (unique to hotspot?)
+- Test is attempting to lookup an abstract class which should throw an `IllegalAccessException` and flip a boolean. However, the lookup completes successfully and the boolean is not flipped, causing the AssertionError
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+STDOUT:
+11:24:04  [TestNG] Running:
+11:24:04    java/lang/invoke/FindAccessTest.java
+11:24:04  
+11:24:04  test test.java.lang.invoke.FindAccessTest.testFindClassCNFE(): success
+11:24:04  test test.java.lang.invoke.FindAccessTest.testFindSpecial(): success
+11:24:04  test test.java.lang.invoke.FindAccessTest.testFindSpecialAbstract(): failure
+11:24:04  java.lang.AssertionError: 
+11:24:04  	at org.testng.AssertJUnit.fail(AssertJUnit.java:59)
+11:24:04  	at org.testng.AssertJUnit.assertTrue(AssertJUnit.java:24)
+11:24:04  	at org.testng.AssertJUnit.assertTrue(AssertJUnit.java:33)
+11:24:04  	at test.java.lang.invoke.FindAccessTest.testFindSpecialAbstract(FindAccessTest.java:72)
+11:24:04  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+11:24:04  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+11:24:04  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+11:24:04  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+11:24:04  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+11:24:04  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+11:24:04  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+11:24:04  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+11:24:04  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+11:24:04  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+11:24:04  	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+11:24:04  	at org.testng.TestRunner.run(TestRunner.java:623)
+11:24:04  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+11:24:04  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+11:24:04  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+11:24:04  	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+11:24:04  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+11:24:04  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+11:24:04  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+11:24:04  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+11:24:04  	at org.testng.TestNG.run(TestNG.java:1018)
+11:24:04  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+11:24:04  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+11:24:04  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+11:24:04  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+11:24:04  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+11:24:04  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+11:24:04  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+11:24:04  	at java.base/java.lang.Thread.run(Thread.java:831)
+```
+[openjdk_test_output.tar.gz](https://github.com/eclipse/openj9/files/3550336/openjdk_test_output.tar.gz)

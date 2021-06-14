@@ -1,0 +1,7 @@
+On Z, I am porting change from @fjeremic  for to put fences for volatile field stores. (https://github.com/eclipse/openj9/pull/11262), where most of the write barrier nodes and store nodes goes through the `xstoreVolatileHelper` [1] which will generate a fence for volatile fields. 
+We would have write barrier under ArrayStoreCHK node [2] as well and we do not generate fence for volatiles under that node. 
+
+I am opening up this issue to get more clarity about the behaviour about volatile array reference, i.e, when we declare a volatile array variable in java, in my understanding, only variable is volatile not its elements, right? So if that is the case, would it be ever possible to have volatile field under ArrayStoreCHK node? 
+
+[1]. https://github.com/eclipse/openj9/blob/c97d10cd625f94716bbe5d7efb5f530eb72c0c9f/runtime/compiler/z/codegen/J9TreeEvaluator.cpp#L4150-L4186
+[2]. https://github.com/eclipse/omr/blob/4ede03ca616f2303dbed143df6694a248e439c84/compiler/il/OMRILOpCodeProperties.hpp#L9457-L9490

@@ -1,0 +1,135 @@
+Failure link
+------------
+
+From an internal ibuild `job_output.php?id=7316116`:
+```
+java version "1.8.0_301"
+Java(TM) SE Runtime Environment (build 8.0.7.0 - pap6480sr7-20210518_01(SR7))
+IBM J9 VM (build 2.9, JRE 1.8.0 AIX ppc64-64-Bit Compressed References 20210612_6993 (JIT enabled, AOT enabled)
+OpenJ9   - ebc97a3
+OMR      - 0088625
+IBM      - 790067b)
+```
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+Testing: Test 1-a: Create a shared class cache while using weaving hooks
+Test start time: 2021/06/12 22:11:03 Eastern Standard Time
+Running command: "/bluebird/builds/bld_6993/sdk/ap6480/bin/java"    -Xshareclasses:name=cdsadaptor_cache -cp /bluebird/builds/bld_6993/jvmtest/test/SE80/functional/cmdLineTests/CDSAdaptorTest:/bluebird/builds/bld_6993/jvmtest/test/SE80/TKG/lib/org.eclipse.osgi-3.16.100.jar org.openj9.test.cdsadaptortest.CDSAdaptorOrphanTest -frameworkBundleLocation /bluebird/builds/bld_6993/jvmtest/test/SE80/functional/cmdLineTests/CDSAdaptorTest/FrameworkBundles -testBundleLocation /bluebird/builds/bld_6993/jvmtest/test/SE80/functional/cmdLineTests/CDSAdaptorTest/CDSAdaptorOrphanTestBundles
+Time spent starting: 28 milliseconds
+***[TEST INFO 2021/06/12 22:21:03] ProcessKiller detected a timeout after 600000 milliseconds!***
+INFO: The current OS is 'AIX'. 'Debug on timeout' is currently only supported on Linux.
+***[TEST INFO 2021/06/12 22:21:03] executing kill -ABRT 12058778***
+***[TEST INFO 2021/06/12 22:21:03] kill -ABRT signal sent***
+Time spent executing: 632739 milliseconds
+Test result: FAILED
+Output from test:
+ [ERR] JVMDUMP039I Processing dump event "abort", detail "" at 2021/06/12 22:21:03 - please wait.
+ [ERR] JVMDUMP032I JVM requested System dump using '/tmp/bld_6993/CDSAdaptorTest_0/core.20210612.222103.12058778.0001.dmp' in response to an event
+ [ERR] JVMDUMP010I System dump written to /tmp/bld_6993/CDSAdaptorTest_0/core.20210612.222103.12058778.0001.dmp
+ [ERR] JVMDUMP032I JVM requested Java dump using '/tmp/bld_6993/CDSAdaptorTest_0/javacore.20210612.222103.12058778.0002.txt' in response to an event
+ [ERR] JVMDUMP010I Java dump written to /tmp/bld_6993/CDSAdaptorTest_0/javacore.20210612.222103.12058778.0002.txt
+ [ERR] JVMDUMP032I JVM requested Snap dump using '/tmp/bld_6993/CDSAdaptorTest_0/Snap.20210612.222103.12058778.0003.trc' in response to an event
+ [ERR] JVMDUMP010I Snap dump written to /tmp/bld_6993/CDSAdaptorTest_0/Snap.20210612.222103.12058778.0003.trc
+ [ERR] JVMDUMP032I JVM requested JIT dump using '/tmp/bld_6993/CDSAdaptorTest_0/jitdump.20210612.222103.12058778.0004.dmp' in response to an event
+ [ERR] JVMDUMP051I JIT dump occurred in 'SIGABRT Thread' thread 0x0000000030294C00
+ [ERR] JVMDUMP010I JIT dump written to /tmp/bld_6993/CDSAdaptorTest_0/jitdump.20210612.222103.12058778.0004.dmp
+ [ERR] JVMDUMP013I Processed dump event "abort", detail "".
+```
+
+The failures afterwards are:
+```
+Testing: Test 1-b: Check shared class cache for presence of Orphan class
+Test start time: 2021/06/12 22:41:41 Eastern Standard Time
+Running command: "/bluebird/builds/bld_6993/sdk/ap6480/bin/java"    -Xshareclasses:name=cdsadaptor_cache,printStats=orphan+romclass
+Time spent starting: 29 milliseconds
+***[TEST INFO 2021/06/12 22:41:41] ABRT completed***
+Output from test:
+Time spent executing: 953 milliseconds
+Test result: FAILED
+
+Testing: Test 1-c: Reuse previous cache without using weaving hooks
+Test start time: 2021/06/12 22:41:43 Eastern Standard Time
+Running command: "/bluebird/builds/bld_6993/sdk/ap6480/bin/java"    -Xshareclasses:name=cdsadaptor_cache -cp /bluebird/builds/bld_6993/jvmtest/test/SE80/functional/cmdLineTests/CDSAdaptorTest:/bluebird/builds/bld_6993/jvmtest/test/SE80/TKG/lib/org.eclipse.osgi-3.16.100.jar org.openj9.test.cdsadaptortest.CDSAdaptorOrphanTest -frameworkBundleLocation /bluebird/builds/bld_6993/jvmtest/test/SE80/functional/cmdLineTests/CDSAdaptorTest/FrameworkBundles -testBundleLocation /bluebird/builds/bld_6993/jvmtest/test/SE80/functional/cmdLineTests/CDSAdaptorTest/CDSAdaptorOrphanTestBundles -ignoreWeavingHookBundle
+Time spent starting: 46 milliseconds
+***[TEST INFO 2021/06/12 22:51:43] ProcessKiller detected a timeout after 600000 milliseconds!***
+INFO: The current OS is 'AIX'. 'Debug on timeout' is currently only supported on Linux.
+***[TEST INFO 2021/06/12 22:51:43] executing kill -ABRT 8847454***
+***[TEST INFO 2021/06/12 22:51:43] kill -ABRT signal sent***
+Time spent executing: 631538 milliseconds
+Test result: FAILED
+Output from test:
+ [ERR] JVMDUMP039I Processing dump event "abort", detail "" at 2021/06/12 22:51:43 - please wait.
+ [ERR] JVMDUMP032I JVM requested System dump using '/tmp/bld_6993/CDSAdaptorTest_0/core.20210612.225143.8847454.0001.dmp' in response to an event
+ [ERR] JVMDUMP010I System dump written to /tmp/bld_6993/CDSAdaptorTest_0/core.20210612.225143.8847454.0001.dmp
+ [ERR] JVMDUMP032I JVM requested Java dump using '/tmp/bld_6993/CDSAdaptorTest_0/javacore.20210612.225143.8847454.0002.txt' in response to an event
+ [ERR] JVMDUMP010I Java dump written to /tmp/bld_6993/CDSAdaptorTest_0/javacore.20210612.225143.8847454.0002.txt
+ [ERR] JVMDUMP032I JVM requested Snap dump using '/tmp/bld_6993/CDSAdaptorTest_0/Snap.20210612.225143.8847454.0003.trc' in response to an event
+ [ERR] JVMDUMP010I Snap dump written to /tmp/bld_6993/CDSAdaptorTest_0/Snap.20210612.225143.8847454.0003.trc
+ [ERR] JVMDUMP032I JVM requested JIT dump using '/tmp/bld_6993/CDSAdaptorTest_0/jitdump.20210612.225143.8847454.0004.dmp' in response to an event
+ [ERR] JVMDUMP051I JIT dump occurred in 'SIGABRT Thread' thread 0x0000000030141F00
+ [ERR] JVMDUMP010I JIT dump written to /tmp/bld_6993/CDSAdaptorTest_0/jitdump.20210612.225143.8847454.0004.dmp
+ [ERR] JVMDUMP013I Processed dump event "abort", detail "".
+
+Testing: Test 1-d: Check shared class cache for presence of ROMClass class
+Test start time: 2021/06/12 22:52:14 Eastern Standard Time
+Running command: "/bluebird/builds/bld_6993/sdk/ap6480/bin/java"    -Xshareclasses:name=cdsadaptor_cache,printStats=orphan+romclass
+Time spent starting: 23 milliseconds
+***[TEST INFO 2021/06/12 22:52:14] ABRT completed***
+Output from test:
+Time spent executing: 284 milliseconds
+Test result: FAILED
+
+Testing: Test 1-e: Reuse previous cache while using weaving hooks
+Test start time: 2021/06/12 22:52:15 Eastern Standard Time
+Running command: "/bluebird/builds/bld_6993/sdk/ap6480/bin/java"    -Xshareclasses:name=cdsadaptor_cache -cp /bluebird/builds/bld_6993/jvmtest/test/SE80/functional/cmdLineTests/CDSAdaptorTest:/bluebird/builds/bld_6993/jvmtest/test/SE80/TKG/lib/org.eclipse.osgi-3.16.100.jar org.openj9.test.cdsadaptortest.CDSAdaptorOrphanTest -frameworkBundleLocation /bluebird/builds/bld_6993/jvmtest/test/SE80/functional/cmdLineTests/CDSAdaptorTest/FrameworkBundles -testBundleLocation /bluebird/builds/bld_6993/jvmtest/test/SE80/functional/cmdLineTests/CDSAdaptorTest/CDSAdaptorOrphanTestBundles
+Time spent starting: 25 milliseconds
+***[TEST INFO 2021/06/12 23:02:15] ProcessKiller detected a timeout after 600000 milliseconds!***
+INFO: The current OS is 'AIX'. 'Debug on timeout' is currently only supported on Linux.
+***[TEST INFO 2021/06/12 23:02:15] executing kill -ABRT 8847458***
+***[TEST INFO 2021/06/12 23:02:15] kill -ABRT signal sent***
+***[TEST INFO 2021/06/12 23:03:07] ABRT completed***
+Output from test:
+ [ERR] JVMDUMP039I Processing dump event "abort", detail "" at 2021/06/12 23:02:15 - please wait.
+ [ERR] JVMDUMP032I JVM requested System dump using '/tmp/bld_6993/CDSAdaptorTest_0/core.20210612.230215.8847458.0001.dmp' in response to an event
+ [ERR] JVMDUMP010I System dump written to /tmp/bld_6993/CDSAdaptorTest_0/core.20210612.230215.8847458.0001.dmp
+ [ERR] JVMDUMP032I JVM requested Java dump using '/tmp/bld_6993/CDSAdaptorTest_0/javacore.20210612.230215.8847458.0002.txt' in response to an event
+ [ERR] JVMDUMP010I Java dump written to /tmp/bld_6993/CDSAdaptorTest_0/javacore.20210612.230215.8847458.0002.txt
+ [ERR] JVMDUMP032I JVM requested Snap dump using '/tmp/bld_6993/CDSAdaptorTest_0/Snap.20210612.230215.8847458.0003.trc' in response to an event
+ [ERR] JVMDUMP010I Snap dump written to /tmp/bld_6993/CDSAdaptorTest_0/Snap.20210612.230215.8847458.0003.trc
+ [ERR] JVMDUMP032I JVM requested JIT dump using '/tmp/bld_6993/CDSAdaptorTest_0/jitdump.20210612.230215.8847458.0004.dmp' in response to an event
+ [ERR] JVMDUMP051I JIT dump occurred in 'SIGABRT Thread' thread 0x0000000030294800
+ [ERR] JVMDUMP010I JIT dump written to /tmp/bld_6993/CDSAdaptorTest_0/jitdump.20210612.230215.8847458.0004.dmp
+ [ERR] JVMDUMP013I Processed dump event "abort", detail "".
+Time spent executing: 652203 milliseconds
+Test result: FAILED
+Output from test:
+
+Testing: Cleanup: Destroy any existing shared class cache
+Test start time: 2021/06/12 23:03:07 Eastern Standard Time
+Running command: "/bluebird/builds/bld_6993/sdk/ap6480/bin/java"    -Xshareclasses:name=cdsadaptor_cache,destroy
+Time spent starting: 18 milliseconds
+Time spent executing: 271 milliseconds
+Test result: PASSED
+
+
+---TEST RESULTS---
+Number of PASSED tests: 2 out of 7
+Number of FAILED tests: 5 out of 7
+
+---SUMMARY OF FAILED TESTS---
+Test 1-a: Create a shared class cache while using weaving hooks
+Test 1-b: Check shared class cache for presence of Orphan class
+Test 1-c: Reuse previous cache without using weaving hooks
+Test 1-d: Check shared class cache for presence of ROMClass class
+Test 1-e: Reuse previous cache while using weaving hooks
+-----------------------------
+```
+
+The failure is consistent across machines as per grinder `build_info.php?build_id=7074`.
+From the test history it appears a regression between ibuild `6498` and `6626`.

@@ -1,0 +1,56 @@
+**Expected behavior**
+Running the build script for openj9-openjdk-jdk10 or openj9-openjdk-jdk9 for target platform aarch64 results into the binary for aarch64 platform to ensure openj9-openjdk support for aarch64.
+
+**Actual behavoir**
+Running the build script from https://github.com/eclipse/openj9/tree/master/buildenv/docker/jdk10/aarch64_CC/arm-linux-aarch64 based on the instructions from https://www.eclipse.org/openj9/oj9_build.html results into an binary for platform Linux amd64-64-Bit. 
+The `./configure` creates the build structure as ` ./build/linux-x86_64-normal-server-release`. This looks not like aarch64 ready. The build result contains linux-x86_64 binaries (Linux amd64-64-Bit), means the output of the "make all" results successfully, but for wrong platform :
+
+```
+root@590989ca3459:~/openj9-openjdk-jdk10# make all
+Building target 'all' in configuration 'linux-x86_64-normal-server-release'
+Warning: No mercurial configuration present and no .src-rev
+Staging OpenJ9 sourcetools in /root/openj9-openjdk-jdk10/build/linux-x86_64-normal-server-release/vm
+...
+root@590989ca3459:~/openj9-openjdk-jdk10# build/linux-x86_64-normal-server-release/jdk/bin/java --version
+openjdk 10.0.2-internal 2018-07-17
+OpenJDK Runtime Environment (build 10.0.2-internal+0-adhoc..openj9-openjdk-jdk10)
+Eclipse OpenJ9 VM (build master-26f74ee, JRE 10 Linux amd64-64-Bit Compressed References 20180817_000000 (JIT enabled, AOT enabled)
+OpenJ9   - 26f74ee
+OMR      - fb7d17a
+JCL      - cc8e27e based on jdk-10.0.2+13)
+root@590989ca3459:~/openj9-openjdk-jdk10# 
+```
+
+Same result when trying this with openj9-openjdk-jdk9 or openj9-openjdk-jdk8:
+```
+root@4778c9157b50:~/openj9-openjdk-jdk8# make all
+…
+----- Build times -------
+Start 2018-08-16 07:25:46
+End 2018-08-16 07:38:30
+00:00:17 corba
+00:00:21 demos
+00:01:47 docs
+00:01:01 images
+00:00:12 jaxp
+00:00:16 jaxws
+00:01:50 jdk
+00:00:24 langtools
+00:00:10 nashorn
+00:12:44 TOTAL
+-------------------------
+Finished building OpenJDK for target 'all'
+root@4778c9157b50:~/openj9-openjdk-jdk8# 
+
+
+root@4778c9157b50:~/openj9-openjdk-jdk8# ./build/linux-x86_64-normal-server-release/images/j2re-image/bin/java -version
+openjdk version "1.8.0_181-internal"
+OpenJDK Runtime Environment (build 1.8.0_181-internal-_2018_08_16_07_24-b00)
+Eclipse OpenJ9 VM (build master-d9da7f3, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20180816_000000 (JIT enabled, AOT enabled)
+```
+
+
+
+Result:
+This error occurs for openj9-openjdk-jdk10, openj9-openjdk-jdk9 and also for openj9-openjdk-jdk8.
+Have test the feature/behavior of OpenJ9 to minimize RAM and StartupTime already successfully on Linux amd64-64-Bit for Kubernetes HA setup running JBoss-EAP with production ready ear. Next step should be the move to the target platform aarch64. It would be fine if there is a direct download version for aach64 available.

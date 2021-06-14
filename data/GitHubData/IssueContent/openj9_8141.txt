@@ -1,0 +1,70 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/18/
+
+Not sure if all these user requested dumps are normal.
+
+```
+00:02:23  ===============================================
+00:02:23  Running test memoryCategories_0 ...
+00:02:23  ===============================================
+00:02:23  memoryCategories_0 Start Time: Wed Dec 18 00:02:23 2019 Epoch Time (ms): 1576645343063
+00:02:23  "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+00:02:23  JVMSHRC005I No shared class caches available
+00:02:23  JVMSHRC005I No shared class caches available
+00:02:23  cache cleanup done
+00:02:23  variation: NoOptions
+00:02:23  JVM_OPTIONS: -Xnocompressedrefs 
+00:02:23  { itercnt=1; \
+00:02:23  mkdir -p "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/../TKG/test_output_15766433439267/memoryCategories_0"; \
+00:02:23  cd "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/../TKG/test_output_15766433439267/memoryCategories_0"; \
+00:02:23  mkdir -p "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/../TKG/test_output_15766433439267/memoryCategories_0"; \
+00:02:23  	cd "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/../TKG/test_output_15766433439267/memoryCategories_0"; \
+00:02:23  	export LD_LIBRARY_PATH="/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdkbinary/openjdk-test-image/openj9:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdkbinary/j2sdk-image/jre/bin/../lib/ppc64le/default:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdkbinary/j2sdk-image/jre/bin/../lib/ppc64le/j9vm:"; \
+00:02:23  	"/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdkbinary/j2sdk-image/bin/java" -Xnocompressedrefs  \
+00:02:23  -cp "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/../../jvmtest/TestConfig/resources:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/../TKG/lib/testng.jar:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/../TKG/lib/jcommander.jar:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/../../jvmtest/functional/Java8andUp/GeneralTest.jar" \
+00:02:23  org.testng.TestNG -d "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/../TKG/test_output_15766433439267/memoryCategories_0" "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/../../jvmtest/functional/Java8andUp/testng.xml" \
+00:02:23  -testnames memoryCategories \
+00:02:23  -groups level.extended \
+00:02:23  -excludegroups d.*.linux_ppc-64_le,d.*.arch.ppc,d.*.os.linux,d.*.bits.64,d.*.generic-all; \
+00:02:23  if [ $? -eq 0 ] ; then echo ""; echo "memoryCategories_0""_PASSED"; echo ""; cd /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/..;  else echo ""; echo "memoryCategories_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/../TKG/test_output_15766433439267/TestTargetResult";
+00:02:24  [IncludeExcludeTestAnnotationTransformer] [INFO] exclude file is /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/../TestConfig/resources/excludes/latest_exclude_8.txt
+00:02:24  ...
+00:02:24  ... TestNG 6.14.2 by Cédric Beust (cedric@beust.com)
+00:02:24  ...
+00:02:24  
+00:02:24  JVMDUMP034I User requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000223.10131.0001.txt' through com.ibm.jvm.Dump.JavaDump
+00:02:24  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000223.10131.0001.txt
+00:02:24  JVMDUMP034I User requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000223.10131.0002.txt' through com.ibm.jvm.Dump.JavaDump
+00:02:24  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000223.10131.0002.txt
+00:02:24  JVMDUMP034I User requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0003.txt' through com.ibm.jvm.Dump.JavaDump
+00:02:24  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0003.txt
+00:02:24  JVMDUMP034I User requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0004.txt' through com.ibm.jvm.Dump.JavaDump
+00:02:24  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0004.txt
+00:02:24  JVMDUMP034I User requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0005.txt' through com.ibm.jvm.Dump.JavaDump
+00:02:24  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0005.txt
+00:02:24  JVMDUMP034I User requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0006.txt' through com.ibm.jvm.Dump.JavaDump
+00:02:24  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0006.txt
+00:02:24  JVMDUMP034I User requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0007.txt' through com.ibm.jvm.Dump.JavaDump
+00:02:24  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0007.txt
+00:02:24  JVMDUMP034I User requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0008.txt' through com.ibm.jvm.Dump.JavaDump
+00:02:24  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0008.txt
+00:02:24  JVMDUMP034I User requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0009.txt' through com.ibm.jvm.Dump.JavaDump
+00:02:24  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0009.txt
+00:02:24  JVMDUMP034I User requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0010.txt' through com.ibm.jvm.Dump.JavaDump
+00:02:24  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0010.txt
+00:02:24  JVMDUMP034I User requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0011.txt' through com.ibm.jvm.Dump.JavaDump
+00:02:28  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0011.txt
+00:02:28  JVMDUMP034I User requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0012.txt' through com.ibm.jvm.Dump.JavaDump
+00:02:28  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0012.txt
+00:02:28  JVMDUMP034I User requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0013.txt' through com.ibm.jvm.Dump.JavaDump
+00:02:28  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0013.txt
+00:02:28  JVMDUMP034I User requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0014.txt' through com.ibm.jvm.Dump.JavaDump
+00:02:28  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0014.txt
+00:02:28  JVMDUMP034I User requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0015.txt' through com.ibm.jvm.Dump.JavaDump
+00:02:28  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0015.txt
+00:02:28  JVMDUMP034I User requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0016.txt' through com.ibm.jvm.Dump.JavaDump
+00:02:28  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0016.txt
+00:02:28  JVMDUMP034I User requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0017.txt' through com.ibm.jvm.Dump.JavaDump
+00:02:28  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0017.txt
+00:02:28  JVMDUMP034I User requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_ppc64le_linux_xl_Nightly/openjdk-tests/TKG/test_output_15766433439267/memoryCategories_0/javacore.20191218.000224.10131.0018.txt' through com.ibm.jvm.Dump.JavaDump
+06:08:58  Cannot contact ub16p8j93: java.lang.InterruptedException
+```

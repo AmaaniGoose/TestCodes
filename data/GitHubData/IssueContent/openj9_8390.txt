@@ -1,0 +1,11 @@
+I discovered that there is a `lastITable` field cached in the `J9Class` structure.  Presumably, the last ITable in a class where an interface lookup was found is cached, and the next time an interface dispatch is performed on this class the interface class is compared to the latest cached interface class and if there is a match a slower lookup can be skipped.
+
+However, only the x86 and Power JIT backends exploit this on their interface dispatches.  This work was completed several years ago (circa 2015).  Is this an oversight, or are there technical reasons why this wasn't exploited on Z or ARM?  How much of an opportunity is there that would motivate doing the work on those platforms?
+
+Before I add this to my list of work to be completed across all architectures (#5455) I thought I'd raise an issue.
+
+- [ ] Z (#8399)
+- [ ] AArch64 (#8400)
+- [ ] ARM (#8401)
+
+@fjeremic @knn-k @ymanton @gita-omr @andrewcraik 

@@ -1,0 +1,49 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk16_j9_sanity.openjdk_ppc64_aix_Nightly/41
+java/util/stream/test/org/openjdk/tests/java/util/stream/ConcatOpTest.java
+```
+01:30:28  config java.util.stream.LoggingTestCase.after(org.testng.internal.TestResult@e6e399ad): failure
+01:30:28  java.lang.IncompatibleClassChangeError
+01:30:28  	at org.testng.internal.Invoker.runConfigurationListeners(Invoker.java:1662)
+01:30:28  	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:209)
+01:30:28  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:708)
+01:30:28  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+01:30:28  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+01:30:28  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+01:30:28  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+01:30:28  	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+01:30:28  	at org.testng.TestRunner.run(TestRunner.java:623)
+01:30:28  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+01:30:28  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+01:30:28  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+01:30:28  	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+01:30:28  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+01:30:28  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+01:30:28  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+01:30:28  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+01:30:28  	at org.testng.TestNG.run(TestNG.java:1018)
+01:30:28  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+01:30:28  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+01:30:28  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+01:30:28  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+01:30:28  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+01:30:28  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+01:30:28  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+01:30:28  	at java.base/java.lang.Thread.run(Thread.java:853)
+...
+01:30:28  STDERR:
+01:30:28  WARNING: Using incubator modules: jdk.incubator.foreign
+01:30:28  java.lang.Exception: failures: 0
+01:30:28  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:96)
+01:30:28  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+01:30:28  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+01:30:28  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+01:30:28  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+01:30:28  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+01:30:28  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+01:30:28  	at java.base/java.lang.Thread.run(Thread.java:853)
+01:30:28  
+01:30:28  JavaTest Message: Test threw exception: java.lang.Exception: failures: 0
+01:30:28  JavaTest Message: shutting down test
+01:30:28  
+01:30:28  STATUS:Failed.`main' threw exception: java.lang.Exception: failures: 0
+```

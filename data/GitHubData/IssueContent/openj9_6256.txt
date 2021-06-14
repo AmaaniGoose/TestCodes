@@ -1,0 +1,5 @@
+Currently, Field Watch  is not supported in AOT mode on all platforms. Some platforms implemented code for it, however Power has known limitations and support is not complete.
+
+Not that this is not very high priority, see https://github.com/eclipse/openj9/issues/2668#issuecomment-494520512
+
+Related issue: https://github.com/eclipse/openj9/issues/2668

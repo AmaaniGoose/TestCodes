@@ -1,0 +1,36 @@
+Failure link
+------------
+https://ci.adoptopenjdk.net/user/adam-thorpe/my-views/view/Nightly%20test%20openjdk%20openJ9/job/Test_openjdk11_j9_sanity.openjdk_x86-64_mac/132/
+- test category: sanity.openjdk
+- OS/architecture: all
+- public build SHAs: 
+```
+OpenJ9   - 81782de72
+OMR      - d77a173dd
+JCL      - 058070839f based on jdk-11.0.7+1)
+```
+
+Optional info
+-------------
+
+- intermittent failure (yes|no): no
+- regression or new test: New test, introduced in 8u252-b04, 11.0.7+1 and 14+36
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+java.rmi.NoSuchObjectException: no such object in table
+	at java.rmi/sun.rmi.transport.StreamRemoteCall.exceptionReceivedFromServer(StreamRemoteCall.java:303)
+	at java.rmi/sun.rmi.transport.StreamRemoteCall.executeCall(StreamRemoteCall.java:279)
+	at java.rmi/sun.rmi.server.UnicastRef.invoke(UnicastRef.java:164)
+	at java.rmi/java.rmi.server.RemoteObjectInvocationHandler.invokeRemoteMethod(RemoteObjectInvocationHandler.java:217)
+	at java.rmi/java.rmi.server.RemoteObjectInvocationHandler.invoke(RemoteObjectInvocationHandler.java:162)
+	at $Proxy0.echo(Unknown Source)
+	at TCPEndpointReadBug.main(TCPEndpointReadBug.java:48)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+```

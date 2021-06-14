@@ -1,0 +1,11 @@
+I would like to propose removing support for the 32-bit ARM processor from OpenJ9.
+
+This support was contributed when OpenJ9 was first open sourced in 2017 but there has been no significant community interest in it, no builds or binaries produced at AdoptOpenJDK, and a lack of support for Java features introduced since JDK 8.  The code paths remain largely untested, with only the occasional JDK 8 cross-compile build occurring internally within IBM (i.e., no tests, only builds).
+
+Granted, there has been some limited grassroots interest in running OpenJ9 on older Raspberry Pis and similar embedded devices, but in my opinion not enough to justify the human and hardware resource cost of modernizing, building, and maintaining it.
+
+Removing 32-bit ARM code from OpenJ9 will eliminate this technical debt and simplify some code paths.  The code will remain in the GitHub repo should someone decide in the future to resurrect it and provide resources to modernize, build, test, and maintain it.  In practical terms, the bulk of this support is in the JIT, the JIT runtime, VM-JIT glue, and build infrastructure.
+
+Note that this proposal only applies to OpenJ9.  It does not propose removing the 32-bit ARM code generator support from the OMR project which could still be useful in some language environments on some devices.
+
+Input from the community is welcome on this proposal (please comment below).  If there are appeals for clemency I'm particularly interested in the use cases.  My goal is to make a decision on its disposition by Sept 4.

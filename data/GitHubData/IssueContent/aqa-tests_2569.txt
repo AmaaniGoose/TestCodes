@@ -1,0 +1,163 @@
+extended.openjdk jdk_other test javax/naming/InitialContext/NoApplet.java fails on openj9 jdk8  x86-64_mac.
+
+The test hits the 960 sec timeout limit.  The last message output by the test is
+```
+_RegisterApplication(), FAILED TO establish the default connection to the WindowServer, _CGSDefaultConnection() is NULL.
+```
+Maybe the jdk hangs after receiving that error?
+
+The test passes on hotspot jdk8 and jdk11, and passes on openj9 jdk11 - only fails on openj9 jdk8.
+
+Failing job link: https://ci.adoptopenjdk.net/job/Grinder/545/console
+
+To reproduce: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&JDK_VENDOR=eclipse&BUILD_LIST=openjdk&PLATFORM=x86-64_mac&CUSTOM_TARGET=jdk/test/javax/naming/InitialContext/NoApplet.java&TARGET=jdk_custom
+
+The failure does not seem to be a regression - the test also fails on this old build:
+```
+openjdk version "1.8.0_232"
+OpenJDK Runtime Environment (build 1.8.0_232-b09)
+Eclipse OpenJ9 VM (build openj9-0.17.0, JRE 1.8.0 Mac OS X amd64-64-Bit Compressed References 20191017_369 (JIT enabled, AOT enabled)
+OpenJ9   - 77c1cf708
+OMR      - 20db4fbc
+JCL      - 97b5ec8f383 based on jdk8u232-b09)
+```
+Full output of failing test:
+```
+11:08:52  TEST: javax/naming/InitialContext/NoApplet.java
+11:08:52  TEST JDK: /Users/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image/Contents/Home/bin/..
+11:08:52  
+11:08:52  ACTION: build -- Passed. Build successful
+11:08:52  REASON: Named class compiled on demand
+11:08:52  TIME:   1.068 seconds
+11:08:52  messages:
+11:08:52  command: build NoApplet
+11:08:52  reason: Named class compiled on demand
+11:08:52  Test directory:
+11:08:52    compile: NoApplet
+11:08:52  elapsed time (seconds): 1.068
+11:08:52  
+11:08:52  ACTION: compile -- Passed. Compilation successful
+11:08:52  REASON: .class file out of date or does not exist
+11:08:52  TIME:   1.054 seconds
+11:08:52  messages:
+11:08:52  command: compile -XDignore.symbol.file=true /Users/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/naming/InitialContext/NoApplet.java
+11:08:52  reason: .class file out of date or does not exist
+11:08:52  Mode: agentvm
+11:08:52  Agent id: 1
+11:08:52  elapsed time (seconds): 1.054
+11:08:52  configuration:
+11:08:52  Boot Layer (javac runtime environment)
+11:08:52    class path: /Users/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image/Contents/Home/bin/../lib/tools.jar
+11:08:52                /Users/jenkins/workspace/Grinder/jvmtest/openjdk/jtreg/lib/javatest.jar
+11:08:52                /Users/jenkins/workspace/Grinder/jvmtest/openjdk/jtreg/lib/jtreg.jar
+11:08:52  
+11:08:52  javac compilation environment
+11:08:52    source path: /Users/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/naming/InitialContext
+11:08:52    class path:  /Users/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/naming/InitialContext
+11:08:52                 /Users/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16202947535076/jdk_custom_0/work/classes/0/javax/naming/InitialContext
+11:08:52                 /Users/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image/Contents/Home/bin/../lib/tools.jar
+11:08:52  
+11:08:52  rerun:
+11:08:52  cd /Users/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16202947535076/jdk_custom_0/work/scratch/0 && \
+11:08:52  HOME=/Users/jenkins \
+11:08:52  PATH=/bin:/usr/bin:/usr/sbin \
+11:08:52      /Users/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image/Contents/Home/bin/../bin/javac \
+11:08:52          -J-ea \
+11:08:52          -J-esa \
+11:08:52          -J-Xmx512m \
+11:08:52          -J-XX:+UseCompressedOops \
+11:08:52          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+11:08:52          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+11:08:52          -J-Dtest.compiler.opts= \
+11:08:52          -J-Dtest.java.opts= \
+11:08:52          -J-Dtest.jdk=/Users/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image/Contents/Home/bin/.. \
+11:08:52          -J-Dcompile.jdk=/Users/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image/Contents/Home/bin/.. \
+11:08:52          -J-Dtest.timeout.factor=8.0 \
+11:08:52          -J-Dtest.root=/Users/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/jdk/test \
+11:08:52          -J-Dtest.name=javax/naming/InitialContext/NoApplet.java \
+11:08:52          -J-Dtest.file=/Users/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/naming/InitialContext/NoApplet.java \
+11:08:52          -J-Dtest.src=/Users/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/naming/InitialContext \
+11:08:52          -J-Dtest.src.path=/Users/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/naming/InitialContext \
+11:08:52          -J-Dtest.classes=/Users/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16202947535076/jdk_custom_0/work/classes/0/javax/naming/InitialContext \
+11:08:52          -J-Dtest.class.path=/Users/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16202947535076/jdk_custom_0/work/classes/0/javax/naming/InitialContext \
+11:08:52          -J-Dtest.class.path.prefix=/Users/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16202947535076/jdk_custom_0/work/classes/0/javax/naming/InitialContext:/Users/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/naming/InitialContext \
+11:08:52          -d /Users/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16202947535076/jdk_custom_0/work/classes/0/javax/naming/InitialContext \
+11:08:52          -sourcepath /Users/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/naming/InitialContext \
+11:08:52          -classpath /Users/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/naming/InitialContext:/Users/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16202947535076/jdk_custom_0/work/classes/0/javax/naming/InitialContext:/Users/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image/Contents/Home/bin/../lib/tools.jar \
+11:08:52          -XDignore.symbol.file=true /Users/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/naming/InitialContext/NoApplet.java
+11:08:52  
+11:08:52  ACTION: main -- Error. Agent error: java.lang.Exception: Agent 2 timed out with a timeout of 960 seconds; check console log for any additional details
+11:08:52  REASON: Assumed action based on file name: run main NoApplet 
+11:08:52  TIME:   960.622 seconds
+11:08:52  messages:
+11:08:52  command: main NoApplet
+11:08:52  reason: Assumed action based on file name: run main NoApplet 
+11:08:52  Mode: agentvm
+11:08:52  Agent id: 2
+11:08:52  Timeout refired 960 times
+11:08:52  Timeout information:
+11:08:52  Running jcmd on process 65337
+11:08:52  Error getting data from 65337: Exception connecting to 65337
+11:08:52  Usage : jcmd <vmid> <arguments>
+11:08:52  
+11:08:52     -J : supply arguments to the Java VM running jcmd
+11:08:52     -l : list JVM processes on the local machine
+11:08:52     -h : print this help message
+11:08:52  
+11:08:52     <vmid> : Attach API VM ID as shown in jps or other Attach API-based tools
+11:08:52  
+11:08:52     arguments:
+11:08:52        help : print the list of diagnostic commands
+11:08:52        help <command> : print help for the specific command
+11:08:52        <command> [command arguments] : command from the list returned by "help"
+11:08:52  
+11:08:52  list JVM processes on the local machine. Default behavior when no options are specified.
+11:08:52  
+11:08:52  NOTE: this utility may significantly affect the performance of the target JVM.
+11:08:52      The available diagnostic commands are determined by
+11:08:52      the target VM and may vary between VMs.
+11:08:52  Running jstack on process 65337
+11:08:52  2021-05-06T11:08:38.684
+11:08:52  Error getting data from 65337: Exception connecting to 65337
+11:08:52  --- Timeout information end.
+11:08:52  elapsed time (seconds): 960.622
+11:08:52  configuration:
+11:08:52  Boot Layer
+11:08:52    class path: /Users/jenkins/workspace/Grinder/jvmtest/openjdk/jtreg/lib/javatest.jar
+11:08:52                /Users/jenkins/workspace/Grinder/jvmtest/openjdk/jtreg/lib/jtreg.jar
+11:08:52                /Users/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image/Contents/Home/bin/../lib/tools.jar
+11:08:52                /Users/jenkins/workspace/Grinder/jvmtest/openjdk/jtreg/lib/junit.jar
+11:08:52                /Users/jenkins/workspace/Grinder/jvmtest/openjdk/jtreg/lib/testng.jar
+11:08:52                /Users/jenkins/workspace/Grinder/jvmtest/openjdk/jtreg/lib/jcommander.jar
+11:08:52  
+11:08:52  Test Layer
+11:08:52    class path: /Users/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16202947535076/jdk_custom_0/work/classes/0/javax/naming/InitialContext
+11:08:52                /Users/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/naming/InitialContext
+11:08:52  
+11:08:52  rerun:
+11:08:52  cd /Users/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16202947535076/jdk_custom_0/work/scratch/0 && \
+11:08:52  HOME=/Users/jenkins \
+11:08:52  PATH=/bin:/usr/bin:/usr/sbin \
+11:08:52      /Users/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image/Contents/Home/bin/../bin/java \
+11:08:52          -Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+11:08:52          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+11:08:52          -Dtest.compiler.opts= \
+11:08:52          -Dtest.java.opts= \
+11:08:52          -Dtest.jdk=/Users/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image/Contents/Home/bin/.. \
+11:08:52          -Dcompile.jdk=/Users/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image/Contents/Home/bin/.. \
+11:08:52          -Dtest.timeout.factor=8.0 \
+11:08:52          -Dtest.root=/Users/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/jdk/test \
+11:08:52          -Dtest.name=javax/naming/InitialContext/NoApplet.java \
+11:08:52          -Dtest.file=/Users/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/naming/InitialContext/NoApplet.java \
+11:08:52          -Dtest.src=/Users/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/naming/InitialContext \
+11:08:52          -Dtest.src.path=/Users/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/naming/InitialContext \
+11:08:52          -Dtest.classes=/Users/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16202947535076/jdk_custom_0/work/classes/0/javax/naming/InitialContext \
+11:08:52          -Dtest.class.path=/Users/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16202947535076/jdk_custom_0/work/classes/0/javax/naming/InitialContext \
+11:08:52          -Dtest.class.path.prefix=/Users/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16202947535076/jdk_custom_0/work/classes/0/javax/naming/InitialContext:/Users/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/naming/InitialContext \
+11:08:52          -classpath /Users/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16202947535076/jdk_custom_0/work/classes/0/javax/naming/InitialContext:/Users/jenkins/workspace/Grinder/openjdk-tests/openjdk/openjdk-jdk/jdk/test/javax/naming/InitialContext:/Users/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image/Contents/Home/bin/../lib/tools.jar:/Users/jenkins/workspace/Grinder/jvmtest/openjdk/jtreg/lib/javatest.jar:/Users/jenkins/workspace/Grinder/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+11:08:52          NoApplet
+11:08:52  stderr:
+11:08:52  _RegisterApplication(), FAILED TO establish the default connection to the WindowServer, _CGSDefaultConnection() is NULL.
+11:08:52  
+11:08:52  TEST RESULT: Error. Agent error: java.lang.Exception: Agent 2 timed out with a timeout of 960 seconds; check console log for any additional details
+```

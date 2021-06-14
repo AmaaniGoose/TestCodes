@@ -1,0 +1,45 @@
+Test category: openjdk
+Test name(s):
+com/sun/net/httpserver/bugs/B6361557.java
+
+Product(s) tested:
+21:19:14  openjdk version "11.0.5" 2019-10-15
+21:19:14  OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.5+10-201908071815)
+21:19:14  OpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.5+10-201908071815, mixed mode)
+
+OS/architecture: windows
+Platform specific: yes
+
+Reproducibility: yes
+
+```
+Stacktrace
+
+Execution failed: `main' threw exception: java.net.ConnectException: Connection refused: connect    
+
+Standard Output
+
+destaddr /127.0.0.1:52591
+    
+
+Standard Error
+
+java.net.ConnectException: Connection refused: connect
+	at java.base/sun.nio.ch.Net.connect0(Native Method)
+	at java.base/sun.nio.ch.Net.connect(Net.java:476)
+	at java.base/sun.nio.ch.Net.connect(Net.java:468)
+	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:694)
+	at java.base/java.nio.channels.SocketChannel.open(SocketChannel.java:194)
+	at B6361557.main(B6361557.java:106)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+JavaTest Message: Test threw exception: java.net.ConnectException: Connection refused: connect
+```
+
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk11_hs_sanity.openjdk_x86-64_windows/22/console
+JBS: https://bugs.openjdk.java.net/browse/JDK-8196070

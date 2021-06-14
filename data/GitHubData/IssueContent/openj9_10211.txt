@@ -1,0 +1,4 @@
+OpenJ9 should consider adding support for dtrace.
+See
+https://github.com/AdoptOpenJDK/openjdk-build/issues/1242
+https://github.com/AdoptOpenJDK/openjdk-build/pull/1244

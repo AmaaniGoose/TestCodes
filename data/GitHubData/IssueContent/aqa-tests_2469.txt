@@ -1,0 +1,169 @@
+java/util/concurrent/Executors/AutoShutdown.java failed with ` 2 not equal to 3` message.
+
+Also seen on openj9 AIX (see comment below).
+
+Failing job: https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/497/console
+
+Failure output:
+```
+10:12:17  ACTION: main -- Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Some tests failed
+10:12:17  REASON: User specified action: run main/othervm AutoShutdown 
+10:12:17  TIME:   0.146 seconds
+10:12:17  messages:
+10:12:17  command: main AutoShutdown
+10:12:17  reason: User specified action: run main/othervm AutoShutdown 
+10:12:17  Mode: othervm [/othervm specified]
+10:12:17  elapsed time (seconds): 0.146
+10:12:17  configuration:
+10:12:17  STDOUT:
+10:12:17  2 not equal to 3
+10:12:17  
+10:12:17  Passed = 0, failed = 1
+```
+Full output of failing test
+```
+10:12:17  TEST: java/util/concurrent/Executors/AutoShutdown.java
+10:12:17  TEST JDK: /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image
+10:12:17  
+10:12:17  ACTION: build -- Passed. Build successful
+10:12:17  REASON: Named class compiled on demand
+10:12:17  TIME:   0.071 seconds
+10:12:17  messages:
+10:12:17  command: build AutoShutdown
+10:12:17  reason: Named class compiled on demand
+10:12:17  Test directory:
+10:12:17    compile: AutoShutdown
+10:12:17  elapsed time (seconds): 0.071
+10:12:17  
+10:12:17  ACTION: compile -- Passed. Compilation successful
+10:12:17  REASON: .class file out of date or does not exist
+10:12:17  TIME:   0.071 seconds
+10:12:17  messages:
+10:12:17  command: compile -XDignore.symbol.file=true /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/util/concurrent/Executors/AutoShutdown.java
+10:12:17  reason: .class file out of date or does not exist
+10:12:17  Mode: agentvm
+10:12:17  Agent id: 1
+10:12:17  elapsed time (seconds): 0.071
+10:12:17  configuration:
+10:12:17  Boot Layer (javac runtime environment)
+10:12:17    class path: /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image/lib/tools.jar
+10:12:17                /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/javatest.jar
+10:12:17                /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar
+10:12:17  
+10:12:17  javac compilation environment
+10:12:17    source path: /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/util/concurrent/Executors
+10:12:17    class path:  /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/util/concurrent/Executors
+10:12:17                 /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/output_16176132565542/jdk_util_0/work/classes/0/java/util/concurrent/Executors
+10:12:17                 /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image/lib/tools.jar
+10:12:17  
+10:12:17  rerun:
+10:12:17  cd /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/output_16176132565542/jdk_util_0/work/scratch/1 && \
+10:12:17  DISPLAY=:0 \
+10:12:17  HOME=/home/jenkins \
+10:12:17  LANG=en_US.UTF-8 \
+10:12:17  PATH=/bin:/usr/bin:/usr/sbin \
+10:12:17      /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image/bin/javac \
+10:12:17          -J-ea \
+10:12:17          -J-esa \
+10:12:17          -J-Xmx1540m \
+10:12:17          -J-Xdump:system:none \
+10:12:17          -J-Xdump:heap:none \
+10:12:17          -J-Xdump:system:events=gpf+abort+traceassert+corruptcache \
+10:12:17          -J-XX:+UseCompressedOops \
+10:12:17          -J-Dtest.vm.opts='-ea -esa -Xmx1540m -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache -XX:+UseCompressedOops' \
+10:12:17          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx1540m -J-Xdump:system:none -J-Xdump:heap:none -J-Xdump:system:events=gpf+abort+traceassert+corruptcache -J-XX:+UseCompressedOops' \
+10:12:17          -J-Dtest.compiler.opts= \
+10:12:17          -J-Dtest.java.opts= \
+10:12:17          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+10:12:17          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+10:12:17          -J-Dtest.timeout.factor=8.0 \
+10:12:17          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test \
+10:12:17          -J-Dtest.name=java/util/concurrent/Executors/AutoShutdown.java \
+10:12:17          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/util/concurrent/Executors/AutoShutdown.java \
+10:12:17          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/util/concurrent/Executors \
+10:12:17          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/util/concurrent/Executors \
+10:12:17          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/output_16176132565542/jdk_util_0/work/classes/0/java/util/concurrent/Executors \
+10:12:17          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/output_16176132565542/jdk_util_0/work/classes/0/java/util/concurrent/Executors \
+10:12:17          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/output_16176132565542/jdk_util_0/work/classes/0/java/util/concurrent/Executors:/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/util/concurrent/Executors \
+10:12:17          -d /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/output_16176132565542/jdk_util_0/work/classes/0/java/util/concurrent/Executors \
+10:12:17          -sourcepath /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/util/concurrent/Executors \
+10:12:17          -classpath /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/util/concurrent/Executors:/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/output_16176132565542/jdk_util_0/work/classes/0/java/util/concurrent/Executors:/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image/lib/tools.jar \
+10:12:17          -XDignore.symbol.file=true /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/util/concurrent/Executors/AutoShutdown.java
+10:12:17  
+10:12:17  ACTION: main -- Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Some tests failed
+10:12:17  REASON: User specified action: run main/othervm AutoShutdown 
+10:12:17  TIME:   0.146 seconds
+10:12:17  messages:
+10:12:17  command: main AutoShutdown
+10:12:17  reason: User specified action: run main/othervm AutoShutdown 
+10:12:17  Mode: othervm [/othervm specified]
+10:12:17  elapsed time (seconds): 0.146
+10:12:17  configuration:
+10:12:17  STDOUT:
+10:12:17  2 not equal to 3
+10:12:17  
+10:12:17  Passed = 0, failed = 1
+10:12:17  
+10:12:17  STDERR:
+10:12:17  java.lang.Throwable
+10:12:17  	at java.lang.Thread.dumpStack(Thread.java:498)
+10:12:17  	at AutoShutdown.fail(AutoShutdown.java:81)
+10:12:17  	at AutoShutdown.fail(AutoShutdown.java:82)
+10:12:17  	at AutoShutdown.equal(AutoShutdown.java:86)
+10:12:17  	at AutoShutdown.realMain(AutoShutdown.java:66)
+10:12:17  	at AutoShutdown.main(AutoShutdown.java:88)
+10:12:17  	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+10:12:17  	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+10:12:17  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+10:12:17  	at java.lang.reflect.Method.invoke(Method.java:498)
+10:12:17  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+10:12:17  	at java.lang.Thread.run(Thread.java:823)
+10:12:17  java.lang.AssertionError: Some tests failed
+10:12:17  	at AutoShutdown.main(AutoShutdown.java:90)
+10:12:17  	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+10:12:17  	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+10:12:17  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+10:12:17  	at java.lang.reflect.Method.invoke(Method.java:498)
+10:12:17  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+10:12:17  	at java.lang.Thread.run(Thread.java:823)
+10:12:17  
+10:12:17  JavaTest Message: Test threw exception: java.lang.AssertionError: Some tests failed
+10:12:17  JavaTest Message: shutting down test
+10:12:17  
+10:12:17  STATUS:Failed.`main' threw exception: java.lang.AssertionError: Some tests failed
+10:12:17  rerun:
+10:12:17  cd /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/output_16176132565542/jdk_util_0/work/scratch/1 && \
+10:12:17  DISPLAY=:0 \
+10:12:17  HOME=/home/jenkins \
+10:12:17  LANG=en_US.UTF-8 \
+10:12:17  PATH=/bin:/usr/bin:/usr/sbin \
+10:12:17  CLASSPATH=/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/output_16176132565542/jdk_util_0/work/classes/0/java/util/concurrent/Executors:/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/util/concurrent/Executors:/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image/lib/tools.jar:/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+10:12:17      /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image/bin/java \
+10:12:17          -Dtest.vm.opts='-ea -esa -Xmx1540m -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache -XX:+UseCompressedOops' \
+10:12:17          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx1540m -J-Xdump:system:none -J-Xdump:heap:none -J-Xdump:system:events=gpf+abort+traceassert+corruptcache -J-XX:+UseCompressedOops' \
+10:12:17          -Dtest.compiler.opts= \
+10:12:17          -Dtest.java.opts= \
+10:12:17          -Dtest.jdk=/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+10:12:17          -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image \
+10:12:17          -Dtest.timeout.factor=8.0 \
+10:12:17          -Dtest.root=/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test \
+10:12:17          -Dtest.name=java/util/concurrent/Executors/AutoShutdown.java \
+10:12:17          -Dtest.file=/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/util/concurrent/Executors/AutoShutdown.java \
+10:12:17          -Dtest.src=/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/util/concurrent/Executors \
+10:12:17          -Dtest.src.path=/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/util/concurrent/Executors \
+10:12:17          -Dtest.classes=/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/output_16176132565542/jdk_util_0/work/classes/0/java/util/concurrent/Executors \
+10:12:17          -Dtest.class.path=/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/output_16176132565542/jdk_util_0/work/classes/0/java/util/concurrent/Executors \
+10:12:17          -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/output_16176132565542/jdk_util_0/work/classes/0/java/util/concurrent/Executors:/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/util/concurrent/Executors \
+10:12:17          -ea \
+10:12:17          -esa \
+10:12:17          -Xmx1540m \
+10:12:17          -Xdump:system:none \
+10:12:17          -Xdump:heap:none \
+10:12:17          -Xdump:system:events=gpf+abort+traceassert+corruptcache \
+10:12:17          -XX:+UseCompressedOops \
+10:12:17          com.sun.javatest.regtest.agent.MainWrapper /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/output_16176132565542/jdk_util_0/work/java/util/concurrent/Executors/AutoShutdown.d/main.0.jta
+10:12:17  
+10:12:17  TEST RESULT: Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Some tests failed
+10:12:17  --------------------------------------------------
+10:16:22  Test results: passed: 649; failed: 1
+```

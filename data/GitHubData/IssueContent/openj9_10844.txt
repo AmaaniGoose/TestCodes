@@ -1,0 +1,37 @@
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/226 (0.23.0 M2 build)
+java/util/stream/boottest/java.base/java/util/stream/StreamOpFlagsTest.java
+build-packet-ubuntu1804-armv8l-1
+```
+14:45:52  stderr:
+14:45:52  JVMDUMP039I Processing dump event "systhrow", detail "java/lang/OutOfMemoryError" at 2020/10/05 18:45:37 - please wait.
+14:45:52  JVMDUMP039I Processing dump event "systhrow", detail "java/lang/OutOfMemoryError" at 2020/10/05 18:45:46 - please wait.
+14:45:52  JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/TKG/test_output_16019223383390/jdk_util_j9_0/work/scratch/26/javacore.20201005.184537.22705.0001.txt' in response to an event
+14:45:52  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/TKG/test_output_16019223383390/jdk_util_j9_0/work/scratch/26/javacore.20201005.184537.22705.0001.txt
+14:45:52  JVMDUMP039I Processing dump event "systhrow", detail "java/lang/OutOfMemoryError" at 2020/10/05 18:45:46 - please wait.
+14:45:52  JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/TKG/test_output_16019223383390/jdk_util_j9_0/work/scratch/26/Snap.20201005.184537.22705.0003.trc' in response to an event
+14:45:52  JVMDUMP010I Snap dump written to /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/TKG/test_output_16019223383390/jdk_util_j9_0/work/scratch/26/Snap.20201005.184537.22705.0003.trc
+14:45:52  JVMDUMP013I Processed dump event "systhrow", detail "java/lang/OutOfMemoryError".
+14:45:52  JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/TKG/test_output_16019223383390/jdk_util_j9_0/work/scratch/26/javacore.20201005.184546.22705.0002.txt' in response to an event
+14:45:52  JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/TKG/test_output_16019223383390/jdk_util_j9_0/work/scratch/26/javacore.20201005.184546.22705.0002.txt
+14:45:52  JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux_xl/openjdk-tests/TKG/test_output_16019223383390/jdk_util_j9_0/work/scratch/26/Snap.20201005.184546.22705.0005.trc' in response to an event
+14:45:52  JVMDUMP010I Snap dump written to {nothing to snap}
+14:45:52  JVMDUMP013I Processed dump event "systhrow", detail "java/lang/OutOfMemoryError".
+14:45:52  direct.log:
+14:45:52  java.lang.reflect.InvocationTargetException
+14:45:52  	at jdk.internal.reflect.GeneratedMethodAccessor4.invoke(Unknown Source)
+14:45:52  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+14:45:52  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+14:45:52  	at com.sun.javatest.regtest.agent.RegressionCompileCommand.run(RegressionCompileCommand.java:189)
+14:45:52  	at com.sun.javatest.regtest.agent.CompileActionHelper.runCompile(CompileActionHelper.java:92)
+14:45:52  	at com.sun.javatest.regtest.agent.AgentServer.doCompile(AgentServer.java:262)
+14:45:52  	at com.sun.javatest.regtest.agent.AgentServer.run(AgentServer.java:229)
+14:45:52  	at com.sun.javatest.regtest.agent.AgentServer.main(AgentServer.java:69)
+14:45:52  Caused by: java.lang.ClassCastException: com.sun.tools.javac.util.List incompatible with java.io.Closeable
+14:45:52  	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.close(JavaCompiler.java:1808)
+14:45:52  	at jdk.compiler/com.sun.tools.javac.main.Main.compile(Main.java:352)
+14:45:52  	at jdk.compiler/com.sun.tools.javac.main.Main.compile(Main.java:170)
+14:45:52  	at jdk.compiler/com.sun.tools.javac.Main.compile(Main.java:75)
+14:45:52  	... 8 more
+14:45:52  
+14:45:52  TEST RESULT: Error. Error invoking compiler
+```

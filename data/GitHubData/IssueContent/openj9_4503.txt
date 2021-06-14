@@ -1,0 +1,35 @@
+The existing Unix implementation of the `j9sock` API doesn't work on OSX. OSX supports functions as per the BSD implementation whereas the Unix implementation of `j9sock` API uses functions as per the GNU implementation. BSD and GNU definitions vary quite a bit. For some GNU functions, there is no BSD alternative. Plus, IPv4 and IPv6 categorization varies between the BSD and GNU implementation.
+
+The existing Unix implementation of the `j9sock` API: https://github.com/eclipse/openj9/blob/master/runtime/port/unix/j9sock.c.
+
+`j9sock` tests: https://github.com/eclipse/openj9/blob/master/runtime/tests/port/j9sockTest.c.
+
+The `j9sock` tests are run as part of the `pltest` suite. Currently, the `j9sock` tests are disabled on OSX via #4504. The `j9sock` tests can re-enabled on OSX once the `j9sock` API is properly implemented on OSX.
+
+The `j9sock` API is not used by OpenJ9 anymore. It may be used by JITaaS (JIT as a Service). Depending upon the usage of the `j9sock` API, it can be decided whether the `j9sock` API is required on OSX.
+
+Two options to support `j9sock` API on OSX:
+1. Extend the existing Unix implementation of the `j9sock` API to support both the GNU and BSD implementations.
+2. Create a new OSX specific implementation of the `j9sock` API, which is BSD-based.
+
+The following `j9sock` tests fail when the existing Unix implementation of the `j9sock` API is used on OSX:
+```
+j9sockTest.c line  196: j9sock_test1_basic error creating address: Unknown error: -1
+j9sockTest.c line  392: j9sock_test1_basic error starting server: Unknown error: -1
+j9sockTest.c line  244: j9sock_test1_basic error creating address: Unknown error: -1
+j9sockTest.c line  396: j9sock_test1_basic error creating/connecting client: Unknown error: -1
+j9sockTest.c line  401: j9sock_test1_basic error accepting connection: Invalid argument
+j9sockTest.c line  196: j9sock_test3_fdset_basic_select error creating address: Bad file descriptor
+j9sockTest.c line  609: j9sock_test3_fdset_basic_select error starting server: Bad file descriptor
+j9sockTest.c line  244: j9sock_test3_fdset_basic_select error creating address: Bad file descriptor
+j9sockTest.c line  613: j9sock_test3_fdset_basic_select error creating/connecting client: Bad file descriptor
+j9sockTest.c line  618: j9sock_test3_fdset_basic_select error accepting connection: Invalid argument
+j9sockTest.c line  930: j9sock_test5_basic_options error creating address: Bad file descriptor
+j9sockTest.c line  196: j9sock_test6_nonblocking_connect error creating address: Bad file descriptor
+j9sockTest.c line 1008: j9sock_test6_nonblocking_connect error starting server: Bad file descriptor
+j9sockTest.c line  196: j9sock_test7_nonblocking_read error creating address: Bad file descriptor
+j9sockTest.c line 1073: j9sock_test7_nonblocking_read error starting server: Bad file descriptor
+j9sockTest.c line  244: j9sock_test7_nonblocking_read error creating address: Bad file descriptor
+j9sockTest.c line 1077: j9sock_test7_nonblocking_read error creating/connecting client: Bad file descriptor
+j9sockTest.c line 1081: j9sock_test7_nonblocking_read error accepting connection: Invalid argument
+```

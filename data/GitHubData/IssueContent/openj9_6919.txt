@@ -1,0 +1,5 @@
+eclipse/omr#3675 introduces a new options processing framework for the compiler. It includes the `options-gen` script run at build time to generate files that are then used to populate various data structures.
+
+**The script requires at minimum Python 3.2**.
+
+After eclipse/omr#3675 is merged, an OpenJ9 PR will be opened to use the new options processing framework in the OpenJ9 JIT. This would add Python 3 as a build requirement, and hence **all** OpenJ9 build machines would require Python 3.2 and up to build the JIT component.

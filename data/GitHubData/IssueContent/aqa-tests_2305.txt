@@ -1,0 +1,250 @@
+The extended.system target MiniMix_5m reports a failure from one of the tests in the workload followed by the jdk hanging until it is killed.
+
+Does not happen all the time, but often (maybe 50%).
+
+Occurs on both openj9 and hotspot, and on all platforms.  Not seen on jdk8, jdk11 or jdk16,
+
+The test is set to run for five minutes - at the end of the test some threads do not terminate. A run on a local Windows machine showed that when the test is at the hanging stage the jdk is not consuming  CPU.
+
+The output from the failing subtest is:
+```
+14:13:08  LT  testStarted : testAPI(net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinTaskTest)
+14:13:08  LT  testFailure: testAPI(net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinTaskTest): 25 : getMySurplusQueuedTaskCount() expected:<1> but was:<-7>
+```
+
+The test output at point of the failure including the hang:
+```
+14:08:58  LT  08:08:57.902 - Starting thread. Suite=0 thread=0
+14:08:58  LT  08:08:57.905 - Starting thread. Suite=0 thread=1
+14:08:58  LT  08:08:57.906 - Starting thread. Suite=0 thread=2
+14:08:58  LT  08:08:57.906 - Starting thread. Suite=0 thread=3
+14:08:58  LT  08:08:57.907 - Starting thread. Suite=0 thread=4
+14:08:58  LT  08:08:57.907 - Starting thread. Suite=0 thread=5
+14:08:58  LT  08:08:57.908 - Starting thread. Suite=0 thread=6
+14:08:58  LT  08:08:57.908 - Starting thread. Suite=0 thread=7
+14:08:58  LT  08:08:57.909 - Starting thread. Suite=0 thread=8
+14:08:58  LT  08:08:57.909 - Starting thread. Suite=0 thread=9
+14:09:19  LT  08:09:17.882 - Completed 6.7%. Number of tests started=6587
+14:09:39  LT  08:09:37.899 - Completed 13.4%. Number of tests started=11342 (+4755)
+14:10:00  LT  08:09:57.844 - Completed 20.1%. Number of tests started=16729 (+5387)
+14:10:20  LT  08:10:17.810 - Completed 26.8%. Number of tests started=21217 (+4488)
+14:10:40  LT  08:10:37.861 - Completed 33.5%. Number of tests started=25330 (+4113)
+14:11:01  LT  08:10:57.892 - Completed 40.3%. Number of tests started=27937 (+2607)
+14:11:18  LT  08:11:17.835 - Completed 46.9%. Number of tests started=31971 (+4034)
+14:11:38  LT  08:11:37.870 - Completed 53.7%. Number of tests started=34567 (+2596)
+14:11:59  LT  08:11:57.804 - Completed 60.3%. Number of tests started=39477 (+4910)
+14:12:19  LT  08:12:17.849 - Completed 67.1%. Number of tests started=42358 (+2881)
+14:12:39  LT  08:12:37.825 - Completed 73.8%. Number of tests started=44796 (+2438)
+14:12:59  LT  08:12:57.824 - Completed 80.5%. Number of tests started=46736 (+1940)
+14:13:08  LT  08:13:07.577 - First failure detected by thread: load-6. Not creating dumps as no dump generation is requested for this load test
+14:13:08  LT  08:13:07.580 - suite.getInventory().getInventoryFileRef(): openjdk.test.load/config/inventories/mix/mix-more.xml
+14:13:08  LT  08:13:07.581 - suite.isCreateDump() : false
+14:13:08  LT  08:13:07.583 - Test failed
+14:13:08  LT    Failure num.  = 1
+14:13:08  LT    Test number   = 3718
+14:13:08  LT    Test details  = 'JUnit[net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinTaskTest]'
+14:13:08  LT    Suite number  = 0
+14:13:08  LT    Thread number = 6
+14:13:08  LT  >>> Captured test output >>>
+14:13:08  LT  testStarted : testAPI(net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinTaskTest)
+14:13:08  LT  testFailure: testAPI(net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinTaskTest): 25 : getMySurplusQueuedTaskCount() expected:<1> but was:<-7>
+14:13:08  LT  junit.framework.AssertionFailedError: 25 : getMySurplusQueuedTaskCount() expected:<1> but was:<-7>
+14:13:08  LT  	at junit.framework.Assert.fail(Assert.java:57)
+14:13:08  LT  	at junit.framework.Assert.failNotEquals(Assert.java:329)
+14:13:08  LT  	at junit.framework.Assert.assertEquals(Assert.java:78)
+14:13:08  LT  	at junit.framework.Assert.assertEquals(Assert.java:234)
+14:13:08  LT  	at junit.framework.TestCase.assertEquals(TestCase.java:401)
+14:13:08  LT  	at net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinTaskTest.testAPI(ForkJoinTaskTest.java:174)
+14:13:08  LT  	at jdk.internal.reflect.GeneratedMethodAccessor8280.invoke(Unknown Source)
+14:13:08  LT  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+14:13:08  LT  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+14:13:08  LT  	at junit.framework.TestCase.runTest(TestCase.java:176)
+14:13:08  LT  	at junit.framework.TestCase.runBare(TestCase.java:141)
+14:13:08  LT  	at junit.framework.TestResult$1.protect(TestResult.java:122)
+14:13:08  LT  	at junit.framework.TestResult.runProtected(TestResult.java:142)
+14:13:08  LT  	at junit.framework.TestResult.run(TestResult.java:125)
+14:13:08  LT  	at junit.framework.TestCase.run(TestCase.java:129)
+14:13:08  LT  	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+14:13:08  LT  	at junit.framework.TestSuite.run(TestSuite.java:247)
+14:13:08  LT  	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+14:13:08  LT  	at org.junit.runners.Suite.runChild(Suite.java:128)
+14:13:08  LT  	at org.junit.runners.Suite.runChild(Suite.java:27)
+14:13:08  LT  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+14:13:08  LT  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+14:13:08  LT  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+14:13:08  LT  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+14:13:08  LT  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+14:13:08  LT  	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+14:13:08  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+14:13:08  LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+14:13:08  LT  	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+14:13:08  LT  	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+14:13:08  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1135)
+14:13:08  LT  	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+14:13:08  LT  	at java.base/java.lang.Thread.run(Thread.java:853)
+14:13:08  LT  testFinished: testAPI(net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinTaskTest)
+14:13:08  LT  
+14:13:08  LT  JUnit Test Results for: net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinTaskTest
+14:13:08  LT    Ran    : 1
+14:13:08  LT    Passed : 0
+14:13:08  LT    Failed : 1
+14:13:08  LT    Ignored: 0
+14:13:08  LT    Result : FAILED
+14:13:08  LT  <<<
+14:13:08  LT  
+14:13:19  LT  08:13:17.819 - Completed 87.2%. Number of tests started=48665 (+1929) (with 1 failure(s))
+14:13:39  LT  08:13:37.862 - Completed 93.9%. Number of tests started=51824 (+3159) (with 1 failure(s))
+14:13:54  STF 08:13:54.017 - Heartbeat: Process LT  is still running
+14:13:57  LT  08:13:56.207 - Thread completed. Suite=0 thread=9
+14:13:58  LT  08:13:57.877 - Completed 100.0%. Number of tests started=53557 (+1733) (with 1 failure(s))
+14:13:58  LT  08:13:58.352 - Thread completed. Suite=0 thread=0
+14:14:01  LT  08:14:00.764 - Thread completed. Suite=0 thread=1
+14:14:12  LT  08:14:10.938 - Thread completed. Suite=0 thread=5
+14:14:13  LT  08:14:13.103 - Thread completed. Suite=0 thread=3
+14:14:15  LT  08:14:14.819 - Thread completed. Suite=0 thread=2
+14:14:18  LT  08:14:17.817 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:14:39  LT  08:14:37.849 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:14:59  LT  08:14:57.882 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:15:19  LT  08:15:17.814 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:15:39  LT  08:15:37.856 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:16:00  LT  08:15:57.888 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:16:20  LT  08:16:17.819 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:16:37  LT  08:16:37.847 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:17:01  LT  08:16:57.878 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:17:18  LT  08:17:17.808 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:17:39  LT  08:17:37.841 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:17:59  LT  08:17:57.872 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:18:20  LT  08:18:17.805 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:18:40  LT  08:18:37.834 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:18:55  STF 08:18:54.109 - Heartbeat: Process LT  is still running
+14:18:59  LT  08:18:57.865 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:19:19  LT  08:19:17.898 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:19:39  LT  08:19:37.829 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:20:00  LT  08:19:57.860 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:20:20  LT  08:20:17.891 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:20:40  LT  08:20:37.822 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:21:01  LT  08:20:57.850 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:21:18  LT  08:21:17.880 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:21:38  LT  08:21:37.811 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:21:59  LT  08:21:57.840 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:22:19  LT  08:22:17.870 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:22:40  LT  08:22:37.898 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:23:00  LT  08:22:57.827 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:23:20  LT  08:23:17.857 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:23:41  LT  08:23:37.887 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:23:55  STF 08:23:54.187 - Heartbeat: Process LT  is still running
+14:23:59  LT  08:23:57.818 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:24:19  LT  08:24:17.848 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:24:40  LT  08:24:37.879 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:25:00  LT  08:24:57.808 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:25:20  LT  08:25:17.838 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:25:41  LT  08:25:37.867 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:25:58  LT  08:25:57.800 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:26:19  LT  08:26:17.831 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:26:39  LT  08:26:37.866 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:27:00  LT  08:26:57.897 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:27:20  LT  08:27:17.827 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:27:40  LT  08:27:37.858 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:28:00  LT  08:27:57.886 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:28:18  LT  08:28:17.814 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:28:38  LT  08:28:37.842 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:28:56  STF 08:28:54.275 - Heartbeat: Process LT  is still running
+14:28:58  LT  08:28:57.871 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:29:16  LT  08:29:14.997 - **POSSIBLE HANG DETECTED**
+14:29:16  STF 08:29:15.316 - **FAILED** Process LT  has hung
+14:29:16  STF 08:29:15.316 - Collecting dumps for: LT 
+14:29:16  STF 08:29:15.316 - Sending SIG 3 to the java process to generate a javacore
+14:29:16  STF 08:29:15.317 - Running command: kill -3 11789
+14:29:16  STF 08:29:15.317 - Redirecting stderr to /home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/1.LT.kill_3.stderr
+14:29:16  STF 08:29:15.317 - Redirecting stdout to /home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/1.LT.kill_3.stdout
+14:29:16  STF 08:29:15.319 - Pausing for 30 seconds
+14:29:49  STF 08:29:45.319 - Sending SIG 3 to the java process to generate a javacore
+14:29:49  STF 08:29:45.320 - Running command: kill -3 11789
+14:29:49  STF 08:29:45.320 - Redirecting stderr to /home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/1.LT.kill_3.stderr
+14:29:49  STF 08:29:45.320 - Redirecting stdout to /home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/1.LT.kill_3.stdout
+14:29:49  STF 08:29:45.321 - Pausing for 30 seconds
+14:30:17  STF 08:30:15.322 - Sending SIG 3 to the java process to generate a javacore
+14:30:17  STF 08:30:15.322 - Running command: kill -3 11789
+14:30:17  STF 08:30:15.322 - Redirecting stderr to /home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/1.LT.kill_3.stderr
+14:30:17  STF 08:30:15.322 - Redirecting stdout to /home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/1.LT.kill_3.stdout
+14:30:17  STF 08:30:15.324 - Pausing for 30 seconds
+14:30:45  STF 08:30:45.324 - Sending SIGABRT (kill -6) to the java process to generate a core
+14:30:45  STF 08:30:45.325 - Running command: kill -6 11789
+14:30:45  STF 08:30:45.325 - Redirecting stderr to /home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/1.LT.kill_6.stderr
+14:30:45  STF 08:30:45.325 - Redirecting stdout to /home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/1.LT.kill_6.stdout
+14:30:45  STF 08:30:45.327 - Pausing for 30 seconds
+14:31:19  STF 08:31:15.327 - Sending SIGXCPU (kill -24) to the java process to generate an OS dump
+14:31:19  STF 08:31:15.328 - Running command: kill -24 11789
+14:31:19  STF 08:31:15.329 - Redirecting stderr to /home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/1.LT.kill_24.stderr
+14:31:19  STF 08:31:15.329 - Redirecting stdout to /home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/1.LT.kill_24.stdout
+14:31:19  LT  08:29:17.897 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:31:19  LT  08:29:20.001 - **POSSIBLE HANG DETECTED**
+14:31:19  LT  08:29:25.008 - **POSSIBLE HANG DETECTED**
+14:31:19  LT  08:29:30.015 - **POSSIBLE HANG DETECTED**
+14:31:19  LT  08:29:35.023 - **POSSIBLE HANG DETECTED**
+14:31:19  LT  08:29:37.827 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:31:19  LT  08:29:40.031 - **POSSIBLE HANG DETECTED**
+14:31:19  LT  08:29:45.038 - **POSSIBLE HANG DETECTED**
+14:31:19  LT  08:29:50.039 - **POSSIBLE HANG DETECTED**
+14:31:19  LT  08:29:55.046 - **POSSIBLE HANG DETECTED**
+14:31:19  LT  08:29:57.850 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:31:19  LT  08:30:00.053 - **POSSIBLE HANG DETECTED**
+14:31:19  LT  08:30:05.060 - **POSSIBLE HANG DETECTED**
+14:31:19  LT  08:30:10.066 - **POSSIBLE HANG DETECTED**
+14:31:19  LT  08:30:15.073 - **POSSIBLE HANG DETECTED**
+14:31:19  LT  08:30:17.801 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:31:19  LT  08:30:20.104 - **POSSIBLE HANG DETECTED**
+14:31:19  LT  08:30:25.112 - **POSSIBLE HANG DETECTED**
+14:31:19  LT  08:30:30.119 - **POSSIBLE HANG DETECTED**
+14:31:19  LT  08:30:35.126 - **POSSIBLE HANG DETECTED**
+14:31:19  LT  08:30:37.830 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:31:19  LT  08:30:40.133 - **POSSIBLE HANG DETECTED**
+14:31:19  LT  08:30:45.141 - **POSSIBLE HANG DETECTED**
+14:31:19  LT  08:30:50.150 - **POSSIBLE HANG DETECTED**
+14:31:19  LT  08:30:55.158 - **POSSIBLE HANG DETECTED**
+14:31:19  LT  08:30:57.871 - Completed 100.0%. Number of tests started=53557 (+0) (with 1 failure(s))
+14:31:19  LT  08:31:00.174 - **POSSIBLE HANG DETECTED**
+14:31:19  LT  stderr JVMDUMP039I Processing dump event "user", detail "" at 2021/02/14 08:29:15 - please wait.
+14:31:19  LT  stderr JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/javacore.20210214.082915.11789.0001.txt' in response to an event
+14:31:19  LT  stderr JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/javacore.20210214.082915.11789.0001.txt
+14:31:19  LT  stderr JVMDUMP013I Processed dump event "user", detail "".
+14:31:19  LT  stderr JVMDUMP039I Processing dump event "user", detail "" at 2021/02/14 08:29:45 - please wait.
+14:31:19  LT  stderr JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/javacore.20210214.082945.11789.0002.txt' in response to an event
+14:31:19  LT  stderr JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/javacore.20210214.082945.11789.0002.txt
+14:31:19  LT  stderr JVMDUMP013I Processed dump event "user", detail "".
+14:31:19  LT  stderr JVMDUMP039I Processing dump event "user", detail "" at 2021/02/14 08:30:15 - please wait.
+14:31:19  LT  stderr JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/javacore.20210214.083015.11789.0003.txt' in response to an event
+14:31:19  LT  stderr JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/javacore.20210214.083015.11789.0003.txt
+14:31:19  LT  stderr JVMDUMP013I Processed dump event "user", detail "".
+14:31:19  LT  stderr JVMDUMP039I Processing dump event "abort", detail "" at 2021/02/14 08:30:45 - please wait.
+14:31:19  LT  stderr JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/core.20210214.083045.11789.0004.dmp' in response to an event
+14:31:19  LT  stderr JVMDUMP010I System dump written to /home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/core.20210214.083045.11789.0004.dmp
+14:31:19  LT  stderr JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/javacore.20210214.083045.11789.0005.txt' in response to an event
+14:31:19  LT  stderr JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/javacore.20210214.083045.11789.0005.txt
+14:31:19  LT  stderr JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/Snap.20210214.083045.11789.0006.trc' in response to an event
+14:31:19  LT  stderr JVMDUMP010I Snap dump written to /home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/Snap.20210214.083045.11789.0006.trc
+14:31:19  LT  stderr JVMDUMP032I JVM requested JIT dump using '/home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/jitdump.20210214.083045.11789.0007.dmp' in response to an event
+14:31:19  LT  stderr JVMDUMP010I JIT dump written to /home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/results/jitdump.20210214.083045.11789.0007.dmp
+14:31:19  LT  stderr JVMDUMP013I Processed dump event "abort", detail "".
+14:31:19  STF 08:31:15.331 - Monitoring Report Summary:
+14:31:19  STF 08:31:15.332 -   o Process LT  has hung
+14:31:19  STF 08:31:15.332 - Killing processes: LT 
+14:31:19  STF 08:31:15.333 -   o Process LT  pid 11789 is not running
+14:31:19  **FAILED** at step 1 (Run mixed unit tests). Expected return value=0 Actual=1 at /home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/../TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/execute.pl line 96.
+14:31:19  STF 08:31:15.560 - **FAILED** execute script failed. Expected return value=0 Actual=1
+14:31:19  STF 08:31:15.560 - 
+14:31:19  STF 08:31:15.560 - ====================   T E A R D O W N   ====================
+14:31:19  STF 08:31:15.560 - Running teardown: perl /home/jenkins/workspace/Test_openjdk17_j9_extended.system_x86-64_linux/openjdk-tests/TKG/../TKG/output_16133080911379/MiniMix_5m_0/20210214-080848-MixedLoadTest/tearDown.pl
+14:31:19  STF 08:31:15.605 - TEARDOWN stage completed
+14:31:19  STF 08:31:15.609 - 
+14:31:19  STF 08:31:15.609 - =====================   R E S U L T S   =====================
+14:31:19  STF 08:31:15.609 - Stage results:
+14:31:19  STF 08:31:15.609 -   setUp:     pass
+14:31:19  STF 08:31:15.609 -   execute:  *fail*
+14:31:19  STF 08:31:15.609 -   teardown:  pass
+14:31:19  STF 08:31:15.609 - 
+14:31:19  STF 08:31:15.609 - Overall result: **FAILED**
+14:31:19  
+14:31:19  MiniMix_5m_0_FAILED
+```
+To rerun the test: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=17&JDK_IMPL=openj9&JDK_VENDOR=adoptopenjdk&BUILD_LIST=system&PLATFORM=x86-64_linux&TARGET=MiniMix_5m_0

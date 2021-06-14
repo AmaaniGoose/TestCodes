@@ -1,0 +1,703 @@
+sun/security/krb5/auto/rcache_usemd5.sh.rcache_usemd5
+Works with Hotspot, fails with OpenJ9:
+```
+17:01:10  openjdk version "11.0.11" 2021-04-20
+17:01:10  OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.11+5)
+17:01:10  Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.26.0-m1, JRE 11 Linux s390x-64-Bit Compressed References 20210309_909 (JIT enabled, AOT enabled)
+17:01:10  OpenJ9   - b227feba2
+17:01:10  OMR      - 4665e2f72
+17:01:10  JCL      - 73ab98c885 based on jdk-11.0.11+5)
+```
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_extended.openjdk_s390x_linux/14/consoleFull
+```
+18:37:37  Start KDC on 10238
+18:37:37  PROC: Nsanity cmdline: [/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/java, --add-exports=java.base/jdk.internal.misc=ALL-UNNAMED, --add-exports=java.base/sun.security.util=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.jgss=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.jgss.krb5=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5=ALL-UNNAMED, --add-opens=java.security.jgss/sun.security.krb5=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED, --add-opens=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.ccache=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.rcache=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.crypto=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.ktab=ALL-UNNAMED, -ea, -esa, -Xmx512m, -XX:-UseCompressedOops, -cp, /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/sun/security/krb5/auto/rcache_usemd5.d:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/test/lib:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/security/krb5/auto:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib, -Djdk.net.hosts.file=TestHosts, -Dsun.security.jgss.native=true, -Dsun.security.nativegss.debug=true, -Djavax.security.auth.useSubjectCredsOnly=false, ReplayCacheTestProc, Nsanity]
+18:37:37  KRB5_KTNAME=localkdc.ktab KRB5_CONFIG=localkdc-krb5.conf KRB5RCACHEDIR=/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/scratch/1 /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/java --add-exports=java.base/jdk.internal.misc=ALL-UNNAMED --add-exports=java.base/sun.security.util=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.jgss=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.jgss.krb5=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-opens=java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED --add-opens=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.ccache=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.rcache=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.crypto=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.ktab=ALL-UNNAMED -ea -esa -Xmx512m -XX:-UseCompressedOops -cp /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/sun/security/krb5/auto/rcache_usemd5.d:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/test/lib:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/security/krb5/auto:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib -Djdk.net.hosts.file=TestHosts -Dsun.security.jgss.native=true -Dsun.security.nativegss.debug=true -Djavax.security.auth.useSubjectCredsOnly=false ReplayCacheTestProc Nsanity 
+18:37:37  PROC: Nsanity readline: [GSSLibStub:68] [GSSLibStub_init] libName=libgssapi.so
+18:37:37  PROC: Nsanity readline: [GSSLibStub:110] libgssapi.so: cannot open shared object file: No such file or directory
+18:37:37  PROC: Nsanity readline: [GSSLibStub:68] [GSSLibStub_init] libName=libgssapi_krb5.so
+18:37:37  PROC: Nsanity readline: [GSSLibStub:110] libgssapi_krb5.so: cannot open shared object file: No such file or directory
+18:37:37  PROC: Nsanity readline: [GSSLibStub:68] [GSSLibStub_init] libName=libgssapi_krb5.so.2
+18:37:37  PROC: Nsanity readline: SunNativeGSS: Loaded GSS library: libgssapi_krb5.so.2
+18:37:37  PROC: Nsanity readline: SunNativeGSS: Native MF for 1.2.840.113554.1.2.2
+18:37:37  PROC: Nsanity readline: SunNativeGSS: Native MF for 1.3.5.1.5.2
+18:37:37  PROC: Nsanity readline: SunNativeGSS: Native MF for 1.2.840.48018.1.2.2
+18:37:37  PROC: Nsanity readline: SunNativeGSS: Native MF for 1.3.6.1.5.2.5
+18:37:37  PROC: Nsanity readline: SunNativeGSS: Native MF for 1.3.6.1.5.5.2
+18:37:37  PROC: Nsanity readline: SunNativeGSS: Created GSSLibStub for mech 1.2.840.113554.1.2.2
+18:37:37  PROC: Nsanity readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Nsanity readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=0, usage=2
+18:37:37  PROC: Nsanity readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4396706979760
+18:37:37  PROC: Nsanity readline: <EOF>
+18:37:37  PROC: C cmdline: [/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/java, --add-exports=java.base/jdk.internal.misc=ALL-UNNAMED, --add-exports=java.base/sun.security.util=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.jgss=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.jgss.krb5=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5=ALL-UNNAMED, --add-opens=java.security.jgss/sun.security.krb5=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED, --add-opens=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.ccache=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.rcache=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.crypto=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.ktab=ALL-UNNAMED, -ea, -esa, -Xmx512m, -XX:-UseCompressedOops, -cp, /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/sun/security/krb5/auto/rcache_usemd5.d:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/test/lib:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/security/krb5/auto:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib, -Djdk.net.hosts.file=TestHosts, ReplayCacheTestProc, initiator]
+18:37:37  /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/java --add-exports=java.base/jdk.internal.misc=ALL-UNNAMED --add-exports=java.base/sun.security.util=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.jgss=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.jgss.krb5=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-opens=java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED --add-opens=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.ccache=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.rcache=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.crypto=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.ktab=ALL-UNNAMED -ea -esa -Xmx512m -XX:-UseCompressedOops -cp /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/sun/security/krb5/auto/rcache_usemd5.d:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/test/lib:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/security/krb5/auto:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib -Djdk.net.hosts.file=TestHosts ReplayCacheTestProc initiator 
+18:37:37  PROC: Ja cmdline: [/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/java, --add-exports=java.base/jdk.internal.misc=ALL-UNNAMED, --add-exports=java.base/sun.security.util=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.jgss=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.jgss.krb5=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5=ALL-UNNAMED, --add-opens=java.security.jgss/sun.security.krb5=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED, --add-opens=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.ccache=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.rcache=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.crypto=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.ktab=ALL-UNNAMED, -ea, -esa, -Xmx512m, -XX:-UseCompressedOops, -cp, /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/sun/security/krb5/auto/rcache_usemd5.d:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/test/lib:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/security/krb5/auto:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib, -Dsun.security.krb5.rcache=dfl, -Djava.io.tmpdir=/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/scratch/1, -Djdk.net.hosts.file=TestHosts, -Djdk.krb5.rcache.useMD5=true, ReplayCacheTestProc, Ja]
+18:37:37  /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/java --add-exports=java.base/jdk.internal.misc=ALL-UNNAMED --add-exports=java.base/sun.security.util=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.jgss=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.jgss.krb5=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-opens=java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED --add-opens=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.ccache=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.rcache=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.crypto=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.ktab=ALL-UNNAMED -ea -esa -Xmx512m -XX:-UseCompressedOops -cp /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/sun/security/krb5/auto/rcache_usemd5.d:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/test/lib:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/security/krb5/auto:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib -Dsun.security.krb5.rcache=dfl -Djava.io.tmpdir=/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/scratch/1 -Djdk.net.hosts.file=TestHosts -Djdk.krb5.rcache.useMD5=true ReplayCacheTestProc Ja 
+18:37:37  PROC: Jb cmdline: [/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/java, --add-exports=java.base/jdk.internal.misc=ALL-UNNAMED, --add-exports=java.base/sun.security.util=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.jgss=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.jgss.krb5=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5=ALL-UNNAMED, --add-opens=java.security.jgss/sun.security.krb5=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED, --add-opens=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.ccache=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.rcache=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.crypto=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.ktab=ALL-UNNAMED, -ea, -esa, -Xmx512m, -XX:-UseCompressedOops, -cp, /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/sun/security/krb5/auto/rcache_usemd5.d:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/test/lib:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/security/krb5/auto:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib, -Dsun.security.krb5.rcache=dfl, -Djava.io.tmpdir=/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/scratch/1, -Djdk.net.hosts.file=TestHosts, -Djdk.krb5.rcache.useMD5=true, ReplayCacheTestProc, Jb]
+18:37:37  /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/java --add-exports=java.base/jdk.internal.misc=ALL-UNNAMED --add-exports=java.base/sun.security.util=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.jgss=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.jgss.krb5=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-opens=java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED --add-opens=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.ccache=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.rcache=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.crypto=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.ktab=ALL-UNNAMED -ea -esa -Xmx512m -XX:-UseCompressedOops -cp /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/sun/security/krb5/auto/rcache_usemd5.d:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/test/lib:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/security/krb5/auto:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib -Dsun.security.krb5.rcache=dfl -Djava.io.tmpdir=/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/scratch/1 -Djdk.net.hosts.file=TestHosts -Djdk.krb5.rcache.useMD5=true ReplayCacheTestProc Jb 
+18:37:37  PROC: Na cmdline: [/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/java, --add-exports=java.base/jdk.internal.misc=ALL-UNNAMED, --add-exports=java.base/sun.security.util=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.jgss=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.jgss.krb5=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5=ALL-UNNAMED, --add-opens=java.security.jgss/sun.security.krb5=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED, --add-opens=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.ccache=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.rcache=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.crypto=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.ktab=ALL-UNNAMED, -ea, -esa, -Xmx512m, -XX:-UseCompressedOops, -cp, /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/sun/security/krb5/auto/rcache_usemd5.d:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/test/lib:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/security/krb5/auto:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib, -Djdk.net.hosts.file=TestHosts, -Dsun.security.jgss.native=true, -Dsun.security.nativegss.debug=true, -Djavax.security.auth.useSubjectCredsOnly=false, ReplayCacheTestProc, Na]
+18:37:37  KRB5_KTNAME=localkdc.ktab KRB5_CONFIG=localkdc-krb5.conf KRB5RCACHEDIR=/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/scratch/1 /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/java --add-exports=java.base/jdk.internal.misc=ALL-UNNAMED --add-exports=java.base/sun.security.util=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.jgss=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.jgss.krb5=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-opens=java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED --add-opens=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.ccache=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.rcache=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.crypto=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.ktab=ALL-UNNAMED -ea -esa -Xmx512m -XX:-UseCompressedOops -cp /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/sun/security/krb5/auto/rcache_usemd5.d:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/test/lib:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/security/krb5/auto:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib -Djdk.net.hosts.file=TestHosts -Dsun.security.jgss.native=true -Dsun.security.nativegss.debug=true -Djavax.security.auth.useSubjectCredsOnly=false ReplayCacheTestProc Na 
+18:37:37  PROC: Nb cmdline: [/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/java, --add-exports=java.base/jdk.internal.misc=ALL-UNNAMED, --add-exports=java.base/sun.security.util=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.jgss=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.jgss.krb5=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5=ALL-UNNAMED, --add-opens=java.security.jgss/sun.security.krb5=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED, --add-opens=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.ccache=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.rcache=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.crypto=ALL-UNNAMED, --add-exports=java.security.jgss/sun.security.krb5.internal.ktab=ALL-UNNAMED, -ea, -esa, -Xmx512m, -XX:-UseCompressedOops, -cp, /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/sun/security/krb5/auto/rcache_usemd5.d:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/test/lib:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/security/krb5/auto:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib, -Djdk.net.hosts.file=TestHosts, -Dsun.security.jgss.native=true, -Dsun.security.nativegss.debug=true, -Djavax.security.auth.useSubjectCredsOnly=false, ReplayCacheTestProc, Nb]
+18:37:37  KRB5_KTNAME=localkdc.ktab KRB5_CONFIG=localkdc-krb5.conf KRB5RCACHEDIR=/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/scratch/1 /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/java --add-exports=java.base/jdk.internal.misc=ALL-UNNAMED --add-exports=java.base/sun.security.util=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.jgss=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.jgss.krb5=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-opens=java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED --add-opens=java.security.jgss/sun.security.krb5.internal=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.ccache=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.rcache=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.crypto=ALL-UNNAMED --add-exports=java.security.jgss/sun.security.krb5.internal.ktab=ALL-UNNAMED -ea -esa -Xmx512m -XX:-UseCompressedOops -cp /home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/sun/security/krb5/auto/rcache_usemd5.d:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16153093836725/jdk_security4_1/work/classes/1/test/lib:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/sun/security/krb5/auto:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/security/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/lib -Djdk.net.hosts.file=TestHosts -Dsun.security.jgss.native=true -Dsun.security.nativegss.debug=true -Djavax.security.auth.useSubjectCredsOnly=false ReplayCacheTestProc Nb 
+18:37:37  PROC: C println: client1 host2/localhost
+18:37:37  -----------------------------------------------
+18:37:37  >>>>> UDP packet received
+18:37:37  RABBIT.HOLE> client1@RABBIT.HOLE sends AS-REQ for krbtgt/RABBIT.HOLE@RABBIT.HOLE, KDCOptions: 
+18:37:37  KrbException: Additional pre-authentication required (25)
+18:37:37  	at KDC.processAsReq(KDC.java:1294)
+18:37:37  	at KDC.processMessage(KDC.java:772)
+18:37:37  	at KDC$1.run(KDC.java:1524)
+18:37:37       Error 25 Additional pre-authentication required
+18:37:37  >>>>> UDP request honored
+18:37:37  -----------------------------------------------
+18:37:37  >>>>> UDP packet received
+18:37:37  RABBIT.HOLE> client1@RABBIT.HOLE sends AS-REQ for krbtgt/RABBIT.HOLE@RABBIT.HOLE, KDCOptions: 
+18:37:37       Return client1@RABBIT.HOLE ticket for krbtgt/RABBIT.HOLE@RABBIT.HOLE, flags INITIAL;PRE-AUTHENT
+18:37:37  >>>>> UDP request honored
+18:37:37  PROC: C readline: client1 call initSecContext
+18:37:37  -----------------------------------------------
+18:37:37  >>>>> UDP packet received
+18:37:37  RABBIT.HOLE> null sends TGS-REQ for host2/localhost@RABBIT.HOLE, KDCOptions: CANONICALIZE,
+18:37:37  RABBIT.HOLE> verifying referral for host2/localhost
+18:37:37  RABBIT.HOLE> presenting a ticket of client1@RABBIT.HOLE to krbtgt/RABBIT.HOLE@RABBIT.HOLE
+18:37:37       Return client1@RABBIT.HOLE ticket for host2/localhost@RABBIT.HOLE, flags INITIAL
+18:37:37  >>>>> UDP request honored
+18:37:37  PROC: C readline: PROCISFUN:YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QyGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs6A94P+KZ80xafPYmVBUaAFsAkC5m0frSIm4PnB0+nOVX7Eh/z++vQ5AUGMNNtqWvS9ax70SIRSU3hDSbH+iNL7SfzO4focqLY4flB7gIscUVC+o3HwLn+TczoZeS7suW1aRIBju7hzomsAp3ilIAW8GOgIb2uAXmy2gys75LhUAGLvLOqTfA7aUPwjJpFpLk1hyHmimiEbMgNyUOsc9XWY+4QLuRN1rYRIEg0TcKWiU+vZdpIHAMIG9oAMCARGigbUEgbJqtf1IPD4Wwsf8NltjVmYkV5jWUoBkKahAAqNdIy3Ysb1WkhJM/SQICr0YKaznXB1lbPwGoeatoHikQIXqWNwNQNC2Jj/Yp2aBbjdzJ0sbbgxa3ANMa8D/+mcEkO6dU0Xfgbrwr2sK2e5bZQKlGZuokM1cvK36twY1oHAFvZdW6Euftbaza7OkSacA1iNgP4hWebvmiskWFT5fqAkUaXcOc//yvX9asXmco/tR0DQbuXZK
+18:37:37  PROC: C println: client2 host2/localhost
+18:37:37  -----------------------------------------------
+18:37:37  >>>>> UDP packet received
+18:37:37  RABBIT.HOLE> client2@RABBIT.HOLE sends AS-REQ for krbtgt/RABBIT.HOLE@RABBIT.HOLE, KDCOptions: 
+18:37:37  KrbException: Additional pre-authentication required (25)
+18:37:37  	at KDC.processAsReq(KDC.java:1294)
+18:37:37  	at KDC.processMessage(KDC.java:772)
+18:37:37  	at KDC$1.run(KDC.java:1524)
+18:37:37       Error 25 Additional pre-authentication required
+18:37:37  >>>>> UDP request honored
+18:37:37  -----------------------------------------------
+18:37:37  >>>>> UDP packet received
+18:37:37  RABBIT.HOLE> client2@RABBIT.HOLE sends AS-REQ for krbtgt/RABBIT.HOLE@RABBIT.HOLE, KDCOptions: 
+18:37:37       Return client2@RABBIT.HOLE ticket for krbtgt/RABBIT.HOLE@RABBIT.HOLE, flags INITIAL;PRE-AUTHENT
+18:37:37  >>>>> UDP request honored
+18:37:37  PROC: C readline: client2 call initSecContext
+18:37:37  -----------------------------------------------
+18:37:37  >>>>> UDP packet received
+18:37:37  RABBIT.HOLE> null sends TGS-REQ for host2/localhost@RABBIT.HOLE, KDCOptions: CANONICALIZE,
+18:37:37  RABBIT.HOLE> verifying referral for host2/localhost
+18:37:37  RABBIT.HOLE> presenting a ticket of client2@RABBIT.HOLE to krbtgt/RABBIT.HOLE@RABBIT.HOLE
+18:37:37       Return client2@RABBIT.HOLE ticket for host2/localhost@RABBIT.HOLE, flags INITIAL
+18:37:37  >>>>> UDP request honored
+18:37:37  PROC: C readline: PROCISFUN:YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QyGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs1VyeudqGh6SIu7Gf9ReiRj4d1/EjRBoraQajNPdjf93Pxx+hkH2sx+w+HtuqL+YwKLJqCYHhIwG/jAsawJLSzux7BxxIoOatOC2ztlpDFbWqC5YHsg/0DLtAlsf/4D2DsqGWZLNgUiduYcBOAXK2lb8IY5eSKszJuMnRy4CadHNs4jitkQv7QQ0ozWu38n6M/IfTN6r3fh4RPN8k3ZpIh+uVXl5AOLhqozUPqfOHSjKicGxpIHAMIG9oAMCARGigbUEgbI28ikLsbuhuSmjYueIAnLoqODU0ZvO4/OhBPc/UPoDrrSdOH3qVOcoZHn8G1KNnFq4DcqD5SMVRRd5uhYpJsj0oweYcQ1LzNjo1Y5AFFkh4wbyYGl/t5xEKM02YsrMUK1Or5JyZQsCus9X8U/7TRYpdL2l/yk8EtDDsSBC1W6grTozc7ppIAf/Esf8OMAdhkyuvTMTVbJOgHfuNJKz9EHABZcJusWG1LWPceKdp8Csn9V8
+18:37:37  PROC: C println: client1 host0/localhost
+18:37:37  -----------------------------------------------
+18:37:37  >>>>> UDP packet received
+18:37:37  RABBIT.HOLE> client1@RABBIT.HOLE sends AS-REQ for krbtgt/RABBIT.HOLE@RABBIT.HOLE, KDCOptions: 
+18:37:37  KrbException: Additional pre-authentication required (25)
+18:37:37  	at KDC.processAsReq(KDC.java:1294)
+18:37:37  	at KDC.processMessage(KDC.java:772)
+18:37:37  	at KDC$1.run(KDC.java:1524)
+18:37:37       Error 25 Additional pre-authentication required
+18:37:37  >>>>> UDP request honored
+18:37:37  -----------------------------------------------
+18:37:37  >>>>> UDP packet received
+18:37:37  RABBIT.HOLE> client1@RABBIT.HOLE sends AS-REQ for krbtgt/RABBIT.HOLE@RABBIT.HOLE, KDCOptions: 
+18:37:37       Return client1@RABBIT.HOLE ticket for krbtgt/RABBIT.HOLE@RABBIT.HOLE, flags INITIAL;PRE-AUTHENT
+18:37:37  >>>>> UDP request honored
+18:37:37  PROC: C readline: client1 call initSecContext
+18:37:37  -----------------------------------------------
+18:37:37  >>>>> UDP packet received
+18:37:37  RABBIT.HOLE> null sends TGS-REQ for host0/localhost@RABBIT.HOLE, KDCOptions: CANONICALIZE,
+18:37:37  RABBIT.HOLE> verifying referral for host0/localhost
+18:37:37  RABBIT.HOLE> presenting a ticket of client1@RABBIT.HOLE to krbtgt/RABBIT.HOLE@RABBIT.HOLE
+18:37:37       Return client1@RABBIT.HOLE ticket for host0/localhost@RABBIT.HOLE, flags INITIAL
+18:37:37  >>>>> UDP request honored
+18:37:37  PROC: C readline: PROCISFUN:YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QwGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs1PYaLQ7pblgu+xZ+r39VMrvSqQP4636enj82GNWCDYs/WsL1nVacSWtXpNt5VzIvaORAG/TGwsK2Ikk8FrgsnIiXSKUGWbNdTtTt04vGnKMaErjQNpFVNdmNEMGf6FDExW7Mo6KLCXLP8udQYo25L4j1IsC1XkLscgKnbNtBXNVg0iaTyvQCLnRaNpoJDgXYiJqMnmYgw/cL4qTeJNob2pRENkd6vRl3EytyJfxLS5+d/mdpIHAMIG9oAMCARGigbUEgbK71UggPdYn9otdmBuKaN8g//h55pcgaJfZydU55zZHlwEDkDi2u6yorwIvV+d5Un1xjztMFoyroErmLE29QzyvfE44n17uj0Do1uNQg8f/MUdCOTrP2j9k6pF/kwKjwMCvUSjEx/rF1NLA6Y+L3Z0yPmvUvru26EgLmR3fZJGDdAwjux487XkNGlquxX3QCvR09Nk1zSw9uw6LQODWtEMz1boFO6yM3b9dBa2iZBs91ZKS
+18:37:37  PROC: C println: client4 host3/localhost
+18:37:37  -----------------------------------------------
+18:37:37  >>>>> UDP packet received
+18:37:37  RABBIT.HOLE> client4@RABBIT.HOLE sends AS-REQ for krbtgt/RABBIT.HOLE@RABBIT.HOLE, KDCOptions: 
+18:37:37  KrbException: Additional pre-authentication required (25)
+18:37:37  	at KDC.processAsReq(KDC.java:1294)
+18:37:37  	at KDC.processMessage(KDC.java:772)
+18:37:37  	at KDC$1.run(KDC.java:1524)
+18:37:37       Error 25 Additional pre-authentication required
+18:37:37  >>>>> UDP request honored
+18:37:37  -----------------------------------------------
+18:37:37  >>>>> UDP packet received
+18:37:37  RABBIT.HOLE> client4@RABBIT.HOLE sends AS-REQ for krbtgt/RABBIT.HOLE@RABBIT.HOLE, KDCOptions: 
+18:37:37       Return client4@RABBIT.HOLE ticket for krbtgt/RABBIT.HOLE@RABBIT.HOLE, flags INITIAL;PRE-AUTHENT
+18:37:37  >>>>> UDP request honored
+18:37:37  PROC: C readline: client4 call initSecContext
+18:37:37  -----------------------------------------------
+18:37:37  >>>>> UDP packet received
+18:37:37  RABBIT.HOLE
+18:37:37  
+18:37:37  ...
+18:37:37  Output overflow:
+18:37:37  JT Harness has limited the test output to the text
+18:37:37  at the beginning and the end, so that you can see how the
+18:37:37  test began, and how it completed.
+18:37:37  
+18:37:37  If you need to see more of the output from the test,
+18:37:37  set the system property javatest.maxOutputSize to a higher
+18:37:37  value. The current value is 100000
+18:37:37  ...
+18:37:37  
+18:37:37  
+18:37:37  PROC: Na println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QxGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs3nFkXO43hrtRDuI61db6xChq7SRmoSaqkTk+d/+wgtfe1Lp10ZaIRuUHvcWLBjKawgzxWa6fobwqvqP/fvzcAvA57r0b1muLtJECbG/923G7YplfsoBsuoXxh4HwGdfBSGsFo1ks3AejMa9gBHtb7REqvX+VF0gJ9+JwR/LT23puKkS62+i2YeI4lgl5fhDmwDteQaLj/VY6f+eCg7Jmt5R57OpwNCZ8c141Hr4i7VPPDd5pIHAMIG9oAMCARGigbUEgbKx+wESXOa6NERUpfvDCGengHhjMxkbZ905d9lMP1MGxFGeJcJGQeyi0oIceG3QG6Rxh0Yq2EOpV+5sTW7ChY8bkK/VSYQBJay5U97pFhiyc11HnCZZASeZCwO2xIzgF1KORxamIH+8m7n3XGb19xqqf8cvxgjE0yFPxJep4OM5bB+HkjJAUWAHUvHiCY91hQelJu773/RZGHPRhdwh+La9oPZRhesYXqoJT2uhlRDOw1FW
+18:37:37  PROC: Na readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Na readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=0, usage=2
+18:37:37  PROC: Na readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395833379824
+18:37:37  PROC: Na readline: * call acceptSecContext
+18:37:37  PROC: Na readline: SunNativeGSS: Precomputed mechToken length: 480
+18:37:37  PROC: Na readline: SunNativeGSS: Complete Token length: 495
+18:37:37  PROC: Na readline: SunNativeGSS: acceptSecContext=> inToken len=495
+18:37:37  PROC: Na readline: [GSSLibStub:1017] [GSSLibStub_acceptContext]
+18:37:37  PROC: Na readline: [GSSLibStub:1037] [GSSLibStub_acceptContext] before: pCred=4395833379824, pContext=0
+18:37:37  PROC: Na readline: [GSSLibStub:1054] [GSSLibStub_acceptContext] after: pCred=4395833379824, pContext=0, pDelegCred=0
+18:37:37  PROC: Na readline: SunNativeGSS: acceptSecContext=> outToken len=106
+18:37:37  PROC: Na readline: [GSSLibStub:1282] [GSSLibStub_getContextName] 0, isSrc=0
+18:37:37  PROC: Na readline: [GSSLibStub:535] [GSSLibStub_inquireContextAll] Status major/minor = 1080000/0
+18:37:37  PROC: Na readline: [GSSLibStub:537] c/r/s = 1/8/0 
+18:37:37  PROC: Na readline: PROCISFUN:false
+18:37:37  PROC: Na println: TEST
+18:37:37  PROC: Na println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QwGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs5nrgj7sF0pWD/5lmIXsXjgcF06LS3BxDH/yv3utx02tfs1C3/zgc7nEqWMKK1FqCZrZxTYKvC+XdAiHN3lRfQRxNUmDkEHAe96+hbO9mMYxKddJxC6NqaDwmDM6a08Omr7EUzc40F6VmiZj3k5pUeyIByJIoHXOtVV81HwxyBDRiomgbb1hv4V2TZ5EHZtiIdUChcCgU+Y7QUY1JG8Mvu6r5j5FjcXysKznZUcspxO89mslpIHAMIG9oAMCARGigbUEgbLnQCoUx2DQDhkZiGL6Aory+TiHsGSsswq/zzwKhtqxtGK4RAoOP6/JGE/t9atKcacD0542Zdxi3bRPde1UKERhAuJ93pgJxZ5KmiZmOYZ2Jm/LGtbo2N8eTug/VDEPO3pbFeU+R2VLeWib3x4HIiY1Mvl59h+s/HHjHgZqsWEJTnCEYSklR+Pjczccg4T9Hg/7fo3Eg3IK9wwWcs/crIFw9nCU926gNW6J3jEzhCrWj6OR
+18:37:37  PROC: Na readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Na readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=0, usage=2
+18:37:37  PROC: Na readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395834674976
+18:37:37  PROC: Na readline: * call acceptSecContext
+18:37:37  PROC: Na readline: SunNativeGSS: Precomputed mechToken length: 480
+18:37:37  PROC: Na readline: SunNativeGSS: Complete Token length: 495
+18:37:37  PROC: Na readline: SunNativeGSS: acceptSecContext=> inToken len=495
+18:37:37  PROC: Na readline: [GSSLibStub:1017] [GSSLibStub_acceptContext]
+18:37:37  PROC: Na readline: [GSSLibStub:1037] [GSSLibStub_acceptContext] before: pCred=4395834674976, pContext=0
+18:37:37  PROC: Na readline: [GSSLibStub:1054] [GSSLibStub_acceptContext] after: pCred=4395834674976, pContext=4395834353872, pDelegCred=0
+18:37:37  PROC: Na readline: [GSSLibStub:1062] [GSSLibStub_acceptContext] set pContext=4395834353872
+18:37:37  PROC: Na readline: [GSSLibStub:1072] [GSSLibStub_acceptContext] set flags=0x1be
+18:37:37  PROC: Na readline: [GSSLibStub:569] [GSSLibStub_displayName] 4395834750272
+18:37:37  PROC: Na readline: [GSSLibStub:1108] [GSSLibStub_acceptContext] set srcName=4395834750272
+18:37:37  PROC: Na readline: [GSSLibStub:1117] [GSSLibStub_acceptContext] context established
+18:37:37  PROC: Na readline: SunNativeGSS: acceptSecContext=> outToken len=138
+18:37:37  PROC: Na readline: [GSSLibStub:1282] [GSSLibStub_getContextName] 4395834353872, isSrc=0
+18:37:37  PROC: Na readline: [GSSLibStub:1299] [GSSLibStub_getContextName] pName=4395834764304
+18:37:37  PROC: Na readline: [GSSLibStub:569] [GSSLibStub_displayName] 4395834764304
+18:37:37  PROC: Na readline: [GSSLibStub:674] [GSSLibStub_releaseCred] 4395834674976
+18:37:37  PROC: Na readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Na readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=4395834764304, usage=2
+18:37:37  PROC: Na readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395834674976
+18:37:37  PROC: Na readline: PROCISFUN:true
+18:37:37  PROC: Nb println: TEST
+18:37:37  PROC: Nb println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QwGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs+b/aE9v85xMgC0v2xf1VeIKq7c6N9Bd1upW4joZyGRzt5FD1upICzT0nE5YG78CV8AmQSgDA8c9ViZCOdt8heU5l9FzV5ba4mM69CNChJpppT6jS4nXBffhP3IJpdL/qoRW6L6eS+7earOpvGAwpb44xWI+ued8knG4BeEbpCwYV1lHjdCVMSeT6QqKmB/U8mTZRsqdwh/CbPG5AGWno5GZxPA2mJa+rWIQKnul5wnuQspXpIHAMIG9oAMCARGigbUEgbJN8O+fPTpFTg/9MKHD7150xJyF6Dw0vRQ7IUKBgLwyJ6cg4row8S6EaCtsKdXqQ58BHv5du8x6weRgXhu+0C/RQG6ndBCiPwrulOSwR14pQ0cnN1yxLnyaI/agA4+yyVo+TZlBcWzuTkEvEt8J43oecP1ASUsDSLPFCLJ6Fdzy8bORfwwHavstck/fPo83Eacl2+lXmg1rvasFH+gR9CtpKvTC5SQSWe5p1WCNl56Oukk8
+18:37:37  PROC: Nb readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Nb readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=0, usage=2
+18:37:37  PROC: Nb readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395834845984
+18:37:37  PROC: Nb readline: * call acceptSecContext
+18:37:37  PROC: Nb readline: SunNativeGSS: Precomputed mechToken length: 480
+18:37:37  PROC: Nb readline: SunNativeGSS: Complete Token length: 495
+18:37:37  PROC: Nb readline: SunNativeGSS: acceptSecContext=> inToken len=495
+18:37:37  PROC: Nb readline: [GSSLibStub:1017] [GSSLibStub_acceptContext]
+18:37:37  PROC: Nb readline: [GSSLibStub:1037] [GSSLibStub_acceptContext] before: pCred=4395834845984, pContext=0
+18:37:37  PROC: Nb readline: [GSSLibStub:1054] [GSSLibStub_acceptContext] after: pCred=4395834845984, pContext=4395834735120, pDelegCred=0
+18:37:37  PROC: Nb readline: [GSSLibStub:1062] [GSSLibStub_acceptContext] set pContext=4395834735120
+18:37:37  PROC: Nb readline: [GSSLibStub:1072] [GSSLibStub_acceptContext] set flags=0x1be
+18:37:37  PROC: Nb readline: [GSSLibStub:569] [GSSLibStub_displayName] 4395835014624
+18:37:37  PROC: Nb readline: [GSSLibStub:1108] [GSSLibStub_acceptContext] set srcName=4395835014624
+18:37:37  PROC: Nb readline: [GSSLibStub:1117] [GSSLibStub_acceptContext] context established
+18:37:37  PROC: Nb readline: SunNativeGSS: acceptSecContext=> outToken len=138
+18:37:37  PROC: Nb readline: [GSSLibStub:1282] [GSSLibStub_getContextName] 4395834735120, isSrc=0
+18:37:37  PROC: Nb readline: [GSSLibStub:1299] [GSSLibStub_getContextName] pName=4395834736208
+18:37:37  PROC: Nb readline: [GSSLibStub:569] [GSSLibStub_displayName] 4395834736208
+18:37:37  PROC: Nb readline: [GSSLibStub:674] [GSSLibStub_releaseCred] 4395834845984
+18:37:37  PROC: Nb readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Nb readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=4395834736208, usage=2
+18:37:37  PROC: Nb readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395834845984
+18:37:37  PROC: Nb readline: PROCISFUN:true
+18:37:37  PROC: Nb println: TEST
+18:37:37  PROC: Nb println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QyGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs1VyeudqGh6SIu7Gf9ReiRj4d1/EjRBoraQajNPdjf93Pxx+hkH2sx+w+HtuqL+YwKLJqCYHhIwG/jAsawJLSzux7BxxIoOatOC2ztlpDFbWqC5YHsg/0DLtAlsf/4D2DsqGWZLNgUiduYcBOAXK2lb8IY5eSKszJuMnRy4CadHNs4jitkQv7QQ0ozWu38n6M/IfTN6r3fh4RPN8k3ZpIh+uVXl5AOLhqozUPqfOHSjKicGxpIHAMIG9oAMCARGigbUEgbI28ikLsbuhuSmjYueIAnLoqODU0ZvO4/OhBPc/UPoDrrSdOH3qVOcoZHn8G1KNnFq4DcqD5SMVRRd5uhYpJsj0oweYcQ1LzNjo1Y5AFFkh4wbyYGl/t5xEKM02YsrMUK1Or5JyZQsCus9X8U/7TRYpdL2l/yk8EtDDsSBC1W6grTozc7ppIAf/Esf8OMAdhkyuvTMTVbJOgHfuNJKz9EHABZcJusWG1LWPceKdp8Csn9V8
+18:37:37  PROC: Nb readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Nb readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=0, usage=2
+18:37:37  PROC: Nb readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395834735184
+18:37:37  PROC: Nb readline: * call acceptSecContext
+18:37:37  PROC: Nb readline: SunNativeGSS: Precomputed mechToken length: 480
+18:37:37  PROC: Nb readline: SunNativeGSS: Complete Token length: 495
+18:37:37  PROC: Nb readline: SunNativeGSS: acceptSecContext=> inToken len=495
+18:37:37  PROC: Nb readline: [GSSLibStub:1017] [GSSLibStub_acceptContext]
+18:37:37  PROC: Nb readline: [GSSLibStub:1037] [GSSLibStub_acceptContext] before: pCred=4395834735184, pContext=0
+18:37:37  PROC: Nb readline: [GSSLibStub:1054] [GSSLibStub_acceptContext] after: pCred=4395834735184, pContext=0, pDelegCred=0
+18:37:37  PROC: Nb readline: SunNativeGSS: acceptSecContext=> outToken len=106
+18:37:37  PROC: Nb readline: [GSSLibStub:1282] [GSSLibStub_getContextName] 0, isSrc=0
+18:37:37  PROC: Nb readline: [GSSLibStub:535] [GSSLibStub_inquireContextAll] Status major/minor = 1080000/0
+18:37:37  PROC: Nb readline: [GSSLibStub:537] c/r/s = 1/8/0 
+18:37:37  PROC: Nb readline: PROCISFUN:false
+18:37:37  PROC: Jb println: TEST
+18:37:37  PROC: Jb println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QxGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs8bI76FijKKlxMCQPpGjmbIHjOOGEWRtinbMIpgf8cLOuplAiyLPLwoHUobp1HodUwytfBv4+vhEhm+dADVxjIsPg0efENK5sdjRC2oIYTxGNEMbZDKLsJy4lHDgFjTd1ygzASuj4vJowMEJqT92VqCzRW/Kq2MFTNLBRGCmywsX+KE7dMsGqBjF99rm9zd1UJ3LxQ4UycJCzj0ejmv+IL4I//qh6w8tpQiAVNlGTr72rnKApIHAMIG9oAMCARGigbUEgbJ01EPJDRPDnsEsc12hKVghuWkGH6ZU+4UKVFhOSje7/5c7ZpF6FX6QHXHo95gYXgQVWrWA+uMJ600cn9R5JWrTHoKfooEGxAAsLCu7xT+WBO1vRGS0RskOnPGaOFpuGrYiSNlFrMjdbScP8yoO6WUGNZZArULbvFvAHfaxQmWGLwTZ6By1KhNsXFZzO/q5BxAZiZfXab5C+8k5Pb03iah0HgxvI++r6G0e2WDvjM/ErsyE
+18:37:37  PROC: Jb readline: * call acceptSecContext
+18:37:37  PROC: Jb readline: PROCISFUN:false
+18:37:37  PROC: Jb println: TEST
+18:37:37  PROC: Jb println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QwGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs1PYaLQ7pblgu+xZ+r39VMrvSqQP4636enj82GNWCDYs/WsL1nVacSWtXpNt5VzIvaORAG/TGwsK2Ikk8FrgsnIiXSKUGWbNdTtTt04vGnKMaErjQNpFVNdmNEMGf6FDExW7Mo6KLCXLP8udQYo25L4j1IsC1XkLscgKnbNtBXNVg0iaTyvQCLnRaNpoJDgXYiJqMnmYgw/cL4qTeJNob2pRENkd6vRl3EytyJfxLS5+d/mdpIHAMIG9oAMCARGigbUEgbK71UggPdYn9otdmBuKaN8g//h55pcgaJfZydU55zZHlwEDkDi2u6yorwIvV+d5Un1xjztMFoyroErmLE29QzyvfE44n17uj0Do1uNQg8f/MUdCOTrP2j9k6pF/kwKjwMCvUSjEx/rF1NLA6Y+L3Z0yPmvUvru26EgLmR3fZJGDdAwjux487XkNGlquxX3QCvR09Nk1zSw9uw6LQODWtEMz1boFO6yM3b9dBa2iZBs91ZKS
+18:37:37  PROC: Jb readline: * call acceptSecContext
+18:37:37  PROC: Jb readline: PROCISFUN:false
+18:37:37  PROC: Ja println: TEST
+18:37:37  PROC: Ja println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QyGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs7yHiLw3tpuG/KszkTZx1DD3AvIC7NH96An+vpKxtnYODv/LnraS5saQDrsoKIC9xSVu2GA+5A9kwIscW8H4lU4Yk2lS3ZEyWigAr2ZFSBF4NvjV3QZgD9BsMKK/iGXN4hF7XY3Vau+MYlBwABBSWReiseD4ygHOpZSBXLpxI4rPAQXvFt26rRfR2IY43TEH+ytZ8iie1yzoSWC1rLa7sUR+vXoJqeOUcJGt45H2Udl8ySRppIHAMIG9oAMCARGigbUEgbLHyIF7VHMR/gQROgIk0qFC8fNkW96ASzSxmLwr55Juz0Dq/k8V1B9+LhTPBvcqlPXA3xPoCmWSDd3cv4S89BkfKwBvW9fBjDiXbSQ10gaUD6T/BBtKq4NnC1GndRHGbslVW+P99yT457TxyezqLhq+17StIgVhfiLrLN8jyB2mjtW5QT6hy8F4rj84VjBTBHzlQL51g514DE6DmbU8z+GMGQPr1JqoNmEtdenfKeSvOaM0
+18:37:37  PROC: Ja readline: * call acceptSecContext
+18:37:37  PROC: Ja readline: PROCISFUN:true
+18:37:37  PROC: Na println: TEST
+18:37:37  PROC: Na println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QxGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs3nFkXO43hrtRDuI61db6xChq7SRmoSaqkTk+d/+wgtfe1Lp10ZaIRuUHvcWLBjKawgzxWa6fobwqvqP/fvzcAvA57r0b1muLtJECbG/923G7YplfsoBsuoXxh4HwGdfBSGsFo1ks3AejMa9gBHtb7REqvX+VF0gJ9+JwR/LT23puKkS62+i2YeI4lgl5fhDmwDteQaLj/VY6f+eCg7Jmt5R57OpwNCZ8c141Hr4i7VPPDd5pIHAMIG9oAMCARGigbUEgbKx+wESXOa6NERUpfvDCGengHhjMxkbZ905d9lMP1MGxFGeJcJGQeyi0oIceG3QG6Rxh0Yq2EOpV+5sTW7ChY8bkK/VSYQBJay5U97pFhiyc11HnCZZASeZCwO2xIzgF1KORxamIH+8m7n3XGb19xqqf8cvxgjE0yFPxJep4OM5bB+HkjJAUWAHUvHiCY91hQelJu773/RZGHPRhdwh+La9oPZRhesYXqoJT2uhlRDOw1FW
+18:37:37  PROC: Na readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Na readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=0, usage=2
+18:37:37  PROC: Na readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395834751808
+18:37:37  PROC: Na readline: * call acceptSecContext
+18:37:37  PROC: Na readline: SunNativeGSS: Precomputed mechToken length: 480
+18:37:37  PROC: Na readline: SunNativeGSS: Complete Token length: 495
+18:37:37  PROC: Na readline: SunNativeGSS: acceptSecContext=> inToken len=495
+18:37:37  PROC: Na readline: [GSSLibStub:1017] [GSSLibStub_acceptContext]
+18:37:37  PROC: Na readline: [GSSLibStub:1037] [GSSLibStub_acceptContext] before: pCred=4395834751808, pContext=0
+18:37:37  PROC: Na readline: [GSSLibStub:1054] [GSSLibStub_acceptContext] after: pCred=4395834751808, pContext=0, pDelegCred=0
+18:37:37  PROC: Na readline: SunNativeGSS: acceptSecContext=> outToken len=106
+18:37:37  PROC: Na readline: [GSSLibStub:1282] [GSSLibStub_getContextName] 0, isSrc=0
+18:37:37  PROC: Na readline: [GSSLibStub:535] [GSSLibStub_inquireContextAll] Status major/minor = 1080000/0
+18:37:37  PROC: Na readline: [GSSLibStub:537] c/r/s = 1/8/0 
+18:37:37  PROC: Na readline: PROCISFUN:false
+18:37:37  PROC: Ja println: TEST
+18:37:37  PROC: Ja println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QzGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs7RnEkTVuSpLUsL+ESNbHFYgecQDdugitDxhh9NiSOtNhSgbKQ7DWJgy/W3KyMRbXhMiQcXsQ6AhLcp6pMv4SeUpeQynBEWhu5Maxnj3X4Dzoz6moYWDmJH181UOP03fcd8+FYPgBdcIlBAIx5LeV21AqRmMEgncoXXBOq9Iu/nICgM11l6OZZ71426QZ8uq4jN73N1SRk/krXyPVF0qMrllnpUKWFn1QS+wX4FGnOTik5eEpIHAMIG9oAMCARGigbUEgbI75eYH6VGxu15W1rQUOUQD3etK+RWRDDQF4b9lRdSYXB5a1LhsxuoqcicDCFqe5MXex3UYoux47gSaA2Wr+gbKes3wKBj10LQDvX2s8l5UPMCU5QwCo+TZDbmw4/9dC/BXGv0pRJh5UVKnTqR3AndrqZ+ccG+CrdO0FCRzbwsl3UAKp2z6i8za5WrbSaHdIPN1Sj5TVXjcLCfnUexkgxw+YwLjKqLT57226wu/ALSzKR52
+18:37:37  PROC: Ja readline: * call acceptSecContext
+18:37:37  PROC: Ja readline: PROCISFUN:false
+18:37:37  PROC: Ja println: TEST
+18:37:37  PROC: Ja println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QxGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs/oFxiReCCjNcA5nASUgIC0+azO16SX+V+m6WCqaSjuevYAmVxdMZw9X2le5ovqgBdwpPRlc5EzCoh+5OwtLlgPkHQiq13MdU3pToSrvuhTayp+AgapBx7dlujmOwsgXrryIASkERL/GSatY2RDEUKRPPKYooqXzh7I2PwXVu2DUmi3f4T7We2olxEgl5Bq0Hmy4TBowRp+1834bfjUsG8gg6oldOCfVP94EDcz78TtvDJeSpIHAMIG9oAMCARGigbUEgbLO2j6My9vR+6SI62Iz6gcDrgZmFEqz9J0BM9XAdkmvtoDONPHrMNrxW6KBoXr2woTez12BQnJFwPLTRncu+o97ktzVODuYj3bU6GI4OI+HkIVW9sMjcptJ9b4r9yMSUteuEkDYS62HuU+iNU9TrXD3LfwBpB7k8zTY5A0c5MCYukAGCTB7iFm7xHkczk7X99+G0GsJANffHWwcVhyFcQ3IQAFEFEr9BrQAW6QOUDAd+9iW
+18:37:37  PROC: Ja readline: * call acceptSecContext
+18:37:37  PROC: Ja readline: PROCISFUN:true
+18:37:37  PROC: Na println: TEST
+18:37:37  PROC: Na println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QyGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs8kgnqMlycJis5fTzzHFs+esrAAkPWjOzsh8PDGR9au+qFrH78ko2y9hIW5y5jrF/TbEzCNPGj1Iawy3BKuzVr6N4msgh+qiJVWrtlYWj0J4/JmWew+JY4PWaleRjYgsED6IzIsM9k92P25dCZRA4P4IXLtfFFOBBDLL6LUz6sUnCEXwpF6a6OOdZvY7nNfhTzzxhGFmfaTMJe3Z8DoJDiCkGyLmZYWeZ8vY/+ew8pP4J2AtpIHAMIG9oAMCARGigbUEgbLytiuiQivRWeEYEh6Z++R2UCzeTziPT1KrtK/0WxZ5AzBtpJIcohMhmOilPcNZ0EChVkqT7/EOeI00IhswT/j55KvSzXyhdWCeT/vdq+keVoCg9oQEVt55mG0PFprAMQ4PtQDpEjtvKjPENVOfk688Kw+2339F4MTVULm+HjkpjF4SrDZOu74DauRaRvE4VUfTVvBTbh7dUnpPftK3WfChrvmtUdA/hJxEt3oIasg/RE5U
+18:37:37  PROC: Na readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Na readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=0, usage=2
+18:37:37  PROC: Na readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395834750896
+18:37:37  PROC: Na readline: * call acceptSecContext
+18:37:37  PROC: Na readline: SunNativeGSS: Precomputed mechToken length: 480
+18:37:37  PROC: Na readline: SunNativeGSS: Complete Token length: 495
+18:37:37  PROC: Na readline: SunNativeGSS: acceptSecContext=> inToken len=495
+18:37:37  PROC: Na readline: [GSSLibStub:1017] [GSSLibStub_acceptContext]
+18:37:37  PROC: Na readline: [GSSLibStub:1037] [GSSLibStub_acceptContext] before: pCred=4395834750896, pContext=0
+18:37:37  PROC: Na readline: [GSSLibStub:1054] [GSSLibStub_acceptContext] after: pCred=4395834750896, pContext=4395834762352, pDelegCred=0
+18:37:37  PROC: Na readline: [GSSLibStub:1062] [GSSLibStub_acceptContext] set pContext=4395834762352
+18:37:37  PROC: Na readline: [GSSLibStub:1072] [GSSLibStub_acceptContext] set flags=0x1be
+18:37:37  PROC: Na readline: [GSSLibStub:569] [GSSLibStub_displayName] 4395834862352
+18:37:37  PROC: Na readline: [GSSLibStub:1108] [GSSLibStub_acceptContext] set srcName=4395834862352
+18:37:37  PROC: Na readline: [GSSLibStub:1117] [GSSLibStub_acceptContext] context established
+18:37:37  PROC: Na readline: SunNativeGSS: acceptSecContext=> outToken len=138
+18:37:37  PROC: Na readline: [GSSLibStub:1282] [GSSLibStub_getContextName] 4395834762352, isSrc=0
+18:37:37  PROC: Na readline: [GSSLibStub:1299] [GSSLibStub_getContextName] pName=4395834885056
+18:37:37  PROC: Na readline: [GSSLibStub:569] [GSSLibStub_displayName] 4395834885056
+18:37:37  PROC: Na readline: [GSSLibStub:674] [GSSLibStub_releaseCred] 4395834750896
+18:37:37  PROC: Na readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Na readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=4395834885056, usage=2
+18:37:37  PROC: Na readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395834750896
+18:37:37  PROC: Na readline: PROCISFUN:true
+18:37:37  PROC: Na println: TEST
+18:37:37  PROC: Na println: YIIB6gYJKoZIhvcSAQICAQBuggHZMIIB1aADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QyGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs3RlteceaNtnjH2nWACx7QcRhoa4+w813n3uwYihX/rDBet01rMVTxy6NvucddAYwo3n7UTF+KDLofe3tR7YdN7Xs3z7yo+n8uOgqPZwR8melCliEwUyR8Qpg8beq+HtAN5Ubxok5e1QYCZNvSOEuW5/2jHYXwZmEhaVJF9axYkTwmdNR/Vyyyk9w1z8E+8C9w3J6Sff4fZuFVTmreF/XE8kdX4U3Lv1+yfQnA7NWXAOKYJipIG/MIG8oAMCARGigbQEgbHyOhx0UsCqSZmjPoJ0d+EiJHFb4y/8pInXgCwBO4hnr4ciorxpFc0XI84sS7SlXi0Shod5jfgnJbjMQiIqq5v08ZdzUvCm6vGz+kGDVqT6HBr6RI9Lhv76xqqctpIUkFJLvUu23mWPDm5euMmU6kiFaG2xqBVplXXegdhBMYB1T2nn/LrRd7jNuJQtlY7rMgORiYXXoE84QVF79PtcORT4tdPnamQKNtmAditwBwfPv5Y=
+18:37:37  PROC: Na readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Na readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=0, usage=2
+18:37:37  PROC: Na readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395834861088
+18:37:37  PROC: Na readline: * call acceptSecContext
+18:37:37  PROC: Na readline: SunNativeGSS: Precomputed mechToken length: 479
+18:37:37  PROC: Na readline: SunNativeGSS: Complete Token length: 494
+18:37:37  PROC: Na readline: SunNativeGSS: acceptSecContext=> inToken len=494
+18:37:37  PROC: Na readline: [GSSLibStub:1017] [GSSLibStub_acceptContext]
+18:37:37  PROC: Na readline: [GSSLibStub:1037] [GSSLibStub_acceptContext] before: pCred=4395834861088, pContext=0
+18:37:37  PROC: Na readline: [GSSLibStub:1054] [GSSLibStub_acceptContext] after: pCred=4395834861088, pContext=4395834765904, pDelegCred=0
+18:37:37  PROC: Na readline: [GSSLibStub:1062] [GSSLibStub_acceptContext] set pContext=4395834765904
+18:37:37  PROC: Na readline: [GSSLibStub:1072] [GSSLibStub_acceptContext] set flags=0x1be
+18:37:37  PROC: Na readline: [GSSLibStub:569] [GSSLibStub_displayName] 4395834907616
+18:37:37  PROC: Na readline: [GSSLibStub:1108] [GSSLibStub_acceptContext] set srcName=4395834907616
+18:37:37  PROC: Na readline: [GSSLibStub:1117] [GSSLibStub_acceptContext] context established
+18:37:37  PROC: Na readline: SunNativeGSS: acceptSecContext=> outToken len=137
+18:37:37  PROC: Na readline: [GSSLibStub:1282] [GSSLibStub_getContextName] 4395834765904, isSrc=0
+18:37:37  PROC: Na readline: [GSSLibStub:1299] [GSSLibStub_getContextName] pName=4395834920928
+18:37:37  PROC: Na readline: [GSSLibStub:569] [GSSLibStub_displayName] 4395834920928
+18:37:37  PROC: Na readline: [GSSLibStub:674] [GSSLibStub_releaseCred] 4395834861088
+18:37:37  PROC: Na readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Na readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=4395834920928, usage=2
+18:37:37  PROC: Na readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395834861088
+18:37:37  PROC: Na readline: PROCISFUN:true
+18:37:37  PROC: Jb println: TEST
+18:37:37  PROC: Jb println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QxGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs6eVDYydonZnFxgb7tqUcsDrDTNMum6szuEFjw+UKc8Gja0DQU7CjM9N2eOpGfDg6zeLl/SiPjlhADWmD/ldcUneDObxT9jxOxGM+LUwLHT9eVETrdQ9RTIrEwYvCYIgCBqHXG+7Yv1IA8W+wcpxBrPjdj8CyWKIL2EDK4J7DYYvf8FTGBAlU+hrzI1Bp2cAwFDGt+/4usATYxMZ/aOrdh/3nRScu7njDQV6j/5zKGKZuHoDpIHAMIG9oAMCARGigbUEgbIoNfWWAKBO3yZBSWIP6OFUzx0xTUVZf/OtLdWaaOp3YERDkB3dlaxG8d9U2RWEeuwNWea6Jtr5hgLmlZJZovnCcokN9CmHJJ2gWDHDeJIjLgVRvfRqa96lCJu5/MXJNjf9ryn3PIrXIHyyWec3c/TMz5yBTxwPY1gyevd+CmlbY2QnmcayrUr66+vJ8VFKYCIQYoEu42dg7lSLFX9OiW7DKRboganyDEGX1N08LMUvnYkL
+18:37:37  PROC: Jb readline: * call acceptSecContext
+18:37:37  PROC: Jb readline: PROCISFUN:true
+18:37:37  PROC: Na println: TEST
+18:37:37  PROC: Na println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QxGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs6eVDYydonZnFxgb7tqUcsDrDTNMum6szuEFjw+UKc8Gja0DQU7CjM9N2eOpGfDg6zeLl/SiPjlhADWmD/ldcUneDObxT9jxOxGM+LUwLHT9eVETrdQ9RTIrEwYvCYIgCBqHXG+7Yv1IA8W+wcpxBrPjdj8CyWKIL2EDK4J7DYYvf8FTGBAlU+hrzI1Bp2cAwFDGt+/4usATYxMZ/aOrdh/3nRScu7njDQV6j/5zKGKZuHoDpIHAMIG9oAMCARGigbUEgbIoNfWWAKBO3yZBSWIP6OFUzx0xTUVZf/OtLdWaaOp3YERDkB3dlaxG8d9U2RWEeuwNWea6Jtr5hgLmlZJZovnCcokN9CmHJJ2gWDHDeJIjLgVRvfRqa96lCJu5/MXJNjf9ryn3PIrXIHyyWec3c/TMz5yBTxwPY1gyevd+CmlbY2QnmcayrUr66+vJ8VFKYCIQYoEu42dg7lSLFX9OiW7DKRboganyDEGX1N08LMUvnYkL
+18:37:37  PROC: Na readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Na readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=0, usage=2
+18:37:37  PROC: Na readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395834905200
+18:37:37  PROC: Na readline: * call acceptSecContext
+18:37:37  PROC: Na readline: SunNativeGSS: Precomputed mechToken length: 480
+18:37:37  PROC: Na readline: SunNativeGSS: Complete Token length: 495
+18:37:37  PROC: Na readline: SunNativeGSS: acceptSecContext=> inToken len=495
+18:37:37  PROC: Na readline: [GSSLibStub:1017] [GSSLibStub_acceptContext]
+18:37:37  PROC: Na readline: [GSSLibStub:1037] [GSSLibStub_acceptContext] before: pCred=4395834905200, pContext=0
+18:37:37  PROC: Na readline: [GSSLibStub:1054] [GSSLibStub_acceptContext] after: pCred=4395834905200, pContext=0, pDelegCred=0
+18:37:37  PROC: Na readline: SunNativeGSS: acceptSecContext=> outToken len=106
+18:37:37  PROC: Na readline: [GSSLibStub:1282] [GSSLibStub_getContextName] 0, isSrc=0
+18:37:37  PROC: Na readline: [GSSLibStub:535] [GSSLibStub_inquireContextAll] Status major/minor = 1080000/0
+18:37:37  PROC: Na readline: [GSSLibStub:537] c/r/s = 1/8/0 
+18:37:37  PROC: Na readline: PROCISFUN:false
+18:37:37  PROC: Nb println: TEST
+18:37:37  PROC: Nb println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QxGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBsyp3VrjTn8BCmfLJQ2x8Wm+WExitqRYuuWNHBDcNdfpC28t5xz2a1/JuIl7LwtVVBUSJE5WFl2JJKXrFR0+NExqWYjjpcDMccVwCZA2Vsc+9PkDiWDJmK4k7hte7PdUM9uWI3RcOLCkxGpGakEWq7Z2g02ie9tOoKfRQjLOaQCFA9dpNnlswdEnBV1m+zU0Ieg9s2Z4hldGZaYflcNrDzbWN0diDsSYScBQc2UFfOm33mj2bpIHAMIG9oAMCARGigbUEgbL/M43tn0he+J/9FMl4NdgW0ugUy7Sx22gNagRywzIOKwRJTt2JL8Fn3BRby2dy5YUs/9p7ZFTXssLaETMozxIMpTOJM0uZoWKmHOn3kJjAK7U075MSAtJdgje+g3Yb1CGjTnXCuxAG3PtokYl7tbKkKLnAaopvxqeDSL/Gk10zIsVyio7lU7XGS2DwrZbV52DjJVvWgipBXZP2N7icd8lIrZdWRvWlP1TjX9kmEgZpjrjI
+18:37:37  PROC: Nb readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Nb readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=0, usage=2
+18:37:37  PROC: Nb readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395834739760
+18:37:37  PROC: Nb readline: * call acceptSecContext
+18:37:37  PROC: Nb readline: SunNativeGSS: Precomputed mechToken length: 480
+18:37:37  PROC: Nb readline: SunNativeGSS: Complete Token length: 495
+18:37:37  PROC: Nb readline: SunNativeGSS: acceptSecContext=> inToken len=495
+18:37:37  PROC: Nb readline: [GSSLibStub:1017] [GSSLibStub_acceptContext]
+18:37:37  PROC: Nb readline: [GSSLibStub:1037] [GSSLibStub_acceptContext] before: pCred=4395834739760, pContext=0
+18:37:37  PROC: Nb readline: [GSSLibStub:1054] [GSSLibStub_acceptContext] after: pCred=4395834739760, pContext=4395834736304, pDelegCred=0
+18:37:37  PROC: Nb readline: [GSSLibStub:1062] [GSSLibStub_acceptContext] set pContext=4395834736304
+18:37:37  PROC: Nb readline: [GSSLibStub:1072] [GSSLibStub_acceptContext] set flags=0x1be
+18:37:37  PROC: Nb readline: [GSSLibStub:569] [GSSLibStub_displayName] 4395834769376
+18:37:37  PROC: Nb readline: [GSSLibStub:1108] [GSSLibStub_acceptContext] set srcName=4395834769376
+18:37:37  PROC: Nb readline: [GSSLibStub:1117] [GSSLibStub_acceptContext] context established
+18:37:37  PROC: Nb readline: SunNativeGSS: acceptSecContext=> outToken len=138
+18:37:37  PROC: Nb readline: [GSSLibStub:1282] [GSSLibStub_getContextName] 4395834736304, isSrc=0
+18:37:37  PROC: Nb readline: [GSSLibStub:1299] [GSSLibStub_getContextName] pName=4395834781856
+18:37:37  PROC: Nb readline: [GSSLibStub:569] [GSSLibStub_displayName] 4395834781856
+18:37:37  PROC: Nb readline: [GSSLibStub:674] [GSSLibStub_releaseCred] 4395834739760
+18:37:37  PROC: Nb readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Nb readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=4395834781856, usage=2
+18:37:37  PROC: Nb readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395834739760
+18:37:37  PROC: Nb readline: PROCISFUN:true
+18:37:37  PROC: Ja println: TEST
+18:37:37  PROC: Ja println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QxGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs3AtRwGd/U7dpOpsq9sDft3KQj0t+UXAnyCeX7XqpRPcYqekifbATJ8RZM+q95/2ia6lObvm4E1I5o71cwqwcUaOFDMwBkwvwW1WuGOACxR9BBYaHmrFwyQ39grAtYJPJtKfQLC7MpZ4EX/jzVH/zJkqm3pD8NEpFKwAdzfbFVWxLdiHFd19uDTJz3TQopg47WsgbX/e5xuLGpxWAh9Zcb6S1FYi/GR2d1dbOgUSJK8HXEkTpIHAMIG9oAMCARGigbUEgbKGRZf6g55lXBaEqFe0Ec+9BaLHmpRyx4LUhRGcG3B6+hgHmUKRCHM0fsiaIfZHPGOi5srS6a8oq/uruUM6PZyYdW3WRvprkP/WLRkuvZ6oLs8l32gcj0WeAo/ZNu2F0DemslAPORO+0QqkFb9BVybj0tMSA4xrY4UXgWhplLXMKmGapTAX/7U01rCfOc53dK5KrbkghcE2P/qtsGL4UukT6yZQdmlQJxhBioTXjpeWNb9d
+18:37:37  PROC: Ja readline: * call acceptSecContext
+18:37:37  PROC: Ja readline: PROCISFUN:true
+18:37:37  PROC: Ja println: TEST
+18:37:37  PROC: Ja println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QyGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs0IpxjQKKbJIyY3CbO+S/KsoXRph6GOt+mQMbk3JauPacUCKMA7tKwGmM5mV6/JcVQz02dQtiiqgR1SeVv/0gQNvfKj1hB3AJhBVHQwhWvtnHU4rudE7dcQ253X7NKQdY04Bg0o7yLsy1J3JTM0sHh+SD+pNhyt5grKgixsjSs3AdllEHYD+RCV4hJjzRg2Ftjxsk6Nho/Fs15gKTGYh86fraqCYsjm+Z0gCSPVDtqEUSS2HpIHAMIG9oAMCARGigbUEgbJpH2a6RJFPPeTZbIAddC7uNrGsw25XtsEgi9tRXxlkAvL5RyXcNGycwghCAHBS/U2m7GEHJurGpeiSTHeNrOEcrgSN3tHB3PHN25fZyIlmHOSjp5vW6W/t5hJu9P8lPZzFYBNH5J6BgnnCiZtz8/twY8hncPG7qfgHoFGblcBiIypoAuDHQQMCKeaSaKxtc+2KDSdIZ0iuaT09Thu7VKcCg2kaesSsj7nidJSnUjrZ6D9J
+18:37:37  PROC: Ja readline: * call acceptSecContext
+18:37:37  PROC: Ja readline: PROCISFUN:true
+18:37:37  PROC: Nb println: TEST
+18:37:37  PROC: Nb println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QzGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs8dqkXpv2W03L8SR9GtPIcmlsGvEZblv49DSHKdjgyxQlwMB2PkfWauC8UARA/tTQDzAUmyhBvttDt/zwIQyIx6neDJtNiuOdM7z6rH76h7uumrzMtHBjIvk7S2bwYcnqcok76V4j5kE02LtOLmPd0aFTTARXn1V3SVr2umwSJQDy3AmaoM7MzKzrvdDm1RtInqnhpsirl4ghQcMIIdhgTeMVYh2ZC8Nw5utdSGXtOuNRC/upIHAMIG9oAMCARGigbUEgbKR98ID+iO+MKH+L1V2DjUYgg0yz/XF+kD4n0ajgCXevqNvfHClR9D9TmCzj/1JL55zYIMpy7EGsP+Co8GEkcPQGG6a8uZZYClHUXMIY21mRUCablgjqAgxSoPNPqqVtkULgly4jYtulkQkexpKiJkk1vFoA61KXL9AmvoJJeznWI+bsup/q0oYDx5WTqfkSYucUIYe5CUOPLuApUrvg4okZWLHuXWcqxcY3UNVYor6uzVe
+18:37:37  PROC: Nb readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Nb readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=0, usage=2
+18:37:37  PROC: Nb readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395834768016
+18:37:37  PROC: Nb readline: * call acceptSecContext
+18:37:37  PROC: Nb readline: SunNativeGSS: Precomputed mechToken length: 480
+18:37:37  PROC: Nb readline: SunNativeGSS: Complete Token length: 495
+18:37:37  PROC: Nb readline: SunNativeGSS: acceptSecContext=> inToken len=495
+18:37:37  PROC: Nb readline: [GSSLibStub:1017] [GSSLibStub_acceptContext]
+18:37:37  PROC: Nb readline: [GSSLibStub:1037] [GSSLibStub_acceptContext] before: pCred=4395834768016, pContext=0
+18:37:37  PROC: Nb readline: [GSSLibStub:1054] [GSSLibStub_acceptContext] after: pCred=4395834768016, pContext=4395834737056, pDelegCred=0
+18:37:37  PROC: Nb readline: [GSSLibStub:1062] [GSSLibStub_acceptContext] set pContext=4395834737056
+18:37:37  PROC: Nb readline: [GSSLibStub:1072] [GSSLibStub_acceptContext] set flags=0x1be
+18:37:37  PROC: Nb readline: [GSSLibStub:569] [GSSLibStub_displayName] 4395834768256
+18:37:37  PROC: Nb readline: [GSSLibStub:1108] [GSSLibStub_acceptContext] set srcName=4395834768256
+18:37:37  PROC: Nb readline: [GSSLibStub:1117] [GSSLibStub_acceptContext] context established
+18:37:37  PROC: Nb readline: SunNativeGSS: acceptSecContext=> outToken len=138
+18:37:37  PROC: Nb readline: [GSSLibStub:1282] [GSSLibStub_getContextName] 4395834737056, isSrc=0
+18:37:37  PROC: Nb readline: [GSSLibStub:1299] [GSSLibStub_getContextName] pName=4395834800704
+18:37:37  PROC: Nb readline: [GSSLibStub:569] [GSSLibStub_displayName] 4395834800704
+18:37:37  PROC: Nb readline: [GSSLibStub:674] [GSSLibStub_releaseCred] 4395834768016
+18:37:37  PROC: Nb readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Nb readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=4395834800704, usage=2
+18:37:37  PROC: Nb readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395834768016
+18:37:37  PROC: Nb readline: PROCISFUN:true
+18:37:37  PROC: Ja println: TEST
+18:37:37  PROC: Ja println: YIIB6gYJKoZIhvcSAQICAQBuggHZMIIB1aADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QxGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs1dWym8jL24mh8ueFjqtBag+sUJgaGKKlfd7xS/zdOfjDQTJNA2obBfKflF2jUEit9MGp97AQIL6IGvXNEhDbO9a++gKQiXEXUNnq5V4xLu6DBzYx9YlWCGE80XRVHMS4PkM6EOQDphxg8Bz8aZF9poKU+dmQvF8JpTRBPTIBPDyg+VxiB1TBCdyp47JFoM7mAD1CRa27iwKmcG2tS3A40PDJUc6vTXZJAwioh/DJTk/vmc0pIG/MIG8oAMCARGigbQEgbEwJ3DnpicpWaP6vL6CKzaLPeGUtRoPJ4pTjeXa51L2Z2ZUeCrsmFzPiQ43YuUpYCtsfG4wJm6tB81HZM90FAVY0QTT+0AbUjavhRTwwFGKxhiZUT+z7rjSZEoaHjURqgcW+foLyhHddFri3HjjOSN2zxvdrtJokOQGVU5ngsqabY8PiyQseJBGCk1ohQCE/YrG7qEhc3Q/rOe4btJaho0ceGUFtTZsA5/JppvbS0ImstU=
+18:37:37  PROC: Ja readline: * call acceptSecContext
+18:37:37  PROC: Ja readline: PROCISFUN:false
+18:37:37  PROC: Jb println: TEST
+18:37:37  PROC: Jb println: YIIB6gYJKoZIhvcSAQICAQBuggHZMIIB1aADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QwGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs9OsgTP0D+MP2jv03qBxH6gDEyrvx+I/YoGBqde+HrposDgdij0lWguSrpjrNYlyRk1bRRILs1JJ+hR8ecse9f6tgUrkOXzq5w0RGLQIPNN54sFLSUpyt6aFnfdTpOXjtiFPrV9LinwXG8aulEd+PK4Xdo5XRXwa3BJbjYZEyaA1WpEg/vqAfqvI5iY/6QgicptahO+BAFaSFYpkdz+bq6xUwh08jqrBD7PYRgYyn2dlAwBLpIG/MIG8oAMCARGigbQEgbE1jtsNPievD/6fpG/2/UTisLYr2KqibOhyYebBXaJG87YkV4fc6EpGDLjaJMlb5jgJ/TU6RrKBeFWLP4lCSi1wiAXAHAFYosBDeP6MvsxrSuXgVOhWSgU00BADg0/8zLJhHgaA2p/DifSgNdZm8W4CraWFPNCRORauQq+Skykc3T9rnznkkpXwjhLdcp15BSu0eZGf+jlDn4p4ya8MN3rEv5D5NbPX6rozU41b1hi+Psk=
+18:37:37  PROC: Jb readline: * call acceptSecContext
+18:37:37  PROC: Jb readline: PROCISFUN:false
+18:37:37  PROC: Jb println: TEST
+18:37:37  PROC: Jb println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QyGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs3zJ/zfeEpYZh4DpNgCjDhyKpIJonNl8UZxpiWbo178cIghdFBP1PtIOgH1mLnqvxBk985oU2OcM+Ae/U48xrQBRABe04tnp1BzXE/eI5nhtMR5I4vIp3sgWECuGd0fdFHm5n5S7+EEdKL0p6g50v+D3uycO9+AlJr2PuRQX+Vd6NzRUuR+3WGTXQUeAoBiEHYEzV+7cXjPbGm+boss/5YnjXG0h9WD/s4Jq4HXO7HuUdKwnpIHAMIG9oAMCARGigbUEgbJOCT2Bjr4yrc4Mlm75A5PfVng+pV2uakpwtZniqvGrXm8MQZcUQiSR7yQkVgRcwymis67qbsIj7vql/MnW67zHF7YLENBzGRnaxrweM8MsuwQi3OGzCfEpqGY5ol2k38IwPsb28nl07WD3UzKDDPkLaFdo0lOPRlOtLaT0+qLVyWuXKt+EkeihTCIgYMllXusuWsISdlQ8xOmbfttEuVeJQzjMvTdIfdqL9QafrTCz1sDA
+18:37:37  PROC: Jb readline: * call acceptSecContext
+18:37:37  PROC: Jb readline: PROCISFUN:true
+18:37:37  PROC: Na println: TEST
+18:37:37  PROC: Na println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QxGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs8bI76FijKKlxMCQPpGjmbIHjOOGEWRtinbMIpgf8cLOuplAiyLPLwoHUobp1HodUwytfBv4+vhEhm+dADVxjIsPg0efENK5sdjRC2oIYTxGNEMbZDKLsJy4lHDgFjTd1ygzASuj4vJowMEJqT92VqCzRW/Kq2MFTNLBRGCmywsX+KE7dMsGqBjF99rm9zd1UJ3LxQ4UycJCzj0ejmv+IL4I//qh6w8tpQiAVNlGTr72rnKApIHAMIG9oAMCARGigbUEgbJ01EPJDRPDnsEsc12hKVghuWkGH6ZU+4UKVFhOSje7/5c7ZpF6FX6QHXHo95gYXgQVWrWA+uMJ600cn9R5JWrTHoKfooEGxAAsLCu7xT+WBO1vRGS0RskOnPGaOFpuGrYiSNlFrMjdbScP8yoO6WUGNZZArULbvFvAHfaxQmWGLwTZ6By1KhNsXFZzO/q5BxAZiZfXab5C+8k5Pb03iah0HgxvI++r6G0e2WDvjM/ErsyE
+18:37:37  PROC: Na readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Na readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=0, usage=2
+18:37:37  PROC: Na readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395834871440
+18:37:37  PROC: Na readline: * call acceptSecContext
+18:37:37  PROC: Na readline: SunNativeGSS: Precomputed mechToken length: 480
+18:37:37  PROC: Na readline: SunNativeGSS: Complete Token length: 495
+18:37:37  PROC: Na readline: SunNativeGSS: acceptSecContext=> inToken len=495
+18:37:37  PROC: Na readline: [GSSLibStub:1017] [GSSLibStub_acceptContext]
+18:37:37  PROC: Na readline: [GSSLibStub:1037] [GSSLibStub_acceptContext] before: pCred=4395834871440, pContext=0
+18:37:37  PROC: Na readline: [GSSLibStub:1054] [GSSLibStub_acceptContext] after: pCred=4395834871440, pContext=0, pDelegCred=0
+18:37:37  PROC: Na readline: SunNativeGSS: acceptSecContext=> outToken len=106
+18:37:37  PROC: Na readline: [GSSLibStub:1282] [GSSLibStub_getContextName] 0, isSrc=0
+18:37:37  PROC: Na readline: [GSSLibStub:535] [GSSLibStub_inquireContextAll] Status major/minor = 1080000/0
+18:37:37  PROC: Na readline: [GSSLibStub:537] c/r/s = 1/8/0 
+18:37:37  PROC: Na readline: PROCISFUN:false
+18:37:37  PROC: Nb println: TEST
+18:37:37  PROC: Nb println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3Q0Gwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs8I0eKoh5D3sZeX6M3ec46AmyLrO5JXBww8xCuX5MUsZM5FdMsZU9EGU/pOqx8J3U3rlB36ApelWALpxcBhn4lfdZ3MKM1YGbfgF6c62AFRwjXwVKubtl4zdPXsFt7miUMyzD+VRNbxcPwzBB0HPmGLx0/fX/SDkAHV1Q3EM8GOTVmrn7e/eEqBaWqmRBN4GUtoYqHlioltlWUOydwSgD1g49XWRsh24/+/ObYZT61GovqvEpIHAMIG9oAMCARGigbUEgbI/ws7VKSDnJg4JU5fsmmjNTNxpeHrFo0plilMMVeDHCink57rdAiSyleaP9Em4aS9DitUxmLufYb4FzxCq5Hv2/VP1XaTPyuyopgi9YAyrrKDXLCa8eG+wP/KfJUaZvEhRrxdOVgWsHyHJWpq74KMhDKyThrTukpPOM5Q7YS+HhRGyXdY+D6BB4giciDSTAFOHUM6tkWXzlnD9MBZhBj5n8WCgnSZAgR9+4zEulPkfbOmc
+18:37:37  PROC: Nb readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Nb readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=0, usage=2
+18:37:37  PROC: Nb readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395834802352
+18:37:37  PROC: Nb readline: * call acceptSecContext
+18:37:37  PROC: Nb readline: SunNativeGSS: Precomputed mechToken length: 480
+18:37:37  PROC: Nb readline: SunNativeGSS: Complete Token length: 495
+18:37:37  PROC: Nb readline: SunNativeGSS: acceptSecContext=> inToken len=495
+18:37:37  PROC: Nb readline: [GSSLibStub:1017] [GSSLibStub_acceptContext]
+18:37:37  PROC: Nb readline: [GSSLibStub:1037] [GSSLibStub_acceptContext] before: pCred=4395834802352, pContext=0
+18:37:37  PROC: Nb readline: [GSSLibStub:1054] [GSSLibStub_acceptContext] after: pCred=4395834802352, pContext=4395834802944, pDelegCred=0
+18:37:37  PROC: Nb readline: [GSSLibStub:1062] [GSSLibStub_acceptContext] set pContext=4395834802944
+18:37:37  PROC: Nb readline: [GSSLibStub:1072] [GSSLibStub_acceptContext] set flags=0x1be
+18:37:37  PROC: Nb readline: [GSSLibStub:569] [GSSLibStub_displayName] 4395834876592
+18:37:37  PROC: Nb readline: [GSSLibStub:1108] [GSSLibStub_acceptContext] set srcName=4395834876592
+18:37:37  PROC: Nb readline: [GSSLibStub:1117] [GSSLibStub_acceptContext] context established
+18:37:37  PROC: Nb readline: SunNativeGSS: acceptSecContext=> outToken len=138
+18:37:37  PROC: Nb readline: [GSSLibStub:1282] [GSSLibStub_getContextName] 4395834802944, isSrc=0
+18:37:37  PROC: Nb readline: [GSSLibStub:1299] [GSSLibStub_getContextName] pName=4395834768864
+18:37:37  PROC: Nb readline: [GSSLibStub:569] [GSSLibStub_displayName] 4395834768864
+18:37:37  PROC: Nb readline: [GSSLibStub:674] [GSSLibStub_releaseCred] 4395834802352
+18:37:37  PROC: Nb readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Nb readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=4395834768864, usage=2
+18:37:37  PROC: Nb readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395834802352
+18:37:37  PROC: Nb readline: PROCISFUN:true
+18:37:37  PROC: Nb println: TEST
+18:37:37  PROC: Nb println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QzGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs1zawk0ps+1ihXna7YFuStMWRA7g4xftQQVuGtKtTPWQXm/u8ng4npiuvDGfIALaRrCM6Lm8VnxB5Rr14C3ySddXUmorxAcbXu2Ue1ZgGAwCvT/RNrkV6detgdA0VDepHwEq/KYcTMi3+5JpXYlzX6TrsM8KyATPmJ5jwS3JCPF3HCIldjaWlkhccXV1YM3LJPSZWOlM5Nqkb1Gupd0C97rphtNmH5nNloHqfwLsH3ppyiwjpIHAMIG9oAMCARGigbUEgbILn/EIC/zWEax4zmHwBwvMslc8jhc1sBFqRLe68vZ7MSCp5Kv32q+TS8oknERzGncyDjBUUnuQZpaoVMOz4gLga7YaLHAp3oj/i9Gz/rvuG22mwoExDfMvS5sSTfE9yyFucToIfAfUHHwNuuFo1LbElkEJRxZHmT/o2rmQbT0KaUnTdhiZIUQ3K+t8Vf7bI1KFZ/NoaT6x0wwTxCyI+jLrdyfMxylfrUkuASqgICUlZGZE
+18:37:37  PROC: Nb readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Nb readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=0, usage=2
+18:37:37  PROC: Nb readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395834888688
+18:37:37  PROC: Nb readline: * call acceptSecContext
+18:37:37  PROC: Nb readline: SunNativeGSS: Precomputed mechToken length: 480
+18:37:37  PROC: Nb readline: SunNativeGSS: Complete Token length: 495
+18:37:37  PROC: Nb readline: SunNativeGSS: acceptSecContext=> inToken len=495
+18:37:37  PROC: Nb readline: [GSSLibStub:1017] [GSSLibStub_acceptContext]
+18:37:37  PROC: Nb readline: [GSSLibStub:1037] [GSSLibStub_acceptContext] before: pCred=4395834888688, pContext=0
+18:37:37  PROC: Nb readline: [GSSLibStub:1054] [GSSLibStub_acceptContext] after: pCred=4395834888688, pContext=4395834800544, pDelegCred=0
+18:37:37  PROC: Nb readline: [GSSLibStub:1062] [GSSLibStub_acceptContext] set pContext=4395834800544
+18:37:37  PROC: Nb readline: [GSSLibStub:1072] [GSSLibStub_acceptContext] set flags=0x1be
+18:37:37  PROC: Nb readline: [GSSLibStub:569] [GSSLibStub_displayName] 4395834913360
+18:37:37  PROC: Nb readline: [GSSLibStub:1108] [GSSLibStub_acceptContext] set srcName=4395834913360
+18:37:37  PROC: Nb readline: [GSSLibStub:1117] [GSSLibStub_acceptContext] context established
+18:37:37  PROC: Nb readline: SunNativeGSS: acceptSecContext=> outToken len=138
+18:37:37  PROC: Nb readline: [GSSLibStub:1282] [GSSLibStub_getContextName] 4395834800544, isSrc=0
+18:37:37  PROC: Nb readline: [GSSLibStub:1299] [GSSLibStub_getContextName] pName=4395834925136
+18:37:37  PROC: Nb readline: [GSSLibStub:569] [GSSLibStub_displayName] 4395834925136
+18:37:37  PROC: Nb readline: [GSSLibStub:674] [GSSLibStub_releaseCred] 4395834888688
+18:37:37  PROC: Nb readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Nb readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=4395834925136, usage=2
+18:37:37  PROC: Nb readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395834888688
+18:37:37  PROC: Nb readline: PROCISFUN:true
+18:37:37  PROC: Ja println: TEST
+18:37:37  PROC: Ja println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QzGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs5o6I/bfG7VWouFTHXHTcKZdve7ppH3Jda7LTuInjUOScHZU9FwEdq0PRMHqj2uICoiak75gnkuuvW/WI6C9YnW+d+EwgjYXGi4k3TQDmSQDR+4Q4RhXIJg1C2FBE/ZMZhwhBSj/U2pKNY++HlbQF+InygWiFfOmhbaBN1lPpxPlROGEK9ZN0dT8BPaPBgwRug2T1vFzOGZ2HWCUZBl06xOorRnNbWiREdd6Z8Q0IIm1cs9xpIHAMIG9oAMCARGigbUEgbKBr1yjsKgWyaMDASgGnUmj86NsSHn5R4dwqhwx4q7mlLOzuaNEcBdXKKJHcfx+KwTncduXIZrY8kU5aIlnMReFzWOPvGb9mFbz2P38M0DhwIVwBTbwzNfv8fAuIHagAAVzb5KKdl3Gpw5kU4FllZsnjmyCwzf9pMvcUUk6e4dpyWv404zpYBBNZ/UrqllugIAElrHT9plpo0DLmLyIu+HyHmbV+XWWJQ+S3aDz2LCYy2ig
+18:37:37  PROC: Ja readline: * call acceptSecContext
+18:37:37  PROC: Ja readline: PROCISFUN:false
+18:37:37  PROC: Na println: TEST
+18:37:37  PROC: Na println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QxGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBsw3u+c5dHPMZGF/z+uzz/cfXbIrzSWbIoT6jqHXo5NMPHNka9Ei6LE9wI8F1tLzvlPgDPvcCHKddo2aBzfpZVllyD5IKMH4RSec1eE9z/h5e4X2XvVbzt07a0MGAK0BVbSaggkOcqP7Mg4SYx7FQAOrONLPF8Cz0cwYbN7xY5u88j2c9FOr2iBFZyeZTtmXkLn3v1ZIlkScnO34v6qv6P8aHpeuRSYSVwkZGLZUNFIFYlmpYpIHAMIG9oAMCARGigbUEgbIvGiHkW6aavJewai15ASh0zU/TE+kBt534bCk30vikdEwoQK6/9V9CeU7dthH+v21i/WQ7oxq58ZKmmOC7wAG4qex+4SNgUDujHmBauS2VhXmHEXekFPTxXxXPbVhQPJxxRIdLw3J1LrhbF5SiFQcIA7g/vDal05jSRZ47tJsXCqpdT9qQ+AljpclFjav+yAqZNHMeptLPI7R6FxP8ILfulNJo42R4yg9BrOJdrtENQjz0
+18:37:37  PROC: Na readline: [GSSLibStub:633] [GSSLibStub_acquireCred]
+18:37:37  PROC: Na readline: [GSSLibStub:640] [GSSLibStub_acquireCred] pName=0, usage=2
+18:37:37  PROC: Na readline: [GSSLibStub:650] [GSSLibStub_acquireCred] pCred=4395834899616
+18:37:37  PROC: Na readline: * call acceptSecContext
+18:37:37  PROC: Na readline: SunNativeGSS: Precomputed mechToken length: 480
+18:37:37  PROC: Na readline: SunNativeGSS: Complete Token length: 495
+18:37:37  PROC: Na readline: SunNativeGSS: acceptSecContext=> inToken len=495
+18:37:37  PROC: Na readline: [GSSLibStub:1017] [GSSLibStub_acceptContext]
+18:37:37  PROC: Na readline: [GSSLibStub:1037] [GSSLibStub_acceptContext] before: pCred=4395834899616, pContext=0
+18:37:37  PROC: Na readline: [GSSLibStub:1054] [GSSLibStub_acceptContext] after: pCred=4395834899616, pContext=0, pDelegCred=0
+18:37:37  PROC: Na readline: SunNativeGSS: acceptSecContext=> outToken len=106
+18:37:37  PROC: Na readline: [GSSLibStub:1282] [GSSLibStub_getContextName] 0, isSrc=0
+18:37:37  PROC: Na readline: [GSSLibStub:535] [GSSLibStub_inquireContextAll] Status major/minor = 1080000/0
+18:37:37  PROC: Na readline: [GSSLibStub:537] c/r/s = 1/8/0 
+18:37:37  PROC: Na readline: PROCISFUN:false
+18:37:37  PROC: Jb println: TEST
+18:37:37  PROC: Jb println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QwGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBszxmvzRHvm2njATOhq/PyW/m7Kv65SsAkJSA5WVNGZrdRVl2PsShtUqEiYxpCc1PTmoDUgEFAJdoicq9cappP2Vea4A9r2beoNnsB4fY+zHq81g4+lnB8AaXVpW4srUfjBrSpgIeCaDeG7aw30OSZDO8Gle6ROBDd/VmSoi6YXqE/a8gtsWDFLoAoEdQKNk89P5pnvZvs/69GtpZT4t+3yfUL2pI6bhfOCxaLEvnpMdfVQIapIHAMIG9oAMCARGigbUEgbJju9/yll6P1YwkZIsOiTP9KFJo7I8dE3jxNlo66My83d8eKAUYLtstrIhg0AJuYRi3OCBezDRZTIt0OVXnZyIf12nfIx+RAbjqzeJT5oQxhylJ8sQVJWg1nhnfPSHfRIvvg4xeTIJER4Eb3Rx2d1JbrCIT6KU2L3bWGB8wx8KCeAxWtjdrX6i3FRD6Niz+JFaK8lzLJ63j/yBmVwy1KKDXuyvKHd+t6XGmOsYUE7QEijsI
+18:37:37  PROC: Jb readline: * call acceptSecContext
+18:37:37  PROC: Jb readline: PROCISFUN:false
+18:37:37  PROC: Ja println: TEST
+18:37:37  PROC: Ja println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QwGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBs1rN8IxGeqe7WQ7DR9eTeK3IyPcgWxdmKtYYH3nWfSpOFB5htQT1cdL65g9FynMk388H2hkA/4u/Djw7bvLtPv6fyEjg4wnb/Zn3dMBzi0UJoNRPsPnGRSMq3A3hcTuu6RvGVzpKMWNOWh2GTWlsLmFA4HGAKBW2+1zNwro/Yp4YEZ3p3FplCrgisUM9KNtnVLXv3qx9sdxADIzIprwOLJ1IUF2gyGPzPgfHSy/OBhpaEcZHpIHAMIG9oAMCARGigbUEgbLRpjD7LpIIxlzW/mc5454JxpGj4mEDzIoNrSmK4UHOelGK/jcZNvn+yD3Ty9QkNEI2o+7vX62MVsPZveMsBAS5UJQCJAbHTGIyl0NH0WbuW7SaKg1Kp4ORROE5O98eo/Ty43pKqbYpVjrVf7UJLV5Y9oMwADZe+HBAoJVT/nvtMO3t1TO4ICRa0o/z+36eAey8ZH4aM9BQF0r/HaKWymwEBAWGY1nh1iPBmx82lMohjO7W
+18:37:37  PROC: Ja readline: * call acceptSecContext
+18:37:37  PROC: Ja readline: PROCISFUN:true
+18:37:37  PROC: Ja println: TEST
+18:37:37  PROC: Ja println: YIIB6wYJKoZIhvcSAQICAQBuggHaMIIB1qADAgEFoQMCAQ6iBwMFACAAAACjgf1hgfowgfegAwIBBaENGwtSQUJCSVQuSE9MRaIdMBugAwIBAKEUMBIbBWhvc3QxGwlsb2NhbGhvc3SjgcEwgb6gAwIBEaKBtgSBsyp3VrjTn8BCmfLJQ2x8Wm+WExitqRYuuWNHBDcNdfpC28t5xz2a1/JuIl7LwtVVBUSJE5WFl2JJKXrFR0+NExqWYjjpcDMccVwCZA2Vsc+9PkDiWDJmK4k7hte7PdUM9uWI3RcOLCkxGpGakEWq7Z2g02ie9tOoKfRQjLOaQCFA9dpNnlswdEnBV1m+zU0Ieg9s2Z4hldGZaYflcNrDzbWN0diDsSYScBQc2UFfOm33mj2bpIHAMIG9oAMCARGigbUEgbL/M43tn0he+J/9FMl4NdgW0ugUy7Sx22gNagRywzIOKwRJTt2JL8Fn3BRby2dy5YUs/9p7ZFTXssLaETMozxIMpTOJM0uZoWKmHOn3kJjAK7U075MSAtJdgje+g3Yb1CGjTnXCuxAG3PtokYl7tbKkKLnAaopvxqeDSL/Gk10zIsVyio7lU7XGS2DwrZbV52DjJVvWgipBXZP2N7icd8lIrZdWRvWlP1TjX9kmEgZpjrjI
+18:37:37  PROC: Ja readline: * call acceptSecContext
+18:37:37  PROC: Ja readline: PROCISFUN:false
+18:37:37  PROC: C println: END
+18:37:37  PROC: Ja println: END
+18:37:37  PROC: Jb println: END
+18:37:37  PROC: Na println: END
+18:37:37  PROC: Nb println: END
+18:37:37  
+18:37:37  All Test Results
+18:37:37  ================
+18:37:37          req**  client    service  acceptor   Result
+18:37:37  ----  -------  ------  ---------  --------  -------
+18:37:37    0:      0**      c1    s2  (2)        Na   ++     
+18:37:37    1:      0        c1    s2  (2)        Jb   --     
+18:37:37    2:      1**      c2    s2  (4)        Nb   ++     
+18:37:37    3:      2**      c1    s0  (2)        Nb   ++     
+18:37:37    4:      3**      c4    s3  (2)        Ja   ++     
+18:37:37    5:      1        c2    s2  (4)        Nb   --     
+18:37:37    6:      3        c4    s3  (2)        Nb   --     
+18:37:37    7:      4**      c1    s0  (4)        Nb   ++     
+18:37:37    8:      2        c1    s0  (4)        Ja   --     
+18:37:37    9:      3        c4    s3  (2)        Ja   --     
+18:37:37   10:      5**      c4    s3  (4)        Ja   ++     
+18:37:37   11:      2        c1    s0  (4)        Ja   --     
+18:37:37   12:      5        c4    s3  (4)        Na   --     
+18:37:37   13:      1        c2    s2  (4)        Na   --     
+18:37:37   14:      6**      c2    s4  (2)        Nb   ++     
+18:37:37   15:      3        c4    s3  (4)        Na   --     
+18:37:37   16:      7**      c1    s2  (6)        Nb   ++     
+18:37:37   17:      4        c1    s0  (4)        Na   --     
+18:37:37   18:      1        c2    s2  (6)        Jb   --     
+18:37:37   19:      1        c2    s2  (6)        Jb   --     
+18:37:37   20:      8**      c1    s4  (4)        Jb   ++     
+18:37:37   21:      7        c1    s2  (6)        Jb   --     
+18:37:37   22:      2        c1    s0  (4)        Ja   --     
+18:37:37   23:      9**      c0    s0  (6)        Ja   ++     
+18:37:37   24:     10**      c3    s4  (6)        Jb   ++     
+18:37:37   25:     10        c3    s4  (6)        Nb   --     
+18:37:37   26:      0        c1    s2  (6)        Nb   --     
+18:37:37   27:     11**      c3    s1  (2)        Nb   ++     
+18:37:37   28:      6        c2    s4  (6)        Ja   --     
+18:37:37   29:     10        c3    s4  (6)        Ja   --     
+18:37:37   30:      1        c2    s2  (6)        Na   --     
+18:37:37   31:     12**      c3    s2  (8)        Ja   ++     
+18:37:37   32:     13**      c0    s2 (10)        Nb   ++     
+18:37:37   33:     14**      c4    s2 (12)        Na   ++     
+18:37:37   34:     15**      c2    s1  (4)        Na   ++     
+18:37:37   35:      9        c0    s0  (6)        Ja   --     
+18:37:37   36:      0        c1    s2 (12)        Nb   --     
+18:37:37   37:      7        c1    s2 (12)        Ja   --     
+18:37:37   38:     16**      c1    s4  (8)        Nb   ++     
+18:37:37   39:     17**      c3    s3  (6)        Nb   ++     
+18:37:37   40:      7        c1    s2 (12)        Ja   --     
+18:37:37   41:     18**      c1    s2 (14)        Na   --  xxx
+18:37:37   42:     19**      c0    s2 (16)        Ja   ++     
+18:37:37   43:     20**      c1    s0  (8)        Nb   ++     
+18:37:37   44:     21**      c3    s0 (10)        Jb   ++     
+18:37:37   45:     22**      c4    s3  (8)        Jb   ++     
+18:37:37   46:     12        c3    s2 (16)        Nb   --     
+18:37:37   47:      2        c1    s0 (10)        Jb   --     
+18:37:37   48:      6        c2    s4  (8)        Ja   --     
+18:37:37   49:     23**      c1    s1  (6)        Ja   ++     
+18:37:37   50:     24**      c3    s1  (8)        Na   ++     
+18:37:37   51:     15        c2    s1  (8)        Nb   --     
+18:37:37   52:     25**      c3    s3 (10)        Na   ++     
+18:37:37   53:     26**      c2    s4 (10)        Nb   ++     
+18:37:37   54:     20        c1    s0 (10)        Na   --     
+18:37:37   55:      3        c4    s3 (10)        Na   --     
+18:37:37   56:     27**      c1    s2 (18)        Nb   ++     
+18:37:37   57:     28**      c0    s1 (10)        Nb   ++     
+18:37:37   58:     29**      c4    s2 (20)        Ja   ++     
+18:37:37   59:     14        c4    s2 (20)        Nb   --     
+18:37:37   60:     26        c2    s4 (10)        Ja   --     
+18:37:37   61:     30**      c3    s4 (12)        Ja   ++     
+18:37:37   62:     23        c1    s1 (10)        Nb   --     
+18:37:37   63:     25        c3    s3 (10)        Jb   --     
+18:37:37   64:     31**      c0    s1 (12)        Jb   ++     
+18:37:37   65:     16        c1    s4 (12)        Ja   --     
+18:37:37   66:      8        c1    s4 (12)        Ja   --     
+18:37:37   67:     17        c3    s3 (10)        Ja   --     
+18:37:37   68:      7        c1    s2 (20)        Nb   --     
+18:37:37   69:     32**      c1    s2 (22)        Nb   ++     
+18:37:37   70:     31        c0    s1 (12)        Na   --     
+18:37:37   71:     24        c3    s1 (12)        Na   --     
+18:37:37   72:     33**      c3    s0 (12)        Na   ++     
+18:37:37   73:     34**      c4    s0 (14)        Nb   ++     
+18:37:37   74:      1        c2    s2 (22)        Nb   --     
+18:37:37   75:     28        c0    s1 (12)        Jb   --     
+18:37:37   76:      2        c1    s0 (14)        Jb   --     
+18:37:37   77:     35**      c2    s2 (24)        Ja   ++     
+18:37:37   78:     24        c3    s1 (12)        Na   --     
+18:37:37   79:     25        c3    s3 (10)        Ja   --     
+18:37:37   80:     36**      c4    s1 (14)        Ja   ++     
+18:37:37   81:     37**      c2    s2 (26)        Na   ++     
+18:37:37   82:     38**      c1    s2 (28)        Na   ++     
+18:37:37   83:     39**      c0    s1 (16)        Jb   ++     
+18:37:37   84:     39        c0    s1 (16)        Na   --     
+18:37:37   85:     40**      c1    s1 (18)        Nb   ++     
+18:37:37   86:     41**      c0    s1 (20)        Ja   ++     
+18:37:37   87:     42**      c3    s2 (30)        Ja   ++     
+18:37:37   88:     43**      c1    s3 (12)        Nb   ++     
+18:37:37   89:     23        c1    s1 (20)        Ja   --     
+18:37:37   90:      9        c0    s0 (14)        Jb   --     
+18:37:37   91:     44**      c1    s2 (32)        Jb   ++     
+18:37:37   92:     28        c0    s1 (20)        Na   --     
+18:37:37   93:     45**      c4    s4 (14)        Nb   ++     
+18:37:37   94:     46**      c2    s3 (14)        Nb   ++     
+18:37:37   95:      5        c4    s3 (14)        Ja   --     
+18:37:37   96:     31        c0    s1 (20)        Na   --     
+18:37:37   97:     20        c1    s0 (14)        Jb   --     
+18:37:37   98:     47**      c0    s0 (16)        Ja   ++     
+18:37:37   99:     40        c1    s1 (20)        Ja   --     
+18:37:37  
+18:37:37  Path of Reqs
+18:37:37  ============
+18:37:37    0 (c1 -> s2): Na(0) -> Jb(1) -> Nb(26) -> Nb(36)
+18:37:37    1 (c2 -> s2): Nb(2) -> Nb(5) -> Na(13) -> Jb(18) -> Jb(19) -> Na(30) -> Nb(74)
+18:37:37    2 (c1 -> s0): Nb(3) -> Ja(8) -> Ja(11) -> Ja(22) -> Jb(47) -> Jb(76)
+18:37:37    3 (c4 -> s3): Ja(4) -> Nb(6) -> Ja(9) -> Na(15) -> Na(55)
+18:37:37    4 (c1 -> s0): Nb(7) -> Na(17)
+18:37:37    5 (c4 -> s3): Ja(10) -> Na(12) -> Ja(95)
+18:37:37    6 (c2 -> s4): Nb(14) -> Ja(28) -> Ja(48)
+18:37:37    7 (c1 -> s2): Nb(16) -> Jb(21) -> Ja(37) -> Ja(40) -> Nb(68)
+18:37:37    8 (c1 -> s4): Jb(20) -> Ja(66)
+18:37:37    9 (c0 -> s0): Ja(23) -> Ja(35) -> Jb(90)
+18:37:37   10 (c3 -> s4): Jb(24) -> Nb(25) -> Ja(29)
+18:37:37   11 (c3 -> s1): Nb(27)
+18:37:37   12 (c3 -> s2): Ja(31) -> Nb(46)
+18:37:37   13 (c0 -> s2): Nb(32)
+18:37:37   14 (c4 -> s2): Na(33) -> Nb(59)
+18:37:37   15 (c2 -> s1): Na(34) -> Nb(51)
+18:37:37   16 (c1 -> s4): Nb(38) -> Ja(65)
+18:37:37   17 (c3 -> s3): Nb(39) -> Ja(67)
+18:37:37   18 (c1 -> s2): Na(41)xxx
+18:37:37   19 (c0 -> s2): Ja(42)
+18:37:37   20 (c1 -> s0): Nb(43) -> Na(54) -> Jb(97)
+18:37:37   21 (c3 -> s0): Jb(44)
+18:37:37   22 (c4 -> s3): Jb(45)
+18:37:37   23 (c1 -> s1): Ja(49) -> Nb(62) -> Ja(89)
+18:37:37   24 (c3 -> s1): Na(50) -> Na(71) -> Na(78)
+18:37:37   25 (c3 -> s3): Na(52) -> Jb(63) -> Ja(79)
+18:37:37   26 (c2 -> s4): Nb(53) -> Ja(60)
+18:37:37   27 (c1 -> s2): Nb(56)
+18:37:37   28 (c0 -> s1): Nb(57) -> Jb(75) -> Na(92)
+18:37:37   29 (c4 -> s2): Ja(58)
+18:37:37   30 (c3 -> s4): Ja(61)
+18:37:37   31 (c0 -> s1): Jb(64) -> Na(70) -> Na(96)
+18:37:37   32 (c1 -> s2): Nb(69)
+18:37:37   33 (c3 -> s0): Na(72)
+18:37:37   34 (c4 -> s0): Nb(73)
+18:37:37   35 (c2 -> s2): Ja(77)
+18:37:37   36 (c4 -> s1): Ja(80)
+18:37:37   37 (c2 -> s2): Na(81)
+18:37:37   38 (c1 -> s2): Na(82)
+18:37:37   39 (c0 -> s1): Jb(83) -> Na(84)
+18:37:37   40 (c1 -> s1): Nb(85) -> Ja(99)
+18:37:37   41 (c0 -> s1): Ja(86)
+18:37:37   42 (c3 -> s2): Ja(87)
+18:37:37   43 (c1 -> s3): Nb(88)
+18:37:37   44 (c1 -> s2): Jb(91)
+18:37:37   45 (c4 -> s4): Nb(93)
+18:37:37   46 (c2 -> s3): Nb(94)
+18:37:37   47 (c0 -> s0): Ja(98)
+18:37:37  
+18:37:37  STDERR:
+18:37:37  Nsanity started
+18:37:37  Ja started
+18:37:37  Jb started
+18:37:37  Na started
+18:37:37  Nb started
+18:37:37  java.lang.Exception
+18:37:37  	at ReplayCacheTestProc.main0(ReplayCacheTestProc.java:286)
+18:37:37  	at ReplayCacheTestProc.main(ReplayCacheTestProc.java:333)
+18:37:37  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+18:37:37  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+18:37:37  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+18:37:37  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+18:37:37  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+18:37:37  	at java.base/java.lang.Thread.run(Thread.java:836)
+18:37:37  java.lang.Exception
+18:37:37  	at ReplayCacheTestProc.main0(ReplayCacheTestProc.java:286)
+18:37:37  	at ReplayCacheTestProc.main(ReplayCacheTestProc.java:333)
+18:37:37  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+18:37:37  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+18:37:37  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+18:37:37  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+18:37:37  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+18:37:37  	at java.base/java.lang.Thread.run(Thread.java:836)
+18:37:37  
+18:37:37  JavaTest Message: Test threw exception: java.lang.Exception
+```

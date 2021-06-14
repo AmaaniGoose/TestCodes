@@ -1,0 +1,237 @@
+This occurred testing the 0.12 release branch.
+
+https://ci.eclipse.org/openj9/job/Test-extended.functional-JDK11-linux_390-64_cmprssptrs/147
+```
+FAILED: testMemoryLeaks
+java.lang.AssertionError: -Xcheck:memory failed: stderr = WARNING: 4443 unfreed blocks remaining at shutdown!
+WARNING: 0 blocks were ignored per ignoredCallsite parameter
+WARNING: only 32 most recent leaked blocks will be described
+port_shutdown_library describing block at 000003FF700137F0 (header at 000003FF700135F0):
+Wrapped block size is 2640, allocation number is 7818
+Block was allocated by StringTable.cpp:88
+First 32 bytes:
+000003FF700137F0: 00 00 00 00 00 00 00 08 00 00 01 08 00 00 01 94  ................
+000003FF70013800: 00 00 00 00 00 00 00 00 00 00 00 00 13 FF 4F 88  ..............O.
+port_shutdown_library describing block at 00000000870F1CD8 (header at 00000000870F1AD8):
+Wrapped block size is 32768, allocation number is 7812
+Block was allocated by segment.c:233
+First 32 bytes:
+00000000870F1CD0: -  -  -  -  -  -  -  -  00 00 00 00 87 0F 92 00          ........
+00000000870F1CE0: 00 00 00 00 86 EA 6C 00 00 00 00 00 87 09 03 00  ......l.........
+00000000870F1CF0: 00 00 00 00 86 EA 6C 00                          ......l.
+port_shutdown_library describing block at 00000000870E9328 (header at 00000000870E9128):
+Wrapped block size is 1032, allocation number is 7792
+Block was allocated by segment.c:233
+First 32 bytes:
+00000000870E9320: -  -  -  -  -  -  -  -  00 00 00 00 87 0E 94 00          ........
+00000000870E9330: E7 E7 87 0E 93 28 E7 E7 E7 E7 87 0E 93 28 E7 E7  .....(.......(..
+00000000870E9340: E7 E7 87 0E 93 28 E7 E7                          .....(..
+port_shutdown_library describing block at 000003FF60004B00 (header at 000003FF60004900):
+Wrapped block size is 1104, allocation number is 7788
+Block was allocated by segment.c:238
+First 32 bytes:
+000003FF60004B00: 00 00 04 50 00 00 00 00 00 00 01 E0 00 00 02 1A  ...P............
+000003FF60004B10: 00 00 10 30 0A 84 08 00 00 00 00 01 00 00 01 10  ...0............
+port_shutdown_library describing block at 000003FF70013390 (header at 000003FF70013190):
+Wrapped block size is 16, allocation number is 7786
+Block was allocated by jnicsup.cpp:1937
+First 16 bytes:
+000003FF70013390: 00 00 03 FF A0 A9 BC F8 00 00 00 00 00 00 00 00  ................
+port_shutdown_library describing block at 0000000086F62300 (header at 0000000086F62100):
+Wrapped block size is 1000, allocation number is 7784
+Block was allocated by segment.c:233
+First 32 bytes:
+0000000086F62300: 00 00 00 00 86 F6 24 00 E7 E7 86 F6 23 00 E7 E7  ......$.....#...
+0000000086F62310: E7 E7 86 F6 23 00 E7 E7 E7 E7 86 F6 23 00 E7 E7  ....#.......#...
+port_shutdown_library describing block at 000003FF70012780 (header at 000003FF70012580):
+Wrapped block size is 1992, allocation number is 7783
+Block was allocated by segment.c:427
+First 32 bytes:
+000003FF70012780: 00 00 00 00 00 00 00 04 00 00 00 40 00 00 03 3C  ...........@...<
+000003FF70012790: 00 00 00 00 00 00 00 00 00 00 00 00 30 A8 AC 88  ............0...
+port_shutdown_library describing block at 000003FF70012000 (header at 000003FF70011E00):
+Wrapped block size is 816, allocation number is 7779
+Block was allocated by segment.c:238
+First 32 bytes:
+000003FF70012000: 00 00 03 30 00 00 00 00 00 00 01 40 00 00 01 9C  ...0.......@....
+000003FF70012010: 00 00 10 30 08 84 08 00 00 00 00 01 00 00 00 CC  ...0............
+port_shutdown_library describing block at 000003FF70011B50 (header at 000003FF70011950):
+Wrapped block size is 94, allocation number is 7778
+Block was allocated by ROMClassBuilder.cpp:299
+First 32 bytes:
+000003FF70011B50: 6A 64 6B 2F 69 6E 74 65 72 6E 61 6C 2F 72 65 66  jdk/internal/ref
+000003FF70011B60: 2F 43 6C 65 61 6E 65 72 53 68 75 74 64 6F 77 6E  /CleanerShutdown
+port_shutdown_library describing block at 000003FF7000FDB0 (header at 000003FF7000FBB0):
+Wrapped block size is 6488, allocation number is 7773
+Block was allocated by StringTable.cpp:88
+First 32 bytes:
+000003FF7000FDB0: 00 00 00 00 00 00 00 00 00 00 03 FF A0 28 C0 80  .............(..
+000003FF7000FDC0: 00 00 03 FF 84 00 7F D0 00 00 03 FF A0 28 D3 60  .............(.`
+port_shutdown_library describing block at 000003FF60004650 (header at 000003FF60004450):
+Wrapped block size is 104, allocation number is 7767
+Block was allocated by jnicsup.cpp:1937
+First 32 bytes:
+000003FF60004650: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+000003FF60004660: 00 00 00 00 00 00 00 00 00 00 03 FF A0 A9 BC D0  ................
+port_shutdown_library describing block at 000003FF600041A0 (header at 000003FF60003FA0):
+Wrapped block size is 104, allocation number is 7766
+Block was allocated by jnicsup.cpp:1937
+First 32 bytes:
+000003FF600041A0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+000003FF600041B0: 00 00 00 00 00 00 00 00 00 00 03 FF A0 A9 BC A8  ................
+port_shutdown_library describing block at 000003FF60003CF0 (header at 000003FF60003AF0):
+Wrapped block size is 104, allocation number is 7765
+Block was allocated by jnicsup.cpp:1937
+First 32 bytes:
+000003FF60003CF0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+000003FF60003D00: 00 00 00 00 00 00 00 00 00 00 03 FF A0 A9 BC 80  ................
+port_shutdown_library describing block at 000003FF60001840 (header at 000003FF60001640):
+Wrapped block size is 8296, allocation number is 7760
+Block was allocated by trclog.c:1022
+First 32 bytes:
+000003FF60001840: 55 54 54 42 00 00 20 68 00 00 00 05 00 00 00 00  UTTB.. h........
+000003FF60001850: 00 00 03 FF 74 00 18 40 E7 E7 60 00 18 40 E7 E7  ....t..@..`..@..
+port_shutdown_library describing block at 000003FF74001840 (header at 000003FF74001640):
+Wrapped block size is 8296, allocation number is 7757
+Block was allocated by trclog.c:1022
+First 32 bytes:
+000003FF74001840: 55 54 54 42 00 00 20 68 00 00 00 05 00 00 00 00  UTTB.. h........
+000003FF74001850: 00 00 03 FF 6C 00 18 40 E7 E7 74 00 18 40 E7 E7  ....l..@..t..@..
+port_shutdown_library describing block at 000003FF6C001840 (header at 000003FF6C001640):
+Wrapped block size is 8296, allocation number is 7756
+Block was allocated by trclog.c:1022
+First 32 bytes:
+000003FF6C001840: 55 54 54 42 00 00 20 68 00 00 00 05 00 00 00 00  UTTB.. h........
+000003FF6C001850: 00 00 03 FF 70 00 18 60 E7 E7 6C 00 18 40 E7 E7  ....p..`..l..@..
+port_shutdown_library describing block at 000003FF68001840 (header at 000003FF68001640):
+Wrapped block size is 8296, allocation number is 7753
+Block was allocated by trclog.c:1022
+First 32 bytes:
+000003FF68001840: 55 54 54 42 00 00 20 68 00 00 00 05 00 00 00 00  UTTB.. h........
+000003FF68001850: 00 00 03 FF 84 00 18 40 E7 E7 68 00 18 40 E7 E7  .......@..h..@..
+port_shutdown_library describing block at 000003FFA0ADBA60 (header at 000003FFA0ADB860):
+Wrapped block size is 16, allocation number is 7732
+Block was allocated by vmthread.c:138
+First 16 bytes:
+000003FFA0ADBA60: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+port_shutdown_library describing block at 00000000870EAF80 (header at 00000000870EAD80):
+Wrapped block size is 3200, allocation number is 7731
+Block was allocated by vmthread.c:121
+First 32 bytes:
+00000000870EAF80: E7 E7 87 0E AF 80 E7 E7 E7 E7 87 0E AF 80 E7 E7  ................
+00000000870EAF90: E7 E7 87 0E AF 80 E7 E7 E7 E7 87 0E AF 80 E7 E7  ................
+port_shutdown_library describing block at 000003FFA0AD3F90 (header at 000003FFA0AD3D90):
+Wrapped block size is 16, allocation number is 7716
+Block was allocated by vmthread.c:138
+First 16 bytes:
+000003FFA0AD3F90: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+port_shutdown_library describing block at 00000000870E8258 (header at 00000000870E8058):
+Wrapped block size is 3200, allocation number is 7715
+Block was allocated by vmthread.c:121
+First 32 bytes:
+00000000870E8250: -  -  -  -  -  -  -  -  E7 E7 87 0E 82 58 E7 E7          .....X..
+00000000870E8260: E7 E7 87 0E 82 58 E7 E7 E7 E7 87 0E 82 58 E7 E7  .....X.......X..
+00000000870E8270: E7 E7 87 0E 82 58 E7 E7                          .....X..
+port_shutdown_library describing block at 000003FFA0ACB4B0 (header at 000003FFA0ACB2B0):
+Wrapped block size is 16, allocation number is 7700
+Block was allocated by vmthread.c:138
+First 16 bytes:
+000003FFA0ACB4B0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+port_shutdown_library describing block at 0000000086F61230 (header at 0000000086F61030):
+Wrapped block size is 3200, allocation number is 7699
+Block was allocated by vmthread.c:121
+First 32 bytes:
+0000000086F61230: E7 E7 86 F6 12 30 E7 E7 E7 E7 86 F6 12 30 E7 E7  .....0.......0..
+0000000086F61240: E7 E7 86 F6 12 30 E7 E7 E7 E7 86 F6 12 30 E7 E7  .....0.......0..
+port_shutdown_library describing block at 000003FFA0202060 (header at 000003FFA0201E60):
+Wrapped block size is 16, allocation number is 7684
+Block was allocated by vmthread.c:138
+First 16 bytes:
+000003FFA0202060: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+port_shutdown_library describing block at 0000000086F60160 (header at 0000000086F5FF60):
+Wrapped block size is 3200, allocation number is 7683
+Block was allocated by vmthread.c:121
+First 32 bytes:
+0000000086F60160: E7 E7 86 F6 01 60 E7 E7 E7 E7 86 F6 01 60 E7 E7  .....`.......`..
+0000000086F60170: E7 E7 86 F6 01 60 E7 E7 E7 E7 86 F6 01 60 E7 E7  .....`.......`..
+port_shutdown_library describing block at 000003FFA022BE50 (header at 000003FFA022BC50):
+Wrapped block size is 82, allocation number is 7672
+Block was allocated by stringhelpers.cpp:335
+First 32 bytes:
+000003FFA022BE50: 44 65 73 74 72 6F 79 4A 61 76 61 56 4D 20 68 65  DestroyJavaVM he
+000003FFA022BE60: 6C 70 65 72 20 74 68 72 65 61 64 00 BE 50 E7 E7  lper thread..P..
+port_shutdown_library describing block at 000003FFA018C820 (header at 000003FFA018C620):
+Wrapped block size is 12, allocation number is 7671
+Block was allocated by trcmain.c:1007
+First 12 bytes:
+000003FFA018C820: 4A 56 4D 56 4D 55 54 30 30 31 20 00              JVMVMUT001 .
+port_shutdown_library describing block at 000003FFA097F2C0 (header at 000003FFA097F0C0):
+Wrapped block size is 88, allocation number is 7670
+Block was allocated by trcmain.c:997
+First 32 bytes:
+000003FFA097F2C0: 55 54 54 44 00 00 00 58 00 00 00 05 00 00 00 00  UTTD...X........
+000003FFA097F2D0: 00 00 00 00 86 EA 59 00 00 00 03 FF A0 00 7A 30  ......Y.......z0
+port_shutdown_library describing block at 000003FFA000D530 (header at 000003FFA000D330):
+Wrapped block size is 104, allocation number is 7663
+Block was allocated by ../../omr/port/common/omrtlshelpers.c:65
+First 32 bytes:
+000003FFA000D530: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+000003FFA000D540: 00 00 00 02 FF FF FF 94 00 00 00 00 00 00 00 00  ................
+port_shutdown_library describing block at 000003FFA01ED6A0 (header at 000003FFA01ED4A0):
+Wrapped block size is 352, allocation number is 7661
+Block was allocated by TLHAllocationInterface.cpp:57
+First 32 bytes:
+000003FFA01ED6A0: 00 00 00 00 00 00 01 50 00 00 00 00 D6 A0 E7 E7  .......P........
+000003FFA01ED6B0: 00 00 03 FF 9F 6F 00 D8 00 00 03 FF 9F 68 65 B0  .....o.......he.
+port_shutdown_library describing block at 000003FFA018C220 (header at 000003FFA018C020):
+Wrapped block size is 88, allocation number is 7660
+Block was allocated by OwnableSynchronizerObjectBufferStandard.cpp:47
+First 32 bytes:
+000003FFA018C220: 00 00 00 00 00 00 00 48 00 00 00 00 C2 20 E7 E7  .......H..... ..
+000003FFA018C230: 00 00 03 FF 9F 6F 28 68 00 00 03 FF 9F 69 87 90  .....o(h.....i..
+port_shutdown_library describing block at 000003FFA01F2BC0 (header at 000003FFA01F29C0):
+Wrapped block size is 88, allocation number is 7659
+Block was allocated by UnfinalizedObjectBufferStandard.cpp:47
+First 32 bytes:
+000003FFA01F2BC0: 00 00 00 00 00 00 00 48 00 00 00 00 2B C0 E7 E7  .......H....+...
+000003FFA01F2BD0: 00 00 03 FF 9F 6F 2C B8 00 00 03 FF 9F 69 92 D8  .....o,......i..
+Memory checker statistics:
+Total blocks allocated = 7893 ( = most recent allocationNumber)
+Total blocks freed = 3450
+Total bytes allocated = 16931858
+Total bytes freed = 2736649
+Total unknown blocks ignored = 0
+High water blocks allocated = 4646
+High water bytes allocated = 14520606
+Largest block ever allocated = size 833616, allocation number 315
+Failed allocation attempts = 0
+4443 allocated blocks totaling 14195209 bytes were not freed before shutdown!
+
+	at org.testng.AssertJUnit.fail(AssertJUnit.java:59)
+	at org.testng.AssertJUnit.assertTrue(AssertJUnit.java:24)
+	at org.openj9.test.vmArguments.VmArgumentTests.testMemoryLeaks(VmArgumentTests.java:1264)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+	at org.testng.TestRunner.run(TestRunner.java:505)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+	at org.testng.TestNG.runSuites(TestNG.java:1049)
+	at org.testng.TestNG.run(TestNG.java:1017)
+	at org.testng.TestNG.privateMain(TestNG.java:1354)
+	at org.testng.TestNG.main(TestNG.java:1323)
+```

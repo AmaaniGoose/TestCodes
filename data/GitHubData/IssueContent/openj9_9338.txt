@@ -1,0 +1,235 @@
+Failure link: https://ci.adoptopenjdk.net/job/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/69
+
+Running on Apr 2020 quarterly release build:
+```
+20:54:01  "/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdkbinary/j2sdk-image/Contents/Home/bin/..//bin/java" -version
+20:54:01  openjdk version "14.0.1" 2020-04-14
+20:54:01  OpenJDK Runtime Environment AdoptOpenJDK (build 14.0.1+7)
+20:54:01  Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.20.0, JRE 14 Mac OS X amd64-64-Bit 20200422_47 (JIT enabled, AOT enabled)
+20:54:01  OpenJ9   - 05fa2d361
+20:54:01  OMR      - d4365f371
+20:54:01  JCL      - 5757187cae based on jdk-14.0.1+7)
+```
+
+Test can be rerun via: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=14&JDK_IMPL=openj9&BUILD_LIST=openjdk&PLATFORM=x86-64_mac_xl&TARGET=jdk_util_j9_0
+
+Failure appears to be intermittent - found a reference to it in https://github.com/AdoptOpenJDK/openjdk-tests/issues/1511 but no individual issue.
+
+Test output around failing test case:
+```
+22:09:30  TEST: java/util/regex/RegExTest.java
+22:09:30  TEST JDK: /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdkbinary/j2sdk-image/Contents/Home/bin/..
+22:09:30  
+22:09:30  ACTION: build -- Passed. All files up to date
+22:09:30  REASON: User specified action: run build jdk.test.lib.RandomFactory 
+22:09:30  TIME:   0.001 seconds
+22:09:30  messages:
+22:09:30  command: build jdk.test.lib.RandomFactory
+22:09:30  reason: User specified action: run build jdk.test.lib.RandomFactory 
+22:09:30  elapsed time (seconds): 0.001
+22:09:30  
+22:09:30  ACTION: build -- Passed. Build successful
+22:09:30  REASON: Named class compiled on demand
+22:09:30  TIME:   0.809 seconds
+22:09:30  messages:
+22:09:30  command: build RegExTest
+22:09:30  reason: Named class compiled on demand
+22:09:30  Test directory:
+22:09:30    compile: RegExTest
+22:09:30  elapsed time (seconds): 0.809
+22:09:30  
+22:09:30  ACTION: compile -- Passed. Compilation successful
+22:09:30  REASON: .class file out of date or does not exist
+22:09:30  TIME:   0.808 seconds
+22:09:30  messages:
+22:09:30  command: compile /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/regex/RegExTest.java
+22:09:30  reason: .class file out of date or does not exist
+22:09:30  Mode: agentvm
+22:09:30  Agent id: 0
+22:09:30  elapsed time (seconds): 0.808
+22:09:30  configuration:
+22:09:30  Boot Layer (javac runtime environment)
+22:09:30    class path: /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/jvmtest/openjdk/jtreg/lib/javatest.jar 
+22:09:30                /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+22:09:30    patch:      java.base /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/patches/java.base
+22:09:30  
+22:09:30  javac compilation environment
+22:09:30    source path: /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/regex
+22:09:30                 /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/lib/testlibrary/java/lang
+22:09:30                 /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/lib
+22:09:30    class path:  /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/regex
+22:09:30                 /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/java/util/regex/RegExTest.d
+22:09:30                 /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/lib/testlibrary/java/lang
+22:09:30                 /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/test/lib
+22:09:30  
+22:09:30  rerun:
+22:09:30  cd /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/scratch/0 && \
+22:09:30  HOME=/Users/jenkins \
+22:09:30  PATH=/bin:/usr/bin:/usr/sbin \
+22:09:30      /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdkbinary/j2sdk-image/Contents/Home/bin/../bin/javac \
+22:09:30          -J-ea \
+22:09:30          -J-esa \
+22:09:30          -J-Xmx512m \
+22:09:30          -J-Xdump:system:none \
+22:09:30          -J-Xdump:heap:none \
+22:09:30          -J-Xdump:system:events=gpf+abort+traceassert+corruptcache \
+22:09:30          -J-Dtest.class.path.prefix=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/java/util/regex/RegExTest.d:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/regex:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/lib/testlibrary/java/lang:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/test/lib \
+22:09:30          -J-Dtest.file=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/regex/RegExTest.java \
+22:09:30          -J-Dtest.src=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/regex \
+22:09:30          -J-Dtest.src.path=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/regex:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/lib/testlibrary/java/lang:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/lib \
+22:09:30          -J-Dtest.classes=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/java/util/regex/RegExTest.d \
+22:09:30          -J-Dtest.class.path=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/java/util/regex/RegExTest.d:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/lib/testlibrary/java/lang:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/test/lib \
+22:09:30          -J-Dtest.vm.opts='-ea -esa -Xmx512m -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache' \
+22:09:30          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-Xdump:system:none -J-Xdump:heap:none -J-Xdump:system:events=gpf+abort+traceassert+corruptcache' \
+22:09:30          -J-Dtest.compiler.opts= \
+22:09:30          -J-Dtest.java.opts= \
+22:09:30          -J-Dtest.jdk=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdkbinary/j2sdk-image/Contents/Home/bin/.. \
+22:09:30          -J-Dcompile.jdk=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdkbinary/j2sdk-image/Contents/Home/bin/.. \
+22:09:30          -J-Dtest.timeout.factor=8.0 \
+22:09:30          -J-Dtest.root=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+22:09:30          -d /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/java/util/regex/RegExTest.d \
+22:09:30          -sourcepath /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/regex:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/lib/testlibrary/java/lang:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/lib \
+22:09:30          -classpath /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/regex:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/java/util/regex/RegExTest.d:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/lib/testlibrary/java/lang:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/test/lib /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/regex/RegExTest.java
+22:09:30  
+22:09:30  ACTION: main -- Failed. Execution failed: `main' threw exception: java.lang.NullPointerException
+22:09:30  REASON: User specified action: run main RegExTest 
+22:09:30  TIME:   42.934 seconds
+22:09:30  messages:
+22:09:30  command: main RegExTest
+22:09:30  reason: User specified action: run main RegExTest 
+22:09:30  Mode: agentvm
+22:09:30  Agent id: 0
+22:09:30  elapsed time (seconds): 42.934
+22:09:30  configuration:
+22:09:30  Boot Layer
+22:09:30    class path: /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/jvmtest/openjdk/jtreg/lib/javatest.jar 
+22:09:30                /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+22:09:30    patch:      java.base /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/patches/java.base
+22:09:30  
+22:09:30  Test Layer
+22:09:30    class path: /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/java/util/regex/RegExTest.d
+22:09:30                /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/regex
+22:09:30                /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/lib/testlibrary/java/lang
+22:09:30                /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/lib/testlibrary/java/lang
+22:09:30                /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/test/lib
+22:09:30                /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/lib
+22:09:30  
+22:09:30  rerun:
+22:09:30  cd /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/scratch/0 && \
+22:09:30  HOME=/Users/jenkins \
+22:09:30  PATH=/bin:/usr/bin:/usr/sbin \
+22:09:30      /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdkbinary/j2sdk-image/Contents/Home/bin/../bin/java \
+22:09:30          -Dtest.class.path.prefix=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/java/util/regex/RegExTest.d:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/regex:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/lib/testlibrary/java/lang:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/test/lib \
+22:09:30          -Dtest.file=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/regex/RegExTest.java \
+22:09:30          -Dtest.src=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/regex \
+22:09:30          -Dtest.src.path=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/regex:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/lib/testlibrary/java/lang:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/lib \
+22:09:30          -Dtest.classes=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/java/util/regex/RegExTest.d \
+22:09:30          -Dtest.class.path=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/java/util/regex/RegExTest.d:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/lib/testlibrary/java/lang:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/test/lib \
+22:09:30          -Dtest.vm.opts='-ea -esa -Xmx512m -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache' \
+22:09:30          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-Xdump:system:none -J-Xdump:heap:none -J-Xdump:system:events=gpf+abort+traceassert+corruptcache' \
+22:09:30          -Dtest.compiler.opts= \
+22:09:30          -Dtest.java.opts= \
+22:09:30          -Dtest.jdk=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdkbinary/j2sdk-image/Contents/Home/bin/.. \
+22:09:30          -Dcompile.jdk=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdkbinary/j2sdk-image/Contents/Home/bin/.. \
+22:09:30          -Dtest.timeout.factor=8.0 \
+22:09:30          -Dtest.root=/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+22:09:30          -classpath /Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/java/util/regex/RegExTest.d:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/regex:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/lib/testlibrary/java/lang:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/jdk/lib/testlibrary/java/lang:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/TKG/test_output_15875852407910/jdk_util_j9_0/work/classes/0/test/lib:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/openjdk-tests/openjdk/openjdk-jdk/test/lib:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/jvmtest/openjdk/jtreg/lib/javatest.jar:/Users/jenkins/workspace/Test_openjdk14_j9_sanity.openjdk_x86-64_mac_xl/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+22:09:30          RegExTest
+22:09:30  STDERR:
+22:09:30  TestCases.txt                 : Passed
+22:09:30  BMPTestCases.txt              : Passed
+22:09:30  SupplementaryTestCases.txt    : Passed
+22:09:30  Boyer Moore (ASCII)           : Passed
+22:09:30  Boyer Moore (Supplementary)   : Passed
+22:09:30  Slice                         : Passed
+22:09:30  Slice (Supplementary)         : Passed
+22:09:30  Escape sequences              : Passed
+22:09:30  Blank input                   : Passed
+22:09:30  Global Substitution           : Passed
+22:09:30  SB Substitution               : Passed
+22:09:30  SB Substitution 2             : Passed
+22:09:30  Substitution Basher           : Passed
+22:09:30  Substitution Basher 2         : Passed
+22:09:30  Canonical Equivalence         : Passed
+22:09:30  Anchors                       : Passed
+22:09:30  Matches                       : Passed
+22:09:30  Looking At                    : Passed
+22:09:30  Pattern Matches               : Passed
+22:09:30  Lookbehind                    : Passed
+22:09:30  Null Argument                 : Passed
+22:09:30  BackRef                       : Passed
+22:09:30  GroupCapture                  : Passed
+22:09:30  Caret                         : Passed
+22:09:30  CharClass                     : Passed
+22:09:30  EmptyPattern                  : Passed
+22:09:30  FindInt                       : Passed
+22:09:30  Group0                        : Passed
+22:09:30  LongPattern                   : Passed
+22:09:30  Octal                         : Passed
+22:09:30  Ampersand                     : Passed
+22:09:30  Negation                      : Passed
+22:09:30  Split                         : Passed
+22:09:30  Append                        : Passed
+22:09:30  Case Folding                  : Passed
+22:09:30  Comments                      : Passed
+22:09:30  Unix Lines                    : Passed
+22:09:30  Replace First                 : Passed
+22:09:30  \G                            : Passed
+22:09:30  \Z                            : Passed
+22:09:30  Serialization                 : Passed
+22:09:30  Reluctant Repetition          : Passed
+22:09:30  Multiline Dollar              : Passed
+22:09:30  Dollar at End                 : Passed
+22:09:30  Caret between terminators     : Passed
+22:09:30  Java character classes        : Passed
+22:09:30  Non capturing repetition      : Passed
+22:09:30  Not captured GroupCurly       : Passed
+22:09:30  Escaped segment               : Passed
+22:09:30  Literal pattern               : Passed
+22:09:30  Literal replacement           : Passed
+22:09:30  Regions                       : Passed
+22:09:30  toString                      : Passed
+22:09:30  Negated Character Class       : Passed
+22:09:30  Check for alternating find    : Passed
+22:09:30  Region bounds transparency    : Passed
+22:09:30  Unicode word boundary         : Passed
+22:09:30  Caret at end                  : Passed
+22:09:30  Customer word search          : Passed
+22:09:30  hitEnd                        : Passed
+22:09:30  toMatchResult is a copy       : Passed
+22:09:30  toMatchResult2 appropriate exceptions: Passed
+22:09:30  Surrogate pair in Unicode escape: Passed
+22:09:30  Remove Q/E Quoting            : Passed
+22:09:30  NamedGroupCapture             : Passed
+22:09:30  NonBmpClassComplement         : Passed
+22:09:30  unicodeProperties             : Passed
+22:09:30  unicodeHexNotation            : Passed
+22:09:30  unicodePredefinedClasses      : Passed
+22:09:30  unicodeCharacterName          : Passed
+22:09:30  horizontalAndVerticalWSTest   : Passed
+22:09:30  linebreakTest                 : Passed
+22:09:30  branchTest                    : Passed
+22:09:30  GroupCurly NotFoundSupp       : Passed
+22:09:30  GroupCurly backoff            : Passed
+22:09:30  Pattern.asPredicate           : Passed
+22:09:30  Pattern.asMatchPredicate      : Passed
+22:09:30  Invalid compile flags         : Passed
+22:09:30  java.lang.NullPointerException
+22:09:30  	at java.base/java.util.regex.Pattern.compile(Pattern.java:1070)
+22:09:30  	at RegExTest.embeddedFlags(RegExTest.java:4780)
+22:09:30  	at RegExTest.main(RegExTest.java:183)
+22:09:30  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+22:09:30  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+22:09:30  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+22:09:30  	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+22:09:30  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+22:09:30  	at java.base/java.lang.Thread.run(Thread.java:835)
+22:09:30  
+22:09:30  JavaTest Message: Test threw exception: java.lang.NullPointerException
+22:09:30  JavaTest Message: shutting down test
+22:09:30  
+22:09:30  STDOUT:
+22:09:30  Seed from RandomFactory = -7765903138658859649L
+22:09:30  
+22:09:30  TEST RESULT: Failed. Execution failed: `main' threw exception: java.lang.NullPointerException
+```

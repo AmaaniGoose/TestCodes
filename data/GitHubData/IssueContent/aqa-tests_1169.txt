@@ -1,0 +1,7 @@
+Create a Bill of Materials (BoM) to include with the release that contains:
+
+- SHAs of test repos used
+
+- Summary of test targets ran & results
+
+- Listing of disabled tests

@@ -1,0 +1,9 @@
+In constant pool creation process, there are several functions that have redundant call stack or duplicate code/function calls
+
+```
+ClassFileOracle::markConstantAsUsedByAnnotation
+ConstantPoolMap::getROMClassCPIndex
+ConstantPoolMap::getROMClassCPIndexForAnnotation
+```
+
+related: #1594 

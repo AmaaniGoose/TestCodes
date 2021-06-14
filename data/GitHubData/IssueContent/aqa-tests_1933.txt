@@ -1,0 +1,7 @@
+Related: https://github.com/AdoptOpenJDK/openjdk-build/pull/1812
+
+As we are about to build an 'adopt_bundle' we should verify that it is performant (startup and runtime metrics).  We can also measure JRE perf and compare against it using various [performance benchmarks](https://github.com/AdoptOpenJDK/openjdk-tests/tree/master/perf) we have in the suite.
+
+Since the project now has some bare-metal machines for some platforms (labelled ci.role.perf), we will focus our runs on those machines/platforms.  
+
+Initially we can run these tests in Grinders, but need to incorporate them into our overall pipeline story and configure the TRSS server (trss.adoptopenjdk.net) to monitor the runs so we can store historical data and watch for trends/regressions.

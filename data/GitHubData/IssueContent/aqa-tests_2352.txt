@@ -1,0 +1,50 @@
+java/net/Inet6Address/B6558853.java.B6558853
+https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_extended.openjdk_ppc64_aix/17/testReport/junit/java_net_Inet6Address_B6558853/java/B6558853/
+OpenJ9 only:
+```
+13:27:44  openjdk version "1.8.0_292"
+13:27:44  OpenJDK Runtime Environment (build 1.8.0_292-202103091149-b05)
+13:27:44  Eclipse OpenJ9 VM (build openj9-0.26.0-m1, JRE 1.8.0 AIX ppc64-64-Bit Compressed References 20210309_991 (JIT enabled, AOT enabled)
+13:27:44  OpenJ9   - b227feba2
+13:27:44  OMR      - 4665e2f72
+13:27:44  JCL      - 1780cbc92b based on jdk8u292-b05)
+```
+```
+14:20:54  cd /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16152971712534/jdk_net_0/work/scratch && \
+14:20:54  DISPLAY=:0 \
+14:20:54  HOME=/home/jenkins \
+14:20:54  LANG=en_US \
+14:20:54  PATH=/bin:/usr/bin:/usr/sbin \
+14:20:54  TZ=CST6CDT \
+14:20:54      /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/bin/java \
+14:20:54          -Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+14:20:54          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+14:20:54          -Dtest.compiler.opts= \
+14:20:54          -Dtest.java.opts= \
+14:20:54          -Dtest.jdk=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image \
+14:20:54          -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image \
+14:20:54          -Dtest.timeout.factor=8.0 \
+14:20:54          -Dtest.root=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test \
+14:20:54          -Dtest.name=java/net/Inet6Address/B6558853.java \
+14:20:54          -Dtest.file=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/net/Inet6Address/B6558853.java \
+14:20:54          -Dtest.src=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/net/Inet6Address \
+14:20:54          -Dtest.src.path=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/net/Inet6Address \
+14:20:54          -Dtest.classes=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16152971712534/jdk_net_0/work/classes/java/net/Inet6Address \
+14:20:54          -Dtest.class.path=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16152971712534/jdk_net_0/work/classes/java/net/Inet6Address \
+14:20:54          -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16152971712534/jdk_net_0/work/classes/java/net/Inet6Address:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/net/Inet6Address \
+14:20:54          -classpath /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16152971712534/jdk_net_0/work/classes/java/net/Inet6Address:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/net/Inet6Address:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/lib/tools.jar:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+14:20:54          B6558853
+14:20:54  STDOUT:
+14:20:54  Using /fe80:0:0:0:58c6:cbff:fe91:9b05%en1
+14:20:54  STDERR:
+14:20:54  java.lang.RuntimeException: Wrong address: fe80:0:0:0:58c6:cbff:fe91:9b05
+14:20:54  	at B6558853.main(B6558853.java:71)
+14:20:54  	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+14:20:54  	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+14:20:54  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+14:20:54  	at java.lang.reflect.Method.invoke(Method.java:498)
+14:20:54  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:312)
+14:20:54  	at java.lang.Thread.run(Thread.java:823)
+14:20:54  
+14:20:54  JavaTest Message: Test threw exception: java.lang.RuntimeException
+```

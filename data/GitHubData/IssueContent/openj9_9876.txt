@@ -1,0 +1,93 @@
+Failure link
+------------
+
+From an internal build `acceptance build 449148`:
+```
+java version "1.8.0_261"
+Java(TM) SE Runtime Environment (build 8.0.7.0 - pxz3180sr7-20200528_02(SR7))
+IBM J9 VM (build 2.9, JRE 1.8.0 Linux s390-31-Bit 20200614_449148 (JIT enabled, AOT enabled)
+OpenJ9   - ca6b724
+OMR      - 4e3a0f4
+IBM      - 49b6835)
+JCL - 20200528_01 based on Oracle jdk8u261-b76
+```
+
+Optional info
+-------------
+
+- intermittent failure (yes): 
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+===============================================
+Running test decompileAtMethodResolve_0 ...
+===============================================
+decompileAtMethodResolve_0 Start Time: Sun Jun 14 09:59:37 2020 Epoch Time (ms): 1592153977324
+"/j9vm/ascii/builds/bld_449148/sdk/xz3180/bin/java" -Xshareclasses:destroyAll; "/j9vm/ascii/builds/bld_449148/sdk/xz3180/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+JVMSHRC005I No shared class caches available
+JVMSHRC005I No shared class caches available
+cache cleanup done
+variation: NoOptions
+JVM_OPTIONS:  
+{ itercnt=1; \
+	mkdir -p "/tmp/bld_449148/decompileAtMethodResolve_0"; \
+	cd "/tmp/bld_449148/decompileAtMethodResolve_0"; \
+	"/j9vm/ascii/builds/bld_449148/sdk/xz3180/bin/java"   \
+	-XXdecomp:forceDecompile "-Xjit:count=0,limit={*.test*},rtresolve" -Xrunjdwp:transport=dt_socket,address=8888,server=y,onthrow=no.pkg.foo,launch=echo \
+	-cp "/j9vm/ascii/builds/bld_449148/jvmtest/test/SE80/functional/cmdLineTests/jvmtitests/jvmtitest.jar" com.ibm.jvmti.tests.decompileAtMethodResolve.ResolveTest; \
+	if [ $? -eq 0 ] ; then echo ""; echo "decompileAtMethodResolve_0""_PASSED"; echo ""; cd /j9vm/ascii/builds/bld_449148/jvmtest/test/SE80;  else perl "-I/j9vm/ascii/builds/bld_449148/../../javatest/HEAD_382595/test/lib/perl" -mResultStore::Uploader -e "ResultStore::Uploader::upload('.',449148,646668515,'vmfarm.ottawa.ibm.com:31','results-646668515')"; echo ""; echo "decompileAtMethodResolve_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/tmp/bld_449148/TestTargetResult";
+
+Starting test: Mixed
+Unhandled exception
+Type=Illegal instruction vmState=0x00000000
+J9Generic_Signal_Number=00000048 Signal_Number=00000004 Error_Value=00000000 Signal_Code=00000001
+Handler1=7C518CD0 Handler2=7C7654B8
+gpr0=00000016 gpr1=7D1E9EA4 gpr2=0000000E gpr3=7C66975C
+gpr4=79DCD25A gpr5=77733568 gpr6=00000000 gpr7=2FFC63C8
+gpr8=00000000 gpr9=10015B58 gpr10=00000028 gpr11=10015B80
+gpr12=7C63F7A8 gpr13=7C669900 gpr14=7B5F1000 gpr15=7D1E9ED8
+hgpr0=7D2B3000 hgpr1=77733568 hgpr2=7C66974C hgpr3=00000000
+hgpr4=00000000 hgpr5=00000000 hgpr6=7D2B3640 hgpr7=0000010E
+hgpr8=00000001 hgpr9=0000010E hgpr10=7C166000 hgpr11=7BECA18C
+hgpr12=FC1452EA hgpr13=00000000 hgpr14=00000000 hgpr15=00000000
+psw=F9DCD262 mask=070DD000 fpc=00080000 bea=77733568
+fpr0 3ff0000000000000 (f: 0.000000, d: 1.000000e+00)
+fpr1 4030000000000000 (f: 0.000000, d: 1.600000e+01)
+fpr2 400000007c7eaaa0 (f: 2088675968.000000, d: 2.000001e+00)
+fpr3 3eceb40024924925 (f: 613566784.000000, d: 3.660098e-06)
+fpr4 4010000000000000 (f: 0.000000, d: 4.000000e+00)
+fpr5 3c8c14b092492492 (f: 2454267136.000000, d: 4.871246e-17)
+fpr6 4100000000000000 (f: 0.000000, d: 1.310720e+05)
+fpr7 3e2bfc7a92492492 (f: 2454267136.000000, d: 3.258028e-09)
+fpr8 3ce7168800000000 (f: 0.000000, d: 2.563284e-15)
+fpr9 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+fpr10 3c07528400000000 (f: 0.000000, d: 1.580382e-19)
+fpr11 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+fpr12 388f3d0900000000 (f: 0.000000, d: 2.937647e-36)
+fpr13 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+fpr14 3e17cee700000000 (f: 0.000000, d: 1.385820e-09)
+fpr15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+
+Compiled_method=com/ibm/jvmti/tests/decompileAtMethodResolve/ResolveTest1Super.test()V
+Target=2_90_20200614_449148 (Linux 2.6.32-754.23.1.el6.s390x)
+CPU=s390 (4 logical CPUs) (0xf34e0000 RAM)
+----------- Stack Backtrace -----------
+(0x7C783278 [libj9prt29.so+0x37278])
+(0x7C7667E6 [libj9prt29.so+0x1a7e6])
+(0x7C78330C [libj9prt29.so+0x3730c])
+(0x7C783402 [libj9prt29.so+0x37402])
+(0x7C7830CA [libj9prt29.so+0x370ca])
+(0x7C7667E6 [libj9prt29.so+0x1a7e6])
+(0x7C783162 [libj9prt29.so+0x37162])
+(0x7C518C30 [libj9vm29.so+0x91c30])
+(0x7C7667E6 [libj9prt29.so+0x1a7e6])
+(0x7C518DEC [libj9vm29.so+0x91dec])
+(0x7C765712 [libj9prt29.so+0x19712])
+(0x7D1E9CE0 [<unknown>+0x0])
+(0x79DCD262 [<unknown>+0x0])
+---------------------------------------
+```
+
+Only one occurrence in a 100x grinder.

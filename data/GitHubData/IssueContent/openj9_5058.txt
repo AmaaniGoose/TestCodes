@@ -1,0 +1,23 @@
+We determined to port a complete runtime environment including OpenJDK11 + OpenJ9 + OMR (without JIT) to the RISC-V development board (e.g. HiFive Unleashed with Linux support / please refer to https://www.sifive.com/boards/hifive-unleashed for details) to get it work on the board.
+
+According to the explanation of RISC-V cross-compilers at https://www.lowrisc.org/docs/untether-v0.2/riscv_compile/, the JDK /JRE is supposed to be executed with Linux support in the user mode as the JVM /application is multiple-threaded.
+
+
+Overall, there are a bunch of prerequisites before compiling OpenJ9:
+- the Freedom E SDK (https://github.com/sifive/freedom-e-sdk) + openOCD ready for use (already offered on the website at https://www.sifive.com)
+- compile a cross compiler with glibc support:  e.g. riscv-unknown-linux-gnu-gcc based on the instructions at https://github.com/riscv/riscv-gnu-toolchain; if OK, check whether it works good with simple test.
+- probably need the Yocto build system (https://www.yoctoproject.org/ or https://github.com/riscv/meta-riscv) to build everything including a Linux/RISC-V kernel  (https://github.com/riscv/riscv-linux), a root file system image, a bootloader, a toolchain, QEMU, etc.
+- (to be added if anything else)
+
+Considering the complexity & unexpected challenges during the porting, the project will be split into at least 4 sub-tasks as follows to be accomplished to achieve our goal:
+- compile a build without JIT on Linux (changed all request config/setting to get it work) to ensure it works good as expected; if everything goes well, all changes will be added to the compilation with riscv-unknown-linux-gnu-gcc.
+- import the FFI code (libffi) for RISC-V support to OpenJ9 (https://github.com/libffi/libffi/tree/master/src/riscv / need to open an Eclipse CQ for that)
+- figure out whether we need to modify the related config/setting in the Freedom E SDK and how to integrate them into the config/setting in OpenJDK11 + OpenJ9 + OMR to ensure the build is compiled with riscv-unknown-linux-gnu-gcc.
+- might need to run via an Emulator (e.g. QEMU) on the host to ensure it works before uploading.
+- figure out how to flash/upload the compiled build & the Linux port to the development board to get it executed/tested.
+- (to be added if anything else)
+
+The issue at #11136 was created separately to track the progress of OpenJ9 JIT on RISC-V.
+Another issue at https://github.com/eclipse-openj9/openj9/issues/12699 for the CI pipline environment setup.
+
+FYI: @DanHeidinga , @pshipton, @tajila 

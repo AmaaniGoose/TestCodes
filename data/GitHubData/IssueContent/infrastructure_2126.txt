@@ -1,0 +1,17 @@
+If the repos are not enabled before running the `yum update` task, ansible will hit this error
+
+```
+fatal: [test-ibm-aix71-ppc64-1]: FAILED! => {"changed": false, "msg": "There are no enabled repos.\n
+Run \"yum repolist all\" to see the repos you have.\n 
+You can enable repos with yum-config-manager --enable <repo>\n"
+, "rc": 1, "results": []}
+```
+
+The repos we use are 
+```
+AIX_Toolbox
+AIX_Toolbox_71
+AIX_Toolbox_noarch
+```
+
+Disabled repos listed in /opt/freeware/etc/yum/yum.conf will have `enabled=0` listed under each repo entry. Its just a case of having an ansible task which ensures that `enabled=1` is present, or something equivalent, before running the `yum update` task

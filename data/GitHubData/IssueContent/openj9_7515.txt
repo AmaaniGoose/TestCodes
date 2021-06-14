@@ -1,0 +1,14 @@
+Failure link
+------------
+
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_sanity.openjdk_ppc64le_linux_Release/1/consoleFull
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+15:57:01  Error: JDK not found: /home/jenkins/jenkins-agent/workspace/Test_openjdk8_j9_sanity.openjdk_ppc64le_linux_Release/openjdkbinary/j2re-image
+15:57:01  
+15:57:01  jdk_math_jre_0_FAILED
+```

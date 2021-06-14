@@ -1,0 +1,14 @@
+https://ci.adoptopenjdk.net/job/Test_openjdk16_hs_extended.openjdk_x86-32_windows/9/consoleFull
+```
+12:03:11  Unrecognized VM option 'ReduceBulkZeroing'
+12:03:11  Unrecognized VM option 'StressGCM'
+12:03:37  Unrecognized VM option 'MaxVectorSize=8'
+12:06:36  Unrecognized VM option 'SplitIfBlocks'
+12:09:06  Unrecognized VM option 'SuperWordLoopUnrollAnalysis'
+12:23:32  Unrecognized VM option 'LoopUnrollLimit=250'
+12:24:24  Unrecognized VM option 'PartialPeelLoop'
+12:24:24  Unrecognized VM option 'LoopMaxUnroll=0'
+12:24:51  Unrecognized VM option 'UseLoopPredicate'
+12:29:07  Unrecognized VM option 'DoEscapeAnalysis'
+12:29:54  Unrecognized VM option 'UseCountedLoopSafepoints'
+```

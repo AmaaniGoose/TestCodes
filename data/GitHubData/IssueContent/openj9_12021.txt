@@ -1,0 +1,38 @@
+Hi,
+
+I'm doing a POC with OpenJ9, currently on Hotspot, and if successful then adopt it more widely.
+
+### Issue overview
+While running performance tests I've encountered an issue which takes the services down.
+The performance test is separated in 2: roughly same parts of the code are executed in both 1st & 2nd part.
+The problem always appear at the 2nd part, more than 1h into the test.
+Around 10min after 2nd part starts, the `Used class storage` metric (see NR JVM stats attached, green line) goes up.
+Shortly after, the service health checks fail and task is taken down.
+Surprisingly the 1st part of the test doesn't trigger that metric to go up.
+
+Also, not setting `-Xmcrs125M` allowed the `Used class storage` usage to go up significantly.
+
+Any ideas what is happening in this scenario?  How can I get this under control? 
+I am worried a similar situation might happen in PROD causing an outage.
+
+Thank you.
+
+### What I've tried
+I had one performance test run with `-Xgcpolicy:balanced` which didn't have the above issue, but added higher latencies. 
+
+### Setup details
+Spring Boot 2.4.1 / Reactive stack
+Running in AWS ECS on Fargate `v1.4.0`
+Base Docker image: `adoptopenjdk:11-jre-openj9`
+JDK version: `openj9-0.24.0`, Java version: `11.0.10`
+JVM flags: 
+
+- `JAVA_TOOL_OPTIONS=-XX:MaxRAMPercentage=50 -Xmcrs125M -Duser.timezone=UTC -Dreactor.netty.ioWorkerCount=16`
+- `OPENJ9_JAVA_OPTIONS=-Xscmx100m -verbose:sizes -Xshareclasses:name=openj9_system_scc,cacheDir=/opt/java/.scc,readonly,verbose -Xtune:virtualized`
+
+The SCC has been regenerated previously; so it's not the initial one found in base Docker image.
+
+Check green line in screenshots below:
+![Screenshot 2021-02-22 at 17 21 03](https://user-images.githubusercontent.com/5630684/108746865-c6439880-7534-11eb-9de0-72f88dc4520d.png)
+![Screenshot 2021-02-22 at 17 23 01](https://user-images.githubusercontent.com/5630684/108746883-c93e8900-7534-11eb-987b-9acf1ea94054.png)
+

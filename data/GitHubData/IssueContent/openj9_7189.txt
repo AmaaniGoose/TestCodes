@@ -1,0 +1,22 @@
+I was running some of my own tests in a memory constrained situation. Sometimes I saw messages such as this in the console:
+
+```
+Exception in thread "MemoryMXBean notification dispatcher" java.lang.OutOfMemoryError: Java heap space
+	at java.util.Properties.load0(Properties.java:389)
+	at java.util.Properties.load(Properties.java:364)
+	at com.ibm.oti.vm.MsgHelp.loadMessages(MsgHelp.java:204)
+	at com.ibm.oti.util.PriviAction.run(PriviAction.java:172)
+	at java.security.AccessController.doPrivileged(AccessController.java:678)
+	at com.ibm.oti.util.Msg.<clinit>(Msg.java:63)
+	at java.lang.ThreadGroup.uncaughtException(ThreadGroup.java:872)
+	at java.lang.ThreadGroup.uncaughtException(ThreadGroup.java:866)
+	at java.lang.Thread.uncaughtException(Thread.java:1332)
+```
+The printStackTrace() method has careful handling of OutOfMemoryError but `uncaughtException(Thread t, Throwable e)` seems to get another OOME getting message K0319 which could hide the original exception.
+
+```
+		// No parent group, has to be 'system' Thread Group
+		// K0319 = Exception in thread "{0}" 
+		System.err.print(com.ibm.oti.util.Msg.getString("K0319", t.getName())); //$NON-NLS-1$
+		e.printStackTrace(System.err);
+```

@@ -1,0 +1,45 @@
+The following Error was encountered when attempting to process a customer's dump on z/OS, and it prevented the dump from being parsed:
+
+```
+DTFJView version 4.29.5, using DTFJ version 1.12.29003
+Loading image from DTFJ...
+
+Exception in thread "main" java.lang.Error: tbc
+    at com.ibm.j9ddr.corereaders.tdump.zebedee.le.DsaStackFrame.getCallingAddr(DsaStackFrame.java:652)
+    at com.ibm.j9ddr.corereaders.tdump.zebedee.le.DsaStackFrame.processDsfmt(DsaStackFrame.java:460)
+    at com.ibm.j9ddr.corereaders.tdump.zebedee.le.DsaStackFrame.ceextbck(DsaStackFrame.java:284)
+    at com.ibm.j9ddr.corereaders.tdump.zebedee.le.DsaStackFrame.<init>(DsaStackFrame.java:121)
+    at com.ibm.j9ddr.corereaders.tdump.zebedee.le.DsaStackFrame.getParentFrame(DsaStackFrame.java:222)
+    at com.ibm.j9ddr.corereaders.tdump.TDumpReader$TCBAdapter.getStackFrames(TDumpReader.java:1314)
+    at com.ibm.j9ddr.corereaders.tdump.TDumpReader$TCBAdapter.getStackSymbols(TDumpReader.java:1234)
+    at com.ibm.j9ddr.corereaders.tdump.TDumpReader$EdbAdapter.getStackSymbols(TDumpReader.java:827)
+    at com.ibm.j9ddr.corereaders.tdump.TDumpReader$EdbAdapter.loadModules(TDumpReader.java:671)
+    at com.ibm.j9ddr.corereaders.tdump.TDumpReader$EdbAdapter.getModules(TDumpReader.java:659)
+    at com.ibm.j9ddr.corereaders.tdump.TDumpReader$EdbAdapter.getModules(TDumpReader.java:1)
+    at com.ibm.j9ddr.VMDataFactory.getStructureDataFileFromSymbol(VMDataFactory.java:394)
+    at com.ibm.j9ddr.VMDataFactory.getStructureDataFile(VMDataFactory.java:331)
+    at com.ibm.j9ddr.VMDataFactory.getAllVMData(VMDataFactory.java:153)
+    at com.ibm.j9ddr.VMDataFactory.getVMData(VMDataFactory.java:117)
+    at com.ibm.j9ddr.view.dtfj.image.J9DDRImageProcess.getRuntimes(J9DDRImageProcess.java:427)
+    at com.ibm.dtfj.image.j9.ImageFactory.hasJavaRuntime(ImageFactory.java:449)
+    at com.ibm.dtfj.image.j9.ImageFactory.foundImage(ImageFactory.java:380)
+    at com.ibm.dtfj.image.j9.ImageFactory.getImage(ImageFactory.java:208)
+    at com.ibm.jvm.dtfjview.commands.OpenCommand.imagesFromCommandLine(OpenCommand.java:115)
+    at com.ibm.jvm.dtfjview.commands.OpenCommand.run(OpenCommand.java:83)
+    at com.ibm.java.diagnostics.utils.Context.tryCommand(Context.java:141)
+    at com.ibm.java.diagnostics.utils.Context.execute(Context.java:97)
+    at com.ibm.jvm.dtfjview.CombinedContext.execute(CombinedContext.java:179)
+    at com.ibm.jvm.dtfjview.CombinedContext.execute(CombinedContext.java:163)
+    at com.ibm.jvm.dtfjview.Session.imageFromCommandLine(Session.java:650)
+    at com.ibm.jvm.dtfjview.Session.sessionInit(Session.java:262)
+    at com.ibm.jvm.dtfjview.Session.<init>(Session.java:179)
+    at com.ibm.jvm.dtfjview.Session.getInstance(Session.java:171)
+    at com.ibm.jvm.dtfjview.DTFJView.launch(DTFJView.java:58)
+```
+
+This appears to be a very rare corner case, but it should be possible to handle the situation gracefully, even if it means that the problematic thread stack is incomplete. In the words of the support team:
+
+> An error getting an NSI from one thread downstack shouldn't prevent the
+> com.ibm.dtfj.image.j9.ImageFactory.getImage call from completing.
+
+Right now the dump is available for examination in IBM's support environment, but it will be removed when the main support case is closed. (The main case does not depend on this issue being resolved in DTFJ, because a workaround has been implemented in the specific piece of DTFJ-based tooling the support team needed to use in their investigation.)

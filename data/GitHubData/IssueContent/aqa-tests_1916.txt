@@ -1,0 +1,27 @@
+**Describe the bug**
+The system test times out, with an instance of the SolverTest hogging each of the threads.
+
+With tests chosen at random in that kind of load test, the tests that *don't* overrun are completed quickly, and replaced by another test from the bucket. So, eventually, all of the concurrent threads are held by one of the test types that *does* overrun, which is what's happened here.
+
+**To Reproduce**
+[Test_openjdk8_hs_extended.system_s390x_linux #256/UtilLoadTest_0](https://trss.adoptopenjdk.net/output/test?id=5f1a07cc0bec7975aef8ace0)
+
+**Additional context**
+```
+[2020-07-23T19:44:52.150Z] ULT "load-2" #10 prio=5 os_prio=0 tid=0x000003ffb047ade0 nid=0xa2b runnable [0x000003ff9de52000]
+[2020-07-23T19:44:52.150Z] ULT    java.lang.Thread.State: RUNNABLE
+[2020-07-23T19:44:52.150Z] ULT 	at net.adoptopenjdk.test.util.solver.SolverTest.processNextCard(SolverTest.java:160)
+[2020-07-23T19:44:52.150Z] ULT 	at net.adoptopenjdk.test.util.solver.SolverTest.processNextCard(SolverTest.java:175)
+[2020-07-23T19:44:52.150Z] ULT 	at net.adoptopenjdk.test.util.solver.SolverTest.processNextCard(SolverTest.java:175)
+[2020-07-23T19:44:52.150Z] ULT 	at net.adoptopenjdk.test.util.solver.SolverTest.processNextCard(SolverTest.java:175)
+[2020-07-23T19:44:52.150Z] ULT 	at net.adoptopenjdk.test.util.solver.SolverTest.processNextCard(SolverTest.java:175)
+[2020-07-23T19:44:52.150Z] ULT 	at net.adoptopenjdk.test.util.solver.SolverTest.processNextCard(SolverTest.java:175)
+[2020-07-23T19:44:52.150Z] ULT 	at net.adoptopenjdk.test.util.solver.SolverTest.processNextCard(SolverTest.java:175)
+[2020-07-23T19:44:52.150Z] ULT 	at net.adoptopenjdk.test.util.solver.SolverTest.processNextCard(SolverTest.java:175)
+[2020-07-23T19:44:52.150Z] ULT 	at net.adoptopenjdk.test.util.solver.SolverTest.processNextCard(SolverTest.java:175)
+[2020-07-23T19:44:52.150Z] ULT 	at net.adoptopenjdk.test.util.solver.SolverTest.processNextCard(SolverTest.java:175)
+[2020-07-23T19:44:52.150Z] ULT 	at net.adoptopenjdk.test.util.solver.SolverTest.processNextCard(SolverTest.java:175)
+[2020-07-23T19:44:52.150Z] ULT 	at net.adoptopenjdk.test.util.solver.SolverTest.processNextCard(SolverTest.java:175)
+[2020-07-23T19:44:52.150Z] ULT 	at net.adoptopenjdk.test.util.solver.SolverTest.processNextCard(SolverTest.java:175)
+[2020-07-23T19:44:52.150Z] ULT 	at net.adoptopenjdk.test.util.solver.SolverTest.testSolution(SolverTest.java:78)
+```

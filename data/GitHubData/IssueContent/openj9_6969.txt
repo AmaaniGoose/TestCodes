@@ -1,0 +1,2 @@
+All fields in `TR_J9SharedCache` with the exception of `_fe` are identical and thus it make sense to make them static (together with the methods that access them). This would save some allocations because there is one `TR_J9SharedCache` object per frontend object (thus per vmthread). On the surface only compilation threads need to look at the `TR_J9SharedCache` objects, but, as discovered in #6965, during the sampling process any application thread may want to look at SCC hints and for this it needs to create a frontend and a `TR_J9SharedCache` object.
+

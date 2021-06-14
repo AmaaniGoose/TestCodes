@@ -1,0 +1,14 @@
+Java version: Eclipse OpenJ9 VM, version 11.0.2+9
+--------------------
+
+Summary of problem
+------------------
+
+Segmentation errors are appearing in the liberty FAT tests.
+
+Diagnostic files
+----------------
+
+This is a console.log file from a failing test. More diagnostic files are available at https://libfsvip.hursley.ibm.com/liberty/dev/SOE/BucketOutput/2019-11-04/com.ibm.ws.transaction_fat_java7/_wD12oPxEEemwhO4H9O23bA.zip under the path servers/com.ibm.ws.transaction-02-11-2019-02-00-45
+
+[console.log](https://github.com/eclipse/openj9/files/3820593/console.log)

@@ -1,0 +1,5 @@
+The process of deciding what to compile when is somewhat simple in that it's based on invocation counts; however, these counts can also be decremented via sampling. 
+
+Additionally, the more complicated procedure is deciding what the optimization level should be. This depends on whether the JVM thinks the application is in startup, whether the compilation is an AOT compilation, sampling, etc. 
+
+Both of these processes should be documented.

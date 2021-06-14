@@ -1,0 +1,16 @@
+This issue is created based on discussion on #10976
+https://github.com/eclipse/openj9/pull/10976#issuecomment-715483281
+https://github.com/eclipse/openj9/pull/10976#issuecomment-715508411
+
+GRA runs liveness analysis to get local liveness, and use it to assign regiesters. The local liveness info is stored in block, and is used by codegen in gc map computation.
+
+However, post-GRA transformations will manipulate CFG and break the liveness info, resulting in bad gc map. A gc map related defect is hard to debug, and it's not obvious for a JIT developer to know the dependency between GRA and gc map correctness.
+
+We can either
+1. Run liveness info in codegen. However, optimizer has shutdown in codegen, liveness analysis may not work at this stage
+2. Fix up liveness info manually in places that manupulates CFG. This should work for simple CFG manipulation, transformations that only expands a tree/block to several blocks. Places that manipulate CFG include the following
+ a. acmp helper and array store check lowering
+ b. jprofiling
+3. If 1 and 2 are not possible, we should invalidate liveness info. This will cause codegen to conservatively compute gc map for locals: locals with collected reference will be live on all gc points.
+
+We should try 1 as it is the simplest approach if works. 3 may have performance impact as it will prolong local liveness.

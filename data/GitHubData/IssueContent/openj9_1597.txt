@@ -1,0 +1,15 @@
+`genZeroInitObject2()` has an assume which can trigger for no good reason:
+```
+      switch (objectSize)
+         {
+         case 8:
+            generateMemRegInstruction(MOVQMemReg, node, generateX86MemoryReference(targetReg, headerSize + offset, cg), scratchReg, cg);
+            break;
+         case 4:
+            generateMemRegInstruction(MOVDMemReg, node, generateX86MemoryReference(targetReg, headerSize + offset, cg), scratchReg, cg);
+            break;
+         default:
+            TR_ASSERT(false, "residue should only be 4 or 8.");
+         }
+```
+It's quite common that `objectSize` being tested in the `switch` statement above is 0. The entire `switch` should be executed only for `objectSize > 0`

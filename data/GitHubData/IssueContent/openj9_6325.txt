@@ -1,0 +1,6 @@
+For performance considerations, investigate and implement a dynamic polymorphic inline cache (PIC) solution for interface dispatches.  Exploit the capabilities and work around the limitations of the AArch64 architecture in the solution.
+
+Extend the solution to include PIC slots that can be initialized at compile-time via profiling information.
+
+As a bonus, consider architecting the solution to this as the basis for a common, cross-platform interface PIC solution where the implementation is written largely in C++ and can be specialized by each architecture.
+

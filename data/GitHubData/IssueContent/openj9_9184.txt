@@ -1,0 +1,2 @@
+There are some relaxations we can take for regular final fields in LocalCSE as mentioned in https://github.com/eclipse/omr/pull/4926#issuecomment-609868083
+As suggested in https://github.com/eclipse/omr/pull/4926#issuecomment-609916953, We should add a Java Specific query to OpenJ9 for Local CSE so that we do not force the Java Specific semantics to OMR semantics. I am opening up this issue to continue discussions here. 

@@ -1,0 +1,60 @@
+**Test Info**
+Test Name: renaissance-db-shootout_0
+Test Duration: 45 sec
+Machine: test-sxamb-armv7l-raspbian-pi4
+TRSS link for the test output: https://trss.adoptopenjdk.net/output/test?id=5ffa171c2bad7850660776fa
+
+
+**Build Info**
+Build Name: Test_openjdk11_hs_extended.perf_arm_linux
+Jenkins Build start time: Jan 09 2021, 01:46 pm
+Jenkins Build URL: https://ci.adoptopenjdk.net/job/Test_openjdk11_hs_extended.perf_arm_linux/1/
+TRSS link for the build: https://trss.adoptopenjdk.net/allTestsInfo?buildId=5ffa16382bad785066077481
+
+Based on console output, it would appear that this benchmark may only be applicable to amd 64bit systems due to a dependent lib in use:
+
+```
+[2021-01-09T19:54:54.163Z] Error during tear-down: null
+[2021-01-09T19:54:54.163Z] java.lang.NullPointerException
+[2021-01-09T19:54:54.163Z] 	at org.lmdbjava.bench.LevelDb$CommonLevelDb.teardown(LevelDb.java:128)
+[2021-01-09T19:54:54.163Z] 	at org.lmdbjava.bench.LevelDb$Reader.teardown(LevelDb.java:233)
+[2021-01-09T19:54:54.163Z] 	at org.renaissance.database.DbShootout.tearDownAfterAll(DbShootout.scala:80)
+[2021-01-09T19:54:54.163Z] 	at org.renaissance.RenaissanceBenchmark.runBenchmark(RenaissanceBenchmark.java:97)
+[2021-01-09T19:54:54.163Z] 	at org.renaissance.RenaissanceSuite$.$anonfun$main$2(renaissance-suite.scala:308)
+[2021-01-09T19:54:54.163Z] 	at org.renaissance.RenaissanceSuite$.$anonfun$main$2$adapted(renaissance-suite.scala:306)
+[2021-01-09T19:54:54.163Z] 	at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)
+[2021-01-09T19:54:54.163Z] 	at scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)
+[2021-01-09T19:54:54.163Z] 	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)
+[2021-01-09T19:54:54.163Z] 	at org.renaissance.RenaissanceSuite$.main(renaissance-suite.scala:306)
+[2021-01-09T19:54:54.163Z] 	at org.renaissance.RenaissanceSuite.main(renaissance-suite.scala)
+[2021-01-09T19:54:54.163Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-01-09T19:54:54.163Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2021-01-09T19:54:54.163Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-01-09T19:54:54.163Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+[2021-01-09T19:54:54.163Z] 	at org.renaissance.Launcher.main(Launcher.java:18)
+[2021-01-09T19:54:54.164Z] Exception occurred in org.renaissance.database.DbShootout@6e35bc3d: Could not load library. Reasons: [no leveldbjni64-1.8 in java.library.path: [/usr/java/packages/lib, /lib, /usr/lib], no leveldbjni-1.8 in java.library.path: [/usr/java/packages/lib, /lib, /usr/lib], no leveldbjni in java.library.path: [/usr/java/packages/lib, /lib, /usr/lib], /tmp/libleveldbjni-64-1-18376265094432061618.8: /tmp/libleveldbjni-64-1-18376265094432061618.8: cannot open shared object file: No such file or directory (Possible cause: can't load AMD 64-bit .so on a AARCH64-bit platform)]
+[2021-01-09T19:54:54.164Z] java.lang.UnsatisfiedLinkError: Could not load library. Reasons: [no leveldbjni64-1.8 in java.library.path: [/usr/java/packages/lib, /lib, /usr/lib], no leveldbjni-1.8 in java.library.path: [/usr/java/packages/lib, /lib, /usr/lib], no leveldbjni in java.library.path: [/usr/java/packages/lib, /lib, /usr/lib], /tmp/libleveldbjni-64-1-18376265094432061618.8: /tmp/libleveldbjni-64-1-18376265094432061618.8: cannot open shared object file: No such file or directory (Possible cause: can't load AMD 64-bit .so on a AARCH64-bit platform)]
+[2021-01-09T19:54:54.164Z] 	at org.fusesource.hawtjni.runtime.Library.doLoad(Library.java:187)
+[2021-01-09T19:54:54.164Z] 	at org.fusesource.hawtjni.runtime.Library.load(Library.java:143)
+[2021-01-09T19:54:54.164Z] 	at org.fusesource.leveldbjni.JniDBFactory.<clinit>(JniDBFactory.java:48)
+[2021-01-09T19:54:54.164Z] 	at org.lmdbjava.bench.LevelDb$CommonLevelDb.setup(LevelDb.java:118)
+[2021-01-09T19:54:54.164Z] 	at org.lmdbjava.bench.LevelDb$Reader.setup(LevelDb.java:227)
+[2021-01-09T19:54:54.164Z] 	at org.renaissance.database.DbShootout.setUpBeforeAll(DbShootout.scala:62)
+[2021-01-09T19:54:54.164Z] 	at org.renaissance.RenaissanceBenchmark.runBenchmark(RenaissanceBenchmark.java:74)
+[2021-01-09T19:54:54.164Z] 	at org.renaissance.RenaissanceSuite$.$anonfun$main$2(renaissance-suite.scala:308)
+[2021-01-09T19:54:54.164Z] 	at org.renaissance.RenaissanceSuite$.$anonfun$main$2$adapted(renaissance-suite.scala:306)
+[2021-01-09T19:54:54.164Z] 	at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)
+[2021-01-09T19:54:54.164Z] 	at scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)
+[2021-01-09T19:54:54.164Z] 	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)
+[2021-01-09T19:54:54.164Z] 	at org.renaissance.RenaissanceSuite$.main(renaissance-suite.scala:306)
+[2021-01-09T19:54:54.164Z] 	at org.renaissance.RenaissanceSuite.main(renaissance-suite.scala)
+[2021-01-09T19:54:54.164Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-01-09T19:54:54.164Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2021-01-09T19:54:54.164Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-01-09T19:54:54.164Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+[2021-01-09T19:54:54.164Z] 	at org.renaissance.Launcher.main(Launcher.java:18)
+[2021-01-09T19:54:54.164Z] The following benchmarks failed: db-shootout
+[2021-01-09T19:54:54.164Z] 
+```
+
+Once confirmed, this renaissance-db-shootout target may need to be excluded on certain platforms (arm, aarch64, s390x, ppc64le and win32 need to be excluded).

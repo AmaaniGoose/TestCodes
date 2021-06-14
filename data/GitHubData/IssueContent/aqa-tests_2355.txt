@@ -1,0 +1,107 @@
+com/sun/jndi/ldap/LdapTimeoutTest.java.LdapTimeoutTest
+https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_extended.openjdk_x86-32_windows/14/consoleFull
+```
+12:45:18  openjdk version "1.8.0_292"
+12:45:18  OpenJDK Runtime Environment (build 1.8.0_292-202103091148-b05)
+12:45:18  Eclipse OpenJ9 VM (build openj9-0.26.0-m1, JRE 1.8.0 Windows Server 2012 R2 x86-32-Bit 20210309_870 (JIT enabled, AOT enabled)
+12:45:18  OpenJ9   - b227feba2
+12:45:18  OMR      - 4665e2f72
+12:45:18  JCL      - 1780cbc92b based on jdk8u292-b05)
+```
+```
+12:54:08  [TestNG] Running:
+12:54:08    com/sun/jndi/ldap/LdapTimeoutTest.java
+12:54:08  
+12:54:08  Starting diagnostic output (probe)
+12:54:08  config LdapTimeoutTest.beforeTest(): success
+12:54:08  (probe) expected [ms.]: 0, actual [ms.]: 0
+12:54:08  (probe) expected [ms.]: 500, actual [ms.]: 580
+12:54:08  (probe) expected [ms.]: 1000, actual [ms.]: 1000
+12:54:08  (probe) expected [ms.]: 1500, actual [ms.]: 1500
+12:54:08  (probe) expected [ms.]: 2000, actual [ms.]: 1999
+12:54:08  (probe) expected [ms.]: 2500, actual [ms.]: 2507
+12:54:08  (probe) expected [ms.]: 3000, actual [ms.]: 2999
+12:54:08  (probe) expected [ms.]: 3500, actual [ms.]: 3573
+12:54:08  (probe) expected [ms.]: 4000, actual [ms.]: 4000
+12:54:08  (probe) expected [ms.]: 4500, actual [ms.]: 4519
+12:54:08  (probe) expected [ms.]: 5000, actual [ms.]: 5183
+12:54:08  (probe) expected [ms.]: 5500, actual [ms.]: 5572
+12:54:08  (probe) expected [ms.]: 6000, actual [ms.]: 6047
+12:54:08  (probe) expected [ms.]: 6500, actual [ms.]: 6502
+12:54:08  (probe) expected [ms.]: 7000, actual [ms.]: 7000
+12:54:08  (probe) expected [ms.]: 7500, actual [ms.]: 7499
+12:54:08  (probe) expected [ms.]: 8000, actual [ms.]: 8000
+12:54:08  (probe) expected [ms.]: 8500, actual [ms.]: 8499
+12:54:08  (probe) expected [ms.]: 9000, actual [ms.]: 8999
+12:54:08  (probe) expected [ms.]: 9500, actual [ms.]: 9500
+12:54:08  (probe) expected [ms.]: 10000, actual [ms.]: 10010
+12:54:08  (probe) expected [ms.]: 500, actual [ms.]: 508
+12:54:08  (probe) expected [ms.]: 1000, actual [ms.]: 1022
+12:54:08  (probe) expected [ms.]: 1500, actual [ms.]: 1520
+12:54:08  (probe) expected [ms.]: 2000, actual [ms.]: 2015
+12:54:08  (probe) expected [ms.]: 2500, actual [ms.]: 2501
+12:54:08  (probe) expected [ms.]: 3000, actual [ms.]: 3004
+12:54:08  (probe) expected [ms.]: 3500, actual [ms.]: 3506
+12:54:08  (probe) expected [ms.]: 4000, actual [ms.]: 4165
+12:54:08  (probe) expected [ms.]: 4500, actual [ms.]: 4499
+12:54:08  (probe) expected [ms.]: 5000, actual [ms.]: 5013
+12:54:08  (probe) expected [ms.]: 5500, actual [ms.]: 5500
+12:54:08  (probe) expected [ms.]: 6000, actual [ms.]: 6031
+12:54:08  (probe) expected [ms.]: 6500, actual [ms.]: 6506
+12:54:08  (probe) expected [ms.]: 7000, actual [ms.]: 7008
+12:54:08  java.util.ServiceConfigurationError: com.sun.jndi.ldap.spi.LdapDnsProvider: Provider dnsprovider.MissingDnsProvider not found
+12:54:08  	at java.util.ServiceLoader.fail(ServiceLoader.java:239)
+12:54:08  	at java.util.ServiceLoader.access$300(ServiceLoader.java:185)
+12:54:08  	at java.util.ServiceLoader$LazyIterator.nextService(ServiceLoader.java:372)
+12:54:08  	at java.util.ServiceLoader$LazyIterator.next(ServiceLoader.java:404)
+12:54:08  	at java.util.ServiceLoader$1.next(ServiceLoader.java:480)
+12:54:08  	at com.sun.jndi.ldap.LdapDnsProviderService.lookupEndpoints(LdapDnsProviderService.java:101)
+12:54:08  	at com.sun.jndi.ldap.LdapCtxFactory.getUsingURL(LdapCtxFactory.java:166)
+12:54:08  	at com.sun.jndi.ldap.LdapCtxFactory.getUsingURLs(LdapCtxFactory.java:243)
+12:54:08  	at com.sun.jndi.ldap.LdapCtxFactory.getLdapCtxInstance(LdapCtxFactory.java:154)
+12:54:08  	at com.sun.jndi.ldap.LdapCtxFactory.getInitialContext(LdapCtxFactory.java:84)
+12:54:08  	at javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:684)
+12:54:08  	at javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:313)
+12:54:08  	at javax.naming.InitialContext.init(InitialContext.java:244)
+12:54:08  	at javax.naming.InitialContext.<init>(InitialContext.java:216)
+12:54:08  	at javax.naming.directory.InitialDirContext.<init>(InitialDirContext.java:101)
+12:54:08  	at LdapTimeoutTest.test2(LdapTimeoutTest.java:161)
+12:54:08  	at LdapTimeoutTest.lambda$test$1(LdapTimeoutTest.java:113)
+12:54:08  	at LdapTimeoutTest$$Lambda$4/0x00000000.call(Unknown Source)
+12:54:08  	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+12:54:08  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+12:54:08  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+12:54:08  	at java.lang.Thread.run(Thread.java:823)
+12:54:08  test LdapTimeoutTest.test(): failure
+12:54:08  java.lang.RuntimeException: 1 (sub)tests failed
+12:54:08  	at LdapTimeoutTest.test(LdapTimeoutTest.java:132)
+12:54:08  	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+12:54:08  	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+12:54:08  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+12:54:08  	at java.lang.reflect.Method.invoke(Method.java:498)
+12:54:08  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+12:54:08  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+12:54:08  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+12:54:08  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+12:54:08  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+12:54:08  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+12:54:08  	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+12:54:08  	at org.testng.TestRunner.run(TestRunner.java:623)
+12:54:08  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+12:54:08  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+12:54:08  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+12:54:08  	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+12:54:08  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+12:54:08  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+12:54:08  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+12:54:08  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+12:54:08  	at org.testng.TestNG.run(TestNG.java:1018)
+12:54:08  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+12:54:08  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+12:54:08  	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+12:54:08  	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+12:54:08  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+12:54:08  	at java.lang.reflect.Method.invoke(Method.java:498)
+12:54:08  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+12:54:08  	at java.lang.Thread.run(Thread.java:823)
+```

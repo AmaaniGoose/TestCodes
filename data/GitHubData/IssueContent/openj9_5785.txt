@@ -1,0 +1,129 @@
+Java -version output
+--------------------
+
+```
+openjdk version "1.8.0_212"
+OpenJDK Runtime Environment (build 1.8.0_212-b03)
+Eclipse OpenJ9 VM (build openj9-0.14.0, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20190417_286 (JIT enabled, AOT enabled)
+OpenJ9   - bad1d4d06
+OMR      - 4a4278e6
+JCL      - 5590c4f818 based on jdk8u212-b03)
+```
+
+```
+openjdk version "11.0.3" 2019-04-16
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.3+7)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.14.0, JRE 11 Linux amd64-64-Bit Compressed References 20190417_202 (JIT enabled, AOT enabled)
+OpenJ9   - bad1d4d06
+OMR      - 4a4278e6
+JCL      - 5cc996a803 based on jdk-11.0.3+7)
+```
+
+```
+openjdk version "12.0.1" 2019-04-16
+OpenJDK Runtime Environment AdoptOpenJDK (build 12.0.1+12)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.14.1, JRE 12 Linux amd64-64-Bit Compressed References 20190418_66 (JIT enabled, AOT enabled)
+OpenJ9   - 412258978
+OMR      - 4a4278e6
+JCL      - 9fad1c64af based on jdk-12.0.1+12)
+```
+
+Summary of problem
+------------------
+
+The JVMTI event `JVMTI_EVENT_EXCEPTION_CATCH` is not generated if the exception is caught in native code. The [JVMTI documentation](https://docs.oracle.com/javase/8/docs/platform/jvmti/jvmti.html#ExceptionCatch) indicates, that the event should be generated "as soon as control is returned to a Java programming language method". The OpenJDK HotSpot VM currently has the same [issue](https://bugs.openjdk.java.net/browse/JDK-8223812).
+
+The behavior is the same for all OpenJ9 versions available from https://adoptopenjdk.net.
+
+Please see the example application and JVMTI agent at the end.
+
+Output of the example application
+---------------------------------
+
+OpenJ9:
+```
+MAIN
+THROW!
+THROW!
+THROW!
+CATCH! 
+```
+
+Expected output:
+```
+MAIN
+THROW!
+CATCH!
+THROW!
+CATCH!
+```
+
+Example application
+-------------------
+
+```Java
+// Test.java
+class Test {
+    public static void main(String... args) throws Exception {
+        System.out.println("MAIN");
+        try {
+            native0(true);
+        } catch (UnsupportedOperationException t) {}
+        try {
+            native0(false);
+        } catch (UnsupportedOperationException t) {}
+    }
+
+    public static void throwing() {
+        throw new UnsupportedOperationException();
+    }
+
+    public static native void native0(boolean doCatch);
+}
+```
+
+```c++
+// test.cpp
+#include <cstdio>
+#include <jvmti.h>
+
+void JNICALL
+on_exception(jvmtiEnv*, JNIEnv*, jthread, jmethodID, jlocation, jobject,
+             jmethodID, jlocation) {
+    printf("THROW!\n");
+}
+
+void JNICALL
+on_exception_catch(jvmtiEnv*, JNIEnv*, jthread, jmethodID, jlocation, jobject) {
+    printf("CATCH!\n");
+}
+
+JNIEXPORT jint JNICALL
+Agent_OnLoad(JavaVM* jvm, char* options, void* reserved) {
+    jvmtiEnv* jvmti;
+    jvm->GetEnv((void**) &jvmti, JVMTI_VERSION);
+
+    jvmtiCapabilities requiredCaps = {};
+    requiredCaps.can_generate_exception_events = 1;
+    jvmti->AddCapabilities(&requiredCaps);
+
+    jvmti->SetEventNotificationMode(JVMTI_ENABLE, JVMTI_EVENT_EXCEPTION, NULL);
+    jvmti->SetEventNotificationMode(JVMTI_ENABLE, JVMTI_EVENT_EXCEPTION_CATCH, NULL);
+
+    jvmtiEventCallbacks eventCallbacks = {};
+    eventCallbacks.Exception = on_exception;
+    eventCallbacks.ExceptionCatch = on_exception_catch;
+    jvmti->SetEventCallbacks(&eventCallbacks, sizeof(eventCallbacks));
+
+    return 0;
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_Test_native0(JNIEnv* jni, jclass klass, jboolean do_catch) {
+    jmethodID throwingMethod;
+    throwingMethod = jni->GetStaticMethodID(klass, "throwing", "()V");
+    jni->CallStaticVoidMethod(klass, throwingMethod);
+    if (jni->ExceptionCheck() == JNI_TRUE && do_catch == JNI_TRUE)
+        jni->ExceptionClear();
+}
+```

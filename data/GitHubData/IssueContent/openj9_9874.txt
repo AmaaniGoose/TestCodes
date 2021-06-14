@@ -1,0 +1,107 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_extended.system_x86-64_windows_Nightly/391
+win2012r2-x86-1
+SC_Softmx_JitAot_0
+```
+STF 23:14:27.199 - +------ Step 2 - Destroy cache
+STF 23:14:27.199 - | Destroy specific shared classes cache
+...
+SCC stderr JVMSHRC764W Unable to create shared memory of size 314572800 bytes as requested 
+SCC stderr  	Adjusted to maximum shared memory permitted (67108864 bytes) 
+SCC stderr  	(To increase available shared memory, modify system SHMMAX value) 
+SCC stderr  	 If -Xscdmx is used, the debug attribute area is adjusted in proportion 
+SCC stderr  	 according to its original ratio to the -Xscmx value.
+SCC stderr JVMSHRC023E Cache does not exist
+```
+
+Found the following in 4.jvm1.stdout and 5.jvm2.stdout
+```
+23:14:35.994 - Test failed
+  Failure num.  = 1
+  Test number   = 88
+  Test details  = 'JUnit[net.adoptopenjdk.test.nio2.filesystem.FileSystemsTest]'
+  Suite number  = 0
+  Thread number = 0
+>>> Captured test output >>>
+testStarted : testAllFileSystemsAreRegistered(net.adoptopenjdk.test.nio2.filesystem.FileSystemsTest)
+testFailure: testAllFileSystemsAreRegistered(net.adoptopenjdk.test.nio2.filesystem.FileSystemsTest): Unable to match all memory FileSystems in the list of available providers expected:<1000> but was:<0>
+junit.framework.AssertionFailedError: Unable to match all memory FileSystems in the list of available providers expected:<1000> but was:<0>
+	at junit.framework.Assert.fail(Assert.java:57)
+	at junit.framework.Assert.failNotEquals(Assert.java:329)
+	at junit.framework.Assert.assertEquals(Assert.java:78)
+	at junit.framework.Assert.assertEquals(Assert.java:234)
+	at junit.framework.TestCase.assertEquals(TestCase.java:401)
+	at net.adoptopenjdk.test.nio2.filesystem.FileSystemsTest.testAllFileSystemsAreRegistered(FileSystemsTest.java:119)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:836)
+testFinished: testAllFileSystemsAreRegistered(net.adoptopenjdk.test.nio2.filesystem.FileSystemsTest)
+testStarted : testFileSystemIsRegistered(net.adoptopenjdk.test.nio2.filesystem.FileSystemsTest)
+testFailure: testFileSystemIsRegistered(net.adoptopenjdk.test.nio2.filesystem.FileSystemsTest): Unable to find intial provider 'memory0'
+junit.framework.AssertionFailedError: Unable to find intial provider 'memory0'
+	at junit.framework.Assert.fail(Assert.java:57)
+	at junit.framework.Assert.assertTrue(Assert.java:22)
+	at junit.framework.TestCase.assertTrue(TestCase.java:192)
+	at net.adoptopenjdk.test.nio2.filesystem.FileSystemsTest.testFileSystemIsRegistered(FileSystemsTest.java:78)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:836)
+testFinished: testFileSystemIsRegistered(net.adoptopenjdk.test.nio2.filesystem.FileSystemsTest)
+
+JUnit Test Results for: net.adoptopenjdk.test.nio2.filesystem.FileSystemsTest
+  Ran    : 2
+  Passed : 0
+  Failed : 2
+  Ignored: 0
+  Result : FAILED
+<<<
+```

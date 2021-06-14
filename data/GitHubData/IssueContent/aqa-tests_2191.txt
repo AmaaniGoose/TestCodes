@@ -1,0 +1,75 @@
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.external_s390x_linux_openliberty-mp-tck/37/console
+```
+21:52:22  Total time: 2 minutes 15 seconds
+21:52:34  /open-liberty/dev/com.ibm.ws.componenttest/src/componenttest/matchers/Matchers.java:13: error: cannot find symbol
+21:52:34  import static org.hamcrest.Matchers.containsString;
+21:52:34                            ^
+21:52:34    symbol:   class Matchers
+21:52:34    location: package org.hamcrest
+21:52:34  /open-liberty/dev/com.ibm.ws.componenttest/src/componenttest/matchers/Matchers.java:13: error: static import only from classes and interfaces
+21:52:34  import static org.hamcrest.Matchers.containsString;
+21:52:34  ^
+21:52:34  /open-liberty/dev/com.ibm.ws.componenttest/src/componenttest/matchers/Matchers.java:14: error: cannot find symbol
+21:52:34  import static org.hamcrest.Matchers.hasItem;
+21:52:34                            ^
+21:52:34    symbol:   class Matchers
+21:52:34    location: package org.hamcrest
+21:52:34  /open-liberty/dev/com.ibm.ws.componenttest/src/componenttest/matchers/Matchers.java:14: error: static import only from classes and interfaces
+21:52:34  import static org.hamcrest.Matchers.hasItem;
+21:52:34  ^
+21:52:34  /open-liberty/dev/com.ibm.ws.componenttest/src/componenttest/matchers/Matchers.java:23: error: cannot find symbol
+21:52:34  import org.hamcrest.TypeSafeMatcher;
+21:52:34                     ^
+21:52:34    symbol:   class TypeSafeMatcher
+21:52:34    location: package org.hamcrest
+21:52:34  /open-liberty/dev/com.ibm.ws.componenttest/src/componenttest/matchers/Matchers.java:102: error: cannot find symbol
+21:52:34      public static final class DoesCollectionHaveSubsequence<T> extends TypeSafeMatcher<Iterable<T>> {
+21:52:34                                                                         ^
+21:52:34    symbol:   class TypeSafeMatcher
+21:52:34    location: class Matchers
+21:52:34  /open-liberty/dev/com.ibm.ws.componenttest/src/componenttest/matchers/Matchers.java:142: error: cannot find symbol
+21:52:34      public static final class ContainsPattern extends TypeSafeMatcher<String> {
+21:52:34                                                        ^
+21:52:34    symbol:   class TypeSafeMatcher
+21:52:34    location: class Matchers
+21:52:34  /open-liberty/dev/com.ibm.ws.componenttest/src/componenttest/matchers/Matchers.java:38: error: cannot find symbol
+21:52:34          return containsString(subString);
+21:52:34                 ^
+21:52:34    symbol:   method containsString(String)
+21:52:34    location: class Matchers
+21:52:34  /open-liberty/dev/com.ibm.ws.componenttest/src/componenttest/matchers/Matchers.java:42: error: cannot find symbol
+21:52:34          return hasItem(element);
+21:52:34                 ^
+21:52:34    symbol:   method hasItem(T)
+21:52:34    location: class Matchers
+21:52:34    where T is a type-variable:
+21:52:34      T extends Object declared in method <T>haveItem(T)
+21:52:34  /open-liberty/dev/com.ibm.ws.componenttest/src/componenttest/matchers/Matchers.java:51: error: incompatible types: DoesCollectionHaveSubsequence<T> cannot be converted to Matcher<Iterable<T>>
+21:52:34          return new DoesCollectionHaveSubsequence<T>(Arrays.asList(items));
+21:52:34                 ^
+21:52:34    where T is a type-variable:
+21:52:34      T extends Object declared in method <T>hasSubsequence(T...)
+21:52:34  /open-liberty/dev/com.ibm.ws.componenttest/src/componenttest/matchers/Matchers.java:83: error: incompatible types: ContainsPattern cannot be converted to Matcher<String>
+21:52:34          return new ContainsPattern(pattern);
+21:52:34                 ^
+21:52:34  /open-liberty/dev/com.ibm.ws.componenttest/src/componenttest/matchers/Matchers.java:90: error: incompatible types: ContainsPattern cannot be converted to Matcher<String>
+21:52:34          return new ContainsPattern(Pattern.compile(regex));
+21:52:34                 ^
+21:52:34  /open-liberty/dev/com.ibm.ws.componenttest/src/componenttest/matchers/Matchers.java:128: error: method does not override or implement a method from a supertype
+21:52:34          @Override
+21:52:34          ^
+21:52:34  /open-liberty/dev/com.ibm.ws.componenttest/src/componenttest/matchers/Matchers.java:133: error: method does not override or implement a method from a supertype
+21:52:34          @Override
+21:52:34          ^
+21:52:34  /open-liberty/dev/com.ibm.ws.componenttest/src/componenttest/matchers/Matchers.java:150: error: method does not override or implement a method from a supertype
+21:52:34          @Override
+21:52:34          ^
+21:52:34  /open-liberty/dev/com.ibm.ws.componenttest/src/componenttest/matchers/Matchers.java:155: error: method does not override or implement a method from a supertype
+21:52:34          @Override
+21:52:34          ^
+21:52:34  Note: /open-liberty/dev/com.ibm.ws.componenttest/src/componenttest/matchers/Matchers.java uses unchecked or unsafe operations.
+21:52:34  Note: Recompile with -Xlint:unchecked for details.
+21:52:34  16 errors
+21:52:34  
+21:52:34  FAILURE: Build failed with an exception.
+```

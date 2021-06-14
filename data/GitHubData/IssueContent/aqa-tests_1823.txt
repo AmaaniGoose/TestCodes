@@ -1,0 +1,52 @@
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_extended.external_x86-64_linux_tomcat/2/
+
+```
+15:23:06      [junit] Running org.apache.tomcat.websocket.pojo.TestPojoMethodMapping
+15:23:07      [junit] java.util.logging.ErrorManager: 0: Unable to delete log files older than [90] days
+15:23:07      [junit] java.util.logging.ErrorManager: 0: Unable to delete log files older than [90] days
+15:23:07      [junit] java.util.logging.ErrorManager: 0: Unable to delete log files older than [90] days
+15:23:07      [junit] java.util.logging.ErrorManager: 0: Unable to delete log files older than [90] days
+15:23:07      [junit] 08-Jun-2020 19:23:07.343 INFO [main] org.apache.catalina.startup.LoggingBaseTest.setUp Starting test case [test]
+15:23:07      [junit] 08-Jun-2020 19:23:07.814 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The Apache Tomcat Native library which allows using OpenSSL was not found on the java.library.path: [/tomcat/output/build/bin]
+15:23:08      [junit] 08-Jun-2020 19:23:08.827 SEVERE [main] org.apache.catalina.util.LifecycleBase.handleSubClassException Failed to initialize component [Connector[org.apache.coyote.http11.Http11AprProtocol-auto-1]]
+15:23:08      [junit] org.apache.catalina.LifecycleException: The configured protocol [org.apache.coyote.http11.Http11AprProtocol] requires the APR/native library which is not available
+15:23:08      [junit] 	at org.apache.catalina.connector.Connector.initInternal(Connector.java:1023)
+15:23:08      [junit] 	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+15:23:08      [junit] 	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:533)
+15:23:08      [junit] 	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+15:23:08      [junit] 	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:1057)
+15:23:08      [junit] 	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+15:23:08      [junit] 	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:173)
+15:23:08      [junit] 	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:468)
+15:23:08      [junit] 	at org.apache.catalina.startup.TomcatBaseTest$TomcatWithFastSessionIDs.start(TomcatBaseTest.java:875)
+15:23:08      [junit] 	at org.apache.tomcat.websocket.pojo.TestPojoMethodMapping.test(TestPojoMethodMapping.java:68)
+15:23:08      [junit] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:23:08      [junit] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+15:23:08      [junit] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:23:08      [junit] 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+15:23:08      [junit] 	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+15:23:08      [junit] 	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+15:23:08      [junit] 	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+15:23:08      [junit] 	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+15:23:08      [junit] 	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+15:23:08      [junit] 	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+15:23:08      [junit] 	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)
+15:23:08      [junit] 	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+15:23:08      [junit] 	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+15:23:08      [junit] 	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+15:23:08      [junit] 	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+15:23:08      [junit] 	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+15:23:08      [junit] 	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+15:23:08      [junit] 	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+15:23:08      [junit] 	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+15:23:08      [junit] 	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+15:23:08      [junit] 	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+15:23:08      [junit] 	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+15:23:08      [junit] 	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+15:23:08      [junit] 	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+15:23:08      [junit] 	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+15:23:08      [junit] 	at junit.framework.JUnit4TestAdapter.run(JUnit4TestAdapter.java:50)
+15:23:08      [junit] 	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:534)
+15:23:08      [junit] 	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.launch(JUnitTestRunner.java:1196)
+15:23:08      [junit] 	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.main(JUnitTestRunner.java:1041)
+```

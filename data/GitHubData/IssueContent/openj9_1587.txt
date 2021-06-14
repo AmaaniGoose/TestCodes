@@ -1,0 +1,13 @@
+I just tried out the Dockerfile for running the OpenJ9 tests and I have a couple of suggestions:
+
+Choice of FROM
+Currently the Dockerfile is based off the build dockerfile. There are no dependencies provided by the build dockerfile that are required by the test environment, so in the spirit of keeping Docker images targeted to their purpose and as small as (usefully) possible, I'd recommend just basing on ubuntu. There is also no particular reason why a test machine would support building, so having a requirement on the build docker file may be adding an unnecessary step to the setup process.
+
+Linking gcc
+Since we're not building in the test docker image there is no need to install back level gcc or setup links to it
+
+Perl dependencies
+We're currently using cpan to install the perl dependencies. This is comically slow. The same dependencies can be installed by apt using the libjson-xs-perl and libtext-csv-perl targets.
+
+Volumes
+I don't quite understand the reasoning for having the VOLUME line. We seem to be creating docker managed volumes and then recommending that people over-lay them with -v bindings. There's no need to have the VOLUME line for this usage, it simply adds unnecessary noise to the docker installation that has to be cleaned up at some point.

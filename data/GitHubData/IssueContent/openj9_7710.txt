@@ -1,0 +1,26 @@
+For the majority of the time the SCC feature has existed, there was no real reason for the SCC to ever be moved from one machine to another. However, with the emergence of Docker containers it is much more likely that a SCC generated on one machine could be used on another. In fact, multi-layered SCCs (introduced in 0.17) facilitates such a workflow. However, because the SCC was never moved from one machine to another, it is not completely portable<sup>1</sup>. This high level issue exists to track the discussion and follow up work to define and implement a completely portable SCC.
+
+The following is a list of ideas that worth discussing in the OpenJ9 Community Call; feel free to comment other ideas and I'll add it to the list.
+
+1. Define baseline target processor features / use target processor features specified in SCC (https://github.com/eclipse/openj9/issues/7635).
+2. Make Target Environment local to compilation (https://github.com/eclipse/omr/issues/4518).
+3. Add option to `-Xshareclasses` to denote "portable" mode.
+4. Save options string to SCC, have ability to set up JVM according to stored options in SCC.
+5. Force compressed shift amount in "portable" mode.
+6. Standardize write barrier (write barrier sequence can vary even in the same GC policy depending on the heap (e.g. fixed heap))
+
+Sub Issues (Discussion):
+- [x] [Compilation Local Target (OMR)](https://github.com/eclipse/omr/issues/4518)
+- [x] [Compilation Local Target (OpenJ9)](https://github.com/eclipse/openj9/issues/8198)
+- [ ] [Define Default Processor Features](https://github.com/eclipse/openj9/issues/7966)
+- [ ] [Compressed Refs](https://github.com/eclipse/openj9/issues/7965)
+- [ ] [Processor Vender](https://github.com/eclipse/openj9/issues/6836)
+
+Overall Principles:
+* A Portable SCC:
+  * Should maximize the amount of AOT being used when the cache is moved to a different machine.
+  * Should be willing to accept slightly slower AOT code if it makes the code more portable
+
+<hr/>
+
+1 - The lack of portability comes mostly from the stored AOT code; however, this issue tags other components because defining a portable SCC still requires coordination with the other components.

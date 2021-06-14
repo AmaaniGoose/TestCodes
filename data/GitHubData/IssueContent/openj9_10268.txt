@@ -1,0 +1,17 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_sanity.openjdk_s390x_linux_xl_Nightly/109
+java/math/BigDecimal/StringConstructor.java
+ub18-390-2
+```
+java.lang.NumberFormatException
+	at java.math.BigDecimal.<init>(BigDecimal.java:599)
+	at java.math.BigDecimal.<init>(BigDecimal.java:383)
+	at java.math.BigDecimal.<init>(BigDecimal.java:809)
+	at StringConstructor.nonAsciiZeroTest(StringConstructor.java:110)
+	at StringConstructor.main(StringConstructor.java:70)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+	at java.lang.Thread.run(Thread.java:823)
+```

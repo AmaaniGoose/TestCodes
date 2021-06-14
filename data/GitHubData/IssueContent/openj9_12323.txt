@@ -1,0 +1,9 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk16_j9_extended.functional_x86-64_linux_Nightly_testList_1/54/
+TestJps_0
+```
+FAILED: testJpsPackageName
+java.lang.AssertionError: Wrong package name: 32588 org.testng.TestNG
+	at org.testng.AssertJUnit.fail(AssertJUnit.java:59)
+	at org.testng.AssertJUnit.assertTrue(AssertJUnit.java:24)
+	at org.openj9.test.attachAPI.TestJps.testJpsPackageName(TestJps.java:71)
+```

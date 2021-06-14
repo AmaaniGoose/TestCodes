@@ -1,0 +1,11 @@
+The file https://github.com/eclipse/openj9/blob/master/runtime/compiler/build/toolcfg/gnu/common.mk checks the availability of static libstdc++ as the following:
+```
+SUPPORT_STATIC_LIBCXX = $(shell $(SOLINK_CMD) -static-libstdc++ 2>&1 | grep "unrecognized option" > /dev/null; echo $$?)
+```
+
+It does not always work as expected.  I see the following output in an environment without static libstdc++:
+```
+$ aarch64-poky-linux-g++ -static-libstdc++
+/usr/local/gcc-7.3.0/bin/../lib/gcc/aarch64-poky-linux/7.3.0/../../../../aarch64-poky-linux/bin/ld: cannot find -lstdc++
+collect2: error: ld returned 1 exit status.
+```

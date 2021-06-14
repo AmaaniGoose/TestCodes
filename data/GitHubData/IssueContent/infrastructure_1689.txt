@@ -1,0 +1,9 @@
+In light of #1679, we should investigate moving TRSS to OpenShift which is our main platform for production applications. It already runs the API and jlink.online. Currently, TRSS is hosted on a EC2 machine at AWS in an ad-hoc fashion.
+
+* [ ] Investigate whether TRSS can be run on OpenShift. If not, initiate the necessary adjustments.
+* [ ] Ensure TRSS provides endpoints for health checks (indicate whether TRSS is up, MongoDB is operational).
+* [ ] Codify the deployment of OpenShift (Dockerfile, Ansible, ...).
+* [ ] Create staging environment.
+* [ ] Work out backup strategy and implement it.
+* [ ] Create production environment.
+* [ ] Monitor SSL certificate, reachability, health endpoints and resources of TRSS.

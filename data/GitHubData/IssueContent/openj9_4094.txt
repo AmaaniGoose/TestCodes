@@ -1,0 +1,59 @@
+The test https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/rmi/server/UnicastRemoteObject/unexportObject/UnexportLeak.java has intermittent failures.
+
+It will sometimes coredump with following ...
+
+```
+JVMDUMP039I Processing dump event "systhrow", detail "java/lang/OutOfMemoryError" at 2018/12/18 12:10:47 - please wait.
+JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/core.20181218.121047.26489.0001.dmp' in response to an event
+JVMDUMP010I System dump written to /home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/core.20181218.121047.26489.0001.dmp
+JVMDUMP032I JVM requested Heap dump using '/home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/heapdump.20181218.121047.26489.0002.phd' in response to an event
+JVMDUMP010I Heap dump written to /home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/heapdump.20181218.121047.26489.0002.phd
+JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/javacore.20181218.121047.26489.0003.txt' in response to an event
+JVMDUMP010I Java dump written to /home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/javacore.20181218.121047.26489.0003.txt
+JVMDUMP039I Processing dump event "systhrow", detail "java/lang/OutOfMemoryError" at 2018/12/18 12:10:52 - please wait.
+JVMDUMP039I Processing dump event "systhrow", detail "java/lang/OutOfMemoryError" at 2018/12/18 12:10:52 - please wait.
+JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/Snap.20181218.121047.26489.0004.trc' in response to an event
+JVMDUMP010I Snap dump written to /home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/Snap.20181218.121047.26489.0004.trc
+JVMDUMP013I Processed dump event "systhrow", detail "java/lang/OutOfMemoryError".
+JVMDUMP032I JVM requested Heap dump using '/home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/heapdump.20181218.121052.26489.0005.phd' in response to an event
+JVMDUMP010I Heap dump written to /home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/heapdump.20181218.121052.26489.0005.phd
+JVMDUMP032I JVM requested Heap dump using '/home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/heapdump.20181218.121052.26489.0006.phd' in response to an event
+JVMDUMP010I Heap dump written to /home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/heapdump.20181218.121052.26489.0006.phd
+JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/javacore.20181218.121052.26489.0007.txt' in response to an event
+JVMDUMP010I Java dump written to /home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/javacore.20181218.121052.26489.0007.txt
+JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/Snap.20181218.121052.26489.0009.trc' in response to an event
+JVMDUMP010I Snap dump written to {nothing to snap}
+JVMDUMP013I Processed dump event "systhrow", detail "java/lang/OutOfMemoryError".
+JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/javacore.20181218.121052.26489.0008.txt' in response to an event
+JVMDUMP010I Java dump written to /home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/javacore.20181218.121052.26489.0008.txt
+JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/Snap.20181218.121052.26489.0010.trc' in response to an event
+PASSED: unexported object collected
+JVMDUMP010I Snap dump written to /home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/Snap.20181218.121052.26489.0010.trc
+JVMDUMP013I Processed dump event "systhrow", detail "java/lang/OutOfMemoryError".
+JVMDUMP039I Processing dump event "systhrow", detail "java/lang/OutOfMemoryError" at 2018/12/18 12:10:52 - please wait.
+JVMDUMP032I JVM requested Heap dump using '/home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/heapdump.20181218.121052.26489.0011.phd' in response to an event
+JVMDUMP010I Heap dump written to /home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/heapdump.20181218.121052.26489.0011.phd
+JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/javacore.20181218.121052.26489.0012.txt' in response to an event
+JVMDUMP010I Java dump written to /home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/javacore.20181218.121052.26489.0012.txt
+JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/Snap.20181218.121052.26489.0013.trc' in response to an event
+JVMDUMP010I Snap dump written to /home/jenkins/workspace/SXA-Grinder/jvmtest/openjdk_regression/work/scratch/0/Snap.20181218.121052.26489.0013.trc
+JVMDUMP013I Processed dump event "systhrow", detail "java/lang/OutOfMemoryError".
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+	at com.sun.javatest.regtest.agent.MainWrapper.main(MainWrapper.java:83)
+Dec 18, 2018 12:10:52 PM sun.rmi.transport.tcp.TCPTransport$AcceptLoop run
+WARNING: RMI TCP Accept-0: accept loop for ServerSocket[addr=0.0.0.0/0.0.0.0,localport=39890] throws
+java.lang.OutOfMemoryError: Java heap space
+	at java.base/java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:458)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:551)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:519)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$AcceptLoop.executeAcceptLoop(TCPTransport.java:394)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$AcceptLoop.run(TCPTransport.java:366)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+```
+
+From this run there is a 33/100 occurrence rate - https://ci.adoptopenjdk.net/view/work%20in%20progress/job/SXA-Grinder/5
+
+Coredump files from that run : https://ibm.box.com/s/8m8t0iujb99bym7itj86ftd0rk5kn3gz
+
+No such problem is observed with Hotspot running this test.

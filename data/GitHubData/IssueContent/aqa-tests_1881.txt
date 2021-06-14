@@ -1,0 +1,78 @@
+**Test Info**
+Test Name: ConcurrentLoadTest_0
+Test Duration: 3 min 24 sec
+Machine: test-softlayer-win2012r2-x64-2
+TRSS link for the test output: https://trss.adoptopenjdk.net/output/test?id=5f0b54c07eaab3443c9d60df
+
+
+**Build Info**
+Build Name: Test_openjdk8_hs_extended.system_x86-64_windows
+Jenkins Build start time: Jul 12 2020, 01:29 pm
+Jenkins Build URL: https://ci.adoptopenjdk.net/job/Test_openjdk8_hs_extended.system_x86-64_windows/204/
+TRSS link for the build: https://trss.adoptopenjdk.net/allTestsInfo?buildId=5f0b543d7eaab3443c9d609f
+
+
+**Java Version**
+openjdk version "1.8.0_262"
+OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_262-202007121711-b09)
+OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.262-b09, mixed mode)
+
+
+Console output:
+[2020-07-12T17:35:21.919Z] LT  18:34:44.928 - Test failed
+[2020-07-12T17:35:21.919Z] LT    Failure num.  = 1
+[2020-07-12T17:35:21.920Z] LT    Test number   = 7
+[2020-07-12T17:35:21.920Z] LT    Test details  = 'JUnit[net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinPoolTest]'
+[2020-07-12T17:35:21.920Z] LT    Suite number  = 0
+[2020-07-12T17:35:21.920Z] LT    Thread number = 14
+[2020-07-12T17:35:21.920Z] LT  >>> Captured test output >>>
+[2020-07-12T17:35:21.920Z] LT  testStarted : testAPI(net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinPoolTest)
+[2020-07-12T17:35:21.920Z] LT  testFailure: testAPI(net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinPoolTest): 5 : getActiveThreadCount() expected:<0> but was:<1>
+[2020-07-12T17:35:21.920Z] LT  junit.framework.AssertionFailedError: 5 : getActiveThreadCount() expected:<0> but was:<1>
+[2020-07-12T17:35:21.920Z] LT  	at junit.framework.Assert.fail(Assert.java:57)
+[2020-07-12T17:35:21.920Z] LT  	at junit.framework.Assert.failNotEquals(Assert.java:329)
+[2020-07-12T17:35:21.920Z] LT  	at junit.framework.Assert.assertEquals(Assert.java:78)
+[2020-07-12T17:35:21.920Z] LT  	at junit.framework.Assert.assertEquals(Assert.java:234)
+[2020-07-12T17:35:21.920Z] LT  	at junit.framework.TestCase.assertEquals(TestCase.java:401)
+[2020-07-12T17:35:21.920Z] LT  	at net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinPoolTest.testAPI(ForkJoinPoolTest.java:122)
+[2020-07-12T17:35:21.920Z] LT  	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2020-07-12T17:35:21.920Z] LT  	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2020-07-12T17:35:21.920Z] LT  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2020-07-12T17:35:21.920Z] LT  	at java.lang.reflect.Method.invoke(Method.java:498)
+[2020-07-12T17:35:21.920Z] LT  	at junit.framework.TestCase.runTest(TestCase.java:176)
+[2020-07-12T17:35:21.920Z] LT  	at junit.framework.TestCase.runBare(TestCase.java:141)
+[2020-07-12T17:35:21.920Z] LT  	at junit.framework.TestResult$1.protect(TestResult.java:122)
+[2020-07-12T17:35:21.920Z] LT  	at junit.framework.TestResult.runProtected(TestResult.java:142)
+[2020-07-12T17:35:21.920Z] LT  	at junit.framework.TestResult.run(TestResult.java:125)
+[2020-07-12T17:35:21.920Z] LT  	at junit.framework.TestCase.run(TestCase.java:129)
+[2020-07-12T17:35:21.920Z] LT  	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+[2020-07-12T17:35:21.920Z] LT  	at junit.framework.TestSuite.run(TestSuite.java:247)
+[2020-07-12T17:35:21.920Z] LT  	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+[2020-07-12T17:35:21.920Z] LT  	at org.junit.runners.Suite.runChild(Suite.java:128)
+[2020-07-12T17:35:21.920Z] LT  	at org.junit.runners.Suite.runChild(Suite.java:27)
+[2020-07-12T17:35:21.920Z] LT  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+[2020-07-12T17:35:21.920Z] LT  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+[2020-07-12T17:35:21.920Z] LT  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+[2020-07-12T17:35:21.920Z] LT  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+[2020-07-12T17:35:21.920Z] LT  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+[2020-07-12T17:35:21.920Z] LT  	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+[2020-07-12T17:35:21.920Z] LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+[2020-07-12T17:35:21.920Z] LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+[2020-07-12T17:35:21.920Z] LT  	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+[2020-07-12T17:35:21.920Z] LT  	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+[2020-07-12T17:35:21.920Z] LT  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+[2020-07-12T17:35:21.920Z] LT  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+[2020-07-12T17:35:21.920Z] LT  	at java.lang.Thread.run(Thread.java:748)
+[2020-07-12T17:35:21.920Z] LT  testFinished: testAPI(net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinPoolTest)
+[2020-07-12T17:35:21.920Z] LT  testStarted : testStress(net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinPoolTest)
+[2020-07-12T17:35:21.920Z] LT  testFinished: testStress(net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinPoolTest)
+[2020-07-12T17:35:21.920Z] LT  
+[2020-07-12T17:35:21.920Z] LT  JUnit Test Results for: net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinPoolTest
+[2020-07-12T17:35:21.920Z] LT    Ran    : 2
+[2020-07-12T17:35:21.920Z] LT    Passed : 1
+[2020-07-12T17:35:21.920Z] LT    Failed : 1
+[2020-07-12T17:35:21.920Z] LT    Ignored: 0
+[2020-07-12T17:35:21.920Z] LT    Result : FAILED
+
+
+Only seen on Windows, Rerun [link](https://ci.adoptopenjdk.net/job/Grinder/parambuild/?TARGET=ConcurrentLoadTest_0&CUSTOM_TARGET=&SDK_RESOURCE=nightly&VENDOR_TEST_SHAS=&TEST_FLAG=&VENDOR_TEST_DIRS=&ARTIFACTORY_REPO=&ARTIFACTORY_ROOT_DIR=&PLATFORM=x86-64_windows&KEEP_REPORTDIR=true&PERSONAL_BUILD=false&ADOPTOPENJDK_REPO=https://github.com/AdoptOpenJDK/openjdk-tests.git&JDK_IMPL=hotspot&LABEL=&TKG_BRANCH=master&EXTRA_OPTIONS=&SSH_AGENT_CREDENTIAL=&IS_PARALLEL=false&CUSTOMIZED_SDK_URL=&BUILD_IDENTIFIER=&AUTO_DETECT=true&ADOPTOPENJDK_BRANCH=master&TKG_SHA=&ARTIFACTORY_SERVER=&CUSTOMIZED_SDK_URL_CREDENTIAL_ID=&OPENJDK_SHA=&KEEP_WORKSPACE=false&JDK_VERSION=8&BUILD_LIST=system&USER_CREDENTIALS_ID=&ITERATIONS=1&VENDOR_TEST_REPOS=&TIME_LIMIT=10&RELEASE_TAG=&OPENJ9_BRANCH=master&OPENJ9_SHA=&JCK_GIT_REPO=&VENDOR_TEST_BRANCHES=&OPENJ9_REPO=https:/github.com/eclipse/openj9.git&JVM_OPTIONS=&TKG_REPO=https://github.com/AdoptOpenJDK/TKG.git) 

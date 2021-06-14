@@ -1,0 +1,22 @@
+This **epic** relates to developer build instructions for OpenJ9 as posted here https://www.eclipse.org/openj9/oj9_build.html and linked to from https://github.com/eclipse/openj9/blob/master/README.md _(Build Instructions)_.
+
+Clear instructions are provided for setting up build environment with link to script for setting up [x86_64/Ubuntu](https://github.com/eclipse/openj9/blob/master/buildenv/docker/jdk8/x86_64/ubuntu16/Dockerfile) but analogous script for, say, RedHat Linux 6.9 as per AdoptOpenJDK at present time, is harder to find -- [Jenkins](https://github.com/eclipse/openj9/issues/4035) setup scripts are available but no guidance for finding them or adapting for local builds is presented. Similarly for other platforms PowerPC, Z-series, ... and related OS.
+
+Likewise, straightforward guidance is provided in current online OpenJ9 build instructions. This guidance produces a full (`make all`) optimized release build with symbols stripped (a "release" or "production" build). Incremental builds involving GC component source only fail to link rebuilt OMR GC libraries into OpenJ9 Java JDK image. Some guidance for building debug JDK images is available as a blog but involves changes to committed make files, which need to be abandoned, etc.
+
+1. _Suggest presenting links to clear guidance for setting up developer build environments to match AdoptOpenJDK build environments._ 
+
+Analagous to [x86_64/Ubuntu](https://github.com/eclipse/openj9/blob/master/buildenv/docker/jdk8/x86_64/ubuntu16/Dockerfile). This will allow developers to build prototype features into SDKs that are comparable with binaries from nightly/LTS OpenJ9 and OpenJDK builds downloaded from AdoptOpenJDK. 
+
+2. _Expose and document top-level make targets to allow incremental and debug builds for OpenJ9._ 
+
+Developers will benefit from clear and simple guidance for building OpenJ9 JDKs comparable to OpenJ9 builds from AdoptOpenJDK in any one of 4 configurations (debug builds should preserve symbolic information and relax compiler optimizations, eg `-O0` for gcc):
+
+- full/release
+- full/debug
+- incremental/release
+- incremental/debug
+
+Incremental/release is handy in performance runoff/benchmarking scenarios. The utility of the other configurations is patent. Instructions on par with those currently provided for full/release builds on the Eclipse OpenJ9 web site should be provided for the other configurations. 
+
+If accepted, guidance for (1) and (2) above should be reflected into setup and build instructions and easily  reachable from https://www.eclipse.org/openj9./oj9_build.html.

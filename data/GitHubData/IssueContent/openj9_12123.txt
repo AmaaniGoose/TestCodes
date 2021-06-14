@@ -1,0 +1,10 @@
+The implementation of the Node flags `isHeapObjectWrtBar()` and `isNonHeapObjectWrtBar()` make their return value conditional on a `debug()` flag.  Since that flag is only set in a JIT debug build, for all practical purposes it is forcing those Node flags to always answer `false`.
+
+https://github.com/eclipse/omr/blob/67ddc287341ab2bce7dfee85f1fde1f1e9b3889d/compiler/il/OMRNode.cpp#L7026
+https://github.com/eclipse/omr/blob/67ddc287341ab2bce7dfee85f1fde1f1e9b3889d/compiler/il/OMRNode.cpp#L7056
+
+These Node flags appear to be used in the write barrier evaluators of various platforms.
+
+A quick discussion with @vijaysun-omr theorized that they may be disabled because the intended behaviour was achieved some other way.  If that is the case then we should remove them.
+
+However, it may be insightful to study whether any write barriers would now be skipped (thereby improving performance) based on the correct setting of the flags.  Adding some temporary code to the write barrier evaluator to report new-found opportunities if the flags are enabled might be the way to achieve this.  If there are new opportunities then we should consider removing the `debug()` guards and keeping the queries.

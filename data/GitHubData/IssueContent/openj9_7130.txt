@@ -1,0 +1,1 @@
+A placeholder to figure out the work needed to implement String compression on AArch32 and then implement it.  Likely coupled with #7129.

@@ -1,0 +1,6 @@
+Currently, the default location for native test libs is set to be 
+https://github.com/eclipse/openj9/blob/43a4db0c9e5f53806fd63f35fa53fe66118db477/test/TestConfig/openj9Settings.mk#L68-L70
+
+If the SDK is built with test image, users still need to reset `NATIVE_TEST_LIBS` or put the native test libs into the expected location. 
+
+This is not user friendly behavior and it is misleading. `NATIVE_TEST_LIBS` should have its default location set to test image location.

@@ -1,0 +1,44 @@
+Important information provided by @r30shah 
+
+## Block Frequency Info 
+
+For this, JIT'd code contain code that reference to Static address holding counters. And while AOT load, it needs to serialize BitVector that holds information about CFG structure and location of counters in JIT'd code plus Information to derive Frequency of uncounted  blocks. Optimization Performed in : https://github.com/eclipse/openj9/blob/master/runtime/compiler/optimizer/JProfilingBlock.cpp
+
+Initialization of TR_BlockFrequencyInfo Structure : https://github.com/eclipse/openj9/blob/c95f17653e0e50d91349f47beae156273eec7e9e/runtime/compiler/optimizer/JProfilingBlock.cpp#L763
+https://github.com/eclipse/openj9/blob/c95f17653e0e50d91349f47beae156273eec7e9e/runtime/compiler/runtime/J9Profiler.cpp#L1651
+                                                    
+Data Structure To look At : https://github.com/eclipse/openj9/blob/c95f17653e0e50d91349f47beae156273eec7e9e/runtime/compiler/runtime/J9Profiler.hpp#L615
+ 
+Bit Vector that needed Serializing while relocation : https://github.com/eclipse/openj9/blob/c95f17653e0e50d91349f47beae156273eec7e9e/runtime/compiler/runtime/J9Profiler.hpp#L664
+ 
+Static Counters directly accessed in the JIT'd code : https://github.com/eclipse/openj9/blob/c95f17653e0e50d91349f47beae156273eec7e9e/runtime/compiler/runtime/J9Profiler.hpp#L658
+This is where nodes that accesses static counter is generated : https://github.com/eclipse/openj9/blob/c95f17653e0e50d91349f47beae156273eec7e9e/runtime/compiler/runtime/J9Profiler.cpp#L1984
+https://github.com/eclipse/openj9/blob/c95f17653e0e50d91349f47beae156273eec7e9e/runtime/compiler/optimizer/JProfilingBlock.cpp#L990
+ 
+Another place where a static Symbol Ref is accesses (Holds threshold for recompilation count) : https://github.com/eclipse/openj9/blob/c95f17653e0e50d91349f47beae156273eec7e9e/runtime/compiler/optimizer/JProfilingBlock.cpp#L870
+ 
+Other things needed while reassociating profiling information with method Body : https://github.com/eclipse/openj9/blob/c95f17653e0e50d91349f47beae156273eec7e9e/runtime/compiler/runtime/J9Profiler.hpp#L655
+https://github.com/eclipse/openj9/blob/c95f17653e0e50d91349f47beae156273eec7e9e/runtime/compiler/runtime/J9Profiler.hpp#L657
+ 
+Address of either of this two variable is accessed in JIT'd code to skip over/Disable Profiling code:   https://github.com/eclipse/openj9/blob/c95f17653e0e50d91349f47beae156273eec7e9e/runtime/compiler/runtime/J9Profiler.hpp#L666
+https://github.com/eclipse/openj9/blob/c95f17653e0e50d91349f47beae156273eec7e9e/runtime/compiler/runtime/J9Profiler.hpp#L668
+Place where this static Sym generated : https://github.com/eclipse/openj9/blob/c95f17653e0e50d91349f47beae156273eec7e9e/runtime/compiler/optimizer/JProfilingBlock.cpp#L857
+https://github.com/eclipse/openj9/blob/c95f17653e0e50d91349f47beae156273eec7e9e/runtime/compiler/optimizer/JProfilingValue.cpp#L578
+
+## Value Profiling Info
+
+As we discusses here, In JIT'd code we basically have address of the table and using some constant offset we update the information in the table. Initial values in table contains bytecode info (https://github.com/eclipse/openj9/blob/f497aa478d1906b6c6efb60dc899abb7593d6805/runtime/compiler/runtime/J9ValueProfiler.hpp#L229)
+Metadata (https://github.com/eclipse/openj9/blob/f497aa478d1906b6c6efb60dc899abb7593d6805/runtime/compiler/runtime/J9ValueProfiler.hpp#L306)
+ 
+Intial values in metadata : https://github.com/eclipse/openj9/blob/f497aa478d1906b6c6efb60dc899abb7593d6805/runtime/compiler/runtime/J9ValueProfiler.hpp#L676
+https://github.com/eclipse/openj9/blob/f497aa478d1906b6c6efb60dc899abb7593d6805/runtime/compiler/runtime/J9ValueProfiler.hpp#L401
+ 
+Opt Performed in : https://github.com/eclipse/openj9/blob/master/runtime/compiler/optimizer/JProfilingValue.cpp
+Static Sym for table address created in : https://github.com/eclipse/openj9/blob/c95f17653e0e50d91349f47beae156273eec7e9e/runtime/compiler/runtime/J9Profiler.cpp#L729
+https://github.com/eclipse/openj9/blob/c95f17653e0e50d91349f47beae156273eec7e9e/runtime/compiler/runtime/J9Profiler.cpp#L742
+https://github.com/eclipse/openj9/blob/aea43dc0b1c7c84bc0e6d85c78247f19771e4483/runtime/compiler/optimizer/JProfilingValue.cpp#L267
+https://github.com/eclipse/openj9/blob/aea43dc0b1c7c84bc0e6d85c78247f19771e4483/runtime/compiler/optimizer/JProfilingValue.cpp#L291
+ 
+Important Data Structures : https://github.com/eclipse/openj9/blob/f497aa478d1906b6c6efb60dc899abb7593d6805/runtime/compiler/runtime/J9ValueProfiler.hpp#L195
+https://github.com/eclipse/openj9/blob/f497aa478d1906b6c6efb60dc899abb7593d6805/runtime/compiler/runtime/J9ValueProfiler.hpp#L237
+https://github.com/eclipse/openj9/blob/f497aa478d1906b6c6efb60dc899abb7593d6805/runtime/compiler/runtime/J9ValueProfiler.hpp#L333

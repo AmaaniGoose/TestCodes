@@ -1,0 +1,9 @@
+While emitting a `J9CallSnippet`, it is possible that we end up in this corner case and add a `TR_MethodObject` relocation record:
+https://github.com/eclipse/openj9/blob/efe832a24443e98ce83632bee671884a949f5e1c/runtime/compiler/z/codegen/S390J9CallSnippet.cpp#L377-L378
+
+This situation can occur if we are doing an AOT or remote compile and we are emitting code for a direct call. During relocation, we will end up relocating this `TR_MethodObject` incorrectly. Here is the relevant code:
+https://github.com/eclipse/openj9/blob/efe832a24443e98ce83632bee671884a949f5e1c/runtime/compiler/runtime/RelocationRecord.cpp#L1720-L1727
+
+So we write the constant pool in that location instead of the new method pointer. This is obviously incorrect and needs to be fixed.
+
+We most likely did not encounter this issue in the past because direct calls for AOT compiles are treated as unresolved calls and thus the data is emitted inside unresolved data snippets instead.

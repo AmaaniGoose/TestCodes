@@ -1,0 +1,10 @@
+Access level:
+
+- [X] Non-privileged
+- [ ] jenkins user
+- [ ] root/Administrative
+- [ ] other (Please specify):
+
+System for which access is needed: test-osuosl-aix72-ppc64-2.
+
+I'm investigating adoptium/aqa-tests#2535.  The test fails differently on test-osuosl-aix72-ppc64-2 to test-ibm-aix71-ppc64-1 (already worked out why the test fails there).

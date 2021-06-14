@@ -1,0 +1,45 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/168
+java/lang/ProcessBuilder/InheritIO/InheritIO.sh
+osx1011-x86-2
+```
+22:23:10  TEST: java/lang/ProcessBuilder/InheritIO/InheritIO.sh
+22:23:10  TEST JDK: /Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/openjdkbinary/j2sdk-image
+22:23:10  
+22:23:10  ACTION: shell -- Failed. Execution failed: exit code 255
+22:23:10  REASON: User specified action: run shell InheritIO.sh 
+22:23:10  TIME:   1.357 seconds
+22:23:10  messages:
+22:23:10  command: shell InheritIO.sh
+22:23:10  reason: User specified action: run shell InheritIO.sh 
+22:23:10  elapsed time (seconds): 1.357
+22:23:10  STDOUT:
+22:23:10  FAIL: InheritIO$TestRedirectInherit failed with 255
+22:23:10  STDERR:
+22:23:10  rerun:
+22:23:10  cd /Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/openjdk-tests/TKG/test_output_16014325088874/jdk_lang_j9_0/work/scratch/1 && \
+22:23:10  HOME=/Users/jenkins \
+22:23:10  LANG=en_US.UTF-8 \
+22:23:10  PATH=/bin:/usr/bin:/usr/sbin \
+22:23:10  TESTFILE=/Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/lang/ProcessBuilder/InheritIO/InheritIO.sh \
+22:23:10  TESTSRC=/Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/lang/ProcessBuilder/InheritIO \
+22:23:10  TESTSRCPATH=/Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/lang/ProcessBuilder/InheritIO \
+22:23:10  TESTCLASSES=/Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/openjdk-tests/TKG/test_output_16014325088874/jdk_lang_j9_0/work/classes/1/java/lang/ProcessBuilder/InheritIO \
+22:23:10  TESTCLASSPATH=/Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/openjdk-tests/TKG/test_output_16014325088874/jdk_lang_j9_0/work/classes/1/java/lang/ProcessBuilder/InheritIO \
+22:23:10  COMPILEJAVA=/Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/openjdkbinary/j2sdk-image \
+22:23:10  TESTJAVA=/Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/openjdkbinary/j2sdk-image \
+22:23:10  TESTVMOPTS='-ea -esa -Xmx512m -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache -XX:-JITServerTechPreviewMessage' \
+22:23:10  TESTTOOLVMOPTS='-J-ea -J-esa -J-Xmx512m -J-Xdump:system:none -J-Xdump:heap:none -J-Xdump:system:events=gpf+abort+traceassert+corruptcache -J-XX:-JITServerTechPreviewMessage' \
+22:23:10  TESTJAVACOPTS= \
+22:23:10  TESTJAVAOPTS= \
+22:23:10  TESTTIMEOUTFACTOR=8.0 \
+22:23:10  TESTROOT=/Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/openjdk-tests/openjdk/openjdk-jdk/jdk/test \
+22:23:10  FS=/ \
+22:23:10  PS=: \
+22:23:10  NULL=/dev/null \
+22:23:10      sh \
+22:23:10          /Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/lang/ProcessBuilder/InheritIO/InheritIO.sh
+22:23:10  
+22:23:10  TEST RESULT: Failed. Execution failed: exit code 255
+22:23:10  --------------------------------------------------
+22:25:02  Test results: passed: 434; failed: 1
+```

@@ -1,0 +1,292 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/16
+java/util/logging/LoggingDeadlock2.java
+jdk_util_j9_0
+```
+10:21:19  rerun:
+10:21:19  cd /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/TKG/test_output_16035455927730/jdk_util_j9_0/work/scratch && \
+10:21:19  DISPLAY=:0 \
+10:21:19  HOME=/home/jenkins \
+10:21:19  LANG=en_US \
+10:21:19  PATH=/bin:/usr/bin:/usr/sbin \
+10:21:19  TZ=EST5EDT \
+10:21:19      /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdkbinary/j2sdk-image/bin/javac \
+10:21:19          -J-ea \
+10:21:19          -J-esa \
+10:21:19          -J-Xmx512m \
+10:21:19          -J-Xdump:system:none \
+10:21:19          -J-Xdump:heap:none \
+10:21:19          -J-Xdump:system:events=gpf+abort+traceassert+corruptcache \
+10:21:19          -J-Dtest.vm.opts='-ea -esa -Xmx512m -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache' \
+10:21:19          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-Xdump:system:none -J-Xdump:heap:none -J-Xdump:system:events=gpf+abort+traceassert+corruptcache' \
+10:21:19          -J-Dtest.compiler.opts= \
+10:21:19          -J-Dtest.java.opts= \
+10:21:19          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdkbinary/j2sdk-image \
+10:21:19          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdkbinary/j2sdk-image \
+10:21:19          -J-Dtest.timeout.factor=8.0 \
+10:21:19          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+10:21:19          -J-Dtest.name=java/util/logging/LoggingDeadlock2.java \
+10:21:19          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging/LoggingDeadlock2.java \
+10:21:19          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging \
+10:21:19          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging \
+10:21:19          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/TKG/test_output_16035455927730/jdk_util_j9_0/work/classes/java/util/logging/LoggingDeadlock2.d \
+10:21:19          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/TKG/test_output_16035455927730/jdk_util_j9_0/work/classes/java/util/logging/LoggingDeadlock2.d \
+10:21:19          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/TKG/test_output_16035455927730/jdk_util_j9_0/work/classes/java/util/logging/LoggingDeadlock2.d:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging \
+10:21:19          -J-Dtest.modules=java.logging \
+10:21:19          --add-modules java.logging \
+10:21:19          -d /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/TKG/test_output_16035455927730/jdk_util_j9_0/work/classes/java/util/logging/LoggingDeadlock2.d \
+10:21:19          -sourcepath /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging \
+10:21:19          -classpath /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/TKG/test_output_16035455927730/jdk_util_j9_0/work/classes/java/util/logging/LoggingDeadlock2.d /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging/LoggingDeadlock2.java
+10:21:19  
+10:21:19  ACTION: build -- Passed. All files up to date
+10:21:19  REASON: Named class compiled on demand
+10:21:19  TIME:   0.001 seconds
+10:21:19  messages:
+10:21:19  command: build LoggingDeadlock2
+10:21:19  reason: Named class compiled on demand
+10:21:19  elapsed time (seconds): 0.001
+10:21:19  
+10:21:19  ACTION: main -- Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Some tests failed
+10:21:19  REASON: User specified action: run main LoggingDeadlock2 
+10:21:19  TIME:   10.251 seconds
+10:21:19  messages:
+10:21:19  command: main LoggingDeadlock2
+10:21:19  reason: User specified action: run main LoggingDeadlock2 
+10:21:19  Mode: agentvm
+10:21:19  Agent id: 1
+10:21:19  elapsed time (seconds): 10.251
+10:21:19  configuration:
+10:21:19  Boot Layer
+10:21:19    class path: /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/jvmtest/openjdk/jtreg/lib/javatest.jar 
+10:21:19                /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+10:21:19    patch:      java.base /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/TKG/test_output_16035455927730/jdk_util_j9_0/work/patches/java.base
+10:21:19  
+10:21:19  Test Layer
+10:21:19    class path: /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/TKG/test_output_16035455927730/jdk_util_j9_0/work/classes/java/util/logging/LoggingDeadlock2.d
+10:21:19                /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging
+10:21:19  
+10:21:19  rerun:
+10:21:19  cd /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/TKG/test_output_16035455927730/jdk_util_j9_0/work/scratch && \
+10:21:19  DISPLAY=:0 \
+10:21:19  HOME=/home/jenkins \
+10:21:19  LANG=en_US \
+10:21:19  PATH=/bin:/usr/bin:/usr/sbin \
+10:21:19  TZ=EST5EDT \
+10:21:19      /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdkbinary/j2sdk-image/bin/java \
+10:21:19          -Dtest.vm.opts='-ea -esa -Xmx512m -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache' \
+10:21:19          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-Xdump:system:none -J-Xdump:heap:none -J-Xdump:system:events=gpf+abort+traceassert+corruptcache' \
+10:21:19          -Dtest.compiler.opts= \
+10:21:19          -Dtest.java.opts= \
+10:21:19          -Dtest.jdk=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdkbinary/j2sdk-image \
+10:21:19          -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdkbinary/j2sdk-image \
+10:21:19          -Dtest.timeout.factor=8.0 \
+10:21:19          -Dtest.root=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+10:21:19          -Dtest.name=java/util/logging/LoggingDeadlock2.java \
+10:21:19          -Dtest.file=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging/LoggingDeadlock2.java \
+10:21:19          -Dtest.src=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging \
+10:21:19          -Dtest.src.path=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging \
+10:21:19          -Dtest.classes=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/TKG/test_output_16035455927730/jdk_util_j9_0/work/classes/java/util/logging/LoggingDeadlock2.d \
+10:21:19          -Dtest.class.path=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/TKG/test_output_16035455927730/jdk_util_j9_0/work/classes/java/util/logging/LoggingDeadlock2.d \
+10:21:19          -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/TKG/test_output_16035455927730/jdk_util_j9_0/work/classes/java/util/logging/LoggingDeadlock2.d:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging \
+10:21:19          -Dtest.modules=java.logging \
+10:21:19          -classpath /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/TKG/test_output_16035455927730/jdk_util_j9_0/work/classes/java/util/logging/LoggingDeadlock2.d:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+10:21:19          LoggingDeadlock2
+10:21:19  STDOUT:
+10:21:19  [/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdkbinary/j2sdk-image/bin/java, -classpath, /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/TKG/test_output_16035455927730/jdk_util_j9_0/work/classes/java/util/logging/LoggingDeadlock2.d:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/jvmtest/openjdk/jtreg/lib/jtreg.jar, LoggingDeadlock2$JavaChild]
+10:21:19  Waiting for child process to exit
+10:21:19  JavaChild started
+10:21:19  seed=503950657178197132
+10:21:19  dojoin=true
+10:21:19  iters1=283
+10:21:19  iters2=741
+10:21:19  exiter started
+10:21:19  $Unhandled exception
+10:21:19  Type=Segmentation error vmState=0x00000000
+10:21:19  J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000032
+10:21:19  Handler1=09001000A1356B90 Handler2=09001000A12279C0
+10:21:19  R0=0000000000000004 R1=0000010010043920 R2=09001000A135A5C8 R3=0A00010000000000
+10:21:19  R4=0000000000000020 R5=0000000000000000 R6=000000003000E700 R7=0000000000000000
+10:21:19  R8=0A00010000000000 R9=00000100100436C0 R10=0A000100076B0914 R11=0000000000000006
+10:21:19  R12=FFFFFFFF84408240 R13=0000010010057800 R14=00000000300F3B20 R15=000000003000E700
+10:21:19  R16=0000010021CCE798 R17=FFFFFFFFFFFFFFFF R18=00000100106177B0 R19=00000100106177B0
+10:21:19  R20=0000000000000000 R21=00000000FFEA0950 R22=00000000FFEA0A60 R23=00000000FFEA0A08
+10:21:19  R24=0000000000000000 R25=000000000000000C R26=00000000FFEA14C8 R27=0000000000000001
+10:21:19  R28=0000000000000000 R29=0A000100076B18C3 R30=000000003000E700 R31=0000000000000000
+10:21:19  IAR=0900000012926888 LR=0900000012937F58 MSR=A00000000200D032 CTR=0900000012937B60
+10:21:19  CR=2440824900000010 FPSCR=8200000000000000 XER=0000001082000000
+10:21:19  FPR0 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR1 c3e0000000000000 (f: 0.000000, d: -9.223372e+18)
+10:21:19  FPR2 41cdcd6500000000 (f: 0.000000, d: 1.000000e+09)
+10:21:19  FPR3 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR4 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR5 c3e0000000000000 (f: 0.000000, d: -9.223372e+18)
+10:21:19  FPR6 410d67a000000000 (f: 0.000000, d: 2.408840e+05)
+10:21:19  FPR7 412e848000000000 (f: 0.000000, d: 1.000000e+06)
+10:21:19  FPR8 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR9 4530000000000000 (f: 0.000000, d: 1.934281e+25)
+10:21:19  FPR10 412e848000000000 (f: 0.000000, d: 1.000000e+06)
+10:21:19  FPR11 43300000000f4240 (f: 1000000.000000, d: 4.503600e+15)
+10:21:19  FPR12 4530000000000000 (f: 0.000000, d: 1.934281e+25)
+10:21:19  FPR13 0000000000000002 (f: 2.000000, d: 9.881313e-324)
+10:21:19  FPR14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR16 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR17 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR18 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR19 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR20 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR21 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR22 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR23 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR24 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR25 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR26 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR27 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR28 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR29 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR30 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR31 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  Module=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdkbinary/j2sdk-image/lib/compressedrefs/libj9vm29.so
+10:21:19  Module_base_address=0900000012751000
+10:21:19  Target=2_90_20201024_54 (AIX 7.1)
+10:21:19  CPU=ppc64 (16 logical CPUs) (0x200000000 RAM)
+10:21:19  ----------- Stack Backtrace -----------
+10:21:19  (0x09000000127BFCFC [libj9vm29.so+0x6ecfc])
+10:21:19  sendClinit+0x1f0 (0x09000000127B9574 [libj9vm29.so+0x68574])
+10:21:19  initializeImpl+0x3fc (0x09000000127B5800 [libj9vm29.so+0x64800])
+10:21:19  classInitStateMachine__FP10J9VMThreadP7J9Class16J9ClassInitState+0xe98 (0x09000000127B6A1C [libj9vm29.so+0x65a1c])
+10:21:19  resolveStaticMethodRefInto+0x200 (0x09000000127D2C44 [libj9vm29.so+0x81c44])
+10:21:19  resolveStaticMethodRef+0x30 (0x09000000127D3194 [libj9vm29.so+0x82194])
+10:21:19  bytecodeLoopCompressed+0x4d70 (0x090000001292D2F4 [libj9vm29.so+0x1dc2f4])
+10:21:19  (0x09000000127BFCFC [libj9vm29.so+0x6ecfc])
+10:21:19  sendClinit+0x1f0 (0x09000000127B9574 [libj9vm29.so+0x68574])
+10:21:19  initializeImpl+0x3fc (0x09000000127B5800 [libj9vm29.so+0x64800])
+10:21:19  classInitStateMachine__FP10J9VMThreadP7J9Class16J9ClassInitState+0xe98 (0x09000000127B6A1C [libj9vm29.so+0x65a1c])
+10:21:19  resolveStaticFieldRefInto+0x910 (0x09000000127D3D14 [libj9vm29.so+0x82d14])
+10:21:19  resolveStaticFieldRef+0x30 (0x09000000127D3E54 [libj9vm29.so+0x82e54])
+10:21:19  bytecodeLoopCompressed+0x25214 (0x090000001294D798 [libj9vm29.so+0x1fc798])
+10:21:19  (0x09000000127BFCFC [libj9vm29.so+0x6ecfc])
+10:21:19  runCallInMethod+0x264 (0x09000000127BC948 [libj9vm29.so+0x6b948])
+10:21:19  gpProtectedRunCallInMethod__FPv+0x48 (0x09000000127AD04C [libj9vm29.so+0x5c04c])
+10:21:19  signalProtectAndRunGlue+0x28 (0x09000000127A6CAC [libj9vm29.so+0x55cac])
+10:21:19  omrsig_protect+0x488 (0x0900000012A47E4C [libj9prt29.so+0x58e4c])
+10:21:19  gpProtectAndRun+0xf8 (0x09000000127A6DFC [libj9vm29.so+0x55dfc])
+10:21:19  gpCheckCallin+0x114 (0x09000000127ACFB8 [libj9vm29.so+0x5bfb8])
+10:21:19  callStaticVoidMethod+0x48 (0x0900000012807E8C [libj9vm29.so+0xb6e8c])
+10:21:19  JavaMain+0xd6c (0x0000010000007450 [java+0x7450])
+10:21:19  _pthread_body+0xf0 (0x0900000000570E14 [libpthreads.a+0x3e14])
+10:21:19  ---------------------------------------
+10:21:19  JVMDUMP039I Processing dump event "gpf", detail "" at 2020/10/24 10:21:02 - please wait.
+10:21:19  JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/TKG/test_output_16035455927730/jdk_util_j9_0/work/scratch/core.20201024.102102.15335428.0001.dmp' in response to an event
+10:21:19  
+10:21:19  Child exited with status: 99
+10:21:19  Unhandled exception
+10:21:19  Type=Segmentation error vmState=0x00000000
+10:21:19  J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000032
+10:21:19  Handler1=09001000A1356B90 Handler2=09001000A12279C0
+10:21:19  R0=0000000000000004 R1=0000010010043920 R2=09001000A135A5C8 R3=0A00010000000000
+10:21:19  R4=0000000000000020 R5=0000000000000000 R6=000000003000E700 R7=0000000000000000
+10:21:19  R8=0A00010000000000 R9=00000100100436C0 R10=0A000100076B0914 R11=0000000000000006
+10:21:19  R12=FFFFFFFF84408240 R13=0000010010057800 R14=00000000300F3B20 R15=000000003000E700
+10:21:19  R16=0000010021CCE798 R17=FFFFFFFFFFFFFFFF R18=00000100106177B0 R19=00000100106177B0
+10:21:19  R20=0000000000000000 R21=00000000FFEA0950 R22=00000000FFEA0A60 R23=00000000FFEA0A08
+10:21:19  R24=0000000000000000 R25=000000000000000C R26=00000000FFEA14C8 R27=0000000000000001
+10:21:19  R28=0000000000000000 R29=0A000100076B18C3 R30=000000003000E700 R31=0000000000000000
+10:21:19  IAR=0900000012926888 LR=0900000012937F58 MSR=A00000000200D032 CTR=0900000012937B60
+10:21:19  CR=2440824900000010 FPSCR=8200000000000000 XER=0000001082000000
+10:21:19  FPR0 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR1 c3e0000000000000 (f: 0.000000, d: -9.223372e+18)
+10:21:19  FPR2 41cdcd6500000000 (f: 0.000000, d: 1.000000e+09)
+10:21:19  FPR3 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR4 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR5 c3e0000000000000 (f: 0.000000, d: -9.223372e+18)
+10:21:19  FPR6 410d67a000000000 (f: 0.000000, d: 2.408840e+05)
+10:21:19  FPR7 412e848000000000 (f: 0.000000, d: 1.000000e+06)
+10:21:19  FPR8 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR9 4530000000000000 (f: 0.000000, d: 1.934281e+25)
+10:21:19  FPR10 412e848000000000 (f: 0.000000, d: 1.000000e+06)
+10:21:19  FPR11 43300000000f4240 (f: 1000000.000000, d: 4.503600e+15)
+10:21:19  FPR12 4530000000000000 (f: 0.000000, d: 1.934281e+25)
+10:21:19  FPR13 0000000000000002 (f: 2.000000, d: 9.881313e-324)
+10:21:19  FPR14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR16 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR17 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR18 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR19 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR20 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR21 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR22 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR23 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR24 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR25 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR26 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR27 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR28 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR29 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR30 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  FPR31 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+10:21:19  Module=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdkbinary/j2sdk-image/lib/compressedrefs/libj9vm29.so
+10:21:19  Module_base_address=0900000012751000
+10:21:19  Target=2_90_20201024_54 (AIX 7.1)
+10:21:19  CPU=ppc64 (16 logical CPUs) (0x200000000 RAM)
+10:21:19  ----------- Stack Backtrace -----------
+10:21:19  (0x09000000127BFCFC [libj9vm29.so+0x6ecfc])
+10:21:19  sendClinit+0x1f0 (0x09000000127B9574 [libj9vm29.so+0x68574])
+10:21:19  initializeImpl+0x3fc (0x09000000127B5800 [libj9vm29.so+0x64800])
+10:21:19  classInitStateMachine__FP10J9VMThreadP7J9Class16J9ClassInitState+0xe98 (0x09000000127B6A1C [libj9vm29.so+0x65a1c])
+10:21:19  resolveStaticMethodRefInto+0x200 (0x09000000127D2C44 [libj9vm29.so+0x81c44])
+10:21:19  resolveStaticMethodRef+0x30 (0x09000000127D3194 [libj9vm29.so+0x82194])
+10:21:19  bytecodeLoopCompressed+0x4d70 (0x090000001292D2F4 [libj9vm29.so+0x1dc2f4])
+10:21:19  (0x09000000127BFCFC [libj9vm29.so+0x6ecfc])
+10:21:19  sendClinit+0x1f0 (0x09000000127B9574 [libj9vm29.so+0x68574])
+10:21:19  initializeImpl+0x3fc (0x09000000127B5800 [libj9vm29.so+0x64800])
+10:21:19  classInitStateMachine__FP10J9VMThreadP7J9Class16J9ClassInitState+0xe98 (0x09000000127B6A1C [libj9vm29.so+0x65a1c])
+10:21:19  resolveStaticFieldRefInto+0x910 (0x09000000127D3D14 [libj9vm29.so+0x82d14])
+10:21:19  resolveStaticFieldRef+0x30 (0x09000000127D3E54 [libj9vm29.so+0x82e54])
+10:21:19  bytecodeLoopCompressed+0x25214 (0x090000001294D798 [libj9vm29.so+0x1fc798])
+10:21:19  (0x09000000127BFCFC [libj9vm29.so+0x6ecfc])
+10:21:19  runCallInMethod+0x264 (0x09000000127BC948 [libj9vm29.so+0x6b948])
+10:21:19  gpProtectedRunCallInMethod__FPv+0x48 (0x09000000127AD04C [libj9vm29.so+0x5c04c])
+10:21:19  signalProtectAndRunGlue+0x28 (0x09000000127A6CAC [libj9vm29.so+0x55cac])
+10:21:19  omrsig_protect+0x488 (0x0900000012A47E4C [libj9prt29.so+0x58e4c])
+10:21:19  gpProtectAndRun+0xf8 (0x09000000127A6DFC [libj9vm29.so+0x55dfc])
+10:21:19  gpCheckCallin+0x114 (0x09000000127ACFB8 [libj9vm29.so+0x5bfb8])
+10:21:19  callStaticVoidMethod+0x48 (0x0900000012807E8C [libj9vm29.so+0xb6e8c])
+10:21:19  JavaMain+0xd6c (0x0000010000007450 [java+0x7450])
+10:21:19  _pthread_body+0xf0 (0x0900000000570E14 [libpthreads.a+0x3e14])
+10:21:19  ---------------------------------------
+10:21:19  JVMDUMP039I Processing dump event "gpf", detail "" at 2020/10/24 10:21:02 - please wait.
+10:21:19  JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Release/openjdk-tests/TKG/test_output_16035455927730/jdk_util_j9_0/work/scratch/core.20201024.102102.15335428.0001.dmp' in response to an event
+10:21:19   not equal to 
+10:21:19  
+10:21:19  Passed = 4, failed = 1
+10:21:19  
+10:21:19  STDERR:
+10:21:19  java.lang.Throwable
+10:21:19  	at java.base/java.lang.Thread.dumpStack(Thread.java:511)
+10:21:19  	at LoggingDeadlock2.fail(LoggingDeadlock2.java:324)
+10:21:19  	at LoggingDeadlock2.fail(LoggingDeadlock2.java:325)
+10:21:19  	at LoggingDeadlock2.equal(LoggingDeadlock2.java:331)
+10:21:19  	at LoggingDeadlock2.realMain(LoggingDeadlock2.java:87)
+10:21:19  	at LoggingDeadlock2.main(LoggingDeadlock2.java:333)
+10:21:19  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+10:21:19  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+10:21:19  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+10:21:19  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+10:21:19  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+10:21:19  	at java.base/java.lang.Thread.run(Thread.java:836)
+10:21:19  java.lang.AssertionError: Some tests failed
+10:21:19  	at LoggingDeadlock2.main(LoggingDeadlock2.java:335)
+10:21:19  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+10:21:19  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+10:21:19  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+10:21:19  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+10:21:19  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+10:21:19  	at java.base/java.lang.Thread.run(Thread.java:836)
+10:21:19  
+10:21:19  JavaTest Message: Test threw exception: java.lang.AssertionError
+10:21:19  JavaTest Message: shutting down test
+10:21:19  
+10:21:19  
+10:21:19  TEST RESULT: Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Some tests failed
+```

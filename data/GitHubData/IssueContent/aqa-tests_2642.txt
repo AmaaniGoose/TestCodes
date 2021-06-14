@@ -1,0 +1,13 @@
+We have two jreg dependencies jtreg4.2, jtreg 5.1, which are downloading from https://ci.adoptopenjdk.net/view/Dependencies/job/dependency_pipeline/lastSuccessfulBuild/artifact/jtreg/ (either directly or by test.getDependency job).
+
+It turns out at least from Nov 13, 2020 the two different version jar actually are both the same as jtreg5.1, which also said all tests can run successfully using jtreg5.1 (jdk8, jdk11). Jtreg 5.1 is required for jdk15, jdk16, https://github.com/AdoptOpenJDK/openjdk-jdk15u/blob/master/test/jdk/TEST.ROOT#L62 https://github.com/openjdk/jdk16u/blob/master/make/conf/test-dependencies
+https://github.com/openjdk/jdk16u/blob/master/test/jdk/TEST.ROOT#L70
+
+jdk17+ require jtreg6. https://github.com/openjdk/jdk17/blob/master/make/conf/test-dependencies#L29
+https://github.com/openjdk/jdk/blob/master/make/conf/test-dependencies#L29
+
+As former jdk versions don't work with jtreg 6 ( https://adoptium.slack.com/archives/C5219G28G/p1623072758038100)
+We will need update jtreg depencency to jtreg5.1 and jtreg6 for now.
+
+Dependecy_pipeline currently has issue to build both jtreg5 and jtreg6.
+https://github.com/adoptium/ci-jenkins-pipelines/issues/165

@@ -1,0 +1,73 @@
+### Summary
+Hi, we found that multiple J9 versions failed to catch StackOverflowError, especially on Linux. The simplified test case can be found in the attachment. 
+
+It is noteworthy that we tested the test case on three platforms: macOS, Linux and windows.  The result is that on Linux, the exception can be triggered almost every time. On macOS, the execution result is unstable. The exception can be triggered about 10 times of 100 executions on average. However, on windows, we tried many times and no exception was triggered. There is no such problem on windows.
+
+### How to reproduce?
+[SOFL.zip](https://github.com/eclipse-openj9/openj9/files/6643887/SOFL.zip)
+Follow the commands in readme.
+
+### Affected versions
+Linux:
+```
+Ubuntu 18.04.2 LTS
+CPU model: Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz
+CPU cores: two octa-core CPUs
+Memory: 96452 MB
+```
+
+Java -version output  under Linux
+```
+openjdk version "1.8.0_275"
+OpenJDK Runtime Environment (build 1.8.0_275-b01)
+Eclipse OpenJ9 VM (build openj9-0.23.0, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20201110_845 (JIT enabled, AOT enabled)
+OpenJ9   - 0394ef754
+OMR      - 582366ae5
+JCL      - b52d2ff7ee based on jdk8u275-b01)
+```
+
+```
+openjdk version "9.0.4-adoptopenjdk"
+OpenJDK Runtime Environment (build 9.0.4-adoptopenjdk+12)
+Eclipse OpenJ9 VM (build openj9-0.9.0, JRE 9 Linux amd64-64-Bit Compressed References 20180814_248 (JIT enabled, AOT enabled)
+OpenJ9   - 24e53631
+OMR      - fad6bf6e
+JCL      - feec4d2ae based on jdk-9.0.4+12)
+
+```
+
+```
+openjdk version "11.0.10" 2021-01-19
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.10+9)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.24.0, JRE 11 Linux amd64-64-Bit Compressed References 20210120_910 (JIT enabled, AOT enabled)
+OpenJ9   - 345e1b09e
+OMR      - 741e94ea8
+JCL      - 0a86953833 based on jdk-11.0.10+9)
+```
+
+macOS:
+```
+macOS Big Sur
+Version 11.2.3 (20D91)
+Processor 2.3 GHz Dual-Core Intel Core i5
+Memory 8 GB 2133 MHz LPDDR3
+```
+
+Java -version output under macOS
+```
+openjdk version "1.8.0_272"
+OpenJDK Runtime Environment (build 1.8.0_272-b10)
+Eclipse OpenJ9 VM (build openj9-0.23.0, JRE 1.8.0 Mac OS X amd64-64-Bit Compressed References 20201022_737 (JIT enabled, AOT enabled)
+OpenJ9   - 0394ef754
+OMR      - 582366ae5
+JCL      - 41f03341d5 based on jdk8u272-b10)
+```
+
+```
+openjdk version "11.0.10" 2021-01-19
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.10+9)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.24.0, JRE 11 Mac OS X amd64-64-Bit Compressed References 20210120_897 (JIT enabled, AOT enabled)
+OpenJ9   - 345e1b09e
+OMR      - 741e94ea8
+JCL      - 0a86953833 based on jdk-11.0.10+9)
+```

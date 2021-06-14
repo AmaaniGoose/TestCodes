@@ -1,0 +1,13 @@
+Failing job link: https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_sanity.functional_ppc64_aix/103/
+
+Output of failing test:
+```
+03:39:01   [ERR] Starting test j9sysinfo_testOnlineProcessorCount
+03:39:01   [ERR] si.c line 1331: j9sysinfo_testOnlineProcessorCount Invalid online processor count found.
+03:39:01   [ERR] 
+03:39:01   [ERR] 		LastErrorNumber: -102
+03:39:01   [ERR] 		LastErrorMessage: The file access permissions do not allow the specified action.
+03:39:01   [ERR] 
+03:39:01   [ERR] Ending test j9sysinfo_testOnlineProcessorCount
+```
+Test fails on test-osuosl-aix72-ppc64-1 (https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_sanity.functional_ppc64_aix/103/), passes on test-osuosl-aix72-ppc64-2 (https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_sanity.functional_ppc64_aix/101/)

@@ -1,0 +1,7 @@
+As requested by @0xdaryl ,   we should be able to set up a cross-compilated/emulated RISC-V CI testing environment in OpenJ9 for RISC-V before the hardware is attached to the project, which is similar to what was set up at OMR for RISC-V at https://github.com/eclipse/omr/issues/4641.   As @janvrany starts to open OpenJ9 PRs for his work, it would be very useful if we could verify the changes at the project. 
+
+Actually we previously had cross-compiling jobs at Adopt but it won't work any wore. For now, we still have cross-compiling jobs internally which seems working to generate the cross-build (we need to figure out what is still left to do there)
+
+The issue is created to check what is still missing, what has been done and what to do next.
+
+FYI: @0xdaryl, @AdamBrousseau, @jdekonin, @tajila, @pshipton, @DanHeidinga

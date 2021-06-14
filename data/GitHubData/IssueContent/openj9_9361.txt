@@ -1,0 +1,8 @@
+As discussed in #9349, a monthly release cadence will be more likely to hit TKG breaking changes hitting a given release are higher than they have been before. We'll also need a way to add a depends tag for the https://github.com/eclipse/openj9-systemtest as it too may (though unlikely) change in an incompatible way.
+
+>Do the PR builds have a way to specify the TKG version they need? Will more syntax be needed for that?
+
+No but syntax could be added. It might not be that difficult to change since all the parsing is done on the pipeline side now so we have more flexibility with groovy. The regex in the Jenkins config is simple `Jenkins (compile|test) *`.
+We also don't yet have the mechanics for passing TKG variables to the test jobs so that would have to be added.
+
+_Originally posted by @AdamBrousseau in https://github.com/eclipse/openj9/issues/9349#issuecomment-619081424_

@@ -1,0 +1,4 @@
+Assert is found [here](https://github.com/eclipse/openj9/blob/5e9ce6ba4a2ee2a70a16abc2acfdb983ffa07fe8/runtime/gc_vlhgc/SchedulingDelegate.cpp#L642)
+`Assert_MM_true(_liveSetBytesAfterGlobalSweep <= _liveSetBytesAfterGlobalSweep);`
+
+Not knowing the code at all, my best guess would be that it should be `_liveSetBytesAfterGlobalSweep <= _previousLiveSetBytesAfterGlobalSweep`, however [elsewhere](https://github.com/eclipse/openj9/blob/5e9ce6ba4a2ee2a70a16abc2acfdb983ffa07fe8/runtime/gc_vlhgc/SchedulingDelegate.cpp#L508-L512) in the code it is mentioned that the heap occupancy trend can go negative.

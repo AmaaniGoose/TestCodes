@@ -1,0 +1,10 @@
+I need to request a new machine:
+
+- New machine operating system (e.g. linux/windows/macos/solaris/aix): Linux
+- New machine architecture (e.g. x64/aarch32/arm32/ppc64/ppc64le/sparc): x64/aarch64/ppc64le
+- Provider (leave blank if it does not matter):
+- Desired usage: Test
+- Any unusual specification/setup required: DockerStatic systems
+- How many of them are required: One for each `dockerhost` system we have
+
+Please explain what this machine is needed for: Testing on the CentOS stream release since this is the primary CentOS head stream now.

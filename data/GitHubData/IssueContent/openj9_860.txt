@@ -1,0 +1,40 @@
+A compilation log of `java/util/zip/ZipUtils.LG([BI)J` at scorching compile level using the below command
+
+```
+java -Xjit:count=1,optlevel=scorching,disableasynccompilation,disableSuffixLogs,'{java/util/zip/ZipUtils.LG([BI)J}(tracefull,log=LG.log' -Xdump:none Test
+```
+
+on Test which makes use of the Zip class produces the attached log:
+[LG.log](https://github.com/eclipse/openj9/files/1576709/LG.log)
+
+In the log we see the following trees before Sign Extending Loads optimization:
+
+```
+n269n         bu2i (X>=0 )                                                                    
+n270n           bloadi  <array-shadow>[#471  Shadow] [flags 0x80000601 0x0 ] (cannotOverflow )
+n271n             aladd (X>=0 internalPtr sharedMemory )                                      
+n232n               ==>aload
+n272n               lsub (highWordZero X>=0 cannotOverflow )                                  
+n302n                 i2l                                                                     
+n235n                   ==>iload
+n304n                 lconst -10
+```
+
+and the trees after Sign Extending Loads optimization are:
+
+```
+n269n         bu2i (X>=0 )                                                                    
+n270n           bloadi  <array-shadow>[#471  Shadow] [flags 0x80000601 0x0 ] (cannotOverflow )
+n271n             aladd (X>=0 internalPtr sharedMemory )                                      
+n232n               ==>aload
+n272n               lsub (highWordZero X>=0 cannotOverflow )                                  
+n302n                 i2l                                                                     
+n311n                   ==>i2l
+n304n                 lconst -10                                                              
+```
+
+Node `n311n` has been introduced which makes node `n302n` not properly typed. The child of `n302n` should be of type `TR::Int32` but it is not. The optimization seems to perform the following related transformation to the original `n235n` load:
+
+```
+[   164] O^O SIGN EXTENDING LOADS TRANSFORMATION: i2l inserted for 000003FFD5DD9E20
+```

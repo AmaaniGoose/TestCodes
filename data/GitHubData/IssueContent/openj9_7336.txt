@@ -1,0 +1,27 @@
+Failure link
+------------
+Rebuild link: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&BUILD_LIST=openjdk&JenkinsFile=openjdk_x86-64_linux&CUSTOM_TARGET=test/jdk/vm/verifier/VerifyProtectedConstructor.java&TARGET=jdk_custom_0
+- test category: sanity openjdk
+- OS/architecture: all
+- version: 11, 13
+- JVM: openj9 only
+
+Optional info
+-------------
+- intermittent failure: no
+- regression or new test: regression
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+15:50:40  java.lang.Exception: FAIL: should be a VerifyError for CF version 49
+15:50:40  	at VerifyProtectedConstructor.main(VerifyProtectedConstructor.java:41)
+15:50:40  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:50:40  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+15:50:40  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:50:40  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+15:50:40  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+15:50:40  	at java.base/java.lang.Thread.run(Thread.java:831)
+```
+
+This test is testing whether a protected constructor of a superclass can be accessed while not in the same package. On hotspot, doing this throws a VerifyError, but on J9 it does not.

@@ -1,0 +1,30 @@
+#7352 proposed a plan to replace Openj9 MethodHandle implementation with OpenJDK's. This issue is to track JIT work to support the switch.
+
+## Functional support 
+- [x] #10607  bytecode handler
+- [x] #10576 Add routines to get target method from MethodHandle and MemberName
+- [x] #10617 Handle `MethodHandle.invokeBasic` and `MethodHandle.linkTo` (Basic functional support)
+- [x] https://github.com/eclipse/omr/pull/5597 and #10788 Insert store to `J9VMThread.tempSlot` for `MethodHandle.invokeBasic` in lower tree
+- [x] Handle `ldc` of patched object https://github.com/eclipse/omr/pull/5664 and #11092 
+- [x] OSR support #11261
+- [ ] Don't mark transformed `invokeBasic` and `linkTo*` call as cannot OSR (doNotProfile shouldn't be set on the transformed node) 
+
+## Performance
+1. Inline MH chain
+  - [x] Don't invalidate prex arg if a store doesn't change the parm's value. https://github.com/eclipse/omr/pull/5683
+  - [x] Refactor prex arg info computation and propagation. issue #11584 
+  - [x] Transform `invokeBasic` and `linkTo*` such that the call can be matched by inliner target #11634 and https://github.com/eclipse/omr/pull/5745
+  - [x] Inliner change to ensure correct target is selected and MH methods are inlined with existing JSR292 heuristics https://github.com/eclipse/openj9/pull/12162
+  - [ ] MutableCallSite inlining
+  - [ ] Support more bytecodes in InterpreterEmulator
+
+2. INL dispatch
+  - [ ] Improve dispatch performance of `invokeBasic` and `linkTo*`
+
+
+-- More to come --
+
+## JITServer support
+
+## AOT support
+- [ ] issue #4850

@@ -1,0 +1,78 @@
+Failure link
+------------
+
+From an internal build `Test_openjdkValhalla_j9_sanity.functional_x86-64_linux_valhalla_Nightly_testList_1/52`:
+```
+21:45:10  openjdk version "16-internal" 2021-03-16
+21:45:10  OpenJDK Runtime Environment (build 16-internal+0-adhoc.jenkins.BuildJDKnextx86-64linuxvalhallaNightly)
+21:45:10  Eclipse OpenJ9 VM (build master-d3ca26b528e, JRE 16 Linux amd64-64-Bit Compressed References 20200810_117 (JIT enabled, AOT enabled)
+21:45:10  OpenJ9   - d3ca26b528e
+21:45:10  OMR      - e27fe46829b
+21:45:10  JCL      - 98badf86fb4 based on jdk-16+9)
+```
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+Unhandled exception
+Type=Segmentation error vmState=0x00000000
+J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000002
+Handler1=00007F6A68E29A20 Handler2=00007F6A68705D90 InaccessibleAddress=00000000FFF700C0
+RDI=0000000000000000 RSI=00000000FFE40128 RAX=00000000FFDCAA48 RBX=00000000FFDCAA48
+RCX=00000000FFF79B00 RDX=00000000FFDCAA48 R8=00000000FFFFFFFF R9=000000000004A100
+R10=0000000000000008 R11=00000000FFE40000 R12=00000000FFE40138 R13=00000000000000C6
+R14=00000000FFE40138 R15=00000000FFE40128
+RIP=00000000FFF700C0 GS=0000 FS=0000 RSP=000000000010C2C8
+EFlags=0000000000010206 CS=0033 RBP=0000000000016700 ERR=0000000000000015
+TRAPNO=000000000000000E OLDMASK=0000000000000000 CR2=00000000FFF700C0
+xmm0 0000000048b8bfa0 (f: 1220067200.000000, d: 6.027933e-315)
+xmm1 000000004804cc40 (f: 1208273920.000000, d: 5.969667e-315)
+xmm2 0000000047a27333 (f: 1201828608.000000, d: 5.937823e-315)
+xmm3 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm4 43e0000000000000 (f: 0.000000, d: 9.223372e+18)
+xmm5 000000003e6119bf (f: 1046550976.000000, d: 5.170649e-315)
+xmm6 0000000048b8bfa0 (f: 1220067200.000000, d: 6.027933e-315)
+xmm7 000000003dfab536 (f: 1039840576.000000, d: 5.137495e-315)
+xmm8 ffdc5f3800000000 (f: 0.000000, d: -7.969384e+307)
+xmm9 ffdc5f80ffdc5f68 (f: 4292632320.000000, d: -7.969697e+307)
+xmm10 3f847ae147ae147b (f: 1202590848.000000, d: 1.000000e-02)
+xmm11 00000000ffdc5ff8 (f: 4292632576.000000, d: 2.120842e-314)
+xmm12 ffdc6040ffdc6028 (f: 4292632576.000000, d: -7.970520e+307)
+xmm13 74757074756f5f74 (f: 1970233216.000000, d: 9.823958e+252)
+xmm14 2f36373438303234 (f: 942682688.000000, d: 2.927521e-81)
+xmm15 494a737473655465 (f: 1936020608.000000, d: 1.179754e+45)
+Target=2_90_20200810_117 (Linux 4.4.0-174-generic)
+CPU=amd64 (4 logical CPUs) (0xf6f3a000 RAM)
+----------- Stack Backtrace -----------
+(0x00007F6A68737362 [libj9prt29.so+0x4d362])
+(0x00007F6A68706AF3 [libj9prt29.so+0x1caf3])
+(0x00007F6A687373DE [libj9prt29.so+0x4d3de])
+(0x00007F6A687374D4 [libj9prt29.so+0x4d4d4])
+(0x00007F6A68706AF3 [libj9prt29.so+0x1caf3])
+(0x00007F6A6873723B [libj9prt29.so+0x4d23b])
+(0x00007F6A68E29564 [libj9vm29.so+0xa4564])
+(0x00007F6A68706AF3 [libj9prt29.so+0x1caf3])
+(0x00007F6A68E297D5 [libj9vm29.so+0xa47d5])
+(0x00007F6A68E57475 [libj9vm29.so+0xd2475])
+---------------------------------------
+JVMDUMP039I Processing dump event "gpf", detail "" at 2020/08/10 18:47:35 - please wait.
+JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test_openjdkValhalla_j9_sanity.functional_x86-64_linux_valhalla_Nightly_testList_1/openjdk-tests/TKG/test_output_15971104208476/ValueTypeTestsJIT_0/core.20200810.184735.464.0001.dmp' in response to an event
+JVMPORT030W /proc/sys/kernel/core_pattern setting "|/usr/share/apport/apport %p %s %c %d %P" specifies that the core dump is to be piped to an external program.  Attempting to rename either core or core.507.
+
+JVMDUMP010I System dump written to /home/jenkins/workspace/Test_openjdkValhalla_j9_sanity.functional_x86-64_linux_valhalla_Nightly_testList_1/openjdk-tests/TKG/test_output_15971104208476/ValueTypeTestsJIT_0/core.20200810.184735.464.0001.dmp
+JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdkValhalla_j9_sanity.functional_x86-64_linux_valhalla_Nightly_testList_1/openjdk-tests/TKG/test_output_15971104208476/ValueTypeTestsJIT_0/javacore.20200810.184735.464.0002.txt' in response to an event
+JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdkValhalla_j9_sanity.functional_x86-64_linux_valhalla_Nightly_testList_1/openjdk-tests/TKG/test_output_15971104208476/ValueTypeTestsJIT_0/javacore.20200810.184735.464.0002.txt
+JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Test_openjdkValhalla_j9_sanity.functional_x86-64_linux_valhalla_Nightly_testList_1/openjdk-tests/TKG/test_output_15971104208476/ValueTypeTestsJIT_0/Snap.20200810.184735.464.0003.trc' in response to an event
+JVMDUMP010I Snap dump written to /home/jenkins/workspace/Test_openjdkValhalla_j9_sanity.functional_x86-64_linux_valhalla_Nightly_testList_1/openjdk-tests/TKG/test_output_15971104208476/ValueTypeTestsJIT_0/Snap.20200810.184735.464.0003.trc
+JVMDUMP032I JVM requested JIT dump using '/home/jenkins/workspace/Test_openjdkValhalla_j9_sanity.functional_x86-64_linux_valhalla_Nightly_testList_1/openjdk-tests/TKG/test_output_15971104208476/ValueTypeTestsJIT_0/jitdump.20200810.184735.464.0004.dmp' in response to an event
+JVMDUMP010I JIT dump written to /home/jenkins/workspace/Test_openjdkValhalla_j9_sanity.functional_x86-64_linux_valhalla_Nightly_testList_1/openjdk-tests/TKG/test_output_15971104208476/ValueTypeTestsJIT_0/jitdump.20200810.184735.464.0004.dmp
+JVMDUMP013I Processed dump event "gpf", detail "".
+
+ValueTypeTestsJIT_0_FAILED
+```
+For example, to rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links:
+21:47:40  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=Valhalla&JDK_IMPL=openj9&BUILD_LIST=functional/Valhalla,functional/cmdline_options_tester,functional/cmdLineTests/valuetypeddrtests&PLATFORM=x86-64_linux&TARGET=ValueTypeTestsJIT_0

@@ -1,0 +1,8 @@
+With JProfiling we already have seen a great performance improvements in ILOG and Spark/HiBench(Steady state). I am opening up this issue to document the needed work to be done to enable JProfiling in profiling compilations and track progress. 
+Things to do : 
+
+1. Move optimization phase to split blocks after GRA
+Instead of splitting blocks before GRA increasing the GRA Candidate which in turns increases the compilation time, add the profiling trees after GRA manually handling the un commoning  through `GLRegDeps`.
+2. Scan for VFT Profiling candidate and profile them in profiling compilations
+Currently for profiling compilations we add the profiling trees for the profiling candidates chose by other optimizations and also in the scan it can add the profiling code to profile instanceOf/checkcast nodes. We need to refactor the code in JProfilingValur.cpp to accommodate other profiling candidates as well like VFT of receiver object which was not chose by other opts.
+3. Re-evaluate the peformance and enable it. 

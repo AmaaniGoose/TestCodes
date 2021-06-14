@@ -1,0 +1,50 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk13_j9_extended.functional_x86-64_mac_OpenJDK13/27
+SyntheticGCWorkload_concurrentSlackAuto_1M_J9_0
+```
+Legend: 
+. = Scavenge
+, = Global
+f = Failed flip
+F = Failed tenure
+p = Percolate collect
+c = Concurrent aborted
+| = Minute marker
+x = Warning: aborted collection due to insufficient free space
+s = Warning: scan cache overflow (storage acquired from heap)
+X = Other warning
+T = Total throughput
+S = Concurrent slack (-1 = auto)
+? = Unknown event
+---------------------------------------------------------
+/Users/jenkins/workspace/Test_openjdk13_j9_extended.functional_x86-64_mac_OpenJDK13/openjdk-tests/TestConfig/scripts/testKitGen/../../../TestConfig/test_output_15662511831369/SyntheticGCWorkload_concurrentSlackAuto_1M_J9_0/config_1M_0.4.xml_2019-08-19T_18-09-15_verbose_original.xml: 
+...............,........,.f|........F,.........F,.........F,...|......fFxp,........F,........Fp,.....|...fFxp,........F,........F,.........F|,.........F,........F,.........F,..|.......F,.f.........F,.........F,....|.....F,.........F,.........F,......|...fFxp,........F,........F,........|.F,.........F,.........fFx,........F,..|......fFxp,.........F,.........Fp,....|.
+.	,	x	f	F	p	S	T	
+280	31	5	7	29	6	0	38.6GB
+---------------------------------------------------------
+/Users/jenkins/workspace/Test_openjdk13_j9_extended.functional_x86-64_mac_OpenJDK13/openjdk-tests/TestConfig/scripts/testKitGen/../../../TestConfig/test_output_15662511831369/SyntheticGCWorkload_concurrentSlackAuto_1M_J9_0/config_1M_0.4.xml_2019-08-19T_18-09-15_verbose_concurrentSlackAuto.xml: 
+..............,....p,......,..|....p,.f.,.....,.....,....,.....,..|...,.....,.f....,.....,.....,.....,|......p,.....,.....,......,.f.....,.|....,......,......,......,.....|,.f......,.f.....,.......,......,.f...|..,.....,......,.......,......,...|...,......,.....,.f......,......,.|......,.....,......,......,......,|.....,.f......,......,......,.....
+.	,	x	f	F	p	S	T	
+282	48	0	8	0	3	-2	39.1GB
+---------------------------------------------------------
+Test results: 
+Warning: aborted collection due to insufficient free space (x): before 5, after 0, ratio 0.0 <= 0.15 --> passed
+Percolate collect (p): before 6, after 3, ratio 0.5 > 0.15 --> failed
+```
+
+https://ci.eclipse.org/openj9/job/Test_openjdk13_j9_extended.functional_x86-64_linux_xl_OpenJDK13/26/
+```
+---------------------------------------------------------
+/home/jenkins/workspace/Test_openjdk13_j9_extended.functional_x86-64_linux_xl_OpenJDK13/openjdk-tests/TestConfig/scripts/testKitGen/../../../TestConfig/test_output_15662514763642/SyntheticGCWorkload_concurrentSlackAuto_1M_J9_0/config_1M_0.4.xml_2019-08-19T_21-58-01_verbose_original.xml: 
+...............,.......,...|......F,.........F,.........F,.f.....|....fFx,.f.........F,..........F,.........F|,.........F,.........F,..........Fp,...|......F,.........fFxp,.........F,.......|..F,.f.........fFx,.f.........F,.........F,.|........fFxp,........F,.f.........Fp,.....|....F,.........F,.........Fp,.f........F|,.........F,.........Fp,.........Fp,...|......F,.........F,.........F,......|..
+.	,	x	f	F	p	S	T	
+306	32	4	10	30	7	0	42.8GB
+---------------------------------------------------------
+/home/jenkins/workspace/Test_openjdk13_j9_extended.functional_x86-64_linux_xl_OpenJDK13/openjdk-tests/TestConfig/scripts/testKitGen/../../../TestConfig/test_output_15662514763642/SyntheticGCWorkload_concurrentSlackAuto_1M_J9_0/config_1M_0.4.xml_2019-08-19T_21-58-01_verbose_concurrentSlackAuto.xml: 
+..............,....p,....,.....,.|...,....,.....,....,.....,....,....|..,....,.....,....,.....,.....,.....,.|....,.f......,.....p,......,.....,...|...,.....p,......,.....,.f......,....|..,.......,.....,.....,......,.f.....|.,......,......,......,.....,.f......|,......p,......,......p,......,.....,|......,.....,.....,......,.....,.f....|.,.....,.f.....,.....,.f.....,.....,
+.	,	x	f	F	p	S	T	
+299	54	0	7	0	5	-2	42.7GB
+---------------------------------------------------------
+Test results: 
+Warning: aborted collection due to insufficient free space (x): before 4, after 0, ratio 0.0 <= 0.15 --> passed
+Percolate collect (p): before 7, after 5, ratio 0.7142857142857143 > 0.15 --> failed
+```

@@ -1,0 +1,48 @@
+```
+Testing: FindStore.BuildVerify
+Test start time: 2018/09/12 06:17:26 Greenwich Mean Time
+Running command: cmd /c .\FindStore\buildVerify.bat C:/Users/j9build/jenkins/workspace/Test-sanity.functional-JDK10-win_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/bin\\..\bin ..\..\FindStore\sharedClassesResults
+Time spent starting: 4 milliseconds
+Time spent executing: 8996 milliseconds
+Test result: FAILED
+>> Success condition was found: [Output match: A.jar]
+>> Failure condition was found: [Output match: 0 file(s) copied]
+>> Failure condition was not found: [Output match: Usage:]
+>> Failure condition was not found: [Output match: no such]
+>> Failure condition was not found: [Output match: Exception:]
+>> Failure condition was not found: [Output match: Error:]
+
+Testing: FindStore.FindClassfile
+Test start time: 2018/09/12 06:17:35 Greenwich Mean Time
+Running command: "C:/Users/j9build/jenkins/workspace/Test-sanity.functional-JDK10-win_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/bin\\java"  -Xcompressedrefs -Xcompressedrefs -Xjit -Xgcpolicy:gencon    -Xshareclasses:nonpersistent,controlDir=.,name=FindStore,noTimestampChecks -cp .\FindStore\M_Classes;.\FindStore\N_Classes;.\FindStore\O_Classes;.\FindStore\P_Classes;.\FindStore\Nothing.jar jnurlcldr.shared.findstore.M_Main
+Time spent starting: 4 milliseconds
+Time spent executing: 278 milliseconds
+Test result: FAILED
+ [OUT] CACHED M
+ [ERR] Exception in thread "main" java.lang.NoClassDefFoundError: jnurlcldr.shared.findstore.N_Dummy
+ [ERR] 	at jnurlcldr.shared.findstore.M_Main$Data.getInt(M_Main.java:31)
+ [ERR] 	at jnurlcldr.shared.findstore.M_Main.main(M_Main.java:36)
+ [ERR] Caused by: java.lang.ClassNotFoundException: jnurlcldr.shared.findstore.N_Dummy
+ [ERR] 	at jdk.internal.loader.BuiltinClassLoader.loadClass(java.base@10.0.2-internal/BuiltinClassLoader.java:753)
+ [ERR] 	at jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(java.base@10.0.2-internal/ClassLoaders.java:190)
+ [ERR] 	at java.lang.ClassLoader.loadClass(java.base@10.0.2-internal/ClassLoader.java:1032)
+ [ERR] 	... 2 more
+
+Testing: FindStore.FindDiffcpClassfile
+Test start time: 2018/09/12 06:17:36 Greenwich Mean Time
+Running command: "C:/Users/j9build/jenkins/workspace/Test-sanity.functional-JDK10-win_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/bin\\java"  -Xcompressedrefs -Xcompressedrefs -Xjit -Xgcpolicy:gencon    -Xshareclasses:nonpersistent,controlDir=.,name=FindStore,noTimestampChecks -cp .\FindStore\M_Classes;.\FindStore\N_Classes;.\FindStore\O_Classes;.\FindStore\P_Classes jnurlcldr.shared.findstore.M_Main
+Time spent starting: 5 milliseconds
+Time spent executing: 202 milliseconds
+Test result: FAILED
+ [OUT] CACHED M
+ [ERR] Exception in thread "main" java.lang.NoClassDefFoundError: jnurlcldr.shared.findstore.N_Dummy
+ [ERR] 	at jnurlcldr.shared.findstore.M_Main$Data.getInt(M_Main.java:31)
+ [ERR] 	at jnurlcldr.shared.findstore.M_Main.main(M_Main.java:36)
+ [ERR] Caused by: java.lang.ClassNotFoundException: jnurlcldr.shared.findstore.N_Dummy
+ [ERR] 	at jdk.internal.loader.BuiltinClassLoader.loadClass(java.base@10.0.2-internal/BuiltinClassLoader.java:753)
+ [ERR] 	at jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(java.base@10.0.2-internal/ClassLoaders.java:190)
+ [ERR] 	at java.lang.ClassLoader.loadClass(java.base@10.0.2-internal/ClassLoader.java:1032)
+ [ERR] 	... 2 more
+```
+
+Occurred at `Test-sanity.functional-JDK11-win_x86-64_cmprssptrs` as well.

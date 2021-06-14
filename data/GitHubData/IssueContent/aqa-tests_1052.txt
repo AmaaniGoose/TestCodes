@@ -1,0 +1,28 @@
+java/nio/MappedByteBuffer/Truncate.java consistently got VM crashed with s390x hotspot jdk8.
+
+```
+Stacktrace
+
+Unexpected exit from test [exit code: 134]    
+
+Standard Output
+
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  Internal Error (os_linux_zero.cpp:202), pid=61427, tid=0x000003ff63fff910
+#  Error: ShouldNotCall()
+#
+# JRE version: OpenJDK Runtime Environment (8.0_202-b08) (build 1.8.0_202-201903300430-b08)
+# Java VM: OpenJDK 64-Bit Zero VM (25.202-b08 interpreted mode linux-s390x )
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# An error report file with more information is saved as:
+# /data/jenkins/workspace/openjdk8_hs_openjdktest_s390x_linux/jvmtest/openjdk_regression/work/scratch/2/hs_err_pid61427.log
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+#
+```
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/openjdk8_hs_openjdktest_s390x_linux/18/consoleFull    
+

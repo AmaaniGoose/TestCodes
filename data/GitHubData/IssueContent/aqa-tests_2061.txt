@@ -1,0 +1,9 @@
+From @smlambert in #802
+
+@sxa - while this is a fairly old issue, we can either update it with the intermittent failures seen in sanity.openjdk tests or reference in a new issue (& close this one).
+
+In a [recent test run](https://ci.adoptopenjdk.net/job/Test_openjdk8_hs_sanity.openjdk_arm_linux/109/testReport/), 2 test cases failing out of 1321 run as part of the sanity.openjdk target.  
+
+<img width="1299" alt="Screen Shot 2020-11-17 at 10 38 34 PM" src="https://user-images.githubusercontent.com/2836948/99480316-d7717d80-2925-11eb-8146-2f791317b154.png">
+
+_Originally posted by @smlambert in https://github.com/AdoptOpenJDK/openjdk-tests/issues/802#issuecomment-729376427_

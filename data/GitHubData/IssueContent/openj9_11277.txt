@@ -1,0 +1,5 @@
+```
+jextract is a simple - but convenient - tool which generates a Java API from one or more native C headers. The tool can be obtained by building the foreign-jextract branch of Panama foreign repository.
+```
+
+If we are to build tests that make use of jextract we will need libclang installed on those machines. 

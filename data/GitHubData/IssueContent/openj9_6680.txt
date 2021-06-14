@@ -1,0 +1,61 @@
+# Failure link
+https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/lang/StackWalker/DumpStackTest.java
+
+Consistent failure with jdk11-openj9 (all generic operating systems). Test passes on hotspot for all platforms
+# Java Version (when running locally)
+```
+openjdk 11.0.4 2019-07-16
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.4+11)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.15.1, JRE 11 Mac OS X amd64-64-Bit Compressed References 20190717_289 (JIT enabled, AOT enabled)
+OpenJ9   - 0f66c6431
+OMR      - ec782f26
+JCL      - fa49279450 based on jdk-11.0.4+11)
+```
+# Summary
+The issue is a failed `assertEquals()` caused by an unexpected call frame in the `consumeLambda()` test.
+
+# Failure output
+```
+13:29:44  --- Actual ---
+13:29:44  java.base/java.lang.Thread.getStackTrace(Thread.java:1169)
+13:29:44  DumpStackTest.consumeLambda(DumpStackTest.java:147)
+13:29:44  DumpStackTest.lambda$testLambda$0(DumpStackTest.java:129)
+13:29:44  DumpStackTest$$Lambda$3.000000009FE08CD0.accept(Unknown Source)
+13:29:44  DumpStackTest.testLambda(DumpStackTest.java:130)
+13:29:44  DumpStackTest.main(DumpStackTest.java:45)
+13:29:44  java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+13:29:44  java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+13:29:44  java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+13:29:44  java.base/java.lang.reflect.Method.invoke(Method.java:566)
+13:29:44  com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+13:29:44  java.base/java.lang.Thread.run(Thread.java:831)
+13:29:44  --- Expected ---
+13:29:44  java.lang.Thread.getStackTrace(Thread.java)
+13:29:44  DumpStackTest.consumeLambda(DumpStackTest.java)
+13:29:44  DumpStackTest.lambda$testLambda$0(DumpStackTest.java)
+13:29:44  DumpStackTest.testLambda(DumpStackTest.java)
+13:29:44  DumpStackTest.main(DumpStackTest.java)
+13:29:44  jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java)
+13:29:44  jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java)
+13:29:44  jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java)
+13:29:44  java.lang.reflect.Method.invoke(Method.java)
+13:29:44  java.lang.Thread.run(Thread.java)
+13:29:44  STDERR:
+13:29:44  java.lang.RuntimeException: StackTraceElements mismatch at index 3. Expected [DumpStackTest.testLambda(DumpStackTest.java)], but get [DumpStackTest$$Lambda$3.000000009FE08CD0.accept(Unknown Source)]
+13:29:44  	at DumpStackTest.assertEquals(DumpStackTest.java:227)
+13:29:44  	at DumpStackTest.assertStackTrace(DumpStackTest.java:219)
+13:29:44  	at DumpStackTest.consumeLambda(DumpStackTest.java:147)
+13:29:44  	at DumpStackTest.lambda$testLambda$0(DumpStackTest.java:129)
+13:29:44  	at DumpStackTest$$Lambda$3.000000009FE08CD0.accept(Unknown Source)
+13:29:44  	at DumpStackTest.testLambda(DumpStackTest.java:130)
+13:29:44  	at DumpStackTest.main(DumpStackTest.java:45)
+13:29:44  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+13:29:44  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+13:29:44  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+13:29:44  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+13:29:44  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+13:29:44  	at java.base/java.lang.Thread.run(Thread.java:831)
+13:29:44  
+13:29:44  JavaTest Message: Test threw exception: java.lang.RuntimeException: StackTraceElements mismatch at index 3. Expected [DumpStackTest.testLambda(DumpStackTest.java)], but get [DumpStackTest$$Lambda$3.000000009FE08CD0.accept(Unknown Source)]
+13:29:44  JavaTest Message: shutting down test
+```

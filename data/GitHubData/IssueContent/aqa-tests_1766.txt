@@ -1,0 +1,25 @@
+To automate and improve efficiency of the project we are thinking to enable a set of GitHub Actions. [GitHub Actions](https://github.com/features/actions) allow unlimited minutes for workflows on open sourced projects, which could automate common tasks easily.
+
+Examples:
+1. Mark/Close Stale Issues/PRs
+It is in the interest of the project to keep the number of issues down, and to have a healthy pipeline of pull requests getting merged and not languishing.
+
+[Close Stale Issues and PRs](https://github.com/actions/stale) uses a cron job to look through all issues/PRs in the repository and if the issue/PR has not been modified for a period of time, it adds a stale label (configurable) to the issue/PR and optionally comments on the issue.
+
+If the stale label is present for an additional amount of time, the issue/PR is eventually closed.
+
+This Action helps to maintain the number of issues/PRs on the repository which can easily get out of hand. The common scenario is someone opening up a WIP: PR and never completing it, but not closing the PR off. Or for example opening up an issue to ask a question and then not closing the issue once the answer is posted. Such issues clutter the queue needlessly and give the appearance of "too many problems" or "too big of a queue to get something contributed" on the repository.
+
+The automation can be overridden by either a committer removing the stale label, or any contributor simply commenting on the issue/PR.
+
+2. Pull Request Labeler
+Committers spend a non-trivial amount of time looking through pull request changes and adding appropriate labels so that other committers can use label filters to identify commits which they may want to review. This task can be almost completely automated, thus saving effort for the committer team. The contributor can also remove the label manually.
+
+[Pull Request Labeler](https://github.com/actions/labeler) triages PRs based on the paths that are modified in the PR.
+
+Examples:
+https://github.com/sophia-guo/openjdk-tests/pull/1
+
+
+We could also create our own actions to fit the specific requirement. 
+This is open discussion and could be a general discussion in the AdoptOpenJDK community.

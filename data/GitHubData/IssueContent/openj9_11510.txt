@@ -1,0 +1,251 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk15_j9_sanity.openjdk_x86-64_linux_Nightly/126
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.openjdk_x86-64_linux_Nightly/255
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.openjdk_s390x_linux_xl_Nightly/242
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/264/
+java/util/concurrent/ScheduledThreadPoolExecutor/GCRetention.java
+```
+01:45:44  ACTION: main -- Error. Agent error: java.lang.Exception: Agent 1 timed out with a timeout of 960 seconds; check console log for any additional details
+01:45:44  REASON: Assumed action based on file name: run main GCRetention 
+01:45:44  TIME:   965.38 seconds
+01:45:44  messages:
+01:45:44  command: main GCRetention
+01:45:44  reason: Assumed action based on file name: run main GCRetention 
+01:45:44  Mode: agentvm
+01:45:44  Agent id: 1
+01:45:44  Timeout refired 960 times
+01:45:44  Timeout information:
+01:45:44  Running jcmd on process 31103
+01:45:44  Dump written to /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/test_output_16081856075131/jdk_util_j9_0/work/scratch/1/core.20201217.064531.31103.0001.dmp
+01:45:44  Running jstack on process 31103
+01:45:44  2020-12-17T06:45:33.524181085
+01:45:44  Virtual machine: 31103 JVM information:
+01:45:44  JRE 11 Linux s390x-64-Bit Compressed References 20201216_600 (JIT enabled, AOT enabled)
+01:45:44  OpenJ9   - 8a09d26dbd5
+01:45:44  OMR      - adb322cd8ac
+01:45:44  JCL      - c47c5c113fb based on jdk-11.0.10+6
+01:45:44  
+01:45:44  "main" prio=5 Id=1 WAITING
+01:45:44  	at java.base@11.0.10-internal/java.lang.Object.wait(Native Method)
+01:45:44  	at java.base@11.0.10-internal/java.lang.Object.wait(Object.java:221)
+01:45:44  	at java.base@11.0.10-internal/java.lang.Thread.join(Thread.java:716)
+01:45:44  	at app//com.sun.javatest.regtest.agent.MainActionHelper.runClass(MainActionHelper.java:198)
+01:45:44  	at app//com.sun.javatest.regtest.agent.AgentServer.doMain(AgentServer.java:305)
+01:45:44  	at app//com.sun.javatest.regtest.agent.AgentServer.run(AgentServer.java:232)
+01:45:44  	at app//com.sun.javatest.regtest.agent.AgentServer.main(AgentServer.java:69)
+01:45:44  
+01:45:44  "JIT Compilation Thread-000" prio=10 Id=3 RUNNABLE
+01:45:44  
+01:45:44  "JIT Compilation Thread-001 Suspended" prio=10 Id=4 RUNNABLE
+01:45:44  
+01:45:44  "JIT Compilation Thread-002 Suspended" prio=10 Id=5 RUNNABLE
+01:45:44  
+01:45:44  "JIT Compilation Thread-003 Suspended" prio=10 Id=6 RUNNABLE
+01:45:44  
+01:45:44  "JIT Compilation Thread-004 Suspended" prio=10 Id=7 RUNNABLE
+01:45:44  
+01:45:44  "JIT Compilation Thread-005 Suspended" prio=10 Id=8 RUNNABLE
+01:45:44  
+01:45:44  "JIT Compilation Thread-006 Suspended" prio=10 Id=9 RUNNABLE
+01:45:44  
+01:45:44  "JIT Diagnostic Compilation Thread-007 Suspended" prio=10 Id=10 RUNNABLE
+01:45:44  
+01:45:44  "JIT-SamplerThread" prio=10 Id=11 TIMED_WAITING
+01:45:44  
+01:45:44  "IProfiler" prio=5 Id=12 RUNNABLE
+01:45:44  
+01:45:44  "Common-Cleaner" prio=8 Id=2 TIMED_WAITING
+01:45:44  	at java.base@11.0.10-internal/java.lang.Object.wait(Native Method)
+01:45:44  	at java.base@11.0.10-internal/java.lang.Object.wait(Object.java:221)
+01:45:44  	at java.base@11.0.10-internal/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:138)
+01:45:44  	at java.base@11.0.10-internal/jdk.internal.ref.CleanerImpl.run(CleanerImpl.java:148)
+01:45:44  	at java.base@11.0.10-internal/java.lang.Thread.run(Thread.java:836)
+01:45:44  	at java.base@11.0.10-internal/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:134)
+01:45:44  
+01:45:44  "Finalizer thread" prio=5 Id=13 RUNNABLE
+01:45:44  
+01:45:44  "Concurrent Mark Helper" prio=1 Id=14 RUNNABLE
+01:45:44  
+01:45:44  "GC Worker" prio=5 Id=15 RUNNABLE
+01:45:44  
+01:45:44  "GC Worker" prio=5 Id=16 RUNNABLE
+01:45:44  
+01:45:44  "GC Worker" prio=5 Id=17 RUNNABLE
+01:45:44  
+01:45:44  "Attach API wait loop" prio=10 Id=20 TIMED_WAITING
+01:45:44  	at java.base@11.0.10-internal/java.lang.Thread.sleep(Native Method)
+01:45:44  	at java.base@11.0.10-internal/java.lang.Thread.sleep(Thread.java:966)
+01:45:44  	at java.base@11.0.10-internal/openj9.internal.tools.attach.target.WaitLoop.checkReplyAndCreateAttachment(WaitLoop.java:140)
+01:45:44  	at java.base@11.0.10-internal/openj9.internal.tools.attach.target.WaitLoop.waitForNotification(WaitLoop.java:117)
+01:45:44  	at java.base@11.0.10-internal/openj9.internal.tools.attach.target.WaitLoop.run(WaitLoop.java:154)
+01:45:44  
+01:45:44  "pool-1-thread-1" prio=5 Id=21 TIMED_WAITING
+01:45:44  	at java.base@11.0.10-internal/jdk.internal.misc.Unsafe.park(Native Method)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:234)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2123)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1054)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1114)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+01:45:44  	at java.base@11.0.10-internal/java.lang.Thread.run(Thread.java:836)
+01:45:44  
+01:45:44  "ClassCache Reaper" prio=5 Id=40 WAITING
+01:45:44  	at java.base@11.0.10-internal/java.lang.Object.wait(Native Method)
+01:45:44  	at java.base@11.0.10-internal/java.lang.Object.wait(Object.java:221)
+01:45:44  	at java.base@11.0.10-internal/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:138)
+01:45:44  	at java.base@11.0.10-internal/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:110)
+01:45:44  	at java.base@11.0.10-internal/java.io.ClassCache$Reaper.run(ClassCache.java:234)
+01:45:44  	at java.base@11.0.10-internal/java.lang.Thread.run(Thread.java:836)
+01:45:44  
+01:45:44  "ForkJoinPool.commonPool-worker-3" prio=5 Id=69 WAITING
+01:45:44  	at java.base@11.0.10-internal/jdk.internal.misc.Unsafe.park(Native Method)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
+01:45:44  
+01:45:44  "AgentVMThread" prio=5 Id=953 TIMED_WAITING
+01:45:44  	at java.base@11.0.10-internal/java.lang.Object.wait(Native Method)
+01:45:44  	at java.base@11.0.10-internal/java.lang.Object.wait(Object.java:221)
+01:45:44  	at java.base@11.0.10-internal/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:138)
+01:45:44  	at app//GCRetention.removeAll(GCRetention.java:86)
+01:45:44  	at app//GCRetention.test(GCRetention.java:117)
+01:45:44  	at app//GCRetention.instanceMain(GCRetention.java:138)
+01:45:44  	at app//GCRetention.main(GCRetention.java:136)
+01:45:44  	at java.base@11.0.10-internal/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+01:45:44  	at java.base@11.0.10-internal/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+01:45:44  	at java.base@11.0.10-internal/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+01:45:44  	at java.base@11.0.10-internal/java.lang.reflect.Method.invoke(Method.java:566)
+01:45:44  	at app//com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:312)
+01:45:44  	at java.base@11.0.10-internal/java.lang.Thread.run(Thread.java:836)
+01:45:44  
+01:45:44  "pool-66-thread-1" prio=5 Id=954 WAITING
+01:45:44  	at java.base@11.0.10-internal/jdk.internal.misc.Unsafe.park(Native Method)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2081)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1170)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1054)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1114)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+01:45:44  	at java.base@11.0.10-internal/java.lang.Thread.run(Thread.java:836)
+01:45:44  
+01:45:44  "pool-66-thread-2" prio=5 Id=955 WAITING
+01:45:44  	at java.base@11.0.10-internal/jdk.internal.misc.Unsafe.park(Native Method)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2081)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1170)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1054)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1114)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+01:45:44  	at java.base@11.0.10-internal/java.lang.Thread.run(Thread.java:836)
+01:45:44  
+01:45:44  "pool-66-thread-3" prio=5 Id=956 WAITING
+01:45:44  	at java.base@11.0.10-internal/jdk.internal.misc.Unsafe.park(Native Method)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2081)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1170)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1054)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1114)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+01:45:44  	at java.base@11.0.10-internal/java.lang.Thread.run(Thread.java:836)
+01:45:44  
+01:45:44  "pool-66-thread-4" prio=5 Id=957 WAITING
+01:45:44  	at java.base@11.0.10-internal/jdk.internal.misc.Unsafe.park(Native Method)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2081)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1170)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1054)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1114)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+01:45:44  	at java.base@11.0.10-internal/java.lang.Thread.run(Thread.java:836)
+01:45:44  
+01:45:44  "pool-66-thread-5" prio=5 Id=958 WAITING
+01:45:44  	at java.base@11.0.10-internal/jdk.internal.misc.Unsafe.park(Native Method)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2081)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1177)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1054)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1114)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+01:45:44  	at java.base@11.0.10-internal/java.lang.Thread.run(Thread.java:836)
+01:45:44  
+01:45:44  "pool-66-thread-6" prio=5 Id=959 WAITING
+01:45:44  	at java.base@11.0.10-internal/jdk.internal.misc.Unsafe.park(Native Method)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2081)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1170)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1054)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1114)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+01:45:44  	at java.base@11.0.10-internal/java.lang.Thread.run(Thread.java:836)
+01:45:44  
+01:45:44  "pool-66-thread-7" prio=5 Id=960 WAITING
+01:45:44  	at java.base@11.0.10-internal/jdk.internal.misc.Unsafe.park(Native Method)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2081)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1177)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1054)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1114)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+01:45:44  	at java.base@11.0.10-internal/java.lang.Thread.run(Thread.java:836)
+01:45:44  
+01:45:44  "pool-66-thread-8" prio=5 Id=961 WAITING
+01:45:44  	at java.base@11.0.10-internal/jdk.internal.misc.Unsafe.park(Native Method)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2081)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1170)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1054)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1114)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+01:45:44  	at java.base@11.0.10-internal/java.lang.Thread.run(Thread.java:836)
+01:45:44  
+01:45:44  "pool-66-thread-9" prio=5 Id=962 WAITING
+01:45:44  	at java.base@11.0.10-internal/jdk.internal.misc.Unsafe.park(Native Method)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2081)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1177)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1054)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1114)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+01:45:44  	at java.base@11.0.10-internal/java.lang.Thread.run(Thread.java:836)
+01:45:44  
+01:45:44  "pool-66-thread-10" prio=5 Id=963 WAITING
+01:45:44  	at java.base@11.0.10-internal/jdk.internal.misc.Unsafe.park(Native Method)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2081)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1170)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1054)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1114)
+01:45:44  	at java.base@11.0.10-internal/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+01:45:44  	at java.base@11.0.10-internal/java.lang.Thread.run(Thread.java:836)
+01:45:44  
+01:45:44  "file lock watchdog" prio=10 Id=965 TIMED_WAITING
+01:45:44  	at java.base@11.0.10-internal/java.lang.Object.wait(Native Method)
+01:45:44  	at java.base@11.0.10-internal/java.lang.Object.wait(Object.java:221)
+01:45:44  	at java.base@11.0.10-internal/java.util.TimerThread.mainLoop(Timer.java:553)
+01:45:44  	at java.base@11.0.10-internal/java.util.TimerThread.run(Timer.java:506)
+01:45:44  
+01:45:44  "Attachment 34983" prio=10 Id=966 RUNNABLE
+01:45:44  	at java.base@11.0.10-internal/openj9.internal.tools.attach.target.DiagnosticUtils.dumpAllThreadsImpl(Native Method)
+01:45:44  	at java.base@11.0.10-internal/openj9.internal.tools.attach.target.DiagnosticUtils.getThreadInfo(DiagnosticUtils.java:245)
+01:45:44  	at java.base@11.0.10-internal/openj9.internal.tools.attach.target.DiagnosticUtils$$Lambda$5/0x0000000000000000.apply(Unknown Source)
+01:45:44  	at java.base@11.0.10-internal/openj9.internal.tools.attach.target.DiagnosticUtils.executeDiagnosticCommand(DiagnosticUtils.java:181)
+01:45:44  	at java.base@11.0.10-internal/openj9.internal.tools.attach.target.Attachment.doCommand(Attachment.java:249)
+01:45:44  	at java.base@11.0.10-internal/openj9.internal.tools.attach.target.Attachment.run(Attachment.java:160)
+01:45:44  
+01:45:44  
+01:45:44  --- Timeout information end.
+```
+
+Changes from the previous build, which didn't fail.
+https://github.com/eclipse/openj9/compare/ef89ce3...8a09d26
+https://github.com/eclipse/openj9-omr/compare/d255f37...adb322c

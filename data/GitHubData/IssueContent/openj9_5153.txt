@@ -1,0 +1,73 @@
+Failure link
+------------
+https://ci.eclipse.org/openj9/job/Test-sanity.functional-JDK11-osx_x86-64_cmprssptrs/248/tapResults/
+
+Optional info
+-------------
+
+- intermittent failure: yes
+
+Failure output
+--------------
+cmdLineTester_SCHelperCompatibilityTests_unix_1
+
+```
+[2019-03-19T14:10:58.497Z] Testing: HelperCompatibilityTest 3
+[2019-03-19T14:10:58.497Z] Test start time: 2019/03/19 10:10:57 Eastern Standard Time
+[2019-03-19T14:10:58.497Z] Running command: "/Users/jenkins/workspace/Test-sanity.functional-JDK11-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/bin/java" -Xcompressedrefs -Xcompressedrefs -Xjit -Xgcpolicy:gencon  -Xshareclasses:name=HelperCompatibilityTests -Xbootclasspath/a:./Utils:. URLClassPathHelperURLHelperStaleEntryCompatibilityTest -testfile "/Users/jenkins/workspace/Test-sanity.functional-JDK11-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/functional/cmdLineTests/shareClassTests/SCHelperCompatibilityTests/props_unix/Test3.props" -javacdir /Users/jenkins/workspace/Test-sanity.functional-JDK11-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/bin/../bin
+[2019-03-19T14:10:58.497Z] Time spent starting: 5 milliseconds
+[2019-03-19T14:11:07.739Z] Time spent executing: 9288 milliseconds
+[2019-03-19T14:11:07.739Z] Test result: FAILED
+[2019-03-19T14:11:07.739Z]  [OUT] 
+[2019-03-19T14:11:07.739Z]  [OUT] ** Running: /bin/sh ./batchfiles/StaleClassPathTest1.sh /Users/jenkins/workspace/Test-sanity.functional-JDK11-osx_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/bin/../bin
+[2019-03-19T14:11:07.739Z]  [ERR] Unhandled exception
+[2019-03-19T14:11:07.739Z]  [ERR] Type=Segmentation error vmState=0x0005ffff
+[2019-03-19T14:11:07.739Z]  [ERR] J9Generic_Signal_Number=00000004 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000001
+[2019-03-19T14:11:07.739Z]  [ERR] Handler1=000000000769ABF0 Handler2=000000000788FB20 InaccessibleAddress=0000000000000040
+[2019-03-19T14:11:07.739Z]  [ERR] RDI=0000000008BDFADB RSI=00007000002593B4 RAX=0000000000000000 RBX=0000000008BDFADB
+[2019-03-19T14:11:07.739Z]  [ERR] RCX=000000000000004A RDX=00007F87E1D92760 R8=00000000FFFFFFF3 R9=000000000000000D
+[2019-03-19T14:11:07.739Z]  [ERR] R10=00007F87E1D929C8 R11=0000000000000040 R12=00000000FFFFFFF3 R13=000000001FD539B0
+[2019-03-19T14:11:07.739Z]  [ERR] R14=000000000000004A R15=0000000000000054
+[2019-03-19T14:11:07.739Z]  [ERR] RIP=00007FFF8638D7D4 GS=0000 FS=0000 RSP=0000700000259380
+[2019-03-19T14:11:07.739Z]  [ERR] RFlags=0000000000010202 CS=002B RBP=00007000002593A0 ERR=0000004000000004
+[2019-03-19T14:11:07.739Z]  [ERR] TRAPNO=000000040000000E CPU=0040000000040000 FAULTVADDR=0000000000000040
+[2019-03-19T14:11:07.739Z]  [ERR] XMM0 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2019-03-19T14:11:07.739Z]  [ERR] XMM1 00000000ff000000 (f: 4278190080.000000, d: 2.113707e-314)
+[2019-03-19T14:11:07.739Z]  [ERR] XMM2 00000000ff000000 (f: 4278190080.000000, d: 2.113707e-314)
+[2019-03-19T14:11:07.739Z]  [ERR] XMM3 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2019-03-19T14:11:07.739Z]  [ERR] XMM4 0000009600000320 (f: 800.000000, d: 3.182994e-312)
+[2019-03-19T14:11:07.739Z]  [ERR] XMM5 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2019-03-19T14:11:07.739Z]  [ERR] XMM6 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2019-03-19T14:11:07.739Z]  [ERR] XMM7 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2019-03-19T14:11:07.739Z]  [ERR] XMM8 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2019-03-19T14:11:07.739Z]  [ERR] XMM9 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2019-03-19T14:11:07.739Z]  [ERR] XMM10 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2019-03-19T14:11:07.739Z]  [ERR] XMM11 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2019-03-19T14:11:07.739Z]  [ERR] XMM12 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2019-03-19T14:11:07.739Z]  [ERR] XMM13 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2019-03-19T14:11:07.739Z]  [ERR] XMM14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2019-03-19T14:11:07.739Z]  [ERR] XMM15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+[2019-03-19T14:11:07.739Z]  [ERR] Module=/usr/lib/system/libsystem_c.dylib
+[2019-03-19T14:11:07.739Z]  [ERR] Module_base_address=00007FFF8632E000 Symbol=__findenv
+[2019-03-19T14:11:07.739Z]  [ERR] Symbol_address=00007FFF8638D780
+[2019-03-19T14:11:07.739Z]  [ERR] 
+[2019-03-19T14:11:07.739Z]  [ERR] Method_being_compiled=jdk/internal/reflect/NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+[2019-03-19T14:11:07.739Z]  [ERR] Target=2_90_20190319_308 (Mac OS X 10.11.6)
+[2019-03-19T14:11:07.739Z]  [ERR] CPU=amd64 (4 logical CPUs) (0x200000000 RAM)
+[2019-03-19T14:11:07.739Z]  [ERR] ----------- Stack Backtrace -----------
+[2019-03-19T14:11:07.739Z]  [ERR] ---------------------------------------
+[2019-03-19T14:11:07.739Z]  [ERR] JVMDUMP039I Processing dump event "gpf", detail "" at 2019/03/19 10:10:59 - please wait.
+[2019-03-19T14:11:07.739Z]  [ERR] JVMDUMP032I JVM requested System dump using '/Users/jenkins/workspace/Test-sanity.functional-JDK11-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15530016248530/cmdLineTester_SCHelperCompatibilityTests_unix_1/core.20190319.101059.86438.0001.dmp' in response to an event
+[2019-03-19T14:11:07.739Z]  [ERR] JVMDUMP010I System dump written to /Users/jenkins/workspace/Test-sanity.functional-JDK11-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15530016248530/cmdLineTester_SCHelperCompatibilityTests_unix_1/core.20190319.101059.86438.0001.dmp
+[2019-03-19T14:11:07.739Z]  [ERR] JVMDUMP032I JVM requested Java dump using '/Users/jenkins/workspace/Test-sanity.functional-JDK11-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15530016248530/cmdLineTester_SCHelperCompatibilityTests_unix_1/javacore.20190319.101059.86438.0002.txt' in response to an event
+[2019-03-19T14:11:07.739Z]  [ERR] JVMDUMP010I Java dump written to /Users/jenkins/workspace/Test-sanity.functional-JDK11-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15530016248530/cmdLineTester_SCHelperCompatibilityTests_unix_1/javacore.20190319.101059.86438.0002.txt
+[2019-03-19T14:11:07.739Z]  [ERR] JVMDUMP032I JVM requested Snap dump using '/Users/jenkins/workspace/Test-sanity.functional-JDK11-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15530016248530/cmdLineTester_SCHelperCompatibilityTests_unix_1/Snap.20190319.101059.86438.0003.trc' in response to an event
+[2019-03-19T14:11:07.739Z]  [ERR] JVMDUMP010I Snap dump written to /Users/jenkins/workspace/Test-sanity.functional-JDK11-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15530016248530/cmdLineTester_SCHelperCompatibilityTests_unix_1/Snap.20190319.101059.86438.0003.trc
+[2019-03-19T14:11:07.739Z]  [ERR] JVMDUMP007I JVM Requesting JIT dump using '/Users/jenkins/workspace/Test-sanity.functional-JDK11-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15530016248530/cmdLineTester_SCHelperCompatibilityTests_unix_1/jitdump.20190319.101059.86438.0004.dmp'
+[2019-03-19T14:11:07.739Z]  [ERR] JVMDUMP010I JIT dump written to /Users/jenkins/workspace/Test-sanity.functional-JDK11-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/test_output_15530016248530/cmdLineTester_SCHelperCompatibilityTests_unix_1/jitdump.20190319.101059.86438.0004.dmp
+[2019-03-19T14:11:07.739Z]  [ERR] JVMDUMP013I Processed dump event "gpf", detail "".
+[2019-03-19T14:11:07.739Z] >> Success condition was not found: [Output match: TEST PASSED]
+[2019-03-19T14:11:07.739Z] >> Failure condition was not found: [Output match: Error:]
+[2019-03-19T14:11:07.739Z] >> Failure condition was found: [Output match: Unhandled Exception]
+[2019-03-19T14:11:07.739Z] >> Failure condition was not found: [Output match: Exception:]
+```

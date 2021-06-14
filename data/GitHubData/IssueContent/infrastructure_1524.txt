@@ -1,0 +1,10 @@
+We have been creating a centos7 docker build image for quite some time.
+
+I have managed to get jenkins to dynamically provision machines using the OSUOSL openstack and have run some test builds:
+
+https://ci.adoptopenjdk.net/job/build-scripts/job/jobs/job/jdk8u/job/jdk8u-linux-ppc64le-hotspot/659/
+https://ci.adoptopenjdk.net/job/build-scripts/job/jobs/job/jdk8u/job/jdk8u-linux-ppc64le-openj9/719/
+
+My proposal is to switch jdk15 and jdk16 builds to use these machines for a while and then we can consider switching JDK11 and JDK8 too. My reason for holding off is that we will have to eventually delete the static builds machines to free up some resource and I want to prove this out first.
+
+Any objections @sxa??

@@ -1,0 +1,4 @@
+Only x86 and Power enable refined alias sets (via the CodeGenerator flag `setEnableRefinedAliasSets`).  Is this by design, or an oversight?  What does a CodeGenerator need to do to support refined alias sets?
+
+@vijaysun-omr @andrewcraik @fjeremic @gita-omr @knn-k 
+

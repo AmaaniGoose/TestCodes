@@ -1,0 +1,55 @@
+In the existing implementation, all raw data in stackmap tables (if exists) are always decompressed to
+a new stackmap stable with more readable data for later verification. However, it might occupy a bigger memory space as compared to the original stackmap table. which in turn seriously impacts the footprint at startup/runtime.
+
+This issue is intended to investigate how much memory space it wastes in term of the decompressed stackmap table in most cases.  If it wastes far more than anticipation, we need to come up with a solution which should be feasible to improve the footprint.
+
+1) what steps to do to check the wasted memory space?
+   [1]check via DDR
+   [2]check via -verbose:stackmapload
+   [3] Another way is to directly check the occupied memory by adding printing message when allocating memory  for the stackmap in the following code:
+
+    /runtime/bcverify/bcverify.c
+   ...
+   static UDATA maximalMemoryStackmap = 0;
+   ...
+   j9bcv_verifyBytecodes (J9PortLibrary * portLib, J9Class * clazz, J9ROMClass * romClass,
+		   J9BytecodeVerificationData * verifyData)
+{
+  ...
+  			verifyData->stackSize = (J9_MAX_STACK_FROM_ROM_METHOD(romMethod)
+									+ J9_ARG_COUNT_FROM_ROM_METHOD(romMethod)
+									+ J9_TEMP_COUNT_FROM_ROM_METHOD(romMethod)
+									+ BCV_TARGET_STACK_HEADER_UDATA_SIZE
+									+ BCV_STACK_OVERFLOW_BUFFER_UDATA_SIZE) * sizeof(UDATA);
+				...
+  			stackMapsSize = (verifyData->stackSize) * (verifyData->stackMapsCount);
+			ALLOC_BUFFER(verifyData->stackMaps, stackMapsSize);
+			
+			if (maximalMemoryStackmap < stackMapsSize) {
+			    maximalMemoryStackmap = stackMapsSize;
+			    printf("\nstackMapsSize = %u\n", maximalMemoryStackmap);
+			}
+			...
+Given that the memory for the stackmap is reused for all methods(to be verified) and gets reallocated only when the new requested size is bigger than the allocated memory, we only need to check the maximal value of stackMapsSize in such case.
+
+2) which one of the following solutions is the preferable if the issue exists and matters to improve the footprint?
+
+[1] Solution 1:
+   Given that rom classes are already stored in the shared cache (including lineNumber, debugInfo, etc),
+   we can take advantage of the shared cache to store the new stackmap table. The intention here is that the StackMapTables could be stored out of line in the sharedclasses cache and then the memory for them could be disclaimed after the VM exists startup_phase.
+
+   The benefit of doing this is obvious:
+   1) there is literally no memory space spent on the new stackmap table.
+   2) it would accelerate the runtime verification except the first-time startup (decompressed only once)
+
+[2]Solution 2:
+    Another alternative is an one-round verification which means it decodes one specific frame from the raw stackmap table only when checking the consistency of the stackmap frame during verification.
+   
+   Theoretically, the total time spent on the verification in this solution should be equivalent of an one-round traverses on the original stackmap table, in which case it should spend far less time than the original implementation.  (The original implementation needs two-round traverses on the stackmap table: first of all, decompress the stackmap table (also involves the reallocation of memory; secondly), go through the new stackmap table to do verification.)
+
+   Meanwhile, there is actually only one stackmap frame of memory that should be allocated/reusd during the verification.
+
+   The downside of solution 2 as compared to the solution 1 include:
+   1) It literally needs to decode the stackmap table every time when doing verification (there is no time spent on decompression in solution [1] except the first-time startup) 
+   2) Memory still needs to be allocated for a stackmap frame while there is no memory allocated in solution [1] (stored in the shared cache).
+   3) It is unclear for now how many changes are involved in the detailed error message framework followed by such adjustment.

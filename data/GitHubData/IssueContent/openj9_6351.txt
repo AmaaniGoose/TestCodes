@@ -1,0 +1,1 @@
+For the remote/out-of-process compilation case we must ensure that a server based on OpenJDK11 can compile methods for a client running OpenJDK8 and viceversa.

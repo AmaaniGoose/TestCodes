@@ -1,0 +1,76 @@
+Failure link
+------------
+
+From an internal build `openjdk16-pipeline #3/jdk16-linux-x64-openj9 #1/Test_openjdk16_j9_sanity.openjdk_x86-64_linux #1/jdk_foreign_native_0`:
+```
+10:09:36  openjdk version "16" 2021-03-16
+10:09:36  OpenJDK Runtime Environment AdoptOpenJDK (build 16+32-202101220448)
+10:09:36  Eclipse OpenJ9 VM AdoptOpenJDK (build master-a1cfdc286, JRE 16 Linux amd64-64-Bit Compressed References 20210122_1 (JIT enabled, AOT enabled)
+10:09:36  OpenJ9   - a1cfdc286
+10:09:36  OMR      - cf8c5aab9
+10:09:36  JCL      - eacf70634f based on jdk-16+32)
+```
+To rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links:
+11:26:53  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=16&JDK_IMPL=openj9&BUILD_LIST=openjdk&PLATFORM=x86-64_linux&TARGET=jdk_foreign_native_0
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+[2021-01-22T16:23:35.757Z] Running test jdk_foreign_native_0 ...
+[2021-01-22T16:23:35.757Z] ===============================================
+[2021-01-22T16:23:47.622Z] [TestNG] Running:
+[2021-01-22T16:23:47.622Z]   java/foreign/TestNative.java
+[2021-01-22T16:23:47.622Z] 
+[2021-01-22T16:23:47.622Z] test TestNative.testBadResize(): success
+[2021-01-22T16:23:47.622Z] test TestNative.testDefaultAccessModes(): failure
+[2021-01-22T16:23:47.630Z] java.lang.RuntimeException: java.lang.UnsatisfiedLinkError: jdk/internal/foreign/abi/ProgrammableInvoker.registerNatives()V
+[2021-01-22T16:23:47.630Z] 	at jdk.incubator.foreign/jdk.internal.foreign.abi.SharedUtils.allocateMemoryInternal(SharedUtils.java:285)
+[2021-01-22T16:23:47.630Z] 	at jdk.incubator.foreign/jdk.incubator.foreign.CLinker.allocateMemoryRestricted(CLinker.java:396)
+[2021-01-22T16:23:47.630Z] 	at TestNative.allocate(TestNative.java:147)
+[2021-01-22T16:23:47.630Z] 	at TestNative.testDefaultAccessModes(TestNative.java:176)
+[2021-01-22T16:23:47.630Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-01-22T16:23:47.630Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+[2021-01-22T16:23:47.630Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-01-22T16:23:47.630Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+[2021-01-22T16:23:47.630Z] 	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+[2021-01-22T16:23:47.630Z] 	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+[2021-01-22T16:23:47.630Z] 	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+[2021-01-22T16:23:47.630Z] 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+[2021-01-22T16:23:47.630Z] 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+[2021-01-22T16:23:47.632Z] 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+[2021-01-22T16:23:47.632Z] 	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+[2021-01-22T16:23:47.632Z] 	at org.testng.TestRunner.run(TestRunner.java:623)
+[2021-01-22T16:23:47.632Z] 	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+[2021-01-22T16:23:47.632Z] 	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+[2021-01-22T16:23:47.632Z] 	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+[2021-01-22T16:23:47.632Z] 	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+[2021-01-22T16:23:47.632Z] 	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+[2021-01-22T16:23:47.632Z] 	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+[2021-01-22T16:23:47.632Z] 	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+[2021-01-22T16:23:47.632Z] 	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+[2021-01-22T16:23:47.632Z] 	at org.testng.TestNG.run(TestNG.java:1018)
+[2021-01-22T16:23:47.632Z] 	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+[2021-01-22T16:23:47.632Z] 	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+[2021-01-22T16:23:47.632Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-01-22T16:23:47.632Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+[2021-01-22T16:23:47.632Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-01-22T16:23:47.632Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+[2021-01-22T16:23:47.632Z] 	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+[2021-01-22T16:23:47.632Z] 	at java.base/java.lang.Thread.run(Thread.java:853)
+[2021-01-22T16:23:47.632Z] Caused by: java.lang.UnsatisfiedLinkError: jdk/internal/foreign/abi/ProgrammableInvoker.registerNatives()V
+[2021-01-22T16:23:47.632Z] 	at jdk.incubator.foreign/jdk.internal.foreign.abi.ProgrammableInvoker.<clinit>(ProgrammableInvoker.java:384)
+[2021-01-22T16:23:47.632Z] 	at jdk.incubator.foreign/jdk.internal.foreign.abi.x64.sysv.CallArranger.arrangeDowncall(CallArranger.java:129)
+[2021-01-22T16:23:47.632Z] 	at jdk.incubator.foreign/jdk.internal.foreign.abi.x64.sysv.SysVx64Linker.downcallHandle(SysVx64Linker.java:93)
+[2021-01-22T16:23:47.632Z] 	at jdk.incubator.foreign/jdk.internal.foreign.abi.SharedUtils$AllocHolder.<clinit>(SharedUtils.java:272)
+[2021-01-22T16:23:47.632Z] 	at jdk.incubator.foreign/jdk.internal.foreign.abi.SharedUtils.allocateMemoryInternal(SharedUtils.java:283)
+[2021-01-22T16:23:47.632Z] 	... 32 more
+
+[2021-01-22T16:23:47.635Z] ===============================================
+[2021-01-22T16:23:47.635Z] java/foreign/TestNative.java
+[2021-01-22T16:23:47.635Z] Total tests run: 19, Failures: 3, Skips: 0
+[2021-01-22T16:23:47.635Z] ===============================================
+```

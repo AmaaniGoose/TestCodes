@@ -1,0 +1,49 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk16_j9_special.system_x86-64_mac_testList_4/27/` (`mac11x64rt04`):
+```
+openjdk version "16.0.1" 2021-04-20
+OpenJDK Runtime Environment Temurin-16.0.1+9-202105130402 (build 16.0.1+9-202105130402)
+Eclipse OpenJ9 VM Temurin-16.0.1+9-202105130402 (build master-29631a275, JRE 16 Mac OS X amd64-64-Bit Compressed References 20210513_30 (JIT enabled, AOT enabled)
+OpenJ9   - 29631a275
+OMR      - 092787cd6
+JCL      - 7a506c7025 based on jdk-16.0.1+9)
+```
+[Rerun in Grinder](https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?TARGET=MathLoadTest_bigdecimal_special_5m_13&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=Test_openjdk16_j9_special.system_x86-64_mac&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;PLATFORM=x86-64_mac&amp;KEEP_REPORTDIR=false&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk16u%2Fjdk16u-mac-x64-openj9%2F30%2FOpenJDK16U-debugimage_x64_mac_openj9_2021-05-13-03-59.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk16u%2Fjdk16u-mac-x64-openj9%2F30%2FOpenJDK16U-jre_x64_mac_openj9_2021-05-13-03-59.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk16u%2Fjdk16u-mac-x64-openj9%2F30%2FOpenJDK16U-testimage_x64_mac_openj9_2021-05-13-03-59.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk16u%2Fjdk16u-mac-x64-openj9%2F30%2FOpenJDK16U-jdk_x64_mac_openj9_2021-05-13-03-59.tar.gz&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;LIGHT_WEIGHT_CHECKOUT=true&amp;ARTIFACTORY_SERVER=na.artifactory.swg-devops&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=16&amp;USER_CREDENTIALS_ID=&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=&amp;JDK_REPO=https%3A%2F%2Fgithub.com%2Fibmruntimes%2Fopenj9-openjdk-jdk16&amp;RELEASE_TAG=&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;UPSTREAM_JOB_NAME=&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=openj9&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=30&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=openj9&amp;SSH_AGENT_CREDENTIAL=83181e25-eea4-4f55-8b3e-e79615733226&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=4e18ffe7-b1b1-4272-9979-99769b68bcc2&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=system&amp;UPSTREAM_JOB_NUMBER=&amp;TIME_LIMIT=10&amp;JVM_OPTIONS=&amp;PARALLEL=None)
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+[2021-05-13T06:03:03.476Z] Running test MathLoadTest_bigdecimal_special_5m_13 ...
+[2021-05-13T06:03:03.476Z] ===============================================
+[2021-05-13T06:03:03.476Z] MathLoadTest_bigdecimal_special_5m_13 Start Time: Thu May 13 02:03:03 2021 Epoch Time (ms): 1620885783300
+[2021-05-13T06:03:03.476Z] "/Users/jenkins/workspace/Test_openjdk16_j9_special.system_x86-64_mac_testList_4/openjdkbinary/j2sdk-image/Contents/Home/bin/..//bin/java" -Xshareclasses:destroyAll; "/Users/jenkins/workspace/Test_openjdk16_j9_special.system_x86-64_mac_testList_4/openjdkbinary/j2sdk-image/Contents/Home/bin/..//bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+[2021-05-13T06:03:05.923Z] JVMSHRC005I No shared class caches available
+[2021-05-13T06:03:05.923Z] JVMSHRC005I No shared class caches available
+[2021-05-13T06:03:05.923Z] cache cleanup done
+[2021-05-13T06:03:05.923Z] variation: Mode551
+[2021-05-13T06:03:05.923Z] JVM_OPTIONS:  -XX:+UseCompressedOops -Xjit -Xgcpolicy:balanced 
+
+[2021-05-13T06:03:10.379Z] GEN stderr Error: A JNI error has occurred, please check your installation and try again
+[2021-05-13T06:03:10.379Z] GEN stderr Exception in thread "main" java.lang.ExceptionInInitializerError
+[2021-05-13T06:03:10.379Z] GEN stderr 	at java.base/java.lang.J9VMInternals.ensureError(J9VMInternals.java:184)
+[2021-05-13T06:03:10.379Z] GEN stderr 	at java.base/java.lang.J9VMInternals.recordInitializationFailure(J9VMInternals.java:173)
+[2021-05-13T06:03:10.379Z] GEN stderr 	at java.base/sun.launcher.LauncherHelper.getLocalizedMessage(LauncherHelper.java:472)
+[2021-05-13T06:03:10.379Z] GEN stderr 	at java.base/sun.launcher.LauncherHelper.abort(LauncherHelper.java:636)
+[2021-05-13T06:03:10.379Z] GEN stderr 	at java.base/sun.launcher.LauncherHelper.loadMainClass(LauncherHelper.java:801)
+[2021-05-13T06:03:10.379Z] GEN stderr 	at java.base/sun.launcher.LauncherHelper.checkAndLoadMain(LauncherHelper.java:675)
+[2021-05-13T06:03:10.379Z] GEN stderr Caused by: java.lang.NullPointerException: Cannot invoke "java.lang.Module.isNamed()" because "targetModule" is null
+[2021-05-13T06:03:10.379Z] GEN stderr 	at java.base/java.util.ResourceBundle.getDefaultControl(ResourceBundle.java:1510)
+[2021-05-13T06:03:10.379Z] GEN stderr 	at java.base/java.util.ResourceBundle.getDefaultControl(ResourceBundle.java:1506)
+[2021-05-13T06:03:10.379Z] GEN stderr 	at java.base/java.util.ResourceBundle.getBundle(ResourceBundle.java:857)
+[2021-05-13T06:03:10.379Z] GEN stderr 	at java.base/sun.launcher.LauncherHelper$ResourceBundleHolder.<clinit>(LauncherHelper.java:125)
+[2021-05-13T06:03:10.379Z] GEN stderr 	... 4 more
+[2021-05-13T06:03:10.379Z] Generation failed
+[2021-05-13T06:03:10.379Z] 
+[2021-05-13T06:03:10.379Z] MathLoadTest_bigdecimal_special_5m_13_FAILED
+```

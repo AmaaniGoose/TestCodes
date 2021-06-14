@@ -1,0 +1,18 @@
+We can take advantage of GitHub's topics feature [1] to add [2] the Eclipse OpenJ9 to a bunch of topics which will effectively increase awareness of our project for people using the topics feature to search repositories relating to their search term.
+
+Do others think this is a good idea? If so let's come up with a list of topics we can add ourselves to. Here is an initial list:
+
+- compiler
+- garbage-collector
+- gc
+- java
+- jit
+- jvm
+- interpreter
+- runtime
+- virtual-machine
+
+It doesn't have to be this verbose, we can just pick a few topics. This is just a list we can think about picking from. Interested to hear from others.
+
+[1] https://github.com/topics/
+[2] https://help.github.com/en/articles/classifying-your-repository-with-topics

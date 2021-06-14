@@ -1,0 +1,38 @@
+Detailed command:
+
+Running command: /QopenSys/pkgs/jdk11/bin/../../native-test-libs//testjep178_static -jvmpath:/QopenSys/pkgs/jdk11/bin/../lib/j9vm -classpath:/home/niannian/jdk11test/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/functional/cmdLineTests/jep178staticLinkingTest/jep178staticLinkingTest.jar  -Xcompressedrefs  com/ibm/j9/tests/jeptests/StaticLinking
+Time spent starting: 393 milliseconds
+Time spent executing: 895 milliseconds
+Test result: FAILED
+Output from test:
+ [OUT] [MSG] Starting up JEP 178 test.
+ [OUT] [MSG] Opening jvm from /QopenSys/pkgs/jdk11/bin/../lib/j9vm/libjvm.so
+ [OUT] [MSG] **Reached OnLoad (testlibA): JNI_OnLoad [dynamically]**
+ [OUT] [MSG] **Reached OnLoad (testlibB): JNI_OnLoad [dynamically]**
+ [OUT] [MSG] Calling native instance method fooImpl.
+ [OUT] [MSG] Reached native fooImpl() [dynamically]
+ [OUT] [MSG] Calling native static method barImpl.
+ [OUT] [MSG] Reached native barImpl() [dynamically]
+ [OUT] [MSG] Test jep178 passed with error code: 0
+>> **Required condition was not found: [Output match: [MSG] Reached OnLoad: JNI_OnLoad_testlibA [statically]]**
+>> **Required condition was not found: [Output match: [MSG] Reached OnLoad: JNI_OnLoad_testlibB [statically]]**
+>> Required condition was not found: [Output match: [MSG] Reached native fooImpl() [statically]]
+>> Required condition was not found: [Output match: [MSG] Reached native barImpl() [statically]]
+>> Required condition was not found: [Output match: [MSG] Reached OnUnload: JNI_OnUnload_testlibA [statically]]
+>> Required condition was not found: [Output match: [MSG] Reached OnUnload: JNI_OnUnload_testlibB [statically]]
+>> Failure condition was not found: [Output match: [ERR]]
+>> Failure condition was found: [Output match: [dynamically]]
+>> Success condition was found: [Output match: [MSG] Test jep178 passed with error code: 0]
+
+Failed to test static linking.    Checked the executable testjep178_static and shows it does exported the required initializer routine and definitions for JNI routines, such as fooImpl(), barImpl().
+
+nm -X64 testjep178_static
+
+JNI_OnLoad_testlibA  D  4563406096          24
+JNI_OnLoad_testlibB  D  4563406144          24
+JNI_OnUnload_testlibA D  4563406120          24
+JNI_OnUnload_testlibB D  4563406168          24
+Java_com_ibm_j9_tests_jeptests_StaticLinking_barImpl D  4563406216          24
+Java_com_ibm_j9_tests_jeptests_StaticLinking_fooImpl D  4563406192          24
+
+Anything wrong with my test?  What detailed changes  are for JEP178? 

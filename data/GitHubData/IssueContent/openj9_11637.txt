@@ -1,0 +1,15 @@
+JITServer frequently needs to fetch some member from client class, e.g. `J9Class->classFlags`. Currently, fetching each member of a class requires creating a new message type, e.g. `ClassEnv_classFlagsValue` for `classFlags`.
+@liqunl suggested that we could create a more generic message that would fetch fixed size class members based on offset from the beginning of the class.
+It could look something like this:
+```
+void *
+J9::ClassEnv::getAddressAtOffsetFromClass(J9::Compilation *comp, uint8_t *classPointer, uint32_t offset)
+   {
+   if (comp->isOutOfProcessCompilation())
+       {
+        // send message to the client and return the result
+       }
+   return *(classPointer + offset);
+   }
+```
+This would reduce the amount of work that needs to be done in the future if some new class member needs to get acccessed on the server.

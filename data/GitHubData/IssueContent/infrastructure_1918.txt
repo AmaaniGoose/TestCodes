@@ -1,0 +1,18 @@
+https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_extended.functional_ppc64_aix/21/consoleFull
+Tests which analyse the contents of a core file taken during the test are failing on build-osuosl-aix71-ppc64-2.  The error messages suggest the core file is not actually being written successfully:
+```
+21:29:10  Testing: Run !allclasses
+21:29:10  Test start time: 2021/02/08 13:29:09 Pacific Standard Time
+21:29:10  Running command: /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdkbinary/j2sdk-image/bin/jdmpview -core j9core.dmp
+21:29:10  Time spent starting: 29 milliseconds
+21:29:11  Time spent executing: 1688 milliseconds
+21:29:11  Test result: FAILED
+21:29:11   [OUT] DTFJView version 4.29.5, using DTFJ version 1.12.29003
+21:29:11   [OUT] Loading image from DTFJ...
+21:29:11   [OUT] 
+21:29:11   [OUT] Could not load dump file and/or could not load XML file: Image file '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_ppc64_aix/openjdk-tests/TKG/output_16128142891542/cmdLineTester_classesdbgddrext_1/j9core.dmp' not found.
+21:29:11   [OUT] For a list of commands, type "help"; for how to use "help", type "help help"
+21:29:11   [OUT] > DDR is not enabled for this core file, '!' commands are disabled
+21:29:11   [OUT] > 
+```
+To rerun one of the failing tests: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=16&JDK_IMPL=openj9&JDK_VENDOR=adoptopenjdk&BUILD_LIST=functional&PLATFORM=ppc64_aix&TARGET=testDDRExt_General_0

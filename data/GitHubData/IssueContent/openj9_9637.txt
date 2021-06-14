@@ -1,0 +1,45 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk8_j9_special.system_x86-64_windows_xl_Nightly_mauveLoadTest/19`:
+```
+05:43:20  openjdk version "1.8.0_262-internal"
+05:43:20  OpenJDK Runtime Environment (build 1.8.0_262-internal-jenkins_2020_05_19_18_24-b00)
+05:43:20  Eclipse OpenJ9 VM (build ibm_sdk-bdeced4f56, JRE 1.8.0 Windows Server 2016 amd64-64-Bit 20200519_88 (JIT enabled, AOT enabled)
+05:43:20  OpenJ9   - bdeced4f56
+05:43:20  OMR      - 4908c25d1
+05:43:20  JCL      - 4dcdf539a2a based on jdk8u262-b02)
+```
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+STF 07:59:18.468 - ==================   G E N E R A T I O N   ==================
+STF 07:59:18.473 - Checking JVM: C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x86-64_windows_xl_Nightly_mauveLoadTest/openjdkbinary/j2sdk-image
+STF 07:59:18.474 - Starting process to generate scripts: C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x86-64_windows_xl_Nightly_mauveLoadTest/openjdkbinary/j2sdk-image/bin/java  -Dlog4j.skipJansi=true -Djava.system.class.loader=net.adoptopenjdk.stf.runner.StfClassLoader -classpath C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x86-64_windows_xl_Nightly_mauveLoadTest/openjdk-tests///..//jvmtest\system\mauveLoadTest/../\systemtest_prereqs/log4j-2.3/log4j-api-2.3.jar;C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x86-64_windows_xl_Nightly_mauveLoadTest/openjdk-tests///..//jvmtest\system\mauveLoadTest/../\systemtest_prereqs/log4j-2.3/log4j-core-2.3.jar;C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x86-64_windows_xl_Nightly_mauveLoadTest/jvmtest/system/stf/stf.core/scripts/../bin net.adoptopenjdk.stf.runner.StfRunner -properties "C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x86-64_windows_xl_Nightly_mauveLoadTest/openjdk-tests/\TKG\test_output_15899681023721\MauveSingleInvocationLoadTest_special_23/20200520-075918-MauveSingleInvocationLoadTest/stf_parameters.properties, , C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x86-64_windows_xl_Nightly_mauveLoadTest/jvmtest/system/stf/stf.core/config/stf.properties" -testDir "C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x86-64_windows_xl_Nightly_mauveLoadTest/openjdk-tests/\TKG\test_output_15899681023721\MauveSingleInvocationLoadTest_special_23/20200520-075918-MauveSingleInvocationLoadTest"
+Can't open
+	C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x86-64_windows_xl_Nightly_mauveLoadTest/openjdk-tests/\TKG\test_output_15899681023721\MauveSingleInvocationLoadTest_special_23/20200520-075918-MauveSingleInvocationLoadTest/generation/generation.stdout: No such file or directory (#1)
+    (S inplace) The implicit opening of a file through use of the <>
+    filehandle, either implicitly under the -n or -p command-line
+    switches, or explicitly, failed for the indicated reason.  Usually
+    this is because you don't have read permission for a file which
+    you named on the command line.
+    
+    (F) You tried to call perl with the -e switch, but /dev/null (or
+    your operating system's equivalent) could not be opened.
+    
+Uncaught exception from user code:
+	Can't open C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x86-64_windows_xl_Nightly_mauveLoadTest/openjdk-tests/\TKG\test_output_15899681023721\MauveSingleInvocationLoadTest_special_23/20200520-075918-MauveSingleInvocationLoadTest/generation/generation.stdout: No such file or directory
+	stf::ProcessMgmt::Windows::start(stf::ProcessMgmt::Windows=HASH(0x1e79e78)) called at C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x86-64_windows_xl_Nightly_mauveLoadTest/jvmtest/system/stf/stf.core/scripts/stf/Commands.pm line 268
+	stf::Commands::start_process("stf::Commands", "mnemonic", "GEN", "command", "C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x8"..., "logName", "C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x8"..., "uid", ...) called at C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x86-64_windows_xl_Nightly_mauveLoadTest/jvmtest/system/stf/stf.core/scripts/stf/Commands.pm line 864
+	stf::Commands::run_process("stf::Commands", "mnemonic", "GEN", "command", "C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x8"..., "logName", "C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x8"..., "uid", ...) called at C:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x86-64_windows_xl_Nightly_mauveLoadTest/openjdk-tests///..//jvmtest\system\mauveLoadTest/../\stf\stf.core\scripts\stf.pl line 440
+
+MauveSingleInvocationLoadTest_special_23_FAILED
+```
+
+For example, to rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links: https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&PLATFORM=x86-64_windows_xl&TARGET=MauveSingleInvocationLoadTest_special_23

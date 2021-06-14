@@ -1,0 +1,8 @@
+Dynamically adding new class variables to either an existing or new class, while OpenJ9 VM is running, causes the VM to start throwing NoSuchMethod errors when you try and access the getter or setter of the new variable. If you try and access the class variable directly you get NoSuchFieldError errors.  Using hot reload to add new classes and methods works fine, however.
+
+openjdk version "1.8.0_212"
+OpenJDK Runtime Environment (build 1.8.0_212-b03)
+Eclipse OpenJ9 VM (build openj9-0.14.0, JRE 1.8.0 Windows 10 amd64-64-Bit Compressed References 20190417_339 (JIT enabled, AOT enabled)
+OpenJ9   - bad1d4d06
+OMR      - 4a4278e6
+JCL      - 5590c4f818 based on jdk8u212-b03)

@@ -1,0 +1,1 @@
+https://github.com/eclipse/openj9/pull/3099 changes the signature of generated methods that might be used in third-party DDR debug extensions: documentation is needed to explain how to adapt.

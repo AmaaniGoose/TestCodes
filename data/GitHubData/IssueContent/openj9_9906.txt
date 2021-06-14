@@ -1,0 +1,1 @@
+During previous customer PoC, it was found that there was big performance benefit to be gained tuning the spin count and getting rid of the yieldCPU() call.  The workload is not that friendly on a big machine. It is also understood that getting rid of yieldCPU() may hurt other workloads.  Such that, this asks for an option to meet both worlds on the best possible terms.

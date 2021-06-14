@@ -1,0 +1,11 @@
+Currently, github.com/eclipse/openj9 does not have any About topics registered for it, and the related topics that some repositories have selected (#openj9, #eclipse-openj9, #eclipse-openj9-vm) have no descriptions associated with them.
+
+I suggest we decide which topics we should curate (rather than all of them) so people can standardize on one topic. I suggest #eclipse-openj9 even though it's a bit longer than #openj9, but I'm willing to be convinced otherwise.
+
+We should also decide on the list of topics we think we should list for our repository and then ask the Eclipse webmaster (who owns the org) to add those topics for us (I don't think we can do it ourselves).
+
+I think we should add some description to at least the tag we like by adding it per https://github.com/github/explore/blob/master/CONTRIBUTING.md
+
+@sharon-wang suggested #java #jvm #openjdk to which we should add our named topic (e.g. #eclipse-openj9 ). Should we add any other topics?
+
+Thanks to @sharon-wang for making this suggestion on our slack!

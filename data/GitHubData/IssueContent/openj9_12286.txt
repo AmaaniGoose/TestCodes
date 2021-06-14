@@ -1,0 +1,5 @@
+Currently, `VMnewEvaluator` in aarch64 codegen does not implement `DualTLH` support and initializes allocated TLH with zero even if `BatchClearTLH` is enabled.
+Investigate if support for `DualTLH` and `BatchClearTLH` improves performance on aarch64.
+
+It seems that `allocateZeroedTLHPages(vm, true)` is called on startup of aarch64 VM, so TLH is zero cleared by GC.
+https://github.com/eclipse/openj9/blob/726f491e4c0644d49d224f560bb10095bf4aec05/runtime/compiler/control/DLLMain.cpp#L191-L231

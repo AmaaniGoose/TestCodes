@@ -1,0 +1,96 @@
+Failure link
+------------
+
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.openjdk_x86-64_windows_Nightly/154/consoleFull
+win2012r2-x86-3
+For example, to rebuild the failed tests in <Jenkins URL>=https://ci.eclipse.org/openj9/job/Grinder, use the following links:
+04:00:03  https://ci.eclipse.org/openj9/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&BUILD_LIST=openjdk&PLATFORM=x86-64_windows&TARGET=jdk_lang_j9_0
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+
+03:33:28  ===============================================
+03:33:28  java/lang/ProcessHandle/TreeTest.java
+03:33:28  Total tests run: 5, Failures: 1, Skips: 0
+03:33:28  ===============================================
+03:33:28  
+03:33:28  STDERR:
+03:33:28  Unhandled exception
+03:33:28  Type=Segmentation error vmState=0x00000000
+03:33:28  Windows_ExceptionCode=c0000005 J9Generic_Signal=00000004 ExceptionAddress=00007FF8CBEC6938 ContextFlags=0010005f
+03:33:28  Handler1=00007FF8C8941320 Handler2=00007FF8C886AC30 InaccessibleReadAddress=FFFFFFFFFFFFFFFF
+03:33:28  RDI=00000000000001D6 RSI=0000006E4592FA80 RAX=0000006E4585FA60 RBX=61642E74616D726F
+03:33:28  RCX=0000006E4585FA60 RDX=61642E74616D726F R8=0000000000000000 R9=0000000000000000
+03:33:28  R10=00000000000000C8 R11=00000000000000D0 R12=0000006E4F3EF7A8 R13=00007FF8C8941320
+03:33:28  R14=000000000001D600 R15=0000006E45874470
+03:33:28  RIP=00007FF8CBEC6938 RSP=0000006E4F3EF3D0 RBP=0000006E4592FA80 GS=002B
+03:33:28  FS=0053 ES=002B DS=002B
+03:33:28  XMM0 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:33:28  XMM1 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:33:28  XMM2 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:33:28  XMM3 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:33:28  XMM4 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:33:28  XMM5 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:33:28  XMM6 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:33:28  XMM7 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:33:28  XMM8 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:33:28  XMM9 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:33:28  XMM10 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:33:28  XMM11 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:33:28  XMM12 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:33:28  XMM13 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:33:28  XMM14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:33:28  XMM15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+03:33:28  Module=C:\Users\jenkins\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_Nightly\openjdkbinary\j2sdk-image\bin\compressedrefs\J9THR29.dll
+03:33:28  Module_base_address=00007FF8CBEC0000 Offset_in_DLL=0000000000006938
+03:33:28  Target=2_90_20200916_509 (Windows Server 2012 R2 6.3 build 9600)
+03:33:28  CPU=amd64 (8 logical CPUs) (0x1ffb9c000 RAM)
+03:33:28  ----------- Stack Backtrace -----------
+03:33:28  omrthread_get_category+0x2f28 (0x00007FF8CBEC6938 [J9THR29+0x6938])
+03:33:28  omrthread_monitor_wait+0x43 (0x00007FF8CBEC2AD3 [J9THR29+0x2ad3])
+03:33:28  (0x00007FF8C7517115 [j9jit29+0x87115])
+03:33:28  (0x00007FF8C75209C7 [j9jit29+0x909c7])
+03:33:28  j9port_isCompatible+0x1a09f (0x00007FF8C886CDAF [j9prt29+0x1cdaf])
+03:33:28  (0x00007FF8C752060D [j9jit29+0x9060d])
+03:33:28  omrthread_get_category+0xa42 (0x00007FF8CBEC4452 [J9THR29+0x4452])
+03:33:28  _o_strcat_s+0x5e (0x00007FF8C8B0C1AE [ucrtbase+0x1c1ae])
+03:33:28  BaseThreadInitThunk+0x22 (0x00007FF8D8F113D2 [KERNEL32+0x13d2])
+03:33:28  RtlUserThreadStart+0x34 (0x00007FF8DAF854F4 [ntdll+0x154f4])
+03:33:28  ---------------------------------------
+03:33:28  JVMDUMP039I Processing dump event "gpf", detail "" at 2020/09/17 02:29:03 - please wait.
+03:33:28  JVMDUMP032I JVM requested System dump using 'C:\Users\jenkins\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_Nightly\openjdk-tests\TKG\test_output_16003273664477\jdk_lang_j9_0\work\java\lang\ProcessHandle\TreeTest\core.20200917.022903.4044.0001.dmp' in response to an event
+03:33:28  JVMDUMP010I System dump written to C:\Users\jenkins\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_Nightly\openjdk-tests\TKG\test_output_16003273664477\jdk_lang_j9_0\work\java\lang\ProcessHandle\TreeTest\core.20200917.022903.4044.0001.dmp
+03:33:28  JVMDUMP032I JVM requested Java dump using 'C:\Users\jenkins\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_Nightly\openjdk-tests\TKG\test_output_16003273664477\jdk_lang_j9_0\work\java\lang\ProcessHandle\TreeTest\javacore.20200917.022903.4044.0002.txt' in response to an event
+03:33:28  JVMDUMP010I Java dump written to C:\Users\jenkins\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_Nightly\openjdk-tests\TKG\test_output_16003273664477\jdk_lang_j9_0\work\java\lang\ProcessHandle\TreeTest\javacore.20200917.022903.4044.0002.txt
+03:33:28  JVMDUMP032I JVM requested Snap dump using 'C:\Users\jenkins\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_Nightly\openjdk-tests\TKG\test_output_16003273664477\jdk_lang_j9_0\work\java\lang\ProcessHandle\TreeTest\Snap.20200917.022903.4044.0003.trc' in response to an event
+03:33:28  JVMDUMP010I Snap dump written to C:\Users\jenkins\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_Nightly\openjdk-tests\TKG\test_output_16003273664477\jdk_lang_j9_0\work\java\lang\ProcessHandle\TreeTest\Snap.20200917.022903.4044.0003.trc
+03:33:28  JVMDUMP013I Processed dump event "gpf", detail "".
+03:33:28  JVMJ9VM015W Initialization error for library j9jit29(11): cannot initialize JIT
+03:33:28  JVMJ9VM015W Initialization error for library j9jit29(11): cannot initialize JIT
+03:33:28  Error: Could not create the Java Virtual Machine.
+03:33:28  Error: A fatal exception has occurred. Program will exit.
+03:33:28  Error: Could not create the Java Virtual Machine.
+03:33:28  Error: A fatal exception has occurred. Program will exit.
+03:33:28  Error: Could not create the Java Virtual Machine.
+03:33:28  Error: A fatal exception has occurred. Program will exit.
+03:33:28  java.lang.Exception: failures: 1
+03:33:28  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:96)
+03:33:28  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+03:33:28  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+03:33:28  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+03:33:28  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+03:33:28  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+03:33:28  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+03:33:28  	at java.base/java.lang.Thread.run(Thread.java:836)
+03:33:28  
+03:33:28  JavaTest Message: Test threw exception: java.lang.Exception: failures: 1
+03:33:28  JavaTest Message: shutting down test
+03:33:28  
+03:33:28  STATUS:Failed.`main' threw exception: java.lang.Exception: failures: 1
+```

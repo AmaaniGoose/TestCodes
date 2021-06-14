@@ -1,0 +1,48 @@
+So far, we have static Docker containers with Alpine Linux 3.11 and 3.12 for testing purposes. Alpine Linux 3.13 was released last January, so it's about time that we add a container for testing with Alpine Linux 3.13.
+
+## Steps to Perform
+
+### Step 1: Add a Dockerfile with Alpine Linux 3.13
+
+The Dockerfiles reside in `https://github.com/AdoptOpenJDK/openjdk-infrastructure/tree/master/ansible/playbooks/AdoptOpenJDK_Unix_Playbook/roles/DockerStatic/Dockerfiles`. You can use the one [for Alpine Linux 3.11](https://github.com/AdoptOpenJDK/openjdk-infrastructure/blob/master/ansible/playbooks/AdoptOpenJDK_Unix_Playbook/roles/DockerStatic/Dockerfiles/Dockerfile.alp311) as an example.
+
+### Step 2: Register the Dockerfile in the Ansible playbooks
+
+The container won't magically appear on a machine. It has to be registered in our Ansible playbooks so that during the next machine re-configuration the container is added to the machine and started. To do so, you have to make two changes.
+
+Add the newly created container to this block which is responsible for building the containers:
+ 
+https://github.com/AdoptOpenJDK/openjdk-infrastructure/blob/6362d8ce258aebded8b33a1c7764b10ef915afa4/ansible/playbooks/AdoptOpenJDK_Unix_Playbook/roles/DockerStatic/tasks/main.yml#L28-L37
+
+Add another block similar to this one that starts the container:
+
+https://github.com/AdoptOpenJDK/openjdk-infrastructure/blob/6362d8ce258aebded8b33a1c7764b10ef915afa4/ansible/playbooks/AdoptOpenJDK_Unix_Playbook/roles/DockerStatic/tasks/main.yml#L79-L82
+
+Here, you have to make a couple of changes:
+
+* Pick a free SSH port on the host machine. The old block is using 2229 (`2229:22`). Take the next free number. At the time of writing, this would be 2230.
+* Update the name of the container accordingly. It should be `<dockerfile suffix>.<portnumber>`. If the Dockerfile suffix is alp313 and the port number 2230, that would result in `alp313.2230`.
+* Update the image name. The format is `aqa_<dockerfile suffix>`. If the Dockerfile suffix is alp313, the result would be `aqa_alp313`.
+
+### Step 3: Test whether your container is good
+
+* [ ] You can log into it via SSH.
+* [ ] You can copy a file into it with SCP.
+* [ ] The timezone is set to UTC.
+* [ ] The Locale (environment variables `LANG`, `LANGUAGE`, `LC_ALL`) is set to `en_US.UTF-8`.
+* [ ] You can run our test suite successfully.
+
+To run a part of our test suite, perform the following steps within the container:
+
+1. Download AdoptOpenJDK for Alpine Linux from https://adoptopenjdk.net/releases.html?variant=openjdk16&jvmVariant=hotspot.
+2. Unpack it and set the root folder of the unpacked JDK as `TEST_JDK_HOME`, for example `export TEST_JDK_HOME=/home/jenkins/jdk-16+36`.
+3. Configure the BUILD_LIST: `export BUILD_LIST=system`
+4. Run the test:
+   ```shell
+   $ git clone https://github.com/AdoptOpenJDK/openjdk-tests.git
+   $ cd openjdk-tests
+   $ ./get.sh
+   $ cd TKG
+   $ make compile
+   $ make _sanity.system
+   ```

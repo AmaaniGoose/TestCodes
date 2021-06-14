@@ -1,0 +1,11 @@
+As we have recently encountered network issues (https://github.com/eclipse/openj9/issues/9560), we are very short of xlinux/mac machines and do not have capacity to adequately cover PR testing, we can put a workflow in place to help cover the gap.
+
+2 github actions we will use for this workflow file (recently demonstrated in the OpenJ9 community call):
+
+- [**build-jdk-openj9**](https://github.com/sophia-guo/build-jdk-openj9) - used to build openj9 (and can use the contributors personal repos for openj9, openj9-omr, and the jdk-jdk{Version} extensions repo).  
+_Note_: this action currently resides in @sophia-guo personal repo, but we will eventually plan to move it to an official repo site, this move does not need to block the creation and use of this new workflow.
+
+- [**run-aqa**](https://github.com/AdoptOpenJDK/run-aqa) - used to run any of the test groups that are run at the openj9 and/or adoptopenjdk projects.  
+_Note_: we can focus on sanity.functional to start with, and ask @pshipton and other committers for input re: what test targets to launch against a particular PR.  In terms of trigger, we can start with a push to master as the trigger, but can also discuss other ways one might trigger this, once we have an initial workflow in place.
+
+related: https://github.com/eclipse/openj9/issues/9547

@@ -1,0 +1,3 @@
+With #4435 changes merged, all -XX options need to be consumed during initialization in order for `-XX:-IgnoreUnrecognizedXXColonOptions` to correctly function.
+
+Currently, there are still some XX options not consumed when it have been checked (with `FIND_ARG_IN_VMARGS`) which should be fixed.

@@ -1,0 +1,3 @@
+As part of #4049 @dsouzai has identified during some of his AOT work that the array store check evaluation is producing a sub-optimal sequence on x86. Please see the aforementioned PR for details on what the sequences is and what it should be.
+
+We should check the Z codegen to see what we generate and to see if we have a similar problem, and if so we should fix it in the same manner as #4049. First step is to just use a simple test case to generate an array store check and dump out the instruction sequence from the log here so we can examine.

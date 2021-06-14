@@ -1,0 +1,17 @@
+The @ForceInline (jdk.internal.vm.annotation.ForceInline) will be used to notify the JIT that the method will benefit from inlining. 
+
+We will introduce a compile time jithelper to so the JIT can query if the method is annotated with @ForceInline or not.
+
+First we will add a VMHelper
+
+//@param clazz, the class that own the field
+//@param the cpindex of the method to query
+//@return true, if forceinline, false otherwise
+BOOLEAN
+isMethodTaggedForForceInline(J9Class clazz, UDATA cpIndex);
+
+Take a look at dumpAnnotationInfo in rcdump.c to see how to look up method annotations.
+To find the name of the field given a cpIndex romFieldRef = (J9ROMMethodRef *)&clazz->ramConstantPool->romConstantPool[cpIndex];
+
+Compile time helpers are stored in cthelpers.cpp
+

@@ -1,0 +1,35 @@
+We want to select various (open-source) performance benchmark suites/harnesses to run at AdoptOpenJDK (for validating JDK binaries and to make available for easy use by JDK developers).
+
+We can first list any that could be useful for JDK measurement/verification, identify why they are interesting, and then prioritize accordingly.  This list can include both full suites and microbenchmarks with links to git repos (and pre-compiled jar/zip files when available).
+
+Once we start adding test targets from different benches, we will also have to ensure that they are suitable for all implementations (not based on implementation specific classes, etc).  But we can leave that as a separate exercise.
+
+**Larger suites**
+HiBench:
+https://github.com/Intel-bigdata/HiBench
+
+AcmeAir:
+https://github.com/blueperf/acmeair-monolithic-java
+https://acmeair.github.io/acmeair/ 
+
+DayTrader3:
+https://github.com/WASdev/sample.daytrader3
+
+DayTrader7:
+https://github.com/WASdev/sample.daytrader7
+
+Dacapo:
+https://github.com/dacapobench/dacapobench
+http://dacapobench.org/
+
+
+**Micro/Macro Bench Harnesses**
+Bumblebench:
+https://github.com/AdoptOpenJDK/bumblebench
+
+jmh:
+https://openjdk.java.net/projects/code-tools/jmh/
+
+
+Also look at https://github.com/Hyperfoil/
+

@@ -1,0 +1,9 @@
+Issue to track enabling AOT w/ SVM on 32-bit x86. As I find and fix problems, I'll update it here so that others working on 32-bit enablement on other platforms can save themselves the pain of figuring out these issues on their own.
+
+Progress:
+- Compile run seems OK.
+- Load run is still failing, probably because of some other missed relocations.
+
+Known issues:
+1. 32-bit section of `J9::X86::AheadOfTimeCompile::_relocationTargetTypeToHeaderSizeMap` needs to be updated.
+2. `genInitObjectHeader` in `x/codegen/J9TreeEvaluator.cpp` needs to be updated to pass in the `TR_ClassPointer` reloKind when not using 64-bit classes.

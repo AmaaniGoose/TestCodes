@@ -1,0 +1,43 @@
+Both https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/io/FileInputStream/UnreferencedFISClosesFd.java and https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/io/FileOutputStream/UnreferencedFOSClosesFd.java are behaving inconsistently ...
+
+Sometimes (~60% of the time) they pass and other times they time out.
+
+The problematic sub-test in both is StreamOverridesFinalizeClose.
+
+When they pass the output looks like this ...
+```
+Testing UnreferencedFOSClosesFd$StreamOverridesFinalizeClose
+  cleanup: null, alt: java.io.FileOutputStream$AltFinalizer@2492059c, ffd: 8, cf: private jdk.internal.ref.PhantomCleanable java.io.FileDescriptor.cleanup
+    fdWeak: java.lang.ref.WeakReference@82607569
+    msWeak: java.lang.ref.WeakReference@e34a887e
+    altFinalizerWeak: java.lang.ref.WeakReference@93abf91f
+    r: null, pending: 3
+    r: java.lang.ref.WeakReference@e34a887e, pending: 3
+    r: java.lang.ref.WeakReference@82607569, pending: 2
+    r: java.lang.ref.WeakReference@93abf91f, pending: 1
+``` 
+... and when they time out the output looks like this ...
+```
+Testing UnreferencedFOSClosesFd$StreamOverridesFinalizeClose
+  cleanup: null, alt: java.io.FileOutputStream$AltFinalizer@9cf94964, ffd: 8, cf: private jdk.internal.ref.PhantomCleanable java.io.FileDescriptor.cleanup
+    fdWeak: java.lang.ref.WeakReference@c6c0f862
+    msWeak: java.lang.ref.WeakReference@c47a6dae
+    altFinalizerWeak: java.lang.ref.WeakReference@629a3211
+    r: null, pending: 3
+    r: null, pending: 3
+    r: null, pending: 3
+    r: null, pending: 3
+	<continues repeating until timeout reached>
+```
+
+These core dumps were taken for each test during this repetition ...
+[FIS_javacore.20181105.141217.10362.0001.txt](https://github.com/eclipse/openj9/files/2548876/FIS_javacore.20181105.141217.10362.0001.txt)
+[FOS_javacore.20181105.140311.9322.0001.txt](https://github.com/eclipse/openj9/files/2548877/FOS_javacore.20181105.140311.9322.0001.txt)
+
+Example log archives for time out of each test ...
+[FailureUnreferencedFOSClosesFd.tar.gz](https://github.com/eclipse/openj9/files/2548885/FailureUnreferencedFOSClosesFd.tar.gz)
+[FailureUnreferencedFISClosesFd.tar.gz](https://github.com/eclipse/openj9/files/2548886/FailureUnreferencedFISClosesFd.tar.gz)
+
+Example log archives for passess of each test ...
+[SuccessUnreferencedFOSClosesFd.tar.gz](https://github.com/eclipse/openj9/files/2548887/SuccessUnreferencedFOSClosesFd.tar.gz)
+[SuccessUnreferencedFISClosesFd.tar.gz](https://github.com/eclipse/openj9/files/2548888/SuccessUnreferencedFISClosesFd.tar.gz)

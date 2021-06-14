@@ -1,0 +1,16 @@
+This issue is to discuss whether or not it makes sense to define a set of processor features the compiler should target when generating AOT code. The three general approaches we can take are:
+
+1. The compiler has a set of processor features defined for an AOT compile.
+2. The compiler targets whatever features are available on the machine it is running on (while turning off certain features such as TM).
+3. The compiler maintains a mapping of CPU version to CPU features; even though certain platforms don't have CPU features that are tied to any particular CPU version, the compiler can enforce such a mapping to simply user experience (rather than the user having to specify all features they want).
+
+The question of what a compiler like GCC does came up in the discussion. Looking online, my understanding is that by default GCC compiles for the target it itself was compiled to target:
+
+> The only difference in behavior between two GCC versions built targeting different sub-architectures is the implicit default argument for the -march parameter, which is derived from the GCC's CHOST when not explicitly provided in the command line. [1]
+
+GCC will only target the CPU it is running on if `-march=native` is specified [2]
+
+<hr/>
+
+[1] https://wiki.gentoo.org/wiki/GCC_optimization
+[2] https://wiki.gentoo.org/wiki/Distcc#-march.3Dnative

@@ -1,0 +1,19 @@
+New test, never passed.
+
+https://ci.eclipse.org/openj9/view/Test/job/Test-Extended-linux_390-64_cmprssptrs/lastBuild/testReport/junit/j9vm.test.softmx/SoftmxRemoteTest/setUp/
+
+Failed
+
+j9vm.test.softmx.SoftmxRemoteTest.setUp
+
+Failing for the past 38 builds (Since Unstable#2 )
+Took 0 ms.
+Error Message
+
+The server is not ready after 120 seconds!!!
+Stacktrace
+
+      java.lang.AssertionError: The server is not ready after 120 seconds!!!
+	at org.testng.Assert.fail(Assert.java:94)
+	at j9vm.test.softmx.SoftmxRemoteTest.waitRemoteServer(SoftmxRemoteTest.java:344)
+	at j9vm.test.softmx.SoftmxRemoteTest.setUp(SoftmxRemoteTest.java:71)

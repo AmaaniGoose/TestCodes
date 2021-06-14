@@ -1,0 +1,3 @@
+It would be useful to have a link on a build job to create a grinder from the build. It would set the platform, customized download, and the build and credential into the grinder.
+
+@AdamBrousseau fyi

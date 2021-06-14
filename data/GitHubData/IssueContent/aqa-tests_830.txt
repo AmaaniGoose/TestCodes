@@ -1,0 +1,73 @@
+**On Mac:**
+Following tests got timeout error with error message " RegisterApplication(), FAILED TO establish the default connection to the WindowServer, _CGSDefaultConnection() is NULL". No JBS reports.
+
+java/io/Serializable/serialver/classpath/run.sh.run
+java/io/Serializable/serialver/nested/run.sh.run 
+java/util/logging/TestLoggingWithMainAppContext.java.TestLoggingWithMainAppContext
+java/util/logging/TestMainAppContext.java.TestMainAppContext
+
+```
+Stacktrace
+
+Program `/Users/jenkins/workspace/openjdk8_j9_openjdktest_x86-64_macos/openjdkbinary/j2sdk-image/jre/bin/../../bin/java' timed out (timeout set to 960000ms, elapsed time including timeout handling was 960045ms).    
+
+Standard Output
+
+Creating loggers.
+bar1.getParent() is the same as foo1
+Now running with security manager
+Timeout refired 960 times
+    
+
+Standard Error
+
+_RegisterApplication(), FAILED TO establish the default connection to the WindowServer, _CGSDefaultConnection() is NULL.
+    
+```
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/openjdk8_j9_openjdktest_x86-64_macos/lastCompletedBuild/testReport/
+
+java/rmi/activation/Activatable/checkAnnotations/CheckAnnotations.java
+java/rmi/activation/Activatable/nestedActivate/NestedActivate.java same failure with ' nested exception is: java.lang.NullPointerException', no JBS report
+
+Both triggered by code:
+`                        ActivationGroupID groupID =
+                            ActivationGroup.getSystem().
+                            registerGroup(groupDesc);
+`
+
+```
+Test failed with: null
+java.lang.NullPointerException
+	at CheckAnnotations.main(CheckAnnotations.java:95)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.lang.Thread.run(Thread.java:813)
+rmid shut down
+ACTIVATION_LIBRARY: Activation System available after 0 milliseconds
+RMID: getting a reference to the activation system
+RMID: obtained a reference to the activation system
+RMID: testlibrary finished shutting down rmid
+RMID: rmid exited on shutdown request
+ACTIVATION_LIBRARY: finished destroying rmid
+RMID: removing rmid's old log file...
+TestFailedException: TEST FAILED: ; nested exception is: 
+	java.lang.NullPointerException
+java.lang.NullPointerException
+	at CheckAnnotations.main(CheckAnnotations.java:95)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.lang.Thread.run(Thread.java:813)
+
+```
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/openjdk8_j9_openjdktest_x86-64_macos/83/testReport/junit/java_rmi_activation_Activatable_checkAnnotations_CheckAnnotations/java/CheckAnnotations/
+
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/openjdk8_j9_openjdktest_x86-64_macos/86/testReport/junit/java_rmi_activation_Activatable_nestedActivate_NestedActivate/java/NestedActivate/
+
+
+

@@ -1,0 +1,5 @@
+> I would still be tempted to go the gpProtected route - you could write a 2 in there instead of 1 to indicate the special case.
+
+I started out opposed but I think you're right.  gpProtected should be based on an enum where 1 is protected, 2 is xrs, and some macros should be added to check if gpProtected or not.
+
+_Originally posted by @DanHeidinga in https://github.com/eclipse/openj9/pull/9872#issuecomment-646426889_

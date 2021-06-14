@@ -1,0 +1,1 @@
+As per #10107, the jenkins pipeline scripts are hard coding a JDK IMPL. However the tests support auto detection of the JDK impl now. It would be better to use the auto detect than to hard code.  Testing will do the right thing rather than build changes causing breakage that needs to be manually fixed.

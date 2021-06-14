@@ -1,0 +1,184 @@
+Both Hotspot and OpenJ9:
+https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_extended.openjdk_ppc64_aix/17/consoleFull
+```
+13:27:44  openjdk version "1.8.0_292"
+13:27:44  OpenJDK Runtime Environment (build 1.8.0_292-202103091149-b05)
+13:27:44  Eclipse OpenJ9 VM (build openj9-0.26.0-m1, JRE 1.8.0 AIX ppc64-64-Bit Compressed References 20210309_991 (JIT enabled, AOT enabled)
+13:27:44  OpenJ9   - b227feba2
+13:27:44  OMR      - 4665e2f72
+13:27:44  JCL      - 1780cbc92b based on jdk8u292-b05)
+```
+```
+16:55:37  Timeout information:
+16:55:37  Running jstack on process 29294884
+16:55:37  2021-03-09T10:55:28.954
+16:55:37  Virtual machine: 29294884 JVM information:
+16:55:37  JRE 1.8.0 AIX ppc64-64-Bit Compressed References 20210309_991 (JIT enabled, AOT enabled)
+16:55:37  OpenJ9   - b227feba2
+16:55:37  OMR      - 4665e2f72
+16:55:37  JCL      - 1780cbc92b based on jdk8u292-b05
+16:55:37  
+16:55:37  "main" Id=1 WAITING
+16:55:37  	at java.lang.Object.wait(Native Method)
+16:55:37  	at java.lang.Object.wait(Object.java:218)
+16:55:37  	at java.lang.Thread.join(Thread.java:703)
+16:55:37  	at com.sun.javatest.regtest.agent.MainWrapper.main(MainWrapper.java:74)
+16:55:37  
+16:55:37  "JIT Compilation Thread-000" Id=2 RUNNABLE
+16:55:37  
+16:55:37  "JIT Compilation Thread-001 Suspended" Id=3 RUNNABLE
+16:55:37  
+16:55:37  "JIT Compilation Thread-002 Suspended" Id=4 RUNNABLE
+16:55:37  
+16:55:37  "JIT Compilation Thread-003 Suspended" Id=5 RUNNABLE
+16:55:37  
+16:55:37  "JIT Compilation Thread-004 Suspended" Id=6 RUNNABLE
+16:55:37  
+16:55:37  "JIT Compilation Thread-005 Suspended" Id=7 RUNNABLE
+16:55:37  
+16:55:37  "JIT Compilation Thread-006 Suspended" Id=8 RUNNABLE
+16:55:37  
+16:55:37  "JIT Diagnostic Compilation Thread-007 Suspended" Id=9 RUNNABLE
+16:55:37  
+16:55:37  "JIT-SamplerThread" Id=10 TIMED_WAITING
+16:55:37  
+16:55:37  "IProfiler" Id=11 RUNNABLE
+16:55:37  
+16:55:37  "Concurrent Mark Helper" Id=12 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=13 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=14 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=15 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=16 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=17 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=18 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=19 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=20 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=21 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=22 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=23 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=24 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=25 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=26 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=27 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=28 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=29 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=30 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=31 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=32 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=33 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=34 RUNNABLE
+16:55:37  
+16:55:37  "GC Worker" Id=35 RUNNABLE
+16:55:37  
+16:55:37  "Attach API wait loop" Id=38 TIMED_WAITING
+16:55:37  	at java.lang.Thread.sleep(Native Method)
+16:55:37  	at java.lang.Thread.sleep(Thread.java:953)
+16:55:37  	at openj9.internal.tools.attach.target.WaitLoop.checkReplyAndCreateAttachment(WaitLoop.java:140)
+16:55:37  	at openj9.internal.tools.attach.target.WaitLoop.waitForNotification(WaitLoop.java:117)
+16:55:37  	at openj9.internal.tools.attach.target.WaitLoop.run(WaitLoop.java:154)
+16:55:37  
+16:55:37  "MainThread" Id=40 RUNNABLE
+16:55:37  	at java.net.PlainDatagramSocketImpl.receive0(Native Method)
+16:55:37  	at java.net.AbstractPlainDatagramSocketImpl.receive(AbstractPlainDatagramSocketImpl.java:143)
+16:55:37  	- locked java.net.PlainDatagramSocketImpl@a36a70ca
+16:55:37  	at java.net.DatagramSocket.receive(DatagramSocket.java:812)
+16:55:37  	- locked java.net.DatagramSocket@122f7a3d
+16:55:37  	at sun.security.krb5.internal.UDPClient.receive(NetClient.java:206)
+16:55:37  	at sun.security.krb5.KdcComm$KdcCommunication.run(KdcComm.java:404)
+16:55:37  	at sun.security.krb5.KdcComm$KdcCommunication.run(KdcComm.java:364)
+16:55:37  	at java.security.AccessController.doPrivileged(AccessController.java:738)
+16:55:37  	at sun.security.krb5.KdcComm.send(KdcComm.java:348)
+16:55:37  	at sun.security.krb5.KdcComm.sendIfPossible(KdcComm.java:253)
+16:55:37  	at sun.security.krb5.KdcComm.send(KdcComm.java:229)
+16:55:37  	at sun.security.krb5.KdcComm.send(KdcComm.java:200)
+16:55:37  	at sun.security.krb5.KrbAsReqBuilder.send(KrbAsReqBuilder.java:345)
+16:55:37  	at sun.security.krb5.KrbAsReqBuilder.action(KrbAsReqBuilder.java:498)
+16:55:37  	at com.sun.security.auth.module.Krb5LoginModule.attemptAuthentication(Krb5LoginModule.java:770)
+16:55:37  	at com.sun.security.auth.module.Krb5LoginModule.login(Krb5LoginModule.java:618)
+16:55:37  	at Context.fromUserPass(Context.java:195)
+16:55:37  	at Context.fromUserPass(Context.java:151)
+16:55:37  	at Unreachable.main(Unreachable.java:47)
+16:55:37  	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+16:55:37  	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+16:55:37  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+16:55:37  	at java.lang.reflect.Method.invoke(Method.java:498)
+16:55:37  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+16:55:37  	at java.lang.Thread.run(Thread.java:823)
+16:55:37  
+16:55:37  "Finalizer thread" Id=41 RUNNABLE
+16:55:37  
+16:55:37  "Attachment 60789" Id=42 RUNNABLE
+16:55:37  	at openj9.internal.tools.attach.target.DiagnosticUtils.dumpAllThreadsImpl(Native Method)
+16:55:37  	at openj9.internal.tools.attach.target.DiagnosticUtils.getThreadInfo(DiagnosticUtils.java:245)
+16:55:37  	at openj9.internal.tools.attach.target.DiagnosticUtils$$Lambda$13/0x0000000000000000.apply(Unknown Source)
+16:55:37  	at openj9.internal.tools.attach.target.DiagnosticUtils.executeDiagnosticCommand(DiagnosticUtils.java:181)
+16:55:37  	at openj9.internal.tools.attach.target.Attachment.doCommand(Attachment.java:239)
+16:55:37  	at openj9.internal.tools.attach.target.Attachment.run(Attachment.java:150)
+16:55:37  
+16:55:37  "file lock watchdog" Id=43 TIMED_WAITING
+16:55:37  	at java.lang.Object.wait(Native Method)
+16:55:37  	at java.lang.Object.wait(Object.java:218)
+16:55:37  	at java.util.TimerThread.mainLoop(Timer.java:552)
+16:55:37  	at java.util.TimerThread.run(Timer.java:505)
+16:55:37  
+16:55:37  
+16:55:37  --- Timeout information end.
+16:55:37  elapsed time (seconds): 82.373
+16:55:37  configuration:
+16:55:37  STDOUT:
+16:55:37  Timeout refired 80 times
+16:55:37  STDERR:
+16:55:37  rerun:
+16:55:37  cd /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16152971712534/jdk_security4_0/work/scratch && \
+16:55:37  DISPLAY=:0 \
+16:55:37  HOME=/home/jenkins \
+16:55:37  LANG=en_US \
+16:55:37  PATH=/bin:/usr/bin:/usr/sbin \
+16:55:37  TZ=CST6CDT \
+16:55:37  CLASSPATH=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16152971712534/jdk_security4_0/work/classes/sun/security/krb5/auto:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/sun/security/krb5/auto:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/lib/tools.jar:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+16:55:37      /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/bin/java \
+16:55:37          -Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+16:55:37          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+16:55:37          -Dtest.compiler.opts= \
+16:55:37          -Dtest.java.opts= \
+16:55:37          -Dtest.jdk=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image \
+16:55:37          -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image \
+16:55:37          -Dtest.timeout.factor=8.0 \
+16:55:37          -Dtest.root=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test \
+16:55:37          -Dtest.name=sun/security/krb5/auto/Unreachable.java \
+16:55:37          -Dtest.file=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/sun/security/krb5/auto/Unreachable.java \
+16:55:37          -Dtest.src=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/sun/security/krb5/auto \
+16:55:37          -Dtest.src.path=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/sun/security/krb5/auto \
+16:55:37          -Dtest.classes=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16152971712534/jdk_security4_0/work/classes/sun/security/krb5/auto \
+16:55:37          -Dtest.class.path=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16152971712534/jdk_security4_0/work/classes/sun/security/krb5/auto \
+16:55:37          -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16152971712534/jdk_security4_0/work/classes/sun/security/krb5/auto:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/sun/security/krb5/auto \
+16:55:37          -ea \
+16:55:37          -esa \
+16:55:37          -Xmx512m \
+16:55:37          -XX:+UseCompressedOops \
+16:55:37          com.sun.javatest.regtest.agent.MainWrapper /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16152971712534/jdk_security4_0/work/sun/security/krb5/auto/Unreachable.d/main.0.jta
+16:55:37  
+16:55:37  TEST RESULT: Error. Program `/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/bin/java' timed out (timeout set to 80000ms, elapsed time including timeout handling was 82329ms).
+```

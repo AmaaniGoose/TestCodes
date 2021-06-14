@@ -1,0 +1,34 @@
+**👾 Description of the issue**
+
+We need to remove systemtest's dependency on `wget` and use `curl` on all platforms. 
+
+Except for system tests, all other tests have been switched to use curl, since we cannot use wget on z/OS and we do not want to support both curl and wget, we choose to use curl only (ref: https://github.com/AdoptOpenJDK/openjdk-tests/issues/1250). 
+
+**Tips to solve this particular issue:** 
+
+To fix this issue, we need to update [top.xml](https://github.com/adoptium/STF/blob/master/stf.build/include/top.xml) Ant script and do the following: 
+- Remove [check-for-wget](https://github.com/adoptium/STF/blob/master/stf.build/include/top.xml#L366) target and all its references;
+- Remove any existing condition from [check-for-curl](https://github.com/adoptium/STF/blob/master/stf.build/include/top.xml#L377) - so that it runs on all platforms; 
+- Since we are using a single download tool, we may replace the target `check-for-download-tool` with the target `check-for-curl`;
+- Remove conditional property [download-tool](https://github.com/adoptium/STF/blob/master/stf.build/include/top.xml#L377) and use `curl` directly where download-tool was being used;
+- Remove any additional conditional properties, such as [download-tool-security-options](https://github.com/adoptium/STF/blob/c1687efe376b077a733766da1f82d2df51e953a6/stf.build/include/top.xml#L396),  and [download-tool-srcfile-option](https://github.com/adoptium/STF/blob/c1687efe376b077a733766da1f82d2df51e953a6/stf.build/include/top.xml#L400) and use the option for `curl` directly in the actual download [command](https://github.com/adoptium/STF/blob/c1687efe376b077a733766da1f82d2df51e953a6/stf.build/include/top.xml#L422);  
+- Test the changes in your branch by pointing a Grinder to it and running a system test (e.g. `MathLoadTest_autosimd_0`) on all platforms. 
+
+**📋 Step by Step**
+
+To solve this issue and contribute a fix you should check the following step-by-step list. A more detailed documentation of the workflow can be found [here](https://github.com/firstcontributions/first-contributions/blob/master/README.md).
+
+- [ ] Claim this issue: Comment below.
+- [ ]  Fork the [STF repository](https://github.com/adoptium/STF) in github by simply clicking the 'fork' button.
+- [ ]  Check out the forked repository
+- [ ]  Create a feature branch for the issue. We do not have any naming definition for branches.
+- [ ]  Commit your changes.
+- [ ]  Start a Pull Request.
+- [ ]  Done 👍 Ask in comments for a review :)
+- [ ]  If the reviewers find some missing peaces or a problem, s/he will start a discussion with you and describe the next steps how the problem can be solved.
+- [ ]  You did it 🎉 We will merge the fix in the master branch.
+- [ ]  Thanks, thanks, thanks for being part of this project as an open source contributor ❤️
+
+**🤔❓ Questions**
+
+If you have any questions just ask us directly in this issue by adding a comment. You can join our community chat at [Slack](https://adoptopenjdk.net/slack.html). Next to this you can find a general manual about open source contributions [here](https://github.com/firstcontributions/first-contributions/blob/master/README.md).

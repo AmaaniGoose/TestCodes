@@ -1,0 +1,9 @@
+Version: JDK14 OpenJ9
+Platform: Unix XL Builds
+```
+Agent communication error: java.io.EOFException; check console log for any additional details
+```
+
+I wouldn't normally raise these problems as they tend to have a low inconsistency and are hard to recreate. However in nightly sanity.openjdk runs, this test has around a 50% failure rate.. but I cannot seem to recreate the failure in a grinder with the exact same parameters and machine etc.
+
+For context, this failure is thrown when the JTReg agent hits a critical failure, but it doesn't know what went wrong. It's often a problem with the test material or how the agent is configured, rather than the code it is testing. This needs further investigation but I would imagine this is low priority and wouldn't block release.

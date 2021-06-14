@@ -1,0 +1,9 @@
+> Can it be moved out of util and the c api be provided by calling the new impl in VMHelpers?
+
+I don't think so. There are several uses of the C API from within C contexts:
+
+https://github.com/eclipse/openj9/blob/58a679f1fe4e1b7eaa97d2b01b1d9452df4edac0/runtime/shared_util/classpathcache.c#L267
+https://github.com/eclipse/openj9/blob/58a679f1fe4e1b7eaa97d2b01b1d9452df4edac0/runtime/vm/classsupport.c#L1289
+https://github.com/eclipse/openj9/blob/58a679f1fe4e1b7eaa97d2b01b1d9452df4edac0/runtime/vm/lockwordconfig.c#L57
+
+_Originally posted by @fjeremic in https://github.com/eclipse/openj9/diffs_

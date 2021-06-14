@@ -1,0 +1,3 @@
+While dealing with #5014 it became evident that the GPUHelpers.cpp file could use some clean up.
+
+Many of the functions inside GPUHelpers.cpp returned magic numbers or results that did not match the return type for no reason. Frequently the return values aren't actually used so this did not lead to functional issues but they should still be correct in case they are used in the future. The functions need to be updated to have descriptive return values that actually match the return type of the function.

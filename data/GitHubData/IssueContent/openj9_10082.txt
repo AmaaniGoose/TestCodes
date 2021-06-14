@@ -1,0 +1,10 @@
+The default behavior of OpenJ9 is to keep a balance between different performance metrics: start-up time, ramp-up time, footprint, throughput, CPU consumption, small pause time, etc. However, some people may care a lot about a particular metric and, instead of reaching that performance goal with a relatively large set of JVM options, it would be nice to use just one option.
+OpenJ9 already has `-Xtune:virtualized` command line option which is recommended in virtualized/constrained scenario due to its lower JIT CPU consumption and slightly lower footprint. Following a similar pattern we could define: `-Xtune:throughput`, `-Xtune:footprint`, etc.
+
+This purpose of this issue is to discuss:
+- Whether we want to add new options targeting different performance goals
+- How these options should look like (e.g. do we want `-XX:` style options, or `-Xtune:` are good enough)
+- How to deal with conflicts when user specifies more than one performance goal
+
+My preference is to introduce `-Xtune:perfGoal` style options and the last such option wins (all previous ones are ignored)
+FYI: @vijaysun-omr @mstoodle @DanHeidinga @pshipton

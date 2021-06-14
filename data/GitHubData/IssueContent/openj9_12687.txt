@@ -1,0 +1,77 @@
+Hi, we reported an issue to hotspot a few days ago, which is about handling exceptions after StackOverflowError occurred. The behavior between hotspot and J9 on the given test case is quite different. We first believe that this was a bug in hotspot.
+
+However, the developer of hotspot gave an explanation for this issue, and this explanation was reasonable to convince me. Then, I have doubts about how J9 handles this exception. Is this an optimization in stack management or does it hide some problems in stack management?
+
+To simply, on hotspot, there is a big difference in the results of whether the print in the test case is executed. However, the exception can be thrown on J9, and the results are consistent.
+
+More information can be found at https://bugs.openjdk.java.net/browse/JDK-8266955.
+
+We paste the hotspot developer's explanation here, and the test case can be found below.
+``` 
+This is a good puzzler but not a bug.
+
+Let the SOE hit when calling m2 at depth N. We catch the SOE in m2() at depth N and return true, the m2() at depth N-1 then proceeds after the try/catch block:
+
+// System.out.println("This is the only diff");
+        if (var1) {
+            try {
+                m1(var0);
+            } catch (StackOverflowError e) { }
+        }
+        return false;
+
+with no println we try to execute m1() but there's still not enough stack so it throws SOE again. We catch that and return false, and so we unwind back to main() with m2() always returning false and so var1 is false and we never actually execute m1.
+
+When the println is present the println gets the SOE, but that happens outside a try block so we unwind to depth N-2 where the SOE is caught and returns true to depth N-3. Now we have sufficient stack to execute the println, and then sufficient stack to execute m1() - which throws NullPointerException.
+
+A different VM (like J9) may do stack management differently such that after the call to m2() gets SOE there is sufficient stack at depth N-1 to execute m1() okay and it throws the NPE (which also doesn't encounter a stack overflow in the process).
+```
+### Test Case:
+```
+public class Bug {
+
+    static Object m1(boolean var0) {
+        throw new NullPointerException();
+    }
+
+    static boolean m2(boolean var0) {
+        boolean var1 = false;
+
+        try {
+            var1 = m2(var0);
+        } catch (StackOverflowError e) {
+            return true;
+        }
+// System.out.println(“This is the only diff”);
+        if (var1) {
+            try {
+                m1(var0);
+            } catch (StackOverflowError e) { }
+        }
+        return false;
+    }
+
+    public static void main(String[] var0) {
+        m2(true);
+    }
+}
+```
+
+### Runtime Information:
+macOS:
+```
+macOS Big Sur
+Version 11.2.3 (20D91)
+Processor 2.3 GHz Dual-Core Intel Core i5
+Memory 8 GB 2133 MHz LPDDR3
+```
+
+Java -version output under macOS
+```
+openjdk version "1.8.0_272"
+OpenJDK Runtime Environment (build 1.8.0_272-b10)
+Eclipse OpenJ9 VM (build openj9-0.23.0, JRE 1.8.0 Mac OS X amd64-64-Bit Compressed References 20201022_737 (JIT enabled, AOT enabled)
+OpenJ9   - 0394ef754
+OMR      - 582366ae5
+JCL      - 41f03341d5 based on jdk8u272-b10)
+```

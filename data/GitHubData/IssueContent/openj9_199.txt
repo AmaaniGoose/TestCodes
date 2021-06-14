@@ -1,0 +1,13 @@
+Performance of the Monte Carlo kernel of the SciMark benchmark is reduced by the presence of locking on a local object inside the hot loop. When run with HCR disabled the object is recognised as non-escaping and the lock is folded away, resulting in a 64% performance increase. Folding away the lock with HCR enabled is being investigated.
+
+```
+Test results on 32 core Xeon(R) CPU E7-8867:
+
+OpenJ9 313 Mflops vs Hotspot 753 Mflops
+
+With HCR disabled: 513 Mflops
+```
+
+Analysis of the compilation log suggests that there may be opportunity for further optimisation of the x86 floating point sequences that are being emitted.
+
+

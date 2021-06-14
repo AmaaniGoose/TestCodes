@@ -1,0 +1,4 @@
+I noticed `ExtendedOperatingSystemMXBeanImpl.getFreePhysicalMemorySize()` has its own native method `getFreePhysicalMemorySizeImpl()` which uses port library API `j9vmem_get_available_physical_memory` for getting available memory in the system. It gets the value using `sysconf` without taking into account cgroup memory stats.
+
+Other APIs in `ExtendedOperatingSystemMXBeanImpl` like `getFreeSwapSpaceSize()`, `getTotalSwapSpaceSize()` use a private method `retrieveMemoryUsage()` which actually gets all memory stats using `sysinfo_get_memory_info` which takes into account cgroup stats as well.
+I think it would be more consistent and better to just call `retrieveMemoryUsage()` in `getFreePhysicalMemorySize()` as well and use `MemoryUsage.getFree()` to get available physical memory.

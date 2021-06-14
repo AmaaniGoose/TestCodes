@@ -1,0 +1,11 @@
+@gdams and @karianna [have stated](https://adoptopenjdk.slack.com/archives/C53GHCXL4/p1614162805028800) that they want AdoptOpenJDK 16 for Windows on ARM in March which is currently blocked on lack of suitable test machines. So here's the tracking ticket for the machine request.
+
+- New machine operating system (e.g. linux/windows/macos/solaris/aix): Windows
+- New machine architecture (e.g. x64/aarch32/arm32/ppc64/ppc64le/sparc): aarch64
+- Provider (leave blank if it does not matter):
+- Desired usage: Testing AdoptOpenJDK 16+ for Windows on ARM
+- Any unusual specification/setup required: 
+- How many of them are required: 2
+
+Please explain what this machine is needed for:
+https://github.com/AdoptOpenJDK/openjdk-tests/issues/2224

@@ -1,0 +1,5 @@
+In roughly a month, we're going to release AdoptOpenJDK 16. For the first time, support for Windows on ARM is included but we currently don't test it:
+
+https://github.com/AdoptOpenJDK/openjdk-build/blob/3a26592a68ac5d58ae55bbe385a620f29d2ce695/pipelines/jobs/configurations/jdk16_pipeline_config.groovy#L83-L93
+
+This is currently blocked on the lack of Windows machines with ARM CPU (working on it, no luck so far).

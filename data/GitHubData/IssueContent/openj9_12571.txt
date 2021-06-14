@@ -1,0 +1,42 @@
+### Error
+
+This issue documents the `jsr292Test_*` failures seen after resolution of the seg fault in https://github.com/eclipse/openj9/issues/11936. The below failures are seen with JDK16+.
+
+`testBindTo` passes in RI but fails in OJ9 with OJDK MHs enabled.
+
+**OJ9 with OJDK MHs enabled:**
+```
+FAILED: testBindTo
+FAILED: testAll
+FAILED: testPermuteArguments
+FAILED: testIfVirtualHandleTestIsJitted
+FAILED: testIfConstructorHandleIsJitted
+FAILED: testIfRecieverBoundHandleTestIsJitted
+FAILED: testIfInterfaceHandleIsJitted
+FAILED: testIfDirectHandleTestIsJitted
+```
+
+**Reference Implementation (RI):**
+```
+FAILED: testAll
+FAILED: testPermuteArguments
+FAILED: testIfVirtualHandleTestIsJitted
+FAILED: testIfConstructorHandleIsJitted
+FAILED: testIfRecieverBoundHandleTestIsJitted
+FAILED: testIfInterfaceHandleIsJitted
+FAILED: testIfDirectHandleTestIsJitted
+```
+
+### Failing Test Targets
+
+1. `jsr292Test_0` [extended.functional]
+2. `jsr292Test_1` [extended.functional]
+3. `jsr292Test_JitCount0_0` [extended.functional]
+
+### How-to Run Tests?
+
+https://github.com/eclipse/openj9/blob/master/test/docs/OpenJ9TestUserGuide.md
+
+### Steps to build an OpenJ9 JDK with OJDK MHs enabled
+
+Refer to #11458.

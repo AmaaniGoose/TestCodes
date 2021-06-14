@@ -1,0 +1,65 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk11_j9_special.system_x86-64_linux_jit_Nightly_mathLoadTest/71`:
+```
+02:17:06  openjdk version "11.0.8-internal" 2020-07-14
+02:17:06  OpenJDK Runtime Environment (build 11.0.8-internal+0-adhoc.jenkins.BuildJDK11x86-64linuxjitNightly)
+02:17:06  Eclipse OpenJ9 VM (build master-1c194db6e72, JRE 11 Linux amd64-64-Bit Compressed References 20200803_145 (JIT enabled, AOT enabled)
+02:17:06  OpenJ9   - 1c194db6e72
+02:17:06  OMR      - 7b76a160bc7
+02:17:06  JCL      - 94b9d6d2c6f based on jdk-11.0.8+10)
+```
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+MLT 20:51:04.453 - Completed 64.9%. Number of tests started=3405 (+440)
+MLT 20:51:12.207 - First failure detected by thread: load-1. Not creating dumps as no dump generation is requested for this load test
+MLT 20:51:12.211 - Test failed
+MLT   Failure num.  = 1
+MLT   Test number   = 34
+MLT   Test details  = 'JUnit[net.adoptopenjdk.test.bigdecimal.TestSuite034]'
+MLT   Suite number  = 0
+MLT   Thread number = 1
+MLT >>> Captured test output >>>
+MLT Test failed:
+MLT java.lang.InternalError: java.lang.reflect.InvocationTargetException
+MLT 	at java.base/java.lang.Class.newInternalError(Class.java:3854)
+MLT 	at java.base/java.lang.Class.lookupCachedMethod(Class.java:3874)
+MLT 	at java.base/java.lang.Class.getMethodHelper(Class.java:1386)
+MLT 	at java.base/java.lang.Class.getMethod(Class.java:1338)
+MLT 	at org.junit.internal.runners.JUnit38ClassRunner.getAnnotations(JUnit38ClassRunner.java:131)
+MLT 	at org.junit.internal.runners.JUnit38ClassRunner.makeDescription(JUnit38ClassRunner.java:101)
+MLT 	at org.junit.internal.runners.JUnit38ClassRunner.makeDescription(JUnit38ClassRunner.java:109)
+MLT 	at org.junit.internal.runners.JUnit38ClassRunner.getDescription(JUnit38ClassRunner.java:95)
+MLT 	at org.junit.runners.Suite.describeChild(Suite.java:123)
+MLT 	at org.junit.runners.Suite.describeChild(Suite.java:27)
+MLT 	at org.junit.runners.ParentRunner.getDescription(ParentRunner.java:352)
+MLT 	at org.junit.runner.JUnitCore.run(JUnitCore.java:136)
+MLT 	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+MLT 	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+MLT 	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+MLT 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+MLT 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+MLT 	at java.base/java.lang.Thread.run(Thread.java:836)
+MLT Caused by: java.lang.reflect.InvocationTargetException
+MLT 	at jdk.internal.reflect.GeneratedMethodAccessor2.invoke(Unknown Source)
+MLT 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+MLT 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+MLT 	at java.base/java.lang.Class.lookupCachedMethod(Class.java:3871)
+MLT 	... 16 more
+MLT Caused by: java.lang.IllegalArgumentException: Can not copy a non-root Method
+MLT 	at java.base/java.lang.reflect.Method.copy(Method.java:158)
+MLT 	... 20 more
+MLT <<<
+MLT 
+```
+
+For example, to rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links:
+03:25:24  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&BUILD_LIST=system/mathLoadTest&PLATFORM=x86-64_linux&TARGET=MathLoadTest_all_special_12

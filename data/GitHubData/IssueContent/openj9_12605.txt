@@ -1,0 +1,98 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk17_j9_sanity.openjdk_aarch64_linux/13/`:
+```
+openjdk version "17" 2021-09-14
+OpenJDK Runtime Environment AdoptOpenJDK-17+18-202104300408 (build 17+18-202104300408)
+Eclipse OpenJ9 VM AdoptOpenJDK-17+18-202104300408 (build master-cc51e1af9, JRE 17 Linux aarch64-64-Bit Compressed References 20210430_37 (JIT enabled, AOT enabled)
+OpenJ9   - cc51e1af9
+OMR      - bb9ac28f7
+JCL      - 1dc21088e3 based on jdk-17+18)
+```
+[Rerun in Grinder](https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?TARGET=jdk_util_1&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;PLATFORM=aarch64_linux&amp;KEEP_REPORTDIR=true&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk%2Fjdk-linux-aarch64-openj9%2F37%2FOpenJDK-jre_aarch64_linux_openj9_2021-04-30-03-59.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk%2Fjdk-linux-aarch64-openj9%2F37%2FOpenJDK-debugimage_aarch64_linux_openj9_2021-04-30-03-59.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk%2Fjdk-linux-aarch64-openj9%2F37%2FOpenJDK-jdk_aarch64_linux_openj9_2021-04-30-03-59.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk%2Fjdk-linux-aarch64-openj9%2F37%2FOpenJDK-testimage_aarch64_linux_openj9_2021-04-30-03-59.tar.gz&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;LIGHT_WEIGHT_CHECKOUT=true&amp;ARTIFACTORY_SERVER=na.artifactory.swg-devops&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=17&amp;USER_CREDENTIALS_ID=&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=&amp;JDK_REPO=https%3A%2F%2Fgithub.com%2Fibmruntimes%2Fopenj9-openjdk-jdk&amp;RELEASE_TAG=&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;UPSTREAM_JOB_NAME=&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=openj9&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=openj9&amp;SSH_AGENT_CREDENTIAL=83181e25-eea4-4f55-8b3e-e79615733226&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=4e18ffe7-b1b1-4272-9979-99769b68bcc2&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=openjdk&amp;UPSTREAM_JOB_NUMBER=&amp;TIME_LIMIT=10&amp;JVM_OPTIONS=&amp;PARALLEL=)
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+[2021-04-30T05:57:26.740Z] Running test jdk_util_1 ...
+[2021-04-30T05:57:26.740Z] ===============================================
+[2021-04-30T05:57:26.740Z] jdk_util_1 Start Time: Fri Apr 30 01:57:25 2021 Epoch Time (ms): 1619762245633
+[2021-04-30T05:57:26.740Z] "/home/jenkins/workspace/Test_openjdk17_j9_sanity.openjdk_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk17_j9_sanity.openjdk_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+[2021-04-30T05:57:26.740Z] JVMSHRC005I No shared class caches available
+[2021-04-30T05:57:26.740Z] JVMSHRC005I No shared class caches available
+[2021-04-30T05:57:26.740Z] cache cleanup done
+[2021-04-30T05:57:26.740Z] variation: -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache Mode650
+[2021-04-30T05:57:26.741Z] JVM_OPTIONS:  -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache -XX:-UseCompressedOops 
+
+[2021-04-30T06:14:55.500Z] --------------------------------------------------
+[2021-04-30T06:14:55.500Z] TEST: java/util/stream/test/org/openjdk/tests/java/util/stream/StreamLinkTest.java
+
+[2021-04-30T06:14:55.508Z] java.lang.StackOverflowError
+[2021-04-30T06:14:55.508Z] 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+[2021-04-30T06:14:55.508Z] 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:78)
+[2021-04-30T06:14:55.508Z] 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+[2021-04-30T06:14:55.508Z] 	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+[2021-04-30T06:14:55.508Z] 	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+[2021-04-30T06:14:55.508Z] 	at java.base/java.util.concurrent.ForkJoinTask.getThrowableException(ForkJoinTask.java:564)
+[2021-04-30T06:14:55.508Z] 	at java.base/java.util.concurrent.ForkJoinTask.reportException(ForkJoinTask.java:591)
+[2021-04-30T06:14:55.508Z] 	at java.base/java.util.concurrent.ForkJoinTask.invoke(ForkJoinTask.java:689)
+[2021-04-30T06:14:55.508Z] 	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateParallel(ReduceOps.java:919)
+[2021-04-30T06:14:55.508Z] 	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:238)
+[2021-04-30T06:14:55.508Z] 	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:682)
+[2021-04-30T06:14:55.508Z] 	at java.base/java.util.stream.StreamTestScenario$17.run(StreamTestScenario.java:208)
+[2021-04-30T06:14:55.508Z] 	at java.base/java.util.stream.StreamTestScenario.run(StreamTestScenario.java:272)
+[2021-04-30T06:14:55.508Z] 	at java.base/java.util.stream.OpTestCase$ExerciseDataStreamBuilder.exercise(OpTestCase.java:404)
+[2021-04-30T06:14:55.508Z] 	at org.openjdk.tests.java.util.stream.StreamLinkTest.testManyStreams(StreamLinkTest.java:56)
+[2021-04-30T06:14:55.508Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-04-30T06:14:55.508Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+[2021-04-30T06:14:55.508Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-04-30T06:14:55.508Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+[2021-04-30T06:14:55.508Z] 	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+[2021-04-30T06:14:55.508Z] 	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+[2021-04-30T06:14:55.508Z] 	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+[2021-04-30T06:14:55.508Z] 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+[2021-04-30T06:14:55.508Z] 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+[2021-04-30T06:14:55.508Z] 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+[2021-04-30T06:14:55.508Z] 	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+[2021-04-30T06:14:55.508Z] 	at org.testng.TestRunner.run(TestRunner.java:623)
+[2021-04-30T06:14:55.508Z] 	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+[2021-04-30T06:14:55.508Z] 	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+[2021-04-30T06:14:55.508Z] 	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+[2021-04-30T06:14:55.508Z] 	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+[2021-04-30T06:14:55.508Z] 	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+[2021-04-30T06:14:55.508Z] 	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+[2021-04-30T06:14:55.508Z] 	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+[2021-04-30T06:14:55.508Z] 	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+[2021-04-30T06:14:55.508Z] 	at org.testng.TestNG.run(TestNG.java:1018)
+[2021-04-30T06:14:55.508Z] 	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+[2021-04-30T06:14:55.508Z] 	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+[2021-04-30T06:14:55.508Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-04-30T06:14:55.508Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+[2021-04-30T06:14:55.508Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-04-30T06:14:55.508Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+[2021-04-30T06:14:55.508Z] 	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+[2021-04-30T06:14:55.508Z] 	at java.base/java.lang.Thread.run(Thread.java:878)
+[2021-04-30T06:14:55.508Z] Caused by: java.lang.StackOverflowError
+[2021-04-30T06:14:55.508Z] 	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+[2021-04-30T06:14:55.508Z] 	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+[2021-04-30T06:14:55.508Z] 	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+[2021-04-30T06:14:55.508Z] 	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+[2021-04-30T06:14:55.508Z] 	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+[2021-04-30T06:14:55.508Z] 	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+[2021-04-30T06:14:55.508Z] 	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+[2021-04-30T06:14:55.508Z] 	at java.base/java.util.stream.Referenc
+
+[2021-04-30T06:14:55.528Z] TEST RESULT: Failed. Execution failed: `main' threw exception: java.lang.Exception: failures: 79
+[2021-04-30T06:14:55.528Z] --------------------------------------------------
+[2021-04-30T06:19:54.638Z] Test results: passed: 884; failed: 1
+[2021-04-30T06:20:08.473Z] Report written to /home/jenkins/workspace/Test_openjdk17_j9_sanity.openjdk_aarch64_linux/jvmtest/openjdk/report/html/report.html
+[2021-04-30T06:20:08.473Z] Results written to /home/jenkins/workspace/Test_openjdk17_j9_sanity.openjdk_aarch64_linux/openjdk-tests/TKG/output_16197582042316/jdk_util_1/work
+[2021-04-30T06:20:08.473Z] Error: Some tests failed or other problems occurred.
+[2021-04-30T06:20:08.473Z] 
+[2021-04-30T06:20:08.473Z] jdk_util_1_FAILED
+```

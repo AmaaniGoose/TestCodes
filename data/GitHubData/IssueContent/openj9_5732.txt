@@ -1,0 +1,50 @@
+> When an allocation causes a GC (an AF) the mutator thread will get exclusiveVMAccess to perform the GC. After the GC is completed the mutator thread will attempt to allocate the object that caused the failure. This allocation is happening while still holding exclusive (??) and it appears the object is fully initialized before we unwindExclusiveVMAccess. In a lot of scenarios AF events are driven by large (or relatively large) array allocations. In my logs you can see that the time to allocate and initialize the object is almost as long as the GC time which is effectively doubling the time exclusiveVMAccess is being held.
+I do not think that we should change the allocation part as I believe that should happen before other threads are allowed to allocate again but maybe the initialization of the object should be moved outside of the exclusiveVMaccess
+
+Example of a verbose stanza
+```
+<exclusive-start id="1066" timestamp="2019-05-10T05:59:29.685" intervalms="841.830">
+  <response-info timems="0.114" idlems="0.114" threads="0" lastid="0000000001C5EA00" lastname="main" />
+</exclusive-start>
+<af-start id="1067" threadId="0000000001C5F388" totalBytesRequested="280364288" timestamp="2019-05-10T05:59:29.686" intervalms="1250.345" type="nursery" />
+<cycle-start id="1068" type="scavenge" contextid="0" timestamp="2019-05-10T05:59:29.686" intervalms="1250.350" />
+<gc-start id="1069" type="scavenge" contextid="1068" timestamp="2019-05-10T05:59:29.686">
+  <mem-info id="1070" free="3051914568" total="4294967296" percent="71">
+    <mem type="nursery" free="99269528" total="1073741824" percent="9">
+      <mem type="allocate" free="99269528" total="660013056" percent="15" />
+      <mem type="survivor" free="0" total="413728768" percent="0" />
+    </mem>
+    <mem type="tenure" free="2952645040" total="3221225472" percent="91">
+      <mem type="soa" free="2791584176" total="3060164608" percent="91" />
+      <mem type="loa" free="161060864" total="161060864" percent="100" />
+    </mem>
+    <remembered-set count="53" />
+  </mem-info>
+</gc-start>
+<allocation-stats totalBytes="560737968" >
+  <allocated-bytes non-tlh="560706664" tlh="31304" />
+  <largest-consumer threadName="main" threadId="0000000001C5EA00" bytes="560737968" />
+</allocation-stats>
+<gc-op id="1071" type="scavenge" timems="83.578" contextid="1068" timestamp="2019-05-10T05:59:29.769">
+  <scavenger-info tenureage="1" tenuremask="7ffe" tiltratio="61" />
+  <memory-copied type="nursery" objects="2" bytes="186909552" bytesdiscarded="23784" />
+</gc-op>
+<gc-end id="1072" type="scavenge" contextid="1068" durationms="83.987" usertimems="336.949" systemtimems="7.999" timestamp="2019-05-10T05:59:29.770" activeThreads="8">
+  <mem-info id="1073" free="3445647704" total="4294967296" percent="80">
+    <mem type="nursery" free="493002664" total="1073741824" percent="45">
+      <mem type="allocate" free="493002664" total="679936000" percent="72" />
+      <mem type="survivor" free="0" total="393805824" percent="0" />
+    </mem>
+    <mem type="tenure" free="2952645040" total="3221225472" percent="91" macro-fragmented="535425129">
+      <mem type="soa" free="2791584176" total="3060164608" percent="91" />
+      <mem type="loa" free="161060864" total="161060864" percent="100" />
+    </mem>
+    <remembered-set count="53" />
+  </mem-info>
+</gc-end>
+<cycle-end id="1074" type="scavenge" contextid="1068" timestamp="2019-05-10T05:59:29.770" />
+<allocation-satisfied id="1075" threadId="0000000001C5EA00" bytesRequested="280364288" />
+<af-end id="1076" timestamp="2019-05-10T05:59:29.816" threadId="0000000001C5F388" success="true" from="nursery"/>
+<exclusive-end id="1077" timestamp="2019-05-10T05:59:29.816" durationms="130.739" />
+```
+>an exclusive time of 130ms and the scavenge only took 83ms. By examining the timestamps you can quickly see that the extra ~50ms is taken in between `cycle-end` and `af-end` and there was an allocation of ~260M that had to be zero'd

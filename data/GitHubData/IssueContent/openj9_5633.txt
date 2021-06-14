@@ -1,0 +1,5 @@
+Compilation threads can get stuck in a recursive loop in this bit of code of debug code:
+
+https://github.com/eclipse/openj9/blob/9c033bd4311a1d2bccad1a5250330ada13f9c550/runtime/compiler/optimizer/FearPointAnalysis.cpp#L178-L197
+
+I see this most often when running the `jit_jitt_0` sanity test. Note that the JIT needs to be built in debug or prod_with_assumes defined for the problematic code to have a chance to run.

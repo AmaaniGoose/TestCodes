@@ -1,0 +1,20 @@
+Consistent failure ...
+
+```
+[2019-03-27T14:35:13.786Z] com.sun.tools.attach.AttachOperationFailedException: AttachOperationFailedException from target: ATTACH_ERR AttachOperationFailedException in startLocalManagementAgent:  startLocalManagementAgent error starting agent:class com.ibm.tools.attach.target.IbmAttachOperationFailedException startLocalManagementAgent cannot access startLocalManagementAgent
+[2019-03-27T14:35:13.786Z] 	at jdk.attach/com.ibm.tools.attach.attacher.OpenJ9VirtualMachine.parseResponse(OpenJ9VirtualMachine.java:335)
+[2019-03-27T14:35:13.786Z] 	at jdk.attach/com.ibm.tools.attach.attacher.OpenJ9VirtualMachine.startLocalManagementAgent(OpenJ9VirtualMachine.java:525)
+[2019-03-27T14:35:13.786Z] 	at GetPackageBootLoaderChildLayer.main(GetPackageBootLoaderChildLayer.java:46)
+[2019-03-27T14:35:13.786Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2019-03-27T14:35:13.786Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2019-03-27T14:35:13.786Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2019-03-27T14:35:13.786Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+[2019-03-27T14:35:13.786Z] 	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+[2019-03-27T14:35:13.786Z] 	at java.base/java.lang.Thread.run(Thread.java:825)
+```
+
+... observed in test https://github.com/ibmruntimes/openj9-openjdk-jdk12/blob/openj9/test/jdk/java/lang/Class/GetPackageBootLoaderChildLayer.java.
+
+See [consoleText.txt](https://github.com/eclipse/openj9/files/3013761/consoleText.txt).
+
+

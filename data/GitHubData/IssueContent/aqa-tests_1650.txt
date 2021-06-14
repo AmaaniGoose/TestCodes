@@ -1,0 +1,36 @@
+Platform: AIX JDK14 (HS and OJ9)
+
+java/net/SocketPermission/SocketPermissionTest.java
+```
+01:13:09  test SocketPermissionTest.joinGroupMulticastTest(): failure
+01:13:09  java.util.NoSuchElementException: No value present
+01:13:09  	at java.base/java.util.Optional.get(Optional.java:141)
+01:13:09  	at SocketPermissionTest.joinGroupMulticastTest(SocketPermissionTest.java:227)
+```
+
+java/nio/channels/DatagramChannel/AfterDisconnect.java
+```
+01:31:02  Test with default
+01:31:02  test AfterDisconnect.execute(): failure
+01:31:02  java.lang.IllegalArgumentException: IPv6 socket cannot join IPv4 multicast group
+01:31:02  	at java.base/sun.nio.ch.DatagramChannelImpl.innerJoin(DatagramChannelImpl.java:1422)
+01:31:02  	at java.base/sun.nio.ch.DatagramChannelImpl.join(DatagramChannelImpl.java:1507)
+01:31:02  	at AfterDisconnect.testMulticastGroups(AfterDisconnect.java:210)
+01:31:02  	at AfterDisconnect.test(AfterDisconnect.java:96)
+01:31:02  	at AfterDisconnect.execute(AfterDisconnect.java:67)
+```
+
+java/nio/channels/DatagramChannel/ChangingAddress.java
+```
+01:31:02  java.lang.RuntimeException: Expected: /129.33.196.209, actual: /0:0:0:0:0:0:0:0
+01:31:02  	at ChangingAddress.check(ChangingAddress.java:43)
+01:31:02  	at ChangingAddress.main(ChangingAddress.java:65)
+01:31:02  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+01:31:02  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+01:31:02  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+01:31:02  	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+01:31:02  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+01:31:02  	at java.base/java.lang.Thread.run(Thread.java:832)
+```
+
+Going to investigate, occurs on all machines but we don't have many AIX boxes so could be a setup issue with the networking configurations/playbooks. Couldn't find any bug reports on JBS which is why I believe to be a problem with our infra

@@ -1,0 +1,47 @@
+Failing JTReg test https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/965d0c0df359f3da224b865701bbcc044b7104c2/test/jdk/java/lang/StackWalker/VerifyStackTrace.java#L1 for JDK11 and JDK13 on all platforms (hotspot unaffected).
+- category, openjdk
+
+Output (JDK11)
+-------
+```
+STDERR:
+15:19:46  
+15:19:46  Unexpected stack trace: 
+15:19:46  <!-- expected -->
+15:19:46  1: VerifyStackTrace.lambda$test$??(VerifyStackTrace.java:00)
+15:19:46  2: VerifyStackTrace$Handle.execute(VerifyStackTrace.java:00)
+15:19:46  3: VerifyStackTrace$Handle.run(VerifyStackTrace.java:00)
+15:19:46  4: VerifyStackTrace.invoke(VerifyStackTrace.java:00)
+15:19:46  5: VerifyStackTrace$??.run(VerifyStackTrace.java:00)
+15:19:46  6: java.base/java.security.AccessController.doPrivileged(Native Method)
+15:19:46  7: VerifyStackTrace.test(VerifyStackTrace.java:00)
+15:19:46  8: VerifyStackTrace.main(VerifyStackTrace.java:00)
+15:19:46  
+15:19:46  <--  actual -->
+15:19:46  1: VerifyStackTrace.lambda$test$1(VerifyStackTrace.java:249)
+15:19:46  2: VerifyStackTrace$Handle.execute(VerifyStackTrace.java:175)
+15:19:46  3: VerifyStackTrace$Handle.run(VerifyStackTrace.java:188)
+15:19:46  4: VerifyStackTrace.invoke(VerifyStackTrace.java:228)
+15:19:46  5: VerifyStackTrace$1.run(VerifyStackTrace.java:261)
+15:19:46  6: java.base/java.security.AccessController.doPrivileged(AccessController.java:678)
+15:19:46  7: VerifyStackTrace.test(VerifyStackTrace.java:270)
+15:19:46  8: VerifyStackTrace.main(VerifyStackTrace.java:221)
+15:19:46  
+15:19:46  java.lang.RuntimeException: Unexpected stack trace  for: StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE)
+15:19:46  	at VerifyStackTrace.test(VerifyStackTrace.java:285)
+15:19:46  	at VerifyStackTrace.main(VerifyStackTrace.java:221)
+15:19:46  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:19:46  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+15:19:46  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:19:46  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+15:19:46  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+15:19:46  	at java.base/java.lang.Thread.run(Thread.java:831)
+15:19:46  
+15:19:46  JavaTest Message: Test threw exception: java.lang.RuntimeException: Unexpected stack trace  for: StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE)
+15:19:46  JavaTest Message: shutting down test
+15:19:46  
+15:19:46  STATUS:Failed.`main' threw exception: java.lang.RuntimeException: Unexpected stack trace for: StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE)
+```
+Summary
+---------
+Test is failing at [#272](https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/965d0c0df359f3da224b865701bbcc044b7104c2/test/jdk/java/lang/StackWalker/VerifyStackTrace.java#L272) for each case. `TestCase1` and `TestCase2` both fail in similar ways (see lines 1 and 6 of the stack trace above). Bypassing those with the [instructions](https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/965d0c0df359f3da224b865701bbcc044b7104c2/test/jdk/java/lang/StackWalker/VerifyStackTrace.java#L60) on the test revealed showed `TestCase3` to have 2 fewer stack elements (both relating to `lambda` expressions) than the expected output.

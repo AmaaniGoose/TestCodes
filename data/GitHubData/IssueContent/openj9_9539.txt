@@ -1,0 +1,35 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk14_j9_extended.functional_x86-64_linux_cm_Nightly/3`:
+```
+21:52:39  openjdk version "14.0.1-internal" 2020-04-14
+21:52:39  OpenJDK Runtime Environment (build 14.0.1-internal+0-adhoc.jenkins.BuildJDK14x86-64linuxcmNightly)
+21:52:39  Eclipse OpenJ9 VM (build ibm_sdk-3abfb62305, JRE 14 Linux amd64-64-Bit Compressed References 20200511_3 (JIT enabled, AOT enabled)
+21:52:39  OpenJ9   - 3abfb62305
+21:52:39  OMR      - 295075ec1
+21:52:39  JCL      - ea8cbb81576 based on jdk-14.0.1+7)
+```
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+testDDRExt_General_openj9_0
+===============================================
+Running test testDDRExt_General_openj9_0 ...
+===============================================
+testDDRExt_General_openj9_0 Start Time: Mon May 11 21:06:51 2020 Epoch Time (ms): 1589256411589
+variation: NoOptions
+JVM_OPTIONS:  
+Buildfile: /home/jenkins/workspace/Test_openjdk14_j9_extended.functional_x86-64_linux_cm_Nightly/openjdk-tests/TKG/../../jvmtest/functional/DDR_Test/tck_ddrext.xml does not exist!
+Build failed
+
+testDDRExt_General_openj9_0_FAILED
+```
+For example, to rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links:
+https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=14&JDK_IMPL=openj9&BUILD_LIST=functional&PLATFORM=x86-64_linux&TARGET=testDDRExt_General_openj9_0

@@ -1,0 +1,44 @@
+Failure link
+------------
+- Test: https://github.com/ibmruntimes/openj9-openjdk-jdk13/blob/openj9/test/jdk/java/rmi/activation/Activatable/checkAnnotations/CheckAnnotations.java
+- Build: https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk13_j9_sanity.openjdk_x86-64_windows/19/
+- Test Category: openjdk
+- Test Suite Name: jdk_rmi
+- OS/Architecture: x64_windows
+- OpenJDK Version: 13+30
+- Public Build SHAs:
+- OpenJ9 - `41360de87`
+- OMR - `6e99760b`
+- JCL - `2337332cb3`
+
+Optional info
+-------------
+- Intermittent failure: No 
+- Regression or new test: Regression
+- Test seems to iterate through the for loop (CheckAnotations.java:112) once and fail in the second loop, when it tries do `myRMI.printOut(OUT + iteration);`
+
+Failure output (captured from console output)
+---------------------------------------------
+From STDERR:
+```
+08:25:04  Create activation group in this VM
+08:25:04  errXYZ-1
+08:25:04  errXYZ-1
+08:25:04  rmid output not yet received, retrying...
+08:25:04  rmid output not yet received, retrying...
+08:25:04  rmid output not yet received, retrying...
+08:25:04  rmid output not yet received, retrying...
+08:25:04  rmid output not yet received, retrying...
+08:25:04  Deactivate object via method call
+08:25:04  ACTIVATION_LIBRARY: inactive successful
+08:25:04  TEST FAILED: 
+08:25:04  Test failed with: activation failed; nested exception is: 
+08:25:04  	java.rmi.activation.ActivationException: timeout creating child process
+08:25:04  java.rmi.activation.ActivateFailedException: activation failed; nested exception is: 
+08:25:04  	java.rmi.activation.ActivationException: timeout creating child process
+08:25:04  	at java.rmi/sun.rmi.server.ActivatableRef.activate(ActivatableRef.java:303)
+08:25:04  	at java.rmi/sun.rmi.server.ActivatableRef.invoke(ActivatableRef.java:209)
+08:25:04  	at CheckAnnotations_Stub.printOut(CheckAnnotations_Stub.java:107)
+08:25:04  	at CheckAnnotations.checkAnnotations(CheckAnnotations.java:162)
+08:25:04  	at CheckAnnotations.main(CheckAnnotations.java:115)
+```

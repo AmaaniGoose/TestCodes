@@ -1,0 +1,8 @@
+```
+fatal: [build-scaleway-ubuntu1604-armv7-1]: FAILED! => {"changed": false, "cmd": "dphys-swapfile uninstall", "failed": true, "msg": "[Errno 2] No such file or directory", "rc": 2}
+...ignoring
+skipping: [test-softlayer-rhel74-x64-1]
+fatal: [build-scaleway-ubuntu1604-armv7-2]: FAILED! => {"changed": false, "cmd": "dphys-swapfile uninstall", "failed": true, "msg": "[Errno 2] No such file or directory", "rc": 2}
+```
+https://ci.adoptopenjdk.net/computer/build-scaleway-armv7-ubuntu16-04-1/
+https://ci.adoptopenjdk.net/computer/build-scaleway-armv7-ubuntu16-04-2/

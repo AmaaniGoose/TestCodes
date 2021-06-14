@@ -1,0 +1,7 @@
+Proposed in https://github.com/eclipse/openj9/pull/11662#discussion_r563879944.
+
+For several libraries (those split into regular/compressed and full for mixed references builds), there exists a pattern to declare one (regular lib) or two versions (regular/compressed and full) of the library depending on `OMR_MIXED_REFERENCES_MODE_STATIC`.
+
+Since this pattern exists in many CMake files, it would be cleaner to write a function to encapsulate the splitting.
+
+More mixed builds discussion: #8878.

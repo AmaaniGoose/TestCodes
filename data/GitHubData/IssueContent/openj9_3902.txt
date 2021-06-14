@@ -1,0 +1,29 @@
+Thanks to @cwesMills for not only adding new docker containers but also automating the process of keeping them up to date. We have started pushing them to Docker Hub. Once they are all there and tested, we should start enabling them on [Jenkins](https://ci.eclipse.org/openj9/).
+
+### Current VMs we use
+#### x86
+- 6x Ubuntu 16
+#### ppc64le
+- 4x Ubuntu 16
+#### s390x
+- 4x Ubuntu 16
+
+### Available containers
+#### x86
+- Cent 6.9 Build & Test
+- Ubuntu 16 Test only
+- Ubuntu 18 Test only
+#### ppc64le
+- Cent 7 Build & Test
+- Ubuntu 16 Test only
+- Ubuntu 18 test only
+#### s390x
+- Ubuntu 16 Build & Test
+- Ubuntu 18 Test only
+
+### Questions
+- Perf impact for multiple build or multiple test containers (or a combination of the two) running on the same host. To be investigated by @AdamBrousseau or @cwesMills once we start testing the waters. We have numbers from internal investigations which we can use as a reference.
+- Is there concern from Dev or Test (cc @smlambert @llxia ) if we only run compiles and/or tests in containers. Ex. If we wanted to switch x86 compiles to Cent6, we would only be able to compile in containers as the VMs are UB16.
+- Depending on the answer to the previous question, how many vms should we leave as agents and how many should we allocate to "docker cloud".
+- ~How do we connect the Master to the each Cloud (master is behind a proxy)~ Master is no longer behind build.eclipse.org on the OpenShift infra (https://bugs.eclipse.org/bugs/show_bug.cgi?id=553549#c4)
+- ~How do we connect the Master to each Agent (master is behind a proxy)~

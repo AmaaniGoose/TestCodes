@@ -1,0 +1,21 @@
+This is a general issue to track failure in Test_openjdk11_j9_extended.openjdk_x86-64_linux_Nightly (at internal Jenkins)
+
+- jvm_native_sanity_0
+- jvm_compiler_0
+- runtime_nestmate_0
+- jdk_awt_0
+- jdk_beans_0
+- jdk_security3_0
+- jdk_security4_0
+- jdk_time_0
+- jdk_management_0
+- jdk_jmx_0
+- jdk_tools_0
+- jdk_instrument_0
+- build_0
+- jdk_client_sanity_0
+- jdk_security_infra_0
+- jdk_2d_0
+- jfc_demo_0
+
+The plan is to disable them to get a green build, so we can have a baseline. And we will investigate/triage the failure.

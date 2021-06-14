@@ -1,0 +1,18 @@
+Trying to run `make test` in openj9/test/TestConfig I get a high cpu hang during
+```
+compile:
+     [echo] Ant version is Apache Ant(TM) version 1.9.6 compiled on July 8 2015
+     [echo] ============COMPILER SETTINGS============
+     [echo] ===fork:				yes
+     [echo] ===executable:			/cardhu5/seagate/sdks/travis-jdk/jdk/bin/javac
+     [echo] ===debug:				on
+     [echo] ===destdir:				/cardhu5/seagate/arm/tests/openj9/test/TestConfig/../../jvmtest/Jsr292
+    [javac] Compiling 70 source files to /cardhu5/seagate/arm/tests/openj9/test/Jsr292/bin
+```
+ps shows
+```
+0 S jkingdon 22099 21604 99  80   0 - 145714 futex_ 10:11 pts/0   00:54:40 /cardhu5/seagate/sdks/travis-jdk/jdk/bin/javac -d /cardhu5/seagate/arm/tests/openj9/test/Jsr292/bin -classpath /cardhu5/seagate/arm/tests/openj9/test/Jsr292/bin:/cardhu5/seagate/arm/tests/openj9/test/Jsr292/bootstrap_bin:/cardhu5/seagate/arm/tests/openj9/test/TestConfig/lib/asm-all.jar:/cardhu5/seagate/arm/tests/openj9/test/TestConfig/lib/junit4.jar:/cardhu5/seagate/arm/tests/openj9/test/TestConfig/lib/testng.jar:/cardhu5/seagate/arm/tests/openj9/test/TestConfig/lib/jcommander.jar -sourcepath /cardhu5/seagate/arm/tests/openj9/test/Jsr292/src:/cardhu5/seagate/arm/tests/openj9/test/Utils/src -encoding ISO-8859-1 -g @/tmp/files2874207937784958340
+```
+I wasn't able to get javacores from this process for some reason.
+
+Build used: https://github.com/JamesKingdon/openj9-openjdk-jdk9/releases/tag/20180209031853-6e05d366

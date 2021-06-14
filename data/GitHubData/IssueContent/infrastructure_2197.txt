@@ -1,0 +1,10 @@
+Access level:
+
+- [X] Non-privileged
+- [ ] jenkins user
+- [ ] root/Administrative
+- [ ] other (Please specify):
+
+System for which access is needed: test-ibm-aix71-ppc64-1.
+
+I'm trying to create a standalone test case for https://github.com/adoptium/aqa-tests/issues/2535, which is AIX specific, so would like access to test the test case.

@@ -1,0 +1,8 @@
+Several tests need to know the platform (usually z/OS or Windows) and the Java version (often Java 8 vs. later).  There are multiple implementations of isJava8() already.
+
+Suggest creating a common class in TestUtilities, e.g. org.openj9.test.util.PlatformInfo
+with (initially)
+static boolean [isWindows(), isZos(), isJava8()].
+The code for these can be lifted from existing sources.
+
+@smlambert @llxia your thoughts?

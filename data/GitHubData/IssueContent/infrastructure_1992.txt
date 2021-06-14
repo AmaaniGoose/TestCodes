@@ -1,0 +1,226 @@
+s390x_linux extended.openjdk target jdk_other fails with
+```
+javax.naming.CommunicationException: DNS error [Root exception is java.net.SocketException: No route to host (Receive failed)]; remaining name ''
+```
+
+Example failing job: https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_extended.openjdk_s390x_linux/9/consoleFull
+
+Looks like it occurs on both hotspot and openj9, all releases and all s390x machines - so I'm guessing it's a machine setup issue on the marist machines.
+
+To rerun the test: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=16&JDK_IMPL=openj9&JDK_VENDOR=adoptopenjdk&BUILD_LIST=openjdk&PLATFORM=s390x_linux_mixed&TARGET=jdk_other_1
+
+Full output of failing test:
+```
+11:11:11  ===============================================
+11:11:11  Running test jdk_other_1 ...
+11:11:11  ===============================================
+11:11:11  jdk_other_1 Start Time: Mon Mar  1 11:11:01 2021 Epoch Time (ms): 1614597061159
+11:11:11  "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+11:11:11  JVMSHRC005I No shared class caches available
+11:11:11  JVMSHRC005I No shared class caches available
+11:11:11  cache cleanup done
+11:11:11  variation: Mode650
+11:11:11  JVM_OPTIONS:  -XX:-UseCompressedOops 
+11:11:11  { itercnt=1; \
+11:11:11  mkdir -p "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/../TKG/output_16145965772431/jdk_other_1"; \
+11:11:11  cd "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/../TKG/output_16145965772431/jdk_other_1"; \
+11:11:11  "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/java" -Xmx512m -jar "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/../../jvmtest/openjdk/jtreg/lib/jtreg.jar" \
+11:11:11  -agentvm -a -ea -esa -v:fail,error,time,nopass -retain:fail,error,*.dmp,javacore.*,heapdump.*,*.trc -ignore:quiet -timeoutFactor:8 -xml:verify -concurrency:2 -vmoptions:"-Xmx512m  -XX:-UseCompressedOops " \
+11:11:11  -w ""/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/../TKG/output_16145965772431/jdk_other_1"/work" \
+11:11:11  -r "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/../../jvmtest/openjdk/report" \
+11:11:11  -jdk:"/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image" \
+11:11:11  -exclude:"/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/../openjdk/openjdk-jdk/test/jdk/ProblemList.txt" \
+11:11:11  -exclude:"/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/../../jvmtest/openjdk/ProblemList_openjdk16-openj9.txt" \
+11:11:11  "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/../openjdk/openjdk-jdk/test/jdk:jdk_other"; \
+11:11:11  if [ $? -eq 0 ] ; then echo ""; echo "jdk_other_1""_PASSED"; echo ""; cd /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/..;  else echo ""; echo "jdk_other_1""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/../TKG/output_16145965772431/TestTargetResult";
+11:11:11  Directory "/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/../TKG/output_16145965772431/jdk_other_1/work" not found: creating
+11:11:11  XML output with verification to /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work
+11:11:17  --------------------------------------------------
+11:11:17  TEST: com/sun/jndi/dns/ConfigTests/Timeout.java
+11:11:17  TEST JDK: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image
+11:11:17  
+11:11:17  ACTION: build -- Passed. Build successful
+11:11:17  REASON: Named class compiled on demand
+11:11:17  TIME:   0.427 seconds
+11:11:17  messages:
+11:11:17  command: build Timeout
+11:11:17  reason: Named class compiled on demand
+11:11:17  Test directory:
+11:11:17    compile: Timeout
+11:11:17  elapsed time (seconds): 0.427
+11:11:17  
+11:11:17  ACTION: compile -- Passed. Compilation successful
+11:11:17  REASON: .class file out of date or does not exist
+11:11:17  TIME:   0.427 seconds
+11:11:17  messages:
+11:11:17  command: compile /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/ConfigTests/Timeout.java
+11:11:17  reason: .class file out of date or does not exist
+11:11:17  Additional options from @modules: --add-modules java.base --add-exports java.base/sun.security.util=ALL-UNNAMED
+11:11:17  Mode: agentvm
+11:11:17  Agent id: 2
+11:11:17  elapsed time (seconds): 0.427
+11:11:17  configuration:
+11:11:17  Boot Layer (javac runtime environment)
+11:11:17    class path: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/jvmtest/openjdk/jtreg/lib/javatest.jar 
+11:11:17                /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+11:11:17    patch:      java.base /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/patches/java.base
+11:11:17  
+11:11:17  javac compilation environment
+11:11:17    add modules: java.base                   
+11:11:17    add exports: java.base/sun.security.util ALL-UNNAMED
+11:11:17    source path: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/ConfigTests 
+11:11:17                 /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/lib 
+11:11:17    class path:  /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/ConfigTests 
+11:11:17                 /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/classes/1/com/sun/jndi/dns/ConfigTests/Timeout.d 
+11:11:17                 /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/classes/1/com/sun/jndi/dns/lib 
+11:11:17  
+11:11:17  rerun:
+11:11:17  cd /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/scratch/1 && \
+11:11:17  DISPLAY=:0 \
+11:11:17  HOME=/home/jenkins \
+11:11:17  LANG=en_US.UTF-8 \
+11:11:17  PATH=/bin:/usr/bin:/usr/sbin \
+11:11:17      /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/javac \
+11:11:17          -J-ea \
+11:11:17          -J-esa \
+11:11:17          -J-Xmx512m \
+11:11:17          -J-XX:-UseCompressedOops \
+11:11:17          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:-UseCompressedOops' \
+11:11:17          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:-UseCompressedOops' \
+11:11:17          -J-Dtest.compiler.opts= \
+11:11:17          -J-Dtest.java.opts= \
+11:11:17          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image \
+11:11:17          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image \
+11:11:17          -J-Dtest.timeout.factor=8.0 \
+11:11:17          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+11:11:17          -J-Dtest.name=com/sun/jndi/dns/ConfigTests/Timeout.java \
+11:11:17          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/ConfigTests/Timeout.java \
+11:11:17          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/ConfigTests \
+11:11:17          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/ConfigTests:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/lib \
+11:11:17          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/classes/1/com/sun/jndi/dns/ConfigTests/Timeout.d \
+11:11:17          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/classes/1/com/sun/jndi/dns/ConfigTests/Timeout.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/classes/1/com/sun/jndi/dns/lib \
+11:11:17          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/classes/1/com/sun/jndi/dns/ConfigTests/Timeout.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/ConfigTests:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/classes/1/com/sun/jndi/dns/lib \
+11:11:17          -J-Dtest.modules=java.base/sun.security.util \
+11:11:17          --add-modules java.base \
+11:11:17          --add-exports java.base/sun.security.util=ALL-UNNAMED \
+11:11:17          -d /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/classes/1/com/sun/jndi/dns/ConfigTests/Timeout.d \
+11:11:17          -sourcepath /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/ConfigTests:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/lib \
+11:11:17          -classpath /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/ConfigTests:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/classes/1/com/sun/jndi/dns/ConfigTests/Timeout.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/classes/1/com/sun/jndi/dns/lib /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/ConfigTests/Timeout.java
+11:11:17  direct:
+11:11:17  /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/lib/DNSTracer.java:24: warning: HexDumpEncoder is internal proprietary API and may be removed in a future release
+11:11:17  import sun.security.util.HexDumpEncoder;
+11:11:17                          ^
+11:11:17  /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/lib/DNSServer.java:24: warning: HexDumpEncoder is internal proprietary API and may be removed in a future release
+11:11:17  import sun.security.util.HexDumpEncoder;
+11:11:17                          ^
+11:11:17  /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/lib/DNSTracer.java:53: warning: HexDumpEncoder is internal proprietary API and may be removed in a future release
+11:11:17      static HexDumpEncoder encoder = new HexDumpEncoder();
+11:11:17             ^
+11:11:17  /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/lib/DNSTracer.java:53: warning: HexDumpEncoder is internal proprietary API and may be removed in a future release
+11:11:17      static HexDumpEncoder encoder = new HexDumpEncoder();
+11:11:17                                          ^
+11:11:17  /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/lib/DNSServer.java:85: warning: HexDumpEncoder is internal proprietary API and may be removed in a future release
+11:11:17      static HexDumpEncoder encoder = new HexDumpEncoder();
+11:11:17             ^
+11:11:17  /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/lib/DNSServer.java:85: warning: HexDumpEncoder is internal proprietary API and may be removed in a future release
+11:11:17      static HexDumpEncoder encoder = new HexDumpEncoder();
+11:11:17                                          ^
+11:11:17  6 warnings
+11:11:17  
+11:11:17  ACTION: main -- Failed. Execution failed: `main' threw exception: javax.naming.CommunicationException: DNS error [Root exception is java.net.NoRouteToHostException: No route to host]; remaining name ''
+11:11:17  REASON: User specified action: run main Timeout 
+11:11:17  TIME:   2.568 seconds
+11:11:17  messages:
+11:11:17  command: main Timeout
+11:11:17  reason: User specified action: run main Timeout 
+11:11:17  Mode: agentvm
+11:11:17  Agent id: 4
+11:11:17  Additional exports to unnamed modules from @modules: java.base/sun.security.util
+11:11:17  elapsed time (seconds): 2.568
+11:11:17  configuration:
+11:11:17  Boot Layer
+11:11:17    class path: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/jvmtest/openjdk/jtreg/lib/javatest.jar 
+11:11:17                /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+11:11:17                /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/jvmtest/openjdk/jtreg/lib/junit.jar 
+11:11:17                /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/jvmtest/openjdk/jtreg/lib/testng.jar 
+11:11:17                /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/jvmtest/openjdk/jtreg/lib/jcommander.jar 
+11:11:17    patch:      java.base /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/patches/java.base
+11:11:17  
+11:11:17  Test Layer
+11:11:17    add exports: java.base/sun.security.util ALL-UNNAMED
+11:11:17    class path:  /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/classes/1/com/sun/jndi/dns/ConfigTests/Timeout.d 
+11:11:17                 /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/ConfigTests 
+11:11:17                 /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/classes/1/com/sun/jndi/dns/lib 
+11:11:17                 /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/lib 
+11:11:17  
+11:11:17  rerun:
+11:11:17  cd /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/scratch/1 && \
+11:11:17  DISPLAY=:0 \
+11:11:17  HOME=/home/jenkins \
+11:11:17  LANG=en_US.UTF-8 \
+11:11:17  PATH=/bin:/usr/bin:/usr/sbin \
+11:11:17      /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image/bin/java \
+11:11:17          -Dtest.vm.opts='-ea -esa -Xmx512m -XX:-UseCompressedOops' \
+11:11:17          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:-UseCompressedOops' \
+11:11:17          -Dtest.compiler.opts= \
+11:11:17          -Dtest.java.opts= \
+11:11:17          -Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image \
+11:11:17          -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdkbinary/j2sdk-image \
+11:11:17          -Dtest.timeout.factor=8.0 \
+11:11:17          -Dtest.root=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+11:11:17          -Dtest.name=com/sun/jndi/dns/ConfigTests/Timeout.java \
+11:11:17          -Dtest.file=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/ConfigTests/Timeout.java \
+11:11:17          -Dtest.src=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/ConfigTests \
+11:11:17          -Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/ConfigTests:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/lib \
+11:11:17          -Dtest.classes=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/classes/1/com/sun/jndi/dns/ConfigTests/Timeout.d \
+11:11:17          -Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/classes/1/com/sun/jndi/dns/ConfigTests/Timeout.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/classes/1/com/sun/jndi/dns/lib \
+11:11:17          -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/classes/1/com/sun/jndi/dns/ConfigTests/Timeout.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/ConfigTests:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/classes/1/com/sun/jndi/dns/lib \
+11:11:17          -Dtest.modules=java.base/sun.security.util \
+11:11:17          -classpath /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/classes/1/com/sun/jndi/dns/ConfigTests/Timeout.d:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/ConfigTests:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work/classes/1/com/sun/jndi/dns/lib:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jndi/dns/lib:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+11:11:17          Timeout
+11:11:17  STDERR:
+11:11:17  javax.naming.CommunicationException: DNS error [Root exception is java.net.NoRouteToHostException: No route to host]; remaining name ''
+11:11:17  	at jdk.naming.dns/com.sun.jndi.dns.DnsClient.query(DnsClient.java:316)
+11:11:17  	at jdk.naming.dns/com.sun.jndi.dns.Resolver.query(Resolver.java:81)
+11:11:17  	at jdk.naming.dns/com.sun.jndi.dns.DnsContext.c_getAttributes(DnsContext.java:434)
+11:11:17  	at java.naming/com.sun.jndi.toolkit.ctx.ComponentDirContext.p_getAttributes(ComponentDirContext.java:235)
+11:11:17  	at java.naming/com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.getAttributes(PartialCompositeDirContext.java:141)
+11:11:17  	at java.naming/com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.getAttributes(PartialCompositeDirContext.java:129)
+11:11:17  	at java.naming/javax.naming.directory.InitialDirContext.getAttributes(InitialDirContext.java:171)
+11:11:17  	at java.naming/javax.naming.directory.InitialDirContext.getAttributes(InitialDirContext.java:166)
+11:11:17  	at Timeout.runTest(Timeout.java:78)
+11:11:17  	at TestBase.launch(TestBase.java:82)
+11:11:17  	at TestBase.run(TestBase.java:50)
+11:11:17  	at Timeout.main(Timeout.java:61)
+11:11:17  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+11:11:17  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+11:11:17  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+11:11:17  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+11:11:17  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+11:11:17  	at java.base/java.lang.Thread.run(Thread.java:853)
+11:11:17  Caused by: java.net.NoRouteToHostException: No route to host
+11:11:17  	at java.base/sun.nio.ch.DatagramChannelImpl.receive0(Native Method)
+11:11:17  	at java.base/sun.nio.ch.DatagramChannelImpl.receiveIntoNativeBuffer(DatagramChannelImpl.java:747)
+11:11:17  	at java.base/sun.nio.ch.DatagramChannelImpl.receive(DatagramChannelImpl.java:725)
+11:11:17  	at java.base/sun.nio.ch.DatagramChannelImpl.trustedBlockingReceive(DatagramChannelImpl.java:703)
+11:11:17  	at java.base/sun.nio.ch.DatagramChannelImpl.blockingReceive(DatagramChannelImpl.java:630)
+11:11:17  	at java.base/sun.nio.ch.DatagramSocketAdaptor.receive(DatagramSocketAdaptor.java:239)
+11:11:17  	at java.base/java.net.DatagramSocket.receive(DatagramSocket.java:567)
+11:11:17  	at jdk.naming.dns/com.sun.jndi.dns.DnsClient.doUdpQuery(DnsClient.java:426)
+11:11:17  	at jdk.naming.dns/com.sun.jndi.dns.DnsClient.query(DnsClient.java:214)
+11:11:17  	... 17 more
+11:11:17  
+11:11:17  JavaTest Message: Test threw exception: javax.naming.CommunicationException
+11:11:17  JavaTest Message: shutting down test
+11:11:17  
+11:11:17  STDOUT:
+11:11:17  Skip local DNS Server creation 
+11:11:17  
+11:11:17  TEST RESULT: Failed. Execution failed: `main' threw exception: javax.naming.CommunicationException: DNS error [Root exception is java.net.NoRouteToHostException: No route to host]; remaining name ''
+11:11:17  --------------------------------------------------
+11:14:34  Test results: passed: 260; failed: 1
+11:14:34  Report written to /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/jvmtest/openjdk/report/html/report.html
+11:14:34  Results written to /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_s390x_linux/openjdk-tests/TKG/output_16145965772431/jdk_other_1/work
+11:14:34  Error: Some tests failed or other problems occurred.
+11:14:34  
+11:14:34  jdk_other_1_FAILED```

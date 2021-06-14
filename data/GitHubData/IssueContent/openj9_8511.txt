@@ -1,0 +1,42 @@
+Failure link
+------------
+
+From an internal build:
+```
+23:15:22  openjdk version "11.0.7-internal" 2020-04-14
+23:15:22  OpenJDK Runtime Environment (build 11.0.7-internal+0-adhoc.jenkins.BuildJDK11x86-64macNightly)
+23:15:22  Eclipse OpenJ9 VM (build ibm_sdk-479247ea9a, JRE 11 Mac OS X amd64-64-Bit Compressed References 20200204_307 (JIT enabled, AOT enabled)
+23:15:22  OpenJ9   - 479247ea9a
+23:15:22  OMR      - b6a8e9309
+23:15:22  JCL      - 54c0ee734c2 based on jdk-11.0.7+1)
+```
+
+Optional info
+-------------
+
+To rebuild the failed tests in <Jenkins URL>=https://ci.adoptopenjdk.net/job/Grinder, use the following links:
+00:37:39  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&BUILD_LIST=functional&PLATFORM=x86-64_mac&TARGET=testSCCacheManagement_0
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+23:24:42  There was 1 error:
+23:24:42  1) testCacheCreationListingDestroying02(tests.sharedclasses.options.junit.TestOptionsDefault)tests.sharedclasses.TestFailedException: Error: should never hit this code.
+23:24:42  	at tests.sharedclasses.TestUtils.fail(TestUtils.java:598)
+23:24:42  	at tests.sharedclasses.TestUtils.getCacheFileName(TestUtils.java:705)
+23:24:42  	at tests.sharedclasses.TestUtils.getCacheFileLocationForPersistentCache(TestUtils.java:570)
+23:24:42  	at tests.sharedclasses.TestUtils.checkNoFileForPersistentCache(TestUtils.java:851)
+23:24:42  	at tests.sharedclasses.options.TestCacheCreationListingDestroying02.main(TestCacheCreationListingDestroying02.java:95)
+23:24:42  	at tests.sharedclasses.options.junit.TestOptionsBase.testCacheCreationListingDestroying02(TestOptionsBase.java:34)
+23:24:42  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+23:24:42  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+23:24:42  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+23:24:42  
+23:24:42  FAILURES!!!
+23:24:42  Tests run: 168,  Failures: 0,  Errors: 1
+23:24:42  
+23:24:42  
+23:24:42  testSCCacheManagement_0_FAILED
+23:24:42  
+```

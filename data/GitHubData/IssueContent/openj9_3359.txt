@@ -1,0 +1,10 @@
+When building OpenJ9 JDK8, the following compiler warnings were seen for the JIT code:
+
+- `warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]` **[Count = 23]**
+- `warning: converting to non-pointer type 'uint32_t {aka unsigned int}' from NULL [-Wconversion-null]` **[Count = 4]**
+- `J9SymbolReferenceTable.cpp:1375:42: warning: NULL used in arithmetic [-Wpointer-arith]` **[Count = 1]**
+- `omr/compiler/infra/Assert.cpp:171:7: warning: 'noreturn' function does return` **[Count = 1]**
+
+Detailed information about the above warnings: [compiler_warnings.log](https://github.com/eclipse/openj9/files/2493311/compiler_warnings.log).
+
+Warnings are treated as errors when building OpenJ9. Not sure if it applies to the JIT. If it applies to the JIT, we should look into fixing the above warnings. This is not urgent since the feature to treat warnings as errors can be disabled.

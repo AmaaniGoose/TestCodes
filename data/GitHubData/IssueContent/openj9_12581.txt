@@ -1,0 +1,11 @@
+Prototype changes in Value Propagation proposed in pull request #12467 check whether a value used in a comparison operation or the component type of an array might be a value type.  Those checks are performed in the `isValue` static function and `J9::ValuePropagation::isArrayCompTypeValueType` method.
+
+One test that appears in both places is a check of whether the type is a concrete class (not an interface nor abstract).  However, some abstract classes cannot be superclasses of value type classes.  It is expected that the JVM will have such classes implement the `java/lang/IdentityObject` interface.
+
+Once that happens, the implementations of `isValue` and `J9::ValuePropagation::isArrayCompTypeValueType` can check whether the type implements the `java/lang/IdentityObject` interface to rule out such values as possibly referring to instances of value type classes.
+
+This change depends on the following issues and pull request:
+
+- [ ] [Valhalla: Value type abstract super classes](https://github.com/eclipse/openj9/issues/12039)
+- [ ] [ValueType: helper to determine if J9Class can refer to a valuetype](https://github.com/eclipse/openj9/issues/9631)
+- [ ] [Look for opportunities in Value Propagation to replace nonhelper and helper calls for value type support with inline IL](https://github.com/eclipse/openj9/pull/12467)

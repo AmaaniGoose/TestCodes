@@ -1,0 +1,1 @@
+There are a number of places that use an OPENJ9_BUILD flag to control behavior. As the entire project is OpenJ9, this is not appropriate. If different behavior is desired for downstream builds, extension points should be added to easily allow this, or the downstream builds can modify the code as desired.

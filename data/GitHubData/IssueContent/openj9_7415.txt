@@ -1,0 +1,3 @@
+- add more tracepoints to decompilation
+- commit test fix which records decompilation stacks (under option)
+- deal with OOM in exception catch

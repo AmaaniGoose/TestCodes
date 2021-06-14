@@ -1,0 +1,19 @@
+We are investigating a `java/nio/channels/ClosedByInterruptException` issue where seemingly our application doesn't correctly handle all instances of such exceptions; however, if we enable too much trace, the problem is avoided. What we've been doing is using `-Xdump:stack:events=throw+systhrow,filter=java/nio/channels/ClosedByInterruptException` to tell us all the exceptions that happen and then a lightweight application trace to try to understand what went wrong in the unhandled cases. However, there is ambiguity in the JVM message because we don't know if the same exception instance is re-thrown or if it's a different one because some timestamps overlap:
+
+```
+JVMDUMP039I Processing dump event "throw", detail "java/nio/channels/ClosedByInterruptException" at 2020/04/13 10:51:17 - please wait.
+Thread=pool-12-thread-34 (00007F9AF2278C40) Status=Running
+	at java/nio/channels/spi/AbstractInterruptibleChannel.end(Z)V (AbstractInterruptibleChannel.java:220) (Compiled Code) [...]
+
+JVMDUMP039I Processing dump event "throw", detail "java/nio/channels/ClosedByInterruptException" at 2020/04/13 10:51:17 - please wait.
+Thread=pool-12-thread-34 (00007F9AF2278C40) Status=Running
+	at sun/nio/ch/SocketChannelImpl.write([Ljava/nio/ByteBuffer;II)J (SocketChannelImpl.java:532) (Compiled Code) [...]
+```
+
+It would be nice if the JVMDUMP039I message included the [object identity hash code](https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#identityHashCode-java.lang.Object-) so that we knew exactly which instances are the same. For example:
+
+`JVMDUMP039I Processing dump event "throw", detail "java/nio/channels/ClosedByInterruptException @0x12345678" at 2020/04/13 10:51:35 - please wait.`
+
+If the message description can't be changed in service, this could be hidden behind a request option such as:
+
+`-Xdump:stack:events=throw+systhrow,filter=java/nio/channels/ClosedByInterruptException,request=hashcode`

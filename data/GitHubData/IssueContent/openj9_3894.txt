@@ -1,0 +1,9 @@
+Based on a stack overflow question:
+https://stackoverflow.com/questions/53452713/why-is-2-i-i-faster-than-2-i-i
+
+I modified the test case slightly to get out of DLT and compile the loop at scorching. The resulting compilation log indicates four back to back async checks at the top of the hot loop.
+
+Attached zip file contains the modified test code: LoopTest1x.java, a script showing how the test was run: 
+runtest-OpenJ9-11, verbose log and compilation trace from an example run. Test was executed with the Java11 OpenJDK OpenJ9 build 11.0.1_31 from AdoptOpenJDK
+
+[modifiedTestAndResults.zip](https://github.com/eclipse/openj9/files/2634327/modifiedTestAndResults.zip)

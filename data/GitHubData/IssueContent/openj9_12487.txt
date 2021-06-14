@@ -1,0 +1,5 @@
+Doing a GC compaction may be one way of reducing the size of the snapshot that gets generated. This expectation needs to be validated first and then depending on the results we may need to consider doing a compaction and/or any other GC optimization we feel would be appropriate to either reduce the size of the snapshot or to improve the performance after restore. 
+
+Another possible pre-snapshot option might be to zero out memory if this encourages a better compression ratio when we take the snapshot. This direction also needs to be explored first before to check what kind of compression (if any) happens at snapshot creation time.
+
+ 

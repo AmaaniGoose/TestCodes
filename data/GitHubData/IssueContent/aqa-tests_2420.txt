@@ -1,0 +1,175 @@
+
+**Test Info**
+Test Name: jdk_util_1
+Test Duration: 7 min 30 sec
+Machine: build-docker-ubuntu1804-armv8-6
+TRSS link for the test output: https://trss.adoptopenjdk.net/output/test?id=605e432c47db9757319f4626
+
+
+**Build Info**
+Build Name: Test_openjdk8_hs_sanity.openjdk_aarch64_linux
+Jenkins Build start time: Mar 26 2021, 02:18 pm
+Jenkins Build URL: https://ci.adoptopenjdk.net/job/Test_openjdk8_hs_sanity.openjdk_aarch64_linux/478/
+TRSS link for the build: https://trss.adoptopenjdk.net/allTestsInfo?buildId=605e423647db9757319f44f9
+
+
+**Java Version**
+openjdk version "1.8.0_292-internal"
+OpenJDK Runtime Environment (build 1.8.0_292-internal-202103261810-b06)
+OpenJDK 64-Bit Server VM (build 25.292-b06, mixed mode)
+
+Appears intermittent (passes 2/10 times in Deep History)
+
+**This test has been failed 6 times since Mar 17 2021, 02:38 pm**
+**Java Version when the issue first seen**
+openjdk version "1.8.0_292-internal"
+OpenJDK Runtime Environment (build 1.8.0_292-internal-202103171815-b05)
+OpenJDK 64-Bit Server VM (build 25.292-b05, mixed mode)
+Jenkins Build URL: https://ci.adoptopenjdk.net/job/Test_openjdk8_hs_sanity.openjdk_aarch64_linux/473/
+
+The test failed on machine build-docker-ubuntu1804-armv8-6 1 times 
+The test failed on machine build-docker-fedora33-armv8-5 3 times 
+The test failed on machine build-docker-fedora33-armv8-2 1 times 
+The test failed on machine build-docker-ubuntu1804-armv8-5 1 times 
+
+
+[Rerun in Grinder](https://ci.adoptopenjdk.net/job/Grinder/parambuild/?TARGET=jdk_util_1&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;PLATFORM=aarch64_linux&amp;KEEP_REPORTDIR=true&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;ARTIFACTORY_SERVER=&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=8&amp;USER_CREDENTIALS_ID=&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=&amp;JDK_REPO=https%3A%2F%2Fgithub.com%2Fadoptopenjdk%2Fopenjdk-jdk8u&amp;RELEASE_TAG=&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=&amp;UPSTREAM_JOB_NAME=build-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-linux-aarch64-hotspot&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=dev&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=hotspot&amp;SSH_AGENT_CREDENTIAL=&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=openjdk&amp;UPSTREAM_JOB_NUMBER=852&amp;TIME_LIMIT=10&amp;JVM_OPTIONS=&amp;PARALLEL=None)
+
+
+1 of 667 test cases fail:
+https://ci.adoptopenjdk.net/job/Test_openjdk8_hs_sanity.openjdk_aarch64_linux/478/testReport/java_util_Locale_Bug8040211/java/Bug8040211/
+
+Console output:
+```
+[2021-03-24T18:53:43.747Z]         Bug8040211
+[2021-03-24T18:53:43.747Z] STDERR:
+[2021-03-24T18:53:43.747Z]   Expected size=51
+[2021-03-24T18:53:43.747Z]     range=aam, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=aas, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=adp, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=dz, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=aue, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=ktz, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=bcg, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=bgm, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=cqu, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=quh, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=ema, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=uok, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=en-gb-oed, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=en-gb-oxendict, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=gti, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=nyc, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=kdz, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=ncp, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=koj, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=kwv, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=kwq, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=yam, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=kxe, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=tvd, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=lii, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=raq, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=lmm, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=rmx, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=mtm, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=ymt, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=ngv, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=nnx, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=oyb, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=thx, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=skk, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=jeg, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=phr, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=pmu, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=pub, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=puz, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=suj, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=xsj, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=taj, weight=0.9
+[2021-03-24T18:53:43.747Z]     range=tsf, weight=0.9
+[2021-03-24T18:53:43.747Z]     range=ar-hyw, weight=0.8
+[2021-03-24T18:53:43.747Z]     range=yug, weight=0.5
+[2021-03-24T18:53:43.747Z]     range=yuu, weight=0.5
+[2021-03-24T18:53:43.747Z]     range=gfx, weight=0.4
+[2021-03-24T18:53:43.747Z]     range=oun, weight=0.4
+[2021-03-24T18:53:43.747Z]     range=mwj, weight=0.4
+[2021-03-24T18:53:43.747Z]     range=vaj, weight=0.4
+[2021-03-24T18:53:43.747Z]     range=aam, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=aas, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=adp, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=dz, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=aue, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=ktz, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=bcg, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=bgm, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=cqu, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=quh, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=ema, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=uok, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=en-gb-oed, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=en-gb-oxendict, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=gti, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=nyc, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=kdz, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=ncp, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=koj, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=kwv, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=kwq, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=yam, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=kxe, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=tvd, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=lii, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=raq, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=lmm, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=rmx, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=mtm, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=ymt, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=ngv, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=nnx, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=oyb, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=thx, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=skk, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=jeg, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=phr, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=pmu, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=pub, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=puz, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=suj, weight=1.0
+[2021-03-24T18:53:43.747Z]     range=taj, weight=0.9
+[2021-03-24T18:53:43.747Z]     range=tsf, weight=0.9
+[2021-03-24T18:53:43.747Z]     range=ar-hyw, weight=0.8
+[2021-03-24T18:53:43.747Z]     range=yug, weight=0.5
+[2021-03-24T18:53:43.747Z]     range=yuu, weight=0.5
+[2021-03-24T18:53:43.747Z]     range=gfx, weight=0.4
+[2021-03-24T18:53:43.747Z]     range=oun, weight=0.4
+[2021-03-24T18:53:43.747Z]     range=mwj, weight=0.4
+[2021-03-24T18:53:43.747Z]     range=vaj, weight=0.4
+[2021-03-24T18:53:43.747Z]     language parse() test failed.
+[2021-03-24T18:53:43.747Z]   test_parse() failed.
+[2021-03-24T18:53:43.747Z] java.lang.RuntimeException: Failed.
+[2021-03-24T18:53:43.747Z] 	at Bug8040211.main(Bug8040211.java:50)
+[2021-03-24T18:53:43.747Z] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-03-24T18:53:43.748Z] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2021-03-24T18:53:43.748Z] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-03-24T18:53:43.748Z] 	at java.lang.reflect.Method.invoke(Method.java:498)
+[2021-03-24T18:53:43.748Z] 	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:312)
+[2021-03-24T18:53:43.748Z] 	at java.lang.Thread.run(Thread.java:748)
+[2021-03-24T18:53:43.748Z] 
+[2021-03-24T18:53:43.748Z] JavaTest Message: Test threw exception: java.lang.RuntimeException
+[2021-03-24T18:53:43.748Z] JavaTest Message: shutting down test
+[2021-03-24T18:53:43.748Z] 
+[2021-03-24T18:53:43.748Z] STDOUT:
+[2021-03-24T18:53:43.748Z] Test LanguageRange class parse method...
+[2021-03-24T18:53:43.748Z]   Actual size=50
+[2021-03-24T18:53:43.748Z] Test Locale class methods...
+[2021-03-24T18:53:43.748Z]   test_filter() passed.
+[2021-03-24T18:53:43.748Z]   test_filterTags() passed.
+[2021-03-24T18:53:43.748Z]   test_lookup() passed.
+[2021-03-24T18:53:43.748Z]   test_lookupTag() passed.
+[2021-03-24T18:53:43.748Z] 
+[2021-03-24T18:53:43.748Z] TEST RESULT: Failed. Execution failed: `main' threw exception: java.lang.RuntimeException: Failed.
+[2021-03-24T18:53:43.748Z] --------------------------------------------------
+[2021-03-24T18:58:41.599Z] Test results: passed: 666; failed: 1
+```
+

@@ -1,0 +1,50 @@
+Failure link
+------------
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.openjdk_x86-64_mac/363/console
+```
+11:05:51  STDOUT:
+11:05:51  [TestNG] Running:
+11:05:51    java/util/ResourceBundle/modules/basic/BasicTest.java
+11:05:51  
+11:05:51  Command line: [/Users/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/../bin/jar -cf /Users/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_x86-64_mac/openjdk-tests/TKG/test_output_16019716953586/jdk_util_j9_0/work/classes/java/util/ResourceBundle/modules/basic/BasicTest.d/extra_basic.jar -C /Users/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_x86-64_mac/openjdk-tests/TKG/test_output_16019716953586/jdk_util_j9_0/work/classes/java/util/ResourceBundle/modules/basic/BasicTest.d/classes/basic jdk/test/resources/eu -C /Users/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/ResourceBundle/modules/basic/srcBasic/extra jdk/test/resources/asia]
+11:05:51  Error: Port Library failed to initialize: -1
+11:05:51  Error: Could not create the Java Virtual Machine.
+11:05:51  Error: A fatal exception has occurred. Program will exit.
+11:05:51  
+11:05:51  test BasicTest.RunBasicTestWithCp(): failure
+11:05:51  java.lang.RuntimeException: Create extra_basic.jar failed. Unexpected exit code: 1: expected 1 to equal 0
+11:05:51  	at jdk.test.lib.Asserts.fail(Asserts.java:594)
+11:05:51  	at jdk.test.lib.Asserts.assertEquals(Asserts.java:205)
+11:05:51  	at BasicTest.jarBasic(BasicTest.java:185)
+11:05:51  	at BasicTest.RunBasicTestWithCp(BasicTest.java:143)
+11:05:51  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+11:05:51  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+11:05:51  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+11:05:51  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+11:05:51  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+11:05:51  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+11:05:51  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+11:05:51  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+11:05:51  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+11:05:51  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+11:05:51  	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+11:05:51  	at org.testng.TestRunner.run(TestRunner.java:623)
+11:05:51  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+11:05:51  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+11:05:51  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+11:05:51  	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+11:05:51  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+11:05:51  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+11:05:51  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+11:05:51  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+11:05:51  	at org.testng.TestNG.run(TestNG.java:1018)
+11:05:51  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+11:05:51  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+11:05:51  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+11:05:51  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+11:05:51  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+11:05:51  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+11:05:51  	at java.base/java.lang.Thread.run(Thread.java:836)
+11:05:51  Command line: [/Users/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/../bin/java -p /Users/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_x86-64_mac/openjdk-tests/TKG/test_output_16019716953586/jdk_util_j9_0/work/classes/java/util/ResourceBundle/modules/basic/BasicTest.d/modsAppbasic -m test/jdk.test.Main de fr ja zh-tw en de]
+```
+

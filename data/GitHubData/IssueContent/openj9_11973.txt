@@ -1,0 +1,4 @@
+Similar functionality to:
+- [JWarmup](https://github.com/alibaba/dragonwell8/wiki/Alibaba-Dragonwell8-User-Guide#jwarmup)
+- [Elastic Heap](https://github.com/alibaba/dragonwell8/wiki/Alibaba-Dragonwell8-User-Guide#g1elasticheap)
+- [Stackful symmetric co-routine implemented at the JVM level without source modification](https://github.com/alibaba/dragonwell8/wiki/Wisp-Documentation)

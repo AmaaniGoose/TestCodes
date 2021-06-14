@@ -1,0 +1,13 @@
+See: #6301 
+
+Rather than requiring the getOriginalROMMethod call, tag breakpointed methods in the modifiers and store a pointer to the original ROM method.
+
+For quick access, the allocated memory for the breakpointed method will begin with the back pointer, followed by the copied ROM method.
+
+Access to the unbreakpointed method will be:
+```
+if (romMethod->modifiers & NewBit) romMethod = *(((J9ROMMethod**)romMethod) - 1);
+```
+This could be added to the J9_ROM_CLASS_FROM_RAM_CLASS macro with fairly minimal cost, making the explicit getOriginalROMMethod calls unnecessary. If we need to, we could add a "basic" version of the macro to copy the old behaviour, which would be used infrequently.
+
+It would also be easy to add some assertions to the metadata queries to ensure they are not passed the breakpointed ROM method.

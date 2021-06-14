@@ -1,0 +1,26 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_sanity.system_x86-64_mac_Nightly/150
+TestIBMJlmRemoteMemoryAuth_SE80_0
+TestIBMJlmRemoteMemoryNoAuth_SE80_0
+```
+STF 23:59:29.669 - +------ Step 5 - Wait for the processes to complete
+STF 23:59:29.669 - | Wait for processes to meet expectations
+STF 23:59:29.669 - |   Processes: [LT1, CL1]
+STF 23:59:29.669 - |
+STF 23:59:29.669 - Monitoring processes: CL1 LT1
+CL1 j> 2019/09/21 23:59:29.745 ServerURL=service:jmx:rmi:///jndi/rmi://localhost:1234/jmxrmi
+CL1 j> 2019/09/21 23:59:34.849 Monitored VM not ready at Sep 21, 2019 11:59:34 PM (attempt 0).
+CL1 j> 2019/09/21 23:59:34.850 Wait 5 secs and trying again...
+CL1 j> 2019/09/21 23:59:35.988 Connection established!
+CL1 j> 2019/09/21 23:59:36.610 Starting to write data
+STF 00:04:29.087 - Heartbeat: Process CL1 is still running
+STF 00:04:29.595 - **FAILED** Process LT1 has ended unexpectedly
+```
+1.LT1.stdout shows the following, and stderr is empty.
+```
+00:08:47.800 - Load test completed
+00:08:47.801 -   Ran     : 300000
+00:08:47.801 -   Passed  : 300000
+00:08:47.801 -   Failed  : 0
+00:08:47.801 -   Result  : PASSED
+```
+There are no useful diagnostics to explain what happened.

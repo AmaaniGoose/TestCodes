@@ -1,0 +1,179 @@
+I don't think this is intermittent, but the assert at OSCachesysv.cpp:1213 doesn't always occur. I think the assert is a separate issue.
+
+11.0.8 stream
+job/Test_openjdk11_ibm_extended.functional_s390x_zos_Personal_testList_0/17
+testSCCacheManagement_0
+fyrec520
+```
+--------- PROGRAM RUN COMMANDLINE INFO ---------
+java_exe =	/home/jenkins/workspace/Test_openjdk11_ibm_extended.functional_s390x_zos_Personal_testList_0/openjdkbinary/j2sdk-image/bin/java  
+cmd.runProgramSimpleApp =	null
+.Running  :testSharedCacheJvmtiAPI  (Test suite : TestOptionsDefault)
+Command executed: '/home/jenkins/workspace/Test_openjdk11_ibm_extended.functional_s390x_zos_Personal_testList_0/openjdkbinary/j2sdk-image/bin/java   -Xshareclasses:printCacheFilename,name=cache2_groupaccess,nonpersistent'
+vvv STDOUT vvv
+
+^^^ STDOUT ^^^
+vvv STDERR vvv
+JVMJ9VM082E Unable to switch to IFA processor - issue "extattr +a libj9ifa29.so"
+/home/jenkins/javasharedresources/C290M11F1A64_memory_cache2_groupaccess_G41L00
+
+^^^ STDERR ^^^
+vvv STACK TRACE vvv
+java.lang.Throwable
+	at tests.sharedclasses.TestUtils.showOutput(TestUtils.java:786)
+	at tests.sharedclasses.TestUtils.fail(TestUtils.java:595)
+	at tests.sharedclasses.TestUtils.checkFileExists(TestUtils.java:584)
+	at tests.sharedclasses.TestUtils.checkFileExistsForNonPersistentCache(TestUtils.java:889)
+	at tests.sharedclasses.options.TestSharedCacheJvmtiAPI.main(TestSharedCacheJvmtiAPI.java:92)
+	at tests.sharedclasses.options.junit.TestOptionsBase.testSharedCacheJvmtiAPI(TestOptionsBase.java:119)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at junit.framework.TestCase.runTest(TestCase.java:168)
+	at junit.framework.TestCase.runBare(TestCase.java:134)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at junit.textui.TestRunner.doRun(TestRunner.java:116)
+	at junit.textui.TestRunner.start(TestRunner.java:180)
+	at junit.textui.TestRunner.main(TestRunner.java:138)
+^^^ STACK TRACE ^^^
+2nd last command executed: '/home/jenkins/workspace/Test_openjdk11_ibm_extended.functional_s390x_zos_Personal_testList_0/openjdkbinary/j2sdk-image/bin/java   -Xshareclasses:printCacheFilename,name=cache2_groupaccess,nonpersistent'
+vvv 2ND LAST STDOUT vvv
+
+^^^ 2ND LAST STDOUT ^^^
+vvv 2ND LAST STDERR vvv
+JVMJ9VM082E Unable to switch to IFA processor - issue "extattr +a libj9ifa29.so"
+/home/jenkins/javasharedresources/C290M11F1A64_memory_cache2_groupaccess_G41L00
+
+^^^ 2ND LAST STDERR ^^^
+No file found at '/home/jenkins/javasharedresources/C290M11F1A64_memory_cache2_groupaccess_G41L00'
+	Last command: /home/jenkins/workspace/Test_openjdk11_ibm_extended.functional_s390x_zos_Personal_testList_0/openjdkbinary/j2sdk-image/bin/java   -Xshareclasses:printCacheFilename,name=cache2_groupaccess,nonpersistent
+05:20:13.309 0x1d9cb600   j9shr.1009   *   ** ASSERTION FAILED ** at ./OSCachesysv.cpp:1213: ((0 ))
+05:20:13.309 0x1d9c6c00   j9shr.1009   *   ** ASSERTION FAILED ** at ./OSCachesysv.cpp:1213: ((0 ))
+JVMDUMP039I Processing dump event "traceassert", detail "" at 2020/07/28 05:20:13 - please wait.
+JVMDUMP039I Processing dump event "traceassert", detail "" at 2020/07/28 05:20:13 - please wait.
+JVMDUMP032I JVM requested System dump using 'JENKINS.JVM.JENKINS3.D200728.T052013.X&DS' in response to an event
+IEATDUMP in progress with options SDATA=(LPA,GRSQ,LSQA,NUC,PSA,RGN,SQA,SUM,SWA,TRT)
+IEATDUMP success for DSN='JENKINS.JVM.JENKINS3.D200728.T052013.X&DS'
+JVMDUMP040I System dump written to dataset(s) using name template JENKINS.JVM.JENKINS3.D200728.T052013.X&DS
+JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk11_ibm_extended.functional_s390x_zos_Personal_testList_0/openjdk-tests/TKG/test_output_15959133211694/testSCCacheManagement_0/javacore.20200728.052013.16777396.0003.txt' in response to an event
+JVMDUMP032I JVM requested System dump using 'JENKINS.JVM.JENKINS3.D200728.T052013.X&DS' in response to an event
+IEATDUMP in progress with options SDATA=(LPA,GRSQ,LSQA,NUC,PSA,RGN,SQA,SUM,SWA,TRT)
+JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk11_ibm_extended.functional_s390x_zos_Personal_testList_0/openjdk-tests/TKG/test_output_15959133211694/testSCCacheManagement_0/javacore.20200728.052013.16777396.0003.txt
+IEATDUMP failure for DSN='JENKINS.JVM.JENKINS3.D200728.T052013.X&DS' RC=0x00000008 RSN=0x00000026
+JVMPORT024E IEATDUMP failed because we couldn't allocate the dump dataset (check disk space and field permissions).
+JVMDUMP012E Error in System dump: JENKINS.JVM.JENKINS3.D200728.T052013.X&DS
+JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk11_ibm_extended.functional_s390x_zos_Personal_testList_0/openjdk-tests/TKG/test_output_15959133211694/testSCCacheManagement_0/javacore.20200728.052013.16777396.0005.txt' in response to an event
+JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Test_openjdk11_ibm_extended.functional_s390x_zos_Personal_testList_0/openjdk-tests/TKG/test_output_15959133211694/testSCCacheManagement_0/Snap.20200728.052013.16777396.0004.trc' in response to an event
+JVMDUMP010I Snap dump written to /home/jenkins/workspace/Test_openjdk11_ibm_extended.functional_s390x_zos_Personal_testList_0/openjdk-tests/TKG/test_output_15959133211694/testSCCacheManagement_0/Snap.20200728.052013.16777396.0004.trc
+JVMDUMP013I Processed dump event "traceassert", detail "".
+
+testSCCacheManagement_0_FAILED
+```
+
+head stream:
+job/Test_openjdk11_ibm_extended.functional_s390x_zos_Personal_testList_0/18/
+fyrec520
+```
+[2020-07-28T06:36:25.893Z] .Running  :testSharedCacheJvmtiAPI  (Test suite : TestOptionsDefault)
+[2020-07-28T06:36:36.336Z] Command executed: '/home/jenkins/workspace/Test_openjdk11_ibm_extended.functional_s390x_zos_Personal_testList_0/openjdkbinary/j2sdk-image/bin/java   -Xshareclasses:printCacheFilename,name=cache2_groupaccess,nonpersistent'
+[2020-07-28T06:36:36.336Z] vvv STDOUT vvv
+[2020-07-28T06:36:36.336Z]
+[2020-07-28T06:36:36.336Z] ^^^ STDOUT ^^^
+[2020-07-28T06:36:36.336Z] vvv STDERR vvv
+[2020-07-28T06:36:36.336Z] JVMJ9VM082E Unable to switch to IFA processor - issue "extattr +a libj9ifa29.so"
+[2020-07-28T06:36:36.336Z] /home/jenkins/javasharedresources/C290M11F1A64_memory_cache2_groupaccess_G41L00
+[2020-07-28T06:36:36.336Z]
+[2020-07-28T06:36:36.336Z] ^^^ STDERR ^^^
+[2020-07-28T06:36:36.336Z] vvv STACK TRACE vvv
+[2020-07-28T06:36:36.336Z] java.lang.Throwable
+[2020-07-28T06:36:36.336Z]      at tests.sharedclasses.TestUtils.showOutput(TestUtils.java:786)
+[2020-07-28T06:36:36.336Z]      at tests.sharedclasses.TestUtils.fail(TestUtils.java:595)
+[2020-07-28T06:36:36.336Z]      at tests.sharedclasses.TestUtils.checkFileExists(TestUtils.java:584)
+[2020-07-28T06:36:36.336Z]      at tests.sharedclasses.TestUtils.checkFileExistsForNonPersistentCache(TestUtils.java:889)
+[2020-07-28T06:36:36.336Z]      at tests.sharedclasses.options.TestSharedCacheJvmtiAPI.main(TestSharedCacheJvmtiAPI.java:92)
+[2020-07-28T06:36:36.336Z]      at tests.sharedclasses.options.junit.TestOptionsBase.testSharedCacheJvmtiAPI(TestOptionsBase.java:119)
+[2020-07-28T06:36:36.336Z]      at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2020-07-28T06:36:36.336Z]      at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2020-07-28T06:36:36.336Z]      at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2020-07-28T06:36:36.336Z]      at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+[2020-07-28T06:36:36.336Z]      at junit.framework.TestCase.runTest(TestCase.java:168)
+[2020-07-28T06:36:36.336Z]      at junit.framework.TestCase.runBare(TestCase.java:134)
+[2020-07-28T06:36:36.336Z]      at junit.framework.TestResult$1.protect(TestResult.java:110)
+[2020-07-28T06:36:36.336Z]      at junit.framework.TestResult.runProtected(TestResult.java:128)
+[2020-07-28T06:36:36.336Z]      at junit.framework.TestResult.run(TestResult.java:113)
+[2020-07-28T06:36:36.336Z]      at junit.framework.TestCase.run(TestCase.java:124)
+[2020-07-28T06:36:36.336Z]      at junit.framework.TestSuite.runTest(TestSuite.java:243)
+[2020-07-28T06:36:36.336Z]      at junit.framework.TestSuite.run(TestSuite.java:238)
+[2020-07-28T06:36:36.336Z]      at junit.framework.TestSuite.runTest(TestSuite.java:243)
+[2020-07-28T06:36:36.336Z]      at junit.framework.TestSuite.run(TestSuite.java:238)
+[2020-07-28T06:36:36.336Z]      at junit.textui.TestRunner.doRun(TestRunner.java:116)
+[2020-07-28T06:36:36.336Z]      at junit.textui.TestRunner.start(TestRunner.java:180)
+[2020-07-28T06:36:36.336Z]      at junit.textui.TestRunner.main(TestRunner.java:138)
+[2020-07-28T06:36:36.336Z] ^^^ STACK TRACE ^^^
+[2020-07-28T06:36:36.336Z] 2nd last command executed: '/home/jenkins/workspace/Test_openjdk11_ibm_extended.functional_s390x_zos_Personal_testList_0/openjdkbinary/j2sdk-image/bin/java   -Xshareclasses:printCacheFilename,name=cache2_groupaccess,nonpersistent'
+[2020-07-28T06:36:36.336Z] vvv 2ND LAST STDOUT vvv
+[2020-07-28T06:36:36.336Z]
+[2020-07-28T06:36:36.336Z] ^^^ 2ND LAST STDOUT ^^^
+[2020-07-28T06:36:36.336Z] vvv 2ND LAST STDERR vvv
+[2020-07-28T06:36:36.336Z] JVMJ9VM082E Unable to switch to IFA processor - issue "extattr +a libj9ifa29.so"
+[2020-07-28T06:36:36.336Z] /home/jenkins/javasharedresources/C290M11F1A64_memory_cache2_groupaccess_G41L00
+[2020-07-28T06:36:36.336Z]
+[2020-07-28T06:36:36.336Z] ^^^ 2ND LAST STDERR ^^^
+2020-07-28T06:36:36.336Z] No file found at '/home/jenkins/javasharedresources/C290M11F1A64_memory_cache2_groupaccess_G41L00'
+[2020-07-28T06:36:36.336Z]      Last command: /home/jenkins/workspace/Test_openjdk11_ibm_extended.functional_s390x_zos_Personal_testList_0/openjdkbinary/j2sdk-image/bin/java   -Xshareclasses:printCacheFilename,name=cache2_groupaccess,nonpersistent
+[2020-07-28T06:36:40.199Z] E.Running  :testSharedCacheJavaAPI  (Test suite : TestOptionsDefault)
+[2020-07-28T06:36:51.437Z] Command executed: '/home/jenkins/workspace/Test_openjdk11_ibm_extended.functional_s390x_zos_Personal_testList_0/openjdkbinary/j2sdk-image/bin/java   -Xshareclasses:printCacheFilename,name=cache2_groupaccess,nonpersistent'
+[2020-07-28T06:36:51.437Z] vvv STDOUT vvv
+[2020-07-28T06:36:51.437Z]
+[2020-07-28T06:36:51.437Z] ^^^ STDOUT ^^^
+[2020-07-28T06:36:51.437Z] vvv STDERR vvv
+[2020-07-28T06:36:51.437Z] JVMJ9VM082E Unable to switch to IFA processor - issue "extattr +a libj9ifa29.so"
+[2020-07-28T06:36:51.437Z] /home/jenkins/javasharedresources/C290M11F1A64_memory_cache2_groupaccess_G41L00
+[2020-07-28T06:36:51.437Z]
+[2020-07-28T06:36:51.437Z] ^^^ STDERR ^^^
+[2020-07-28T06:36:51.437Z] vvv STACK TRACE vvv
+[2020-07-28T06:36:51.437Z] java.lang.Throwable
+[2020-07-28T06:36:51.437Z]      at tests.sharedclasses.TestUtils.showOutput(TestUtils.java:786)
+[2020-07-28T06:36:51.437Z]      at tests.sharedclasses.TestUtils.fail(TestUtils.java:595)
+[2020-07-28T06:36:51.437Z]      at tests.sharedclasses.TestUtils.checkFileExists(TestUtils.java:584)
+[2020-07-28T06:36:51.437Z]      at tests.sharedclasses.TestUtils.checkFileExistsForNonPersistentCache(TestUtils.java:889)
+[2020-07-28T06:36:51.437Z]      at tests.sharedclasses.options.TestSharedCacheJavaAPI.main(TestSharedCacheJavaAPI.java:171)
+[2020-07-28T06:36:51.437Z]      at tests.sharedclasses.options.junit.TestOptionsBase.testSharedCacheJavaAPI(TestOptionsBase.java:120)
+[2020-07-28T06:36:51.437Z]      at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2020-07-28T06:36:51.437Z]      at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2020-07-28T06:36:51.437Z]      at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2020-07-28T06:36:51.437Z]      at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+[2020-07-28T06:36:51.437Z]      at junit.framework.TestCase.runTest(TestCase.java:168)
+[2020-07-28T06:36:51.437Z]      at junit.framework.TestCase.runBare(TestCase.java:134)
+[2020-07-28T06:36:51.437Z]      at junit.framework.TestResult$1.protect(TestResult.java:110)
+[2020-07-28T06:36:51.437Z]      at junit.framework.TestResult.runProtected(TestResult.java:128)
+[2020-07-28T06:36:51.437Z]      at junit.framework.TestResult.run(TestResult.java:113)
+[2020-07-28T06:36:51.437Z]      at junit.framework.TestCase.run(TestCase.java:124)
+[2020-07-28T06:36:51.437Z]      at junit.framework.TestSuite.runTest(TestSuite.java:243)
+[2020-07-28T06:36:51.438Z]      at junit.framework.TestSuite.run(TestSuite.java:238)
+[2020-07-28T06:36:51.438Z]      at junit.framework.TestSuite.runTest(TestSuite.java:243)
+[2020-07-28T06:36:51.438Z]      at junit.framework.TestSuite.run(TestSuite.java:238)
+[2020-07-28T06:36:51.438Z]      at junit.textui.TestRunner.doRun(TestRunner.java:116)
+[2020-07-28T06:36:51.438Z]      at junit.textui.TestRunner.start(TestRunner.java:180)
+[2020-07-28T06:36:51.438Z]      at junit.textui.TestRunner.main(TestRunner.java:138)
+[2020-07-28T06:36:51.438Z] ^^^ STACK TRACE ^^^
+[2020-07-28T06:36:51.438Z] 2nd last command executed: '/home/jenkins/workspace/Test_openjdk11_ibm_extended.functional_s390x_zos_Personal_testList_0/openjdkbinary/j2sdk-image/bin/java   -Xshareclasses:printCacheFilename,name=cache2_groupaccess,nonpersistent'
+[2020-07-28T06:36:51.438Z] vvv 2ND LAST STDOUT vvv
+[2020-07-28T06:36:51.438Z]
+[2020-07-28T06:36:51.438Z] ^^^ 2ND LAST STDOUT ^^^
+[2020-07-28T06:36:51.438Z] vvv 2ND LAST STDERR vvv
+[2020-07-28T06:36:51.438Z] JVMJ9VM082E Unable to switch to IFA processor - issue "extattr +a libj9ifa29.so"
+[2020-07-28T06:36:51.438Z] /home/jenkins/javasharedresources/C290M11F1A64_memory_cache2_groupaccess_G41L00
+[2020-07-28T06:36:51.438Z]
+[2020-07-28T06:36:51.438Z] ^^^ 2ND LAST STDERR ^^^
+[2020-07-28T06:36:51.438Z] No file found at '/home/jenkins/javasharedresources/C290M11F1A64_memory_cache2_groupaccess_G41L00'
+[2020-07-28T06:36:51.438Z]      Last command: /home/jenkins/workspace/Test_openjdk11_ibm_extended.functional_s390x_zos_Personal_testList_0/openjdkbinary/j2sdk-image/bin/java   -Xshareclasses:printCacheFilename,name=cache2_groupaccess,nonpersistent
+[2020-07-28T06:36:56.438Z] E.Running  :testDestroyCache  (Test suite : TestOptionsDefault)

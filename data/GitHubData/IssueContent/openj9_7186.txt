@@ -1,0 +1,28 @@
+Failure link
+------------
+Rebuild link: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&BUILD_LIST=openjdk&JenkinsFile=openjdk_x86-64_linux&CUSTOM_TARGET=jdk/internal/misc/VM/RuntimeArguments.java&TARGET=jdk_custom_0
+- test category: openjdk
+- OS/architecture: all
+- version: 11 and 13
+- JVM: openj9 only
+
+Optional info
+-------------
+- intermittent failure: no
+- regression or new test: regression
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+14:21:31  STDERR:
+14:21:31   stdout: [];
+14:21:31   stderr: [Exception in thread "main" java.lang.RuntimeException: [-Xoptionsfile=/home/jenkins/workspace/Grinder_Advanced/openjdkbinary/j2sdk-image/lib/options.default, -Xlockword:mode=default,noLockword=java/lang/String,noLockword=java/util/MapEntry,noLockword=java/util/HashMap$Entry,noLockword=org/apache/harmony/luni/util/ModifiedMap$Entry,noLockword=java/util/Hashtable$Entry,noLockword=java/lang/invoke/MethodType,noLockword=java/lang/invoke/MethodHandle,noLockword=java/lang/invoke/CollectHandle,noLockword=java/lang/invoke/ConstructorHandle,noLockword=java/lang/invoke/ConvertHandle,noLockword=java/lang/invoke/ArgumentConversionHandle,noLockword=java/lang/invoke/AsTypeHandle,noLockword=java/lang/invoke/ExplicitCastHandle,noLockword=java/lang/invoke/FilterReturnHandle,noLockword=java/lang/invoke/DirectHandle,noLockword=java/lang/invoke/ReceiverBoundHandle,noLockword=java/lang/invoke/DynamicInvokerHandle,noLockword=java/lang/invoke/FieldHandle,noLockword=java/lang/invoke/FieldGetterHandle,noLockword=java/lang/invoke/FieldSetterHandle,noLockword=java/lang/invoke/StaticFieldGetterHandle,noLockword=java/lang/invoke/StaticFieldSetterHandle,noLockword=java/lang/invoke/IndirectHandle,noLockword=java/lang/invoke/InterfaceHandle,noLockword=java/lang/invoke/VirtualHandle,noLockword=java/lang/invoke/PrimitiveHandle,noLockword=java/lang/invoke/InvokeExactHandle,noLockword=java/lang/invoke/InvokeGenericHandle,noLockword=java/lang/invoke/VarargsCollectorHandle,noLockword=java/lang/invoke/ThunkTuple, -Xjcl:jclse29, -Dcom.ibm.oti.vm.bootstrap.library.path=/home/jenkins/workspace/Grinder_Advanced/openjdkbinary/j2sdk-image/lib/compressedrefs:/home/jenkins/workspace/Grinder_Advanced/openjdkbinary/j2sdk-image/lib, -Dsun.boot.library.path=/home/jenkins/workspace/Grinder_Advanced/openjdkbinary/j2sdk-image/lib/compressedrefs:/home/jenkins/workspace/Grinder_Advanced/openjdkbinary/j2sdk-image/lib, -Djava.library.path=/home/jenkins/workspace/Grinder_Advanced/openjdkbinary/j2sdk-image/lib/compressedrefs:/home/jenkins/workspace/Grinder_Advanced/openjdkbinary/j2sdk-image/lib:/usr/lib64:/usr/lib, -Djava.home=/home/jenkins/workspace/Grinder_Advanced/openjdkbinary/j2sdk-image, -Duser.dir=/home/jenkins/workspace/Grinder_Advanced/openjdk-tests/TestConfig/test_output_15692448794609/jdk_custom_0/work/scratch/0, -Djava.class.path=/home/jenkins/workspace/Grinder_Advanced/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Grinder_Advanced/jvmtest/openjdk/jtreg/lib/jtreg.jar, --add-exports=java.base/jdk.internal.misc=ALL-UNNAMED, --add-exports=java.base/jdk.internal.perf=ALL-UNNAMED, --add-modules=jdk.zipfs, -Djava.class.path=/home/jenkins/workspace/Grinder_Advanced/openjdk-tests/TestConfig/test_output_15692448794609/jdk_custom_0/work/classes/0/jdk/internal/misc/VM/RuntimeArguments.d, -Dsun.java.command=RuntimeArguments --add-exports=java.base/jdk.internal.misc=ALL-UNNAMED --add-exports=java.base/jdk.internal.perf=ALL-UNNAMED --add-modules=jdk.zipfs, -Dsun.java.launcher=SUN_STANDARD, -Dsun.java.launcher.pid=2740] 
+!= 
+[--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED, --add-exports=java.base/jdk.internal.perf=ALL-UNNAMED, --add-modules=jdk.zipfs]
+14:21:31  	at RuntimeArguments.main(RuntimeArguments.java:79)
+14:21:31  ]
+14:21:31   exitValue = 1
+```
+This test returns two of these blocks, I only included one here for readability. The VM.getRuntimeArguments() method here is returning a huge array, the array it was expecting is at the end of that string after the !=.
+
+It may be that this test is not suitable for openj9 and should therefore be permanently excluded, or that the getRuntimeArguments() method is not outputting correctly on openj9, I am not sure. 

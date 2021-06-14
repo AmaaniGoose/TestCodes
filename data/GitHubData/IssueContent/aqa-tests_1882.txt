@@ -1,0 +1,78 @@
+**Test Info**
+Test Name: HCRLateAttachWorkload_0
+Test Duration: 15 sec
+Machine: test-osuosl-centos74-ppc64le-1
+TRSS link for the test output: https://trss.adoptopenjdk.net/output/test?id=5f0b51da7eaab3443c9d5ee4
+
+
+**Build Info**
+Build Name: Test_openjdk8_hs_extended.system_ppc64le_linux
+Jenkins Build start time: Jul 12 2020, 01:31 pm
+Jenkins Build URL: https://ci.adoptopenjdk.net/job/Test_openjdk8_hs_extended.system_ppc64le_linux/259/
+TRSS link for the build: https://trss.adoptopenjdk.net/allTestsInfo?buildId=5f0b515c7eaab3443c9d5eae
+
+
+**Java Version**
+openjdk version "1.8.0_262"
+OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_262-202007121713-b09)
+OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.262-b09, mixed mode)
+
+
+**Console output:**
+[2020-07-12T17:44:13.504Z] LT  stderr Exception in thread "Attach Listener" java.lang.reflect.InvocationTargetException
+[2020-07-12T17:44:13.504Z] AG  stderr Exception in thread "main" com.sun.tools.attach.AgentInitializationException: Agent JAR loaded but agent failed to initialize
+[2020-07-12T17:44:13.504Z] AG  stderr 	at sun.tools.attach.HotSpotVirtualMachine.loadAgent(HotSpotVirtualMachine.java:121)
+[2020-07-12T17:44:13.504Z] AG  stderr 	at net.adoptopenjdk.test.hcrAgent.agent.Attacher.main(Attacher.java:75)
+[2020-07-12T17:44:13.504Z] STF 17:44:12.973 - **FAILED** Process AG  ended with exit code (1) and not the expected exit code/s (0)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at java.lang.reflect.Method.invoke(Method.java:498)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at sun.instrument.InstrumentationImpl.loadClassAndStartAgent(InstrumentationImpl.java:386)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at sun.instrument.InstrumentationImpl.loadClassAndCallAgentmain(InstrumentationImpl.java:411)
+[2020-07-12T17:44:13.504Z] LT  stderr Caused by: java.lang.Error: java.lang.Error: java.lang.NullPointerException
+[2020-07-12T17:44:13.504Z] LT  stderr 	at net.adoptopenjdk.test.hcrAgent.agent.AgentLogger.throwErrors(AgentLogger.java:52)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at net.adoptopenjdk.test.hcrAgent.agent.StringModifierAgent.agentmain(StringModifierAgent.java:131)
+[2020-07-12T17:44:13.504Z] LT  stderr 	... 6 more
+[2020-07-12T17:44:13.504Z] LT  stderr Caused by: java.lang.Error: java.lang.NullPointerException
+[2020-07-12T17:44:13.504Z] LT  stderr 	at net.adoptopenjdk.test.hcrAgent.agent.StringTransformer.transform(StringTransformer.java:84)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at sun.instrument.TransformerManager.transform(TransformerManager.java:188)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at sun.instrument.InstrumentationImpl.transform(InstrumentationImpl.java:428)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at sun.misc.Unsafe.defineAnonymousClass(Native Method)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at java.lang.invoke.InnerClassLambdaMetafactory.spinInnerClass(InnerClassLambdaMetafactory.java:326)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at java.lang.invoke.InnerClassLambdaMetafactory.buildCallSite(InnerClassLambdaMetafactory.java:194)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at java.lang.invoke.LambdaMetafactory.metafactory(LambdaMetafactory.java:304)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at java.lang.invoke.CallSite.makeSite(CallSite.java:302)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at java.lang.invoke.MethodHandleNatives.linkCallSiteImpl(MethodHandleNatives.java:307)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at java.lang.invoke.MethodHandleNatives.linkCallSite(MethodHandleNatives.java:297)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at org.apache.logging.log4j.core.util.BasicAuthorizationProvider.<init>(BasicAuthorizationProvider.java:49)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at org.apache.logging.log4j.core.config.ConfigurationFactory.authorizationProvider(ConfigurationFactory.java:216)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at org.apache.logging.log4j.core.config.ConfigurationFactory.getInstance(ConfigurationFactory.java:189)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:687)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:708)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:263)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:243)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:45)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at org.apache.logging.log4j.LogManager.getContext(LogManager.java:174)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at org.apache.logging.log4j.LogManager.getLogger(LogManager.java:669)
+[2020-07-12T17:44:13.504Z] LT  stderr 	at net.adoptopenjdk.loadTest.LoadTest.<clinit>(LoadTest.java:46)
+[2020-07-12T17:44:13.504Z] LT  stderr Caused by: java.lang.NullPointerException
+[2020-07-12T17:44:13.504Z] LT  stderr 	at net.adoptopenjdk.test.hcrAgent.agent.StringTransformer.transform(StringTransformer.java:67)
+[2020-07-12T17:44:13.504Z] LT  stderr 	... 20 more
+[2020-07-12T17:44:13.504Z] LT  stderr Agent failed to start!
+[2020-07-12T17:44:13.504Z] STF 17:44:12.973 - Monitoring Report Summary:
+[2020-07-12T17:44:13.504Z] STF 17:44:12.973 -   o Process AG  ended with exit code (1) and not the expected exit code/s (0)
+[2020-07-12T17:44:13.504Z] STF 17:44:12.973 -   o Process LT  is still running
+[2020-07-12T17:44:13.504Z] STF 17:44:12.974 - Killing processes: AG  LT 
+[2020-07-12T17:44:13.504Z] STF 17:44:12.974 -   o Process AG  is not running
+[2020-07-12T17:44:33.761Z] STF 17:44:23.975 -   o Process LT  killed
+[2020-07-12T17:44:33.761Z] **FAILED** at step 3 (Wait for Agent to complete, followed by the MiniMix test seconds later.). Expected return value=0 Actual=1 at /home/jenkins/workspace/Test_openjdk8_hs_extended.system_ppc64le_linux/openjdk-tests/TKG/../TKG/test_output_15945755397657/HCRLateAttachWorkload_0/20200712-174409-HCRLateAttachWorkload/execute.pl line 149.
+[2020-07-12T17:44:33.761Z] STF 17:44:24.041 - **FAILED** execute script failed. Expected return value=0 Actual=1
+
+-------------
+
+Appears intermittent, also failed here https://trss.adoptopenjdk.net/output/test?id=5efe22962e55416417bf501e on a different machine.  
+
+Same test target (HCRLateAttachWorkload_0) fails on Mac but with different output.  
+
+Rerun [link](https://ci.adoptopenjdk.net/job/Grinder/parambuild/?TARGET=HCRLateAttachWorkload_0&CUSTOM_TARGET=&SDK_RESOURCE=nightly&VENDOR_TEST_SHAS=&TEST_FLAG=&VENDOR_TEST_DIRS=&ARTIFACTORY_REPO=&ARTIFACTORY_ROOT_DIR=&PLATFORM=ppc64le_linux&KEEP_REPORTDIR=true&PERSONAL_BUILD=false&ADOPTOPENJDK_REPO=https://github.com/AdoptOpenJDK/openjdk-tests.git&JDK_IMPL=hotspot&LABEL=&TKG_BRANCH=master&EXTRA_OPTIONS=&SSH_AGENT_CREDENTIAL=&IS_PARALLEL=false&CUSTOMIZED_SDK_URL=&BUILD_IDENTIFIER=&AUTO_DETECT=true&ADOPTOPENJDK_BRANCH=master&TKG_SHA=&ARTIFACTORY_SERVER=&CUSTOMIZED_SDK_URL_CREDENTIAL_ID=&OPENJDK_SHA=&KEEP_WORKSPACE=false&JDK_VERSION=8&BUILD_LIST=system&USER_CREDENTIALS_ID=&ITERATIONS=1&VENDOR_TEST_REPOS=&TIME_LIMIT=10&RELEASE_TAG=&OPENJ9_BRANCH=master&OPENJ9_SHA=&JCK_GIT_REPO=&VENDOR_TEST_BRANCHES=&OPENJ9_REPO=https://github.com/eclipse/openj9.git&JVM_OPTIONS=&TKG_REPO=https://github.com/AdoptOpenJDK/TKG.git) 

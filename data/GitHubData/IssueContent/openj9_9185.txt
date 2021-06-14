@@ -1,0 +1,14 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_extended.functional_s390x_linux_xl_Nightly/126
+ThreadRegressionTests_0
+```
+===============================================
+Running test ThreadRegressionTests_0 ...
+===============================================
+ThreadRegressionTests_0 Start Time: Wed Apr  8 01:08:55 2020 Epoch Time (ms): 1586322535389
+variation: Mode110
+JVM_OPTIONS: -Xnocompressedrefs -Xjit -Xgcpolicy:gencon -Xnocompressedrefs 
+......WaitForAfterJoinWithTimeout - invalid, assuming pass
+.WaitForAfterInterruptInSleep - invalid received InterruptedException, assuming pass
+
+ThreadRegressionTests_0_FAILED
+```

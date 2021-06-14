@@ -1,0 +1,15 @@
+in the test README, it says
+
+Same as excluding on all platforms, you add a line to latest_exclude_$(JAVA_VERSION).txt file, but with specific specs to exclude, for example:
+```
+org.openj9.test.java.lang.management.TestOperatingSystemMXBean 121187 linux_x86-64
+```
+
+
+The `but with specific specs to exclude` may not be exactly correct since the format of exclude group could be the same as the on in plyalist, a.k.a.
+```
+org.openj9.test.java.lang.management.TestOperatingSystemMXBean 121187 os.aix
+```
+This will exclude this test from all aix platform.
+
+The test README file needs update.

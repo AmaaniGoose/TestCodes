@@ -1,0 +1,91 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/234 - osx1011-x86-2
+jdk_lang_j9_0
+java/lang/System/MacEncoding/TestFileEncoding.java
+
+Diagnostics https://140-211-168-230-openstack.osuosl.org/artifactory/ci-eclipse-openj9/Test/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/234/openjdk_test_output.tar.gz
+```
+22:23:47  ++++Begin Test Info++++
+22:23:47  Test Status: PASS
+22:23:47  ++++Test Environment++++
+22:23:47    PATH=/bin:/usr/bin:/usr/sbin
+22:23:47    __CF_USER_TEXT_ENCODING=0x1F6:0:0
+22:23:47    JAVA_MAIN_CLASS_85590=com.sun.javatest.regtest.agent.AgentServer
+22:23:47    CLASSPATH=/Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/openjdkbinary/j2sdk-image/lib/tools.jar:/Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/jvmtest/openjdk/jtreg/lib/javatest.jar:/Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/jvmtest/openjdk/jtreg/lib/jtreg.jar
+22:23:47    HOME=/Users/jenkins
+22:23:47  ++++Test Output++++
+22:23:47    Unhandled exception
+22:23:47    Type=Segmentation error vmState=0x00040000
+22:23:47    J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000000
+22:23:47    Handler1=0000000001DE0420 Handler2=0000000001FFC040
+22:23:47    RDI=00007FFF80A60E62 RSI=00007000007DDC34 RAX=0000000000000000 RBX=00007FFF80A60E62
+22:23:47    RCX=0000000000000048 RDX=00007F8F91505850 R8=00000000FFFFFFFE R9=0000000000000002
+22:23:47    R10=00007F8F91505878 R11=435F676E616C5F61 R12=00000000FFFFFFFE R13=00007F8F91819A90
+22:23:47    R14=0000000000000048 R15=0000000000000054
+22:23:47    RIP=00007FFF80A347D4 GS=0000 FS=0000 RSP=00007000007DDC00
+22:23:47    RFlags=0000000000010202 CS=002B RBP=00007000007DDC20 ERR=08C5C00000000000
+22:23:47    TRAPNO=000000000000000D CPU=C000000000000000 FAULTVADDR=0000000108C5C000
+22:23:47    XMM0 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+22:23:47    XMM1 706d742f7261762f (f: 1918989824.000000, d: 3.658211e+233)
+22:23:47    XMM2 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+22:23:47    XMM3 3a207465676d6573 (f: 1735222656.000000, d: 1.038436e-28)
+22:23:47    XMM4 5f2f686361747461 (f: 1635021952.000000, d: 3.212809e+150)
+22:23:47    XMM5 636170736b726f77 (f: 1802661760.000000, d: 5.265209e+170)
+22:23:47    XMM6 3fd5d1bdbf5809ca (f: 3210217984.000000, d: 3.409266e-01)
+22:23:47    XMM7 402e7f9c1e980fa9 (f: 513281952.000000, d: 1.524924e+01)
+22:23:47    XMM8 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+22:23:47    XMM9 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+22:23:47    XMM10 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+22:23:47    XMM11 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+22:23:47    XMM12 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+22:23:47    XMM13 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+22:23:47    XMM14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+22:23:47    XMM15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+22:23:47    Module=/usr/lib/system/libsystem_c.dylib
+22:23:47    Module_base_address=00007FFF809D5000 Symbol=__findenv
+22:23:47    Symbol_address=00007FFF80A34780
+22:23:47    Target=2_90_20201209_586 (Mac OS X 10.11.6)
+22:23:47    CPU=amd64 (4 logical CPUs) (0x200000000 RAM)
+22:23:47    ----------- Stack Backtrace -----------
+22:23:47    ---------------------------------------
+22:23:47    Expected file.encoding: UTF-8
+22:23:47    Actual file.encoding: UTF-8
+22:23:47    Expected sun.jnu.encoding is "skip", ignoring
+22:23:47    JVMDUMP039I Processing dump event "gpf", detail "" at 2020/12/09 22:23:32 - please wait.
+22:23:47    JVMDUMP032I JVM requested System dump using '/Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/openjdk-tests/TKG/test_output_16075704549535/jdk_lang_j9_0/work/scratch/0/core.20201209.222332.85787.0001.dmp' in response to an event
+22:23:47    JVMDUMP010I System dump written to /Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/openjdk-tests/TKG/test_output_16075704549535/jdk_lang_j9_0/work/scratch/0/core.20201209.222332.85787.0001.dmp
+22:23:47    JVMDUMP032I JVM requested Java dump using '/Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/openjdk-tests/TKG/test_output_16075704549535/jdk_lang_j9_0/work/scratch/0/javacore.20201209.222332.85787.0002.txt' in response to an event
+22:23:47    JVMDUMP010I Java dump written to /Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/openjdk-tests/TKG/test_output_16075704549535/jdk_lang_j9_0/work/scratch/0/javacore.20201209.222332.85787.0002.txt
+22:23:47    JVMDUMP032I JVM requested Snap dump using '/Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/openjdk-tests/TKG/test_output_16075704549535/jdk_lang_j9_0/work/scratch/0/Snap.20201209.222332.85787.0003.trc' in response to an event
+22:23:47    JVMDUMP010I Snap dump written to /Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/openjdk-tests/TKG/test_output_16075704549535/jdk_lang_j9_0/work/scratch/0/Snap.20201209.222332.85787.0003.trc
+22:23:47    JVMDUMP032I JVM requested JIT dump using '/Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/openjdk-tests/TKG/test_output_16075704549535/jdk_lang_j9_0/work/scratch/0/jitdump.20201209.222332.85787.0004.dmp' in response to an event
+22:23:47    JVMDUMP010I JIT dump written to /Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac_Nightly/openjdk-tests/TKG/test_output_16075704549535/jdk_lang_j9_0/work/scratch/0/jitdump.20201209.222332.85787.0004.dmp
+22:23:47    JVMDUMP013I Processed dump event "gpf", detail "".
+22:23:47  ++++Test Stack Trace++++
+22:23:47  java.lang.Throwable: current stack of the test
+22:23:47    TestHelper.doExec(TestHelper.java:484)
+22:23:47    TestFileEncoding.run(TestFileEncoding.java:120)
+22:23:47    TestFileEncoding.main(TestFileEncoding.java:166)
+22:23:47    sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+22:23:47    sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+22:23:47    sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+22:23:47    java.lang.reflect.Method.invoke(Method.java:498)
+22:23:47    com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:312)
+22:23:47    java.lang.Thread.run(Thread.java:823)
+22:23:47  ++++End of Test Info++++
+22:23:47  
+22:23:47  STDERR:
+22:23:47  Waking Thread[Finalizer thread,5,system]
+22:23:47  java.lang.RuntimeException: TEST FAILED: !tr.isOK()
+22:23:47  	at TestFileEncoding.checkResult(TestFileEncoding.java:147)
+22:23:47  	at TestFileEncoding.run(TestFileEncoding.java:122)
+22:23:47  	at TestFileEncoding.main(TestFileEncoding.java:166)
+22:23:47  	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+22:23:47  	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+22:23:47  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+22:23:47  	at java.lang.reflect.Method.invoke(Method.java:498)
+22:23:47  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:312)
+22:23:47  	at java.lang.Thread.run(Thread.java:823)
+22:23:47  
+22:23:47  JavaTest Message: Test threw exception: java.lang.RuntimeException
+22:23:47  JavaTest Message: shutting down test
+```

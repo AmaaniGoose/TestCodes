@@ -1,0 +1,126 @@
+The existing documentation for jdmpview is here: https://www.eclipse.org/openj9/docs/tool_jdmpview/
+
+This document only contains a subset of the commands exist in jdmpview. 
+
+The following is a list of commands which do not have any documentation:
+```
+<struct> <address>		Format <struct> at <address>
+ac                        <address> [ xrefs | ownedRegions ] Dump allocation context details
+acforobject               <address>            Find allocation context which owns the specified object
+allclasses                [help|rom|ram [startAddr..endAddr]] Dump a list of loaded ROM/RAM classes. Use 'help' to see more details about the usage.
+analyseromClassutf8       [WeightList] [maxDistribution%] Analyze ROM Class UTF8 distribution (max defaults to 85)
+buildflags                [regex]              Prints all or matching buildflags and their values.
+bytecodes                 <address>[,maps]     cfdump the specified J9Method. (maps is optional)
+classforname              <name>               find the class corresponding to name (with wildcards)
+classloaderssummary       [segs]               Display classloaders summary, optionally including the RAM and ROM segment breakdown
+context                   [ctx#]               Lists or selects context (VM) to work with
+coreinfo                                       Prints commandline ,platform and -version info of VM found in the current core file.
+cpdescription             <address>            Dump the cpdescription for the J9ROMClass
+dclibs                    extract <full path to dir> Extract the collected libraries into the specified directory
+dumpallclassesinmodule    <moduleAddress>      dump all loaded classes in the target module
+dumpallclassloaders                            dump all class loaders
+dumpallramclasslinear     [nestingThreshold]   cfdump all J9RAMClass using the Linear RAM Class Dumper
+dumpallregions            cmd|help             dump all regions in the GC
+dumpallromclasslinear     [nestingThreshold]   cfdump all J9ROMClass using the Linear ROM Class Dumper
+dumpallsegments                                dump all segments in the VM
+dumpcontload              cmd|help             dump contended class load table
+dumpmoduledirectedexports <packageAddress>     dump all modules that the package is exported to
+dumpmoduleexports         <targetModuleAddress> display all j9packages exported by the target module
+dumpmodulereads           <targetModuleAddress> display all modules read by the target module
+dumpramclasslinear        <addr>[,n]           cfdump the specified J9RAMClass using Linear RAM Class Dumper
+dumpromclass              <address|name:<classname>> [maps] cfdump the specified J9ROMClass. Wild cards are allowed in class name. (maps is optional)
+dumpromclasslinear        <addr>[,n]           cfdump the specified J9ROMClass using Linear ROM Class Dumper
+dumprommethod             -a <ram method addr>|-o <rom method addr>|<name> dump all the rommethods corresponding to RAM method address <addr>, or to <name> (with wildcards)
+dumpsegmentsinlist        <segmentlist>        dump all segments in segmentlist
+dumpsegregatedstats                            Print segregated heap statistics, similiar to -XXgc:gcbugheap
+dumpstringtable                                Dump content of string table
+exit                                           Exits from DDR Interactive
+j9help                                         Prints the help table
+quit                                           Quits DDR Interactive: a synonym for "exit"
+extractmemory             <hexAddress> <hexLength> <filename> Dump the specified memory range to a binary file
+findallmodules                                 Outputs all the modules loaded by the runtime
+findallreads              <targetModuleAddress> find all modules that read target module
+findfreedcallsite         <callsite>[,start[,end]] [sort:<name|allocsize>] list all freed blocks for the specified callsite.
+printallcallsites         [sort:<name|allocsize>] list all blocks and bytes allocated by each callsite (same as !findcallsite *).
+printfreedcallsites       [sort:<name|allocsize>] list all freed blocks and bytes allocated by each callsite. (same as !findfreedcallsite *)
+findallcallsites          [sort:<name|allocsize>] list a summary of blocks and bytes allocated by each callsite.
+findcallsite              <callsite>[,start[,end]] [sort:<name|allocsize>] list all allocations for the specified callsite.
+findfreedcallsites        [sort:<name|allocsize>] list a summary of all freed blocks and bytes allocated by each callsite.
+findheader                                     locate the memory allocation header for the specified address.
+findmethodfrompc          <pc>                 find the method corresponding to pc
+findmodulebyname          <moduleName>         find the modules corresponding to a name pattern (e.g. 'java.*')
+findall                   <width|ascii pattern startaddr> Find all occurances of number or a search string in memory starting at an address
+findoverlappingsegments   [all|virtual|help]   find overlapping J9MemorySegments
+findpattern               <pattern>            search memory for a specific pattern
+findstackvalue            <stackvalue>         search stacks for a specific value
+findvm                                         Search process memory for the vm structure
+fj9object                 <address>            Display the j9object given a compressed refs address.
+j9objecttofj9object       <address>            Convert the j9object address to a compressed refs address.
+fj9objecttoj9object       <address>            Convert the compressed refs address to a j9object address.
+foreach                                        build up a list of elements to operate on
+do                        <command>            repeat a command for each element in the list
+gccheck                   [parameters]         run the GC Check tool
+gpinfo                         - print out info about a gpf if one occured
+hashcode                  <address>            prints out the Object.hashcode() for an object
+itablesize                                     Dump experimental iTable sizing
+j9classshape              <ramclass>           view instance shape
+j9extendedmethodflaginfo  <flags>              give information about extended method flags
+j9reg                     <level>              list VM named registers
+j9statics                 <ramclass>           Display static fields of a ram class
+j9vtables                 <ramclass>           dump interpreter and jit vtables for given ram class.
+j9x                       <address>            Hexdump <address>
+j9xx                      <address>            Hexdump <address>
+jitmetadatafrompc         <pc>                 Show jit method metadata for PC
+jitstack                  <thread>,<sp>,<pc>   Dump jit stack
+jitstackslots             <thread>,<sp>,<pc>   Dump jit stack slots
+localmap                  <pc>                 calculate the local slot map for the specified PC
+markmap                   <command> <object>   query the markmap
+methodforname             <name>               find the method corresponding to name (with wildcards)
+monitors                  <command> | help     Monitor related commands
+nativememinfo                                  Dump the native memory info
+nativestacks              [tid] [tid] ...      Display the native stacks for all or the specified thread ids.
+nstack                    [tid] [tid] ...      Display the native stacks for all or the specified thread ids.
+objectsizeinfo            [-a] [class name]    Print information about object fields and size of the objects, including unused space
+plugins                   <subcmd>             DDR Plugin management commands
+queryromclass             <addr>,q1[,q2,...]   query the specified J9ROMClass (equivalent to -drq in cfdump)
+    Query examples:       <addr>,/romHeader,/romHeader/className,/methods,
+                          <addr>,/methods/method[0],/methods/method[3]/name,
+                          <addr>,/methods/method[3]/methodBytecodes
+ramclasssummary                                Display ram class summary
+ranges                                         Prints list of available memory ranges
+romclassforname           <name>               find all the romclasses corresponding to name (with wildcards)
+romclasssummary           [local|shared] [nas] Display romclass summary
+runtimesettings                                Prints VM information that can change during runtime (e.g. initial and current softmx values).
+searchstringtable         <address>            Search for J9Object* in string table
+setvm                     <address>            set the JavaVM address
+showdumpagents                                 print the dump agent settings in force when this dump was taken, like -Xdump:what
+shrc                      [command]            shared class cache operations
+snapformat                [-f <filename>] [-d <datfile_directory>] [-t <j9vmthread id>] [-s <filter>] format trace buffers for all threads or just the specified thread to a file or stdout using the specified .dat files
+snaptrace                 <filename>           extract trace buffers to a file
+stack                     <thread>             Walks the Java stack for <thread>
+stackslots                <thread>             Walks the Java stack (including objects) for <thread>
+stackmap                  <pc>                 calculate the stack slot map for the specified PC
+sym                       <address>            Display the symbol, or closest symbol to <address>
+threads                   cmd|help             Lists VM threads
+time                      <command>            run another command and print out elapsed time
+tpconfig                  [<component>|all]    Lists trace components or tracepoints enabled for specified components
+vmcheck                                        Run VM state sanity checks
+vmconstantpool            [j9javavmAddress]    Dump the jclconstantpool entries starting at the top and continuing through the end
+walkinterntable           1|2|3|4|5|6|help     Prints string intern table information or help
+walkj9pool                <address>            Walks the elements of J9Pool
+weakrootpathfindall       <address>            same as rootpathfindall but only for weak roots e.g. classes, classloaders, weak references
+rootpathverbose                                enables displaying errors when walking live set
+rootpathfindall           <address>            prints out all the paths from a (strong) root to an object
+anyrootpathfind           <address>            same as rootpathfind but also includes weak roots e.g. classes, classloaders, weak references
+strongrootpathfindall     <address>            prints out all the paths from a (strong) root to an object
+isobjectalive             <address>            determines whether an object is reachable from a (strong) roots or not.  Use !rootfind <address> or !rootfindall <address> to print out the path(s)
+rootpathfind              <address>            prints out a path from a (strong) root to an object
+anyrootpathfindall        <address>            same as rootpathfindall but also includes weak roots e.g. classes, classloaders, weak references
+rootpathnoverbose                              disables displaying errors when walking live set
+strongrootpathfind        <address>            prints out a path from a (strong) root to an object
+weakrootpathfind          <address>            same as rootpathfind but only weak for roots e.g. classes, classloaders, weak references
+whatis                    <address>            Recursively searches fields for UDATA value
+whatissetdepth            <n>                  Sets the maximum depth of the whatis search
+```
+
+Documentation for modularity commands https://github.com/eclipse/openj9/issues/3102

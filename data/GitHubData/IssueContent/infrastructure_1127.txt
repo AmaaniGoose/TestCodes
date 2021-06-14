@@ -1,0 +1,23 @@
+Machines affected: `test-ibm-ppc64-aix-71-1` and `2`
+JDK Versions: all
+JVM: both
+Platform: ppc64 aix
+
+Passing run on `build-osuosl-ppc64-aix-71-1`: https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/2169/
+Failing run: https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/2167/
+
+```
+10:17:53  STDOUT:
+10:17:53  The target ip is 0.0.0.0
+10:17:53  the target is reachable: false
+10:17:53  Test failed 
+10:17:53  STDERR:
+10:17:53  java.lang.Exception: address 0.0.0.0 can not be reachable!
+10:17:53  	at PingThis.main(PingThis.java:86)
+10:17:53  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+10:17:53  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+10:17:53  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+10:17:53  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+10:17:53  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+10:17:53  	at java.base/java.lang.Thread.run(Thread.java:834)
+```

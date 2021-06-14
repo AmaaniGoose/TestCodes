@@ -1,0 +1,14 @@
+Seems for both j9 and hs there is an issue with the setup/build of the elasticsearch test material.
+
+For j9 (from https://ci.adoptopenjdk.net/view/Test_external_weekly/job/openjdk11_j9_external_extended_elasticsearch_x86-64_linux/76/console):
+08:03:58  * What went wrong:
+08:03:58  Execution failed for task ':plugins:ingest-attachment:unitTest'.
+08:03:58  > There were test failures: 4 suites, 24 tests, 1 suite-level error, 1 error [seed: C59A1DB000FC034E]
+08:03:58  
+
+For hs (from https://ci.adoptopenjdk.net/view/Test_external_weekly/job/openjdk11_hs_external_extended_elasticsearch_x86-64_linux/71/console):
+05:46:41  * What went wrong:
+05:46:41  Execution failed for task ':x-pack:qa:tribe-tests-with-license:unitTest'.
+05:46:41  > There were test failures: 3 suites, 6 tests, 2 suite-level errors, 1 error, 4 ignored [seed: E173281EBB689715]
+
+Something appears to have changed between July & Oct, we should check if we are setting up and using the right material.

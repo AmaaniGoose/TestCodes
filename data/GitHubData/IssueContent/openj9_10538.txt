@@ -1,0 +1,9 @@
+The x86 write barrier evaluators use a number of "fake" relocations defined here:
+
+https://github.com/eclipse/omr/blob/983f4e2e9a5b4291ea4c260e61c5d5015f673bb2/compiler/runtime/Runtime.hpp#L215
+
+Presumably, this is because they all eventually map to a `TR_GlobalValue` relocation but there was no means of "carrying" the kind information from the evaluation phase to the binary encoding phase when the relocations are created.  The binary encoding phase is the only consumer of these "relocations".
+
+I call them "fake" relocations because they indiscriminately overload relocation numbers 100-104.  These appear to have been added 10 years ago when the number of relocations was relatively small and "100" different relocation types seemed an impossibly long way off.  However, since the number of relocations is more than 100 now these are actually incorrect.  I don't know if this will actually cause a problem, but this is not a good design going forward.
+
+The values could either be "adjusted", or the problem that prompted their introduction should be rethought to avoid their use.  I prefer the latter approach.

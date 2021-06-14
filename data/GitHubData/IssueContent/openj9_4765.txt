@@ -1,0 +1,12 @@
+`TR_J9SharedCacheVM::isClassVisible` currently only checks if `sourceClass` and `destClass` have been validated before calling the runtime frontend query `TR_J9VMBase::isClassVisible`. However, the class chains being valid in multiple runs doesn't necessarily imply visibility. Therefore, for AOT w/ SVM, a new validation record should be generated for this front end query. 
+
+This work is a good exercise for anyone who wants to become familiar with OpenJ9's AOT and SVM infrastructure; it is a relatively straightforward task if you use the existing validation records as examples
+
+- [ ] Add new `TR_ExternalRelocationTargetKind` enum, and associated string to `_externalRelocationTargetKindNames`, in OMR
+- [ ] Add new `SymbolValidationRecord` subclass to the SVM
+- [ ] Add _add_/_validate_ methods to the SVM for the new Validation Record
+- [ ] Write the relocation header info for this new validation record in `J9::AheadOfTimeCompile::initializeCommonAOTRelocationHeader` (and debug info in `J9::AheadOfTimeCompile::dumpRelocationHeaderData`)
+- [ ] Create a new `TR_RelocationRecord` subclass (and associated binary template)
+- [ ] Call the _add_ method in `TR_J9SharedCacheVM::isClassVisible` and _validate_ method in the `applyRelocation` method of the `TR_RelocationRecord` subclass
+
+Setting priority to low, because the one caller of `isClassVisible` does so only for non-AOT compilations; however, if ever there is another caller, or this code path is enabled under AOT, a validation for this query becomes functionally necessary.

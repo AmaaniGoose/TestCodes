@@ -1,0 +1,34 @@
+Failure link
+------------
+
+From an internal build `Test_openjdknext_j9_sanity.openjdk_ppc64_aix_Nightly/107`:
+```
+03:44:34  openjdk version "15-internal" 2020-09-15
+03:44:34  OpenJDK Runtime Environment (build 15-internal+0-adhoc.jenkins.BuildJDKnextppc64aixNightly)
+03:44:34  Eclipse OpenJ9 VM (build ibm_sdk-0852f80a4a, JRE 15 AIX ppc64-64-Bit Compressed References 20200328_174 (JIT enabled, AOT enabled)
+03:44:34  OpenJ9   - 0852f80a4a
+03:44:34  OMR      - e9bed7888
+03:44:34  JCL      - 7aba5c409a9 based on jdk-15+16)
+```
+
+Optional info
+-------------
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+08:08:35  STDERR:
+08:08:35  java.lang.RuntimeException: Connection not retried with proxy
+08:08:35  	at HttpURLConWithProxy.main(HttpURLConWithProxy.java:89)
+08:08:35  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+08:08:35  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+08:08:35  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+08:08:35  	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+08:08:35  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+08:08:35  	at java.base/java.lang.Thread.run(Thread.java:835)
+08:08:35  
+08:08:35  JavaTest Message: Test threw exception: java.lang.RuntimeException: Connection not retried with proxy
+08:08:35  JavaTest Message: shutting down test
+```
+To rebuild the failed tests, use the following links: https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=15&JDK_IMPL=openj9&BUILD_LIST=openjdk&PLATFORM=ppc64_aix&TARGET=jdk_net_0

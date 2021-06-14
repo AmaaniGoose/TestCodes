@@ -1,0 +1,57 @@
+I've tried to check if OpenJ9 and/or its' AOT may benefit a scala developer.
+
+So, I've tried to check how would it affect sbt startup time.
+I've tried to run sbt under each jvm in an empty directory and in a project and taken 5th outputs.
+
+Results are kinda strange.
+
+Hotspot version:
+```
+openjdk version "12.0.1" 2019-04-16
+OpenJDK Runtime Environment (build 12.0.1+12)
+OpenJDK 64-Bit Server VM (build 12.0.1+12, mixed mode, sharing)
+```
+
+OpenJ9 version:
+```
+openjdk version "12.0.1" 2019-04-16
+OpenJDK Runtime Environment AdoptOpenJDK (build 12.0.1+12)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.14.1, JRE 12 Mac OS X amd64-64-Bit Compressed References 20190418_59 (JIT enabled, AOT enabled)
+OpenJ9   - 412258978
+OMR      - 4a4278e6
+JCL      - 9fad1c64af based on jdk-12.0.1+12)
+```
+
+sbt options  (I'm using sbt 1.2.8):
+
+```
+# for OpenJ9
+export SBT_OPTS="-Xquickstart -Xaot  -Xshareclasses"
+# for hotspot
+export SBT_OPTS=""
+```
+
+For an empty directory OpenJ9 shows some positive results:
+
+```
+# OpenJ9
+sbt -verbose about  11.37s user 1.41s system 181% cpu 7.046 total
+# Hotspot
+sbt -verbose about  23.90s user 1.58s system 325% cpu 7.819 total
+```
+
+Real project (scalaz-zio):
+```
+# OpenJ9
+sbt -verbose about  20.49s user 2.48s system 182% cpu 12.589 total
+# Hotspot
+sbt -verbose about  41.31s user 2.47s system 364% cpu 12.004 total
+```
+
+And the tendency persists - the bigger a project is - the higher sbt startup time is.
+Hotspot always shows higher `user` time but it always starts faster.
+
+Also without AOT OpenJ9 is always 15-30% slower than hotspot.
+
+Could you give me a hint what I'm doing wrong?..
+

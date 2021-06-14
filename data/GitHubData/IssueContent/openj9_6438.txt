@@ -1,0 +1,1 @@
+This issue tracks the work to enable the arraycopy transformations in value propagation.  It will require AArch64 backend support for the `TR::arraycopy` and `TR::ArrayCHK` opcodes.

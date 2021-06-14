@@ -1,0 +1,4 @@
+Helps #2316
+Depends #2728 
+
+Sometimes it would be useful to only run a smaller set of testing for PR builds. We should be able to add a set of jobs that would accept any test target. Very similar to the [Grinder job](https://ci.eclipse.org/openj9/job/Test-Grinder/). We likely need them per spec and per platform because our pipelines call the existing test jobs without passing that information. We also currently do not pass the BUILD_LIST for PR jobs so we would have to hardcode the default parameter to be `functional,system'. This would cause a bit more overhead for the setup time, but would allow us to call any target from either test set.

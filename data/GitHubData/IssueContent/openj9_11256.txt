@@ -1,0 +1,68 @@
+Failure link
+------------
+
+From an internal build `Test_openjdknext_j9_sanity.openjdk_ppc64_aix_Nightly/278`:
+```
+23:15:12  openjdk version "16-internal" 2021-03-16
+23:15:12  OpenJDK Runtime Environment (build 16-internal+0-adhoc.jenkins.BuildJDKnextppc64aixNightly)
+23:15:12  Eclipse OpenJ9 VM (build master-a3c957cf411, JRE 16 AIX ppc64-64-Bit Compressed References 20201123_394 (JIT enabled, AOT enabled)
+23:15:12  OpenJ9   - a3c957cf411
+23:15:12  OMR      - f7190801d16
+23:15:12  JCL      - 30a060cd4a7 based on jdk-16+25)
+```
+To rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links:
+00:54:12  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=16&JDK_IMPL=openj9&BUILD_LIST=openjdk&PLATFORM=ppc64_aix&TARGET=jdk_lang_j9_0
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+23:31:52  STDOUT:
+23:31:52  [TestNG] Running:
+23:31:52    java/lang/invoke/VarHandles/VarHandleTestExact.java
+23:31:52  
+23:31:52  test VarHandleTestExact.testExactArraySet(class [Ljava.lang.Object;, "abcd", VarHandleTestExact$$Lambda$25/0x000000002282bb88@1045bd75): failure
+23:31:52  java.lang.InternalError: Compile stub invoked! Apart from deliberate reflective access, this should not happen. Please report this to the project so it can be addressed
+23:31:52  	at java.base/java.lang.invoke.OpenJDKCompileStub.OpenJDKCompileStubThrowError(OpenJDKCompileStub.java:38)
+23:31:52  	at java.base/java.lang.invoke.VarHandle.withInvokeBehavior(VarHandle.java:1675)
+23:31:52  	at VarHandleTestExact.doTest(VarHandleTestExact.java:185)
+23:31:52  	at VarHandleTestExact.testExactArraySet(VarHandleTestExact.java:153)
+23:31:52  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+23:31:52  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+23:31:52  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+23:31:52  	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+23:31:52  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+23:31:52  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+23:31:52  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+23:31:52  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+23:31:52  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+23:31:52  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+23:31:52  	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+23:31:52  	at org.testng.TestRunner.run(TestRunner.java:623)
+23:31:52  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+23:31:52  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+23:31:52  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+23:31:52  	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+23:31:52  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+23:31:52  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+23:31:52  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+23:31:52  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+23:31:52  	at org.testng.TestNG.run(TestNG.java:1018)
+23:31:52  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+23:31:52  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+23:31:52  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+23:31:52  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+23:31:52  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+23:31:52  	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+23:31:52  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+23:31:52  	at java.base/java.lang.Thread.run(Thread.java:853)
+
+23:31:52  ===============================================
+23:31:52  java/lang/invoke/VarHandles/VarHandleTestExact.java
+23:31:52  Total tests run: 122, Failures: 98, Skips: 24
+23:31:52  ===============================================
+```

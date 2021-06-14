@@ -1,0 +1,8 @@
+I noticed that since 0.16 the shared cache is on by default (great!) but also that the default directory for the cache has been changed from /tmp/javasharedresources to $HOME/javasharedresources, for understandable reasons.
+
+I and possibly many other Linux desktop users using OpenJ9 don't expect to find this directory directly in their home folder and I would ask to consider moving this directory to one of these locations:
+
+    $HOME/.cache/javasharedresources
+    $HOME/.local/share/javasharedresources
+
+This way, the usage of this feature (now on by default) does not clutter up the users' home directory.

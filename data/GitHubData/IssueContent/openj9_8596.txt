@@ -1,0 +1,56 @@
+Failure link
+------------
+https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/2243/
+
+- test category, sanity.openjdk 
+- OS/architecture, aix
+- public build SHAs (i.e. java -version output), in Grinder provides JDK_VERSION/JDK_IMPL info and helps identify point at which regression introduced: 
+```
+17:36:56  openjdk version "14" 2020-03-17
+17:36:56  OpenJDK Runtime Environment AdoptOpenJDK (build 14+34)
+17:36:56  Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.19.0-m1, JRE 14 AIX ppc64-64-Bit Compressed References 20200213_5 (JIT enabled, AOT enabled)
+17:36:56  OpenJ9   - 1c9b7f4
+17:36:56  OMR      - b00a624
+17:36:56  JCL      - 40d6bfc based on jdk-14+34)
+```
+
+Optional info
+-------------
+- New test:  
+- Part of the JDK14 Openj9 Milestone 1 Triage https://github.com/AdoptOpenJDK/openjdk-tests/issues/1614
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+20:52:53  "Thread-9651" prio=5 Id=10036 WAITING
+20:52:53  	at java.base@14/jdk.internal.misc.Unsafe.park(Native Method)
+20:52:53  	at java.base@14/java.util.concurrent.locks.LockSupport.park(LockSupport.java:211)
+20:52:53  	at java.base@14/java.util.concurrent.locks.AbstractQueuedSynchronizer.acquire(AbstractQueuedSynchronizer.java:714)
+20:52:53  	at java.base@14/java.util.concurrent.locks.AbstractQueuedSynchronizer.acquire(AbstractQueuedSynchronizer.java:937)
+20:52:53  	at java.base@14/java.util.concurrent.locks.ReentrantLock$Sync.lock(ReentrantLock.java:153)
+20:52:53  	at java.base@14/java.util.concurrent.locks.ReentrantLock.lock(ReentrantLock.java:322)
+20:52:53  	at java.base@14/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:343)
+20:52:53  	at java.base@14/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:803)
+20:52:53  	at java.base@14/java.net.Socket$SocketInputStream.read(Socket.java:982)
+20:52:53  	at java.base@14/java.net.Socket$SocketInputStream.read(Socket.java:977)
+20:52:53  	at app//Race$1.run(Race.java:63)
+20:52:53  
+20:52:53  "Attachment 43640" prio=10 Id=10037 RUNNABLE
+20:52:53  	at java.base@14/openj9.internal.tools.attach.target.DiagnosticUtils.dumpAllThreadsImpl(Native Method)
+20:52:53  	at java.base@14/openj9.internal.tools.attach.target.DiagnosticUtils.getThreadInfo(DiagnosticUtils.java:233)
+20:52:53  	at java.base@14/openj9.internal.tools.attach.target.DiagnosticUtils$$Lambda$18/0000000000000000.apply(Unknown Source)
+20:52:53  	at java.base@14/openj9.internal.tools.attach.target.DiagnosticUtils.executeDiagnosticCommand(DiagnosticUtils.java:169)
+20:52:53  	at java.base@14/openj9.internal.tools.attach.target.Attachment.doCommand(Attachment.java:249)
+20:52:53  	at java.base@14/openj9.internal.tools.attach.target.Attachment.run(Attachment.java:160)
+20:52:53  
+20:52:53  "file lock watchdog" prio=10 Id=10038 TIMED_WAITING
+20:52:53  	at java.base@14/java.lang.Object.wait(Native Method)
+20:52:53  	at java.base@14/java.lang.Object.wait(Object.java:221)
+20:52:53  	at java.base@14/java.util.TimerThread.mainLoop(Timer.java:553)
+20:52:53  	- locked java.util.TaskQueue@4f6ded77
+20:52:53  	at java.base@14/java.util.TimerThread.run(Timer.java:506)
+20:52:53  
+20:52:53  
+20:52:53  --- Timeout information end.
+20:52:53  elapsed time (seconds): 962.234
+```

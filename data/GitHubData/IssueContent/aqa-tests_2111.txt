@@ -1,0 +1,110 @@
+```
+09:46:35  ===============================================
+09:46:36  Running test testXXArgumentTesting_0 ...
+09:46:36  ===============================================
+09:46:36  testXXArgumentTesting_0 Start Time: Fri Dec 11 14:46:36 2020 Epoch Time (ms): 1607697996064
+...
+09:46:36  *** Starting test suite: XXArgumentTesting.xml ***
+09:46:36  Testing: Ensure -XXnosuballoc32bitmem is recognized on all platforms
+09:46:36  Test start time: 2020/12/11 14:46:36 Coordinated Universal Time
+09:46:36  Running command: "C:/Users/jenkins.EC2AMAZ-T7I06S9/workspace/Test_openjdk8_hs_sanity.functional_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java"   -Xcompressedrefs -XXnosuballoc32bitmem -version
+09:46:36  Time spent starting: 10 milliseconds
+09:46:36  Time spent executing: 54 milliseconds
+09:46:36  Test result: FAILED
+09:46:36  Output from test:
+09:46:36   [ERR] Error: Could not create the Java Virtual Machine.
+09:46:36   [ERR] Error: A fatal exception has occurred. Program will exit.
+09:46:36   [ERR] Unrecognized option: -XXnosuballoc32bitmem
+09:46:36  >> Success condition was not found: [Output match: (java|openjdk) version]
+09:46:36  >> Failure condition was not found: [Output match: Command-line option unrecognised]
+09:46:36  >> Failure condition was not found: [Output match: Unhandled Exception]
+09:46:36  >> Failure condition was not found: [Output match: Exception:]
+09:46:36  >> Failure condition was not found: [Output match: Processing dump event]
+09:46:36  
+09:46:36  Executing command: rm -f testjavacore.txt
+09:46:36  
+09:46:36  Testing: Generate a javacore without -XXnosuballoc32bitmem
+09:46:36  Test start time: 2020/12/11 14:46:36 Coordinated Universal Time
+09:46:36  Running command: "C:/Users/jenkins.EC2AMAZ-T7I06S9/workspace/Test_openjdk8_hs_sanity.functional_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java"   -Xcompressedrefs -Xdump:java:events=vmstop,file=testjavacore.txt -version
+09:46:36  Time spent starting: 3 milliseconds
+09:46:36  Time spent executing: 48 milliseconds
+09:46:36  Test result: FAILED
+09:46:36  Output from test:
+09:46:36   [ERR] Error: Could not create the Java Virtual Machine.
+09:46:36   [ERR] Error: A fatal exception has occurred. Program will exit.
+09:46:36   [ERR] Unrecognized option: -Xdump:java:events=vmstop,file=testjavacore.txt
+09:46:36  >> Success condition was not found: [Output match: (java|openjdk) version]
+09:46:36  >> Failure condition was not found: [Output match: Command-line option unrecognised]
+09:46:36  >> Failure condition was not found: [Output match: Unhandled Exception]
+09:46:36  >> Failure condition was not found: [Output match: Exception:]
+09:46:36  
+09:46:36  Testing: Verify that the sub allocator memory is listed in the javacore
+09:46:36  Test start time: 2020/12/11 14:46:36 Coordinated Universal Time
+09:46:36  Running command: cat testjavacore.txt
+09:46:36  Time spent starting: 4 milliseconds
+09:46:36  Time spent executing: 40 milliseconds
+09:46:36  Test result: FAILED
+09:46:36  Output from test:
+09:46:36   [ERR] cat: testjavacore.txt: No such file or directory
+09:46:36  >> Success condition was not found: [Output match: 32bit allocation regions]
+09:46:36  
+09:46:36  Executing command: rm -f testjavacore.txt
+09:46:36  
+09:46:36  Testing: Generate a javacore with -XXnosuballoc32bitmem
+09:46:36  Test start time: 2020/12/11 14:46:36 Coordinated Universal Time
+09:46:36  Running command: "C:/Users/jenkins.EC2AMAZ-T7I06S9/workspace/Test_openjdk8_hs_sanity.functional_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java"   -Xcompressedrefs -XXnosuballoc32bitmem -Xdump:java:events=vmstop,file=testjavacore.txt -version
+09:46:36  Time spent starting: 3 milliseconds
+09:46:37  Time spent executing: 44 milliseconds
+09:46:37  Test result: FAILED
+09:46:37  Output from test:
+09:46:37   [ERR] Error: Could not create the Java Virtual Machine.
+09:46:37   [ERR] Error: A fatal exception has occurred. Program will exit.
+09:46:37   [ERR] Unrecognized option: -XXnosuballoc32bitmem
+09:46:37  >> Success condition was not found: [Output match: (java|openjdk) version]
+09:46:37  >> Failure condition was not found: [Output match: Command-line option unrecognised]
+09:46:37  >> Failure condition was not found: [Output match: Unhandled Exception]
+09:46:37  >> Failure condition was not found: [Output match: Exception:]
+09:46:37  
+09:46:37  Testing: Verify that the sub allocator memory is not listed in the javacore on z/OS. All other platforms should use the sub-allocator when -XXnosuballoc32bitmem is used.
+09:46:37  Test start time: 2020/12/11 14:46:36 Coordinated Universal Time
+09:46:37  Running command: cat testjavacore.txt
+09:46:37  Time spent starting: 4 milliseconds
+09:46:37  Time spent executing: 42 milliseconds
+09:46:37  Test result: FAILED
+09:46:37  Output from test:
+09:46:37   [ERR] cat: testjavacore.txt: No such file or directory
+09:46:37  >> Success condition was not found: [Output match: Javacore filename]
+09:46:37  
+09:46:37  Testing: Verify -XX:MaxHeapSize -XX:InitialHeapSize -XX:ThreadStackSize
+09:46:37  Test start time: 2020/12/11 14:46:36 Coordinated Universal Time
+09:46:37  Running command: "C:/Users/jenkins.EC2AMAZ-T7I06S9/workspace/Test_openjdk8_hs_sanity.functional_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java"   -XX:MaxHeapSize=234m -XX:InitialHeapSize=11m -verbose:sizes -version
+09:46:37  Time spent starting: 4 milliseconds
+09:46:37  Time spent executing: 127 milliseconds
+09:46:37  Test result: FAILED
+09:46:37  Output from test:
+09:46:37   [ERR] openjdk version "1.8.0_282-internal"
+09:46:37   [ERR] OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_282-internal-202012111353-b05)
+09:46:37   [ERR] OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.282-b05, mixed mode)
+09:46:37  >> Success condition was not found: [Output match: OpenJ9]
+09:46:37  >> Required condition was not found: [Output match: -Xmx234M]
+09:46:37  >> Required condition was not found: [Output match: -Xms11M]
+...
+
+09:46:37  ---TEST RESULTS---
+09:46:37  Number of PASSED tests: 3 out of 9
+09:46:37  Number of FAILED tests: 6 out of 9
+09:46:37  
+09:46:37  ---SUMMARY OF FAILED TESTS---
+09:46:37  Ensure -XXnosuballoc32bitmem is recognized on all platforms
+09:46:37  Generate a javacore without -XXnosuballoc32bitmem
+09:46:37  Verify that the sub allocator memory is listed in the javacore
+09:46:37  Generate a javacore with -XXnosuballoc32bitmem
+09:46:37  Verify that the sub allocator memory is not listed in the javacore on z/OS. All other platforms should use the sub-allocator when -XXnosuballoc32bitmem is used.
+09:46:37  Verify -XX:MaxHeapSize -XX:InitialHeapSize -XX:ThreadStackSize
+09:46:37  -----------------------------
+09:46:37  
+09:46:37  
+09:46:37  **testXXArgumentTesting_0_PASSED**
+```
+
+https://ci.adoptopenjdk.net/view/Test_functional/job/Test_openjdk8_hs_sanity.functional_x86-64_windows/51/console

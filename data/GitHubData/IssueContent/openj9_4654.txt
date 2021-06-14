@@ -1,0 +1,12 @@
+java/rmi/server/RemoteServer/AddrInUse.java failed with all platforms, same behavior with JDK11
+https://github.com/eclipse/openj9/issues/3377
+
+java/io/File/DeleteOnExitNPE.java failed intermittently with ' No output should have been received from the process' on win64 with openj9 java8
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/openjdk8_j9_openjdktest_x86-64_windows/177/testReport/junit/java_io_File_DeleteOnExitNPE/java/DeleteOnExitNPE/
+
+java/util/zip/ZipFile/DeleteTempJar.java intermittently failed on Win32 with openj9 java8
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/openjdk8_j9_openjdktest_x86-32_windows/115/consoleFull
+
+There are other failures with JDK8
+Details in https://github.com/AdoptOpenJDK/openjdk-tests/issues/821
+https://github.com/AdoptOpenJDK/openjdk-tests/issues/830

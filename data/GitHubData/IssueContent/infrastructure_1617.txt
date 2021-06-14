@@ -1,0 +1,3 @@
+The dynamic machines do not have cygwin or any other dependencies installed on them. For now I've pinned the sign job to use the static win2012 machines
+
+_Originally posted by @gdams in https://github.com/AdoptOpenJDK/openjdk-infrastructure/issues/1616#issuecomment-707601803_

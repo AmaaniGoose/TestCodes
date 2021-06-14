@@ -1,0 +1,58 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk11_j9_sanity.openjdk_aarch64_linux/40/` (`ub18-aarch64-8`):
+```
+openjdk version "11.0.12" 2021-07-20
+OpenJDK Runtime Environment Temurin-11.0.12+2-202105200110 (build 11.0.12+2-202105200110)
+Eclipse OpenJ9 VM Temurin-11.0.12+2-202105200110 (build master-5b78aff29, JRE 11 Linux aarch64-64-Bit Compressed References 20210520_136 (JIT enabled, AOT enabled)
+OpenJ9   - 5b78aff29
+OMR      - 91436845b
+JCL      - 732dbacce0 based on jdk-11.0.12+2)
+```
+[Rerun in Grinder](https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?TARGET=jdk_math_0&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;PLATFORM=aarch64_linux&amp;KEEP_REPORTDIR=true&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-linux-aarch64-openj9%2F136%2FOpenJDK11U-jre_aarch64_linux_openj9_2021-05-20-01-00.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-linux-aarch64-openj9%2F136%2FOpenJDK11U-testimage_aarch64_linux_openj9_2021-05-20-01-00.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-linux-aarch64-openj9%2F136%2FOpenJDK11U-jdk_aarch64_linux_openj9_2021-05-20-01-00.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-linux-aarch64-openj9%2F136%2FOpenJDK11U-debugimage_aarch64_linux_openj9_2021-05-20-01-00.tar.gz&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;LIGHT_WEIGHT_CHECKOUT=true&amp;ARTIFACTORY_SERVER=na.artifactory.swg-devops&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=11&amp;USER_CREDENTIALS_ID=&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=&amp;JDK_REPO=https%3A%2F%2Fgithub.com%2Fibmruntimes%2Fopenj9-openjdk-jdk11&amp;RELEASE_TAG=&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;UPSTREAM_JOB_NAME=&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=openj9&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=openj9&amp;SSH_AGENT_CREDENTIAL=83181e25-eea4-4f55-8b3e-e79615733226&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=4e18ffe7-b1b1-4272-9979-99769b68bcc2&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=openjdk&amp;UPSTREAM_JOB_NUMBER=&amp;TIME_LIMIT=10&amp;JVM_OPTIONS=&amp;PARALLEL=)
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+[2021-05-20T02:31:04.642Z] Running test jdk_math_0 ...
+[2021-05-20T02:31:04.642Z] ===============================================
+[2021-05-20T02:31:04.642Z] jdk_math_0 Start Time: Wed May 19 22:31:03 2021 Epoch Time (ms): 1621477863964
+[2021-05-20T02:31:04.642Z] "/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+[2021-05-20T02:31:04.642Z] JVMSHRC005I No shared class caches available
+[2021-05-20T02:31:04.642Z] JVMSHRC005I No shared class caches available
+[2021-05-20T02:31:04.642Z] cache cleanup done
+[2021-05-20T02:31:04.642Z] variation: -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache Mode150
+[2021-05-20T02:31:04.642Z] JVM_OPTIONS:  -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache -XX:+UseCompressedOops 
+
+[2021-05-20T02:31:49.944Z] java.lang.NumberFormatException: For input string: "00027hi1e3966"
+[2021-05-20T02:31:49.944Z] 	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+[2021-05-20T02:31:49.944Z] 	at java.base/java.lang.Integer.parseInt(Integer.java:652)
+[2021-05-20T02:31:49.944Z] 	at java.base/java.math.BigInteger.<init>(BigInteger.java:543)
+[2021-05-20T02:31:49.944Z] 	at BigIntegerTest.stringConv(BigIntegerTest.java:827)
+[2021-05-20T02:31:49.944Z] 	at BigIntegerTest.main(BigIntegerTest.java:1270)
+[2021-05-20T02:31:49.944Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-05-20T02:31:49.944Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2021-05-20T02:31:49.944Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-05-20T02:31:49.944Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+[2021-05-20T02:31:49.944Z] 	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:312)
+[2021-05-20T02:31:49.944Z] 	at java.base/java.lang.Thread.run(Thread.java:861)
+[2021-05-20T02:31:49.944Z] 
+[2021-05-20T02:31:49.944Z] JavaTest Message: Test threw exception: java.lang.NumberFormatException
+[2021-05-20T02:31:49.944Z] JavaTest Message: shutting down test
+[2021-05-20T02:31:49.944Z] 
+[2021-05-20T02:31:49.944Z] STDOUT:
+[2021-05-20T02:31:49.944Z] Seed from RandomFactory = 2386127766142747498L
+[2021-05-20T02:31:49.944Z] 
+[2021-05-20T02:31:49.944Z] TEST RESULT: Failed. Execution failed: `main' threw exception: java.lang.NumberFormatException: For input string: "00027hi1e3966"
+[2021-05-20T02:31:49.944Z] --------------------------------------------------
+[2021-05-20T02:35:04.930Z] Test results: passed: 40; failed: 1
+[2021-05-20T02:35:17.429Z] Report written to /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux/jvmtest/openjdk/report/html/report.html
+[2021-05-20T02:35:17.429Z] Results written to /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_aarch64_linux/openjdk-tests/TKG/output_16214763519782/jdk_math_0/work
+[2021-05-20T02:35:17.429Z] Error: Some tests failed or other problems occurred.
+[2021-05-20T02:35:17.429Z] 
+```

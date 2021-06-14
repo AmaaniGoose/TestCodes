@@ -1,0 +1,54 @@
+Below are the details about issue with JRE 1.8.0_275 build.
+-GC is not executing as expected.
+
+**Platform:** Mac OS X (mojave, catalina etc)
+
+**JRE-1**:
+openjdk version "1.8.0_275"	
+OpenJDK Runtime Environment (build 1.8.0_275-b01)	
+Eclipse OpenJ9 VM (build openj9-0.23.0, JRE 1.8.0 Mac OS X amd64-64-Bit 20201112_584 (JIT enabled, AOT enabled)	
+OpenJ9   - 0394ef754	
+OMR      - 582366ae5	
+JCL      - b52d2ff7ee based on jdk8u275-b01)	
+
+**JRE-2**:
+java version "1.8.0_181"	
+Java(TM) 2 Runtime Environment, Standard Edition (IBM build 1.8.0_181-b13 25_Jul_2018_11_11 Mac OS X x64(SR5 FP20))	
+Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)	
+IBM Java ORB build orb80-20180617.00	
+XML build XL TXE Java 1.0.60	
+XML build IBM JAXP 1.6.1	
+XML build XML4J 4.5.30	
+
+
+gcpolicy: concurrentScavenge
+(tried with default gencon too)
+
+**Problem:**
+with JRE-1 which we use with our application. 
+-GC is not executing a expected.
+-There is a significant increase in memory even application is idle.
+-performing tests causes increase in memory - but not released as expected.
+
+when using JRE-2 shows significant advantage compared to JRE-1 with our application.
+
+**Analysis:** 
+**_Testing scenario: 1_**
+**JRE-1**:
+starting our application in consumes: 292.0MB
+leave application idle for 1 hour: 28.9MB CONSUMED
+After testing and final memory will be: 693.5MB 
+
+
+**_Testing scenario: 2_**
+**JRE-2**:
+starting our application in consumes: 486.7MB
+leave application idle for 1 hour: 7.7MB RELEASED
+After testing and final memory will be: 315.1MB 
+
+-Testing scenarios are same.
+-Mac OS X is installed in VM environment for testing.
+-Our application is standalone application which runs in Mac as well as Windows. 
+-The issue is not seen with windows version of JRE.
+
+can you please help with the issue so that we can continue with JRE-1 ?

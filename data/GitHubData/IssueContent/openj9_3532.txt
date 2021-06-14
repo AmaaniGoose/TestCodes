@@ -1,0 +1,3 @@
+Current node flag `isSafeForCGToFastPathUnsafeCall` is used to optimize Unsafe.CAS calls made from VarHandle operation methods in UnsafeFastPath. When atomic intrinsic of compareAndSwap is available in OMR, Unsafe.CAS should be converted to its equivalant atomic intrinsic.
+
+Depends on https://github.com/eclipse/omr/pull/2174

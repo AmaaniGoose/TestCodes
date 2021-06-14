@@ -1,0 +1,89 @@
+While trying to find the fastest way to copy content from one array to another, I found this case where, at first glance, Hotspot seems to outperform OpenJ9:
+
+- Hotspot: ~ 1.193 secs
+- _**OpenJ9: ~ 1.46 secs**_
+
+Both of them are average values.
+
+I repeated the process 10 times each, so Hotspot and OpenJ9 had time to optimize their compiled bytecode after each run.
+
+Here's the code I'm using to perform the test:
+
+<details><summary>Test Class --> Just copy & paste</summary>
+<pre>
+
+```java
+
+package test;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+public final class main {
+  public main () {
+    final long start = System.currentTimeMillis();
+    @SuppressWarnings("serial")
+    final ArrayList<String> test1 = new ArrayList<String>() {{
+      int counter = 0;
+      for (@SuppressWarnings("unused") final Object object : new Object[Short.MAX_VALUE * (Short.MAX_VALUE / 16)]) {
+        if (counter == 1000) {
+          this.add("Hi!");
+        }
+        else {
+          this.add(null);
+        }
+        counter++;
+      }
+    }};
+    System.out.println(main.containsNull(test1));
+    final long end = System.currentTimeMillis();
+    System.out.println(String.valueOf((end - start)/1000D) + " seconds");
+  }
+  public static final <Generic> Collection<Generic> containsNull (final Collection<Generic> genericCollection) {
+    if ( null == genericCollection ) {
+      throw new RuntimeException("No null collections allowed!");
+    }
+    final Collection<Generic> result_collection;
+    final ArrayList<Generic> tmp_arrayList = new ArrayList<Generic>(genericCollection.size());
+    for (final Generic generic : genericCollection) {
+      if (generic != null) {
+        tmp_arrayList.add(generic);
+      }
+    }
+    tmp_arrayList.trimToSize();
+    result_collection = tmp_arrayList;
+    return result_collection;
+  }
+}
+
+
+```
+
+</pre>
+</details>
+
+What could be happening?
+
+If I recall correctly, once I read somewhere on the internet that OpenJ9 was way faster than Hotspot, at the cost of being more CPU intensive, whereas Hotspot was the opposite (+ RAM / - CPU).
+
+<details><summary>PC Specs</summary>
+<img src=https://user-images.githubusercontent.com/8020999/57007838-3723fe80-6bb1-11e9-8c0f-16373c96c04b.png>
+</details>
+
+This may be trivial for some people, but i'm concerned over this topic 'cause, although I made this test just to show what's happening, things get worse when the array gets bigger, and the difference starts to become more and more noticeable...and this software I'm developing isn't going to run on this specific PC, but on lower end ones, with even bigger loads, so any improvement in this area will be welcome, no matter how big. Also, in my opinion, I'm pretty sure OpenJ9 is the best, as I've seen other areas where this VM is way better than Hotspot, so I'm confident that this can be improved...
+
+I'd do bigger tests, but I hate waiting...
+
+I have no clue over what's happening here.
+
+Also any improvements/critics on my code are welcome...
+
+P.S: Also I read about _System.arrayCopy vs Arrays.copyOf_,but anyways it seems both VM's now use System.arrayCopy internally when Arrays.copyOf is invoked...
+
+Lastly, If you're wondering why I'm using ArrayLists instead of normal arrays, it's because my PC ran faster when using these instead of normal arrays.
+
+EDIT: I almost forgot:
+
+<details><summary>Hotspot</summary><img src=https://user-images.githubusercontent.com/8020999/57008379-51f87200-6bb5-11e9-80b5-749615ff2340.png></details>
+
+<details><summary>OpenJ9</summary><img src=https://user-images.githubusercontent.com/8020999/57008396-7a806c00-6bb5-11e9-9383-3ed32bffc1d2.png></details>

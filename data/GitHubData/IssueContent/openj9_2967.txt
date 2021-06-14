@@ -1,0 +1,26 @@
+Signal handler for `SIG_RI_INTERRUPT` is registered in `linuxs390/j9ri.c`.
+
+1) [j9ri_enableRISupport](https://github.com/eclipse/openj9/blob/master/runtime/port/linuxs390/j9ri.c#L111)
+
+2) [j9ri_disableRISupport](https://github.com/eclipse/openj9/blob/master/runtime/port/linuxs390/j9ri.c#L155)
+
+```
+OMRSIG_SIGACTION(SIG_RI_INTERRUPT, NULL, NULL)
+```
+
+The above code is used in `j9ri_enableRISupport` and `j9ri_disableRISupport`. The above code translates to a `nop` in case of `sigaction`. In case  of `omrsig_primary_sigaction`, the above code will return `-1`.
+
+I think the goal is to unregister handler for `SIG_RI_INTERRUPT` while restoring the original handler. If so, the old handler`needs to be cached and passed as an input.
+
+**== Correct usage ==**
+
+During registration:
+```
+OMRSIG_SIGACTION(SIG_RI_INTERRUPT, &newAction, &oldAction)
+```
+
+During unregistration:
+```
+OMRSIG_SIGACTION(SIG_RI_INTERRUPT, &oldAction, NULL)
+```
+

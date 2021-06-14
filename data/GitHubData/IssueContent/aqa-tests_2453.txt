@@ -1,0 +1,18 @@
+Jobs failed at compiling stage but get `BUILD SUCCESSFUL` and continued to run test stage.
+
+https://ci.adoptopenjdk.net/view/Test_external/job/Test_openjdk11_hs_extended.external_x86-64_linux_jenkins/30/console
+
+```
+23:15:29       [exec]  ---> ea5c394c8d3b
+23:15:29       [exec] Step 8/21 : RUN apt-get update 	&& apt-get install -y --no-install-recommends git maven 	&& rm -rf /var/lib/apt/lists/*
+23:15:29       [exec]  ---> Running in c55b0d10c17e
+23:15:30       [exec] no status provided on response: unknown
+23:15:30       [exec] Result: 1
+23:15:30  
+23:15:30  dist:
+23:15:30       [copy] Copying 2 files to /home/jenkins/workspace/Test_openjdk11_hs_extended.external_x86-64_linux_jenkins/jvmtest/external/jenkins
+23:15:30  
+23:15:30  BUILD SUCCESSFUL
+23:15:30  Total time: 45 seconds
+23:15:30  0
+```

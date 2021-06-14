@@ -1,0 +1,13 @@
+Opening this PR based on the following conversation in https://github.com/eclipse/omr/pull/4183
+
+>andrewcraik commented 1 hour ago
+>the AMD sequences are functionally different because we use multiple instructions rather than the single instruction on intel, but I'm fine to move that off to another place.
+>
+> 
+>dsouzai commented 1 hour ago
+>Does that mean if one was to generate (relocatable) code on Intel and run it on an AMD machine, the code wouldn't execute in an functionally equivalent way? Or is it just that the code sequence is no longer as optimal?
+>
+>andrewcraik commented 1 hour ago
+>I believe it may not be functionally equivalent..
+
+It may be functionally necessary to distinguish between processor vendors when validation AOT code. Because a SCC can be embedded in a container, it is possible for the SCC to have been generated on one processor and run on a different one.

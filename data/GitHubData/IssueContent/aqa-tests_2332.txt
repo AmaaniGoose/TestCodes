@@ -1,0 +1,32 @@
+**Describe the bug**
+On the `MiniMix_5m_1` test in the `system` category (although it has also been seen on [ConcurrentLoadTest_5m_1](https://ci.adoptopenjdk.net/job/Grinder/7373/))we are getting this failure periodically. I'm doing various tests to figure out when it's occurring but so far I've only seen it on the only POWER9 system that we have ([test-osuosl-aix71-ppc64-1](https://ci.adoptopenjdk.net/computer/test-osuosl-aix71-ppc64-1/))
+```
+ LT  >>> Captured test output >>>
+ LT  testStarted : testAPI(net.adoptopenjdk.test.concurrent.atomic.AtomicLongArrayTest)
+ LT  testFailure: testAPI(net.adoptopenjdk.test.concurrent.atomic.AtomicLongArrayTest): 27 : weakCompareAndSet() expected:<true> but was:<false>
+ LT  junit.framework.AssertionFailedError: 27 : weakCompareAndSet() expected:<true> but was:<false>
+```
+
+**To Reproduce**
+Steps to reproduce the behavior (or Grinder rerun link): https://ci.adoptopenjdk.net/job/Grinder/7395
+
+**Expected behavior**
+Test pass :-)
+
+**Additional context**
+Add any other context about the problem here.
+I've queued up various grinders after the initial tests I did yesterday in order to test various options to determine the extent of it. So far I've only been testing on JDK11 HotSpot - mostly these are five iteration runs. I'll add notes as they complete.
+- JDK11/HS again: https://ci.adoptopenjdk.net/job/Grinder/7394 (3/5 iterations failed)
+- JDK11/HS yet again :-) https://ci.adoptopenjdk.net/job/Grinder/7395 (5/5 iterations failed)
+- JDK11/J9: https://ci.adoptopenjdk.net/job/Grinder/7396 (0/5 iterations failed)
+- JDK16/HS: https://ci.adoptopenjdk.net/job/Grinder/7397 (2/5 iterations failed)
+- JDK11/HS with `-Xint`: https://ci.adoptopenjdk.net/job/Grinder/7398 (Passed)
+- JDK11/HS with `timeLimit=1m` instead of `5m`: https://ci.adoptopenjdk.net/job/Grinder/7399 (Passed)
+
+I've also queued up some more 10 iteration runs on other POWER8 machines just to get some extra validation as to whether it is specific to the POWER9 system:
+- [test-osuosl-aix72-ppc64-2](https://ci.adoptopenjdk.net/job/Grinder/7400/console) - 0/10 iterations failed
+- [build-osuosl-aix71-ppc64-2](https://ci.adoptopenjdk.net/job/Grinder/7401/console) - 0/10 iterations failed
+- [test-ibm-aix71-ppc64-2](https://ci.adoptopenjdk.net/job/Grinder/7402/console) - 0/10 iterations failed
+- And https://ci.adoptopenjdk.net/job/Grinder/7403/console on which ever machine it happens to land on :-) - 0/10 iterations failed
+
+FYI @lumpfish as we were discussing this

@@ -1,0 +1,1 @@
+Currently, the network communication layer in JITaaS is implemented using unix socket API. For portability we should replace that API with the one offered by the portlib and implemented in j9sock.c, unless it adds too much overhead (I doubt it)

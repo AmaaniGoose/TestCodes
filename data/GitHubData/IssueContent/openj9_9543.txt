@@ -1,0 +1,21 @@
+Failure link
+------------
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.system_x86-64_linux_xl/223/tapResults/
+test-godaddy-ubuntu1604-x64-4
+
+Optional info
+-------------
+
+- intermittent failure (yes|no): yes
+- regression or new test:  regression
+- if regression, what are the last passing / first failing public SHAs (OpenJ9, OMR, JCL) :
+
+Failure output (captured from console output)
+---------------------------------------------
+Include test case name, stack trace output.  If test fails with a crash, please include a link to the artifacts (xxxx_test_output.tar.gz) as they include the core/dmp files.  Artifacts are either stored as an attachment to the CI server job itself or as a link from the job to an Artifactory location.
+```
+LT  FAIL: gnu.testlet.java.net.InetSocketAddress.InetSocketAddressTest: Error : test_Constructors failed - 0 Should not throw Exception here (number 0)
+LT  FAIL: gnu.testlet.java.net.InetSocketAddress.InetSocketAddressTest: Error : test_Constructors failed - 2 Unexpected Exception here (number 0)
+LT  FAIL: gnu.testlet.java.net.InetSocketAddress.InetSocketAddressTest: Error : test_Constructors failed - 3 Unexpected Exception here (number 0)
+```
+

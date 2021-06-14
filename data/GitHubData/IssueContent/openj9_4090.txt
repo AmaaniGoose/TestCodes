@@ -1,0 +1,60 @@
+https://ci.eclipse.org/openj9/job/Test-extended.functional-JDK11-osx_x86-64_cmprssptrs/20
+testSoftMxDisclaimMemory_2
+testSoftMxDisclaimMemory_LP4k_2
+```
+===============================================
+Running test testSoftMxDisclaimMemory_2 ...
+===============================================
+testSoftMxDisclaimMemory_2 Start Time: Tue Dec 18 04:43:31 2018 Epoch Time (ms): 1545126211692
+variation: Mode601
+JVM_OPTIONS: -Xcompressedrefs -Xcompressedrefs -Xjit -Xgcpolicy:optthruput 
+[IncludeExcludeTestAnnotationTransformer] [INFO] exclude file is /Users/jenkins/workspace/Test-extended.functional-JDK11-osx_x86-64_cmprssptrs/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/TestConfig/resources/excludes/latest_exclude_11.txt
+...
+... TestNG 6.14.2 by Cédric Beust (cedric@beust.com)
+...
+
+[SoftmxAdvanceTest] [ERROR] 	FAIL: Memory didn't release back to OS! Post memory size 3823534080 is less than or equal to previous memory size 3821236224
+[SoftmxAdvanceTest] [WARN] 	Generate Java core dump after forcing GC.
+JVMJ9VM079W triggerOneOffDump(java) requires j9dmp29
+JVMJ9VM079W triggerOneOffDump(heap) requires j9dmp29
+JVMJ9VM079W triggerOneOffDump(system) requires j9dmp29
+[SoftmxAdvanceTest] [ERROR] 	FAIL: Heap can't shrink to the reset max heap size within 5 minutes!
+[SoftmxAdvanceTest] [WARN] 	Generate Java core dump after forcing GC.
+JVMJ9VM079W triggerOneOffDump(java) requires j9dmp29
+JVMJ9VM079W triggerOneOffDump(heap) requires j9dmp29
+JVMJ9VM079W triggerOneOffDump(system) requires j9dmp29
+[SoftmxAdvanceTest] [ERROR] 	FAIL: Heap can't shrink to the reset max heap size within 5 minutes!
+Exception in thread "MemoryMXBean notification dispatcher" java.lang.OutOfMemoryError: Java heap space
+	at jdk.management/com.ibm.lang.management.internal.MemoryNotificationThread.processNotificationLoop(Native Method)
+	at jdk.management/com.ibm.lang.management.internal.MemoryNotificationThread.run(MemoryNotificationThread.java:183)
+FAILED: testDisclaimMemoryEffects(5)
+java.lang.OutOfMemoryError: Java heap space
+	at java.management/com.ibm.java.lang.management.internal.MemoryMXBeanImpl.getHeapMemoryUsageImpl(Native Method)
+	at java.management/com.ibm.java.lang.management.internal.MemoryMXBeanImpl.getHeapMemoryUsage(MemoryMXBeanImpl.java:277)
+	at j9vm.test.softmx.SoftmxAdvanceTest.runTestDisclaimMemoryEffects(SoftmxAdvanceTest.java:137)
+	at j9vm.test.softmx.SoftmxAdvanceTest.testDisclaimMemoryEffects(SoftmxAdvanceTest.java:64)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+	at org.testng.TestRunner.run(TestRunner.java:505)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+	at org.testng.TestNG.runSuites(TestNG.java:1049)
+	at org.testng.TestNG.run(TestNG.java:1017)
+	at org.testng.TestNG.privateMain(TestNG.java:1354)
+	at org.testng.TestNG.main(TestNG.java:1323)
+```

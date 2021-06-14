@@ -1,0 +1,40 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.functional_x86-64_windows_Nightly_testList_0/195
+TestJps_SE80_0
+win2012-x86-6
+```
+[2020-12-17T05:35:44.643Z] PASSED: testApplicationArguments
+[2020-12-17T05:35:44.643Z] PASSED: testJpsIdOnly
+[2020-12-17T05:35:44.643Z] PASSED: testJpsPackageName
+[2020-12-17T05:35:44.643Z] PASSED: testJpsSanity
+[2020-12-17T05:35:44.643Z] PASSED: testJvmArguments
+[2020-12-17T05:35:44.643Z] FAILED: testComposedArguments
+[2020-12-17T05:35:44.643Z] java.lang.AssertionError: Missing argument: foo
+[2020-12-17T05:35:44.643Z] 	at org.testng.AssertJUnit.fail(AssertJUnit.java:59)
+[2020-12-17T05:35:44.643Z] 	at org.testng.AssertJUnit.assertTrue(AssertJUnit.java:24)
+[2020-12-17T05:35:44.643Z] 	at org.openj9.test.attachAPI.TestJps.testComposedArguments(TestJps.java:134)
+[2020-12-17T05:35:44.643Z] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2020-12-17T05:35:44.643Z] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2020-12-17T05:35:44.643Z] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2020-12-17T05:35:44.643Z] 	at java.lang.reflect.Method.invoke(Method.java:498)
+[2020-12-17T05:35:44.643Z] 	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+[2020-12-17T05:35:44.643Z] 	at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+[2020-12-17T05:35:44.643Z] 	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+[2020-12-17T05:35:44.643Z] 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+[2020-12-17T05:35:44.643Z] 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+[2020-12-17T05:35:44.643Z] 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+[2020-12-17T05:35:44.643Z] 	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+[2020-12-17T05:35:44.643Z] 	at org.testng.TestRunner.run(TestRunner.java:505)
+[2020-12-17T05:35:44.643Z] 	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+[2020-12-17T05:35:44.643Z] 	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+[2020-12-17T05:35:44.643Z] 	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+[2020-12-17T05:35:44.643Z] 	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+[2020-12-17T05:35:44.643Z] 	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+[2020-12-17T05:35:44.643Z] 	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+[2020-12-17T05:35:44.643Z] 	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+[2020-12-17T05:35:44.643Z] 	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+[2020-12-17T05:35:44.644Z] 	at org.testng.TestNG.runSuites(TestNG.java:1049)
+[2020-12-17T05:35:44.644Z] 	at org.testng.TestNG.run(TestNG.java:1017)
+[2020-12-17T05:35:44.644Z] 	at org.testng.TestNG.privateMain(TestNG.java:1354)
+[2020-12-17T05:35:44.644Z] 	at org.testng.TestNG.main(TestNG.java:1323)
+
+```

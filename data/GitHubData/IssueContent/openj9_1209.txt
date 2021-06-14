@@ -1,0 +1,44 @@
+While trying to debug another failure I made a debug build. That build failed with an assertion during GVP:
+
+```
+Assertion failed at /root/openj9-openjdk-jdk9/build/linux-arm-normal-server-release/vm/compiler/../compiler/trj9/optimizer/J9TransformUtil.cpp:374: isFinalFieldPointingAtNativeStruct(symRef, comp)
+VMState: 0x000513ff
+	dereferenceStructPointerChain should be dealing with reference fields
+compiling java/nio/DirectByteBuffer.get([BII)Ljava/nio/ByteBuffer; at level: warm
+#0: function TR_LinuxCallStackIterator::printStackBacktrace(TR::Compilation*)+0 [0xf5b73bbc]
+#1: function TR_Debug::printStackBacktrace()+0 [0xf5b896b8]
+#2: /home/jkingdon/sdks/jdk-debug/lib/default/libj9jit29.so(+0x6c4d9c) [0xf5aaed9c]
+#3: function TR::assertion(char const*, int, char const*, char const*, ...)+0 [0xf5aaeed0]
+#4: /home/jkingdon/sdks/jdk-debug/lib/default/libj9jit29.so(+0xb0e764) [0xf5ef8764]
+#5: function J9::TransformUtil::transformIndirectLoadChainImpl(TR::Compilation*, TR::Node*, TR::Node*, void*, TR::Node**)+0 [0xf5efc2d0]
+#6: function J9::TransformUtil::transformIndirectLoadChainAt(TR::Compilation*, TR::Node*, TR::Node*, unsigned int*, TR::Node**)+0 [0xf5efbe08]
+#7: /home/jkingdon/sdks/jdk-debug/lib/default/libj9jit29.so(+0xc9b17c) [0xf608517c]
+#8: /home/jkingdon/sdks/jdk-debug/lib/default/libj9jit29.so(+0xc9b870) [0xf6085870]
+#9: function constrainIiload(OMR::ValuePropagation*, TR::Node*)+0 [0xf608cc10]
+#10: function OMR::ValuePropagation::launchNode(TR::Node*, TR::Node*, int)+0 [0xf60f895c]
+#11: function constrainChildren(OMR::ValuePropagation*, TR::Node*)+0 [0xf60be0f8]
+#12: function constrainIand(OMR::ValuePropagation*, TR::Node*)+0 [0xf60a59e8]
+#13: function OMR::ValuePropagation::launchNode(TR::Node*, TR::Node*, int)+0 [0xf60f895c]
+#14: function constrainChildren(OMR::ValuePropagation*, TR::Node*)+0 [0xf60be0f8]
+#15: function constrainAdd(OMR::ValuePropagation*, TR::Node*)+0 [0xf609e904]
+#16: function OMR::ValuePropagation::launchNode(TR::Node*, TR::Node*, int)+0 [0xf60f895c]
+#17: function constrainChildren(OMR::ValuePropagation*, TR::Node*)+0 [0xf60be0f8]
+#18: function constrainIshr(OMR::ValuePropagation*, TR::Node*)+0 [0xf60a497c]
+#19: function OMR::ValuePropagation::launchNode(TR::Node*, TR::Node*, int)+0 [0xf60f895c]
+#20: function constrainChildren(OMR::ValuePropagation*, TR::Node*)+0 [0xf60be0f8]
+#21: function OMR::ValuePropagation::launchNode(TR::Node*, TR::Node*, int)+0 [0xf60f895c]
+#22: function OMR::ValuePropagation::processTrees(TR::TreeTop*, TR::TreeTop*)+0 [0xf60e9960]
+#23: function TR::GlobalValuePropagation::processBlock(TR_StructureSubGraphNode*, bool, bool)+0 [0xf60d0a44]
+#24: function TR::GlobalValuePropagation::processStructure(TR_StructureSubGraphNode*, bool, bool)+0 [0xf60cf0cc]
+#25: function TR::GlobalValuePropagation::processRegionNode(TR_StructureSubGraphNode*, bool, bool)+0 [0xf60d03b4]
+#26: function TR::GlobalValuePropagation::processRegionNode(TR_StructureSubGraphNode*, bool, bool)+0 [0xf60d0138]
+#27: function TR::GlobalValuePropagation::processRegionNode(TR_StructureSubGraphNode*, bool, bool)+0 [0xf60d0138]
+#28: function TR::GlobalValuePropagation::processRegionNode(TR_StructureSubGraphNode*, bool, bool)+0 [0xf60d0138]
+#29: function TR::GlobalValuePropagation::processRegionSubgraph(TR_StructureSubGraphNode*, bool, bool, bool)+0 [0xf60cffb4]
+```
+Failing tests: 
+TEST: java/beans/XMLDecoder/spec/TestDouble.java
+TEST: java/beans/Introspector/4058433/TestSwingContainer.java
+TEST: java/beans/Introspector/Test4274639.java
+TEST: java/beans/Introspector/8132566/InheritPropertyInfoTest.java
+(and many others)

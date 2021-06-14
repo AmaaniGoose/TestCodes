@@ -1,0 +1,7 @@
+The JCK-specific machines are not being well utilized.
+
+`jck-softlayer-x64-ubuntu-16.04-1`
+`jck-softlayer-x64-ubuntu-16.04-2`
+`jck-softlayer-x64-ubuntu-16.04-3`
+
+Proposal is to decommission one or more at the moment.  Of course, they can always be recreated if required.

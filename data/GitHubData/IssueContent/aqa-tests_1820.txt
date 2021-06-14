@@ -1,0 +1,17 @@
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_extended.external_x86-64_linux_kafka/2/console
+
+```
+12:17:55  FAILURE: Build failed with an exception.
+12:17:55  
+12:17:55  * Where:
+12:17:55  Build file '/kafka/build.gradle' line: 165
+12:17:55  
+12:17:55  * What went wrong:
+12:17:55  A problem occurred evaluating root project 'kafka'.
+12:17:55  > Failed to apply plugin [id 'com.github.spotbugs']
+12:17:55     > Gradle version Gradle 5.1 is unsupported. Please use Gradle 5.2 or later.
+12:17:55  
+1
+```
+
+Last passed build was on Feb 23: https://ci.adoptopenjdk.net/job/openjdk11_j9_external_extended_kafka_x86-64_linux/42/

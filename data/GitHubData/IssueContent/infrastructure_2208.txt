@@ -1,0 +1,7 @@
+Several of the machines have less than 10GB available. For most purposes this is not a problem, but since we have jenkins configured to mark machines offline when they have less than this it's causing unecessary availability problems for the RISC-V build pipelines which use [cross-compiled-version-out](https://ci.adoptopenjdk.net/job/build-scripts/job/utils/job/cross-compiled-version-out/) (restricted access).
+
+This needs to be fixed to ensure build pipeline stability.
+
+Links to machines affected by this on a regular basis:
+- https://ci.adoptopenjdk.net/computer/test-sxa-fedora-riscv-1/
+- https://ci.adoptopenjdk.net/computer/test-alibaba-debian-riscv64-1/

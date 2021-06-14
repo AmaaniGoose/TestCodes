@@ -1,0 +1,14 @@
+PR 37709 demonstrated that the class library will detect package conflicts between modules in `jdk.internal.module.ModuleBootstrap.checkSplitPackages(...)`, at least for modules in the built in classloaders - aka boot / system / app loaders and the test implies its trying to validate if there are package conflicts with the unnamed module (aka classpath).
+
+Which allows resolving that item.
+
+This issue is opened to track down the remaining questions raised while reviewing that PR:
+
+I don't have a complete understanding of how packages should be validated in general and it would be good to get sorted out.
+
+Basically, what Is it required to check existing packages against other layers?
+Or to put it another way, if this is about splitting packages we'd need to validate class loads of the same package from the class path fail once a module in the same layer has already claimed the package.
+
+There's also some questions here about cross layer class loading where the classpath splits a package in one unnamed module while another claims the package.
+
+_Originally posted by @DanHeidinga in https://github.com/eclipse/openj9/pull/7709#issuecomment-650335992_

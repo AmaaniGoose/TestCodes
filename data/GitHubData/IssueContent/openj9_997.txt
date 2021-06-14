@@ -1,0 +1,59 @@
+The nightly build ([jdk-9+181-20 on January 22 2018 Linux x64](https://github.com/AdoptOpenJDK/openjdk9-openj9-nightly/releases/download/jdk-9%2B181-20182201/OpenJDK9-OPENJ9_x64_Linux_20182201.tar.gz)) has different behaviors on Xcomp and default mode.
+
+[C0.class](https://drive.google.com/open?id=1kCPeTb97ONca6OfCiPiCIDkDsTTha387)
+
+Default:
+A NegativeArraySizeException is thrown
+
+Xcomp:
+exit normally with 0
+```
+$ ./jdk-9+181/bin/java -Xcomp C0
+$ echo $?
+0
+$ ./jdk-9+181/bin/java C0
+Exception in thread "main" java.lang.NegativeArraySizeException
+	at C0.main(Unknown Source)
+$ ./jdk-9+181/bin/java --version
+openjdk 9-internal
+OpenJDK Runtime Environment (build 9-internal+0-adhoc.jenkins.openjdk)
+Eclipse OpenJ9 VM (build 2.9, JRE 9 Linux amd64-64 Compressed References 20180122_95 (JIT enabled, AOT enabled)
+OpenJ9   - d38352e
+OMR      - cfd2f17
+OpenJDK  - be5903d based on jdk-9+181)
+```
+
+The head of OpenJDK throws an exception.
+
+```
+$ ./openjdk/jdk/build/linux-x86_64-normal-server-release/jdk/bin/java -Xcomp C0
+Exception in thread "main" java.lang.NegativeArraySizeException
+	at C0.main(Unknown Source)
+$ ./openjdk/jdk/build/linux-x86_64-normal-server-release/jdk/bin/java -version
+openjdk version "10-internal" 2018-03-20
+OpenJDK Runtime Environment (build 10-internal+0-adhoc.t.jdk)
+OpenJDK 64-Bit Server VM (build 10-internal+0-adhoc.t.jdk, mixed mode)
+```
+
+Oracle JDK 9 throws an exception.
+```
+$ ./jdk-9.0.4/bin/java -Xcomp C0
+Exception in thread "main" java.lang.NegativeArraySizeException
+	at C0.main(Unknown Source)
+$ ./jdk-9.0.4/bin/java -version
+java version "9.0.4"
+Java(TM) SE Runtime Environment (build 9.0.4+11)
+Java HotSpot(TM) 64-Bit Server VM (build 9.0.4+11, mixed mode)
+```
+
+OpenJDK 8 also throws an exception.
+
+```
+$ java C0
+Exception in thread "main" java.lang.NegativeArraySizeException
+	at C0.main(Unknown Source)
+$ java -version
+openjdk version "1.8.0_151"
+OpenJDK Runtime Environment (build 1.8.0_151-8u151-b12-0ubuntu0.16.04.2-b12)
+OpenJDK 64-Bit Server VM (build 25.151-b12, mixed mode)
+```

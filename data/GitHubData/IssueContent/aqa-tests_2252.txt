@@ -1,0 +1,7 @@
+Failing Test Buckets & Triager:
+- OpenJDK - Adam Farley
+- Functional - Andrew Leonard
+- Performance - Simon Rushton
+- System - Simon Rushton
+
+Each triager to create a comment identifying failures they're working on, with test links, issue links, platforms, etc.

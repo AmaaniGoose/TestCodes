@@ -1,0 +1,6 @@
+@charliegracie asked [here](https://github.com/eclipse/omr/pull/2506#issuecomment-385504881):
+> can you explain the difference between the fields MM_GCExtensionsBase->memoryMax, and MM_GCExtensionsBase->maxSizeDefaultMemorySpace?
+
+As per my understanding, in current code base `maxSizeDefaultMemorySpace` is always equal to `memoryMax`. There are references to an option -Xmdx which would allow to configure `maxSizeDefaultMemorySpace` but I don't see it being parsed anywhere.
+As per an obsolete document CommandLineOptions.html (which was removed by this commit https://github.com/eclipse/openj9/commit/f37b05ba6f56c7927f61f9664f9d01383b95357b), Xmdx is Default memory space maximum size and is <= Xmx.
+@dmitripivkine any idea what is the purpose of `maxSizeDefaultMemorySpace` and do we still need it?

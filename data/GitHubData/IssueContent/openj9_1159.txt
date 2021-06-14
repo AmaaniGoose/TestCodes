@@ -1,0 +1,7 @@
+With the merge of https://github.com/ibmruntimes/openj9-openjdk-jdk9/pull/88 it should now be possible to build for armhf, possibly with something similar to the yml that I use for travis.ci on my fork:
+
+https://github.com/JamesKingdon/openj9-openjdk-jdk9/blob/arm/.travis.yml
+
+What's the right way of doing this within OpenJ9, or would this be better done under AdoptOpenJDK?
+
+If possible I'd like to get arm building and running tests regularly so that we can keep an eye out for regressions.

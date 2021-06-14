@@ -1,0 +1,74 @@
+Java -version output
+--------------------
+```
+openjdk version "15.0.1" 2020-10-20
+OpenJDK Runtime Environment AdoptOpenJDK (build 15.0.1+9-202010252041)
+Eclipse OpenJ9 VM AdoptOpenJDK (build master-75a730480, JRE 15 Linux amd64-64-Bit Compressed References 20201025_86 (JIT enabled, AOT enabled)
+OpenJ9   - 75a730480
+OMR      - e2fac34fc
+JCL      - a37578415a based on jdk-15.0.1+9)
+```
+
+Summary of problem
+------------------
+While collecting measurements for #8878, I ran SPECjbb2015 with `-Xgcpolicy:metronome` using an Adopt OpenJ9 Nightly Build (version info above).
+
+Command:
+```
+jdk-15.0.1+9/bin/java -Xgcpolicy:metronome -verbose:gc -Xverbosegclog -Xmx12G -Xms12G -Xmn10G -jar ./specjbb2015.jar -m COMPOSITE
+```
+
+The program crashes with a segfault, and a large amount of Java stack trace is outputted with various errors, for example:
+- `java.lang.ClassCastException: <SPECjbb_CLASS> incompatible with javax.crypto.Cipher`
+- `java.lang.ClassCastException: [B incompatible with javax.crypto.Cipher`
+- `java.lang.IllegalStateException: AES transport unmarshaller throws unexpected exception: java.security.InvalidKeyException: The key must be -966444586 bytes`
+- `java.lang.IllegalStateException: AES transport unmarshaller throws unexpected exception: java.security.InvalidKeyException: The key must be 145 bytes`
+
+I ran Spring Boot Pet Clinic with the same JDK and `-Xgcpolicy:metronome` and no errors/crashes occurred, so it seems like this is specific to SPECjbb2015. Running the benchmark with `-Xgcpolicy:optthruput` or `-Xgcpolicy:balanced` did not result in any failures. 
+
+Diagnostic files
+----------------
+
+Here is the crash. I can provide core files and the full failure text (~2 million lines!) upon request.
+```
+Unhandled exception
+Type=Segmentation error vmState=0x00000000
+J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000001
+Handler1=00007F5FFB2F7300 Handler2=00007F5FFABDAF90 InaccessibleAddress=0000000000000031
+RDI=000000000035B400 RSI=0000000000000000 RAX=00000005705789D0 RBX=00000005B3240140
+RCX=0000000581DE04C8 RDX=0000000500998C00 R8=0000000500998C00 R9=0000000581DE04E0
+R10=00000000AE0AF13A R11=00007F5FFB2C1EB0 R12=0000000500000478 R13=00000005ECDDD270
+R14=000000055DB7D228 R15=00000005098B42C0
+RIP=0000000000000031 GS=0000 FS=0000 RSP=0000000000E9D9F8
+EFlags=0000000000010206 CS=0033 RBP=0000000000C65B00 ERR=0000000000000014
+TRAPNO=000000000000000E OLDMASK=0000000000000000 CR2=0000000000000031
+xmm0 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm1 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm2 6e616c2f6176616a (f: 1635148160.000000, d: 5.038250e+223)
+xmm3 742e71682e62626a (f: 778199680.000000, d: 4.359270e+251)
+xmm4 300072730500edac (f: 83946928.000000, d: 1.775496e-77)
+xmm5 6507004c01000297 (f: 16777880.000000, d: 4.660335e+178)
+xmm6 6c2f6176616a4c12 (f: 1634356224.000000, d: 1.320535e+213)
+xmm7 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm8 71682e62626a2e63 (f: 1651125888.000000, d: 1.968268e+238)
+xmm9 6f7365522e747365 (f: 779383680.000000, d: 7.351638e+228)
+xmm10 657571655272656d (f: 1383228800.000000, d: 5.561117e+180)
+xmm11 0a004a010002c53e (f: 181566.000000, d: 1.655352e-260)
+xmm12 02007e0071786449 (f: 1903715456.000000, d: 4.925301e-299)
+xmm13 00000000000002b9 (f: 697.000000, d: 3.443638e-321)
+xmm14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+Target=2_90_20201025_86 (Linux 4.4.0-193-generic)
+CPU=amd64 (8 logical CPUs) (0x3eaeae000 RAM)
+----------- Stack Backtrace -----------
+(0x00007F5FFAC0DFD2 [libj9prt29.so+0x57fd2])
+(0x00007F5FFABDBCF3 [libj9prt29.so+0x25cf3])
+(0x00007F5FFAC0E04E [libj9prt29.so+0x5804e])
+(0x00007F5FFAC0E144 [libj9prt29.so+0x58144])
+(0x00007F5FFABDBCF3 [libj9prt29.so+0x25cf3])
+(0x00007F5FFAC0DEAB [libj9prt29.so+0x57eab])
+(0x00007F5FFB2F6E44 [libj9vm29.so+0x96e44])
+(0x00007F5FFABDBCF3 [libj9prt29.so+0x25cf3])
+(0x00007F5FFB2F70B5 [libj9vm29.so+0x970b5])
+(0x00007F5FFB324F15 [libj9vm29.so+0xc4f15])
+```

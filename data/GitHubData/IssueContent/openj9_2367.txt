@@ -1,0 +1,3 @@
+In past, NUMA(affinity) on balanced gc and NUMA memory interleaving on gencon gc are enabled by default. From Java 8Sr5 NUMA interleave memory has been turned off by default, it also disable NUMA(affinity) on balanced gc.
+This issue would not affect AIX-PPC and windows platforms.
+currently the user could add "-XX:+InterleaveMemory" option for a workaround.

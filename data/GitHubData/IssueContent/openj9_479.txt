@@ -1,0 +1,13 @@
+java -version
+openjdk version "9-internal"
+OpenJDK Runtime Environment (build 9-internal+0-adhoc.openj9.openjdk)
+Eclipse OpenJ9 VM (build 2.9, JRE 9 Linux amd64-64 Compressed References 20170929_365721 (JIT enabled, AOT enabled)
+OpenJ9   - 0ac16fb
+OMR      - 3b00c11
+OpenJDK  - dc8928f based on jdk-9+181)
+
+java -Xnocompressedrefs -cp ~/pdbteam/lib/ HelloWorld
+Selected VM [default] by option -Xnocompressedrefs does not exist.
+
+This is causing this failure:
+https://ci.eclipse.org/openj9/view/Test/job/Test-Extended-linux_ppc-64_cmprssptrs_le/lastBuild/testngreports/org.openj9.test.vmArguments/VmArgumentTests/testCrNocr/

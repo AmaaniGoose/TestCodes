@@ -1,0 +1,3 @@
+As suggested by @andrewcraik in https://github.com/eclipse/openj9/pull/133#issuecomment-332185691 and https://github.com/eclipse/openj9/pull/133#issuecomment-332515832 we should be able to implement a simple agent for the StringBuilderTransformer optimization and check it into our repository so that we can always collect statistics if need be.
+
+The corresponding PR https://github.com/eclipse/openj9/pull/133 contains a rather large https://github.com/eclipse/openj9/pull/133#issuecomment-332006978 outlining the types of changes which are needed to StringBuilder class for the instrumentation to work.

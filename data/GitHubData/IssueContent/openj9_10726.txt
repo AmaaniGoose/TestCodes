@@ -1,0 +1,12 @@
+The snapshot code currently assumes certain data that's dangled off the vmThread is not persistent. Therefore, when the vmthreads are stored into the image, these fields should be reset.
+
+From what I can tell, the fields are:
+profilingBufferEnd
+profilingBufferCursor
+jitExceptionHandlerCache
+jitArtifactSearchCache
+aotVMwithThreadInfo
+jitVMwithThreadInfo
+jitPrivateData
+
+fyi @tajila 

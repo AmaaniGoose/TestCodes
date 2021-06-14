@@ -1,0 +1,15 @@
+Port of issue from the internal repo:
+
+The Persistent CH Table consists of entries of type TR_PersistentClassInfo, there is a 1-1 mapping between a class info entry and a J9Class. The class info has some flags that are global.
+
+getFieldInfo/setFieldInfo - The field info gets set if we perform the TR_ClassLookahead opt.
+getTimeStamp - Only relevant if TR_IProfilerPerformTimestampCheck is set.
+getUnloaded - Set when the class is unloaded, and the entry is freed when class unloading is done.
+getNumPrexAssumptions - Only relevant if prex is enabled
+_shouldNotBeNewlyExtended - Bit field, where the position of the bit is related to the comp thread number. Mostly only used if prex is enabled, but is also used when IPA and Monitor Elimination is enabled.
+_containsRecognizedAnnotations - flag is set if CHT Opts are enabled
+_cannotTrustStaticFinal - Only gets set if we perform the TR_ClassLookAhead opt.
+_classHasBeenRedefined - Affects some compilation decisions if classes are redefined.
+Most of these are not problems as long as we disable CHT Opts in the snapshot run; however, it is important that we do not disable recompilation or we won't emit the code to jump to the recompiled body from the old body. In the restore run, we obviously have to have CHT Opts disabled until the CHT is populated. EDIT: These have now been addressed; CH Opts are disabled on the snapshot run.
+
+Not really sure what to do about the _classHasBeenRedefined flag though. It's used in TR_ResolvedJ9Method::shouldFailSetRecognizedMethodInfoBecauseOfHCR and TR_StringPeepholes::classRedefined. For the latter, it might just be a matter of disabling stringpeepholes, but not sure how to address the former.

@@ -1,0 +1,47 @@
+The issue is a stack misalignment when storing an XMM in C code which has been called directly from the code cache:
+
+```
+Program received signal SIGSEGV, Segmentation fault.
+[Switching to Thread 0xf7d4ab40 (LWP 11187)]
+0xf65f1fc7 in TR_EmbeddedHashTable<unsigned int, 2u>::rearrange(TR_HashTableProfilerInfo<unsigned int>::HashFunction&) ()
+   from /bluebird/builds/bld_426736/sdk/xi3280/jre/lib/i386/default/libj9jit29.so
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-292.el7.i686 libgcc-4.8.5-39.el7.i686
+(gdb) bt
+#0  0xf65f1fc7 in TR_EmbeddedHashTable<unsigned int, 2u>::rearrange(TR_HashTableProfilerInfo<unsigned int>::HashFunction&) ()
+   from /bluebird/builds/bld_426736/sdk/xi3280/jre/lib/i386/default/libj9jit29.so
+#1  0xf65f3163 in TR_EmbeddedHashTable<unsigned int, 2u>::addKey(unsigned int) ()
+   from /bluebird/builds/bld_426736/sdk/xi3280/jre/lib/i386/default/libj9jit29.so
+#2  0xf65f48aa in _jProfile32BitValue () from /bluebird/builds/bld_426736/sdk/xi3280/jre/lib/i386/default/libj9jit29.so
+#3  0x5563bff5 in ?? ()
+#4  0xf7409fa0 in ?? ()
+Backtrace stopped: previous frame inner to this frame (corrupt stack?)
+
+(gdb) frame 0
+#0  0xf65f1fc7 in TR_EmbeddedHashTable<unsigned int, 2u>::rearrange(TR_HashTableProfilerInfo<unsigned int>::HashFunction&) ()
+   from /bluebird/builds/bld_426736/sdk/xi3280/jre/lib/i386/default/libj9jit29.so
+(gdb) x/20i $pc
+=> 0xf65f1fc7 <_ZN20TR_EmbeddedHashTableIjLj2EE9rearrangeERN24TR_HashTableProfilerInfoIjE12HashFunctionE+55>:	
+    movaps %xmm0,0x30(%esp)
+
+esp            0xd2f05644 <- not 16-byte aligned
+
+(gdb) frame 3
+#3  0x5563bff5 in ?? ()
+(gdb) x/20i $pc-14
+   0x5563bfe7:	mov    %edx,%edi
+   0x5563bfe9:	mov    $0xd544dc08,%edx
+   0x5563bfee:	mov    %edi,%ecx
+   0x5563bff0:	call   0xf65f48a0 <_jProfile32BitValue>
+=> 0x5563bff5:	mov    %edi,%edx
+   0x5563bff7:	jmp    0x5563a397
+
+esp            0xd2f05734 <- not 16-byte aligned
+
+The calling compiled method is:
+
++ (profiled very-hot) j9vm/test/hashTable/HashTableCorrectnessTest.addNumberOfStringsToTree(Ljava/util/TreeSet;I)V @ 55638824-5563C686 OrdinaryMethod 30.30% T Q_SZ=0 Q_SZI=0 QW=100 j9m=D316C2A0 bcsz=64 JPROF compThread=0 CpuLoad=200%(100%avg) JvmCpu=199%
+```
+
+I've verified that both of the C functions are maintaining correct stack alignment.
+
+The issue appears to be that the incorrect linkage is being used to call the helpers, so the stack is not being aligned/restored to the native stack.

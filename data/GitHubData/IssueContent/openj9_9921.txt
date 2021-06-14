@@ -1,0 +1,3 @@
+R6 is Java BP (aka J9A0) in 32-bit Arm.  The register is never assigned by the JIT compiler.
+There is no need for dedicated register for Java BP now.
+https://github.com/eclipse/openj9/blob/ba45f786c5a2dea88dd640ef301ed33ae375b9fe/runtime/compiler/arm/codegen/ARMPrivateLinkage.cpp#L65

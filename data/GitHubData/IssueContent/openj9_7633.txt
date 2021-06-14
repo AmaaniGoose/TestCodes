@@ -1,0 +1,3 @@
+openssl should be updated to the latest version for each OpenJ9 release. 
+
+Don't close this issue, move it to the next milestone after completing the update.

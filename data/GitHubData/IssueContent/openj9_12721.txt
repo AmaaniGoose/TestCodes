@@ -1,0 +1,2 @@
+#11331 changed ROM class serialization to always include all ROM strings, including the ones stored outside of the class. All strings are now sent to the server and stored there, and SRPs to them are updated. 
+This means that `TR_ResolvedJ9JITServerMethod:::getROMString` (and its copy in the client session) is no longer needed, and all methods that use it, no longer need to be overridden for JITServer. 

@@ -1,0 +1,9 @@
+In the grinder setting it says _Customized SDK URL, only set when SDK_RESOURCE customized._ However if the user accidentally set both CUSTOMIZED_SDK_URL and SDK_RESOURCE ( non-customized) the system will take CUSTOMIZED_SDK_URL and ignore the SDK_RESOURCE's setting. Not sure if this is expected. 
+
+Senario:
+1. First use CUSTOMIZED_SDK_URL
+2. Rerun use SDK_RESOURCE = nightly to compare the difference ( CUSTOMIZED_SDK_URL is not reset as empty)
+3. Build will rerun with CUSTOMIZED_SDK_URL, which ignores SDK_RESOURCE as nightly ( also in get.sh, SDK_RESOURCE default is nightly).
+
+example：
+https://ci.adoptopenjdk.net/view/work-in-progress/job/grinder_sandbox/162/console

@@ -1,0 +1,5 @@
+Requirement for the current JVM's resolved shared class cache name and number of connected users to be added to the MemoryMXBean and SharedClass APIs (com.ibm.oti.shared.SharedClassStatistics and  com.ibm.oti.shared.SharedClassUtilities) so this information can be recorded in CICS JVM server statistics reports. 
+
+The resolved shared class cache name is not available today in the openJ9 SharedClass APIs or the MemoryMXBean. Only the unresolved shared class cache name is obtainable through the Java system API, via the -Xshareclasses:name=<> JVM option. The resolved cache name is valuable as CICS is unable to resolve the symbols that can be specified in the cache name. 
+
+The number of users connected to the SCC is already available from the openJ9 java core, but it is not available from the SharedClass APIs. This limits CICS from capturing this information and reporting it in its' statistics report. This information is valuable as it allows customers to confirm if the class cache is being shared by other JVMs, which would prevent the cache from being deleted until the connected JVMs are stopped.

@@ -1,0 +1,23 @@
+**Describe the bug** Building the mauve suites requires a java explicitly in the `PATH`
+
+**To Reproduce**
+Steps to reproduce the behavior (or Grinder rerun link): `BUILD_LIST=system make compile`
+```
+get-source:
+
+BUILD FAILED
+/home/sxa/openjdk-tests/TKG/scripts/build_test.xml:76: The following error occurred while executing this line:
+/home/sxa/openjdk-tests/system/common.xml:255: The following error occurred while executing this line:
+/home/sxa/openjdk-tests/system/common.xml:246: The following error occurred while executing this line:
+/home/sxa/openjdk-tests/system/openjdk-systemtest/openjdk.build/build.xml:58: The following error occurred while executing this line:
+/home/sxa/openjdk-tests/system/openjdk-systemtest/openjdk.test.mauve/build.xml:363: Execute failed: java.io.IOException: Cannot run program "java" (in directory "/tmp/mauve"): error=2, No such file or directory
+	at java.lang.ProcessBuilder.start(ProcessBuilder.java:1048)
+```
+
+**Expected behavior** Test suite would be able to use the java from `TEST_JDK_HOME` but it doesn't.
+
+**Screenshots** n/a
+
+**Additional context** n/a
+
+I suspect this would be fairly simple to change, and I can't see a reason why it would be beneficial to use the system one instead of the one under test for building, so I would suggest that this be changed to invoke `TEST_JDK_HOME/bin/java` (or `jre/bin/java`) instead of relying on the PATH for simplicity.

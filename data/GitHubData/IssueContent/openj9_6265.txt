@@ -1,0 +1,1 @@
+Each code generator provides their own version of `AheadOfTimeCompile::processRelocations` whose logic is nearly identical.  This code should be refactored such that all backends share a single implementation.

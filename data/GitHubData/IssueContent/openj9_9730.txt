@@ -1,0 +1,9 @@
+Patchable GCR guards are only implemented on x86, and are believed to realize a non-negligible performance improvement when enabled.
+
+The performance impact should be measured, and they should be implemented on
+- [ ] Power
+- [ ] Z
+- [ ] AArch64
+- [ ] ARM
+
+if they are beneficial.

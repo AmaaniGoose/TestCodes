@@ -1,0 +1,23 @@
+**Describe the bug**
+This is a brain-dump bug containing several issues seen in a [single aix extended.perf](https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_extended.perf_ppc64_aix/15/) run over the weekend. 
+
+These issues will be listed below, in order of occurrence, and issues raised in the correct repositories.
+
+1) There was a stack overflow during execution of the renaissance-als_0 test target, which looks the same as [this one](https://github.com/eclipse/openj9/issues/10370). (Will reopen and annotate.)
+Note: the job then correctly executed the next test target to be run, which was renaissance-chi-square_0
+2) Later in the job, another test target (renaissance-dec-tree_0) failed with another stack overflow. However, at the end of this test target's section, it strangely declared that renaissance-als_0 had failed. 
+3) The job then proceeded to execute renaissance-chi-square_0, which had already run earlier. This implies that not only had the test declared the failure of the wrong test target, but some internal error had reset the progression of test targets to the renaissance-als_0 position. [Issue raised.](https://github.com/adoptium/TKG/issues/181)
+Note: This pattern continued for the rest of the tests. A random renaissance test target would hit an infrequent stack overflow error, said test target would be incorrectly declared to be renaissance-als_0, and the following test targets to be executed would imply that the progression through the test targets had been reset to the start of renaissance-chi-square_0 again.
+4) [TRSS](https://trss.adoptopenjdk.net/allTestsInfo?buildId=60735c4947db975731f280c2&limit=5&hasChildren=false) correctly identified that there were many instances of renaissance-chi-square_0, but incorrectly declared them to have all failed. Also, the contents of the multiple failures were all from the single instance of renaissance-chi-square_0 which had failed. [Issue raised.](https://github.com/adoptium/aqa-test-tools/issues/407)
+
+**To Reproduce**
+https://ci.adoptopenjdk.net/job/Grinder/parambuild/?SDK_RESOURCE=upstream&TARGET=extended.perf&TEST_FLAG=&UPSTREAM_TEST_JOB_NAME=&DOCKER_REQUIRED=false&ACTIVE_NODE_TIMEOUT=0&VENDOR_TEST_DIRS=&EXTRA_DOCKER_ARGS=&TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&TEST_PARALLELIZATION_PARAMS=&PLATFORM=ppc64_aix&KEEP_REPORTDIR=false&PERSONAL_BUILD=false&ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&LABEL=&TEST_OPTIONS_PARAMS=&EXTRA_OPTIONS=&CUSTOMIZED_SDK_URL=&BUILD_IDENTIFIER=&NON_AQA_TEST_REPOS_HELP_TEXT=&ADOPTOPENJDK_BRANCH=master&LIGHT_WEIGHT_CHECKOUT=false&NON_AQA_TEST_REPOS=&ARTIFACTORY_SERVER=&TEST_REPO_PARAMS=&TEST_SELECTION_PARAMS=&TEST_PARALLELIZATION_PARAMS_HELP_TEXT=&JDK_SELECTION_PARAMS=&KEEP_WORKSPACE=false&USER_CREDENTIALS_ID=&JDK_VERSION=11&ITERATIONS=1&VENDOR_TEST_REPOS=&JDK_REPO=https%3A%2F%2Fgithub.com%2Fibmruntimes%2Fopenj9-openjdk-jdk11&PLATFORM_AND_MACHINE_HELP_TEXT=&RELEASE_TAG=&OPENJ9_BRANCH=master&OPENJ9_SHA=&JCK_GIT_REPO=&VENDOR_TEST_BRANCHES=&UPSTREAM_JOB_NAME=build-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-aix-ppc64-openj9&OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&PLATFORM_AND_MACHINE=&CUSTOM_TARGET=&VENDOR_TEST_SHAS=&JDK_BRANCH=openj9&LABEL_ADDITION=&ARTIFACTORY_REPO=&ARTIFACTORY_ROOT_DIR=&POST_RUN_PARAMS_HELP_TEXT=&UPSTREAM_TEST_JOB_NUMBER=&DOCKERIMAGE_TAG=&JDK_SELECTION_PARAMS_HELP_TEXT=&JDK_IMPL=openj9&SSH_AGENT_CREDENTIAL=&AUTO_DETECT=true&TKG_SHA=&TEST_SELECTION_PARAMS_HELP_TEXT=&CUSTOMIZED_SDK_URL_CREDENTIAL_ID=&OPENJDK_SHA=&NUM_MACHINES=&BUILD_LIST=perf&UPSTREAM_JOB_NUMBER=964&TEST_REPO_PARAMS_HELP_TEXT=&POST_RUN_PARAMS=&TIME_LIMIT=10&TEST_OPTIONS_PARAMS_HELP_TEXT=&JVM_OPTIONS=&PARALLEL=None
+
+**Expected behavior**
+I expect these test targets to execute once in such a scenario, not execute multiple times; resetting their progression every time a failure is encountered.
+
+**Screenshots**
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_extended.perf_ppc64_aix/15/
+
+**Additional context**
+While the TRSS failure is perhaps more excusable (garbage in, garbage out), I'm still raising a TRSS issue to see if the TRSS crew feel that it should be more resilient against this particular problem.

@@ -1,0 +1,34 @@
+Failure link
+------------
+https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/502ab02dbda2e8b021cffedc3f52e25246cdeec1/test/jdk/java/lang/ref/EarlyTimeout.java#L1 fails for JDK8/11/13-openj9
+- test category, openjdk 
+- OS/architecture, openjdk_x86-64_linux, openjdk_x86-64_windows, openjdk_x86-64_mac
+```
+13:11:15  openjdk version "11.0.5" 2019-10-15
+13:11:15  OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.5+7-201909200946)
+13:11:15  Eclipse OpenJ9 VM AdoptOpenJDK (build master-ad592a06b, JRE 11 Linux amd64-64-Bit Compressed References 20190920_335 (JIT enabled, AOT enabled)
+13:11:15  OpenJ9   - ad592a06b
+13:11:15  OMR      - 640f1dfa
+13:11:15  JCL      - 8bf2a81661 based on jdk-11.0.5+7)
+```
+
+Optional info
+-------------
+
+- intermittent failure (no): 
+- Part of the excluded https://github.com/AdoptOpenJDK/openjdk-tests/issues/585
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+13:12:58  STDERR:
+13:12:58  java.lang.RuntimeException: elapsed time 563 is less than timeout 1000
+13:12:58  	at EarlyTimeout.main(EarlyTimeout.java:82)
+13:12:58  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+13:12:58  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+13:12:58  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+13:12:58  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+13:12:58  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+13:12:58  	at java.base/java.lang.Thread.run(Thread.java:831)
+```
+Rerun job: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&BUILD_LIST=openjdk&JenkinsFile=openjdk_x86-64_linux&CUSTOM_TARGET=java/lang/ref/EarlyTimeout.java&TARGET=jdk_custom_0

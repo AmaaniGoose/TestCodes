@@ -1,0 +1,70 @@
+### Summary
+We found a test case where some bytecodes in the class files are not executed. The simplified test case can be found in the attachment. 
+
+To simply,  we inserted a print statement before the main function exits, as shown below. 
+The correct execution should output "Success" on the console. However, executing this test case on J9 did not output any information.
+
+```
+ public static Method main:"([Ljava/lang/String;)V"
+stack 5 locals 6
+ {
+	...
+	...
+	getstatic	Field java/lang/System.out:"Ljava/io/PrintStream;";
+	ldc	String "Success";
+	invokevirtual	Method java/io/PrintStream.println:"(Ljava/lang/String;)V";
+	return;
+ }
+```
+
+### How to reproduce?
+[Test1.zip](https://github.com/eclipse-openj9/openj9/files/6585686/Test1.zip)
+
+Follow the commands in readme.
+
+### Affected versions
+macOS:
+```
+macOS Big Sur
+Version 11.2.3 (20D91)
+Processor 2.3 GHz Dual-Core Intel Core i5
+Memory 8 GB 2133 MHz LPDDR3
+```
+
+Java -version output under macOS
+```
+openjdk version "1.8.0_272"
+OpenJDK Runtime Environment (build 1.8.0_272-b10)
+Eclipse OpenJ9 VM (build openj9-0.23.0, JRE 1.8.0 Mac OS X amd64-64-Bit Compressed References 20201022_737 (JIT enabled, AOT enabled)
+OpenJ9   - 0394ef754
+OMR      - 582366ae5
+JCL      - 41f03341d5 based on jdk8u272-b10)
+```
+
+```
+openjdk version "11.0.10" 2021-01-19
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.10+9)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.24.0, JRE 11 Mac OS X amd64-64-Bit Compressed References 20210120_897 (JIT enabled, AOT enabled)
+OpenJ9   - 345e1b09e
+OMR      - 741e94ea8
+JCL      - 0a86953833 based on jdk-11.0.10+9)
+```
+
+Windows 10:
+```
+Microsoft Windows 10 Professional
+10.0.16299 Build 16299
+Intel(R) Core(TM) i5-9400F CPU @ 2.90GHz 2.90 GHz
+Memory 8 GB
+```
+
+Java -version output under Windows 10
+```
+openjdk version "1.8.0_275"
+OpenJDK Runtime Environment (build 1.8.0_275-b01)
+Eclipse OpenJ9 VM (build openj9-0.23.0, JRE 1.8.0 Windows 10 x86-32-Bit 20201112_759 (JIT enabled, AOT enabled)
+OpenJ9   - 0394ef754
+OMR      - 582366ae5
+JCL      - b52d2ff7ee based on jdk8u275-b01)
+```
+

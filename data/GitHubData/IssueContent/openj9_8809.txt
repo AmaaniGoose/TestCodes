@@ -1,0 +1,7 @@
+Summary of problem
+------------------
+```
+$ ./jdk/bin/jextract core.20200309.150725.90282.0001.dmp 
+Loading dump file...
+Error. Dump type not recognised, file: core.20200309.150725.90282.0001.dmp
+```

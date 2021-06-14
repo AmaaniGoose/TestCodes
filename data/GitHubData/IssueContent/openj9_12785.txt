@@ -1,0 +1,13 @@
+In J9, we have a distinction between the Java stack and the native stack. We set the Java stack with `-Xss` and the native stack with `-Xmso`. The java launcher however does not recognize `-Xmso` and uses `-Xss` to to set the native stack size of the main Java thread. An example is shown below.
+
+```
+~/openj9-openjdk-jdk2/build/linux-x86_64-server-release/images/jdk/bin$ ./java -Xss2048m -Xmso512m -version
+vmthread=0x1aa00 Setup osStack free for osthread=0x7fcd10007330 requested stacksize=536870912 realStacksize=2147487744 (zero is not found) stackfree=2147476608 starting sp=0x7fcd95d36478
+vmthread=0x1e600 Setup osStack free for osthread=0x7fcd100d3630 requested stacksize=536870912 realStacksize=1048576 (zero is not found) stackfree=1035040 starting sp=0x7fccf26cbb18
+vmthread=0x22300 Setup osStack free for osthread=0x7fcd100d3ba8 requested stacksize=536870912 realStacksize=1048576 (zero is not found) stackfree=1035040 starting sp=0x7fccf15cab18
+vmthread=0x25f00 Setup osStack free for osthread=0x7fcd100d4b40 requested stacksize=536870912 realStacksize=1048576 (zero is not found) stackfree=1035040 starting sp=0x7fccf14c9b18
+vmthread=0x29b00 Setup osStack free for osthread=0x7fcd100d50b8 requested stacksize=536870912 realStacksize=1048576 (zero is not found) stackfree=1035040 starting sp=0x7fccf13c8b18
+vmthread=0x2d800 Setup osStack free for osthread=0x7fcd100d6050 requested stacksize=536870912 realStacksize=1048576 (zero is not found) stackfree=1035040 starting sp=0x7fccf12c7b18
+```
+
+We need to modify the Java launcher to be aware of these distinctions, and also respect the default native stack size we have in J9 (`J9_OS_STACK_SIZE`).

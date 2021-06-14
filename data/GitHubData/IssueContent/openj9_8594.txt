@@ -1,0 +1,21 @@
+I see the following assertion failure in `OMR::Block::createEmptyBlock()` in OMR compiler/il/OMRBlock.cpp with my debug build, Java 11 for AArch64 Linux.  It disappears when I use `optlevel=cold`.
+
+```
+$ jdk/bin/java -Xjit:optlevel=warm,count=0,limit=boot
+Assertion failed at /root/openj9-openjdk-jdk11/build/linux-aarch64-normal-server-release/vm/compiler/../omr/compiler/il/OMRBlock.cpp:277: (frequency >= 0)
+VMState: 0x00050fff
+        Block frequency must be non negative
+compiling jdk/internal/module/ModuleBootstrap.boot()Ljava/lang/ModuleLayer; at level: warm
+```
+
+It looks like a platform-independent problem.  It is a `TR_ASSERT()` and you can reproduce it with debug builds only.
+
+```
+   if (!comp->isPeekingMethod() && (comp->getFlowGraph()->getMaxFrequency() >= 0))
+      {
+      TR_ASSERT((frequency >= 0), "Block frequency must be non negative\n");
+      }
+```
+The Java method is related to the module system, so I don't think it is reproducible with Java 8.
+
+My local Feb. 14 debug build fails while the Feb. 10 debug build is OK.  I think something has changed last week.

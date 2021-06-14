@@ -1,0 +1,6 @@
+JVM during its runtime, doesn't recognize the new CPUs that are added dynamically when `NUMA` is ON. New CPUs are added dynamically via CPU Hotplug or LPAR(in Linux PPC). Because of this, the new threads that are started after adding CPUs that was added during JVM run-time, doesn't get scheduled on the new CPUs, this leads to under utilization on available cores. 
+
+JVM while starting up, reads the `defaultAffinityMask` value via `sched_getaffinity()` API. 
+The affinityMask value should get updated when new CPUs are added, but JVM doesn't call `sched_getaffinity` to get the new values, so the new threads that are created doesn't get scheduled on the new cores. Also for the existing threads, affinityMask value should be updated, so that when it is rescheduled, it will be able to use the newer cores. 
+
+Note, the issue doesn't occur on AIX. It occurs only on Linux or Linux PPC. 

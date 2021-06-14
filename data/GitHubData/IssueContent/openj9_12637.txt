@@ -1,0 +1,82 @@
+Parts of parallel test jobs tests can fail, such as the following. It would be useful to automatically restart these.
+
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.system_x86-64_linux_Nightly_testList_2/59/console
+https://ci.eclipse.org/openj9/job/Test_openjdk16_j9_extended.functional_x86-64_mac_Nightly_testList_1/82/console
+
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.functional_x86-64_mac_OMR_testList_0/264/
+```
+14:03:18  get functional test material...
+14:03:18  git clone --depth 1 -b master https://github.com/eclipse/openj9.git
+14:03:49  update to openj9 sha: a35b83d0ef1e650851401a9b33adefa3012e1c14
+14:03:49  git fetch -q --unshallow
+14:04:12  Cannot contact osx1011-x86-1: java.lang.InterruptedException
+14:06:32  Note: checking out 'a35b83d0ef1e650851401a9b33adefa3012e1c14'.
+14:06:32  
+14:06:32  You are in 'detached HEAD' state. You can look around, make experimental
+14:06:32  changes and commit them, and you can discard any commits you make in this
+14:06:32  state without impacting any branches by performing another checkout.
+14:06:32  
+14:06:32  If you want to create a new branch to retain commits you create, you may
+14:06:32  do so (now or later) by using -b with the checkout command again. Example:
+14:06:32  
+14:06:32    git checkout -b <new-branch-name>
+14:06:32  
+14:06:32  HEAD is now at a35b83d0e Merge pull request #12247 from gza060625/cg-marking-verbose
+14:06:32  check OpenJ9 Repo sha
+14:06:32  /Users/****/workspace/Test_openjdk11_j9_sanity.functional_x86-64_mac_OMR_testList_0/openjdk-tests/TKG/scripts/getSHA.sh --repo_dir /Users/****/workspace/Test_openjdk11_j9_sanity.functional_x86-64_mac_OMR_testList_0/openjdk-tests/openj9 --output_file /Users/****/workspace/Test_openjdk11_j9_sanity.functional_x86-64_mac_OMR_testList_0/openjdk-tests/TKG/SHA.txt
+14:06:32  Check sha in /Users/****/workspace/Test_openjdk11_j9_sanity.functional_x86-64_mac_OMR_testList_0/openjdk-tests/openj9 and store the info in /Users/****/workspace/Test_openjdk11_j9_sanity.functional_x86-64_mac_OMR_testList_0/openjdk-tests/TKG/SHA.txt
+14:06:32  ================================================
+14:06:32  timestamp: 20210505-140631
+14:06:32  repo dir: /Users/****/workspace/Test_openjdk11_j9_sanity.functional_x86-64_mac_OMR_testList_0/openjdk-tests/openj9
+14:06:32  git repo: 
+14:06:32    Fetch URL: https://github.com/eclipse/openj9.git
+14:06:32  sha:
+14:06:32  a35b83d0ef1e650851401a9b33adefa3012e1c14
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+14:06:35  $ ssh-agent -k
+14:06:35  kill: No such process
+[Pipeline] // sshagent
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // timestamps
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] echo
+terminateJavaProcesses iteration: 1
+[Pipeline] echo
+PROCESSCATCH: Checking for any leftover java processes on the machine
+[Pipeline] sh
++ ps -fu jenkins
++ grep java
++ egrep -v 'remoting.jar|agent.jar|grep'
+  501 10680 10679   0  6:43AM ??         1:47.73 java -jar slave.jar
+[Pipeline] echo
+PROCESSCATCH: There are rogue processes still on the machine as per the list above
+[Pipeline] echo
+PROCESSCATCH: Removed processes - here is what is remaining:
+[Pipeline] sh
++ ps -fu jenkins
++ grep java
++ egrep -v 'remoting.jar|agent.jar|grep'
+  501 10680 10679   0  6:43AM ??         1:47.78 java -jar slave.jar
+[Pipeline] cleanWs
+[WS-CLEANUP] Deleting project workspace...
+[WS-CLEANUP] Deferred wipeout is disabled by the job configuration...
+[WS-CLEANUP] done
+[Pipeline] sh
++ find /cores -name '*core*' -print -exec rm -f '{}' ';'
+/cores
+[Pipeline] }
+[Pipeline] // timeout
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] End of Pipeline
+ERROR: Failed to run ssh-agent -k
+```

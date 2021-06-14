@@ -1,0 +1,3 @@
+This issue tracks the work to investigate an OpenJ9 AArch64 port to macOS.
+
+Relevant OpenJDK JEP -> https://openjdk.java.net/jeps/391

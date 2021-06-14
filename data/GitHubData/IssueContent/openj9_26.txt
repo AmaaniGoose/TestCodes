@@ -1,0 +1,7 @@
+The [definition of JITINLINE](https://github.com/eclipse/openj9/blob/6858c8b89dc152d73fd9738869f2e6e8c133cbcd/runtime/tr.source/trj9/runtime/MethodMetaData.h#L195), as well potentially other places in the code, causes consternation. Specifically, if you compile C files with newer C compilers, JITINLINE doesn't emit a symbol, causing compilation failures such as 
+
+```
+../tr.source/trj9/runtime/MethodMetaData.h:366:18: error: inline function ‘getByteCodeInfoFromStackMap’ declared but never defined [-Werror]
+```
+
+This has been worked around previously by forcing newer C compilers to use the old standard, but this really should be resolved once and for all, and likely, across the whole codebase. 

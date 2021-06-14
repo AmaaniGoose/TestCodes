@@ -1,0 +1,1 @@
+Currently we export JAVA_BIN for test execution and we also have JDK_HOME defined in makefiles based on JAVA_BIN. In order to be consistent with system tests, we would like to export JAVA_HOME and construct JAVA_BIN in makefiles.

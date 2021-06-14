@@ -1,0 +1,50 @@
+Cleaning problem?
+
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.functional_ppc64le_linux_xl_OMR/336
+```
+06:24:47  git clone --depth 1 -b master https://github.com/eclipse/openj9.git
+06:25:43  update to openj9 sha: 88959036c015a9140edbf7cc1142b63023c24ac2
+06:25:43  git fetch -q --unshallow
+06:28:10  Note: checking out '88959036c015a9140edbf7cc1142b63023c24ac2'.
+06:28:10  
+06:28:10  You are in 'detached HEAD' state. You can look around, make experimental
+06:28:10  changes and commit them, and you can discard any commits you make in this
+06:28:10  state without impacting any branches by performing another checkout.
+06:28:10  
+06:28:10  If you want to create a new branch to retain commits you create, you may
+06:28:10  do so (now or later) by using -b with the checkout command again. Example:
+06:28:10  
+06:28:10    git checkout -b <new-branch-name>
+06:28:10  
+06:28:10  HEAD is now at 88959036c Merge pull request #11436 from babsingh/remove_deadcode
+06:28:10  mv: cannot move 'openj9/test/functional/CacheManagement' to 'functional/CacheManagement': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/cmdline_options_tester' to 'functional/cmdline_options_tester': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/cmdline_options_testresources' to 'functional/cmdline_options_testresources': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/cmdLineTests' to 'functional/cmdLineTests': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/DDR_Test' to 'functional/DDR_Test': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/IllegalAccessError_for_protected_method' to 'functional/IllegalAccessError_for_protected_method': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/InstrumentationAgent' to 'functional/InstrumentationAgent': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/J9 Exclude File Support' to 'functional/J9 Exclude File Support': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/Java10andUp' to 'functional/Java10andUp': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/Java11andUp' to 'functional/Java11andUp': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/Java12andUp' to 'functional/Java12andUp': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/Java14andUp' to 'functional/Java14andUp': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/Java15andUp' to 'functional/Java15andUp': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/Java8andUp' to 'functional/Java8andUp': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/Java9andUp' to 'functional/Java9andUp': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/JavaAgentTest' to 'functional/JavaAgentTest': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/JIT_Test' to 'functional/JIT_Test': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/JLM_Tests' to 'functional/JLM_Tests': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/Jsr292' to 'functional/Jsr292': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/Jsr335' to 'functional/Jsr335': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/Jsr335_interfaceStaticMethod' to 'functional/Jsr335_interfaceStaticMethod': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/NativeTest' to 'functional/NativeTest': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/OpenJ9_Jsr_292_API' to 'functional/OpenJ9_Jsr_292_API': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/Panama' to 'functional/Panama': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/SharedCPEntryInvokerTests' to 'functional/SharedCPEntryInvokerTests': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/TestExample' to 'functional/TestExample': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/TestUtilities' to 'functional/TestUtilities': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/UnsafeTest' to 'functional/UnsafeTest': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/Valhalla' to 'functional/Valhalla': Directory not empty
+06:28:10  mv: cannot move 'openj9/test/functional/VM_Test' to 'functional/VM_Test': Directory not empty
+```

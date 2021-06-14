@@ -1,0 +1,3 @@
+In the current setup, committers can launch PR builds with SDK complication and tests on each platform and against different java version. However, there are lots of cases where we only need run test builds to verify test change and SDK compilation is not needed. 
+
+In order to be more efficient in terms of machine resource and build execution time, I think we should support test only PR builds, so committers can launch test only build with pre-existed/staged SDK (maybe from nightly build).

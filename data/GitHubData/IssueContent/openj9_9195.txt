@@ -1,0 +1,26 @@
+Given that the last of the perf regressions have been fixed up. We can now begin moving to making cmake the default build and deprecating the uma build system. 
+
+Given that it has the least baggage in terms of internal builds, I'm proposing starting with osx. Once that is done, following up with the linuxes (x, p, then z), then aix, and finally windows.  With each platform, use the following general template to migrate over:
+
+- Enable jenkins build for the platform.
+- Ensure the full set of extended testing is passing.
+- Announce "beta" cmake build, ask for testing and bug reports, add bugs to list below.
+- Resolve issues relevant to platform from the list below.
+- After suitable buffer period to ensure that all builds are stable, and any bug reports that are going to be filed are,  update the jdk extensions repo so that the configure script defaults to a CMake build on osx (old behaviour remains as a fallback by passing `--without-cmake` on the configure line, and my current draft of this functionality also informs the user of this if autoconf is unable to find cmake). Initially this would just be for jdk11 (as it is the most tested with respect to the cmake changes), but after waiting a suitable time to ensure nothing goes horribly wrong, it would be rolled out to the other jdks.
+
+Platforms:
+- [X] OSX (ibmruntimes/openj9-openjdk-jdk11#308)
+- [X] Linux on x86 (ibmruntimes/openj9-openjdk-jdk11#314)
+- [x] Linux on Power (ibmruntimes/openj9-openjdk-jdk11#323)
+- [x] Linux on Z (ibmruntimes/openj9-openjdk-jdk11#323)
+- [x] Linux on ARM
+- [x] AIX
+- [x] Windows
+- [ ] z/OS
+
+Known Problems:
+- ~Jit is not build with split debug info, causing the jdk to be unnecessarily large~
+- ~Currently the cmake builds are run with warnings as errors disabled (#9455)~
+- ~Intermitent failure while building ddr 'cannot find symbol generated.OmrBuildFlags' (#9126)~
+- ~xlinux cmake builds hang on jsigjnitest (#9430)~
+- ~Osx build failure on jdk8 (#9425)~

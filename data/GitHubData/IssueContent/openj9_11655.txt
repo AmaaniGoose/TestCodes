@@ -1,0 +1,29 @@
+Java -version output
+--------------------
+This is from the latest JDK11 GA i.e. [OpenJDK11U-jre_x64_mac_openj9_11.0.9_11_openj9-0.23.0.tar.gz](https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.9%2B11.2_openj9-0.23.0/OpenJDK11U-jre_x64_mac_openj9_11.0.9_11_openj9-0.23.0.tar.gz) (Same occurs with JDK8)
+```
+administrator@test-macstadium-macos11-arm64-2 2 % ./jdk-11.0.9+11-jre/Contents/Home/bin/java -Xint -version
+14:51:23.125 0x414a700 omrport.0      *   ** ASSERTION FAILED ** at /Users/jenkins/workspace/build-scripts/jobs/jdk11u/jdk11u-mac-x64-openj9/workspace/build/src/omr/port/osx/omrvmem.c:345: ((0 == ((uintptr_t)(params->byteAmount) % (uintptr_t)(params->pageSize))))
+JVMDUMP039I Processing dump event "traceassert", detail "" at 2021/01/14 06:51:23 - please wait.
+JVMDUMP032I JVM requested System dump using '/Users/administrator/sxa/2/core.20210114.065123.61389.0001.dmp' in response to an event
+JVMDUMP012E Error in System dump: The core file created by child process with pid = 61390 was not found. Expected to find core file with name "/cores/core.61390"
+JVMDUMP032I JVM requested Java dump using '/Users/administrator/sxa/2/javacore.20210114.065123.61389.0002.txt' in response to an event
+JVMDUMP010I Java dump written to /Users/administrator/sxa/2/javacore.20210114.065123.61389.0002.txt
+JVMDUMP032I JVM requested Snap dump using '/Users/administrator/sxa/2/Snap.20210114.065123.61389.0003.trc' in response to an event
+JVMDUMP010I Snap dump written to /Users/administrator/sxa/2/Snap.20210114.065123.61389.0003.trc
+JVMDUMP013I Processed dump event "traceassert", detail "".
+administrator@test-macstadium-macos11-arm64-2 2 %
+```
+
+Summary of problem
+------------------
+
+Crashes, as per the above message (which was done with `-Xint` but it does the same without that too
+
+Diagnostic files
+----------------
+
+
+[macos_aarch64_jdk11crash.tar.gz](https://github.com/eclipse/openj9/files/5815197/macos_aarch64_jdk11crash.tar.gz)
+
+NOTE: The Hotspot JVM does not fail in the same way and is able to run `java -version` and at least [attempt the test suites](https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk8_hs_sanity.openjdk_x86-64_mac/409/console)

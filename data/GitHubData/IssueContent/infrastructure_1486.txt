@@ -1,0 +1,5 @@
+I would like to make a SPARC T3-2 server running Linux available to the AdoptOpenJDK project.
+
+It is large enough to be shared (currently used by [GCC Compile Farm](https://cfarm.tetaneutral.net/news/26#) project).
+
+@sxa is evaluating the possibility of using this machine for JVM builds and suggested I create a ticket for tracking purposes.

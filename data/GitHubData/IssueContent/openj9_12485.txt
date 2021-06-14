@@ -1,0 +1,1 @@
+Similar how `TR::Monitor`s are wrapped in the `OMR::CriticalSection` RAII object and VMAccess acquire/release is wrapped in the `TR::VMAccessCriticalSection`, calls to `j9thread_monitor_enter`/`j9thread_monitor_exit` should be wrapped in a new RAII object that acquires the lock in the constructor and releases it in its destructor.

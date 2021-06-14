@@ -1,0 +1,9 @@
+Any testcase that tries to compile build-natives-unix, fails with the following on this node:
+```
+02:20:41       [exec] gcc -m64 -dynamiclib -o /Users/jenkins/workspace/Test_openjdk11_j9_extended.system_x86-64_mac/openjdk-tests/system/openjdk-systemtest/openjdk.test.modularity/bin/tests/com.test.jlink/native/bin/osx_x86-64/libJniTest.dylib /Users/jenkins/workspace/Test_openjdk11_j9_extended.system_x86-64_mac/openjdk-tests/system/openjdk-systemtest/openjdk.test.modularity/bin/tests/com.test.jlink/native/lib/osx_x86-64/JniTest.o
+02:20:42       [exec] ld: unsupported tapi file type '!tapi-tbd' in YAML file '/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/lib/libSystem.tbd' for architecture x86_64
+02:20:42       [exec] clang: error: linker command failed with exit code 1 (use -v to see invocation)
+```
+https://ci.adoptopenjdk.net/view/Test_system/job/Test_openjdk11_j9_extended.system_x86-64_mac/431/console
+
+Ref: https://github.com/AdoptOpenJDK/openjdk-tests/issues/2133

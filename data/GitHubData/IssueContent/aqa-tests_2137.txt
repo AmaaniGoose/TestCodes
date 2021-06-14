@@ -1,0 +1,28 @@
+As we wish to enable extended.openjdk tests in weekly builds (and release builds), we must triage the various failures within them.  There are any where between 70 to nearly 300 test cases failures depending on the platform, but the number of core issues that cause this number of failures seems to be small.  This issue lists the set of core issues that account for most of the failures (and will allow us to temporarily disable tests while the issues are investigated and fixed):
+
+- non-Linux platforms require machine configuration (**x11 server installed**) to enable jdk_awt and jdk_swing tests (see https://github.com/AdoptOpenJDK/openjdk-infrastructure/issues/1791 and https://github.com/AdoptOpenJDK/openjdk-infrastructure/issues/211) AND in the case that xvfb/x11 are installed on machines check that we are attempting to enable it on a machine prior to a test run (need to do this for aarch64 see: https://github.com/AdoptOpenJDK/openjdk-tests/blob/master/buildenv/jenkins/JenkinsfileBase#L562) 
+- on Linux platforms where x11 server is installed, many jdk_awt tests are failing with '**Incorrect focus owner**' issues (see: https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk11_hs_extended.openjdk_ppc64le_linux/9/testReport/java_awt_Focus_8073453_AWTFocusTransitionTest/java/AWTFocusTransitionTest/)
+- some **javax/print tests require a printer** to be installed (example: https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk11_hs_extended.openjdk_ppc64le_linux/9/testReport/javax_print_CheckDupFlavor/java/CheckDupFlavor/)
+- **compiler/jvmci tests** are failing with Can't init module exports: module not found: jdk.internal.vm.ci (see: https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk11_hs_extended.openjdk_x86-64_mac/9/testReport/compiler_jvmci_meta_StableFieldTest/java/StableFieldTest/)
+- some test targets contain native test lib and are failing because they need **nativepath configured** (Use -nativepath to specify the location of native code, see: https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk11_hs_extended.openjdk_x86-64_mac/9/testReport/tools_launcher_JliLaunchTest/java/JliLaunchTest/)
+- **java/beans editor tests** are failing with 'java.lang.Error: could not find editor for class java.awt.Font' (see: https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk11_hs_extended.openjdk_x86-64_mac/9/testReport/java_beans_PropertyEditor_TestFontClassValue/java/TestFontClassValue/)
+
+
+
+Individually raised issues for individually failing test classes (rather than by test target):
+- https://github.com/AdoptOpenJDK/openjdk-tests/issues/2365
+- https://github.com/AdoptOpenJDK/openjdk-tests/issues/2360
+- https://github.com/AdoptOpenJDK/openjdk-tests/issues/2359
+- https://github.com/AdoptOpenJDK/openjdk-tests/issues/2358
+- https://github.com/AdoptOpenJDK/openjdk-tests/issues/2357
+- https://github.com/AdoptOpenJDK/openjdk-tests/issues/2356
+- https://github.com/AdoptOpenJDK/openjdk-tests/issues/2355
+- https://github.com/AdoptOpenJDK/openjdk-tests/issues/2354
+- https://github.com/AdoptOpenJDK/openjdk-tests/issues/2353
+- https://github.com/AdoptOpenJDK/openjdk-tests/issues/2352
+- https://github.com/AdoptOpenJDK/openjdk-tests/issues/2351
+- https://github.com/AdoptOpenJDK/openjdk-tests/issues/2350
+- https://github.com/AdoptOpenJDK/openjdk-tests/issues/2349
+- https://github.com/AdoptOpenJDK/openjdk-tests/issues/2327
+- https://github.com/AdoptOpenJDK/openjdk-tests/issues/2294
+

@@ -1,0 +1,9 @@
+Various errors encountered:
+```
+ CompileJavaModules.gmk:590: recipe for target '/home/jenkins/workspace/Build_JDK11_x86-64_linux_Personal/build/linux-x86_64-normal-server-release/jdk/modules/java.desktop/_the.java.desktop_batch' failed
+```
+```21:37:41  gmake[6]: *** [/home/jenkins/workspace/Build_JDK11_x86-64_linux_Nightly/build/linux-x86_64-normal-server-release/vm/compiler/../objs/compiler/optimizer/LoopAliasRefiner.o] Error 1
+21:37:41  gmake[6]: *** Waiting for unfinished jobs....
+21:37:41  gmake[6]: *** [/home/jenkins/workspace/Build_JDK11_x86-64_linux_Nightly/build/linux-x86_64-normal-server-release/vm/compiler/../objs/compiler/optimizer/J9Optimizer.o] Error 1
+```
+First encountered these errors Aug 7 9:14pm, but don't have much history before that. Errors have been intermittent. Docker container used can be found [here](https://github.com/eclipse/openj9/blob/master/buildenv/jenkins/docker-slaves/x86/centos6.9/Dockerfile)

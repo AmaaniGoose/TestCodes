@@ -1,0 +1,8 @@
+```
+static BOOLEAN
+isModuleNameGood(j9object_t moduleName)
+```
+
+Ensure that `.` is not the first character. Ensure that `.` is not preceeded by another `.`
+
+In addition, moduleNames must follow all the other rules for package names

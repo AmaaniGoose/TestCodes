@@ -1,0 +1,74 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk11_j9_special.system_aarch64_linux_testList_3/5/`:
+```
+openjdk version "11.0.11" 2021-04-20
+OpenJDK Runtime Environment AdoptOpenJDK-11.0.11+7-202103310107 (build 11.0.11+7-202103310107)
+Eclipse OpenJ9 VM AdoptOpenJDK-11.0.11+7-202103310107 (build master-b20c7c695, JRE 11 Linux aarch64-64-Bit Compressed References 20210331_97 (JIT enabled, AOT enabled)
+OpenJ9   - b20c7c695
+OMR      - 0ba8989a2
+JCL      - 72b96fe2b3 based on jdk-11.0.11+7)
+```
+[Rerun in Grinder](https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?TARGET=MathLoadTest_all_special_5m_9&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=Test_openjdk11_j9_special.system_aarch64_linux&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;RUNTIME_NAME=testList_3&amp;PLATFORM=aarch64_linux&amp;KEEP_REPORTDIR=false&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;LIGHT_WEIGHT_CHECKOUT=true&amp;ARTIFACTORY_SERVER=na.artifactory.swg-devops&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=11&amp;USER_CREDENTIALS_ID=&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=&amp;JDK_REPO=https%3A%2F%2Fgithub.com%2Fibmruntimes%2Fopenj9-openjdk-jdk11&amp;RELEASE_TAG=&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=&amp;UPSTREAM_JOB_NAME=build-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-linux-aarch64-openj9&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=openj9&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=5&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=openj9&amp;SSH_AGENT_CREDENTIAL=83181e25-eea4-4f55-8b3e-e79615733226&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=system&amp;UPSTREAM_JOB_NUMBER=97&amp;TIME_LIMIT=10&amp;JVM_OPTIONS=&amp;PARALLEL=None)
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+[2021-03-31T02:46:35.219Z] Running test MathLoadTest_all_special_5m_9 ...
+[2021-03-31T02:46:35.219Z] ===============================================
+[2021-03-31T02:46:35.219Z] MathLoadTest_all_special_5m_9 Start Time: Tue Mar 30 22:46:34 2021 Epoch Time (ms): 1617158794975
+[2021-03-31T02:46:35.219Z] "/home/jenkins/workspace/Test_openjdk11_j9_special.system_aarch64_linux_testList_3/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk11_j9_special.system_aarch64_linux_testList_3/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+[2021-03-31T02:46:35.219Z] JVMSHRC005I No shared class caches available
+[2021-03-31T02:46:35.219Z] JVMSHRC005I No shared class caches available
+[2021-03-31T02:46:35.219Z] cache cleanup done
+[2021-03-31T02:46:35.219Z] variation: Mode187
+[2021-03-31T02:46:35.219Z] JVM_OPTIONS:  -Xaggressive -Xgcpolicy:gencon -Xjit -Xnocompressedrefs 
+
+[2021-03-31T02:47:17.243Z] MLT testFailure: testItem_0262(net.adoptopenjdk.test.bigdecimal.TestSuite017): null
+[2021-03-31T02:47:17.243Z] MLT java.lang.NullPointerException
+[2021-03-31T02:47:17.243Z] MLT 	at java.base/java.lang.ClassLoader.addPackageToList(ClassLoader.java:529)
+[2021-03-31T02:47:17.243Z] MLT 	at java.base/java.lang.VMAccess.addPackageToList(VMAccess.java:183)
+[2021-03-31T02:47:17.243Z] MLT 	at java.base/jdk.internal.misc.Unsafe.defineClass(Unsafe.java:1510)
+[2021-03-31T02:47:17.243Z] MLT 	at java.base/jdk.internal.reflect.ClassDefiner.defineClass(ClassDefiner.java:63)
+[2021-03-31T02:47:17.243Z] MLT 	at java.base/jdk.internal.reflect.MethodAccessorGenerator$1.run(MethodAccessorGenerator.java:400)
+[2021-03-31T02:47:17.243Z] MLT 	at java.base/jdk.internal.reflect.MethodAccessorGenerator$1.run(MethodAccessorGenerator.java:394)
+[2021-03-31T02:47:17.244Z] MLT 	at java.base/java.security.AccessController.doPrivileged(AccessController.java:682)
+[2021-03-31T02:47:17.244Z] MLT 	at java.base/jdk.internal.reflect.MethodAccessorGenerator.generate(MethodAccessorGenerator.java:393)
+[2021-03-31T02:47:17.244Z] MLT 	at java.base/jdk.internal.reflect.MethodAccessorGenerator.generateMethod(MethodAccessorGenerator.java:75)
+[2021-03-31T02:47:17.244Z] MLT 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:53)
+[2021-03-31T02:47:17.244Z] MLT 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-03-31T02:47:17.244Z] MLT 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+[2021-03-31T02:47:17.244Z] MLT 	at junit.framework.TestCase.runTest(TestCase.java:176)
+[2021-03-31T02:47:17.244Z] MLT 	at junit.framework.TestCase.runBare(TestCase.java:141)
+[2021-03-31T02:47:17.244Z] MLT 	at junit.framework.TestResult$1.protect(TestResult.java:122)
+[2021-03-31T02:47:17.244Z] MLT 	at junit.framework.TestResult.runProtected(TestResult.java:142)
+[2021-03-31T02:47:17.244Z] MLT 	at junit.framework.TestResult.run(TestResult.java:125)
+[2021-03-31T02:47:17.244Z] MLT 	at junit.framework.TestCase.run(TestCase.java:129)
+[2021-03-31T02:47:17.244Z] MLT 	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+[2021-03-31T02:47:17.244Z] MLT 	at junit.framework.TestSuite.run(TestSuite.java:247)
+[2021-03-31T02:47:17.244Z] MLT 	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+[2021-03-31T02:47:17.244Z] MLT 	at org.junit.runners.Suite.runChild(Suite.java:128)
+[2021-03-31T02:47:17.244Z] MLT 	at org.junit.runners.Suite.runChild(Suite.java:27)
+[2021-03-31T02:47:17.244Z] MLT 	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+[2021-03-31T02:47:17.244Z] MLT 	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+[2021-03-31T02:47:17.244Z] MLT 	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+[2021-03-31T02:47:17.244Z] MLT 	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+[2021-03-31T02:47:17.244Z] MLT 	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+[2021-03-31T02:47:17.244Z] MLT 	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+[2021-03-31T02:47:17.244Z] MLT 	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+[2021-03-31T02:47:17.244Z] MLT 	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+[2021-03-31T02:47:17.244Z] MLT 	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+[2021-03-31T02:47:17.244Z] MLT 	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+[2021-03-31T02:47:17.244Z] MLT 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+[2021-03-31T02:47:17.244Z] MLT 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+[2021-03-31T02:47:17.244Z] MLT 	at java.base/java.lang.Thread.run(Thread.java:836)
+```
+
+The NPE in question is at https://github.com/eclipse/openj9/blob/5a48e54c3b5022ac1d8246abd30701617f5ae1bb/jcl/src/java.base/share/classes/java/lang/ClassLoader.java#L659.
+This appears a JIT issue.
+fyi @knn-k 

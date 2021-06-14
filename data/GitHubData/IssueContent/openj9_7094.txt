@@ -1,0 +1,11 @@
+The implementation of `isBigDecimalMethod` is presented below
+
+```
+bool
+TR_J9MethodBase::isBigDecimalMethod(J9Method * j9Method)
+   {
+   return isBigDecimalMethod(J9_ROM_METHOD_FROM_RAM_METHOD(j9Method), J9_CLASS_FROM_METHOD(j9Method)->romClass);
+   }
+```
+The JITServer can use the caches around j9classes and j9methods to completely eliminate `ResolvedMethod_isBigDecimalMethod` messages.
+The same goes for `ResolvedMethod_isBigDecimalConvertersMethod` messages

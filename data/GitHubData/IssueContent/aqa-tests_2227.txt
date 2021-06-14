@@ -1,0 +1,9 @@
+If 'all' is specified for PLATFORM:
+
+1. Jobs are generated for platform ppc64-aix_xl, which does not exist
+2. Jobs are not generated for x86-32_windows for anything other than jdk8, though it exists for jdk11 and later on hotspot
+3. Jobs are not generated for aarch64-linux_xl which exists for jdk11 and later on openj9
+
+Jobs are not generated for other platforms (e.g. RISC-V, Solaris), but I think this is the desired behaviour since they are excluded from the 'normal' test runs).
+
+Also once the jobs are generated the are submitted in the order they were added to the platforms list (in https://github.com/AdoptOpenJDK/openjdk-tests/blob/314dc7c35260354d60bf0455c54f9728be7aef12/buildenv/jenkins/openjdk_tests).  It would be nice if the list were sorted once complete so that which jobs are which once they are submitted would be more predictable.

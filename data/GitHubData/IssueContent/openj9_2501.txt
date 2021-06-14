@@ -1,0 +1,40 @@
+Testcase:
+[Dummy.zip](https://github.com/eclipse/openj9/files/2238463/Dummy.zip)
+[TestDummy.zip](https://github.com/eclipse/openj9/files/2238464/TestDummy.zip) (GIT only allows `zip` file not `jar` files)
+
+Following code snippet launches multiple JVMs almost simultaneously 
+```
+		ProcessBuilder builder = new ProcessBuilder(cmds).inheritIO();
+		Process[] processes = new Process[loop];
+		for (int i = 0; i < loop; i++) {
+			processes[i] = builder.start();
+		}
+```
+The new process can be a simple Java app just sleep for `10s`.
+
+Command line to reproduce:
+```
+path\to\java -jar path\to\TestDummy.zip 100 path\to\target\java -jar path\to\Dummy.jar
+```
+The first `java` launches `TestDummy` which starts a target `java` process with following command line. `100` here is the number of processes to be started.
+
+This can produce following OOM:
+```
+Exception in thread "main" java/lang/OutOfMemoryError: native memory exhausted
+```
+or other errors:
+```
+JVMJ9VM015W Initialization error for library j9gc29(5): Failed to allocate default memory space
+```
+and 
+```
+Type=Segmentation error vmState=0x00020011
+```
+
+These errors are easier to reproduce at Windows 10 platform with `OpenJ9 JDK10`. Specifying large `-Xmx` value or large number of processes to be created seem also make reproducing easier. 
+It appears such error occurs much less in other platforms such as PPCLE but I did see it at least once so it might be a timing issue. 
+
+I understand that there is a limitation to create the number of JVM in a resource limited machine. However the test shows that a Win10 machine with `8G` RAM might throw such error when creating `~40` Java processes which just run a simple program. It appears not the actual memory required to run the Java app caused the OOM, probably it is out of virtual address JVM attempts to reserve. 
+
+Is this because of `Java 9+` uses `25%` of the physical memory on the machine as the default `-Xmx`? When following process attempts to find available space, is there a synchronization issue that caused segmentation error? 
+  

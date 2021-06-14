@@ -1,0 +1,22 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.openjdk_x86-64_windows_OpenJDK11/32
+java/util/Collection/IteratorMicroBenchmark.java
+```
+17:51:37  STDERR:
+17:51:37  java.lang.RuntimeException: Job failed: ConcurrentLinkedDeque descendingIterator() loop
+17:51:37  	at IteratorMicroBenchmark$Job.run(IteratorMicroBenchmark.java:86)
+17:51:37  	at IteratorMicroBenchmark.time0(IteratorMicroBenchmark.java:152)
+17:51:37  	at IteratorMicroBenchmark.time(IteratorMicroBenchmark.java:162)
+17:51:37  	at IteratorMicroBenchmark.run(IteratorMicroBenchmark.java:324)
+17:51:37  	at IteratorMicroBenchmark.main(IteratorMicroBenchmark.java:254)
+17:51:37  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+17:51:37  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+17:51:37  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+17:51:37  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+17:51:37  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:312)
+17:51:37  	at java.base/java.lang.Thread.run(Thread.java:836)
+17:51:37  Caused by: java.lang.AssertionError: Sum mismatch
+17:51:37  	at IteratorMicroBenchmark$Check.sum(IteratorMicroBenchmark.java:248)
+17:51:37  	at IteratorMicroBenchmark$24.work(IteratorMicroBenchmark.java:511)
+17:51:37  	at IteratorMicroBenchmark$Job.run(IteratorMicroBenchmark.java:83)
+17:51:37  	... 10 more
+```

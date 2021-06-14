@@ -1,0 +1,3 @@
+Both the build and test jobs in a PR test pipeline use the `pull/nnn/merge` reference: the problem is the meaning of that reference can change between when the build is launched and when the test portion begins. See https://github.com/eclipse/openj9/pull/6822 where the build was based on `98a888ab596c4cec379318bd9ae192ae633f3a9b`, but the test was based on `15afcbb98d2f683190b07ca803e189749b6c64c5` because in the interim, #6938 was merged which changed the meaning of `pull/6822/merge`. The result in [1] is errors that refer to lines that don't exist in the commit used to build.
+
+[1] https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_sanity.functional_ppc64le_linux_Personal/260

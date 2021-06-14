@@ -1,0 +1,174 @@
+Test name: java/lang/management/ThreadMXBean/ResetPeakThreadCount.java.ResetPeakThreadCount
+
+Java version: 11 (but any)
+
+Failure:
+```
+java.lang.RuntimeException: ***** Unexpected thread count: previous = 33 current = 27 delta = -8*****
+	at ResetPeakThreadCount.checkThreadCount(ResetPeakThreadCount.java:228)
+	at ResetPeakThreadCount.main(ResetPeakThreadCount.java:114)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:836)
+
+JavaTest Message: Test threw exception: java.lang.RuntimeException: ***** Unexpected thread count: previous = 33 current = 27 delta = -8*****
+JavaTest Message: shutting down test
+```
+
+stderr output
+```
+Reset peak before = 23 current = 23 after reset peak = 23 current = 23
+Starting 8 threads....
+   Current = 31 Peak before = 23 after: 31
+   Live thread count before returns 31
+Terminating 4 threads....
+   Live thread count before returns 27
+Starting 2 threads....
+   Current = 29 Peak before = 31 after: 31
+   Live thread count before returns 29
+Reset peak before = 31 current = 29 after reset peak = 29 current = 29
+Starting 4 threads....
+   Current = 33 Peak before = 29 after: 33
+   Live thread count before returns 33
+Terminating 8 threads....
+   Live thread count before returns 27
+Full Java thread dump
+"main" Id=1 in WAITING on lock=java.lang.Thread@b36c2381 (running in native)
+   at java.base/java.lang.Object.wait(Native Method)
+   at java.base/java.lang.Object.wait(Object.java:221)
+   at java.base/java.lang.Thread.join(Thread.java:716)
+     - locked java.lang.Thread@b36c2381
+   at com.sun.javatest.regtest.agent.MainWrapper.main(MainWrapper.java:74)
+
+   Locked synchronizers: count = 0
+
+"JIT Compilation Thread-000" daemon Id=3 in RUNNABLE
+
+   Locked synchronizers: count = 0
+
+"JIT Compilation Thread-001 Suspended" daemon Id=4 in RUNNABLE
+
+   Locked synchronizers: count = 0
+
+"JIT Compilation Thread-002 Suspended" daemon Id=5 in RUNNABLE
+
+   Locked synchronizers: count = 0
+
+"JIT Compilation Thread-003 Suspended" daemon Id=6 in RUNNABLE
+
+   Locked synchronizers: count = 0
+
+"JIT Compilation Thread-004 Suspended" daemon Id=7 in RUNNABLE
+
+   Locked synchronizers: count = 0
+
+"JIT Compilation Thread-005 Suspended" daemon Id=8 in RUNNABLE
+
+   Locked synchronizers: count = 0
+
+"JIT Compilation Thread-006 Suspended" daemon Id=9 in RUNNABLE
+
+   Locked synchronizers: count = 0
+
+"JIT Diagnostic Compilation Thread-007 Suspended" daemon Id=10 in RUNNABLE
+
+   Locked synchronizers: count = 0
+
+"JIT-SamplerThread" daemon Id=11 in TIMED_WAITING
+
+   Locked synchronizers: count = 0
+
+"IProfiler" daemon Id=12 in RUNNABLE
+
+   Locked synchronizers: count = 0
+
+"Common-Cleaner" daemon Id=2 in TIMED_WAITING on lock=java.lang.ref.ReferenceQueue@b06d99c1 (running in native)
+   at java.base/java.lang.Object.wait(Native Method)
+   at java.base/java.lang.Object.wait(Object.java:221)
+   at java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:138)
+     - locked java.lang.ref.ReferenceQueue@b06d99c1
+   at java.base/jdk.internal.ref.CleanerImpl.run(CleanerImpl.java:148)
+   at java.base/java.lang.Thread.run(Thread.java:836)
+   at java.base/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:134)
+
+   Locked synchronizers: count = 0
+
+"Finalizer thread" daemon Id=13 in RUNNABLE
+
+   Locked synchronizers: count = 0
+
+"Concurrent Mark Helper" daemon Id=14 in RUNNABLE
+
+   Locked synchronizers: count = 0
+
+"GC Worker" daemon Id=15 in RUNNABLE
+
+   Locked synchronizers: count = 0
+
+"GC Worker" daemon Id=16 in RUNNABLE
+
+   Locked synchronizers: count = 0
+
+"GC Worker" daemon Id=17 in RUNNABLE
+
+   Locked synchronizers: count = 0
+
+"GC Worker" daemon Id=18 in RUNNABLE
+
+   Locked synchronizers: count = 0
+
+"GC Worker" daemon Id=19 in RUNNABLE
+
+   Locked synchronizers: count = 0
+
+"GC Worker" daemon Id=20 in RUNNABLE
+
+   Locked synchronizers: count = 0
+
+"GC Worker" daemon Id=21 in RUNNABLE
+
+   Locked synchronizers: count = 0
+
+"Attach API wait loop" daemon Id=24 in RUNNABLE (running in native)
+   at java.base/openj9.internal.tools.attach.target.IPC.waitSemaphore(Native Method)
+   at java.base/openj9.internal.tools.attach.target.CommonDirectory.waitSemaphore(CommonDirectory.java:259)
+   at java.base/openj9.internal.tools.attach.target.WaitLoop.waitForNotification(WaitLoop.java:66)
+   at java.base/openj9.internal.tools.attach.target.WaitLoop.run(WaitLoop.java:154)
+
+   Locked synchronizers: count = 0
+
+"MainThread" Id=26 in RUNNABLE (running in native)
+   at java.management/com.ibm.java.lang.management.internal.ThreadMXBeanImpl.dumpAllThreadsImpl(Native Method)
+   at java.management/com.ibm.java.lang.management.internal.ThreadMXBeanImpl.dumpAllThreadsCommon(ThreadMXBeanImpl.java:676)
+   at java.management/com.ibm.java.lang.management.internal.ThreadMXBeanImpl.dumpAllThreads(ThreadMXBeanImpl.java:659)
+   at ThreadDump.threadDump(ThreadDump.java:103)
+   at ResetPeakThreadCount.checkThreadCount(ResetPeakThreadCount.java:227)
+   at ResetPeakThreadCount.main(ResetPeakThreadCount.java:114)
+   at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+   at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+   at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+   at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+   at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+   at java.base/java.lang.Thread.run(Thread.java:836)
+
+   Locked synchronizers: count = 0
+
+"Thread-16" daemon Id=39 in TIMED_WAITING on lock=[Z@50e668ec (running in native)
+   at java.base/java.lang.Object.wait(Native Method)
+   at java.base/java.lang.Object.wait(Object.java:221)
+   at ResetPeakThreadCount$MyThread.run(ResetPeakThreadCount.java:249)
+     - locked [Z@50e668ec
+
+   Locked synchronizers: count = 0
+
+"Thread-17" daemon Id=40 in TIMED_WAITING on lock=[Z@50e668ec (running in native)
+   at java.base/java.lang.Object.wait(Native Method)
+   at java.base/java.lang.Object.wait(Object.java:221)
+   at ResetPeakThreadCount$MyThread.run(ResetPeakThreadCount.java:249)
+     - locked [Z@50e668ec
+
+   Locked synchronizers: count = 0
+```

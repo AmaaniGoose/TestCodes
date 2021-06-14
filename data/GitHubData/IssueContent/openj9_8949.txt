@@ -1,0 +1,10 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.functional_x86-64_linux_Nightly/319
+ testSCCacheManagement_0
+```
+1) testSharedCacheEnableBCI(tests.sharedclasses.options.junit.TestOptionsCacheDir)tests.sharedclasses.TestFailedException: Mismatch in number of ROMClasses. Without enableBCI, # ROMClasses: 523With enableBCI, # ROMClasses: 490.
+Maximum allowed difference is 10
+	at tests.sharedclasses.TestUtils.fail(TestUtils.java:598)
+	at tests.sharedclasses.options.TestSharedCacheEnableBCI.runTest1(TestSharedCacheEnableBCI.java:255)
+	at tests.sharedclasses.options.TestSharedCacheEnableBCI.main(TestSharedCacheEnableBCI.java:61)
+	at tests.sharedclasses.options.junit.TestOptionsBase.testSharedCacheEnableBCI(TestOptionsBase.java:132)
+```

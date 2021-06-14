@@ -1,0 +1,9 @@
+Originally described by @keithc-ca  in [#9429 comment](https://github.com/eclipse/openj9/issues/9429#issuecomment-627356330).
+
+> NativeChaCha20Cipher.EngineAEADDec appears to capture the entire input in a ByteArrayOutputStream: if the input is large (think gigabytes) this is not reasonable.
+
+To elaborate:
+* When a client calls `cipher.engineUpdate` or `cipher.engineFinal` with a `ByteBuffer` as input, [`bufferCrypt`](https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/d6ccd89fcb7d919ffa2949b82ff0dec305f6f1a8/src/java.base/share/classes/javax/crypto/CipherSpi.java#L744-L837) will be called (as shown [here](https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/d6ccd89fcb7d919ffa2949b82ff0dec305f6f1a8/src/java.base/share/classes/javax/crypto/CipherSpi.java#L555) and [here](https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/d6ccd89fcb7d919ffa2949b82ff0dec305f6f1a8/src/java.base/share/classes/javax/crypto/CipherSpi.java#L730)).
+* In case of ChaCha20, `bufferCrypt` calls one of the `engineUpdate` and `engineDoFinal` functions in [NativeChaCha20Cipher.java](https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/closed/src/java.base/share/classes/com/sun/crypto/provider/NativeChaCha20Cipher.java).
+* Those functions call the underlying `doUpdate` call. In case of AEAD decryption, the `doUpdate` [copies the input to a buffer](https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/d6ccd89fcb7d919ffa2949b82ff0dec305f6f1a8/closed/src/java.base/share/classes/com/sun/crypto/provider/NativeChaCha20Cipher.java#L1009)
+* Hence calling `cipher.engineUpdate` continuously with large input sizes (gigabytes) will cause a crash.

@@ -1,0 +1,7 @@
+Please can we setup CI integration for the openjdk extensions "head" repository, similar to the jdk11 setup.
+
+    copyright/line end checks
+    nightly builds, build/sanity/extended
+    PR builds for both openjdk (next) and openj9
+
+fyi @vsebe

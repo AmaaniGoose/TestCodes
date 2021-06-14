@@ -1,0 +1,232 @@
+java/util/concurrent/TimeUnit/Basic.java fails intermittently in the AdoptOpenJDK test runs.  Only been seen on Windows.
+
+Output:
+```
+23:46:00  TEST: java/util/concurrent/TimeUnit/Basic.java
+23:46:00  TEST JDK: C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdkbinary\j2sdk-image
+23:46:00  
+23:46:00  ACTION: build -- Passed. Build successful
+23:46:00  REASON: Named class compiled on demand
+23:46:00  TIME:   0.327 seconds
+23:46:00  messages:
+23:46:00  command: build Basic
+23:46:00  reason: Named class compiled on demand
+23:46:00  Test directory:
+23:46:00    compile: Basic
+23:46:00  elapsed time (seconds): 0.327
+23:46:00  
+23:46:00  ACTION: compile -- Passed. Compilation successful
+23:46:00  REASON: .class file out of date or does not exist
+23:46:00  TIME:   0.325 seconds
+23:46:00  messages:
+23:46:00  command: compile C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\concurrent\TimeUnit\Basic.java
+23:46:00  reason: .class file out of date or does not exist
+23:46:00  Mode: agentvm
+23:46:00  Agent id: 0
+23:46:00  elapsed time (seconds): 0.325
+23:46:00  configuration:
+23:46:00  Boot Layer (javac runtime environment)
+23:46:00    class path: C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\javatest.jar 
+23:46:00                C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\jtreg.jar 
+23:46:00    patch:      java.base C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\patches\java.base
+23:46:00  
+23:46:00  javac compilation environment
+23:46:00    source path: C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\concurrent\TimeUnit
+23:46:00                 C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\lib
+23:46:00    class path:  C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\concurrent\TimeUnit
+23:46:00                 C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\classes\1\java\util\concurrent\TimeUnit\Basic.d
+23:46:00                 C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\classes\1\test\lib
+23:46:00  
+23:46:00  rerun:
+23:46:00  cd 'C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\scratch\0' && \
+23:46:00  PATH='C:\cygwin64\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\Amazon\cfn-bootstrap;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Strawberry\perl\bin;C:\Program Files\Git\cmd;C:\openjdk\jdk-8\bin;C:\apache-ant\apache-ant-1.10.5\bin;C:\Program Files (x86)\IncrediBuild;C:\rust\bin;C:\Program Files\IcedTeaWEB\bin;C:\Users\jenkins.EC2AMAZ-T7I06S9\AppData\Local\Microsoft\WindowsApps' \
+23:46:00  SystemDrive=C: \
+23:46:00  SystemRoot='C:\Windows' \
+23:46:00  TEMP='C:\Users\JENKIN~1.EC2\AppData\Local\Temp\3' \
+23:46:00  TMP='C:\Users\JENKIN~1.EC2\AppData\Local\Temp\3' \
+23:46:00  windir='C:\Windows' \
+23:46:00      'C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdkbinary\j2sdk-image\bin\javac' \
+23:46:00          -J-ea \
+23:46:00          -J-esa \
+23:46:00          -J-Xmx512m \
+23:46:00          -J-Xcompressedrefs \
+23:46:00          -J-Dtest.class.path.prefix='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\classes\1\java\util\concurrent\TimeUnit\Basic.d;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\concurrent\TimeUnit;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\classes\1\test\lib' \
+23:46:00          -J-Dtest.file='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\concurrent\TimeUnit\Basic.java' \
+23:46:00          -J-Dtest.src='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\concurrent\TimeUnit' \
+23:46:00          -J-Dtest.src.path='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\concurrent\TimeUnit;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\lib' \
+23:46:00          -J-Dtest.classes='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\classes\1\java\util\concurrent\TimeUnit\Basic.d' \
+23:46:00          -J-Dtest.class.path='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\classes\1\java\util\concurrent\TimeUnit\Basic.d;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\classes\1\test\lib' \
+23:46:00          -J-Dtest.vm.opts='-ea -esa -Xmx512m -Xcompressedrefs' \
+23:46:00          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-Xcompressedrefs' \
+23:46:00          -J-Dtest.compiler.opts= \
+23:46:00          -J-Dtest.java.opts= \
+23:46:00          -J-Dtest.jdk='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdkbinary\j2sdk-image' \
+23:46:00          -J-Dcompile.jdk='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdkbinary\j2sdk-image' \
+23:46:00          -J-Dtest.timeout.factor=8.0 \
+23:46:00          -J-Dtest.root='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk' \
+23:46:00          -d 'C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\classes\1\java\util\concurrent\TimeUnit\Basic.d' \
+23:46:00          -sourcepath 'C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\concurrent\TimeUnit;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\lib' \
+23:46:00          -classpath 'C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\concurrent\TimeUnit;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\classes\1\java\util\concurrent\TimeUnit\Basic.d;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\classes\1\test\lib' 'C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\concurrent\TimeUnit\Basic.java'
+23:46:00  
+23:46:00  ACTION: main -- Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Some tests failed
+23:46:00  REASON: Assumed action based on file name: run main Basic 
+23:46:00  TIME:   0.076 seconds
+23:46:00  messages:
+23:46:00  command: main Basic
+23:46:00  reason: Assumed action based on file name: run main Basic 
+23:46:00  Mode: agentvm
+23:46:00  Agent id: 0
+23:46:00  elapsed time (seconds): 0.076
+23:46:00  configuration:
+23:46:00  Boot Layer
+23:46:00    class path: C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\javatest.jar 
+23:46:00                C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\jtreg.jar 
+23:46:00    patch:      java.base C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\patches\java.base
+23:46:00  
+23:46:00  Test Layer
+23:46:00    class path: C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\classes\1\java\util\concurrent\TimeUnit\Basic.d
+23:46:00                C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\concurrent\TimeUnit
+23:46:00                C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\classes\1\test\lib
+23:46:00                C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\lib
+23:46:00  
+23:46:00  rerun:
+23:46:00  cd 'C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\scratch\0' && \
+23:46:00  PATH='C:\cygwin64\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\Amazon\cfn-bootstrap;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Strawberry\perl\bin;C:\Program Files\Git\cmd;C:\openjdk\jdk-8\bin;C:\apache-ant\apache-ant-1.10.5\bin;C:\Program Files (x86)\IncrediBuild;C:\rust\bin;C:\Program Files\IcedTeaWEB\bin;C:\Users\jenkins.EC2AMAZ-T7I06S9\AppData\Local\Microsoft\WindowsApps' \
+23:46:00  SystemDrive=C: \
+23:46:00  SystemRoot='C:\Windows' \
+23:46:00  TEMP='C:\Users\JENKIN~1.EC2\AppData\Local\Temp\3' \
+23:46:00  TMP='C:\Users\JENKIN~1.EC2\AppData\Local\Temp\3' \
+23:46:00  windir='C:\Windows' \
+23:46:00      'C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdkbinary\j2sdk-image\bin\java' \
+23:46:00          -Dtest.class.path.prefix='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\classes\1\java\util\concurrent\TimeUnit\Basic.d;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\concurrent\TimeUnit;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\classes\1\test\lib' \
+23:46:00          -Dtest.file='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\concurrent\TimeUnit\Basic.java' \
+23:46:00          -Dtest.src='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\concurrent\TimeUnit' \
+23:46:00          -Dtest.src.path='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\concurrent\TimeUnit;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\lib' \
+23:46:00          -Dtest.classes='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\classes\1\java\util\concurrent\TimeUnit\Basic.d' \
+23:46:00          -Dtest.class.path='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\classes\1\java\util\concurrent\TimeUnit\Basic.d;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\classes\1\test\lib' \
+23:46:00          -Dtest.vm.opts='-ea -esa -Xmx512m -Xcompressedrefs' \
+23:46:00          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-Xcompressedrefs' \
+23:46:00          -Dtest.compiler.opts= \
+23:46:00          -Dtest.java.opts= \
+23:46:00          -Dtest.jdk='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdkbinary\j2sdk-image' \
+23:46:00          -Dcompile.jdk='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdkbinary\j2sdk-image' \
+23:46:00          -Dtest.timeout.factor=8.0 \
+23:46:00          -Dtest.root='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk' \
+23:46:00          -classpath 'C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\classes\1\java\util\concurrent\TimeUnit\Basic.d;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\concurrent\TimeUnit;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\TKG\test_output_15831870247222\jdk_util_0\work\classes\1\test\lib;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\lib;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\javatest.jar;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk14_j9_sanity.openjdk_x86-64_windows\jvmtest\openjdk\jtreg\lib\jtreg.jar' \
+23:46:00          Basic
+23:46:00  STDERR:
+23:46:00  java.lang.Throwable
+23:46:00  	at java.base/java.lang.Thread.dumpStack(Thread.java:512)
+23:46:00  	at Basic.fail(Basic.java:123)
+23:46:00  	at Basic.check(Basic.java:126)
+23:46:00  	at Basic.lambda$realMain$0(Basic.java:97)
+23:46:00  	at Basic$$Lambda$764/0000000000000000.run(Unknown Source)
+23:46:00  	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1800)
+23:46:00  	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1792)
+23:46:00  	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+23:46:00  	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1016)
+23:46:00  	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1665)
+23:46:00  	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1598)
+23:46:00  	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+23:46:00  java.lang.AssertionError: Some tests failed
+23:46:00  	at Basic.main(Basic.java:133)
+23:46:00  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+23:46:00  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+23:46:00  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+23:46:00  	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+23:46:00  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+23:46:00  	at java.base/java.lang.Thread.run(Thread.java:835)
+23:46:00  
+23:46:00  JavaTest Message: Test threw exception: java.lang.AssertionError
+23:46:00  JavaTest Message: shutting down test
+23:46:00  
+23:46:00  STDOUT:
+23:46:00  NANOSECONDS
+23:46:00  MICROSECONDS
+23:46:00  MILLISECONDS
+23:46:00  SECONDS
+23:46:00  MINUTES
+23:46:00  HOURS
+23:46:00  DAYS
+23:46:00  
+23:46:00  Passed = 74, failed = 1
+23:46:00  
+23:46:00  
+23:46:00  TEST RESULT: Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Some tests failed
+```
+The number of tests failed is variable between runs.
+
+Running the test locally and adding some debug to the test case showed that the failing part of the test checks that the elapsed time before and after calling MILLISECOND.sleep is greater than the sleep time requested.
+
+This smaller test case demonstrated the issue locally on a Windows 10 laptop:
+```
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+
+import java.util.concurrent.TimeUnit;
+
+public class SleepTest {
+        
+    public static void main(String[] args) throws InterruptedException {
+        int i = 0;
+        int ms = 4;
+        for ( i=0; i<30; i++) {
+            long startTime = System.nanoTime();
+            MILLISECONDS.sleep(ms);
+            long elapsedNanos = System.nanoTime() - startTime;
+            long timeoutNanos = MILLISECONDS.toNanos(ms);
+            System.out.println("elapsedNanos = " + elapsedNanos + " timeoutNanos = " + timeoutNanos);
+            if (elapsedNanos < timeoutNanos) {
+                System.out.println("  ** ERROR **");
+            }
+        }
+    }
+}
+```
+Output from a run of the test:
+```
+jdk-11.0.4+11\bin\java SleepTest
+elapsedNanos = 4983700 timeoutNanos = 4000000
+elapsedNanos = 3789400 timeoutNanos = 4000000
+  ** ERROR **
+elapsedNanos = 4156000 timeoutNanos = 4000000
+elapsedNanos = 4751200 timeoutNanos = 4000000
+elapsedNanos = 4716900 timeoutNanos = 4000000
+elapsedNanos = 4414700 timeoutNanos = 4000000
+elapsedNanos = 4561000 timeoutNanos = 4000000
+elapsedNanos = 4567700 timeoutNanos = 4000000
+elapsedNanos = 4687700 timeoutNanos = 4000000
+elapsedNanos = 4504200 timeoutNanos = 4000000
+elapsedNanos = 4652700 timeoutNanos = 4000000
+elapsedNanos = 4382800 timeoutNanos = 4000000
+elapsedNanos = 3721200 timeoutNanos = 4000000
+  ** ERROR **
+elapsedNanos = 4707400 timeoutNanos = 4000000
+elapsedNanos = 4564000 timeoutNanos = 4000000
+elapsedNanos = 4620200 timeoutNanos = 4000000
+elapsedNanos = 4687600 timeoutNanos = 4000000
+elapsedNanos = 3664500 timeoutNanos = 4000000
+  ** ERROR **
+elapsedNanos = 5015600 timeoutNanos = 4000000
+elapsedNanos = 4153700 timeoutNanos = 4000000
+elapsedNanos = 4549600 timeoutNanos = 4000000
+elapsedNanos = 4511200 timeoutNanos = 4000000
+elapsedNanos = 4361000 timeoutNanos = 4000000
+elapsedNanos = 4509200 timeoutNanos = 4000000
+elapsedNanos = 4573300 timeoutNanos = 4000000
+elapsedNanos = 4513000 timeoutNanos = 4000000
+elapsedNanos = 4656600 timeoutNanos = 4000000
+elapsedNanos = 4550900 timeoutNanos = 4000000
+elapsedNanos = 4649500 timeoutNanos = 4000000
+elapsedNanos = 4577800 timeoutNanos = 4000000
+```
+The test loops 30 times.  Usually, but not always, there is at least one failure.
+
+This small test case fails on both openj9 and hotspot.
+
+So it appears that the test case is unsafe on Windows, which should be raised upstream.  In the meantime, I'll submit a PR to exclude the test from the Windows runs.
+
+The test can be rerun via (for example)
+```
+https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=14&JDK_IMPL=openj9&BUILD_LIST=openjdk&PLATFORM=x86-64_windows&TARGET=jdk_math_0
+```
+but bear in mind the failure is intermittent.

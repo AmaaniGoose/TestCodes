@@ -1,0 +1,192 @@
+`java/lang/invoke/RevealDirectTest.java` consistently fails for JDK11/13-openj9 (hotspot unaffected). Original Issue: https://github.com/AdoptOpenJDK/openjdk-tests/issues/1344
+- Category, openjdk
+- OS's, all
+- Part of the Excluded jdk11 openj9 JTReg tests: https://github.com/AdoptOpenJDK/openjdk-tests/issues/585
+- JDK8-openj9 is passing 
+
+**JDK11**
+```
+16:54:42  openjdk version "11.0.6" 2020-01-14
+16:54:42  OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.6+9-202001090333)
+16:54:42  Eclipse OpenJ9 VM AdoptOpenJDK (build master-9771d87a4, JRE 11 Linux amd64-64-Bit Compressed References 20200109_421 (JIT enabled, AOT enabled)
+16:54:42  OpenJ9   - 9771d87a4
+16:54:42  OMR      - 4d5712b26
+16:54:42  JCL      - fe28a7deff based on jdk-11.0.6+9)
+```
+```
+11:46:04  STDOUT:
+**OMITTED PASSING TESTS**
+11:46:04  *** FAIL: protected java.lang.Object java.lang.Object.clone() throws java.lang.CloneNotSupportedException => java.lang.AssertionError: unexpected lookup for negative test
+11:46:04  *** FAIL: protected void java.lang.Object.finalize() throws java.lang.Throwable => java.lang.AssertionError: unexpected lookup for negative test
+**OMITTED PASSING TESTS**
+11:46:04  *** FAIL: public final native java.lang.invoke.MethodHandle.invoke(Object[])Object => java.lang.AssertionError: expected:<4369> but was:<401>
+**OMITTED PASSING TEST*
+11:46:04  STDERR:
+11:46:04  JavaTest Message: JUnit Failure: testPublicLookupNegative(test.java.lang.invoke.RevealDirectTest): unexpected lookup for negative test
+11:46:04  java.lang.AssertionError: unexpected lookup for negative test
+11:46:04  	at test.java.lang.invoke.RevealDirectTest.testWithMember(RevealDirectTest.java:701)
+11:46:04  	at test.java.lang.invoke.RevealDirectTest.testOnMembersImpl(RevealDirectTest.java:385)
+11:46:04  	at test.java.lang.invoke.RevealDirectTest.testOnMembersNoLookup(RevealDirectTest.java:362)
+11:46:04  	at test.java.lang.invoke.RevealDirectTest.testPublicLookupNegative(RevealDirectTest.java:130)
+11:46:04  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+11:46:04  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+11:46:04  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+11:46:04  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+11:46:04  	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+11:46:04  	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+11:46:04  	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+11:46:04  	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+11:46:04  	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+11:46:04  	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+11:46:04  	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+11:46:04  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+11:46:04  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+11:46:04  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+11:46:04  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+11:46:04  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+11:46:04  	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+11:46:04  	at org.junit.runners.Suite.runChild(Suite.java:128)
+11:46:04  	at org.junit.runners.Suite.runChild(Suite.java:24)
+11:46:04  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+11:46:04  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+11:46:04  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+11:46:04  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+11:46:04  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+11:46:04  	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+11:46:04  	at org.junit.runner.JUnitCore.run(JUnitCore.java:157)
+11:46:04  	at org.junit.runner.JUnitCore.run(JUnitCore.java:136)
+11:46:04  	at org.junit.runner.JUnitCore.run(JUnitCore.java:127)
+11:46:04  	at org.junit.runner.JUnitCore.runClasses(JUnitCore.java:76)
+11:46:04  	at com.sun.javatest.regtest.agent.JUnitRunner.main(JUnitRunner.java:76)
+11:46:04  	at com.sun.javatest.regtest.agent.JUnitRunner.main(JUnitRunner.java:43)
+11:46:04  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+11:46:04  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+11:46:04  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+11:46:04  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+11:46:04  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+11:46:04  	at java.base/java.lang.Thread.run(Thread.java:831)
+11:46:04  
+11:46:04  JavaTest Message: JUnit Failure: testMethodHandleInvokes(test.java.lang.invoke.RevealDirectTest): expected:<4369> but was:<401>
+11:46:04  java.lang.AssertionError: expected:<4369> but was:<401>
+11:46:04  	at org.junit.Assert.fail(Assert.java:93)
+11:46:04  	at org.junit.Assert.failNotEquals(Assert.java:647)
+11:46:04  	at org.junit.Assert.assertEquals(Assert.java:128)
+11:46:04  	at org.junit.Assert.assertEquals(Assert.java:472)
+11:46:04  	at org.junit.Assert.assertEquals(Assert.java:456)
+11:46:04  	at test.java.lang.invoke.RevealDirectTest.consistent(RevealDirectTest.java:640)
+11:46:04  	at test.java.lang.invoke.RevealDirectTest.testWithMember(RevealDirectTest.java:719)
+11:46:04  	at test.java.lang.invoke.RevealDirectTest.testOnMembersImpl(RevealDirectTest.java:385)
+11:46:04  	at test.java.lang.invoke.RevealDirectTest.testOnMembers(RevealDirectTest.java:358)
+11:46:04  	at test.java.lang.invoke.RevealDirectTest.testMethodHandleInvokes(RevealDirectTest.java:185)
+11:46:04  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+11:46:04  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+11:46:04  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+11:46:04  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+11:46:04  	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+11:46:04  	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+11:46:04  	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+11:46:04  	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+11:46:04  	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+11:46:04  	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+11:46:04  	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+11:46:04  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+11:46:04  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+11:46:04  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+11:46:04  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+11:46:04  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+11:46:04  	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+11:46:04  	at org.junit.runners.Suite.runChild(Suite.java:128)
+11:46:04  	at org.junit.runners.Suite.runChild(Suite.java:24)
+11:46:04  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+11:46:04  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+11:46:04  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+11:46:04  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+11:46:04  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+11:46:04  	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+11:46:04  	at org.junit.runner.JUnitCore.run(JUnitCore.java:157)
+11:46:04  	at org.junit.runner.JUnitCore.run(JUnitCore.java:136)
+11:46:04  	at org.junit.runner.JUnitCore.run(JUnitCore.java:127)
+11:46:04  	at org.junit.runner.JUnitCore.runClasses(JUnitCore.java:76)
+11:46:04  	at com.sun.javatest.regtest.agent.JUnitRunner.main(JUnitRunner.java:76)
+11:46:04  	at com.sun.javatest.regtest.agent.JUnitRunner.main(JUnitRunner.java:43)
+11:46:04  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+11:46:04  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+11:46:04  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+11:46:04  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+11:46:04  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+11:46:04  	at java.base/java.lang.Thread.run(Thread.java:831)
+11:46:04  
+11:46:04  java.lang.Exception: JUnit test failure
+11:46:04  	at com.sun.javatest.regtest.agent.JUnitRunner.main(JUnitRunner.java:92)
+11:46:04  	at com.sun.javatest.regtest.agent.JUnitRunner.main(JUnitRunner.java:43)
+11:46:04  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+11:46:04  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+11:46:04  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+11:46:04  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+11:46:04  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+11:46:04  	at java.base/java.lang.Thread.run(Thread.java:831)
+11:46:04  
+11:46:04  JavaTest Message: Test threw exception: java.lang.Exception: JUnit test failure
+11:46:04  JavaTest Message: shutting down test
+11:46:04  
+```
+**JDK13**
+```
+16:56:09  openjdk version "13.0.1" 2019-10-15
+16:56:09  OpenJDK Runtime Environment AdoptOpenJDK (build 13.0.1+9-202001081408)
+16:56:09  Eclipse OpenJ9 VM AdoptOpenJDK (build master-a025fcd7e, JRE 13 Linux amd64-64-Bit Compressed References 20200108_141 (JIT enabled, AOT enabled)
+16:56:09  OpenJ9   - a025fcd7e
+16:56:09  OMR      - 4d5712b26
+16:56:09  JCL      - e2a5fe7b38 based on jdk-13.0.1+9)
+```
+```
+16:57:19  STDOUT:
+**OMITTED PASSING TESTS**
+16:57:19  *** FAIL: protected java.lang.Object java.lang.Object.clone() throws java.lang.CloneNotSupportedException => java.lang.AssertionError: unexpected lookup for negative test
+16:57:19  *** FAIL: protected void java.lang.Object.finalize() throws java.lang.Throwable => java.lang.AssertionError: unexpected lookup for negative test
+**OMITTED PASSING TESTS**
+16:57:19  STDERR:
+16:57:19  JavaTest Message: JUnit Failure: testPublicLookupNegative(test.java.lang.invoke.RevealDirectTest): unexpected lookup for negative test
+16:57:19  java.lang.AssertionError: unexpected lookup for negative test
+16:57:19  	at test.java.lang.invoke.RevealDirectTest.testWithMember(RevealDirectTest.java:701)
+16:57:19  	at test.java.lang.invoke.RevealDirectTest.testOnMembersImpl(RevealDirectTest.java:385)
+16:57:19  	at test.java.lang.invoke.RevealDirectTest.testOnMembersNoLookup(RevealDirectTest.java:362)
+16:57:19  	at test.java.lang.invoke.RevealDirectTest.testPublicLookupNegative(RevealDirectTest.java:130)
+16:57:19  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+16:57:19  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+16:57:19  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+16:57:19  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+16:57:19  	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+16:57:19  	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+16:57:19  	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+16:57:19  	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+16:57:19  	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+16:57:19  	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+16:57:19  	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+16:57:19  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+16:57:19  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+16:57:19  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+16:57:19  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+16:57:19  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+16:57:19  	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+16:57:19  	at org.junit.runners.Suite.runChild(Suite.java:128)
+16:57:19  	at org.junit.runners.Suite.runChild(Suite.java:24)
+16:57:19  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+16:57:19  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+16:57:19  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+16:57:19  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+16:57:19  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+16:57:19  	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+16:57:19  	at org.junit.runner.JUnitCore.run(JUnitCore.java:157)
+16:57:19  	at org.junit.runner.JUnitCore.run(JUnitCore.java:136)
+16:57:19  	at org.junit.runner.JUnitCore.run(JUnitCore.java:127)
+16:57:19  	at org.junit.runner.JUnitCore.runClasses(JUnitCore.java:76)
+16:57:19  	at com.sun.javatest.regtest.agent.JUnitRunner.main(JUnitRunner.java:76)
+16:57:19  	at com.sun.javatest.regtest.agent.JUnitRunner.main(JUnitRunner.java:43)
+16:57:19  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+16:57:19  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+16:57:19  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+16:57:19  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+16:57:19  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+16:57:19  	at java.base/java.lang.Thread.run(Thread.java:847)
+```

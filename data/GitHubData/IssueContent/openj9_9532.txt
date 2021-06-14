@@ -1,0 +1,5 @@
+When a qtype classref is resolved it must be a VT. When a Ltype classref or non-signature classref is resolved it must not be a VT, an error must be thrown in this case. At time of writing this issue it is currently unknown what kind of error will be thrown.
+
+In addition, we need to verify at classload that all fieldrefs with Qsignatures are VTs. It is uncertain whether we will need to verify that all fieldrefs with L signatures are not VTs. 
+
+Tests must also be added to verify this behaviour

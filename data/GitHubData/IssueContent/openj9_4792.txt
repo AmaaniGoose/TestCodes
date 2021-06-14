@@ -1,0 +1,10 @@
+Handle or disallow load-time and HCR-time modifications to java/lang/Object.
+
+Examples:
+
+- finalize becoming non-empty
+- hard-coding of the known final methods
+- assumptions on hashCode
+- assumptions on clone
+
+Related: #4714

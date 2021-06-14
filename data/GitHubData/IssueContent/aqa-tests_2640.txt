@@ -1,0 +1,152 @@
+extended.openjdk jvm_compiler_1 test compiler/gcbarriers/UnsafeIntrinsicsTest.java#shenandoah fails on jdk11 hotspot aarch64_lunux with:
+```
+[2021-05-29T18:25:21.280Z] STDOUT:
+[2021-05-29T18:25:21.280Z] CompileCommand: dontinline *.mergeImpl*
+[2021-05-29T18:25:21.280Z] Testing CAS with 4 thread and 133700 nodes
+[2021-05-29T18:25:21.280Z] Milage: 43435288 Skipped: 2741688 Created: 2719937 iterations: 21244
+[2021-05-29T18:25:21.280Z] Milage: 43737504 Skipped: 2755288 Created: 2750451 iterations: 21380
+[2021-05-29T18:25:21.280Z] Milage: 40243946 Skipped: 2530828 Created: 2548312 iterations: 19813
+[2021-05-29T18:25:21.280Z] Milage: 40524267 Skipped: 2543076 Created: 2537547 iterations: 19762
+[2021-05-29T18:25:21.280Z] Program end, found 138160 nodes
+[2021-05-29T18:25:21.280Z] Testing Weak_CAS with 4 thread and 133700 nodes
+[2021-05-29T18:25:21.280Z] STDERR:
+[2021-05-29T18:25:21.280Z] java.lang.Error: Weak CAS should always succeed on thread local objects, check you barrier implementation
+[2021-05-29T18:25:21.280Z] 	at compiler.gcbarriers.Runner.mergeImplWeakCAS(UnsafeIntrinsicsTest.java:319)
+[2021-05-29T18:25:21.280Z] 	at compiler.gcbarriers.Runner.merge(UnsafeIntrinsicsTest.java:272)
+[2021-05-29T18:25:21.280Z] 	at compiler.gcbarriers.Runner.run(UnsafeIntrinsicsTest.java:243)
+[2021-05-29T18:25:21.280Z] 	at java.base/java.lang.Thread.run(Thread.java:829)
+[2
+```
+Failing job link: https://ci.adoptopenjdk.net/job/Test_openjdk11_hs_extended.openjdk_aarch64_linux/30/consoleFull
+
+To rerun: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=hotspot&JDK_VENDOR=adoptopenjdk&BUILD_LIST=openjdk&PLATFORM=aarch64_linux_xl&CUSTOM_TARGET=test/hotspot/jtreg/compiler/gcbarriers/UnsafeIntrinsicsTest.java#shenandoah&TARGET=jdk_custom
+```
+[2021-05-29T18:13:04.672Z] Running test jvm_compiler_1 ...
+[2021-05-29T18:13:04.672Z] ===============================================
+[2021-05-29T18:13:04.672Z] jvm_compiler_1 Start Time: Sat May 29 18:13:00 2021 Epoch Time (ms): 1622311980797
+[2021-05-29T18:13:04.672Z] Nothing to be done for setup.
+[2021-05-29T18:13:04.672Z] variation: Mode650
+[2021-05-29T18:13:04.672Z] JVM_OPTIONS:  -XX:-UseCompressedOops 
+[2021-05-29T18:13:04.672Z] { itercnt=1; \
+[2021-05-29T18:13:04.672Z] mkdir -p "/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/TKG/../TKG/output_16223118831670/jvm_compiler_1"; \
+[2021-05-29T18:13:04.672Z] cd "/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/TKG/../TKG/output_16223118831670/jvm_compiler_1"; \
+[2021-05-29T18:13:04.672Z] "/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xmx512m -jar "/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/TKG/../../jvmtest/openjdk/jtreg/lib/jtreg.jar" \
+[2021-05-29T18:13:04.672Z] -agentvm -a -ea -esa -v:fail,error,time,nopass -retain:fail,error,*.dmp,javacore.*,heapdump.*,*.trc -ignore:quiet -timeoutFactor:8 -xml:verify -concurrency:4 -nativepath:"/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdkbinary/openjdk-test-image/hotspot/jtreg/native" -vmoptions:"-Xmx512m  -XX:-UseCompressedOops " \
+[2021-05-29T18:13:04.672Z] -w ""/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/TKG/../TKG/output_16223118831670/jvm_compiler_1"/work" \
+[2021-05-29T18:13:04.672Z] -r "/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/TKG/../../jvmtest/openjdk/report" \
+[2021-05-29T18:13:04.672Z] -jdk:"/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdkbinary/j2sdk-image" \
+[2021-05-29T18:13:04.672Z] -exclude:"/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/TKG/../openjdk/openjdk-jdk/test/hotspot/jtreg/ProblemList.txt" \
+[2021-05-29T18:13:04.672Z] -exclude:"/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/TKG/../../jvmtest/openjdk/excludes/ProblemList_openjdk11.txt" \
+[2021-05-29T18:13:04.672Z] "/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/TKG/../openjdk/openjdk-jdk/test/hotspot/jtreg:hotspot_compiler"; \
+[2021-05-29T18:13:04.672Z] if [ $? -eq 0 ] ; then echo ""; echo "jvm_compiler_1""_PASSED"; echo ""; cd /home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/TKG/..;  else echo ""; echo "jvm_compiler_1""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/TKG/../TKG/output_16223118831670/TestTargetResult";
+[2021-05-29T18:13:04.672Z] Directory "/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/TKG/../TKG/output_16223118831670/jvm_compiler_1/work" not found: creating
+[2021-05-29T18:13:07.056Z] XML output with verification to /home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16223118831670/jvm_compiler_1/work
+[2021-05-29T18:25:21.279Z] --------------------------------------------------
+[2021-05-29T18:25:21.279Z] TEST: compiler/gcbarriers/UnsafeIntrinsicsTest.java#shenandoah
+[2021-05-29T18:25:21.279Z] TEST JDK: /home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdkbinary/j2sdk-image
+[2021-05-29T18:25:21.279Z] 
+[2021-05-29T18:25:21.279Z] ACTION: build -- Passed. Build successful
+[2021-05-29T18:25:21.279Z] REASON: Named class compiled on demand
+[2021-05-29T18:25:21.279Z] TIME:   0.145 seconds
+[2021-05-29T18:25:21.279Z] messages:
+[2021-05-29T18:25:21.279Z] command: build compiler.gcbarriers.UnsafeIntrinsicsTest
+[2021-05-29T18:25:21.279Z] reason: Named class compiled on demand
+[2021-05-29T18:25:21.279Z] Test directory:
+[2021-05-29T18:25:21.279Z]   compile: compiler.gcbarriers.UnsafeIntrinsicsTest
+[2021-05-29T18:25:21.279Z] elapsed time (seconds): 0.145
+[2021-05-29T18:25:21.279Z] 
+[2021-05-29T18:25:21.279Z] ACTION: compile -- Passed. Compilation successful
+[2021-05-29T18:25:21.279Z] REASON: .class file out of date or does not exist
+[2021-05-29T18:25:21.279Z] TIME:   0.144 seconds
+[2021-05-29T18:25:21.279Z] messages:
+[2021-05-29T18:25:21.279Z] command: compile /home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/gcbarriers/UnsafeIntrinsicsTest.java
+[2021-05-29T18:25:21.279Z] reason: .class file out of date or does not exist
+[2021-05-29T18:25:21.279Z] Additional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.misc=ALL-UNNAMED
+[2021-05-29T18:25:21.279Z] Mode: agentvm
+[2021-05-29T18:25:21.279Z] Agent id: 3
+[2021-05-29T18:25:21.279Z] elapsed time (seconds): 0.144
+[2021-05-29T18:25:21.279Z] configuration:
+[2021-05-29T18:25:21.279Z] Boot Layer (javac runtime environment)
+[2021-05-29T18:25:21.279Z]   class path: /home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/jvmtest/openjdk/jtreg/lib/javatest.jar 
+[2021-05-29T18:25:21.279Z]               /home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+[2021-05-29T18:25:21.279Z]   patch:      java.base /home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16223118831670/jvm_compiler_1/work/patches/java.base
+[2021-05-29T18:25:21.279Z] 
+[2021-05-29T18:25:21.279Z] javac compilation environment
+[2021-05-29T18:25:21.279Z]   add modules: java.base                   
+[2021-05-29T18:25:21.279Z]   add exports: java.base/jdk.internal.misc ALL-UNNAMED
+[2021-05-29T18:25:21.279Z]   source path: /home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/gcbarriers 
+[2021-05-29T18:25:21.279Z]   class path:  /home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/gcbarriers 
+[2021-05-29T18:25:21.279Z]                /home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16223118831670/jvm_compiler_1/work/classes/2/compiler/gcbarriers/UnsafeIntrinsicsTest_shenandoah.d 
+[2021-05-29T18:25:21.279Z] 
+[2021-05-29T18:25:21.279Z] rerun:
+[2021-05-29T18:25:21.279Z] cd /home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16223118831670/jvm_compiler_1/work/scratch/3 && \
+[2021-05-29T18:25:21.279Z] DISPLAY=:0 \
+[2021-05-29T18:25:21.279Z] HOME=/home/jenkins \
+[2021-05-29T18:25:21.279Z] LANG=C.UTF-8 \
+[2021-05-29T18:25:21.279Z] PATH=/bin:/usr/bin:/usr/sbin \
+[2021-05-29T18:25:21.279Z]     /home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdkbinary/j2sdk-image/bin/javac \
+[2021-05-29T18:25:21.279Z]         -J-ea \
+[2021-05-29T18:25:21.279Z]         -J-esa \
+[2021-05-29T18:25:21.279Z]         -J-Xmx512m \
+[2021-05-29T18:25:21.279Z]         -J-XX:-UseCompressedOops \
+[2021-05-29T18:25:21.279Z]         -J-Djava.library.path=/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdkbinary/openjdk-test-image/hotspot/jtreg/native \
+[2021-05-29T18:25:21.279Z]         -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:-UseCompressedOops' \
+[2021-05-29T18:25:21.279Z]         -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:-UseCompressedOops' \
+[2021-05-29T18:25:21.279Z]         -J-Dtest.compiler.opts= \
+[2021-05-29T18:25:21.279Z]         -J-Dtest.java.opts= \
+[2021-05-29T18:25:21.279Z]         -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdkbinary/j2sdk-image \
+[2021-05-29T18:25:21.279Z]         -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdkbinary/j2sdk-image \
+[2021-05-29T18:25:21.279Z]         -J-Dtest.timeout.factor=8.0 \
+[2021-05-29T18:25:21.279Z]         -J-Dtest.nativepath=/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdkbinary/openjdk-test-image/hotspot/jtreg/native \
+[2021-05-29T18:25:21.279Z]         -J-Dtest.root=/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg \
+[2021-05-29T18:25:21.279Z]         -J-Dtest.name=compiler/gcbarriers/UnsafeIntrinsicsTest.java#shenandoah \
+[2021-05-29T18:25:21.279Z]         -J-Dtest.file=/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/gcbarriers/UnsafeIntrinsicsTest.java \
+[2021-05-29T18:25:21.279Z]         -J-Dtest.src=/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/gcbarriers \
+[2021-05-29T18:25:21.279Z]         -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/gcbarriers \
+[2021-05-29T18:25:21.279Z]         -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16223118831670/jvm_compiler_1/work/classes/2/compiler/gcbarriers/UnsafeIntrinsicsTest_shenandoah.d \
+[2021-05-29T18:25:21.279Z]         -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16223118831670/jvm_compiler_1/work/classes/2/compiler/gcbarriers/UnsafeIntrinsicsTest_shenandoah.d \
+[2021-05-29T18:25:21.280Z]         -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16223118831670/jvm_compiler_1/work/classes/2/compiler/gcbarriers/UnsafeIntrinsicsTest_shenandoah.d:/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/gcbarriers \
+[2021-05-29T18:25:21.280Z]         -J-Dtest.modules=java.base/jdk.internal.misc:+open \
+[2021-05-29T18:25:21.280Z]         --add-modules java.base \
+[2021-05-29T18:25:21.280Z]         --add-exports java.base/jdk.internal.misc=ALL-UNNAMED \
+[2021-05-29T18:25:21.280Z]         -d /home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16223118831670/jvm_compiler_1/work/classes/2/compiler/gcbarriers/UnsafeIntrinsicsTest_shenandoah.d \
+[2021-05-29T18:25:21.280Z]         -sourcepath /home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/gcbarriers \
+[2021-05-29T18:25:21.280Z]         -classpath /home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/gcbarriers:/home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16223118831670/jvm_compiler_1/work/classes/2/compiler/gcbarriers/UnsafeIntrinsicsTest_shenandoah.d /home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/gcbarriers/UnsafeIntrinsicsTest.java
+[2021-05-29T18:25:21.280Z] direct:
+[2021-05-29T18:25:21.280Z] /home/jenkins/workspace/Test_openjdk11_hs_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/hotspot/jtreg/compiler/gcbarriers/UnsafeIntrinsicsTest.java:59: warning: Unsafe is internal proprietary API and may be removed in a future release
+[2021-05-29T18:25:21.280Z] import sun.misc.Unsafe;
+[2021-05-29T18:25:21.280Z]                ^
+[2021-05-29T18:25:21.280Z] 1 warning
+[2021-05-29T18:25:21.280Z] 
+[2021-05-29T18:25:21.280Z] ACTION: main -- Failed. Execution failed: `main' threw exception: java.lang.Error: Weak CAS should always succeed on thread local objects, check you barrier implementation
+[2021-05-29T18:25:21.280Z] REASON: User specified action: run main/othervm -Xmx256m -XX:+UseShenandoahGC -XX:+UnlockDiagnosticVMOptions -XX:-CreateCoredumpOnCrash -XX:+ShenandoahVerify -XX:+IgnoreUnrecognizedVMOptions -XX:+ShenandoahVerifyOptoBarriers -XX:CompileCommand=dontinline,*::mergeImpl* compiler.gcbarriers.UnsafeIntrinsicsTest 
+[2021-05-29T18:25:21.280Z] TIME:   5.979 seconds
+[2021-05-29T18:25:21.280Z] messages:
+[2021-05-29T18:25:21.280Z] command: main -Xmx256m -XX:+UseShenandoahGC -XX:+UnlockDiagnosticVMOptions -XX:-CreateCoredumpOnCrash -XX:+ShenandoahVerify -XX:+IgnoreUnrecognizedVMOptions -XX:+ShenandoahVerifyOptoBarriers -XX:CompileCommand=dontinline,*::mergeImpl* compiler.gcbarriers.UnsafeIntrinsicsTest
+[2021-05-29T18:25:21.280Z] reason: User specified action: run main/othervm -Xmx256m -XX:+UseShenandoahGC -XX:+UnlockDiagnosticVMOptions -XX:-CreateCoredumpOnCrash -XX:+ShenandoahVerify -XX:+IgnoreUnrecognizedVMOptions -XX:+ShenandoahVerifyOptoBarriers -XX:CompileCommand=dontinline,*::mergeImpl* compiler.gcbarriers.UnsafeIntrinsicsTest 
+[2021-05-29T18:25:21.280Z] Mode: othervm [/othervm specified]
+[2021-05-29T18:25:21.280Z] Additional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.misc=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED
+[2021-05-29T18:25:21.280Z] elapsed time (seconds): 5.979
+[2021-05-29T18:25:21.280Z] configuration:
+[2021-05-29T18:25:21.280Z] Boot Layer
+[2021-05-29T18:25:21.280Z]   add modules: java.base                   
+[2021-05-29T18:25:21.280Z]   add exports: java.base/jdk.internal.misc ALL-UNNAMED
+[2021-05-29T18:25:21.280Z]   add opens:   java.base/jdk.internal.misc ALL-UNNAMED
+[2021-05-29T18:25:21.280Z] 
+[2021-05-29T18:25:21.280Z] STDOUT:
+[2021-05-29T18:25:21.280Z] CompileCommand: dontinline *.mergeImpl*
+[2021-05-29T18:25:21.280Z] Testing CAS with 4 thread and 133700 nodes
+[2021-05-29T18:25:21.280Z] Milage: 43435288 Skipped: 2741688 Created: 2719937 iterations: 21244
+[2021-05-29T18:25:21.280Z] Milage: 43737504 Skipped: 2755288 Created: 2750451 iterations: 21380
+[2021-05-29T18:25:21.280Z] Milage: 40243946 Skipped: 2530828 Created: 2548312 iterations: 19813
+[2021-05-29T18:25:21.280Z] Milage: 40524267 Skipped: 2543076 Created: 2537547 iterations: 19762
+[2021-05-29T18:25:21.280Z] Program end, found 138160 nodes
+[2021-05-29T18:25:21.280Z] Testing Weak_CAS with 4 thread and 133700 nodes
+[2021-05-29T18:25:21.280Z] STDERR:
+[2021-05-29T18:25:21.280Z] java.lang.Error: Weak CAS should always succeed on thread local objects, check you barrier implementation
+[2021-05-29T18:25:21.280Z] 	at compiler.gcbarriers.Runner.mergeImplWeakCAS(UnsafeIntrinsicsTest.java:319)
+[2021-05-29T18:25:21.280Z] 	at compiler.gcbarriers.Runner.merge(UnsafeIntrinsicsTest.java:272)
+[2021-05-29T18:25:21.280Z] 	at compiler.gcbarriers.Runner.run(UnsafeIntrinsicsTest.java:243)
+[2021-05-29T18:25:21.280Z] 	at java.base/java.lang.Thread.run(Thread.java:829)
+[2021-05-29T18:25:21.280Z] STATUS:Failed.`main' threw exception: java.lang.Error: Weak CAS should always succeed on thread local objects, check you barrier implementation
+```

@@ -1,0 +1,21 @@
+Test https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/rmi/server/RemoteServer/AddrInUse.java fails with ...
+
+```
+Regression test for bug 4111507
+
+Created a ServerSocket on port 45118...
+create a registry on the same port...
+(should cause an ExportException)
+java.lang.RuntimeException: TEST FAILED: export on already-bound port succeeded
+	at AddrInUse.main(AddrInUse.java:91)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:115)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+```
+
+Test passes against Hotspot.
+
+Log archive : [AddrInUseProb.tar.gz](https://github.com/eclipse/openj9/files/2496274/AddrInUseProb.tar.gz)

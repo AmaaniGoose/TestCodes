@@ -1,0 +1,7 @@
+There are several .cpp files that do
+```
+#if defined (_MSC_VER) && (_MSC_VER < 1900)
+#define snprintf _snprintf
+#endif
+```
+This is particularly frustrating because it means that anytime a new `snprintf` is added somewhere, the dev has to remember to add this definition. This should really be put in a single header somewhere that's visible to everyone.

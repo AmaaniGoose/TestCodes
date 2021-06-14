@@ -1,0 +1,36 @@
+After cancelling a build, the jobs get interrupted, however they may just retry and continue, wasting valuable machine time.
+```
+Cloning repository https://github.com/eclipse/openj9.git
+ > git init /var/jenkins_home/workspace/Build_JDKnext_x86-64_windows_OpenJDK@script # timeout=10
+Using reference repository: /var/jenkins_home/openjdk_cache
+Fetching upstream changes from https://github.com/eclipse/openj9.git
+ > git --version # timeout=10
+ > git fetch --tags --force --progress -- https://github.com/eclipse/openj9.git +refs/heads/*:refs/remotes/origin/*
+ERROR: Checkout failed
+java.lang.InterruptedException
+	at java.lang.Object.wait(Native Method)
+	at java.lang.Object.wait(Unknown Source)
+	at java.lang.UNIXProcess.waitFor(Unknown Source)
+	at hudson.Proc$LocalProc.join(Proc.java:325)
+	at hudson.Proc.joinWithTimeout(Proc.java:171)
+	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommandIn(CliGitAPIImpl.java:2168)
+	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommandWithCredentials(CliGitAPIImpl.java:1864)
+	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.access$500(CliGitAPIImpl.java:78)
+	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl$1.execute(CliGitAPIImpl.java:545)
+	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl$2.execute(CliGitAPIImpl.java:758)
+	at hudson.plugins.git.GitSCM.retrieveChanges(GitSCM.java:1152)
+	at hudson.plugins.git.GitSCM.checkout(GitSCM.java:1192)
+	at org.jenkinsci.plugins.workflow.steps.scm.SCMStep.checkout(SCMStep.java:124)
+	at org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition.create(CpsScmFlowDefinition.java:149)
+	at org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition.create(CpsScmFlowDefinition.java:67)
+	at org.jenkinsci.plugins.workflow.job.WorkflowRun.run(WorkflowRun.java:299)
+	at hudson.model.ResourceController.execute(ResourceController.java:97)
+	at hudson.model.Executor.run(Executor.java:429)
+Retrying after 10 seconds
+No credentials specified
+Wiping out workspace first.
+Cloning the remote Git repository
+Cloning repository https://github.com/eclipse/openj9.git
+ > git init /var/jenkins_home/workspace/Build_JDKnext_x86-64_windows_OpenJDK@script # timeout=10
+Using reference repository: /var/jenkins_home/openjdk_cache
+```

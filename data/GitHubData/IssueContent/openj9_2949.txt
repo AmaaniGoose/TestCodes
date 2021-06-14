@@ -1,0 +1,9 @@
+There are quite a few places with this pairing:
+
+```
+throwexception.c:throwNativeOOMError()
+jniinv.c:protectedInternalAttachCurrentThread() Note: there is no code between.
+vm_scar.c:J9VMDllMain()
+```
+
+Will let these code intact until further investigation.

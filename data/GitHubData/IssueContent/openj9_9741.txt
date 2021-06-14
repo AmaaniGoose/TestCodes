@@ -1,0 +1,12 @@
+OMR MethodSymbols and ResolvedMethodSymbols default to private linkage for their calling convention.  For example:
+
+https://github.com/eclipse/omr/blob/42b29d116f4a65f74b34eb54957f4a9b10172b70/compiler/il/OMRMethodSymbol.hpp#L56
+
+https://github.com/eclipse/omr/blob/42b29d116f4a65f74b34eb54957f4a9b10172b70/compiler/il/OMRResolvedMethodSymbol.cpp#L110
+
+Because this is set in OMR, this is surprising for non-Java environments as private linkage is an OpenJ9 concept and usually leads to asserts or unintended behaviour due to the unimplemented linkage.  System linkage is usually expected as that is what non-Java environments typically implement.  This discrepancy has been reported on a couple of occasions in the past, on RISC-V and AArch64 most recently.  In OMR, the default linkage should be changed to `TR_System`.
+
+The reason I am opening this issue in OpenJ9 rather than OMR is because I believe most of the work to implement this correctly is in OpenJ9 (in OMR, it is really just a matter of changing the default linkage to `TR_System` and things should just work from the OMR perspective).
+
+I did attempt to make this change a few months ago but ran into problems in OpenJ9 (the details of which escape me at the moment, but it isn't as straightforward as it might seem). 
+ This issue will formalize that investigation and track its resolution.

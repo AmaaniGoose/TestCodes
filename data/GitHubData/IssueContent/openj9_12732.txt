@@ -1,0 +1,24 @@
+Found in a PR build (#10320) and test running 5-minute mauve in default mode.  Full output attached.
+```
+        LT  05:49:19.434 - First failure detected by thread: load-79. Not creating dumps as no dump generation is requested for this load test
+        LT  05:49:19.436 - suite.getInventory().getInventoryFileRef(): openjdk.test.load/config/inventories/mauve/mauve_multiThread.xml
+        LT  05:49:19.437 - suite.isCreateDump() : false
+        LT  05:49:19.441 - Test failed
+        LT    Failure num.  = 1
+        LT    Test number   = 3097
+        LT    Test details  = 'Mauve[[consoleText.txt](https://github.com/eclipse-openj9/openj9/files/6515580/consoleText.txt)]'
+        LT    Suite number  = 0
+        LT    Thread number = 79
+        LT  >>> Captured test output >>>
+        LT  FAIL: (number 0)
+        LT  got [means CAR. but expected car means RAC.
+        LT  FAIL: gnu.testlet.java.text.Bidi.reorderVisually (number 1)
+        LT  got ~~MEANS CAR. but expected .RAC SNAEM car
+        LT  FAIL: gnu.testlet.java.text.Bidi.reorderVisually (number 2)
+        LT  got ~Od "car MEANS CAR." but expected he said "RAC SNAEM car."
+        LT  FAIL: gnu.testlet.java.text.Bidi.reorderVisually (number 3)
+        LT  got ~SAY 'he said "car MEANS CAR"'? but expected ?'he said "RAC SNAEM car"' YAS UOY DID
+        LT  <<<
+```
+
+[consoleText.txt](https://github.com/eclipse-openj9/openj9/files/6515580/consoleText.txt)

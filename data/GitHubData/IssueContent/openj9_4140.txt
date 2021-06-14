@@ -1,0 +1,7 @@
+amd64 code generation contains redundant checks of `TR::Compiler->target.is64Bit()`.  This should be cleaned up, as they're only ever used for 64-bit code generation.
+
+For instance, in `void TR::AMD64JNILinkage::cleanupReturnValue` in `AMD64JNILinkage.cpp`, there are checks like this:
+
+```
+op = TR::Compiler->target.is64Bit() ? MOVZXReg8Reg1 : MOVZXReg4Reg1;
+```

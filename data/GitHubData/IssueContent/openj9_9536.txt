@@ -1,0 +1,1 @@
+Comparing UMA and CMake builds show that the cmake build takes longer to compile (approx 3-4 min). Although given the fact our openjdk makefiles don't play nice with the make jobserver, its hard to say for sure if the issue is truely a result of cmake, or an artifact due to the particulars of how the generated makefiles interact with the job server. 

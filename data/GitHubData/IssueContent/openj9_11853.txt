@@ -1,0 +1,24 @@
+https://github.com/eclipse/openj9/blob/master/doc/build-instructions/Build_Compiler_Only.md
+
+I am trying this instruction, but got a few errors reported. 
+Firstly, for following instruction: I would guess it's trying to point to the path of tracegen, while current build of openj9 has tracegen under $JAVA_BASE/vm/runtime.
+```
+export J9SRC=$JAVA_BASE/vm
+```
+Secondly, when I do the make , I got following error: Looks like it failed to find the j9cfg.h from $JAVA_BASE/vm/runtime. Not sure what's the best way to make it found ? 
+```
+In file included from /root/omr/compiler/env/TRMemory.hpp:67:0,
+                 from /root/omr/compiler/codegen/StorageInfo.hpp:27,
+                 from /root/omr/compiler/codegen/OMRCodeGenerator.hpp:43,
+                 from /root/omr/compiler/x/codegen/OMRCodeGenerator.hpp:34,
+                 from /root/omr/compiler/x/amd64/codegen/OMRCodeGenerator.hpp:36,
+                 from /root/compiler/codegen/J9CodeGenerator.hpp:36,
+                 from /root/compiler/x/codegen/J9CodeGenerator.hpp:26,
+                 from /root/compiler/x/amd64/codegen/J9CodeGenerator.hpp:39,
+                 from /root/compiler/codegen/CodeGenerator.hpp:26,
+                 from /root/compiler/codegen/CodeGenGPU.cpp:32:
+/root/compiler/env/PersistentAllocator.hpp:32:10: fatal error: j9cfg.h: No such file or directory
+ #include "j9cfg.h"
+          ^~~~~~~~~
+compilation terminated.
+```

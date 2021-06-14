@@ -1,0 +1,3 @@
+TR_J2IThunkTable is used for InvokeExact thunk; this is a non POD type so it needs to be serialized/deserialized in order to build up the thunk tables in there restore run for when ASLR is disabled.
+
+We might also have to look at the j2i and other thunks.

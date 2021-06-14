@@ -1,0 +1,47 @@
+**Describe the bug**
+
+jdk_management_0 hangs shortly after initialization, with no output (beyond the bit in "screenshots"). Declared hanging and killed many hours later.
+
+Seen during every recorded run on jdk8 & 11 on Windows 64bit, and at least once on 32bit, but is not seen on other platforms.
+
+Issue spotted on:
+- test-ibmcloud-win2012r2-x64-1
+- test-ibmcloud-win2012r2-x64-2
+- build-azure-win2012r2-x64-2
+
+So I don't think it's a machine-specific issue.
+
+**To Reproduce**
+https://ci.adoptopenjdk.net/job/Grinder/parambuild/?TARGET=extended.openjdk&SDK_RESOURCE=nightly&TEST_FLAG=&UPSTREAM_TEST_JOB_NAME=&DOCKER_REQUIRED=false&ACTIVE_NODE_TIMEOUT=0&EXTRA_DOCKER_ARGS=&VENDOR_TEST_DIRS=&TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&PLATFORM=x86-64_windows&KEEP_REPORTDIR=true&PERSONAL_BUILD=false&ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&LABEL=&EXTRA_OPTIONS=&CUSTOMIZED_SDK_URL=&BUILD_IDENTIFIER=&ADOPTOPENJDK_BRANCH=master&ARTIFACTORY_SERVER=&KEEP_WORKSPACE=false&JDK_VERSION=8&USER_CREDENTIALS_ID=&ITERATIONS=1&VENDOR_TEST_REPOS=&JDK_REPO=https%3A%2F%2Fgithub.com%2Fadoptopenjdk%2Fopenjdk-jdk8u&RELEASE_TAG=&OPENJ9_BRANCH=master&OPENJ9_SHA=&JCK_GIT_REPO=&VENDOR_TEST_BRANCHES=&UPSTREAM_JOB_NAME=&OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&CUSTOM_TARGET=&VENDOR_TEST_SHAS=&JDK_BRANCH=dev&LABEL_ADDITION=&ARTIFACTORY_REPO=&ARTIFACTORY_ROOT_DIR=&UPSTREAM_TEST_JOB_NUMBER=&DOCKERIMAGE_TAG=&JDK_IMPL=hotspot&SSH_AGENT_CREDENTIAL=&AUTO_DETECT=true&TKG_SHA=&CUSTOMIZED_SDK_URL_CREDENTIAL_ID=&NUM_MACHINES=&OPENJDK_SHA=&BUILD_LIST=openjdk&UPSTREAM_JOB_NUMBER=&TIME_LIMIT=10&JVM_OPTIONS=&PARALLEL=None
+
+**Expected behavior**
+I expect the tests in the jdk_management set to run and pass/fail.
+
+**Screenshots**
+https://trss.adoptopenjdk.net/output/test?id=603199dc5730424dbc8568be
+
+```
+[2021-02-20T13:56:58.398Z] "E:/workspace/Test_openjdk8_hs_extended.openjdk_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java" -Xmx512m -jar "E:/workspace/Test_openjdk8_hs_extended.openjdk_x86-64_windows/openjdk-tests///..//jvmtest\\openjdk\\jtreg\\lib\\jtreg.jar" \
+[2021-02-20T13:56:58.398Z] -agentvm -a -ea -esa -v:fail,error,time,nopass -retain:fail,error,*.dmp,javacore.*,heapdump.*,*.trc -ignore:quiet -timeoutFactor:8 -xml:verify -concurrency:4 -vmoptions:"-Xmx512m  -XX:+UseCompressedOops " \
+[2021-02-20T13:56:58.398Z] -w ""E:/workspace/Test_openjdk8_hs_extended.openjdk_x86-64_windows/openjdk-tests/\\TKG\\output_16138267607997\\jdk_management_0"\\work" \
+[2021-02-20T13:56:58.398Z] -r "E:/workspace/Test_openjdk8_hs_extended.openjdk_x86-64_windows/openjdk-tests///..//jvmtest\\openjdk\\report" \
+[2021-02-20T13:56:58.398Z] -jdk:"E:/workspace/Test_openjdk8_hs_extended.openjdk_x86-64_windows/openjdkbinary/j2sdk-image" \
+[2021-02-20T13:56:58.398Z] -exclude:"E:/workspace/Test_openjdk8_hs_extended.openjdk_x86-64_windows/openjdk-tests/\\openjdk\\openjdk-jdk\\jdk\\test\\ProblemList.txt" \
+[2021-02-20T13:56:58.398Z] -exclude:"E:/workspace/Test_openjdk8_hs_extended.openjdk_x86-64_windows/openjdk-tests///..//jvmtest\\openjdk\\ProblemList_openjdk8.txt" \
+[2021-02-20T13:56:58.398Z] "E:/workspace/Test_openjdk8_hs_extended.openjdk_x86-64_windows/openjdk-tests/\\openjdk\\openjdk-jdk\\jdk\\test:jdk_management"; \
+[2021-02-20T13:56:58.398Z] if [ $? -eq 0 ] ; then echo ""; echo "jdk_management_0""_PASSED"; echo ""; cd E:/workspace/Test_openjdk8_hs_extended.openjdk_x86-64_windows/openjdk-tests/;  else echo ""; echo "jdk_management_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "E:/workspace/Test_openjdk8_hs_extended.openjdk_x86-64_windows/openjdk-tests/\\TKG\\output_16138267607997\\TestTargetResult";
+[2021-02-20T13:56:58.938Z] Directory "E:\workspace\Test_openjdk8_hs_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16138267607997\jdk_management_0\work" not found: creating
+[2021-02-20T13:57:00.179Z] XML output with verification to E:\workspace\Test_openjdk8_hs_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16138267607997\jdk_management_0\work
+Cancelling nested steps due to timeout
+[2021-02-20T23:09:52.605Z] Sending interrupt signal to process
+[2021-02-20T23:10:07.103Z] 
+[2021-02-20T23:10:07.103Z] jdk_management_0_FAILED
+```
+
+**Additional context**
+
+On JDK versions 16 and 17, jdk_management_0 passes or fails in under 5 minutes.
+
+Unknown why this wasn't spotted before, as it's been happening for weeks. I think it's because some more test jobs were generated last week, and it's now easier to identify the difference between "missing" test jobs and long-term aborted ones.
+
+Unknown if this is seen on OpenJ9, as it's been disabled since October for no documented reason. See [this issue](https://github.com/eclipse/openj9/issues/10757).

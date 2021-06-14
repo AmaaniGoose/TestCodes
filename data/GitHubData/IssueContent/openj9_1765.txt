@@ -1,0 +1,16 @@
+Running "_sanity" testing on Windows 2012 is now failing.  The sha tested against is a31cbae7, the last good sha was : 66fc23ae
+
+Diff : https://github.com/eclipse/openj9/compare/66fc23ae...a31cbae7
+
+01:20:36         =========================================== ...   (more...)
+01:20:36         ===============================================
+01:20:36         GeneralTest suite
+01:20:36         Total tests run: 644, Failures: 27, Skips: 0
+01:20:36         ===============================================
+
+Tests :
+org.openj9.test.annotation.Test_Annotation.*
+org.openj9.test.annotationPackage.Test_PackageAnnotation.test_elementFormDefault
+org.openj9.test.annotationPackage.Test_PackageAnnotation.test_elementFormDefault
+org.openj9.test.annotationPackage.Test_PackageAnnotation2.test_isAnnotationPresent
+org.openj9.test.annotationPackage.Test_PackageAnnotation2.test_isAnnotationPresent

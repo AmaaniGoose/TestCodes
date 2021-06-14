@@ -1,0 +1,8 @@
+Compilation failures of type `compilationAotCacheFullReloFailure` can appear for AOT compilations when the reserved code cache does not have enough free space during code generation and we need to switch to a new code cache. This failed compilation is retried and if we are at the last retrial we switch to a JIT compilation instead of AOT.
+With JITServer I am seeing that we fail all retrials and then continue interpreted:
+```
+! com/mongodb/operation/MixedBulkWriteOperation$Run$2.executeWriteCommandProtocol()Lcom/mongodb/bulk/BulkWriteResult; time=778us compilationAotCacheFullReloFailure memLimit=262144 KB freePhysicalMemory=335 MB mem=[region=64 system=16384]KB
+! com/mongodb/operation/MixedBulkWriteOperation$Run$2.executeWriteCommandProtocol()Lcom/mongodb/bulk/BulkWriteResult; time=372us compilationAotCacheFullReloFailure memLimit=262144 KB freePhysicalMemory=335 MB mem=[region=64 system=16384]KB
+! com/mongodb/operation/MixedBulkWriteOperation$Run$2.executeWriteCommandProtocol()Lcom/mongodb/bulk/BulkWriteResult; time=404us compilationAotCacheFullReloFailure memLimit=262144 KB freePhysicalMemory=335 MB mem=[region=64 system=16384]KB
+```
+`compilationAotCacheFullReloFailure` should not appear in the first place with JITServer because, when the code cache is reserved we know exactly how much space we need.

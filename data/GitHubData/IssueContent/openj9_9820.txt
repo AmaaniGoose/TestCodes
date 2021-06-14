@@ -1,0 +1,5 @@
+Currently, for C files on z/OS, we don't actually mark any functions as `inline`. I suspect this is due to the fact that the `inline` keyword is not available in c89. However, given that we now compile with `-Wc,langlvl(extc99)` we should be able to use the `inline` keyword. I have a PR (eclipse/omr#5292) which compiles and passes testing, but I want to do a bit more testing to make sure that there are no unintended side effects.
+
+For reference:
+https://www.ibm.com/support/knowledgecenter/SSLTBW_2.4.0/com.ibm.zos.v2r4.cbclx01/cplr243.htm
+https://www.ibm.com/support/knowledgecenter/SSLTBW_2.4.0/com.ibm.zos.v2r4.cbclx01/macros_lang_levels.htm

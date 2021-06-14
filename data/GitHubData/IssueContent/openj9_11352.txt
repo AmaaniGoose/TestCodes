@@ -1,0 +1,18 @@
+I have a question about the semantics of the J9 CodeGenerator query `hasFixedFrameC_CallingConvention()` which only returns `true` for P and Z.  Despite it being in the code for many years, I had not come across this before.
+
+The best explanation for why this exists is here (from a very old @gacholio email):
+https://github.com/eclipse/openj9/blob/9f11871a18a0dd8e518445fbd4abe14241c67146/runtime/compiler/il/J9Node.cpp#L361
+
+What is the definition of "fixed frame" implied in this query because it seems to differ from the definition of "fixed frame" that I thought we were using (namely, those that can be carved out in one chunk as opposed to being constructed incrementally via PUSH instructions, for example.  In practice, by this definition I think IA32 was the only non-fixed frame linkage).
+
+Is it that the stack pointer does not need to be explicitly adjusted on the caller side to reserve space for the arguments because a certain amount of space is already guaranteed?  How is this different from other system linkage calls?
+
+My other question is why this is a CodeGenerator question and not a Linkage question.  In fact, there seem to be two flags: one on the CompilationInfo object [1] and one on the CodeGenerator [2] object, and setting of both is driven by a FrontEnd query [3].  Further, the FrontEnd query appears to want to do a port library call to derive an answer but the functionality doesn't live there yet.  I'm curious about the complexity here.
+
+Can anyone shed some light on this function?
+
+[1] https://github.com/eclipse/openj9/blob/13282f2fdf3d6f90d1d8c72884484d0eb2dbadbf/runtime/compiler/control/CompilationRuntime.hpp#L815
+[2] https://github.com/eclipse/openj9/blob/13282f2fdf3d6f90d1d8c72884484d0eb2dbadbf/runtime/compiler/codegen/J9CodeGenerator.hpp#L456
+[3] https://github.com/eclipse/openj9/blob/13282f2fdf3d6f90d1d8c72884484d0eb2dbadbf/runtime/compiler/env/VMJ9.cpp#L965
+
+@zl-wang @fjeremic @Akira1Saitoh @knn-k @janvrany

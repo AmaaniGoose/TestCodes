@@ -1,0 +1,262 @@
+Failure link: https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl/159/console
+
+Occurred on winXL jdk11 milestone 1 build:
+```
+java -version
+01:21:21  openjdk version "11.0.7" 2020-04-14
+01:21:21  OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.7+7)
+01:21:21  Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.20.0-m1, JRE 11 Windows Server 2019 amd64-64-Bit 20200315_249 (JIT enabled, AOT enabled)
+01:21:21  OpenJ9   - a5a4b077b
+01:21:21  OMR      - b30884f2d
+01:21:21  JCL      - f25a302629 based on jdk-11.0.7+7)
+```
+Rerunning in a grinder to ascertain whether it is intermittent.
+
+Test output for the failing test:
+```
+03:24:37  TEST: java/util/zip/ZipFile/TestCleaner.java
+03:24:37  TEST JDK: C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdkbinary\j2sdk-image
+03:24:37  
+03:24:37  ACTION: build -- Passed. Build successful
+03:24:37  REASON: Named class compiled on demand
+03:24:37  TIME:   0.112 seconds
+03:24:37  messages:
+03:24:37  command: build TestCleaner
+03:24:37  reason: Named class compiled on demand
+03:24:37  Test directory:
+03:24:37    compile: TestCleaner
+03:24:37  elapsed time (seconds): 0.112
+03:24:37  
+03:24:37  ACTION: compile -- Passed. Compilation successful
+03:24:37  REASON: .class file out of date or does not exist
+03:24:37  TIME:   0.111 seconds
+03:24:37  messages:
+03:24:37  command: compile C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\zip\ZipFile\TestCleaner.java
+03:24:37  reason: .class file out of date or does not exist
+03:24:37  Additional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.vm.annotation=ALL-UNNAMED
+03:24:37  Mode: agentvm
+03:24:37  Agent id: 0
+03:24:37  elapsed time (seconds): 0.111
+03:24:37  configuration:
+03:24:37  Boot Layer (javac runtime environment)
+03:24:37    class path: C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\jvmtest\openjdk\jtreg\lib\javatest.jar 
+03:24:37                C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\jvmtest\openjdk\jtreg\lib\jtreg.jar 
+03:24:37    patch:      java.base C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\TKG\test_output_15843216805455\jdk_util_0\work\patches\java.base
+03:24:37  
+03:24:37  javac compilation environment
+03:24:37    add modules: java.base                            
+03:24:37    add exports: java.base/jdk.internal.vm.annotation ALL-UNNAMED
+03:24:37    source path: C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\zip\ZipFile 
+03:24:37    class path:  C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\zip\ZipFile 
+03:24:37                 C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\TKG\test_output_15843216805455\jdk_util_0\work\classes\1\java\util\zip\ZipFile\TestCleaner.d 
+03:24:37  
+03:24:37  rerun:
+03:24:37  cd 'C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\TKG\test_output_15843216805455\jdk_util_0\work\scratch\0' && \
+03:24:37  PATH='C:\cygwin64\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\Amazon\cfn-bootstrap;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Strawberry\perl\bin;C:\Program Files\Git\cmd;C:\openjdk\jdk-8\bin;C:\apache-ant\apache-ant-1.10.5\bin;C:\Program Files (x86)\IncrediBuild;C:\rust\bin;C:\Program Files\IcedTeaWEB\bin;C:\Users\jenkins.EC2AMAZ-T7I06S9\AppData\Local\Microsoft\WindowsApps' \
+03:24:37  SystemDrive=C: \
+03:24:37  SystemRoot='C:\Windows' \
+03:24:37  TEMP='C:\Users\JENKIN~1.EC2\AppData\Local\Temp\3' \
+03:24:37  TMP='C:\Users\JENKIN~1.EC2\AppData\Local\Temp\3' \
+03:24:37  windir='C:\Windows' \
+03:24:37      'C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdkbinary\j2sdk-image\bin\javac' \
+03:24:37          -J-ea \
+03:24:37          -J-esa \
+03:24:37          -J-Xmx512m \
+03:24:37          -J-Xnocompressedrefs \
+03:24:37          -J-Dtest.class.path.prefix='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\TKG\test_output_15843216805455\jdk_util_0\work\classes\1\java\util\zip\ZipFile\TestCleaner.d;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\zip\ZipFile' \
+03:24:37          -J-Dtest.file='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\zip\ZipFile\TestCleaner.java' \
+03:24:37          -J-Dtest.src='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\zip\ZipFile' \
+03:24:37          -J-Dtest.src.path='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\zip\ZipFile' \
+03:24:37          -J-Dtest.classes='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\TKG\test_output_15843216805455\jdk_util_0\work\classes\1\java\util\zip\ZipFile\TestCleaner.d' \
+03:24:37          -J-Dtest.class.path='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\TKG\test_output_15843216805455\jdk_util_0\work\classes\1\java\util\zip\ZipFile\TestCleaner.d' \
+03:24:37          -J-Dtest.vm.opts='-ea -esa -Xmx512m -Xnocompressedrefs' \
+03:24:37          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-Xnocompressedrefs' \
+03:24:37          -J-Dtest.compiler.opts= \
+03:24:37          -J-Dtest.java.opts= \
+03:24:37          -J-Dtest.jdk='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdkbinary\j2sdk-image' \
+03:24:37          -J-Dcompile.jdk='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdkbinary\j2sdk-image' \
+03:24:37          -J-Dtest.timeout.factor=8.0 \
+03:24:37          -J-Dtest.root='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\openjdk\openjdk-jdk\test\jdk' \
+03:24:37          -J-Dtest.modules='java.base/java.util.zip:open java.base/jdk.internal.vm.annotation' \
+03:24:37          --add-modules java.base \
+03:24:37          --add-exports java.base/jdk.internal.vm.annotation=ALL-UNNAMED \
+03:24:37          -d 'C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\TKG\test_output_15843216805455\jdk_util_0\work\classes\1\java\util\zip\ZipFile\TestCleaner.d' \
+03:24:37          -sourcepath 'C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\zip\ZipFile' \
+03:24:37          -classpath 'C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\zip\ZipFile;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\TKG\test_output_15843216805455\jdk_util_0\work\classes\1\java\util\zip\ZipFile\TestCleaner.d' 'C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\zip\ZipFile\TestCleaner.java'
+03:24:37  
+03:24:37  ACTION: main -- Error. Agent error: java.lang.Exception: Agent 0 timed out with a timeout of 960 seconds; check console log for any additional details
+03:24:37  REASON: Assumed action based on file name: run main TestCleaner 
+03:24:37  TIME:   962.172 seconds
+03:24:37  messages:
+03:24:37  command: main TestCleaner
+03:24:37  reason: Assumed action based on file name: run main TestCleaner 
+03:24:37  Mode: agentvm
+03:24:37  Agent id: 0
+03:24:37  Additional exports to unnamed modules from @modules: java.base/jdk.internal.vm.annotation
+03:24:37  Additional opens to unnamed modules from @modules: java.base/java.util.zip
+03:24:37  Timeout refired 960 times
+03:24:37  Timeout information:
+03:24:37  Running jstack on process 7136
+03:24:37  2020-03-16T03:24:21.127926400
+03:24:37  Virtual machine: 7136 JVM information:
+03:24:37  JRE 11 Windows Server 2019 amd64-64-Bit 20200315_249 (JIT enabled, AOT enabled)
+03:24:37  OpenJ9   - a5a4b077b
+03:24:37  OMR      - b30884f2d
+03:24:37  JCL      - f25a302629 based on jdk-11.0.7+7
+03:24:37  
+03:24:37  "main" prio=5 Id=1 WAITING
+03:24:37  	at java.base@11.0.7/java.lang.Object.wait(Native Method)
+03:24:37  	at java.base@11.0.7/java.lang.Object.wait(Object.java:221)
+03:24:37  	at java.base@11.0.7/java.lang.Thread.join(Thread.java:714)
+03:24:37  	- locked java.lang.Thread@aeda2290
+03:24:37  	at app//com.sun.javatest.regtest.agent.MainActionHelper.runClass(MainActionHelper.java:184)
+03:24:37  	at app//com.sun.javatest.regtest.agent.AgentServer.doMain(AgentServer.java:257)
+03:24:37  	at app//com.sun.javatest.regtest.agent.AgentServer.run(AgentServer.java:193)
+03:24:37  	at app//com.sun.javatest.regtest.agent.AgentServer.main(AgentServer.java:65)
+03:24:37  
+03:24:37  "JIT Compilation Thread-000" prio=10 Id=3 RUNNABLE
+03:24:37  
+03:24:37  "JIT Compilation Thread-001 Suspended" prio=10 Id=4 RUNNABLE
+03:24:37  
+03:24:37  "JIT Compilation Thread-002 Suspended" prio=10 Id=5 RUNNABLE
+03:24:37  
+03:24:37  "JIT Diagnostic Compilation Thread-003 Suspended" prio=10 Id=6 RUNNABLE
+03:24:37  
+03:24:37  "JIT-SamplerThread" prio=10 Id=7 TIMED_WAITING
+03:24:37  
+03:24:37  "IProfiler" prio=5 Id=8 RUNNABLE
+03:24:37  
+03:24:37  "Common-Cleaner" prio=8 Id=2 TIMED_WAITING
+03:24:37  	at java.base@11.0.7/java.lang.Object.wait(Native Method)
+03:24:37  	at java.base@11.0.7/java.lang.Object.wait(Object.java:221)
+03:24:37  	at java.base@11.0.7/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:138)
+03:24:37  	- locked java.lang.ref.ReferenceQueue@751d314
+03:24:37  	at java.base@11.0.7/jdk.internal.ref.CleanerImpl.run(CleanerImpl.java:148)
+03:24:37  	at java.base@11.0.7/java.lang.Thread.run(Thread.java:834)
+03:24:37  	at java.base@11.0.7/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:134)
+03:24:37  
+03:24:37  "Concurrent Mark Helper" prio=1 Id=9 RUNNABLE
+03:24:37  
+03:24:37  "Finalizer thread" prio=5 Id=10 RUNNABLE
+03:24:37  
+03:24:37  "GC Slave" prio=5 Id=11 RUNNABLE
+03:24:37  
+03:24:37  "GC Slave" prio=5 Id=12 RUNNABLE
+03:24:37  
+03:24:37  "GC Slave" prio=5 Id=13 RUNNABLE
+03:24:37  
+03:24:37  "Attach API wait loop" prio=10 Id=16 TIMED_WAITING
+03:24:37  	at java.base@11.0.7/java.lang.Thread.sleep(Native Method)
+03:24:37  	at java.base@11.0.7/java.lang.Thread.sleep(Thread.java:964)
+03:24:37  	at java.base@11.0.7/openj9.internal.tools.attach.target.WaitLoop.checkReplyAndCreateAttachment(WaitLoop.java:140)
+03:24:37  	at java.base@11.0.7/openj9.internal.tools.attach.target.WaitLoop.waitForNotification(WaitLoop.java:117)
+03:24:37  	at java.base@11.0.7/openj9.internal.tools.attach.target.WaitLoop.run(WaitLoop.java:154)
+03:24:37  
+03:24:37  "pool-1-thread-1" prio=5 Id=17 TIMED_WAITING
+03:24:37  	at java.base@11.0.7/jdk.internal.misc.Unsafe.park(Native Method)
+03:24:37  	at java.base@11.0.7/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:234)
+03:24:37  	at java.base@11.0.7/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2123)
+03:24:37  	at java.base@11.0.7/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+03:24:37  	at java.base@11.0.7/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+03:24:37  	at java.base@11.0.7/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1054)
+03:24:37  	at java.base@11.0.7/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1114)
+03:24:37  	at java.base@11.0.7/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+03:24:37  	at java.base@11.0.7/java.lang.Thread.run(Thread.java:834)
+03:24:37  
+03:24:37  "ClassCache Reaper" prio=5 Id=30 WAITING
+03:24:37  	at java.base@11.0.7/java.lang.Object.wait(Native Method)
+03:24:37  	at java.base@11.0.7/java.lang.Object.wait(Object.java:221)
+03:24:37  	at java.base@11.0.7/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:138)
+03:24:37  	- locked java.lang.ref.ReferenceQueue@267a68c9
+03:24:37  	at java.base@11.0.7/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:110)
+03:24:37  	at java.base@11.0.7/java.io.ClassCache$Reaper.run(ClassCache.java:234)
+03:24:37  	at java.base@11.0.7/java.lang.Thread.run(Thread.java:834)
+03:24:37  
+03:24:37  "ForkJoinPool.commonPool-worker-7" prio=5 Id=125 WAITING
+03:24:37  	at java.base@11.0.7/jdk.internal.misc.Unsafe.park(Native Method)
+03:24:37  	at java.base@11.0.7/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+03:24:37  	at java.base@11.0.7/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+03:24:37  	at java.base@11.0.7/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+03:24:37  
+03:24:37  "ForkJoinPool-3-worker-3" prio=5 Id=339 WAITING
+03:24:37  	at java.base@11.0.7/jdk.internal.misc.Unsafe.park(Native Method)
+03:24:37  	at java.base@11.0.7/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+03:24:37  	at java.base@11.0.7/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+03:24:37  	at java.base@11.0.7/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+03:24:37  
+03:24:37  "AgentVMThread" prio=5 Id=27885 TIMED_WAITING
+03:24:37  	at java.base@11.0.7/jdk.internal.misc.Unsafe.park(Native Method)
+03:24:37  	at java.base@11.0.7/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:234)
+03:24:37  	at java.base@11.0.7/java.util.concurrent.locks.AbstractQueuedSynchronizer.doAcquireSharedNanos(AbstractQueuedSynchronizer.java:1079)
+03:24:37  	at java.base@11.0.7/java.util.concurrent.locks.AbstractQueuedSynchronizer.tryAcquireSharedNanos(AbstractQueuedSynchronizer.java:1369)
+03:24:37  	at java.base@11.0.7/java.util.concurrent.CountDownLatch.await(CountDownLatch.java:278)
+03:24:37  	at app//TestCleaner.testZipFile(TestCleaner.java:249)
+03:24:37  	at app//TestCleaner.main(TestCleaner.java:44)
+03:24:37  	at java.base@11.0.7/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+03:24:37  	at java.base@11.0.7/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+03:24:37  	at java.base@11.0.7/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+03:24:37  	at java.base@11.0.7/java.lang.reflect.Method.invoke(Method.java:566)
+03:24:37  	at app//com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+03:24:37  	at java.base@11.0.7/java.lang.Thread.run(Thread.java:834)
+03:24:37  
+03:24:37  "Attachment 50074" prio=10 Id=27886 RUNNABLE
+03:24:37  	at java.base@11.0.7/openj9.internal.tools.attach.target.DiagnosticUtils.dumpAllThreadsImpl(Native Method)
+03:24:37  	at java.base@11.0.7/openj9.internal.tools.attach.target.DiagnosticUtils.getThreadInfo(DiagnosticUtils.java:233)
+03:24:37  	at java.base@11.0.7/openj9.internal.tools.attach.target.DiagnosticUtils$$Lambda$19/0000000000000000.apply(Unknown Source)
+03:24:37  	at java.base@11.0.7/openj9.internal.tools.attach.target.DiagnosticUtils.executeDiagnosticCommand(DiagnosticUtils.java:169)
+03:24:37  	at java.base@11.0.7/openj9.internal.tools.attach.target.Attachment.doCommand(Attachment.java:249)
+03:24:37  	at java.base@11.0.7/openj9.internal.tools.attach.target.Attachment.run(Attachment.java:160)
+03:24:37  
+03:24:37  "file lock watchdog" prio=10 Id=27887 TIMED_WAITING
+03:24:37  	at java.base@11.0.7/java.lang.Object.wait(Native Method)
+03:24:37  	at java.base@11.0.7/java.lang.Object.wait(Object.java:221)
+03:24:37  	at java.base@11.0.7/java.util.TimerThread.mainLoop(Timer.java:553)
+03:24:37  	- locked java.util.TaskQueue@fd2dc509
+03:24:37  	at java.base@11.0.7/java.util.TimerThread.run(Timer.java:506)
+03:24:37  
+03:24:37  
+03:24:37  --- Timeout information end.
+03:24:37  elapsed time (seconds): 962.172
+03:24:37  configuration:
+03:24:37  Boot Layer
+03:24:37    class path: C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\jvmtest\openjdk\jtreg\lib\javatest.jar 
+03:24:37                C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\jvmtest\openjdk\jtreg\lib\jtreg.jar 
+03:24:37    patch:      java.base C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\TKG\test_output_15843216805455\jdk_util_0\work\patches\java.base
+03:24:37  
+03:24:37  Test Layer
+03:24:37    add exports: java.base/jdk.internal.vm.annotation ALL-UNNAMED
+03:24:37    add opens:   java.base/java.util.zip              ALL-UNNAMED
+03:24:37    class path:  C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\TKG\test_output_15843216805455\jdk_util_0\work\classes\1\java\util\zip\ZipFile\TestCleaner.d 
+03:24:37                 C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\zip\ZipFile 
+03:24:37  
+03:24:37  rerun:
+03:24:37  cd 'C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\TKG\test_output_15843216805455\jdk_util_0\work\scratch\0' && \
+03:24:37  PATH='C:\cygwin64\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\Amazon\cfn-bootstrap;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Strawberry\perl\bin;C:\Program Files\Git\cmd;C:\openjdk\jdk-8\bin;C:\apache-ant\apache-ant-1.10.5\bin;C:\Program Files (x86)\IncrediBuild;C:\rust\bin;C:\Program Files\IcedTeaWEB\bin;C:\Users\jenkins.EC2AMAZ-T7I06S9\AppData\Local\Microsoft\WindowsApps' \
+03:24:37  SystemDrive=C: \
+03:24:37  SystemRoot='C:\Windows' \
+03:24:37  TEMP='C:\Users\JENKIN~1.EC2\AppData\Local\Temp\3' \
+03:24:37  TMP='C:\Users\JENKIN~1.EC2\AppData\Local\Temp\3' \
+03:24:37  windir='C:\Windows' \
+03:24:37      'C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdkbinary\j2sdk-image\bin\java' \
+03:24:37          -Dtest.class.path.prefix='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\TKG\test_output_15843216805455\jdk_util_0\work\classes\1\java\util\zip\ZipFile\TestCleaner.d;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\zip\ZipFile' \
+03:24:37          -Dtest.file='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\zip\ZipFile\TestCleaner.java' \
+03:24:37          -Dtest.src='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\zip\ZipFile' \
+03:24:37          -Dtest.src.path='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\zip\ZipFile' \
+03:24:37          -Dtest.classes='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\TKG\test_output_15843216805455\jdk_util_0\work\classes\1\java\util\zip\ZipFile\TestCleaner.d' \
+03:24:37          -Dtest.class.path='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\TKG\test_output_15843216805455\jdk_util_0\work\classes\1\java\util\zip\ZipFile\TestCleaner.d' \
+03:24:37          -Dtest.vm.opts='-ea -esa -Xmx512m -Xnocompressedrefs' \
+03:24:37          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-Xnocompressedrefs' \
+03:24:37          -Dtest.compiler.opts= \
+03:24:37          -Dtest.java.opts= \
+03:24:37          -Dtest.jdk='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdkbinary\j2sdk-image' \
+03:24:37          -Dcompile.jdk='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdkbinary\j2sdk-image' \
+03:24:37          -Dtest.timeout.factor=8.0 \
+03:24:37          -Dtest.root='C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\openjdk\openjdk-jdk\test\jdk' \
+03:24:37          -Dtest.modules='java.base/java.util.zip:open java.base/jdk.internal.vm.annotation' \
+03:24:37          -classpath 'C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\TKG\test_output_15843216805455\jdk_util_0\work\classes\1\java\util\zip\ZipFile\TestCleaner.d;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\openjdk-tests\openjdk\openjdk-jdk\test\jdk\java\util\zip\ZipFile;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\jvmtest\openjdk\jtreg\lib\javatest.jar;C:\Users\jenkins.EC2AMAZ-T7I06S9\workspace\Test_openjdk11_j9_sanity.openjdk_x86-64_windows_xl\jvmtest\openjdk\jtreg\lib\jtreg.jar' \
+03:24:37          TestCleaner
+03:24:37  
+03:24:37  TEST RESULT: Error. Agent error: java.lang.Exception: Agent 0 timed out with a timeout of 960 seconds; check console log for any additional details
+```
+
+Test can be rerun via: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&BUILD_LIST=openjdk&PLATFORM=x86-64_windows_xl&TARGET=jdk_util_0

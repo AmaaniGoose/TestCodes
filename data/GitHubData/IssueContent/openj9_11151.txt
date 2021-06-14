@@ -1,0 +1,30 @@
+Java -version output
+--------------------
+
+```
+# java -version
+openjdk version "11.0.9" 2020-10-20
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.9+11)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.23.0, JRE 11 Linux amd64-64-Bit Compressed References 20201022_810 (JIT enabled, AOT enabled)
+OpenJ9   - 0394ef754
+OMR      - 582366ae5
+JCL      - 3b09cfd7e9 based on jdk-11.0.9+11)
+```
+
+Summary of problem
+------------------
+
+Given my understanding of the documentation `-Xsoftmx=600M` shoaled mean that the JVM won't use more than 600M of heap. This can be tuned at runtime to go above this limit if needed.
+
+The documentation at https://www.eclipse.org/openj9/docs/xsoftmx/ is perhaps ambiguous, since it _also_ states that:
+> There is no guarantee that a decrease in the heap size will occur. If or when the heap shrinks to less than the new limit, the heap will not grow beyond that limit.
+
+It is unclear if it should go above the limit if it has never been above the limit.
+
+In any case, in my test, I am allocating many 1M-1.5M objects, and then keeping ten of these in memory. This is creating a fair amount of garbage ~1.25M objects. I have specified `-Xsoftmx=640M` and so I wouldn't expect that the JVM should allocate more than 600M of heap, but I see it going to above 1G of heap.
+
+Diagnostic files
+----------------
+
+I have attached my gc logs (very slightly sanitised to remove company names and directory locations from the program args)
+[mem.output.conf4-1109-options-0.2020-11-06T160657.gclog.zip](https://github.com/eclipse/openj9/files/5524722/mem.output.conf4-1109-options-0.2020-11-06T160657.gclog.zip)

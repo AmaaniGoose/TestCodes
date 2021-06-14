@@ -1,0 +1,71 @@
+I'm compiling a list of features that a new OpenJ9 JIT backend would need to implement to be reasonably "feature complete" with the others.  These features are typically performance features above and beyond a basic, functional OpenJ9 JIT.
+
+This could also serve a secondary purpose as a cross checklist for existing platforms to determine if they are missing any opportunities.
+
+At the moment, I am particularly interested in the work that has been done to support features in Java 9, 11, 12, ... to be sure we don't miss any of that work in the AArch64 implementation.
+
+This is a bit of a brain dump, but I hope to provide some structure to it once everyone has provided their input.  I would appreciate it if those that are familiar with a particular backend could review this list and add anything you think is relevant.  You don't necessarily have to go into great detail here:  it will either be enough for me to track down the feature myself, or I can ask you about it.
+
+FYI @andrewcraik @fjeremic @gita-omr, but input from anyone is welcome.
+
+
+* software concurrent scavenge
+
+* constant dynamic
+
+* nestmates
+
+* read barriers
+
+* write barriers
+
+* field watch
+   * support AOT + fieldwatch (e.g., #6256)
+
+* JNI dispatch
+
+* lock reservation
+
+* recompilation
+
+* on-stack replacement?  (@andrewcraik)
+
+* AOT / SVM?  (@dsouzai)
+
+* per code-cache helpers
+
+* JSR292?
+
+* DLT?
+	* no specific support seems needed, but DLT symbols are excluded in some situations
+
+* JProfiling?
+
+* J9-specific IL opcodes, including:
+	* ArrayStoreCHK
+	* ArrayCHK
+	* SpineCHKs and variants, arraylets in general
+	* loadFence, storeFence, fullFence
+
+* Platform-specific inlining
+	* unsafe natives
+	* juc methods
+	* optimized String hashcode
+	* String.indexof
+	* String case conversions (UTF16 & Latin1)
+	* String compression
+	* currentTimeMillis/nanoTime inlining
+
+* inlined helpers
+	* monitor enter/exit
+	* checkcast
+	* instanceof
+	* new/newarray/anewarray
+
+* implicit NULLCHK (via signal handler)
+
+* implicit DIVCHK (via signal handler)
+
+* transactional memory (tstart/tfinish/tabort/tcommit)
+		
+* what is "asyncCheckGCMapPatching" @0dvictor ?

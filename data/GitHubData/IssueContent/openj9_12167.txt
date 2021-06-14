@@ -1,0 +1,533 @@
+java/nio/channels/AsynchronousSocketChannel/CompletionHandlerRelease.java hangs
+completes in 2 seconds on Hotspot
+https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_extended.openjdk_ppc64_aix/17/consoleFull
+```
+15:18:50  Timeout information:
+15:18:50  Running jstack on process 38994338
+15:18:50  2021-03-09T09:18:33.698
+15:18:50  Virtual machine: 38994338 JVM information:
+15:18:50  JRE 1.8.0 AIX ppc64-64-Bit Compressed References 20210309_991 (JIT enabled, AOT enabled)
+15:18:50  OpenJ9   - b227feba2
+15:18:50  OMR      - 4665e2f72
+15:18:50  JCL      - 1780cbc92b based on jdk8u292-b05
+15:18:50  
+15:18:50  "main" Id=1 WAITING
+15:18:50  	at java.lang.Object.wait(Native Method)
+15:18:50  	at java.lang.Object.wait(Object.java:218)
+15:18:50  	at java.lang.Thread.join(Thread.java:703)
+15:18:50  	at com.sun.javatest.regtest.agent.MainActionHelper.runClass(MainActionHelper.java:198)
+15:18:50  	at com.sun.javatest.regtest.agent.AgentServer.doMain(AgentServer.java:305)
+15:18:50  	at com.sun.javatest.regtest.agent.AgentServer.run(AgentServer.java:232)
+15:18:50  	at com.sun.javatest.regtest.agent.AgentServer.main(AgentServer.java:69)
+15:18:50  
+15:18:50  "JIT Compilation Thread-000" Id=2 RUNNABLE
+15:18:50  
+15:18:50  "JIT Compilation Thread-001 Suspended" Id=3 RUNNABLE
+15:18:50  
+15:18:50  "JIT Compilation Thread-002 Suspended" Id=4 RUNNABLE
+15:18:50  
+15:18:50  "JIT Compilation Thread-003 Suspended" Id=5 RUNNABLE
+15:18:50  
+15:18:50  "JIT Compilation Thread-004 Suspended" Id=6 RUNNABLE
+15:18:50  
+15:18:50  "JIT Compilation Thread-005 Suspended" Id=7 RUNNABLE
+15:18:50  
+15:18:50  "JIT Compilation Thread-006 Suspended" Id=8 RUNNABLE
+15:18:50  
+15:18:50  "JIT Diagnostic Compilation Thread-007 Suspended" Id=9 RUNNABLE
+15:18:50  
+15:18:50  "JIT-SamplerThread" Id=10 TIMED_WAITING
+15:18:50  
+15:18:50  "IProfiler" Id=11 RUNNABLE
+15:18:50  
+15:18:50  "Concurrent Mark Helper" Id=12 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=13 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=14 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=15 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=16 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=17 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=18 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=19 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=20 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=21 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=22 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=23 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=24 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=25 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=26 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=27 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=28 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=29 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=30 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=31 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=32 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=33 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=34 RUNNABLE
+15:18:50  
+15:18:50  "GC Worker" Id=35 RUNNABLE
+15:18:50  
+15:18:50  "Attach API wait loop" Id=38 TIMED_WAITING
+15:18:50  	at java.lang.Thread.sleep(Native Method)
+15:18:50  	at java.lang.Thread.sleep(Thread.java:953)
+15:18:50  	at openj9.internal.tools.attach.target.WaitLoop.checkReplyAndCreateAttachment(WaitLoop.java:140)
+15:18:50  	at openj9.internal.tools.attach.target.WaitLoop.waitForNotification(WaitLoop.java:117)
+15:18:50  	at openj9.internal.tools.attach.target.WaitLoop.run(WaitLoop.java:154)
+15:18:50  
+15:18:50  "Finalizer thread" Id=39 RUNNABLE
+15:18:50  
+15:18:50  "pool-1-thread-1" Id=40 TIMED_WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:215)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2078)
+15:18:50  	at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1093)
+15:18:50  	at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:809)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  
+15:18:50  "InnocuousThread-421" Id=1428 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-422" Id=1429 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-423" Id=1430 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-424" Id=1431 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-425" Id=1432 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-426" Id=1433 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-427" Id=1434 RUNNABLE
+15:18:50  	at sun.nio.ch.AixPollPort.pollsetPoll(Native Method)
+15:18:50  	at sun.nio.ch.AixPollPort.access$400(AixPollPort.java:42)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.poll(AixPollPort.java:328)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:425)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-428" Id=1435 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-429" Id=1436 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-430" Id=1437 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-431" Id=1438 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-432" Id=1439 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-433" Id=1440 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-434" Id=1441 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-435" Id=1442 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-436" Id=1443 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-437" Id=1444 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-438" Id=1445 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-439" Id=1446 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-440" Id=1447 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-441" Id=1448 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-442" Id=1449 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-443" Id=1450 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-444" Id=1451 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-445" Id=1452 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "InnocuousThread-704" Id=2061 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1081)
+15:18:50  	at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:809)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  	at sun.misc.InnocuousThread.run(InnocuousThread.java:106)
+15:18:50  
+15:18:50  "AgentVMThread" Id=2062 TIMED_WAITING
+15:18:50  	at java.lang.Object.wait(Native Method)
+15:18:50  	at java.lang.Object.wait(Object.java:218)
+15:18:50  	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:138)
+15:18:50  	at CompletionHandlerRelease.waitForRefToClear(CompletionHandlerRelease.java:205)
+15:18:50  	at CompletionHandlerRelease.testConnect(CompletionHandlerRelease.java:70)
+15:18:50  	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:18:50  	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+15:18:50  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:18:50  	at java.lang.reflect.Method.invoke(Method.java:498)
+15:18:50  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+15:18:50  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+15:18:50  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+15:18:50  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+15:18:50  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+15:18:50  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+15:18:50  	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+15:18:50  	at org.testng.TestRunner.run(TestRunner.java:623)
+15:18:50  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+15:18:50  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+15:18:50  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+15:18:50  	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+15:18:50  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+15:18:50  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+15:18:50  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+15:18:50  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+15:18:50  	at org.testng.TestNG.run(TestNG.java:1018)
+15:18:50  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+15:18:50  	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:18:50  	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+15:18:50  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:18:50  	at java.lang.reflect.Method.invoke(Method.java:498)
+15:18:50  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:312)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  
+15:18:50  "pool-422-thread-1" Id=2063 RUNNABLE
+15:18:50  	at sun.nio.ch.AixPollPort.pollsetPoll(Native Method)
+15:18:50  	at sun.nio.ch.AixPollPort.access$400(AixPollPort.java:42)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.poll(AixPollPort.java:328)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:425)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  
+15:18:50  "pool-422-thread-2" Id=2064 WAITING
+15:18:50  	at sun.misc.Unsafe.park(Native Method)
+15:18:50  	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+15:18:50  	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+15:18:50  	at java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:403)
+15:18:50  	at sun.nio.ch.AixPollPort$EventHandlerTask.run(AixPollPort.java:419)
+15:18:50  	at sun.nio.ch.AsynchronousChannelGroupImpl$1.run(AsynchronousChannelGroupImpl.java:112)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+15:18:50  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+15:18:50  	at java.lang.Thread.run(Thread.java:823)
+15:18:50  
+15:18:50  "Attachment 55995" Id=2065 RUNNABLE
+15:18:50  	at openj9.internal.tools.attach.target.DiagnosticUtils.dumpAllThreadsImpl(Native Method)
+15:18:50  	at openj9.internal.tools.attach.target.DiagnosticUtils.getThreadInfo(DiagnosticUtils.java:245)
+15:18:50  	at openj9.internal.tools.attach.target.DiagnosticUtils$$Lambda$13/0x0000000000000000.apply(Unknown Source)
+15:18:50  	at openj9.internal.tools.attach.target.DiagnosticUtils.executeDiagnosticCommand(DiagnosticUtils.java:181)
+15:18:50  	at openj9.internal.tools.attach.target.Attachment.doCommand(Attachment.java:239)
+15:18:50  	at openj9.internal.tools.attach.target.Attachment.run(Attachment.java:150)
+15:18:50  
+15:18:50  "file lock watchdog" Id=2066 TIMED_WAITING
+15:18:50  	at java.lang.Object.wait(Native Method)
+15:18:50  	at java.lang.Object.wait(Object.java:218)
+15:18:50  	at java.util.TimerThread.mainLoop(Timer.java:552)
+15:18:50  	at java.util.TimerThread.run(Timer.java:505)
+15:18:50  
+15:18:50  
+15:18:50  --- Timeout information end.
+15:18:50  elapsed time (seconds): 962.669
+15:18:50  configuration:
+15:18:50  Boot Layer
+15:18:50    class path: /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/javatest.jar
+15:18:50                /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/jtreg.jar
+15:18:50                /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/lib/tools.jar
+15:18:50                /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/junit.jar
+15:18:50                /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/testng.jar
+15:18:50                /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/jcommander.jar
+15:18:50  
+15:18:50  Test Layer
+15:18:50    class path: /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16152971712534/jdk_nio_0/work/classes/java/nio/channels/AsynchronousSocketChannel
+15:18:50                /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/nio/channels/AsynchronousSocketChannel
+15:18:50  
+15:18:50  rerun:
+15:18:50  cd /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16152971712534/jdk_nio_0/work/scratch && \
+15:18:50  DISPLAY=:0 \
+15:18:50  HOME=/home/jenkins \
+15:18:50  LANG=en_US \
+15:18:50  PATH=/bin:/usr/bin:/usr/sbin \
+15:18:50  TZ=CST6CDT \
+15:18:50      /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/bin/java \
+15:18:50          -Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+15:18:50          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+15:18:50          -Dtest.compiler.opts= \
+15:18:50          -Dtest.java.opts= \
+15:18:50          -Dtest.jdk=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image \
+15:18:50          -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image \
+15:18:50          -Dtest.timeout.factor=8.0 \
+15:18:50          -Dtest.root=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test \
+15:18:50          -Dtest.name=java/nio/channels/AsynchronousSocketChannel/CompletionHandlerRelease.java \
+15:18:50          -Dtest.file=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/nio/channels/AsynchronousSocketChannel/CompletionHandlerRelease.java \
+15:18:50          -Dtest.src=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/nio/channels/AsynchronousSocketChannel \
+15:18:50          -Dtest.src.path=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/nio/channels/AsynchronousSocketChannel \
+15:18:50          -Dtest.classes=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16152971712534/jdk_nio_0/work/classes/java/nio/channels/AsynchronousSocketChannel \
+15:18:50          -Dtest.class.path=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16152971712534/jdk_nio_0/work/classes/java/nio/channels/AsynchronousSocketChannel \
+15:18:50          -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16152971712534/jdk_nio_0/work/classes/java/nio/channels/AsynchronousSocketChannel:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/nio/channels/AsynchronousSocketChannel \
+15:18:50          -classpath /home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/TKG/output_16152971712534/jdk_nio_0/work/classes/java/nio/channels/AsynchronousSocketChannel:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/nio/channels/AsynchronousSocketChannel:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/testng.jar:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/jcommander.jar:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/lib/tools.jar:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk8_j9_extended.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+15:18:50          com.sun.javatest.regtest.agent.TestNGRunner java/nio/channels/AsynchronousSocketChannel/CompletionHandlerRelease.java false CompletionHandlerRelease
+15:18:50  
+15:18:50  TEST RESULT: Error. Agent error: java.lang.Exception: Agent 2 timed out with a timeout of 960 seconds; check console log for any additional details
+```
+

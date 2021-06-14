@@ -1,0 +1,32 @@
+Java -version output
+--------------------
+
+openjdk version "1.8.0_282-internal"
+OpenJDK Runtime Environment (build 1.8.0_282-internal-202012091711-b04)
+Eclipse OpenJ9 VM (build master-b5733bb66, JRE 1.8.0 Windows 8.1 amd64-64-Bit Compressed References 20201209_934 (JIT enabled, AOT enabled)
+OpenJ9   - b5733bb66
+OMR      - da9530688
+JCL      - 06559695 based on jdk8u282-b04)
+
+Summary of problem
+------------------
+
+maybe this is a duplicated of #7741, but i have more information that may help.
+
+There's a crash when placing a block from the 0.0.5 version of this Minecraft Mod: https://github.com/CD4017BE/ThermokineticEngineering/packages/481819
+(Required Dependency: CD4017BE_lib 6.6.0:
+https://github.com/CD4017BE/CD4017BE_lib/packages/71046).
+
+it is not present when using the 0.0.4 version of it (with CD4017BE_lib 6.6.0), so maybe in one of the commits between 0.0.4 and 0.0.5 there's the source of the issue.
+
+@tajila hello again, i remember that you commented in #11271 that there was a difference in the crash report if i use `Xshare:off`, well, the same is happening in this case, i think there is a (hard to fix) reason why this issue (#7741) is still open, if that's the case let me know and i will close this issue.
+
+also, sorry for bothering with these issues related to a game, i should not being using a business software to play (i only do it because of the performance improvement), i think this issue is pretty hard to fix so no worries, i don't wan't to be a nuisance more time, i'm so grateful with you and the others who helped me with that issue
+
+Diagnostic files
+----------------
+Crash Report without `-Xshare:off`
+https://pastebin.com/46WXWnEJ
+
+Crash Report using `-Xshare:off`
+https://pastebin.com/SRvhQjYj

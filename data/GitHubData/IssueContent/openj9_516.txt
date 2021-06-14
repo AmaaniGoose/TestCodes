@@ -1,0 +1,7 @@
+Following `OpenJ9.gmk` script overrides `MAKEFLAGS`
+````
+# openjdk makeflags don't work with openj9/omr native compiles; override with number of cpus which openj9 and omr need supplied
+override MAKEFLAGS := -j $(JOBS)
+````
+
+This effectively overrides the command line options from makefile caller. For example, `Main.gmk` invokes `OpenJ9.gmk` with command line option `VERSION_MAJOR=$(VERSION_MAJOR)` which could be overridden by hard-coded setting `VERSION_MAJOR:=9` hence cause the problem described in https://github.com/eclipse/openj9/pull/492#issuecomment-340955293, and a workaround https://github.com/eclipse/openj9/pull/492 has to be introduced to avoid the overriding.

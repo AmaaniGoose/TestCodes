@@ -1,0 +1,96 @@
+**Test**
+
+MixedLoadTest -test-args="timeLimit=30m"
+JVM_OPTIONS: `--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED -Xcompressedrefs  -Xjit:count=0,optlevel=hot,gcOnResolve,rtResolve`
+
+Corefile download link: https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder_SM/42/artifact/system_test_output.tar.gz
+
+**Java Version**
+
+```
+15:46:51  openjdk version "11.0.11" 2021-04-20
+15:46:51  OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.11+4-202103021817)
+15:46:51  Eclipse OpenJ9 VM AdoptOpenJDK (build master-9123f9b8a, JRE 11 Linux aarch64-64-Bit Compressed References 20210302_677 (JIT enabled, AOT enabled)
+15:46:51  OpenJ9   - 9123f9b8a
+15:46:51  OMR      - eb4f5a875
+15:46:51  JCL      - 7222dc7018 based on jdk-11.0.11+4)
+```
+
+**Error details copied from console output**
+
+```
+LT  stderr Unhandled exception
+LT  stderr Type=Segmentation error vmState=0x00000000
+LT  stderr J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000001
+LT  stderr Handler1=0000FFFF8E9AF8C0 Handler2=0000FFFF8E9273F0 InaccessibleAddress=0000000000000020
+LT  stderr R0=0000FFFF6B9C54D0 R1=0000FFFF6B9C54E0 R2=0000FFFF6417B5A0 R3=0000FFFF641FBAB0
+LT  stderr R4=0000FFFF74FDE22C R5=0000000000000000 R6=0000000000000000 R7=0000FFFF8E61A7E0
+LT  stderr R8=0000FFFF68C58F00 R9=FFFFFFFFFFFFFFB0 R10=0000FFFF74FDE22C R11=0000FFFF6B7C8C74
+LT  stderr R12=7420303D65746975 R13=0000000000000038 R14=000000000000003F R15=0000FFFF68053520
+LT  stderr R16=0000FFFF8E8FD118 R17=0000FFFF8F7FE428 R18=0000000000000001 R19=0000FFFF6B9C54D0
+LT  stderr R20=0000FFFF6417B5A0 R21=0000000000000000 R22=0000FFFF74FDE22C R23=0000000000000000
+LT  stderr R24=0000FFFF74FDE230 R25=0000000000000000 R26=00000006805B3418 R27=0000000000000000
+LT  stderr R28=0000000000000009 R29=0000000000000000 R30=0000FFFF8E381254 R31=0000FFFF68053230
+LT  stderr PC=0000FFFF8E381258 SP=0000FFFF68053230 PSTATE=0000000020000000
+LT  stderr V0 0000000000000005 (f: 5.000000, d: 2.470328e-323)
+LT  stderr V1 000000003f800000 (f: 1065353216.000000, d: 5.263544e-315)
+LT  stderr V2 0000ffff68053470 (f: 1745171584.000000, d: 1.390659e-309)
+LT  stderr V3 0000ffff68053460 (f: 1745171584.000000, d: 1.390659e-309)
+LT  stderr V4 0000ffff68053450 (f: 1745171584.000000, d: 1.390659e-309)
+LT  stderr V5 0000ffff68053440 (f: 1745171456.000000, d: 1.390659e-309)
+LT  stderr V6 0000ffff68053430 (f: 1745171456.000000, d: 1.390659e-309)
+LT  stderr V7 0000ffff68053420 (f: 1745171456.000000, d: 1.390659e-309)
+LT  stderr V8 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+LT  stderr V9 3f50624dd2f1a9fc (f: 3539053056.000000, d: 1.000000e-03)
+LT  stderr V10 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+LT  stderr V11 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+LT  stderr V12 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+LT  stderr V13 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+LT  stderr V14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+LT  stderr V15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+LT  stderr V16 0000ffff68053410 (f: 1745171456.000000, d: 1.390659e-309)
+LT  stderr V17 0000ffff68053400 (f: 1745171456.000000, d: 1.390659e-309)
+LT  stderr V18 0000ffff680533f0 (f: 1745171456.000000, d: 1.390659e-309)
+LT  stderr V19 0000ffff680533e0 (f: 1745171456.000000, d: 1.390659e-309)
+LT  stderr V20 0000ffff680533d0 (f: 1745171456.000000, d: 1.390659e-309)
+LT  stderr V21 0000ffff680533c0 (f: 1745171456.000000, d: 1.390659e-309)
+LT  stderr V22 0000ffff680533b0 (f: 1745171328.000000, d: 1.390659e-309)
+LT  stderr V23 00000000000000f0 (f: 240.000000, d: 1.185758e-321)
+LT  stderr V24 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+LT  stderr V25 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+LT  stderr V26 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+LT  stderr V27 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+LT  stderr V28 3ff0000000000000 (f: 0.000000, d: 1.000000e+00)
+LT  stderr V29 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+LT  stderr V30 4040000000000000 (f: 0.000000, d: 3.200000e+01)
+LT  stderr V31 4010000000000000 (f: 0.000000, d: 4.000000e+00)
+LT  stderr Module=/home/jenkins/workspace/Grinder_SM/openjdkbinary/j2sdk-image/lib/default/libj9jit29.so
+LT  stderr Module_base_address=0000FFFF8DC74000
+LT  stderr Target=2_90_20210302_677 (Linux 4.15.0-34-generic)
+LT  stderr CPU=aarch64 (64 logical CPUs) (0x1f699a1000 RAM)
+LT  stderr ----------- Stack Backtrace -----------
+LT  stderr (0x0000FFFF8E924048 [libj9prt29.so+0x26048])
+LT  stderr ---------------------------------------
+LT  stderr JVMDUMP039I Processing dump event "gpf", detail "" at 2021/03/03 21:23:53 - please wait.
+LT  stderr JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Grinder_SM/openjdk-tests/TKG/output_16148047811448/system_custom_0/20210303-205302-MixedLoadTest/results/core.20210303.212353.7047.0001.dmp' in response to an event
+LT  21:23:54.289 - Thread completed. Suite=0 thread=8
+LT  21:23:58.906 - Completed 100.0%. Number of tests started=248428 (+2171)
+LT  21:24:02.112 - Thread completed. Suite=0 thread=9
+LT  stderr JVMDUMP010I System dump written to /home/jenkins/workspace/Grinder_SM/openjdk-tests/TKG/output_16148047811448/system_custom_0/20210303-205302-MixedLoadTest/results/core.20210303.212353.7047.0001.dmp
+LT  stderr JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Grinder_SM/openjdk-tests/TKG/output_16148047811448/system_custom_0/20210303-205302-MixedLoadTest/results/javacore.20210303.212353.7047.0002.txt' in response to an event
+STF 21:24:02.703 - Found dump at: /home/jenkins/workspace/Grinder_SM/openjdk-tests/TKG/output_16148047811448/system_custom_0/20210303-205302-MixedLoadTest/results/javacore.20210303.212353.7047.0002.txt
+STF 21:24:02.704 - Found dump at: /home/jenkins/workspace/Grinder_SM/openjdk-tests/TKG/output_16148047811448/system_custom_0/20210303-205302-MixedLoadTest/results/core.20210303.212353.7047.0001.dmp
+LT  stderr javacore file generated - /home/jenkins/workspace/Grinder_SM/openjdk-tests/TKG/output_16148047811448/system_custom_0/20210303-205302-MixedLoadTest/results/javacore.20210303.212353.7047.0002.txt
+LT  stderr core file generated - /home/jenkins/workspace/Grinder_SM/openjdk-tests/TKG/output_16148047811448/system_custom_0/20210303-205302-MixedLoadTest/results/core.20210303.212353.7047.0001.dmp
+LT  21:24:06.617 - Thread completed. Suite=0 thread=2
+LT  21:24:08.407 - Thread completed. Suite=0 thread=6
+LT  21:24:11.309 - Thread completed. Suite=0 thread=7
+LT  stderr JVMDUMP010I Java dump written to /home/jenkins/workspace/Grinder_SM/openjdk-tests/TKG/output_16148047811448/system_custom_0/20210303-205302-MixedLoadTest/results/javacore.20210303.212353.7047.0002.txt
+LT  stderr JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Grinder_SM/openjdk-tests/TKG/output_16148047811448/system_custom_0/20210303-205302-MixedLoadTest/results/Snap.20210303.212353.7047.0003.trc' in response to an event
+LT  stderr JVMDUMP010I Snap dump written to /home/jenkins/workspace/Grinder_SM/openjdk-tests/TKG/output_16148047811448/system_custom_0/20210303-205302-MixedLoadTest/results/Snap.20210303.212353.7047.0003.trc
+LT  stderr JVMDUMP032I JVM requested JIT dump using '/home/jenkins/workspace/Grinder_SM/openjdk-tests/TKG/output_16148047811448/system_custom_0/20210303-205302-MixedLoadTest/results/jitdump.20210303.212353.7047.0004.dmp' in response to an event
+LT  stderr JVMDUMP013I Processed dump event "gpf", detail "".
+STF 21:24:16.734 - Found dump at: /home/jenkins/workspace/Grinder_SM/openjdk-tests/TKG/output_16148047811448/system_custom_0/20210303-205302-MixedLoadTest/results/Snap.20210303.212353.7047.0003.trc
+
+```
+

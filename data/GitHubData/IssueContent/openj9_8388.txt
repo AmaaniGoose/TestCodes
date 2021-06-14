@@ -1,0 +1,13 @@
+Classes unloading in Gencon is executed by Global GC only. So it is possible that in case if Global GC is not necessary for long period of time (Scavenge cycles handle keep heap in good shape) the large number of classes might be accumulated (not unloaded). To prevent this scenario GC might make a decision to execute Global GC instead of Local GC (percolate to Global). The real check is "If number of `Anonymous Classes loaded since last Global GC` times `Anonymous Class Weight` plus `Number of Classloaders loaded since last Global GC` exceeds Class Unloading Threshold" execute Global GC instead of Local GC.
+
+Current default value for this threshold is set to `80000`. `Anonymous Class Weight` is set to `1.0`
+
+Unfortunately we have a situation when time of handling of class unloading hook in JIT code might be in order of milliseconds. This leads to multi-second pauses in STW Global GC.
+
+Looks like it is reasonable to reduce threshold to 5000 - 10000, at least temporary until slow handling of class unloading in JIT code is fixed.
+
+Also I have a question for JIT developers: Is unloading time for Anonymous Class is smaller than average? 
+
+Currently Anonymous and regular classes have equal weight but it can be changed (for example 5-10 Anonymous per regular class). The threshold was set so high to handle test case when waste amount of Anonymous classes are generated. In this case we don't want to execute Global GC too often.
+
+@LinHu2016 @amicic @mpirvu @andrewcraik @DanHeidinga @manqingl

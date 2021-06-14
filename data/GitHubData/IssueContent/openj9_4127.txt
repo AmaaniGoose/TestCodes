@@ -1,0 +1,5 @@
+Test https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/lang/invoke/condy/CondyNestedTest.java consistently fails on Linux PPCLE with ...
+
+"TEST RESULT: Error. Agent communication error: java.io.EOFException; check console log for any additional details"
+
+Example job showing failure - https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/615

@@ -1,0 +1,36 @@
+Failure link
+------------
+https://ci.adoptopenjdk.net/user/adam-thorpe/my-views/view/Nightly%20test%20openjdk%20openJ9/job/Test_openjdk8_j9_sanity.openjdk_x86-64_mac/120/
+Version: JDK8
+Platform: Mac and MacXL
+JVM: Openj9 only
+
+Optional info
+-------------
+- intermittent failure (yes|no): no
+- regression or new test: regression
+- if regression, what are the last passing / first failing public SHAs (OpenJ9, OMR, JCL) : Unknown, popped up once https://github.com/eclipse/openj9/issues/8194 was fixed, likely was blocking this failure
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+Stacktrace
+Program `/Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/../bin/java' timed out (timeout set to 960000ms, elapsed time including timeout handling was 960322ms).    
+Standard Output
+Command line: [/Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/../bin/javac -d classes /Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/lang/Runtime/loadLibrary/src/Target.java /Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/lang/Runtime/loadLibrary/src/Target2.java]
+--- ProcessLog ---
+cmd: /Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/../bin/javac -d classes /Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/lang/Runtime/loadLibrary/src/Target.java /Users/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/lang/Runtime/loadLibrary/src/Target2.java
+exitvalue: 0
+stderr: 
+stdout: 
+
+
+findLibrary someLibrary
+Thread1 load
+findLibrary awt
+Thread2 load
+Timeout refired 960 times
+    
+Standard Error
+_RegisterApplication(), FAILED TO establish the default connection to the WindowServer, _CGSDefaultConnection() is NULL.
+```

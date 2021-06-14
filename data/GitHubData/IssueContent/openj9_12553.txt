@@ -1,0 +1,5 @@
+This issue is to capture all the enhancement suggestions mentioned in the code review https://github.com/eclipse/openj9/pull/12422
+
+1. Possible combination of the implementation of `lower{Load|Store}ArrayElement `: https://github.com/eclipse/openj9/pull/12422#discussion_r613409293
+
+2. Generate `BNDCHK` in ILGEN and make it common for both the helper call block and the regular aaload/aastore block for :https://github.com/eclipse/openj9/pull/12422#discussion_r614396458

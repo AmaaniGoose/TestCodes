@@ -1,0 +1,56 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/292
+java/lang/ClassLoader/GetSystemPackage.java
+```
+00:57:59  rerun:
+00:57:59  cd /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/test_output_16106037707237/jdk_lang_j9_0/work/scratch/0 && \
+00:57:59  DISPLAY=:0 \
+00:57:59  HOME=/home/jenkins \
+00:57:59  LANG=en_US.UTF-8 \
+00:57:59  PATH=/bin:/usr/bin:/usr/sbin \
+00:57:59      /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/j2sdk-image/bin/java \
+00:57:59          -Dtest.vm.opts='-ea -esa -Xmx512m -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache -XX:-JITServerTechPreviewMessage -XX:+UseCompressedOops' \
+00:57:59          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-Xdump:system:none -J-Xdump:heap:none -J-Xdump:system:events=gpf+abort+traceassert+corruptcache -J-XX:-JITServerTechPreviewMessage -J-XX:+UseCompressedOops' \
+00:57:59          -Dtest.compiler.opts= \
+00:57:59          -Dtest.java.opts= \
+00:57:59          -Dtest.jdk=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/j2sdk-image \
+00:57:59          -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/j2sdk-image \
+00:57:59          -Dtest.timeout.factor=8.0 \
+00:57:59          -Dtest.nativepath=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+00:57:59          -Dtest.root=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+00:57:59          -Dtest.name=java/lang/ClassLoader/GetSystemPackage.java \
+00:57:59          -Dtest.file=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/ClassLoader/GetSystemPackage.java \
+00:57:59          -Dtest.src=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/ClassLoader \
+00:57:59          -Dtest.src.path=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/ClassLoader:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/lib/testlibrary \
+00:57:59          -Dtest.classes=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/test_output_16106037707237/jdk_lang_j9_0/work/classes/0/java/lang/ClassLoader/GetSystemPackage.d \
+00:57:59          -Dtest.class.path=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/test_output_16106037707237/jdk_lang_j9_0/work/classes/0/java/lang/ClassLoader/GetSystemPackage.d:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/test_output_16106037707237/jdk_lang_j9_0/work/classes/0/lib/testlibrary \
+00:57:59          -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/test_output_16106037707237/jdk_lang_j9_0/work/classes/0/java/lang/ClassLoader/GetSystemPackage.d:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/ClassLoader:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/test_output_16106037707237/jdk_lang_j9_0/work/classes/0/lib/testlibrary \
+00:57:59          -classpath /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/test_output_16106037707237/jdk_lang_j9_0/work/classes/0/java/lang/ClassLoader/GetSystemPackage.d:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/ClassLoader:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/test_output_16106037707237/jdk_lang_j9_0/work/classes/0/lib/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/lib/testlibrary:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+00:57:59          GetSystemPackage
+00:57:59  stderr:
+00:57:59  Exception in thread "main" java.lang.NullPointerException
+00:57:59  	at GetSystemPackage.findPackage(GetSystemPackage.java:180)
+00:57:59  	at GetSystemPackage.verifyPackage(GetSystemPackage.java:159)
+00:57:59  	at GetSystemPackage.main(GetSystemPackage.java:65)
+00:57:59  STDOUT:
+00:57:59  Command line: [/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/j2sdk-image/bin/java -Xbootclasspath/a:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/test_output_16106037707237/jdk_lang_j9_0/work/classes/0/java/lang/ClassLoader/GetSystemPackage.d/manifest.jar GetSystemPackage system-manifest ]
+00:57:59  Command line: [/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/j2sdk-image/bin/java -Xbootclasspath/a:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/test_output_16106037707237/jdk_lang_j9_0/work/classes/0/java/lang/ClassLoader/GetSystemPackage.d GetSystemPackage system-no-manifest ]
+00:57:59  Command line: [/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/j2sdk-image/bin/java -Xbootclasspath/a:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/test_output_16106037707237/jdk_lang_j9_0/work/classes/0/java/lang/ClassLoader/GetSystemPackage.d/no-manifest.jar GetSystemPackage system-no-manifest ]
+00:57:59  Command line: [/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/j2sdk-image/bin/java -cp /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/test_output_16106037707237/jdk_lang_j9_0/work/classes/0/java/lang/ClassLoader/GetSystemPackage.d/manifest.jar GetSystemPackage non-system-manifest ]
+00:57:59  STDERR:
+00:57:59  java.lang.RuntimeException: Classpath package with manifest improperly resolved
+00:57:59  	at GetSystemPackage.runSubProcess(GetSystemPackage.java:124)
+00:57:59  	at GetSystemPackage.buildJarsAndInitiateSystemPackageTest(GetSystemPackage.java:99)
+00:57:59  	at GetSystemPackage.main(GetSystemPackage.java:54)
+00:57:59  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+00:57:59  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+00:57:59  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+00:57:59  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+00:57:59  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:312)
+00:57:59  	at java.base/java.lang.Thread.run(Thread.java:836)
+00:57:59  
+00:57:59  JavaTest Message: Test threw exception: java.lang.RuntimeException
+00:57:59  JavaTest Message: shutting down test
+00:57:59  
+00:57:59  
+00:57:59  TEST RESULT: Failed. Execution failed: `main' threw exception: java.lang.RuntimeException: Classpath package with manifest improperly resolved
+```

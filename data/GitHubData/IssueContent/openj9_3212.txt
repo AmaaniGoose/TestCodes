@@ -1,0 +1,34 @@
+pltest, jsigjnitest failed on windows. Suspect the passing in `path` is a mix of window and cygwin path as specified executable or dll are in the path.
+
+jsiginitest result:
+```
+16:17:04 ===============================================
+16:17:04 Running test jsigjnitest_0 ...
+16:17:04 ===============================================
+16:17:05 jsigjnitest_0 Start Time: Tue Oct  9 20:17:04 2018 Epoch Time (ms): 1539112624124
+16:17:05 test with NoOptions
+16:17:05 { mkdir -p "C:/Users/j9build/jenkins/workspace/Test-sanity.functional-JDK11-win_x86-64_cmprssptrs/openjdk-tests/\\TestConfig\\test_output_15391092494994\\jsigjnitest_0"; \
+16:17:05 cd "C:/Users/j9build/jenkins/workspace/Test-sanity.functional-JDK11-win_x86-64_cmprssptrs/openjdk-tests/\\TestConfig\\test_output_15391092494994\\jsigjnitest_0"; \
+16:17:05 export PATH=""/cygdrive/c/Users/j9build/jenkins/workspace/Test-sanity.functional-JDK11-win_x86-64_cmprssptrs/openjdkbinary/native-test-libs/:/cygdrive/c/Users/j9build/jenkins/workspace/Test-sanity.functional-JDK11-win_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/bin/compressedrefs:/cygdrive/c/Users/j9build/jenkins/workspace/Test-sanity.functional-JDK11-win_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/bin/j9vm":/usr/bin:/usr/bin:/cygdrive/c/Windows/system32:/cygdrive/c/Windows:/cygdrive/c/Windows/System32/Wbem:/cygdrive/c/Windows/System32/WindowsPowerShell/v1.0:/cygdrive/c/Strawberry/bin:/cygdrive/c/apache-ant/apache-ant-1.10.1/bin:/cygdrive/c/Program Files/Microsoft SQL Server/110/Tools/Binn:/cygdrive/c/Program Files (x86)/Microsoft SDKs/TypeScript/1.0:/cygdrive/c/Program Files/Microsoft SQL Server/120/Tools/Binn:/cygdrive/c/apache-ant/apache-ant-1.10.1/bin:/cygdrive/c/Program Files/Java/jdk8u144-b01/bin:/cygdrive/c/Program Files/Microsoft Windows Performance Toolkit"; \
+16:17:05 '/cygdrive/c/Users/j9build/jenkins/workspace/Test-sanity.functional-JDK11-win_x86-64_cmprssptrs/openjdkbinary/native-test-libs/\\jsigjnitest' \
+16:17:05 '/cygdrive/c/Users/j9build/jenkins/workspace/Test-sanity.functional-JDK11-win_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/bin/j9vm'  -Xcompressedrefs  ; \
+16:17:05 if [ $? -eq 0 ] ; then echo ""; echo "jsigjnitest_0""_PASSED"; echo ""; cd C:/Users/j9build/jenkins/workspace/Test-sanity.functional-JDK11-win_x86-64_cmprssptrs/openjdk-tests/; rm -f -r "C:/Users/j9build/jenkins/workspace/Test-sanity.functional-JDK11-win_x86-64_cmprssptrs/openjdk-tests/\\TestConfig\\test_output_15391092494994\\jsigjnitest_0"; else echo ""; echo "jsigjnitest_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "C:/Users/j9build/jenkins/workspace/Test-sanity.functional-JDK11-win_x86-64_cmprssptrs/openjdk-tests/\\TestConfig\\test_output_15391092494994\\TestTargetResult";
+16:17:05 Usage: jvmlibpath[-java options]
+16:17:05 
+16:17:05 Could not open /cygdrive/c/Users/j9build/jenkins/workspace/Test-sanity.functional-JDK11-win_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/bin/j9vm\jvm.dll: 126
+16:17:05 Attempting to open /cygdrive/c/Users/j9build/jenkins/workspace/Test-sanity.functional-JDK11-win_x86-64_cmprssptrs/openjdkbinary/j2sdk-image/bin/j9vm\jvm.dll
+16:17:05 
+16:17:05 jsigjnitest_0_FAILED
+16:17```
+
+pltest result:
+```
+16:30:47         cmdLineTester_pltest_0 Start Time: Tue Oct  9 19:48:37 2018 Epoch Time (ms): 1539110917229
+16:30:47         test with NoOptions
+16:30:47         *** Starting test suite: J9 Command-Line Option Test for pltest ***
+16:30:47         Testing: PLTEST
+16:30:47         Test start time: 2018/10/09 19:48:37 Greenwich Mean Time
+16:30:47         Running command: /cygdrive/c/Users/j9build/jenkins/workspace/Test-sanity.functional-JDK11-win_x86-64_cmprssptrs/openjdkbinary/native-test-libs/\\pltest 
+16:30:47         ***[TEST INFO 2018/10/09 19:48:37] Error during test case: PLTEST***
+16:30:47         ***[TEST INFO 2018/10/09 19:48:37] java.io.IOException: Cannot run program "/cygdrive/c/Users/j9build/jenkins/workspace/Test-sanity.functional-JDK11-win_x86-64_cmprssptrs/openjdkbinary/native-test-libs/\\pltest" (in directory "C:\Users\j9build\jenkins\workspace\Test-sanity.functional-JDK11-win_x86-64_cmprssptrs\openjdk-tests\TestConfi
+```

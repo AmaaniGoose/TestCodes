@@ -1,0 +1,1 @@
+#3755 shows a bug in type conversion that should have been caught in a unit test. The unit test should ensure methods calling to `JITHelpers.get[Char|Byte]FromArray` or `JITHelpers.get[Char|Byte]FromArrayByIndex` is compiled.  The array passed in can be a byte array or a char array.

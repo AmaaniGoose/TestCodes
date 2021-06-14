@@ -1,0 +1,11 @@
+Pulling this comment out into a new issue as the basis for a plan on how to handle backports for the interim release proposal.
+
+Will close this issue if the proposal fails to gain acceptance.
+
+> This sounds great idealogically do you have any ideas on how we would implement this practically to keep the overhead low? Perhaps some kind of label and a business item in the weekly meeting to review the list and change the label to confirm a backport vs remove the label?
+
+Labels would work pretty good for this.  There's already a `backport:candidate` label that could be added when a PR is merged in `master`.  Once a backport is agreed on, we could add a `backport:accepted`, and maybe a `backport:complete` label after the backport is merged?  And maybe a `backport:rejected` label for cases where we decided not to backport.
+
+There should be a fairly low cost workflow that can be implemented with labels and maybe if we want to get really fancy, a new `backports` project kanban board.
+
+_Originally posted by @DanHeidinga in https://github.com/eclipse/openj9/issues/9316#issuecomment-619984772_

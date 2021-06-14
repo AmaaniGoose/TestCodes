@@ -1,0 +1,11 @@
+The current implementation of `java/lang/String.hashCode()I` supports a compression enabled and disabled path as seen in the implementation here:
+
+https://github.com/eclipse/openj9/blob/723e4a5e891a2e5e703c63ef8ca46372bcef1429/jcl/src/java.base/share/classes/java/lang/String.java#L2641-L2652
+
+Currently we have a fast inline sequence for decompressed `hashCode` call found here:
+
+https://github.com/eclipse/openj9/blob/723e4a5e891a2e5e703c63ef8ca46372bcef1429/runtime/compiler/trj9/x/codegen/J9TreeEvaluator.cpp#L14152-L14157
+
+in which we inline a fast vector sequence to evaluate the call. For performance we should also accelerate the compression enabled call as well. The algorithm is effectively the same. The only thing that changes is the stride, i.e. in the compressed algorithm we operate on 1-byte characters, and on the decompressed algorithm we operate on 2-byte characters.
+
+For the compression enabled accelerated call we should be able to achieve 2x the throughput given we can hash double the number of characters per loop iteration (if the implementation is vectorized).

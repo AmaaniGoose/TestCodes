@@ -1,0 +1,3 @@
+An OMR issue (eclipse/omr#1403) has been created to migrate the FLUSH_MEMORY macros to a more sensible location and/or representation.
+
+This issue tracks the changes necessary to OpenJ9 to use the relocated macro or function.

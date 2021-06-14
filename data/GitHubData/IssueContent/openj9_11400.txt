@@ -1,0 +1,121 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_special.system_ppc64_aix_Nightly_testList_4/5
+MauveMultiThreadLoadTest_special_16
+aix71-p8-8
+variation: Mode555
+JVM_OPTIONS:  -XX:+UseCompressedOops -Xgcpolicy:balanced -Xjit:counts=- - - - - - 1 1 1 1000 250 250 - - - 10000 100000 10000,gcOnResolve,rtResolve,sampleInterval=2,scorchingSampleThreshold=10000,quickProfile -Xcheck:gc:vmthreads:all:quiet 
+
+Diagnostics (javacores only)
+https://140-211-168-230-openstack.osuosl.org/artifactory/ci-eclipse-openj9/Test/Test_openjdk8_j9_special.system_ppc64_aix_Nightly_testList_4/5/system_test_output.tar.gz
+```
+STF 00:56:07.443 - Heartbeat: Process LT  is still running
+STF 01:01:07.018 - Heartbeat: Process LT  is still running
+STF 01:06:07.106 - Heartbeat: Process LT  is still running
+STF 01:11:07.212 - Heartbeat: Process LT  is still running
+STF 01:16:07.299 - Heartbeat: Process LT  is still running
+STF 01:21:07.398 - Heartbeat: Process LT  is still running
+STF 01:26:07.485 - Heartbeat: Process LT  is still running
+STF 01:31:07.049 - Heartbeat: Process LT  is still running
+STF 01:36:07.121 - Heartbeat: Process LT  is still running
+STF 01:41:07.211 - Heartbeat: Process LT  is still running
+STF 01:46:07.294 - Heartbeat: Process LT  is still running
+STF 01:51:07.398 - Heartbeat: Process LT  is still running
+STF 01:56:07.000 - Heartbeat: Process LT  is still running
+STF 02:01:07.105 - Heartbeat: Process LT  is still running
+STF 02:06:07.185 - Heartbeat: Process LT  is still running
+STF 02:11:07.260 - Heartbeat: Process LT  is still running
+STF 02:16:07.343 - Heartbeat: Process LT  is still running
+STF 02:21:07.414 - Heartbeat: Process LT  is still running
+STF 02:26:07.491 - Heartbeat: Process LT  is still running
+STF 02:31:07.050 - Heartbeat: Process LT  is still running
+STF 02:36:07.116 - Heartbeat: Process LT  is still running
+STF 02:41:07.187 - Heartbeat: Process LT  is still running
+STF 02:46:07.280 - Heartbeat: Process LT  is still running
+STF 02:51:07.361 - Heartbeat: Process LT  is still running
+STF 02:51:08.365 - **FAILED** Process LT  has timed out
+STF 02:51:08.365 - Collecting dumps for: LT 
+STF 02:51:08.365 - Sending SIG 3 to the java process to generate a javacore
+STF 02:51:08.365 - Running command: kill -3 11796628
+STF 02:51:08.365 - Redirecting stderr to /home/jenkins/workspace/Test_openjdk8_j9_special.system_ppc64_aix_Nightly_testList_4/openjdk-tests/TKG/test_output_16074022357020/MauveMultiThreadLoadTest_special_16/20201208-005104-MauveMultiThreadTestTrc/results/1.LT.kill_3.stderr
+STF 02:51:08.365 - Redirecting stdout to /home/jenkins/workspace/Test_openjdk8_j9_special.system_ppc64_aix_Nightly_testList_4/openjdk-tests/TKG/test_output_16074022357020/MauveMultiThreadLoadTest_special_16/20201208-005104-MauveMultiThreadTestTrc/results/1.LT.kill_3.stdout
+STF 02:51:08.373 - Pausing for 30 seconds
+STF 02:51:38.373 - Sending SIG 3 to the java process to generate a javacore
+STF 02:51:38.375 - Running command: kill -3 11796628
+STF 02:51:38.375 - Redirecting stderr to /home/jenkins/workspace/Test_openjdk8_j9_special.system_ppc64_aix_Nightly_testList_4/openjdk-tests/TKG/test_output_16074022357020/MauveMultiThreadLoadTest_special_16/20201208-005104-MauveMultiThreadTestTrc/results/1.LT.kill_3.stderr
+STF 02:51:38.375 - Redirecting stdout to /home/jenkins/workspace/Test_openjdk8_j9_special.system_ppc64_aix_Nightly_testList_4/openjdk-tests/TKG/test_output_16074022357020/MauveMultiThreadLoadTest_special_16/20201208-005104-MauveMultiThreadTestTrc/results/1.LT.kill_3.stdout
+STF 02:51:38.380 - Pausing for 30 seconds
+STF 02:52:08.381 - Sending SIG 3 to the java process to generate a javacore
+STF 02:52:08.383 - Running command: kill -3 11796628
+STF 02:52:08.383 - Redirecting stderr to /home/jenkins/workspace/Test_openjdk8_j9_special.system_ppc64_aix_Nightly_testList_4/openjdk-tests/TKG/test_output_16074022357020/MauveMultiThreadLoadTest_special_16/20201208-005104-MauveMultiThreadTestTrc/results/1.LT.kill_3.stderr
+STF 02:52:08.383 - Redirecting stdout to /home/jenkins/workspace/Test_openjdk8_j9_special.system_ppc64_aix_Nightly_testList_4/openjdk-tests/TKG/test_output_16074022357020/MauveMultiThreadLoadTest_special_16/20201208-005104-MauveMultiThreadTestTrc/results/1.LT.kill_3.stdout
+STF 02:52:08.390 - Pausing for 30 seconds
+STF 02:52:38.391 - Sending SIGABRT (kill -6) to the java process to generate a core
+STF 02:52:38.391 - Running command: kill -6 11796628
+STF 02:52:38.392 - Redirecting stderr to /home/jenkins/workspace/Test_openjdk8_j9_special.system_ppc64_aix_Nightly_testList_4/openjdk-tests/TKG/test_output_16074022357020/MauveMultiThreadLoadTest_special_16/20201208-005104-MauveMultiThreadTestTrc/results/1.LT.kill_6.stderr
+STF 02:52:38.392 - Redirecting stdout to /home/jenkins/workspace/Test_openjdk8_j9_special.system_ppc64_aix_Nightly_testList_4/openjdk-tests/TKG/test_output_16074022357020/MauveMultiThreadLoadTest_special_16/20201208-005104-MauveMultiThreadTestTrc/results/1.LT.kill_6.stdout
+STF 02:52:38.399 - Pausing for 30 seconds
+STF 02:53:08.401 - Sending SIGXCPU (kill -24) to the java process to generate an OS dump
+STF 02:53:08.401 - Running command: kill -24 11796628
+STF 02:53:08.401 - Redirecting stderr to /home/jenkins/workspace/Test_openjdk8_j9_special.system_ppc64_aix_Nightly_testList_4/openjdk-tests/TKG/test_output_16074022357020/MauveMultiThreadLoadTest_special_16/20201208-005104-MauveMultiThreadTestTrc/results/1.LT.kill_24.stderr
+STF 02:53:08.401 - Redirecting stdout to /home/jenkins/workspace/Test_openjdk8_j9_special.system_ppc64_aix_Nightly_testList_4/openjdk-tests/TKG/test_output_16074022357020/MauveMultiThreadLoadTest_special_16/20201208-005104-MauveMultiThreadTestTrc/results/1.LT.kill_24.stdout
+LT  stderr JVMDUMP039I Processing dump event "user", detail "" at 2020/12/08 02:51:08 - please wait.
+LT  stderr JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_special.system_ppc64_aix_Nightly_testList_4/openjdk-tests/TKG/test_output_16074022357020/MauveMultiThreadLoadTest_special_16/20201208-005104-MauveMultiThreadTestTrc/results/javacore.20201208.025108.11796628.0001.txt' in response to an event
+LT  stderr JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_special.system_ppc64_aix_Nightly_testList_4/openjdk-tests/TKG/test_output_16074022357020/MauveMultiThreadLoadTest_special_16/20201208-005104-MauveMultiThreadTestTrc/results/javacore.20201208.025108.11796628.0001.txt
+LT  stderr JVMDUMP013I Processed dump event "user", detail "".
+LT  stderr JVMDUMP039I Processing dump event "user", detail "" at 2020/12/08 02:51:38 - please wait.
+LT  stderr JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_special.system_ppc64_aix_Nightly_testList_4/openjdk-tests/TKG/test_output_16074022357020/MauveMultiThreadLoadTest_special_16/20201208-005104-MauveMultiThreadTestTrc/results/javacore.20201208.025138.11796628.0002.txt' in response to an event
+LT  stderr JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_special.system_ppc64_aix_Nightly_testList_4/openjdk-tests/TKG/test_output_16074022357020/MauveMultiThreadLoadTest_special_16/20201208-005104-MauveMultiThreadTestTrc/results/javacore.20201208.025138.11796628.0002.txt
+LT  stderr JVMDUMP013I Processed dump event "user", detail "".
+LT  stderr JVMDUMP039I Processing dump event "user", detail "" at 2020/12/08 02:52:08 - please wait.
+LT  stderr JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_special.system_ppc64_aix_Nightly_testList_4/openjdk-tests/TKG/test_output_16074022357020/MauveMultiThreadLoadTest_special_16/20201208-005104-MauveMultiThreadTestTrc/results/javacore.20201208.025208.11796628.0003.txt' in response to an event
+LT  stderr JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_special.system_ppc64_aix_Nightly_testList_4/openjdk-tests/TKG/test_output_16074022357020/MauveMultiThreadLoadTest_special_16/20201208-005104-MauveMultiThreadTestTrc/results/javacore.20201208.025208.11796628.0003.txt
+LT  stderr JVMDUMP013I Processed dump event "user", detail "".
+STF 02:53:08.409 - Monitoring Report Summary:
+STF 02:53:08.410 -   o Process LT  has timed out
+STF 02:53:08.410 - Killing processes: LT 
+STF 02:53:09.412 -   o Process LT  killed
+**FAILED** at step 1 (Run Mauve load test). Expected return value=0 Actual=1 at /home/jenkins/workspace/Test_openjdk8_j9_special.system_ppc64_aix_Nightly_testList_4/openjdk-tests/TKG/../TKG/test_output_16074022357020/MauveMultiThreadLoadTest_special_16/20201208-005104-MauveMultiThreadTestTrc/execute.pl line 114.
+STF 02:53:09.806 - **FAILED** execute script failed. Expected return value=0 Actual=1
+```
+
+The process seems to be stuck here. All 3 javacore files show this, and other threads blocked on "load-8".
+```
+3XMTHREADINFO      "load-8" J9VMThread:0x0000000030458500, omrthread_t:0x0000010024516270, java/lang/Thread:0x0000000072E01800, state:R, prio=5
+3XMJAVALTHREAD            (java/lang/Thread getId:0x2E, isDaemon:false)
+3XMTHREADINFO1            (native thread ID:0x270261, native priority:0x5, native policy:UNKNOWN, vmstate:CW, vm thread flags:0x00000081)
+3XMCPUTIME               CPU usage total: 1.004645000 secs, user: 0.929407000 secs, system: 0.075238000 secs, current category="Application"
+3XMHEAPALLOC             Heap bytes allocated since last GC cycle=0 (0x0)
+1INTERNAL                    Unable to obtain lock context information
+3XMTHREADINFO3           Java callstack:
+4XESTACKTRACE                at java/io/PrintStream.println(PrintStream.java:806(Compiled Code))
+4XESTACKTRACE                at gnu/testlet/SingleTestHarness.check(SingleTestHarness.java:52(Compiled Code))
+4XESTACKTRACE                at gnu/testlet/TestHarness.check(TestHarness.java:160(Compiled Code))
+4XESTACKTRACE                at gnu/testlet/java/util/LinkedHashMap/LinkedHashMapTest.check_presence(LinkedHashMapTest.java:445(Compiled Code))
+4XESTACKTRACE                at gnu/testlet/java/util/LinkedHashMap/LinkedHashMapTest.do_behaviourtest(LinkedHashMapTest.java:456(Compiled Code))
+4XESTACKTRACE                at gnu/testlet/java/util/LinkedHashMap/LinkedHashMapTest.test_behaviour(LinkedHashMapTest.java:437(Compiled Code))
+4XESTACKTRACE                at gnu/testlet/java/util/LinkedHashMap/LinkedHashMapTest.test(LinkedHashMapTest.java:62(Compiled Code))
+4XESTACKTRACE                at sun/reflect/GeneratedMethodAccessor1525.invoke(Bytecode PC:40(Compiled Code))
+4XESTACKTRACE                at sun/reflect/DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43(Compiled Code))
+4XESTACKTRACE                at java/lang/reflect/Method.invoke(Method.java:498(Compiled Code))
+4XESTACKTRACE                at net/adoptopenjdk/loadTest/adaptors/MauveAdaptor.executeTest(MauveAdaptor.java:74(Compiled Code))
+4XESTACKTRACE                at net/adoptopenjdk/loadTest/LoadTestRunner$2.run(LoadTestRunner.java:182(Compiled Code))
+4XESTACKTRACE                at java/util/concurrent/ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+4XESTACKTRACE                at java/util/concurrent/ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+4XESTACKTRACE                at java/lang/Thread.run(Thread.java:823(Compiled Code))
+3XMTHREADINFO3           Native callstack:
+4XENATIVESTACK               _event_wait+0x344 (0x09000000005843C8 [libpthreads.a+0x173c8])
+4XENATIVESTACK               _cond_wait_local+0x4dc (0x0900000000592920 [libpthreads.a+0x25920])
+4XENATIVESTACK               _cond_wait+0xc8 (0x0900000000592F0C [libpthreads.a+0x25f0c])
+4XENATIVESTACK               pthread_cond_wait+0x19c (0x0900000000593B60 [libpthreads.a+0x26b60])
+4XENATIVESTACK               IPRA.$monitor_wait_original+0x9b0 (0x09000000128ADD34 [libj9thr29.so+0x9d34])
+4XENATIVESTACK               omrthread_monitor_wait+0x40 (0x09000000128AD104 [libj9thr29.so+0x9104])
+4XENATIVESTACK               internalAcquireVMAccessNoMutexWithMask+0x1c0 (0x09000000126331C4 [libj9vm29.so+0x1b1c4])
+4XENATIVESTACK               javaCheckAsyncMessages+0x12c (0x0900000012618590 [libj9vm29.so+0x590])
+4XENATIVESTACK               old_slow_jitStackOverflow+0x2d0 (0x0900000012BAEB14 [libj9jit29.so+0x156b14])
+4XENATIVESTACK               (0x0900000012BA3078 [libj9jit29.so+0x14b078])
+4XENATIVESTACK               runJavaThread+0x1d4 (0x09000000126868B8 [libj9vm29.so+0x6e8b8])
+4XENATIVESTACK               javaProtectedThreadProc+0x11c (0x090000001261AAA0 [libj9vm29.so+0x2aa0])
+4XENATIVESTACK               omrsig_protect+0x488 (0x0900000012921BCC [libj9prt29.so+0x59bcc])
+4XENATIVESTACK               javaThreadProc+0x68 (0x090000001261A88C [libj9vm29.so+0x288c])
+4XENATIVESTACK               thread_wrapper+0x524 (0x09000000128A8808 [libj9thr29.so+0x4808])
+4XENATIVESTACK               _pthread_body+0xf0 (0x0900000000570E14 [libpthreads.a+0x3e14])
+```

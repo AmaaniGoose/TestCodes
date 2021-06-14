@@ -1,0 +1,126 @@
+### Intro ###
+Recent JDK15 bringup (https://github.com/eclipse/openj9/pull/8855 & https://github.com/eclipse/openj9/pull/8941) exposed an issue with native library suffixes (`.so` vs `.a`) in `AIX` platform. Before jumping into the actual problem, I would like describe existing behaviours `OpenJ9` vs `OpenJDK hotspot`. 
+
+Java has public APIs to load libraries independent from platforms, namely, `java.lang.System.loadLibrary(libname)` which is equivalent to `Runtime.getRuntime().loadLibrary(libname)` [1]. OpenJ9 has its own implementation of `java.lang.System` and its friends `java.lang.ClassLoader`, etc., hence it has different behaviours from `OpenJDK hotspot` which is going to be demonstrated in following section.
+
+In addition, OpenJDK Java Class Library (JCL) internally could load native libraries directly without going through the public APIs mentioned above such as `javax.management.loading.MLet` [3][4]. Since `OpenJ9` shares `JCL` with `OpenJDK`, this kind of library loading presents in OpenJ9 as well, and the behaviour difference between these two JVM is due to the implementation of `java.lang.System.mapLibraryName(userLibName)`.
+
+Following sections shows `OpenJ9` internal library loading approach and the behaviour difference from `OpenJDK hotspot`.
+
+### OpenJ9 vs OpenJDK - java.lang.System.loadLibrary(libname) ###
+
+`OpenJ9 java.lang.System.loadLibrary()` can load the libraries with suffix both `.so` and `.a` because the VM first attempts `.so` then fallback to `.a` if the first try failed [2]. For example, after renaming `lib/libj2pcsc.so` to `lib/libj2pcsc.a`, `System.loadLibrary(j2pcsc)` still succeeds.
+This applies to `OpenJ9 JDK 8+` and no recent behaviour changes.
+
+On the other hand, `OpenJDK hotspot` can only load `libj2pcsc.so`, and throw an error when it is renamed to `libj2pcsc.a`:
+```
+openjdk version "11.0.8" 2020-07-14
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.8+1-202005080037)
+OpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.8+1-202005080037, mixed mode)
+loading j2pcsc
+Exception in thread "main" java.lang.UnsatisfiedLinkError: no j2pcsc in java.library.path: [/team/jasonf/ive/espresso/aix/hotspot/jdk-11.0.8+1/lib/server, /team/jasonf/ive/espresso/aix/hotspot/jdk-11.0.8+1/lib, /team/jasonf/ive/espresso/aix/hotspot/jdk-11.0.8+1/lib/jli, /team/jasonf/ive/espresso/aix/hotspot/jdk-11.0.8+1/../lib, /usr/lib, /lib, /usr/lib]
+        at java.base/java.lang.ClassLoader.loadLibrary(ClassLoader.java:2670)
+        at java.base/java.lang.Runtime.loadLibrary0(Runtime.java:830)
+        at java.base/java.lang.System.loadLibrary(System.java:1873)
+```
+
+### OpenJ9 vs OpenJDK - java.lang.System.mapLibraryName(userLibName) ###
+
+`System.mapLibraryName(userLibName)` is used to load the native libraries specifically such as `javax.management.loading.MLet` [3][4]:
+```
+// Get the platform-specific string representing a native library.
+         String nativelibname = System.mapLibraryName(libname);  --> get platform dependent native library name
+// First try to locate the library in the JAR file using only the native library name.  e.g. if user requested a load for "foo" on Solaris SPARC 5.7 we try to load "libfoo.so" from the JAR file.
+         abs_path = loadLibraryAsResource(nativelibname); 
+ // Next try to locate it using the native library name and the architecture-specific path name.  e.g. if user requested a load for "foo" on Solaris SPARC 5.7 we try to  load "SunOS/sparc/5.7/lib/libfoo.so" from the JAR file.
+ nativelibname = removeSpace(System.getProperty("os.name")) + File.separator + removeSpace(System.getProperty("os.arch")) + File.separator + removeSpace(System.getProperty("os.version")) + File.separator + "lib" + File.separator + nativelibname;
+         abs_path = loadLibraryAsResource(nativelibname);     
+// All paths exhausted, library not found in JAR file.
+
+/*** Search the specified native library in any of the JAR files  loaded by this classloader.  If the library is found copy it
+  * into the library directory and return the absolute path.  If the library is not found then return null.
+  */
+     private synchronized String loadLibraryAsResource(String libname) {
+         try {
+             InputStream is = getResourceAsStream(
+                     libname.replace(File.separatorChar,'/'));
+             if (is != null) {
+                 try {
+                     File directory = new File(libraryDirectory);
+                     directory.mkdirs();
+                     File file = Files.createTempFile(directory.toPath(),  libname + ".", null) .toFile();
+                     file.deleteOnExit();
+                     FileOutputStream fileOutput = new FileOutputStream(file);
+```
+
+`OpenJ9` used to return `.a` suffix for `System.mapLibraryName(userLibName)` while `OpenJDK hotspot` returns `.so` suffix instead. It was observed that `hotspot` failed some tests which require loading native library like `libsystemInfo.a` within a jar file with a similar approach as above code snippet.
+
+### OpenJ9 JDK15 bringup problem - adopting jdk.internal.loader.NativeLibraries ###
+
+`JDK15` introduced `jdk.internal.loader.NativeLibraries` for native library loading which uses `System.mapLibraryName(userLibName)`[5][6] and loads libraries directly like `MLet` in previous section.
+
+```
+private NativeLibrary findFromPaths(String[] paths, Class<?> fromClass, String name) {
+       for (String path : paths) {
+           File libfile = new File(path, System.mapLibraryName(name)); --> get platform specific native library name, only expect .so, .a won’t work
+           NativeLibrary nl = loadLibrary(fromClass, libfile);
+
+public NativeLibrary loadLibrary(Class<?> fromClass, File file) {
+    // Check to see if we're attempting to access a static library
+    String name = findBuiltinLib(file.getName());
+    boolean isBuiltin = (name != null);
+    if (!isBuiltin) {
+      name = AccessController.doPrivileged(new PrivilegedAction<>() {
+        public String run() {
+          try {
+            return file.exists() ? file.getCanonicalPath() : null;  ---> one of path is going to check if the file exists or not.
+```
+
+This new `JDK15` change caused OpenJ9 build error:
+```
+12:35:36  Exception in thread "main" java/lang/UnsatisfiedLinkError: sun/nio/fs/UnixNativeDispatcher.init()I
+12:35:36  	at sun/nio/fs/UnixNativeDispatcher.<clinit> (java.base@9/UnixNativeDispatcher.java:654)
+12:35:36  	at sun/nio/fs/UnixFileSystem.<init> (java.base@9/UnixFileSystem.java:65)
+12:35:36  	at sun/nio/fs/AixFileSystem.<init> (java.base@9/AixFileSystem.java:42)
+12:35:36  	at sun/nio/fs/AixFileSystemProvider.newFileSystem (java.base@9/AixFileSystemProvider.java:42)
+12:35:36  	at sun/nio/fs/AixFileSystemProvider.newFileSystem (java.base@9/AixFileSystemProvider.java:35)
+12:35:36  	at sun/nio/fs/UnixFileSystemProvider.<init> (java.base@9/UnixFileSystemProvider.java:56)
+12:35:36  	at sun/nio/fs/DefaultFileSystemProvider.<clinit> (java.base@9/DefaultFileSystemProvider.java:35)
+12:35:36  	at java/nio/file/FileSystems.getDefault (java.base@9/FileSystems.java:185)
+12:35:36  	at java/nio/file/Path.of (java.base@9/Path.java:147)
+12:35:36  	at jdk/internal/module/SystemModuleFinders.ofSystem (java.base@9/SystemModuleFinders.java:188)
+12:35:36  	at jdk/internal/module/ModuleBootstrap.boot (java.base@9/ModuleBootstrap.java:214)
+12:35:36  	at java/lang/ClassLoader.initializeClassLoaders (java.base@9/ClassLoader.java:211)
+12:35:36  	at java/lang/Thread.initialize (java.base@9/Thread.java:430)
+12:35:36  	at java/lang/Thread.<init> (java.base@9/Thread.java:155)
+```
+
+https://github.com/eclipse/openj9/pull/8941 changed `System.mapLibraryName(userLibName)` to return `.so` sufffix which fixed the `JDK15 UnsatisfiedLinkError`, however VM with this change can't load libraries like `libsystemInfo.a` in a jar file and caused some test failures just in same way as `hotspot` failures mentioned earlier.
+
+### AIX mapAlternativeName(File lib) proposed ###
+
+To keep application back compatibility, `OpenJ9 JDK 8` behaviour stays same via https://github.com/eclipse/openj9/pull/9489 which returns suffix `.a` from `System.mapLibraryName(userLibName)`.
+
+`OpenJ9 JDK 11+` still return the suffix `.so` from `System.mapLibraryName(userLibName)`. A JCL change is being proposed to add following `jdk.internal.loader.ClassLoaderHelper.mapAlternativeName(File lib)` implementation for `AIX` just like existing approach for `OSX` extension `.jnilib`[7].
+```
+    static File mapAlternativeName(File lib) {
+        String name = lib.toString();
+        int index = name.lastIndexOf('.');
+        if (index < 0) {
+            return null;
+        }
+        return new File(name.substring(0, index) + ".a");
+    }
+```
+This change is required for `JDK11+` extension repo and hopefully it can be contributed back to OpenJDK.
+
+
+fyi @DanHeidinga 
+
+[1] https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#loadLibrary-java.lang.String-
+[2] https://github.com/eclipse/omr/blob/cd259de5afc5c80fdc42491c7201564275bb718e/port/aix/omrsl.c#L216-L314
+[3] https://github.com/ibmruntimes/openj9-openjdk-jdk8/blob/d0099f2c689e409eb9a5ccb774315447a2e5472e/jdk/src/share/classes/javax/management/loading/MLet.java#L1039-L1058
+[4] https://github.com/ibmruntimes/openj9-openjdk-jdk8/blob/d0099f2c689e409eb9a5ccb774315447a2e5472e/jdk/src/share/classes/javax/management/loading/MLet.java#L1150-L1192
+[5] https://github.com/ibmruntimes/openj9-openjdk-jdk/blob/521b2f12fc414d54b42baebf0cbdec6ec8a27390/src/java.base/share/classes/jdk/internal/loader/NativeLibraries.java#L307-L323
+[6] https://github.com/ibmruntimes/openj9-openjdk-jdk/blob/521b2f12fc414d54b42baebf0cbdec6ec8a27390/src/java.base/share/classes/jdk/internal/loader/NativeLibraries.java#L144-L170
+[7] https://github.com/ibmruntimes/openj9-openjdk-jdk/blob/81a6e58c25e4ce880037d14345a068011e4a0d3f/src/java.base/macosx/classes/jdk/internal/loader/ClassLoaderHelper.java#L35-L48

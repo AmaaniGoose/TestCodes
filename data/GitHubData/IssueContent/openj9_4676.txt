@@ -1,0 +1,6 @@
+Currently, these stats reside in privateJITConfig, which is global. Ideally, we want to store AOT stats on the server per-client.
+This can be achieved  by either moving AOT stats out of privateJITConfig into its own cache,
+or by making privateJITConfig itself per-client.
+The latter is probably better, as jit config contains other fields that should be stored per-client.
+
+Related to #3372

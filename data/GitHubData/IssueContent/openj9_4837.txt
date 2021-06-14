@@ -1,0 +1,17 @@
+OpenJ9 does not perform very well with programs heavily using jsr292. This issue is for tracking investigation into the performance issue. The ideas are still in experimental state and I will update PR link once they are ready for delivery.
+
+1.  Swapping targeted inlining with normal inlining 
+       Targeted inlining was done before normal inlining and won't do any thing if the jsr292 methdos were called from a inlined callee. Swapping to do normal inlining first so that jsr292 methods called from callees can be inlined as well. This can result in leaf java methods not being inlined so we will need to check how does it work in practice.
+
+2.  add small recongnized jsr292 methods as inlineable target for both targeted inlining and normal inlining:
+`java_lang_invoke_MethodHandle_type`  
+`java_lang_invoke_ArgumentMoverHandle_extra_L`
+`java_lang_invoke_BruteArgumentMoverHandle_extra_L`
+
+3. MutableCallSite target inlining. There are several problems with mutable callsite
+        **a.**  `MutableCallSiteTargetGuard` exists already for inlining mutable callsite and if a method handle is got from `MutableCallSite.getTarget()` or `MutableCallSite.target` the guard is created and the methodhandle chain can be inlined. HCR guard breaks the pattern by storing the result into a temp when inlining `MutableCallSite.getTarget`. Need to find a way to keep the pattern so that we can inline mutable callsite target. One cleaner way would be changing the `MutableCallSite.target` field to package access so that we don't need to access the field through function call.
+        **b**.  once the target is inlined, propagate known obj info down the call chain.
+
+4. there is a condition to only inline jsr292 methods at hot level. change it to inline at warm as well. https://github.com/eclipse/openj9/blob/ad68fc5e4ef89bdea9f81df7ce2320c56988c38b/runtime/compiler/env/VMJ9.cpp#L3138-L3142
+  
+@vijaysun-omr @DanHeidinga @andrewcraik 

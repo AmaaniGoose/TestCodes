@@ -1,0 +1,81 @@
+Ideally, the JIT CPU consumption at the JITaaS client should be very small because compilations are performed in another process. The reality is that **the communication overhead is very high in terms of CPU cycles**.
+Here's a perf profile of the lone compilation thread during an AcmeAir benchmark run obtained with:
+`perf record -e cycles -c 200000  -o profile_client.txt --tid 4823 -- sleep 120`
+
+Breakdown per module
+```
+  49.92%  [kernel.kallsyms]         
+  17.44%  libj9jit29.so
+   9.62%  libc-2.23.so
+   5.11%  libprotobuf.so.15.0.0
+   4.00%  [nf_conntrack]
+```
+As shown above 50% of the CPU goes into Linux kernel to handle socket communication.
+The ticks in libc are mostly used for malloc/free used during communication (many of them used in protobuf layer)
+```
+libc-2.23.so
+   2.81%  JIT Compilation  [.] malloc
+   2.38%  JIT Compilation  [.] _int_free
+   2.08%  JIT Compilation  [.] _int_malloc
+   0.83%  JIT Compilation  [.] __memcpy_avx_unaligned
+   0.78%  JIT Compilation  [.] free
+   0.26%  JIT Compilation  [.] malloc_consolidate
+   0.21%  JIT Compilation  [.] __strncmp_sse42
+   0.06%  JIT Compilation  [.] __memset_avx2
+   0.03%  JIT Compilation  [.] vfprintf
+   0.01%  JIT Compilation  [.] __GI___inet_pton
+```
+Even the 17.44% in libj9jit29.so is dominated by routines used for communication
+```
+libj9jit29.so
+   1.62%  JIT Compilation  [.] FlatPersistentClassInfo::classSize(TR_PersistentClassInfo*)  ==> Probably traversing the linked list of subclasses to get its length is the expensive part
+   1.27%  JIT Compilation  [.] handleServerMessage(JITaaS::J9ClientStream*, TR_J9VM*)
+   0.84%  JIT Compilation  [.] FlatPersistentClassInfo::serializeClass(TR_PersistentClassInfo*, FlatPersistentClassInfo*)
+   0.68%  JIT Compilation  [.] _ZN6JITaaS3Any27MergePartialFromCodedStreamEPN6google8protobuf2io16CodedInputStreamE
+   0.51%  JIT Compilation  [.] JITaaS::AnyData::~AnyData()
+   0.48%  JIT Compilation  [.] JITaaS::Any::clear_type()
+   0.42%  JIT Compilation  [.] _ZN6JITaaS8J9Stream12readBlockingINS_15J9ServerMessageEEEvRT_
+   0.38%  JIT Compilation  [.] _ZN6JITaaS7AnyData27MergePartialFromCodedStreamEPN6google8protobuf2io16CodedInputStreamE
+   0.30%  JIT Compilation  [.] JITaaS::J9ServerMessage::Clear()
+   0.30%  JIT Compilation  [.] _ZN6google8protobuf8internal20RepeatedPtrFieldBase5ClearINS0_16RepeatedPtrFieldIN6JITaaS3AnyEE11TypeHandlerEEEvv
+   0.27%  JIT Compilation  [.] JITaaS::Any::Any(JITaaS::Any const&)
+   0.25%  JIT Compilation  [.] void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag).isra.323
+   0.22%  JIT Compilation  [.] JITaaS::Any::ByteSizeLong() const
+   0.21%  JIT Compilation  [.] J9::MonitorTable::removeAndDestroy(TR::Monitor*)
+   0.21%  JIT Compilation  [.] TR_ResolvedJ9Method::construct()
+   0.18%  JIT Compilation  [.] JITaaS::Any::InternalSerializeWithCachedSizesToArray(bool, unsigned char*) const
+   0.18%  JIT Compilation  [.] JITaaS::J9ServerMessage::MergePartialFromCodedStream(google::protobuf::io::CodedInputStream*)
+   0.17%  JIT Compilation  [.] JITaaS::AnyData::ByteSizeLong() const
+   0.17%  JIT Compilation  [.] operator new(unsigned long)
+   0.16%  JIT Compilation  [.] TR_IProfiler::findOrCreateEntry(int, unsigned long, bool)
+   0.16%  JIT Compilation  [.] jitParseSignature
+   0.15%  JIT Compilation  [.] JITaaS::J9ClientMessage::ByteSizeLong() const
+   0.15%  JIT Compilation  [.] TR_ResolvedJ9Method::isMethodInValidLibrary()
+   0.14%  JIT Compilation  [.] JITaaS::AnyData::InternalSerializeWithCachedSizesToArray(bool, unsigned char*) const
+   0.14%  JIT Compilation  [.] JITaaS::J9ServerMessage::IsInitialized constv
+   0.14%  JIT Compilation  [.] J9::Compilation::fej9vm()
+   0.13%  JIT Compilation  [.] _ZNK6google8protobuf8internal20RepeatedPtrFieldBase3GetINS0_16RepeatedPtrFieldIN6JITaaS3AnyEE11TypeHandlerEEERKNT_4TypeEi
+   0.12%  JIT Compilation  [.] J9::VMEnv::acquireVMAccessIfNeeded(TR_J9VMBase*)
+   0.12%  JIT Compilation  [.] TR::CompilationInfo::getCompInfoForThread(J9VMThread*)
+   0.12%  JIT Compilation  [.] TR_ResolvedJ9Method::TR_ResolvedJ9Method(TR_OpaqueMethodBlock*, TR_FrontEnd*, TR_Memory*, TR_ResolvedMethod*, unsigned int)
+   0.11%  JIT Compilation  [.] acquireVMaccessIfNeeded(J9VMThread*, TR_YesNoMaybe)
+   0.10%  JIT Compilation  [.] JITaaS::GetArgs<int>::getArgs(JITaaS::AnyData const*, unsigned long)
+   0.10%  JIT Compilation  [.] protobuf_compile_2eproto::InitDefaultsAny()
+   0.10%  JIT Compilation  [.] TR::CompilationInfoPerThread::getStream()
+   0.10%  JIT Compilation  [.] _ZN6JITaaS12AnyPrimitiveIKSt5tupleIJ41TR_ResolvedJ9JITaaSServerMethodInfoStructNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES8_EEvE10write_implIS9_JLm0ELm1ELm
+   0.10%  JIT Compilation  [.] remoteCompile(J9VMThread*, TR::Compilation*, TR_ResolvedMethod*, J9Method*, TR::IlGeneratorMethodDetails&, TR::CompilationInfoPerThreadBase*)
+   0.10%  JIT Compilation  [.] void JITaaS::J9Stream::writeBlocking<JITaaS::J9ClientMessage>(JITaaS::J9ClientMessage const&)
+   0.09%  JIT Compilation  [.] JITaaS::Any::Any()
+   0.09%  JIT Compilation  [.] getOriginalROMMethodUnchecked
+   0.09%  JIT Compilation  [.] JITaaS::Any::Clear()
+   0.09%  JIT Compilation  [.] TR_ContiguousIPMethodHashTableEntry::serialize(TR_IPMethodHashTableEntry*)
+   0.09%  JIT Compilation  [.] JITaaS::J9ClientMessage::SerializeWithCachedSizes(google::protobuf::io::CodedOutputStream*) const
+   0.09%  JIT Compilation  [.] OMR::Options::getCmdLineOptions()
+   0.09%  JIT Compilation  [.] JITaaS::AnyData::AnyData()
+   0.08%  JIT Compilation  [.] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned long&, unsigned long)
+   0.08%  JIT Compilation  [.] TR::Region::allocate(unsigned long, void*)
+   0.08%  JIT Compilation  [.] _ZN31TR_ResolvedJ9JITaaSServerMethod28createResolvedJ9MethodMirrorERSt5tupleIJ41TR_ResolvedJ9JITaaSServerMethodInfoStructNSt7__cxx1112basic_stringIcSt11char_traitsIc
+   0.08%  JIT Compilation  [.] TR_ResolvedJ9Method::cp().localalias.201
+```
+
+It follows that we must reduce the number of messages exchanged per compilation between server and client

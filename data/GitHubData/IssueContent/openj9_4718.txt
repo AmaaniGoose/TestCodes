@@ -1,0 +1,111 @@
+Hello,
+
+We have a blocking issue specific to AdoptOpenJDK 11.0.2 with Eclipse J9 on Linux with our way to use signal handling native libraries to ignore ^C interrupt.
+
+The same code is working fine with:
+- AdoptOpenJDK 8 update 202 with HotSpot on Linux
+- AdoptOpenJDK 8 update 202 with OpenJ9 on Linux
+- AdoptOpenJDK 11.0.2 with OpenJ9 on Linux
+
+I have a simple test case reproducing the issue, see instructions below.
+Our actual scenario uses JNI to call Java methods from our C++ code, but we have been able to narrow down our issue to this minimal sample.
+
+I run everything on this Linux brand & version:
+
+$ cat /etc/redhat-release
+CentOS Linux release 7.6.1810 (Core)
+
+To reproduce the issue:
+- AdoptOpenJDK 8 update 202 with HotSpot on Linux is installed in:
+  /home/data/ave/Java/AdoptOpenJDK/hotspot-jdk8u202-b08
+- AdoptOpenJDK 8 update 202 with OpenJ9 on Linux is installed in:
+  /home/data/ave/Java/AdoptOpenJDK/j9-jdk8u202-b08
+- AdoptOpenJDK 11.0.2 with HotSpot on Linux is installed in:
+  /home/data/ave/Java/AdoptOpenJDK/hotspot-jdk-11.0.2
+- AdoptOpenJDK 11.0.2 with OpenJ9 on Linux is installed in:
+  /home/data/ave/Java/AdoptOpenJDK/j9-jdk-11.0.2
+
+Steps:
+1. Compile the following C++ source (let's call it sig.cpp):
+
+```
+#include <stdio.h>
+#include <stdio.h>
+#include <signal.h>
+
+int main(int argc, char **argv)
+{
+  // ignore ^c interrupt
+  signal(SIGINT, SIG_IGN);
+
+  printf("BYE\n");
+
+  return 0;
+}
+```
+using the following command:
+   g++ sig.cpp -ldl
+
+   Note: here's the g++ version used:
+```
+   g++ --version
+   g++ (GCC) 6.3.1 20170216 (Red Hat 6.3.1-3)
+   Copyright (C) 2016 Free Software Foundation, Inc.
+   This is free software; see the source for copying conditions.  There is NO
+   warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+
+2. Run the following shell lines (using KSH or Bash):
+
+```
+export JAVA_HOME=/home/data/ave/Java/AdoptOpenJDK/hotspot-jdk8u202-b08
+$JAVA_HOME/bin/java -version
+LD_PRELOAD=$JAVA_HOME/jre/lib/amd64/libjsig.so ./a.out
+echo
+
+export JAVA_HOME=/home/data/ave/Java/AdoptOpenJDK/j9-jdk8u202-b08
+$JAVA_HOME/bin/java -version
+LD_PRELOAD=$JAVA_HOME/jre/lib/amd64/compressedrefs/libjsig.so ./a.out
+echo
+
+export JAVA_HOME=/home/data/ave/Java/AdoptOpenJDK/hotspot-jdk-11.0.2
+$JAVA_HOME/bin/java -version
+LD_PRELOAD=$JAVA_HOME/lib/libjsig.so ./a.out
+echo
+
+export JAVA_HOME=/home/data/ave/Java/AdoptOpenJDK/j9-jdk-11.0.2
+$JAVA_HOME/bin/java -version
+LD_PRELOAD=$JAVA_HOME/lib/libjsig.so ./a.out
+```
+  
+Here are the results: everything is OK except for the last run with AdoptOpenJDK 11.0.2 with Eclipse J9 which hangs forever (and which, ironically, can be interrupted using ^C):
+
+  
+```
+export JAVA_HOME=/home/data/acme/Java/AdoptOpenJDK/hotspot-jdk8u202-b08
+LD_PRELOAD=$JAVA_HOME/jre/lib/amd64/libjsig.so ./a.out
+BYE
+
+export JAVA_HOME=/home/data/acme/Java/AdoptOpenJDK/j9-jdk8u202-b08
+LD_PRELOAD=$JAVA_HOME/jre/lib/amd64/compressedrefs/libjsig.so ./a.out
+BYE
+
+export JAVA_HOME=/home/data/acme/Java/AdoptOpenJDK/hotspot-jdk-11.0.2
+LD_PRELOAD=$JAVA_HOME/lib/libjsig.so ./a.out
+BYE
+
+export JAVA_HOME=/home/data/acme/Java/AdoptOpenJDK/j9-jdk-11.0.2
+LD_PRELOAD=$JAVA_HOME/jre/lib/amd64/compressedrefs/libjsig.so ./a.out
+  ---> hangs
+```
+  
+
+This is blocking our move to AdoptOpenJDK 11.0.2 with Eclipse J9 - we already successfully tested our app with AdoptOpenJDK 11.0.2 with HotSpot, but we're eager to support OpenJ9 as well.
+
+Is there anything wrong is the way we use signal handling in this context?
+If so then what would be the proper way (note: we do not only need signals for catching ^C)?
+Is that a bug in AdoptOpenJDK 11.0.2 with Eclipse J9 that could be fixed ?
+
+Kind regards,
+Alexandre Vermeerbergen
+

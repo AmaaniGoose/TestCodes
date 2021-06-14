@@ -1,0 +1,6 @@
+For diagnostic purposes it would be useful to determine (from a coredump) whether a compilation was performed remotely (by the JITServer) or local. A single bit is sufficient for this task.
+This bit could be added to the persistentJittedBodyInfo or MethodMetaData. Since a small number of jitted bodies do not have a persistentJittedBodyInfo, it's probably better to add this bit to MethodMetaData. This data structure is actually called `J9JITExceptionTable` in the VM and has a "flags" field. 
+https://github.com/eclipse-openj9/openj9/blob/master/runtime/oti/j9nonbuilder.h#L516-L551
+
+We could add another flag in there:
+https://github.com/eclipse-openj9/openj9/blob/master/runtime/oti/j9nonbuilder.h#L553-L556

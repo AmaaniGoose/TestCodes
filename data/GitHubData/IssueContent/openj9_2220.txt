@@ -1,0 +1,5 @@
+Add new Unsafe native
+
+` public native int getMaxVectorSize(java.lang.Class<?>)`
+
+The expected parameter types are: byte, short, int, long, float and double

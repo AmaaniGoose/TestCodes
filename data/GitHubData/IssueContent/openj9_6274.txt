@@ -1,0 +1,5 @@
+I've been noticing a slowdown in the amount of time it takes to launch PR builds since the switch to pipeline generated jobs. For example a build triggered via `Jenkins test extended all jdk8,jdk11` produces the build seen in [1]. Inside each "Processing DSL script buildenv/jenkins/jobs/pipelines/Pipeline_Template.groovy" step seems to take roughly 2:30 min. for each job that is being generated.
+
+For this particular case there are many jobs, so we end up waiting roughly one hour between requesting the tests via a PR comment and any build jobs being launched. Was wondering if something can be done to improve the performance of these pipelines so that we reach the build step faster.
+
+[1] https://ci.eclipse.org/openj9/job/PullRequest-OpenJ9/632/console

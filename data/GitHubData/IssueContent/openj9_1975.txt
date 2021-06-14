@@ -1,0 +1,38 @@
+`JAVA_SPEC_VERSION` is defined in `targets.mk.ftl` as following:
+```
+CFLAGS+=-DJAVA_SPEC_VERSION=$(VERSION_MAJOR)
+CXXFLAGS+=-DJAVA_SPEC_VERSION=$(VERSION_MAJOR)
+CPPFLAGS+=-DJAVA_SPEC_VERSION=$(VERSION_MAJOR)
+```
+in which `VERSION_MAJOR` is defined in https://github.com/ibmruntimes/openj9-openjdk-jdk10/blob/openj9/closed/make/Main.gmk
+```
+$(MAKE) -f OpenJ9.gmk SPEC=$(SPEC) VERSION_MAJOR=$(VERSION_FEATURE) build-j9)
+```
+
+When a sub-module such as `j9vm_b156/libjvm.so` is built via a makefile in `j9vm_b156`, `VERSION_MAJOR` is not defined hence `JAVA_SPEC_VERSION` is not defined properly either.
+This will build incorrect library with following code snippet at `j2sever.h`
+```
+#if JAVA_SPEC_VERSION == 8
+	#define J2SE_LATEST  J2SE_18
+#elif JAVA_SPEC_VERSION == 9
+	#define J2SE_LATEST  J2SE_19
+#elif JAVA_SPEC_VERSION == 10
+	#define J2SE_LATEST  J2SE_V10
+#else
+	#define J2SE_LATEST  J2SE_V11
+#endif
+#if JAVA_SPEC_VERSION == 8
+	#define J2SE_SHAPE_LATEST       J2SE_SHAPE_OPENJDK
+#elif JAVA_SPEC_VERSION == 9
+	#define J2SE_SHAPE_LATEST       J2SE_SHAPE_B165
+#elif JAVA_SPEC_VERSION == 10
+	#define J2SE_SHAPE_LATEST       J2SE_SHAPE_V10
+#else
+	#define J2SE_SHAPE_LATEST       J2SE_SHAPE_V11
+#endif
+```
+
+So far this code only affects `jvm.c:getVersionFromReleaseFile()` if the first attempt to look for the version string failed and it falls back to `finalVersion = J2SE_LATEST | J2SE_SHAPE_LATEST;`.
+Note: https://github.com/eclipse/openj9/pull/1969 will fix the first attempt and not fall back to `J2SE_LATEST | J2SE_SHAPE_LATEST` hence the incorrect library won't cause failure.
+
+However a solution is still needed to ensure `JAVA_SPEC_VERSION` is set to a proper value within individual makefiles. This applies to any potential flags set by high level makefile, referenced by the code but not available in sub-module makefiles.

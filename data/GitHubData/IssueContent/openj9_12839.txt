@@ -1,0 +1,5 @@
+This issue is meant to capture two pieces of work :
+
+1) Study the effectiveness of how well escape analysis works (both with respect to static as well as dynamic counters) on a couple of applications that need higher opt levels for getting higher, e.g. SPECjbb and ILOG maybe. In particular I think we should check what proportion of objects that get stack allocated with HCR disabled get stack allocated with HCR enabled since the latter is the default. 
+
+2) If the proportion of stack allocated objects with HCR enabled is too small compared to the HCR disabled case, then we should think again about further enhancements we can make to improve the effectiveness of escape analysis with HCR enabled and create a plan to implement them.

@@ -1,0 +1,57 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk14_j9_sanity.functional_s390x_linux_xl_Nightly/2
+cmdLineTest_gpTest_0
+```
+00:05:22  Testing: softwareRead thread
+00:05:22  Test start time: 2020/02/10 05:05:20 Coordinated Universal Time
+00:05:22  Running command: "/home/jenkins/workspace/Test_openjdk14_j9_sanity.functional_s390x_linux_xl_Nightly/openjdkbinary/j2sdk-image/bin/java" -Xnocompressedrefs  -Xdump:system:none -cp "/home/jenkins/workspace/Test_openjdk14_j9_sanity.functional_s390x_linux_xl_Nightly/openjdk-tests/TKG/../../jvmtest/functional/cmdline_options_testresources/cmdlinetestresources.jar" VMBench.GPTests.GPTest thread softwareRead
+00:05:22  Time spent starting: 3 milliseconds
+00:10:33  ***[TEST INFO 2020/02/10 05:10:20] ProcessKiller detected a timeout after 300000 milliseconds!***
+00:10:33  INFO: getUnixPID() has failed indicating this is not a UNIX System.'Debug on timeout' is currently only supported on Linux.
+00:10:33  Output from test:
+00:10:33   [ERR] Unhandled exception
+00:10:33   [ERR] Type=Segmentation error vmState=0x00040000
+00:10:33   [ERR] J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=fffffffa
+00:10:33   [ERR] Handler1=000003FFB49387C0 Handler2=000003FFB4727F88
+00:10:33   [ERR] gpr0=0000000000000000 gpr1=000003FFB46FF910 gpr2=0000000000000000 gpr3=0000000000003DB3
+00:10:33   [ERR] gpr4=000000000000000B gpr5=000003FFB0307D00 gpr6=0000000000000000 gpr7=000003FF14080EB0
+00:10:33   [ERR] gpr8=000003FFB0307E18 gpr9=0000000000000000 gpr10=000003FFB5443648 gpr11=000003FFB46FDE88
+00:10:33   [ERR] gpr12=0000000000000000 gpr13=000003FFB49F49E4 gpr14=000003FFB49F49E4 gpr15=000003FFB46FDDE8
+00:10:33   [ERR] psw=000003FFB570EC16 mask=0705100180000000 fpc=00080000 bea=000003FFB489D564
+00:10:33   [ERR] fpr0 000003ffb491b380 (f: 3029447680.000000, d: 2.172298e-311)
+00:10:33   [ERR] fpr1 402f1a9f8585da3b (f: 2240141824.000000, d: 1.555200e+01)
+00:10:33   [ERR] fpr2 000003ffb46fde48 (f: 3027230208.000000, d: 2.172297e-311)
+00:10:33   [ERR] fpr3 3fd3606256aa494d (f: 1454000512.000000, d: 3.027578e-01)
+00:10:33   [ERR] fpr4 000003ffb46fdf78 (f: 3027230464.000000, d: 2.172297e-311)
+00:10:33   [ERR] fpr5 3d754a90114c71b7 (f: 290222528.000000, d: 1.210268e-12)
+00:10:33   [ERR] fpr6 00bf3248c26cdeec (f: 3261914880.000000, d: 4.442518e-305)
+00:10:33   [ERR] fpr7 3c5d000000000000 (f: 0.000000, d: 6.288373e-18)
+00:10:33   [ERR] fpr8 0000000000040000 (f: 262144.000000, d: 1.295163e-318)
+00:10:33   [ERR] fpr9 000003ffb00b0fb0 (f: 2953515008.000000, d: 2.172261e-311)
+00:10:33   [ERR] fpr10 000003ffb46c0000 (f: 3026976768.000000, d: 2.172297e-311)
+00:10:33   [ERR] fpr11 000003ff881bc0b8 (f: 2283520256.000000, d: 2.171930e-311)
+00:10:33   [ERR] fpr12 000003ffb01fdac8 (f: 2954877696.000000, d: 2.172262e-311)
+00:10:33   [ERR] fpr13 000003ff881bc098 (f: 2283520256.000000, d: 2.171930e-311)
+00:10:33   [ERR] fpr14 0000000000000016 (f: 22.000000, d: 1.086944e-322)
+00:10:33   [ERR] fpr15 000003ff8d17db70 (f: 2367150848.000000, d: 2.171971e-311)
+00:10:33   [ERR] Module=/lib/s390x-linux-gnu/libpthread.so.0
+00:10:33   [ERR] Module_base_address=000003FFB5700000 Symbol=pthread_kill
+00:10:33   [ERR] Symbol_address=000003FFB570EBE0
+00:10:33   [ERR] Target=2_90_20200210_4 (Linux 4.4.0-170-generic)
+00:10:33   [ERR] CPU=s390x (4 logical CPUs) (0x1f723a000 RAM)
+00:10:33   [ERR] ----------- Stack Backtrace -----------
+00:10:33   [ERR] pthread_kill+0x36 (0x000003FFB570EC16 [libpthread.so.0+0xec16])
+00:10:33   [ERR] (0x000003FFB49F49E4 [libj9vm29.so+0x1749e4])
+00:10:33   [ERR] (0x000003FFB49F285E [libj9vm29.so+0x17285e])
+00:10:33   [ERR] (0x000003FFB48A89F6 [libj9vm29.so+0x289f6])
+00:10:33   [ERR] (0x000003FFB48945C0 [libj9vm29.so+0x145c0])
+00:10:33   [ERR] (0x000003FFB497A604 [libj9vm29.so+0xfa604])
+00:10:33   [ERR] ---------------------------------------
+00:10:33   [ERR] JVMDUMP039I Processing dump event "gpf", detail "" at 2020/02/10 05:05:20 - please wait.
+00:10:33   [ERR] JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk14_j9_sanity.functional_s390x_linux_xl_Nightly/openjdk-tests/TKG/test_output_15813085732368/cmdLineTest_gpTest_0/javacore.20200210.050520.15771.0001.txt' in response to an event
+00:10:33   [ERR] Bad scan type for object pointer 000003FFAE5EBF60
+00:10:33   [ERR] java: ../../gc_glue_java/ScavengerDelegate.cpp:381: GC_ObjectScanner* MM_ScavengerDelegate::getObjectScanner(MM_EnvironmentStandard*, omrobjectptr_t, void*, uintptr_t): Assertion `0' failed.
+00:10:33   [ERR] JVMDUMP039I Processing dump event "abort", detail "" at 2020/02/10 05:05:20 - please wait.
+00:10:33   [ERR] JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk14_j9_sanity.functional_s390x_linux_xl_Nightly/openjdk-tests/TKG/test_output_15813085732368/cmdLineTest_gpTest_0/javacore.20200210.050520.15771.0002.txt' in response to an event
+00:10:33   [ERR] JVMDUMP012E Error in Java dump: /home/jenkins/workspace/Test_openjdk14_j9_sanity.functional_s390x_linux_xl_Nightly/openjdk-tests/TKG/test_output_15813085732368/cmdLineTest_gpTest_0/javacore.20200210.050520.15771.0001.txt
+00:10:33   [ERR] JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Test_openjdk14_j9_sanity.functional_s390x_linux_xl_Nightly/openjdk-tests/TKG/test_output_15813085732368/cmdLineTest_gpTest_0/Snap.20200210.050520.15771.0003.trc' in response to an event
+```

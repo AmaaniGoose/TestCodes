@@ -1,0 +1,5 @@
+We are seeing this benchmark target run very quickly on other test machines (sanity.perf on test-aws-xxxx resources pass and take 8min), but run very slowly on test-azure-xxxx resources, hit a benchmark timeout and fail (often around 8hrs of execution time).  
+
+See results from https://ci.adoptopenjdk.net/job/Test_openjdk8_hs_sanity.perf_x86-64_windows/
+
+This issue will need further triage to understand why the future_genetic benchmark is sensitive to the different resources, but for now will exclude from windows (as we'll not guarantee which resources the perf targets will run on).

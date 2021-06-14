@@ -1,0 +1,22 @@
+Using OpenJ9 0.18.1 JDK11 release, I created a core file on AIX, on vmstop from running nothing in particular. `java -Xdump:system:events=vmstop`
+
+On AIX, `!printallcallsites` finds 5102 sites, while looking at the same core file from xlinux finds 0.
+```
+Searching for all memory block callsites...
+ !j9x 0x0000000030000048,0x0000000000000390     rasdump.c:497
+ !j9x 0x0000000030000428,0x0000000000000C50     montable.c:150
+ !j9x 0x00000000300010C8,0x0000000000000C50     montable.c:150
+ !j9x 0x0000000030001D68,0x0000000000000C50     montable.c:150
+ !j9x 0x0000000030002A08,0x0000000000000C50     montable.c:150
+ !j9x 0x00000000300036A8,0x0000000000000C50     montable.c:150
+ !j9x 0x0000000030004348,0x0000000000000C50     montable.c:150
+etc.
+```
+
+```
+0x30000000 :  0000000000640000 0000000000001cc5 [ .....d.......... ]
+0x30000010 :  000000000001dfdf 0000000000000004 [ ................ ]
+0x30000020 :  ffffffffffffff86 b123456729e70e87 [ .........#Eg)... ]
+0x30000030 :  0000000000000390 0900000008072900 [ ..............). ]
+0x30000040 :  09001000a0c37158 4a39564d52415300 [ ......qXJ9VMRAS. ]
+```

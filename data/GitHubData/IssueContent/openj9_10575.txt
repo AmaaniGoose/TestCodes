@@ -1,0 +1,5 @@
+A few month ago I added a new version of CPU detection for all platforms in OMR. As a way to make sure the new version does not give us any unexpected behaviour, we have kept the old version in the codebase and used the old version as a reference to test against the new version. It's been a few months and we have not seen any issues with the new version so I think it's safe to remove the old version now. Note that as things stand right now only Z and Power's old version can be removed. x86's old version cannot be removed currently because standalone OMR still relies on it. And the reason Z and Power's old version can be removed is because there were no CPU detection support in standalone OMR on these platforms in the first place.
+
+Another reason I would really like the old version gone is because there is nothing preventing developers from still using the old version queries as well as adding new code to the old version. 
+
+Additionally, with Portable AOT support being added to Z, in order to avoid any unexpected behaviour I need to make sure to eliminate all instances where we are still using the old version of CPU detection.

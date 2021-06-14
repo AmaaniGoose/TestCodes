@@ -1,0 +1,3 @@
+I think that the TEST: java/io/FileOutputStream/ManyFiles.java failure on AIX is due to infrastructure issues with the build/test machine. I've seen this on the repeatably on grinder jobs I've run.
+
+I'll attach the console output for more info and I'll exclude the test on AIX.

@@ -1,0 +1,14 @@
+Hi,
+
+I would like to make the proposal for Java 9 with support of ARMv5 - Headless EABI, SoftFP ABI.
+
+Currently, Oracle only supports Java 8, for this version: 
+http://www.oracle.com/technetwork/java/embedded/embedded-se/downloads/index.html
+
+But it is important to have the JVM for this version of ARM. Why?
+Exist an important `LEGO Mindstorms` community and it is necessary to add support for them.
+
+Many thanks in advance.
+
+Juan Antonio
+

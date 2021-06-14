@@ -1,0 +1,13 @@
+**Describe the bug**
+Performance tests should run on machines with the `ci.role.perf` label
+
+**To Reproduce**
+Run any sanity.perf test
+
+**Expected behavior**
+Machines will only schedule on machines with `ci.role.perf` labels in jenkins. 
+
+**Additional context**
+I thought we had been using the `ci.role.test&&ci.role.perf` label for performance test suites but from what I can tell we only have [one machine](https://ci.adoptopenjdk.net/label/ci.role.perf/) with that label now and I can't see any indication in the logs that we're targetting any of the `perf` jobs to machines with that label. I would propose setting up a suitable set of machines with a `ci.role.perf` label which would go on machines that can produce consistent results where possible, and ensure that the `perf` tests only go onto those. I was about to set up some labels before realising they're not currently used.
+
+I think I've mentioned this before but I would also propose using this label INSTEAD of `ci.role.test` and not require `ci.role.test&&ci.role.perf` to be present, to cover any case where we might be using a completely separate machien that we don't want to be used for other general testing.

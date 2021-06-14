@@ -1,0 +1,25 @@
+The reference implementation shows:
+```
+Usage: jcmd <pid | main class> <command ...|PerfCounter.print|-f file>
+   or: jcmd -l                                                    
+   or: jcmd -h                                                    
+```
+
+Suggested changes to OpenJ9 `jcmd`:
+```
+Usage : jcmd <vmid> <target arguments>
+    or:
+       jcmd <jcmd arguments>
+
+jcmd arguments: 
+    -J : supply arguments to the Java VM running jcmd
+    -l :  list JVM processes on the local machine
+    -h : print this help message
+
+<vmid> : Attach API VM ID as shown in jps or other Attach API-based tools.
+
+target arguments:
+    help : print the list of diagnostic commands
+    help command : print help for the specific command
+    command [command arguments] : command from the list returned by "help"
+```                      

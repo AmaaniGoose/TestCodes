@@ -1,0 +1,1 @@
+Our CentOS7 arm64 machines at Linaro have not been active in jenkins for a while. This hasn't been a problem as we have machines at packet and AWS for this architecture, however it would be good to identify what is wrong, whether they can be recovered (they may need to be reprovisioned) or whether we still want them if they cannot be easily recovered.

@@ -1,0 +1,33 @@
+As background, -Xtrace method trace on a class constructor along with a jstacktrace trigger is a great way to find who is leaking something. This is particularly useful for issues such as objects that aren't closed by an application properly and end up accumulating in a finalizer list so that it's difficult to figure out who created or owns the objects by the time of the OOM as they're all just GC roots waiting to be finalized. For example with socket objects:
+
+```
+-Xtrace:print=mt,methods=com/ibm/jsse2/av.<init>(),trigger=method{com/ibm/jsse2/av.<init>,jstacktrace}
+```
+
+Leads to:
+
+```
+08:43:59.307 0x1f799048200              mt.1        > com/ibm/jsse2/av.<init>([CII)V compiled method, this = 0x7ff42cb57ef8
+08:43:59.307 0x1f799048200       j9trc_aux.0        - jstacktrace:
+08:43:59.307 0x1f799048200       j9trc_aux.1        - [1] com.ibm.jsse2.av.<init> (av.java:12) (Compiled Code)
+[...]
+08:43:59.307 0x1f799048200              mt.7        < com/ibm/jsse2/av.<init>([CII)V compiled method
+```
+
+Often, this data alone is enough to determine the leaker through statistical inference (i.e. aggregating by the top stack frames after the constructor and sorting by the aggregate count); however, we've hit an issue where there are hundreds of unique callers and such an inference search has not been fruitful.
+
+It would be nice if the -Xtrace method entry line of the constructor printed a globally unique identifier for the object which was then made available through DTFJ. This would allow, for example, a jdmpview or MAT query which then listed all the objects in the finalizer list with their unique identifier and that would allow easy correlation to the -Xtrace jstacktraces.
+
+Currently, the -Xtrace method entry line prints the object address but this may be moved by the GC so it's not helpful for this example because by the time of the OOM, it has almost surely been moved by the GC (e.g. from nursery into tenured).
+
+I know that the object's identity hash code is available from DTFJ, if it has been previously calculated at runtime, but I believe this would just be the result of the `hashCode` of the object which may not be unique.
+
+I'm imagining output something like this with new output at the end of the line:
+
+```
+08:43:59.307 0x1f799048200              mt.1        > com/ibm/jsse2/av.<init>([CII)V compiled method, this = 0x7ff42cb57ef8 (unique ID ZZZZZ)
+```
+
+And then a DTFJ API on the JavaObject to get this unique ID.
+
+This might require something like a GUID generator which might not be cheap but this would presumably only be called lazily by diagnostics such as -Xtrace so it should not have much performance impact, although I can imagine adding a field to the JavaObject might affect memory and cache utilization.

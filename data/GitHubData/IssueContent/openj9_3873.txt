@@ -1,0 +1,10 @@
+Running 
+```java -Xjit:aot,verbose={compilePerformance},vlog=vlog -version```
+Results in a crash. This is due to a bug in the OMR compiler options processing code (it crashes here https://github.com/eclipse/omr/blob/ab3462429e1ef193d6b315c764486ff75da79c64/compiler/ras/OptionsDebug.cpp#L379 because of the NULL here https://github.com/eclipse/omr/blob/ab3462429e1ef193d6b315c764486ff75da79c64/compiler/control/OMROptions.cpp#L117). 
+
+While that bug should be fixed, I'm opening an issue here because of a more insidious bug:
+Running
+```java -Xjit:aotMethodCompilesThreshold=2,verbose={compilePerformance},vlog=vlog -version```
+Results in the **same** crash. As far as I can tell, because the `aotMethodCompilesThreshold=` option is defined in J9Options.cpp and the `aot` is defined in OMROptions.cpp, somehow the options processing code matches `aotMethodCompilesThreshold` with `aot`. I don't know if this only results in the incorrect option getting printed in the vlog, or whether the `aotMethodCompilesThreshold` option never gets applied.
+
+fyi @nbhuiyan 

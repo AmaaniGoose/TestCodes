@@ -1,0 +1,13 @@
+This does not look like it was written by an an AIX admin.
+
+It checks for bash being installed, but it is #! (has bang) started by /bin/bash (which iirc is not where bash should be - maybe packages have changed).
+
+As far as I can see, everything in the script would work fine using ksh. (And then checking for bash would be okay, but what does that have to do with filesystems?).
+
+The is a 'constant' being used to increase the default number of logical partition segments from 512 to 2048? Why? This doesn't hurt anything - but changes should not be made on a whim. What is the goal? To be able to assign 2048 * 1G for every filesystem. While the defaults - one a single disk system do not provide more than 1016 partitions on the disk.
+
+To an AIX admin, imho, it looks sloppy and pointless.
+
+Further, without going into a lot of detail - the idea of trying to assign all the space available in the disk to filesystems goes contrary to all IBM AIX education principles. AIX storage administration is 'on demand' - grow as you need it. This looks more like how UNIX and Xenix was setup 30+ years ago when you had to use a program like `divvy` to partition the disk prior to creating file systems. Everyone uses logical volume managers so that this kind of pre-sizing is outdated - at least on AIX.
+
+So, are you willing to consider an alternative approach to setting up AIX?

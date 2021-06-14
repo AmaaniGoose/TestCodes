@@ -1,0 +1,7 @@
+Enabling concurrent class scanning in CS is not strictly a pre-req for this work. It's an independent work item/optimization that will compensate the increase of class scanning time introduced by this work. 
+
+At some point (when only statics were part of Scavenge class scanning) we were very close to enabling it, but then came CP scanning which complied only with static stores barriers but not with static reads (which as I said are pre-req for enabling concurrent class scanning). And now, we are adding even more to class scanning (that also does not comply with read barriers) and making this optimization even harder to happen.
+
+Anyhow, I just want to raise awareness of it, rather than holding completion of this or other work.
+
+_Originally posted by @amicic in https://github.com/eclipse/openj9/issues/7486#issuecomment-551219114_

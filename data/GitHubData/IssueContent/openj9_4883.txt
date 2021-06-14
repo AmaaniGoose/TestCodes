@@ -1,0 +1,2 @@
+`fixPersistentMethodInfo()` is declared in a `#if` - `#endif` block in `runtime/compiler/runtime/J9Runtime.hpp`.
+On the other hand, `applyRelocation()` in `runtime/compiler/runtime/RelocationRecord.cpp` calls the function without a matching `#if` - `#endif` guard.

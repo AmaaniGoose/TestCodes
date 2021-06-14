@@ -1,0 +1,1 @@
+Besides documentations changes (e.g. eclipse/openj9-docs#770), other references in help, etc. should use the new name `jpackcore`.

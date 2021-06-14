@@ -1,0 +1,69 @@
+It looks like the openj9 functional tests which create a j9core.dmp or other core file and then examine the contents of the file are failing to create the core dump.
+
+Example job link: https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_sanity.functional_x86-64_linux/71/consoleFull
+
+The failing test targets are
+```
+21:20:34  FAILED test targets:
+21:20:34  	cmdLineTester_callsitedbgddrext_openj9_0
+21:20:34  	cmdLineTester_pltest_0
+```
+
+The cmdLineTester_callsitedbgddrext_openj9_0 test failure message is
+```
+19:50:25  Output from test:
+19:50:25   [OUT] DTFJView version 4.29.5, using DTFJ version 1.12.29003
+19:50:25   [OUT] Loading image from DTFJ...
+19:50:25   [OUT] 
+19:50:25   [OUT] Could not load dump file and/or could not load XML file: Image file '/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_linux/openjdk-tests/TKG/test_output_16103945291575/cmdLineTester_callsitedbgddrext_openj9_0/j9core.dmp' not found.
+19:50:25   [OUT] For a list of commands, type "help"; for how to use "help", type "help help"
+19:50:25   [OUT] > DDR is not enabled for this core file, '!' commands are disabled
+19:50:25   [OUT] > 
+19:50:25  >> Success condition was not found: [Output match: jvminit.c]
+```
+
+The cmdLineTester_pltest_0 test failure message is
+```
+20:13:11   [ERR] ----------------------------------------
+20:13:11   [ERR] dump tests
+20:13:11   [ERR] ----------------------------------------
+20:13:11   [ERR] 
+20:13:11   [ERR] 
+20:13:11   [ERR] Starting test j9dump_verify_functiontable_slots
+20:13:11   [ERR] Ending test j9dump_verify_functiontable_slots
+20:13:11   [ERR] 
+20:13:11   [ERR] 
+20:13:11   [ERR] Starting test j9dump_test_create_dump_with_name
+20:13:11   [ERR]   calling j9dump_create with filename: /home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_linux/openjdk-tests/TKG/test_output_16103945291575/cmdLineTester_pltest_0/j9dump_test_create_dump_with_name
+20:13:11   [ERR] JVMPORT030W 
+20:13:11   [ERR] j9dumpTest.c line  213: j9dump_test_create_dump_with_name j9dump_create returned: 1, with filename: The core file created by child process with pid = 3757128 was not found. Expected to find core file with name "/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_linux/openjdk-tests/TKG/test_output_16103945291575/cmdLineTester_pltest_0/core.3757128"
+20:13:11   [ERR] 
+20:13:11   [ERR] 		LastErrorNumber: -108
+20:13:11   [ERR] 		LastErrorMessage: No such file or directory
+20:13:11   [ERR] 
+20:13:11   [ERR] Ending test j9dump_test_create_dump_with_name
+20:13:11   [ERR] 
+20:13:11   [ERR] 
+20:13:11   [ERR] Starting test j9dump_test_create_dump_from_signal_handler
+20:13:11   [ERR]   calling j9dump_create with filename: /home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_linux/openjdk-tests/TKG/test_output_16103945291575/cmdLineTester_pltest_0/j9dump_test_create_dump_from_signal_handler
+20:13:11   [ERR] JVMPORT030W 
+20:13:11   [ERR] j9dumpTest.c line  311: j9dump_test_create_dump_from_signal_handler j9dump_create returned: 1, with filename: The core file created by child process with pid = 3757143 was not found. Expected to find core file with name "/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_linux/openjdk-tests/TKG/test_output_16103945291575/cmdLineTester_pltest_0/core.3757143"
+20:13:11   [ERR] 		LastErrorNumber: -108
+20:13:11   [ERR] 		LastErrorMessage: No such file or directory
+20:13:11   [ERR] 
+20:13:11   [ERR] Ending test j9dump_test_create_dump_from_signal_handler
+20:13:11   [ERR] 
+20:13:11   [ERR] 
+20:13:11   [ERR] Starting test j9dump_test_create_dump_with_NO_name
+20:13:11   [ERR]   calling j9dump_create with empty filename
+20:13:11   [ERR] JVMPORT030W 
+20:13:11   [ERR] j9dumpTest.c line  153: j9dump_test_create_dump_with_NO_name j9dump_create returned: 1, with filename: The core file created by child process with pid = 3757157 was not found. Expected to find core file with name "core.3757157"
+20:13:11   [ERR] 		LastErrorNumber: -108
+20:13:11   [ERR] 		LastErrorMessage: No such file or directory
+20:13:11   [ERR] 
+20:13:11   [ERR] Ending test j9dump_test_create_dump_with_NO_name
+20:13:11   [ERR] 
+20:13:11   [ERR] Dump test done, failures detected.
+```
+
+The same tests pass on other machines - e.g. https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_sanity.functional_x86-64_linux_xl/72/consoleFull

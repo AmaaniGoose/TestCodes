@@ -1,0 +1,5 @@
+Currently, running OpenJ9 with the JIT option `useIlValidator`, assert fails with the following message: "Attempting to validate the IL without the ILValidator being initialized".
+
+ILValidator is initialized in OMR in [IlInjector::genIL()](https://github.com/eclipse/omr/blob/6328141a215e35978ebed7dad1e9ba73cca4484f/compiler/ilgen/IlInjector.cpp#L138-L144), however, we don't use `IlInjector` in OpenJ9. Further, the corresponding [genIL() ](https://github.com/eclipse/openj9/blob/9929617e2cd480c742a7305ed0788a4c78adb447/runtime/compiler/ilgen/IlGenerator.cpp#L135) method in OpenJ9 does not initialize ILValidator.
+
+It would be worthwhile to initialize ILValidator in OpenJ9 for debugging purposes and to avoid new (fix existing) type issues when generating nodes. 

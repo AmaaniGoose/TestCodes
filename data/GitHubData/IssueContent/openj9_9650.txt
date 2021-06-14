@@ -1,0 +1,2 @@
+Allocation prefetching is not implemented in the current `VMnewEvaluator` of aarch64 code generator.
+This issue tracks the work to investigate aarch64 cache architecture and implement allocation prefetching.

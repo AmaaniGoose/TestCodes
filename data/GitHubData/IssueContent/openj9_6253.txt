@@ -1,0 +1,23 @@
+When configuring an -Xdump CEEDUMP agent, the location of the dump produced does not respect the documented parameters.
+
+The -Xdump agent reports it will write the CEEDUMP to a DSN specified by the JAVA_DUMP_TDUMP_PATTERN (if configured). The dumping process reports it is writing a CEEDUMP to zFS specified by the _CEE_DMPTARG settings (if configured). However both the reported locations are wrong and the two environment variables are completely ignored. The CEEDUMP is produced at the default LE z/OS location which is typically the 
+CEEDUMP destination in the z/OS joblog.
+
+Recreate steps:
+Add the following agent (because there isn't a default ceedump agent) : -Xdump:ceedump:events=user
+
+set these environment-vars in the process in which the JVM will run:
+JAVA_DUMP_TDUMP_PATTERN=DUMP.IVAN.TDUMP.TEST.D%y%m%d.T%H%M%S.X&DS
+_CEE_DMPTARG=STUFF
+
+Results in the Dump.queryOptions API returning:
+ceedump:events=user,dsn=DUMP.IVAN.TDUMP.TEST.D%y%m%d.T%H%M%S.X&DS,range=1..0,priority=888,request=serial
+
+When a dump is triggered, the following is reported in stderr:
+
+JVMDUMP019I JVM requesting CEEDUMP dump
+CEEDUMP in progress - Please Wait.
+CEEDUMP success for FILE='STUFF/CEEDUMP'
+JVMDUMP010I CEEDUMP dump written to STUFF/CEEDUMP
+
+The DUMP is written to neither of those locations!

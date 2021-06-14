@@ -1,0 +1,178 @@
+openjdk test java/foreign/TestSegments.java failed on jdk-15.0.1+9openj9-0.24.0-m1 with an OutOfMemoryError,
+Failing job: https://ci.adoptopenjdk.net/job/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/135/.
+Test target jdk_foreign_0 passed on other platforms.
+```
+22:17:12  "/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/bin/java" -version
+22:17:12  openjdk version "15.0.1" 2020-10-20
+22:17:12  OpenJDK Runtime Environment AdoptOpenJDK (build 15.0.1+9)
+22:17:12  Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.24.0-m1, JRE 15 AIX ppc64-64-Bit Compressed References 20201207_125 (JIT enabled, AOT enabled)
+22:17:12  OpenJ9   - c757b5115
+22:17:12  OMR      - 5080dab1e
+22:17:12  JCL      - c46d88330c based on jdk-15.0.1+9)
+```
+
+Output around time of failure:
+
+```
+23:41:52  ===============================================
+23:41:52  Running test jdk_foreign_0 ...
+23:41:52  ===============================================
+23:41:52  jdk_foreign_0 Start Time: Mon Dec  7 18:41:50 2020 Epoch Time (ms): 1607384510488
+23:41:52  "/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+23:41:52  JVMSHRC005I No shared class caches available
+23:41:52  JVMSHRC005I No shared class caches available
+23:41:52  cache cleanup done
+23:41:52  variation: NoOptions
+23:41:52  JVM_OPTIONS:  
+23:41:52  { itercnt=1; \
+23:41:52  mkdir -p "/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/../TKG/test_output_16073794318590/jdk_foreign_0"; \
+23:41:52  cd "/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/../TKG/test_output_16073794318590/jdk_foreign_0"; \
+23:41:52  "/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/bin/java" -Xmx512m -jar "/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/../../jvmtest/openjdk/jtreg/lib/jtreg.jar" \
+23:41:52  -agentvm -a -ea -esa -v:fail,error,time,nopass -retain:fail,error,*.dmp,javacore.*,heapdump.*,*.trc -ignore:quiet -timeoutFactor:8 -xml:verify -concurrency:1 -nativepath:"/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdkbinary/openjdk-test-image/jdk/jtreg/native" -vmoptions:"-Xmx512m --add-modules jdk.incubator.foreign  " \
+23:41:52  -w ""/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/../TKG/test_output_16073794318590/jdk_foreign_0"/work" \
+23:41:52  -r "/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/../../jvmtest/openjdk/report" \
+23:41:52  -jdk:"/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdkbinary/j2sdk-image" \
+23:41:52  -exclude:"/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/../openjdk/openjdk-jdk/test/jdk/ProblemList.txt" \
+23:41:52  -exclude:"/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/../../jvmtest/openjdk/ProblemList_openjdk15-openj9.txt" \
+23:41:52  "/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/../openjdk/openjdk-jdk/test/jdk:jdk_foreign"; \
+23:41:52  if [ $? -eq 0 ] ; then echo ""; echo "jdk_foreign_0""_PASSED"; echo ""; cd /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/..;  else echo ""; echo "jdk_foreign_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/../TKG/test_output_16073794318590/TestTargetResult";
+23:41:52  Directory "/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/../TKG/test_output_16073794318590/jdk_foreign_0/work" not found: creating
+23:42:00  WARNING: Using incubator modules: jdk.incubator.foreign
+23:42:00  XML output with verification to /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/test_output_16073794318590/jdk_foreign_0/work
+23:42:00  WARNING: Using incubator modules: jdk.incubator.foreign
+23:50:24  --------------------------------------------------
+23:50:24  TEST: java/foreign/TestSegments.java
+23:50:24  TEST JDK: /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdkbinary/j2sdk-image
+23:50:24  
+23:50:24  ACTION: build -- Passed. Build successful
+23:50:24  REASON: Named class compiled on demand
+23:50:24  TIME:   0.824 seconds
+23:50:24  messages:
+23:50:24  command: build TestSegments
+23:50:24  reason: Named class compiled on demand
+23:50:24  Test directory:
+23:50:24    compile: TestSegments
+23:50:24  elapsed time (seconds): 0.824
+23:50:24  
+23:50:24  ACTION: compile -- Passed. Compilation successful
+23:50:24  REASON: .class file out of date or does not exist
+23:50:24  TIME:   0.822 seconds
+23:50:24  messages:
+23:50:24  command: compile /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign/TestSegments.java
+23:50:24  reason: .class file out of date or does not exist
+23:50:24  Additional options from @modules: --add-modules jdk.incubator.foreign
+23:50:24  Mode: agentvm
+23:50:24  Agent id: 1
+23:50:24  elapsed time (seconds): 0.822
+23:50:24  configuration:
+23:50:24  Boot Layer (javac runtime environment)
+23:50:24    add modules: jdk.incubator.foreign 
+23:50:24    class path:  /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/javatest.jar 
+23:50:24                 /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+23:50:24    patch:       java.base /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/test_output_16073794318590/jdk_foreign_0/work/patches/java.base
+23:50:24  
+23:50:24  javac compilation environment
+23:50:24    add modules: jdk.incubator.foreign
+23:50:24    source path: /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign
+23:50:24    class path:  /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign
+23:50:24                 /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/test_output_16073794318590/jdk_foreign_0/work/classes/java/foreign/TestSegments.d
+23:50:24                 /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/testng.jar
+23:50:24                 /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/jcommander.jar
+23:50:24  
+23:50:24  rerun:
+23:50:24  cd /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/test_output_16073794318590/jdk_foreign_0/work/scratch && \
+23:50:24  DISPLAY=:0 \
+23:50:24  HOME=/home/jenkins \
+23:50:24  LANG=en_US \
+23:50:24  PATH=/bin:/usr/bin:/usr/sbin \
+23:50:24  TZ=EST5EDT \
+23:50:24      /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/bin/javac \
+23:50:24          -J-ea \
+23:50:24          -J-esa \
+23:50:24          -J-Xmx512m \
+23:50:24          -J--add-modules \
+23:50:24          -Jjdk.incubator.foreign \
+23:50:24          -J-Djava.library.path=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+23:50:24          -J-Dtest.vm.opts='-ea -esa -Xmx512m --add-modules jdk.incubator.foreign' \
+23:50:24          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J--add-modules -Jjdk.incubator.foreign' \
+23:50:24          -J-Dtest.compiler.opts= \
+23:50:24          -J-Dtest.java.opts= \
+23:50:24          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdkbinary/j2sdk-image \
+23:50:24          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdkbinary/j2sdk-image \
+23:50:24          -J-Dtest.timeout.factor=8.0 \
+23:50:24          -J-Dtest.nativepath=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+23:50:24          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+23:50:24          -J-Dtest.name=java/foreign/TestSegments.java \
+23:50:24          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign/TestSegments.java \
+23:50:24          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign \
+23:50:24          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign \
+23:50:24          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/test_output_16073794318590/jdk_foreign_0/work/classes/java/foreign/TestSegments.d \
+23:50:24          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/test_output_16073794318590/jdk_foreign_0/work/classes/java/foreign/TestSegments.d \
+23:50:24          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/test_output_16073794318590/jdk_foreign_0/work/classes/java/foreign/TestSegments.d:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign \
+23:50:24          -J-Dtest.modules=jdk.incubator.foreign \
+23:50:24          --add-modules jdk.incubator.foreign \
+23:50:24          -d /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/test_output_16073794318590/jdk_foreign_0/work/classes/java/foreign/TestSegments.d \
+23:50:24          -sourcepath /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign \
+23:50:24          -classpath /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/test_output_16073794318590/jdk_foreign_0/work/classes/java/foreign/TestSegments.d:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/testng.jar:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/jcommander.jar /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign/TestSegments.java
+23:50:24  direct:
+23:50:24  warning: using incubating module(s): jdk.incubator.foreign
+23:50:24  1 warning
+23:50:24  
+23:50:24  ACTION: testng -- Error. Agent communication error: java.io.EOFException; check console log for any additional details
+23:50:24  REASON: User specified action: run testng TestSegments 
+23:50:24  TIME:   26.02 seconds
+23:50:24  messages:
+23:50:24  command: testng TestSegments
+23:50:24  reason: User specified action: run testng TestSegments 
+23:50:24  Mode: agentvm
+23:50:24  Agent id: 2
+23:50:24  elapsed time (seconds): 26.02
+23:50:24  configuration:
+23:50:24  Boot Layer
+23:50:24    add modules: jdk.incubator.foreign 
+23:50:24    class path:  /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/javatest.jar 
+23:50:24                 /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+23:50:24                 /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/junit.jar 
+23:50:24                 /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/testng.jar 
+23:50:24                 /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/jcommander.jar 
+23:50:24    patch:       java.base /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/test_output_16073794318590/jdk_foreign_0/work/patches/java.base
+23:50:24  
+23:50:24  Test Layer
+23:50:24    class path: /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/test_output_16073794318590/jdk_foreign_0/work/classes/java/foreign/TestSegments.d
+23:50:24                /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign
+23:50:24  
+23:50:24  rerun:
+23:50:24  cd /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/test_output_16073794318590/jdk_foreign_0/work/scratch && \
+23:50:24  DISPLAY=:0 \
+23:50:24  HOME=/home/jenkins \
+23:50:24  LANG=en_US \
+23:50:24  PATH=/bin:/usr/bin:/usr/sbin \
+23:50:24  TZ=EST5EDT \
+23:50:24      /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdkbinary/j2sdk-image/bin/java \
+23:50:24          -Dtest.vm.opts='-ea -esa -Xmx512m --add-modules jdk.incubator.foreign' \
+23:50:24          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J--add-modules -Jjdk.incubator.foreign' \
+23:50:24          -Dtest.compiler.opts= \
+23:50:24          -Dtest.java.opts= \
+23:50:24          -Dtest.jdk=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdkbinary/j2sdk-image \
+23:50:24          -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdkbinary/j2sdk-image \
+23:50:24          -Dtest.timeout.factor=8.0 \
+23:50:24          -Dtest.nativepath=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+23:50:24          -Dtest.root=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+23:50:24          -Dtest.name=java/foreign/TestSegments.java \
+23:50:24          -Dtest.file=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign/TestSegments.java \
+23:50:24          -Dtest.src=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign \
+23:50:24          -Dtest.src.path=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign \
+23:50:24          -Dtest.classes=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/test_output_16073794318590/jdk_foreign_0/work/classes/java/foreign/TestSegments.d \
+23:50:24          -Dtest.class.path=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/test_output_16073794318590/jdk_foreign_0/work/classes/java/foreign/TestSegments.d \
+23:50:24          -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/test_output_16073794318590/jdk_foreign_0/work/classes/java/foreign/TestSegments.d:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign \
+23:50:24          -Dtest.modules=jdk.incubator.foreign \
+23:50:24          -classpath /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/test_output_16073794318590/jdk_foreign_0/work/classes/java/foreign/TestSegments.d:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/foreign:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/testng.jar:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/jcommander.jar:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+23:50:24          com.sun.javatest.regtest.agent.TestNGRunner java/foreign/TestSegments.java false TestSegments
+23:50:24  stderr:
+23:50:24  JVMDUMP039I Processing dump event "systhrow", detail "java/lang/OutOfMemoryError" at 2020/12/07 18:49:48 - please wait.
+23:50:24  JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_ppc64_aix/openjdk-tests/TKG/test_output_16073794318590/jdk_foreign_0/work/scratch/core.20201207.184948.16842858.0001.dmp' in response to an event
+23:50:24  
+23:50:24  TEST RESULT: Error. Agent communication error: java.io.EOFException; check console log for any additional details
+```
+github won't let me attach the test output which includes a core dump. but I have a copy locally.
+

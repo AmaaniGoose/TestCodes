@@ -1,0 +1,52 @@
+3 tests timeout:
+java/lang/String/CompactString/Numbers.java
+java/lang/String/CompactString/RegionMatches.java
+java/lang/String/CompactString/SubString.java
+
+Failure link
+------------
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk11_j9_sanity.openjdk_x86-64_linux/7/testReport/
+
+Public link to the failing test.
+If the link is not public, instead include 
+- test category (functionality, system, etc): openjdk
+- test suite name: jdk_lang
+- OS/architecture (i.e. Ubuntu 16.04 x64): x86-64_linux
+- OpenJDK version (i.e. 8u202-b08): 
+- public build SHAs (i.e. -version output): 
+"/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image/bin/java" -version
+openjdk version "11.0.4" 2019-07-16
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.4+10-201907151830)
+Eclipse OpenJ9 VM AdoptOpenJDK (build master-9409a4266, JRE 11 Linux amd64-64-Bit Compressed References 20190715_284 (JIT enabled, AOT enabled)
+OpenJ9   - 9409a4266
+OMR      - 4beca561
+JCL      - 411f32dbbb based on jdk-11.0.4+10)
+
+Optional info
+-------------
+- intermittent failure (yes|no): yes
+- regression or new test:  
+- if regression, what are the last passing / first failing public SHAs (OpenJ9, OMR, JCL) :
+
+Failure output
+--------------
+21:43:49  ACTION: testng -- Error. Program `/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_x86-64_linux/openjdkbinary/j2sdk-image/bin/java' timed out (timeout set to 960000ms, elapsed time including timeout handling was 1868586ms).
+21:43:49  REASON: User specified action: run testng/othervm -XX:+CompactStrings RegionMatches 
+21:43:49  TIME:   1868.591 seconds
+21:43:49  messages:
+21:43:49  command: testng -XX:+CompactStrings RegionMatches
+21:43:49  reason: User specified action: run testng/othervm -XX:+CompactStrings RegionMatches 
+21:43:49  Mode: othervm [/othervm specified]
+21:43:49  Timeout information:
+21:43:49  Running jstack on process 31451
+21:43:49  2019-07-15T19:28:29.700030956
+21:43:49  Error getting data from 31451: Exception connecting to 31451
+21:43:49  --- Timeout information end.
+21:43:49  elapsed time (seconds): 1868.591
+21:43:49  configuration:
+21:43:49  STDOUT:
+21:43:49  Timeout refired 960 times
+
+1x grinder on same machine as original failure (test-packet-ubuntu1604-x64-1):  https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/1764/
+
+20x grinder: https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/1763

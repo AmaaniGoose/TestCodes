@@ -1,0 +1,3 @@
+The top level README.md on the infrastructure repository is somewhat out of date with respect to our backup setups and policy for the infrastructure systems (jenkins, api, blog, monitoring etc.)
+
+We should get the documentation up to date, while ensuring that all appropriate backups are definitely in place and running.

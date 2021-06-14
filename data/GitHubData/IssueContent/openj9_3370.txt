@@ -1,0 +1,18 @@
+Hi everyone!
+
+I just tried on a FreeBSD platform:
+`# ./makejdk-any-platform.sh --build-variant openj9 --skip-freetype jdk8u`
+
+Result was:
+```
+configure: error: Unsupported OpenJ9 platform bsd!
+configure exiting with result code 1
+```
+
+As [Mac is supported](https://github.com/eclipse/openj9/issues/36) with a somewhat similar kernel, I wonder what it would take to support *BSD systems.
+
+I know the BSD platforms have become less popular since cloud services and docker on linux have arrived, but not having AIX or Darwin at hand, *BSD is a good way to test one's java applications on another platform.
+
+I personally don't need it right away, just wanted to keep this open. Perhaps it is not too much effort at all, since Mac is already supported.
+
+If you think that *BSD is not popular to support it, that's fine for me -- I don't use it a lot anyway.

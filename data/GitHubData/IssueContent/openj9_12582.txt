@@ -1,0 +1,55 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_sanity.openjdk_s390x_linux_Nightly/372
+jdk_lang_0
+JVM_OPTIONS:  -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache -XX:-JITServerTechPreviewMessage -XX:+UseCompressedOops
+java/lang/ProcessBuilder/Basic.java
+
+```
+22:05:47  ACTION: main -- Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Some tests failed
+22:05:47  REASON: User specified action: run main/othervm/timeout=300 -Djdk.lang.Process.launchMechanism=fork Basic 
+22:05:47  TIME:   6.422 seconds
+22:05:47  messages:
+22:05:47  command: main -Djdk.lang.Process.launchMechanism=fork Basic
+22:05:47  reason: User specified action: run main/othervm/timeout=300 -Djdk.lang.Process.launchMechanism=fork Basic 
+22:05:47  Mode: othervm [/othervm specified]
+22:05:47  elapsed time (seconds): 6.422
+22:05:47  configuration:
+22:05:47  STDOUT:
+22:05:47  This appears to be a Unix system.
+22:05:47  Testing ASCII environment values
+22:05:47  Testing Latin1 environment values
+22:05:47  Testing Unicode environment values
+22:05:47  Testing directory .
+22:05:47  Testing directory ..
+22:05:47  Testing directory /
+22:05:47  Testing directory /bin
+22:05:47  cmdp
+22:05:47  cmdp 0: /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/j2sdk-image/jre/bin/java
+22:05:47  cmdp 1: -XX:+DisplayVMOutputToStderr
+22:05:47  cmdp 2: -classpath
+22:05:47  cmdp 3: /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/output_16195754743272/jdk_lang_0/work/classes/0/java/lang/ProcessBuilder:/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/jdk/test/java/lang/ProcessBuilder:/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/j2sdk-image/lib/tools.jar:/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_s390x_linux_Nightly/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_s390x_linux_Nightly/jvmtest/openjdk/jtreg/lib/jtreg.jar
+22:05:47  cmdp 4: Basic$JavaChild
+22:05:47  cmdp 5: System.getenv()
+22:05:47  envp
+22:05:47  envp 0: LC_ALL=C
+22:05:47  envp 1: FO=BR
+22:05:47   waitFor process: delta: 25633
+22:05:47  
+22:05:47  Passed = 9000, failed = 1
+22:05:47  
+22:05:47  STDERR:
+22:05:47  java.io.IOException: Stream closed
+22:05:47  	at java.io.BufferedInputStream.getBufIfOpen(BufferedInputStream.java:170)
+22:05:47  	at java.io.BufferedInputStream.read(BufferedInputStream.java:269)
+22:05:47  	at Basic$12.run(Basic.java:1995)
+22:05:47  java.lang.AssertionError: Some tests failed
+22:05:47  	at Basic.main(Basic.java:2600)
+22:05:47  	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+22:05:47  	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+22:05:47  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+22:05:47  	at java.lang.reflect.Method.invoke(Method.java:498)
+22:05:47  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+22:05:47  	at java.lang.Thread.run(Thread.java:821)
+22:05:47  
+22:05:47  JavaTest Message: Test threw exception: java.lang.AssertionError: Some tests failed
+22:05:47  JavaTest Message: shutting down test
+```

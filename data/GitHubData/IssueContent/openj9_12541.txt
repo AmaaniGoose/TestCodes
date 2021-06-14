@@ -1,0 +1,1 @@
+`samplerThreadProc` is the function that the Sampler Thread executes in a loop. It does different tasks depending at different periods of time. Each of these periods should be refactored into their own function so that it's conceptually easier to understand.

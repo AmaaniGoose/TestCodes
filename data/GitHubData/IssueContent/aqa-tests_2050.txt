@@ -1,0 +1,9 @@
+Analysis of jdk8 Hotspot zLinux:
+```
+- sanity.perf 9Hrs
+- sanity.system 4Hrs
+- extended.openjdk 10Hrs
+- sanity.external 10Hrs **(Bogus, is caused by sub-parallel job Queue times)**
+- extended.perf 10Hrs
+- sanity.openjdk 2hrs40mins
+```

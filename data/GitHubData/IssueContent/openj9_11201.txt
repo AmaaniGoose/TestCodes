@@ -1,0 +1,10 @@
+There are several Relocation Records that are common on all platforms, but that acquire the data to generate the common Relocation header differently. This issue is opened to track the work to standardize them so that the platforms specific versions of `initializeAOTRelocationHeader` only initialize relocation records that are specific to that platform.
+
+The reason for the inconsistency comes from the fact that the `TR::ExternalRelocationRecord` takes two parameters; however, on ARM, AArch64, and/or P, sometimes 3 paramters have to be passed in. As a consequence, the data passed in to the external relocation record is different, resulting in these platforms having to demarshal the external relocation record differently. To fix this issue, the data passed into the external relocation record has to be the same on all platforms.
+
+- [ ] Standardize TR_ClassAddress (https://github.com/eclipse/openj9/issues/12449)
+- [ ] Standardize TR_DataAddress (https://github.com/eclipse/openj9/issues/12450)
+- [ ] Standardize TR_AbsoluteHelperAddress (https://github.com/eclipse/openj9/issues/12451)
+- [ ] Standardize TR_ArbitraryClassAddress (https://github.com/eclipse/openj9/issues/12452)
+- [ ] Standardize TR_GlobalValue (https://github.com/eclipse/openj9/issues/12453)
+- [ ] Standardize TR_HCR (https://github.com/eclipse/openj9/issues/12454)

@@ -1,0 +1,48 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk8_j9_sanity.functional_ppc64_aix_testList_2/54/`:
+```
+openjdk version "1.8.0_302"
+OpenJDK Runtime Environment (build 1.8.0_302-b05)
+Eclipse OpenJ9 VM (build v0.27.0-release-3309d95fa, JRE 1.8.0 AIX ppc64-64-Bit Compressed References 20210612_148 (JIT enabled, AOT enabled)
+OpenJ9   - 3309d95fa
+OMR      - 4ed9b9de5
+JCL      - b872217a70 based on jdk8u302-b05)
+```
+[Rerun in Grinder](https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?SDK_RESOURCE=upstream&amp;TARGET=jit_jitt_array_compress_0&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=Test_openjdk8_j9_sanity.functional_ppc64_aix&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;VENDOR_TEST_DIRS=&amp;EXTRA_DOCKER_ARGS=&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;TEST_PARALLELIZATION_PARAMS=&amp;OPENJ9_SYSTEMTEST_OWNER_BRANCH=eclipse%3Amaster&amp;PLATFORM=ppc64_aix&amp;GENERATE_JOBS=true&amp;KEEP_REPORTDIR=false&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2Fadoptium%2Faqa-tests.git&amp;LABEL=&amp;TEST_OPTIONS_PARAMS=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-aix-ppc64-openj9%2F148%2FSemeru-jdk_ppc64_aix_8u302b05_openj9-0.27.0-m1a.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-aix-ppc64-openj9%2F148%2FSemeru-debugimage_ppc64_aix_8u302b05_openj9-0.27.0-m1a.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-aix-ppc64-openj9%2F148%2FSemeru-testimage_ppc64_aix_8u302b05_openj9-0.27.0-m1a.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-aix-ppc64-openj9%2F148%2FSemeru-jre_ppc64_aix_8u302b05_openj9-0.27.0-m1a.tar.gz&amp;BUILD_IDENTIFIER=&amp;NON_AQA_TEST_REPOS_HELP_TEXT=&amp;ADOPTOPENJDK_BRANCH=master&amp;LIGHT_WEIGHT_CHECKOUT=true&amp;NON_AQA_TEST_REPOS=&amp;ARTIFACTORY_SERVER=na.artifactory.swg-devops&amp;TEST_REPO_PARAMS=&amp;TEST_SELECTION_PARAMS=&amp;TEST_PARALLELIZATION_PARAMS_HELP_TEXT=&amp;JDK_SELECTION_PARAMS=&amp;KEEP_WORKSPACE=false&amp;USER_CREDENTIALS_ID=&amp;JDK_VERSION=8&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=&amp;JDK_REPO=https%3A%2F%2Fgithub.com%2Fibmruntimes%2Fopenj9-openjdk-jdk8&amp;PLATFORM_AND_MACHINE_HELP_TEXT=&amp;RELEASE_TAG=v0.27.0-release&amp;OPENJ9_BRANCH=v0.27.0-release&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse-openj9%2Fopenj9.git&amp;UPSTREAM_JOB_NAME=&amp;CLOUD_PROVIDER=&amp;PLATFORM_AND_MACHINE=&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=v0.27.0-release&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;POST_RUN_PARAMS_HELP_TEXT=&amp;UPSTREAM_TEST_JOB_NUMBER=86&amp;DOCKERIMAGE_TAG=&amp;JDK_SELECTION_PARAMS_HELP_TEXT=&amp;JDK_IMPL=openj9&amp;TEST_TIME=&amp;SSH_AGENT_CREDENTIAL=83181e25-eea4-4f55-8b3e-e79615733226&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;TEST_SELECTION_PARAMS_HELP_TEXT=&amp;ADOPTOPENJDK_SYSTEMTEST_OWNER_BRANCH=adoptium%3Amaster&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=4e18ffe7-b1b1-4272-9979-99769b68bcc2&amp;OPENJDK_SHA=&amp;NUM_MACHINES=&amp;TRSS_URL=http%3A%2F%2Ftrss1.fyre.ibm.com&amp;BUILD_LIST=functional&amp;UPSTREAM_JOB_NUMBER=&amp;STF_OWNER_BRANCH=adoptium%3Amaster&amp;TEST_REPO_PARAMS_HELP_TEXT=&amp;POST_RUN_PARAMS=&amp;TIME_LIMIT=20&amp;TEST_OPTIONS_PARAMS_HELP_TEXT=&amp;JVM_OPTIONS=&amp;PARALLEL=None)
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+[2021-06-13T05:48:26.994Z] Running test jit_jitt_array_compress_0 ...
+[2021-06-13T05:48:26.994Z] ===============================================
+[2021-06-13T05:48:26.994Z] jit_jitt_array_compress_0 Start Time: Sun Jun 13 01:48:23 2021 Epoch Time (ms): 1623563303488
+[2021-06-13T05:48:26.994Z] "/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_ppc64_aix_testList_2/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_ppc64_aix_testList_2/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+[2021-06-13T05:48:26.994Z] JVMSHRC005I No shared class caches available
+[2021-06-13T05:48:26.994Z] JVMSHRC005I No shared class caches available
+[2021-06-13T05:48:26.994Z] cache cleanup done
+[2021-06-13T05:48:26.994Z] variation: -Xjit:disableAsyncCompilation,count=1 -XXgc:forcedShiftingCompressionAmount=1
+[2021-06-13T05:48:26.994Z] JVM_OPTIONS:  -Xjit:disableAsyncCompilation,count=1 -XXgc:forcedShiftingCompressionAmount=1 
+[2021-06-13T05:48:26.994Z] { itercnt=1; \
+[2021-06-13T05:48:26.994Z] mkdir -p "/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_ppc64_aix_testList_2/aqa-tests/TKG/../TKG/output_16235632433291/jit_jitt_array_compress_0"; \
+[2021-06-13T05:48:26.994Z] cd "/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_ppc64_aix_testList_2/aqa-tests/TKG/../TKG/output_16235632433291/jit_jitt_array_compress_0"; \
+[2021-06-13T05:48:26.994Z] "/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_ppc64_aix_testList_2/openjdkbinary/j2sdk-image/bin/java"  -Xjit:disableAsyncCompilation,count=1 -XXgc:forcedShiftingCompressionAmount=1  \
+[2021-06-13T05:48:26.994Z] -cp "/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_ppc64_aix_testList_2/aqa-tests/TKG/../../jvmtest/TestConfig/resources:/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_ppc64_aix_testList_2/aqa-tests/TKG/../TKG/lib/testng.jar:/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_ppc64_aix_testList_2/aqa-tests/TKG/../TKG/lib/jcommander.jar:/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_ppc64_aix_testList_2/aqa-tests/TKG/../../jvmtest/functional/JIT_Test/jitt.jar" \
+[2021-06-13T05:48:26.994Z] org.testng.TestNG -d "/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_ppc64_aix_testList_2/aqa-tests/TKG/../TKG/output_16235632433291/jit_jitt_array_compress_0" "/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_ppc64_aix_testList_2/aqa-tests/TKG/../../jvmtest/functional/JIT_Test/testng.xml" \
+[2021-06-13T05:48:26.994Z] -testnames \
+[2021-06-13T05:48:26.994Z] arrayTest \
+[2021-06-13T05:48:26.994Z] -groups level.sanity \
+[2021-06-13T05:48:26.994Z] -excludegroups d.*.aix_ppc-64_mxdptrs,d.*.arch.ppc,d.*.os.aix,d.*.bits.64,d.*.generic-all; \
+[2021-06-13T05:48:26.994Z] if [ $? -eq 0 ] ; then echo ""; echo "jit_jitt_array_compress_0""_PASSED"; echo ""; cd /home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_ppc64_aix_testList_2/aqa-tests/TKG/..; rm -f -r "/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_ppc64_aix_testList_2/aqa-tests/TKG/../TKG/output_16235632433291/jit_jitt_array_compress_0"; else echo ""; echo "jit_jitt_array_compress_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/home/jenkins/workspace/Test_openjdk8_j9_sanity.functional_ppc64_aix_testList_2/aqa-tests/TKG/../TKG/output_16235632433291/TestTargetResult";
+[2021-06-13T05:48:26.994Z] JVMJ9GC028E Option too large: '-Xmx'
+[2021-06-13T05:48:26.994Z] JVMJ9VM015W Initialization error for library j9gc29(2): Failed to initialize
+[2021-06-13T05:48:26.994Z] Error: Could not create the Java Virtual Machine.
+[2021-06-13T05:48:26.994Z] Error: A fatal exception has occurred. Program will exit.
+[2021-06-13T05:48:26.994Z] 
+[2021-06-13T05:48:26.994Z] jit_jitt_array_compress_0_FAILED
+```

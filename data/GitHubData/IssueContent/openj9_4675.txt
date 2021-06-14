@@ -1,0 +1,9 @@
+The javacore MEMINFO section should include more detailed summary information about usage of storage to help more quickly determine which JVM components are using 32-bit vs. 64-bit storage.
+
+**Proposed Solutions**
+
+1. Update the NATIVEMEMINFO summary to split out the storage for the loaded classes into RAM and ROM classes, as these can be stored either below or above 4G depending on usage of compressed references.
+
+2. Provide an indicator of whether the RAM and ROM classes are in 32 or 64-bit storage.
+
+3. Provide an indicator of whether the JIT Data Cache and Code Cache are in 32-bit or 64-bit storage

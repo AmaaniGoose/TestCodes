@@ -1,0 +1,3 @@
+Need implement a custom classloader which is going to be defined via a system property `java.system.class.loader`, in addition, a class can only be loaded by this custom classloader, for JVM without PR #2941, a `ClassNotFoundException` should be thrown.
+
+This test is to support #2941 and prevent a regression.

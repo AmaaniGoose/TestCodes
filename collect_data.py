@@ -37,7 +37,7 @@ def store_issue_details(issue, repo, db):
 	issue_number = issue['number']
 	repo_name = repo.split('/')[-1]
 	issue_uid = f'{repo_name}_{issue_number}.txt'
-	issue_content_path = f'./data/GitHubData/IssueContent/{issue_uid}'
+	issue_content_path = f'data/GitHubData/IssueContent/{issue_uid}'
 	# test_output_path = f'./data/GitHubData/TestOutput/{issue_uid}'
 
 	#Get issue details

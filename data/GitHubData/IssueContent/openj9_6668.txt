@@ -1,0 +1,31 @@
+Failure link
+------------
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_sanity.openjdk_x86-64_mac/10/testReport/java_lang_ClassLoader_Assert/java/Assert/
+
+Optional info
+-------------
+
+- intermittent failure: no, seems to happen 2/3rds of the time.
+- regression or new test:  regression
+- if regression, what are the last passing / first failing public SHAs (OpenJ9, OMR, JCL) :
+Unknown, old test results are purged.
+- platforms: Only seen on mac, non-xl.
+
+Failure output
+--------------
+20:09:39  ACTION: main -- Error. Program `/Users/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/bin/java' timed out (timeout set to 960000ms, elapsed time including timeout handling was 998737ms).
+20:09:39  REASON: User specified action: run main/othervm Assert 
+20:09:39  TIME:   998.746 seconds
+20:09:39  messages:
+20:09:39  command: main Assert
+20:09:39  reason: User specified action: run main/othervm Assert 
+20:09:39  Mode: othervm [/othervm specified]
+20:09:39  Timeout information:
+20:09:39  Running jstack on process 9669
+20:09:39  2019-07-31T20:09:28.221217
+20:09:39  Error getting data from 9669: Exception connecting to 9669
+20:09:39  --- Timeout information end.
+20:09:39  elapsed time (seconds): 998.746
+20:09:39  configuration:
+20:09:39  STDOUT:
+20:09:39  Timeout refired 960 times

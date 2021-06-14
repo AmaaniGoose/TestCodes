@@ -1,0 +1,18 @@
+I'm opening an issue to discuss in more detail some ideas briefly talked about offline.
+
+## -Xtune:virtualized
+
+1. Increase default SCC Size
+`-Xtune:virtualized` is a mode in which the JIT generates a lot of AOT code in order to provide very fast rampup (minimize the time between application startup and steady state) and low CPU utilization. In order to get this benefit, depending on the application, the user would very likely have to increase the size of the SCC. Perhaps to improve usability, it is better to increase the size of the SCC by default when `-Xtune:virtualized` is specified.
+
+2. Enable SVM during startup
+The SVM is currently disabled  during startup. This is because of potential startup regressions when compared to no SVM during startup. However, from recent investigation, this is mainly because the bodies generated with SVM enabled are larger (because there is more inlining and more optimized code) resulting in less bodies stored into the SCC, which means less methods are AOT loaded during startup. Increasing the SCC removes this regression. However, if the SCC size is to be increased under `-Xtune:virtualized` we might as well enable SVM during startup as well.
+
+## forceAOT
+
+1. Increase SCC Size
+If it is desired to run forceAOT by default, then perhaps the default SCC size should be increased. Depending on the application being run, the default SCC can become full during startup even without forceAOT, rendering enabling forceAOT moot. 
+
+<hr/>
+
+Tagging @mpirvu @vijaysun-omr for their thoughts.

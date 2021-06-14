@@ -1,0 +1,92 @@
+Hi,
+I'v got the following core dump:
+
+`0SECTION       TITLE subcomponent dump routine
+NULL           ===============================
+1TICHARSET     ANSI_X3.4-1968
+1TISIGINFO     Dump Event "gpf" (00002000) received 
+1TIDATETIME    Date: 2020/03/24 at 10:56:21:075
+1TINANOTIME    System nanotime: 73484966233883
+1TIFILENAME    Javacore filename:    /var/log/dump/usermode/javacore.20200324.105438.5935.0008.txt
+1TIREQFLAGS    Request Flags: 0x81 (exclusive+preempt)
+1TIPREPSTATE   Prep State: 0x100 (trace_disabled)
+1TIPREPINFO    Exclusive VM access not taken: data may not be consistent across javacore sections
+NULL           ------------------------------------------------------------------------
+0SECTION       GPINFO subcomponent dump routine
+NULL           ================================
+2XHOSLEVEL     OS Level         : Linux 3.10.0-957.21.3cpx86_64
+2XHCPUS        Processors -
+3XHCPUARCH       Architecture   : amd64
+3XHNUMCPUS       How Many       : 32
+3XHNUMASUP       NUMA support enabled
+NULL           
+1XHEXCPCODE    J9Generic_Signal_Number: 00000018
+1XHEXCPCODE    Signal_Number: 0000000B
+1XHEXCPCODE    Error_Value: 00000000
+1XHEXCPCODE    Signal_Code: 00000001
+1XHEXCPCODE    Handler1: 00007FF817CFE7D0
+1XHEXCPCODE    Handler2: 00007FF8175E3670
+1XHEXCPCODE    InaccessibleAddress: 00000000000000B0
+NULL           
+1XHEXCPMODULE  Module: /opt/CPshrd-R81/jre_64/lib/amd64/compressedrefs/libj9gc29.so
+1XHEXCPMODULE  Module_base_address: 00007FF81557F000
+NULL           
+1XHREGISTERS   Registers:
+2XHREGISTER      RDI: 00007FF81805F4B0
+2XHREGISTER      RSI: 0000000001EE8500
+2XHREGISTER      RAX: 00007FF8180459A0
+2XHREGISTER      RBX: 00007FF81805F4B0
+2XHREGISTER      RCX: 000000005E09D6AC
+2XHREGISTER      RDX: 0000000000000000
+2XHREGISTER      R8: 0000000000000001
+2XHREGISTER      R9: 00007FF8155AA7B0
+2XHREGISTER      R10: 0000000000000002
+2XHREGISTER      R11: 00007FF81D5623E0
+2XHREGISTER      R12: 00007FF81805F4B0
+2XHREGISTER      R13: 00007FF7FC001A68
+2XHREGISTER      R14: 00007FF8155A8CE0
+2XHREGISTER      R15: 000000005E09D688
+2XHREGISTER      xmm0: 0000000000000000
+2XHREGISTER      xmm1: 616C2F6176616A4C
+2XHREGISTER      xmm2: 0000000000000000
+2XHREGISTER      xmm3: 0000000000000000
+2XHREGISTER      xmm4: 2F676E616C2F6176
+2XHREGISTER      xmm5: 000000003ECCCCCD
+2XHREGISTER      xmm6: 00007FF6051438F0
+2XHREGISTER      xmm7: 00007FF605143770
+2XHREGISTER      xmm8: 0000000000000000
+2XHREGISTER      xmm9: 00FFFFFFFFFFFF00
+2XHREGISTER      xmm10: 0000000000000000
+2XHREGISTER      xmm11: 000000004C570A3D
+2XHREGISTER      xmm12: 000000004909A025
+2XHREGISTER      xmm13: 000000004A2C0833
+2XHREGISTER      xmm14: 000000004AE48E00
+2XHREGISTER      xmm15: 000000004936D800
+2XHREGISTER      RIP: 00007FF815763BDA
+2XHREGISTER      GS: 0000
+2XHREGISTER      FS: 0000
+2XHREGISTER      RSP: 00007FF800FF7DD0
+2XHREGISTER      EFlags: 0000000000010202
+2XHREGISTER      CS: 0033
+2XHREGISTER      RBP: 000000005E09D6AC
+2XHREGISTER      ERR: 0000000000000004
+2XHREGISTER      TRAPNO: 000000000000000E
+2XHREGISTER      OLDMASK: 0000000000000000
+2XHREGISTER      CR2: 00000000000000B0
+1XHEXCPMODULE  Compiling method: java/lang/invoke/MutableCallSiteDynamicInvokerHandle.invokeExact_thunkArchetype_X(I)I
+NULL           
+1XHFLAGS       VM flags:00000000000502FF
+NULL     `
+
+java -version
+java version "1.8.0_231"
+Java(TM) SE Runtime Environment (build 8.0.6.0 - pxi3280sr6-20191107_01(SR6))
+IBM J9 VM (build 2.9, JRE 1.8.0 Linux x86-32-Bit 20191106_432135 (JIT enabled, AOT enabled)
+OpenJ9   - f0b6be7
+OMR      - 18d8f94
+IBM      - 233dfb5)
+JCL - 20191016_01 based on Oracle jdk8u231-b10
+
+excluding this function (java/lang/invoke/MutableCallSiteDynamicInvokerHandle.invokeExact_thunkArchetype_X(I)I) from JIT solve the issue but caused a performance degradation, can you please assist
+
+Thanks

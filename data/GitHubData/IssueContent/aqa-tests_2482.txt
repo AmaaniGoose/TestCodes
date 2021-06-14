@@ -1,0 +1,3 @@
+An enhancement to the [runAqa workflow ](https://github.com/AdoptOpenJDK/openjdk-tests/blob/master/.github/workflows/runAqa.yml)that will restrict what gets built for the external set of tests (otherwise each subdirectory is built, including Dockerfiles generated for all 23 subdirs.
+
+See https://github.com/AdoptOpenJDK/openjdk-tests/pull/2480#issuecomment-815818366 and https://github.com/AdoptOpenJDK/openjdk-tests/pull/2480#issuecomment-815821704

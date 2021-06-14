@@ -1,0 +1,57 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.functional_x86-64_linux_OMR_testList_0/200
+testJITServer_1
+```
+////////////////////////////////////////////////////////////////////////
+//// JITServer is currently a technology preview. Its use is not yet supported
+//// [IncludeExcludeTestAnnotationTransformer] [INFO] exclude file is /home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_x86-64_linux_OMR_testList_0/openjdk-tests/TKG/../TestConfig/resources/excludes/latest_exclude_11.txt
+//// ...
+//// ... TestNG 6.14.2 by Cédric Beust (cedric@beust.com)
+//// ...
+//// 
+//// [ZipTester] [INFO] -loopforever was specified; test will run continuously until the JVM is terminated.
+//// Unhandled exception
+//// Type=Segmentation error vmState=0x00000000
+//// J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000001
+//// Handler1=00007F34398B4DA0 Handler2=00007F343961AA10 InaccessibleAddress=00007EE055701418
+//// RDI=00007F340F126BF8 RSI=0000000000000000 RAX=00007EE055701414 RBX=0000000000019A00
+//// RCX=0000000000000003 RDX=00007F34144C9B2D R8=00007F340F1270FF R9=00007F340F127196
+//// R10=0000000000000006 R11=000000000000000A R12=00007F343B3161F0 R13=00007F34144C9B2D
+//// R14=00007F3434024F70 R15=00007F340F126BF8
+//// RIP=00007F3433648BBD GS=0000 FS=0000 RSP=00007F343B316140
+//// EFlags=0000000000010246 CS=0033 RBP=00007F343AB13360 ERR=0000000000000004
+//// TRAPNO=000000000000000E OLDMASK=0000000000000000 CR2=00007EE055701418
+//// xmm0 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+//// xmm1 00000007ffefa580 (f: 4293895680.000000, d: 1.697544e-313)
+//// xmm2 00007f343b316430 (f: 993092672.000000, d: 6.910116e-310)
+//// xmm3 00007f343b316430 (f: 993092672.000000, d: 6.910116e-310)
+//// xmm4 00007f343b316430 (f: 993092672.000000, d: 6.910116e-310)
+//// xmm5 00000000393df5c5 (f: 960361920.000000, d: 4.744818e-315)
+//// xmm6 4c00736968740065 (f: 1752432768.000000, d: 1.290794e+58)
+//// xmm7 000000003e0ea74e (f: 1041147712.000000, d: 5.143953e-315)
+//// xmm8 1c00010401001700 (f: 16783104.000000, d: 8.088354e-174)
+//// xmm9 a2680190110003b6 (f: 285213632.000000, d: -6.151964e-143)
+//// xmm10 000000003e8c05e2 (f: 1049363968.000000, d: 5.184547e-315)
+//// xmm11 000000003c075284 (f: 1007112832.000000, d: 4.975799e-315)
+//// xmm12 0000000040400000 (f: 1077936128.000000, d: 5.325712e-315)
+//// xmm13 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+//// xmm14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+//// xmm15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+//// Module=/home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_x86-64_linux_OMR_testList_0/openjdkbinary/j2sdk-image/lib/compressedrefs/libj9jit29.so
+//// Module_base_address=00007F34331DB000
+//// Target=2_90_20210208_825 (Linux 4.4.0-140-generic)
+//// CPU=amd64 (8 logical CPUs) (0x3eae99000 RAM)
+//// ----------- Stack Backtrace -----------
+//// (0x00007F3433648BBD [libj9jit29.so+0x46dbbd])
+//// (0x00007F3433B2D2DB [libj9jit29.so+0x9522db])
+//// (0x00007F3433B256B7 [libj9jit29.so+0x94a6b7])
+//// (0x00007F3433B3BA26 [libj9jit29.so+0x960a26])
+//// ---------------------------------------
+...
+FAILED: testServerUnreachableForAWhile
+java.lang.AssertionError: Expected an exit value of 0 or 143, got 255 instead.
+	at org.testng.AssertJUnit.fail(AssertJUnit.java:59)
+	at jit.test.jitserver.JITServerTest.destroyAndCheckProcess(JITServerTest.java:144)
+	at jit.test.jitserver.JITServerTest.testServerUnreachableForAWhile(JITServerTest.java:315)
+```
+
+@mpirvu fyi

@@ -1,0 +1,19 @@
+Currently there is no way to generate AOT code for Method Handles. However, in Java 11 (technically from Java 9), String concatenation is done via `invokedynamic`. Lambdas are also implemented using Method Handles. As the uses of Method Handles increases, it becomes more important to enable AOT support. ~While it may have been extremely difficult to impossible in the past, with the SVM, it is now a more manageable problem to tackle. That said, this is still going to be somewhat of a mini-epic.~ See comment below.
+
+- [Technical Discussion regarding AOT Validations for Method Handles](https://github.com/eclipse/openj9/issues/11209)
+
+### Tasks
+
+1. Ensure creation/validation of class chain of the class of the generated method
+2. Do class chain validation of the class of the patched object (if a `ldc` bytecode exists)
+3. Do a `getClassFromSignature` query using the name of the class in 2 and compare the returned J9Class for equality with the J9Class of the patched object from 2.
+4. Add new relocation record for J9Method acquired from the MemberName object stored in a field of MH, or from the side table of a RAM class with invokedynamic/invokehandle
+  4 a. Update relocation of guards / metadata inlining table to know how to materialize associated J9Method/J9Class.
+5. Add AOT support for the call to invokeBasic, linkTo* (see https://github.com/eclipse/openj9/issues/4850#issuecomment-730439646) - may need a new relocation record for the native address.
+
+### PRs
+
+- [ ] Initial AOT support for new MH implementation (JDK 16) (https://github.com/eclipse/openj9/pull/12546)
+- [ ] Initial AOT support for new MH implementation (JDK 11)
+- [ ] Don't pretend invokeDynamic and invokeHandle dispatches are unresolved
+- [ ] Enable MH Transformer (requires KOT support which can only be done with the SVM)

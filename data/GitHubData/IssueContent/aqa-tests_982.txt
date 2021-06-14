@@ -1,0 +1,8 @@
+Failed
+java/lang/ClassLoader/Assert.java.Assert (from java_lang_ClassLoader_Assert.java)
+Execution failed: exit code 1    
+
+This was running on Adopt as well as hyc-runtimes-jenkins.swg-devops.com, and still same failures.
+SDK Url ; https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u-2019-03-11-11-19/OpenJDK8U-jdk_ppc64_aix_openj9_2019-03-11-11-19.tar.gz
+
+https://hyc-runtimes-jenkins.swg-devops.com/view/Test_grinder/job/Grinder/1770/parameters/

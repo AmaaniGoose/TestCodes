@@ -1,0 +1,6 @@
+As suggested in https://github.com/AdoptOpenJDK/openjdk-build/pull/2397#issuecomment-773488556 I wish to trial run any documentation that is created to add tests for the `release` file.
+
+This has been prompted by https://github.com/AdoptOpenJDK/openjdk-tests/issues/2024 and an error discovered with the heap size value on certain architectures (https://github.com/AdoptOpenJDK/openjdk-build/pull/2413)
+
+TODO: 
+- Add table of values and methods to test

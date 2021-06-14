@@ -1,0 +1,1 @@
+Vector registers are currently not preserved correctly and efficiently at least on Power and X. Because of that, we temporarily disabled autoSIMD for loops that contain asyncchecks. See https://github.com/eclipse/openj9/pull/11126

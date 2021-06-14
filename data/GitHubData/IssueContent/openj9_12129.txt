@@ -1,0 +1,25 @@
+Received a recent customer problem where they had `-Xmx` == `-Xmnx`. This should not be allowed and a check should be included to prevent this scenario from occurring. 
+
+As taken from @dmitripivkine testing, setting `-Xmx` and `-Xmnx`
+```
+$ ../temp/jdk-11.0.10+9/bin/java -Xmx4g -Xmnx4g -version
+openjdk version "11.0.10" 2021-01-19
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.10+9-202101291824)
+Eclipse OpenJ9 VM AdoptOpenJDK (build master-33b153130, JRE 11 Linux amd64-64-Bit Compressed References 20210129_915 (JIT enabled, AOT enabled)
+OpenJ9   - 33b153130
+OMR      - 841a43702
+JCL      - f7475ea97e based on jdk-11.0.10+9)
+```
+
+and testing `-Xmx` and `-Xmn`
+```
+$ ../temp/jdk-11.0.10+9/bin/java -Xmx4g -Xmn4g -version
+JVMJ9GC019E -Xmn too large for -Xmx
+JVMJ9VM015W Initialization error for library j9gc29(2): Failed to initialize
+Error: Could not create the Java Virtual Machine.
+Error: A fatal exception has occurred. Program will exit.
+```
+
+There is no check for the `-Xmnx` case while there is a check for the `-Xmn` case. A check should be added for the `-Xmnx` case  (something similar to the check to the `-Xmn` case)
+
+This case should also be reflected to the documentation for future reference

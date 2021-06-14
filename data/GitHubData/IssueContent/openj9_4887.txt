@@ -1,0 +1,11 @@
+Open this issue and see if we would like to have Slack integration set up for `eclipse/openj9` repo.
+
+`/github subscribe https://github.com/eclipse/openj9`
+```
+Either the app isn't installed on your repository or the repository does not exist. 
+Install it to proceed.
+_Note: You need to be an organization owner to install the app (or ask one to 
+install it for you)._
+```
+
+Getting notifications directly in Slack channels on pull requests, issues opened/closed, and commits etc. would help us better monitor the repos we work on. Currently we do get email notifications from GH and some of us set up email forwarding to Slack, but not all. Based on the description from https://github.com/integrations/slack, I think we could also close/open issues directly from Slack channels. Teams could set up specific Slack channels to better monitor GH activities on specific branches.

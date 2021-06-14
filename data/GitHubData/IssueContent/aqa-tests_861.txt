@@ -1,0 +1,1 @@
+For any Shared Classes tests for OpenJ9, as well as when Shared Classes becomes default in Openj9, it would be very helpful for debugging for the test harness to save the SCC file generated or used by the test. I believe the test harness already saves the core files, so this would be an extension of that.

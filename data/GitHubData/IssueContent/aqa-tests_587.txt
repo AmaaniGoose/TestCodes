@@ -1,0 +1,5 @@
+- [x] Open-Liberty bug opened upstream : https://github.com/OpenLiberty/open-liberty/issues/5125
+
+- [ ] Payara-mp-tck issue https://github.com/AdoptOpenJDK/openjdk-tests/issues/1160  : https://github.com/payara/MicroProfile-TCK-Runners/issues/42 
+
+- [ ] jenkins error https://github.com/AdoptOpenJDK/openjdk-tests/issues/1409 : https://github.com/eclipse/openj9/issues/7669

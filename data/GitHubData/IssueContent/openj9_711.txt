@@ -1,0 +1,13 @@
+I am proposing to remove all the logic in OMR and OpenJ9 compiler code supporting VMThread reclamation.  Recall, this is logic to re-use the register normally reserved for the J9VMThread in areas of high register pressure.  If the JIT can prove that the VMThread context is not needed in a context where registers are required to avoid spilling then it may spill the VMThread register to free it for general register assignment.  There is also logic to use the VMThread register in a GRA context, as well as a late tree-lowering pass (late edge splitting) to help with reclamation placement.
+
+Sounds great, right?  But,
+
+* It is currently only enabled by default on 32-bit Windows.  Z has some support, but it is an independent implementation and has been disabled by default for years (and likely quite dusty).  P and ARM never implemented support for it.  The optimization was really intended to benefit register constrained architectures, of which IA32 was the prime consumer.
+* The logic to accomplish this complicates the register assigner (to decide to use the register and manage spilling of it), the machine state, and evaluators (to describe the ranges in which the VMThread register can be re-used).
+* There is no measurable performance benefit on most (all?) workloads that justifies the complexity it insists upon the codebase.  This feature has been disabled in the past on Win32 (about 4 years ago) and showed no degradation at all on most workloads (enterprise workloads and benchmarks).
+* For the IA32 implementation at least, the logic to guard where a VMThread can be reclaimed is highly OpenJ9-specific.  On x86, its not general enough in its current form to be suitable for non-OpenJ9 runtimes and therefore doesn't belong in OMR.
+* It has been a rich source of bugs over the years as developers need to be vigilant about describing the dependencies on their code on the VMThread register.  In my mind its not worth generalizing any of this logic.  Should the need arise in the future (unlikely) I believe this support needs to be re-designed to support a language-independent implementation.
+
+So the proposal is to remove all the logic supporting VMThread reclamation, which affects 32-bit Windows only.
+
+Thoughts?   @vijaysun-omr @andrewcraik @fjeremic @ymanton @gita-omr @zl-wang 

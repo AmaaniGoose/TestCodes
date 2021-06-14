@@ -1,0 +1,121 @@
+Java -version output
+--------------------
+openjdk version "1.8.0_232"
+OpenJDK Runtime Environment (build 1.8.0_232-201910110340-b08)
+Eclipse OpenJ9 VM (build master-fe39103a7, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20191011_432 (JIT enabled, AOT enabled)
+OpenJ9   - fe39103a7
+OMR      - bc5ceea7
+JCL      - 660f897065 based on jdk8u232-b08)
+
+
+Summary of problem
+------------------
+The benchmark runs fine with default and small size workloads. Only with "large" size, this issue is observed.
+HotSpot build works fine even with large size.
+
+Command used to run the benchmark:
+java  -jar ../dacapo/dacapo-9.12-MR1-bach.jar -s large eclipse
+
+Platform: Linux X64
+
+Below is the error I get: 
+```
+Unzip workspace
+===== DaCapo 9.12-MR1 eclipse starting =====
+Initialize workspace ..............................................................
+Index workspace #0: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9jit29.so(+0x791045) [0x7fe721417045]
+#1: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9jit29.so(+0x79be80) [0x7fe721421e80]
+#2: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9jit29.so(+0x1287be) [0x7fe720dae7be]
+#3: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9prt29.so(+0x200aa) [0x7fe722af50aa]
+#4: /lib/x86_64-linux-gnu/libpthread.so.0(+0x11390) [0x7fe724e86390]
+#5: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9jit29.so(+0x713ed4) [0x7fe721399ed4]
+#6: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9jit29.so(+0x71404d) [0x7fe72139a04d]
+#7: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9jit29.so(+0x71480b) [0x7fe72139a80b]
+#8: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9jit29.so(+0x60f3c9) [0x7fe7212953c9]
+#9: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9jit29.so(+0x60ed69) [0x7fe721294d69]
+#10: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9jit29.so(+0x6101db) [0x7fe7212961db]
+#11: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9jit29.so(+0x400fd1) [0x7fe721086fd1]
+#12: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9jit29.so(+0x136ce8) [0x7fe720dbcce8]
+#13: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9jit29.so(+0x137b22) [0x7fe720dbdb22]
+#14: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9prt29.so(+0x20be3) [0x7fe722af5be3]
+#15: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9jit29.so(+0x139589) [0x7fe720dbf589]
+#16: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9jit29.so(+0x139ab2) [0x7fe720dbfab2]
+#17: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9jit29.so(+0x135b2b) [0x7fe720dbbb2b]
+#18: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9jit29.so(+0x135e4a) [0x7fe720dbbe4a]
+#19: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9jit29.so(+0x135f0a) [0x7fe720dbbf0a]
+#20: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9prt29.so(+0x20be3) [0x7fe722af5be3]
+#21: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9jit29.so(+0x136364) [0x7fe720dbc364]
+#22: /java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9thr29.so(+0xe156) [0x7fe722f64156]
+#23: /lib/x86_64-linux-gnu/libpthread.so.0(+0x76ba) [0x7fe724e7c6ba]
+#24: function clone+0x6d [0x7fe72479641d]
+Unhandled exception
+Type=Floating point error vmState=0x000536ff
+J9Generic_Signal_Number=00000888 Signal_Number=00000008 Error_Value=00000000 Signal_Code=00000001
+Handler1=00007FE723210830 Handler2=00007FE722AF4E80
+RDI=00007FE6480142D0 RSI=0000000000000000 RAX=0000000000002710 RBX=00007FE64809F870
+RCX=0000000000002710 RDX=0000000000000000 R8=00000000000002A3 R9=0000000000000000
+R10=0000000000000010 R11=00007FE724825150 R12=00007FE67FC45C20 R13=00007FE67FDE0000
+R14=000000000000029B R15=000000000000029A
+RIP=00007FE721399ED4 GS=0000 FS=0000 RSP=00007FE709C91150
+EFlags=0000000000010246 CS=0033 RBP=00007FE709C91370 ERR=0000000000000000
+TRAPNO=0000000000000000 OLDMASK=0000000000000000 CR2=0000000000000000
+xmm0 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm1 00007fe648031450 (f: 1208161408.000000, d: 6.947898e-310)
+xmm2 00007fe6480313f0 (f: 1208161280.000000, d: 6.947898e-310)
+xmm3 00007fe648031390 (f: 1208161152.000000, d: 6.947898e-310)
+xmm4 00007fe648031330 (f: 1208161024.000000, d: 6.947898e-310)
+xmm5 00007fe6480311b0 (f: 1208160640.000000, d: 6.947898e-310)
+xmm6 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm7 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm8 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm9 000d021e09180205 (f: 152568320.000000, d: 1.809023e-308)
+xmm10 05000f09430b1e03 (f: 1124802048.000000, d: 1.349912e-284)
+xmm11 0000000049d70a38 (f: 1238829568.000000, d: 6.120632e-315)
+xmm12 000000004689a022 (f: 1183424512.000000, d: 5.846894e-315)
+xmm13 0000000047ac082f (f: 1202456576.000000, d: 5.940925e-315)
+xmm14 0000000048650dc0 (f: 1214582272.000000, d: 6.000833e-315)
+xmm15 0000000046b73e38 (f: 1186414080.000000, d: 5.861665e-315)
+Module=/java/O8_j9_lnx64-20191011/jre/lib/amd64/compressedrefs/libj9jit29.so
+Module_base_address=00007FE720C86000
+
+Method_being_compiled=org/eclipse/jdt/internal/compiler/parser/Parser.consumeRule(I)V
+Target=2_90_20191011_432 (Linux 4.4.0-164-generic)
+CPU=amd64 (16 logical CPUs) (0xbc9342000 RAM)
+----------- Stack Backtrace -----------
+(0x00007FE721399ED4 [libj9jit29.so+0x713ed4])
+(0x00007FE72139A04D [libj9jit29.so+0x71404d])
+(0x00007FE72139A80B [libj9jit29.so+0x71480b])
+(0x00007FE7212953C9 [libj9jit29.so+0x60f3c9])
+(0x00007FE721294D69 [libj9jit29.so+0x60ed69])
+(0x00007FE7212961DB [libj9jit29.so+0x6101db])
+(0x00007FE721086FD1 [libj9jit29.so+0x400fd1])
+(0x00007FE720DBCCE8 [libj9jit29.so+0x136ce8])
+(0x00007FE720DBDB22 [libj9jit29.so+0x137b22])
+(0x00007FE722AF5BE3 [libj9prt29.so+0x20be3])
+(0x00007FE720DBF589 [libj9jit29.so+0x139589])
+(0x00007FE720DBFAB2 [libj9jit29.so+0x139ab2])
+(0x00007FE720DBBB2B [libj9jit29.so+0x135b2b])
+(0x00007FE720DBBE4A [libj9jit29.so+0x135e4a])
+(0x00007FE720DBBF0A [libj9jit29.so+0x135f0a])
+(0x00007FE722AF5BE3 [libj9prt29.so+0x20be3])
+(0x00007FE720DBC364 [libj9jit29.so+0x136364])
+(0x00007FE722F64156 [libj9thr29.so+0xe156])
+(0x00007FE724E7C6BA [libpthread.so.0+0x76ba])
+clone+0x6d (0x00007FE72479641D [libc.so.6+0x10741d])
+---------------------------------------
+JVMDUMP039I Processing dump event "gpf", detail "" at 2019/10/14 20:19:52 - please wait.
+JVMDUMP032I JVM requested System dump using '/java/rt-cloud/rt-cloud-benchmarks-master/dacapo/scripts/core.20191014.201952.3847.0001.dmp' in response to an event
+JVMPORT030W /proc/sys/kernel/core_pattern setting "|/usr/share/apport/apport %p %s %c %d %P" specifies that the core dump is to be piped to an external program.  Attempting to rename either core or core.3945.
+
+JVMDUMP010I System dump written to /java/rt-cloud/rt-cloud-benchmarks-master/dacapo/scripts/core.20191014.201952.3847.0001.dmp
+JVMDUMP032I JVM requested Java dump using '/java/rt-cloud/rt-cloud-benchmarks-master/dacapo/scripts/javacore.20191014.201952.3847.0002.txt' in response to an event
+JVMDUMP010I Java dump written to /java/rt-cloud/rt-cloud-benchmarks-master/dacapo/scripts/javacore.20191014.201952.3847.0002.txt
+JVMDUMP032I JVM requested Snap dump using '/java/rt-cloud/rt-cloud-benchmarks-master/dacapo/scripts/Snap.20191014.201952.3847.0003.trc' in response to an event
+JVMDUMP010I Snap dump written to /java/rt-cloud/rt-cloud-benchmarks-master/dacapo/scripts/Snap.20191014.201952.3847.0003.trc
+JVMDUMP007I JVM Requesting JIT dump using '/java/rt-cloud/rt-cloud-benchmarks-master/dacapo/scripts/jitdump.20191014.201952.3847.0004.dmp'
+...............................................................
+#JITDUMP:  vmThread=0000000000F49B00 Recursive crash occurred. Aborting JIT dump.JVMDUMP010I JIT dump written to /java/rt-cloud/rt-cloud-benchmarks-master/dacapo/scripts/jitdump.20191014.201952.3847.0004.dmp
+JVMDUMP013I Processed dump event "gpf", detail "".
+```
+
+[javacores.zip](https://github.com/eclipse/openj9/files/3725148/javacores.zip)

@@ -1,0 +1,12 @@
+Test https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/lang/ProcessBuilder/SkipTest.java fails on Windows consistently with this or very similar (different Agent number identified) ...
+
+"TEST RESULT: Error. Agent error: java.lang.Exception: Agent 1 timed out with a timeout of 960 seconds; check console log for any additional details"
+
+Examples ...
+https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/664/testReport/junit/java_lang_ProcessBuilder_SkipTest/java/SkipTest
+https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/665/testReport/junit/java_lang_ProcessBuilder_SkipTest/java/SkipTest
+https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/666/testReport/junit/java_lang_ProcessBuilder_SkipTest/java/SkipTest
+
+No such problem observed running against other platforms - e.g. Linux PPC64 - https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/668/testReport/java_lang_ProcessBuilder_SkipTest/java/SkipTest
+
+No such problem with Hotspot on Windows - https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/662/consoleText

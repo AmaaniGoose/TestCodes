@@ -1,0 +1,14 @@
+There is a failure creating a core file when running cmdLineTester_GCCheck in an internal build. The failure output shows the following failure to find the main class org.openj9.test.nogc.Main. This doesn't cause the test to fail, but the test is not running as intended.
+```
+Running command: "/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_linux_Personal_testList_0/openjdkbinary/j2sdk-image/bin/java"  -Xjit -Xgcpolicy:gencon -Xnocompressedrefs  -Xmx256m -cp /home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_linux_Personal_testList_0/openjdk-tests/TKG/../../jvmtest/functional/cmdline_options_testresources/cmdlinetestresources.jar:/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_linux_Personal_testList_0/openjdk-tests/TKG/../../jvmtest/functional/cmdLineTests/gcCheck/gcCheck.jar -Xdump:system:file=j9core.dmp,events=vmstop,request=exclusive+compact org.openj9.test.nogc.Main
+Time spent starting: 13 milliseconds
+Time spent executing: 6629 milliseconds
+Test result: FAILED
+Output from test:
+ [ERR] Error: Could not find or load main class org.openj9.test.nogc.Main
+ [ERR] Caused by: java.lang.ClassNotFoundException: org.openj9.test.nogc.Main
+ [ERR] JVMDUMP039I Processing dump event "vmstop", detail "#0000000000000001" at 2021/04/17 12:31:08 - please wait.
+ ...
+```
+
+@llxia fyi

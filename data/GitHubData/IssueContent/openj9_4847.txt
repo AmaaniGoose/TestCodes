@@ -1,0 +1,3 @@
+Currently, if a class (lets say `Foo`) has a class chain stored in the SCC, if we try to remember `Foo`'s parent (lets say `Bar`), we do not reuse part of `Foo`'s class chain, even though `Bar`'s class chain is fundamentally a subset of `Foo`'s class chain. Instead, we store `Bar`'s own class chain separately.
+
+By changing the way class chains are structured in the SCC to allow such reuse, we not only save space in the SCC, but also enforce the invariant that a parent class must succeed being remembered in the SCC if its child succeeded (thereby preventing bugs such as https://github.com/eclipse/openj9/issues/4751).

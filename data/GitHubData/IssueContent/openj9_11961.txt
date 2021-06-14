@@ -1,0 +1,5 @@
+This issue was created primarily as a reminder.
+
+Unless #9416 is resolved in time for 0.25, the workaround that has been used in the previous two releases should be ported to the 0.25 release (see #11431).
+
+Also, the diagnostic code added in #11871 should be reverted.

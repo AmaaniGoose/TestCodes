@@ -1,0 +1,53 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk8_j9_extended.perf_x86-64_linux/11/` (`ub20x64rt3-2`):
+```
+openjdk version "1.8.0_302"
+OpenJDK Runtime Environment (build 1.8.0_302-b05)
+Eclipse OpenJ9 VM (build master-f6bdf7af9, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20210605_150 (JIT enabled, AOT enabled)
+OpenJ9   - f6bdf7af9
+OMR      - bb369d1aa
+JCL      - f7ae2714 based on jdk8u302-b05)
+```
+[Rerun in Grinder](https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?TARGET=renaissance-db-shootout_0&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;PLATFORM=x86-64_linux&amp;KEEP_REPORTDIR=false&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-linux-x64-openj9%2F150%2FOpenJDK8U-jre_x64_linux_openj9_2021-06-05-02-30.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-linux-x64-openj9%2F150%2FOpenJDK8U-testimage_x64_linux_openj9_2021-06-05-02-30.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-linux-x64-openj9%2F150%2FOpenJDK8U-jdk_x64_linux_openj9_2021-06-05-02-30.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-linux-x64-openj9%2F150%2FOpenJDK8U-debugimage_x64_linux_openj9_2021-06-05-02-30.tar.gz&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;LIGHT_WEIGHT_CHECKOUT=true&amp;ARTIFACTORY_SERVER=na.artifactory.swg-devops&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=8&amp;USER_CREDENTIALS_ID=&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=&amp;JDK_REPO=https%3A%2F%2Fgithub.com%2Fibmruntimes%2Fopenj9-openjdk-jdk8&amp;RELEASE_TAG=&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;UPSTREAM_JOB_NAME=&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=openj9&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=openj9&amp;SSH_AGENT_CREDENTIAL=83181e25-eea4-4f55-8b3e-e79615733226&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=4e18ffe7-b1b1-4272-9979-99769b68bcc2&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=perf&amp;UPSTREAM_JOB_NUMBER=&amp;TIME_LIMIT=20&amp;JVM_OPTIONS=&amp;PARALLEL=)
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+[2021-06-05T03:23:56.326Z] Running test renaissance-db-shootout_0 ...
+[2021-06-05T03:23:56.326Z] ===============================================
+[2021-06-05T03:23:56.326Z] renaissance-db-shootout_0 Start Time: Fri Jun  4 20:23:56 2021 Epoch Time (ms): 1622863436182
+[2021-06-05T03:23:56.326Z] "/home/jenkins/workspace/Test_openjdk8_j9_extended.perf_x86-64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk8_j9_extended.perf_x86-64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+[2021-06-05T03:23:56.326Z] JVMSHRC005I No shared class caches available
+[2021-06-05T03:23:56.326Z] JVMSHRC005I No shared class caches available
+[2021-06-05T03:23:56.326Z] cache cleanup done
+[2021-06-05T03:23:56.326Z] variation: NoOptions
+[2021-06-05T03:23:56.326Z] JVM_OPTIONS:  
+[2021-06-05T03:23:56.326Z] { itercnt=1; \
+[2021-06-05T03:23:56.326Z] mkdir -p "/home/jenkins/workspace/Test_openjdk8_j9_extended.perf_x86-64_linux/openjdk-tests/TKG/../TKG/output_16228620741551/renaissance-db-shootout_0"; \
+[2021-06-05T03:23:56.326Z] cd "/home/jenkins/workspace/Test_openjdk8_j9_extended.perf_x86-64_linux/openjdk-tests/TKG/../TKG/output_16228620741551/renaissance-db-shootout_0"; \
+[2021-06-05T03:23:56.326Z] "/home/jenkins/workspace/Test_openjdk8_j9_extended.perf_x86-64_linux/openjdkbinary/j2sdk-image/bin/java"  -jar "/home/jenkins/workspace/Test_openjdk8_j9_extended.perf_x86-64_linux/openjdk-tests/TKG/../../jvmtest/perf/renaissance/renaissance.jar" --json ""/home/jenkins/workspace/Test_openjdk8_j9_extended.perf_x86-64_linux/openjdk-tests/TKG/../TKG/output_16228620741551/renaissance-db-shootout_0"/db-shootout.json" db-shootout; \
+[2021-06-05T03:23:56.326Z] 	if [ $? -eq 0 ] ; then echo ""; echo "renaissance-db-shootout_0""_PASSED"; echo ""; cd /home/jenkins/workspace/Test_openjdk8_j9_extended.perf_x86-64_linux/openjdk-tests/TKG/..; rm -f -r "/home/jenkins/workspace/Test_openjdk8_j9_extended.perf_x86-64_linux/openjdk-tests/TKG/../TKG/output_16228620741551/renaissance-db-shootout_0"; else echo ""; echo "renaissance-db-shootout_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/home/jenkins/workspace/Test_openjdk8_j9_extended.perf_x86-64_linux/openjdk-tests/TKG/../TKG/output_16228620741551/TestTargetResult";
+[2021-06-05T03:24:23.694Z] SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+[2021-06-05T03:24:23.694Z] SLF4J: Defaulting to no-operation (NOP) logger implementation
+[2021-06-05T03:24:23.694Z] SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+[2021-06-05T03:24:31.862Z] ====== db-shootout (database), iteration 0 started ======
+[2021-06-05T03:24:43.869Z] 03:24:43.455 0x765f00j9vmutil(j9vm).15     *   ** ASSERTION FAILED ** at /home/jenkins/workspace/build-scripts/jobs/jdk8u/jdk8u-linux-x64-openj9/workspace/build/src/openj9/runtime/util/fieldutil.c:156: ((((UDATA)sectionStart % sizeof(U_32)) == 0))
+[2021-06-05T03:24:43.869Z] JVMDUMP039I Processing dump event "traceassert", detail "" at 2021/06/04 20:24:43 - please wait.
+[2021-06-05T03:24:43.869Z] JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.perf_x86-64_linux/openjdk-tests/TKG/output_16228620741551/renaissance-db-shootout_0/core.20210604.202443.3197378.0001.dmp' in response to an event
+[2021-06-05T03:24:49.398Z] JVMPORT030W /proc/sys/kernel/core_pattern setting "|/usr/share/apport/apport %p %s %c %d %P %E" specifies that the core dump is to be piped to an external program.  Attempting to rename either core or core.3197447.
+[2021-06-05T03:24:49.398Z] 
+[2021-06-05T03:24:49.398Z] JVMDUMP010I System dump written to /home/jenkins/workspace/Test_openjdk8_j9_extended.perf_x86-64_linux/openjdk-tests/TKG/output_16228620741551/renaissance-db-shootout_0/core.20210604.202443.3197378.0001.dmp
+[2021-06-05T03:24:49.398Z] JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.perf_x86-64_linux/openjdk-tests/TKG/output_16228620741551/renaissance-db-shootout_0/javacore.20210604.202443.3197378.0002.txt' in response to an event
+[2021-06-05T03:24:49.398Z] JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_extended.perf_x86-64_linux/openjdk-tests/TKG/output_16228620741551/renaissance-db-shootout_0/javacore.20210604.202443.3197378.0002.txt
+[2021-06-05T03:24:49.398Z] JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Test_openjdk8_j9_extended.perf_x86-64_linux/openjdk-tests/TKG/output_16228620741551/renaissance-db-shootout_0/Snap.20210604.202443.3197378.0003.trc' in response to an event
+[2021-06-05T03:24:49.398Z] JVMDUMP010I Snap dump written to /home/jenkins/workspace/Test_openjdk8_j9_extended.perf_x86-64_linux/openjdk-tests/TKG/output_16228620741551/renaissance-db-shootout_0/Snap.20210604.202443.3197378.0003.trc
+[2021-06-05T03:24:49.398Z] JVMDUMP013I Processed dump event "traceassert", detail "".
+[2021-06-05T03:24:49.398Z] 
+[2021-06-05T03:24:49.398Z] renaissance-db-shootout_0_FAILED
+```

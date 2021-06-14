@@ -1,0 +1,10 @@
+The hot loop of the LU matrix factorization kernel of the SciMark benchmark is suitable for auto-SIMD, but currently isn't converted because it uses multiply-subtract. The current auto-SIMD optimisation is capable of transforming multiply-adds, and support for multiply-subtract is being implemented.
+
+The loop would also benefit from the use of four-wide avx instructions for the vector double operations when auto-SIMD reduces it.
+
+Testing on 32 core Xeon(R) CPU E7-8867
+
+OpenJ9 2820 Mflops vs HotSpot 4445 Mflops
+
+By studying the OpenJ9 profile we estimate that implementing the two improvements above should help substantially.
+

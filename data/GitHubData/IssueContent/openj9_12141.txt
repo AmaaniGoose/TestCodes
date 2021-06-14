@@ -1,0 +1,19 @@
+We had an issue last year where the SCC range checks caused a gpf. None of our tests where able to catch this issue:
+
+```
+        j9vm29!j9shr_Query_IsAddressInCache+0x29
+        j9vm29!ComparingCursor::isRangeValidForUTF8Ptr()
+        j9vm29!ComparingCursor::writeSRP()
+        j9vm29!ROMClassWriter::ConstantPoolWriter::visitString()
+        j9vm29!ConstantPoolMap::constantPoolDo()
+        j9vm29!ROMClassWriter::writeConstantPool+0x7a
+        j9vm29!ROMClassWriter::writeROMClass()
+        j9vm29!ROMClassBuilder::compareROMClassForEquality+0x136
+        j9vm29!ROMClassBuilder::prepareAndLaydown()
+        j9vm29!ROMClassBuilder::buildROMClass()
+        j9vm29!j9bcutil_buildRomClass()
+```
+
+https://github.com/eclipse/openj9/issues/11504
+
+We need to introduce a test that ensures core SCC functionality such as this is working.

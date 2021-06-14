@@ -1,0 +1,83 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk11_j9_extended.perf_ppc64_aix/3`:
+```
+01:46:08  openjdk version "11.0.11" 2021-04-20
+01:46:08  OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.11+6)
+01:46:08  Eclipse OpenJ9 VM AdoptOpenJDK (build master-67bdb5a35, JRE 11 AIX ppc64-64-Bit Compressed References 20210312_78 (JIT enabled, AOT enabled)
+01:46:08  OpenJ9   - 67bdb5a35
+01:46:08  OMR      - 2c0d1393c
+01:46:08  JCL      - 8e3c671652 based on jdk-11.0.11+6)
+```
+to rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links:
+02:27:25  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&JDK_VENDOR=adoptopenjdk&BUILD_LIST=perf&PLATFORM=ppc64_aix_mixed&TARGET=renaissance-als_0
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+===============================================
+Running test renaissance-als_0 ...
+===============================================
+renaissance-als_0 Start Time: Fri Mar 12 23:53:01 2021 Epoch Time (ms): 1615614781851
+variation: NoOptions
+JVM_OPTIONS:  
+
+====== als (apache-spark) [default], iteration 2 started ======
+GC before operation: completed in 119.526 ms, heap usage 359.201 MB -> 254.724 MB.
+21/03/12 23:53:40 ERROR Executor: Exception in task 0.0 in stage 238.0 (TID 314)
+java.lang.StackOverflowError
+	at java.base/java.io.ObjectInputStream.redirectedReadObject(ObjectInputStream.java:507)
+	at scala.collection.immutable.List$SerializationProxy.readObject(List.scala:479)
+	at jdk.internal.reflect.GeneratedMethodAccessor9.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at java.base/java.io.ObjectStreamClass.invokeReadObject(ObjectStreamClass.java:1175)
+	at java.base/java.io.ObjectInputStream.readSerialData(ObjectInputStream.java:2452)
+	at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2318)
+	at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1801)
+	at java.base/java.io.ObjectInputStream.defaultReadFields(ObjectInputStream.java:2593)
+	at java.base/java.io.ObjectInputStream.readSerialData(ObjectInputStream.java:2485)
+	at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2318)
+	at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1801)
+	at java.base/java.io.ObjectInputStream.defaultReadFields(ObjectInputStream.java:2593)
+	at java.base/java.io.ObjectInputStream.readSerialData(ObjectInputStream.java:2485)
+	at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2318)
+	at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1801)
+	at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:577)
+	at java.base/java.io.ObjectInputStream.redirectedReadObject(ObjectInputStream.java:507)
+
+	at java.base/java.io.ObjectInputStream.redirectedReadObject(ObjectInputStream.java:507)
+	at scala.collection.immutable.List$SerializationProxy.readObject(List.scala:479)
+	at jdk.internal.reflect.GeneratedMethodAccessor9.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at java.base/java.io.ObjectStreamClass.invokeReadObject(ObjectStreamClass.java:1175)
+	at java.base/java.io.ObjectInputStream.readSerialData(ObjectInputStream.java:2452)
+	at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2318)
+	at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1801)
+	at java.base/java.io.ObjectInputStream.defaultReadFields(ObjectInputStream.java:2593)
+	at java.base/java.io.ObjectInputStream.readSerialData(ObjectInputStream.java:2485)
+	at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2318)
+	at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1801)
+	at java.base/java.io.ObjectInputStream.defaultReadFields(ObjectInputStream.java:2593)
+	at java.base/java.io.ObjectInputStream.readSerialData(ObjectInputStream.java:2485)
+	at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2318)
+	at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1801)
+	at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:577)
+	at java.base/java.io.ObjectInputStream.redirectedReadObject(ObjectInputStream.java:507)
+	at org.apache.spark.serializer.JavaDeserializationStream.readObject(JavaSerializer.scala:75)
+	at org.apache.spark.serializer.JavaSerializerInstance.deserialize(JavaSerializer.scala:114)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:66)
+	at org.apache.spark.scheduler.Task.run(Task.scala:85)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:274)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:836)
+
+renaissance-als_0_FAILED
+```

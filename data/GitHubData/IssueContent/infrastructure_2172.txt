@@ -1,0 +1,5 @@
+related: https://github.com/adoptium/aqa-test-tools/issues/404
+
+We would like to auto-deploy TRSS on Jenkins, here is the to-do list
+1. Add TRSS as a Jenkins node
+2. Store machine password at Jenkins side, so that Jenkins can access as a root user

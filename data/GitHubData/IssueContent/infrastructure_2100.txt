@@ -1,0 +1,1 @@
+At the moment the `-M virt` type used in qemuPlaybookCheck for RISC-V VMs only seems to be operating as a single-core machine. From what I can tell if we were able to use `-M sifive_u` or `-M microchip-icicle-kit ` then we'd be able to get up to 5 cores available which would be more useful.

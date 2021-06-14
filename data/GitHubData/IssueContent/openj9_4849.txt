@@ -1,0 +1,15 @@
+This issue outlines a general roadmap to enable OSR on AOT compilations.
+
+1. - [x] Remove dependence of Inlining table relocations on the existence of virtual guards (https://github.com/eclipse/openj9/issues/11060). 
+2. - [x] Add support for involuntary OSR (https://github.com/eclipse/openj9/pull/11553).
+3. - [ ] Add support for voluntary OSR
+
+1 is a necessary prerequisite in order to allow the optimizer to do what it needs to with the OSR guards without having to worry about the relocation infrastructure. 
+
+In order to implement 2, all that's needed is a validation to ensure that the VM's emergency OSR buffer has enough space for any OSR transition in the method to be loaded. 
+
+Finally, 3 can be implemented; this will involve relocating all the OSR guards, which is a bit non-trivial as it requires "that all OSR guards will be patched in the event of any redefinition, rather than just the required set to protect a removed HCR guard" [1]. This will require materializing the receiver class of all the removed HCR guards. Since the various inlined method relocations all have some notion of a receiver class associated with them, the relo infra will have to maintain a list of the receiver classes as the inlined method guards / inlined table entries (in the metadata) are relocated, and then for every OSR guard relocation, add an assumption against each class in the list.
+
+With 1 & 2, FSD can be implemented for AOT compilations; with 3, NextGenHCR can be implemented.
+
+[1] https://github.com/eclipse/openj9/blob/master/doc/compiler/hcr/NextGenHCR.md#osr-guards

@@ -1,0 +1,1 @@
+https://github.com/eclipse/openj9/pull/5180 disables the SVM during startup. This issue is to ensure we re-enable it. Doing so very likely requires solving https://github.com/eclipse/openj9/issues/4897.

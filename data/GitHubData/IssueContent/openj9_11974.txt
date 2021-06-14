@@ -1,0 +1,10 @@
+The final field folding code is scattered in multiple places. The folding util is in J9TransformUtils, however, there're two very similar tables of whitelisted classes whose fields can be folded (in function `foldFinalFieldsIn`), one in J9TransformUtils and one in VMJ9.cpp. We should consolidate them. Notice that there is subtle difference between the two, one is for both static field and instance field, one is for instance field only.
+
+There're other static functions with two copies in VMJ9.cpp and J9TransformUtils.cpp, we should move them into one.
+
+There's also similar utils `transformIndirectLoad` and `transformIndirectLoadChain` with the former disabled. We should deprecate `transformIndirectLoad` or change it to call `transformIndirectLoadChain`.
+
+Another place that final field folding is the opt StaticFinalFieldFolding, which folds static final fields in whitelisted classes as well as generic static final fields but with guard. 
+
+A better name for the JIT option `unleashStaticFieldFolding` is needed.
+A better documentation is needed for final field folding.

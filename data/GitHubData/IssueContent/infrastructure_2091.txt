@@ -1,0 +1,13 @@
+In the GIT_Source role we build and install git from source if the version on the default version of `git` on the machine is either too old or not present.
+
+On some distributions (Such as Debian11) if the distribution's own `git` is new enough but not already present, we don't try to install it and still fall back to compiling it yourself. We should look at this and ensure we use the distribution's `git` where possible.
+
+(same appears to be true for cmake)
+
+Please put the name of the software product (and affected platforms if relevant) in the title of this issue
+
+- [x] Missing install
+- [ ] Bug in ansible playbook
+- [ ] Request for new playbook addition
+
+Details:

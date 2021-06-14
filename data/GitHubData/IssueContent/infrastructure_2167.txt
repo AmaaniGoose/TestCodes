@@ -1,0 +1,13 @@
+Access level:
+
+- [x] Non-privileged
+- [ ] jenkins user
+- [ ] root/Administrative
+- [ ] other (Please specify):
+
+System for which access is needed:
+x86_64, aarm64, ppc64le, s390x
+
+Please explain why you need this access including whether it is a temporary or permanent request: 
+Working on a PR fix for slim package, which affects multiple systems. https://github.com/AdoptOpenJDK/openjdk-docker/issues/339 team member recommented to access for my unit testing
+

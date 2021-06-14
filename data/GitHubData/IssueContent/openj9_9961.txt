@@ -1,0 +1,3 @@
+The JITServer verbose log contains way too many lines of the form:
+`#JITServer: Chain exists (00007F2DFF81B24C) so nothing to store`
+These lines don't have much value, they add overhead and increase the size of the vlog, therefore it's better if we just remove them.

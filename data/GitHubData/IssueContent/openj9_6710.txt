@@ -1,0 +1,5 @@
+There are ~10 places in current code base to determine an OS type via `com.ibm.oti.vm.VM.getVMLangAccess().internalGetProperties().getProperty("os.name")`.
+
+Those can be consolidated to helper methods within `java.base` such as `VM.isZOS()`, `VM.isWindows()`, etc.
+
+A thought from https://github.com/eclipse/openj9/pull/6702#discussion_r312309785

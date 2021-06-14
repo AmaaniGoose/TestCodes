@@ -1,0 +1,36 @@
+Build:
+```
+10:13:59  openjdk version "16" 2021-03-16
+10:13:59  OpenJDK Runtime Environment AdoptOpenJDK-16+36-202104050826 (build 16+36)
+10:13:59  Eclipse OpenJ9 VM AdoptOpenJDK-16+36-202104050826 (build openj9-0.26.0-m2, JRE 16 Linux aarch64-64-Bit Compressed References 20210405_13 (JIT enabled, AOT enabled)
+10:13:59  OpenJ9   - 4ce9ec8a1
+10:13:59  OMR      - b8996ac2c
+10:13:59  JCL      - 8f1ec25575 based on jdk-16+36)
+```
+https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_extended.openjdk_aarch64_linux/19/consoleFull:
+```
+12:17:24  TEST: javax/imageio/stream/DeleteOnExitTest.sh
+12:17:24  TEST JDK: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdkbinary/j2sdk-image
+12:17:24  
+12:17:24  ACTION: shell -- Failed. Execution failed: exit code 1
+12:17:24  REASON: User specified action: run shell DeleteOnExitTest.sh 
+12:17:24  TIME:   3.619 seconds
+12:17:24  messages:
+12:17:24  command: shell DeleteOnExitTest.sh
+12:17:24  reason: User specified action: run shell DeleteOnExitTest.sh 
+12:17:24  elapsed time (seconds): 3.619
+12:17:24  STDOUT:
+12:17:24  TESTJAVA=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdkbinary/j2sdk-image
+12:17:24  TESTSRC=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/stream
+12:17:24  TESTCLASSES=/home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16176141351257/jdk_imageio_0/work/classes/0/javax/imageio/stream/DeleteOnExitTest.d
+12:17:24  tmp: /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16176141351257/jdk_imageio_0/work/classes/0/javax/imageio/stream/DeleteOnExitTest.d
+12:17:24  tmpDir is /home/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_aarch64_linux/openjdk-tests/TKG/output_16176141351257/jdk_imageio_0/work/classes/0/javax/imageio/stream/DeleteOnExitTest.d
+12:17:24  Files before test: 1
+12:17:24  iis = javax.imageio.stream.FileCacheImageInputStream@c2670bb7
+12:17:24  ios = javax.imageio.stream.FileCacheImageOutputStream@e7127ede
+12:17:24  Files after test: 1
+12:17:24  Test fails: exception thrown!
+12:17:24  STDERR:
+12:17:24  Exception in thread "main" java.lang.RuntimeException: Test failed: cache was not used.
+12:17:24  	at DeleteOnExitTest.main(DeleteOnExitTest.java:72)
+```

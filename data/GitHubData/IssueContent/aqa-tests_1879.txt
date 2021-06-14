@@ -1,0 +1,44 @@
+**Test Info**
+Test Name: jdk_util_0
+Test Duration: 31 min 56 sec
+Machine: build-osuosl-aix71-ppc64-1
+TRSS link for the test output: https://trss.adoptopenjdk.net/output/test?id=5f0a74bf7eaab3443c9c4062
+
+
+**Build Info**
+Build Name: Test_openjdk11_hs_sanity.openjdk_ppc64_aix
+Jenkins Build start time: Jul 11 2020, 08:55 pm
+Jenkins Build URL: https://ci.adoptopenjdk.net/job/Test_openjdk11_hs_sanity.openjdk_ppc64_aix/145/
+TRSS link for the build: https://trss.adoptopenjdk.net/allTestsInfo?buildId=5f0a742f7eaab3443c9c3b00
+
+
+**Java Version**
+openjdk version "11.0.8" 2020-07-14
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.8+8-202007112343)
+OpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.8+8-202007112343, mixed mode)
+
+
+**Console output:**
+[2020-07-12T02:10:39.865Z] config Zip64SizeTest.setUp(): success
+[2020-07-12T02:10:39.865Z] Creating LargeZipEntry.txt
+[2020-07-12T02:10:39.865Z] test Zip64SizeTest.validateZipEntrySizes(): failure
+[2020-07-12T02:10:39.865Z] java.io.IOException: A file cannot be larger than the value set by ulimit.
+[2020-07-12T02:10:39.866Z] 	at java.base/java.io.RandomAccessFile.setLength(Native Method)
+[2020-07-12T02:10:39.866Z] 	at Zip64SizeTest.createFiles(Zip64SizeTest.java:124)
+[2020-07-12T02:10:39.866Z] 	at Zip64SizeTest.validateZipEntrySizes(Zip64SizeTest.java:67)
+[2020-07-12T02:10:39.866Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2020-07-12T02:10:39.866Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2020-07-12T02:10:39.866Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2020-07-12T02:10:39.866Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+[2020-07-12T02:10:39.866Z] 	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+
+...
+
+[2020-07-12T02:10:39.866Z] java/util/zip/ZipFile/Zip64SizeTest.java
+[2020-07-12T02:10:39.866Z] Total tests run: 1, Failures: 1, Skips: 0
+
+Appears to first start failing on July 11 https://trss.adoptopenjdk.net/output/test?id=5f0a74bf7eaab3443c9c4062, seen on build-osuosl-aix71-ppc64-1
+
+ To rerun in Grinder, pre-populate the parameters using this [link](https://ci.adoptopenjdk.net/job/Grinder/parambuild/?TARGET=jdk_util_0&CUSTOM_TARGET=&SDK_RESOURCE=nightly&VENDOR_TEST_SHAS=&TEST_FLAG=&VENDOR_TEST_DIRS=&ARTIFACTORY_REPO=&ARTIFACTORY_ROOT_DIR=&PLATFORM=ppc64_aix&KEEP_REPORTDIR=true&PERSONAL_BUILD=false&ADOPTOPENJDK_REPO=https://github.com/AdoptOpenJDK/openjdk-tests.git&JDK_IMPL=hotspot&LABEL=&TKG_BRANCH=master&EXTRA_OPTIONS=&SSH_AGENT_CREDENTIAL=&IS_PARALLEL=false&CUSTOMIZED_SDK_URL=&BUILD_IDENTIFIER=&AUTO_DETECT=true&ADOPTOPENJDK_BRANCH=master&TKG_SHA=&ARTIFACTORY_SERVER=&CUSTOMIZED_SDK_URL_CREDENTIAL_ID=&OPENJDK_SHA=&KEEP_WORKSPACE=false&JDK_VERSION=11&BUILD_LIST=openjdk&USER_CREDENTIALS_ID=&ITERATIONS=1&VENDOR_TEST_REPOS=&TIME_LIMIT=10&RELEASE_TAG=&OPENJ9_BRANCH=master&OPENJ9_SHA=&JCK_GIT_REPO=&VENDOR_TEST_BRANCHES=&OPENJ9_REPO=https://github.com/eclipse/openj9.git&JVM_OPTIONS=&TKG_REPO=https://github.com/AdoptOpenJDK/TKG.git)
+
+

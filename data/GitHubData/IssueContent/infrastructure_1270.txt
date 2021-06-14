@@ -1,0 +1,9 @@
+**Platform:**
+Windows
+
+**Architecture:**
+any
+
+@jdekonin mentioned the Windows playbooks install the latest VS2017 compiler. Meaning that if build machines are created at different times, they could have different levels of the VS2017 compiler on them. Ideally all build machines should have the same level of VS2017, so the build isn't affected by what machine it lands on.
+
+Not sure if the same issue applies to VS2010.

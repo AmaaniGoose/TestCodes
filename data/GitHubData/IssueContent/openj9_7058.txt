@@ -1,0 +1,46 @@
+Failure link
+------------
+
+https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/6716544a3e1aab5520e36418b4378172e358fd2f/test/jdk/java/lang/invoke/PrivateInterfaceCall.java#L1 is consistantly failing for JDK11/13-openj9 (hotspot unaffected)
+- test category, openjdk
+- OS/architecture, openjdk_x86-64_linux, openjdk_x86-64_windows, openjdk_x86-64_mac
+```
+09:46:27  openjdk version "11.0.5" 2019-10-15
+09:46:27  OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.5+6-201909111831)
+09:46:27  Eclipse OpenJ9 VM AdoptOpenJDK (build master-d65742671, JRE 11 Linux amd64-64-Bit Compressed References 20190911_331 (JIT enabled, AOT enabled)
+09:46:27  OpenJ9   - d65742671
+09:46:27  OMR      - 7e9584ea
+09:46:27  JCL      - 8057a0754d based on jdk-11.0.5+6)
+```
+
+Optional info
+-------------
+- intermittent failure (no): 
+- My suspicion is that it's an unsuitable test (MethodHandles has been unsuitable before)
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+11:27:47  STDOUT:
+11:27:47  UNRESOLVED:
+11:27:47  ICCE PrivateInterfaceCall.invokeDirect D1
+11:27:47  Threw expected: java.lang.IncompatibleClassChangeError
+11:27:47  ICCE PrivateInterfaceCall.invokeDirect E
+11:27:47  Threw expected: java.lang.IncompatibleClassChangeError
+11:27:47  ICCE PrivateInterfaceCall.invokeInterfaceMH D1
+11:27:47  STDERR:
+11:27:47  java.lang.AssertionError: No exception thrown: expected java.lang.IncompatibleClassChangeError
+11:27:47  	at PrivateInterfaceCall.shouldThrow(PrivateInterfaceCall.java:273)
+11:27:47  	at PrivateInterfaceCall.shouldThrowICCE(PrivateInterfaceCall.java:244)
+11:27:47  	at PrivateInterfaceCall.runNegativeTests(PrivateInterfaceCall.java:191)
+11:27:47  	at PrivateInterfaceCall.main(PrivateInterfaceCall.java:225)
+11:27:47  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+11:27:47  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+11:27:47  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+11:27:47  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+11:27:47  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+11:27:47  	at java.base/java.lang.Thread.run(Thread.java:831)
+11:27:47  
+11:27:47  JavaTest Message: Test threw exception: java.lang.AssertionError: No exception thrown: expected java.lang.IncompatibleClassChangeError
+11:27:47  JavaTest Message: shutting down test
+```

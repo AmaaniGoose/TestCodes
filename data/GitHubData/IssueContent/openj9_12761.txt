@@ -1,0 +1,161 @@
+https://openj9-jenkins.osuosl.org/job/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/2
+ub20-390-1
+java/util/logging/FileHandlerAccessTest.java
+jdk_util_1
+JVM_OPTIONS:  -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache -XX:-UseCompressedOops
+```
+01:55:08  TEST: java/util/logging/FileHandlerAccessTest.java
+01:55:08  TEST JDK: /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/j2sdk-image
+01:55:08  
+01:55:08  ACTION: build -- Passed. Build successful
+01:55:08  REASON: Named class compiled on demand
+01:55:08  TIME:   0.057 seconds
+01:55:08  messages:
+01:55:08  command: build FileHandlerAccessTest
+01:55:08  reason: Named class compiled on demand
+01:55:08  Test directory:
+01:55:08    compile: FileHandlerAccessTest
+01:55:08  elapsed time (seconds): 0.057
+01:55:08  
+01:55:08  ACTION: compile -- Passed. Compilation successful
+01:55:08  REASON: .class file out of date or does not exist
+01:55:08  TIME:   0.056 seconds
+01:55:08  messages:
+01:55:08  command: compile /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging/FileHandlerAccessTest.java
+01:55:08  reason: .class file out of date or does not exist
+01:55:08  Additional options from @modules: --add-modules java.logging
+01:55:08  Mode: agentvm
+01:55:08  Agent id: 1
+01:55:08  elapsed time (seconds): 0.056
+01:55:08  configuration:
+01:55:08  Boot Layer (javac runtime environment)
+01:55:08    class path: /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/jvmtest/openjdk/jtreg/lib/javatest.jar 
+01:55:08                /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+01:55:08    patch:      java.base /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/output_16216596417152/jdk_util_1/work/patches/java.base
+01:55:08  
+01:55:08  javac compilation environment
+01:55:08    add modules: java.logging
+01:55:08    source path: /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging
+01:55:08    class path:  /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging
+01:55:08                 /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/output_16216596417152/jdk_util_1/work/classes/0/java/util/logging/FileHandlerAccessTest.d
+01:55:08  
+01:55:08  rerun:
+01:55:08  cd /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/output_16216596417152/jdk_util_1/work/scratch/1 && \
+01:55:08  DISPLAY=:0 \
+01:55:08  HOME=/home/jenkins \
+01:55:08  LANG=en_US.UTF-8 \
+01:55:08  PATH=/bin:/usr/bin:/usr/sbin \
+01:55:08      /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/j2sdk-image/bin/javac \
+01:55:08          -J-ea \
+01:55:08          -J-esa \
+01:55:08          -J-Xmx1540m \
+01:55:08          -J-Xdump:system:none \
+01:55:08          -J-Xdump:heap:none \
+01:55:08          -J-Xdump:system:events=gpf+abort+traceassert+corruptcache \
+01:55:08          -J-XX:-UseCompressedOops \
+01:55:08          -J-Djava.library.path=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+01:55:08          -J-Dtest.vm.opts='-ea -esa -Xmx1540m -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache -XX:-UseCompressedOops' \
+01:55:08          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx1540m -J-Xdump:system:none -J-Xdump:heap:none -J-Xdump:system:events=gpf+abort+traceassert+corruptcache -J-XX:-UseCompressedOops' \
+01:55:08          -J-Dtest.compiler.opts= \
+01:55:08          -J-Dtest.java.opts= \
+01:55:08          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/j2sdk-image \
+01:55:08          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/j2sdk-image \
+01:55:08          -J-Dtest.timeout.factor=8.0 \
+01:55:08          -J-Dtest.nativepath=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+01:55:08          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+01:55:08          -J-Dtest.name=java/util/logging/FileHandlerAccessTest.java \
+01:55:08          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging/FileHandlerAccessTest.java \
+01:55:08          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging \
+01:55:08          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging \
+01:55:08          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/output_16216596417152/jdk_util_1/work/classes/0/java/util/logging/FileHandlerAccessTest.d \
+01:55:08          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/output_16216596417152/jdk_util_1/work/classes/0/java/util/logging/FileHandlerAccessTest.d \
+01:55:08          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/output_16216596417152/jdk_util_1/work/classes/0/java/util/logging/FileHandlerAccessTest.d:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging \
+01:55:08          -J-Dtest.modules=java.logging/java.util.logging:open \
+01:55:08          --add-modules java.logging \
+01:55:08          -d /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/output_16216596417152/jdk_util_1/work/classes/0/java/util/logging/FileHandlerAccessTest.d \
+01:55:08          -sourcepath /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging \
+01:55:08          -classpath /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/output_16216596417152/jdk_util_1/work/classes/0/java/util/logging/FileHandlerAccessTest.d /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging/FileHandlerAccessTest.java
+01:55:08  
+01:55:08  ACTION: main -- Error. Program `/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/j2sdk-image/bin/java' timed out (timeout set to 960000ms, elapsed time including timeout handling was 960297ms).
+01:55:08  REASON: User specified action: run main/othervm FileHandlerAccessTest 20 
+01:55:08  TIME:   960.299 seconds
+01:55:08  messages:
+01:55:08  command: main FileHandlerAccessTest 20
+01:55:08  reason: User specified action: run main/othervm FileHandlerAccessTest 20 
+01:55:08  Mode: othervm [/othervm specified]
+01:55:08  Additional options from @modules: --add-modules java.logging --add-opens java.logging/java.util.logging=ALL-UNNAMED
+01:55:08  Timeout information:
+01:55:08  Running jcmd on process 3017703
+01:55:08  Error getting data from 3017703: Exception connecting to 3017703
+01:55:08  Usage : jcmd <vmid> <arguments>
+01:55:08  
+01:55:08     -J : supply arguments to the Java VM running jcmd
+01:55:08     -l : list JVM processes on the local machine
+01:55:08     -h : print this help message
+01:55:08  
+01:55:08     <vmid> : Attach API VM ID as shown in jps or other Attach API-based tools
+01:55:08  
+01:55:08     arguments:
+01:55:08        help : print the list of diagnostic commands
+01:55:08        help <command> : print help for the specific command
+01:55:08        <command> [command arguments] : command from the list returned by "help"
+01:55:08  
+01:55:08  list JVM processes on the local machine. Default behavior when no options are specified.
+01:55:08  
+01:55:08  NOTE: this utility might significantly affect the performance of the target JVM.
+01:55:08      The available diagnostic commands are determined by
+01:55:08      the target VM and may vary between VMs.
+01:55:08  Running jstack on process 3017703
+01:55:08  2021-05-22T05:54:56.149006821
+01:55:08  Error getting data from 3017703: Exception connecting to 3017703
+01:55:08  --- Timeout information end.
+01:55:08  elapsed time (seconds): 960.299
+01:55:08  configuration:
+01:55:08  Boot Layer
+01:55:08    add modules: java.logging                   
+01:55:08    add opens:   java.logging/java.util.logging ALL-UNNAMED
+01:55:08  
+01:55:08  STDOUT:
+01:55:08  Testing with 20 threads
+01:55:08  Timeout refired 960 times
+01:55:08  STDERR:
+01:55:08  STATUS:Passed.
+01:55:08  rerun:
+01:55:08  cd /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/output_16216596417152/jdk_util_1/work/scratch/1 && \
+01:55:08  DISPLAY=:0 \
+01:55:08  HOME=/home/jenkins \
+01:55:08  LANG=en_US.UTF-8 \
+01:55:08  PATH=/bin:/usr/bin:/usr/sbin \
+01:55:08  CLASSPATH=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/output_16216596417152/jdk_util_1/work/classes/0/java/util/logging/FileHandlerAccessTest.d:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+01:55:08      /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/j2sdk-image/bin/java \
+01:55:08          -Dtest.vm.opts='-ea -esa -Xmx1540m -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache -XX:-UseCompressedOops' \
+01:55:08          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx1540m -J-Xdump:system:none -J-Xdump:heap:none -J-Xdump:system:events=gpf+abort+traceassert+corruptcache -J-XX:-UseCompressedOops' \
+01:55:08          -Dtest.compiler.opts= \
+01:55:08          -Dtest.java.opts= \
+01:55:08          -Dtest.jdk=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/j2sdk-image \
+01:55:08          -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/j2sdk-image \
+01:55:08          -Dtest.timeout.factor=8.0 \
+01:55:08          -Dtest.nativepath=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+01:55:08          -Dtest.root=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+01:55:08          -Dtest.name=java/util/logging/FileHandlerAccessTest.java \
+01:55:08          -Dtest.file=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging/FileHandlerAccessTest.java \
+01:55:08          -Dtest.src=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging \
+01:55:08          -Dtest.src.path=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging \
+01:55:08          -Dtest.classes=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/output_16216596417152/jdk_util_1/work/classes/0/java/util/logging/FileHandlerAccessTest.d \
+01:55:08          -Dtest.class.path=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/output_16216596417152/jdk_util_1/work/classes/0/java/util/logging/FileHandlerAccessTest.d \
+01:55:08          -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/output_16216596417152/jdk_util_1/work/classes/0/java/util/logging/FileHandlerAccessTest.d:/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/logging \
+01:55:08          -Dtest.modules=java.logging/java.util.logging:open \
+01:55:08          --add-modules java.logging \
+01:55:08          --add-opens java.logging/java.util.logging=ALL-UNNAMED \
+01:55:08          -ea \
+01:55:08          -esa \
+01:55:08          -Xmx1540m \
+01:55:08          -Xdump:system:none \
+01:55:08          -Xdump:heap:none \
+01:55:08          -Xdump:system:events=gpf+abort+traceassert+corruptcache \
+01:55:08          -XX:-UseCompressedOops \
+01:55:08          -Djava.library.path=/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+01:55:08          com.sun.javatest.regtest.agent.MainWrapper /home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdk-tests/TKG/output_16216596417152/jdk_util_1/work/java/util/logging/FileHandlerAccessTest.d/main.0.jta 20
+01:55:08  
+01:55:08  TEST RESULT: Error. Program `/home/jenkins/workspace/Test_openjdk11_j9_sanity.openjdk_s390x_linux_Nightly/openjdkbinary/j2sdk-image/bin/java' timed out (timeout set to 960000ms, elapsed time including timeout handling was 960297ms).
+```

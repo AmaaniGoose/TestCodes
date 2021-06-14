@@ -1,0 +1,1 @@
+Allow linkage registers to participate in global register allocation, and provide the means to shuffle linkage registers to GRA registers.

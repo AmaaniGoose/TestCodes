@@ -1,0 +1,34 @@
+Failure link
+------------
+- Build: https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk13_j9_sanity.openjdk_x86-64_mac_xl/21/
+- Test: https://github.com/ibmruntimes/openj9-openjdk-jdk13/blob/openj9/test/jdk/java/net/Socket/asyncClose/AsyncClose.java
+- Test Category: openjdk
+- Test Suite Name: jdk_net
+- OS/Architecture: x64_macos_xl
+- OpenJDK Version: 13+30
+- Public Build SHAs:
+- OpenJ9 - `5dd23af84`
+- OMR - `6e99760b`
+- JCL - `2337332cb3`
+
+Optional info
+-------------
+- Intermittent failure: No
+- Regression or new test: Regression
+
+Failure output (captured from console output)
+---------------------------------------------
+`run main/othervm -Djava.net.preferIPv4Stack=true AsyncClose`
+```
+08:47:02  Test: Socket.getInputStream().read()
+08:47:02  Failed: 
+08:47:02   - Socket.getInputStream().read() returned unexpectedly!!
+08:47:02   - Socket.getInputStream().read() wasn't preempted
+```
+and
+```
+08:47:02  Test: Socket.getInputStream().read() (with timeout)
+08:47:02  Failed: 
+08:47:02   - Socket.getInputStream().read() returned unexpectedly!!
+08:47:02   - Socket.getInputStream().read() wasn't preempted
+```

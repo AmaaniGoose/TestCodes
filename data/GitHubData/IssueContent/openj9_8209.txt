@@ -1,0 +1,8 @@
+The current behavior of PR builds is overly restrictive: you can only request a build for a particular version and specification if it is implied by 'all'. For example, one should be able to request
+```
+Jenkins test sanity xlinuxjit jdk13
+```
+without the response being:
+```
+Warning: Selected Java versions (13) for x86-64_linux_jit is not supported(nothing to do)!
+```

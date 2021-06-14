@@ -1,0 +1,97 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk17_j9_extended.system_x86-64_mac/2`:
+```
+01:07:57  openjdk version "17" 2021-09-14
+01:07:57  OpenJDK Runtime Environment AdoptOpenJDK (build 17+10-202102260218)
+01:07:57  Eclipse OpenJ9 VM AdoptOpenJDK (build master-95834e075, JRE 17 Mac OS X amd64-64-Bit Compressed References 20210225_9 (JIT enabled, AOT enabled)
+01:07:57  OpenJ9   - 95834e075
+01:07:57  OMR      - 116004c6a
+01:07:57  JCL      - bd8290d2fc based on jdk-17+10)
+```
+to rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links:
+07:40:50  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=17&JDK_IMPL=openj9&JDK_VENDOR=adoptopenjdk&BUILD_LIST=system&PLATFORM=x86-64_mac_mixed&TARGET=ConcurrentLoadTest_5m_0
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+===============================================
+Running test ConcurrentLoadTest_5m_0 ...
+===============================================
+ConcurrentLoadTest_5m_0 Start Time: Fri Feb 26 06:11:21 2021 Epoch Time (ms): 1614337881921
+variation: Mode150
+JVM_OPTIONS:  -XX:+UseCompressedOops 
+LT  06:14:58.099 - First failure detected by thread: load-11. Not creating dumps as no dump generation is requested for this load test
+LT  06:14:58.101 - suite.getInventory().getInventoryFileRef(): openjdk.test.load/config/inventories/concurrent/concurrent.xml
+LT  06:14:58.101 - suite.isCreateDump() : false
+LT  06:14:58.102 - Test failed
+LT    Failure num.  = 1
+LT    Test number   = 10
+LT    Test details  = 'JUnit[net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinTaskTest]'
+LT    Suite number  = 0
+LT    Thread number = 11
+LT  >>> Captured test output >>>
+LT  testStarted : testAPI(net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinTaskTest)
+LT  testFailure: testAPI(net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinTaskTest): 25 : getMySurplusQueuedTaskCount() expected:<1> but was:<-7>
+LT  junit.framework.AssertionFailedError: 25 : getMySurplusQueuedTaskCount() expected:<1> but was:<-7>
+LT  	at junit.framework.Assert.fail(Assert.java:57)
+LT  	at junit.framework.Assert.failNotEquals(Assert.java:329)
+LT  	at junit.framework.Assert.assertEquals(Assert.java:78)
+LT  	at junit.framework.Assert.assertEquals(Assert.java:234)
+LT  	at junit.framework.TestCase.assertEquals(TestCase.java:401)
+LT  	at net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinTaskTest.testAPI(ForkJoinTaskTest.java:174)
+LT  	at jdk.internal.reflect.GeneratedMethodAccessor5.invoke(Unknown Source)
+LT  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+LT  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+LT  	at junit.framework.TestCase.runTest(TestCase.java:176)
+LT  	at junit.framework.TestCase.runBare(TestCase.java:141)
+LT  	at junit.framework.TestResult$1.protect(TestResult.java:122)
+LT  	at junit.framework.TestResult.runProtected(TestResult.java:142)
+LT  	at junit.framework.TestResult.run(TestResult.java:125)
+LT  	at junit.framework.TestCase.run(TestCase.java:129)
+LT  	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+LT  	at junit.framework.TestSuite.run(TestSuite.java:247)
+LT  	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+LT  	at org.junit.runners.Suite.runChild(Suite.java:128)
+LT  	at org.junit.runners.Suite.runChild(Suite.java:27)
+LT  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+LT  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+LT  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+LT  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+LT  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+LT  	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+LT  	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+LT  	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+LT  	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1135)
+LT  	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+LT  	at java.base/java.lang.Thread.run(Thread.java:853)
+LT  testFinished: testAPI(net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinTaskTest)
+LT  
+LT  JUnit Test Results for: net.adoptopenjdk.test.concurrent.jsr166y.ForkJoinTaskTest
+LT    Ran    : 1
+LT    Passed : 0
+LT    Failed : 1
+LT    Ignored: 0
+LT    Result : FAILED
+LT  <<<
+LT  
+STF 06:31:25.208 - Heartbeat: Process LT  is still running
+LT  06:31:26.141 - Completed 100.0%. Number of tests started=1143 (+0) (with 1 failure(s))
+LT  06:31:46.151 - Completed 100.0%. Number of tests started=1143 (+0) (with 1 failure(s))
+LT  06:31:55.754 - **POSSIBLE HANG DETECTED**
+STF 06:31:56.039 - **FAILED** Process LT  has hung
+STF 06:31:56.039 - Collecting dumps for: LT 
+STF 06:31:56.039 - Sending SIG 3 to the java process to generate a javacore
+STF 06:31:56.040 - Running command: kill -3 40725
+LT  06:33:46.186 - Completed 100.0%. Number of tests started=1143 (+0) (with 1 failure(s))
+LT  06:33:47.017 - **POSSIBLE HANG DETECTED**
+LT  06:33:52.122 - **POSSIBLE HANG DETECTED**
+ConcurrentLoadTest_5m_0_FAILED
+```

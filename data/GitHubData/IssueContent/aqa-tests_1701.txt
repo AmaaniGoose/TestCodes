@@ -1,0 +1,10 @@
+A couple of tests under jdk_forfeign have intermittent failures for hotspot and openj9.  This is a new subset of tier1 added a few month ago.
+
+/home/jenkins/workspace/Sophia/openjdk-tests/openjdkbinary/j2sdk-image//bin/java -version
+openjdk version "14" 2020-03-17
+OpenJDK Runtime Environment AdoptOpenJDK (build 14+35-202003272029)
+OpenJDK 64-Bit Server VM AdoptOpenJDK (build 14+35-202003272029, mixed mode, sharing)
+
+java/foreign/TestArrays.java
+java/foreign/TestLayouts.java
+

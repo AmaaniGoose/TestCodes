@@ -1,0 +1,6 @@
+We should revisit disabled tests to see if the issues are resolved. If they are, we need to re-enable the tests. For these ones that do not have any comments, we should check them again.
+
+For example:
+https://github.com/eclipse/openj9/blob/ad7c3f09279a54f8d4d253af03da2a2a31f86f8e/test/functional/cmdLineTests/modularityddrtests/playlist.xml#L26
+https://github.com/eclipse/openj9/blob/e2c38649abb06128ee30c06691b6dcc9e19db55b/test/functional/VM_Test/playlist.xml#L148
+https://github.com/eclipse/openj9/blob/ab7f03ab6faa069307a3ddedf09ac26f79b9702c/test/functional/cmdLineTests/pltest/playlist.xml#L175

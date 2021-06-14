@@ -1,0 +1,20 @@
+Provide AArch64 code generator inlining of the following methods:
+```
+TR::java_util_concurrent_atomic_AtomicBoolean_getAndSet:
+TR::java_util_concurrent_atomic_AtomicInteger_addAndGet:
+TR::java_util_concurrent_atomic_AtomicInteger_decrementAndGet:
+TR::java_util_concurrent_atomic_AtomicInteger_getAndAdd:
+TR::java_util_concurrent_atomic_AtomicInteger_getAndDecrement:
+TR::java_util_concurrent_atomic_AtomicInteger_getAndIncrement
+TR::java_util_concurrent_atomic_AtomicInteger_getAndSet
+TR::java_util_concurrent_atomic_AtomicInteger_incrementAndGet
+TR::java_util_concurrent_atomic_AtomicIntegerArray_addAndGet
+TR::java_util_concurrent_atomic_AtomicIntegerArray_decrementAndGet
+TR::java_util_concurrent_atomic_AtomicIntegerArray_getAndAdd
+TR::java_util_concurrent_atomic_AtomicIntegerArray_getAndDecrement
+TR::java_util_concurrent_atomic_AtomicIntegerArray_getAndIncrement
+TR::java_util_concurrent_atomic_AtomicIntegerArray_getAndSet
+TR::java_util_concurrent_atomic_AtomicIntegerArray_incrementAndGet
+TR::java_util_concurrent_atomic_AtomicReference_getAndSet
+TR::java_util_concurrent_atomic_AtomicReferenceArray_getAndSet
+```

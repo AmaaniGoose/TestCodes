@@ -1,0 +1,5 @@
+The `disableSrcObjCheck` is always set to true. It seems to have been guarded by an option in the past. Looking into the history internally before the change was made it seems to have caused a performance regression, which is why the `= true` change was made. This performance regression goes back to 2014.
+
+https://github.com/eclipse/openj9/blob/94649e13230cf293f73f060f83b331eb38174d8b/runtime/compiler/z/codegen/J9TreeEvaluator.cpp#L1777
+
+We should fold away this variable and all the resulting dead code as well as eliminate the option from the codebase as it is no longer used.

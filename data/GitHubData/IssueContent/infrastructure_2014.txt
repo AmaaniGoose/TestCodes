@@ -1,0 +1,8 @@
+We have hit several cases recently where a broader set of team members would like to assist in testing/fixing infrastructure issues and there is not a standardized approach of sharing credentials securely.  Not exactly sure how to address this, but definitely feel we need to introduce a way of dealing with credentials management.  
+
+This would allow us to:
+- offload issues to a larger set of people who can assist with infrastructure (including EF infra team)
+- reduce delays to fixes that are currently bottlenecked because only one or 2 people have access to some machines
+- ensure that when credentials are shared, it is done is a sanctioned way
+
+In the past, I believe we had LastPass or something like that set up.  Not suggesting it be reintroduced, but created this issue to discuss what options we have available to us to improve the situation.

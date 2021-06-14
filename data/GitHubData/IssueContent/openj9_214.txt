@@ -1,0 +1,7 @@
+Test method probably just needs to have its return value removed. 
+
+```
+Method public int jit.test.jitt.assembler.SwitchTest2.tstSwitch() has a @Test annotation but also a return value: ignoring it. Use <suite allow-return-values="true"> to fix this
+```
+
+Run the JIT tests from `openj9/test/TestConfig` with `make JAVA_BIN=<build>/jdk/bin/ SPEC=<spec> test_JIT_Test` 

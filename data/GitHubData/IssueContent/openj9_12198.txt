@@ -1,0 +1,3 @@
+The testCheckCastValueTypeOnInvalidQtype test casts null to a QType class and expects an exception. Hotspot throws a NullPointerException for the test. OpenJ9 throws NoClassDefFoundError. 
+PR https://github.com/eclipse/openj9/pull/11560 changes the expected exception to NullPointerException and disables the test.
+The incorrect exception thrown must be investigated and corrected if need be.

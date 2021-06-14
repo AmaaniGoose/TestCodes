@@ -1,0 +1,72 @@
+Failure link
+------------
+
+From an internal build `Test_openjdknext_j9_sanity.openjdk_ppc64_aix_Nightly/222`:
+```
+22:35:10  openjdk version "16-internal" 2021-03-16
+22:35:10  OpenJDK Runtime Environment (build 16-internal+0-adhoc.jenkins.BuildJDKnextppc64aixNightly)
+22:35:10  Eclipse OpenJ9 VM (build master-04a8b9eb903, JRE 16 AIX ppc64-64-Bit Compressed References 20200824_306 (JIT enabled, AOT enabled)
+22:35:10  OpenJ9   - 04a8b9eb903
+22:35:10  OMR      - 97452b48be2
+22:35:10  JCL      - d286fa99214 based on jdk-16+11)
+```
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+00:27:45  ===============================================
+00:27:45  Running test jdk_foreign_0 ...
+00:27:45  ===============================================
+
+00:28:09  TEST: java/foreign/TestAdaptVarHandles.java
+00:28:09  test TestAdaptVarHandles.testBadCollectCoordinatesNegativePos(): failure
+00:28:09  java.lang.ClassCastException: java.lang.invoke.DirectHandle incompatible with java.lang.invoke.BoundMethodHandle
+00:28:09  	at java.base/java.lang.invoke.VarHandles.noCheckedExceptions(VarHandles.java:625)
+00:28:09  	at java.base/java.lang.invoke.VarHandles.filterCoordinates(VarHandles.java:465)
+00:28:09  	at java.base/java.lang.invoke.MethodHandleImpl$1.filterCoordinates(MethodHandleImpl.java:1848)
+00:28:09  	at jdk.incubator.foreign/jdk.incubator.foreign.MemoryHandles.filterCoordinates(MemoryHandles.java:483)
+00:28:09  	at jdk.incubator.foreign/jdk.internal.foreign.Utils.fixUpVarHandle(Utils.java:75)
+00:28:09  	at jdk.incubator.foreign/jdk.internal.foreign.LayoutPath.dereferenceHandle(LayoutPath.java:144)
+00:28:09  	at jdk.incubator.foreign/jdk.incubator.foreign.MemoryLayout.lambda$varHandle$3(MemoryLayout.java:388)
+00:28:09  	at jdk.incubator.foreign/jdk.incubator.foreign.MemoryLayout$$Lambda$30/0000000022132A48.apply(Unknown Source)
+00:28:09  	at jdk.incubator.foreign/jdk.incubator.foreign.MemoryLayout.computePathOp(MemoryLayout.java:432)
+00:28:09  	at jdk.incubator.foreign/jdk.incubator.foreign.MemoryLayout.varHandle(MemoryLayout.java:388)
+00:28:09  	at TestAdaptVarHandles.testBadCollectCoordinatesNegativePos(TestAdaptVarHandles.java:422)
+00:28:09  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+00:28:09  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+00:28:09  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+00:28:09  	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+00:28:09  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+00:28:09  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+00:28:09  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+00:28:09  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+00:28:09  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+00:28:09  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+00:28:09  	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+00:28:09  	at org.testng.TestRunner.run(TestRunner.java:623)
+00:28:09  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+00:28:09  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+00:28:09  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+00:28:09  	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+00:28:09  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+00:28:09  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+00:28:09  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+00:28:09  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+00:28:09  	at org.testng.TestNG.run(TestNG.java:1018)
+00:28:09  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+00:28:09  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+00:28:09  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+00:28:09  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+00:28:09  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+00:28:09  	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+00:28:09  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+00:28:09  	at java.base/java.lang.Thread.run(Thread.java:851)
+```
+
+For example, to rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links:
+00:36:21  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=16&JDK_IMPL=openj9&BUILD_LIST=openjdk&PLATFORM=ppc64_aix&TARGET=jdk_foreign_0

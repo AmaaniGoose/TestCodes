@@ -1,0 +1,11 @@
+Based on discussion in the OpenJ9 community call and retrospectively looking at the September release, it will be helpful to clearly define conditions or criteria that would constitute a 'stop-ship' of a release.
+
+This issue is to capture a discussion and ultimately / hopefully result in helping both the OpenJ9 and AdoptOpenJDK projects during a release to decide on what actions to take based on the variety of scenarios that may occur during release period.
+
+What constitutes a stop-ship event?  Here are some thoughts, to trigger the discussion...
+
+- test failures that indicate a serious functional or performance problem
+- test failures that require more investigation before knowing if they fall into the above type
+- missing features that are intended to be part of a release but are not yet in (what amount of waiting period should this be)
+- issues on a particular platform may stop the release for that platform while other platforms can be released (what amount of time to wait before deciding to make that call, if a fix for the platform issue can not be done in X days, then?)
+- how to categorize/prioritize user raised issues (this is likely a 'gut feel' one, but throwing it in there anyway)

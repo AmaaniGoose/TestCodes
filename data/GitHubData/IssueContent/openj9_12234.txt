@@ -1,0 +1,11 @@
+In the prototype implementation of value types support, an element of an array whose component type is a value type cannot contain a null reference.  Assignment of a null value to an array element of value type must throw a `NullPointerException`.
+
+This is currently handled in the JIT compiler by [expanding an `ArrayStoreCHK` during Tree Lowering](https://github.com/eclipse/openj9/blob/a9838e74bba0f5935103bedcda6fc84c881804ca/runtime/compiler/optimizer/TreeLowering.cpp#L319) to perform a `NullCHK` of the value that is guarded by a run-time check of whether the component type of the array is a value type.
+
+There are also places that prevent `ArrayStoreCHK`s from being removed to allow for the possibility that it might be needed to trigger insertion of a `NullCHK`, even though the JIT compiler statically recognizes that an `ArrayStoreException` will not be thrown - for example, in OMR's `constrainArrayStoreChk` [if the value is known to be null](https://github.com/eclipse/omr/blob/c2af26bc125e59b61dc5d2d0c4afefea080a8779/compiler/optimizer/VPHandlers.cpp#L12285-L12296) or [if the value is known to be an instance of the array's component type, but is not known to be non-null](https://github.com/eclipse/omr/blob/c2af26bc125e59b61dc5d2d0c4afefea080a8779/compiler/optimizer/VPHandlers.cpp#L12345-L12358).
+
+This means that the semantics of `ArrayStoreCHK` changes during optimization if value types support is enabled - prior to Tree Lowering, the `ArrayStoreCHK` might throw a `NullPointerException`, but after Tree Lowering it will not.
+
+Instead, the JIT compiler should use some other way of denoting the combined `ArrayStoreCHK` plus conditional `NullCHK` operation, by introducing a new operation that denotes the combination of the two checks, introducing a new non-helper symbol, or some other way.
+
+The combined operation would still be expanded during Tree Lowering, and other optimizations, like Value Propagation, could reduce the operation to just an `ArrayStoreCHK`, if the value is known not to be null or the array's component type is known not to be a value type, or just a `NullCHK` if the array's component type is known to be a value type.

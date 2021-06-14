@@ -1,0 +1,2 @@
+It seems like in current version of JITServer, when it reaches memory limit, it just says "out of scratch space" and stops compiling anything until restart.
+Shouldn't it remove old cached code in that case?

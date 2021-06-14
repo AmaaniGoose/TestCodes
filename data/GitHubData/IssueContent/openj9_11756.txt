@@ -1,0 +1,3 @@
+According to the benchmarks used in [GraalVM 20.1, OpenJ9 0.20, OpenJDK Java Benchmarks](https://www.phoronix.com/scan.php?page=article&item=graalvm201-openj920-jvm&num=1) OpenJ9 is falling behind in every benchmark.
+
+Can the performance disparity with OpenJDK and GraalVM tracked and eliminate to outperform both them.

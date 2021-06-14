@@ -1,0 +1,15 @@
+Java -version output
+--------------------
+All
+
+Summary of problem
+------------------
+The SCC has some powerful verbose options (ie: `verboseAOT`, `verboseIO`, etc) to show what is being loaded, if the AOT methods are being used, etc.  Unfortunately, this info logs to stderr by default and there's no option to log it to a file.
+
+While trying to diagnose a slow JVM issue with a user, it's been harder to share the verbose output as it's intermingled with regular java output.  It would be a big improvement if we could specify where to write the output so it went to a directory or file the user could pick.
+
+Having the ability to tell it to write a file (using a similar name as verbosegclog ie: `verbosegc.%Y%m%d.%H%M%S.%pid.txt`) to a directory the user specifies would be a major improvement in servicability.
+
+Diagnostic files
+----------------
+NA - Looking for a new diagnostic file =)

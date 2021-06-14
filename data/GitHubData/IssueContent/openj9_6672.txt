@@ -1,0 +1,29 @@
+Failure link
+------------
+https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/lang/String/CaseConvertSameInstance.java
+Test Category: openjdk
+Test Suite Name: jdk_lang
+OS/Architecture: x86-64-windows, x86-64-linux, x86-64-osx, ...
+OpenJDK Version: 11.0.4+11
+Public Build SHAs:
+OpenJ9 - `b09716014`
+OMR - `6e99760b`
+JCL - `965d0c0df3`
+
+Optional info
+-------------
+Not an intermittent failure. Fails with openj9 but not hotspot.
+Interesting to note that the test passed on an ubuntu system with the same parameters but failed on jenkins.
+
+Failure output
+--------------
+```
+java.lang.Exception: toLowerCase returned different object
+  	at CaseConvertSameInstance.main(CaseConvertSameInstance.java:35)
+  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+  	at java.base/java.lang.Thread.run(Thread.java:831)
+```

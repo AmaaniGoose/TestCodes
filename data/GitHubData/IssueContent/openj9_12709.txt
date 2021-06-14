@@ -1,0 +1,60 @@
+When a snap dump is generated, the trace buffers are flushed. This appears to be intentional, but there is an undesirable side effect that occurs under certain cirumstances.
+
+When a multithreaded process runs out of Java heap space, several threads can throw OutOfMemoryErrors at almost exactly the same time, and dumps are simultaneously triggered for all these threads. The default Xdump agents for OOMs are configured with priority values that should lead to dumps being triggered in this order:
+
+**system dump -> heapdump -> javacore -> snap dump**
+
+However, this ordering isn't always respected, presumably because the default agents are not all specified with the `serial` option. For example, here's some stderr output from a real multithreaded app hitting an OOM on the IBM JRE:
+
+```
+JVMDUMP032I JVM requested System dump using '<redacted>\core.20210514.080812.3712.0001.dmp' in response to an event
+JVMDUMP010I System dump written to <redacted>\core.20210514.080812.3712.0001.dmp
+JVMDUMP032I JVM requested Heap dump using '<redacted>\heapdump.20210514.080812.3712.0002.phd' in response to an event
+JVMDUMP010I Heap dump written to <redacted>\heapdump.20210514.080812.3712.0002.phd
+JVMDUMP032I JVM requested Heap dump using '<redacted>\heapdump.20210514.080812.3712.0003.phd' in response to an event
+JVMDUMP010I Heap dump written to <redacted>\heapdump.20210514.080812.3712.0003.phd
+JVMDUMP032I JVM requested Heap dump using '<redacted>\heapdump.20210514.080812.3712.0004.phd' in response to an event
+JVMDUMP010I Heap dump written to <redacted>\heapdump.20210514.080812.3712.0004.phd
+JVMDUMP032I JVM requested Heap dump using '<redacted>\heapdump.20210514.080812.3712.0005.phd' in response to an event
+JVMDUMP010I Heap dump written to <redacted>\heapdump.20210514.080812.3712.0005.phd
+JVMDUMP032I JVM requested Snap dump using '<redacted>\Snap.20210514.080812.3712.0010.trc' in response to an event
+JVMDUMP010I Snap dump written to <redacted>\Snap.20210514.080812.3712.0010.trc
+JVMDUMP013I Processed dump event "systhrow", detail "java/lang/OutOfMemoryError".
+JVMDUMP032I JVM requested Java dump using '<redacted>\javacore.20210514.080812.3712.0006.txt' in response to an event
+JVMDUMP010I Java dump written to <redacted>\javacore.20210514.080812.3712.0006.txt
+JVMDUMP032I JVM requested Snap dump using '<redacted>\Snap.20210514.080812.3712.0011.trc' in response to an event
+JVMDUMP010I Snap dump written to {nothing to snap}
+JVMDUMP013I Processed dump event "systhrow", detail "java/lang/OutOfMemoryError".
+JVMDUMP032I JVM requested Java dump using '<redacted>\javacore.20210514.080812.3712.0007.txt' in response to an event
+JVMDUMP010I Java dump written to <redacted>\javacore.20210514.080812.3712.0007.txt
+JVMDUMP032I JVM requested Snap dump using '<redacted>\Snap.20210514.080812.3712.0012.trc' in response to an event
+JVMDUMP010I Snap dump written to {nothing to snap}
+JVMDUMP013I Processed dump event "systhrow", detail "java/lang/OutOfMemoryError".
+JVMDUMP032I JVM requested Java dump using '<redacted>\javacore.20210514.080812.3712.0008.txt' in response to an event
+JVMDUMP010I Java dump written to <redacted>\javacore.20210514.080812.3712.0008.txt
+JVMDUMP032I JVM requested Snap dump using '<redacted>\Snap.20210514.080812.3712.0013.trc' in response to an event
+JVMDUMP010I Snap dump written to {nothing to snap}
+JVMDUMP013I Processed dump event "systhrow", detail "java/lang/OutOfMemoryError".
+JVMDUMP032I JVM requested Java dump using '<redacted>\javacore.20210514.080812.3712.0009.txt' in response to an event
+JVMDUMP010I Java dump written to <redacted>\javacore.20210514.080812.3712.0009.txt
+JVMDUMP013I Processed dump event "systhrow", detail "java/lang/OutOfMemoryError".
+```
+
+As you can see, in this case the dumps were produced in this order:
+
+**system dump -> heapdump -> heapdump -> heapdump -> heapdump -> snap dump -> javacore -> snap dump -> javacore -> snap dump -> javacore -> snap dump -> javacore**
+
+The problem here is that the first snap dump happens before the first javacore. This means that the "GC History" and "Current thread history" sections in the javacore are empty, because the trace buffers have been flushed before the javacore is generated:
+
+```
+1STGCHTYPE     GC History  
+NULL   
+```
+```
+1XECTHTYPE     Current thread history (J9VMThread:0x0000000003C28400)
+NULL
+```
+
+This is not a desirable result. Yes, the snap dump should contain the missing trace data, but I suspect that most users and support teams are much more accustomed to viewing javacore files than processing snap dumps.
+
+I'm not sure why the trace buffers are flushed when snap dumps are generated (or what downsides are associated with _not_ flushing them), but perhaps the current behaviour needs to be reconsidered?

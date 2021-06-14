@@ -1,0 +1,8 @@
+We currently have toolchain information spread around multiple files including
+```
+linux_arm.spec
+configure_linux_arm.ml
+targets.mk.linux.inc.ftl
+tr.source/trj9/Makefile
+```
+This information should ideally be obtained from the openJDK configure output.

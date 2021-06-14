@@ -1,0 +1,9 @@
+We need to disable Portable AOT by default in containers if the user has explicitly specified a different gc policy.
+The reason for this is that there is potential overhead for the JVM to be running in Portable AOT mode. When the gc policy is not the default, it's more likely that the Portable AOT will be invalidated so we are going to avoid the overhead by disabling it by default. The user would need to explicitly specify `+XX:+PortableSharedCache` to enable Portable AOT when a non-default gc policy is specified.
+
+#### Inside containers:
+- Portable AOT enabled by default with default gc policy
+- Portable AOT disabled by default with non-default gc policy
+
+#### Outside of containers:
+- Portable AOT disabled by default

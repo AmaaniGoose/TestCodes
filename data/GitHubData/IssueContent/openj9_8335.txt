@@ -1,0 +1,6 @@
+The Trc_BCU_internalDefineClass_FullData tracepoint should output data in a more human readable format, example below:
+
+```
+19:59:52.031602000  0x0000000002247e00 j9bcu(j9vm).198     Event       BCU Trc_BCU_internalDefineClass_FullData: data=????^@^@^@4^@^G^G^@^E^G^@^F^A^@
+SourceFile^A^@^NCloneable.java^A^@^Sjava/lang/Cloneable^A^@^Pjava/lang/Object^F^A^@^A^@^B^@^@^@^@^@^@^@^A^@^C^@^@^@^B^@^D, classLoader=0x7fa47c07f8b8
+```

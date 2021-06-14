@@ -1,0 +1,47 @@
+https://ci.adoptopenjdk.net/job/Test_openjdk15_j9_sanity.openjdk_aarch64_linux/67 (0.23.0 M2 build)
+java/util/StringJoiner/MergeTest.java
+test-aws-rhel76-armv8-3
+```
+15:31:02  STDOUT:
+15:31:02  [TestNG] Running:
+15:31:02    java/util/StringJoiner/MergeTest.java
+15:31:02  
+15:31:02  STDERR:
+15:31:02  rerun:
+15:31:02  cd /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_aarch64_linux/openjdk-tests/TKG/test_output_16019219211563/jdk_util_j9_0/work/scratch/0 && \
+15:31:02  DISPLAY=:0 \
+15:31:02  HOME=/home/jenkins \
+15:31:02  LANG=en_US.UTF-8 \
+15:31:02  PATH=/bin:/usr/bin:/usr/sbin \
+15:31:02  CLASSPATH=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_aarch64_linux/openjdk-tests/TKG/test_output_16019219211563/jdk_util_j9_0/work/classes/1/java/util/StringJoiner/MergeTest.d:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/StringJoiner:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_aarch64_linux/jvmtest/openjdk/jtreg/lib/testng.jar:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_aarch64_linux/jvmtest/openjdk/jtreg/lib/jcommander.jar:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_aarch64_linux/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_aarch64_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+15:31:02      /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_aarch64_linux/openjdkbinary/j2sdk-image/bin/java \
+15:31:02          -Dtest.vm.opts='-ea -esa -Xmx512m -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache' \
+15:31:02          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-Xdump:system:none -J-Xdump:heap:none -J-Xdump:system:events=gpf+abort+traceassert+corruptcache' \
+15:31:02          -Dtest.compiler.opts= \
+15:31:02          -Dtest.java.opts= \
+15:31:02          -Dtest.jdk=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_aarch64_linux/openjdkbinary/j2sdk-image \
+15:31:02          -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_aarch64_linux/openjdkbinary/j2sdk-image \
+15:31:02          -Dtest.timeout.factor=8.0 \
+15:31:02          -Dtest.root=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+15:31:02          -Dtest.name=java/util/StringJoiner/MergeTest.java \
+15:31:02          -Dtest.file=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/StringJoiner/MergeTest.java \
+15:31:02          -Dtest.src=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/StringJoiner \
+15:31:02          -Dtest.src.path=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/StringJoiner \
+15:31:02          -Dtest.classes=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_aarch64_linux/openjdk-tests/TKG/test_output_16019219211563/jdk_util_j9_0/work/classes/1/java/util/StringJoiner/MergeTest.d \
+15:31:02          -Dtest.class.path=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_aarch64_linux/openjdk-tests/TKG/test_output_16019219211563/jdk_util_j9_0/work/classes/1/java/util/StringJoiner/MergeTest.d \
+15:31:02          -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_aarch64_linux/openjdk-tests/TKG/test_output_16019219211563/jdk_util_j9_0/work/classes/1/java/util/StringJoiner/MergeTest.d:/home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_aarch64_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/util/StringJoiner \
+15:31:02          -Dtest.modules=java.base/jdk.internal.util \
+15:31:02          --add-modules java.base \
+15:31:02          --add-exports java.base/jdk.internal.util=ALL-UNNAMED \
+15:31:02          -ea \
+15:31:02          -esa \
+15:31:02          -Xmx512m \
+15:31:02          -Xdump:system:none \
+15:31:02          -Xdump:heap:none \
+15:31:02          -Xdump:system:events=gpf+abort+traceassert+corruptcache \
+15:31:02          -Xmx4g \
+15:31:02          -XX:+CompactStrings \
+15:31:02          com.sun.javatest.regtest.agent.MainWrapper /home/jenkins/workspace/Test_openjdk15_j9_sanity.openjdk_aarch64_linux/openjdk-tests/TKG/test_output_16019219211563/jdk_util_j9_0/work/java/util/StringJoiner/MergeTest.d/testng.0.jta java/util/StringJoiner/MergeTest.java false MergeTest
+15:31:02  
+15:31:02  TEST RESULT: Failed. Unexpected exit from test [exit code: 137]
+```

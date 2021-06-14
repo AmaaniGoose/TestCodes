@@ -1,0 +1,104 @@
+z/OS V2.3 XL C/C++
+
+Appears to be right at the end of the build process; creating the jdk images.  I no longer have the output files for debugging, but I can easily generate or possibly supply access to a machine where this can be reproduced.
+
+fyi @fjeremic @pshipton , I had the version on the failing machine incorrect.  As I understand this might be an expected error on v2.3 atm.
+
+```
+01:06:27.973  Unhandled exception
+01:06:27.973  Type=Segmentation error vmState=0x000501ff
+01:06:27.973  J9Generic_Signal_Number=00000004 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000035
+01:06:27.973  Handler1=0000005008720800 Handler2=000000500864E320
+01:06:27.973  gpr0=0000000000000100 gpr1=0000005097CB08C0 gpr2=0000005097CA68E0 gpr3=0000005097CA8C10
+01:06:27.973  gpr4=00000050320EB4C0 gpr5=00000050190AA080 gpr6=0000000000000A00 gpr7=0000000027568D10
+01:06:27.973  gpr8=0000005097C80A00 gpr9=00000050190821B0 gpr10=0000005097CA5BB0 gpr11=0000000000000000
+01:06:27.973  gpr12=0000005097CAABA0 gpr13=0000000027578770 gpr14=0000005097CB08C0 gpr15=0000000000000000
+01:06:27.973  fpc=00880000 psw0=0785040180000000 psw1=0000000000000A02 sp=00000050320EB4C0
+01:06:27.973  bea=0000000027568D0E
+01:06:27.973  fpr0=3f40000000000000 fpr1=40a8000000000000 fpr2=3ff0000000000000 fpr3=c1e0000000000000
+01:06:27.973  fpr4=406f000000000000 fpr5=4002400000000000 fpr6=0000000000000000 fpr7=0000000000000000
+01:06:27.973  fpr8=461c400000000000 fpr9=0000000000000000 fpr10=3ecccccd00000000 fpr11=0000000000000000
+01:06:27.973  fpr12=3dcccccd00000000 fpr13=0000000000000000 fpr14=0000000000000000 fpr15=0000000000000000
+01:06:27.973  
+01:06:27.973  Method_being_compiled=jdk/tools/jlink/internal/PerfectHashBuilder$Bucket.add(Ljdk/tools/jlink/internal/PerfectHashBuilder$Entry;)V
+01:06:27.973  Target=2_90_20190501_30 (z/OS 02.03.00)
+01:06:27.973  CPU=s390x (4 logical CPUs) (0x7d4569000 RAM)
+```
+
+<details>
+     <summary>Full stack trace</summary>
+01:06:27.973  Unhandled exception
+01:06:27.973  Type=Segmentation error vmState=0x000501ff
+01:06:27.973  J9Generic_Signal_Number=00000004 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000035
+01:06:27.973  Handler1=0000005008720800 Handler2=000000500864E320
+01:06:27.973  gpr0=0000000000000100 gpr1=0000005097CB08C0 gpr2=0000005097CA68E0 gpr3=0000005097CA8C10
+01:06:27.973  gpr4=00000050320EB4C0 gpr5=00000050190AA080 gpr6=0000000000000A00 gpr7=0000000027568D10
+01:06:27.973  gpr8=0000005097C80A00 gpr9=00000050190821B0 gpr10=0000005097CA5BB0 gpr11=0000000000000000
+01:06:27.973  gpr12=0000005097CAABA0 gpr13=0000000027578770 gpr14=0000005097CB08C0 gpr15=0000000000000000
+01:06:27.973  fpc=00880000 psw0=0785040180000000 psw1=0000000000000A02 sp=00000050320EB4C0
+01:06:27.973  bea=0000000027568D0E
+01:06:27.973  fpr0=3f40000000000000 fpr1=40a8000000000000 fpr2=3ff0000000000000 fpr3=c1e0000000000000
+01:06:27.973  fpr4=406f000000000000 fpr5=4002400000000000 fpr6=0000000000000000 fpr7=0000000000000000
+01:06:27.973  fpr8=461c400000000000 fpr9=0000000000000000 fpr10=3ecccccd00000000 fpr11=0000000000000000
+01:06:27.973  fpr12=3dcccccd00000000 fpr13=0000000000000000 fpr14=0000000000000000 fpr15=0000000000000000
+01:06:27.973  
+01:06:27.973  Method_being_compiled=jdk/tools/jlink/internal/PerfectHashBuilder$Bucket.add(Ljdk/tools/jlink/internal/PerfectHashBuilder$Entry;)V
+01:06:27.973  Target=2_90_20190501_30 (z/OS 02.03.00)
+01:06:27.973  CPU=s390x (4 logical CPUs) (0x7d4569000 RAM)
+01:06:27.973  ----------- Stack Backtrace -----------
+01:06:27.973  protectedIntrospectBacktraceSymbols+0xd8ea5d50 (, 0x0000000000000000)
+01:06:27.973  omrsig_protect+0xd8ea8e68 (, 0x0000000000000000)
+01:06:27.973  omrintrospect_backtrace_symbols+0xd8ea5e40 (, 0x0000000000000000)
+01:06:27.973  generateDiagnosticFiles+0xd91dbfb0 (, 0x0000000000000000)
+01:06:27.973  omrsig_protect+0xd8ea8e68 (, 0x0000000000000000)
+01:06:27.973  structuredSignalHandler+0xd91dad48 (, 0x0000000000000000)
+01:06:27.973  masterSynchSignalHandler+0xd8eaccc0 (, 0x0000000000000000)
+01:06:27.973  __zerro+0xd95dd160 (, 0x0000000000000000)
+01:06:27.973  __zerros+0xd95dd490 (, 0x0000000000000000)
+01:06:27.973  CEEHDSP+0xd9ae1d90 (, 0x0000000000000000)
+01:06:27.973  CEEOSIGJ+0xd9837670 (, 0x0000000000000000)
+01:06:27.973  CELQHROD+0xd9ace448 (, 0x0000000000000000)
+01:06:27.973  CEEOSIGG+0xd983d200 (, 0x0000000000000000)
+01:06:27.973  CELQHROD+0xd9ace448 (, 0x0000000000000000)
+01:06:27.973  TR_PrexArgInfo::clearArgInfoForNonInvariantArguments(TR::ResolvedMethodSymbol*,TR_InlinerTr...+0xd8a973a0 (, 0x0000000000000000)
+01:06:27.973  TR_J9EstimateCodeSize::realEstimateCodeSize(TR_CallTarget*,TR_CallStack*,bool)+0xd8a78cb8 (, 0x0000000000000000)
+01:06:27.973  TR_J9EstimateCodeSize::estimateCodeSize(TR_CallTarget*,TR_CallStack*,bool)+0xd8a78d68 (, 0x0000000000000000)
+01:06:27.973  TR_J9EstimateCodeSize::realEstimateCodeSize(TR_CallTarget*,TR_CallStack*,bool)+0xd8a78cb8 (, 0x0000000000000000)
+01:06:27.973  TR_J9EstimateCodeSize::estimateCodeSize(TR_CallTarget*,TR_CallStack*,bool)+0xd8a78d68 (, 0x0000000000000000)
+01:06:27.973  TR_EstimateCodeSize::calculateCodeSize(TR_CallTarget*,TR_CallStack*,bool)+0xd8ab0840 (, 0x0000000000000000)
+01:06:27.973  (, 0x0000000000000000)
+01:06:27.973  (, 0x0000000000000000)
+01:06:27.973  TR_InlinerBase::performInlining(TR::ResolvedMethodSymbol*)+0xd834d7c0 (, 0x0000000000000000)
+01:06:27.973  TR_Inliner::perform()+0xd8a9fd60 (, 0x0000000000000000)
+01:06:27.973  OMR::Optimizer::performOptimization(const OptimizationStrategy*,int,int,int)+0xd8385c08 (, 0x0000000000000000)
+01:06:27.973  OMR::Optimizer::optimize()+0xd8386ae0 (, 0x0000000000000000)
+01:06:27.973  OMR::Compilation::performOptimizations()+0xd874d248 (, 0x0000000000000000)
+01:06:27.973  OMR::Compilation::compile()+0xd8750f28 (, 0x0000000000000000)
+01:06:27.973  TR::CompilationInfoPerThreadBase::compile(J9VMThread*,TR::Compilation*,TR_ResolvedMethod*,T...+0xd8ca1b08 (, 0x0000000000000000)
+01:06:27.973  TR::CompilationInfoPerThreadBase::wrappedCompile(J9PortLibrary*,void*)+0xd8ca4b70 (, 0x0000000000000000)
+01:06:27.973  omrsig_protect+0xd8ea8e68 (, 0x0000000000000000)
+01:06:27.973  TR::CompilationInfoPerThreadBase::compile(J9VMThread*,TR_MethodToBeCompiled*,J9::J9SegmentP...+0xd8cadeb0 (, 0x0000000000000000)
+01:06:27.973  TR::CompilationInfoPerThread::processEntry(TR_MethodToBeCompiled&,J9::J9SegmentProvider&)+0xd8caed98 (, 0x0000000000000000)
+01:06:27.973  TR::CompilationInfoPerThread::processEntries()+0xd8cb09c0 (, 0x0000000000000000)
+01:06:27.973  protectedCompilationThreadProc(J9PortLibrary*,TR::CompilationInfoPerThread*)+0xd8cb12f0 (, 0x0000000000000000)
+01:06:27.973  omrsig_protect+0xd8ea8e68 (, 0x0000000000000000)
+01:06:27.973  compilationThreadProc(void*)+0xd8cb3f28 (, 0x0000000000000000)
+01:06:27.973  thread_wrapper+0xd8f8d100 (, 0x0000000000000000)
+01:06:27.973  ---------------------------------------
+01:06:27.973  JVMDUMP039I Processing dump event "gpf", detail "" at 2019/05/01 13:25:26 - please wait.
+01:06:27.973  JVMDUMP032I JVM requested System dump using 'JENKINS.JVM.JENKINS5.D190501.T132526.X&DS' in response to an event
+01:06:27.973  IEATDUMP in progress with options SDATA=(LPA,GRSQ,LSQA,NUC,PSA,RGN,SQA,SUM,SWA,TRT)
+01:06:31.894  IEATDUMP success for DSN='JENKINS.JVM.JENKINS5.D190501.T132526.X&DS'
+01:06:31.894  JVMDUMP040I System dump written to dataset(s) using name template JENKINS.JVM.JENKINS5.D190501.T132526.X&DS
+01:06:31.894  JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Build_JDK11_s390x_zos_Nightly/make/javacore.20190501.132526.16780946.0002.txt' in response to an event
+01:06:31.894  JVMDUMP010I Java dump written to /home/jenkins/workspace/Build_JDK11_s390x_zos_Nightly/make/javacore.20190501.132526.16780946.0002.txt
+01:06:31.894  JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Build_JDK11_s390x_zos_Nightly/make/Snap.20190501.132526.16780946.0003.trc' in response to an event
+01:06:31.894  JVMDUMP010I Snap dump written to /home/jenkins/workspace/Build_JDK11_s390x_zos_Nightly/make/Snap.20190501.132526.16780946.0003.trc
+01:06:31.894  JVMDUMP007I JVM Requesting JIT dump using '/home/jenkins/workspace/Build_JDK11_s390x_zos_Nightly/make/jitdump.20190501.132526.16780946.0004.dmp'
+01:06:31.894  JVMDUMP010I JIT dump written to /home/jenkins/workspace/Build_JDK11_s390x_zos_Nightly/make/jitdump.20190501.132526.16780946.0004.dmp
+01:06:31.894  JVMDUMP013I Processed dump event "gpf", detail "".
+01:06:31.894  make[3]: *** [/home/jenkins/workspace/Build_JDK11_s390x_zos_Nightly/build/zos-s390x-normal-server-release/images/jdk/bin/java] Error 1
+01:06:31.894  Images.gmk:93: recipe for target '/home/jenkins/workspace/Build_JDK11_s390x_zos_Nightly/build/zos-s390x-normal-server-release/images/jdk/bin/java' failed
+01:06:31.894  make/Main.gmk:329: recipe for target 'jdk-image' failed
+01:06:31.894  make[2]: *** [jdk-image] Error 1
+</details>

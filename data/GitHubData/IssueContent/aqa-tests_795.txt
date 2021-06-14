@@ -1,0 +1,102 @@
+On MacOS, test java/nio/file/Files/CopyAndMove.java consistently fails against OpenJ9.
+It consistently passes against HotSpot. 
+
+The output shows a notable difference in the locations of the source file, which I initially thought might be contributing ...
+
+HotSpot
+https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/687/testReport/java_nio_file_Files_CopyAndMove/java/CopyAndMove/
+
+```
+dir1: /var/folders/dc/xtzpw2_131v4cy252smdxkrh0000gn/T/name12555691569991705168 (hfs)
+dir2: ./name18010584833420215097 (hfs)
+```
+
+OpenJ9
+https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/670/testReport/junit/java_nio_file_Files_CopyAndMove/java/CopyAndMove/
+
+```
+dir1: /var/tmp/name4629835475329962021 (hfs)
+dir2: ./name12425497224243571621 (hfs)
+```
+
+
+A 10x run of the test against OpenJ9 (https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/758/consoleText) seems to show it consistently fails to correctly copy over the attributes (which are randomly selected permissions each run) 
+from the source file to target file and also (when the test happens to randomly select such that there are no permissions to check) it is also failing to set the group of the target file to that of the source file.
+
+
+Execution of this code locally on my Mac laptop against an OpenJDK11+OpenJ9 build behaves as expected with source file with range of permissions - however it is an apfs filesystem rather than hfs (and also the user permissions / system configuration likely different too) ...
+
+```
+import java.nio.file.Files;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+
+public class CopyTest {
+
+	public static void main(String[] args) throws Exception {
+		
+		System.out.println(FileSystems.getDefault());
+	
+		Path source = FileSystems.getDefault().getPath("/var/tmp", "testSourceFile");
+		
+		Path target = FileSystems.getDefault().getPath("/Users/ben_walsh@uk.ibm.com", "testTargetFile");
+		
+		System.out.println(Files.getFileStore(source).type());
+		System.out.println(Files.getFileStore(target).type());
+			
+		Files.copy(source, target, StandardCopyOption.COPY_ATTRIBUTES);
+	
+	}
+	
+}
+```
+
+Suspecting a UnixException is being silently hidden here - https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/src/java.base/unix/classes/sun/nio/fs/UnixCopyFile.java#L265, I put together some modifications to ensure any UnixException was rethrown and produce some additional debug output - https://github.com/ben-walsh/openj9-openjdk-jdk11/blob/copyAndMoveProb/src/java.base/unix/classes/sun/nio/fs/UnixCopyFile.java
+
+Running the test against a OpenJK11+OpenJ9 build with these modifications (https://hyc-runtimes-jenkins.swg-devops.com/view/Test_grinder/job/Grinder/1123/console) I see the following sort of output repeatedly ...
+
+```
+13:36:40 BW flags.failIfUnableToCopyPosix = true
+13:36:40 BW A
+13:36:40 source : /var/tmp/name2971445279196695842/source1530903229
+13:36:40 target : /var/tmp/name2971445279196695842/target-926717882
+13:36:40 fchown : 11 502 0
+13:36:40 fchmod : 11 33185
+13:36:40 BW B
+13:36:40 BW flags.failIfUnableToCopyPosix = true
+13:36:40 BW flags.failIfUnableToCopyPosix = true
+13:36:40 BW A
+13:36:40 source : /var/tmp/name2971445279196695842/source1456756525
+13:36:40 target : ./name3631902639406140259/target-1512466135
+13:36:40 fchown : 11 502 0
+13:36:40 BW C
+13:36:40 STDERR:
+13:36:40 dir1: /var/tmp/name2971445279196695842 (apfs)
+13:36:40 dir2: ./name3631902639406140259 (apfs)
+13:36:40 java.nio.file.FileSystemException: ./name3631902639406140259/target-1512466135: Operation not permitted
+13:36:40 	at java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:100)
+13:36:40 	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:111)
+13:36:40 	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:116)
+13:36:40 	at java.base/sun.nio.fs.UnixCopyFile.copyFile(UnixCopyFile.java:276)
+13:36:40 	at java.base/sun.nio.fs.UnixCopyFile.copy(UnixCopyFile.java:612)
+13:36:40 	at java.base/sun.nio.fs.UnixFileSystemProvider.copy(UnixFileSystemProvider.java:254)
+13:36:40 	at java.base/java.nio.file.Files.copy(Files.java:1294)
+13:36:40 	at CopyAndMove.copyAndVerify(CopyAndMove.java:644)
+13:36:40 	at CopyAndMove.testCopyFileToFile(CopyAndMove.java:795)
+13:36:40 	at CopyAndMove.main(CopyAndMove.java:73)
+13:36:40 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+13:36:40 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+13:36:40 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+13:36:40 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+13:36:40 	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+13:36:40 	at java.base/java.lang.Thread.run(Thread.java:825)
+```
+
+... so a UnixException is hidden and it looks like attempts to set the ownership of the target file are not permitted when it is under the . directory as oppose to the /var/tmp directory.
+
+
+The implication is that the file/directory permissions for the . directory under which the OpenJ9 test runs differ from those under which the HotSpot test runs.
+Note the observation of the OpenJ9 failures under both the AOJDK and internal Jenkins infrastructure.
+
+Can you provide some details on what those differences might be ?

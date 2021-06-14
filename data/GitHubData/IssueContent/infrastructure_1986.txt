@@ -1,0 +1,24 @@
+[Standard support for the Ubuntu 16.04 line ends at the end of April 2021](https://wiki.ubuntu.com/Releases). Afterwards, patches are only available if ESM is purchased from Canonical. Affected machines according to our inventory:
+
+* [ ] ci.adoptopenjdk.net ([Issue](https://github.com/AdoptOpenJDK/openjdk-infrastructure/issues/2108))
+* [x] trss.adoptopenjdk.net **Already upgraded to 18.04 - will update inventory**
+* [ ] ansible.adoptopenjdk.net (No longer in use, kept for reference when setting up new server)
+* [ ] ubuntu1604-armv7-1 (Scaleway, replacement in progress)
+* [ ] ubuntu1604-armv7-2 (Scaleway, replacement in progress)
+* [ ] build-ubuntu1604-x64-1 (Scaleway) **[Only machine tagged for fpm](https://github.com/AdoptOpenJDK/openjdk-build/issues/1044#issuecomment-803318114) (installers)** Now offline as [test-packet-ubuntu-1804-x64-2](https://ci.adoptopenjdk.net/computer/test-packet-ubuntu1804-x64-2) can now do this.
+* [ ] docker-ubuntu1604-x64-1 (AWS) **Marked offline**
+* [ ] ubuntu1604-s390x-1 (Marist) **Marked offline**
+* [x] ubuntu1604-s390x-2 (Marist) **Upgraded to 18.04**
+* [x] ubuntu1604-s390x-3 (Marist) **Upgraded to 18.04**
+* [x] ubuntu1604-s390x-4 (Marist) **Upgraded to 18.04**
+* [ ] test-ubuntu1604-armv8-1 (Packet) **To be decomissioned when Altras fully in place**
+* [x] test-ubuntu1604-armv8-2 (Packet) **Already upgraded to 18.04 - needs renamed**
+* [x] docker-ubuntu1604-armv8-1 (Packet) **Marked offline - had 3 `docker` executors**
+* [ ] ubuntu1604-x64-1 (Packet) **Marked offline**
+* [ ] ubuntu1604-x64-2 (Packet) **Marked offline**
+* [ ] ubuntu1604-x64-3 (Packet) **Upgrade completed but won't restart properly**
+* [ ] ubuntu1604-ppc64le-1 (OSUOSL) **Marked offline**
+* [ ] ubuntu1604-ppc64le-2 (OSUOSL) **Marked offline**
+* [x] ubuntu1604-ppc64le-3 (OSUOSL) **Decomissioned**
+* [x] ubuntu1604-ppc64le-4 (OSUOSL) **Decomissioned**
+* [ ] ubuntu1604-x64-1 (IBM Cloud) **Marked offline**

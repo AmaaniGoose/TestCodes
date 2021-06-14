@@ -1,0 +1,3 @@
+When setting a default Java system dump location using the _CEE_DMPTARG  environment variable. Using the symbol %uid results in a z/OS userid substitution. However that userid is uppercased (IVANH in my case) which fails to write at the z/FS intended location because my matching USS (z/FS) segment is lowercase "/u/ivanh". USS is case-sensitive and so the JVM failed to write dumps to the non-existent location under /u/IVANH.
+
+There is no option to choose the case of the substitution. For example one might expect %UID to result in "IVANH", and %uid to result in "ivanh". It doesn't, which means using %uid is not useful if you want a Java system dump produced by _CEE_DMPTARG on zFS.

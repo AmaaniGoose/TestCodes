@@ -1,0 +1,5 @@
+In a regular build, sources are generated into the `default` directory for non-compressed refs build and the `compressedrefs` directory for a compressed refs build.
+
+In mixed builds, we currently generate the sources/libs into the `default` directory. However, it's not actually necessary for a directory to be used at all for a mixed build, since sources/libraries don't need to be kept separate. So, the generated libraries can just sit in the parent directory where the `compressedrefs`/`default` directories currently sit alongside all the other libraries, i.e. `images/jdk/lib`, `jdk/lib`.
+
+More mixed builds discussion: #8878.

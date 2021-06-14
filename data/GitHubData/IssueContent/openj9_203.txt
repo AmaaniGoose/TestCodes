@@ -1,0 +1,13 @@
+Analysis of the Bork file encryption benchmark indicates a large number of calls to /usr/lib64/libz for calculating crc32. The relatively expensive native method call sequence suggests that this may be a good candidate for an optimised helper.
+
+```
+Test results on 32 core Xeon(R) CPU E7-8867
+(times in seconds, smaller is better)
+
+OpenJ9: 12.5s
+HotSpot:  9.3s
+
+```
+The benchmark suffers from running in the dynamic loop transfer* (DLT) compile of a top level method which gets called only once per file to be encrypted (with only one file being encrypted during each run of the benchmark). Modifying the testcase to perform multiple iterations reduces the runtime to 10.9s
+
+ * DLT compiles transfer control flow from long running interpreted loops into the corresponding program point in JIT compiled code. Such compiles can be slightly sub-optimal because they are usually not done at the highest optimisation level and are typically missing JIT profiling info.

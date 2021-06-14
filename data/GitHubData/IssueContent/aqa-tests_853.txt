@@ -1,0 +1,105 @@
+### Background of the Current Design for Running Benchmarks through Openjdk-tests Framework
+
+In order to integrate all performance benchmarks into openjdk-tests repo, we need to add benchmark configurations for several benchmarks and variants that are able to run on all supported HW platforms by OpenJDK. As part of this initiative, we tested the water by deploying ODM benchmark on Openjdk-tests Framework since that benchmark is simple to configure and run, though it needs a license. 
+
+Initially, we designed the Openjdk-tests Framework to use a bash script (i.e. `benchmark.sh` as shown below) that would keep all the bash commands, which are required to set environment variables and run the benchmark. 
+
+https://github.com/AdoptOpenJDK/openjdk-tests/blob/0cff000dabf262f48ad0c20f45f36892f0220fcb/performance/odm/scripts/benchmark.sh#L1-L55
+
+### Limitations of the Current Design
+
+Some issues with keeping the benchmark configs as export commands inside a static bash script:
+
+1. This design is not very flexible or maintainable if we want to run benchmarks with multiple variations. 
+
+2. Environment Variables are hard-coded for just one machine right now. So, you would need to manually change environment variables such as `CLIENT`, `DB_MACHINE`, `LIBERTY_HOST` and `AFFINITY` while running some benchmarks, especially the ones that require more than one machine, such as Liberty DayTrader. You would also need to change the command for pinning threads such as numactl.
+
+3. Redundancy! Currently, all performance tests can be run from the PerfNext launcher (https://github.com/AdoptOpenJDK/openjdk-test-tools/tree/master/PerfNext/), which already has all the benchmark configurations in that repo. 
+
+If you see the ODM configs file from PerfNext below, you'll notice that those configs have been duplicated in the openjdk-tests repo for now. The only major difference is the format of configs. On openjdk-tests, we use a bash script that has all the configs in export commands, while on PerfNext, we keep the configs in a XML file.
+
+https://github.com/AdoptOpenJDK/openjdk-test-tools/blob/b528a63ea146080f4bb1430740a734c2af87df7e/PerfNext/config/benchmarks/data_simple/ODM.xml#L1-L55
+
+```
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<benchmarks>
+    <benchmark name="ILOG_WODM" variant="881-4way-Seg5FastpathRVEJB" setup="true">
+        <properties>
+            <scripts>
+                <bash dir="$benchmark_dir" file="run_ilog_with_gcmv.sh" pkgName="ilog_wodm881"></bash>
+            </scripts>
+
+            <ENV>
+				<property name="CLASS">com.ibm.rules.bench.segmentation.RuleEngineRunner</property>
+				<property name="CLSPATH">lib/asm-3.1.jar:lib/asm-analysis-3.1.jar:lib/asm-commons-3.1.jar:lib/asm-tree-3.1.jar:lib/asm-util-3.1.jar:lib/dom4j-1.6.1.jar:lib/j2ee_connector-1_5-fr.jar:lib/jrules-engine.jar:lib/jrules-res-execution.jar:lib/log4j-1.2.8.jar:lib/openxml4j-beta.jar:lib/sam.jar:lib/sizing-xom.jar:bin:bin/ra.xml</property>
+				<property name="RULEUSAGE">false</property>
+				<property name="BENCHMARKARGS">ruleset=F_JAVAXOM_Segmentation5_DE javaXOM sizeparam=1 warmup=240 timeout=400 stateful 100000000 reportPath=j2se-perf-report-87.csv jrulesVersion=8.7 DT_or_Rules=DT</property>
+				<property name="WORKDIR">$(pwd)</property>
+				<property name="WORKLOAD">ILOG_WODM</property>
+				<property name="TIMEOUT">900000</property>
+				<property name="GCPOLICY">-Xgcpolicy:optthruput</property>
+				<property name="JDK_OPTIONS">-Xdump:system:defaults:file={perffarm_dump}/core.%Y%m%d.%H%M%S.%pid.%seq.dmp -Xdump:nofailover -Xlp -Xcompressedrefs</property>
+				<property name="MINHEAPSIZE">-Xms1024m</property>
+				<property name="MAXHEAPSIZE">-Xmx1024m</property>
+				<property name="TENUREDSIZE"></property>
+				<property name="NURSERYSIZE"></property>
+				<property name="MULTITHREAD">4</property>
+				<property name="CPUAFFINITY">numactl --physcpubind=0,1,28,29 --membind=0</property>
+            </ENV>
+        </properties>
+        <iterations>1</iterations>
+    </benchmark>
+    <benchmark name="ILOG_WODM" variant="881-4way-Seg300RulesFastpathRVEJB" setup="true">
+        <properties>
+            <scripts>
+                <bash dir="$benchmark_dir" file="run_ilog_with_gcmv.sh" pkgName="ilog_wodm881"></bash>
+            </scripts>
+
+            <ENV>
+				<property name="CLASS">com.ibm.rules.bench.segmentation.RuleEngineRunner</property>
+```
+### Possible Solutions
+
+In order to avoid having the same benchmark configurations in multiple locations, we should use the configs from the PerfNext repo. Currently, `playlist.xml` (shown below) uses the static bash script (i.e. `benchmark.sh`). `playlist.xml` should call some tool/script to dynamically generate that bash script using the benchmark configs from PerfNext and then run that generated script.
+
+https://github.com/AdoptOpenJDK/openjdk-tests/blob/0cff000dabf262f48ad0c20f45f36892f0220fcb/performance/odm/playlist.xml#L18-L24
+
+
+### Option 1:
+PerfNext also has an API (snippet below) that can generate the bash script for running a benchmark with a specific name and variant. It can also generate the specific HW environment variables such as CPU affinity commands and client machine for a selected machine. So we can possibly use that PerfNext's feature (`/api/benchengine/generatescript`) to generate the bash script for running benchmarks through Openjdk-tests Framework.
+
+Code snippet from https://github.com/AdoptOpenJDK/openjdk-test-tools/blob/b528a63ea146080f4bb1430740a734c2af87df7e/PerfNext/app/apis/BenchEngine/parser.js#L20-L34
+
+```
+	/*
+    * API to generate test script from XML Benchmark definition.     
+    * 
+    * Params: XML definition
+    */
+	app.post('/api/benchengine/generatescript', function(req, res) {
+		var raw_definition = req.rawBody; //Raw XML to be parsed
+
+		parseDefinition(raw_definition, function(generatedOutput){
+			parseSetupScript(raw_definition, function(setupScript){
+				var mergedScripts = setupScript + generatedOutput;
+				res.send(mergedScripts)
+			});
+		});
+	});
+```
+**Drawbacks of Option 1**
+This option would create an extra dependency on Openjdk-tests Framework since it would always require PerfNext to be up and running. If PerfNext is broken for some reason, then we wouldn't be able to run performance tests through Openjdk-tests Framework.
+
+### Option 2:
+1. Create an parameter for Openjdk-tests Framework to specify the location of the benchmark configs XML file (i.e. https://github.com/AdoptOpenJDK/openjdk-test-tools/tree/master/PerfNext/config) in case we need to get these files from some other location (i.e. internal) in future.
+2. Openjdk-tests Framework should download the XML files from the specified location 
+3. Write a simple translator script that parses the benchmark XML files for general benchmark configs and machine database XML file for machine specific configs for some specific benchmark variant, and generates a bash script that can set all the parameters and run the benchmark.
+
+**Drawbacks of Option 2**
+Redoing what PerfNext can already do. In future, if we decide to get the HW specific configs in some other way (i.e. get it directly from Jenkins labels instead of machine data XML file), then we would need to make changes to both PerfNext and translator script (XML to Shell).
+
+### Option 3:
+Combined design of option 1 & option 2.
+
+### Assigned Contributors
+Awsaf (@pinicman) from my team would work on adding this functionality.

@@ -1,0 +1,16 @@
+The JVM crashes during shutdown on the snapshot run with the following back trace; happens even with -Xint
+```
+omrheap_free (portLibrary=<optimized out>, heap=0x7fffc3055000, address=<optimized out>) at ../../omr/port/common/omrheap.c:330
+330		thisBlockTopPadding[0] = thisBlockSize;
+Missing separate debuginfos, use: dnf debuginfo-install libgcc-9.1.1-1.fc30.x86_64 sssd-client-2.1.0-2.fc30.x86_64
+(gdb) where
+#0  omrheap_free (portLibrary=<optimized out>, heap=0x7fffc3055000, address=<optimized out>) at ../../omr/port/common/omrheap.c:330
+#1  0x00007ffff68ee521 in VMSnapshotImpl::freeSubAllocatedMemory (this=0x7ffff000c610, address=0x7ffff005da30, sub4G=<optimized out>) at VMSnapshotImpl.cpp:417
+#2  0x00007ffff441973d in JCL_OnUnload (vm=vm@entry=0x7fffc3055b40, reserved=reserved@entry=0x0) at common/stdinit.c:589
+#3  0x00007ffff44268b2 in J9VMDllMain (vm=0x7fffc3055b40, stage=<optimized out>, reserved=<optimized out>) at common/vm_scar.c:410
+#4  0x00007ffff6922eab in runJ9VMDllMain (userDataTemp=0x7ffff784ead0, dllLoadInfo=0x7ffff001a6f8) at jvminit.c:3694
+#5  runShutdownStageJvmtiFirst (userData=0x7ffff784ead0, vm=0x7fffc3055b40) at jvminit.c:3763
+#6  runShutdownStage (vm=vm@entry=0x7fffc3055b40, stage=stage@entry=17, filterFlags=filterFlags@entry=0, reserved=0x0) at jvminit.c:3795
+#7  0x00007ffff6923ab0 in freeJavaVM (vm=vm@entry=0x7fffc3055b40) at jvminit.c:764
+...
+```

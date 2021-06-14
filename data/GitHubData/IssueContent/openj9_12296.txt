@@ -1,0 +1,1 @@
+In PR https://github.com/eclipse/openj9/pull/12290, we enabled healthcenter sanity test. It may be worth looking into https://github.com/eclipse/openj9/pull/12290#issuecomment-806812203. If it can be handled in XXArgumentTesting.xml properly, there is no need to have extra build.xml and playlist.xml.

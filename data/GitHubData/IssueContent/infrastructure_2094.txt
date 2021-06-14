@@ -1,0 +1,5 @@
+The macOS machines at Colozüri lose their IPv6 addresses from time to time and go offline (example: https://github.com/AdoptOpenJDK/openjdk-infrastructure/issues/2050). Restarting the RA daemon brings them back.
+
+Next steps:
+
+* Is macOS the problem or the RA daemon? Try with other OS.

@@ -1,0 +1,5 @@
+New unit test mentioned by #784 should be added.
+
+As it should be run with -XX:+StringCompression command line option, we can add the unit test as a separate (cmdlinetester) test, or add it to the existing String test suite and run the entire group with an additional variant.  
+
+(We can also use this issue as a good example for documentation on how to incorporate new tests).

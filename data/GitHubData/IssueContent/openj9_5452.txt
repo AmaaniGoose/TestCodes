@@ -1,0 +1,32 @@
+It appears OpenJ9 fully warmed up state performance is less than half that of Hotspot.
+
+The test uses Eclipse Collection's MutableIntBag. It creates 100K entries and then profiles the forEach iterator that goes through each entry and adds the entry to an external counter.
+
+The two builds I compared the results against are as follows (on MacOS)
+
+[1] openjdk version "12" 2019-03-19
+OpenJDK Runtime Environment AdoptOpenJDK (build 12+33)
+OpenJDK 64-Bit Server VM AdoptOpenJDK (build 12+33, mixed mode, sharing)
+
+[2] openjdk version "12" 2019-03-19
+OpenJDK Runtime Environment AdoptOpenJDK (build 12+33)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.13.0, JRE 12 Mac OS X amd64-64-Bit Compressed References 20190320_32 (JIT enabled, AOT enabled)
+OpenJ9   - caeb51f87
+OMR      - 33a33ff2
+
+----
+Repro steps:
+[1] mvn exec:java -Dexec.mainClass=local.scratch.ESCollections 
+
+------
+Tested on 
+ Model Name:	MacBook Air
+  Model Identifier:	MacBookAir6,2
+  Processor Name:	Intel Core i7
+  Processor Speed:	1.7 GHz
+  Number of Processors:	1
+  Total Number of Cores:	2
+  L2 Cache (per Core):	256 KB
+  L3 Cache:	4 MB
+  Memory:	8 GB
+

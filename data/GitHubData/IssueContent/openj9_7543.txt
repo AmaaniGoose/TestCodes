@@ -1,0 +1,3 @@
+Even the smallest cold compilation consumes more than 700KB of scratch memory and the smallest no-opt compilation consumes more than 500KB.
+We would like to understand if this amount of memory is warranted and reduce it if possible.
+Note: the amount of JIT scratch memory is reported by the verbose logs when using `-Xjit:verbose={compilePerformance}`

@@ -1,0 +1,7 @@
+Many years ago the x86 JIT introduced a "breakOnThrow" option which inserts a user breakpoint in JITed code just prior to the point of throwing an exception that matches some regex.  Presumably this is useful for halting at the precise point in compiled code where a particular exception is thrown.  This feature does not exist on any other platform.  If it is useful then it should be.
+
+I haven't kept up with the state-of-the-art in RAS techniques in the VM over the years to know whether or not there is some equivalent functionality in `Xdump` or `Xtrace` that should be used instead.
+
+Did anyone even know this feature exists on x86?  :-)  It's implementation is a bit hacky (my opinion) and I would remove it if there isn't any value to it.
+
+@andrewcraik @fjeremic @gita-omr @knn-k 

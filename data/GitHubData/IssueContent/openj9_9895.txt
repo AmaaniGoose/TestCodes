@@ -1,0 +1,1 @@
+In JDK15+, commits dependent on the OpenJDK MethodHandle(s) were noticed. These commits cannot be supported with the OpenJ9 MethodHandle implementation. These commits are temporarily reverted (disabled) until OpenJ9 supports the OpenJDK MethodHandle(s). This issue will track all such commits so that their revert can be undone once OpenJ9 supports the OpenJDK MethodHandles(s).

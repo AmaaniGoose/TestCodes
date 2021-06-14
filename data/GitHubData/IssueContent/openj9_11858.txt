@@ -1,0 +1,3 @@
+https://github.com/eclipse/openj9/pull/11631 changes the implementation of Class.newInstance() for jdk16+, which may affect performance. For non-bootstrap callers, instead of calling the newInstanceImpl native, it basically gets the Constructor and calls Constructor.newInstance() instead. There is overhead in getting the reflection object via the reflection cache, and using the reflection optimizations that create new classes.
+
+In all cases, there is the addition of getting the calling class in Class.newInstance().

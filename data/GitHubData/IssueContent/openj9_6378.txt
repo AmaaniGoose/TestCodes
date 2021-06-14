@@ -1,0 +1,3 @@
+I tried to run a unit test to reproduce a failure. The unit test was able to have my wanted function compiled in `-Xjit` option with `disableAsyncCompilation` sub-option. However, when I tried to change the `-Xjit` into `-Xaot` with the same sub-options, the wanted function didn't get compiled. 
+
+We found that the `TR::CompilationInfo::asynchronousCompilation()` function seems not checking the `AOT` options. 

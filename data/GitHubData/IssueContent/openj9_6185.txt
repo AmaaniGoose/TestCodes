@@ -1,0 +1,179 @@
+Java -version output
+--------------------
+```
+openjdk version "1.8.0_212"
+OpenJDK Runtime Environment (build 1.8.0_212-b04)
+Eclipse OpenJ9 VM (build openj9-0.14.2, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20190521_315 (JIT enabled, AOT enabled)
+OpenJ9   - 4b1df46fe
+OMR      - b56045d2
+JCL      - a8c217d402 based on jdk8u212-b04)
+```
+```
+openjdk version "1.8.0_222"
+OpenJDK Runtime Environment (build 1.8.0_222-201906190413-b05)
+Eclipse OpenJ9 VM (build master-8dae1c8f9, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20190619_342 (JIT enabled, AOT enabled)
+OpenJ9   - 8dae1c8f9
+OMR      - c10087d5
+JCL      - 0843c3e6c2 based on jdk8u222-b05)
+```
+Summary of problem
+------------------
+
+Running bin/tnameserv results in the following:
+```
+Jun 19, 2019 9:46:10 AM com.sun.corba.se.impl.transport.SocketOrChannelAcceptorImpl initialize
+SEVERE: "IOP00410216: (COMM_FAILURE) Unable to create listener thread on the specified port: 900"
+org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 216  completed: No
+        at com.sun.corba.se.impl.logging.ORBUtilSystemException.createListenerFailed(ORBUtilSystemException.java:2632)
+        at com.sun.corba.se.impl.logging.ORBUtilSystemException.createListenerFailed(ORBUtilSystemException.java:2651)
+        at com.sun.corba.se.impl.transport.SocketOrChannelAcceptorImpl.initialize(SocketOrChannelAcceptorImpl.java:164)
+        at com.sun.corba.se.impl.transport.CorbaTransportManagerImpl.getAcceptors(CorbaTransportManagerImpl.java:218)
+        at com.sun.corba.se.impl.transport.CorbaTransportManagerImpl.addToIORTemplate(CorbaTransportManagerImpl.java:236)
+        at com.sun.corba.se.spi.oa.ObjectAdapterBase.initializeTemplate(ObjectAdapterBase.java:122)
+        at com.sun.corba.se.impl.oa.poa.POAImpl.initialize(POAImpl.java:404)
+        at com.sun.corba.se.impl.oa.poa.POAImpl.makeRootPOA(POAImpl.java:272)
+        at com.sun.corba.se.impl.oa.poa.POAFactory$1.evaluate(POAFactory.java:205)
+        at com.sun.corba.se.impl.orbutil.closure.Future.evaluate(Future.java:46)
+        at com.sun.corba.se.impl.resolver.LocalResolverImpl.resolve(LocalResolverImpl.java:40)
+        at com.sun.corba.se.impl.resolver.CompositeResolverImpl.resolve(CompositeResolverImpl.java:45)
+        at com.sun.corba.se.impl.orb.ORBImpl.resolve_initial_references(ORBImpl.java:1177)
+        at com.sun.corba.se.impl.naming.cosnaming.TransientNameService.initialize(TransientNameService.java:113)
+        at com.sun.corba.se.impl.naming.cosnaming.TransientNameService.<init>(TransientNameService.java:80)
+        at com.sun.corba.se.impl.naming.cosnaming.TransientNameServer.initializeRootNamingContext(TransientNameServer.java:91)
+        at com.sun.corba.se.impl.naming.cosnaming.TransientNameServer.main(TransientNameServer.java:179)
+Caused by: java.net.SocketException: Permission denied
+        at sun.nio.ch.Net.bind0(Native Method)
+        at sun.nio.ch.Net.bind(Net.java:433)
+        at sun.nio.ch.Net.bind(Net.java:425)
+        at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+        at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+        at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:67)
+        at com.sun.corba.se.impl.transport.DefaultSocketFactoryImpl.createServerSocket(DefaultSocketFactoryImpl.java:83)
+        at com.sun.corba.se.impl.transport.SocketOrChannelAcceptorImpl.initialize(SocketOrChannelAcceptorImpl.java:161)
+        ... 14 more
+
+Jun 19, 2019 9:46:10 AM com.sun.corba.se.impl.naming.cosnaming.TransientNameService initialize
+WARNING: "IOP00910650: (INITIALIZE) SystemException in transient name service while initializing"
+org.omg.CORBA.INITIALIZE:   vmcid: SUN  minor code: 650  completed: No
+        at com.sun.corba.se.impl.logging.NamingSystemException.transNsCannotCreateInitialNcSys(NamingSystemException.java:324)
+        at com.sun.corba.se.impl.logging.NamingSystemException.transNsCannotCreateInitialNcSys(NamingSystemException.java:342)
+        at com.sun.corba.se.impl.naming.cosnaming.TransientNameService.initialize(TransientNameService.java:139)
+        at com.sun.corba.se.impl.naming.cosnaming.TransientNameService.<init>(TransientNameService.java:80)
+        at com.sun.corba.se.impl.naming.cosnaming.TransientNameServer.initializeRootNamingContext(TransientNameServer.java:91)
+        at com.sun.corba.se.impl.naming.cosnaming.TransientNameServer.main(TransientNameServer.java:179)
+Caused by: org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 216  completed: No
+        at com.sun.corba.se.impl.logging.ORBUtilSystemException.createListenerFailed(ORBUtilSystemException.java:2632)
+        at com.sun.corba.se.impl.logging.ORBUtilSystemException.createListenerFailed(ORBUtilSystemException.java:2651)
+        at com.sun.corba.se.impl.transport.SocketOrChannelAcceptorImpl.initialize(SocketOrChannelAcceptorImpl.java:164)
+        at com.sun.corba.se.impl.transport.CorbaTransportManagerImpl.getAcceptors(CorbaTransportManagerImpl.java:218)
+        at com.sun.corba.se.impl.transport.CorbaTransportManagerImpl.addToIORTemplate(CorbaTransportManagerImpl.java:236)
+        at com.sun.corba.se.spi.oa.ObjectAdapterBase.initializeTemplate(ObjectAdapterBase.java:122)
+        at com.sun.corba.se.impl.oa.poa.POAImpl.initialize(POAImpl.java:404)
+        at com.sun.corba.se.impl.oa.poa.POAImpl.makeRootPOA(POAImpl.java:272)
+        at com.sun.corba.se.impl.oa.poa.POAFactory$1.evaluate(POAFactory.java:205)
+        at com.sun.corba.se.impl.orbutil.closure.Future.evaluate(Future.java:46)
+        at com.sun.corba.se.impl.resolver.LocalResolverImpl.resolve(LocalResolverImpl.java:40)
+        at com.sun.corba.se.impl.resolver.CompositeResolverImpl.resolve(CompositeResolverImpl.java:45)
+        at com.sun.corba.se.impl.orb.ORBImpl.resolve_initial_references(ORBImpl.java:1177)
+        at com.sun.corba.se.impl.naming.cosnaming.TransientNameService.initialize(TransientNameService.java:113)
+        ... 3 more
+Caused by: java.net.SocketException: Permission denied
+        at sun.nio.ch.Net.bind0(Native Method)
+        at sun.nio.ch.Net.bind(Net.java:433)
+        at sun.nio.ch.Net.bind(Net.java:425)
+        at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+        at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+        at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:67)
+        at com.sun.corba.se.impl.transport.DefaultSocketFactoryImpl.createServerSocket(DefaultSocketFactoryImpl.java:83)
+        at com.sun.corba.se.impl.transport.SocketOrChannelAcceptorImpl.initialize(SocketOrChannelAcceptorImpl.java:161)
+        ... 14 more
+
+Jun 19, 2019 9:46:10 AM com.sun.corba.se.impl.naming.cosnaming.TransientNameServer initializeRootNamingContext
+WARNING: "IOP00910650: (INITIALIZE) SystemException in transient name service while initializing"
+org.omg.CORBA.INITIALIZE:   vmcid: SUN  minor code: 650  completed: No
+        at com.sun.corba.se.impl.logging.NamingSystemException.transNsCannotCreateInitialNcSys(NamingSystemException.java:324)
+        at com.sun.corba.se.impl.logging.NamingSystemException.transNsCannotCreateInitialNcSys(NamingSystemException.java:342)
+        at com.sun.corba.se.impl.naming.cosnaming.TransientNameServer.initializeRootNamingContext(TransientNameServer.java:94)
+        at com.sun.corba.se.impl.naming.cosnaming.TransientNameServer.main(TransientNameServer.java:179)
+Caused by: org.omg.CORBA.INITIALIZE:   vmcid: SUN  minor code: 650  completed: No
+        at com.sun.corba.se.impl.logging.NamingSystemException.transNsCannotCreateInitialNcSys(NamingSystemException.java:324)
+        at com.sun.corba.se.impl.logging.NamingSystemException.transNsCannotCreateInitialNcSys(NamingSystemException.java:342)
+        at com.sun.corba.se.impl.naming.cosnaming.TransientNameService.initialize(TransientNameService.java:139)
+        at com.sun.corba.se.impl.naming.cosnaming.TransientNameService.<init>(TransientNameService.java:80)
+        at com.sun.corba.se.impl.naming.cosnaming.TransientNameServer.initializeRootNamingContext(TransientNameServer.java:91)
+        ... 1 more
+Caused by: org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 216  completed: No
+        at com.sun.corba.se.impl.logging.ORBUtilSystemException.createListenerFailed(ORBUtilSystemException.java:2632)
+        at com.sun.corba.se.impl.logging.ORBUtilSystemException.createListenerFailed(ORBUtilSystemException.java:2651)
+        at com.sun.corba.se.impl.transport.SocketOrChannelAcceptorImpl.initialize(SocketOrChannelAcceptorImpl.java:164)
+        at com.sun.corba.se.impl.transport.CorbaTransportManagerImpl.getAcceptors(CorbaTransportManagerImpl.java:218)
+        at com.sun.corba.se.impl.transport.CorbaTransportManagerImpl.addToIORTemplate(CorbaTransportManagerImpl.java:236)
+        at com.sun.corba.se.spi.oa.ObjectAdapterBase.initializeTemplate(ObjectAdapterBase.java:122)
+        at com.sun.corba.se.impl.oa.poa.POAImpl.initialize(POAImpl.java:404)
+        at com.sun.corba.se.impl.oa.poa.POAImpl.makeRootPOA(POAImpl.java:272)
+        at com.sun.corba.se.impl.oa.poa.POAFactory$1.evaluate(POAFactory.java:205)
+        at com.sun.corba.se.impl.orbutil.closure.Future.evaluate(Future.java:46)
+        at com.sun.corba.se.impl.resolver.LocalResolverImpl.resolve(LocalResolverImpl.java:40)
+        at com.sun.corba.se.impl.resolver.CompositeResolverImpl.resolve(CompositeResolverImpl.java:45)
+        at com.sun.corba.se.impl.orb.ORBImpl.resolve_initial_references(ORBImpl.java:1177)
+        at com.sun.corba.se.impl.naming.cosnaming.TransientNameService.initialize(TransientNameService.java:113)
+        ... 3 more
+Caused by: java.net.SocketException: Permission denied
+        at sun.nio.ch.Net.bind0(Native Method)
+        at sun.nio.ch.Net.bind(Net.java:433)
+        at sun.nio.ch.Net.bind(Net.java:425)
+        at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+        at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+        at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:67)
+        at com.sun.corba.se.impl.transport.DefaultSocketFactoryImpl.createServerSocket(DefaultSocketFactoryImpl.java:83)
+        at com.sun.corba.se.impl.transport.SocketOrChannelAcceptorImpl.initialize(SocketOrChannelAcceptorImpl.java:161)
+        ... 14 more
+
+caught an exception while starting the bootstrap service on port 900
+try using a different port with commandline arguments -ORBInitialPort <portno>
+org.omg.CORBA.INITIALIZE:   vmcid: SUN  minor code: 650  completed: No
+        at com.sun.corba.se.impl.logging.NamingSystemException.transNsCannotCreateInitialNcSys(NamingSystemException.java:324)
+        at com.sun.corba.se.impl.logging.NamingSystemException.transNsCannotCreateInitialNcSys(NamingSystemException.java:342)
+        at com.sun.corba.se.impl.naming.cosnaming.TransientNameServer.initializeRootNamingContext(TransientNameServer.java:94)
+        at com.sun.corba.se.impl.naming.cosnaming.TransientNameServer.main(TransientNameServer.java:179)
+Caused by: org.omg.CORBA.INITIALIZE:   vmcid: SUN  minor code: 650  completed: No
+        at com.sun.corba.se.impl.logging.NamingSystemException.transNsCannotCreateInitialNcSys(NamingSystemException.java:324)
+        at com.sun.corba.se.impl.logging.NamingSystemException.transNsCannotCreateInitialNcSys(NamingSystemException.java:342)
+        at com.sun.corba.se.impl.naming.cosnaming.TransientNameService.initialize(TransientNameService.java:139)
+        at com.sun.corba.se.impl.naming.cosnaming.TransientNameService.<init>(TransientNameService.java:80)
+        at com.sun.corba.se.impl.naming.cosnaming.TransientNameServer.initializeRootNamingContext(TransientNameServer.java:91)
+        ... 1 more
+Caused by: org.omg.CORBA.COMM_FAILURE:   vmcid: SUN  minor code: 216  completed: No
+        at com.sun.corba.se.impl.logging.ORBUtilSystemException.createListenerFailed(ORBUtilSystemException.java:2632)
+        at com.sun.corba.se.impl.logging.ORBUtilSystemException.createListenerFailed(ORBUtilSystemException.java:2651)
+        at com.sun.corba.se.impl.transport.SocketOrChannelAcceptorImpl.initialize(SocketOrChannelAcceptorImpl.java:164)
+        at com.sun.corba.se.impl.transport.CorbaTransportManagerImpl.getAcceptors(CorbaTransportManagerImpl.java:218)
+        at com.sun.corba.se.impl.transport.CorbaTransportManagerImpl.addToIORTemplate(CorbaTransportManagerImpl.java:236)
+        at com.sun.corba.se.spi.oa.ObjectAdapterBase.initializeTemplate(ObjectAdapterBase.java:122)
+        at com.sun.corba.se.impl.oa.poa.POAImpl.initialize(POAImpl.java:404)
+        at com.sun.corba.se.impl.oa.poa.POAImpl.makeRootPOA(POAImpl.java:272)
+        at com.sun.corba.se.impl.oa.poa.POAFactory$1.evaluate(POAFactory.java:205)
+        at com.sun.corba.se.impl.orbutil.closure.Future.evaluate(Future.java:46)
+        at com.sun.corba.se.impl.resolver.LocalResolverImpl.resolve(LocalResolverImpl.java:40)
+        at com.sun.corba.se.impl.resolver.CompositeResolverImpl.resolve(CompositeResolverImpl.java:45)
+        at com.sun.corba.se.impl.orb.ORBImpl.resolve_initial_references(ORBImpl.java:1177)
+        at com.sun.corba.se.impl.naming.cosnaming.TransientNameService.initialize(TransientNameService.java:113)
+        ... 3 more
+Caused by: java.net.SocketException: Permission denied
+        at sun.nio.ch.Net.bind0(Native Method)
+        at sun.nio.ch.Net.bind(Net.java:433)
+        at sun.nio.ch.Net.bind(Net.java:425)
+        at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+        at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+        at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:67)
+        at com.sun.corba.se.impl.transport.DefaultSocketFactoryImpl.createServerSocket(DefaultSocketFactoryImpl.java:83)
+        at com.sun.corba.se.impl.transport.SocketOrChannelAcceptorImpl.initialize(SocketOrChannelAcceptorImpl.java:161)
+```
+
+Expected output is like
+```
+Initial Naming Context:
+IOR: ...
+TransientNameServer: setting port for initial object references to: 2809
+Ready.
+```

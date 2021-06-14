@@ -1,0 +1,11 @@
+Based on https://ci.adoptopenjdk.net/job/Test_openjdk8_hs_sanity.external_x86-64_linux_tomee/ it seems to run quickly on the softlayer machine but slowly on the godaddy ones - close to 10 hours vs under an hour. We should investigate the logs and the machines to see where the slowness is occurring. There are certainly places where there are close to 4 hour delays showing in the logs when it's trying to download some of the external tools e.g. from [run 477](https://ci.adoptopenjdk.net/job/Test_openjdk8_hs_sanity.external_x86-64_linux_tomee/477/consoleFull)
+
+```
+20:02:14  [INFO] Downloaded from JBoss Repository: https://repository.jboss.org/nexus/content/groups/public-jboss/net/sourceforge/htmlunit/htmlunit/2.33/htmlunit-2.33.jar (2.0 MB at 22 kB/s)
+Cancelling nested steps due to timeout
+23:54:57  Sending interrupt signal to process
+23:55:14  Terminated
+23:55:14  
+23:55:14  tomee_test_hs_0_FAILED
+```
+This is limiting the performance of the overnight pipelines

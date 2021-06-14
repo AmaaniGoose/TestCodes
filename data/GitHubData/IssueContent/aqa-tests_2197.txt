@@ -1,0 +1,58 @@
+[2021-01-21T20:36:24.647Z] rerun:
+[2021-01-21T20:36:24.647Z] cd /home/jenkins/workspace/Test_openjdk15_hs_sanity.openjdk_arm_linux/openjdk-tests/TKG/test_output_16112358856146/jdk_svc_sanity_2/work/scratch && \
+[2021-01-21T20:36:24.647Z] DISPLAY=:0 \
+[2021-01-21T20:36:24.647Z] HOME=/home/jenkins \
+[2021-01-21T20:36:24.647Z] LANG=en_US.UTF-8 \
+[2021-01-21T20:36:24.647Z] PATH=/bin:/usr/bin:/usr/sbin \
+[2021-01-21T20:36:24.647Z]     /home/jenkins/workspace/Test_openjdk15_hs_sanity.openjdk_arm_linux/openjdkbinary/j2sdk-image/bin/java \
+[2021-01-21T20:36:24.647Z]         -Dtest.vm.opts='-ea -esa -Xmx512m' \
+[2021-01-21T20:36:24.647Z]         -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m' \
+[2021-01-21T20:36:24.647Z]         -Dtest.compiler.opts= \
+[2021-01-21T20:36:24.647Z]         -Dtest.java.opts= \
+[2021-01-21T20:36:24.647Z]         -Dtest.jdk=/home/jenkins/workspace/Test_openjdk15_hs_sanity.openjdk_arm_linux/openjdkbinary/j2sdk-image \
+[2021-01-21T20:36:24.647Z]         -Dcompile.jdk=/home/jenkins/workspace/Test_openjdk15_hs_sanity.openjdk_arm_linux/openjdkbinary/j2sdk-image \
+[2021-01-21T20:36:24.647Z]         -Dtest.timeout.factor=8.0 \
+[2021-01-21T20:36:24.647Z]         -Dtest.root=/home/jenkins/workspace/Test_openjdk15_hs_sanity.openjdk_arm_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+[2021-01-21T20:36:24.647Z]         -Dtest.name=com/sun/jdi/AccessSpecifierTest.java \
+[2021-01-21T20:36:24.647Z]         -Dtest.file=/home/jenkins/workspace/Test_openjdk15_hs_sanity.openjdk_arm_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jdi/AccessSpecifierTest.java \
+[2021-01-21T20:36:24.647Z]         -Dtest.src=/home/jenkins/workspace/Test_openjdk15_hs_sanity.openjdk_arm_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jdi \
+[2021-01-21T20:36:24.647Z]         -Dtest.src.path=/home/jenkins/workspace/Test_openjdk15_hs_sanity.openjdk_arm_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jdi \
+[2021-01-21T20:36:24.647Z]         -Dtest.classes=/home/jenkins/workspace/Test_openjdk15_hs_sanity.openjdk_arm_linux/openjdk-tests/TKG/test_output_16112358856146/jdk_svc_sanity_2/work/classes/com/sun/jdi/AccessSpecifierTest.d \
+[2021-01-21T20:36:24.647Z]         -Dtest.class.path=/home/jenkins/workspace/Test_openjdk15_hs_sanity.openjdk_arm_linux/openjdk-tests/TKG/test_output_16112358856146/jdk_svc_sanity_2/work/classes/com/sun/jdi/AccessSpecifierTest.d \
+[2021-01-21T20:36:24.647Z]         -Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk15_hs_sanity.openjdk_arm_linux/openjdk-tests/TKG/test_output_16112358856146/jdk_svc_sanity_2/work/classes/com/sun/jdi/AccessSpecifierTest.d:/home/jenkins/workspace/Test_openjdk15_hs_sanity.openjdk_arm_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jdi \
+[2021-01-21T20:36:24.647Z]         -Dtest.modules=jdk.jdi \
+[2021-01-21T20:36:24.647Z]         -classpath /home/jenkins/workspace/Test_openjdk15_hs_sanity.openjdk_arm_linux/openjdk-tests/TKG/test_output_16112358856146/jdk_svc_sanity_2/work/classes/com/sun/jdi/AccessSpecifierTest.d:/home/jenkins/workspace/Test_openjdk15_hs_sanity.openjdk_arm_linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/com/sun/jdi:/home/jenkins/workspace/Test_openjdk15_hs_sanity.openjdk_arm_linux/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk15_hs_sanity.openjdk_arm_linux/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+[2021-01-21T20:36:24.647Z]         AccessSpecifierTest
+[2021-01-21T20:36:24.647Z] STDERR:
+[2021-01-21T20:36:24.647Z] [20ms] run args: [AccessSpecifierTarg]
+[2021-01-21T20:36:24.647Z] VM initialization failed for: /home/jenkins/workspace/Test_openjdk15_hs_sanity.openjdk_arm_linux/openjdkbinary/j2sdk-image/bin/java -classpath /home/jenkins/workspace/Test_openjdk15_hs_sanity.openjdk_arm_linux/openjdk-tests/TKG/test_output_16112358856146/jdk_svc_sanity_2/work/classes/com/sun/jdi/AccessSpecifierTest.d -ea -esa -Xmx512m -Xdebug -Xrunjdwp:transport=dt_socket,address=212.47.246.7.adoptopenjdk.net:53645,suspend=y AccessSpecifierTarg
+[2021-01-21T20:36:24.647Z] 
+[2021-01-21T20:36:24.647Z] 
+[2021-01-21T20:36:24.647Z]  Target VM failed to initialize.
+[2021-01-21T20:36:24.647Z] java.lang.NullPointerException: Cannot invoke "com.sun.jdi.VirtualMachine.setDebugTraceMode(int)" because "this.vm" is null
+[2021-01-21T20:36:24.647Z] 	at VMConnection.open(VMConnection.java:157)
+[2021-01-21T20:36:24.647Z] 	at TestScaffold.connect(TestScaffold.java:637)
+[2021-01-21T20:36:24.647Z] 	at TestScaffold.startUp(TestScaffold.java:364)
+[2021-01-21T20:36:24.647Z] 	at TestScaffold.startTo(TestScaffold.java:374)
+[2021-01-21T20:36:24.647Z] 	at AccessSpecifierTest.runTests(AccessSpecifierTest.java:221)
+[2021-01-21T20:36:24.647Z] 	at TestScaffold.startTests(TestScaffold.java:431)
+[2021-01-21T20:36:24.647Z] 	at AccessSpecifierTest.main(AccessSpecifierTest.java:189)
+[2021-01-21T20:36:24.647Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-01-21T20:36:24.647Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+[2021-01-21T20:36:24.647Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-01-21T20:36:24.647Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+[2021-01-21T20:36:24.647Z] 	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+[2021-01-21T20:36:24.647Z] 	at java.base/java.lang.Thread.run(Thread.java:832)
+[2021-01-21T20:36:24.647Z] 
+[2021-01-21T20:36:24.647Z] JavaTest Message: Test threw exception: java.lang.NullPointerException
+[2021-01-21T20:36:24.647Z] JavaTest Message: shutting down test
+[2021-01-21T20:36:24.647Z] 
+[2021-01-21T20:36:24.647Z] STDOUT:
+[2021-01-21T20:36:24.647Z] vmOpts: '-ea -esa -Xmx512m'
+[2021-01-21T20:36:24.647Z] javaOpts: ''
+[2021-01-21T20:36:24.647Z] ERROR: transport error 202: connect failed: Connection refused
+[2021-01-21T20:36:24.647Z] ERROR: JDWP Transport dt_socket failed to initialize, TRANSPORT_INIT(510)
+[2021-01-21T20:36:24.647Z] JDWP exit error AGENT_ERROR_TRANSPORT_INIT(197): No transports initialized [./src/jdk.jdwp.agent/share/native/libjdwp/debugInit.c:734]
+[2021-01-21T20:36:24.647Z] 
+[2021-01-21T20:36:24.647Z] TEST RESULT: Failed. Execution failed: `main' threw exception: java.lang.NullPointerException: Cannot invoke "com.sun.jdi.VirtualMachine.setDebugTraceMode(int)" because "this.vm" is null
+[2021-01-21T20:36:24.647Z] --------------------------------------------------

@@ -1,0 +1,33 @@
+I was optimizing a particularly hot threadlocal in JRuby today and noticed that current OpenJ9 Java 8 (nightly from Oct 12th or so) appears to be nearly 2x slower than OpenJDK8 C2 (recent-ish build). It seemed worth posting an issue after discussing it in Slack.
+
+The optimized PR/branch and the benchmark are provided along with a link to C2 assembly output in https://github.com/jruby/jruby/pull/5959
+
+My numbers locally for Java 8 C2 vs J9:
+
+```
+[] ~/projects/jruby $ pickjdk 4 ; java -cp lib/jruby.jar:. ContextGetter
+New JDK: adoptopenjdk-8.jdk
+3.65159464
+3.34112901
+3.31879354
+...
+3.23659174
+3.53413285
+3.26626448
+3.23872332
+^C
+[] ~/projects/jruby $ pickjdk 3 ; java -cp lib/jruby.jar:. ContextGetter
+New JDK: adoptopenjdk-8-openj9.jdk
+9.12280868
+7.90640427
+7.60049042
+7.5055133
+...
+6.04649531
+6.04165871
+5.98665528
+5.97691534
+^C
+```
+
+Note that I also saw both Java 11 C2 and J9 degrade, but the degradation seemed proportional. Something has changed in Java 11 ThreadLocal that impacts both runtimes.

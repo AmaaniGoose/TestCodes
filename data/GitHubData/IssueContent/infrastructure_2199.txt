@@ -1,0 +1,7 @@
+Currently, we have the `NTP_TIME` role, that will effectively disable `systemd-timesyncd` and enable `ntp` for most platforms, however that doesn't reflect the checks that Nagios makes (see reference section). It's been determined that it's probably best we just keep the defaults of the platform, which I _think_ is what the Nagios checks already confirm (i.e NTP for RHEL/CentOS, timesyncd for everything else), so changes to the `NTP_TIME` role will be required.
+
+## Ref:
+- Slack conversation : https://adoptium.slack.com/archives/C53GHCXL4/p1622626868016400
+- `Nagios_Ansible_Config_Tool`. The platform specific checks section : https://github.com/adoptium/infrastructure/blob/master/ansible/playbooks/Supporting_Scripts/Nagios_Ansible_Config_tool/Nagios_Ansible_Config_tool.sh#L128
+- `check_ntp_timesync`, for CentOS and RHEL platforms : https://github.com/adoptium/infrastructure/blob/master/ansible/playbooks/AdoptOpenJDK_Unix_Playbook/roles/Nagios_Plugins/tasks/additional_plugins/check_ntp_timesync 
+- `check_timesync`, for Debian/Ubuntu/SLES platforms: https://github.com/adoptium/infrastructure/blob/master/ansible/playbooks/AdoptOpenJDK_Unix_Playbook/roles/Nagios_Plugins/tasks/additional_plugins/check_timesync 

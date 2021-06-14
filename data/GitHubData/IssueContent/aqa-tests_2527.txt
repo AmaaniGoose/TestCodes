@@ -1,0 +1,9 @@
+If a Grinder test is run with `TARGET=jdk_custom` and `CUSTOM_TARGET=path_to_openjdk_test` the test which is actually executed can be `java/math/BigInteger/BigIntegerTest.java`, not the requested `path_to_openjdk_test`
+
+This situation has arisen in two use cases:
+1. If a grinder is run with `TARGET=jdk_custom`, then if the test fails the rerun command specifies `TARGET=jdk_custom_n` rather than `TARGET=jdk_custom`.  This appears to have the side effect of CUSTOM_TARGET no longer being recognised  - the incorrect test java/math/BigInteger/BigIntegerTest.java is run instead (I don't know why that particular test is chosen, but it is chosen consistently).
+An example generated 'rerun' command:
+https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=hotspot&JDK_VENDOR=adoptopenjdk&BUILD_LIST=openjdk&PLATFORM=ppc64le_linux_xl&CUSTOM_TARGET=jdk/test/sun/security/krb5/auto/ReplayCacheTestProc.java&TARGET=jdk_custom_1
+
+2. If `PARALLEL=Dynamic` is run with TARGET=jdk_custom and CUSTOM_TARGET=path_to_openjdk_test then all the subordinate jobs run the incorrect test.
+An example `PARALLEL=Dynamic` job: https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/219/console (links to the subordinate jobs can be found in the console output).

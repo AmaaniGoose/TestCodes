@@ -1,0 +1,4 @@
+While working on [1], I found that both Power and X86 codegen, recognizes JNI calls to Unsafe.copyMemory calls which might escape the optimizer and transform it and generates instructions for inlining System.arrayCopy. There is a fair amount of code duplication between both and also On Z we do not recognize it. As discussed in [2], we should add the recognition of JNI call Unsafe.copyMemory to RecognizedCallTransformer so that all the codegen can benefit in case the call escaped optimization. 
+
+[1]. https://github.com/eclipse/openj9/pull/10366 
+[2]. https://github.com/eclipse/openj9/pull/10366#pullrequestreview-465046324

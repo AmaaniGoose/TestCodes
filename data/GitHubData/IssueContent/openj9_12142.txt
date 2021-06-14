@@ -1,0 +1,3 @@
+Investigate whether enabling `USE_COMPUTED_GOTO` for the the bytecode interpreter loop on AArch64 would be worthwhile.  This should involve investigating startup performance with it enabled.
+
+https://github.com/eclipse/openj9/blob/b227feba29b0b191867789756a14b1f1ab061b71/runtime/vm/BytecodeInterpreter.inc#L36

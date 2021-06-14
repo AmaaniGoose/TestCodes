@@ -1,0 +1,3 @@
+With the changes in https://github.com/eclipse/openj9/pull/2700, openj9 correctly handles condy's in the bsm list.  We should add some tests that validate that other cp items are rejected.
+
+In particular, to validate that the error cases print reasonable messages and don't crash :)

@@ -1,0 +1,14 @@
+Valuetypes is going to introduce covariant arrays to the JDK. This means that when an array instance has a static type of `[java/lang/Object;` or `[com/some/InterfaceOrValueCapableAbstractClass;` there is no guarantee as to what the element size of the array may be if it is flattened. 
+
+Currently, the way to check if an array instance is flattened is by checking the classFlags (`arrayInstance->ramClass->classFlags`). Having a faster path to getting this information by using up a bit in the object header has shown to improve performance. See https://github.com/eclipse/openj9/pull/12105 for the bits.
+
+Currently there are no free bits available in the header. These are the proposed solutions:
+
+1) Overload the bit 4 (Object has been hashed) to denote a flattened array as well. 
+
+2) Use the 32nd bit in the `size` field  of the `J9IndexableObject` header to denote a flattened array.
+
+3) Use one of the low bits in `dataAddr` field of the `J9IndexableObject` header to denote a flattened array
+
+4) Do nothing
+

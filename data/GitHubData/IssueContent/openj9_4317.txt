@@ -1,0 +1,20 @@
+Test https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/nio/channels/SocketChannel/AdaptSocket.java fails consistently on Mac OS with the following ...
+
+```
+java.lang.Exception: Should time out, but not, data: [102, 111, 111, 13, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	at AdaptSocket.testRead(AdaptSocket.java:106)
+	at AdaptSocket.testRead(AdaptSocket.java:143)
+	at AdaptSocket.main(AdaptSocket.java:200)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+```
+
+Latest occurrence of failure - https://ci.adoptopenjdk.net/view/Test_openjdk/job/openjdk11_j9_openjdktest_x86-64_macos/138/testReport/junit/java_nio_channels_SocketChannel_AdaptSocket/java/AdaptSocket
+
+Successful run against Linux x86_64 - https://ci.adoptopenjdk.net/view/Test_openjdk/job/openjdk11_j9_openjdktest_x86-64_linux/240/testReport/java_nio_channels_SocketChannel_AdaptSocket/java/AdaptSocket
+
+No such problem against HotSpot on MacOS - https://ci.adoptopenjdk.net/view/Test_openjdk/job/openjdk11_hs_openjdktest_x86-64_macos/98/testReport/java_nio_channels_SocketChannel_AdaptSocket/java/AdaptSocket

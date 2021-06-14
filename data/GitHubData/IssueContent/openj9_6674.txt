@@ -1,0 +1,91 @@
+Failure link
+------------
+CustomLoggerTest: https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/1846/
+DefaultLoggerTest: https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/1848/
+https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/lang/System/Logger/custom/CustomLoggerTest.java
+https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/lang/System/Logger/default/DefaultLoggerTest.java
+Test Category: openjdk
+Test Suite: java_lang
+OS/Architecture: x86-64-windows, x86-64-linux, x86-64-osx, ...
+OpenJDK Version: 11.0.4+11
+Public Build SHAs:
+OpenJ9 - `85b0693e8`
+OMR - `6e99760b`
+JCL - `965d0c0df3`
+
+Optional info
+-------------
+intermittent failure : no
+regression or new test:  regression
+These tests are both excluded jtreg tests, failing on openj9 builds of jdk11 across at least these 3 OS's. Both pass on hotspot builds. They seem to relate to the same problem which is why I have linked them in the same issue. Console outputs below.
+
+Failure output
+--------------
+CustomLoggerTest:
+*** With Security Manager, without permissions
+`System.getLogger("foo"): jdk.internal.logger.LazyLoggers$JdkLazyLogger@22e01eb3`
+CustomLoggerTest.java:314 - `Logger appLogger2 = System.getLogger("foo", loggerBundle);`
+```
+java.security.AccessControlException: Access denied ("java.lang.RuntimePermission" "loggerFinder")
+        at java.base/java.security.AccessController.throwACE(AccessController.java:176)
+        at java.base/java.security.AccessController.checkPermissionHelper(AccessController.java:238)
+        at java.base/java.security.AccessController.checkPermission(AccessController.java:385)
+        at java.base/java.lang.SecurityManager.checkPermission(SecurityManager.java:322)
+        at java.base/java.lang.System$LoggerFinder.verifyPermissions(System.java:1183)
+        at java.base/java.lang.System$LoggerFinder.getLoggerFinder(System.java:1170)
+        at java.base/java.lang.System.getLogger(System.java:1114)
+        at CustomLoggerTest.test(CustomLoggerTest.java:382)
+        at CustomLoggerTest.lambda$main$0(CustomLoggerTest.java:314)
+        at CustomLoggerTest$$Lambda$6.00000000940AFE60.accept(Unknown Source)
+        at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+        at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+        at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+        at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:497)
+        at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:487)
+        at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+        at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+        at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:239)
+        at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:497)
+        at CustomLoggerTest.main(CustomLoggerTest.java:304)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+        at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+        at java.base/java.lang.Thread.run(Thread.java:831)
+```
+
+DefaultLoggerTest:
+*** With Security Manager, without permissions
+`System.getLogger("foo"): jdk.internal.logger.LazyLoggers$JdkLazyLogger@5968a779`
+DefaultLoggerTest.java:522 - `sink = java.util.logging.Logger.getLogger("foo");`
+```
+java.security.AccessControlException: Access denied ("java.lang.RuntimePermission" "loggerFinder")
+        at java.base/java.security.AccessController.throwACE(AccessController.java:176)
+        at java.base/java.security.AccessController.checkPermissionHelper(AccessController.java:238)
+        at java.base/java.security.AccessController.checkPermission(AccessController.java:385)
+        at java.base/java.lang.SecurityManager.checkPermission(SecurityManager.java:322)
+        at java.base/java.lang.System$LoggerFinder.verifyPermissions(System.java:1183)
+        at java.base/java.lang.System$LoggerFinder.getLoggerFinder(System.java:1170)
+        at java.base/java.lang.System.getLogger(System.java:1114)
+        at DefaultLoggerTest.test(DefaultLoggerTest.java:522)
+        at DefaultLoggerTest.test(DefaultLoggerTest.java:485)
+        at DefaultLoggerTest.lambda$main$0(DefaultLoggerTest.java:438)
+        at DefaultLoggerTest$$Lambda$15.0000000008015B60.accept(Unknown Source)
+        at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+        at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+        at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948)
+        at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:497)
+        at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:487)
+        at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+        at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+        at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:239)
+        at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:497)
+        at DefaultLoggerTest.main(DefaultLoggerTest.java:428)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+        at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+        at java.base/java.lang.Thread.run(Thread.java:831)
+```

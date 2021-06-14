@@ -1,0 +1,29 @@
+### Errors
+Unexpected `IllegalAccessException` (caused by `IncompatibleClassChangeError`) thrown when OJDK MHs are enabled in OpenJ9.
+
+```
+java.lang.IllegalAccessException: no such method: org.openj9.test.jsr335.defendersupersends.asm.K.m()char/invokeSpecial
+	at java.base/java.lang.invoke.MemberName.makeAccessException(MemberName.java:974)
+	at java.base/java.lang.invoke.MemberName$Factory.resolveOrFail(MemberName.java:1119)
+	at java.base/java.lang.invoke.MethodHandles$Lookup.resolveOrFail(MethodHandles.java:3651)
+	at java.base/java.lang.invoke.MethodHandles$Lookup.findSpecial(MethodHandles.java:2997)
+
+Caused by: java.lang.IncompatibleClassChangeError: conflicting default methods for 'm()C' in org/openj9/test/jsr335/defendersupersends/asm/K from classes [org/openj9/test/jsr335/defendersupersends/asm/A, org/openj9/test/jsr335/defendersupersends/asm/B]
+	at java.base/java.lang.invoke.MethodHandleNatives.resolve(Native Method)
+	at java.base/java.lang.invoke.MemberName$Factory.resolve(MemberName.java:1087)
+	at java.base/java.lang.invoke.MemberName$Factory.resolveOrFail(MemberName.java:1116)
+```
+
+### Failing Test Targets
+
+1. `jsr335tests_*` (multiple variants with different JVM arguments) [sanity.functional] 
+     - `test335DefenderSupersendsAsmAsMethodHandles`
+     - `testConflictingDefinitionsInSuperInterface`
+
+### How-to Run Tests?
+
+https://github.com/eclipse/openj9/blob/master/test/docs/OpenJ9TestUserGuide.md
+
+### Steps to build an OpenJ9 JDK with OJDK MHs enabled
+
+Refer to #11458.

@@ -1,0 +1,13 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk16_j9_sanity.openjdk_x86-64_mac_Nightly/11
+java/foreign/TestLibraryLookup.java
+osx1014-x86-1
+```
+08:39:41  test TestLibraryLookup.testInvalidSymbolLookup(): failure
+08:39:41  java.lang.AssertionError: expected [1] but found [0]
+08:39:41  	at org.testng.Assert.fail(Assert.java:94)
+08:39:41  	at org.testng.Assert.failNotEquals(Assert.java:496)
+08:39:41  	at org.testng.Assert.assertEquals(Assert.java:125)
+08:39:41  	at org.testng.Assert.assertEquals(Assert.java:372)
+08:39:41  	at org.testng.Assert.assertEquals(Assert.java:382)
+08:39:41  	at TestLibraryLookup.testInvalidSymbolLookup(TestLibraryLookup.java:84)
+```

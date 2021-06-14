@@ -1,0 +1,36 @@
+Running any job on Jenkins server using OpenJ9 VM throws the "java.lang.OutOfMemoryError: Java heap space" error once the job execution is completed. Below is the version of the openJDK and steps to replicate the issue.
+
+OpenJDK version:
+openjdk version "1.8.0_222"
+OpenJDK Runtime Environment (build 1.8.0_222-b10)
+Eclipse OpenJ9 VM (build openj9-0.15.1, JRE 1.8.0 Windows 10 amd64-64-Bit Compressed References 20190717_421 (JIT enabled, AOT enabled)
+
+How to replicate:
+Start the jenkins server.
+Create new item.
+You can add any build step or else let it remain as it is.
+Click "Build Now".
+The execution completes and open the corresponding build under the Build History.
+Open the Console Output.
+Below error would be available:
+
+Started by user admin
+Building on master in workspace C:\Users\anuraag.k\.jenkins\workspace\jobtest
+FATAL: Java heap space
+java.lang.OutOfMemoryError: Java heap space
+	at java.lang.String.<init>(String.java:831)
+	at java.lang.String.substring(String.java:2661)
+	at org.jvnet.winp.WinProcess.parseCmdLineAndEnvVars(WinProcess.java:177)
+	at org.jvnet.winp.WinProcess.getEnvironmentVariables(WinProcess.java:146)
+	at hudson.util.ProcessTree$WindowsOSProcess.getEnvironmentVariables2(ProcessTree.java:589)
+	at hudson.util.ProcessTree$WindowsOSProcess.hasMatchingEnvVars2(ProcessTree.java:601)
+	at hudson.util.ProcessTree$WindowsOSProcess.access$700(ProcessTree.java:493)
+	at hudson.util.ProcessTree$Windows.hasMatchingEnvVars(ProcessTree.java:677)
+	at hudson.util.ProcessTree$Windows.killAll(ProcessTree.java:652)
+	at hudson.Launcher$LocalLauncher.kill(Launcher.java:955)
+	at hudson.model.AbstractBuild$AbstractBuildExecution.run(AbstractBuild.java:510)
+	at hudson.model.Run.execute(Run.java:1810)
+	at hudson.model.FreeStyleBuild.run(FreeStyleBuild.java:43)
+	at hudson.model.ResourceController.execute(ResourceController.java:97)
+	at hudson.model.Executor.run(Executor.java:429)
+Finished: FAILURE

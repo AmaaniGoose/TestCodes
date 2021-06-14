@@ -1,0 +1,32 @@
+Java -version output
+--------------------
+
+```
+openjdk version "1.8.0_282"
+OpenJDK Runtime Environment (build 1.8.0_282-b08)
+Eclipse OpenJ9 VM (build openj9-0.24.0, JRE 1.8.0 Windows 7 amd64-64-Bit Compres
+sed References 20210120_972 (JIT enabled, AOT enabled)
+OpenJ9   - 345e1b09e
+OMR      - 741e94ea8
+JCL      - ab07c6a8fd based on jdk8u282-b08)
+```
+
+Summary of problem
+------------------
+Use Balanced gc:
+When set -Xmx1024M -Xms1023M. The eden initial committed size is Xmns value.
+If set Xmx=Xms, the eden initial committed size is Xmnx value。
+
+Use the [app](https://github.com/jelastic/java-vertical-scaling-test/tree/master/dist) to test gc 
+` java -Xmx1024M -Xms1024M -Xmns2M -Xmnx1000M -verbose:gc -Xverbosegclog -Xgcpolicy:balanced -jar app.jar 1`
+
+Diagnostic files
+----------------
+MC server gc log:
+Xmx=Xms:[verbosegc.20210203.095225.2492.zip](https://github.com/eclipse/openj9/files/5915691/verbosegc.20210203.095225.2492.zip)
+Xmx≠Xms:[verbosegc.20210203.100915.2992.zip](https://github.com/eclipse/openj9/files/5915696/verbosegc.20210203.100915.2992.zip)
+
+
+Test gclog(Use this [app](https://github.com/jelastic/java-vertical-scaling-test/tree/master/dist)):
+Xmx=Xms:[verbosegc.20210203.102236.3028.zip](https://github.com/eclipse/openj9/files/5915703/verbosegc.20210203.102236.3028.zip)
+Xmx≠Xms:[verbosegc.20210203.102409.1604.zip](https://github.com/eclipse/openj9/files/5915704/verbosegc.20210203.102409.1604.zip)

@@ -1,0 +1,226 @@
+<h1>DDR support for modularity Update</h1>
+
+Existing j9module command looks like:
+
+```
+> !j9module 0x00007F60B42E9398
+J9Module at 0x7f60b42e9398 {
+  Fields for J9Module:
+	0x0: struct J9Object* moduleName = !j9object 0x0000000705470518 // java/lang/String
+	0x8: struct J9Object* moduleObject = !j9object 0x0000000705487610 // java/lang/Module
+	0x10: struct J9Object* version = !j9object 0x0000000705455378 // java/lang/String
+	0x18: struct J9ClassLoader* classLoader = !j9classloader 0x00007F60B408DD60
+	0x20: struct J9HashTable* readAccessHashTable = !j9hashtable 0x00007F60B42EE720
+	0x28: struct J9HashTable* removeAccessHashTable = !j9hashtable 0x00007F60B43538A0
+	0x30: struct J9HashTable* removeExportsHashTable = !j9hashtable 0x0000000000000000
+	0x38: unsigned int isLoose = 0x00000000 (0)
+	0x3c: unsigned int isOpen = 0x00000000 (0)
+}
+Module name: openj9.zosconditionhandling
+To display all j9packages exported by a module, use !dumpmoduleexports 0x00007F60B42E9398
+To display all modules that the target module reads, use !dumpmodulereads 0x00007F60B42E9398
+To find all modules that read a module, use !findallreads 0x00007F60B42E9398
+To find all loaded classes in a module, use !dumpallclassesinmodule 0x00007F60B42E9398 
+```
+
+The two main issues are:
+1) The command names are misleading
+2) There are too many commands
+
+`1) Can be fixed by simply renaming commands based on what appears in a module-info.java file, 2) can be addressed by making fewer commands and provinding options to the commands to filter the output.`
+
+<h2>New Proposal</h2>
+For the given module com.example1:
+
+```
+module com.example1 {
+	requires com.example2
+	requires com.example3
+
+	exports com.example.pkg1;
+	exports com.example.pkg2 to com.example4;
+}
+```
+
+Note there are no current plans to support uses, provides, but that can be added later.
+
+
+
+
+<h3> Find modules </h3>
+A module can be found by using the command `!findmodules`
+
+Usage: !findmodules [[Option] [Param]...]
+
+Options:
+all - Requires no parameters. lists all modules loaded by the JVM (default if no option is specified)
+name - Requires module name as parameter, `param`. Lists all modules with the same name as the `param` loaded by the JVM
+requires - Requires module name as parameter. Lists all loaded modules that require the `param`.
+package - Requires package name as parameter. Lists the loaded module that owns the package.
+
+<h3> Dump module </h3>
+The `!j9module` command will output the following
+
+```
+> !j9module 0x00007F60B42E9398
+J9Module at 0x7f60b42e9398 {
+  Fields for J9Module:
+	0x0: struct J9Object* moduleName = !j9object 0x0000000705470518 // java/lang/String
+	0x8: struct J9Object* moduleObject = !j9object 0x0000000705487610 // java/lang/Module
+	0x10: struct J9Object* version = !j9object 0x0000000705455378 // java/lang/String
+	0x18: struct J9ClassLoader* classLoader = !j9classloader 0x00007F60B408DD60
+	0x20: struct J9HashTable* readAccessHashTable = !j9hashtable 0x00007F60B42EE720
+	0x28: struct J9HashTable* removeAccessHashTable = !j9hashtable 0x00007F60B43538A0
+	0x30: struct J9HashTable* removeExportsHashTable = !j9hashtable 0x0000000000000000
+	0x38: unsigned int isLoose = 0x00000000 (0)
+	0x3c: unsigned int isOpen = 0x00000000 (0)
+}
+Module name: openj9.zosconditionhandling
+To display all details about a module, use !dumpmodule 0x00007F60B42E9398
+```
+
+Usage: !dumpmodule [Option] Address
+
+Options:
+all - lists all details (requires & exports) about the module. (default if no option is specified)
+requires - lists all modules required by the given module
+exports - lists all packages exported by the given module
+classes - lists all loaded classes in the module
+packages - lists all packages in the module
+Address is required in all cases
+
+<h3> Dump package </h3>
+The `!j9package` command will output the following
+
+```
+> !dumpmoduleexports 0x00007F60B42E9398
+com/ibm/le/conditionhandling                  !j9package 0x00007F60B42E93E0
+> !j9package 0x00007F60B42E93E0
+J9Package at 0x7f60b42e93e0 {
+  Fields for J9Package:
+	0x0: struct J9UTF8* packageName = !j9utf8 0x00007F60B42EE8D0
+	0x8: unsigned int exportToAll = 0x00000001 (1)
+	0xc: unsigned int exportToAllUnnamed = 0x00000001 (1)
+	0x10: struct J9Module* module = !j9module 0x00007F60B42E9398
+	0x18: struct J9HashTable* exportsHashTable = !j9hashtable 0x00007F60B42EE940
+	0x20: struct J9ClassLoader* classLoader = !j9classloader 0x00007F60B408DD60
+}
+Package name: com/ibm/le/conditionhandling
+To display all details about a package, !dumppackage 0x00007F60B42E93E0
+```
+
+Usage: !dumppackage [Option] Address
+
+all - displays exportsTo (This is default if no option is specified)
+exportsTo - Lists all modules that this pacakge is exported to
+classes - Lists all classes in this package
+Address is required in all cases
+
+-----------------------------------------------------------------------------------
+<b> <h1>Previous proposal</h1></b>
+1. Find all modules command. Outputs all the modules loaded by the runtime
+Command: `!findallmodules`
+Result
+`[name] !j9module [address]`
+
+Ie.
+```
+!findallmodules
+    java.base            !j9module 0xXXXXX
+    java.desktop      !j9module 0xXXXXX
+```
+
+2. Find module by name (similar to !classforname)
+Command `!findmodulebyname [moduleName]`
+Result: `[moduleName] !j9module [address]`
+
+If there are multiple modules with the same name, output all of them. 
+
+3. Extend `!j9module` command 
+Existing j9module command looks like:
+```
+> !j9module 0x00007F849C073B38
+J9Module at 0x7f849c073b38 {
+  Fields for J9Module:
+	0x0: j9object_t moduleName = !j9object 0x00000000C29D4638 // java/lang/String
+	0x8: j9object_t moduleObject = !j9object 0x00000000FFF00080 // java/lang/reflect/Module
+	0x10: j9object_t version = !j9object 0x00000000C29C4960 // java/lang/String
+	0x18: struct J9ClassLoader * classLoader = !j9classloader 0x00007F849C0729F8
+	0x20: struct J9HashTable * readAccessHashTable = !j9hashtable 0x00007F849C28CD40
+	0x28: struct J9HashTable * removeAccessHashTable = !j9hashtable 0x0000000000000000
+	0x30: struct J9HashTable * removeExportsHashTable = !j9hashtable 0x00007F849C3ACF70
+	0x38: BOOLEAN isLoose = !j9x 0x7f849c073b70
+	0x3c: BOOLEAN isOpen = !j9x 0x7f849c073b74
+}
+```
+3.1 Extend !j9module to add command to display all j9packages exported by the target module (similar to !j9statics command when running !j9class)
+Command: `!dumppackageexports [targertModuleAddress]`
+Output: `!j9package [packageName]`
+
+3.2 Extend j9module to add command to display all modules that the target reads
+Command: `!dumpmodulereads [targetModuleAddress]`
+Output: `!j9module [moduleAddress]`
+
+So !j9module should look something like this:
+
+```
+> !j9module 0x00007F849C073B38
+J9Module at 0x7f849c073b38 {
+  Fields for J9Module:
+	0x0: j9object_t moduleName = !j9object 0x00000000C29D4638 // java/lang/String
+	0x8: j9object_t moduleObject = !j9object 0x00000000FFF00080 // java/lang/reflect/Module
+	0x10: j9object_t version = !j9object 0x00000000C29C4960 // java/lang/String
+	0x18: struct J9ClassLoader * classLoader = !j9classloader 0x00007F849C0729F8
+	0x20: struct J9HashTable * readAccessHashTable = !j9hashtable 0x00007F849C28CD40
+	0x28: struct J9HashTable * removeAccessHashTable = !j9hashtable 0x0000000000000000
+	0x30: struct J9HashTable * removeExportsHashTable = !j9hashtable 0x00007F849C3ACF70
+	0x38: BOOLEAN isLoose = !j9x 0x7f849c073b70
+	0x3c: BOOLEAN isOpen = !j9x 0x7f849c073b74
+}
+!dumppackageexports 0x00007F849C073B38
+!dumpmodulereads 0x00007F849C073B38
+```
+
+4. Find all modules that read target module
+Command: `!findallreads [targetModuleAddress]`
+Output: `!j9module [moduleAddress]`
+
+5. Extend !j9package
+Existing j9package command looks like this:
+```
+> !j9package 0x7F849C3AD0B0
+J9Package at 0x7f849c3ad0b0 {
+  Fields for J9Package:
+	0x0: struct J9UTF8 * packageName = !j9utf8 0x00007F849C399AA8
+	0x8: BOOLEAN exportToAll = !j9x 0x7f849c3ad0b8
+	0xc: BOOLEAN exportToAllUnnamed = !j9x 0x7f849c3ad0bc
+	0x10: struct J9Module * module = !j9module 0x0000000000000000
+	0x18: struct J9HashTable * exportsHashTable = !j9hashtable 0x0000000000000000
+	0x20: struct J9ClassLoader * classLoader = !j9classloader 0x0000000000000000
+}
+```
+Extend it to add command that dumps all modules that the package is exported to
+Command: `!dumpmoduleexports [packageAddress]`
+Output: `!j9module [moduleAddress]`
+
+So !j9package will look like:
+
+```
+> !j9package 0x7F849C3AD0B0
+J9Package at 0x7f849c3ad0b0 {
+  Fields for J9Package:
+	0x0: struct J9UTF8 * packageName = !j9utf8 0x00007F849C399AA8
+	0x8: BOOLEAN exportToAll = !j9x 0x7f849c3ad0b8
+	0xc: BOOLEAN exportToAllUnnamed = !j9x 0x7f849c3ad0bc
+	0x10: struct J9Module * module = !j9module 0x0000000000000000
+	0x18: struct J9HashTable * exportsHashTable = !j9hashtable 0x0000000000000000
+	0x20: struct J9ClassLoader * classLoader = !j9classloader 0x0000000000000000
+}
+!dumpmoduleexports 0x7F849C3AD0B0
+```
+
+6. Find all classes in a module
+Command: `!dumpallclassesinmodule [moduleAddress]`
+Output: `!j9class [classAddress]`
+
+7. Add tests for each of the commands above.

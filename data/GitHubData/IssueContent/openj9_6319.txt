@@ -1,0 +1,55 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.functional_x86-64_linux_xl_Nightly/79
+```
+===============================================
+Running test testJCMMXBeanLocal_SE80_0 ...
+===============================================
+testJCMMXBeanLocal_SE80_0 Start Time: Sat Jun 29 02:45:34 2019 Epoch Time (ms): 1561790734011
+variation: Mode100
+JVM_OPTIONS: -Xnocompressedrefs -Xint -Xgcpolicy:optthruput -Xnocompressedrefs 
+[IncludeExcludeTestAnnotationTransformer] [INFO] exclude file is /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_linux_xl_Nightly/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/TestConfig/resources/excludes/latest_exclude_8.txt
+...
+... TestNG 6.14.2 by Cédric Beust (cedric@beust.com)
+...
+
+[JvmCpuMonitorMXBeanTest] [INFO]  ------------------------------------------
+[JvmCpuMonitorMXBeanTest] [INFO]  Starting JvmCpuMonitorMXBean API tests....
+[JvmCpuMonitorMXBeanTest] [INFO]  ------------------------------------------
+[JvmCpuMonitorMXBeanTest] [INFO] Testing setCategory...
+FAILED: runJvmCpuMonitorMXBeanTest
+java.lang.AssertionError: Unexpected exception occured : Task java.util.concurrent.FutureTask@6b69b832 rejected from java.util.concurrent.ThreadPoolExecutor@56f541c5[Terminated, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0]
+	at org.testng.Assert.fail(Assert.java:85)
+	at org.openj9.test.management.JvmCpuMonitorMXBeanTest.test_setThreadCategory(JvmCpuMonitorMXBeanTest.java:400)
+	at org.openj9.test.management.JvmCpuMonitorMXBeanTest.runJvmCpuMonitorMXBeanTest(JvmCpuMonitorMXBeanTest.java:202)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+	at org.testng.TestRunner.run(TestRunner.java:505)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+	at org.testng.TestNG.runSuites(TestNG.java:1049)
+	at org.testng.TestNG.run(TestNG.java:1017)
+	at org.testng.TestNG.privateMain(TestNG.java:1354)
+	at org.testng.TestNG.main(TestNG.java:1323)
+Caused by: java.util.concurrent.RejectedExecutionException: Task java.util.concurrent.FutureTask@6b69b832 rejected from java.util.concurrent.ThreadPoolExecutor@56f541c5[Terminated, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0]
+	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2063)
+	at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:830)
+	at java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1379)
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:134)
+	at java.util.concurrent.Executors$DelegatedExecutorService.submit(Executors.java:681)
+	at org.openj9.test.management.JvmCpuMonitorMXBeanTest.test_setThreadCategory(JvmCpuMonitorMXBeanTest.java:396)
+	... 25 more
+```

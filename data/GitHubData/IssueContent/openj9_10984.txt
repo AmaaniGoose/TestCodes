@@ -1,0 +1,89 @@
+Failure link
+------------
+
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/526/
+```
+22:27:54  openjdk version "1.8.0_272-internal"
+22:27:54  OpenJDK Runtime Environment (build 1.8.0_272-internal-****_2020_10_22_20_44-b00)
+22:27:54  Eclipse OpenJ9 VM (build master-db2937c1f10, JRE 1.8.0 Windows Server 2012 R2 amd64-64-Bit Compressed References 20201022_551 (JIT enabled, AOT enabled)
+22:27:54  OpenJ9   - db2937c1f10
+22:27:54  OMR      - 6b0f48b54a9
+22:27:54  JCL      - b672b0f1942 based on jdk8u272-b10)
+```
+To rebuild the failed tests in <Jenkins URL>=https://ci.eclipse.org/openj9/job/Grinder, use the following links:
+23:30:37  https://ci.eclipse.org/openj9/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system&PLATFORM=x86-64_windows&TARGET=SC_Softmx_JitAot_0
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+STF 21:48:54.911 - Monitoring processes: jvm4
+STF 21:49:29.128 - Found dump at: F:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly\openjdk-tests\TKG\test_output_1603420302663\SC_Softmx_JitAot_0\20201022-214819-SharedClassesWorkloadTest_Softmx_Increase_JitAot\results\core.20201022.214928.4468.0001.dmp
+STF 21:49:32.627 - Found dump at: F:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly\openjdk-tests\TKG\test_output_1603420302663\SC_Softmx_JitAot_0\20201022-214819-SharedClassesWorkloadTest_Softmx_Increase_JitAot\results\javacore.20201022.214928.4468.0002.txt
+STF 21:49:33.019 - Found dump at: F:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly\openjdk-tests\TKG\test_output_1603420302663\SC_Softmx_JitAot_0\20201022-214819-SharedClassesWorkloadTest_Softmx_Increase_JitAot\results\Snap.20201022.214928.4468.0003.trc
+STF 21:49:33.019 - **FAILED** Process jvm4 ended with exit code (4294967295) and not the expected exit code/s (0,1)
+STF 21:49:33.019 - Monitoring Report Summary:
+STF 21:49:33.019 -   o Process jvm4 has crashed unexpectedly
+STF 21:49:33.020 - Killing processes: jvm4
+STF 21:49:33.020 -   o Process jvm4 is not running
+**FAILED** at step 16 (Run Jvm4 workload process). Expected return value=0 Actual=1 at 
+
+from openjdk-tests/TKG/test_output_1603420302663/SC_Softmx_JitAot_0/20201022-214819-SharedClassesWorkloadTest_Softmx_Increase_JitAot/results/16.jvm4.stderr
+Unhandled exception
+Type=Segmentation error vmState=0x0002000f
+Windows_ExceptionCode=c0000005 J9Generic_Signal=00000004 ExceptionAddress=00007FF8D2E92CFF ContextFlags=0010005f
+Handler1=00007FF8D31B10B0 Handler2=00007FF8D30C8C50 InaccessibleReadAddress=0000000000000018
+RDI=0000000000000000 RSI=0000000000000000 RAX=00000000005D8F10 RBX=00000000112CBF28
+RCX=0000000000FFE080 RDX=0000000000000000 R8=00000000125EEE80 R9=00000000125EEE98
+R10=00000000125EF3E0 R11=00000000125EF230 R12=00000000125EEE98 R13=00000000125EEE80
+R14=0000000001740A08 R15=0000000000FFDFF0
+RIP=00007FF8D2E92CFF RSP=00000000125EEDE0 RBP=0000000000000000 GS=002B
+FS=0053 ES=002B DS=002B
+XMM0 412a7e6b4953f35f (f: 1230238592.000000, d: 8.681496e+005)
+XMM1 000000005f000000 (f: 1593835520.000000, d: 7.874594e-315)
+XMM2 402b5603913d6266 (f: 2436719104.000000, d: 1.366800e+001)
+XMM3 3f7928f15cf8188d (f: 1559763072.000000, d: 6.142562e-003)
+XMM4 3e64946b0af63307 (f: 183907072.000000, d: 3.833279e-008)
+XMM5 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM6 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM7 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM8 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM9 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM10 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM11 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM12 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM13 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM14 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM15 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+Module=F:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly\openjdkbinary\j2sdk-image\jre\bin\compressedrefs\j9gc29.dll
+Module_base_address=00007FF8D2CD0000 Offset_in_DLL=00000000001c2cff
+Target=2_90_20201022_551 (Windows Server 2012 R2 6.3 build 9600)
+CPU=amd64 (8 logical CPUs) (0x1ffb9c000 RAM)
+----------- Stack Backtrace -----------
+J9VMDllMain+0x1c1cef (0x00007FF8D2E92CFF [j9gc29+0x1c2cff])
+J9VMDllMain+0x15d698 (0x00007FF8D2E2E6A8 [j9gc29+0x15e6a8])
+J9VMDllMain+0x1610ea (0x00007FF8D2E320FA [j9gc29+0x1620fa])
+J9VMDllMain+0x153ea (0x00007FF8D2CE63FA [j9gc29+0x163fa])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x5eb5af (0x00007FF8D217562F [j9jit29+0x68562f])
+Java_java_lang_invoke_MutableCallSite_invalidate+0x5ebdcb (0x00007FF8D2175E4B [j9jit29+0x685e4b])
+J9_CreateJavaVM+0x254b7 (0x00007FF8D31E1A17 [j9vm29+0xb1a17])
+J9VMDllMain+0x154c5 (0x00007FF8D2CE64D5 [j9gc29+0x164d5])
+J9VMDllMain+0x131ae (0x00007FF8D2CE41BE [j9gc29+0x141be])
+J9VMDllMain+0x12f03 (0x00007FF8D2CE3F13 [j9gc29+0x13f13])
+J9VMDllMain+0x1408e (0x00007FF8D2CE509E [j9gc29+0x1509e])
+J9VMDllMain+0x16054e (0x00007FF8D2E3155E [j9gc29+0x16155e])
+J9VMDllMain+0xf6292 (0x00007FF8D2DC72A2 [j9gc29+0xf72a2])
+J9VMDllMain+0xf5ec0 (0x00007FF8D2DC6ED0 [j9gc29+0xf6ed0])
+j9port_init_library+0x2768f (0x00007FF8D30CA05F [j9prt29+0x2a05f])
+J9VMDllMain+0xf601b (0x00007FF8D2DC702B [j9gc29+0xf702b])
+omrthread_detach+0x1fd (0x00007FF8D3115D6D [J9THR29+0x5d6d])
+_endthreadex+0x43 (0x0000000055CC1D9F [msvcr100+0x21d9f])
+_endthreadex+0xdf (0x0000000055CC1E3B [msvcr100+0x21e3b])
+BaseThreadInitThunk+0x22 (0x00007FF8E4EA13F2 [KERNEL32+0x13f2])
+RtlUserThreadStart+0x34 (0x00007FF8E58854F4 [ntdll+0x154f4])
+---------------------------------------
+```

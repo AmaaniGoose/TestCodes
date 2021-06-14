@@ -1,0 +1,20 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.functional_ppc64_aix_OMR/361
+JCL_TEST_Java-Security_0
+aix71-p8-7 - disabled
+Not sure if the failure has anything to do with the test.
+```
+[2019-11-22T04:25:42.828Z] ===============================================
+[2019-11-22T04:25:42.828Z]     JCL_TEST_Java-Security
+[2019-11-22T04:25:42.828Z]     Tests run: 25, Failures: 0, Skips: 0
+[2019-11-22T04:25:42.828Z] ===============================================
+[2019-11-22T04:25:42.828Z] 
+[2019-11-22T04:25:42.828Z] 
+[2019-11-22T04:25:42.828Z] ===============================================
+[2019-11-22T04:25:42.828Z] GeneralTest suite
+[2019-11-22T04:25:42.828Z] Total tests run: 25, Failures: 0, Skips: 0
+[2019-11-22T04:25:42.828Z] ===============================================
+[2019-11-22T04:25:42.828Z] 
+[2019-11-22T04:25:55.832Z] /bin/sh[4]: 4391146 Trace/BPT trap(coredump)
+[2019-11-22T04:25:55.832Z] 
+[2019-11-22T04:25:55.832Z] JCL_TEST_Java-Security_0_FAILED
+```

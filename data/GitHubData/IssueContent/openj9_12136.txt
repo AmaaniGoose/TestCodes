@@ -1,0 +1,135 @@
+Failure link
+------------
+
+From an internal build `Grinder/13994/`
+```
+08:05:13  openjdk version "11.0.9-internal" 2020-10-20
+08:05:13  OpenJDK Runtime Environment (build 11.0.9-internal+0-adhoc.JENKINS.BuildJDK11s390xzosNightly)
+08:05:13  IBM J9 VM (build ibm_sdk-4310a7e89cd, JRE 11 z/OS s390x-64-Bit Compressed References 20210204_686 (JIT enabled, AOT enabled)
+08:05:13  OpenJ9   - 4310a7e89cd
+08:05:13  OMR      - aaef5d25598
+08:05:13  IBM      - 358762e
+08:05:13  JCL      - f8d7242e763 based on jdk-11.0.9+11)
+```
+to rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links
+09:59:57  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=ibm&JDK_VENDOR=oracle&BUILD_LIST=functional&PLATFORM=s390x_zos&TARGET=TestJcmd_ibm_0
+
+Optional info
+-------------
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+
+08:37:19  PASSED: testListVms
+08:37:19  PASSED: testNoCommandOptions
+08:37:19  PASSED: testThreadPrint
+08:37:19  FAILED: testDumps
+08:37:19  java.lang.AssertionError: dump file /home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16146910503363/TestJcmd_ibm_0/mySystemDumpmissing expected [true] but found [false]
+08:37:19  	at org.testng.Assert.fail(Assert.java:96)
+08:37:19  	at org.testng.Assert.failNotEquals(Assert.java:776)
+08:37:19  	at org.testng.Assert.assertTrue(Assert.java:44)
+08:37:19  	at org.openj9.test.attachAPI.TestJcmd.testDumps(TestJcmd.java:225)
+08:37:19  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+08:37:19  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+08:37:19  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+08:37:19  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+08:37:19  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+08:37:19  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+08:37:19  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+08:37:19  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+08:37:19  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+08:37:19  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+08:37:19  	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+08:37:19  	at org.testng.TestRunner.run(TestRunner.java:505)
+08:37:19  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+08:37:19  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+08:37:19  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+08:37:19  	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+08:37:19  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+08:37:19  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+08:37:19  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+08:37:19  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+08:37:19  	at org.testng.TestNG.runSuites(TestNG.java:1049)
+08:37:19  	at org.testng.TestNG.run(TestNG.java:1017)
+08:37:19  	at org.testng.TestNG.privateMain(TestNG.java:1354)
+08:37:19  	at org.testng.TestNG.main(TestNG.java:1323)
+08:37:19  
+08:37:19  FAILED: testDumpsDefaultSettings
+08:37:19  java.lang.AssertionError: Failed to delete the temparary dump file : JENKINS.JVM.JENKINS2.D210302.T133609.X&DS
+08:37:19  	at org.testng.Assert.fail(Assert.java:96)
+08:37:19  	at org.openj9.test.attachAPI.TestJcmd.cleanupFile(TestJcmd.java:295)
+08:37:19  	at org.openj9.test.attachAPI.TestJcmd$$Lambda$76/0x0000000000000000.accept(Unknown Source)
+08:37:19  	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+08:37:19  	at org.openj9.test.attachAPI.TestJcmd.testDumpsDefaultSettings(TestJcmd.java:331)
+08:37:19  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+08:37:19  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+08:37:19  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+08:37:19  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+08:37:19  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+08:37:19  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+08:37:19  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+08:37:19  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+08:37:19  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+08:37:19  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+08:37:19  	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+08:37:19  	at org.testng.TestRunner.run(TestRunner.java:505)
+08:37:19  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+08:37:19  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+08:37:19  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+08:37:19  	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+08:37:19  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+08:37:19  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+08:37:19  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+08:37:19  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+08:37:19  	at org.testng.TestNG.runSuites(TestNG.java:1049)
+08:37:19  	at org.testng.TestNG.run(TestNG.java:1017)
+08:37:19  	at org.testng.TestNG.privateMain(TestNG.java:1354)
+08:37:19  	at org.testng.TestNG.main(TestNG.java:1323)
+08:37:19  
+08:37:19  FAILED: testDumpsWithOptions
+08:37:19  java.lang.AssertionError: dump file /home/jenkins/workspace/Grinder/openjdk-tests/TKG/output_16146910503363/TestJcmd_ibm_0/mySystemDumpmissing expected [true] but found [false]
+08:37:19  	at org.testng.Assert.fail(Assert.java:96)
+08:37:19  	at org.testng.Assert.failNotEquals(Assert.java:776)
+08:37:19  	at org.testng.Assert.assertTrue(Assert.java:44)
+08:37:19  	at org.openj9.test.attachAPI.TestJcmd.testDumpsWithOptions(TestJcmd.java:271)
+08:37:19  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+08:37:19  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+08:37:19  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+08:37:19  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+08:37:19  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+08:37:19  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+08:37:19  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+08:37:19  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+08:37:19  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+08:37:19  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+08:37:19  	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+08:37:19  	at org.testng.TestRunner.run(TestRunner.java:505)
+08:37:19  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+08:37:19  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+08:37:19  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+08:37:19  	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+08:37:19  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+08:37:19  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+08:37:19  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+08:37:19  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+08:37:19  	at org.testng.TestNG.runSuites(TestNG.java:1049)
+08:37:19  	at org.testng.TestNG.run(TestNG.java:1017)
+08:37:19  	at org.testng.TestNG.privateMain(TestNG.java:1354)
+08:37:19  	at org.testng.TestNG.main(TestNG.java:1323)
+08:37:19  
+08:37:19  
+08:37:19  ===============================================
+08:37:19      TestJcmd
+08:37:19      Tests run: 10, Failures: 3, Skips: 0
+08:37:19  ===============================================
+08:37:19  
+08:37:19  
+08:37:19  ===============================================
+08:37:19  GeneralTest suite
+08:37:19  Total tests run: 10, Failures: 3, Skips: 0
+08:37:19  ===============================================
+08:37:19  
+08:37:19  
+08:37:19  TestJcmd_ibm_0_FAILED
+```

@@ -1,0 +1,125 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.openjdk_ppc64le_linux_Nightly/61
+java/lang/ref/FinalizeOverride.java
+```
+00:41:03  ACTION: main -- Error. Agent error: java.lang.Exception: Agent 35 timed out with a timeout of 960 seconds; check console log for any additional details
+00:41:03  REASON: Assumed action based on file name: run main FinalizeOverride 
+00:41:03  TIME:   962.632 seconds
+00:41:03  messages:
+00:41:03  command: main FinalizeOverride
+00:41:03  reason: Assumed action based on file name: run main FinalizeOverride 
+00:41:03  Mode: agentvm
+00:41:03  Agent id: 35
+00:41:03  Timeout refired 960 times
+00:41:03  Timeout information:
+00:41:03  Running jstack on process 31842
+00:41:03  2020-05-22T01:39:09.394211345
+00:41:03  Virtual machine: 31842 JVM information:
+00:41:03  JRE 11 Linux ppc64le-64-Bit Compressed References 20200521_395 (JIT enabled, AOT enabled)
+00:41:03  OpenJ9   - 561026fca
+00:41:03  OMR      - 00689235c
+00:41:03  JCL      - cfce36dfff5 based on jdk-11.0.8+3
+00:41:03  
+00:41:03  "main" prio=5 Id=1 WAITING
+00:41:03  	at java.base@11.0.8-internal/java.lang.Object.wait(Native Method)
+00:41:03  	at java.base@11.0.8-internal/java.lang.Object.wait(Object.java:221)
+00:41:03  	at java.base@11.0.8-internal/java.lang.Thread.join(Thread.java:716)
+00:41:03  	- locked java.lang.Thread@4043657b
+00:41:03  	at app//com.sun.javatest.regtest.agent.MainActionHelper.runClass(MainActionHelper.java:184)
+00:41:03  	at app//com.sun.javatest.regtest.agent.AgentServer.doMain(AgentServer.java:301)
+00:41:03  	at app//com.sun.javatest.regtest.agent.AgentServer.run(AgentServer.java:232)
+00:41:03  	at app//com.sun.javatest.regtest.agent.AgentServer.main(AgentServer.java:69)
+00:41:03  
+00:41:03  "JIT Compilation Thread-000" prio=10 Id=3 RUNNABLE
+00:41:03  
+00:41:03  "JIT Compilation Thread-001 Suspended" prio=10 Id=4 RUNNABLE
+00:41:03  
+00:41:03  "JIT Compilation Thread-002 Suspended" prio=10 Id=5 RUNNABLE
+00:41:03  
+00:41:03  "JIT Compilation Thread-003 Suspended" prio=10 Id=6 RUNNABLE
+00:41:03  
+00:41:03  "JIT Compilation Thread-004 Suspended" prio=10 Id=7 RUNNABLE
+00:41:03  
+00:41:03  "JIT Compilation Thread-005 Suspended" prio=10 Id=8 RUNNABLE
+00:41:03  
+00:41:03  "JIT Compilation Thread-006 Suspended" prio=10 Id=9 RUNNABLE
+00:41:03  
+00:41:03  "JIT Diagnostic Compilation Thread-007 Suspended" prio=10 Id=10 RUNNABLE
+00:41:03  
+00:41:03  "JIT-SamplerThread" prio=10 Id=11 TIMED_WAITING
+00:41:03  
+00:41:03  "IProfiler" prio=5 Id=12 RUNNABLE
+00:41:03  
+00:41:03  "Common-Cleaner" prio=8 Id=2 TIMED_WAITING
+00:41:03  	at java.base@11.0.8-internal/java.lang.Object.wait(Native Method)
+00:41:03  	at java.base@11.0.8-internal/java.lang.Object.wait(Object.java:221)
+00:41:03  	at java.base@11.0.8-internal/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:138)
+00:41:03  	- locked java.lang.ref.ReferenceQueue@e8d74150
+00:41:03  	at java.base@11.0.8-internal/jdk.internal.ref.CleanerImpl.run(CleanerImpl.java:148)
+00:41:03  	at java.base@11.0.8-internal/java.lang.Thread.run(Thread.java:836)
+00:41:03  	at java.base@11.0.8-internal/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:134)
+00:41:03  
+00:41:03  "Concurrent Mark Helper" prio=1 Id=13 RUNNABLE
+00:41:03  
+00:41:03  "Finalizer thread" prio=5 Id=14 RUNNABLE
+00:41:03  
+00:41:03  "GC Slave" prio=5 Id=15 RUNNABLE
+00:41:03  
+00:41:03  "GC Slave" prio=5 Id=16 RUNNABLE
+00:41:03  
+00:41:03  "GC Slave" prio=5 Id=17 RUNNABLE
+00:41:03  
+00:41:03  "GC Slave" prio=5 Id=18 RUNNABLE
+00:41:03  
+00:41:03  "GC Slave" prio=5 Id=19 RUNNABLE
+00:41:03  
+00:41:03  "GC Slave" prio=5 Id=20 RUNNABLE
+00:41:03  
+00:41:03  "GC Slave" prio=5 Id=21 RUNNABLE
+00:41:03  
+00:41:03  "Attach API wait loop" prio=10 Id=24 RUNNABLE
+00:41:03  	at java.base@11.0.8-internal/openj9.internal.tools.attach.target.IPC.waitSemaphore(Native Method)
+00:41:03  	at java.base@11.0.8-internal/openj9.internal.tools.attach.target.CommonDirectory.waitSemaphore(CommonDirectory.java:259)
+00:41:03  	at java.base@11.0.8-internal/openj9.internal.tools.attach.target.WaitLoop.waitForNotification(WaitLoop.java:66)
+00:41:03  	at java.base@11.0.8-internal/openj9.internal.tools.attach.target.WaitLoop.run(WaitLoop.java:154)
+00:41:03  
+00:41:03  "pool-1-thread-1" prio=5 Id=25 TIMED_WAITING
+00:41:03  	at java.base@11.0.8-internal/jdk.internal.misc.Unsafe.park(Native Method)
+00:41:03  	at java.base@11.0.8-internal/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:234)
+00:41:03  	at java.base@11.0.8-internal/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2123)
+00:41:03  	at java.base@11.0.8-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+00:41:03  	at java.base@11.0.8-internal/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+00:41:03  	at java.base@11.0.8-internal/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1054)
+00:41:03  	at java.base@11.0.8-internal/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1114)
+00:41:03  	at java.base@11.0.8-internal/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+00:41:03  	at java.base@11.0.8-internal/java.lang.Thread.run(Thread.java:836)
+00:41:03  
+00:41:03  "AgentVMThread" prio=5 Id=26 TIMED_WAITING
+00:41:03  	at java.base@11.0.8-internal/java.lang.Thread.sleep(Native Method)
+00:41:03  	at java.base@11.0.8-internal/java.lang.Thread.sleep(Thread.java:966)
+00:41:03  	at app//FinalizeOverride.test(FinalizeOverride.java:75)
+00:41:03  	at app//FinalizeOverride.main(FinalizeOverride.java:52)
+00:41:03  	at java.base@11.0.8-internal/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+00:41:03  	at java.base@11.0.8-internal/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+00:41:03  	at java.base@11.0.8-internal/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+00:41:03  	at java.base@11.0.8-internal/java.lang.reflect.Method.invoke(Method.java:566)
+00:41:03  	at app//com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+00:41:03  	at java.base@11.0.8-internal/java.lang.Thread.run(Thread.java:836)
+00:41:03  
+00:41:03  "Attachment 44538" prio=10 Id=27 RUNNABLE
+00:41:03  	at java.base@11.0.8-internal/openj9.internal.tools.attach.target.DiagnosticUtils.dumpAllThreadsImpl(Native Method)
+00:41:03  	at java.base@11.0.8-internal/openj9.internal.tools.attach.target.DiagnosticUtils.getThreadInfo(DiagnosticUtils.java:233)
+00:41:03  	at app//openj9.internal.tools.attach.target.DiagnosticUtils$$Lambda$66/00000000F4005C80.apply(Unknown Source)
+00:41:03  	at java.base@11.0.8-internal/openj9.internal.tools.attach.target.DiagnosticUtils.executeDiagnosticCommand(DiagnosticUtils.java:169)
+00:41:03  	at java.base@11.0.8-internal/openj9.internal.tools.attach.target.Attachment.doCommand(Attachment.java:249)
+00:41:03  	at java.base@11.0.8-internal/openj9.internal.tools.attach.target.Attachment.run(Attachment.java:160)
+00:41:03  
+00:41:03  "file lock watchdog" prio=10 Id=28 TIMED_WAITING
+00:41:03  	at java.base@11.0.8-internal/java.lang.Object.wait(Native Method)
+00:41:03  	at java.base@11.0.8-internal/java.lang.Object.wait(Object.java:221)
+00:41:03  	at java.base@11.0.8-internal/java.util.TimerThread.mainLoop(Timer.java:553)
+00:41:03  	- locked java.util.TaskQueue@793acdc7
+00:41:03  	at java.base@11.0.8-internal/java.util.TimerThread.run(Timer.java:506)
+00:41:03  
+00:41:03  
+00:41:03  --- Timeout information end.
+```

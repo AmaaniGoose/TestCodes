@@ -1,0 +1,5 @@
+In file:
+
+https://github.com/eclipse/openj9/blob/fa929cce09d104e526e898f86aa9d6e9cd8a8f62/runtime/compiler/aarch64/runtime/ARM64ArrayCopy.spp
+
+There's a comment about "optimizing" with wider data types - this is not an optimization, it's a requirement. All array accesses must be atomic wrt the element size. This is particularly important for object arrays, where non-slot copies will result in potentially "torn" object pointers, which will cause random crashes in the VM/GC/JIT code.

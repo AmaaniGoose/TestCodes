@@ -1,0 +1,8 @@
+With value type support enabled, the JIT compiler currently aborts the compilation in the following circumstances:
+
+- if it encounters a `putfield`, `getfield` or `withfield` operation for which the field's type is a value type, and the field is unresolved; or
+- if the class involved in a `defaultvalue` or `withfield` operation is unresolved.
+
+Situations which are more likely to involve unresolved fields and classes, such as cold paths that involve value type operations or compilations with `count=0`, will be more likely to see compilations aborted.  The JIT needs to be able to handle resolution of such fields.
+
+See issue #11729 for some relevant design discussion.

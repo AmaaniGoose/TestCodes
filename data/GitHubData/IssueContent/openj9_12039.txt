@@ -1,0 +1,32 @@
+There is an interface called IndentityObject (currently named `IdentityInterface` - needs renaming) which is implicitly implemented by all stateful types, that is:
+1) Is concrete (non-abstract/interface - j.l.Object exculded) or,
+2) Declares an instance field or,
+3) Declares an instance initializer or,
+4) Has constructor with a non-empty body (something other than 'super();') or,
+5) Must have access to extend the super class (supers <init> must be visible)
+6) Declares a synchronized method
+//Note: Most importantly, an abstract class can also implement IdentityInterface explicitly or implicitly if it has any of the properties above
+
+A value-type (primitive class) has the following requirements:
+1) Cannot subclass any type that implements `IdentityInterface` either directly or indirectly.
+2) Cannot be abstract
+3) Must not declare synchronized methods
+4) Must have access to extend the super class (supers <init> must be visible)
+
+Currently, we only inject the IdentityObject interface for types that are concrete, https://github.com/eclipse/openj9/blob/master/runtime/bcutil/ROMClassBuilder.cpp#L254. This needs to be updated with the new requirements above.
+
+Implementation plan:
+------------------------
+1) Detect abstract classes that have no fields, have empty constructors and do not implement `IdentityInterface` either directly or indirectly. We can refer to these as "light" abstract classes, all other abstract classes are considered "heavy"
+2) Ensure that all "heavy" abstract classes implement `IdentityInterface`, may inject it if needed. Note "light" abstract classes may optionally implement `IdentityInterface` if user chooses so.
+3) Ensure the the super type for Valuetypes is type that doesnt implement `IdentityInterface`, throw a VerificationError otherwise (the exact type of error is TBD but we can use the verify error for the time being)
+
+Test plan
+--------------
+1) Ensure that primitive class can not subclass concrete type or "heavy" abstract type
+2) Ensure that primitive class can subclass "light" abstract type and j.l.Object
+3) Ensure that primitive class can not subtype IndentityObject
+4) Ensure that primitive class can not subclass any type that implements IdentityObject (even if light abstract type) either directly or indirectly
+5) Ensure primitive class can not be abstract or interface
+6) Ensure primitive class can not have synchronized methods
+//Note: some of the existing tests in `openj9/test/functional/Valhalla/src/org/openj9/test/lworld/ValueTypeTests.java` may need to be modified with the new requirements.

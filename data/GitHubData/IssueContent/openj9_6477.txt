@@ -1,0 +1,2 @@
+Current communication code for JITServer supports only IPv4. 
+While IBM Cloud Private does not support IPv6 either, RedHat openshift and Amazon AWS support IPv6 and therefore we should add support for it as well.

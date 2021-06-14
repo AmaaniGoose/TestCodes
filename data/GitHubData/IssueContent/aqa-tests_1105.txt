@@ -1,0 +1,33 @@
+**Platform:**
+Windows x32
+
+**Architecture:**
+Windows x32
+
+Please describe the issue that you are having with our binaries and if possible how to recreate it.
+
+jtreg -v:error,fail -nr -w tmp -jdk:D:/software/jdk/win32-adoptopenjdk-jdk8u212-b03 jdk8u/jdk/test/java/time/test/java/time/format/TestNonIsoFormatter.java
+
+
+![image](https://user-images.githubusercontent.com/36258307/56940530-b5e15300-6b41-11e9-91d4-2911c5d23b00.png)
+
+
+result:
+```
+test test.java.time.format.TestNonIsoFormatter.test_lenientEraYear(Japanese, "Meiji 123", "Heisei 2"): failure
+java.time.format.DateTimeParseException: Text 'Meiji 123-01-01' could not be parsed at index 0
+        at java.time.format.DateTimeFormatter.parseResolved0(DateTimeFormatter.java:1949)
+        at java.time.format.DateTimeFormatter.parse(DateTimeFormatter.java:1851)
+        at java.time.LocalDate.parse(LocalDate.java:400)
+        at test.java.time.format.TestNonIsoFormatter.test_lenientEraYear(TestNonIsoFormatter.java:196)
+```
+
+
+
+Windows x64 jdk8u212-b03 and other linux Platforms seems to be OK:
+
+![image](https://user-images.githubusercontent.com/36258307/56940665-618aa300-6b42-11e9-9e8b-a3cf9d150079.png)
+
+
+
+[TestNonIsoFormatter.java.txt](https://github.com/AdoptOpenJDK/openjdk-build/files/3129941/TestNonIsoFormatter.java.txt)

@@ -1,0 +1,42 @@
+I am investigating a crash that I encountered while trying to generate performance metrics using an internal performance tool.
+
+To summarize briefly, the C stack looks like below:
+```
+#12 <signal handler called>
+#13 0x000003ff93ecc618 in getJNIMethodID () from /opt/ibm/java/jre/lib/s390x/compressedrefs/libj9vm29.so
+#14 0x000003ff9209e214 in jvmtiHookMethodEnter () from /opt/ibm/java/jre/lib/s390x/compressedrefs/libj9jvmti29.so
+#15 0x000003ff93d01570 in J9HookDispatch () from /opt/ibm/java/jre/lib/s390x/compressedrefs/libj9hookable29.so
+#16 0x000003ff931e4b5e in jitReportMethodEnterImpl (isStatic=false, receiver=<optimized out>, method=0x83400d0, currentThread=0x67300) at cnathelp.cpp:1391
+#17 old_slow_jitReportMethodEnter (currentThread=0x67300) at cnathelp.cpp:1405
+#18 0x000003ff931f5086 in jitReportMethodEnter () from /opt/ibm/java/jre/lib/s390x/compressedrefs/libj9jit29.so
+#19 0x000003ff93ea72d4 in sendLoadClass () from /opt/ibm/java/jre/lib/s390x/compressedrefs/libj9vm29.so
+#20 0x000003ff93eb3a7a in internalFindClassInModule () from /opt/ibm/java/jre/lib/s390x/compressedrefs/libj9vm29.so
+#21 0x000003ff93eb65f8 in internalFindClassUTF8 () from /opt/ibm/java/jre/lib/s390x/compressedrefs/libj9vm29.so
+#22 0x000003ff93f295b4 in j9rtv_verifierGetRAMClass () from /opt/ibm/java/jre/lib/s390x/compressedrefs/libj9vm29.so
+#23 0x000003ff93f2f9be in isClassCompatible () from /opt/ibm/java/jre/lib/s390x/compressedrefs/libj9vm29.so
+#24 0x000003ff93f29916 in j9rtv_verifyArguments () from /opt/ibm/java/jre/lib/s390x/compressedrefs/libj9vm29.so
+#25 0x000003ff93f2b56e in j9rtv_verifyBytecodes () from /opt/ibm/java/jre/lib/s390x/compressedrefs/libj9vm29.so
+#26 0x000003ff93f22b14 in j9bcv_verifyBytecodes () from /opt/ibm/java/jre/lib/s390x/compressedrefs/libj9vm29.so
+#27 0x000003ff93e41cac in classInitStateMachine () from /opt/ibm/java/jre/lib/s390x/compressedrefs/libj9vm29.so
+#28 0x000003ff93ef144e in resolveClassRef () from /opt/ibm/java/jre/lib/s390x/compressedrefs/libj9vm29.so
+#29 0x000003ff93e75ba4 in VM_DebugBytecodeInterpreter::run(J9VMThread*) () from /opt/ibm/java/jre/lib/s390x/compressedrefs/libj9vm29.so
+#30 0x000003ff93e430ca in debugBytecodeLoop () from /opt/ibm/java/jre/lib/s390x/compressedrefs/libj9vm29.so
+#31 0x000003ff93f082ac in c_cInterpreter () from /opt/ibm/java/jre/lib/s390x/compressedrefs/libj9vm29.so
+#32 0x000003ff93eadb22 in runCallInMethod () from /opt/ibm/java/jre/lib/s390x/compressedrefs/libj9vm29.so
+#33 0x000003ff93ec8452 in gpProtectedRunCallInMethod () from /opt/ibm/java/jre/lib/s390x/compressedrefs/libj9vm29.so
+```
+
+Based on the stack trace it looks like we were interpreting a method and ended up at  `jitReportMethodEnter`. I wanted to figure out what java method we were interpreting. So looking at the java stacktrace in the javacore, I see the following under "Current thread":
+```
+3XMHEAPALLOC             Heap bytes allocated since last GC cycle=277944 (0x43DB8)
+3XMTHREADINFO3           Java callstack:
+4XESTACKTRACE                at java/util/jar/JarFile.getManifest(JarFile.java:180(Compiled Code))
+4XESTACKTRACE                at com/ibm/ws/kernel/internal/classloader/JarResourceHandler.getManifest(JarResourceHandler.java:128(Compiled Code))
+4XESTACKTRACE                at com/ibm/ws/kernel/internal/classloader/JarFileClassLoader.findClass(JarFileClassLoader.java:145(Compiled Code))
+4XESTACKTRACE                at com/ibm/ws/kernel/internal/classloader/BootstrapChildFirstJarClassloader.loadClass(BootstrapChildFirstJarClassloader.java:84)
+5XESTACKTRACE                   (entered lock: java/lang/ClassLoader$ClassNameBasedLock@0x000000002DEA4008, entry count: 1)
+4XESTACKTRACE                at java/lang/ClassLoader.loadClass(ClassLoader.java:881)
+4XESTACKTRACE                at org/eclipse/osgi/internal/loader/SystemBundleLoader.findLocalClass(SystemBundleLoader.java:63)
+```
+
+I will update this issue with further details as I continue my investigation.

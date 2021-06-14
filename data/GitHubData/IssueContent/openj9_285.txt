@@ -1,0 +1,3 @@
+* asmtools.jar is built weekly so the sha sum of it is changing
+* Currently we hardcoded the sha1 sum of every test dependent jar file, we should grab sha1 sum values from download sources and compare it with the downloaded jar.
+* sha sum check of asmtools.jar is temporarily excluded in PR #280 , will be back once the second requirement is met.

@@ -1,0 +1,9 @@
+ci-jck expired today so creating this to ensure they are all doing the right thing.
+Related to:
+- [ ] www.adoptopenjdk.net
+- [ ] ansible.adoptopenjdk.net
+- [ ] nagios.adoptopenjdk.net
+- [ ] ci.adoptopenjdk.net
+- [ ] ci-jck.adoptopenjdk.net
+- [ ] trss.adoptopenjdk.net
+Ref: #306 #12 #325 #489

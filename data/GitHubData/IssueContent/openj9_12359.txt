@@ -1,0 +1,138 @@
+__TL;DR: JDK16 records use `invokedynamic` for equality checks and that behaves very badly on OpenJ9 (eg. compared to manually written equality checks).__
+
+Record classes introduced in JDK16 seem to be quite a bit slower on OpenJ9 than Hotspot. I put together a [simple JMH benchmark][0] to compare the performance of `equals` on Java records to `equals` on Scala case classes. Looking at the bytecode the interesting difference is:
+
+  * Java records use `invokedynamic` on [`java.lang.runtime.ObjectMethods`][1]
+  * Scala case classes generate bytecode that manually checks each field for equality
+
+Here's the relevant snippets from `javap -p -v`:
+
+<details>
+
+<summary>manually written equality (Scala <code>case class</code>)</summary>
+
+```
+  public boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+    flags: ACC_PUBLIC
+    Code:
+      stack=4, locals=6, args_size=2
+         0: aload_0
+         1: aload_1
+         2: if_acmpeq     102
+         5: aload_1
+         6: astore_3
+         7: aload_3
+         8: instanceof    #2                  // class records/SmallScala
+        11: ifeq          19
+        14: iconst_1
+        15: istore_2
+        16: goto          27
+        19: goto          22
+        22: iconst_0
+        23: istore_2
+        24: goto          27
+        27: iload_2
+        28: ifeq          106
+        31: aload_1
+        32: checkcast     #2                  // class records/SmallScala
+        35: astore        4
+        37: aload_0
+        38: invokevirtual #62                 // Method i:()I
+        41: aload         4
+        43: invokevirtual #62                 // Method i:()I
+        46: if_icmpne     98
+        49: aload_0
+        50: invokevirtual #65                 // Method s:()Ljava/lang/String;
+        53: aload         4
+        55: invokevirtual #65                 // Method s:()Ljava/lang/String;
+        58: astore        5
+        60: dup
+        61: ifnonnull     73
+        64: pop
+        65: aload         5
+        67: ifnull        81
+        70: goto          98
+        73: aload         5
+        75: invokevirtual #137                // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+        78: ifeq          98
+        81: aload_0
+        82: invokevirtual #68                 // Method l:()J
+        85: aload         4
+        87: invokevirtual #68                 // Method l:()J
+        90: lcmp
+        91: ifne          98
+        94: iconst_1
+        95: goto          99
+        98: iconst_0
+        99: ifeq          106
+       102: iconst_1
+       103: goto          107
+       106: iconst_0
+       107: ireturn
+```
+
+</details>
+
+<details>
+<summary><code>invokedynamic</code> equality (Java <code>record</code>)</summary>
+
+```
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+    flags: (0x0011) ACC_PUBLIC, ACC_FINAL
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #29,  0             // InvokeDynamic #0:equals:(Lrecords/SmallJava;Ljava/lang/Object;)Z
+         7: ireturn
+...
+BootstrapMethods:
+  0: #45 REF_invokeStatic java/lang/runtime/ObjectMethods.bootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/TypeDescriptor;Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/invoke/MethodHandle;)Ljava/lang/Object;
+    Method arguments:
+      #8 records/SmallJava
+      #52 i;s;l
+      #54 REF_getField records/SmallJava.i:I
+      #55 REF_getField records/SmallJava.s:Ljava/lang/String;
+      #56 REF_getField records/SmallJava.l:J
+```
+
+</details>
+
+I ran this benchmark twice to compare HotSpot OpenJDK 16 and Eclipse OpenJ9. Although disappointing, it isn't too surprising that OpenJ9 isn't faster (after all, I don't think this benchmark exercises any of OpenJ9's strengths). What _is_ surprising is that `invokedynamic` on OpenJ9 is abysmal and `invokedynamic` on HotSpot is the best.
+
+![Unknown-5](https://user-images.githubusercontent.com/10766081/113728899-5a179100-96ab-11eb-8fcf-56010a494b5b.png)
+
+|                         | HotSpot "vanilla" | HotSpot `invokedynamic` | OpenJ9 "vanilla" | OpenJ9 `invokedynamic` |
+| ----------------------- | ----------------- | ----------------------- | ---------------- | ---------------------- |
+| Large record equality   | 32.445 ± 7.299    |     9.588 ± 0.097       | 58.364 ± 6.539   |  133.907 ± 3.924       |
+| Large record inequality |  6.622 ± 0.071    |     3.418 ± 0.592       |  6.710 ± 1.031   |   31.420 ± 1.408       |
+| Small record equality   |  7.083 ± 0.419    |     3.892 ± 0.470       | 12.112 ± 1.443   |   32.535 ± 0.341       |
+| Small record inequality |  3.294 ± 0.131    |     2.847 ± 0.061       |  2.808 ± 1.137   |   44.639 ± 6.619       |
+
+---
+
+OpenJ9 (installed with `brew install  adoptopenjdk16-openj9`)
+
+```
+$ java -version
+openjdk version "16" 2021-03-16
+OpenJDK Runtime Environment AdoptOpenJDK (build 16+36)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.25.0, JRE 16 Mac OS X amd64-64-Bit Compressed References 20210311_66 (JIT enabled, AOT enabled)
+OpenJ9   - 022d65424
+OMR      - 09514431e
+JCL      - 0c11227a21a based on jdk-16+36)
+```
+
+HotSpot OpenJDK 16 (installed with ` brew install adoptopenjdk16`)
+
+```
+$ java -version
+openjdk version "16" 2021-03-16
+OpenJDK Runtime Environment AdoptOpenJDK (build 16+36)
+OpenJDK 64-Bit Server VM AdoptOpenJDK (build 16+36, mixed mode, sharing)
+```
+
+  [0]: https://github.com/harpocrates/scala-java-records-benchmark
+  [1]: https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/runtime/ObjectMethods.html

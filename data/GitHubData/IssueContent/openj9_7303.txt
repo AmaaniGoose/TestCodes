@@ -1,0 +1,1 @@
+When verbose GC logs are broken into several files, we should report the '<initialized' stanza at the beginning of each file (right now reported only at the first file). It has useful info, like what kind of options are provided to the run.

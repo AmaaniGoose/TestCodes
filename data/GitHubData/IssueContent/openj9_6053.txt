@@ -1,0 +1,46 @@
+Failure link
+------------
+
+https://140-211-168-230-openstack.osuosl.org/artifactory/webapp/builds/Test_openjdk8_j9_sanity.functional_x86-64_windows_Personal/28
+
+Optional info
+-------------
+
+- intermittent failure (yes|no): no
+- regression or new test:  new test
+
+Failure output
+--------------
+
+```
+[2019-06-03T17:14:23.551Z] Testing: HelperCompatibilityTest 12
+[2019-06-03T17:14:23.551Z] Test start time: 2019/06/03 12:14:23 Central Standard Time
+[2019-06-03T17:14:23.551Z] Running command: "C:/Users/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_windows_Personal/openjdkbinary/j2sdk-image/jre/bin\\java" -Xcompressedrefs -Xcompressedrefs -Xjit -Xgcpolicy:gencon  -Xshareclasses:name=HelperCompatibilityTests -Xbootclasspath/a:./Utils;. PartitioningURLClassPathHelperURLHelperStaleEntryCompatibilityTest -testfile "C:/Users/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_windows_Personal/openjdk-tests///..//jvmtest\functional\cmdLineTests\shareClassTests\SCHelperCompatibilityTests\props_win/Test11.props" -javacdir C:/Users/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-64_windows_Personal/openjdkbinary/j2sdk-image/bin
+[2019-06-03T17:14:23.551Z] Time spent starting: 15 milliseconds
+[2019-06-03T17:14:23.551Z] Time spent executing: 390 milliseconds
+[2019-06-03T17:14:23.551Z] Test result: FAILED
+[2019-06-03T17:14:23.551Z]  [ERR] JIT: env var TR_OptionsAOT is set to forceAOT
+[2019-06-03T17:14:23.551Z]  [ERR] JIT: env var TR_Options is set to forceAOT
+[2019-06-03T17:14:23.551Z]  [ERR] Exception in thread "main" java.lang.NoClassDefFoundError: CustomClassloaders.CustomPartitioningURLClassLoader$FoundAtIndex
+[2019-06-03T17:14:23.551Z]  [ERR] 	at CustomClassloaders.CustomPartitioningURLClassLoader.<init>(CustomPartitioningURLClassLoader.java:64)
+[2019-06-03T17:14:23.551Z]  [ERR] 	at PartitioningURLClassPathHelperURLHelperStaleEntryCompatibilityTest.executeTest(PartitioningURLClassPathHelperURLHelperStaleEntryCompatibilityTest.java:128)
+[2019-06-03T17:14:23.551Z]  [ERR] 	at PartitioningURLClassPathHelperURLHelperStaleEntryCompatibilityTest.run(PartitioningURLClassPathHelperURLHelperStaleEntryCompatibilityTest.java:113)
+[2019-06-03T17:14:23.551Z]  [ERR] 	at PartitioningURLClassPathHelperURLHelperStaleEntryCompatibilityTest.main(PartitioningURLClassPathHelperURLHelperStaleEntryCompatibilityTest.java:52)
+[2019-06-03T17:14:23.551Z] >> Success condition was not found: [Output match: TEST PASSED]
+[2019-06-03T17:14:23.551Z] >> Failure condition was found: [Output match: Error:]
+[2019-06-03T17:14:23.551Z] >> Failure condition was not found: [Output match: Unhandled Exception]
+[2019-06-03T17:14:23.551Z] >> Failure condition was not found: [Output match: Exception:]
+...
+[2019-06-03T17:14:29.567Z] ---TEST RESULTS---
+[2019-06-03T17:14:29.567Z] Number of PASSED tests: 27 out of 33
+[2019-06-03T17:14:29.567Z] Number of FAILED tests: 6 out of 33
+[2019-06-03T17:14:29.567Z] 
+[2019-06-03T17:14:29.567Z] ---SUMMARY OF FAILED TESTS---
+[2019-06-03T17:14:29.567Z] HelperCompatibilityTest 12
+[2019-06-03T17:14:29.567Z] HelperCompatibilityTest 13
+[2019-06-03T17:14:29.567Z] HelperCompatibilityTest 14
+[2019-06-03T17:14:29.567Z] HelperCompatibilityTest 15
+[2019-06-03T17:14:29.567Z] HelperCompatibilityTest 16
+[2019-06-03T17:14:29.567Z] HelperCompatibilityTest 17
+[2019-06-03T17:14:29.567Z] -----------------------------
+```

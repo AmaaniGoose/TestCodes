@@ -1,0 +1,25 @@
+This issue is to encapsulate the requirements and work needed to replace our existing Jenkins server with a new one:
+
+Existing Jenkins server is suffering from some instability.  Recent difficult updates have shown that we need a better disaster recovery plan (this is also related to: https://github.com/AdoptOpenJDK/openjdk-infrastructure/issues/1295)  It is also a ubuntu-16.04 machine.  For all of these reasons, and likely reasons not yet listed, we should begin the work to replace the existing Jenkins server with a new one.
+
+Requirements:
+- Similar requirements to existing server
+- Ansible playbook for creation/spinup
+- Staging server to try out upgrades and major features or changes
+- Clearly documented process for deploying updates
+- Back up / disaster recovery process (in place and tested) / training for multiple people in multiple timezones to be able to assist
+- Policy & documentation for how many jobs to keep in history, how many days to keep jobs
+- How many of them are required: 1
+
+Please explain what this machine is needed for: 
+- nightly/weekly/release builds and testing
+- Grinders for debugging and triage
+- building tools and dependencies
+- building Docker images
+- building installers
+
+Considerations:
+- Given that this server is for our production builds, should we limit freeform builds, personal duplicates of existing pipelines, etc.?
+- Should we have a separate sandbox for 'experimental' jobs and work?
+- We should have a script that checks for jobs that have not been run/used in X months to remove old/stale jobs (may not need if all jobs have policy for how many days to keep jobs)
+- Consider pushing artifacts to artifactory or other storage so that they are available for longer than

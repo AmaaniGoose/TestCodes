@@ -1,0 +1,6 @@
+Adding stack protection flag to compiler to prevent any stack overflow security vulnerabilities
+
+GCC: `-fstack-protector`
+XLC: `-qstackprotect`
+
+Previous PR #4842 

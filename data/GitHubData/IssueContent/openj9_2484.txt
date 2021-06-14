@@ -1,0 +1,104 @@
+##  Restricted Transactional Memory (RTM)
+
+Four assembly language instructions for RTM:
+- `xbegin`: begin a transaction
+- `xend`: end a transaction
+- `xabort`: abort a transaction
+- `xtest`: check if a transaction is happening
+
+The code to start/end a transaction is generic, and we can introduce **new APIs in OMR** for using transactional memory features.
+
+Intel article [[1]](https://software.intel.com/en-us/articles/tsx-anti-patterns-in-lock-elision-code) provides all requirements and details to the new API for transactional memory.
+
+```
+uint32_t 
+startTransaction(omrthread_monitor_t monitor, transaction_heuristics_t heuristics)
+{
+    int retries = heuristics->retries;
+    for (i = 0; i < retries; i++) {
+        if ((status = _xbegin()) == _XBEGIN_STARTED) {
+            if (monitor is free) {
+                return SUCCESS; /* Execute critical region */
+            }
+            _xabort(0xff); /* lock busy */
+        }
+        if ((status & _XABORT_EXPLICIT) && _XABORT_CODE(status) == 0xff) {
+            Wait for lock to become free
+        } else if (!(status & _XABORT_RETRY))
+            break;
+        }
+    }
+     return FAIL;
+}
+```
+
+The main body of the above function is taken from [[1]](https://software.intel.com/en-us/articles/tsx-anti-patterns-in-lock-elision-code).
+
+`Wait for lock to become free`: This can be achieved using any of the following functions – `VM_AtomicSupport::yieldCPU()`, `omrthread_yield()`, `omrthread_yield_new(...)` or `_mm_pause()`.
+
+If `startTransaction` succeeds, then the monitor doesn't need to be acquired. If `startTransaction` fails, then monitor should be acquired as the fallback path. If needed, a new flag can be added to `omrthread_monitor_t->flags` to indicate a transaction is taking place: `OMRTHREAD_MONITOR_TRANSACTION`.
+
+```
+uint32_t 
+endTransaction(omrthread_monitor_t monitor)
+{
+    if (monitor is free && _xtest()) {
+        _xend();
+       return SUCCESS;
+    }
+    return FAIL;
+}
+```
+
+If `endTransaction` succeeds, then the monitor doesn't need to be released because the monitor won't be acquired during a transaction. If `endTransaction` fails (monitor is not free), then the monitor should be released.
+
+The definition of `omrthread_monitor_t` (`J9ThreadMonitor`) is here: 
+i) [J9ThreadMonitor definition Part 1](https://github.com/eclipse/omr/blob/e2baea03b8cc06f247c27a0a71b42b40379a0cf6/include_core/thrtypes.h#L63).
+ii) [J9ThreadMonitor definition Part 2](https://github.com/eclipse/omr/blob/97107f4d8b0d076e8f848d11e9fae8dc521e0b94/include_core/omrthread_generated.h#L193)
+
+### Where should `startTransaction` be added?
+
+`startTransaction` should be executed before executing the spinlock loop. There are three spin loops:
+[a] [`spinOnFlatLock`](https://github.com/eclipse/openj9/blob/master/runtime/vm/ObjectMonitor.cpp#L360)
+[b] [`spinOnTryEnter`](https://github.com/eclipse/openj9/blob/master/runtime/vm/ObjectMonitor.cpp#L448) -> [`omrthread_monitor_try_enter_using_threadId`](https://github.com/eclipse/omr/blob/master/thread/common/omrthread.c#L3995) -> [`omrthread_spinlock_acquire_no_spin`](https://github.com/eclipse/omr/blob/80b41f44ec5611972e6fb231227559f9e2cb7486/thread/common/threadhelpers.cpp#L155)
+[c] [`omrthread_spinlock_acquire`](https://github.com/eclipse/omr/blob/80b41f44ec5611972e6fb231227559f9e2cb7486/thread/common/threadhelpers.cpp#L54)
+
+In J9, an inflated lock can be associated to `omrthread_monitor_t`. `spinOnTryEnter` [b] and  `omrthread_spinlock_acquire` [c] loop on the inflated lock (`omrthread_monitor_t`). `startTransaction` should be added at the start of [b] and [c].
+
+### Where should `endTransaction` be added?
+
+i) If the start point is `omrthread_monitor_enter` -> ... -> `omrthread_spinlock_acquire`, then the end point would be `omrthread_monitor_exit` -> `monitor_exit`. So, one place for endTransaction would be the start of [`monitor_exit`](https://github.com/eclipse/omr/blob/master/thread/common/omrthread.c#L4112).
+ii) In `spinOnTryEnter`, `startTransaction` should only be attempted if the lock is inflated [`J9_LOCK_IS_INFLATED(*lwEA)`]. For the inflated scenario, the following code path will be taken: `objectMonitorExit` -> `omrthread_monitor_exit` -> `monitor_exit`. So, the end point for `omrthread_spinlock_acquire` and `spinOnTryEnter` (inflated scenario) should be the same. This seems tricky. We can ignore `spinOnTryEnter` at the beginning if issues are encountered.
+
+## Hardware Lock Ellision (HLE)
+
+Two assembly instructions for HLE:
+- `xacquire`: prefix to the instruction acquiring lock
+- `xrelease`: prefix to the instruction releasing lock
+
+```
+void hle_spin_lock(int *lock)
+{
+    while ((int)__hle_acquire_sub_fetch4(&lock, 1) < 0) {
+        /* spin until the lock is free before retrying */
+        while (*lock != 1)
+            _mm_pause(); /* Re-read lock and abort. */
+    }
+}
+```
+The above code snippet is taken from [[1]](https://software.intel.com/en-us/articles/tsx-anti-patterns-in-lock-elision-code).
+
+` __hle_acquire_or_fetch4(&foo, 1)` 
+`__atomic_or_fetch(&foo, 1, __ATOMIC_ACQUIRE|__ATOMIC_HLE_ACQUIRE) `
+
+`_hle_acquire_or_fetch4` is equivalent to `__atomic_or_fetch` [with XACQUIRE HLE prefix]
+
+In spin loops [b] and [c], `VM_AtomicSupport::lockCompareExchange` can be replaced with a compare exchange that has a XACQUIRE HLE prefix.
+
+## Compiler requirements
+gcc4.8+ **[Need to be verified]**
+
+## References:
+[1] https://software.intel.com/en-us/articles/tsx-anti-patterns-in-lock-elision-code
+[2] https://software.intel.com/en-us/blogs/2013/05/20/using-hle-and-rtm-with-older-compilers-with-tsx-tools
+[3] https://www.scss.tcd.ie/Jeremy.Jones/CS4021/transactional%20memory.pdf

@@ -1,0 +1,17 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_sanity.system_x86-64_linux_xl_Nightly/147
+MauveMultiThreadLoadTest_OpenJ9_0
+```
+LT  00:03:47.333 - Test failed
+LT    Failure num.  = 1
+LT    Test number   = 3116
+LT    Test details  = 'Mauve[gnu.testlet.java.text.DateFormat.equals]'
+LT    Suite number  = 0
+LT    Thread number = 2
+```
+```
+01:33:44  To rebuild the failed test in a jenkins job, copy the following link and fill out the <Jenkins URL> and <FAILED test target>:
+01:33:44  <Jenkins URL>/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system&JenkinsFile=openjdk_x86-64_linux_xl&TARGET=<FAILED test target>
+01:33:44  
+01:33:44  For example, to rebuild the failed tests in <Jenkins URL>=https://ci.adoptopenjdk.net/job/Grinder, use the following links:
+01:33:44  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system&JenkinsFile=openjdk_x86-64_linux_xl&TARGET=MauveMultiThreadLoadTest_OpenJ9_0
+```

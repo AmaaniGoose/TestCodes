@@ -1,0 +1,60 @@
+As we add more machines, and write more pipeline scripts for various builds and tests in Jenkins, it is useful to settle on a labelling scheme that will allow us flexibility and improved machine management (even taking advantage of some of the Jenkins APIs for automated labelling).
+
+Benefits to having and documenting a 'scheme':
+- as new machines and machine capabilities are added, it is clear how to add/organize new labels and sub-categories
+- avoids label duplication
+- prevent running jobs on machines we do not want them to run on
+- added flexibility in pipeline scripts
+- triage failures faster, as it becomes clearer to see that a test fails on a machine with particular labelled attributes, but passes on other machines (different label set)  example: pipeline script to run tests on sw.os.windows (doesn’t care what version), but would be interesting to note if see failures only on windows.10 machines
+- allows for certain level of machine sanity checking, especially if we automate the labelling via Jenkins APIs, so that we can compare the expected machine config (via ansible) with the actual machine config (via calls to Jenkins API http://javadoc.jenkins-ci.org/hudson/model/Node.html#getAssignedLabels--).  
+
+I suggest the schema 'tree' below, categorizing under 3 top-level roots, hw, sw, and ci (continuous integration catch-all, for all groupings not hw or sw), each with its own sub-categories. 
+
+hw.platform.zlinux
+                     xlinux
+                     plinux
+                     windows
+                     aix
+                     zos
+                     osx
+
+hw.arch.s390
+              ppc
+              x86
+
+hw.endian.le
+
+hw.bits.64bit
+             32bit
+
+hw.physical.cpu.xx
+                    disk.xx
+                    memory.xx
+
+sw.os.rhel.6
+sw.os.rhel.7
+sw.os.ubuntu.14
+sw.os.ubuntu.16
+sw.os.sles.11
+sw.os.sles.12
+sw.os.aix.6
+sw.os.aix.7
+sw.os.osx.10
+sw.os.windows.8
+sw.os.windows.10
+sw.os.zos.1_13 (where dotted version numbers represented by _ )
+sw.os.zos.2_1
+
+sw.tool.gcc.xx (where xx represents version number)
+sw.tool.docker.xx
+sw.tool.hypervisor.kvm, etc
+
+ci.role.perf
+ci.role.compile
+ci.role.test
+ci.role.test.jck
+
+We could just start with the labels that are of direct use to build/test scripts and add as we see the need.
+
+Do people have strong thoughts on the matter?  In general, labels are of no consequence to people unless they are writing scripts and/or adding builds to Jenkins, so if you are actively working on builds, please share your thoughts.  Thanks.
+

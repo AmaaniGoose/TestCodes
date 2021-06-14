@@ -1,0 +1,36 @@
+The [LinuxNumaTest](https://github.com/eclipse/openj9/blob/master/test/functional/VM_Test/src/com/ibm/j9/numa/LinuxNumaTest.java) is failing with null pointer exception if its running with balanced gc policy.
+
+```
+root@b137720e3ef8:/home/openj9-stuff# ./aoj9/aoj9-build/bin/java -Xdump:java:events=user,file=javacore.txt -Xgcpolicy:balanced com.bharathappali.src.LinuxNumaTest preferred 0-1 
+Begining heap memory policy test...
+Checking for old java dump: javacore.txt
+deleting old java dump: javacore.txt
+Getting PID of current process
+JVM process pid=349
+Completed parsing /proc/349/numa_maps
+Sending kill signal to generate java dump
+Executing another process: kill -QUIT 349
+JVMDUMP039I Processing dump event "user", detail "" at 2019/02/28 06:26:57 - please wait.
+Executing another process: numactl --showJVMDUMP032I JVM requested Java dump using '/home/openj9-stuff/javacore.txt' in response to an event
+JVMDUMP010I Java dump written to /home/openj9-stuff/javacore.txt
+JVMDUMP032I JVM requested Java dump using '/home/openj9-stuff/javacore.20190228.062657.349.0002.txt' in response to an event
+JVMDUMP010I Java dump written to /home/openj9-stuff/javacore.20190228.062657.349.0002.txt
+
+JVMDUMP013I Processed dump event "user", detail "".
+mem node: 0
+mem node: 1
+Sleeping to allow exec'ed process to send signal and generate java dump
+Sleeping for 5000 milliseconds
+Parsing java dump: javacore.txt
+javacore.txt line describing heap size:
+1STHEAPTOTAL   Total memory:                     8388608 (0x0000000000800000)
+Exception in thread "main" java.lang.NullPointerException
+	at com.bharathappali.src.LinuxNumaTest.parseJavaDump(LinuxNumaTest.java:1225)
+	at com.bharathappali.src.LinuxNumaTest.run(LinuxNumaTest.java:1061)
+	at com.bharathappali.src.LinuxNumaTest.main(LinuxNumaTest.java:965)```
+```
+
+**Reason :**
+The test checks for `1STHEAPREGION` tag in javacore which has the heap address which the program uses to check in `numa_maps` for policy and nodes. In case of balanced gc the javacore doesn't contain the `1STHEAPREGION` line in it so the program is crashing with null pointer exception.
+
+It seems to be like scope of this test is confined to `gencon` policy. As this is a NUMA test, will it be good to extend its scope to work along with balanced gc as well. 

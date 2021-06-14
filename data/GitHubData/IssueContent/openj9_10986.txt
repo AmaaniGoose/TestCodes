@@ -1,0 +1,168 @@
+Failure link
+------------
+
+From an internal abuild `458019`:
+```
+java version "1.8.0_271"
+Java(TM) SE Runtime Environment (build 8.0.7.0 - pxi3280sr7-20200922_01(SR7))
+IBM J9 VM (build 2.9, JRE 1.8.0 Linux x86-32-Bit 20201023_458019 (JIT enabled, AOT enabled)
+OpenJ9   - 5293016
+OMR      - be47e22
+IBM      - b344eac)
+JCL - 20200921_01 based on Oracle jdk8u271-b09
+```
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+j> 17:27:18 20201023 17:27:18 Runtime State Reporter IMPORTANT: 6560 tests complete, 2 currently running
+j> 17:27:40 #0: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0x78afd1) [0x174dfd1]
+j> 17:27:40 #1: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0x7959f8) [0x17589f8]
+j> 17:27:40 #2: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0xbf928) [0x1082928]
+j> 17:27:40 #3: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9prt29.so(+0x238cd) [0xcc08cd]
+j> 17:27:40 #4: [0x7dc410]
+j> 17:27:40 #5: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0x399a2f) [0x135ca2f]
+j> 17:27:40 #6: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0x7f4dd8) [0x17b7dd8]
+j> 17:27:40 #7: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0x7f4e5f) [0x17b7e5f]
+j> 17:27:40 #8: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0x7ecab6) [0x17afab6]
+j> 17:27:40 #9: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0x7ddc2a) [0x17a0c2a]
+j> 17:27:40 #10: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0x80f2d9) [0x17d22d9]
+j> 17:27:40 #11: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0x7dd4b9) [0x17a04b9]
+j> 17:27:40 #12: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0x7e3254) [0x17a6254]
+j> 17:27:40 #13: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0x3a8e29) [0x136be29]
+j> 17:27:40 #14: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0x3a73ff) [0x136a3ff]
+j> 17:27:40 #15: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0x3a4fd0) [0x1367fd0]
+j> 17:27:40 #16: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0x3bbf3c) [0x137ef3c]
+j> 17:27:40 #17: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0xce98d) [0x109198d]
+j> 17:27:40 #18: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0xcf7dd) [0x10927dd]
+j> 17:27:40 #19: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9prt29.so(+0x24730) [0xcc1730]
+j> 17:27:40 #20: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0xd1678) [0x1094678]
+j> 17:27:40 #21: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0xd1cb1) [0x1094cb1]
+j> 17:27:40 #22: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0xcd440) [0x1090440]
+j> 17:27:40 #23: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0xcd88b) [0x109088b]
+j> 17:27:40 #24: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0xcd944) [0x1090944]
+j> 17:27:40 #25: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9prt29.so(+0x24730) [0xcc1730]
+j> 17:27:40 #26: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so(+0xcddaf) [0x1090daf]
+j> 17:27:40 #27: /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9thr29.so(+0xf70e) [0x70770e]
+j> 17:27:40 #28: /lib/libpthread.so.0() [0x94fb39]
+j> 17:27:40 #29: function clone+0x5e [0x258c2e]
+j> 17:27:40 Unhandled exception
+j> 17:27:40 Type=Segmentation error vmState=0x0005ff06
+j> 17:27:40 J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000001
+j> 17:27:40 Handler1=004B173E Handler2=00CC06C3 InaccessibleAddress=0000005D
+j> 17:27:40 EDI=00000012 ESI=00000000 EAX=00000005 EBX=01B76000
+j> 17:27:40 ECX=B3A05E00 EDX=B43D0250
+j> 17:27:40 EIP=0135CA2F ES=002B DS=002B ESP=00E87014
+j> 17:27:40 EFlags=00210202 CS=0023 SS=002B EBP=00000000
+j> 17:27:40 Module=/bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so
+j> 17:27:40 Module_base_address=00FC3000
+j> 17:27:40 
+j> 17:27:40 Method_being_compiled=java/util/regex/Pattern.split(Ljava/lang/CharSequence;I)[Ljava/lang/String;
+j> 17:27:40 Target=2_90_20201023_458019 (Linux 2.6.32-504.8.1.el6.x86_64)
+j> 17:27:40 CPU=x86 (2 logical CPUs) (0x1675a4000 RAM)
+j> 17:27:40 ----------- Stack Backtrace -----------
+j> 17:27:40 (0x0135CA2F [libj9jit29.so+0x399a2f])
+j> 17:27:40 (0x017B7DD8 [libj9jit29.so+0x7f4dd8])
+j> 17:27:40 (0x017B7E5F [libj9jit29.so+0x7f4e5f])
+j> 17:27:40 (0x017AFAB6 [libj9jit29.so+0x7ecab6])
+j> 17:27:40 (0x017A0C2A [libj9jit29.so+0x7ddc2a])
+j> 17:27:40 (0x017D22D9 [libj9jit29.so+0x80f2d9])
+j> 17:27:40 (0x017A04B9 [libj9jit29.so+0x7dd4b9])
+j> 17:27:40 (0x017A6254 [libj9jit29.so+0x7e3254])
+j> 17:27:40 (0x0136BE29 [libj9jit29.so+0x3a8e29])
+j> 17:27:40 (0x0136A3FF [libj9jit29.so+0x3a73ff])
+j> 17:27:40 (0x01367FD0 [libj9jit29.so+0x3a4fd0])
+j> 17:27:40 (0x0137EF3C [libj9jit29.so+0x3bbf3c])
+j> 17:27:40 (0x0109198D [libj9jit29.so+0xce98d])
+j> 17:27:40 (0x010927DD [libj9jit29.so+0xcf7dd])
+j> 17:27:40 (0x00CC1730 [libj9prt29.so+0x24730])
+j> 17:27:40 (0x01094678 [libj9jit29.so+0xd1678])
+j> 17:27:40 (0x01094CB1 [libj9jit29.so+0xd1cb1])
+j> 17:27:40 (0x01090440 [libj9jit29.so+0xcd440])
+j> 17:27:40 (0x0109088B [libj9jit29.so+0xcd88b])
+j> 17:27:40 (0x01090944 [libj9jit29.so+0xcd944])
+j> 17:27:40 (0x00CC1730 [libj9prt29.so+0x24730])
+j> 17:27:40 (0x01090DAF [libj9jit29.so+0xcddaf])
+j> 17:27:40 (0x0070770E [libj9thr29.so+0xf70e])
+j> 17:27:40 (0x0094FB39 [libpthread.so.0+0x6b39])
+j> 17:27:40 clone+0x5e (0x00258C2E [libc.so.6+0xe2c2e])
+j> 17:27:40 ---------------------------------------
+j> 17:27:40 JVMDUMP039I Processing dump event "gpf", detail "" at 2020/10/23 17:27:40 - please wait.
+j> 17:27:40 JVMDUMP032I JVM requested System dump using '/tmp/bld_458019/abbs.5mins/659940315/JLTF-jgrinder-abbs-mode301-20201023-1721/core.20201023.172740.27924.0001.dmp' in response to an event
+p> 20201023-17:27:41 Dump /tmp/bld_458019/abbs.5mins/659940315/JLTF-jgrinder-abbs-mode301-20201023-1721/core.29363 spotted.
+p> 20201023-17:27:42 Attempted to collect /proc/pid/maps and /proc/pid/smaps
+j> 17:27:45 20201023 17:27:44 Thread Control Engine INFO: Retiring JobSet Primary
+j> 17:27:46 20201023 17:27:45 Launcher INFO: Final result: All 6562 tests passed
+j> 17:27:46 20201023 17:27:45 Runtime State Reporter IMPORTANT: 6562 tests complete, 0 currently running
+j> 17:27:46 20201023 17:27:45 Launcher INFO: Java Component Shows Passed
+j> 17:28:07 JVMPORT030W /proc/sys/kernel/core_pattern setting "|/usr/libexec/abrt-hook-ccpp %s %c %p %u %g %t e" specifies that the core dump is to be piped to an external program.  Attempting to rename either core or core.29363.
+j> 17:28:07 
+j> 17:28:07 JVMDUMP010I System dump written to /tmp/bld_458019/abbs.5mins/659940315/JLTF-jgrinder-abbs-mode301-20201023-1721/core.20201023.172740.27924.0001.dmp
+j> 17:28:07 JVMDUMP032I JVM requested Java dump using '/tmp/bld_458019/abbs.5mins/659940315/JLTF-jgrinder-abbs-mode301-20201023-1721/javacore.20201023.172740.27924.0002.txt' in response to an event
+p> 20201023-17:28:07 Dump /tmp/bld_458019/abbs.5mins/659940315/JLTF-jgrinder-abbs-mode301-20201023-1721/core.20201023.172740.27924.0001.dmp spotted.
+p> 20201023-17:28:07 Attempted to collect /proc/pid/maps and /proc/pid/smaps
+p> 20201023-17:28:07 Dump /tmp/bld_458019/abbs.5mins/659940315/JLTF-jgrinder-abbs-mode301-20201023-1721/javacore.20201023.172740.27924.0002.txt spotted.
+j> 17:28:08 JVMDUMP010I Java dump written to /tmp/bld_458019/abbs.5mins/659940315/JLTF-jgrinder-abbs-mode301-20201023-1721/javacore.20201023.172740.27924.0002.txt
+j> 17:28:08 JVMDUMP032I JVM requested Snap dump using '/tmp/bld_458019/abbs.5mins/659940315/JLTF-jgrinder-abbs-mode301-20201023-1721/Snap.20201023.172740.27924.0003.trc' in response to an event
+j> 17:28:08 JVMDUMP010I Snap dump written to /tmp/bld_458019/abbs.5mins/659940315/JLTF-jgrinder-abbs-mode301-20201023-1721/Snap.20201023.172740.27924.0003.trc
+j> 17:28:08 JVMDUMP032I JVM requested JIT dump using '/tmp/bld_458019/abbs.5mins/659940315/JLTF-jgrinder-abbs-mode301-20201023-1721/jitdump.20201023.172740.27924.0004.dmp' in response to an event
+p> 20201023-17:28:08 Dump /tmp/bld_458019/abbs.5mins/659940315/JLTF-jgrinder-abbs-mode301-20201023-1721/Snap.20201023.172740.27924.0003.trc spotted.
+j> 17:28:09 JVMDUMP010I JIT dump written to /tmp/bld_458019/abbs.5mins/659940315/JLTF-jgrinder-abbs-mode301-20201023-1721/jitdump.20201023.172740.27924.0004.dmp
+j> 17:28:09 JVMDUMP013I Processed dump event "gpf", detail "".
+p> 20201023-17:28:09 Java Process completed. Total java component duration 419 seconds. Leaving process polling loop
+
+
+p> 20201023-17:28:09 Running ValidateDDRDump on /tmp/bld_458019/abbs.5mins/659940315/JLTF-jgrinder-abbs-mode301-20201023-1721/core.20201023.172740.27924.0001.dmp
+
+Validating dump core.20201023.172740.27924.0001.dmp
+
+Running validateDDRDump: java -Dcom.ibm.jtc.ras.ddr.MaxCorruptions=10 -classpath '/bluebird/javatest/HEAD_382595/test/SVT/stress/jltf/engine/jltf.core/scripts/../../../../../../lib/perl/common/../../../SVT/ras/tools:/bluebird/javatest/HEAD_382595/test/SVT/stress/jltf/engine/jltf.core/scripts/../../../../../../lib/perl/common/../../../lib/java/classes/Common.jar' tests.com.ibm.jtc.ras.util.dtfj.ValidateDDRDump /tmp/bld_458019/abbs.5mins/659940315/JLTF-jgrinder-abbs-mode301-20201023-1721//core.20201023.172740.27924.0001.dmp
+
+dump validation complete, result: ValidateDDRDump ERROR
+
+p> 20201023-17:34:09 Running gdb on /tmp/bld_458019/abbs.5mins/659940315/JLTF-jgrinder-abbs-mode301-20201023-1721/core.20201023.172740.27924.0001.dmp
+p> 20201023-17:34:09 Logging gdb output to /tmp/bld_458019/abbs.5mins/659940315/JLTF-jgrinder-abbs-mode301-20201023-1721/core.20201023.172740.27924.0001.dmp.gdb.log
+p> 20201023-17:34:12 gdb completed with return code: 0
+p> 20201023-17:34:12 Running gdb again on /tmp/bld_458019/abbs.5mins/659940315/JLTF-jgrinder-abbs-mode301-20201023-1721/core.20201023.172740.27924.0001.dmp
+p> 20201023-17:34:12 Logging gdb output to /tmp/bld_458019/abbs.5mins/659940315/JLTF-jgrinder-abbs-mode301-20201023-1721/core.20201023.172740.27924.0001.dmp.gdb2.log
+p> 20201023-17:34:13 gdb completed with return code: 0
+p> 20201023-17:34:13 Filtered gdb output was:
+p> 20201023-17:34:13 <gdb> 
+p> 20201023-17:34:13 <gdb> warning: core file may not match specified executable file.
+p> 20201023-17:34:13 <gdb> [Thread debugging using libthread_db enabled]
+p> 20201023-17:34:13 <gdb> Core was generated by `/bluebird/builds/bld_458019/sdk/xi3280/jre/bin/java -Xmx1024M -Xms4M -Xnocompre'.
+p> 20201023-17:34:13 <gdb> Program terminated with signal 11, Segmentation fault.
+p> 20201023-17:34:13 <gdb> #0  0x007dc430 in __kernel_vsyscall ()
+p> 20201023-17:34:13 <gdb> 
+p> 20201023-17:34:13 <gdb> backtrace:
+p> 20201023-17:34:13 <gdb> #0  0x007dc430 in __kernel_vsyscall ()
+p> 20201023-17:34:13 <gdb> #1  0x009545b3 in pthread_kill () from /lib/libpthread.so.0
+p> 20201023-17:34:13 <gdb> #2  0x00ce5140 in omrdump_create () from /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9prt29.so
+p> 20201023-17:34:13 <gdb> #3  0x00314216 in doSystemDump () from /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9dmp29.so
+p> 20201023-17:34:13 <gdb> #4  0x0030f8e0 in protectedDumpFunction () from /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9dmp29.so
+p> 20201023-17:34:13 <gdb> #5  0x00cc1730 in omrsig_protect () from /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9prt29.so
+p> 20201023-17:34:13 <gdb> #6  0x003133f0 in runDumpFunction () from /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9dmp29.so
+p> 20201023-17:34:13 <gdb> #7  0x003135d7 in runDumpAgent () from /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9dmp29.so
+p> 20201023-17:34:13 <gdb> #8  0x0032c93f in triggerDumpAgents () from /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9dmp29.so
+p> 20201023-17:34:13 <gdb> #9  0x004b1213 in generateDiagnosticFiles () from /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9vm29.so
+p> 20201023-17:34:13 <gdb> #10 0x00cc1730 in omrsig_protect () from /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9prt29.so
+p> 20201023-17:34:13 <gdb> #11 0x004b150e in vmSignalHandler () from /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9vm29.so
+p> 20201023-17:34:13 <gdb> #12 0x004b1792 in structuredSignalHandler () from /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9vm29.so
+p> 20201023-17:34:13 <gdb> #13 0x00cc08cd in mainSynchSignalHandler () from /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9prt29.so
+p> 20201023-17:34:13 <gdb> #14 <signal handler called>
+p> 20201023-17:34:13 <gdb> #15 0x0135ca2f in TR_LiveRegisters::setAssociation(TR::Register*, TR::RealRegister*) () from /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so
+p> 20201023-17:34:13 <gdb> #16 0x017b7dd8 in TR_X86RegisterDependencyGroup::setDependencyInfo(TR_X86RegisterDependencyIndex, TR::Register*, OMR::RealRegister::RegNum, TR::CodeGenerator*, unsigned char, bool) () from /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so
+p> 20201023-17:34:13 <gdb> #17 0x017b7e5f in OMR::X86::RegisterDependencyConditions::unionRealDependencies(TR_X86RegisterDependencyGroup*, TR_X86RegisterDependencyIndex, TR::Register*, OMR::RealRegister::RegNum, TR::CodeGenerator*, unsigned char, bool) () from /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so
+p> 20201023-17:34:13 <gdb> #18 0x017afab6 in TR_RegisterAssignerState::createDependenciesFromRegisterState(TR_OutlinedInstructions*) () from /bluebird/builds/bld_458019/sdk/xi3280/jre/lib/i386/default/libj9jit29.so
+p> 20201023-17:34:13 <gdb> #19 0xababaa60 in ?? ()
+p> 20201023-17:34:13 <gdb> #20 0xab236680 in ?? ()
+p> 20201023-17:34:13 <gdb> Backtrace stopped: previous frame inner to this frame (corrupt stack?)
+p> 20201023-17:34:13 
+p> 20201023-17:34:13 Checking return code.
+p> 20201023-17:34:13 The 16 bit process exit status on UNIX encodes several pieces of data:
+```
+This was reproduced in a 100x grinder.

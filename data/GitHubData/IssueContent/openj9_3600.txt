@@ -1,0 +1,13 @@
+Not sure if these are from compiles or tests or both. Likely multiple issues here.
+I guess more accurately, this is the Jenkins RemoteFS dir. The home dir would be cygwin /home/jenkins/ since we connect to these machines using cygwin-ssh.
+```
+C:\users\jenkins
+files:
+{028D07BC-8B92-4B73-8B30-F78F6EBCA625}
+tmp4002297857010390153.lock
+folders:
+openj9tr_resources7151118105708709363
+resource-3001439739939246237
+```
+
+@acrowthe pointed out this [block](https://github.com/eclipse/openj9/blob/master/test/functional/Java8andUp/src/org/openj9/test/support/resource/Support_Resources.java#L78) of test code which is likely the culprit for the `openj9tr_resources` folders

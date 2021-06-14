@@ -1,0 +1,21 @@
+As part of  a review comment by @vijaysun-omr in [1] we seem to generate an odd tree sequence duing ILGen:
+
+```
+aiadd
+  aconst 0x784b8500
+  iconst 28
+```
+
+This is a result of the following command:
+
+```
+./bin/java -Xjit:'limit={java/lang/System.setFieldImpl(Ljava/lang/String;Ljava/lang/Object;)V}(tracefull,log=setFieldImpl.trace)' -version
+```
+
+And a quote from @vijaysun-omr himself:
+
+> Regarding the first question, I looked at #2923 and while I got a little bit more information on the origin of the tree (from IL gen and for accessing some instance field off a class) I am still a bit unclear on the context in which this IL is possible. One obvious question is why does'nt the IL gen just generate an aconst instead of this aiadd. If the point is to expose the address of the class separately for ensuring that HCR or AOT can see the address as something to patch up, then I wonder if a loadaddr of that class might have been a better choice of IL (though maybe this bug would probably still have been seen).
+
+The task here is to determine why the Walker chose to generate the above tree sequence and could we have done something better?
+
+[1] https://github.com/eclipse/omr/pull/2920#issuecomment-418760581 

@@ -1,0 +1,66 @@
+- Test https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/965d0c0df359f3da224b865701bbcc044b7104c2/test/jdk/java/lang/invoke/AccessControlTest.java#L1 is consistantly failing on openj9 builds of JDK11/13 (JDK8 and hotspot unaffected).
+- Category: openjdk
+- OS/Architecture: x86-64_linux, x86-64_osx, x86-64_windows
+- Jenkins build: 
+```
+- Version: Eclipse OpenJ9 VM (build master-41360de87, JRE 11 Linux amd64-64-Bit Compressed References 20190815_528 (JIT enabled, AOT enabled)
+- OpenJ9   - 41360de87
+- OMR      - 6e99760b
+- JCL      - f1b130d028e based on jdk-11.0.4+11)
+```
+Optional info
+-------------
+- Part of the excluded jdk11 openj9 JTReg Tests: [AdoptOpenJDK/openjdk-tests#585](https://github.com/AdoptOpenJDK/openjdk-tests/issues/585)
+- Error is an `AssertionError`, the test expects `willAccess` and `didAccess` to be equal (`willAccess = false`, `didAccess = true`).
+- Lines 422-423 are of particular interest.
+
+Failure output
+---------------------------------------------
+```
+STDOUT:
+11:12:41  [TestNG] Running:
+11:12:41    java/lang/invoke/AccessControlTest.java
+11:12:41  
+11:12:41  loaders = [jdk.internal.loader.ClassLoaders$AppClassLoader@4be02140]
+11:12:41  filled in 28 cases from 9 original cases in 3 rounds
+11:12:41  AccessControlTest/module => AccessControlTest.pro_in_self()void
+11:12:41  fail on protected static void test.java.lang.invoke.AccessControlTest.pro_in_self() ex=null
+11:12:41  test test.java.lang.invoke.AccessControlTest.test(): failure
+11:12:41  java.lang.AssertionError: expected [true] but found [false]
+11:12:41  	at org.testng.Assert.fail(Assert.java:94)
+11:12:41  	at org.testng.Assert.failNotEquals(Assert.java:496)
+11:12:41  	at org.testng.Assert.assertEquals(Assert.java:125)
+11:12:41  	at org.testng.Assert.assertEquals(Assert.java:288)
+11:12:41  	at org.testng.Assert.assertEquals(Assert.java:298)
+11:12:41  	at test.java.lang.invoke.AccessControlTest.testOneAccess(AccessControlTest.java:453)
+11:12:41  	at test.java.lang.invoke.AccessControlTest.test(AccessControlTest.java:407)
+11:12:41  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+11:12:41  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+11:12:41  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+11:12:41  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+11:12:41  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+11:12:41  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+11:12:41  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:821)
+11:12:41  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1131)
+11:12:41  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+11:12:41  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+11:12:41  	at org.testng.TestRunner.privateRun(TestRunner.java:773)
+11:12:41  	at org.testng.TestRunner.run(TestRunner.java:623)
+11:12:41  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+11:12:41  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+11:12:41  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+11:12:41  	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+11:12:41  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+11:12:41  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+11:12:41  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1185)
+11:12:41  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1110)
+11:12:41  	at org.testng.TestNG.run(TestNG.java:1018)
+11:12:41  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:94)
+11:12:41  	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:54)
+11:12:41  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+11:12:41  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+11:12:41  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+11:12:41  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+11:12:41  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+11:12:41  	at java.base/java.lang.Thread.run(Thread.java:831)
+```

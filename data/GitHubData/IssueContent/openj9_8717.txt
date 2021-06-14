@@ -1,0 +1,22 @@
+A few `KOT` related optimizations/operations will be bypassed at the server [1][2] due to various reasons. They would require an re-evaluation in the near future in case if there is any potential performance impact.
+
+1. Currently there is no implementation/infrastructure in OMR code to send messages from the server to the client when VM access is required. 
+* `int32_t TR_InvariantArgumentPreexistence::perform()`
+  * https://github.com/eclipse/omr/blob/892a0fef24c7bc781cda8aab530b4cd18cea6814/compiler/optimizer/LocalOpts.cpp#L6844-L6851
+  * https://github.com/eclipse/omr/blob/892a0fef24c7bc781cda8aab530b4cd18cea6814/compiler/optimizer/LocalOpts.cpp#L6987-L7000
+* `void TR_InvariantArgumentPreexistence::processIndirectCall()`
+  * https://github.com/eclipse/omr/blob/892a0fef24c7bc781cda8aab530b4cd18cea6814/compiler/optimizer/LocalOpts.cpp#L7290-L7306
+* `static bool addKnownObjectConstraints(OMR::ValuePropagation *vp, TR::Node *node)`
+  * https://github.com/eclipse/omr/blob/892a0fef24c7bc781cda8aab530b4cd18cea6814/compiler/optimizer/VPHandlers.cpp#L1530-L1535
+
+2. Not directly related to KOT but the following VM access could be called at the server. 
+* `TR::Node *
+J9::TransformUtil::transformIndirectLoad(TR::Compilation *comp, TR::Node *node)` 
+  * https://github.com/eclipse/openj9/blob/ebec356635a35ff2acbd4e3958752c309b9bcdc4/runtime/compiler/optimizer/J9TransformUtil.cpp#L741
+* `bool
+J9::TransformUtil::transformIndirectLoadChain()`
+  * https://github.com/eclipse/openj9/blob/ebec356635a35ff2acbd4e3958752c309b9bcdc4/runtime/compiler/optimizer/J9TransformUtil.cpp#L1477
+
+-----------------
+[1] eclipse/omr#4829
+[2] eclipse/openj9#8527

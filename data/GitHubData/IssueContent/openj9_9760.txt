@@ -1,0 +1,117 @@
+When I enable JProfiling in JITServer by using the patch [1], I encountered couple of crashes on the server side when compiling methods.
+
+First is an assertion failure in `J9::KnownObjectTable::updateKnownObjectTableAtServer()` when compiling a method at `warm` level:
+
+```
+Assertion failed at /home/ashu/data/ashu-mehra/openj9-openjdk-jdk11/build/linux-x86_64-normal-server-slowdebug/vm/compiler/../compiler/env/J9KnownObjectTable.cpp:236: objectReferenceLocationClient
+VMState: 0x000501ff
+        objectReferenceLocationClient should not be NULL
+compiling SimpleSortObject.main([Ljava/lang/String;)V at level: warm
+#0: function TR_LinuxCallStackIterator::printStackBacktrace(TR::Compilation*)+0x32 [0x7f7fc10cd6fa]
+#1: function TR_Debug::printStackBacktrace()+0x23 [0x7f7fc10df8f1]
+#2: /home/ashu/data/ashu-mehra/openj9-openjdk-jdk11/build/linux-x86_64-normal-server-slowdebug/images/jdk/lib/compressedrefs/libj9jit29.so(+0x12261ed) [0x7f7fc0d611ed]
+#3: /home/ashu/data/ashu-mehra/openj9-openjdk-jdk11/build/linux-x86_64-normal-server-slowdebug/images/jdk/lib/compressedrefs/libj9jit29.so(+0x1226305) [0x7f7fc0d61305]
+#4: function TR::assertion(char const*, int, char const*, char const*, ...)+0x104 [0x7f7fc0d6140e]
+#5: function J9::KnownObjectTable::updateKnownObjectTableAtServer(int, unsigned long*)+0x81 [0x7f7fc07c1d9d]
+#6: function InterpreterEmulator::maintainStackForGetField()+0x445 [0x7f7fc08c840d]
+#7: function InterpreterEmulator::maintainStack(TR_J9ByteCode)+0x92 [0x7f7fc08c8cac]
+#8: function InterpreterEmulator::findAndCreateCallsitesFromBytecodes(bool, bool)+0x2cb [0x7f7fc08ca899]
+#9: function TR_J9EstimateCodeSize::realEstimateCodeSize(TR_CallTarget*, TR_CallStack*, bool, TR::Region&)+0x1596 [0x7f7fc08b9f92]
+#10: function TR_J9EstimateCodeSize::estimateCodeSize(TR_CallTarget*, TR_CallStack*, bool)+0x58 [0x7f7fc08b589a]
+#11: function TR_J9EstimateCodeSize::realEstimateCodeSize(TR_CallTarget*, TR_CallStack*, bool, TR::Region&)+0x29dc [0x7f7fc08bb3d8]
+#12: function TR_J9EstimateCodeSize::estimateCodeSize(TR_CallTarget*, TR_CallStack*, bool)+0x58 [0x7f7fc08b589a]
+#13: function TR_J9EstimateCodeSize::realEstimateCodeSize(TR_CallTarget*, TR_CallStack*, bool, TR::Region&)+0x29dc [0x7f7fc08bb3d8]
+#14: function TR_J9EstimateCodeSize::estimateCodeSize(TR_CallTarget*, TR_CallStack*, bool)+0x58 [0x7f7fc08b589a]
+#15: function TR_EstimateCodeSize::calculateCodeSize(TR_CallTarget*, TR_CallStack*, bool)+0xf3 [0x7f7fc08907c5]
+#16: function TR_MultipleCallTargetInliner::weighCallSite(TR_CallStack*, TR_CallSite*, bool, bool)+0x558 [0x7f7fc08a0474]
+#17: function TR_MultipleCallTargetInliner::inlineCallTargets(TR::ResolvedMethodSymbol*, TR_CallStack*, TR_InnerPreexistenceInfo*)+0x92e [0x7f7fc089eb96]
+#18: function TR_InlinerBase::performInlining(TR::ResolvedMethodSymbol*)+0xdf [0x7f7fc0e3efc7]
+#19: function TR_Inliner::perform()+0x14a [0x7f7fc089b808]
+#20: function OMR::Optimizer::performOptimization(OptimizationStrategy const*, int, int, int)+0x2b95 [0x7f7fc0f2b5d7]
+#21: function OMR::Optimizer::optimize()+0x856 [0x7f7fc0f2815a]
+#22: function OMR::Compilation::performOptimizations()+0x73 [0x7f7fc0cb5ac5]
+#23: function OMR::Compilation::compile()+0xb59 [0x7f7fc0cb4b03]
+#24: function TR::CompilationInfoPerThreadBase::compile(J9VMThread*, TR::Compilation*, TR_ResolvedMethod*, TR_J9VMBase&, TR_OptimizationPlan*, TR::SegmentAllocator const&)+0xd4b [0x7f7fc0775c95]
+#25: function TR::CompilationInfoPerThreadBase::wrappedCompile(J9PortLibrary*, void*)+0x288e [0x7f7fc0773cfe]
+#26: /home/ashu/data/ashu-mehra/openj9-openjdk-jdk11/build/linux-x86_64-normal-server-slowdebug/images/jdk/lib/compressedrefs/libj9prt29.so(+0x21dad) [0x7f7fc2d71dad]
+#27: function TR::CompilationInfoPerThreadBase::compile(J9VMThread*, TR_MethodToBeCompiled*, J9::J9SegmentProvider&)+0x6f8 [0x7f7fc0770fc4]
+#28: function TR::CompilationInfoPerThreadRemote::processEntry(TR_MethodToBeCompiled&, J9::J9SegmentProvider&)+0x132d [0x7f7fc09d9383]
+#29: function TR::CompilationInfoPerThread::processEntries()+0x238 [0x7f7fc07668f8]
+```
+
+This one can be avoided by using `-Xjit:disableKnownObjectTable`.
+
+Second crash occurs when compiling a method at `profiled very-hot`:
+```
+JIT: crashed while compiling SimpleSortObject.simpleSort([LUtil/ValueArray;)V (recoverable 0)
+#0: function TR_LinuxCallStackIterator::printStackBacktrace(TR::Compilation*)+0x32 [0x7f9429d006fa]
+#1: function TR_Debug::printStackBacktrace()+0x23 [0x7f9429d128f1]
+#2: /home/ashu/data/ashu-mehra/openj9-openjdk-jdk11/build/linux-x86_64-normal-server-slowdebug/images/jdk/lib/compressedrefs/libj9jit29.so(+0xc2167a) [0x7f942938f67a]
+#3: /home/ashu/data/ashu-mehra/openj9-openjdk-jdk11/build/linux-x86_64-normal-server-slowdebug/images/jdk/lib/compressedrefs/libj9prt29.so(+0x237e3) [0x7f942b9a67e3]
+#4: /lib/x86_64-linux-gnu/libpthread.so.0(+0x12890) [0x7f942cc43890]
+#5: function OMR::X86::TreeEvaluator::performCall(TR::Node*, bool, bool, TR::CodeGenerator*)+0xa3 [0x7f9429d9fead]
+#6: function OMR::X86::TreeEvaluator::directCallEvaluator(TR::Node*, TR::CodeGenerator*)+0x394 [0x7f9429da0e62]
+#7: function J9::X86::TreeEvaluator::directCallEvaluator(TR::Node*, TR::CodeGenerator*)+0x745 [0x7f94296f6a13]
+#8: function OMR::CodeGenerator::evaluate(TR::Node*)+0x164 [0x7f94298c1da8]
+#9: function OMR::X86::TreeEvaluator::treetopEvaluator(TR::Node*, TR::CodeGenerator*)+0x33 [0x7f9429da1061]
+#10: function OMR::CodeGenerator::evaluate(TR::Node*)+0x164 [0x7f94298c1da8]
+#11: function J9::CodeGenerator::doInstructionSelection()+0x3b15 [0x7f94293414bd]
+#12: function OMR::CodeGenPhase::performInstructionSelectionPhase(TR::CodeGenerator*, TR::CodeGenPhase*)+0xf8 [0x7f94298d2f6c]
+#13: function OMR::CodeGenPhase::performAll()+0x12e [0x7f94298d1cba]
+#14: function OMR::CodeGenerator::generateCode()+0xaf [0x7f94298c7bf7]
+#15: function OMR::Compilation::compile()+0xe8e [0x7f94298e7e38]
+#16: function TR::CompilationInfoPerThreadBase::compile(J9VMThread*, TR::Compilation*, TR_ResolvedMethod*, TR_J9VMBase&, TR_OptimizationPlan*, TR::SegmentAllocator const&)+0xd4b [0x7f94293a8c95]
+#17: function TR::CompilationInfoPerThreadBase::wrappedCompile(J9PortLibrary*, void*)+0x288e [0x7f94293a6cfe]
+#18: /home/ashu/data/ashu-mehra/openj9-openjdk-jdk11/build/linux-x86_64-normal-server-slowdebug/images/jdk/lib/compressedrefs/libj9prt29.so(+0x21dad) [0x7f942b9a4dad]
+#19: function TR::CompilationInfoPerThreadBase::compile(J9VMThread*, TR_MethodToBeCompiled*, J9::J9SegmentProvider&)+0x6f8 [0x7f94293a3fc4]
+#20: function TR::CompilationInfoPerThreadRemote::processEntry(TR_MethodToBeCompiled&, J9::J9SegmentProvider&)+0x132d [0x7f942960c383]
+#21: function TR::CompilationInfoPerThread::processEntries()+0x238 [0x7f94293998f8]
+#22: function TR::CompilationInfoPerThread::run()+0x60 [0x7f94293991aa]
+#23: function protectedCompilationThreadProc(J9PortLibrary*, TR::CompilationInfoPerThread*)+0x1d3 [0x7f9429398f7e]
+#24: /home/ashu/data/ashu-mehra/openj9-openjdk-jdk11/build/linux-x86_64-normal-server-slowdebug/images/jdk/lib/compressedrefs/libj9prt29.so(+0x21dad) [0x7f942b9a4dad]
+#25: function compilationThreadProc(void*)+0x469 [0x7f9429398d54]
+#26: /home/ashu/data/ashu-mehra/openj9-openjdk-jdk11/build/linux-x86_64-normal-server-slowdebug/images/jdk/lib/compressedrefs/libj9thr29.so(+0x6241) [0x7f942c3af241]
+#27: /lib/x86_64-linux-gnu/libpthread.so.0(+0x76db) [0x7f942cc386db]
+#28: function clone+0x3f [0x7f942d1bf88f]
+```
+It can be avoided by using `-Xjit:disablePRE`.
+
+Although the infrastructure for using JProfiling in JITServer is not present, I believe these crashes are should not have occurred just by enabling the JProfiling, which warrants some investigation to under the root cause of these two issues.
+
+---
+
+[1]: the patch I used is:
+```
+diff --git a/runtime/compiler/control/J9Options.cpp b/runtime/compiler/control/J9Options.cpp
+index ee2078e90..7eae767e2 100644
+--- a/runtime/compiler/control/J9Options.cpp
++++ b/runtime/compiler/control/J9Options.cpp
+@@ -2097,11 +2097,11 @@ J9::Options::setupJITServerOptions()
+       {
+       self()->setOption(TR_DisableSamplingJProfiling);
+       self()->setIsVariableHeapBaseForBarrierRange0(true);
+-      self()->setOption(TR_DisableProfiling); // JITServer limitation, JIT profiling data is not available to remote compiles yet
++      //self()->setOption(TR_DisableProfiling); // JITServer limitation, JIT profiling data is not available to remote compiles yet
+       self()->setOption(TR_DisableEDO); // JITServer limitation, EDO counters are not relocatable yet
+       self()->setOption(TR_DisableMethodIsCold); // Shady heuristic; better to disable to reduce client/server traffic
+-      self()->setOption(TR_DisableJProfilerThread);
+-      self()->setOption(TR_EnableJProfiling, false);
++      //self()->setOption(TR_DisableJProfilerThread);
++      //self()->setOption(TR_EnableJProfiling, false);
+ 
+       if (compInfo->getPersistentInfo()->getRemoteCompilationMode() == JITServer::SERVER)
+          {
+diff --git a/runtime/compiler/control/J9Recompilation.cpp b/runtime/compiler/control/J9Recompilation.cpp
+index 235301d96..748f75a4e 100644
+--- a/runtime/compiler/control/J9Recompilation.cpp
++++ b/runtime/compiler/control/J9Recompilation.cpp
+@@ -114,7 +114,7 @@ J9::Recompilation::setupMethodInfo()
+ #if defined(J9VM_OPT_JITSERVER)
+       if (comp()->getPersistentInfo()->getRemoteCompilationMode() == JITServer::CLIENT)
+          {
+-         TR_ASSERT_FATAL(_methodInfo->profilingDisabled(), "Profiling is not supported in JITServer");
++         TR_ASSERT_FATAL(!_methodInfo->profilingDisabled(), "Profiling is not enabled on client side in JITServer");
+          }
+ #endif /* defined(J9VM_OPT_JITSERVER) */
+
+```

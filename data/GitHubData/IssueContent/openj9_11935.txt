@@ -1,0 +1,27 @@
+### Error
+
+Unexpected `IllegalAccessException` thrown from `UnreflectTests.testLookupUnreflectSpecial` when OJDK MHs are enabled in OpenJ9.
+
+```
+FAILED: testLookupUnreflectSpecial
+java.lang.IllegalAccessException: caller class must be a subclass below the method: org.openj9.test.unnamed.UnnamedDummy.dummy(Dummy)void/invokeSpecial, from class org.openj9.test.modularity.tests.UnreflectTests (module org.openj9test.modularity.testUnreflect)
+	at java.base/java.lang.invoke.MemberName.makeAccessException(MemberName.java:957)
+	at java.base/java.lang.invoke.MethodHandles$Lookup.restrictReceiver(MethodHandles.java:3918)
+	at java.base/java.lang.invoke.MethodHandles$Lookup.getDirectMethodCommon(MethodHandles.java:3993)
+	at java.base/java.lang.invoke.MethodHandles$Lookup.getDirectMethodNoSecurityManager(MethodHandles.java:3944)
+	at java.base/java.lang.invoke.MethodHandles$Lookup.unreflectSpecial(MethodHandles.java:3402)
+	at org.openj9test.modularity.testUnreflect/org.openj9.test.modularity.tests.UnreflectTests.testLookupUnreflectSpecial(UnreflectTests.java:64)
+```
+
+### Failing Test Targets
+
+1. `UnreflectTests_0` [extended.functional]
+    - `testLookupUnreflectSpecial`
+
+### How-to Run Tests?
+
+https://github.com/eclipse/openj9/blob/master/test/docs/OpenJ9TestUserGuide.md
+
+### Steps to build an OpenJ9 JDK with OJDK MHs enabled
+
+Refer to #11458.

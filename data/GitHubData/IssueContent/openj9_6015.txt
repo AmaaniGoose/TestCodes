@@ -1,0 +1,3 @@
+Prior to merging pull request #5699, all fields and methods of `TR_EscapeAnalysis` were public.  In a [review comment on that pull request](https://github.com/eclipse/openj9/pull/5699#discussion_r282597704), @andrewcraik Andrew Craik recommended making a newly added method a protected part of the API.
+As everything in `TR_EscapeAnalysis` was public, I took the easiest route of declaring most fields and methods to be protected, and declared a few classes that needed access to those fields or methods to be friends.
+However, the API should really be cleaned up, with fields/methods that ought to be public,  made public, and the elimination of friends declarations.

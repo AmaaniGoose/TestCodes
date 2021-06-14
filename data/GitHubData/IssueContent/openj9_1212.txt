@@ -1,0 +1,16 @@
+From make openjdk, test failure in openjdk_regression/work/sun/security/util/FilePermCompat/CompatImpact
+
+```
+#3  0xf75999b2 in __assert_fail_base (fmt=0x1 <error: Cannot access memory at address 0x1>, 
+    assertion=0xf6cb9fa0 "!\"JVM_GetVmArguments unimplemented\"", 
+    assertion@entry=0x2 <error: Cannot access memory at address 0x2>, file=file@entry=0xd3dbe470 "\001", line=1511, 
+    line@entry=4150669440, function=function@entry=0xf6cb9284 <__PRETTY_FUNCTION__.24832> "JVM_GetVmArguments") at assert.c:92
+#4  0xf7599a4a in __GI___assert_fail (assertion=0x2 <error: Cannot access memory at address 0x2>, file=0xd3dbe470 "\001", 
+    line=4150669440, function=0xf6cb9284 <__PRETTY_FUNCTION__.24832> "JVM_GetVmArguments") at assert.c:101
+#5  0xf6c96cf8 in JVM_GetVmArguments () from /home/jkingdon/sdks/jdk-debug/lib/default/libjvm.so
+#6  0xf6c24768 in ffi_call_VFP () from /home/jkingdon/sdks/jdk-debug/lib/default/libffi29.so
+#7  0xf6c23490 in ffi_call () from /home/jkingdon/sdks/jdk-debug/lib/default/libffi29.so
+#8  0xf69ad688 in bytecodeLoop () from /home/jkingdon/sdks/jdk-debug/lib/default/libj9vm29.so
+#9  0xf69f9cd8 in cInterpreter () from /home/jkingdon/sdks/jdk-debug/lib/default/libj9vm29.so
+
+```

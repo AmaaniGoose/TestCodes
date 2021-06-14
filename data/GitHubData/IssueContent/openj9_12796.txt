@@ -1,0 +1,60 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk11_j9_extended.openjdk_x86-64_windows/13/` (`win16x64cudart1 `):
+```
+java version "11.0.12" 2021-07-20
+Java(TM) SE Runtime Environment 11.0.12.0-IBM (build 11.0.12+4)
+Eclipse OpenJ9 VM 11.0.12.0-IBM (build master-262b10ca7, JRE 11 Windows Server 2016 amd64-64-Bit Compressed References 20210529_86 (JIT enabled, AOT enabled)
+OpenJ9   - 262b10ca7
+OMR      - e358cd0e5
+JCL      - 34925c161a based on jdk-11.0.12+4)
+```
+[Rerun in Grinder](https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?TARGET=jdk_imageio_0&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;PLATFORM=x86-64_windows&amp;KEEP_REPORTDIR=true&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-windows-x64-openj9-IBM%2F86%2FOpenJDK11U-jre_x64_windows_openj9_IBM_2021-05-29-01-00.zip+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-windows-x64-openj9-IBM%2F86%2FOpenJDK11U-jdk_x64_windows_openj9_IBM_2021-05-29-01-00.zip+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-windows-x64-openj9-IBM%2F86%2FOpenJDK11U-testimage_x64_windows_openj9_IBM_2021-05-29-01-00.zip+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-windows-x64-openj9-IBM%2F86%2FOpenJDK11U-debugimage_x64_windows_openj9_IBM_2021-05-29-01-00.zip&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;LIGHT_WEIGHT_CHECKOUT=true&amp;ARTIFACTORY_SERVER=na.artifactory.swg-devops&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=11&amp;USER_CREDENTIALS_ID=&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=&amp;JDK_REPO=git%40github.com%3Aibmruntimes%2Fopenj9-openjdk-jdk11&amp;RELEASE_TAG=&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;UPSTREAM_JOB_NAME=&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=openj9&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=openj9&amp;SSH_AGENT_CREDENTIAL=83181e25-eea4-4f55-8b3e-e79615733226&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=4e18ffe7-b1b1-4272-9979-99769b68bcc2&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=openjdk&amp;UPSTREAM_JOB_NUMBER=&amp;TIME_LIMIT=10&amp;JVM_OPTIONS=&amp;PARALLEL=)
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+[2021-05-29T13:16:13.878Z] Running test jdk_imageio_0 ...
+[2021-05-29T13:16:13.878Z] ===============================================
+[2021-05-29T13:16:13.878Z] jdk_imageio_0 Start Time: Sat May 29 09:16:12 2021 Epoch Time (ms): 1622294172805
+[2021-05-29T13:16:14.563Z] "C:/Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java" -Xshareclasses:destroyAll; "C:/Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+[2021-05-29T13:16:14.563Z] 
+[2021-05-29T13:16:14.563Z] Attempting to destroy all caches in cacheDir C:\Users\jenkins\AppData\Local\javasharedresources\
+[2021-05-29T13:16:14.563Z] 
+[2021-05-29T13:16:14.563Z] JVMSHRC241E Error: unable to delete shared class cache file
+[2021-05-29T13:16:14.563Z] JVMSHRC336E Port layer error code = -100
+[2021-05-29T13:16:14.563Z] JVMSHRC337E Platform error message: (32) The process cannot access the file because it is being used by another process.
+[2021-05-29T13:16:14.563Z] JVMSHRC430I Failed to remove current generation of shared class cache "sharedcc_jenkins"
+[2021-05-29T13:16:14.563Z] 
+[2021-05-29T13:16:14.563Z] Attempting to destroy all caches in cacheDir C:\Users\jenkins\AppData\Local\javasharedresources\
+[2021-05-29T13:16:14.563Z] 
+[2021-05-29T13:16:14.563Z] JVMSHRC241E Error: unable to delete shared class cache file
+[2021-05-29T13:16:14.563Z] JVMSHRC336E Port layer error code = -100
+[2021-05-29T13:16:14.563Z] JVMSHRC337E Platform error message: (32) The process cannot access the file because it is being used by another process.
+[2021-05-29T13:16:14.563Z] JVMSHRC430I Failed to remove current generation of shared class cache "sharedcc_jenkins"
+[2021-05-29T13:16:15.248Z] cache cleanup done
+[2021-05-29T13:16:15.248Z] variation: Mode150
+[2021-05-29T13:16:15.248Z] JVM_OPTIONS:  -XX:+UseCompressedOops 
+
+[2021-05-29T13:27:23.550Z] The test failed :-(
+[2021-05-29T13:27:23.550Z] exit status was 1
+[2021-05-29T13:27:23.550Z] STDERR:
+[2021-05-29T13:27:23.550Z] C:\Users\jenkins\workspace\Test_openjdk11_j9_extended.openjdk_x86-64_windows\openjdk-tests\openjdk\openjdk-jdk\test\jdk\javax\imageio\stream\StreamCloserLeak\run_test.sh: line 125: cd: /Temp: No such file or directory
+[2021-05-29T13:27:23.550Z] Exception in thread "main" java.lang.RuntimeException: Test FAILED: exta class loader is detected! 
+[2021-05-29T13:27:23.550Z] 	at test.Main.main(Main.java:162)
+[2021-05-29T13:27:23.550Z] Test FAILED: some classloaders weren't destroyed.
+
+[2021-05-29T13:27:23.550Z] TEST RESULT: Failed. Execution failed: exit code 1
+[2021-05-29T13:27:23.550Z] --------------------------------------------------
+[2021-05-29T13:28:55.593Z] Test results: passed: 191; failed: 1
+[2021-05-29T13:29:16.636Z] Report written to C:\Users\jenkins\workspace\Test_openjdk11_j9_extended.openjdk_x86-64_windows\jvmtest\openjdk\report\html\report.html
+[2021-05-29T13:29:16.636Z] Results written to C:\Users\jenkins\workspace\Test_openjdk11_j9_extended.openjdk_x86-64_windows\openjdk-tests\TKG\output_16222729139555\jdk_imageio_0\work
+[2021-05-29T13:29:16.636Z] Error: Some tests failed or other problems occurred.
+[2021-05-29T13:29:17.323Z] 
+[2021-05-29T13:29:17.323Z] jdk_imageio_0_FAILED
+```

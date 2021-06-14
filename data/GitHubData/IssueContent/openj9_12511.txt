@@ -1,0 +1,4 @@
+The Sampler Thread is, in some ways, a kind of clock in the compiler. It is responsible for triggering the sampling of methods [1], the changing of the jit state, and a bunch of other smaller tasks. Therefore, this thread deserves its own documentation.
+
+
+[1] https://github.com/eclipse/openj9/blob/master/doc/compiler/runtime/Recompilation.md#sampling

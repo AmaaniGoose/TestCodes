@@ -1,0 +1,62 @@
+Steps to follow:
+---------------
+git clone https://github.com/apache/kafka.git
+cd kafka/
+gradle
+./gradlew jar
+
+Now Run the unittests as 
+./gradlew unitTest
+
+There are 3 test cases that fails
+testMultipleServerMechanisms, testMechanismPluggability and testAuthenticateCallbackHandlerMechanisms
+
+```org.apache.kafka.common.security.authenticator.SaslAuthenticatorTest > testMultipleServerMechanisms FAILED
+    java.lang.AssertionError
+        at org.junit.Assert.fail(Assert.java:86)
+        at org.junit.Assert.assertTrue(Assert.java:41)
+        at org.junit.Assert.assertTrue(Assert.java:52)
+        at org.apache.kafka.common.network.NetworkTestUtils.waitForChannelReady(NetworkTestUtils.java:79)
+        at org.apache.kafka.common.network.NetworkTestUtils.checkClientConnection(NetworkTestUtils.java:52)
+        at org.apache.kafka.common.security.authenticator.SaslAuthenticatorTest.testMultipleServerMechanisms(SaslAuthenticatorTest.java:281)
+
+
+
+
+org.apache.kafka.common.security.authenticator.SaslAuthenticatorTest > testMechanismPluggability FAILED
+    java.lang.AssertionError
+        at org.junit.Assert.fail(Assert.java:86)
+        at org.junit.Assert.assertTrue(Assert.java:41)
+        at org.junit.Assert.assertTrue(Assert.java:52)
+        at org.apache.kafka.common.network.NetworkTestUtils.waitForChannelReady(NetworkTestUtils.java:79)
+        at org.apache.kafka.common.network.NetworkTestUtils.checkClientConnection(NetworkTestUtils.java:52)
+        at org.apache.kafka.common.security.authenticator.SaslAuthenticatorTest.createAndCheckClientConnection(SaslAuthenticatorTest.java:1475)
+        at org.apache.kafka.common.security.authenticator.SaslAuthenticatorTest.testMechanismPluggability(SaslAuthenticatorTest.java:257)
+
+
+
+
+org.apache.kafka.common.security.authenticator.SaslAuthenticatorTest > testAuthenticateCallbackHandlerMechanisms FAILED
+    java.lang.AssertionError
+        at org.junit.Assert.fail(Assert.java:86)
+        at org.junit.Assert.assertTrue(Assert.java:41)
+        at org.junit.Assert.assertTrue(Assert.java:52)
+        at org.apache.kafka.common.network.NetworkTestUtils.waitForChannelReady(NetworkTestUtils.java:79)
+        at org.apache.kafka.common.network.NetworkTestUtils.checkClientConnection(NetworkTestUtils.java:52)
+        at org.apache.kafka.common.security.authenticator.SaslAuthenticatorTest.createAndCheckClientConnection(SaslAuthenticatorTest.java:1475)
+        at org.apache.kafka.common.security.authenticator.SaslAuthenticatorTest.testAuthenticateCallbackHandlerMechanisms(SaslAuthenticatorTest.java:776)
+```
+
+Open J9 level used 
+openjdk version "1.8.0_162"
+OpenJDK Runtime Environment (build 1.8.0_162-b12)
+Eclipse OpenJ9 VM (build master-712c2ee2, JRE 1.8.0 Linux amd64-64 Compressed References 20180322_127 (JIT enabled, AOT enabled)
+OpenJ9   - 712c2ee2
+OMR      - b623c98f
+JCL      - 7580d499 based on jdk8u162-b12)
+
+I would need to run the same tests with open JDK and confirm the behaviour .
+There is similar issue reported in apache 
+https://lists.apache.org/thread.html/bda87d268b08eb0b37bbb7d2b45b77a25b669d8c1f43bd39816b0aff@%3Cdev.kafka.apache.org%3E
+
+

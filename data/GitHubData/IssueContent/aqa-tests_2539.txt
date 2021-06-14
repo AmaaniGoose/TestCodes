@@ -1,0 +1,7 @@
+Commit: https://github.com/AdoptOpenJDK/openjdk-tests/commit/a8e7c9bbde47b41e02142bdbc14e0f88cd372589
+introduced the usage of bash negative array index, but this only works on some bash versions >=4.2
+```
+14:22:36  ./openjdk-tests/get.sh: line 300: validate: bad array subscript
+```
+Some AdoptOpenJDK nodes don't support it, eg:
+https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/377/console

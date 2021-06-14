@@ -1,0 +1,5 @@
+`J9::IlGeneratorMethodDetails` has an assignment operator that breaks if devirtualization happens, because it transmutes the runtime type of the class. 
+
+https://github.com/eclipse/openj9/blob/6858c8b89dc152d73fd9738869f2e6e8c133cbcd/runtime/tr.source/trj9/ilgen/J9IlGeneratorMethodDetails.cpp#L53-L75
+
+It's not clear to me if this is legal C++ either. 

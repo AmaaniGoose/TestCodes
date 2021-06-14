@@ -1,0 +1,29 @@
+**Describe the bug**
+[extended.functional test suite](https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_extended.functional_ppc64_aix/71/console) (seen on JDK8/J9) appears to hang in testOpenJ9DiagnosticsMXBean_0 if port 9999 is already in use. This was also described at https://github.com/AdoptOpenJDK/openjdk-build/issues/1450#issuecomment-755142427
+```
+03:37:55  Exception in thread "main" java/lang/RuntimeException: sun.management.AgentConfigurationError: java.rmi.server.ExportException: Port already in use: 9999; nested exception is: 
+03:37:55  	java.net.BindException: The socket name is already in use. (Bind failed)
+03:37:55  	at sun/management/Agent.error (Agent.java:526)
+03:37:55  	at sun/management/Agent.startAgent (Agent.java:269)
+03:37:55  	at sun/management/Agent.startAgent (Agent.java:452)
+03:37:55  	at java/lang/System.startSNMPAgent (NativeMethod:4294967295)
+03:37:55  	at java/lang/Thread.completeInitialization (Thread.java:169)
+03:37:55  	at java/lang/J9VMInternals.completeInitialization (J9VMInternals.java:72)
+Aborted by Andrew Leonard
+07:48:31  Sending interrupt signal to process
+07:48:37  
+07:48:37  testOpenJ9DiagnosticsMXBean_0_FAILED
+```
+
+**To Reproduce**
+Steps to reproduce the behavior (or Grinder rerun link): https://ci.adoptopenjdk.net/job/Grinder/parambuild/?TARGET=extended.functional&SDK_RESOURCE=upstream&TEST_FLAG=&UPSTREAM_TEST_JOB_NAME=&DOCKER_REQUIRED=false&ACTIVE_NODE_TIMEOUT=0&EXTRA_DOCKER_ARGS=&VENDOR_TEST_DIRS=&TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&PLATFORM=ppc64_aix&KEEP_REPORTDIR=true&PERSONAL_BUILD=false&ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&LABEL=&EXTRA_OPTIONS=&CUSTOMIZED_SDK_URL=&BUILD_IDENTIFIER=&ADOPTOPENJDK_BRANCH=master&ARTIFACTORY_SERVER=&KEEP_WORKSPACE=false&JDK_VERSION=8&USER_CREDENTIALS_ID=&ITERATIONS=1&VENDOR_TEST_REPOS=&JDK_REPO=https%3A%2F%2Fgithub.com%2Fibmruntimes%2Fopenj9-openjdk-jdk8&RELEASE_TAG=&OPENJ9_BRANCH=master&OPENJ9_SHA=&JCK_GIT_REPO=&VENDOR_TEST_BRANCHES=&UPSTREAM_JOB_NAME=build-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-aix-ppc64-openj9&OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&CUSTOM_TARGET=&VENDOR_TEST_SHAS=&JDK_BRANCH=openj9&LABEL_ADDITION=&ARTIFACTORY_REPO=&ARTIFACTORY_ROOT_DIR=&UPSTREAM_TEST_JOB_NUMBER=&DOCKERIMAGE_TAG=&JDK_IMPL=openj9&SSH_AGENT_CREDENTIAL=&AUTO_DETECT=true&TKG_SHA=&CUSTOMIZED_SDK_URL_CREDENTIAL_ID=&NUM_MACHINES=&OPENJDK_SHA=&BUILD_LIST=functional&UPSTREAM_JOB_NUMBER=944&TIME_LIMIT=10&JVM_OPTIONS=&PARALLEL=None (untried to see if it's repeatable)
+
+**Expected behavior**
+A clear and concise description of what you expected to happen. Test case passes, or at least is able to fail gracefully in the situation where the port is already in use. The exception is thrown, but seeminlgy something stops it from continuing with the test suite execution. 
+
+**Screenshots**
+If applicable, add screenshots to help explain your problem. N/A - the log fragment above with the timestamps showing it got stuck for several hours cover it
+
+**Additional context** I would suggest that we try to run the test in isolation with a Grinder, and then intentionally lock out the port on the machine and retry to see if it's reproducible, then try to mitigate it
+
+FYI @andrew-m-leonard 

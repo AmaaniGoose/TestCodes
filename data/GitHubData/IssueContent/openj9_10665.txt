@@ -1,0 +1,49 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_special.system_x86-64_windows_Nightly_mauveLoadTest/134
+MauveSingleInvocationLoadTest_special_22
+Options are:  `-Xcompressedrefs -Xjit:count=0 -Xgcpolicy:gencon -Xaggressive -Xconcurrentlevel0` 
+
+```
+LT  23:12:45.733 - Completed 80.1%. Number of tests started=2256
+LT  stderr Unhandled exception
+LT  stderr Type=Segmentation error vmState=0x00000000
+LT  stderr Windows_ExceptionCode=c0000005 J9Generic_Signal=00000004 ExceptionAddress=00007FFA4ED40052 ContextFlags=0010005f
+LT  stderr Handler1=00007FFA5024FD00 Handler2=00007FFA50168C50 InaccessibleReadAddress=FFFFFFFFFFFFFFFF
+LT  stderr RDI=00007FFA3BBE85C3 RSI=00007FFA3BBE85C8 RAX=FFBC1C10FFBC1C00 RBX=0000000001DA3100
+LT  stderr RCX=00000000FFBC1900 RDX=00007FFA3BBE85C8 R8=0000000000000000 R9=0000000001DA3500
+LT  stderr R10=00000000013EFFF0 R11=00000000FFFF0000 R12=00000000FFFD13E0 R13=0000000000000010
+LT  stderr R14=0000000000000000 R15=00000000FFFD1390
+LT  stderr RIP=00007FFA4ED40052 RSP=0000000001A0C660 RBP=0000000001A05000 GS=002B
+LT  stderr FS=0053 ES=002B DS=002B
+LT  stderr XMM0 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+LT  stderr XMM1 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+LT  stderr XMM2 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+LT  stderr XMM3 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+LT  stderr XMM4 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+LT  stderr XMM5 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+LT  stderr XMM6 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+LT  stderr XMM7 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+LT  stderr XMM8 3fdfd535dd2acfe8 (f: 3710570496.000000, d: 4.973883e-001)
+LT  stderr XMM9 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+LT  stderr XMM10 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+LT  stderr XMM11 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+LT  stderr XMM12 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+LT  stderr XMM13 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+LT  stderr XMM14 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+LT  stderr XMM15 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+LT  stderr Module=C:\Users\jenkins\workspace\Test_openjdk8_j9_special.system_x86-64_windows_Nightly_mauveLoadTest\openjdkbinary\j2sdk-image\jre\bin\compressedrefs\j9jit29.dll
+LT  stderr Module_base_address=00007FFA4EBB0000 Offset_in_DLL=0000000000190052
+LT  stderr Target=2_90_20200921_521 (Windows Server 2012 R2 6.3 build 9600)
+LT  stderr CPU=amd64 (8 logical CPUs) (0x1ffb9c000 RAM)
+LT  stderr ----------- Stack Backtrace -----------
+LT  stderr Java_java_lang_invoke_MutableCallSite_invalidate+0xf6ad2 (0x00007FFA4ED40052 [j9jit29+0x190052])
+LT  stderr (0x00000000FFBC1900)
+LT  stderr (0x00000000FFBC1900)
+LT  stderr (0x00000000FFFD0040)
+LT  stderr (0x00000000FFFD0060)
+LT  stderr Java_java_lang_invoke_MutableCallSite_invalidate+0x5df750 (0x00007FFA4F228CD0 [j9jit29+0x678cd0])
+LT  stderr (0x00007FFA3BBE85C8)
+LT  stderr (0x00007FFA3BB39A14)
+LT  stderr (0x00007FFA3BB39A14)
+LT  stderr (0x00000000FFBC1798)
+LT  stderr ---------------------------------------
+```

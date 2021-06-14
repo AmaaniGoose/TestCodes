@@ -1,0 +1,1 @@
+#1925 added static Docker containers that run SSH as root (and probably other things). We should configure user namespacing (and maybe static UID/GID) so that someone who manages to escape from the container does not become root on the host.

@@ -1,0 +1,42 @@
+Failure link
+------------
+
+From an internal build:
+```
+21:25:46  Configuration summary:
+21:25:46  * Debug level:    release
+21:25:46  * HS debug level: product
+21:25:46  * JVM variants:   server
+21:25:46  * JVM features:   server: 'compiler1 compiler2 epsilongc g1gc jni-check jvmti management nmt parallelgc serialgc services vm-structs' 
+21:25:46  * OpenJDK target: OS: aix, CPU architecture: ppc, address length: 64
+21:25:46  * Version string: 14-internal+0-adhoc.jenkins.BuildJDK14ppc64aixNightly (14-internal)
+21:25:46  
+21:25:46  Tools summary:
+21:25:46  * Boot JDK:       openjdk version "13-internal" 2019-09-17 OpenJDK Runtime Environment (build 13-internal+0-adhoc.u0020236.BuildJDK13ppc64aixPersonal) Eclipse OpenJ9 VM (build aixbxlc13-6a6e85599, JRE 13 AIX ppc64-64-Bit Compressed References 20191016_31 (JIT enabled, AOT enabled) OpenJ9   - 6a6e85599 OMR      - dd23311b JCL      - 3654432014 based on jdk-13+33)  (at /usr/java13_64)
+21:25:46  * Toolchain:      xlc (IBM XL C/C++)
+21:25:46  * C Compiler:     Version 16.1.0 (at /opt/IBM/xlC/16.1.0/bin/xlclang)
+21:25:46  * C++ Compiler:   Version 16.1.0 (at /opt/IBM/xlC/16.1.0/bin/xlclang++)
+```
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+23:00:10  ERROR: Build failed for target 'all' in configuration 'aix-ppc64-server-release' (exit code 2) 
+23:00:10  
+23:00:10  === Output from failing command(s) repeated here ===
+23:00:10  * For target buildtools_create_symbols__the.COMPILE_CREATE_SYMBOLS_batch:
+23:00:10  Sjavac server failed to initialize: Deadlock condition if locked
+23:00:10  Process output:
+23:00:10  <End of process output>
+23:00:10  IOException caught during compilation: Server failed to initialize: Deadlock condition if locked
+23:00:10  
+23:00:10  * All command lines available in /home/jenkins/workspace/Build_JDK14_ppc64_aix_Nightly/build/aix-ppc64-server-release/make-support/failure-logs.
+23:00:10  === End of repeated output ===
+```
+
+@AdamBrousseau observed this kind of failure before.

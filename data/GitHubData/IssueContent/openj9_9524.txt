@@ -1,0 +1,13 @@
+While investigating a miscellaneous issue with @VermaSh we stumbled upon a block which has frequency 19994. According to the optimizer experts the frequency should not exceed 10000 which implies there is a bug in the GLU optimization following which this block first appears.
+
+I'm attaching the trace log here for investigation. @VermaSh can easily reproduce the trace with additional options if needed.
+
+```
+n8427n    BBStart <block_612> (freq 19994) (in loop 612)                                      [     0x3ff7e2839d0] bci=[30,19,752] rc=0 vc=9010 vn=- li=- udi=- nc=0
+n8428n    istore  <temp slot 13>[#848  Auto] [flags 0x20000003 0x0 ]                          [     0x3ff7e283a20] bci=[30,21,752] rc=0 vc=9015 vn=- li=102 udi=46 nc=1
+n8429n      isub                                                                              [     0x3ff7e283a70] bci=[30,21,752] rc=1 vc=9015 vn=- li=- udi=- nc=2
+n8430n        iload  <temp slot 13>[#848  Auto] [flags 0x20000003 0x0 ] (cannotOverflow )     [     0x3ff7e283ac0] bci=[30,20,752] rc=1 vc=9015 vn=- li=- udi=230 nc=0 flg=0x1000
+n8431n        iconst -1 (X!=0 X<=0 )                                                          [     0x3ff7e283b10] bci=[30,21,752] rc=1 vc=9015 vn=- li=- udi=- nc=0 flg=0x204
+```
+
+[n8427n-freq-19994.zip](https://github.com/eclipse/openj9/files/4611957/n8427n-freq-19994.zip)

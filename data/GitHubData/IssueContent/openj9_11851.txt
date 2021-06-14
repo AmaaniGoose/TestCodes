@@ -1,0 +1,94 @@
+Failure link
+------------
+
+https://ci.adoptopenjdk.net/view/Test_functional/job/Test_openjdk11_j9_extended.functional_aarch64_linux/107/tapResults/
+
+You can find the same failure from 103 (on January 26) to 107 (on February 1), while 102 on January 20 was OK.  Results before 102 is unavailable.
+
+Optional info
+-------------
+
+- intermittent failure: no
+- regression or new test: regression
+- if regression, what are first failing public SHAs (OpenJ9, OMR, JCL) :
+openjdk version "11.0.10" 2021-01-19
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.10+9-202101261820)
+Eclipse OpenJ9 VM AdoptOpenJDK (build master-adde9ef08, JRE 11 Linux aarch64-64-Bit Compressed References 20210126_651 (JIT enabled, AOT enabled)
+OpenJ9   - adde9ef08
+OMR      - 5ad82738f
+JCL      - f7475ea97e based on jdk-11.0.10+9)
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+===============================================
+Running test jit_hw_2 ...
+===============================================
+jit_hw_2 Start Time: Mon Feb  1 17:24:32 2021 Epoch Time (ms): 1612200272899
+variation: -Xdump:java -Xjit:enableHCR,enableOSR,count=0
+JVM_OPTIONS:  -Xdump:java -Xjit:enableHCR,enableOSR,count=0 
+Unhandled exception
+Type=Illegal instruction vmState=0x00000000
+J9Generic_Signal_Number=00000048 Signal_Number=00000004 Error_Value=00000000 Signal_Code=00000001
+Handler1=0000FFFFA5AE3308 Handler2=0000FFFFA5A5C3E8
+R0=00000007FFF299C8 R1=0000FFFF80535050 R2=000000000000000E R3=0000FFFFA00233B0
+R4=00000000000A2A70 R5=000000000000A00F R6=0000000000000000 R7=0000000000000001
+R8=0000FFFF80535050 R9=0000FFFFA001D6A8 R10=FFFFFFFFFFFFFFFF R11=0000000000000001
+R12=0000000000000000 R13=0000FFFFA001D680 R14=0000FFFFA001D688 R15=0000000000000000
+R16=0000FFFFA5A320D8 R17=0000FFFFA68DFED0 R18=00000007FFF0E3D0 R19=0000000000010200
+R20=00000000000A2690 R21=0000000000000000 R22=0000000000032200 R23=00000007FFF299C8
+R24=0000000000032200 R25=00000000D00008A0 R26=000000000002C73A R27=00000007FFF04BA0
+R28=00000007FFF04EF8 R29=0000003B0000003E R30=0000FFFF803F0688 R31=0000FFFFA67119D0
+PC=0000FFFF80468538 SP=0000FFFFA67119D0 PSTATE=0000000000000000
+V0 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+V1 a5f101ba173ab6ac (f: 389723808.000000, d: -6.280917e-126)
+V2 0000ffffa5f101ba (f: 2784035328.000000, d: 1.390664e-309)
+V3 bfe026338f44c390 (f: 2403648512.000000, d: -5.046633e-01)
+V4 bfd00ea348b88334 (f: 1220051712.000000, d: -2.508934e-01)
+V5 3fd5575b0be00b6a (f: 199232368.000000, d: 3.334568e-01)
+V6 bfdffffef20a4123 (f: 4060758272.000000, d: -4.999997e-01)
+V7 3fe62e42fefa39ef (f: 4277811712.000000, d: 6.931472e-01)
+V8 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+V9 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+V10 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+V11 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+V12 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+V13 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+V14 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+V15 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+V16 bff0000000000000 (f: 0.000000, d: -1.000000e+00)
+V17 00000a0028900000 (f: 680525824.000000, d: 5.432645e-311)
+V18 0000080200000000 (f: 0.000000, d: 4.350091e-311)
+V19 0000ffffa510bb88 (f: 2769337344.000000, d: 1.390664e-309)
+V20 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+V21 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+V22 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+V23 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+V24 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+V25 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+V26 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+V27 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+V28 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+V29 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+V30 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+V31 0000000041040000 (f: 1090781184.000000, d: 5.389175e-315)
+
+Compiled_method=unknown (In JIT code segment 0000FFFFA00DC038 but no method found)
+Target=2_90_20210201_656 (Linux 4.15.0-34-generic)
+CPU=aarch64 (64 logical CPUs) (0x1f699a1000 RAM)
+----------- Stack Backtrace -----------
+(0x0000FFFFA5A59040 [libj9prt29.so+0x26040])
+---------------------------------------
+JVMDUMP039I Processing dump event "gpf", detail "" at 2021/02/01 17:24:37 - please wait.
+JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/output_16121974198650/jit_hw_2/core.20210201.172437.35612.0001.dmp' in response to an event
+JVMDUMP010I System dump written to /home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/output_16121974198650/jit_hw_2/core.20210201.172437.35612.0001.dmp
+JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/output_16121974198650/jit_hw_2/javacore.20210201.172437.35612.0002.txt' in response to an event
+JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/output_16121974198650/jit_hw_2/javacore.20210201.172437.35612.0002.txt
+JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/output_16121974198650/jit_hw_2/Snap.20210201.172437.35612.0003.trc' in response to an event
+JVMDUMP010I Snap dump written to /home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/output_16121974198650/jit_hw_2/Snap.20210201.172437.35612.0003.trc
+JVMDUMP032I JVM requested JIT dump using '/home/jenkins/workspace/Test_openjdk11_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/output_16121974198650/jit_hw_2/jitdump.20210201.172437.35612.0004.dmp' in response to an event
+JVMDUMP013I Processed dump event "gpf", detail "".
+
+jit_hw_2_FAILED
+```

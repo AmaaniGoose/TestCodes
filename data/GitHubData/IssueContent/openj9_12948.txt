@@ -1,0 +1,70 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk11_j9_extended.openjdk_x86-64_windows/16/` (`win16x64cudart1`):
+```
+openjdk version "11.0.12" 2021-07-20
+OpenJDK Runtime Environment Semeru-11.0.12.0-m1 (build 11.0.12+5)
+Eclipse OpenJ9 VM Semeru-11.0.12.0-m1 (build v0.27.0-release-3309d95fa, JRE 11 Windows Server 2016 amd64-64-Bit Compressed References 20210613_132 (JIT enabled, AOT enabled)
+OpenJ9   - 3309d95fa
+OMR      - 4ed9b9de5
+JCL      - a4db72eb0f based on jdk-11.0.12+5)
+```
+[Rerun in Grinder](https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?SDK_RESOURCE=upstream&amp;TARGET=jdk_rmi_1&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;VENDOR_TEST_DIRS=&amp;EXTRA_DOCKER_ARGS=&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;TEST_PARALLELIZATION_PARAMS=&amp;OPENJ9_SYSTEMTEST_OWNER_BRANCH=eclipse%3Amaster&amp;PLATFORM=x86-64_windows&amp;GENERATE_JOBS=true&amp;KEEP_REPORTDIR=true&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2Fadoptium%2Faqa-tests.git&amp;LABEL=&amp;TEST_OPTIONS_PARAMS=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-windows-x64-openj9%2F132%2FSemeru-jre_x64_windows_11.0.12_5_openj9-0.27.0-m1a.zip+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-windows-x64-openj9%2F132%2FSemeru-debugimage_x64_windows_11.0.12_5_openj9-0.27.0-m1a.zip+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-windows-x64-openj9%2F132%2FSemeru-jdk_x64_windows_11.0.12_5_openj9-0.27.0-m1a.zip+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-windows-x64-openj9%2F132%2FSemeru-testimage_x64_windows_11.0.12_5_openj9-0.27.0-m1a.zip&amp;BUILD_IDENTIFIER=&amp;NON_AQA_TEST_REPOS_HELP_TEXT=&amp;ADOPTOPENJDK_BRANCH=master&amp;LIGHT_WEIGHT_CHECKOUT=true&amp;NON_AQA_TEST_REPOS=&amp;ARTIFACTORY_SERVER=na.artifactory.swg-devops&amp;TEST_REPO_PARAMS=&amp;TEST_SELECTION_PARAMS=&amp;TEST_PARALLELIZATION_PARAMS_HELP_TEXT=&amp;JDK_SELECTION_PARAMS=&amp;KEEP_WORKSPACE=false&amp;USER_CREDENTIALS_ID=&amp;JDK_VERSION=11&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=&amp;JDK_REPO=https%3A%2F%2Fgithub.com%2Fibmruntimes%2Fopenj9-openjdk-jdk11&amp;PLATFORM_AND_MACHINE_HELP_TEXT=&amp;RELEASE_TAG=v0.27.0-release&amp;OPENJ9_BRANCH=v0.27.0-release&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse-openj9%2Fopenj9.git&amp;UPSTREAM_JOB_NAME=&amp;CLOUD_PROVIDER=&amp;PLATFORM_AND_MACHINE=&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=v0.27.0-release&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;POST_RUN_PARAMS_HELP_TEXT=&amp;UPSTREAM_TEST_JOB_NUMBER=&amp;DOCKERIMAGE_TAG=&amp;JDK_SELECTION_PARAMS_HELP_TEXT=&amp;JDK_IMPL=openj9&amp;TEST_TIME=&amp;SSH_AGENT_CREDENTIAL=83181e25-eea4-4f55-8b3e-e79615733226&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;TEST_SELECTION_PARAMS_HELP_TEXT=&amp;ADOPTOPENJDK_SYSTEMTEST_OWNER_BRANCH=adoptium%3Amaster&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=4e18ffe7-b1b1-4272-9979-99769b68bcc2&amp;OPENJDK_SHA=&amp;NUM_MACHINES=&amp;TRSS_URL=http%3A%2F%2Ftrss1.fyre.ibm.com&amp;BUILD_LIST=openjdk&amp;UPSTREAM_JOB_NUMBER=&amp;STF_OWNER_BRANCH=adoptium%3Amaster&amp;TEST_REPO_PARAMS_HELP_TEXT=&amp;POST_RUN_PARAMS=&amp;TIME_LIMIT=20&amp;TEST_OPTIONS_PARAMS_HELP_TEXT=&amp;JVM_OPTIONS=&amp;PARALLEL=)
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+[2021-06-13T10:16:03.226Z] Running test jdk_rmi_0 ...
+[2021-06-13T10:16:03.226Z] ===============================================
+[2021-06-13T10:16:03.226Z] jdk_rmi_0 Start Time: Sun Jun 13 06:15:45 2021 Epoch Time (ms): 1623579345530
+[2021-06-13T10:16:03.226Z] "C:/Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java" -Xshareclasses:destroyAll; "C:/Users/jenkins/workspace/Test_openjdk11_j9_extended.openjdk_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+[2021-06-13T10:16:04.026Z] 
+[2021-06-13T10:16:04.026Z] Attempting to destroy all caches in cacheDir C:\Users\jenkins\AppData\Local\javasharedresources\
+[2021-06-13T10:16:04.026Z] 
+[2021-06-13T10:16:04.026Z] JVMSHRC241E Error: unable to delete shared class cache file
+[2021-06-13T10:16:04.026Z] JVMSHRC336E Port layer error code = -100
+[2021-06-13T10:16:04.026Z] JVMSHRC337E Platform error message: (32) The process cannot access the file because it is being used by another process.
+[2021-06-13T10:16:04.026Z] JVMSHRC430I Failed to remove current generation of shared class cache "sharedcc_jenkins"
+[2021-06-13T10:16:04.026Z] JVMSHRC241E Error: unable to delete shared class cache file
+[2021-06-13T10:16:04.026Z] JVMSHRC336E Port layer error code = -100
+[2021-06-13T10:16:04.026Z] JVMSHRC337E Platform error message: (32) The process cannot access the file because it is being used by another process.
+[2021-06-13T10:16:04.026Z] JVMSHRC430I Failed to remove current generation of shared class cache "sharedcc_jenkins"
+[2021-06-13T10:16:04.026Z] 
+[2021-06-13T10:16:04.026Z] Attempting to destroy all caches in cacheDir C:\Users\jenkins\AppData\Local\javasharedresources\
+[2021-06-13T10:16:04.026Z] 
+[2021-06-13T10:16:04.026Z] JVMSHRC241E Error: unable to delete shared class cache file
+[2021-06-13T10:16:04.026Z] JVMSHRC336E Port layer error code = -100
+[2021-06-13T10:16:04.026Z] JVMSHRC337E Platform error message: (32) The process cannot access the file because it is being used by another process.
+[2021-06-13T10:16:04.026Z] JVMSHRC430I Failed to remove current generation of shared class cache "sharedcc_jenkins"
+[2021-06-13T10:16:04.026Z] JVMSHRC241E Error: unable to delete shared class cache file
+[2021-06-13T10:16:04.026Z] JVMSHRC336E Port layer error code = -100
+[2021-06-13T10:16:04.026Z] JVMSHRC337E Platform error message: (32) The process cannot access the file because it is being used by another process.
+[2021-06-13T10:16:04.027Z] JVMSHRC430I Failed to remove current generation of shared class cache "sharedcc_jenkins"
+[2021-06-13T10:16:04.027Z] cache cleanup done
+[2021-06-13T10:16:04.027Z] variation: Mode150
+[2021-06-13T10:16:04.027Z] JVM_OPTIONS:  -XX:+UseCompressedOops 
+
+[2021-06-13T10:37:52.205Z] JAVAVM: command = [C:\Users\jenkins\workspace\Test_openjdk11_j9_extended.openjdk_x86-64_windows\openjdkbinary\j2sdk-image\bin\java, -ea, -esa, -Xmx512m, -XX:+UseCompressedOops, -Drmi.registry.port=64389, SelfTerminator]
+[2021-06-13T10:37:52.205Z] waiting for unreferenced() callback...
+[2021-06-13T10:37:52.205Z] java.lang.RuntimeException: TEST FAILED: unreferenced() not invoked after 20.0 seconds
+[2021-06-13T10:37:52.205Z] 	at LeaseCheckInterval.main(LeaseCheckInterval.java:111)
+[2021-06-13T10:37:52.205Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-06-13T10:37:52.205Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2021-06-13T10:37:52.205Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-06-13T10:37:52.205Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+[2021-06-13T10:37:52.205Z] 	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+[2021-06-13T10:37:52.205Z] 	at java.base/java.lang.Thread.run(Thread.java:866)
+[2021-06-13T10:37:52.205Z] 
+[2021-06-13T10:37:52.205Z] JavaTest Message: Test threw exception: java.lang.RuntimeException: TEST FAILED: unreferenced() not invoked after 20.0 seconds
+[2021-06-13T10:37:52.205Z] JavaTest Message: shutting down test
+[2021-06-13T10:37:52.205Z] 
+[2021-06-13T10:37:52.205Z] STATUS:Failed.`main' threw exception: java.lang.RuntimeException: TEST FAILED: unreferenced() not invoked after 20.0 seconds
+
+[2021-06-13T10:41:23.156Z] jdk_rmi_0_FAILED
+```
+This might be network related though there was an error `Port layer error code = -100` at setup stage.

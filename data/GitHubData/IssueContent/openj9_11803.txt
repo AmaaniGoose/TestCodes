@@ -1,0 +1,1 @@
+The current code for handling `aloadi` nodes in `insertPrefetchIfNecessary` doesn't work correctly on 64-bit machines and so is disabled there. Since there's nothing theoretically preventing prefetching from being generated on `aloadi` nodes on 64-bit, this should be fixed.

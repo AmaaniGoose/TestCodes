@@ -1,0 +1,77 @@
+### Error
+
+Seg fault noticed while running `jsr292_MethodHandleAPI_Test_0` and `jsr292_MethodHandleAPI_Test_JitCount1_0` with OJDK MHs enabled in OpenJ9.
+
+```
+===============================================
+Running test jsr292_MethodHandleAPI_Test_0 ...
+===============================================
+jsr292_MethodHandleAPI_Test_0 Start Time: Mon Feb  8 09:53:57 2021 Epoch Time (ms): 1612806837806
+variation: NoOptions
+JVM_OPTIONS:  
+[IncludeExcludeTestAnnotationTransformer] [INFO] exclude file is /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux_ojdk292_Personal_testList_1/openjdk-tests/TKG/../TestConfig/resources/excludes/latest_exclude_16.txt
+...
+... TestNG 6.14.2 by Cédric Beust (cedric@beust.com)
+...
+
+Unhandled exception
+Type=Segmentation error vmState=0x00000000
+J9Generic_Signal_Number=00000018 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000001
+Handler1=00007F5A07C97550 Handler2=00007F5A0C0D0AC0 InaccessibleAddress=0000000000000000
+RDI=00007F59B18DAC9A RSI=0000000000490758 RAX=0000000000000000 RBX=00007F5A0D8806A0
+RCX=00000000000000B1 RDX=000000000010BE08 R8=000000000044E628 R9=0000000000000000
+R10=000000000000000C R11=00000000FFDE1908 R12=000000000010BE10 R13=0000000000000000
+R14=00000000C27FB340 R15=000000000047660B
+RIP=00007F5A07CE2BB7 GS=0000 FS=0000 RSP=00007F5A0D880330
+EFlags=0000000000010246 CS=0033 RBP=0000000000016700 ERR=0000000000000004
+TRAPNO=000000000000000E OLDMASK=0000000000000000 CR2=0000000000000000
+xmm0 0000000000000005 (f: 5.000000, d: 2.470328e-323)
+xmm1 6e616c2f6176616a (f: 1635148160.000000, d: 5.038250e+223)
+xmm2 00007f5a0d8806d0 (f: 227018448.000000, d: 6.918142e-310)
+xmm3 000000000003cc68 (f: 248936.000000, d: 1.229907e-318)
+xmm4 0000000000000005 (f: 5.000000, d: 2.470328e-323)
+xmm5 00007f5a07ff8f40 (f: 134188864.000000, d: 6.918137e-310)
+xmm6 000000000000002c (f: 44.000000, d: 2.173889e-322)
+xmm7 0000000000000014 (f: 20.000000, d: 9.881313e-323)
+xmm8 0815320332050719 (f: 839190272.000000, d: 1.003009e-269)
+xmm9 0815320332060719 (f: 839255808.000000, d: 1.003009e-269)
+xmm10 0815320432040719 (f: 839124736.000000, d: 1.003009e-269)
+xmm11 b609150815320432 (f: 355599424.000000, d: -2.145238e-48)
+xmm12 b609150815320432 (f: 355599424.000000, d: -2.145238e-48)
+xmm13 b609150815320532 (f: 355599680.000000, d: -2.145238e-48)
+xmm14 10b6091508153205 (f: 135606784.000000, d: 3.633505e-228)
+xmm15 11b6091508153205 (f: 135606784.000000, d: 2.381254e-223)
+Module=/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux_ojdk292_Personal_testList_1/openjdkbinary/j2sdk-image/lib/compressedrefs/libj9vm29.so
+Module_base_address=00007F5A07C5F000
+Target=2_90_20210208_5 (Linux 4.4.0-201-generic)
+CPU=amd64 (4 logical CPUs) (0xf6f13000 RAM)
+----------- Stack Backtrace -----------
+(0x00007F5A07CE2BB7 [libj9vm29.so+0x83bb7])
+(0x00007F5A07CDF340 [libj9vm29.so+0x80340])
+(0x00007F5A07D39462 [libj9vm29.so+0xda462])
+---------------------------------------
+JVMDUMP039I Processing dump event "gpf", detail "" at 2021/02/08 09:54:01 - please wait.
+JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux_ojdk292_Personal_testList_1/openjdk-tests/TKG/output_1612801612461/jsr292_MethodHandleAPI_Test_0/core.20210208.095401.15708.0001.dmp' in response to an event
+JVMPORT030W /proc/sys/kernel/core_pattern setting "|/usr/share/apport/apport %p %s %c %d %P %E" specifies that the core dump is to be piped to an external program.  Attempting to rename either core or core.15732.
+
+JVMDUMP010I System dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux_ojdk292_Personal_testList_1/openjdk-tests/TKG/output_1612801612461/jsr292_MethodHandleAPI_Test_0/core.20210208.095401.15708.0001.dmp
+JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux_ojdk292_Personal_testList_1/openjdk-tests/TKG/output_1612801612461/jsr292_MethodHandleAPI_Test_0/javacore.20210208.095401.15708.0002.txt' in response to an event
+JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux_ojdk292_Personal_testList_1/openjdk-tests/TKG/output_1612801612461/jsr292_MethodHandleAPI_Test_0/javacore.20210208.095401.15708.0002.txt
+JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux_ojdk292_Personal_testList_1/openjdk-tests/TKG/output_1612801612461/jsr292_MethodHandleAPI_Test_0/Snap.20210208.095401.15708.0003.trc' in response to an event
+JVMDUMP010I Snap dump written to /home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux_ojdk292_Personal_testList_1/openjdk-tests/TKG/output_1612801612461/jsr292_MethodHandleAPI_Test_0/Snap.20210208.095401.15708.0003.trc
+JVMDUMP032I JVM requested JIT dump using '/home/jenkins/workspace/Test_openjdk16_j9_extended.functional_x86-64_linux_ojdk292_Personal_testList_1/openjdk-tests/TKG/output_1612801612461/jsr292_MethodHandleAPI_Test_0/jitdump.20210208.095401.15708.0004.dmp' in response to an event
+JVMDUMP013I Processed dump event "gpf", detail "".
+```
+
+### Failing Test Targets
+
+1. `jsr292_MethodHandleAPI_Test_0` [extended.functional]
+2. `jsr292_MethodHandleAPI_Test_JitCount1_0` [extended.functional]
+
+### How-to Run Tests?
+
+https://github.com/eclipse/openj9/blob/master/test/docs/OpenJ9TestUserGuide.md
+
+### Steps to build an OpenJ9 JDK with OJDK MHs enabled
+
+Refer to #11458.

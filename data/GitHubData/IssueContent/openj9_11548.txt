@@ -1,0 +1,26 @@
+Java -version output
+--------------------
+
+```
+openjdk version "1.8.0_272"
+OpenJDK Runtime Environment (build 1.8.0_272-b10)
+Eclipse OpenJ9 VM (build openj9-0.23.0, JRE 1.8.0 Windows 7 amd64-64-Bit Compres
+sed References 20201022_871 (JIT enabled, AOT enabled)
+OpenJ9   - 0394ef754
+OMR      - 582366ae5
+JCL      - 41f03341d5 based on jdk8u272-b10)
+```
+
+
+Summary of problem
+------------------
+Set " javaw -Xmx1G -Xgcpolicy:balanced -Xverbosegclog -verbose:gc -jar HMCL-3.3.170.jar" ,This [Launcher](https://github.com/huanghongxun/HMCL) can not show background picture.  When I set -Xmx2G or -Xgc:regionSize=2M, The Launcher can show background picture.
+When user set -Xmx1G (no -Xms1G),maybe The GC do not try expansion region size. 
+Set -Xgc:regionSize=8M can improve gc pause time When lancher minecraft and set balanced gc.
+
+Diagnostic files
+----------------
+GClog:
+[(-Xmx2g)verbosegc.20201229.113619.8276.zip](https://github.com/eclipse/openj9/files/5749525/-Xmx2g.verbosegc.20201229.113619.8276.zip)
+[[set regionSize and 1G Xmx] verbosegc.zip](https://github.com/eclipse/openj9/files/5749526/set.regionSize.and.1G.Xmx.verbosegc.zip)
+[[-Xmx1g]verbosegc.20201229.113726.10348.zip](https://github.com/eclipse/openj9/files/5749527/-Xmx1g.verbosegc.20201229.113726.10348.zip)

@@ -1,0 +1,2 @@
+buildenv/jenkins/common/build:get_sources() times out after 30mins:
+https://hyc-runtimes-jenkins.swg-devops.com/view/OpenJ9%20-%20Build/job/Build-JDK11-win_x86-64_cmprssptrs/76/

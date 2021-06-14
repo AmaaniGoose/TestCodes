@@ -1,0 +1,3 @@
+Our JDK 15 builds for Windows/x64 "lost" some modules along the way that were present in 14 and were supposed to be in 15. We didn't notice that until very late in the release cycle ([bug report](https://github.com/AdoptOpenJDK/openjdk-build/issues/2047)). We need test coverage that helps us detect such changes, especially if we introduce the JRE replacement that relies on curated module lists.
+
+One possible way to achieve this: Store module lists per version, operating system and architecture and compare those lists with the output of `java --list-modules`. If there are differences, fail the test.

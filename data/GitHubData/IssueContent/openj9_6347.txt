@@ -1,0 +1,19 @@
+Many (many, many) years ago, the IA32 JIT fixed a problem where a `TR::ResolveAndNULLCHK` of a call/load/store implemented with an **explicit NULLCHK** was not operating correctly because the resolution and NPE exceptions would be generated in the wrong order.  This was because the explicit NULLness checks would wrap the call/load/store and any NPE would occur before any resolution exception which violates the VM spec.  I don't recall what the test case was, but I believe it was a JCK test.
+
+If the NULLness check is done implicitly this won't be a problem--I think--because the resolution will happen first before the indirect address child is dereferenced (i.e., the implicit NULLCHK).
+
+The original author of the NULLCHK evaluator code knew of this problem which is why he left comments like this in the code, which still exist in Power and ARM:
+```
+   // TODO - If a resolve check is needed as well, the resolve must be done
+   // before the null check, so that exceptions are handled in the correct
+   // order.
+   //
+   ///// if (needsResolve)
+   /////    {
+   /////    ...
+   /////    }
+```
+As far as I can tell, this problem was not solved on Power, Z, ARM, or AMD64 (IA32 is OK).  Can @fjeremic @gita-omr please confirm that this is still a problem, or describe why it is not for the respective platform?  Thanks.
+
+FYI:  @knn-k @aarongraham9 @andrewcraik 
+

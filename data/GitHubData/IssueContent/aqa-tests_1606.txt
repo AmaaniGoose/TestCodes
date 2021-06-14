@@ -1,0 +1,21 @@
+**Describe the bug**
+When jck material is already staged on disk, we run a git clean and a git pull to ensure it's up to date. We have some builds failing at this point because there are changes on disk that are blocking these operations. Not sure how we've got to this point.
+https://github.com/AdoptOpenJDK/openjdk-tests/blob/278401c2e312e52bff8b6c3be7afd2bf7c041881/jck/build.xml#L71
+```
+23:02:37  stage_jck_material:
+23:02:37       [echo] Running git clean at C:\Users\jenkins\workspace\Test_openjdk11_j9_sanity.jck_x86-64_windows_Nightly\openjdk-tests\jck/../../../../jck_root/JCK11-unzipped...
+23:02:37       [echo] Updating C:\Users\jenkins\workspace\Test_openjdk11_j9_sanity.jck_x86-64_windows_Nightly\openjdk-tests\jck/../../../../jck_root/JCK11-unzipped with latest...
+23:02:47       [exec] From github.ibm.com:runtimes/JCK11-unzipped
+23:02:47       [exec]    caaefa62629..19e8da15434  master     -> origin/master
+23:02:51       [exec] Updating 67028e821ba..19e8da15434
+23:02:51       [exec] error: Your local changes to the following files would be overwritten by merge:
+23:02:51       [exec] 	config/default/jcktest.properties
+23:02:51       [exec] 	excludes/jck11.jtx
+23:02:51       [exec] Please commit your changes or stash them before you merge.
+23:02:51       [exec] Aborting
+```
+Only have seen this error on Winx64 JDK11 so far. Not sure why.
+cc @Mesbah-Alam 
+
+**Expected behavior**
+The clean and pull should be robust enough to handle the repo contents on disk being in any state.

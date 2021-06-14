@@ -1,0 +1,11 @@
+In order to retain optimal performance in the interpreter in runtime compressed refs mode, we'll need to multiply-compile it (we already do this for debug mode).
+
+The idea is to defined something like `J9_COMPRESSED_REFS_OVERRIDE` to either `TRUE` or `FALSE`, and use the override value if present in the `J9VMTHREAD_COMPRESS_OBJECT_REFERENCES` and `J9JAVAVM_COMPRESS_OBJECT_REFERENCES` macros.
+
+In keeping with the current naming conventions, I'd suggest replacing `BytecodeInterprer.cpp` with `BytecodeInterpreterCompressed.cpp` and `BytecodeInterpreterFull.cpp`, and rename the C entry points appropriately. (Almost) the entirety of these files should be ifdeffed on `OMR_GC_COMPRESSED_POINTERS` or `OMR_GC_FULL_POINTERS` (you'll need to include `j9cfg.h` to get those ifdefs).
+
+The new entry points will need to be used in:
+
+https://github.com/eclipse/openj9/blob/b542db86f655d22d1697c64d071bd483c3da3695/runtime/vm/jvminit.c#L2455
+
+For now, let's not bother splitting the debug interpreter or MH interpreter.

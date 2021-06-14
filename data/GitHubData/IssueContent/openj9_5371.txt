@@ -1,0 +1,91 @@
+Hello,
+
+We have large server stack exposing its API through Javascript for applications running on top of it.
+
+We get significantly less performances using AdoptOpenJDK11 with OpenJ9 vs. AdoptOpenJDK11 with HotSpot to run this stack. The order of magnitude of performance degradation over HotSpot flavor is around 20%.
+
+We had hard time spotting what could be the main factor explaining this slowness because of the broad scope of the APIs used by the Javascript-writen applications. 
+
+We finally built a sample to measure performance of key features used by applications relying on our stack, and the results shows up to 29x slower performances of OpenJ9 vs. HotSpout on our "MyBenchmark.mathTest" (with latest nightly build 20190402 this is x24 slower - better but still huge gap). 
+
+Here's our results by running the sample on Windows with AdoptOpenJDK11.02 with HotSpot versus AdopOpenJDK11.0.2 with OpenJ9:
+
+
+Benchmark | hotspot_11.0.2_9 Score | Units |   | openj9-0.12.1 Score | Units | times slower for OpenJ9 0.12.0 vs. HotSpot
+-- | -- | -- | -- | -- | -- | --
+MyBenchmark.closureTest | 32043.786 | ns/op |   | 572955.419 | ns/op | 17.88
+MyBenchmark.javaTest | 235351.866 | ns/op |   | 506706.529 | ns/op | 2.15
+MyBenchmark.loadJS | 448370605.6 | ns/op |   | 1911184748 | ns/op | 4.26
+MyBenchmark.mathTest | 12936471.58 | ns/op |   | 384410084.9 | ns/op | 29.72
+MyBenchmark.objectTest | 95285.829 | ns/op |   | 551754.491 | ns/op | 5.79
+MyBenchmark.regexTest | 21032330.29 | ns/op |   | 22140437.38 | ns/op | 1.05
+
+And see the same tests comparing AdoptOpenJDK11.0.2 with HotSpot with AdoptOpenJDK11 with OpenJ9 from nightly build 20190402:
+
+
+Benchmark | hotspot_11.0.2_9 Score | Units |   | OpenJ9 0.14.0 20190402 Score | Units | times slower for OpenJ9 0.14.0 20190402 vs.   HotSpot
+-- | -- | -- | -- | -- | -- | --
+MyBenchmark.closureTest | 32043.786 | ns/op |   | 508100.069 | ns/op | 15.86
+MyBenchmark.javaTest | 235351.866 | ns/op |   | 496498.31 | ns/op | 2.11
+MyBenchmark.loadJS | 448370605.6 | ns/op |   | 1832595648 | ns/op | 4.09
+MyBenchmark.mathTest | 12936471.58 | ns/op |   | 314401645.2 | ns/op | 24.30
+MyBenchmark.objectTest | 95285.829 | ns/op |   | 531180.643 | ns/op | 5.57
+MyBenchmark.regexTest | 21032330.29 | ns/op |   | 21353274.23 | ns/op | 1.02
+
+The nighly build based test is slightly better, but I haven't checked with HotSpot nightly, so maybe this is an improvement on JCL side rather than on the VM side.
+
+I have ran the same tests on Linux RH 7 with very similar results in term of slowness factor of OpenJ9 vs. HotSpot, so it seems to be OS-independent.
+
+The main performance gap lies on the mathTest and on the closureTest. regexTest show both OpenJ9 & HotSpot at same performance, and the other tests show OpenJ9 x5 slower than HotSpot so there's probably room for improvements there.
+
+To reproduce, please find attached the NashornBenchmark1.zip file.
+[NashornBenchmark1.zip](https://github.com/eclipse/openj9/files/3045636/NashornBenchmark1.zip)
+
+To use it, just extract it some where, and run it:
+
+`java  -jar target/benchmarks.jar`
+
+For example to run it on a Windows Server 2012 R2 bare metal machine, I used:
+
+`"E:\nosave\NashornPerf\hotspot_11.0.2_9\jdk-11.0.2+9\bin\java.exe" -jar target/benchmarks.jar`
+
+With "E:\nosave\NashornPerf\hotspot_11.0.2_9\jdk-11.0.2+9\bin\java.exe" being the absolute path to java.exe command from AdoptOpenJDK11.0.2 with HotSpot on this machine.
+
+Summary results are displayed at the end the benchmark, for example:
+
+```
+# Run complete. Total time: 00:52:48
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+Benchmark                Mode  Cnt           Score           Error  Units
+MyBenchmark.closureTest  avgt   25      508100.069 ▒     93004.516  ns/op
+MyBenchmark.javaTest     avgt   25      496498.310 ▒     13188.529  ns/op
+MyBenchmark.loadJS       avgt   25  1832595648.258 ▒ 177371643.333  ns/op
+MyBenchmark.mathTest     avgt   25   314401645.237 ▒  39846918.872  ns/op
+MyBenchmark.objectTest   avgt   25      531180.643 ▒     30670.155  ns/op
+MyBenchmark.regexTest    avgt   25    21353274.233 ▒    900657.097  ns/op
+```
+
+The source code of the sample is included with POM file and Eclipse project.
+
+With such performance gaps, the use of OpenJ9 vs. HotSpot for this software stack is currently a NoGO.
+
+Are there any OpenJ9 specific options which could help make it at least run the tested functions with a performance equivalent of better than HotSpot's ?
+
+Otherwise, is there any hope that this sample could help improving OpenJ9 to make it even or better than HotSpot on this type of usage?
+
+Kind regards,
+Alexandre Vermeerbergen
+
+
+
+
+
+
+
+

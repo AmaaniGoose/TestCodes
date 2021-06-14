@@ -1,0 +1,13 @@
+Test 45: LIR 1445.1 : Debug Area PrintStats Test : Ensure debug area sizes are correct in generated javacore
+
+This test essentially greps a javacore for some success and fail conditions.  One of the fail conditions is:
+
+```>> Failure condition was found: [Output match: corrupt]```
+
+The javacore contains the contents of all environment variables, one of which is the PR comment:
+
+```[OUT] 2CIENVVAR      ghprbPullLongDescription=J9VMThreadPointerUtil.getJ9State() was copied from thrinfo.c but is\r\nmissing some checks.  This can lead to a NULL pointer dereference,\r\ncausing a CorruptDataException to be thrown.\r\n\r\nSigned-off-by: Graham Chapman <graham_chapman@ca.ibm.com>```
+
+So any PR which contains the word "corrupt" will fail this test.
+
+Example: https://ci.eclipse.org/openj9/job/PullRequest-Sanity-JDK8-linux_ppc-64_cmprssptrs_le-OpenJ9/257/tapResults/

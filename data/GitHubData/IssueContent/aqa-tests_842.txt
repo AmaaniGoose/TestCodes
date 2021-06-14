@@ -1,0 +1,70 @@
+I'm running `_extended.openjdk` tests on an upstream JDK 8u build like this:
+
+    $ cat run_adopt_openjdk_jtreg_tests.sh
+    #!/bin/bash
+    OPENJDK_SOURCES=$1
+    OPENJDK_BUILD=$2
+    TEST_TARGET=$3
+    if [ -z $TEST_TARGET ]; then
+      TEST_TARGET="_sanity.openjdk"
+    fi
+    git clone https://github.com/AdoptOpenJDK/openjdk-tests
+    cd openjdk-tests
+    TOP_DIR=$(pwd)
+    TEST_DIR="$TOP_DIR"
+    pushd openjdk_regression
+    ln -s $OPENJDK_SOURCES openjdk-jdk
+    popd
+    export JAVA_BIN=$OPENJDK_BUILD/jre/bin
+    export SPEC=linux_x86-64
+    export JDK_IMPL=hotspot
+    export BUILD_LIST=openjdk_regression 
+    export BUILD_ROOT=$TOP_DIR/test-results
+    export JRE_IMAGE=$OPENJDK_BUILD/../j2re-image
+    ./get.sh -t $TEST_DIR
+    ./maketest.sh $TEST_DIR
+    OPENJDK_DIR=$OPENJDK_SOURCES ./maketest.sh $TEST_DIR $TEST_TARGET
+    $ rm -rf test-me-extended; mkdir test-me-extended; pushd test-me-extended; bash ../run_adopt_openjdk_jtreg_tests.sh /disk/openjdk/upstream-sources/openjdk8u-dev /disk/openjdk/upstream-sources/openjdk8u-dev/build/linux-x86_64-normal-server-release/images/j2sdk-image _extended.openjdk; popd
+
+This runs `gc/g1/TestShrinkAuxiliaryData25` test which then fails with:
+
+    Test will use 104 857 600 bytes of memory of 7 350 517 760 available
+    Available memory is 7 245 660 160 with 8 bytes pointer size - can save 48 307 893 pointers
+    Max cache size: 2^25 = 33 554 432 elements
+    Command line: [/disk/openjdk/upstream-sources/openjdk8u-dev/build/linux-x86_64-normal-server-release/images/j2sdk-image/jre/bin/../../bin/java -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=11 -XX:+UseG1GC -XX:G1HeapRegionSize=1048576 -XX:-ExplicitGCInvokesConcurrent -XX:+PrintGCDetails -XX:+UnlockDiagnosticVMOptions -XX:+WhiteBoxAPI -Xbootclasspath/a:. -XX:G1ConcRSLogCacheSize=25 -ea -esa -Xmx512m -XX:ObjectAlignmentInBytes=8 TestShrinkAuxiliaryData$ShrinkAuxiliaryDataTest ]
+    Heap
+     garbage-first heap   total 505856K, used 1024K [0x00000000e0000000, 0x00000000e0100f70, 0x0000000100000000)
+      region size 1024K, 2 young (2048K), 0 survivors (0K)
+     Metaspace       used 2502K, capacity 4480K, committed 4480K, reserved 1056768K
+      class space    used 273K, capacity 384K, committed 384K, reserved 1048576K
+
+    Error: Could not find or load main class TestShrinkAuxiliaryData$ShrinkAuxiliaryDataTest
+
+     stdout: [Heap
+     garbage-first heap   total 505856K, used 1024K [0x00000000e0000000, 0x00000000e0100f70, 0x0000000100000000)
+      region size 1024K, 2 young (2048K), 0 survivors (0K)
+     Metaspace       used 2502K, capacity 4480K, committed 4480K, reserved 1056768K
+      class space    used 273K, capacity 384K, committed 384K, reserved 1048576K
+    ];
+     stderr: [Error: Could not find or load main class TestShrinkAuxiliaryData$ShrinkAuxiliaryDataTest
+    ]
+     exitValue = 1
+
+    Exception in thread "main" java.lang.RuntimeException: Expected to get exit value of [0]
+
+            at com.oracle.java.testlibrary.OutputAnalyzer.shouldHaveExitValue(OutputAnalyzer.java:362)
+            at TestShrinkAuxiliaryData.performTest(TestShrinkAuxiliaryData.java:108)
+            at TestShrinkAuxiliaryData.test(TestShrinkAuxiliaryData.java:95)
+            at TestShrinkAuxiliaryData25.main(TestShrinkAuxiliaryData25.java:40)
+
+When I run this via jtreg directly it passes:
+
+    $ rm -rf JTwork JTreport && JT_JAVA=/disk/openjdk/upstream-sources/openjdk8u-dev/build/linux-x86_64-normal-server-release/images/j2sdk-image /home/sgehwolf/Documents/openjdk/adopt-openjdk-prototype/test-me-extended/openjdk-tests/test-results/openjdk_regression/jtreg/bin/jtreg -verbose hotspot/test/gc/g1/TestShrinkAuxiliaryData25.java 
+    Directory "JTwork" not found: creating
+    Directory "JTreport" not found: creating
+    runner starting test: gc/g1/TestShrinkAuxiliaryData25.java
+    runner finished test: gc/g1/TestShrinkAuxiliaryData25.java
+    Passed. Execution successful
+    Test results: passed: 1
+    Report written to /disk/openjdk/upstream-sources/openjdk8u-dev/JTreport/html/report.html
+    Results written to /disk/openjdk/upstream-sources/openjdk8u-dev/JTwork

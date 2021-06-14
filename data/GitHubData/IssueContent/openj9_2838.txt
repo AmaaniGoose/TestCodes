@@ -1,0 +1,50 @@
+When running in containers with CPU quota set, performance of the application may be adversely affected if CPU frequency governor is set to "powersave".
+
+As an example, compare application running on 4 CPUs with 100% quota vs running it on 8 CPUs with 50% quota. If the CPU frequency governor is set to "powersave", performance in latter case is very poor even though the application has 4 "effective" cpus.
+
+We have observed this during internal testing on DayTrader 3. We ran DayTrader 3 with following cases (Frequency Governor - powersave(default)):
+
+    - 4 cpus, 100% quota
+    - 8 cpus, 50% quota
+
+Throughput comparison for the above cases:
+
+	Case 			Throughput
+	4Cpu100Quota 		9248.22
+	8Cpu50Quota 		7771.04
+
+We also asked about this on Ubuntu forum here: https://askubuntu.com/questions/1007656/behavior-of-powersave-freq-governor-when-cpu-quota-is-set/1007731#1007731
+
+When we came to know that its due to the powersave frequency governor. we ran again with performance frequency governor and saw the difference in throughput
+
+	Case 			Throughput
+	4Cpu100Quota 		8255.2
+	8Cpu50Quota 		8355.69
+
+
+It appears this drop in performance is expected with "powersave" governor. If thats the case then it would be useful to capture the CPU frequency governor being used in javacore which can be helpful in dealing with performance problems.
+
+The Javacore `CPU information section` could be delivering this extended feature and might look something like :
+
+```
+1CICPUINFO	CPU Information
+NULL      	------------------------------------------------------------------------
+2CIPHYSCPU     	Physical CPUs: 4
+2CIONLNCPU     	Online CPUs: 4
+2CIBOUNDCPU    	Bound CPUs: 4
+2CIACTIVECPU   	Active CPUs: 0
+2CITARGETCPU   	Target CPUs: 4
+2CICPUGVNR     	CPU Governors
+2CICPUGVNR0		CPU0 : powersave
+2CICPUGVNR1            	CPU1 : powersave
+2CICPUGVNR2            	CPU2 : powersave
+2CICPUGVNR3            	CPU3 : powersave
+                    .
+                    .
+                    .
+                    .
+...
+```
+Please kindly provide your views on it
+
+FYI @ashu-mehra @dinogun @deesebas

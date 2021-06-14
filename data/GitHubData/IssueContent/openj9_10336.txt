@@ -1,0 +1,49 @@
+Failure link
+------------
+
+Public link to the failing test => https://github.com/ibmruntimes/openj9-openjdk-jdk8/blob/openj9/jdk/test/java/util/concurrent/BlockingQueue/SingleProducerMultipleConsumerLoops.java
+
+and ideally extracting relevant info from the failed run (just enough info to [run a Grinder](https://github.com/AdoptOpenJDK/openjdk-tests/wiki/How-to-Run-a-Grinder-Build-on-Jenkins)), include:
+- test category, openjdk 
+- test target name, jdk_util_j9_0
+- OS/architecture, x86-64_linux
+```
+18:49:52  openjdk version "1.8.0_265"
+18:49:52  OpenJDK Runtime Environment (build 1.8.0_265-202008041719-b01)
+18:49:52  Eclipse OpenJ9 VM (build master-2020312e3, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20200804_734 (JIT enabled, AOT enabled)
+18:49:52  OpenJ9   - 2020312e3
+18:49:52  OMR      - 7b76a160b
+18:49:52  JCL      - bf6e4d1c based on jdk8u265-b01)
+```
+
+Optional info
+-------------
+
+- intermittent failure: Unknown. Investigating via Grinder => https://ci.adoptopenjdk.net/job/Grinder/3689/console
+- new test
+
+Failure output (captured from console output)
+---------------------------------------------
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/279/console
+```
+20:17:53  ACTION: main -- Error. Agent error: java.lang.Exception: Agent 3 timed out with a timeout of 4800 seconds; check console log for any additional details
+20:17:53  REASON: User specified action: run main/timeout=600 SingleProducerMultipleConsumerLoops 
+20:17:53  TIME:   4805.091 seconds
+20:17:53  messages:
+20:17:53  command: main SingleProducerMultipleConsumerLoops
+20:17:53  reason: User specified action: run main/timeout=600 SingleProducerMultipleConsumerLoops 
+20:17:53  Mode: agentvm
+20:17:53  Agent id: 3
+20:17:53  Timeout refired 4800 times
+20:17:53  Timeout information:
+20:17:53  Running jcmd on process 30036
+20:17:53  Dump written to /home/jenkins/workspace/Test_openjdk8_j9_sanity.openjdk_x86-64_linux/openjdk-tests/TKG/test_output_15965634482580/jdk_util_j9_0/work/scratch/0/core.20200804.121736.30036.0001.dmp
+20:17:53  Running jstack on process 30036
+20:17:53  2020-08-04T12:17:38.053
+20:17:53  Virtual machine: 30036 JVM information:
+20:17:53  JRE 1.8.0 Linux amd64-64-Bit Compressed References 20200804_734 (JIT enabled, AOT enabled)
+20:17:53  OpenJ9   - 2020312e3
+20:17:53  OMR      - 7b76a160b
+20:17:53  JCL      - bf6e4d1c based on jdk8u265-b01
+```
+Core dump that is mentioned in the log => https://ibm.box.com/shared/static/o9dt0wzy2rpcyw4jh3bwhtiumt1thjwh.zip

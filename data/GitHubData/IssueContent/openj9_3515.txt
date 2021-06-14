@@ -1,0 +1,17 @@
+Native tests failed while loading shared libraries: libj9prt29.so with PPCLE openjdk8-openj9.
+Tests expect shared libraries are located at `jre/lib/ppc64le/compressedrefs`, which actually are located at `jre/lib/ppc64/compressedrefs`. 
+
+PPCLE openjdk8-hotspot jdk has the structure like `jre/lib/ppc64le`
+FYI @pshipton 
+
+ ===============================================
+12:51:12 Running test algotest2_0 ...
+12:51:12 ===============================================
+12:51:12 algotest2_0 Start Time: Thu Nov  1 12:51:11 2018 Epoch Time (ms): 1541091072003
+12:51:12 test with NoOptions
+12:51:12 { mkdir -p "/home/jenkins/workspace/Test-sanity.functional-JDK8-linux_ppc-64_cmprssptrs_le/openjdk-tests/TestConfig/scripts/testKitGen/../../../TestConfig/test_output_15410883607746/algotest2_0"; \
+12:51:12 cd "/home/jenkins/workspace/Test-sanity.functional-JDK8-linux_ppc-64_cmprssptrs_le/openjdk-tests/TestConfig/scripts/testKitGen/../../../TestConfig/test_output_15410883607746/algotest2_0"; \
+12:51:12 export LD_LIBRARY_PATH=""/home/jenkins/workspace/Test-sanity.functional-JDK8-linux_ppc-64_cmprssptrs_le/openjdkbinary/j2sdk-image/jre/bin/../../../native-test-libs/:/home/jenkins/workspace/Test-sanity.functional-JDK8-linux_ppc-64_cmprssptrs_le/openjdkbinary/j2sdk-image/jre/bin/../lib/ppc64le/compressedrefs:/home/jenkins/workspace/Test-sanity.functional-JDK8-linux_ppc-64_cmprssptrs_le/openjdkbinary/j2sdk-image/jre/bin/../lib/ppc64le/j9vm":"; \
+12:51:12 '/home/jenkins/workspace/Test-sanity.functional-JDK8-linux_ppc-64_cmprssptrs_le/openjdkbinary/j2sdk-image/jre/bin/../../../native-test-libs//algotest' -avltest:/home/jenkins/workspace/Test-sanity.functional-JDK8-linux_ppc-64_cmprssptrs_le/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/functional/NativeTest/../algotest/avltest.lst -Xcheck:memory:ignoreUnfreedCallsite=zip/:dbgwrapper:unknown:wrapper; \
+12:51:12 if [ $? -eq 0 ] ; then echo ""; echo "algotest2_0""_PASSED"; echo ""; cd /home/jenkins/workspace/Test-sanity.functional-JDK8-linux_ppc-64_cmprssptrs_le/openjdk-tests/TestConfig/scripts/testKitGen/../../..; rm -f -r "/home/jenkins/workspace/Test-sanity.functional-JDK8-linux_ppc-64_cmprssptrs_le/openjdk-tests/TestConfig/scripts/testKitGen/../../../TestConfig/test_output_15410883607746/algotest2_0"; else echo ""; echo "algotest2_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/home/jenkins/workspace/Test-sanity.functional-JDK8-linux_ppc-64_cmprssptrs_le/openjdk-tests/TestConfig/scripts/testKitGen/../../../TestConfig/test_output_15410883607746/TestTargetResult";
+12:51:12 /home/jenkins/workspace/Test-sanity.functional-JDK8-linux_ppc-64_cmprssptrs_le/openjdkbinary/j2sdk-image/jre/bin/../../../native-test-libs//algotest: error while loading shared libraries: libj9prt29.so: cannot open shared object file: No such file or directory

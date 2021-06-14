@@ -1,0 +1,12 @@
+For historic reasons I think we have some testing that is only running on XL builds. This is problematic because the OpenJ9 project doesn't have enough machine resources to test everything in both compressedrefs and XL modes. All the compressedrefs builds are running, but only some of the XL builds.
+
+I think we can make some generic changes to improve test modes.
+
+- almost any test running with Mode 110 but not Mode 610 should use NoOptions instead of 110. It's possible a test that runs 110 might need -Xnocompressedrefs, but unlikely.
+
+- a test not specific to GC or JIT running only 101 may switch to NoOptions. 101 used to be the default long ago.
+
+- a test running only 610 can use NoOptions, 610 matches the default options.
+
+- testing running in a mode with -Xint, such as 100, 109, 600, 609 should often remove the -Xint mode or switch to a JIT mode. Often the -Xint mode is there for comparison purposes, to see if a test passes with -Xint but fails with JIT. This was useful long ago, but rarely any more. Removing -Xint testing will speed up the tests.
+

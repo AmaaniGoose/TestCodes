@@ -1,0 +1,2 @@
+e.g. showing version numbers on build/test jobs
+https://wiki.jenkins.io/display/JENKINS/Build+Name+Setter+Plugin is the plugin and we currently have it on the JCK jenkins, but it's not being used on the main one.

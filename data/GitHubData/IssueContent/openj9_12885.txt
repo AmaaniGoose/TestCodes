@@ -1,0 +1,99 @@
+https://openj9-jenkins.osuosl.org/job/Test_openjdk16_j9_sanity.openjdk_x86-64_linux_Nightly/20 - ub16x64j96
+java/util/Deque/ChorusLine.java
+jdk_util_1
+JVM_OPTIONS:  -Xdump:system:none -Xdump:heap:none -Xdump:system:events=gpf+abort+traceassert+corruptcache -XX:-UseCompressedOops
+```
+00:02:10  STDERR:
+00:02:10  java.lang.Throwable
+00:02:10  	at java.base/java.lang.Thread.dumpStack(Thread.java:554)
+00:02:10  	at ChorusLine.fail(ChorusLine.java:190)
+00:02:10  	at ChorusLine.fail(ChorusLine.java:191)
+00:02:10  	at ChorusLine.equal(ChorusLine.java:196)
+00:02:10  	at ChorusLine$1.run(ChorusLine.java:64)
+00:02:10  	at ChorusLine.realMain(ChorusLine.java:144)
+00:02:10  	at ChorusLine.main(ChorusLine.java:198)
+00:02:10  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+00:02:10  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+00:02:10  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+00:02:10  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+00:02:10  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+00:02:10  	at java.base/java.lang.Thread.run(Thread.java:883)
+00:02:10  java.lang.Throwable
+00:02:10  	at java.base/java.lang.Thread.dumpStack(Thread.java:554)
+00:02:10  	at ChorusLine.fail(ChorusLine.java:190)
+00:02:10  	at ChorusLine.fail(ChorusLine.java:191)
+00:02:10  	at ChorusLine.equal(ChorusLine.java:196)
+00:02:10  	at ChorusLine$1.run(ChorusLine.java:71)
+00:02:10  	at ChorusLine.realMain(ChorusLine.java:144)
+00:02:10  	at ChorusLine.main(ChorusLine.java:198)
+00:02:10  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+00:02:10  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+00:02:10  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+00:02:10  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+00:02:10  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+00:02:10  	at java.base/java.lang.Thread.run(Thread.java:883)
+00:02:10  java.lang.Throwable
+00:02:10  	at java.base/java.lang.Thread.dumpStack(Thread.java:554)
+00:02:10  	at ChorusLine.fail(ChorusLine.java:190)
+00:02:10  	at ChorusLine.fail(ChorusLine.java:191)
+00:02:10  	at ChorusLine.equal(ChorusLine.java:196)
+00:02:10  	at ChorusLine.equal(ChorusLine.java:155)
+00:02:10  	at ChorusLine.realMain(ChorusLine.java:145)
+00:02:10  	at ChorusLine.main(ChorusLine.java:198)
+00:02:10  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+00:02:10  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+00:02:10  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+00:02:10  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+00:02:10  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+00:02:10  	at java.base/java.lang.Thread.run(Thread.java:883)
+00:02:10  java.lang.Throwable
+00:02:10  	at java.base/java.lang.Thread.dumpStack(Thread.java:554)
+00:02:10  	at ChorusLine.fail(ChorusLine.java:190)
+00:02:10  	at ChorusLine.fail(ChorusLine.java:191)
+00:02:10  	at ChorusLine.equal(ChorusLine.java:196)
+00:02:10  	at ChorusLine.equal(ChorusLine.java:176)
+00:02:10  	at ChorusLine.equal(ChorusLine.java:163)
+00:02:10  	at ChorusLine.realMain(ChorusLine.java:145)
+00:02:10  	at ChorusLine.main(ChorusLine.java:198)
+00:02:10  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+00:02:10  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+00:02:10  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+00:02:10  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+00:02:10  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+00:02:10  	at java.base/java.lang.Thread.run(Thread.java:883)
+00:02:10  java.util.NoSuchElementException
+00:02:10  	at java.base/java.util.concurrent.ConcurrentLinkedDeque$AbstractItr.next(ConcurrentLinkedDeque.java:1416)
+00:02:10  	at ChorusLine.equal(ChorusLine.java:176)
+00:02:10  	at ChorusLine.equal(ChorusLine.java:168)
+00:02:10  	at ChorusLine.realMain(ChorusLine.java:145)
+00:02:10  	at ChorusLine.main(ChorusLine.java:198)
+00:02:10  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+00:02:10  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+00:02:10  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+00:02:10  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+00:02:10  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+00:02:10  	at java.base/java.lang.Thread.run(Thread.java:883)
+00:02:10  java.lang.AssertionError: Some tests failed
+00:02:10  	at ChorusLine.main(ChorusLine.java:200)
+00:02:10  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+00:02:10  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+00:02:10  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+00:02:10  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+00:02:10  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+00:02:10  	at java.base/java.lang.Thread.run(Thread.java:883)
+00:02:10  
+00:02:10  JavaTest Message: Test threw exception: java.lang.AssertionError
+00:02:10  JavaTest Message: shutting down test
+00:02:10  
+00:02:10  STDOUT:
+00:02:10  [2, 3, 4, 5, 6, 9]
+00:02:10  [2, 3, 4, 5, 6, 9]
+00:02:10  [2, 3, 4, 5, 6, 9]
+00:02:10  9 not equal to 7
+00:02:10  9 not equal to 6
+00:02:10  [2, 3, 4, 5, 6, 7]
+00:02:10  [2, 3, 4, 5, 6, 9] not equal to [2, 3, 4, 5, 6, 7]
+00:02:10  7 not equal to 9
+00:02:10  
+00:02:10  Passed = 76, failed = 5
+```

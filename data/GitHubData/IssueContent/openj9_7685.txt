@@ -1,0 +1,5 @@
+As described in [1] we can have static_assert in the VM/GC by adding command line options to the compiler build process. These options are harmless and enable the use of valuable features such as `static_assert`. We need to find the right place where these options can be added in the VM/GC makefiles.
+
+As part of this issue we should try and revert the x86-only portion of #7678 as a proof of concept that the change to enable `static_assert` is working.
+
+[1] https://github.com/eclipse/openj9/pull/7678#issuecomment-549413940

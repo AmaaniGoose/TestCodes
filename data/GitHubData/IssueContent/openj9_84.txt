@@ -1,0 +1,11 @@
+So what I believe is happening is there are two pairs of places that can trigger a notifyClasspathEntryStateChange through j9shr_hookZipLoadEvent.  One pair is through the JVM_ZipHook out of Java_java_util_zip_ZipFile_close / Java_java_util_zip_ZipFile_open (handle zip file access from Java), and the other pair is from the J9HOOK_VM_ZIP_LOAD event registered in shrinit.cpp, which receives notification from TRIGGER_J9HOOK_VM_ZIP_LOAD, used by the zip cache library used by the zip file access from native.
+
+So even though a file is open and stays open in the zip cache by native, a Java application can open and close a duplicate zip file, breaking the state of the timestamp cache used by hasTimestampChanged() as it doesn't keep track of open count.
+
+Essentially we get something like:
+
+open(xml.jar) from J9HOOK_VM_ZIP_LOAD 
+open(xml.jar) from JVM_ZipHook 
+close(xml.jar) from JVM_ZipHook 
+
+After this point hasTimestampChanged(xml.jar) fails to identify xml.jar as an already open file and continues to invoke the localCheckTimestamp() routine, driving j9file_lastmod.

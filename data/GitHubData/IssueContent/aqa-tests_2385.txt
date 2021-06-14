@@ -1,0 +1,166 @@
+TRSS: https://trss.adoptopenjdk.net/resultSummary?parentId=604a2a745730424dbca9b4d4
+
+job: https://ci.adoptopenjdk.net/job/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/5/console
+```
+15:34:00  TEST: java/lang/ProcessBuilder/Basic.java#id1
+15:34:00  TEST JDK: /home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdkbinary/j2sdk-image
+15:34:00  
+15:34:00  ACTION: build -- Passed. Build successful
+15:34:00  REASON: Named class compiled on demand
+15:34:00  TIME:   0.343 seconds
+15:34:00  messages:
+15:34:00  command: build Basic
+15:34:00  reason: Named class compiled on demand
+15:34:00  Test directory:
+15:34:00    compile: Basic
+15:34:00  elapsed time (seconds): 0.343
+15:34:00  
+15:34:00  ACTION: compile -- Passed. Compilation successful
+15:34:00  REASON: .class file out of date or does not exist
+15:34:00  TIME:   0.343 seconds
+15:34:00  messages:
+15:34:00  command: compile /home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/ProcessBuilder/Basic.java
+15:34:00  reason: .class file out of date or does not exist
+15:34:00  Additional options from @modules: --add-modules java.base
+15:34:00  Mode: agentvm
+15:34:00  Agent id: 22
+15:34:00  elapsed time (seconds): 0.343
+15:34:00  configuration:
+15:34:00  Boot Layer (javac runtime environment)
+15:34:00    class path: /home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/jvmtest/openjdk/jtreg/lib/javatest.jar 
+15:34:00                /home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/jvmtest/openjdk/jtreg/lib/jtreg.jar 
+15:34:00    patch:      java.base /home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/TKG/output_16154767791350/jdk_lang_1/work/patches/java.base
+15:34:00  
+15:34:00  javac compilation environment
+15:34:00    add modules: java.base
+15:34:00    source path: /home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/ProcessBuilder
+15:34:00                 /home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/openjdk/openjdk-jdk/test/lib
+15:34:00    class path:  /home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/ProcessBuilder
+15:34:00                 /home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/TKG/output_16154767791350/jdk_lang_1/work/classes/9/java/lang/ProcessBuilder/Basic_id1.d
+15:34:00                 /home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/TKG/output_16154767791350/jdk_lang_1/work/classes/9/test/lib
+15:34:00  
+15:34:00  rerun:
+15:34:00  cd /home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/TKG/output_16154767791350/jdk_lang_1/work/scratch/17 && \
+15:34:00  HOME=/home/jenkins \
+15:34:00  PATH=/bin:/usr/bin:/usr/sbin \
+15:34:00      /home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdkbinary/j2sdk-image/bin/javac \
+15:34:00          -J-ea \
+15:34:00          -J-esa \
+15:34:00          -J-Xmx512m \
+15:34:00          -J-XX:-UseCompressedOops \
+15:34:00          -J-Djava.library.path=/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+15:34:00          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:-UseCompressedOops' \
+15:34:00          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:-UseCompressedOops' \
+15:34:00          -J-Dtest.compiler.opts= \
+15:34:00          -J-Dtest.java.opts= \
+15:34:00          -J-Dtest.jdk=/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdkbinary/j2sdk-image \
+15:34:00          -J-Dcompile.jdk=/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdkbinary/j2sdk-image \
+15:34:00          -J-Dtest.timeout.factor=8.0 \
+15:34:00          -J-Dtest.nativepath=/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdkbinary/openjdk-test-image/jdk/jtreg/native \
+15:34:00          -J-Dtest.root=/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+15:34:00          -J-Dtest.name=java/lang/ProcessBuilder/Basic.java#id1 \
+15:34:00          -J-Dtest.file=/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/ProcessBuilder/Basic.java \
+15:34:00          -J-Dtest.src=/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/ProcessBuilder \
+15:34:00          -J-Dtest.src.path=/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/ProcessBuilder:/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/openjdk/openjdk-jdk/test/lib \
+15:34:00          -J-Dtest.classes=/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/TKG/output_16154767791350/jdk_lang_1/work/classes/9/java/lang/ProcessBuilder/Basic_id1.d \
+15:34:00          -J-Dtest.class.path=/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/TKG/output_16154767791350/jdk_lang_1/work/classes/9/java/lang/ProcessBuilder/Basic_id1.d:/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/TKG/output_16154767791350/jdk_lang_1/work/classes/9/test/lib \
+15:34:00          -J-Dtest.class.path.prefix=/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/TKG/output_16154767791350/jdk_lang_1/work/classes/9/java/lang/ProcessBuilder/Basic_id1.d:/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/ProcessBuilder:/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/TKG/output_16154767791350/jdk_lang_1/work/classes/9/test/lib \
+15:34:00          -J-Dtest.modules=java.base/java.lang:open \
+15:34:00          --add-modules java.base \
+15:34:00          -d /home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/TKG/output_16154767791350/jdk_lang_1/work/classes/9/java/lang/ProcessBuilder/Basic_id1.d \
+15:34:00          -sourcepath /home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/ProcessBuilder:/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/openjdk/openjdk-jdk/test/lib \
+15:34:00          -classpath /home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/ProcessBuilder:/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/TKG/output_16154767791350/jdk_lang_1/work/classes/9/java/lang/ProcessBuilder/Basic_id1.d:/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/TKG/output_16154767791350/jdk_lang_1/work/classes/9/test/lib /home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/ProcessBuilder/Basic.java
+15:34:00  
+15:34:00  ACTION: main -- Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Some tests failed
+15:34:00  REASON: User specified action: run main/othervm/timeout=300 -Djdk.lang.Process.launchMechanism=posix_spawn Basic 
+15:34:00  TIME:   5.256 seconds
+15:34:00  messages:
+15:34:00  command: main -Djdk.lang.Process.launchMechanism=posix_spawn Basic
+15:34:00  reason: User specified action: run main/othervm/timeout=300 -Djdk.lang.Process.launchMechanism=posix_spawn Basic 
+15:34:00  Mode: othervm [/othervm specified]
+15:34:00  Additional options from @modules: --add-modules java.base --add-opens java.base/java.lang=ALL-UNNAMED
+15:34:00  elapsed time (seconds): 5.256
+15:34:00  configuration:
+15:34:00  Boot Layer
+15:34:00    add modules: java.base           
+15:34:00    add opens:   java.base/java.lang ALL-UNNAMED
+15:34:00  
+15:34:00  STDOUT:
+15:34:00  This appears to be a Unix system.
+15:34:00  Testing ASCII environment values
+15:34:00  Testing Latin1 environment values
+15:34:00  Testing Unicode environment values
+15:34:00  Testing directory .
+15:34:00  Testing directory ..
+15:34:00  Testing directory /
+15:34:00  Testing directory /bin
+15:34:00  cmdp
+15:34:00  cmdp 0: /home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdkbinary/j2sdk-image/bin/java
+15:34:00  cmdp 1: -XX:+DisplayVMOutputToStderr
+15:34:00  cmdp 2: -classpath
+15:34:00  cmdp 3: /home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/TKG/output_16154767791350/jdk_lang_1/work/classes/9/java/lang/ProcessBuilder/Basic_id1.d:/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/openjdk/openjdk-jdk/test/jdk/java/lang/ProcessBuilder:/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/TKG/output_16154767791350/jdk_lang_1/work/classes/9/test/lib:/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/openjdk-tests/openjdk/openjdk-jdk/test/lib:/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/jvmtest/openjdk/jtreg/lib/javatest.jar:/home/jenkins/workspace/Test_openjdk16_hs_sanity.openjdk_x86-64_alpine-linux/jvmtest/openjdk/jtreg/lib/jtreg.jar
+15:34:00  cmdp 4: Basic$JavaChild
+15:34:00  cmdp 5: System.getenv()
+15:34:00  envp
+15:34:00  envp 0: LC_ALL=C
+15:34:00  envp 1: FO=BR
+15:34:00   waitFor process: delta: 60526
+15:34:00  
+15:34:00  Passed = 8983, failed = 2
+15:34:00  
+15:34:00  STDERR:
+15:34:00  >'java.io.IOException: Cannot run program "./prog": error=8, Exec format error
+15:34:00  	at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1142)
+15:34:00  	at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1073)
+15:34:00  	at Basic.run(Basic.java:2701)
+15:34:00  	at Basic$JavaChild.main(Basic.java:491)
+15:34:00  Caused by: java.io.IOException: error=8, Exec format error
+15:34:00  	at java.base/java.lang.ProcessImpl.forkAndExec(Native Method)
+15:34:00  	at java.base/java.lang.ProcessImpl.<init>(ProcessImpl.java:313)
+15:34:00  	at java.base/java.lang.ProcessImpl.start(ProcessImpl.java:244)
+15:34:00  	at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1109)
+15:34:00  	... 3 more
+15:34:00  Exception in thread "main" java.lang.NullPointerException: Cannot invoke "Basic$ProcessResults.exitValue()" because the return value of "Basic.run(java.lang.ProcessBuilder)" is null
+15:34:00  	at Basic$JavaChild.main(Basic.java:491)
+15:34:00  '< not equal to ''
+15:34:00  java.lang.Exception: Stack trace
+15:34:00  	at java.base/java.lang.Thread.dumpStack(Thread.java:1377)
+15:34:00  	at Basic.fail(Basic.java:2772)
+15:34:00  	at Basic.fail(Basic.java:2773)
+15:34:00  	at Basic.equal(Basic.java:2779)
+15:34:00  	at Basic.realMain(Basic.java:2000)
+15:34:00  	at Basic.main(Basic.java:2782)
+15:34:00  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:34:00  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+15:34:00  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:34:00  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+15:34:00  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+15:34:00  	at java.base/java.lang.Thread.run(Thread.java:831)
+15:34:00  >'1'< not equal to '0'
+15:34:00  java.lang.Exception: Stack trace
+15:34:00  	at java.base/java.lang.Thread.dumpStack(Thread.java:1377)
+15:34:00  	at Basic.fail(Basic.java:2772)
+15:34:00  	at Basic.fail(Basic.java:2773)
+15:34:00  	at Basic.equal(Basic.java:2779)
+15:34:00  	at Basic.realMain(Basic.java:2001)
+15:34:00  	at Basic.main(Basic.java:2782)
+15:34:00  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:34:00  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+15:34:00  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:34:00  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+15:34:00  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+15:34:00  	at java.base/java.lang.Thread.run(Thread.java:831)
+15:34:00  java.lang.AssertionError: Some tests failed
+15:34:00  	at Basic.main(Basic.java:2784)
+15:34:00  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:34:00  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+15:34:00  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:34:00  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+15:34:00  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+15:34:00  	at java.base/java.lang.Thread.run(Thread.java:831)
+15:34:00  
+15:34:00  JavaTest Message: Test threw exception: java.lang.AssertionError: Some tests failed
+15:34:00  JavaTest Message: shutting down test
+15:34:00  
+15:34:00  STATUS:Failed.`main' threw exception: java.lang.AssertionError: Some tests failed
+```

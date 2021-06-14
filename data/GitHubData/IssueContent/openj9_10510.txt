@@ -1,0 +1,8 @@
+As a part of the main issue for Kubernetes deployment #9443 , this issue keeps track of discussion about the automated test framework of operator and helm chart.  
+
+The goal is to create automated tests for operator that:
+- contains Kubernetes or Openshift environments
+- verifies operator deployment and functionality
+- reuse existing Adopt testing framework and machines
+
+More information and testing proposal will be posted below later. 

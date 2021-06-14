@@ -1,0 +1,27 @@
+I have been working on a side project to enable the internal JVM as well as Java applications (under proper security permission) to be able to generate native code directly into the JIT code cache using the OMR JitBuilder API. That should include, at some point, the ability for the JIT to inject such code sequences (as IL) into Java method compiles (and vice versa).
+
+There are a host of obstacles to making this work, not least that some fundamental structures aren’t really shared between the OpenJ9 JIT and the OMR compiler, but I’ve been trying to hack my way through just to see what all is needed.
+
+Current status:
+From the `jitHookAboutToRunMain()` I created a `TypeDictionary` and a `MethodBuilder` object representing a function that returns the 64-bit constant '3'. I called `compileMethodBuilder()` on that object, cast the returned `startPC` to a function pointer, called the function and verified that I did get the 64-bit value 3 as its return value. Yay!
+
+I am now working through the Java language client bindings which would enable using JitBuilder directly in a Java application. I'm building on top of the C generator originally started by @Leonardo2718 and now in an OMR pull request thanks to @daytonallen ( https://github.com/eclipse/omr/pull/3859 ). As of now, I have Java classes being correctly generated for the full JitBuilder API (they can be compiled with javac without errors though there are warnings due to use of `Unsafe`). The next step is to generate the native layer underneath the Java classes that connect Java calls into the JitBuilder library and support the callbacks coming out of the native JitBuilder library.
+
+
+Issues encountered so far:
+* `SystemSegmentProvider` in OpenJ9 is completely different than in OMR with a completely different constructor API. Much of the lower level memory allocation function is not consistent across OMR and OpenJ9, but it can be made consistent.
+* `FrontEnd` is handled differently between OMR and OpenJ9 (including where to find `FrontEnd.hpp`
+*  OpenJ9 needs `codegen/ConcreteFE.hpp`
+* `OMRMethodBuilder` expects there to be a C function `compileMethodBuilder()`
+* `J9::SymbolReferenceTable` needs an additional signature for `findOrCreateStaticMethodSymbol()`
+*  Need a kind of resolved method representing a `MethodBuilder` object
+*  `TR::ResolvedMethod` isn’t used in OpenJ9 but is used by OMR JitBuilder
+* Need a TR::IlGeneratorMethodDetails subclass for method builder compilations
+* Need to build JitBuilder API in OMR before OpenJ9 is compiled
+* Need to add JitBuilder client API files to OpenJ9 build files
+* return -1 from TR_J9VMBase::getLineNumberForMethodAndByteCodeIndex()
+** may require a MethodBuilder specific front end subclass
+* disable StringPeepholes optimization
+* prevent a number of accessor functions from digging too deeply into a `J9Method` pointer that is actually a `TR::MethodBuilder` pointer :/
+* avoid some tracing functions that want to print bytecodes and the like
+* don't call `jitMethodTranslated()` at the end of the compilation

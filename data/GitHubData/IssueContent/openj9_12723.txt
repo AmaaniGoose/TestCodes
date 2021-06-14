@@ -1,0 +1,1 @@
+We should do some lower priority investigation of builds with gcc 9. If we can get one build machine for each x,p,z linux with gcc 9 installed, then we can try some builds and see where we stand in terms of successfully building, and performance comparison with existing builds.

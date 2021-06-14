@@ -1,0 +1,7 @@
+I recently had to rebuild the api server and created a playbook for it [here](https://github.com/AdoptOpenJDK/openjdk-infrastructure/tree/master/ansible/playbooks/AdoptOpenJDK_Services_Playbooks) alongside @sxa555's jckservices playbook. We should create a playbook for all of the other services so I will use this issue to track the progress of this.
+
+List of playbooks to be added:
+- [ ]  Keybox
+- [ ]  Possibly the CI's?
+
+Please edit this issue and add new services if there are any that I have missed.

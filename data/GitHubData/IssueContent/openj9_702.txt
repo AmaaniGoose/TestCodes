@@ -1,0 +1,43 @@
+SPECjbb2015 benchmark is running under SPECjbb2015-Composite: Single JVM /Single Host mode.
+Java Options : -Xmx8G -Xms8G -Xmn4G -Xgcpolicy:balanced -Xgc:noNuma -verbose:gc
+
+SPECjbb2015 benchmark is stuck at the end of  RT curve building phase, look like it can not shutdown Backend.
+
+composite.log Output:
+
+...
+Nov 09 13:30:47 EST 2017> org.spec.jbb.controller: Ramping down and finishing
+<Thu Nov 09 13:30:47 EST 2017> org.spec.jbb.group1.backend.compositebackend: IN STATE: Running (IR=946.0), NEW STATE: Running (IR=0.0)
+<Thu Nov 09 13:30:47 EST 2017> org.spec.jbb.group1.txinjector.compositetxinjector: IN STATE: Running (IR=946.0), NEW STATE: Running (IR=0.0)
+<Thu Nov 09 13:30:47 EST 2017> org.spec.jbb.driver: IR = 0 (probe) + 0 (saturate) + 7 (service) = 7 reqs/sec
+<Thu Nov 09 13:30:47 EST 2017> org.spec.jbb.driver: targets = 16, probes = 0, saturates = 0
+<Thu Nov 09 13:30:48 EST 2017> org.spec.jbb.controller: TRANSITION: settling, (rIR:aIR:PR = 0:0:0) (tPR = 0) [OK]
+<Thu Nov 09 13:30:51 EST 2017> org.spec.jbb.controller: TRANSITION: settling, (rIR:aIR:PR = 0:0:0) (tPR = 0) [OK]
+<Thu Nov 09 13:30:54 EST 2017> org.spec.jbb.controller: TRANSITION: settling, (rIR:aIR:PR = 0:0:0) (tPR = 0) [OK]
+<Thu Nov 09 13:30:54 EST 2017> org.spec.jbb.controller: TRANSITION: IR = 0 finished, settle status = [OK] (rIR:aIR:PR = 0:0:0) (tPR = 0)
+<Thu Nov 09 13:30:55 EST 2017> org.spec.jbb.controller: Finishing
+<Thu Nov 09 13:30:55 EST 2017> org.spec.jbb.group1.txinjector.compositetxinjector: IN STATE: Running (IR=0.0), NEW STATE: Terminated
+<Thu Nov 09 13:30:55 EST 2017> org.spec.jbb.ic: Deregistered Group1.TxInjector.CompositeTxInjector.I
+<Thu Nov 09 13:30:55 EST 2017> org.spec.jbb.ic: Deregistered Group1.TxInjector.CompositeTxInjector.I.driver.Driver
+<Thu Nov 09 13:30:55 EST 2017> org.spec.jbb.group1.backend.compositebackend: IN STATE: Running (IR=0.0), NEW STATE: Terminated
+<Thu Nov 09 13:30:55 EST 2017> org.spec.jbb.ic: Deregistered Group1.Backend.CompositeBackend.SM1
+<Thu Nov 09 13:30:55 EST 2017> org.spec.jbb.ic: Deregistered Group1.Backend.CompositeBackend.SM0
+<Thu Nov 09 13:30:55 EST 2017> org.spec.jbb.ic: Deregistered Group1.Backend.CompositeBackend.HQ
+<Thu Nov 09 13:30:55 EST 2017> org.spec.jbb.ic: Deregistered Group1.Backend.CompositeBackend.HQ.OF
+<Thu Nov 09 13:30:55 EST 2017> org.spec.jbb.ic: Deregistered Group1.Backend.CompositeBackend.SP1
+<Thu Nov 09 13:30:55 EST 2017> org.spec.jbb.ic: Deregistered Group1.Backend.CompositeBackend.SP0
+<Thu Nov 09 13:30:55 EST 2017> org.spec.jbb.controller: Run finished
+<Thu Nov 09 13:30:55 EST 2017> org.spec.jbb.group1.backend.compositebackend: Exiting
+<Thu Nov 09 13:30:55 EST 2017> org.spec.jbb.group1.txinjector.compositetxinjector: Exiting
+<Thu Nov 09 13:30:55 EST 2017> org.spec.jbb.group1.txinjector.compositetxinjector: Exiting
+<Thu Nov 09 13:30:55 EST 2017> org.spec.jbb.group1.backend.compositebackend: Exiting
+**<Thu Nov 09 13:30:59 EST 2017> org.spec.jbb: Failed to stop executor service java.util.concurrent.Executors$FinalizableDelegatedExecutorService@5129d62b, trying again
+<Thu Nov 09 13:31:00 EST 2017> org.spec.jbb: Failed to stop executor service java.util.concurrent.Executors$FinalizableDelegatedExecutorService@5129d62b, trying again
+<Thu Nov 09 13:31:01 EST 2017> org.spec.jbb: Failed to stop executor service java.util.concurrent.Executors$FinalizableDelegatedExecutorService@5129d62b, trying again
+<Thu Nov 09 13:31:02 EST 2017> org.spec.jbb: Failed to stop executor service java.util.concurrent.Executors$FinalizableDelegatedExecutorService@5129d62b, trying again
+<Thu Nov 09 13:31:03 EST 2017> org.spec.jbb: Failed to stop executor service java.util.concurrent.Executors$FinalizableDelegatedExecutorService@5129d62b, trying again
+<Thu Nov 09 13:31:04 EST 2017> org.spec.jbb: Failed to stop executor service java.util.concurrent.Executors$FinalizableDelegatedExecutorService@5129d62b, trying again
+<Thu Nov 09 13:31:05 EST 2017> org.spec.jbb: Failed to stop executor service java.util.concurrent.Executors$FinalizableDelegatedExecutorService@5129d62b, trying again
+<Thu Nov 09 13:31:06 EST 2017> org.spec.jbb: Failed to stop executor service java.util.concurrent.Executors$FinalizableDelegatedExecutorService@5129d62b, trying again**
+
+...

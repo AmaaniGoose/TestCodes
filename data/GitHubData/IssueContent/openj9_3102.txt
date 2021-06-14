@@ -1,0 +1,6 @@
+Three new commands are being added:
+!findmodules
+!dumpmodule
+!dumppackage
+
+This issue is part of a larger effort to add documentation for the existing jdmpview commands https://github.com/eclipse/openj9/issues/3100

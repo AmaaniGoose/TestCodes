@@ -1,0 +1,476 @@
+TCK.run.tests.ddrext is failing on AIX jdk8u with messages like:
+```
+15:16:15       [java] Problem running command:
+15:16:15       [java] com.ibm.j9ddr.NullPointerDereference: Memory Fault reading 0x00000000
+```
+Failing job link: https://ci.adoptopenjdk.net/job/Grinder/8007/consoleFull
+
+To rerun the test: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&JDK_VENDOR=adoptopenjdk&BUILD_LIST=functional&PLATFORM=ppc64_aix_mixed&TARGET=testDDRExt_General_0
+
+These tests have not been running sucessfully at AdoptOpenJDK for a while because the AIX machine configuration prevented them from generating core dumps.  This has now been resolved, but the test fails with this error.
+
+The test appears to pass on the AdoptOpenJDK AIX 7.1 machines but not 7.2.
+
+Full output of failing test:
+```
+15:16:10  TCK.run.tests.ddrext:
+15:16:10       [echo] Running the DDR Extension Test
+15:16:10       [java] openjdk version "1.8.0_292-internal"
+15:16:10       [java] OpenJDK Runtime Environment (build 1.8.0_292-internal-202103221808-b07)
+15:16:10       [java] Eclipse OpenJ9 VM (build master-7c05ea5e8, JRE 1.8.0 AIX ppc64-64-Bit Compressed References 20210322_999 (JIT enabled, AOT enabled)
+15:16:10       [java] OpenJ9   - 7c05ea5e8
+15:16:10       [java] OMR      - f111a8bd2
+15:16:10       [java] JCL      - 9cdb1578 based on jdk8u292-b07)
+15:16:10       [java] 
+15:16:15       [java] [SetupConfig] [INFO] Created new DDR Interactive instance using core file : /home/jenkins/workspace/Grinder/openjdk-tests/TKG/../TKG/output_16166853589452/testDDRExt_General_0/DDREXT.J9CORE.DMP
+15:16:15       [java] [AutoRun] [INFO] Running 21 tests for /home/jenkins/workspace/Grinder/openjdk-tests/TKG/../TKG/output_16166853589452/testDDRExt_General_0/DDREXT.J9CORE.DMP
+15:16:15       [java] [AutoRun] [INFO] Starting testVMCheck(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:15       [java] [DDRExtTesterBase] [INFO] Validation started for : '!vmcheck '
+15:16:15       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!vmcheck '
+15:16:15       [java] [AutoRun] [INFO] Finished testVMCheck(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:15       [java] 
+15:16:15       [java] [AutoRun] [INFO] Starting testWalkInternTable(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:15       [java] [DDRExtTesterBase] [INFO] Validation started for : '!walkinterntable '
+15:16:15       [java] [DDRExtTesterBase] [INFO] Starting exhaustive DDR structure test for parent command : '!walkinterntable '
+15:16:15       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!walkinterntable '
+15:16:15       [java] [DDRExtTesterBase] [INFO] Validation started for : '!walkinterntable  help'
+15:16:15       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!walkinterntable  help'
+15:16:15       [java] [DDRExtTesterBase] [ERROR] '!walkinterntable  1' output does not contain success key : Total Shared Weight
+15:16:15       [java] [DDRExtTesterBase] [ERROR] '!walkinterntable  1' output :J9SharedInvariantInternTable at 0x10021595a90 {
+15:16:15       [java] 	0x0: void* performNodeAction = !void 0x0
+15:16:15       [java] 	0x8: UDATA flags = udata: 0x0 (0)
+15:16:15       [java] 	0x10: struct J9ThreadMonitor* tableInternFxMutex = !j9threadmonitor 0x0
+15:16:15       [java] 	0x18: struct J9SRPHashTable* sharedInvariantSRPHashtable = !j9srphashtable 0x0
+15:16:15       [java] 	0x20: struct J9SharedInternSRPHashTableEntry* headNode = !j9sharedinternsrphashtableentry 0x0
+15:16:15       [java] 	0x28: struct J9SharedInternSRPHashTableEntry* tailNode = !j9sharedinternsrphashtableentry 0x0
+15:16:15       [java] 	0x30: J9SRP* sharedTailNodePtr = !selfrelative 0x0
+15:16:15       [java] 	0x38: J9SRP* sharedHeadNodePtr = !selfrelative 0x0
+15:16:15       [java] 	0x40: U32* totalSharedNodesPtr = !u32 0x0
+15:16:15       [java] 	0x48: U32* totalSharedWeightPtr = !u32 0x0
+15:16:15       [java] 	0x50: struct J9ClassLoader* systemClassLoader = !j9classloader 0x0
+15:16:15       [java] }
+15:16:15       [java] 
+15:16:15       [java] Problem running command:
+15:16:15       [java] com.ibm.j9ddr.NullPointerDereference: Memory Fault reading 0x00000000 : 
+15:16:15       [java] 
+15:16:15       [java] junit.framework.AssertionFailedError
+15:16:15       [java] 	at junit.framework.Assert.fail(Assert.java:48)
+15:16:15       [java] 	at junit.framework.Assert.assertTrue(Assert.java:20)
+15:16:15       [java] 	at junit.framework.Assert.assertTrue(Assert.java:27)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.TestDDRExtensionGeneral.testWalkInternTable(TestDDRExtensionGeneral.java:70)
+15:16:15       [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:16:15       [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+15:16:15       [java] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:16:15       [java] 	at java.lang.reflect.Method.invoke(Method.java:498)
+15:16:15       [java] 	at junit.framework.TestCase.runTest(TestCase.java:168)
+15:16:15       [java] 	at junit.framework.TestCase.runBare(TestCase.java:134)
+15:16:15       [java] 	at junit.framework.TestResult$1.protect(TestResult.java:110)
+15:16:15       [java] 	at junit.framework.TestResult.runProtected(TestResult.java:128)
+15:16:15       [java] 	at junit.framework.TestResult.run(TestResult.java:113)
+15:16:15       [java] 	at junit.framework.TestCase.run(TestCase.java:124)
+15:16:15       [java] 	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:74)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:69)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:55)
+15:16:15       [java] 	at j9vm.test.ddrext.AutoRun.runTest(AutoRun.java:275)
+15:16:15       [java] 	at j9vm.test.ddrext.AutoRun.main(AutoRun.java:110)
+15:16:15       [java] java.lang.NullPointerException
+15:16:15       [java] 	at com.ibm.j9ddr.command.CommandParser.parse(CommandParser.java:165)
+15:16:15       [java] 	at com.ibm.j9ddr.command.CommandParser.<init>(CommandParser.java:72)
+15:16:15       [java] 	at com.ibm.j9ddr.tools.ddrinteractive.Context.execute(Context.java:182)
+15:16:15       [java] 	at com.ibm.j9ddr.tools.ddrinteractive.DDRInteractive.execute(DDRInteractive.java:361)
+15:16:15       [java] 	at j9vm.test.ddrext.DDRExtTesterBase.exec(DDRExtTesterBase.java:101)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.TestDDRExtensionGeneral.testWhatis(TestDDRExtensionGeneral.java:110)
+15:16:15       [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:16:15       [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+15:16:15       [java] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:16:15       [java] 	at java.lang.reflect.Method.invoke(Method.java:498)
+15:16:15       [java] 	at junit.framework.TestCase.runTest(TestCase.java:168)
+15:16:15       [java] 	at junit.framework.TestCase.runBare(TestCase.java:134)
+15:16:15       [java] 	at junit.framework.TestResult$1.protect(TestResult.java:110)
+15:16:15       [java] 	at junit.framework.TestResult.runProtected(TestResult.java:128)
+15:16:15       [java] 	at junit.framework.TestResult.run(TestResult.java:113)
+15:16:15       [java] 	at junit.framework.TestCase.run(TestCase.java:124)
+15:16:15       [java] 	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:74)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:69)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:55)
+15:16:15       [java] 	at j9vm.test.ddrext.AutoRun.runTest(AutoRun.java:275)
+15:16:15       [java] 	at j9vm.test.ddrext.AutoRun.main(AutoRun.java:110)
+15:16:15       [java] [DDRExtTesterBase] [INFO] Validation started for : '!walkinterntable  1'
+15:16:15       [java] [AutoRun] [INFO] Finished testWalkInternTable(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:15       [java] 
+15:16:15       [java] [AutoRun] [INFO] Starting testWhatIsSetDepth(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:15       [java] [DDRExtTesterBase] [INFO] Validation started for : '!whatissetdepth  2'
+15:16:15       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!whatissetdepth  2'
+15:16:15       [java] [AutoRun] [INFO] Finished testWhatIsSetDepth(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:15       [java] 
+15:16:15       [java] [AutoRun] [INFO] Starting testWhatis(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:15       [java] [AutoRun] [INFO] Finished testWhatis(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:15       [java] 
+15:16:15       [java] [AutoRun] [INFO] Starting testMethodForName(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:15       [java] [DDRExtTesterBase] [INFO] Validation started for : '!methodforname  sleep'
+15:16:15       [java] [AutoRun] [INFO] Finished testMethodForName(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:15       [java] 
+15:16:15       [java] [AutoRun] [INFO] Starting testByteCodes(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:15       [java] [AutoRun] [INFO] Finished testByteCodes(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:15       [java] 
+15:16:15       [java] [AutoRun] [INFO] Starting testVMConstantPool(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:15       [java] Mar 25, 2021 10:16:14 AM com.ibm.j9ddr.vm29.events.DefaultEventListener corruptData
+15:16:15       [java] SEVERE: Error creating iterator
+15:16:15       [java] com.ibm.j9ddr.NullPointerDereference: Memory Fault reading 0x00000000 : 
+15:16:15       [java] 	at com.ibm.j9ddr.vm29.pointer.AbstractPointer.getPointerAtOffset(AbstractPointer.java:383)
+15:16:15       [java] 	at com.ibm.j9ddr.vm29.pointer.generated.J9PoolPuddleListPointer.nextPuddle(Unknown Source)
+15:16:15       [java] 	at com.ibm.j9ddr.vm29.j9.Pool_29_V0.pool_startDo(Pool_29_V0.java:167)
+15:16:15       [java] 	at com.ibm.j9ddr.vm29.j9.Pool_29_V0.hasNext(Pool_29_V0.java:79)
+15:16:15       [java] 	at com.ibm.j9ddr.vm29.j9.walkers.ClassIterator.setNextItem(ClassIterator.java:83)
+15:16:15       [java] 	at com.ibm.j9ddr.vm29.j9.walkers.ClassIterator.hasNext(ClassIterator.java:70)
+15:16:15       [java] 	at com.ibm.j9ddr.vm29.j9.walkers.ClassIterator.setNextItem(ClassIterator.java:83)
+15:16:15       [java] 	at com.ibm.j9ddr.vm29.j9.walkers.ClassIterator.hasNext(ClassIterator.java:70)
+15:16:15       [java] 	at com.ibm.j9ddr.vm29.tools.ddrinteractive.commands.MethodForNameCommand.dbgGetMethodsForName(MethodForNameCommand.java:110)
+15:16:15       [java] 	at com.ibm.j9ddr.vm29.tools.ddrinteractive.commands.MethodForNameCommand.run(MethodForNameCommand.java:60)
+15:16:15       [java] 	at com.ibm.j9ddr.tools.ddrinteractive.Context.tryCommand(Context.java:229)
+15:16:15       [java] 	at com.ibm.j9ddr.tools.ddrinteractive.Context.execute(Context.java:202)
+15:16:15       [java] 	at com.ibm.j9ddr.tools.ddrinteractive.Context.execute(Context.java:182)
+15:16:15       [java] 	at com.ibm.j9ddr.tools.ddrinteractive.DDRInteractive.execute(DDRInteractive.java:361)
+15:16:15       [java] 	at j9vm.test.ddrext.DDRExtTesterBase.exec(DDRExtTesterBase.java:101)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.TestDDRExtensionGeneral.testMethodForName(TestDDRExtensionGeneral.java:126)
+15:16:15       [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:16:15       [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+15:16:15       [java] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:16:15       [java] 	at java.lang.reflect.Method.invoke(Method.java:498)
+15:16:15       [java] 	at junit.framework.TestCase.runTest(TestCase.java:168)
+15:16:15       [java] 	at junit.framework.TestCase.runBare(TestCase.java:134)
+15:16:15       [java] 	at junit.framework.TestResult$1.protect(TestResult.java:110)
+15:16:15       [java] 	at junit.framework.TestResult.runProtected(TestResult.java:128)
+15:16:15       [java] 	at junit.framework.TestResult.run(TestResult.java:113)
+15:16:15       [java] 	at junit.framework.TestCase.run(TestCase.java:124)
+15:16:15       [java] 	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:74)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:69)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:55)
+15:16:15       [java] 	at j9vm.test.ddrext.AutoRun.runTest(AutoRun.java:275)
+15:16:15       [java] 	at j9vm.test.ddrext.AutoRun.main(AutoRun.java:110)
+15:16:15       [java] 
+15:16:15       [java] [DDRExtTesterBase] [ERROR] '!methodforname  sleep' output does not contain success key : java/lang/Thread.sleep
+15:16:15       [java] [DDRExtTesterBase] [ERROR] '!methodforname  sleep' output :Searching for methods named 'sleep' in VM=0x00000100100AC0B0...
+15:16:15       [java] Found 0 method(s) named sleep
+15:16:15       [java] 
+15:16:15       [java] junit.framework.AssertionFailedError
+15:16:15       [java] 	at junit.framework.Assert.fail(Assert.java:48)
+15:16:15       [java] 	at junit.framework.Assert.assertTrue(Assert.java:20)
+15:16:15       [java] 	at junit.framework.Assert.assertTrue(Assert.java:27)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.TestDDRExtensionGeneral.testMethodForName(TestDDRExtensionGeneral.java:128)
+15:16:15       [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:16:15       [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+15:16:15       [java] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:16:15       [java] 	at java.lang.reflect.Method.invoke(Method.java:498)
+15:16:15       [java] 	at junit.framework.TestCase.runTest(TestCase.java:168)
+15:16:15       [java] 	at junit.framework.TestCase.runBare(TestCase.java:134)
+15:16:15       [java] 	at junit.framework.TestResult$1.protect(TestResult.java:110)
+15:16:15       [java] 	at junit.framework.TestResult.runProtected(TestResult.java:128)
+15:16:15       [java] 	at junit.framework.TestResult.run(TestResult.java:113)
+15:16:15       [java] 	at junit.framework.TestCase.run(TestCase.java:124)
+15:16:15       [java] 	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:74)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:69)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:55)
+15:16:15       [java] 	at j9vm.test.ddrext.AutoRun.runTest(AutoRun.java:275)
+15:16:15       [java] 	at j9vm.test.ddrext.AutoRun.main(AutoRun.java:110)
+15:16:15       [java] Mar 25, 2021 10:16:14 AM com.ibm.j9ddr.vm29.events.DefaultEventListener corruptData
+15:16:15       [java] SEVERE: Error creating iterator
+15:16:15       [java] com.ibm.j9ddr.NullPointerDereference: Memory Fault reading 0x00000000 : 
+15:16:15       [java] 	at com.ibm.j9ddr.vm29.pointer.AbstractPointer.getPointerAtOffset(AbstractPointer.java:383)
+15:16:15       [java] 	at com.ibm.j9ddr.vm29.pointer.generated.J9PoolPuddleListPointer.nextPuddle(Unknown Source)
+15:16:15       [java] 	at com.ibm.j9ddr.vm29.j9.Pool_29_V0.pool_startDo(Pool_29_V0.java:167)
+15:16:15       [java] 	at com.ibm.j9ddr.vm29.j9.Pool_29_V0.hasNext(Pool_29_V0.java:79)
+15:16:15       [java] 	at com.ibm.j9ddr.vm29.j9.walkers.ClassIterator.setNextItem(ClassIterator.java:83)
+15:16:15       [java] 	at com.ibm.j9ddr.vm29.j9.walkers.ClassIterator.hasNext(ClassIterator.java:70)
+15:16:15       [java] 	at com.ibm.j9ddr.vm29.j9.walkers.ClassIterator.setNextItem(ClassIterator.java:83)
+15:16:15       [java] 	at com.ibm.j9ddr.vm29.j9.walkers.ClassIterator.hasNext(ClassIterator.java:70)
+15:16:15       [java] 	at com.ibm.j9ddr.vm29.tools.ddrinteractive.commands.MethodForNameCommand.dbgGetMethodsForName(MethodForNameCommand.java:110)
+15:16:15       [java] 	at com.ibm.j9ddr.vm29.tools.ddrinteractive.commands.MethodForNameCommand.run(MethodForNameCommand.java:60)
+15:16:15       [java] 	at com.ibm.j9ddr.tools.ddrinteractive.Context.tryCommand(Context.java:229)
+15:16:15       [java] 	at com.ibm.j9ddr.tools.ddrinteractive.Context.execute(Context.java:202)
+15:16:15       [java] 	at com.ibm.j9ddr.tools.ddrinteractive.Context.execute(Context.java:182)
+15:16:15       [java] 	at com.ibm.j9ddr.tools.ddrinteractive.DDRInteractive.execute(DDRInteractive.java:361)
+15:16:15       [java] 	at j9vm.test.ddrext.DDRExtTesterBase.exec(DDRExtTesterBase.java:101)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.TestDDRExtensionGeneral.testByteCodes(TestDDRExtensionGeneral.java:137)
+15:16:15       [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:16:15       [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+15:16:15       [java] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:16:15       [java] 	at java.lang.reflect.Method.invoke(Method.java:498)
+15:16:15       [java] 	at junit.framework.TestCase.runTest(TestCase.java:168)
+15:16:15       [java] 	at junit.framework.TestCase.runBare(TestCase.java:134)
+15:16:15       [java] 	at junit.framework.TestResult$1.protect(TestResult.java:110)
+15:16:15       [java] 	at junit.framework.TestResult.runProtected(TestResult.java:128)
+15:16:15       [java] 	at junit.framework.TestResult.run(TestResult.java:113)
+15:16:15       [java] 	at junit.framework.TestCase.run(TestCase.java:124)
+15:16:15       [java] 	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:74)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:69)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:55)
+15:16:15       [java] 	at j9vm.test.ddrext.AutoRun.runTest(AutoRun.java:275)
+15:16:15       [java] 	at j9vm.test.ddrext.AutoRun.main(AutoRun.java:110)
+15:16:15       [java] 
+15:16:15       [java] junit.framework.AssertionFailedError: Failed to obtain method address for method : sleep. Can not proceed further with test
+15:16:15       [java] 	at junit.framework.Assert.fail(Assert.java:50)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.TestDDRExtensionGeneral.testByteCodes(TestDDRExtensionGeneral.java:141)
+15:16:15       [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:16:15       [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+15:16:15       [java] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:16:15       [java] 	at java.lang.reflect.Method.invoke(Method.java:498)
+15:16:15       [java] 	at junit.framework.TestCase.runTest(TestCase.java:168)
+15:16:15       [java] 	at junit.framework.TestCase.runBare(TestCase.java:134)
+15:16:15       [java] 	at junit.framework.TestResult$1.protect(TestResult.java:110)
+15:16:15       [java] 	at junit.framework.TestResult.runProtected(TestResult.java:128)
+15:16:15       [java] 	at junit.framework.TestResult.run(TestResult.java:113)
+15:16:15       [java] 	at junit.framework.TestCase.run(TestCase.java:124)
+15:16:15       [java] 	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:74)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:69)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:55)
+15:16:15       [java] 	at j9vm.test.ddrext.AutoRun.runTest(AutoRun.java:275)
+15:16:15       [java] 	at j9vm.test.ddrext.AutoRun.main(AutoRun.java:110)
+15:16:15       [java] [DDRExtTesterBase] [INFO] Validation started for : '!vmconstantpool '
+15:16:15       [java] [DDRExtTesterBase] [ERROR] '!snaptrace ' output does not contain success key : nextBuffer
+15:16:15       [java] [DDRExtTesterBase] [ERROR] '!snaptrace ' output :Writing snap trace to: /home/jenkins/workspace/Grinder/openjdk-tests/TKG/../TKG/output_16166853589452/testDDRExt_General_0/Snap.DDREXT.J9CORE.DMP.trc
+15:16:15       [java] Buffer size = 8192
+15:16:15       [java] firstBuffer: !uttracebuffer 0x10022631e30
+15:16:15       [java] 1 trace buffers extracted from the dump.
+15:16:15       [java] 
+15:16:15       [java] junit.framework.AssertionFailedError
+15:16:15       [java] 	at junit.framework.Assert.fail(Assert.java:48)
+15:16:15       [java] 	at junit.framework.Assert.assertTrue(Assert.java:20)
+15:16:15       [java] 	at junit.framework.Assert.assertTrue(Assert.java:27)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.TestDDRExtensionGeneral.testSnapTrace(TestDDRExtensionGeneral.java:168)
+15:16:15       [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:16:15       [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+15:16:15       [java] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:16:15       [java] 	at java.lang.reflect.Method.invoke(Method.java:498)
+15:16:15       [java] 	at junit.framework.TestCase.runTest(TestCase.java:168)
+15:16:15       [java] 	at junit.framework.TestCase.runBare(TestCase.java:134)
+15:16:15       [java] 	at junit.framework.TestResult$1.protect(TestResult.java:110)
+15:16:15       [java] 	at junit.framework.TestResult.runProtected(TestResult.java:128)
+15:16:15       [java] 	at junit.framework.TestResult.run(TestResult.java:113)
+15:16:15       [java] 	at junit.framework.TestCase.run(TestCase.java:124)
+15:16:15       [java] 	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:74)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:69)
+15:16:15       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:55)
+15:16:15       [java] 	at j9vm.test.ddrext.AutoRun.runTest(AutoRun.java:275)
+15:16:15       [java] 	at j9vm.test.ddrext.AutoRun.main(AutoRun.java:110)
+15:16:16       [java] [DDRExtTesterBase] [INFO] Starting exhaustive DDR structure test for parent command : '!vmconstantpool '
+15:16:16       [java] [DDRExtTesterBase] [INFO] Runing structure test with : !j9romclassref 0x0900000003F525B0
+15:16:16       [java] 1[DDRExtTesterBase] [INFO] Structure validation passed
+15:16:16       [java] [DDRExtTesterBase] [INFO] Runing structure test with : !j9romnameandsignature 0x900000003f53d74
+15:16:16       [java] [DDRExtTesterBase] [INFO] Structure validation passed
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!vmconstantpool '
+15:16:16       [java] [AutoRun] [INFO] Finished testVMConstantPool(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] 
+15:16:16       [java] [AutoRun] [INFO] Starting testSnapTrace(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!snaptrace '
+15:16:16       [java] [AutoRun] [INFO] Finished testSnapTrace(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] 
+15:16:16       [java] [AutoRun] [INFO] Starting testRanges(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!ranges '
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!ranges '
+15:16:16       [java] [AutoRun] [INFO] Finished testRanges(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] 
+15:16:16       [java] [AutoRun] [INFO] Starting testJ9x(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] [AutoRun] [INFO] Finished testJ9x(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] 
+15:16:16       [java] [AutoRun] [INFO] Starting testJ9xx(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] [AutoRun] [INFO] Finished testJ9xx(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] 
+15:16:16       [java] [AutoRun] [INFO] Starting testContext(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] 0[DDRExtTesterBase] [INFO] Validation started for : '!context '
+15:16:16       [java] [DDRExtTesterBase] [INFO] Starting exhaustive DDR structure test for parent command : '!context '
+15:16:16       [java] [DDRExtTesterBase] [INFO] Runing structure test with : !j9javavm 0x100100ac0b0
+15:16:16       [java] java.lang.NullPointerException
+15:16:16       [java] 	at com.ibm.j9ddr.command.CommandParser.parse(CommandParser.java:165)
+15:16:16       [java] 	at com.ibm.j9ddr.command.CommandParser.<init>(CommandParser.java:72)
+15:16:16       [java] 	at com.ibm.j9ddr.tools.ddrinteractive.Context.execute(Context.java:182)
+15:16:16       [java] 	at com.ibm.j9ddr.tools.ddrinteractive.DDRInteractive.execute(DDRInteractive.java:361)
+15:16:16       [java] 	at j9vm.test.ddrext.DDRExtTesterBase.exec(DDRExtTesterBase.java:101)
+15:16:16       [java] 	at j9vm.test.ddrext.junit.TestDDRExtensionGeneral.testJ9x(TestDDRExtensionGeneral.java:187)
+15:16:16       [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:16:16       [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+15:16:16       [java] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:16:16       [java] 	at java.lang.reflect.Method.invoke(Method.java:498)
+15:16:16       [java] 	at junit.framework.TestCase.runTest(TestCase.java:168)
+15:16:16       [java] 	at junit.framework.TestCase.runBare(TestCase.java:134)
+15:16:16       [java] 	at junit.framework.TestResult$1.protect(TestResult.java:110)
+15:16:16       [java] 	at junit.framework.TestResult.runProtected(TestResult.java:128)
+15:16:16       [java] 	at junit.framework.TestResult.run(TestResult.java:113)
+15:16:16       [java] 	at junit.framework.TestCase.run(TestCase.java:124)
+15:16:16       [java] 	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+15:16:16       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:74)
+15:16:16       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:69)
+15:16:16       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:55)
+15:16:16       [java] 	at j9vm.test.ddrext.AutoRun.runTest(AutoRun.java:275)
+15:16:16       [java] 	at j9vm.test.ddrext.AutoRun.main(AutoRun.java:110)
+15:16:16       [java] java.lang.NullPointerException
+15:16:16       [java] 	at com.ibm.j9ddr.command.CommandParser.parse(CommandParser.java:165)
+15:16:16       [java] 	at com.ibm.j9ddr.command.CommandParser.<init>(CommandParser.java:72)
+15:16:16       [java] 	at com.ibm.j9ddr.tools.ddrinteractive.Context.execute(Context.java:182)
+15:16:16       [java] 	at com.ibm.j9ddr.tools.ddrinteractive.DDRInteractive.execute(DDRInteractive.java:361)
+15:16:16       [java] 	at j9vm.test.ddrext.DDRExtTesterBase.exec(DDRExtTesterBase.java:101)
+15:16:16       [java] 	at j9vm.test.ddrext.junit.TestDDRExtensionGeneral.testJ9xx(TestDDRExtensionGeneral.java:198)
+15:16:16       [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:16:16       [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+15:16:16       [java] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:16:16       [java] 	at java.lang.reflect.Method.invoke(Method.java:498)
+15:16:16       [java] 	at junit.framework.TestCase.runTest(TestCase.java:168)
+15:16:16       [java] 	at junit.framework.TestCase.runBare(TestCase.java:134)
+15:16:16       [java] 	at junit.framework.TestResult$1.protect(TestResult.java:110)
+15:16:16       [java] 	at junit.framework.TestResult.runProtected(TestResult.java:128)
+15:16:16       [java] 	at junit.framework.TestResult.run(TestResult.java:113)
+15:16:16       [java] 	at junit.framework.TestCase.run(TestCase.java:124)
+15:16:16       [java] 	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+15:16:16       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:74)
+15:16:16       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:69)
+15:16:16       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:55)
+15:16:16       [java] 	at j9vm.test.ddrext.AutoRun.runTest(AutoRun.java:275)
+15:16:16       [java] 	at j9vm.test.ddrext.AutoRun.main(AutoRun.java:110)
+15:16:16       [java] 1050624020971903506543626104210471048576327681310720469762048203835026214400000011000762991121100076299152110007629919211000762992323000057647834717553861600262144096324525632451110013107264853594121845843202048151316243200100112345429261516384409611111111110111111110083650000192512-1000000105-1174800028880110007629927211000762993120-100012800110102410256[DDRExtTesterBase] [INFO] Structure validation passed
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!context '
+15:16:16       [java] [AutoRun] [INFO] Finished testContext(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] 
+15:16:16       [java] [AutoRun] [INFO] Starting testJ9ExtendedMethodFlagInfo(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!j9extendedmethodflaginfo  1'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!j9extendedmethodflaginfo  1'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!j9extendedmethodflaginfo  2'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!j9extendedmethodflaginfo  2'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!j9extendedmethodflaginfo  3'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!j9extendedmethodflaginfo  3'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!j9extendedmethodflaginfo  4'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!j9extendedmethodflaginfo  4'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!j9extendedmethodflaginfo  5'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!j9extendedmethodflaginfo  5'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!j9extendedmethodflaginfo  6'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!j9extendedmethodflaginfo  6'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!j9extendedmethodflaginfo  7'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!j9extendedmethodflaginfo  7'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!j9extendedmethodflaginfo  8'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!j9extendedmethodflaginfo  8'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!j9extendedmethodflaginfo  9'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!j9extendedmethodflaginfo  9'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!j9extendedmethodflaginfo  10'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!j9extendedmethodflaginfo  10'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!j9extendedmethodflaginfo  11'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!j9extendedmethodflaginfo  11'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!j9extendedmethodflaginfo  12'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!j9extendedmethodflaginfo  12'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!j9extendedmethodflaginfo  13'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!j9extendedmethodflaginfo  13'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!j9extendedmethodflaginfo  14'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!j9extendedmethodflaginfo  14'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!j9extendedmethodflaginfo  15'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!j9extendedmethodflaginfo  15'
+15:16:16       [java] [AutoRun] [INFO] Finished testJ9ExtendedMethodFlagInfo(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] 
+15:16:16       [java] [AutoRun] [INFO] Starting testPlugins(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!plugins  setpath /home/jenkins/workspace/Grinder/openjdk-tests/TKG/../../jvmtest/functional/DDR_Test/ddrplugin.jar'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!plugins  setpath /home/jenkins/workspace/Grinder/openjdk-tests/TKG/../../jvmtest/functional/DDR_Test/ddrplugin.jar'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!plugins  reload'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!plugins  reload'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!plugins  list'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!plugins  list'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!test '
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!test '
+15:16:16       [java] [AutoRun] [INFO] Finished testPlugins(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] 
+15:16:16       [java] [AutoRun] [INFO] Starting testSetVM(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!setvm  1099780767920'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!setvm  1099780767920'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!setvm  0x100100ac0b0'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!setvm  0x100100ac0b0'
+15:16:16       [java] 1050624020971903506543626104210471048576327681310720469762048203835026214400000011000762991121100076299152110007629919211000762992323000057647834717553861600262144096324525632451110013107264853594121845843202048151316243200100112345429261516384409611111111110111111110083650000192512-1000000105-1174800028880110007629927211000762993120-100012800110102410256[DDRExtTesterBase] [INFO] Validation started for : '!setvm  805403648'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!setvm  805403648'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!setvm  0x30017c00'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!setvm  0x30017c00'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!setvm  1099780767928'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!setvm  1099780767928'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!setvm  0x100100ac0b8'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!setvm  0x100100ac0b8'
+15:16:16       [java] [AutoRun] [INFO] Finished testSetVM(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] 
+15:16:16       [java] [AutoRun] [INFO] Starting testShowdumpagents(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!showdumpagents '
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!showdumpagents '
+15:16:16       [java] [AutoRun] [INFO] Finished testShowdumpagents(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] 
+15:16:16       [java] [AutoRun] [INFO] Starting testDclibs(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!dclibs '
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!dclibs '
+15:16:16       [java] [AutoRun] [INFO] Finished testDclibs(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] 
+15:16:16       [java] [AutoRun] [INFO] Starting testWalkJ9Pool(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] 1050624020971903506543626104210471048576327681310720469762048203835026214400000011000762991121100076299152110007629919211000762992323000057647834717553861600262144096324525632451110013107264853594121845843202048151316243200100112345429261516384409611111111110111111110083650000192512-1000000105-1174800028880110007629927211000762993120-1000128001101024102568162[DDRExtTesterBase] [INFO] Validation started for : '!walkj9pool  0x0000010010399FB0'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!walkj9pool  0x0000010010399FB0'
+15:16:16       [java] 8162[DDRExtTesterBase] [INFO] Validation started for : '!walkj9pool  0x0000010010398E30'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!walkj9pool  0x0000010010398E30'
+15:16:16       [java] 8162147483650[DDRExtTesterBase] [INFO] Validation started for : '!walkj9pool  0x0000010010170310'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!walkj9pool  0x0000010010170310'
+15:16:16       [java] 8162147483650[DDRExtTesterBase] [INFO] Validation started for : '!walkj9pool  0x00000100100B3710'
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!walkj9pool  0x00000100100B3710'
+15:16:16       [java] [AutoRun] [INFO] Finished testWalkJ9Pool(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] 
+15:16:16       [java] [AutoRun] [INFO] Starting testCoreInfo(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] 
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!coreinfo '
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!coreinfo '
+15:16:16       [java] [AutoRun] [INFO] Finished testCoreInfo(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] 
+15:16:16       [java] [AutoRun] [INFO] Starting testNativeMemInfo(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!nativememinfo '
+15:16:16       [java] [AutoRun] [INFO] Finished testNativeMemInfo(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] 
+15:16:16       [java] [AutoRun] [INFO] Starting testVersionInfo(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] 
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation started for : '!coreinfo '
+15:16:16       [java] [DDRExtTesterBase] [INFO] Validation passed for : '!coreinfo '
+15:16:16       [java] [AutoRun] [INFO] Finished testVersionInfo(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] 
+15:16:16       [java] [AutoRun] [INFO] ================Test Result for /home/jenkins/workspace/Grinder/openjdk-tests/TKG/../TKG/output_16166853589452/testDDRExt_General_0/DDREXT.J9CORE.DMP==================
+15:16:16       [java] [AutoRun] [INFO] Errors:   3 out of 21 test cases.
+15:16:16       [java] [AutoRun] [INFO] Failures: 5 out of 21 test cases.
+15:16:16       [java] [AutoRun] [INFO] Total Error/Failures: 8
+15:16:16       [java] [DDRExtTesterBase] [ERROR] '!nativememinfo ' output is null or empty
+15:16:16       [java] junit.framework.AssertionFailedError
+15:16:16       [java] 	at junit.framework.Assert.fail(Assert.java:48)
+15:16:16       [java] 	at junit.framework.Assert.assertTrue(Assert.java:20)
+15:16:16       [java] 	at junit.framework.Assert.assertTrue(Assert.java:27)
+15:16:16       [java] 	at j9vm.test.ddrext.junit.TestDDRExtensionGeneral.testNativeMemInfo(TestDDRExtensionGeneral.java:582)
+15:16:16       [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+15:16:16       [java] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+15:16:16       [java] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+15:16:16       [java] 	at java.lang.reflect.Method.invoke(Method.java:498)
+15:16:16       [java] 	at junit.framework.TestCase.runTest(TestCase.java:168)
+15:16:16       [java] 	at junit.framework.TestCase.runBare(TestCase.java:134)
+15:16:16       [java] 	at junit.framework.TestResult$1.protect(TestResult.java:110)
+15:16:16       [java] 	at junit.framework.TestResult.runProtected(TestResult.java:128)
+15:16:16       [java] 	at junit.framework.TestResult.run(TestResult.java:113)
+15:16:16       [java] 	at junit.framework.TestCase.run(TestCase.java:124)
+15:16:16       [java] 	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+15:16:16       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:74)
+15:16:16       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:69)
+15:16:16       [java] 	at j9vm.test.ddrext.junit.DDRTestSuite.run(DDRTestSuite.java:55)
+15:16:16       [java] 	at j9vm.test.ddrext.AutoRun.runTest(AutoRun.java:275)
+15:16:16       [java] 	at j9vm.test.ddrext.AutoRun.main(AutoRun.java:110)
+15:16:16       [java] [AutoRun] [ERROR] testWalkInternTable(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] [AutoRun] [ERROR] testMethodForName(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] [AutoRun] [ERROR] testByteCodes(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] [AutoRun] [ERROR] testSnapTrace(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16       [java] [AutoRun] [ERROR] testNativeMemInfo(j9vm.test.ddrext.junit.TestDDRExtensionGeneral)
+15:16:16  
+15:16:16  BUILD FAILED
+15:16:16  /home/jenkins/workspace/Grinder/jvmtest/functional/DDR_Test/tck_ddrext.xml:152: The following error occurred while executing this line:
+15:16:16  /home/jenkins/workspace/Grinder/jvmtest/functional/DDR_Test/tck_ddrext.xml:124: Java returned: 254
+15:16:16  
+15:16:16  Total time: 15 seconds
+15:16:16  
+15:16:16  testDDRExt_General_0_FAILED
+```
+

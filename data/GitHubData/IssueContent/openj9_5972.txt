@@ -1,0 +1,1 @@
+Each time `TR::Compiler->om.objectAlignmentInBytes()` is queried (or the deprecated `FrontEnd->getObjectAlignmentInBytes()`) it results in a call back into the JVM to query the answer.  This answer does not change for a particular JVM instance, hence the answer should be cached to avoid the overhead of the callback.

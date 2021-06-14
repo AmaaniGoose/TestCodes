@@ -1,0 +1,6 @@
+OpenJ9 does not support removing the native modifier.
+
+got an exception:
+`java.lang.UnsupportedOperationException: class redefinition failed: attempted to change method modifiers`
+
+This works fine on OpenJDK.

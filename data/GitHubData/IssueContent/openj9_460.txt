@@ -1,0 +1,8 @@
+The tests in openj9/test/Java8andUp/src/org/openj9/test/floatsanity/custom/Check1ULPMath.java have a pattern which says:
+> if (Double.isNaN(expected)) {
+>    Assert.assertTrue(Double.isNaN(expected), operation);
+>} else {
+>   Assert.assertEquals(result, expected, 0, operation);
+>}
+
+The isNan test is not needed - it is handled by assertEquals and isNaN results will never fail because we only ever test the expected value. It may be better for these tests keep the expected value as a long and to only do `Double.longBitsToDouble` to generate the operand(s), do the test, and then use `Double.doubleToLongBits` which will then make the comparisons bit accurate without floating point math which happens in the Asserts for double and float even if the delta is 0.

@@ -1,0 +1,9 @@
+More than half of jdk_jdi tests failed with Dragonwell jdk8 on packet boxes. Tests passed on other boxes. Also test build took 4 hours compared 40 mins on other boxes. Test builds with hotspot|openj9 on packet boxes also take three times longer than on other boxes without behaviour difference. That is test results are consistent running on packet or other boxes.
+
+<img width="1247" alt="Screen Shot 2020-09-17 at 11 05 22 AM" src="https://user-images.githubusercontent.com/18030625/93489704-c11f5500-f8d5-11ea-9705-492ab2416b30.png">
+
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk8_dragonwell_sanity.openjdk_x86-64_linux/14/
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk8_dragonwell_sanity.openjdk_x86-64_linux/12/
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/Test_openjdk8_dragonwell_sanity.openjdk_x86-64_linux/10/
+
+Not sure what's the difference between packet boxes with other except for performance?

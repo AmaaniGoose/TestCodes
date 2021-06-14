@@ -1,0 +1,14 @@
+Please set the title to indicate the test name and machine name where known.
+
+To make it easy for the infrastructure team to repeat and diagnose, please
+answer the following questions:
+
+- test suite/name? JDK16 OpenJ9 extended.functional suite
+- Is there an existing issue elsewhere covering this? Not to my knowledge
+- Which machine(s) does it work on? It has not failed fatally on aix72-2, build-2, ibm-2, or on this machine previously 
+- Which machine(s) does it fail on? test-osuosl-aix72-ppc64-1
+- Do you have a link to a Grinder re-run if the test with the failure? https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_extended.functional_ppc64_aix/40/ was the failure and it can be re-run from there
+
+Any other details: Potential out of disk space issue. As I write this i freed up some space in the jenkins home directory which may have released it to get to the failure state. I haven't looked at the log, but just noting this for whoever picks it up. The time on the machine is currently 0447 and a 3Gb core file was present in /tmp which was created at 2009 yesterday (The test took 8h44 so the core likely came from the test. It may be a simple out of disk space issue in the jenkins home dir that caused this, but we should verify.
+
+FYI to anyone who might be looking at results @smlambert @andrew-m-leonard - I'll re-run it on the same machine at https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_extended.functional_ppc64_aix/41/

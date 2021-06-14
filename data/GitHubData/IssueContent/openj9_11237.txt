@@ -1,0 +1,18 @@
+```
+<concurrent-kickoff id="795" timestamp="2020-10-19T07:18:51.326">
+  <kickoff reason="threshold reached" targetBytes="717044792" thresholdFreeBytes="99074768"  remainingFree="98966736" tenureFreeBytes="175532784" nurseryFreeBytes="98966736" />
+</concurrent-kickoff>
+<exclusive-start id="796" timestamp="2020-10-19T07:18:51.334" intervalms="432.374">
+  <response-info timems="0.252" idlems="0.249" threads="1" lastid="0000000000785500" lastname="Group1.TxInjector.CompositeTxInjector.I.driver.service.35" />
+</exclusive-start>
+<cycle-start id="797" type="global" contextid="0" timestamp="2020-10-19T07:18:51.334" intervalms="48768.123" />
+<exclusive-end id="798" timestamp="2020-10-19T07:18:51.334" durationms="0.177" />
+
+....
+
+<concurrent-collection-start id="800" timestamp="2020-10-19T07:18:51.676" intervalms="55891.125" >
+....
+<cycle-end id="810" type="global" contextid="797" timestamp="2020-10-19T07:18:51.766" />
+<concurrent-collection-end id="811" timestamp="2020-10-19T07:18:51.766" />
+```
+While concurrent-collection-start/end are attached to cycle-end that does have contextid, for completeness it's probably wise to add it to concurrent-collection-start, as well.

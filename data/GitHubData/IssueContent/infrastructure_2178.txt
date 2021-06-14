@@ -1,0 +1,19 @@
+Ref:
+- https://ci.adoptopenjdk.net/job/VagrantPlaybookCheck/1160/
+- https://ci.adoptopenjdk.net/job/VagrantPlaybookCheck/OS=Win2012,label=vagrant/1153/
+
+- [ ] Missing install
+- [x] Bug in ansible playbook
+- [ ] Request for new playbook addition
+
+Details:
+Registering the MSVS_2013 shared libraries ([this task](https://github.com/AdoptOpenJDK/openjdk-infrastructure/blob/3ecc482cd9d34545676efecab0626882321385bb/ansible/playbooks/AdoptOpenJDK_Windows_Playbook/roles/MSVS_2013/tasks/main.yml#L26)), intermittently fails with :
+```
+10:59:23 TASK [MSVS_2013 : Register Visual Studio Community 2013 DIA SDK shared libraries] ***
+10:59:26 failed: [127.0.0.1] (item=C:\Program Files (x86)\Microsoft Visual Studio 12.0\DIA SDK\bin\msdia120.dll) => {"ansible_loop_var": "item", "changed": true, "cmd": "regsvr32 /s \"C:\\Program Files (x86)\\Microsoft Visual Studio 12.0\\DIA SDK\\bin\\msdia120.dll\"", "delta": "0:00:00.093433", "end": "2021-05-05 09:57:05.619367", "item": "C:\\Program Files (x86)\\Microsoft Visual Studio 12.0\\DIA SDK\\bin\\msdia120.dll", "msg": "non-zero return code", "rc": 3, "start": "2021-05-05 09:57:05.525933", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+```
+(return code 3).
+
+There's no stderr because regsvr32 is being run with `/s`, however that may help with debugging. See: https://devblogs.microsoft.com/oldnewthing/20180921-00/?p=99795 which may give some insight. 
+
+According to above, RC=3 means the `loadlibrary` call is failing (or that it's a red herring). Either way, removing `/s` will give some insight, so that's where I'll start.

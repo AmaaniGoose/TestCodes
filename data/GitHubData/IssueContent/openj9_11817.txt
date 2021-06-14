@@ -1,0 +1,37 @@
+### Dependencies to reproduce the error
+
+#11815 and #11816 need to be merged before this error is seen.
+
+### Test source code: ClassDataTest.illegalAccess
+
+https://github.com/ibmruntimes/openj9-openjdk-jdk16/blob/aee3e45015987017ba3e0e4aaac41fd3eb8027c8/test/jdk/java/lang/invoke/MethodHandles/classData/ClassDataTest.java#L79-L99
+
+### First failure
+```
+test ClassDataTest.illegalAccess(java.lang.invoke.MethodHandles$Lookup@2f61e1c0, 31): failure
+java.lang.AssertionError: expected [31] but found [15]
+	at org.testng.Assert.fail(Assert.java:94)
+	at org.testng.Assert.failNotEquals(Assert.java:496)
+	at org.testng.Assert.assertEquals(Assert.java:125)
+	at org.testng.Assert.assertEquals(Assert.java:372)
+	at org.testng.Assert.assertEquals(Assert.java:382)
+	at ClassDataTest.illegalAccess(ClassDataTest.java:97)
+```
+
+### Second failure
+```
+test ClassDataTest.illegalAccess(java.lang.invoke.MethodHandles$Lookup@c48b6873, 25): failure
+java.lang.AssertionError: expected [25] but found [9]
+	at org.testng.Assert.fail(Assert.java:94)
+	at org.testng.Assert.failNotEquals(Assert.java:496)
+	at org.testng.Assert.assertEquals(Assert.java:125)
+	at org.testng.Assert.assertEquals(Assert.java:372)
+	at org.testng.Assert.assertEquals(Assert.java:382)
+	at ClassDataTest.illegalAccess(ClassDataTest.java:97)
+```
+
+### Notes
+
+1. `MethodHandles.privateLookupIn` and `Lookup.in` incorrectly set access modes for hidden classes. For `privateLookupIn`, `targetClassModule` and `accessClassModule` should be the same. But, they are different in case of OpenJ9. The issue with `Lookup.in` still needs to be investigated.
+2. The reported errors are fixed when OJDK MHs are enabled in OpenJ9. So, these failures do not need to be fixed for the JDK16 0.25 release.
+3. Re-enable `ClassDataTest.java` after enabling OJDK MHs in OpenJ9. So, https://github.com/AdoptOpenJDK/openjdk-tests/blob/b50b19e3edc76b951805b42ca364e178a826dafe/openjdk/ProblemList_openjdk16-openj9.txt#L109 should be removed to re-enable `ClassDataTest.java`.

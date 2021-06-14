@@ -1,0 +1,25 @@
+This discussion issue is to capture goals/benefits/restrictions of building/testing OpenJ9 as part of the Eclipse AQAvit program (as we move AdoptOpenJDK repos and activities to Eclipse foundation under Adoptium Github organization.
+
+During the discussion in the OpenJ9 Community call on April 27, 2021, this issue was introduced.  Feedback during the call indicated a preference to continue, and to keep the same frequency that we currently have (some tests nightly, some tests weekly).
+
+
+**Goals/Benefits for AQAvit** 
+- continue to test varied distributions, including OpenJ9 to improve the test material and approach for testing all distros
+- be able to test Adoptium WG members distros listed in the Marketplace 
+- innovate and improve QA related scripts and tools to cover many different use cases
+
+**Goals/Benefits for OpenJ9**
+- have additional test coverage through testing of OpenJ9 running at Adoptium
+- test results listed in live/public TRSS instance
+- benefit from improvements to AQAvit test material and tools via AQAvit project work
+
+**Restrictions**
+- EF has a restriction around what distributions are available for download via the Adoptium project, so testing will continue to take SDK_RESOURCE=upstream and OpenJ9 binaries would not be made available for download via the API or Jenkins.  To address this restriction, we may change SDK_RESOURCE=nightly and releases to point to a different API to pull from the location where these builds are continued to be produced and distributed.
+
+**Triage and Assistance**
+- we are working very hard to get the AQA suite running "green" but upon the move to Adoptium, we will expect other resources to assist with triaging the AQAvit OpenJ9 test runs
+- without the assistance, if the builds/tests become unhealthy / unattended, we would choose to disable them until someone can help get them back to relative health (assuming this would never be a case, given there are several overlaps with the activities at the OpenJ9 Jenkins server which help keep things looking sane).
+
+--------------
+
+Please add details, comments or questions to this discussion issue as you think of them.  Thanks!

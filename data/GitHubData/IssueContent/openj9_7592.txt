@@ -1,0 +1,44 @@
+Failure link
+------------
+Rebuild link: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&BUILD_LIST=openjdk&JenkinsFile=openjdk_x86-64_linux&CUSTOM_TARGET=test/jdk/java/rmi/dgc/retryDirtyCalls/RetryDirtyCalls.java&TARGET=jdk_custom_0
+
+Version: JDK 11+
+JVM: Openj9 only
+Platforms: all
+
+Optional info
+-------------
+- intermittent failure: yes
+- regression or new test: Regression
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+Regression test for bug 4268258
+
+java.lang.RuntimeException: remote object unreferenced
+    at RetryDirtyCalls.main(RetryDirtyCalls.java:140)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+    at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+    at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+    at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+    at java.base/java.lang.Thread.run(Thread.java:831)
+java.lang.RuntimeException: TEST FAILED: java.lang.RuntimeException: remote object unreferenced
+    at RetryDirtyCalls.main(RetryDirtyCalls.java:163)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+    at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+    at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+    at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+    at java.base/java.lang.Thread.run(Thread.java:831)
+
+JavaTest Message: Test threw exception: java.lang.RuntimeException: TEST FAILED: java.lang.RuntimeException: remote object unreferenced
+JavaTest Message: shutting down test
+
+STATUS:Failed.`main' threw exception: java.lang.RuntimeException: TEST FAILED: java.lang.RuntimeException: remote object unreferenced
+```
+
+This test is engineering dirty DGC calls to fail, and testing whether client side DGC will retry the same dirty call at least 3 other times, where the 4th and final call made to the custom SocketFactory will be successful in creating a socket. This is just repeated in a loop until a timeout is hit and the test is deemed passed.
+
+The problem seems to be that on occasion, after a connection is allowed and a socket created, the remote object is being unreferenced by the DGC, meaning that the DGC is deeming it unreachable by the client even though it is not. This happens around once in every 5 attempts at running the test.

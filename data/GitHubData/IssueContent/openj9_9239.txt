@@ -1,0 +1,52 @@
+K8 provides two resource bounds for controlling the use of memory and cpu in a container:
+* Requests: guaranteed minimum a container will get
+* Limits: upper bound that a container can't go beyond without restriction
+
+Currently, the "limit" is used to create the cgroup for the container.  This means the JVM's default container awareness is based on the upper bound (limit) rather than the lower bound (request).
+
+To my knowledge, the "request" limits are not exposed to the container by default so the JVM can't use them to control heap and CPU settings.
+
+There is a K8 api, the Downward API, that allows passing K8-related info into the container.  See https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/
+
+We should define a standard set of environment variables for the REQUEST parameters to allow the JVM to size itself based on the lower bound rather than the upper.  These ENV vars would be used in preference to cgroup settings.
+
+We would also need to work with groups like Appsody and others that are creating yaml files to set the env vars in their yaml.
+
+Example ymal from https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/ :
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dapi-envars-resourcefieldref
+spec:
+  containers:
+    - .....
+      resources:
+        requests:
+          memory: "32Mi"
+          cpu: "125m"
+        limits:
+          memory: "64Mi"
+          cpu: "250m"
+      env:
+        - name: MY_CPU_REQUEST
+          valueFrom:
+            resourceFieldRef:
+              containerName: test-container
+              resource: requests.cpu
+        - name: MY_CPU_LIMIT
+          valueFrom:
+            resourceFieldRef:
+              containerName: test-container
+              resource: limits.cpu
+        - name: MY_MEM_REQUEST
+          valueFrom:
+            resourceFieldRef:
+              containerName: test-container
+              resource: requests.memory
+        - name: MY_MEM_LIMIT
+          valueFrom:
+            resourceFieldRef:
+              containerName: test-container
+              resource: limits.memory
+```

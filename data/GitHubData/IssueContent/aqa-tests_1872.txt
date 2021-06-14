@@ -1,0 +1,8 @@
+We currently make assumptions about where we should pull openjdk test material.  These assumptions are restrictive as we assume for hotspot they are coming from an Adopt mirror, and for openj9 they are from an openjdk extensions repo.  We further assume that if you do not supply a RELEASE_TAG, that we should pull test material from tip.
+
+The current approach is a limitation as other distributors could not easily swap in their mirrors of openjdk.  (this will fix the openjdk-test issues related to corretto tests failing due to mismatch of test materials, we are trying to use Adopt git mirror when we should use the corretto mirror).
+
+Changing to expect and JDK_REPO and JDK_BRANCH for openjdk test material gives more flexibility, and explicitly sets the branch/release/sha info, as well as removes the convoluted logic contained in [openjdk-tests/openjdk/build.xml](https://github.com/AdoptOpenJDK/openjdk-tests/blob/master/openjdk/build.xml#L67-L182)
+
+Downside is that we will need to update a bunch of Jenkins job config, including openjdk-build pipelines, but we auto-gen these now, so likely manageable.
+

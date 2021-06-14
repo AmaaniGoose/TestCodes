@@ -1,0 +1,15 @@
+
+HI,
+i want to test performance ,
+
+for（int i=0; i<100;i++）{
+
+}
+
+for(Object1 obj:objectList) {
+
+}
+
+how can i test openj9 foreach performance ？ which framework show i use ?
+
+cloud you help me ?

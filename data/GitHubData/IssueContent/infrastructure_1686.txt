@@ -1,0 +1,5 @@
+It's on OpenShift, so there's less to do. Required checks:
+
+* [ ] SSL cert up-to-date
+* [ ] Website available (for example, contains text "jlink.online")
+* [ ] Check API health and free cache (https://github.com/AdoptOpenJDK/jlink.online/pull/32)

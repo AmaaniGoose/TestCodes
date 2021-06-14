@@ -1,0 +1,3 @@
+I noticed that the JIT Power codegen doesn't support the compact locals optimization (where the JIT frame is compacted by sharing non-interfering autos).  Was that a conscious decision (e.g., it wouldn't be worth the effort because there are so many registers), or is it just an oversight?  @gita-omr @zl-wang 
+
+Ditto for ARM and AArch64.

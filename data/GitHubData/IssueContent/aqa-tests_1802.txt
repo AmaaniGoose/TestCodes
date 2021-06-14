@@ -1,0 +1,2 @@
+jdk14 is currently serving up [builds from May 8th ](https://github.com/AdoptOpenJDK/openjdk-build/issues/1794)(from 20 days ago).  We can add a test that runs that will fail if the nightlies from the API are over a certain number of days old.  As we do not turn off builds (only testing) during release period, this should always be a short period of time that we miss producing a nightly build for any given version.
+

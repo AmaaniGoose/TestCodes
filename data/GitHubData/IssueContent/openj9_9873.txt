@@ -1,0 +1,6 @@
+Following a discussion on slack:
+https://openj9.slack.com/archives/C8312LCV9/p1591547152254200
+
+I would like to suggest an enhancement to allow overriding the JVM allocator so programs that embed the JVM will be able to give their own memory allocator and follow memory allocations of the JVM. I know for example that a program that embeds the C python is able to specify the memory allocator and the C python will use this allocator to allocate memory. I would like to have the same capability with openj9.
+
+Let me know if it sounds reasonable and if its something you would consider. I will be happy to help with coding it if you give me some guidance and design on how you would imagine such an API.

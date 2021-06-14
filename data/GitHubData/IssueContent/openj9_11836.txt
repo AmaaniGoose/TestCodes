@@ -1,0 +1,61 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_special.system_x86-64_windows_Nightly_testList_3/43
+MauveMultiThrdLoad_special_5m_12
+[2021-01-30T08:47:53.110Z] variation: Mode551
+[2021-01-30T08:47:53.110Z] JVM_OPTIONS:  -XX:+UseCompressedOops -Xjit -Xgcpolicy:balanced 
+No diagnostics.
+```
+[2021-01-30T08:52:42.249Z] LT  02:52:42.364 - Completed 93.5%. Number of tests started=6556698 (+0)
+[2021-01-30T08:52:58.921Z] STF 02:52:59.209 - Heartbeat: Process LT  is still running
+[2021-01-30T08:53:00.859Z] LT  02:53:02.379 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T08:53:20.593Z] LT  02:53:22.286 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T08:53:40.468Z] LT  02:53:42.301 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T08:54:01.142Z] LT  02:54:02.317 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T08:54:21.374Z] LT  02:54:22.333 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T08:54:41.452Z] LT  02:54:42.348 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T08:55:01.468Z] LT  02:55:02.364 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T08:55:21.624Z] LT  02:55:22.379 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T08:55:41.577Z] LT  02:55:42.286 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T08:56:01.686Z] LT  02:56:02.301 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T08:56:22.201Z] LT  02:56:22.317 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T08:56:42.830Z] LT  02:56:42.333 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T08:57:03.108Z] LT  02:57:02.348 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T08:57:23.659Z] LT  02:57:22.364 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T08:57:44.233Z] LT  02:57:42.379 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T08:57:57.451Z] STF 02:57:59.194 - Heartbeat: Process LT  is still running
+[2021-01-30T08:58:01.092Z] LT  02:58:02.287 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T08:58:23.498Z] LT  02:58:22.301 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T08:58:42.639Z] LT  02:58:42.333 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T08:59:00.686Z] LT  02:59:02.348 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T08:59:21.732Z] LT  02:59:22.348 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T08:59:41.591Z] LT  02:59:42.348 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T09:00:03.155Z] LT  03:00:02.364 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T09:00:20.560Z] LT  03:00:22.380 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T09:00:40.592Z] LT  03:00:42.286 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T09:01:00.685Z] LT  03:01:02.301 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T09:01:20.810Z] LT  03:01:22.317 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T09:01:40.716Z] LT  03:01:42.333 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T09:02:00.747Z] LT  03:02:02.348 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T09:02:20.716Z] LT  03:02:22.364 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T09:02:41.310Z] LT  03:02:42.380 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T09:02:58.169Z] STF 03:02:59.241 - Heartbeat: Process LT  is still running
+[2021-01-30T09:03:00.731Z] LT  03:03:02.286 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T09:03:22.856Z] LT  03:03:22.286 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T09:03:41.388Z] LT  03:03:42.302 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T09:04:01.450Z] LT  03:04:02.317 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T09:04:23.247Z] LT  03:04:22.333 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T09:04:43.294Z] LT  03:04:42.348 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T09:05:00.325Z] LT  03:05:02.364 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T09:05:20.575Z] LT  03:05:22.380 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T09:05:40.668Z] LT  03:05:42.286 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T09:06:01.324Z] LT  03:06:02.286 - Completed 100.0%. Number of tests started=6556698 (+0)
+[2021-01-30T09:06:09.965Z] LT  03:06:10.598 - **POSSIBLE HANG DETECTED**
+[2021-01-30T09:06:09.965Z] STF 03:06:11.022 - **FAILED** Process LT  has hung
+[2021-01-30T09:06:09.965Z] STF 03:06:11.022 - Collecting dumps for: LT 
+[2021-01-30T09:06:09.965Z] STF 03:06:11.429 - Using procdump.exe to generate .DMP files
+[2021-01-30T09:06:09.965Z] STF 03:06:11.430 - Running command: F:\Users\jenkins\workspace\Test_openjdk8_j9_special.system_x86-64_windows_Nightly_testList_3\jvmtest\system\systemtest_prereqs\windows_sysinternals\procdump.exe -accepteula -ma 4368
+[2021-01-30T09:06:09.965Z] STF 03:06:11.430 - Redirecting stderr to F:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x86-64_windows_Nightly_testList_3/openjdk-tests/TKG/output_16119870487572/MauveMultiThrdLoad_special_5m_12/20210130-024755-MauveMultiThrdLoadTrc/results/1.LT.jvmdump.stderr
+[2021-01-30T09:06:09.965Z] STF 03:06:11.430 - Redirecting stdout to F:/Users/jenkins/workspace/Test_openjdk8_j9_special.system_x86-64_windows_Nightly_testList_3/openjdk-tests/TKG/output_16119870487572/MauveMultiThrdLoad_special_5m_12/20210130-024755-MauveMultiThrdLoadTrc/results/1.LT.jvmdump.stdout
+[2021-01-30T09:06:09.965Z] STF 03:06:11.435 - Pausing for 30 seconds
+[2021-01-30T09:06:46.653Z] Cannot contact win2012-x86-4: java.lang.InterruptedException
+Cancelling nested steps due to timeout
+```

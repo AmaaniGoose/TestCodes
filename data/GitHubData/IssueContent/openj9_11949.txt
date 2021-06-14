@@ -1,0 +1,12 @@
+We believe that we may be able to combine a [public Azure Devops](https://docs.microsoft.com/en-us/azure/devops/organizations/public/about-public-projects?view=azure-devops#get-started-with-a-public-project) for this open-source project (with [unlimited machine minutes](https://azure.microsoft.com/en-us/blog/announcing-azure-pipelines-with-unlimited-ci-cd-minutes-for-open-source/) and up to 10 parallel jobs) with a few Azure Jenkins plugins to create dynamically created test agents to expand the number of xlinux/windows/mac test machines.  
+
+This issue will track the investigation and work that is required to enable this (if it is indeed possible).
+
+- [ ] Create public AzDo organization
+- [ ] Add committers as admins
+- [ ] Create a PR to add several Azure plugins to Eclipse Jenkins (similar to https://github.com/eclipse-cbi/jiro/pull/61 but adding azure-commons azure-credentials and azure-vm-agents)
+- [ ] Configure public AzDo as a cloud provider to Eclipse Jenkins as per [azure-vm-agents doc](https://plugins.jenkins.io/azure-vm-agents/) (EF infra assistance? can raise bugzilla once we know what is required)
+- [ ] Change [Jenkinsfilebase](https://github.com/AdoptOpenJDK/openjdk-tests/blob/master/buildenv/jenkins/JenkinsfileBase) (currently in Sophia's branch) to call azure-vm-agents when no static machines are idle
+- [ ] Verify on xlinux resources first (follow later with others)
+- [ ] If we get to this point, review with committers & present in OpenJ9 community call
+

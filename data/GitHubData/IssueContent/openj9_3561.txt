@@ -1,0 +1,50 @@
+https://ci.eclipse.org/openj9/job/Test-extended.functional-JDK11-linux_x86-64/72
+https://ci.eclipse.org/openj9/job/Test-extended.functional-JDK11-aix_ppc-64_cmprssptrs/65
+
+```
+===============================================
+Running test vmLifecyleTests_3 ...
+===============================================
+vmLifecyleTests_3 Start Time: Tue Nov  6 06:05:12 2018 Epoch Time (ms): 1541484312463
+test with Mode501
+
+childProcessMain PASSED (rc==0)
+
+childProcessMain PASSED (rc==0)
+
+childProcessMain PASSED (rc==0)
+
+childProcessMain PASSED (rc==0)
+
+childProcessMain PASSED (rc==0)
+
+childProcessMain PASSED (rc==0)
+
+childProcessMain PASSED (rc==0)
+
+childProcessMain PASSED (rc==0)
+
+childProcessMain PASSED (rc==0)
+
+childProcessMain PASSED (rc==0)
+
+childProcessMain PASSED (rc==0)
+
+childProcessMain PASSED (rc==0)
+
+childProcessMain PASSED (rc==0)
+
+childProcessMain PASSED (rc==0)
+JVMJ9VM094I Thread "Common-Cleaner" is still alive after running the shutdown hooks.
+
+The JVM was not shutdown properly
+
+childProcessMain FAILED (rc==1)
+testMultipleCreate: Unknown return value from WaitForProcess(): failed (procrc = 0000000000000001)
+
+testMultipleProcessEachWithAJVM FAILED (rc==1)
+
+FAILURES DETECTED
+
+vmLifecyleTests_3_FAILED
+```

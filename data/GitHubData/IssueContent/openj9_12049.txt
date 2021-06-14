@@ -1,0 +1,7 @@
+In the following code, we call `findCallTargetUsingArgumentPreexistence` if we have fixed type info on the receiver
+https://github.com/eclipse/openj9/blob/48b1439ec6b72c81881904767832ad8697d8cc40/runtime/compiler/optimizer/J9Inliner.cpp#L545-L549
+
+However, in `findCallTargetUsingArgumentPreexistence`, we always create the target with profiled guard.
+https://github.com/eclipse/omr/blob/e3428620936e9603e858d3420e9f7b6fca71c0c3/compiler/optimizer/Inliner.cpp#L3800
+
+We should check if the receiver has fixed type and create a target without guard.

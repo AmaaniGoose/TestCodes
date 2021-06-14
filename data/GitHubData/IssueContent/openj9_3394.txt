@@ -1,0 +1,27 @@
+Test https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/lang/invoke/lambda/LambdaStackTrace.java fails with ...
+
+```
+Actual trace did not match expected trace at frame 1
+Expected frame patterns:
+  0: LambdaStackTrace\\..*
+  1: LambdaStackTrace.testBasic
+Actual frames:
+  0: LambdaStackTrace.lambda$testBasic$0(LambdaStackTrace.java:63)
+  1: LambdaStackTrace$$Lambda$20.000000000000D7F0.run(Unknown Source)
+java.lang.Exception: Incorrect stack frames found
+	at LambdaStackTrace.verifyFrames(LambdaStackTrace.java:191)
+	at LambdaStackTrace.testBasic(LambdaStackTrace.java:75)
+	at LambdaStackTrace.main(LambdaStackTrace.java:53)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:115)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+```
+
+The synthetic frame (i.e. "LambdaStackTrace$$Lambda$20.000000000000D7F0.run(Unknown Source)") should not be present in the exception stack. See OpenJDK bug https://bugs.openjdk.java.net/browse/JDK-8025636.
+
+Test passes against Hotspot.
+
+Log archive : [LambdaStackTraceProb.tar.gz](https://github.com/eclipse/openj9/files/2501513/LambdaStackTraceProb.tar.gz)

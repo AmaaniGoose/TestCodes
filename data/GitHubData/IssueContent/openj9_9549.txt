@@ -1,0 +1,36 @@
+Running the jdmpview `info mod` command on [jdk8u252 for plinux](https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u252-b09_openj9-0.20.0/OpenJDK8U-jdk_ppc64le_linux_openj9_8u252b09_openj9-0.20.0.tar.gz) results in `<no section information>` output for Java modules, as shown below (not a full list). This affects using DTJF to read symbols from these modules.
+
+jdk11 has the same problem, likely other versions as well.
+
+Possibly this is related to the following changes:
+https://github.com/ibmruntimes/openj9-openjdk-jdk8/commit/58e0fd0
+https://github.com/ibmruntimes/openj9-openjdk-jdk8/commit/3902bbd
+https://github.com/ibmruntimes/openj9-openjdk-jdk8/commit/1a074c8
+
+```
+	  libnet.so @ 0x3fff8cfb0000, <no section information>
+
+	  libnio.so @ 0x3fff8cff0000, <no section information>
+
+	  libzip.so @ 0x3fff8d630000, <no section information>
+
+	  libverify.so @ 0x3fff8d670000, <no section information>
+
+	  libjava.so @ 0x3fff8d6a0000, <no section information>
+
+	  libjclse29.so @ 0x3fffa4610000, <no section information>
+
+	  libj9gc29.so @ 0x3fffa46c0000, <no section information>
+
+	  libj9jvmti29.so @ 0x3fffb0080000, <no section information>
+
+	  libj9shr29.so @ 0x3fffb0110000, <no section information>
+
+	  libj9vrb29.so @ 0x3fffb01e0000, <no section information>
+
+	  libj9trc29.so @ 0x3fffb0300000, <no section information>
+
+	  libj9zlib29.so @ 0x3fffb0360000, <no section information>
+
+	  libj9dmp29.so @ 0x3fffb03a0000, <no section information>
+```

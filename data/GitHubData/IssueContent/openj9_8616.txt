@@ -1,0 +1,31 @@
+Currently minimum Object heap settings are defined as:
+```
+#define MINIMUM_VM_SIZE ((uintptr_t) 1*1024*1024)
+#define MINIMUM_OLD_SPACE_SIZE ((uintptr_t) (MINIMUM_VM_SIZE/2))
+#define MINIMUM_NEW_SPACE_SIZE ((uintptr_t) (MINIMUM_VM_SIZE/4))
+```
+where:
+* `MINIMUM_VM_SIZE` (minimum accepted by `-Xms`) is minimum size of Object heap;
+* `MINIMUM_OLD_SPACE_SIZE` is minimum size of Tenure;
+* `MINIMUM_NEW_SPACE_SIZE` is minimum size of **half** of Nursery.
+
+So the heap geometry assumed here is `MINIMUM_OLD_SPACE_SIZE + 2 *  MINIMUM_NEW_SPACE_SIZE` (Tenure/Nursery split 50%/50%)
+
+However it is not what we have in reality. We do not have an exception for very small heaps and default Tenure/Nursery split is 75%/25% as usual and it is too risky to change it.
+
+The definition for Tenure should be changed to be consistent:
+```
+#define MINIMUM_OLD_SPACE_SIZE ((uintptr_t) (MINIMUM_VM_SIZE * 3 / 4))
+```
+
+`MINIMUM_NEW_SPACE_SIZE` might stay at `MINIMUM_VM_SIZE / 4` but change a meaning - to be really (as name suggest) minimum **Nursery** size (not half of it).
+
+The usage of `MINIMUM_OLD_SPACE_SIZE` and `MINIMUM_NEW_SPACE_SIZE` should be reviewed and corrected correspondently where necessary. These constants are used to set MM_GCExtensionsBase members should be watched:
+```
+		, absoluteMinimumOldSubSpaceSize(MINIMUM_OLD_SPACE_SIZE)
+		, absoluteMinimumNewSubSpaceSize(MINIMUM_NEW_SPACE_SIZE)
+```
+
+The definitions itself located in OMR: https://github.com/eclipse/omr/blob/6d76bf2b1af793eba5b0a0dfa19428cb30792c8a/include_core/omrgcconsts.h#L182
+
+The behaviour should be corrected at OpenJ9 side

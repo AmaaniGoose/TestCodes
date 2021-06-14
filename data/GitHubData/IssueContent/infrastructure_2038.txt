@@ -1,0 +1,19 @@
+12 Raspberry Pi 4B with 8 GB RAM each and 256 GB SSD have arrived. Installation in rack is currently underway. Steps to do:
+
+* [ ] Decide on build/test/compliance split
+* [ ] Decide on bitness/OS split
+* [ ] Preconfigure machines (OS, network)
+* [ ] Provision machines with Ansible.
+
+11 of the nodes can be allocated freely. I have to set one aside as management node (netboot server).
+
+The CPU on the 4B is dual-mode (32/64 bit) capable. As we're currently short on 32 bit ARM nodes and have more than enough 64 bit capacity, I plan to provision all as 32 bit machines except we want to set aside a few for 64 bit TCK duty @smlambert.
+
+Without 64 bit TCK, I suggest the following split:
+
+* 2x 32 bit build
+* 6x 32 bit test
+* 3x 32 bit TCK
+
+I plan to install Ubuntu 20.04. The update story for the Raspberry OS (formerly Raspbian) seems murky. Fedora requires an upgrade every 6 months. If anyone has better suggestions, let me know.
+

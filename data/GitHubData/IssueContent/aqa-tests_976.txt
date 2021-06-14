@@ -1,0 +1,17 @@
+A single issue to track which external tests have their junit results copied out for easier viewing via Jenkins GUI, will close the individual issues in favour of this issue.
+
+External tests that have been updated to copy junit results out to mount:
+- [ ] kafka
+- [ ] tomcat
+- [ ] wildfly
+- [ ] lucene-solr - https://github.com/AdoptOpenJDK/openjdk-tests/pull/466 is using mount, which has been removed. Need to update
+- [ ] derby
+- [x] elasticsearch - https://github.com/AdoptOpenJDK/openjdk-tests/pull/1057
+https://github.com/AdoptOpenJDK/openjdk-tests/pull/611
+- [x] jenkins - https://github.com/AdoptOpenJDK/openjdk-tests/pull/537
+- [ ] scala
+
+- [x] thorntail-mp-tck - https://github.com/AdoptOpenJDK/openjdk-tests/pull/533
+- [x] payara-mp-tck - https://github.com/AdoptOpenJDK/openjdk-tests/pull/1068
+ https://github.com/AdoptOpenJDK/openjdk-tests/pull/528 - though 528 is merged, results are not displayed, we need to check why
+- [x] openliberty-mp-tck - https://github.com/AdoptOpenJDK/openjdk-tests/pull/1066 https://github.com/AdoptOpenJDK/openjdk-tests/pull/552/

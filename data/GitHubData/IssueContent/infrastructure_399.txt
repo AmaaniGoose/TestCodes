@@ -1,0 +1,20 @@
+At the moment we have various adoptopenjdk zero VMs in /home on the two arm32 build machines - `/home/boot_jdk8` and `/home/jdk-9+181`. I don't believe these are in the ansible playbooks.
+
+```
+jenkins@build-scaleway-ubuntu1604-armv7-1:/home# boot_jdk8/bin/java -version
+java version "1.8.0_144"
+Java(TM) SE Runtime Environment (build 1.8.0_144-b01)
+Java HotSpot(TM) Client VM (build 25.144-b01, mixed mode)
+jenkins@build-scaleway-ubuntu1604-armv7-1:/home# jdk-9+181/bin/java -version
+openjdk version "9-internal"
+OpenJDK Runtime Environment (build 9-internal+0-adhoc.jenkins.openjdk)
+OpenJDK Zero VM (build 9-internal+0-adhoc.jenkins.openjdk, interpreted mode)
+```
+The system java is this one:
+```
+jenkins@build-scaleway-ubuntu1604-armv7-1:/home# /usr/lib/jvm/java-8-openjdk-armhf/jre/bin/java -version
+openjdk version "1.8.0_171"
+OpenJDK Runtime Environment (build 1.8.0_171-8u171-b11-0ubuntu0.16.04.1-b11)
+OpenJDK Client VM (build 25.171-b11, mixed mode)
+```
+We should either use the system JRE for bootstrapping the openjdk9 builds, or use a more sensibly installed adoptopenjdk build (The current adoptopenjdk ones are using the zero VM which is slowing down the builds significantly - see https://github.com/AdoptOpenJDK/openjdk-build/issues/406) - But we need a better solution for the 9 builds regardless.

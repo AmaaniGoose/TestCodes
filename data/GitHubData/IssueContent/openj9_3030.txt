@@ -1,0 +1,1 @@
+Ensure code guarded by `canDevirtualizeDispatch` does not impact trivial devirtualization opportunities under AOT

@@ -1,0 +1,72 @@
+Failure link
+------------
+
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_sanity.system_ppc64le_linux_Nightly/472/tapResults/
+For example, to rebuild the failed tests in <Jenkins URL>=https://ci.eclipse.org/openj9/job/Grinder, use the following links:
+23:30:47  https://ci.eclipse.org/openj9/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system&PLATFORM=ppc64le_linux&TARGET=DaaLoadTest_daa2_ConcurrentScavenge_0
+
+Optional info
+-------------
+
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+DLT 23:21:09.234 -   26 JUnit[net.openj9.test.PD2Primitive.TestI2PD]  Weighting=1 
+DLT 23:21:09.234 -   27 JUnit[net.openj9.test.PD2Primitive.TestPD2I]  Weighting=1 
+DLT 23:21:09.273 - Starting thread. Suite=0 thread=0
+DLT 23:21:09.275 - Starting thread. Suite=0 thread=1
+DLT 23:21:09.275 - Starting thread. Suite=0 thread=2
+DLT 23:21:09.276 - Starting thread. Suite=0 thread=3
+DLT 23:21:09.276 - Starting thread. Suite=0 thread=4
+DLT 23:21:09.276 - Starting thread. Suite=0 thread=5
+DLT 23:21:09.277 - Starting thread. Suite=0 thread=6
+DLT 23:21:09.277 - Starting thread. Suite=0 thread=7
+DLT 23:21:09.277 - Starting thread. Suite=0 thread=8
+DLT 23:21:09.277 - Starting thread. Suite=0 thread=9
+DLT 23:21:09.278 - Starting thread. Suite=0 thread=10
+DLT 23:21:09.278 - Starting thread. Suite=0 thread=11
+DLT 23:21:09.278 - Starting thread. Suite=0 thread=12
+DLT 23:21:09.279 - Starting thread. Suite=0 thread=13
+DLT stderr Attempt to access ownable synchronizer object located outside of heap (stack allocated?) 0000000000740073
+DLT stderr 03:21:10.200 0x118d00    j9mm.141    *   ** ASSERTION FAILED ** at OwnableSynchronizerObjectBuffer.cpp:100: ((false))
+DLT stderr JVMDUMP039I Processing dump event "traceassert", detail "" at 2020/08/29 23:21:10 - please wait.
+DLT stderr JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test_openjdk8_j9_sanity.system_ppc64le_linux_Nightly/openjdk-tests/TKG/test_output_15987574207831/DaaLoadTest_daa2_ConcurrentScavenge_0/20200829-232106-DaaLoadTest/results/core.20200829.232110.14174.0001.dmp' in response to an event
+DLT stderr JVMPORT030W /proc/sys/kernel/core_pattern setting "|/usr/share/apport/apport %p %s %c %d %P" specifies that the core dump is to be piped to an external program.  Attempting to rename either core or core.14224.
+DLT stderr 
+DLT stderr JVMDUMP010I System dump written to /home/jenkins/workspace/Test_openjdk8_j9_sanity.system_ppc64le_linux_Nightly/openjdk-tests/TKG/test_output_15987574207831/DaaLoadTest_daa2_ConcurrentScavenge_0/20200829-232106-DaaLoadTest/results/core.20200829.232110.14174.0001.dmp
+DLT stderr JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk8_j9_sanity.system_ppc64le_linux_Nightly/openjdk-tests/TKG/test_output_15987574207831/DaaLoadTest_daa2_ConcurrentScavenge_0/20200829-232106-DaaLoadTest/results/javacore.20200829.232110.14174.0002.txt' in response to an event
+STF 23:21:11.296 - Found dump at: /home/jenkins/workspace/Test_openjdk8_j9_sanity.system_ppc64le_linux_Nightly/openjdk-tests/TKG/test_output_15987574207831/DaaLoadTest_daa2_ConcurrentScavenge_0/20200829-232106-DaaLoadTest/results/javacore.20200829.232110.14174.0002.txt
+STF 23:21:11.296 - Found dump at: /home/jenkins/workspace/Test_openjdk8_j9_sanity.system_ppc64le_linux_Nightly/openjdk-tests/TKG/test_output_15987574207831/DaaLoadTest_daa2_ConcurrentScavenge_0/20200829-232106-DaaLoadTest/results/core.20200829.232110.14174.0001.dmp
+DLT stderr javacore file generated - /home/jenkins/workspace/Test_openjdk8_j9_sanity.system_ppc64le_linux_Nightly/openjdk-tests/TKG/test_output_15987574207831/DaaLoadTest_daa2_ConcurrentScavenge_0/20200829-232106-DaaLoadTest/results/javacore.20200829.232110.14174.0002.txt
+DLT stderr core file generated - /home/jenkins/workspace/Test_openjdk8_j9_sanity.system_ppc64le_linux_Nightly/openjdk-tests/TKG/test_output_15987574207831/DaaLoadTest_daa2_ConcurrentScavenge_0/20200829-232106-DaaLoadTest/results/core.20200829.232110.14174.0001.dmp
+DLT stderr JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk8_j9_sanity.system_ppc64le_linux_Nightly/openjdk-tests/TKG/test_output_15987574207831/DaaLoadTest_daa2_ConcurrentScavenge_0/20200829-232106-DaaLoadTest/results/javacore.20200829.232110.14174.0002.txt
+DLT stderr JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Test_openjdk8_j9_sanity.system_ppc64le_linux_Nightly/openjdk-tests/TKG/test_output_15987574207831/DaaLoadTest_daa2_ConcurrentScavenge_0/20200829-232106-DaaLoadTest/results/Snap.20200829.232110.14174.0003.trc' in response to an event
+STF 23:21:12.796 - Found dump at: /home/jenkins/workspace/Test_openjdk8_j9_sanity.system_ppc64le_linux_Nightly/openjdk-tests/TKG/test_output_15987574207831/DaaLoadTest_daa2_ConcurrentScavenge_0/20200829-232106-DaaLoadTest/results/Snap.20200829.232110.14174.0003.trc
+DLT stderr Snap file generated - /home/jenkins/workspace/Test_openjdk8_j9_sanity.system_ppc64le_linux_Nightly/openjdk-tests/TKG/test_output_15987574207831/DaaLoadTest_daa2_ConcurrentScavenge_0/20200829-232106-DaaLoadTest/results/Snap.20200829.232110.14174.0003.trc
+DLT stderr JVMDUMP010I Snap dump written to /home/jenkins/workspace/Test_openjdk8_j9_sanity.system_ppc64le_linux_Nightly/openjdk-tests/TKG/test_output_15987574207831/DaaLoadTest_daa2_ConcurrentScavenge_0/20200829-232106-DaaLoadTest/results/Snap.20200829.232110.14174.0003.trc
+DLT stderr JVMDUMP013I Processed dump event "traceassert", detail "".
+STF 23:21:12.919 - **FAILED** Process DLT ended with exit code (255) and not the expected exit code/s (0)
+STF 23:21:12.919 - Monitoring Report Summary:
+STF 23:21:12.919 -   o Process DLT has crashed unexpectedly
+STF 23:21:12.920 - Killing processes: DLT
+STF 23:21:12.920 -   o Process DLT is not running
+**FAILED** at step 1 (Run daa load test). Expected return value=0 Actual=1 at /home/jenkins/workspace/Test_openjdk8_j9_sanity.system_ppc64le_linux_Nightly/openjdk-tests/TKG/../TKG/test_output_15987574207831/DaaLoadTest_daa2_ConcurrentScavenge_0/20200829-232106-DaaLoadTest/execute.pl line 94.
+STF 23:21:12.956 - **FAILED** execute script failed. Expected return value=0 Actual=1
+STF 23:21:12.956 - 
+STF 23:21:12.956 - ====================   T E A R D O W N   ====================
+STF 23:21:12.956 - Running teardown: perl /home/jenkins/workspace/Test_openjdk8_j9_sanity.system_ppc64le_linux_Nightly/openjdk-tests/TKG/../TKG/test_output_15987574207831/DaaLoadTest_daa2_ConcurrentScavenge_0/20200829-232106-DaaLoadTest/tearDown.pl
+STF 23:21:13.017 - TEARDOWN stage completed
+STF 23:21:13.019 - 
+STF 23:21:13.019 - =====================   R E S U L T S   =====================
+STF 23:21:13.019 - Stage results:
+STF 23:21:13.019 -   setUp:     pass
+STF 23:21:13.019 -   execute:  *fail*
+STF 23:21:13.019 -   teardown:  pass
+STF 23:21:13.019 - 
+STF 23:21:13.020 - Overall result: **FAILED**
+
+DaaLoadTest_daa2_ConcurrentScavenge_0_FAILED
+```

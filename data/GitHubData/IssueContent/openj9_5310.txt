@@ -1,0 +1,117 @@
+Failure link
+------------
+
+https://ci.eclipse.org/openj9/job/Test-extended.functional-JDK11-linux_x86-64/216/tapResults/
+
+Optional info
+-------------
+
+- intermittent failure (yes|no): n/a
+- regression or new test:   n/a
+- if regression, what are the last passing / first failing public SHAs (OpenJ9, OMR, JCL) :
+
+Failure output
+--------------
+```
+Testing: Test 105: Design 40220: Corrupt the cache.
+Test start time: 2019/03/29 14:00:21 Atlantic Standard Time
+Running command: "/home/jenkins/workspace/Test-extended.functional-JDK11-linux_x86-64/openjdkbinary/j2sdk-image/bin/java" -Xnocompressedrefs -Xjit -Xgcpolicy:gencon -Xnocompressedrefs  -Xdump:system:file=shrcmltest.dmp -Xdump:java:file=shrcmltest.txt -Xdump:snap:file=shrcmltest.trc -Xshareclasses:name=ShareClassesCMLTests,printStats,testFakeCorruption -version
+Time spent starting: 3 milliseconds
+	Match (success): jvmshrc443e cache crc is incorrect indicating a corrupt cache. incorrect cache crc: 0x0.
+	Match (required): JVMDUMP039I Processing dump event "corruptcache", detail "" at 2019/03/29 14:00:22 - please wait.
+	Match (required): JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test-extended.functional-JDK11-linux_x86-64/openjdk-tests/TestConfig/test_output_15538786475701/testSCCMLTests2_0/shrcmltest.dmp' in response to an event
+	Match (failure): JVMDUMP012E Error in System dump: The core file created by child process with pid = 756 was not found. Expected to find core file with name "/home/jenkins/workspace/Test-extended.functional-JDK11-linux_x86-64/openjdk-tests/TestConfig/test_output_15538786475701/testSCCMLTests2_0/core"
+	Match (required): JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test-extended.functional-JDK11-linux_x86-64/openjdk-tests/TestConfig/test_output_15538786475701/testSCCMLTests2_0/shrcmltest.txt' in response to an event
+	Match (required): JVMDUMP010I Java dump written to /home/jenkins/workspace/Test-extended.functional-JDK11-linux_x86-64/openjdk-tests/TestConfig/test_output_15538786475701/testSCCMLTests2_0/shrcmltest.txt
+	Match (required): JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Test-extended.functional-JDK11-linux_x86-64/openjdk-tests/TestConfig/test_output_15538786475701/testSCCMLTests2_0/shrcmltest.trc' in response to an event
+	Match (required): JVMDUMP010I Snap dump written to /home/jenkins/workspace/Test-extended.functional-JDK11-linux_x86-64/openjdk-tests/TestConfig/test_output_15538786475701/testSCCMLTests2_0/shrcmltest.trc
+Time spent executing: 6205 milliseconds
+Test result: FAILED
+	Match (success):  [err] jvmshrc443e cache crc is incorrect indicating a corrupt cache. incorrect cache crc: 0x0.
+ [err] jvmdump039i processing dump event "corruptcache", detail "" at 2019/03/29 14:00:22 - please wait.
+ [err] jvmdump032i jvm requested system dump using '/home/jenkins/workspace/test-extended.functional-jdk11-linux_x86-64/openjdk-tests/testconfig/test_output_15538786475701/testsccmltests2_0/shrcmltest.dmp' in response to an event
+ [err] jvmport030w /proc/sys/kernel/core_pattern setting "|/usr/share/apport/apport %p %s %c %d %p" specifies that the core dump is to be piped to an external program.  attempting to rename either core or core.756.
+ [err] 
+ [err] jvmdump012e error in system dump: the core file created by child process with pid = 756 was not found. expected to find core file with name "/home/jenkins/workspace/test-extended.functional-jdk11-linux_x86-64/openjdk-tests/testconfig/test_output_15538786475701/testsccmltests2_0/core"
+ [err] jvmdump032i jvm requested java dump using '/home/jenkins/workspace/test-extended.functional-jdk11-linux_x86-64/openjdk-tests/testconfig/test_output_15538786475701/testsccmltests2_0/shrcmltest.txt' in response to an event
+ [err] jvmdump010i java dump written to /home/jenkins/workspace/test-extended.functional-jdk11-linux_x86-64/openjdk-tests/testconfig/test_output_15538786475701/testsccmltests2_0/shrcmltest.txt
+ [err] jvmdump032i jvm requested snap dump using '/home/jenkins/workspace/test-extended.functional-jdk11-linux_x86-64/openjdk-tests/testconfig/test_output_15538786475701/testsccmltests2_0/shrcmltest.trc' in response to an event
+ [err] jvmdump010i snap dump written to /home/jenkins/workspace/test-extended.functional-jdk11-linux_x86-64/openjdk-tests/testconfig/test_output_15538786475701/testsccmltests2_0/shrcmltest.trc
+ [err] jvmdump013i processed dump event "corruptcache", detail "".
+ [err] jvmshrc442e shared cache "shareclassescmltests" is corrupt. corruption code is -1. corrupt value is 0x0000000000000000. no new jvms will be allowed to connect to the cache.
+ [err]  	existing jvms can continue to function, but cannot update the cache.
+ [err] jvmj9vm015w initialization error for library j9shr29(11): jvmj9vm009e j9vmdllmain failed
+ [err] error: could not create the java virtual machine.
+ [err] error: a fatal exception has occurred. program will exit.
+
+Testing: Test 105-a: Make sure dumps due to corrupt cache exist.
+Test start time: 2019/03/29 14:00:28 Atlantic Standard Time
+Running command: ls
+Time spent starting: 1 milliseconds
+Time spent executing: 8 milliseconds
+Test result: FAILED
+ [OUT] Alphabet
+ [OUT] AlphabetJar
+ [OUT] Animals
+ [OUT] AnimalsJar
+ [OUT] APITests
+ [OUT] BallSports
+ [OUT] batchfiles
+ [OUT] build.xml
+ [OUT] ClassPathMatchingTests
+ [OUT] CustomClassloaders
+ [OUT] DuplicateOrphansTest
+ [OUT] exclude.xml
+ [OUT] Food
+ [OUT] FoodJar
+ [OUT] META-INF
+ [OUT] PartitioningTests
+ [OUT] Pets
+ [OUT] Pudding
+ [OUT] shrcmltest.trc
+ [OUT] shrcmltest.txt
+ [OUT] Sports
+ [OUT] SportsJar
+ [OUT] StaleClassPathEntryTests
+ [OUT] StaleOrphansTest
+ [OUT] StaleOrphansTest1
+ [OUT] tempfiles
+ [OUT] URLHelperTests_80.xml
+ [OUT] URLHelperTests.jar
+ [OUT] URLHelperTests.xml
+ [OUT] Utilities
+ [OUT] Vowels
+>> Success condition was not found: [Output match: shrcmltest.dmp]
+>> Required condition was found: [Output match: shrcmltest.txt]
+>> Required condition was found: [Output match: shrcmltest.trc]
+
+Testing: Test 111: Design 40220: Force a dump on a previously corrupted cache.
+Test start time: 2019/03/29 14:00:29 Atlantic Standard Time
+Running command: "/home/jenkins/workspace/Test-extended.functional-JDK11-linux_x86-64/openjdkbinary/j2sdk-image/bin/java" -Xnocompressedrefs -Xjit -Xgcpolicy:gencon -Xnocompressedrefs  -Xdump:system:file=shrcmltest.dmp -Xdump:java:file=shrcmltest.txt -Xdump:snap:file=shrcmltest.trc -Xshareclasses:name=ShareClassesCMLTests,printStats,forceDumpIfCorrupt
+Time spent starting: 2 milliseconds
+	Match (required): JVMDUMP039I Processing dump event "corruptcache", detail "" at 2019/03/29 14:00:29 - please wait.
+	Match (required): JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test-extended.functional-JDK11-linux_x86-64/openjdk-tests/TestConfig/test_output_15538786475701/testSCCMLTests2_0/shrcmltest.dmp' in response to an event
+	Match (required): JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test-extended.functional-JDK11-linux_x86-64/openjdk-tests/TestConfig/test_output_15538786475701/testSCCMLTests2_0/shrcmltest.txt' in response to an event
+	Match (required): JVMDUMP010I Java dump written to /home/jenkins/workspace/Test-extended.functional-JDK11-linux_x86-64/openjdk-tests/TestConfig/test_output_15538786475701/testSCCMLTests2_0/shrcmltest.txt
+	Match (required): JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Test-extended.functional-JDK11-linux_x86-64/openjdk-tests/TestConfig/test_output_15538786475701/testSCCMLTests2_0/shrcmltest.trc' in response to an event
+	Match (required): JVMDUMP010I Snap dump written to /home/jenkins/workspace/Test-extended.functional-JDK11-linux_x86-64/openjdk-tests/TestConfig/test_output_15538786475701/testSCCMLTests2_0/shrcmltest.trc
+Time spent executing: 6092 milliseconds
+Test result: FAILED
+	Match (required):  [ERR] JVMDUMP039I Processing dump event "corruptcache", detail "" at 2019/03/29 14:00:29 - please wait.
+ [ERR] JVMDUMP032I JVM requested System dump using '/home/jenkins/workspace/Test-extended.functional-JDK11-linux_x86-64/openjdk-tests/TestConfig/test_output_15538786475701/testSCCMLTests2_0/shrcmltest.dmp' in response to an event
+ [ERR] JVMPORT030W /proc/sys/kernel/core_pattern setting "|/usr/share/apport/apport %p %s %c %d %P" specifies that the core dump is to be piped to an external program.  Attempting to rename either core or core.879.
+ [ERR] 
+ [ERR] JVMDUMP012E Error in System dump: The core file created by child process with pid = 879 was not found. Expected to find core file with name "/home/jenkins/workspace/Test-extended.functional-JDK11-linux_x86-64/openjdk-tests/TestConfig/test_output_15538786475701/testSCCMLTests2_0/core"
+ [ERR] JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test-extended.functional-JDK11-linux_x86-64/openjdk-tests/TestConfig/test_output_15538786475701/testSCCMLTests2_0/shrcmltest.txt' in response to an event
+ [ERR] JVMDUMP010I Java dump written to /home/jenkins/workspace/Test-extended.functional-JDK11-linux_x86-64/openjdk-tests/TestConfig/test_output_15538786475701/testSCCMLTests2_0/shrcmltest.txt
+ [ERR] JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Test-extended.functional-JDK11-linux_x86-64/openjdk-tests/TestConfig/test_output_15538786475701/testSCCMLTests2_0/shrcmltest.trc' in response to an event
+ [ERR] JVMDUMP010I Snap dump written to /home/jenkins/workspace/Test-extended.functional-JDK11-linux_x86-64/openjdk-tests/TestConfig/test_output_15538786475701/testSCCMLTests2_0/shrcmltest.trc
+ [ERR] JVMDUMP013I Processed dump event "corruptcache", detail "".
+ [ERR] JVMSHRC442E Shared cache "ShareClassesCMLTests" is corrupt. Corruption code is -1. Corrupt value is 0x0000000000000000. No new JVMs will be allowed to connect to the cache.
+ [ERR]  	Existing JVMs can continue to function, but cannot update the cache.
+ [ERR] JVMJ9VM015W Initialization error for library j9shr29(11): JVMJ9VM009E J9VMDllMain failed
+ [ERR] Error: Could not create the Java Virtual Machine.
+ [ERR] Error: A fatal exception has occurred. Program will exit.
+```
+
+Similar failures are at https://ci.eclipse.org/openj9/job/Test-extended.functional-JDK8-linux_x86-64_cmprssptrs/275/tapResults/ & https://ci.eclipse.org/openj9/job/Test-extended.functional-JDK12-linux_x86-64_cmprssptrs/42/tapResults/ as well.

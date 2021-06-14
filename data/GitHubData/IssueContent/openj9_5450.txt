@@ -1,0 +1,63 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_extended.functional_x86-64_windows_Nightly/1
+```
+00:05:55  ===============================================
+00:05:55  Running test TestJps_0 ...
+00:05:55  ===============================================
+00:05:55  TestJps_0 Start Time: Wed Apr 10 23:05:55 2019 Epoch Time (ms): 1554955555947
+00:05:55  "C:/Users/jenkins/workspace/Test_openjdk11_j9_extended.functional_x86-64_windows_Nightly/openjdkbinary/j2sdk-image/bin\\java" -Xshareclasses:destroyAll; "C:/Users/jenkins/workspace/Test_openjdk11_j9_extended.functional_x86-64_windows_Nightly/openjdkbinary/j2sdk-image/bin\\java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+00:05:56  JVMSHRC005I No shared class caches available
+00:05:56  JVMSHRC005I No shared class caches available
+00:05:56  cache cleanup done
+00:05:56  variation: NoOptions
+00:05:56  JVM_OPTIONS: -Xcompressedrefs 
+00:05:56  { itercnt=1; \
+00:05:56  mkdir -p "C:/Users/jenkins/workspace/Test_openjdk11_j9_extended.functional_x86-64_windows_Nightly/openjdk-tests/\\TestConfig\\test_output_15549520075765\\TestJps_0"; \
+00:05:56  cd "C:/Users/jenkins/workspace/Test_openjdk11_j9_extended.functional_x86-64_windows_Nightly/openjdk-tests/\\TestConfig\\test_output_15549520075765\\TestJps_0"; \
+00:05:56  "C:/Users/jenkins/workspace/Test_openjdk11_j9_extended.functional_x86-64_windows_Nightly/openjdkbinary/j2sdk-image/bin\\java" -Xcompressedrefs  \
+00:05:56  -cp "C:/Users/jenkins/workspace/Test_openjdk11_j9_extended.functional_x86-64_windows_Nightly/openjdk-tests///..//jvmtest\\TestConfig\\resources;C:/Users/jenkins/workspace/Test_openjdk11_j9_extended.functional_x86-64_windows_Nightly/openjdk-tests///..//jvmtest\\TestConfig\\lib\\testng.jar;C:/Users/jenkins/workspace/Test_openjdk11_j9_extended.functional_x86-64_windows_Nightly/openjdk-tests///..//jvmtest\\TestConfig\\lib\\jcommander.jar;C:/Users/jenkins/workspace/Test_openjdk11_j9_extended.functional_x86-64_windows_Nightly/openjdk-tests///..//jvmtest\\functional\\Java8andUp\\GeneralTest.jar" \
+00:05:56  -Dcom.ibm.tools.attach.enable=yes \
+00:05:56  -Djdk.attach.allowAttachSelf=true \
+00:05:56  -Dcom.ibm.tools.attach.timeout=15000 \
+00:05:56  org.testng.TestNG -d "C:/Users/jenkins/workspace/Test_openjdk11_j9_extended.functional_x86-64_windows_Nightly/openjdk-tests/\\TestConfig\\test_output_15549520075765\\TestJps_0" "C:/Users/jenkins/workspace/Test_openjdk11_j9_extended.functional_x86-64_windows_Nightly/openjdk-tests///..//jvmtest\\functional\\Java8andUp\\testng.xml" -testnames TestJps \
+00:05:56  -groups level.extended \
+00:05:56  -excludegroups d.*.win_x86-64_cmprssptrs,d.*.arch.x86,d.*.os.win,d.*.bits.64,d.*.generic-all; \
+00:05:56  if [ $? -eq 0 ] ; then echo ""; echo "TestJps_0""_PASSED"; echo ""; cd C:/Users/jenkins/workspace/Test_openjdk11_j9_extended.functional_x86-64_windows_Nightly/openjdk-tests/; rm -f -r "C:/Users/jenkins/workspace/Test_openjdk11_j9_extended.functional_x86-64_windows_Nightly/openjdk-tests/\\TestConfig\\test_output_15549520075765\\TestJps_0"; else echo ""; echo "TestJps_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "C:/Users/jenkins/workspace/Test_openjdk11_j9_extended.functional_x86-64_windows_Nightly/openjdk-tests/\\TestConfig\\test_output_15549520075765\\TestTargetResult";
+00:05:56  [IncludeExcludeTestAnnotationTransformer] [INFO] exclude file is C:/Users/jenkins/workspace/Test_openjdk11_j9_extended.functional_x86-64_windows_Nightly/openjdk-tests///..//jvmtest\\TestConfig\\resources\\excludes\\latest_exclude_11.txt
+00:05:56  ...
+00:05:56  ... TestNG 6.14.2 by Cédric Beust (cedric@beust.com)
+00:05:56  ...
+00:05:56  
+00:06:18  PASSED: testApplicationArguments
+00:06:18  PASSED: testJpsIdOnly
+00:06:18  PASSED: testJpsPackageName
+00:06:18  PASSED: testJpsSanity
+00:06:18  FAILED: testJvmArguments
+00:06:18  java.lang.AssertionError: Missing argument: -Dfoo=bar
+00:06:18  	at org.testng.AssertJUnit.fail(AssertJUnit.java:59)
+00:06:18  	at org.testng.AssertJUnit.assertTrue(AssertJUnit.java:24)
+00:06:18  	at org.openj9.test.attachAPI.TestJps.testJvmArguments(TestJps.java:124)
+00:06:18  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+00:06:18  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+00:06:18  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+00:06:18  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+00:06:18  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+00:06:18  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+00:06:18  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+00:06:18  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+00:06:18  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+00:06:18  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+00:06:18  	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+00:06:18  	at org.testng.TestRunner.run(TestRunner.java:505)
+00:06:18  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+00:06:18  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+00:06:18  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+00:06:18  	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+00:06:18  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+00:06:18  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+00:06:18  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+00:06:18  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+00:06:18  	at org.testng.TestNG.runSuites(TestNG.java:1049)
+00:06:18  	at org.testng.TestNG.run(TestNG.java:1017)
+00:06:18  	at org.testng.TestNG.privateMain(TestNG.java:1354)
+00:06:18  	at org.testng.TestNG.main(TestNG.java:1323)
+```

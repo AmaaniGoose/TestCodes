@@ -1,0 +1,23 @@
+I was running a test using a build that forces JIT to generate read only code (by setting `TR_ForceGenerateReadOnlyCode`) , test was using JVM Options `-Xdebug -Xrunjdwp:transport=dt_socket,address=8888,server=y,onthrow=no.pkg.foo,launch=echo`. It fails with following ASSERT [1].
+
+```
+j> 11:59:08 18:59:07.441 0x3ec000    j9vm.225    *   ** ASSERTION FAILED ** at BytecodeInterpreter.hpp:541: (!(jitConfig->fsdEnabled))
+```
+
+Looking at the code, where we disable couple of optimizations and features for read only code in J9Options.cpp [2], I see that we do disable FSD from JIT but we do not set/reset the `fsdEnabled` flag on `jitConfig`. After some digging around, I found a place in JIT when we post process the options [3] and call the `initializeFSD`[4] that as its name suggests, sets flags for Full Speed Debug. Looking at the conditions in [3] which must be true to call the `initializeFSD`, I found that `(javaVM->requiredDebugAttributes & J9VM_DEBUG_ATTRIBUTE_CAN_ACCESS_LOCALS)` is true and that triggers the initialization.
+`J9VM_DEBUG_ATTRIBUTE_CAN_ACCESS_LOCALS` on the VM Object is set in [5]. Further chasing down where we set the `can_access_local_variables` on the `capabilities`, I believe it is done at [6].
+
+I couldn’t get much out of the GDB and debug build hence, couldn’t go further. But I believe it was processing above FSD options which causes us to go to this path.
+
+So I have couple of questions regarding to this which I am summarizing here.
+
+1. If I set the `fsdEnabled` flag in [2] to FALSE and I can avoid hitting assert, but I think it is not that simple, we might need to undo other stuff as well to make sure it is FSD is completely disabled. Is it correct?
+2. What are the other changes or work done in VM that requires to be undone, to completely disable the FSD?
+2. What will be the behaviour of VM if someone runs a snapshot run with the above FSD options?
+
+[1]. https://github.com/eclipse/openj9/blob/49a7b0b32ea8ce2b4a15b47714c93932c4d7d5da/runtime/vm/BytecodeInterpreter.hpp#L541
+[2]. https://github.com/eclipse/openj9/blob/49a7b0b32ea8ce2b4a15b47714c93932c4d7d5da/runtime/compiler/control/J9Options.cpp#L2641-L2675
+[3]. https://github.com/eclipse/openj9/blob/49a7b0b32ea8ce2b4a15b47714c93932c4d7d5da/runtime/compiler/control/J9Options.cpp#L2329-L2362
+[4]. https://github.com/eclipse/openj9/blob/49a7b0b32ea8ce2b4a15b47714c93932c4d7d5da/runtime/codert_vm/decomp.cpp#L1771-L1798
+[5]. https://github.com/eclipse/openj9/blob/49a7b0b32ea8ce2b4a15b47714c93932c4d7d5da/runtime/jvmti/jvmtiHook.c#L778-L782
+[6]. https://github.com/eclipse/openj9/blob/49a7b0b32ea8ce2b4a15b47714c93932c4d7d5da/runtime/jvmti/jvmtiCapability.c#L218-L222

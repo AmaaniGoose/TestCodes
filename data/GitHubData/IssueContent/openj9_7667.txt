@@ -1,0 +1,14 @@
+**Issue**
+When `-Xlp<size>` is specified by the user, the correct index of the `-Xlp` argument is not being returned from `FIND_ARG_IN_VMARGS`. See https://github.com/eclipse/openj9/blob/86f128ca839256f15d30d7178fcd3d256963e265/runtime/compiler/control/J9Options.cpp#L1742
+
+`FIND_ARG_IN_VMARGS` is a macro defined call to `findArgInVMArgs` See https://github.com/eclipse/openj9/blob/8ecd11892bc38f416ba474076ca6c815da699e8f/runtime/util/vmargs.c#L82
+
+Instead of getting the correct argument index it always returns 1 on the first invocation of `findArgInVMArgs`. However, on every further invocation we get the right index of the argument. It seems that this problem has always existed, and was exposed by https://github.com/eclipse/openj9/commit/bba5a43eb390b012fdf4a675a838baf822a2d06d. Before this commit, we were making a useless invocation of `findArgInVMArgs`, so when invoked again it always returned the expected result. 
+
+**Environment**
+Fails on PPC64LE Linux/Ubuntu
+Fails with OpenJ9 Java 11
+Fails Using GCC-7.3
+No other architecture, JDK version, or GCC version was tested. So this issue may be fixed in later versions of GCC up to 9.2.
+
+_Analysis to follow._ 

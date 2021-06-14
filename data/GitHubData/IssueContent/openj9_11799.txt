@@ -1,0 +1,36 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.openjdk_ppc64_aix_Nightly/279
+aix71-p8-7
+java/lang/String/NonCharacterMapping.java
+```
+01:00:09  java.lang.ArrayIndexOutOfBoundsException
+01:00:09  	at java.base/java.lang.CharacterDataLatin1.getProperties(CharacterDataLatin1.java:74)
+01:00:09  	at java.base/java.lang.CharacterDataLatin1.toUpperCaseEx(CharacterDataLatin1.java:260)
+01:00:09  	at java.base/java.lang.Character.toUpperCaseEx(Character.java:10573)
+01:00:09  	at java.base/java.lang.StringUTF16.toUpperCase(StringUTF16.java:780)
+01:00:09  	at java.base/java.lang.String.toUpperCase(String.java:2840)
+01:00:09  	at NonCharacterMapping.main(NonCharacterMapping.java:74)
+```
+java/lang/String/SpecialCasingTest.java
+```
+01:00:09  java.lang.ArrayIndexOutOfBoundsException
+01:00:09  	at java.base/java.lang.CharacterDataLatin1.getProperties(CharacterDataLatin1.java:74)
+01:00:09  	at java.base/java.lang.CharacterDataLatin1.toUpperCaseEx(CharacterDataLatin1.java:260)
+01:00:09  	at java.base/java.lang.Character.toUpperCaseEx(Character.java:10573)
+01:00:09  	at java.base/java.lang.StringUTF16.toUpperCase(StringUTF16.java:780)
+01:00:09  	at java.base/java.lang.String.toUpperCase(String.java:2840)
+01:00:09  	at SpecialCasingTest.testUpperCase(SpecialCasingTest.java:320)
+01:00:09  	at SpecialCasingTest.test(SpecialCasingTest.java:298)
+01:00:09  	at SpecialCasingTest.test(SpecialCasingTest.java:147)
+01:00:09  	at SpecialCasingTest.main(SpecialCasingTest.java:118)
+```
+
+It only failed on AIX jdk11, didn't fail in the AIX_XL build, passed the previous night.
+
+Changes from the previous build:
+https://github.com/eclipse/openj9/compare/d132a6b...cafb94c
+https://github.com/eclipse/openj9-omr/compare/b38b0b7...5ad8273
+https://github.com/ibmruntimes/openj9-openjdk-jdk11/compare/b608a89...f7475ea
+
+15x grinders running NonCharacterMapping.java, which passed.
+https://ci.eclipse.org/openj9/job/Grinder/1472 - aix71-p8-3
+https://ci.eclipse.org/openj9/job/Grinder/1473 - aix71-p8-7

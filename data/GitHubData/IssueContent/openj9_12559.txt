@@ -1,0 +1,1 @@
+Document Yi's presentation on Inliner implementation from last June. Concepts includes: `TR_CallSite`, `TR_CallTarget`, heuristics used to decide whether to inline, inlining code structure, etc.

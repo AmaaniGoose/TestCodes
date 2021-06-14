@@ -1,0 +1,10 @@
+The following bytecodes trigger NoClassDef exception on J9. However on the RI it throws an NPE.
+
+```    
+Code:
+       0: aconst_null
+       1: checkcast     #54                 // class "QClassDoesNotExist;"
+       4: areturn
+```
+
+We need to change the behaviour so it matches RI, we also need to make sure we do the right thing when classref is ` "QClassDoesNotExist;"` and reciever is not NULL

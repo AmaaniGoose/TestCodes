@@ -1,0 +1,1 @@
+This issue tracks the work to add proper support for internal pointers for the ARM JIT in OpenJ9.

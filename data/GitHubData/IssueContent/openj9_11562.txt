@@ -1,0 +1,3 @@
+This would be useful both when running the VM under a debugger and in the field.
+
+Probably requires some interaction with OMR.

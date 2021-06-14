@@ -1,0 +1,23 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_special.system_ppc64_aix_Nightly_lambdaLoadTest/125
+LambdaLoadTest_OpenJ9_NonLinux_special_23
+variation: Mode688
+JVM_OPTIONS:  -Xcompressedrefs -Xjit:count=0 -Xgcpolicy:gencon -Xaggressive -Xconcurrentlevel0 
+
+javacores, core and other diagnostic files in the artifact https://140-211-168-230-openstack.osuosl.org/artifactory/ci-eclipse-openj9/Test/Test_openjdk11_j9_special.system_ppc64_aix_Nightly_lambdaLoadTest/125/system_lambdaLoadTest_test_output.tar.gz
+```
+LT  05:23:09.450 - Completed 7.0%. Number of tests started=14 (+0)
+STF 05:23:29.440 - Heartbeat: Process LT  is still running
+LT  05:23:29.441 - Completed 7.0%. Number of tests started=14 (+0)
+STF 05:23:30.444 - **FAILED** Process LT  has timed out
+STF 05:23:30.444 - Collecting dumps for: LT 
+```
+
+I see lots of this
+```
+3XMTHREADINFO3           Java callstack:
+4XESTACKTRACE                at net/adoptopenjdk/test/lambda/TestLambdaMultithreaded$$Lambda$105/000000000000000000.execute(Bytecode PC:5(Compiled Code))
+4XESTACKTRACE                at net/adoptopenjdk/test/lambda/TestLambdaMultithreaded.runSimpleMaths(TestLambdaMultithreaded.java:340(Compiled Code))
+4XESTACKTRACE                at net/adoptopenjdk/test/lambda/TestLambdaMultithreaded.lambda$testLambdasWithMultipleThreads$14(TestLambdaMultithreaded.java:237(Compiled Code))
+4XESTACKTRACE                at net/adoptopenjdk/test/lambda/TestLambdaMultithreaded$$Lambda$144/000000000000000000.run(Bytecode PC:12(Compiled Code))
+4XESTACKTRACE                at java/lang/Thread.run(Thread.java:836(Compiled Code))
+```

@@ -1,0 +1,8 @@
+There's a number of tests in `tests` that put out quite a bit of test information even when succeeding, leading to a difficult to parse volume of data. 
+
+This epic item should track noisy tests, and subsequent issues can be opened to actually quiet them: 
+
+- [ ] `j9vm.test.romclasscreation.ROMRetentionAfterRAMFailureTest` Produces hundreds of lines of output. 
+- [x] `j9vm.test.arraycopy.MultiThreadedArrayCopyTest` 
+
+We probably should aim for a way to change logging levels that's reasonably universal tho. 

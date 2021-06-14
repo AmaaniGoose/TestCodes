@@ -1,0 +1,35 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk16_j9_special.functional_x86-64_windows/2`:
+```
+01:44:12  openjdk version "16" 2021-03-16
+01:44:12  OpenJDK Runtime Environment AdoptOpenJDK (build 16+36)
+01:44:12  Eclipse OpenJ9 VM AdoptOpenJDK (build master-b227feba2, JRE 16 Windows Server 2016 amd64-64-Bit Compressed References 20210306_47 (JIT enabled, AOT enabled)
+01:44:12  OpenJ9   - b227feba2
+01:44:12  OMR      - 4665e2f72
+01:44:12  JCL      - 0599466a08 based on jdk-16+36)
+```
+to rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links:
+03:50:00  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=16&JDK_IMPL=openj9&JDK_VENDOR=adoptopenjdk&BUILD_LIST=functional&PLATFORM=x86-64_windows_mixed&TARGET=MBCS_Tests_file_cn_windows_0
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+===============================================
+Running test MBCS_Tests_file_cn_windows_0 ...
+===============================================
+MBCS_Tests_file_cn_windows_0 Start Time: Sat Mar  6 03:26:30 2021 Epoch Time (ms): 1615019190503
+variation: NoOptions
+JVM_OPTIONS:  
+Exception in thread "main" java.lang.NullPointerException: Cannot invoke "java.io.File.exists()" because "src" is null
+	at FileOperator.list(FileOperator.java:143)
+	at FileOperatorWin.main(FileOperatorWin.java:58)
+	at Main.main(Main.java:26)
+
+MBCS_Tests_file_cn_windows_0_FAILED
+```

@@ -1,0 +1,74 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.functional_s390x_linux_Nightly/384
+testSCCMLSoftmx_1
+Test 9-b: Test stale entry is shown in printStats=stale
+```
+Running command: "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_s390x_linux_Nightly/openjdkbinary/j2sdk-image/bin/java"  -Xcompressedrefs -Xjit -Xgcpolicy:gencon  -Xshareclasses:name=ShareClassesCMLTests,printStats=stale
+Time spent starting: 1 milliseconds
+Time spent executing: 27 milliseconds
+Test result: FAILED
+ [ERR] 
+ [ERR] Current statistics for cache "ShareClassesCMLTests": 
+ [ERR] 
+ [ERR] Cache created with:
+ [ERR] 	-Xnolinenumbers                      = false
+ [ERR] 	BCI Enabled                          = true
+ [ERR] 	Restrict Classpaths                  = false
+ [ERR] 	Feature                              = cr
+ [ERR] 
+ [ERR] Cache contains only classes with line numbers
+ [ERR] 
+ [ERR] base address                         = 0x000003FF3D459000
+ [ERR] end address                          = 0x000003FF50000000
+ [ERR] allocation pointer                   = 0x000003FF3D5BC230
+ [ERR] 
+ [ERR] cache layer                          = 0
+ [ERR] cache size                           = 314572192
+ [ERR] softmx bytes                         = 67108864
+ [ERR] free bytes                           = 64187768
+ [ERR] Reserved space for AOT bytes         = -1
+ [ERR] Maximum space for AOT bytes          = -1
+ [ERR] Reserved space for JIT data bytes    = -1
+ [ERR] Maximum space for JIT data bytes     = -1
+ [ERR] Metadata bytes                       = 27553
+ [ERR] Metadata % used                      = 0%
+ [ERR] Class debug area size                = 25133056
+ [ERR] Class debug area used bytes          = 140324
+ [ERR] Class debug area % used              = 0%
+ [ERR] 
+ [ERR] ROMClass bytes                       = 1454640
+ [ERR] AOT bytes                            = 8475
+ [ERR] JIT data bytes                       = 288
+ [ERR] Zip cache bytes                      = 925272
+ [ERR] Startup hint bytes                   = 0
+ [ERR] Data bytes                           = 363936
+ [ERR] stale bytes                          = 0
+ [ERR] 
+ [ERR] # ROMClasses                         = 506
+ [ERR] # AOT Methods                        = 7
+ [ERR] # Classpaths                         = 2
+ [ERR] # URLs                               = 0
+ [ERR] # Tokens                             = 0
+ [ERR] # Zip caches                         = 5
+ [ERR] # Startup hints                      = 0
+ [ERR] # Stale classes                      = 0
+ [ERR] % Stale classes                      = 0%
+ [ERR] 
+ [ERR] 
+ [ERR] Cache is 4% soft full
+ [ERR] 
+ [ERR] Cache is accessible to current user = true
+>> Success condition was not found: [Output match: ROMCLASS: SystemProperties at 0x[\w]*[\.]!STALE![\n\r].*Index]
+>> Required condition was found: [Output match: stale bytes]
+>> Failure condition was not found: [Output match: ROMCLASS:(.)*at 0x[\w]*[\.][\n\r].*Index]
+>> Failure condition was not found: [Output match: ROMMETHOD:(.)*Address: 0x[\w]*[\n\r]]
+>> Failure condition was not found: [Output match: AOT:(.)*Address: 0x[\w]*[\n\r]]
+>> Failure condition was not found: [Output match: JITPROFILE:(.)*Address: 0x[\w]*[\n\r]]
+>> Failure condition was not found: [Output match: JITHINT:(.)*Address: 0x[\w]*[\n\r]]
+>> Failure condition was not found: [Output match: ORPHAN:(.)*at 0x[\w]*[\.][\n\r]]
+>> Failure condition was not found: [Output match: Address: 0x[\w]*[\s]Size [\d]*[\n\r]]
+>> Failure condition was not found: [Output match: error]
+>> Failure condition was not found: [Output match: Unhandled Exception]
+>> Failure condition was not found: [Output match: Exception:]
+>> Failure condition was not found: [Output match: corrupt]
+>> Failure condition was not found: [Output match: Processing dump event]
+```

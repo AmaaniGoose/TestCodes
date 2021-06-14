@@ -1,0 +1,6 @@
+The aim of this issue is to track progress on implementing a full JIT for RISC-V architecture. 
+The OMR part of the JIT is reasonably stable. For the J9 part of the JIT, the idea is to essentially to follow
+the path of AArch64 port as it proved successful. 
+
+FYI: @ChengJin01 , @0xdaryl 
+

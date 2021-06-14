@@ -1,0 +1,11 @@
+Since JDK9, the [`VarHandle`](https://docs.oracle.com/javase/9/docs/api/java/lang/invoke/VarHandle.html) class has provided static methods to perform memory fence operations:
+
+* fullFence
+* acquireFence
+* releaseFence
+* loadLoadFence
+* storeStoreFence
+
+These methods should be recognized by the JIT and each backend should issue the appropriate machine instructions to implement the corresponding fence semantics.
+
+Currently, these methods are implemented by calling methods in the `Unsafe` class.  The JIT relies on these methods being inlined to expose the underlying `Unsafe` calls.  Since `Unsafe` is due to be deprecated and it is easy enough to recognize the `VarHandle` methods directly then it should be done that way.

@@ -1,0 +1,1 @@
+Anonymous classes unloading procedure uses sequential walk to find ROM class segment for each RAM class to be unloaded. It can be reason for performance degradation if number of Anonymous classes is large. Also with adding Anonymous classes support to SC searched ROM class can not be in the Anonymous classloader list at all, so it is worst case scenario

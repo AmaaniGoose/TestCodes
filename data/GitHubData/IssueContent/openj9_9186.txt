@@ -1,0 +1,28 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.openjdk_x86-64_windows_Nightly/3
+win2012r2-x86-2
+java/util/logging/CheckZombieLockTest.java.CheckZombieLockTest (from java_util_logging_CheckZombieLockTest.java)
+```
+WARNING: unable to delete/cleanup writable test directory: C:\\temp\\writable-lockfile-dir\\log.log
+WARNING: unable to delete/cleanup writable test directory: C:\\temp\\writable-lockfile-dir\\log.log.lck
+WARNING: unable to delete/cleanup writable test directory: C:\\temp\\writable-lockfile-dir
+WARNING: unable to delete/cleanup writable test directory: C:\\temp\\writable-lockfile-dir\\log.log
+WARNING: unable to delete/cleanup writable test directory: C:\\temp\\writable-lockfile-dir\\log.log.lck
+WARNING: unable to delete/cleanup writable test directory: C:\\temp\\writable-lockfile-dir
+java.lang.RuntimeException: Unexpected lock files found: []
+	C:\\temp\\writable-lockfile-dir\\log.log.lck should not have been reused
+	at CheckZombieLockTest.testFileHandlerReuse(CheckZombieLockTest.java:257)
+	at CheckZombieLockTest.runTests(CheckZombieLockTest.java:105)
+	at CheckZombieLockTest.main(CheckZombieLockTest.java:78)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+JavaTest Message: Test threw exception: java.lang.RuntimeException: Unexpected lock files found: []
+	C:\\temp\\writable-lockfile-dir\\log.log.lck should not have been reused
+JavaTest Message: shutting down test
+
+STATUS:Failed.`main' threw exception: java.lang.RuntimeException: Unexpected lock files found: [] C:\\temp\\writable-lockfile-dir\\log.log.lck should not have been reused
+```

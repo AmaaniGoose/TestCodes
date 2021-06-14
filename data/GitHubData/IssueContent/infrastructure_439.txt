@@ -1,0 +1,13 @@
+Currently we have places in our ansible scripts that are [pulling from ci.adoptopenjdk.net](https://github.com/AdoptOpenJDK/openjdk-infrastructure/blob/master/ansible/playbooks/AdoptOpenJDK_Unix_Playbook/roles/freemarker/tasks/main.yml) -  we need to decide if this is a sensible approach going forward or if we should host them somewhere else. Options?
+
+- Keep them as-is on ci.adoptopenjdk.net (`~jenkins/.jenkins/userContent`)
+- Keep them in github (Maybe a branch of openjdk-infrastructure?)
+- Keep them on the AWX server since we'll be using that in order to deploy our machines, so it needs to be alive :-) (NOTE: Some packages used by the AIX playbooks are there)
+- Store them on a custom server that we use for storing artefacts
+- Anything else?
+
+The following work items will be related to this:
+
+- [Add extra windows dependencies](https://github.com/AdoptOpenJDK/openjdk-infrastructure/pull/300/files)
+- [Install gcc 7.3.0 on Linux machines](https://github.com/AdoptOpenJDK/openjdk-infrastructure/issues/438)
+- [Remove dependency on University in Sweden](https://github.com/AdoptOpenJDK/openjdk-build/issues/441)

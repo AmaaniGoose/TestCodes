@@ -1,0 +1,4 @@
+It seems that there are a couple of places in the Power codegen that misuse the `addConstantToInteger` helper function to add a constant to an address-sized value. This helper is only meant to work for 32-bit inputs (both for the constant and in terms of the size of the value in the register), so this is incorrect on 64-bit machines. Specifically, the miuses occur at [1] and [2]. These locations need to use `addConstantToInteger` on 32-bit systems and `addConstantToLong` on 64-bit systems. Perhaps we should consider adding a new `addConstantToAddress` helper to assist with this?
+
+[1] https://github.com/eclipse/openj9/blob/873d7fbbdf1c5caeaace46f0d0d2c48ab11b7ff6/runtime/compiler/p/codegen/J9TreeEvaluator.cpp#L1053
+[2] https://github.com/eclipse/openj9/blob/873d7fbbdf1c5caeaace46f0d0d2c48ab11b7ff6/runtime/compiler/p/codegen/J9TreeEvaluator.cpp#L3261

@@ -1,0 +1,1 @@
+Class.isPrimitiveClass, indicates whether a class is a primitive class. (This is distinct from isPrimitive, which indicates whether a Class represents a basic primitive type.)

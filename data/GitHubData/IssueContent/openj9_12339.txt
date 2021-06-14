@@ -1,0 +1,70 @@
+Failure link
+------------
+
+From an internal ibuild `job_output.php?id=673639453`:
+```
+java version "1.8.0_291"
+Java(TM) SE Runtime Environment (build 8.0.7.0 - pxa6480sr7-20210318_01(SR7))
+IBM J9 VM (build 2.9, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20210330_468630 (JIT enabled, AOT enabled)
+OpenJ9   - 6284f33
+OMR      - 6d397c3
+IBM      - 8165371)
+JCL - 20210314_01 based on Oracle jdk8u291-b07
+```
+
+Optional info
+-------------
+
+- intermittent failure (yes|no): yes ~5/10
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+===============================================
+Running test CDSAdaptorTest_0 ...
+===============================================
+CDSAdaptorTest_0 Start Time: Tue Mar 30 22:36:11 2021 Epoch Time (ms): 1617158171826
+"/bluebird/builds/bld_468630/sdk/xa6480/bin/java" -Xshareclasses:destroyAll; "/bluebird/builds/bld_468630/sdk/xa6480/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+JVMSHRC005I No shared class caches available
+JVMSHRC005I No shared class caches available
+cache cleanup done
+variation: NoOptions
+
+Testing: Test 1-a: Create a shared class cache while using weaving hooks
+Test start time: 2021/03/30 22:36:12 Eastern Standard Time
+Running command: "/bluebird/builds/bld_468630/sdk/xa6480/bin/java"    -Xshareclasses:name=cdsadaptor_cache -cp /bluebird/builds/bld_468630/jvmtest/test/SE80/functional/cmdLineTests/CDSAdaptorTest:/bluebird/builds/bld_468630/jvmtest/test/SE80/TKG/lib/org.eclipse.osgi-3.16.100.jar org.openj9.test.cdsadaptortest.CDSAdaptorOrphanTest -frameworkBundleLocation /bluebird/builds/bld_468630/jvmtest/test/SE80/functional/cmdLineTests/CDSAdaptorTest/FrameworkBundles -testBundleLocation /bluebird/builds/bld_468630/jvmtest/test/SE80/functional/cmdLineTests/CDSAdaptorTest/CDSAdaptorOrphanTestBundles
+Time spent starting: 5 milliseconds
+Time spent executing: 5384 milliseconds
+Test result: FAILED
+Output from test:
+ [OUT] Installing bundles in dir: /bluebird/builds/bld_468630/jvmtest/test/SE80/functional/cmdLineTests/CDSAdaptorTest/FrameworkBundles
+ [OUT] Installing bundles in dir: /bluebird/builds/bld_468630/jvmtest/test/SE80/functional/cmdLineTests/CDSAdaptorTest/CDSAdaptorOrphanTestBundles
+ [OUT] Bundle to be installed: file:/bluebird/builds/bld_468630/jvmtest/test/SE80/functional/cmdLineTests/CDSAdaptorTest/CDSAdaptorOrphanTestBundles/org.openj9.test.testbundle_1.0.0._v1.jar
+ [OUT] Bundle to be installed: file:/bluebird/builds/bld_468630/jvmtest/test/SE80/functional/cmdLineTests/CDSAdaptorTest/CDSAdaptorOrphanTestBundles/org.openj9.test.weavinghooktest_1.0.0._v1.jar
+ [OUT] A message from modified class
+ [ERR] java.io.SyncFailedException: sync failed
+ [ERR] 	at java.io.FileDescriptor.sync(Native Method)
+ [ERR] 	at org.eclipse.osgi.framework.internal.reliablefile.ReliableFileOutputStream.closeIntermediateFile(ReliableFileOutputStream.java:135)
+ [ERR] 	at org.eclipse.osgi.framework.internal.reliablefile.ReliableFileOutputStream.close(ReliableFileOutputStream.java:119)
+ [ERR] 	at org.eclipse.osgi.storagemanager.StorageManager.save(StorageManager.java:566)
+ [ERR] 	at org.eclipse.osgi.storagemanager.StorageManager.update(StorageManager.java:324)
+ [ERR] 	at org.eclipse.osgi.storagemanager.StorageManager.closeOutputStream(StorageManager.java:917)
+ [ERR] 	at org.eclipse.osgi.storagemanager.ManagedOutputStream.close(ManagedOutputStream.java:56)
+ [ERR] 	at java.io.FilterOutputStream.close(FilterOutputStream.java:170)
+ [ERR] 	at java.io.FilterOutputStream.close(FilterOutputStream.java:170)
+ [ERR] 	at org.eclipse.osgi.storage.Storage.save0(Storage.java:1351)
+ [ERR] 	at org.eclipse.osgi.storage.Storage.save(Storage.java:1306)
+ [ERR] 	at org.eclipse.osgi.storage.Storage.close(Storage.java:498)
+ [ERR] 	at org.eclipse.osgi.internal.framework.EquinoxContainer.close(EquinoxContainer.java:240)
+ [ERR] 	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule.stopWorker(EquinoxBundle.java:204)
+ [ERR] 	at org.eclipse.osgi.container.Module.doStop(Module.java:660)
+ [ERR] 	at org.eclipse.osgi.container.Module.stop(Module.java:521)
+ [ERR] 	at org.eclipse.osgi.container.SystemModule.stop(SystemModule.java:207)
+ [ERR] 	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule$1.run(EquinoxBundle.java:220)
+ [ERR] 	at java.lang.Thread.run(Thread.java:822)
+>> Success condition was found: [Output match: A message from modified class]
+>> Failure condition was not found: [Output match: original]
+>> Failure condition was found: [Output match: Exception:]
+>> Failure condition was not found: [Output match: Processing dump event]
+```
+This is a first failure from the test history, but grinder on last ibuild shows failures as well. So it might be a regression or an infra issue.

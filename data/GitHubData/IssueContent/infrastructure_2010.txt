@@ -1,0 +1,4 @@
+To avoid Apple MacOS SIP protection causing bash environment permission protection, we must find bash from /usr/local/bin and not /usr/bin, /usr/local/bin does not get the SIP permission applied to it.
+
+The Jenkins Agent environment setup for PATH must have /usr/local/bin prefixed to achieve this, eg:
+![image](https://user-images.githubusercontent.com/31470007/110457938-1b4de580-80c3-11eb-9f3b-0473d9d63cc0.png)

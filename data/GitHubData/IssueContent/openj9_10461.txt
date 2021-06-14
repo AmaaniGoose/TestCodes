@@ -1,0 +1,7 @@
+A number of parsing functions within `j9argscan.c` return ambiguous integer values.
+i.e https://github.com/eclipse/openj9/blob/b54aca6536d55c5b685866876e9d186fe58686d6/runtime/util_core/j9argscan.c#L186-L220
+
+Replace all return values to be either `OPTION_OK`, `OPTION_MALFORMED`, `OPTION_OVERFLOW` or any respective defined `OPTION_*` value.
+https://github.com/eclipse/openj9/blob/ff2b7f5e827d4310bc8a84a4838484cb47a1609d/runtime/oti/jvminit.h#L100-L106
+
+Finally, replace any caller code to expect the returned OPTION_* defined values. 

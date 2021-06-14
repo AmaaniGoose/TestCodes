@@ -1,0 +1,1 @@
+Investigate implementing implicit NULLCHKs on AArch64.  That is, where the test for NULLness is either handled implicitly through a memory access or through a trap instruction, and the signal handler catches and routes the hardware exception accordingly so that a Java NullPointerException is thrown.  If this is feasible, implement it.

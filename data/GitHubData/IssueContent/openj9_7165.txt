@@ -1,0 +1,3 @@
+Investigate merging aspects of VI thunk generation with private linkage.  For example, the logic to flush the parameter registers to the Java stack which is duplicated in the snippet logic.
+
+Also, investigate sharing more of the logic across platforms.

@@ -1,0 +1,15 @@
+Hi,
+
+currently `TR_J9EstimateCodeSize::realEstimateCodeSize` is a method being used to determine the size of code being partially inlined. In it, there is logic that builds a control flow graph for the input target. Then, there is some more logic for calculating the impact of partial inlining of the inlineableCallSites found on the input target. 
+
+What I would like to do is:
+1) Separate the logic of creating the CFG from the partial inlining size calculation. This is almost already done if the argument `recurseDown` is set to false.
+2) Allow for the CFG (and the basic blocks) to be created on a specified memory region (based on an argument) to allow for different lifetimes for the CFG.
+
+I have an idea on how to make this happen I just need some refactoring. I can point at some code if needed. The majority of the changes are [here](https://github.com/efferifick/openj9/blob/d5033836e34cc9cf37efd3658377c6e255ac16f3/runtime/compiler/optimizer/J9EstimateCodeSize.cpp#L349) and [here](https://github.com/efferifick/openj9/blob/d5033836e34cc9cf37efd3658377c6e255ac16f3/runtime/compiler/optimizer/J9EstimateCodeSize.cpp#L2941)
+
+There was some offline discussion about not using a derived class (`OMR::ByteCodeCFG`) from `CFG` which I agree with, I will change that to use `CFG`. 
+
+I am open to also allocating `TR::Nodes` on a region as opposed to on the stack if possible. But since I have no use for them I have left them on the stack. 
+
+@andrewcraik @liqunl

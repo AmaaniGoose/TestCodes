@@ -1,0 +1,58 @@
+https://ci.eclipse.org/openj9/job/Test-extended.functional-JDK10-linux_ppc-64_cmprssptrs_le/28
+
+```
+===============================================
+Running test threadMXBeanTestSuite1_7 ...
+===============================================
+threadMXBeanTestSuite1_7 Start Time: Tue Jul 31 06:53:23 2018 Epoch Time (ms): 1533020003355
+test with Mode610 -Xjit:noJitUntilMain,count=0,optlevel=warm
+[IncludeExcludeTestAnnotationTransformer] [INFO] exclude file is /home/jenkins/jenkins-agent/workspace/Test-extended.functional-JDK10-linux_ppc-64_cmprssptrs_le/openjdk-tests/TestConfig/scripts/testKitGen/../../../../jvmtest/TestConfig/resources/excludes/latest_exclude_SE100.txt
+...
+... TestNG 6.14.2 by Cédric Beust (cedric@beust.com)
+...
+
+[FindDeadlockTest] [ERROR] Not deadlocks:
+[FindDeadlockTest] [ERROR] Deadlocks not found:
+tid: 43 (ds3)
+blocker: java.util.concurrent.locks.ReentrantLock$NonfairSync@818b5ef0
+owner: 44 (ds4)
+
+PASSED: testAPITest
+PASSED: testMonitorTraceTest
+PASSED: testParkedThreadTest
+FAILED: testFindDeadlockTest
+java.lang.AssertionError: The following asserts failed:
+	findDeadlocks failed expected [true] but found [false]
+	at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:43)
+	at org.openj9.test.java.lang.management.ThreadMXBean.FindDeadlockTest.testFindDeadlockTest(FindDeadlockTest.java:66)
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(java.base@10.0.2-internal/Native Method)
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(java.base@10.0.2-internal/NativeMethodAccessorImpl.java:62)
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(java.base@10.0.2-internal/DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(java.base@10.0.2-internal/Method.java:564)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+	at org.testng.TestRunner.run(TestRunner.java:505)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+	at org.testng.TestNG.runSuites(TestNG.java:1049)
+	at org.testng.TestNG.run(TestNG.java:1017)
+	at org.testng.TestNG.privateMain(TestNG.java:1354)
+	at org.testng.TestNG.main(TestNG.java:1323)
+
+
+===============================================
+    threadMXBeanTestSuite1
+    Tests run: 4, Failures: 1, Skips: 0
+===============================================
+```

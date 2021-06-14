@@ -1,0 +1,1 @@
+Incorrect bytecode info can cause OSR related issues such as https://github.com/eclipse/omr/pull/3603. https://github.com/eclipse/omr/pull/3603 can't fix the problem if the bytecode info is incorrect in Walker. Thus we have to make sure all nodes have correct bytecode info to avoid a future bug.

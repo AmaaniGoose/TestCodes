@@ -1,0 +1,5 @@
+The `compileFirstClassLocation` member of `TR_AOTMethodHeader` appears unused and should be removed if possible. I've removed all references to it in the compiler's code base, changed the member name to `unused`, and initialized it to `0xdeadc0de` (32-bit) / `0xdeadc0dedeadc0de` (64-bit) in https://github.com/eclipse/openj9/pull/6723, but otherwise left it be to maintain the size of the header in case some other tool or script or legacy process depends on it since ultimately this member is written out to the shared class cache.
+
+Unless something breaks or otherwise notices its absence after some time has passed it can be removed.
+
+https://github.com/eclipse/openj9/blob/d7d2ee3e29bf07ea245fadc48fb5468bec9cd5f0/runtime/compiler/runtime/J9Runtime.hpp#L151-L163

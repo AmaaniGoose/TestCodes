@@ -1,0 +1,17 @@
+Multitenancy has been deprecated.  Remove deprecated macros from:
+
+https://github.com/eclipse/openj9/blob/c529318aa26474cb57d0d4a83544d637ff73f6aa/runtime/compiler/p/runtime/PicBuilder.spp#L83
+
+```
+MT_ComputeStaticFieldAddress
+MT_CallHelper
+MT_ResovleStaticField
+MT_ResovleStaticFieldSetter
+MT_ResovleStaticField
+MT_ResovleStaticFieldSetter
+MT_ResovleStaticField
+MT_ResovleStaticFieldSetter
+MT_ResovleStaticField
+MT_ResovleStaticFieldSetter
+```
+Please double check that they are not used anywhere.  Any use points are deprecated as well.

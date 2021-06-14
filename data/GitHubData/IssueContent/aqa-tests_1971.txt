@@ -1,0 +1,5 @@
+We have been doing this manually, changing the tag_version values in set_test_info in [common_functions.sh](https://github.com/AdoptOpenJDK/openjdk-tests/blob/master/external/common_functions.sh#L176), but should also look at what it would take to automate this.
+
+Related:
+https://developer.github.com/v3/repos/releases/#get-the-latest-release
+https://stackoverflow.com/questions/58465057/trigger-a-github-action-when-another-repository-creates-a-new-release

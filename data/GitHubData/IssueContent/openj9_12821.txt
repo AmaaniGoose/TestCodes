@@ -1,0 +1,33 @@
+The following failed test seems to have produced an archive containing only the system core:
+https://openj9-jenkins.osuosl.org/job/Test_openjdk11_j9_sanity.functional_s390x_linux_Personal_testList_0/28/console
+
+```
+fjeremic@Filips-MacBook-Pro Downloads % tar xvf functional_test_output.tar.gz
+x ./openjdk-tests/TKG/output_compilation/
+x ./openjdk-tests/TKG/output_compilation/core.20210602.043837.42158.0001.dmp
+x ./openjdk-tests/TKG/output_compilation/compilation.log
+```
+
+Artifactory link:
+https://openj9-artifactory.osuosl.org/artifactory/ci-eclipse-openj9/Test/Test_openjdk11_j9_sanity.functional_s390x_linux_Personal_testList_0/28/
+
+From the test output however we can see that in addition to `core.20210602.043837.42158.0001.dmp` several other dumps (such as the jitdump) were generated which are needed for investigation here.
+
+```
+    [javac] JVMDUMP010I System dump written to /home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_s390x_linux_Personal_testList_0/openjdk-tests/functional/JIT_Test/core.20210602.043837.42158.0001.dmp
+    [javac] JVMDUMP032I JVM requested Java dump using '/home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_s390x_linux_Personal_testList_0/openjdk-tests/functional/JIT_Test/javacore.20210602.043837.42158.0002.txt' in response to an event
+    [javac] JVMDUMP010I Java dump written to /home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_s390x_linux_Personal_testList_0/openjdk-tests/functional/JIT_Test/javacore.20210602.043837.42158.0002.txt
+    [javac] JVMDUMP032I JVM requested Snap dump using '/home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_s390x_linux_Personal_testList_0/openjdk-tests/functional/JIT_Test/Snap.20210602.043837.42158.0003.trc' in response to an event
+    [javac] JVMDUMP010I Snap dump written to /home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_s390x_linux_Personal_testList_0/openjdk-tests/functional/JIT_Test/Snap.20210602.043837.42158.0003.trc
+    [javac] JVMDUMP032I JVM requested JIT dump using '/home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_s390x_linux_Personal_testList_0/openjdk-tests/functional/JIT_Test/jitdump.20210602.043837.42158.0004.dmp' in response to an event
+    [javac] JVMDUMP051I JIT dump occurred in 'JIT Compilation Thread-000' thread 0x000000000006BD00
+    [javac] JVMDUMP049I JIT dump notified all waiting threads of the current method to be compiled
+    [javac] JVMDUMP054I JIT dump is tracing the IL of the method on the crashed compilation thread
+    [javac] JVMDUMP048I JIT dump method being compiled is an ordinary method
+    [javac] JVMDUMP053I JIT dump is recompiling com/sun/tools/javac/code/Scope$NamedImportScope.getSymbolsByName(Lcom/sun/tools/javac/util/Name;Lcom/sun/tools/javac/util/Filter;Lcom/sun/tools/javac/code/Scope$LookupKind;)Ljava/lang/Iterable;
+    [javac] JVMDUMP052I JIT dump recursive crash occurred on diagnostic thread
+    [javac] JVMDUMP010I JIT dump written to /home/jenkins/workspace/Test_openjdk11_j9_sanity.functional_s390x_linux_Personal_testList_0/openjdk-tests/functional/JIT_Test/jitdump.20210602.043837.42158.0004.dmp
+    [javac] JVMDUMP013I Processed dump event "gpf", detail "".
+```
+
+@llxia could we take a peek and see what is preventing us from saving all the generated dumps?

@@ -1,0 +1,38 @@
+Failure link
+------------
+`aix71-p8-2`
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_special.system_ppc64_aix_Nightly/573/
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_special.system_ppc64_aix_Nightly/570/
+
+`aix71-p8-4`
+https://ci.eclipse.org/openj9/job/Test_openjdk14_j9_extended.system_ppc64_aix_Nightly/7/tapResults/
+
+`aix71-p8-7`
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_extended.system_ppc64_aix_Nightly/306/
+https://ci.eclipse.org/openj9/job/Test_openjdk14_j9_sanity.system_ppc64_aix_Nightly/7/tapResults/
+
+`aix71-p8-8`
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.system_ppc64_aix_Nightly/301/
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_special.system_ppc64_aix_Nightly/574/
+
+`aix71-p8-9`
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_special.system_ppc64_aix_Nightly/572/
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+
+```
+===============================================
+Running test DaaLoadTest_daa1_0 ...
+===============================================
+DaaLoadTest_daa1_0 Start Time: Fri Mar  6 00:50:42 2020 Epoch Time (ms): 1583477442287
+variation: NoOptions
+JVM_OPTIONS: -Xcompressedrefs 
+Can't open perl script "/home/u0020236/workspace/Test_openjdk14_j9_sanity.system_ppc64_aix_Nightly/openjdk-tests/TKG/../../jvmtest/system/daaLoadTest/..//stf/stf.core/scripts/stf.pl": A file or directory in the path name does not exist.
+
+DaaLoadTest_daa1_0_FAILED
+```

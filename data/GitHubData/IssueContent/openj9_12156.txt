@@ -1,0 +1,8 @@
+From https://github.com/eclipse/openj9/pull/12106
+
+What is missed here that Iterator states classiteratorclassslots_state_* are used externally, so we should add support for new classiteratorclassslots_state_flattened_class_cache_slots:
+
+    in GC_CheckEngine::checkClassHeap(): there is trivial handling - just add string description
+    in MM_ReferenceChainWalker::scanClass(): this change requires to introduce new scanning type toJ9GC_REFERENCE_TYPE_*group. This new type should be added tomapEventType()tojvmtiHeap.candjvmtiHeap10.c`. @tajila Would you please provide instructions how to integrate new class from FCC to JVMTI reporting?
+
+A new JVMTI event type will like be added, this would need to be matched with a new `J9GC_REFERENCE_TYPE` 

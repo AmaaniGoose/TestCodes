@@ -1,0 +1,45 @@
+Failure link
+------------
+
+From an internal build `Test_openjdknext_j9_sanity.openjdk_s390x_linux_xl_Nightly/167`:
+```
+22:24:00  openjdk version "16-internal" 2021-03-16
+22:24:00  OpenJDK Runtime Environment (build 16-internal+0-adhoc.jenkins.BuildJDKnexts390xlinuxxlNightly)
+22:24:00  Eclipse OpenJ9 VM (build master-149dd6186ef, JRE 16 Linux s390x-64-Bit 20200917_189 (JIT enabled, AOT enabled)
+22:24:00  OpenJ9   - 149dd6186ef
+22:24:00  OMR      - 25e93bed006
+22:24:00  JCL      - 2e50335fca8 based on jdk-16+15)
+```
+For example, to rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links:
+23:19:03  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=16&JDK_IMPL=openj9&BUILD_LIST=openjdk&PLATFORM=s390x_linux_xl&TARGET=jdk_lang_j9_0
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+22:31:08  TEST: java/lang/invoke/MethodHandles/publicLookup/Driver.java
+22:31:08  TEST JDK: /home/jenkins/workspace/Test_openjdknext_j9_sanity.openjdk_s390x_linux_xl_Nightly/openjdkbinary/j2sdk-image
+22:31:08  
+
+22:31:08  STDERR:
+22:31:08  CL1: verify access for [java.lang.Object/publicLookup, q.EndPoint/publicLookup, q.EndPoint/publicLookup]
+22:31:08  java.lang.AssertionError: unexpected result
+22:31:08  	at m1/p.Main.assertTrue(Main.java:104)
+22:31:08  	at m1/p.Main.checkTypeConsistency(Main.java:98)
+22:31:08  	at m1/p.Main$Test.verifyAccess(Main.java:66)
+22:31:08  	at m1/p.Main.main(Main.java:89)
+22:31:08  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+22:31:08  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+22:31:08  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+22:31:08  	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+22:31:08  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+22:31:08  	at java.base/java.lang.Thread.run(Thread.java:845)
+22:31:08  
+22:31:08  JavaTest Message: Test threw exception: java.lang.AssertionError: unexpected result
+22:31:08  JavaTest Message: shutting down test
+22:31:08  
+22:31:08  STATUS:Failed.`main' threw exception: java.lang.AssertionError: unexpected result
+```

@@ -1,0 +1,7 @@
+For certain debugging situations, structures may be copied into malloc'ed memory. It would be nice to be able to use DDR generically in these cases by allowing the user to remap blocks of memory. Something like:
+
+> remap address,size,newAddress
+
+Any bytes read from memory between address and address+size-1 should be read from a base of newAddress instead.
+
+Ideally, we should allow an arbitrary number of remaps, and there should be commands to list and remove them (listmaps, unmap perhaps).

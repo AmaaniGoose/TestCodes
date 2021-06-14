@@ -1,0 +1,1 @@
+At the moment the public ssh key named `george@Georges-MacBook-Pro-Work.local` is the one used for authenticating our Jenkins server to the agent on the machines. We should use something more descriptive and not user-specific (either by replacing the key or the label globally)

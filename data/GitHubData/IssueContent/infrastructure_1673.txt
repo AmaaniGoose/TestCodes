@@ -1,0 +1,21 @@
+Found this while working on https://github.com/AdoptOpenJDK/openjdk-systemtest/issues/203, where a native ('C') test case does not execute correctly.
+
+I have found that test-macstadium-macos1015-x64-1 fails to compile the test case at all, with the output:
+```
+16:41:13  build-natives-unix:
+16:41:13       [exec] makefile:247: JAVA_EXECUTABLE set to /Users/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image/Contents/Home/bin/java/mkdir -p /Users/jenkins/workspace/Grinder/openjdk-tests/system/openjdk-systemtest/openjdk.test.modularity/bin/tests/com.test.jlink/native/bin/osx_x86-64
+16:41:13       [exec] 
+16:41:13       [exec] chmod 755 /Users/jenkins/workspace/Grinder/openjdk-tests/system/openjdk-systemtest/openjdk.test.modularity/bin/tests/com.test.jlink/native/bin/osx_x86-64
+16:41:13       [exec] mkdir -p /Users/jenkins/workspace/Grinder/openjdk-tests/system/openjdk-systemtest/openjdk.test.modularity/bin/tests/com.test.jlink/native/lib/osx_x86-64
+16:41:13       [exec] chmod 755 /Users/jenkins/workspace/Grinder/openjdk-tests/system/openjdk-systemtest/openjdk.test.modularity/bin/tests/com.test.jlink/native/lib/osx_x86-64
+16:41:13       [exec] gcc -D_JNI_IMPLEMENTATION_ -D_TRIVIAL_AGENT -O0 -g3 -pedantic -c -Wall -std=c99 -fPIC -fno-omit-frame-pointer -m64 -o /Users/jenkins/workspace/Grinder/openjdk-tests/system/openjdk-systemtest/openjdk.test.modularity/bin/tests/com.test.jlink/native/lib/osx_x86-64/JniTest.o -I. -I/Users/jenkins/workspace/Grinder/openjdk-tests/system/openjdk-systemtest/openjdk.test.modularity/bin/tests/com.test.jlink/native/lib -I/Users/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image/Contents/Home/include/darwin -I/Users/jenkins/workspace/Grinder/openjdkbinary/j2sdk-image/Contents/Home/include -I/usr/include JniTest.c
+16:41:13       [exec] chmod 755 /Users/jenkins/workspace/Grinder/openjdk-tests/system/openjdk-systemtest/openjdk.test.modularity/bin/tests/com.test.jlink/native/lib/osx_x86-64/JniTest.o
+16:41:13       [exec] gcc -m64 -dynamiclib -o /Users/jenkins/workspace/Grinder/openjdk-tests/system/openjdk-systemtest/openjdk.test.modularity/bin/tests/com.test.jlink/native/bin/osx_x86-64/libJniTest.dylib /Users/jenkins/workspace/Grinder/openjdk-tests/system/openjdk-systemtest/openjdk.test.modularity/bin/tests/com.test.jlink/native/lib/osx_x86-64/JniTest.o
+
+16:41:14       [exec] ld: unsupported tapi file type '!tapi-tbd' in YAML file '/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/lib/libSystem.tbd' for architecture x86_64
+16:41:14       [exec] clang: error: linker command failed with exit code 1 (use -v to see invocation)
+16:41:14       [exec] make[2]: *** [/Users/jenkins/workspace/Grinder/openjdk-tests/system/openjdk-systemtest/openjdk.test.modularity/bin/tests/com.test.jlink/native/bin/osx_x86-64/libJniTest.dylib] Error 1
+16:41:14  
+16:41:14  BUILD FAILED
+```
+The other test machines (which were 10.12 or 10.14, but I don't know if that's relevant) compile the test case OK.

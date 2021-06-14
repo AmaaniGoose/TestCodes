@@ -1,0 +1,8 @@
+Expanding from pull request https://github.com/eclipse/openj9/pull/5183
+
+The hardware concurrent scavenge (HW CS) implementation scatters across VM, port lib and the SW CS implementation is in the JIT module. We should consider if the HW CS code is organized properly. If not, move them to where they should belong.
+
+For example,  the `handleHardwareReadBarrier` routine can be moved from the VM `zcinterp.m4` to JIT `znathelp.m4`. Currently, `handleHardwareReadBarrier` is a VM function and get used by VM function in guardedStorage.c. So nothing difficult is there because all are in the same module.
+
+But moving it to the JIT can be difficult.
+If we move `handleHardwareReadBarrier` to the JIT znathelp.m4 and use it in `j9gs_params_init` (a port lib function), we have to build the port lib against the JIT lib. Doing this is OK if we just build a JVM. But it'll be problematic if we are to build BC verify unit test in openJ9/runtime/tests/bcverify/unit/. This test loads the port lib to perform tests. If the port lib gets an extra dependency on the JIT, the makefile of this needs changes too.

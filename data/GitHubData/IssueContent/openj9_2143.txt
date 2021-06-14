@@ -1,0 +1,5 @@
+While running on xLinux Java 9, the following output was seen from the cmdlinetester, indicating the feature isn't working properly.
+```
+***[TEST INFO 2018/06/11 10:19:17] ProcessKiller detected a timeout after 240000 milliseconds!***
+INFO: getUnixPID() has failed indicating this is not a UNIX System.'Debug on timeout' is currently only supported on Linux.
+```

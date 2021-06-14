@@ -1,0 +1,105 @@
+Perhaps a dup of https://github.com/eclipse/openj9/issues/4091 update: #4091 is closed as a dup of this one.
+Seems all Mauve sanity.system tests are excluded on osx.
+
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_special.system_x86-64_mac_Nightly/51
+osx1014-x86-2
+All mauve testing failed
+System dumps are created, but there is no archive attached to the job. A grinder of a single sub-test might include diagnostics
+```
+00:35:49  LT  00:35:46.352 - Starting thread. Suite=0 thread=0
+00:35:49  LT  00:35:46.353 - Starting thread. Suite=0 thread=1
+00:35:49  LT  00:35:46.353 - Starting thread. Suite=0 thread=2
+00:35:49  LT  00:35:46.353 - Starting thread. Suite=0 thread=3
+00:35:49  LT  00:35:46.353 - Starting thread. Suite=0 thread=4
+00:35:49  LT  00:35:46.353 - Starting thread. Suite=0 thread=5
+00:35:49  LT  00:35:46.353 - Starting thread. Suite=0 thread=6
+00:35:49  LT  00:35:46.355 - Starting thread. Suite=0 thread=7
+00:35:49  LT  00:35:46.356 - Starting thread. Suite=0 thread=8
+00:35:49  LT  00:35:46.356 - Starting thread. Suite=0 thread=9
+00:35:49  LT  00:35:46.356 - Starting thread. Suite=0 thread=10
+00:35:49  LT  stderr _RegisterApplication(), FAILED TO establish the default connection to the WindowServer, _CGSDefaultConnection() is NULL.
+00:35:49  LT  stderr 2019-09-11 00:35:46.622 java[39481:24524635] +[NSXPCSharedListener endpointForReply:withListenerName:]: an error occurred while attempting to obtain endpoint for listener 'ClientCallsAuxiliary': Connection interrupted
+00:36:09  LT  00:36:06.405 - Completed 0.1%. Number of tests started=2444
+00:36:28  LT  00:36:26.357 - Completed 0.1%. Number of tests started=2444 (+0)
+00:36:48  LT  00:36:46.449 - Completed 0.1%. Number of tests started=2444 (+0)
+00:37:08  LT  00:37:06.451 - Completed 0.1%. Number of tests started=2444 (+0)
+00:37:27  LT  00:37:26.436 - Completed 0.1%. Number of tests started=2444 (+0)
+00:37:47  LT  00:37:46.392 - Completed 0.1%. Number of tests started=2444 (+0)
+00:38:07  LT  00:38:06.379 - Completed 0.1%. Number of tests started=2444 (+0)
+00:38:29  LT  00:38:26.375 - Completed 0.1%. Number of tests started=2444 (+0)
+00:38:47  LT  00:38:46.366 - Completed 0.1%. Number of tests started=2444 (+0)
+00:39:07  LT  00:39:06.419 - Completed 0.1%. Number of tests started=2444 (+0)
+00:39:26  LT  00:39:26.372 - Completed 0.1%. Number of tests started=2444 (+0)
+00:39:49  LT  00:39:46.417 - Completed 0.1%. Number of tests started=2444 (+0)
+00:40:09  LT  00:40:06.384 - Completed 0.1%. Number of tests started=2444 (+0)
+00:40:26  LT  00:40:26.452 - Completed 0.1%. Number of tests started=2444 (+0)
+00:40:46  STF 00:40:45.361 - Heartbeat: Process LT  is still running
+00:40:47  LT  00:40:46.447 - Completed 0.1%. Number of tests started=2444 (+0)
+00:41:07  LT  00:41:06.377 - Completed 0.1%. Number of tests started=2444 (+0)
+00:41:27  LT  00:41:26.354 - Completed 0.1%. Number of tests started=2444 (+0)
+00:41:46  LT  00:41:46.368 - Completed 0.1%. Number of tests started=2444 (+0)
+00:42:10  LT  00:42:06.396 - Completed 0.1%. Number of tests started=2444 (+0)
+00:42:27  LT  00:42:26.356 - Completed 0.1%. Number of tests started=2444 (+0)
+00:42:50  LT  00:42:46.384 - Completed 0.1%. Number of tests started=2444 (+0)
+00:43:09  LT  00:43:06.413 - Completed 0.1%. Number of tests started=2444 (+0)
+00:43:29  LT  00:43:26.395 - Completed 0.1%. Number of tests started=2444 (+0)
+00:43:48  LT  00:43:46.431 - Completed 0.1%. Number of tests started=2444 (+0)
+00:44:07  LT  00:44:06.362 - Completed 0.1%. Number of tests started=2444 (+0)
+00:44:27  LT  00:44:26.454 - Completed 0.1%. Number of tests started=2444 (+0)
+00:44:46  LT  00:44:46.358 - Completed 0.1%. Number of tests started=2444 (+0)
+00:45:09  LT  00:45:06.384 - Completed 0.1%. Number of tests started=2444 (+0)
+00:45:28  LT  00:45:26.436 - Completed 0.1%. Number of tests started=2444 (+0)
+00:45:45  STF 00:45:45.408 - Heartbeat: Process LT  is still running
+00:45:47  LT  00:45:46.358 - Completed 0.1%. Number of tests started=2444 (+0)
+00:46:09  LT  00:46:06.357 - Completed 0.1%. Number of tests started=2444 (+0)
+00:46:29  LT  00:46:26.375 - Completed 0.1%. Number of tests started=2444 (+0)
+00:46:49  LT  00:46:46.351 - Completed 0.1%. Number of tests started=2444 (+0)
+00:47:09  LT  00:47:06.386 - Completed 0.1%. Number of tests started=2444 (+0)
+00:47:28  LT  00:47:26.416 - Completed 0.1%. Number of tests started=2444 (+0)
+00:47:48  LT  00:47:46.355 - Completed 0.1%. Number of tests started=2444 (+0)
+00:48:07  LT  00:48:06.365 - Completed 0.1%. Number of tests started=2444 (+0)
+00:48:28  LT  00:48:26.369 - Completed 0.1%. Number of tests started=2444 (+0)
+00:48:47  LT  00:48:46.394 - Completed 0.1%. Number of tests started=2444 (+0)
+00:49:08  LT  00:49:06.377 - Completed 0.1%. Number of tests started=2444 (+0)
+00:49:27  LT  00:49:26.376 - Completed 0.1%. Number of tests started=2444 (+0)
+00:49:47  LT  00:49:46.358 - Completed 0.1%. Number of tests started=2444 (+0)
+00:50:09  LT  00:50:06.357 - Completed 0.1%. Number of tests started=2444 (+0)
+00:50:29  LT  00:50:26.418 - Completed 0.1%. Number of tests started=2444 (+0)
+00:50:46  STF 00:50:45.274 - Heartbeat: Process LT  is still running
+00:50:47  LT  00:50:46.360 - Completed 0.1%. Number of tests started=2444 (+0)
+00:50:48  LT  00:50:47.350 - **POSSIBLE HANG DETECTED**
+00:50:48  STF 00:50:47.821 - **FAILED** Process LT  has hung
+```
+
+```
+07:45:58  To rebuild the failed test in a jenkins job, copy the following link and fill out the <Jenkins URL> and <FAILED test target>:
+07:45:58  <Jenkins URL>/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=<FAILED test target>
+07:45:58  
+07:45:58  For example, to rebuild the failed tests in <Jenkins URL>=https://ci.adoptopenjdk.net/job/Grinder, use the following links:
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveMultiThreadLoadTest_special_15
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveMultiThreadLoadTest_special_16
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveMultiThreadLoadTest_special_17
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveMultiThreadLoadTest_special_18
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveMultiThreadLoadTest_special_19
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveMultiThreadLoadTest_special_20
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveMultiThreadLoadTest_special_21
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveMultiThreadLoadTest_special_22
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveMultiThreadLoadTest_special_23
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveMultiThreadLoadTest_special_24
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveMultiThreadLoadTest_special_25
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveMultiThreadLoadTest_special_28
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveMultiThreadLoadTest_special_29
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveSingleInvocationLoadTest_special_15
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveSingleInvocationLoadTest_special_16
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveSingleInvocationLoadTest_special_17
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveSingleInvocationLoadTest_special_18
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveSingleInvocationLoadTest_special_19
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveSingleInvocationLoadTest_special_20
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveSingleInvocationLoadTest_special_21
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveSingleInvocationLoadTest_special_22
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveSingleInvocationLoadTest_special_23
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveSingleInvocationLoadTest_special_24
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveSingleInvocationLoadTest_special_25
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveSingleInvocationLoadTest_special_28
+07:45:58  https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=8&JDK_IMPL=openj9&BUILD_LIST=system/mauveLoadTest&JenkinsFile=openjdk_x86-64_mac&TARGET=MauveSingleInvocationLoadTest_special_29
+```

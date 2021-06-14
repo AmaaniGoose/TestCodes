@@ -1,0 +1,33 @@
+Intermittent failure ...
+
+```
+Stacktrace
+
+Execution failed: `main' threw exception: java.lang.ClassCastException: java.util.logging.Logger incompatible with TestLoggerNames$TestLogger    
+
+Standard Output
+
+Got expected NullPointerException for Logger.getLogger(null)
+    
+
+Standard Error
+
+java.lang.ClassCastException: java.util.logging.Logger incompatible with TestLoggerNames$TestLogger
+	at TestLoggerNames.main(TestLoggerNames.java:147)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:825)
+```
+
+... of test https://github.com/ibmruntimes/openj9-openjdk-jdk11/blob/openj9/test/jdk/java/util/logging/LogManager/TestLoggerNames.java observed ...
+
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/openjdk11_j9_openjdktest_x86-64_windows/118/testReport/junit/java_util_logging_LogManager_TestLoggerNames/java/TestLoggerNames/
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/openjdk11_j9_openjdktest_x86-64_linux/270/testReport/junit/java_util_logging_LogManager_TestLoggerNames/java/TestLoggerNames/
+https://ci.adoptopenjdk.net/view/Test_openjdk/job/openjdk11_j9_openjdktest_ppc64le_linux/129/testReport/java_util_logging_LogManager_TestLoggerNames/java/TestLoggerNames/
+
+I have kicked off a 100x (https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/952) and a 100x with -Xint (https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/951).
+
+I have also kicked off a 100x with -Xint on Windows (https://ci.adoptopenjdk.net/view/Test_grinder/job/Grinder/950).

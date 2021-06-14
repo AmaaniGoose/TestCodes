@@ -1,0 +1,15 @@
+The SunFlow benchmark performed poorly with the initial release of OpenJ9 (slower than HotSpot by a factor of about 5x). A large part of the problem was solved by the fix for https://github.com/eclipse/openj9/issues/42 (available in current downloads from AdoptOpenJDK), and/or by selecting a larger fixed size heap.
+
+```
+Testing on 32 core Xeon(R) CPU E7-8867
+(time in seconds, smaller is better)
+
+Initial release of OpenJ9: 5s              
+HotSpot:                   0.98s
+fixed 3G heap  OpenJ9:     1.4s
+fixed 3G heap HotSpot:     0.92
+3G heap, optthruput :      0.67
+```
+During the course of the testing we discovered that on some machines changing the gcpolicy had a significant impact on the reported test results while on other machines there was no measurable difference. On the machine used for the above results, setting -Xgcpolicy:optthruput in conjunction with a fixed 3G heap reduced the required time to process the image to 0.67s. It's not clear to me why the gcpolicy has such an impact in this case, as the time spent in gc is quite low, however we have seen a significant reduction in data cache misses with optthruput. Why gencon is incurring a high rate of data cache misses but optthruput is not is being investigated.
+
+Testing on a four core i7-6820HQ machine showed OpenJ9 at equal performance to HotSpot at the 3G heap size, and without any measurable sensitivity to choice of gcpolicy.

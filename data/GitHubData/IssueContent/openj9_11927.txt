@@ -1,0 +1,25 @@
+### Errors
+
+```
+FAILED: test_RevealDirect_TargetVarargsAdaptor
+java.lang.AssertionError:
+        at org.testng.AssertJUnit.fail(AssertJUnit.java:59) from jdk.internal.loader.ClassLoaders$AppClassLoader@aa4ec875(file:/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_linux_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+        at org.testng.AssertJUnit.assertTrue(AssertJUnit.java:24) from jdk.internal.loader.ClassLoaders$AppClassLoader@aa4ec875(file:/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_linux_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+        at org.testng.AssertJUnit.assertTrue(AssertJUnit.java:33) from jdk.internal.loader.ClassLoaders$AppClassLoader@aa4ec875(file:/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_linux_ojdk292_Personal_testList_1/openjdk-tests/TKG/lib/testng.jar)
+        at org.openj9.test.java.lang.invoke.Test_MethodHandleInfo.test_RevealDirect_TargetVarargsAdaptor(Test_MethodHandleInfo.java:667) from jdk.internal.loader.ClassLoaders$AppClassLoader@aa4ec875(file:/home/jenkins/workspace/Test_openjdk16_j9_sanity.functional_x86-64_linux_ojdk292_Personal_testList_1/jvmtest/functional/Java8andUp/GeneralTest.jar)
+```
+
+`Test_MethodHandleInfo.test_RevealDirect_TargetVarargsAdaptor` expects an `IllegalArgumentException` to be thrown. When OJDK MHs are enabled in OpenJ9, the `IllegalArgumentException` is not thrown.
+
+### Failing Test Targets
+
+1. `JCL_Test_*` (multiple variants with different JVM arguments) [sanity.functional] 
+    - `test_RevealDirect_TargetVarargsAdaptor`
+
+### How-to Run Tests?
+
+https://github.com/eclipse/openj9/blob/master/test/docs/OpenJ9TestUserGuide.md
+
+### Steps to build an OpenJ9 JDK with OJDK MHs enabled
+
+Refer to #11458.

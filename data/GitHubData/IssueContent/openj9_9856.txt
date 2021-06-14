@@ -1,0 +1,1 @@
+As discussed in https://github.com/eclipse/openj9/pull/8922#pullrequestreview-385932410, the JIT's implementation of acmp needs to be enhanced so it can optimizes cases were the result of the comparision is fed directly to an if branch.

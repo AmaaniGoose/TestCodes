@@ -1,0 +1,72 @@
+Failure link
+------------
+
+From an internal build `466459`:
+```
+java version "1.8.0_281"
+Java(TM) SE Runtime Environment (build 8.0.7.0 - pmz3180sr7-20210122_01(SR7))
+IBM J9 VM (build 2.9, JRE 1.8.0 z/OS s390-31-Bit 20210226_466459 (JIT enabled, AOT enabled)
+OpenJ9   - e569f88
+OMR      - d86bd8a
+IBM      - 358762e)
+JCL - 20210108_01 based on Oracle jdk8u281-b09
+```
+Test name - `[zOS S390] 80 FVT_Serviceability.diagnostics.xdump_user.Mode166.1` (or `job_output.php?id=670946830`)
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+>> 2021 Fri Feb 26 22:00:41 Started process
+>> 2021 Fri Feb 26 22:00:41 Waiting for process start confirmation: Looking for keyword string "Completed processing"....
+>> 2021 Fri Feb 26 22:01:11 Keyword string found, process start confirmed.
+>> 2021 Fri Feb 26 22:01:11 user test failed...
+>> 2021 Fri Feb 26 22:01:11 ERROR: Incorrect number of phd heapdump files were created (expected = 1, actual = 0)
+
+
+>> 2021 Fri Feb 26 22:01:11 The standard error output for this test was:
+>> 2021 Fri Feb 26 22:01:11 Stripping "Unable to switch to IFA processor" message from file contents (This is normal if the SDK is on an NFS mount)
+Call raise(SIGQUIT) function to generate an User Event
+JVMDUMP039I Processing dump event "user", detail "" at 2021/02/26 21:55:45 - please wait.
+JVMDUMP032I JVM requested System dump using 'J9BUILD.JVM.J9BUILD9.D210226.T215545' in response to an event
+IEATDUMP in progress with options SDATA=(LPA,GRSQ,LSQA,NUC,PSA,RGN,SQA,SUM,SWA,TRT)
+IEATDUMP success for DSN='J9BUILD.JVM.J9BUILD9.D210226.T215545'
+JVMDUMP010I System dump written to J9BUILD.JVM.J9BUILD9.D210226.T215545
+JVMDUMP019I JVM requesting CEEDUMP dump
+CEEDUMP in progress - Please Wait.
+CEEDUMP success for FILE='/home/j9build/tmp/bld_466459_zos_390-31/bld_466459/diagnostics.xdump_user/670946830/FYREC514-diagnostics_xdump-m166-20210226-215437/user/expected_dumps/CEEDUMP.20210226.215654.83886226'
+JVMDUMP010I CEEDUMP dump written to /home/j9build/tmp/bld_466459_zos_390-31/bld_466459/diagnostics.xdump_user/670946830/FYREC514-diagnostics_xdump-m166-20210226-215437/user/expected_dumps/CEEDUMP.20210226.215654.83886226
+JVMDUMP027W The requested heapdump has not been produced because another component is holding the VM exclusive lock.
+JVMDUMP032I JVM requested Java dump using '/home/j9build/tmp/bld_466459_zos_390-31/bld_466459/diagnostics.xdump_user/670946830/FYREC514-diagnostics_xdump-m166-20210226-215437/user/expected_dumps/javacore.20210226.215545.83886226.0004.txt' in response to an event
+JVMDUMP010I Java dump written to /home/j9build/tmp/bld_466459_zos_390-31/bld_466459/diagnostics.xdump_user/670946830/FYREC514-diagnostics_xdump-m166-20210226-215437/user/expected_dumps/javacore.20210226.215545.83886226.0004.txt
+JVMDUMP032I JVM requested Snap dump using '/home/j9build/tmp/bld_466459_zos_390-31/bld_466459/diagnostics.xdump_user/670946830/FYREC514-diagnostics_xdump-m166-20210226-215437/user/expected_dumps/Snap.20210226.215545.83886226.0005.trc' in response to an event
+JVMDUMP010I Snap dump written to /home/j9build/tmp/bld_466459_zos_390-31/bld_466459/diagnostics.xdump_user/670946830/FYREC514-diagnostics_xdump-m166-20210226-215437/user/expected_dumps/Snap.20210226.215545.83886226.0005.trc
+-------- Console dump --------
+Thread=JIT Compilation Thread-000 (19905E00) Status=Waiting
+Monitor=19C75744 (JIT-CompilationQueueMonitor) Count=0
+
+Thread=JIT Diagnostic Compilation Thread-001 Suspended (19906064) Status=Waiting
+Monitor=19C75B40 (JIT-CompThreadMonitor-??) Count=0
+
+Thread=JIT-SamplerThread (199062C8) Status=Sleeping
+
+Thread=IProfiler (1990652C) Status=Waiting
+Monitor=19C75EF8 (JIT-iprofilerMonitor) Count=0
+
+Thread=DestroyJavaVM helper thread (19905938) Status=Waiting
+Monitor=19904910 (portLibrary_omrsig_async_monitor) Count=0
+
+
+^^^^^^^^ Console dump ^^^^^^^^
+JVMDUMP013I Processed dump event "user", detail "".
+**************************************************************************
+>> 2021 Fri Feb 26 22:01:11 Axxon_xdump.pl TEST SUMMARY - ALL TESTS FAILED
+**************************************************************************
+```
+
+Similar failure for ` [zOS S390] 80 FVT_Serviceability.diagnostics.xdump_user.Mode167.1` (`job_output.php?id=670946831`)
+
+Note: these failures were marked by other problem tracker (PT) or original PT now is expired. Creating an issue in Open instead.

@@ -1,0 +1,20 @@
+Prex argInfo is used in inliner to propagate argument type to help call target selection as well as local opts in ilgen. Currently, prex arginfo computation is done in many places
+1. In static functions of `TR_PrexArgInfo`, used during ECS (estimate code size) stage, the stage when call targets are selected
+2. In inliner utils, used during actual inlining, prex arg info will be used in IAP (InvariantArgumentPreexistence) or other ilgen opts.
+
+Another limitation is during ECS (estimate code size) stage, the stage where we find call targets, we only propagate receiver type info down. If other arguments are used as the receiver in callee method, we won't have the most concrete type info.
+
+Many logics are duplicated and computation assumes result to be stored to a specific place, such as call site `_ecsPrexArgInfo` or call target `_ecsPrexArgInfo` or `_prexArgInfo`. This has made future use of prex arginfo difficult . We should extract the common logic in prex arginfo computation and propagation and put it in one place.
+
+The argument types of a call can be determined by
+a. The type from signature of the called method
+b. The type from the argument node if call node exists
+c. The receiver type inside the inlined body can be refined by the inlining guard (in the case of a guard with vft test)
+
+The solution is to compute prex arginfo based on a, b, c and return the result instead of storing them to a hard coded place. Same as variant arginfo invalidation, which is in OMR.
+
+As for arginfo propagation, two prex arginfo can be merged using `TR_PrexArgInfo::enhance`, we can compute the arginfo from different sources and merge them.
+
+- [x] Consolidate all computation logics into `computePrexInfo`, allow prex info to be computed for call target and call site, and don't store the result to a hard coded place like `TR_CallTarget::_prexArgInfo` #11588 and https://github.com/eclipse/omr/pull/5739
+- [ ] Check if J9 specific TR_PrexArgInfo functions are really J9 specific, either move their implementation to OMR or move the functions completely to OpenJ9
+- [ ] Clean up code that is not used after the refactor

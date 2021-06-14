@@ -1,0 +1,9 @@
+OpenJ9 has container awareness when it runs inside Linux based containers, Currently it queries Cgroup file system to get the container limits to set the heap size etc. (Via -XX:[+|-]UseContainerSupport)
+
+As usage of windows based containers is increasing recently and [OpenJ9 windows based images](https://hub.docker.com/layers/adoptopenjdk/library/adoptopenjdk/openj9-windowsservercore-ltsc2016/images/sha256-3f4a8f2813427c2aee0b38fbafaaf0d85997bc782a2eacb1651877877e32e4ce?context=explore) are available. It might be a good feature which can be extended to windows as well. 
+
+I accept that cgroups are the Linux only feature which is currently used by OpenJ9 to detect if its running in container, but windows do have something like [Job Objects](https://docs.microsoft.com/en-us/windows/win32/procthread/job-objects) which does the [resource management](https://docs.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/resource-controls#resources) in case of windows based containers.
+
+Lemme know your views on it. Sorry if its a duplicate issue I might have missed it in my search.
+
+FYI @dinogun @ashu-mehra 

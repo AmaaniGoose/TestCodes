@@ -1,0 +1,24 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_special.system_ppc64le_linux_Nightly_testList_2/102
+MauveSingleInvocLoad_special_5m_11
+variation: Mode501
+JVM_OPTIONS:  -Xjit -Xgcpolicy:balanced -Xnocompressedrefs 
+gnu.testlet.java.io.InputStreamReader.getEncoding
+```
+LT  Test failed:
+LT  java.lang.IncompatibleClassChangeError
+LT  	at sun.nio.cs.StreamDecoder.encodingName(StreamDecoder.java:357)
+LT  	at sun.nio.cs.StreamDecoder.getEncoding(StreamDecoder.java:107)
+LT  	at java.io.InputStreamReader.getEncoding(InputStreamReader.java:156)
+LT  	at gnu.testlet.java.io.InputStreamReader.getEncoding.test(getEncoding.java:166)
+LT  	at sun.reflect.GeneratedMethodAccessor134.invoke(Unknown Source)
+LT  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+LT  	at java.lang.reflect.Method.invoke(Method.java:498)
+LT  	at net.adoptopenjdk.loadTest.adaptors.MauveAdaptor.executeTest(MauveAdaptor.java:74)
+LT  	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+LT  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+LT  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+LT  	at java.lang.Thread.run(Thread.java:821)
+```
+
+https://github.com/eclipse/openj9/compare/9b90f0a...1e99073
+https://github.com/eclipse/openj9-omr/compare/440f0991...b326d5c

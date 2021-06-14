@@ -1,0 +1,45 @@
+Failure link
+------------
+Rebuild Link: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&BUILD_LIST=openjdk&JenkinsFile=openjdk_x86-64_linux&CUSTOM_TARGET=jdk/internal/misc/VM/GetNanoTimeAdjustment.java&TARGET=jdk_custom_0
+- test category: openjdk 
+- OS/architecture: all
+- version: 11 and 13
+- JVM: openj9 only
+
+Optional info
+-------------
+- intermittent failure (yes|no): no
+- regression or new test: regression
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+10:33:18  STDOUT:
+10:33:18  *** Testing regular cases ***
+10:33:18  Testing with offset: System.currentTimeMillis()/1000
+10:33:18  Adjustment: 424508672
+10:33:18  Can't assert for -1 with offset 1569231198(System.currentTimeMillis()/1000) when time in seconds is in [1569231198, 1569231198]
+10:33:18  Validating adjustment: 424508672
+10:33:18  Testing with offset: System.currentTimeMillis()/1000 - 1024
+10:33:18  Validating adjustment: 1024431260782
+10:33:18  Testing with offset: System.currentTimeMillis()/1000 + 1024
+10:33:18  Validating adjustment: -1023568551830
+10:33:18  *** Testing limits ***
+10:33:18  Testing with offset: System.currentTimeMillis()/1000 - MAX_OFFSET + 1
+10:33:18  STDERR:
+10:33:18  java.lang.RuntimeException: System.currentTimeMillis()/1000 - MAX_OFFSET + 1VM says -2725736097 secs is too far off,  when time in seconds is in [1569231198, 1569231198]
+10:33:18  	at GetNanoTimeAdjustment.testWithOffset(GetNanoTimeAdjustment.java:137)
+10:33:18  	at GetNanoTimeAdjustment.testLimits(GetNanoTimeAdjustment.java:222)
+10:33:18  	at GetNanoTimeAdjustment.main(GetNanoTimeAdjustment.java:247)
+10:33:18  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+10:33:18  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+10:33:18  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+10:33:18  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+10:33:18  	at com.sun.javatest.regtest.agent.MainActionHelper$AgentVMRunnable.run(MainActionHelper.java:298)
+10:33:18  	at java.base/java.lang.Thread.run(Thread.java:831)
+```
+
+The `System.currentTimeMillis()/1000 - MAX_OFFSET + 1` test is the only failing test.
+This test checks the bounds of the `VM.getNanoTimeAdjustment(offset)` method. It should return a long time stamp `adjustment` based on the offset. If the offset is +/- 2^32 the current time, the value returned will be -1. Therefore, this test should return a large adjustment value, as it is within the range, but is returning -1. - MAX_OFFSET + 2 does return a value.
+
+Hotspot JVM does this correctly.

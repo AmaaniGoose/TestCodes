@@ -1,0 +1,1 @@
+Some wording to indicate that we are Infrastructure as Code for other 3rd parties and that we should always make sure to be open for extension.

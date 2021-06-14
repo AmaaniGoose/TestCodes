@@ -1,0 +1,3 @@
+Just want to check if the openssl supported in jdk11 build.   If yes, what's the rule to determine the openssl version?
+
+The latest release in adoptopenjdk is jdk-11.0.8+10_openj9-0.21.0.  So, how can I determine the openssl version supported?  Thanks.

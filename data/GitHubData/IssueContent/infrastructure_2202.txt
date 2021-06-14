@@ -1,0 +1,16 @@
+Please put the name of the software product (and affected platforms if relevant) in the title of this issue
+
+- [x] Missing install
+- [ ] Bug in ansible playbook
+- [ ] Request for new playbook addition
+
+Details: I had a go at this once before and didn't quite manage to make it work, so it needs revisiting. It would be useful to record the last time that the ansible playbooks were run on a particular machine but logging it to e.g. `/var/log/ansible.log` A couple of lines in the log like:
+```
+202106031057 : Ansible playbook started
+202106031203 : Ansible playbook completed
+```
+Would allow us to know
+1. When the playbooks were last run
+2. Whether they were successful (based on the presence or absence of the `completed` message)
+This should be tagged as `adoptopenjdk`
+Bonus points if we can include the SHA of the infrastructure repository used during the deployment and any list of explicit included/excluded tags.

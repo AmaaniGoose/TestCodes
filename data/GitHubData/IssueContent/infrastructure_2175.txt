@@ -1,0 +1,10 @@
+jdk17 openjdk tests have introduced a dependency on `hostname` and `which`, which are missing from some test machines.
+
+So far the failures I've seen have been on docker machines:
+```
+test-docker-fedora33-armv8l-2
+test-docker-fedora33-x64-3
+```
+Affected test cases:
+TEST: sun/net/www/protocol/https/HttpsURLConnection/PostThruProxyWithAuth.java (needs `hostname`)
+TEST: java/nio/file/attribute/BasicFileAttributeView/UnixSocketFile.java (needs `which`)

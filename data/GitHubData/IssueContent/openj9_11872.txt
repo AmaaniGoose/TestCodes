@@ -1,0 +1,57 @@
+### Error details
+
+With OpenJ9 MHs, the error is:
+
+```
+java.lang.InternalError: Compile stub invoked! Apart from deliberate reflective access, this should not happen. Please report this to the project so it can be addressed
+	at java.base/java.lang.invoke.OpenJDKCompileStub.OpenJDKCompileStubThrowError(OpenJDKCompileStub.java:38)
+	at java.base/java.lang.invoke.MethodHandle.intrinsicName(MethodHandle.java:933)
+	at java.base/java.lang.invoke.MethodHandleImpl.makeIntrinsic(MethodHandleImpl.java:1444)
+	at java.base/java.lang.invoke.MethodHandleImpl$ArrayAccessor.<clinit>(MethodHandleImpl.java:158)
+	at java.base/java.lang.Class.forNameImpl(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:336)
+	at Task.getClasses(Task.java:134)
+	at TestConstructorFinder.main(TestConstructorFinder.java:43)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+	at java.base/java.lang.Thread.run(Thread.java:836)
+```
+
+With OJDK MHs enabled in OpenJ9, the error is:
+```
+java.lang.InternalError: java.lang.InternalError: found java.lang.invoke.LambdaForm$DMH/0x0000000000000000, expected java.lang.invoke.MethodHandleImpl$BindCaller
+        at java.base/java.lang.invoke.MethodHandleImpl$BindCaller.<clinit>(MethodHandleImpl.java:1233)
+        at java.base/java.lang.Class.forNameImpl(Native Method)
+        at java.base/java.lang.Class.forName(Class.java:346)
+        at Task.getClasses(Task.java:134)
+        at TestConstructorFinder.main(TestConstructorFinder.java:43)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+        at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+        at java.base/java.lang.Thread.run(Thread.java:853)
+Caused by: java.lang.InternalError: found java.lang.invoke.LambdaForm$DMH/0x0000000000000000, expected java.lang.invoke.MethodHandleImpl$BindCaller
+        at java.base/java.lang.invoke.MethodHandleImpl$BindCaller.checkCallerClass(MethodHandleImpl.java:1243)
+        at java.base/java.lang.invoke.LambdaForm$DMH/0x0000000000000000.invokeStatic(LambdaForm$DMH)
+        at java.base/java.lang.invoke.LambdaForm$MH/0x0000000000000000.invokeExact_MT(LambdaForm$MH)
+        at java.base/java.lang.invoke.MethodHandleImpl$BindCaller.<clinit>(MethodHandleImpl.java:1231)
+        ... 10 more
+```
+
+### Run the test
+
+```
+# Execute from JDK16 extensions repo
+make test TEST="java/beans/XMLDecoder/8028054/TestConstructorFinder.java"
+
+# Using jtreg
+jtreg -jdk:<TEST_JDK_HOME> -va test/jdk/java/beans/XMLDecoder/8028054/TestConstructorFinder.java
+```
+
+### Resources
+- JDK16 extensions repo: https://github.com/ibmruntimes/openj9-openjdk-jdk16
+- JTreg-5.1: https://ci.adoptopenjdk.net/view/Dependencies/job/jtreg/lastSuccessfulBuild/artifact/

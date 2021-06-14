@@ -1,0 +1,146 @@
+https://ci.adoptopenjdk.net/job/Test_openjdk8_j9_extended.functional_aarch64_linux/103/console
+Suspicious of the previous test testJCMMXBeanRemote_SE80_0 which failed...did that then cause the testJCMMXBeanRemote_SE80_1 one to hang?
+Node: build-alibaba-ubuntu1804-armv8-1
+```
+01:36:04  openjdk version "1.8.0_292-internal"
+01:36:04  OpenJDK Runtime Environment (build 1.8.0_292-internal-202103101808-b05)
+01:36:04  Eclipse OpenJ9 VM (build master-ab98c77ab, JRE 1.8.0 Linux aarch64-64-Bit Compressed References 20210310_236 (JIT enabled, AOT enabled)
+01:36:04  OpenJ9   - ab98c77ab
+01:36:04  OMR      - 631fc1da2
+01:36:04  JCL      - aa1907db based on jdk8u292-b05)
+```
+```
+03:36:59  ===============================================
+03:36:59  Running test testJCMMXBeanRemote_SE80_0 ...
+03:36:59  ===============================================
+03:36:59  testJCMMXBeanRemote_SE80_0 Start Time: Thu Mar 11 11:36:58 2021 Epoch Time (ms): 1615433818972
+03:36:59  "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+03:36:59  JVMSHRC005I No shared class caches available
+03:36:59  JVMSHRC005I No shared class caches available
+03:36:59  cache cleanup done
+03:36:59  variation: Mode100
+03:36:59  JVM_OPTIONS:  -Xint -Xgcpolicy:optthruput -Xnocompressedrefs 
+03:36:59  { itercnt=1; \
+03:36:59  mkdir -p "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/output_16154268812235/testJCMMXBeanRemote_SE80_0"; \
+03:36:59  cd "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/output_16154268812235/testJCMMXBeanRemote_SE80_0"; \
+03:36:59  export LD_LIBRARY_PATH="/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/openjdk-test-image/openj9:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/jre/bin/../lib/aarch64/default:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/jre/bin/../lib/aarch64/j9vm:"; \
+03:36:59  "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java"  -Xint -Xgcpolicy:optthruput -Xnocompressedrefs  \
+03:36:59  -DRUNLOCAL=false \
+03:36:59  -Dremote.server.option=" -Xint -Xgcpolicy:optthruput -Xnocompressedrefs  -Dcom.sun.management.jmxremote.port=9999 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false" \
+03:36:59  -cp "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../../jvmtest/TestConfig/resources:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/lib/testng.jar:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/lib/jcommander.jar:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../../jvmtest/functional/JLM_Tests/jlm_tests.jar" \
+03:36:59  org.testng.TestNG -d "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/output_16154268812235/testJCMMXBeanRemote_SE80_0" "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../../jvmtest/functional/JLM_Tests/testng.xml" \
+03:36:59  -testnames testJCMMXBean \
+03:36:59  -groups level.extended \
+03:36:59  -excludegroups d.*.linux_aarch64_mxdptrs,d.*.arch.aarch,d.*.os.linux,d.*.bits.64,d.*.generic-all; \
+03:36:59  if [ $? -eq 0 ] ; then echo ""; echo "testJCMMXBeanRemote_SE80_0""_PASSED"; echo ""; cd /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/..; rm -f -r "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/output_16154268812235/testJCMMXBeanRemote_SE80_0"; else echo ""; echo "testJCMMXBeanRemote_SE80_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/output_16154268812235/TestTargetResult";
+03:36:59  [IncludeExcludeTestAnnotationTransformer] [INFO] exclude file is /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TestConfig/resources/excludes/latest_exclude_8.txt
+03:36:59  ...
+03:36:59  ... TestNG 6.14.2 by Cédric Beust (cedric@beust.com)
+03:36:59  ...
+03:36:59  
+03:37:00  [JvmCpuMonitorMXBeanTest] [INFO]  ------------------------------------------
+03:37:00  [JvmCpuMonitorMXBeanTest] [INFO]  Starting JvmCpuMonitorMXBean API tests....
+03:37:00  [JvmCpuMonitorMXBeanTest] [INFO]  ------------------------------------------
+03:37:00  [JvmCpuMonitorMXBeanTest] [INFO] Starting Remote Server to Monitor!
+03:37:00  [JvmCpuMonitorMXBeanTest] [INFO] /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/jre/bin/java -classpath /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../../jvmtest/TestConfig/resources:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/lib/testng.jar:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/lib/jcommander.jar:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../../jvmtest/functional/JLM_Tests/jlm_tests.jar  -Xint -Xgcpolicy:optthruput -Xnocompressedrefs  -Dcom.sun.management.jmxremote.port=9999 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.lock.file=/tmp/tmp8376393311369472447.lock org.openj9.test.management.RemoteMonitor 
+03:37:00  [JvmCpuMonitorMXBeanTest] [INFO] Remote Server stdout: [RemoteMonitor] [INFO] =========RemoteMonitor Starts!=========
+03:37:01  [JvmCpuMonitorMXBeanTest] [INFO] child started
+03:41:33  [JvmCpuMonitorMXBeanTest] [WARN] Failed connecting. Retry 1 after 1000 ms.
+03:43:42  [JvmCpuMonitorMXBeanTest] [WARN] Failed connecting. Retry 2 after 1000 ms.
+03:45:52  [JvmCpuMonitorMXBeanTest] [WARN] Failed connecting. Retry 3 after 1000 ms.
+03:48:07  [JvmCpuMonitorMXBeanTest] [WARN] Failed connecting. Retry 4 after 1000 ms.
+03:50:16  [JvmCpuMonitorMXBeanTest] [WARN] Failed connecting. Retry 5 after 1000 ms.
+03:52:26  [JvmCpuMonitorMXBeanTest] [WARN] Failed connecting. Retry 6 after 1000 ms.
+03:54:36  [JvmCpuMonitorMXBeanTest] [WARN] Failed connecting. Retry 7 after 1000 ms.
+03:56:45  [JvmCpuMonitorMXBeanTest] [WARN] Failed connecting. Retry 8 after 1000 ms.
+04:01:17  [JvmCpuMonitorMXBeanTest] [WARN] Failed connecting. Retry 9 after 1000 ms.
+04:03:26  [JvmCpuMonitorMXBeanTest] [WARN] Failed connecting. Retry 10 after 1000 ms.
+04:03:26  FAILED: runJvmCpuMonitorMXBeanTest
+04:03:26  java.lang.AssertionError: Unable to connect to Remote Server. !!!Test Failed !!!
+04:03:26  	at org.testng.Assert.fail(Assert.java:96)
+04:03:26  	at org.openj9.test.management.JvmCpuMonitorMXBeanTest.runJvmCpuMonitorMXBeanTest(JvmCpuMonitorMXBeanTest.java:182)
+04:03:26  	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+04:03:26  	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+04:03:26  	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+04:03:26  	at java.lang.reflect.Method.invoke(Method.java:498)
+04:03:26  	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+04:03:26  	at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+04:03:26  	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+04:03:26  	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+04:03:26  	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+04:03:26  	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+04:03:26  	at org.testng.TestRunner.privateRun(TestRunner.java:648)
+04:03:26  	at org.testng.TestRunner.run(TestRunner.java:505)
+04:03:26  	at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+04:03:26  	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+04:03:26  	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+04:03:26  	at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+04:03:26  	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+04:03:26  	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+04:03:26  	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+04:03:26  	at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+04:03:26  	at org.testng.TestNG.runSuites(TestNG.java:1049)
+04:03:26  	at org.testng.TestNG.run(TestNG.java:1017)
+04:03:26  	at org.testng.TestNG.privateMain(TestNG.java:1354)
+04:03:26  	at org.testng.TestNG.main(TestNG.java:1323)
+04:03:26  
+04:03:26  
+04:03:26  ===============================================
+04:03:26      testJCMMXBean
+04:03:26      Tests run: 1, Failures: 1, Skips: 0
+04:03:26  ===============================================
+04:03:26  
+04:03:26  
+04:03:26  ===============================================
+04:03:26  JLM_Tests_Suite
+04:03:26  Total tests run: 1, Failures: 1, Skips: 0
+04:03:26  ===============================================
+04:03:26  
+04:03:26  
+04:03:26  testJCMMXBeanRemote_SE80_0_FAILED
+04:03:26  
+04:03:26  "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+04:03:26  
+04:03:26  Attempting to destroy all caches in cacheDir /home/jenkins/javasharedresources/
+04:03:26  
+04:03:26  JVMSHRC807I Non-compressed references persistent shared cache "sharedcc_jenkins" has been destroyed. Use option -Xcompressedrefs if you want to destroy a compressed references cache.
+04:03:26  JVMSHRC005I No shared class caches available
+04:03:26  cache cleanup done
+04:03:26  testJCMMXBeanRemote_SE80_0 Finish Time: Thu Mar 11 12:03:14 2021 Epoch Time (ms): 1615435394050
+04:03:26  
+04:03:26  ===============================================
+04:03:26  Running test testJCMMXBeanRemote_SE80_1 ...
+04:03:26  ===============================================
+04:03:26  testJCMMXBeanRemote_SE80_1 Start Time: Thu Mar 11 12:03:14 2021 Epoch Time (ms): 1615435394065
+04:03:26  "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+04:03:26  JVMSHRC005I No shared class caches available
+04:03:26  JVMSHRC005I No shared class caches available
+04:03:26  cache cleanup done
+04:03:26  variation: Mode101
+04:03:26  JVM_OPTIONS:  -Xjit -Xgcpolicy:optthruput -Xnocompressedrefs 
+04:03:26  { itercnt=1; \
+04:03:26  mkdir -p "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/output_16154268812235/testJCMMXBeanRemote_SE80_1"; \
+04:03:26  cd "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/output_16154268812235/testJCMMXBeanRemote_SE80_1"; \
+04:03:26  export LD_LIBRARY_PATH="/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/openjdk-test-image/openj9:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/jre/bin/../lib/aarch64/default:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/jre/bin/../lib/aarch64/j9vm:"; \
+04:03:26  "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/bin/java"  -Xjit -Xgcpolicy:optthruput -Xnocompressedrefs  \
+04:03:26  -DRUNLOCAL=false \
+04:03:26  -Dremote.server.option=" -Xjit -Xgcpolicy:optthruput -Xnocompressedrefs  -Dcom.sun.management.jmxremote.port=9999 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false" \
+04:03:26  -cp "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../../jvmtest/TestConfig/resources:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/lib/testng.jar:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/lib/jcommander.jar:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../../jvmtest/functional/JLM_Tests/jlm_tests.jar" \
+04:03:26  org.testng.TestNG -d "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/output_16154268812235/testJCMMXBeanRemote_SE80_1" "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../../jvmtest/functional/JLM_Tests/testng.xml" \
+04:03:26  -testnames testJCMMXBean \
+04:03:26  -groups level.extended \
+04:03:26  -excludegroups d.*.linux_aarch64_mxdptrs,d.*.arch.aarch,d.*.os.linux,d.*.bits.64,d.*.generic-all; \
+04:03:26  if [ $? -eq 0 ] ; then echo ""; echo "testJCMMXBeanRemote_SE80_1""_PASSED"; echo ""; cd /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/..; rm -f -r "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/output_16154268812235/testJCMMXBeanRemote_SE80_1"; else echo ""; echo "testJCMMXBeanRemote_SE80_1""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/output_16154268812235/TestTargetResult";
+04:03:26  [IncludeExcludeTestAnnotationTransformer] [INFO] exclude file is /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TestConfig/resources/excludes/latest_exclude_8.txt
+04:03:26  ...
+04:03:26  ... TestNG 6.14.2 by Cédric Beust (cedric@beust.com)
+04:03:26  ...
+04:03:26  
+04:03:26  [JvmCpuMonitorMXBeanTest] [INFO]  ------------------------------------------
+04:03:26  [JvmCpuMonitorMXBeanTest] [INFO]  Starting JvmCpuMonitorMXBean API tests....
+04:03:26  [JvmCpuMonitorMXBeanTest] [INFO]  ------------------------------------------
+04:03:26  [JvmCpuMonitorMXBeanTest] [INFO] Starting Remote Server to Monitor!
+04:03:26  [JvmCpuMonitorMXBeanTest] [INFO] /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdkbinary/j2sdk-image/jre/bin/java -classpath /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../../jvmtest/TestConfig/resources:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/lib/testng.jar:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../TKG/lib/jcommander.jar:/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_aarch64_linux/openjdk-tests/TKG/../../jvmtest/functional/JLM_Tests/jlm_tests.jar  -Xjit -Xgcpolicy:optthruput -Xnocompressedrefs  -Dcom.sun.management.jmxremote.port=9999 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.lock.file=/tmp/tmp8939678956734438941.lock org.openj9.test.management.RemoteMonitor 
+Aborted by Andrew Leonard
+08:38:43  Sending interrupt signal to process
+```

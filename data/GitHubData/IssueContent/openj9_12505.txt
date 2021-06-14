@@ -1,0 +1,1 @@
+Dynamic Loop Transfer, or DLT, is the inverse of OSR - an application thread will transition from the middle of an interpreted method into the middle of a JIT compiled method. This entire process is undocumented (the control logic, the transition, and the generated code).

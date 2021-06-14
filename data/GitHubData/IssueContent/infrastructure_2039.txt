@@ -1,0 +1,8 @@
+Ref: https://adoptopenjdk.slack.com/archives/C53GHCXL4/p1615801555143800
+
+A lot of the Nagios checks that are failing are to do with the Timesync checks failing (be that NTP, or `systemd-timesyncd.service`). The two plugins being run are: 
+https://github.com/AdoptOpenJDK/openjdk-infrastructure/blob/master/ansible/playbooks/AdoptOpenJDK_Unix_Playbook/roles/Nagios_Plugins/tasks/additional_plugins/check_timesync , For Debian/Ubuntu
+and
+https://github.com/AdoptOpenJDK/openjdk-infrastructure/blob/master/ansible/playbooks/AdoptOpenJDK_Unix_Playbook/roles/Nagios_Plugins/tasks/additional_plugins/check_ntp_timesync For RHEL/CentOS.
+
+The fact that these are failing right after #1990 , would imply that the playbooks aren't setup to put the right settings for the checks. So, either the playbooks need to be changed, or the checks need to be changed, if the playbooks are already setup correctly 

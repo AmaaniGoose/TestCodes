@@ -1,0 +1,32 @@
+The following sample program presents different results when executed multiple times.
+
+```
+public class A {
+   public static void main(String args[]) {
+      ConcurrentSkipListSet concurrentSkipListSet = new ConcurrentSkipListSet();
+      System.out.println(concurrentSkipListSet.add(new Object()));
+   }
+}
+```
+
+**Affected versions:**
+
+openjdk version "1.8.0_162"
+OpenJDK Runtime Environment (build 1.8.0_162-b12)
+Eclipse OpenJ9 VM (build openj9-0.8.0, JRE 1.8.0 Linux amd64-64 Compressed References 20180315_120 (JIT enabled, AOT enabled)
+OpenJ9   - e24e8aa9
+OMR      - 3e8296b4
+JCL      - ee1e77df1d based on jdk8u162-b12)
+
+**Steps to reproduce:**
+
+1. Compile above program
+2. Run it using Eclipse OpenJ9 java
+
+**Current result:**
+
+Sometimes true, sometimes ClassCastException.
+
+**Expected result:**
+
+true

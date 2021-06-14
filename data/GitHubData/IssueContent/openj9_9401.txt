@@ -1,0 +1,55 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.functional_x86-64_linux_xl_Nightly/350
+ub16x64j92
+testSCCMLTests2_0
+```
+Testing: Test 86: utilities test: iterate and destroy cache
+Test start time: 2020/04/29 02:19:44 Atlantic Standard Time
+Running command: "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_linux_xl_Nightly/openjdkbinary/j2sdk-image/bin/java"  -Xjit -Xgcpolicy:gencon -Xnocompressedrefs  -cp /home/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_linux_xl_Nightly/openjdk-tests/TKG/../../jvmtest/functional/VM_Test/VM_Test.jar -Xshareclasses:name=ShareClassesCMLTests,utilities com.ibm.j9.sharedCacheAPI.tests.SharedUtilsTest
+Time spent starting: 2 milliseconds
+Time spent executing: 396 milliseconds
+Test result: FAILED
+ [OUT] iterateSharedCache failed
+>> Success condition was not found: [Output match: iterateSharedCache passed]
+>> Required condition was not found: [Output match: destroySharedCache passed]
+>> Failure condition was found: [Output match: failed]
+>> Failure condition was not found: [Output match: corrupt]
+>> Failure condition was not found: [Output match: Processing dump event]
+```
+
+testSCCMLSoftmx_0
+```
+Testing: Test 1-b: Verify in the cache stats that nothing has been added into the cache
+Test start time: 2020/04/29 02:22:18 Atlantic Standard Time
+Running command: "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_linux_xl_Nightly/openjdkbinary/j2sdk-image/bin/java"  -Xjit -Xgcpolicy:gencon -Xnocompressedrefs  -Xshareclasses:name=ShareClassesCMLTests,printDetails
+Time spent starting: 2 milliseconds
+Time spent executing: 158 milliseconds
+Test result: FAILED
+ [ERR] JVMSHRC023E Cache does not exist
+ [ERR] JVMSHRC023E Cache does not exist
+>> Required condition was not found: [Output match: AOT Methods\s+= 0]
+>> Required condition was not found: [Output match: JIT Hints\s+= 0]
+>> Required condition was not found: [Output match: ROMClasses\s+= 0]
+>> Success condition was not found: [Output match: Cache is 100% soft full]
+>> Failure condition was not found: [Output match: #(.)*= [^0][0-9]*]
+>> Failure condition was not found: [Output match: error]
+>> Failure condition was not found: [Output match: Unhandled Exception]
+>> Failure condition was not found: [Output match: Exception:]
+>> Failure condition was not found: [Output match: corrupt]
+>> Failure condition was not found: [Output match: Processing dump event]
+
+Testing: Test 2: Increase softmx to 20m
+Test start time: 2020/04/29 02:22:18 Atlantic Standard Time
+Running command: "/home/jenkins/workspace/Test_openjdk8_j9_extended.functional_x86-64_linux_xl_Nightly/openjdkbinary/j2sdk-image/bin/java"  -Xjit -Xgcpolicy:gencon -Xnocompressedrefs  -Xshareclasses:name=ShareClassesCMLTests,adjustsoftmx=20m
+Time spent starting: 2 milliseconds
+Time spent executing: 185 milliseconds
+Test result: FAILED
+ [ERR] JVMSHRC023E Cache does not exist
+ [ERR] JVMSHRC023E Cache does not exist
+>> Required condition was not found: [Output match:  The softmx limit set for shared cache usage is greater than the total cache size [^0][0-9]* bytes]
+>> Success condition was not found: [Output match: The softmx bytes is set to [^0][0-9]*]
+>> Failure condition was not found: [Output match: error]
+>> Failure condition was not found: [Output match: Unhandled Exception]
+>> Failure condition was not found: [Output match: Exception:]
+>> Failure condition was not found: [Output match: corrupt]
+>> Failure condition was not found: [Output match: Processing dump event]
+```

@@ -1,0 +1,78 @@
+jdk16 openj9 extended.perf test target dacapo-jython_0 fails with `java.lang.NullPointerException`.
+
+The test fails with openj9 build, passes with hotspot build.
+The test fails on all openj9 platforms.
+
+Failing job link: https://ci.adoptopenjdk.net/job/Test_openjdk16_hs_extended.perf_x86-64_windows/4/consoleFull
+
+Failing build:
+```
+17:51:01  openjdk version "16" 2021-03-16
+17:51:01  OpenJDK Runtime Environment AdoptOpenJDK (build 16+35)
+17:51:01  Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.25.0-m1, JRE 16 Windows Server 2012 R2 amd64-64-Bit Compressed References 20210209_46 (JIT enabled, AOT enabled)
+17:51:01  OpenJ9   - a80e4fe10
+17:51:01  OMR      - adc01bb03
+17:51:01  JCL      - 80c626b79bc based on jdk-16+35)
+```
+
+Test output:
+```
+17:58:44  ===============================================
+17:58:44  Running test dacapo-jython_0 ...
+17:58:44  ===============================================
+17:58:44  dacapo-jython_0 Start Time: Tue Feb  9 17:58:43 2021 Epoch Time (ms): 1612893523978
+17:58:44  "C:/Users/jenkins/workspace/Test_openjdk16_j9_extended.perf_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java" -Xshareclasses:destroyAll; "C:/Users/jenkins/workspace/Test_openjdk16_j9_extended.perf_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+17:58:44  JVMSHRC005I No shared class caches available
+17:58:44  JVMSHRC005I No shared class caches available
+17:58:44  cache cleanup done
+17:58:44  variation: NoOptions
+17:58:44  JVM_OPTIONS:  
+17:58:44  { itercnt=1; \
+17:58:44  mkdir -p "C:/Users/jenkins/workspace/Test_openjdk16_j9_extended.perf_x86-64_windows/openjdk-tests/\\TKG\\output_16128934979825\\dacapo-jython_0"; \
+17:58:44  cd "C:/Users/jenkins/workspace/Test_openjdk16_j9_extended.perf_x86-64_windows/openjdk-tests/\\TKG\\output_16128934979825\\dacapo-jython_0"; \
+17:58:44  "C:/Users/jenkins/workspace/Test_openjdk16_j9_extended.perf_x86-64_windows/openjdkbinary/j2sdk-image\\bin\\java" -jar "C:/Users/jenkins/workspace/Test_openjdk16_j9_extended.perf_x86-64_windows/openjdk-tests///..//jvmtest\\perf\\dacapo\\dacapo.jar" jython; \
+17:58:44  	if [ $? -eq 0 ] ; then echo ""; echo "dacapo-jython_0""_PASSED"; echo ""; cd C:/Users/jenkins/workspace/Test_openjdk16_j9_extended.perf_x86-64_windows/openjdk-tests/; rm -f -r "C:/Users/jenkins/workspace/Test_openjdk16_j9_extended.perf_x86-64_windows/openjdk-tests/\\TKG\\output_16128934979825\\dacapo-jython_0"; else echo ""; echo "dacapo-jython_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "C:/Users/jenkins/workspace/Test_openjdk16_j9_extended.perf_x86-64_windows/openjdk-tests/\\TKG\\output_16128934979825\\TestTargetResult";
+17:58:48  java.lang.reflect.InvocationTargetException
+17:58:48  java.lang.reflect.InvocationTargetException
+17:58:48  	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+17:58:48  	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:78)
+17:58:48  	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+17:58:48  	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+17:58:48  	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+17:58:48  	at org.dacapo.harness.TestHarness.runBenchmark(TestHarness.java:192)
+17:58:48  	at org.dacapo.harness.TestHarness.main(TestHarness.java:152)
+17:58:48  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+17:58:48  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+17:58:48  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+17:58:48  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+17:58:48  	at Harness.main(Unknown Source)
+17:58:48  Caused by: java.lang.reflect.InvocationTargetException
+17:58:48  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+17:58:48  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+17:58:48  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+17:58:48  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+17:58:48  	at org.dacapo.harness.Jython.<init>(Jython.java:36)
+17:58:48  	... 12 more
+17:58:48  Caused by: Exception in thread "main" java.lang.reflect.InvocationTargetException
+17:58:48  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+17:58:48  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+17:58:48  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+17:58:48  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+17:58:48  	at Harness.main(Unknown Source)
+17:58:48  Caused by: java.lang.NullPointerException: Cannot invoke "org.python.core.PyObject.__findattr__(java.lang.String)" because "cls" is null
+17:58:48  	at org.python.core.Py.recursiveIsInstance(Py.java:1913)
+17:58:48  	at org.python.core.Py.isInstance(Py.java:1880)
+17:58:48  	at org.python.core.__builtin__.isinstance(__builtin__.java:696)
+17:58:48  	at org.python.core.Py.displayException(Py.java:1068)
+17:58:48  	at org.python.core.PyException.printStackTrace(PyException.java:79)
+17:58:48  	at org.python.core.PyException.toString(PyException.java:98)
+17:58:48  	at java.base/java.lang.Throwable.printStackTrace(Throwable.java:544)
+17:58:48  	at java.base/java.lang.Throwable.printStackTraceHelper(Throwable.java:342)
+17:58:48  	at java.base/java.lang.Throwable.printStackTrace(Throwable.java:307)
+17:58:48  	at java.base/java.lang.Throwable.printStackTrace(Throwable.java:250)
+17:58:48  	at org.dacapo.harness.TestHarness.main(TestHarness.java:157)
+17:58:48  	... 5 more
+17:58:49  
+17:58:49  dacapo-jython_0_FAILED
+```
+To rerun: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=16&JDK_IMPL=openj9&JDK_VENDOR=adoptopenjdk&BUILD_LIST=perf&PLATFORM=x86-64_windows&TARGET=dacapo-jython_0

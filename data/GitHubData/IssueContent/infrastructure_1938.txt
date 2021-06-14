@@ -1,0 +1,9 @@
+Ref: https://ci.adoptopenjdk.net/view/Tooling/job/VagrantPlaybookCheck/OS=Solaris10,label=vagrant/1033/console
+```
+16:56:33 TASK [Gathering Facts] *********************************************************
+16:56:33 fatal: [127.0.0.1]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: Unable to negotiate with 127.0.0.1 port 2222: no matching key exchange method found. Their offer: gss-group1-sha1-toWM5Slw5Ew8Mqkay+al2g==,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1", "unreachable": true}
+16:56:33 
+16:56:33 PLAY RECAP *********************************************************************
+16:56:33 127.0.0.1                  : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+```
+It's generally going ok in the github checks so hopefully this won't be complicated to fiux

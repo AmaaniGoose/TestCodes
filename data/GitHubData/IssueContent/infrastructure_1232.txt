@@ -1,0 +1,5 @@
+For a project on arm32 we need a JDK running on ARM hard-float (armhf) and another one running EABI arm soft-float (armel). 
+
+Could you add the missing one,  arm soft-float (armel), in order to natively build arm on both of those platforms ?
+
+Thanks,

@@ -1,0 +1,8 @@
+This is a discussion issue to identify a set of common OpenJ9 activities that we may include in various workflows at the Eclipse OpenJ9 project.  In a recent community call, @sophia-guo demonstrated the [AdoptOpenJDK/run-aqa](https://github.com/AdoptOpenJDK/run-aqa) action along with a WIP action in her personal repo, [sophia-guo/build-jdk-openj9](https://github.com/sophia-guo/build-jdk-openj9).  
+
+With the 2 of these actions, it would be possible to trigger a build and test workflow on both ubuntu and mac runners (which could ultimately replace the travis run that we currently have).  We can identify that as one potential OpenJ9 activity that could leverage Github workflows, but let's also consider others and what benefits (either in terms of simplifying existing tasks, taking advantage of some free tier machine resource, or automating things that are currently done manually).  
+
+Related: 
+https://github.com/eclipse/openj9/issues/9349 
+https://github.com/eclipse/openj9/issues/9370
+

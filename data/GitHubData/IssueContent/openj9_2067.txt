@@ -1,0 +1,12 @@
+The code in optinfo.c doesn't handle decompression of entries properly in the most general case (where the PC and line-number offsets are large). The line at [1]:
+```c
+lineNumberOffset = 0xFFFF & lineNumberOffset;
+```
+does nothing because the value was already limited to 16 bits; so it doesn't do as the comment says: 'set the sign bit to 1'. Perhaps what was intended was:
+```c
+lineNumberOffset |= 0xFFFF0000;
+```
+Whatever the outcome, the behavior should be mirrored in [2].
+
+[1] https://github.com/eclipse/openj9/blob/4e26fc285d48a87ee5f56ab8cea5541491514cca/runtime/util/optinfo.c#L328
+[2] DDR_VM/src/com/ibm/j9ddr/vm29/j9/walkers/LineNumberIterator.java

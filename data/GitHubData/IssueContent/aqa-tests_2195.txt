@@ -1,0 +1,3 @@
+Issues have been seen with openj9 AIX testcases that produce dumps that are 30+Gb, because the default heapsize is 25% available RAM, and on some AIX boxes there can be a huge amount of available RAM. But we may only have a 30Gb disk partition.
+
+Should we specify a -Xmx, at least for openj9?

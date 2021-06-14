@@ -1,0 +1,22 @@
+Using the option `-verbose:sizes` should print out all available page sizes configured on the system for both the codecache and objectheap. 
+
+On AIX, the verbose output which lists the available page sizes that the codecache can use is missing the default page size of 64K. This happens even when verbose output verifies that it has committed to use 64K pages as the default page size. 
+
+**To reproduce**, run `java -verbose:sizes -version`
+The output depends on what pages are configured on your system, but if you have 16M pages configured it will look something like the output below.
+
+```
+17:49:29    -Xlp:objectheap:pagesize=64K	 large page size
+17:49:29                    available large page sizes:
+17:49:29                    4K
+17:49:29                    64K    
+17:49:29                    16M
+17:49:29    -Xlp:codecache:pagesize=64K	 large page size for JIT code cache
+17:49:29                    available large page sizes for JIT code cache:
+17:49:29                    4K
+17:49:29                    16M .     
+```
+
+We can see that `64K` is listed in the available large pages on the objectheap portion, but is not included on the codecache portion. 
+
+This issue only occurs on **OpenJ9 AIX** builds. 

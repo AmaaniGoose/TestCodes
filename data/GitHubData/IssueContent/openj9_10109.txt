@@ -1,0 +1,13 @@
+When trying to build openj9 jdk11 on a Windows 2012 Server machine following the instructions here: https://github.com/eclipse/openj9/blob/master/doc/build-instructions/Build_Instructions_V11.md, the build failed with many messages similar to:
+```
+if not exist "C:\Users\Administrator\git\openj9-openjdk-jdk11\build\windows-x86_64-normal-server-release\vm\" mkdir "C:\Users\Administrator\git\openj9-openjdk-jdk11\build\windows-x86_64-normal-server-release\vm\"
+The filename, directory name, or volume label syntax is incorrect.^M
+make[6]: *** [C:/Users/Administrator/git/openj9-openjdk-jdk11/build/windows-x86_64-normal-server-release/vm/compiler/build/rules/win-msvc/common.mk:90: jit_createdirs] Error 1
+make[6]: Leaving directory '/cygdrive/c/Users/Administrator/git/openj9-openjdk-jdk11/build/windows-x86_64-normal-server-release/vm/compiler'
+make[5]: *** [makefile:70: default] Error 2
+```
+It turned out the issue was due to cygwin 3.1.5 (the version installed by default since 1st June 2020) not passing the arguments to a process started with `cmd /c` correctly.  
+
+The 'fix' was to reinstall cygwin specifying the versions for cygwin and cygwin-devel packages to be 3.1.4.  I was not successful in simply uninstalling and reinstalling those two packages - I had to completely remove cygwin (google search or read the cygwin FAQ for how to do that) and reinstall.
+
+Raising this issue in case in case it helps anyone encountering the same build failure.

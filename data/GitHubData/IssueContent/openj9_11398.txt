@@ -1,0 +1,7 @@
+Can the plugin and extension mechanism be added to OMR/OpenJ9 so what user-defined optimization of code can be added without recompiling and compromising the integrity of the runtime?
+
+This way developers can add optimisation for hardware accelerators, GPU. FPGA, etc. or application-specific, code specific optimisations.
+
+Ideally, the API should be Java (in case of OpenJ9), with the ability to specify which context the user-defined optimisations are applicable. This API will not be called from the running application in many circumstances but provided separately through command line or configuration.
+
+I guess this might have some upstream designs considerations for JitBuilder.

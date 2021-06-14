@@ -1,0 +1,1 @@
+As mentioned in https://github.com/eclipse-openj9/openj9/issues/12851#issuecomment-856220452, I think we should add this test into functional.

@@ -1,0 +1,27 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.system_x86-64_linux_xl_Nightly/319
+TestIBMJlmRemoteMemoryNoAuth_0
+```
+CL1 stderr Exception in thread "main" java.lang.BootstrapMethodError: java.lang.invoke.StringConcatException: Generator failed
+CL1 stderr 	at net.openj9.test.extensions.MemoryPoolExtensionCommand.execute(MemoryPoolExtensionCommand.java:97)
+CL1 stderr 	at net.openj9.test.jlm.resources.VMData.invokeIBMMemoryPoolBeanTest(VMData.java:179)
+CL1 stderr 	at net.openj9.test.jlm.resources.MemoryData.writeData(MemoryData.java:112)
+CL1 stderr 	at net.openj9.test.jlm.remote.MemoryProfiler.getStatsViaProxy(MemoryProfiler.java:192)
+CL1 stderr 	at net.openj9.test.jlm.remote.MemoryProfiler.main(MemoryProfiler.java:119)
+CL1 stderr Caused by: java.lang.invoke.StringConcatException: Generator failed
+CL1 stderr 	at java.base/java.lang.invoke.StringConcatFactory.generate(StringConcatFactory.java:764)
+CL1 stderr 	at java.base/java.lang.invoke.StringConcatFactory.doStringConcat(StringConcatFactory.java:665)
+CL1 stderr 	at java.base/java.lang.invoke.StringConcatFactory.makeConcatWithConstants(StringConcatFactory.java:581)
+CL1 stderr 	at java.base/java.lang.invoke.DirectHandle.invokeExact_thunkArchetype_L(DirectHandle.java:302)
+CL1 stderr 	at java.base/java.lang.invoke.CollectHandle.invokeExact_thunkArchetype_X(CollectHandle.java:130)
+CL1 stderr 	at java.base/java.lang.invoke.AsTypeHandle.invokeExact_thunkArchetype_X(AsTypeHandle.java:49)
+CL1 stderr 	at java.base/java.lang.invoke.MethodHandle.invokeBsm(MethodHandle.java:963)
+CL1 stderr 	at java.base/java.lang.invoke.MethodHandle.resolveInvokeDynamic(MethodHandle.java:1093)
+CL1 stderr 	... 5 more
+CL1 stderr Caused by: java.lang.NullPointerException
+CL1 stderr 	at java.base/java.lang.invoke.BruteArgumentMoverHandle.permuteArguments(BruteArgumentMoverHandle.java:286)
+CL1 stderr 	at java.base/java.lang.invoke.MethodHandles.dropArgumentsUnsafe(MethodHandles.java:2911)
+CL1 stderr 	at java.base/java.lang.invoke.MethodHandles.dropArguments(MethodHandles.java:2928)
+CL1 stderr 	at java.base/java.lang.invoke.StringConcatFactory$MethodHandleInlineCopyStrategy.generate(StringConcatFactory.java:1536)
+CL1 stderr 	at java.base/java.lang.invoke.StringConcatFactory.generate(StringConcatFactory.java:756)
+CL1 stderr 	... 12 more
+```

@@ -1,0 +1,11 @@
+OpenJ9 should ignore VM arguments that contain non-ASCII whitespace characters when a JVM is created.
+
+Related issue: #5332 
+Ignoring ASCII whitespace characters have been addressed in PR #5353.
+
+Some additional background from @pshipton 
+> ...note that 0xA0 is a "no-break space" in Unicode. Unicode can be used to determine what is whitespace. i.e. https://en.wikipedia.org/wiki/Unicode_character_property has a list.
+> 
+> optionString is specified as the option as a string in the default platform encoding i.e. if the default platform encoding is ISO8859-1 to -11, then 0xA0 is a 1-1 mapping to Unicode.
+> 
+> Since optionString is in the platform encoding (and we don't want to understand all the encodings), in order to skip non-ascii whitespace we'll have to convert the options to Unicode in UTF8 format, and then look at each UTF8 char to determine if it's whitespace. The conversion to Unicode isn't being done now (except it seems on Windows), and will introduce additional overhead. If we convert everything to Unicode/UTF8, we may want change other parts of the options processing and creation of system properties.

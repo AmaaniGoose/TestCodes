@@ -1,0 +1,7 @@
+This issue is in reference to the currently open Feature Request #9582 and PR #9578 
+
+The MicroJIT compiler need to support the On-Stack Replacement (OSR) feature currently available in TR.
+
+OSR has a number or uses, including support for JITed debugging with the Full-Speed Debugging feature. 
+
+MicroJIT needs to recognize if OSR has been enabled and ensure that it supplies the required Meta-Data information. Until it does so, MicroJIT needs to recognize the option and abort early to ensure it does not cause any unexpected behavior when running with OSR.

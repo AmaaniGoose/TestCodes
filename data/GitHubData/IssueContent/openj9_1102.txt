@@ -1,0 +1,9 @@
+While working on https://github.com/eclipse/openj9/pull/1047 due to a great an thorough review by @JasonFengJ9 there was a bug identified in the implementation where I accidentally removed the setting of the `isCopy` parameter in `getStringUTFChars`:
+
+https://github.com/eclipse/openj9/blob/aba80293cae72171a0e4b861ee6c0b1e963d7d10/runtime/vm/jnimisc.cpp#L781-L804
+
+I had accidentally deleted lines 796-798:
+
+https://github.com/eclipse/openj9/blob/aba80293cae72171a0e4b861ee6c0b1e963d7d10/runtime/vm/jnimisc.cpp#L796-L798
+
+This did not cause any test failures (internal or external). This to me says we are missing testing in this area related to the `isCopy` parameter.

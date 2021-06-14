@@ -1,0 +1,20 @@
+In https://github.com/eclipse/openj9/issues/2263, it was decided to enable container support by default based on the belief that this only modified things in a container:
+
+> Given:
+> * it's already enabled in Adopt's docker images, 
+> * the start up effect is minimal outside a container, and
+> * it's a no-op outside a container,
+> 
+> I'm onboard with enabling this by default.
+> 
+_Originally posted by @DanHeidinga in https://github.com/eclipse/openj9/issues/2263#issuecomment-427224689_
+
+When reviewing #2954, I was surprised to see that `omrsysinfo_cgroup_get_enabled_subsystems` includes some cgroup systems are enabled even outside a container.  See the example javacore for a host system: 
+https://github.com/eclipse/openj9/files/2602877/javacore.container.m2g.txt
+
+I'm now wondering if this code should be gated by a call to `omrsysinfo_is_running_in_container()`:
+https://github.com/eclipse/openj9/blob/87f128a0e7e924befcb2841eafbc8c951e915527/runtime/vm/jvminit.c#L1930-L1938
+
+Does anyone have concerns with the current code?  Does this need the `in_container()` check?
+
+FYI @dinogun @ashu-mehra 

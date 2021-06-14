@@ -1,0 +1,24 @@
+Java -version output
+--------------------
+```
+openjdk version "11.0.4" 2019-07-16 
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.4+11) 
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.15.1, JRE 11 Linux amd64-64-Bit Compressed References 20190717_286 (JIT enabled, AOT enabled) 
+OpenJ9 - 0f66c6431 
+OMR - ec782f26 
+JCL - fa49279450 based on jdk-11.0.4+11)
+```
+
+There are OpenJ9 1.8 JVMs with the same behaviour, so it seems not to be version specific.
+
+Summary of problem
+------------------
+Attaching a javaagent to the running JVM via `com.sun.tools.attach.VirtualMachine` results in `ATTACH_ACK` response but the javaagent does not get loaded/started.
+A heap dump from the affected JVM does not reveal any of the classes provided by the javaagent's jar file. Restarting the JVM resolves the issue.
+From the outside everything looks as expected when attaching the javaagent.
+
+Diagnostic files
+----------------
+
+There is no output to the applications stdout/stderr whatsoever.
+We now added `-Dcom.ibm.tools.attach.logging=yes` and are waiting for the next occurrence. I will add the log when available.

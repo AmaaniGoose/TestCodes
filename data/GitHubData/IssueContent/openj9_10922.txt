@@ -1,0 +1,97 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk11_j9_extended.functional_x86-64_linux_xl_Nightly_testList_0/122`
+```
+23:13:31  openjdk version "11.0.9-internal" 2020-10-20
+23:13:31  OpenJDK Runtime Environment (build 11.0.9-internal+0-adhoc.jenkins.BuildJDK11x86-64linuxxlNightly)
+23:13:31  Eclipse OpenJ9 VM (build master-e5e0324a0f5, JRE 11 Linux amd64-64-Bit 20201017_547 (JIT enabled, AOT enabled)
+23:13:31  OpenJ9   - e5e0324a0f5
+23:13:31  OMR      - d2cc022b7d9
+23:13:31  JCL      - 5e617ab0c87 based on jdk-11.0.9+10)
+```
+To rebuild the failed tests in <Jenkins URL>=https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder, use the following links:
+01:26:34  https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?JDK_VERSION=11&JDK_IMPL=openj9&BUILD_LIST=functional&PLATFORM=x86-64_linux_xl&TARGET=testOpenJ9DiagnosticsMXBean_1
+
+Optional info
+-------------
+
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```
+FAILED: testRemote_setDumpOptions
+openj9.lang.management.ConfigurationUnavailableException: Dump configuration cannot be changed while a dump is in progress
+	at jdk.management/openj9.lang.management.internal.OpenJ9DiagnosticsMXBeanImpl.handleDumpConfigurationUnavailableException(OpenJ9DiagnosticsMXBeanImpl.java:295)
+	at jdk.management/openj9.lang.management.internal.OpenJ9DiagnosticsMXBeanImpl.setDumpOptions(OpenJ9DiagnosticsMXBeanImpl.java:107)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at sun.reflect.misc.Trampoline.invoke(MethodUtil.java:71)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at java.base/sun.reflect.misc.MethodUtil.invoke(MethodUtil.java:260)
+	at java.management/com.sun.jmx.mbeanserver.ConvertingMethod.invokeWithOpenReturn(ConvertingMethod.java:193)
+	at java.management/com.sun.jmx.mbeanserver.ConvertingMethod.invokeWithOpenReturn(ConvertingMethod.java:175)
+	at java.management/com.sun.jmx.mbeanserver.MXBeanIntrospector.invokeM2(MXBeanIntrospector.java:117)
+	at java.management/com.sun.jmx.mbeanserver.MXBeanIntrospector.invokeM2(MXBeanIntrospector.java:54)
+	at java.management/com.sun.jmx.mbeanserver.MBeanIntrospector.invokeSetter(MBeanIntrospector.java:267)
+	at java.management/com.sun.jmx.mbeanserver.PerInterface.setAttribute(PerInterface.java:102)
+	at java.management/com.sun.jmx.mbeanserver.MBeanSupport.setAttribute(MBeanSupport.java:230)
+	at java.management/javax.management.StandardMBean.setAttribute(StandardMBean.java:383)
+	at java.management/com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.setAttribute(DefaultMBeanServerInterceptor.java:736)
+	at java.management/com.sun.jmx.mbeanserver.JmxMBeanServer.setAttribute(JmxMBeanServer.java:739)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1489)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1307)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1399)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.setAttribute(RMIConnectionImpl.java:720)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:359)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:770)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:562)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:796)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:677)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler$$Lambda$82/0x0000000000000000.run(Unknown Source)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:704)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:676)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:835)
+Caused by: com.ibm.jvm.DumpConfigurationUnavailableException: Dump configuration cannot be changed while a dump is in progress.
+	at openj9.jvm/com.ibm.jvm.Dump.setDumpOptions(Dump.java:624)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at jdk.management/openj9.lang.management.internal.OpenJ9DiagnosticsMXBeanImpl.setDumpOptions(OpenJ9DiagnosticsMXBeanImpl.java:104)
+	... 42 more
+Caused by: openj9.management.internal.DumpConfigurationUnavailableExceptionBase: Dump configuration cannot be changed while a dump is in progress.
+	at openj9.jvm/com.ibm.jvm.Dump.setDumpOptionsImpl(Native Method)
+	at openj9.jvm/com.ibm.jvm.Dump.setDumpOptions(Dump.java:619)
+	... 47 more
+
+
+===============================================
+    testOpenJ9DiagnosticsMXBean
+    Tests run: 10, Failures: 1, Skips: 0
+===============================================
+
+
+===============================================
+JLM_Tests_Suite
+Total tests run: 10, Failures: 1, Skips: 0
+===============================================
+
+
+testOpenJ9DiagnosticsMXBean_1_FAILED
+```

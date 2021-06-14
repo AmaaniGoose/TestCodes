@@ -1,0 +1,37 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_sanity.functional_x86-32_windows_OMR/464
+```
+java.io.FileNotFoundException: C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.functional_x86-32_windows_OMR\openjdk-tests\..\jvmtest\functional\cmdLineTests\jvmtitests\decompilationtests.xml (The system cannot find the file specified)
+
+ [ERR] Error: Could not find or load main class jit.test.loopReduction.Main
+
+cp: cannot stat 'C:/Users/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-32_windows_OMR/openjdk-tests///..//jvmtest\functional\cmdLineTests\URLClassLoaderTests\URLClassLoaderTests.jar': No such file or directory
+java.io.FileNotFoundException: URLClassLoaderTests.jar (The system cannot find the file specified)
+
+java.io.FileNotFoundException: C:\Users\jenkins\workspace\Test_openjdk8_j9_sanity.functional_x86-32_windows_OMR\openjdk-tests\..\jvmtest\functional\cmdLineTests\URLClassLoaderTests\excludeJava8.xml (The system cannot find the file specified)
+
+etc.
+```
+
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_sanity.functional_x86-64_windows_OMR/485
+failures finding the test material
+
+I see two different SHAs for the same repo in the SHA.txt file.
+```
+timestamp: 20200324-155214
+repo dir: /cygdrive/c/Users/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-32_windows_OMR/openjdk-tests/openj9
+git repo: 
+  Fetch URL: https://github.com/eclipse/openj9.git
+sha:
+398fa673037e0a655fb2b3b6735d914cac76e5fb
+================================================
+timestamp: 20200325-045116
+repo dir: /cygdrive/c/Users/jenkins/workspace/Test_openjdk8_j9_sanity.functional_x86-32_windows_OMR/openjdk-tests/openj9
+git repo: 
+  Fetch URL: https://github.com/eclipse/openj9.git
+sha:
+18cf44b900950169a23149e95c30229762e46c28
+```
+https://github.com/eclipse/openj9/compare/398fa673...18cf44b9
+
+jdk8 Win64 didn't fail, and doesn't have the two shas.
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_sanity.functional_x86-64_windows_OMR/468/

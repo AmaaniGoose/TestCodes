@@ -1,0 +1,2 @@
+Currently only a subset of information inside TR::Environment is obtained by the JITServer from JITClient (i.e. the TR::CPU object).
+We would like the entire TR::Environment object to be transferred over to JITServer during out-of-process compilations.

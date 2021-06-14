@@ -1,0 +1,29 @@
+The information about a j9class is sent by the client to the JITaaS server as a `ClassInfoTuble` which is a long enumeration of types:
+
+ ```using ClassInfoTuple = std::tuple<std::string, J9Method *, TR_OpaqueClassBlock *, int32_t, TR_OpaqueClassBlock *, std::vector<TR_OpaqueClassBlock *>, std::vector<std::tuple<bool, bool>>, bool, uintptrj_t , bool, uint32_t, TR_OpaqueClassBlock *, void *, TR_OpaqueClassBlock *, TR_OpaqueClassBlock *, TR_OpaqueClassBlock *, uintptrj_t>;```
+   
+It's hard to identify the meaning of those types and accessing them by position (e.g. `std::get<3>(classInfo)`) is error prone. The proposal is to replace the ClassInfoTuple with a struct where fields have meaningful names:
+```
+ struct RamClassInfo
+      {
+      std::string _romClass; 
+      J9Method *_methodsOfClass;
+      TR_OpaqueClassBlock *_baseComponentClass; 
+      int32_t _numDimensions;
+      TR_OpaqueClassBlock *_parentClass;
+      std::vector<TR_OpaqueClassBlock *> _interfaces; 
+      std::vector<std::tuple<bool, bool>> _methodEnterExitInfo;
+      bool _classHasFinalFields;
+      uintptrj_t _classDepthAndFlags;
+      bool _classInitialized;
+      uint32_t _byteOffsetToLockword;
+      TR_OpaqueClassBlock *_leafComponentClass;
+      void *_classLoader;
+      TR_OpaqueClassBlock *_hostClass;
+      TR_OpaqueClassBlock *_componentClass;
+      TR_OpaqueClassBlock *_arrayClass;
+      uintptrj_t _totalInstanceSize;
+      };
+```
+We have to be verify that returning such a struct from `JITaaSHelpers::packRemoteROMClassInfo()` does not create temporary copies (copy elision should be performed by gcc)
+

@@ -1,0 +1,97 @@
+Java -version output
+--------------------
+
+openjdk version "1.8.0_212"
+OpenJDK Runtime Environment (build 1.8.0_212-b04)
+Eclipse OpenJ9 VM (build openj9-0.14.2, JRE 1.8.0 Windows 10 amd64-64-Bit Compressed References 20190521_368 (JIT enabled, AOT enabled)
+OpenJ9   - 4b1df46fe
+OMR      - b56045d2
+JCL      - a8c217d402 based on jdk8u212-b04)
+
+Summary of problem
+------------------
+
+I replaced the Oracle JDK with the OpenJ9 indicated above.  I use the Liferay Developer Studio (based on Eclipse) to compile and build modules for deployment.  After the JDK change, A Gradle build of a module fails with this error:
+
+Gradle User Home: C:\Users\Pete.BSF_INT\.gradle
+Gradle Distribution: Gradle wrapper from target build
+Gradle Version: 3.0
+Java Home: C:\Program Files\AdoptOpenJDK\jdk-8.0.212.04-openj9
+JVM Arguments: None
+Program Arguments: None
+Build Scans Enabled: false
+Offline Mode Enabled: false
+Gradle Tasks: build
+
+:compileJava UP-TO-DATE
+:buildCSS
+Using native Sass compiler
+Unhandled exception
+Type=Segmentation error vmState=0x00040000
+Windows_ExceptionCode=c0000005 J9Generic_Signal=00000004 ExceptionAddress=00007FF8FBD72F83 ContextFlags=0010005f
+Handler1=00007FF8FBD6BAB0 Handler2=00007FF91C23CA30 InaccessibleReadAddress=0000000000000010
+RDI=0000000002AB9A00 RSI=0000000000000000 RAX=000000000262EA08 RBX=00000000122B74E8
+RCX=0000000002AB9A00 RDX=000000000FA94128 R8=0000000000000000 R9=00007FF8FBE41D20
+R10=0000000000000001 R11=00007FF8FBE41D20 R12=000000000FA94128 R13=00000000008D5B60
+R14=00000000000000B2 R15=0000000000000001
+RIP=00007FF8FBD72F83 RSP=000000000262E990 RBP=0000000000000000 GS=002B
+FS=0053 ES=002B DS=002B
+XMM0 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM1 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM2 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM3 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM4 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM5 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM6 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM7 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM8 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM9 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM10 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM11 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM12 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM13 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM14 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM15 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+Module=C:\Program Files\AdoptOpenJDK\jdk-8.0.212.04-openj9\jre\bin\compressedrefs\j9vm29.dll
+Module_base_address=00007FF8FBCF0000 Offset_in_DLL=0000000000082f83
+Target=2_90_20190521_368 (Windows 10 10.0 build 17763)
+CPU=amd64 (8 logical CPUs) (0x3f8732000 RAM)
+----------- Stack Backtrace -----------
+(0x00007FF8FBD72F83 [j9vm29+0x82f83])
+Java_org_bridj_JNI_bindJavaMethodsToCFunctions+0x255 (0x00007FF913DC68E5 [bridj+0x68e5])
+J9_CreateJavaVM+0x8b7c3 (0x00007FF8FBE02773 [j9vm29+0x112773])
+J9_CreateJavaVM+0x8b39c (0x00007FF8FBE0234C [j9vm29+0x11234c])
+(0x00007FF8FBD05430 [j9vm29+0x15430])
+---------------------------------------
+JVMDUMP039I Processing dump event "gpf", detail "" at 2019/05/30 16:29:38 - please wait.
+JVMDUMP032I JVM requested System dump using 'E:\Workspaces\LR70\ServiceDashboard\core.20190530.162938.10468.0001.dmp' in response to an event
+JVMDUMP010I System dump written to E:\Workspaces\LR70\ServiceDashboard\core.20190530.162938.10468.0001.dmp
+JVMDUMP032I JVM requested Java dump using 'E:\Workspaces\LR70\ServiceDashboard\javacore.20190530.162938.10468.0002.txt' in response to an event
+JVMDUMP010I Java dump written to E:\Workspaces\LR70\ServiceDashboard\javacore.20190530.162938.10468.0002.txt
+JVMDUMP032I JVM requested Snap dump using 'E:\Workspaces\LR70\ServiceDashboard\Snap.20190530.162938.10468.0003.trc' in response to an event
+JVMDUMP010I Snap dump written to E:\Workspaces\LR70\ServiceDashboard\Snap.20190530.162938.10468.0003.trc
+JVMDUMP007I JVM Requesting JIT dump using 'E:\Workspaces\LR70\ServiceDashboard\jitdump.20190530.162938.10468.0004.dmp'
+JVMDUMP010I JIT dump written to E:\Workspaces\LR70\ServiceDashboard\jitdump.20190530.162938.10468.0004.dmp
+JVMDUMP013I Processed dump event "gpf", detail "".
+:buildCSS FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':buildCSS'.
+> Process 'command 'C:\Program Files\AdoptOpenJDK\jdk-8.0.212.04-openj9\bin\java.exe'' finished with non-zero exit value -1
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
+
+BUILD FAILED
+
+Total time: 1.927 secs
+
+Diagnostic files
+----------------
+
+Output files can be found here:
+
+https://drive.google.com/drive/folders/1Eohzx5CgJzHYyFAS_TnGynapHrm0kZon?usp=sharing
+

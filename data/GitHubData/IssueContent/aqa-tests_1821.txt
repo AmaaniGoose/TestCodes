@@ -1,0 +1,9 @@
+https://ci.adoptopenjdk.net/job/Test_openjdk11_j9_extended.external_x86-64_linux_derby/2/console
+
+```
+12:23:04  junit-pptesting:
+12:23:04  
+12:23:04  BUILD FAILED
+12:23:04  /derby/build.xml:2572: The <classpath> or <modulepath> for <junit> must include junit.jar if not in Ant's own classpath
+12:23:04  
+```

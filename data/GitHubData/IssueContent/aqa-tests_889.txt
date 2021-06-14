@@ -1,0 +1,42 @@
+## TLDR
+
+We should have the ability to pause the scheduled automated runs on Jenkins during the time when some machine is booked. It's a common scenario in which a developer wants to book and use a specific machine for some personal runs (i.e. performance investigation) using a grinder on Jenkins. 
+
+Currently, we don't have any plugin on Jenkins that allows Jenkins to check some machine booking database and pause the runs. Hence, in order to do so right now, one would manually need to disable all projects temporarily during his booking to make sure that no scheduled builds are launched.
+
+I've mentioned some details below.
+
+## Details
+
+### Background about Automated Perf Runs
+As part of performance testing, various benchmarks with different configs are run for all Java releases such as OpenJDK8 and OpenJDK11 on all supported HW platforms in order to identify any performance issues. These builds will be launched automatically by a Jenkins Pipeline using the "Build periodically" option under the "Build Triggers" section. 
+
+Executing these automated perf runs takes up significant time, and hence, we can expect the performance machines to be busy running these benchmarks. The workload on the performance machines would depend on the benchmark set that needs to be run and the number of machines available for running that set. For example, if Liberty throughput benchmark needs to be run, it would require machines that are setup to do those runs as it cannot run on a machine that does not have the required database.
+
+### Problem Description
+
+At times due to various reasons, it's possible that one might urgently need access to the perf machine while it's busy running those automated perf runs. One might want to use some specific machine(s) to do some runs for some higher priority work such as a blocker issue. This scenario is extremely common when there are limited perf machines. 
+
+For example, each SPECjbb2015 iteration takes 2.5 hours so if we interleave (For more details: https://github.com/AdoptOpenJDK/openjdk-tests/issues/850) with a baseline and run 4 iterations, that would mean that the Jenkins build would run for 20 hours (2.5 hours/iteration * 4 iterations/SDK * 2 SDKs). If that perf machine is urgently needed for some higher priority runs, then we would not be able to use that machine without killing all the remaining Jenkins builds, resulting in wastage of machine time as those runs would no longer have the desired number of iterations for gauging the performance of some SDK. 
+
+### Proposed Solution
+
+Jenkins scheduler should have the capability to pause automated perf runs on some machine if it's booked and then resume them after the machine booking is over. This solution would require Jenkins to frequently (i.e. every 5-15 min. Smaller the better.) talk to some machine booking tool and make changes to its builds queue.
+
+### Scenario
+
+**This is a very common scenario when perf machines are heavily used or when there are limited perf machines:**
+
+1) Jenkins schedules automated perf (daily or weekly) runs on machine A.
+2) Machine A is needed to do some urgent runs for an investigation.
+3) Developer books machine A.
+4) Jenkins scheduler checks the machine booking database every few minutes and finds that machine A is booked.
+5) Jenkins scheduler pauses the automated perf runs on machine A but it continues executing the current running build.
+If some job is running, Jenkins would continue running that job even if you have machine booking for that time. Once Jenkins finishes running that specific job, it would pause the other scheduled builds and no more runs from that parent pipeline would be launched until the developer's reservation finishes. Most jobs usually take less than 20 min except for SPECjbb2015 runs, which can take up to 3 hours.
+
+6) Developer makes sure that no builds are running on machine A by checking "Build Executor Status" on its page: https://<JenkinsURL>/computer/machineA/
+Developer can check how long the current running build would take by going to the parent pipeline for that build and seeing the running time for similar completed builds. Developer should not kill any builds and only use the machine after no other performance builds are running.
+
+7) Once no more automated perf builds are running, developer can use Jenkins to launch runs or login to the machine to do some manual runs.
+8) Jenkins scheduler checks the machine booking database again and finds that machine A is no longer booked. 
+9) Jenkins resumes the paused scheduled builds on machine A.

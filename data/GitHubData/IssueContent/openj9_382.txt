@@ -1,0 +1,3 @@
+Currently there's the hand-crafted j9jit.rc file for JIT's dll information. The contents of that file were outdated (improved by #358), but it really ought to be automatically generated as is the case for (most?) other modules.
+
+sourcetools/com.ibm.uma/com/ibm/j9/uma/platform/PlatformWindows.java seems to make a special case for j9jit.

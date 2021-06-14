@@ -1,0 +1,66 @@
+## TLDR
+
+In order to get more reliable results, we should have the ability to run 2 builds (baseline and test) by interleaving them. Currently, we can only run one build at a time. Hence, in order to run 2 tests, we need to launch them one by one, resulting in sequential runs.
+
+I've mentioned some details below with some proposals. Those are just some suggestions, so there might be better ways of doing so. 
+
+
+## Details
+
+### Background About Interleaved Runs (For more details, please refer a similar issue that I opened in another repo: https://github.com/AdoptOpenJDK/openjdk-test-tools/issues/24)
+If T = Test Build; B = Baseline Build, # = Iteration
+
+**Interleaving Run Pattern:** 
+Do alternate iteration of each baseline and test build in a ping-pong fashion.
+`T1, B1, T2, B2, T3, B3`
+
+**Non-interleaved Run Pattern:** 
+Do all iterations for one build and then do all iterations for another.
+`T1, T2, T3, B1, B2, B3 `
+
+### Possible Solutions
+
+Screenshot below shows some of the relevant files that might require changes.
+
+![image](https://user-images.githubusercontent.com/10422081/52229979-3c103500-2884-11e9-9dcb-408acf0e7400.png)
+
+### Option 1: Design
+One possible way to enable interleaving could be to exploit the `ITERATIONS` param and use the loop in `runTest()` in `JenkinsfileBase` to launch runs in the desired manner as shown above in the screenshot. We could use a new parameter for passing a second SDK URL (i.e. baseline) or use the existing `CUSTOMIZED_SDK_URL` parameter if we can pass multiple URLs in it. 
+
+### Option 1: Constraints
+If we want to launch different Jenkins child builds from this Jenkins parent build running `JenkinsfileBase`, we can't use the same machine to launch both parent and child jobs since only one job can be scheduled on the performance machines. For example, we can't use machine X that's running this parent build with `JenkinsfileBase` to run the child builds since that would result in a deadlock. One very inefficient way to fix this would be to use machine X to push all material to machine Y, requiring an extra machine and taking longer time to push all material to machine Y. If we want to use this option, we would not be able to create Jenkins child builds, a solution that would result in the output of all iterations for baseline and test builds in one Jenkins build, which would be extremely lengthy and more complicated to parse for benchmark results and to debug any issues.
+
+### Option 2: Design
+Use a parent build to launch child builds that run `JenkinsfileBase` by changing the `CUSTOMIZED_SDK_URL` for each iteration in a ping-pong fashion as shown below. We would first call the child build with the test SDK URL, then with the baseline SDK URL , then with the test SDK URL and so on. Hence, this design would have one parent build output that would have all the links to the child builds. This option would be a lot cleaner, resulting in smaller and separate job outputs for each iteration and making it easier for TRSS (https://github.com/AdoptOpenJDK/openjdk-test-tools/tree/master/TestResultSummaryService) to parse the benchmark results. 
+
+**Parent Build Pipeline Code:**
+```
+int iterations = "${Iterations}".toInteger()
+
+for (int i=0; i < iterations; i++) {
+    build job: "ODM_x86-64_linux", parameters: [
+                    string(name: 'TARGET', value: "perf"),
+                    string(name: 'JVM_VERSION', value: "openjdk8-openj9"),
+                    string(name: 'CUSTOMIZED_SDK_URL', value: "${Test_Build_Link}"),
+                    string(name: 'LABEL', value: "${Machine_Label}"),
+                    string(name: 'PERF_CREDENTIALS_ID', value: "45375d80-7180-4cdc-8052-71a9510fbde3"),
+                    string(name: 'BUILD_LIST', value: "performance/odm"),
+                    string(name: 'JAVA_VERSION', value: "SE80")
+                ]
+                
+    build job: "ODM_x86-64_linux", parameters: [
+                    string(name: 'TARGET', value: "perf"),
+                    string(name: 'JVM_VERSION', value: "openjdk8-openj9"),
+                    string(name: 'CUSTOMIZED_SDK_URL', value: "${Baseline_Build_Link}"),
+                    string(name: 'LABEL', value: "${Machine_Label}"),
+                    string(name: 'PERF_CREDENTIALS_ID', value: "45375d80-7180-4cdc-8052-71a9510fbde3"),
+                    string(name: 'BUILD_LIST', value: "performance/odm"),
+                    string(name: 'JAVA_VERSION', value: "SE80")
+                ]
+}
+```
+**Child Build Pipeline Code:**
+Run https://github.com/AdoptOpenJDK/openjdk-tests/buildenv/jenkins/<PlatformSpecificPipelineScript>, which calls `JenkinsfileBase`.
+
+### Option 2: Constraints
+`JenkinsfileBase` pipeline script downloads the all the material such as SDK, benchmark package and git repos with relevant test material every time it's called, a process that might be extremely redundant and time consuming if the only thing that changes between multiple iterations is the SDK. We would need to explore or add some capability to `JenkinsfileBase` so that we can avoid doing so.  

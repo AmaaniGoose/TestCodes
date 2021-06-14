@@ -1,0 +1,5 @@
+Multicast networking is non-functional on the zLinux test machines.
+
+I'm confident this is what is causing the consistent failure of the tests identified in https://github.com/ibmruntimes/openj9-openjdk-jdk8/issues/143.
+
+I have confirmed using the example multicast client and server code at https://examples.javacodegeeks.com/core-java/net/multicastsocket-net/java-net-multicastsocket-example that a fresh and unmodified zLinux machine provisioned on demand on my intranet works.

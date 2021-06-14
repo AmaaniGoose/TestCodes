@@ -1,0 +1,5 @@
+The annotation @sun.misc.Contended (@jdk.internal.vm.annotation.Contended in Java 9+) is supported on OpenJDK to automatically insert padding between an object header and its fields (class level annotation) or around individual fields (field level annotation).
+
+Currently, only the class level @Contended annotation has the desired effect under OpenJ9, while field level usage is a noop.
+
+Based on StackOverflow question https://stackoverflow.com/questions/53341202/does-openj9-support-sun-misc-contended-annotation.

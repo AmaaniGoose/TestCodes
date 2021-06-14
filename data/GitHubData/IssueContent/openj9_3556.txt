@@ -1,0 +1,5 @@
+Unsafe atomic calls should be transformed into atomic intrinsics, which takes a memory address whose content is to be updated.
+
+For arraylets, a spinechk tree is needed before the call to atomic intrinsics to get the actual address.
+
+UnsafeFastPath and J9RecognizedCallTransformer both need the change.

@@ -1,0 +1,41 @@
+There are five places in the JIT (in j9method.cpp) that use alloca to allocate stack memory in a nested scope and then use the pointer returned by alloca outside that scope.
+E.g.
+ ```
+         char *methodDescriptor;
+            {
+            TR::VMAccessCriticalSection invokeExplicitCastHandleConvertArgs(fej9);
+            methodHandle = *thunkDetails->getHandleRef();
+            methodDescriptorRef = fej9->getReferenceField(fej9->getReferenceField(fej9->getReferenceField(
+               methodHandle,
+               "next",             "Ljava/lang/invoke/MethodHandle;"),
+               "type",             "Ljava/lang/invoke/MethodType;"),
+               "methodDescriptor", "Ljava/lang/String;");
+            methodDescriptorLength = fej9->getStringUTF8Length(methodDescriptorRef);
+            methodDescriptor = (char*)alloca(methodDescriptorLength+1);
+            fej9->getStringUTF8(methodDescriptorRef, methodDescriptor, methodDescriptorLength+1);
+            }
+
+         // Create a placeholder to cause argument expressions to be expanded
+         //
+         TR::Node *placeholder = genNodeAndPopChildren(TR::icall, 1, placeholderWithDummySignature());
+
+         // For each child, call the appropriate convert method
+         //
+         char *targetSig = methodDescriptor+1; // skip parenthesis
+```
+This may be incorrect because once the nested scope terminates the stack memory returned by alloca may be used for something else.  I say __may__ because the documentation for alloca says:
+```    The alloca() function allocates size bytes of space in the stack
+       frame of the caller.  This temporary space is automatically freed
+       when the function that called alloca() returns to its caller.
+```
+I am not sure whether the space is freed when the function that called alloca returns to its caller or, more general, when the scope ends. 
+Moreover, the documentation says:
+```
+       The alloca() function is machine- and compiler-dependent.  For
+       certain applications, its use can improve efficiency compared to the
+       use of malloc(3) plus free(3).  In certain cases, it can also
+       simplify memory deallocation in applications that use longjmp(3) or
+       siglongjmp(3).  Otherwise, its use is discouraged.
+```
+All in all I think we should eliminate the usage of alloca at least in these 5 tricky situations.
+JIT region memory could be used as a replacement provided the extra overhead is negligible.

@@ -1,0 +1,1 @@
+Details see https://github.com/AdoptOpenJDK/run-aqa/issues/72. The requirement mainly fits to projects with typescript. 

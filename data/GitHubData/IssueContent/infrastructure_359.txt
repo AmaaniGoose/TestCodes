@@ -1,0 +1,1 @@
+We should create an ansible playbook to create ci.adoptopenjdk.net and ci-jck.adoptopenjdk.net

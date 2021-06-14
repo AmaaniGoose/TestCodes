@@ -1,0 +1,12 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_special.system_s390x_linux_Nightly/123
+MauveMultiThreadLoadTest_special_29
+variation: Mode612-OSRG
+JVM_OPTIONS: -Xcompressedrefs -Xcompressedrefs -Xgcpolicy:gencon -Xjit:enableOSR,enableOSROnGuardFailure,count=1,disableAsyncCompilation 
+```
+04:35:09  LT  04:35:09.311 - Test failed
+04:35:09  LT    Failure num.  = 1
+04:35:09  LT    Test number   = 3241
+04:35:09  LT    Test details  = 'Mauve[gnu.testlet.java.util.Date.range]'
+04:35:09  LT    Suite number  = 0
+04:35:09  LT    Thread number = 2
+```

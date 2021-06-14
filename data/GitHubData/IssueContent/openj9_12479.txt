@@ -1,0 +1,105 @@
+Failure link
+------------
+
+From an internal build `Test_openjdk11_j9_extended.perf_ppc64_aix/7/`
+```
+java version "11.0.11" 2021-04-20
+Java(TM) SE Runtime Environment 11.0.11.0-IBM (build 11.0.11+8)
+Eclipse OpenJ9 VM 11.0.11.0-IBM (build v0.26.0-release-b4cc246d9, JRE 11 AIX ppc64-64-Bit Compressed References 20210416_45 (JIT enabled, AOT enabled)
+OpenJ9   - b4cc246d9
+OMR      - 162e6f729
+JCL      - 00af747b84 based on jdk-11.0.11+8)
+```
+[Rerun in Grinder](https://hyc-runtimes-jenkins.swg-devops.com/job/Grinder/parambuild/?TARGET=renaissance-als_0&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;PLATFORM=ppc64_aix&amp;KEEP_REPORTDIR=false&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-aix-ppc64-openj9-IBM%2F45%2Fibm-java-jdk_ppc64_aix_11.0.11.0.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-aix-ppc64-openj9-IBM%2F45%2Fibm-java-jre_ppc64_aix_11.0.11.0.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-aix-ppc64-openj9-IBM%2F45%2Fibm-java-testimage_ppc64_aix_11.0.11.0.tar.gz+https%3A%2F%2Fna.artifactory.swg-devops.com%2Fartifactory%2Fsys-rt-generic-local%2Fhyc-runtimes-jenkins.swg-devops.com%2Fbuild-scripts%2Fjobs%2Fjdk11u%2Fjdk11u-aix-ppc64-openj9-IBM%2F45%2Fibm-java-debugimage_ppc64_aix_11.0.11.0.tar.gz&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;LIGHT_WEIGHT_CHECKOUT=true&amp;ARTIFACTORY_SERVER=na.artifactory.swg-devops&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=11&amp;USER_CREDENTIALS_ID=&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=&amp;JDK_REPO=git%40github.com%3Aibmruntimes%2Fopenj9-openjdk-jdk11&amp;RELEASE_TAG=&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;UPSTREAM_JOB_NAME=&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=openj9&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=openj9&amp;SSH_AGENT_CREDENTIAL=83181e25-eea4-4f55-8b3e-e79615733226&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=4e18ffe7-b1b1-4272-9979-99769b68bcc2&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=perf&amp;UPSTREAM_JOB_NUMBER=&amp;TIME_LIMIT=10&amp;JVM_OPTIONS=&amp;PARALLEL=)
+
+Optional info
+-------------
+
+
+Failure output (captured from console output)
+---------------------------------------------
+```[2021-04-17T09:06:01.031Z] Running test renaissance-als_0 ...
+[2021-04-17T09:06:01.031Z] ===============================================
+[2021-04-17T09:06:01.031Z] renaissance-als_0 Start Time: Sat Apr 17 05:14:54 2021 Epoch Time (ms): 1618654494175
+[2021-04-17T09:06:01.031Z] "/home/jenkins/workspace/Test_openjdk11_j9_extended.perf_ppc64_aix/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:destroyAll; "/home/jenkins/workspace/Test_openjdk11_j9_extended.perf_ppc64_aix/openjdkbinary/j2sdk-image/bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+[2021-04-17T09:06:01.031Z] JVMSHRC005I No shared class caches available
+[2021-04-17T09:06:01.031Z] JVMSHRC005I No shared class caches available
+[2021-04-17T09:06:01.031Z] cache cleanup done
+[2021-04-17T09:06:01.031Z] variation: NoOptions
+[2021-04-17T09:06:01.031Z] JVM_OPTIONS:  
+
+[2021-04-17T09:06:06.983Z] Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+[2021-04-17T09:06:06.983Z] 21/04/17 04:15:00 INFO SparkContext: Running Spark version 2.0.0
+[2021-04-17T09:06:06.983Z] 21/04/17 04:15:00 ERROR UserGroupInformation: Unable to find JAAS classes:com.ibm.security.auth.UsernamePrincipal
+[2021-04-17T09:06:06.983Z] 21/04/17 04:15:00 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[2021-04-17T09:06:07.927Z] Error during tear-down: null
+[2021-04-17T09:06:07.927Z] java.lang.NullPointerException
+[2021-04-17T09:06:07.927Z] 	at org.renaissance.apache.spark.Als.tearDownAfterAll(Als.scala:87)
+[2021-04-17T09:06:07.927Z] 	at org.renaissance.RenaissanceBenchmark.runBenchmark(RenaissanceBenchmark.java:97)
+[2021-04-17T09:06:07.927Z] 	at org.renaissance.RenaissanceSuite$.$anonfun$main$2(renaissance-suite.scala:308)
+[2021-04-17T09:06:07.927Z] 	at org.renaissance.RenaissanceSuite$.$anonfun$main$2$adapted(renaissance-suite.scala:306)
+[2021-04-17T09:06:07.927Z] 	at org.renaissance.RenaissanceSuite$$$Lambda$117/0x0000000000000000.apply(Unknown Source)
+[2021-04-17T09:06:07.927Z] 	at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)
+[2021-04-17T09:06:07.927Z] 	at scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)
+[2021-04-17T09:06:07.927Z] 	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)
+[2021-04-17T09:06:07.927Z] 	at org.renaissance.RenaissanceSuite$.main(renaissance-suite.scala:306)
+[2021-04-17T09:06:07.927Z] 	at org.renaissance.RenaissanceSuite.main(renaissance-suite.scala)
+[2021-04-17T09:06:07.927Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-04-17T09:06:07.927Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2021-04-17T09:06:07.927Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-04-17T09:06:07.927Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+[2021-04-17T09:06:07.927Z] 	at org.renaissance.Launcher.main(Launcher.java:18)
+[2021-04-17T09:06:07.927Z] Exception occurred in org.renaissance.apache.spark.Als@3dbe0cc0: failure to login
+[2021-04-17T09:06:07.927Z] java.io.IOException: failure to login
+[2021-04-17T09:06:07.927Z] 	at org.apache.hadoop.security.UserGroupInformation.getLoginUser(UserGroupInformation.java:700)
+[2021-04-17T09:06:07.927Z] 	at org.apache.hadoop.security.UserGroupInformation.getCurrentUser(UserGroupInformation.java:571)
+[2021-04-17T09:06:07.927Z] 	at org.apache.spark.util.Utils$$anonfun$getCurrentUserName$1.apply(Utils.scala:2245)
+[2021-04-17T09:06:07.927Z] 	at org.apache.spark.util.Utils$$anonfun$getCurrentUserName$1.apply(Utils.scala:2245)
+[2021-04-17T09:06:07.927Z] 	at scala.Option.getOrElse(Option.scala:121)
+[2021-04-17T09:06:07.928Z] 	at org.apache.spark.util.Utils$.getCurrentUserName(Utils.scala:2245)
+[2021-04-17T09:06:07.928Z] 	at org.apache.spark.SparkContext.<init>(SparkContext.scala:297)
+[2021-04-17T09:06:07.928Z] 	at org.renaissance.apache.spark.Als.setUpSpark(Als.scala:74)
+[2021-04-17T09:06:07.928Z] 	at org.renaissance.apache.spark.Als.setUpBeforeAll(Als.scala:80)
+[2021-04-17T09:06:07.928Z] 	at org.renaissance.RenaissanceBenchmark.runBenchmark(RenaissanceBenchmark.java:74)
+[2021-04-17T09:06:07.928Z] 	at org.renaissance.RenaissanceSuite$.$anonfun$main$2(renaissance-suite.scala:308)
+[2021-04-17T09:06:07.928Z] 	at org.renaissance.RenaissanceSuite$.$anonfun$main$2$adapted(renaissance-suite.scala:306)
+[2021-04-17T09:06:07.928Z] 	at org.renaissance.RenaissanceSuite$$$Lambda$117/0x0000000000000000.apply(Unknown Source)
+[2021-04-17T09:06:07.928Z] 	at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)
+[2021-04-17T09:06:07.928Z] 	at scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)
+[2021-04-17T09:06:07.928Z] 	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)
+[2021-04-17T09:06:07.928Z] 	at org.renaissance.RenaissanceSuite$.main(renaissance-suite.scala:306)
+[2021-04-17T09:06:07.928Z] 	at org.renaissance.RenaissanceSuite.main(renaissance-suite.scala)
+[2021-04-17T09:06:07.928Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2021-04-17T09:06:07.928Z] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[2021-04-17T09:06:07.928Z] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2021-04-17T09:06:07.928Z] 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+[2021-04-17T09:06:07.928Z] 	at org.renaissance.Launcher.main(Launcher.java:18)
+[2021-04-17T09:06:07.928Z] Caused by: javax.security.auth.login.LoginException: No LoginModule found for com.ibm.security.auth.module.AIX64LoginModule
+[2021-04-17T09:06:07.928Z] 	at java.base/javax.security.auth.login.LoginContext.invoke(LoginContext.java:710)
+[2021-04-17T09:06:07.928Z] 	at java.base/javax.security.auth.login.LoginContext$4.run(LoginContext.java:665)
+[2021-04-17T09:06:07.928Z] 	at java.base/javax.security.auth.login.LoginContext$4.run(LoginContext.java:663)
+[2021-04-17T09:06:07.928Z] 	at java.base/java.security.AccessController.doPrivileged(AccessController.java:774)
+[2021-04-17T09:06:07.928Z] 	at java.base/javax.security.auth.login.LoginContext.invokePriv(LoginContext.java:663)
+[2021-04-17T09:06:07.928Z] 	at java.base/javax.security.auth.login.LoginContext.login(LoginContext.java:574)
+[2021-04-17T09:06:07.928Z] 	at org.apache.hadoop.security.UserGroupInformation.getLoginUser(UserGroupInformation.java:675)
+[2021-04-17T09:06:07.928Z] 	... 22 more
+[2021-04-17T09:06:07.928Z] The following benchmarks failed: als
+[2021-04-17T09:06:07.928Z] 
+[2021-04-17T09:06:07.928Z] renaissance-als_0_FAILED
+```
+
+Similar error in Linux platform:
+```
+[2021-04-17T04:32:59.479Z] Caused by: javax.security.auth.login.LoginException: No LoginModule found for com.ibm.security.auth.module.LinuxLoginModule
+[2021-04-17T04:32:59.479Z] 	at java.base/javax.security.auth.login.LoginContext.invoke(LoginContext.java:710)
+[2021-04-17T04:32:59.479Z] 	at java.base/javax.security.auth.login.LoginContext$4.run(LoginContext.java:665)
+[2021-04-17T04:32:59.479Z] 	at java.base/javax.security.auth.login.LoginContext$4.run(LoginContext.java:663)
+[2021-04-17T04:32:59.479Z] 	at java.base/java.security.AccessController.doPrivileged(AccessController.java:774)
+[2021-04-17T04:32:59.479Z] 	at java.base/javax.security.auth.login.LoginContext.invokePriv(LoginContext.java:663)
+[2021-04-17T04:32:59.479Z] 	at java.base/javax.security.auth.login.LoginContext.login(LoginContext.java:574)
+[2021-04-17T04:32:59.479Z] 	at org.apache.hadoop.security.UserGroupInformation.getLoginUser(UserGroupInformation.java:675)
+[2021-04-17T04:32:59.479Z] 	... 22 more
+[2021-04-17T04:32:59.479Z] The following benchmarks failed: chi-square
+[2021-04-17T04:32:59.479Z] 
+[2021-04-17T04:32:59.480Z] renaissance-chi-square_0_FAILED
+```

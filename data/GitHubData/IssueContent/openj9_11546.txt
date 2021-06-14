@@ -1,0 +1,54 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk15_j9_extended.functional_ppc64le_linux_Nightly_testList_0/137/
+testDDRExtJunit_FindExtThread_0
+```
+     [java] [AutoRun] [INFO] Starting testFindMethodFromPC(j9vm.test.ddrext.junit.TestFindExt)
+     [java] [DDRExtTesterBase] [ERROR] '!setvm  18446744073709551615' output does not contain success key : is larger than the max available memory address: 0xFFFFFFFF
+     [java] [DDRExtTesterBase] [ERROR] '!setvm  18446744073709551615' output :Error: Specified value (=-1) is not a javaVM or vmThread pointer, VM not set
+     [java] 
+     [java] [DDRExtTesterBase] [INFO] Validation started for : '!setvm  18446744073709551615'
+     [java] [DDRExtTesterBase] [INFO] Validation started for : '!findmethodfrompc  70365814874673'
+     [java] [DDRExtTesterBase] [INFO] Starting exhaustive DDR structure test for parent command : '!findmethodfrompc  70365814874673'
+     [java] [DDRExtTesterBase] [INFO] Runing structure test with : !j9method 0x00000000001E2B68
+     [java] [DDRExtTesterBase] [INFO] Structure validation passed
+     [java] [DDRExtTesterBase] [INFO] Validation passed for : '!findmethodfrompc  70365814874673'
+     [java] [AutoRun] [INFO] Finished testFindMethodFromPC(j9vm.test.ddrext.junit.TestFindExt)
+     [java] 
+     [java] [AutoRun] [INFO] Starting testFindAndFindnext(j9vm.test.ddrext.junit.TestFindExt)
+     [java] [DDRExtTesterBase] [INFO] Validation started for : '!find  u32 b1234567'
+     [java] [DDRExtTesterBase] [INFO] Validation passed for : '!find  u32 b1234567'
+     [java] [DDRExtTesterBase] [INFO] Validation started for : '!findnext '
+     [java] [DDRExtTesterBase] [INFO] Validation passed for : '!findnext '
+     [java] [AutoRun] [INFO] Finished testFindAndFindnext(j9vm.test.ddrext.junit.TestFindExt)
+     [java] 
+     [java] [AutoRun] [INFO] Starting testFindheader(j9vm.test.ddrext.junit.TestFindExt)
+     [java] [DDRExtTesterBase] [INFO] Validation started for : '!findheader  0x001c5000'
+     [java] [DDRExtTesterBase] [INFO] Starting exhaustive DDR structure test for parent command : '!findheader  0x001c5000'
+     [java] [DDRExtTesterBase] [INFO] Runing structure test with : !j9x 0x1c4f90
+     [java] [DDRExtTesterBase] [INFO] Can not validate: '!j9x  0x1c4f90' output is not a structure
+     [java] [DDRExtTesterBase] [INFO] Runing structure test with : !omrmemcategory 0x3fffa8ae0f48
+     [java] 21474836522[DDRExtTesterBase] [INFO] Structure validation passed
+     [java] [DDRExtTesterBase] [INFO] Validation passed for : '!findheader  0x001c5000'
+     [java] [AutoRun] [INFO] Finished testFindheader(j9vm.test.ddrext.junit.TestFindExt)
+     [java] 
+     [java] [AutoRun] [INFO] Starting testFindvm(j9vm.test.ddrext.junit.TestFindExt)
+     [java] [DDRExtTesterBase] [INFO] Validation started for : '!findvm '
+     [java] [DDRExtTesterBase] [INFO] Starting exhaustive DDR structure test for parent command : '!findvm '
+     [java] [DDRExtTesterBase] [INFO] Runing structure test with : !j9javavm 0x00003FFFA400FAF0
+     [java] 105241602097326350680581812960047104857632768131072046976204820322802621440000007036720215226470367202152304703672021523447036720215238430000703672002775040026214409632452563245111001310727036718366592002048151316163200100112345429261516384409611111111110111111110083650000192512-1000800205-1174800027600703672021524247036720215246470367202152224-1300012800110102410256[DDRExtTesterBase] [INFO] Structure validation passed
+     [java] [DDRExtTesterBase] [INFO] Validation passed for : '!findvm '
+     [java] [AutoRun] [INFO] Finished testFindvm(j9vm.test.ddrext.junit.TestFindExt)
+     [java] 
+     [java] [AutoRun] [INFO] Starting testFindpattern(j9vm.test.ddrext.junit.TestFindExt)
+     [java] [DDRExtTesterBase] [INFO] Validation started for : '!findpattern  b1,4,0xfff01000,10000000000'
+     [java] [DDRExtTesterBase] [INFO] Validation passed for : '!findpattern  b1,4,0xfff01000,10000000000'
+     [java] [AutoRun] [INFO] Finished testFindpattern(j9vm.test.ddrext.junit.TestFindExt)
+     [java] 
+     [java] [AutoRun] [INFO] Starting testFindstackvalue(j9vm.test.ddrext.junit.TestFindExt)
+     [java] [DDRExtTesterBase] [INFO] Validation started for : '!findstackvalue  0x000000000006B6D0'
+     [java] [DDRExtTesterBase] [ERROR] '!findstackvalue  0x000000000006B6D0' output is null or empty
+     [java] junit.framework.AssertionFailedError
+     [java] 	at junit.framework.Assert.fail(Assert.java:48)
+     [java] 	at junit.framework.Assert.assertTrue(Assert.java:20)
+     [java] 	at junit.framework.Assert.assertTrue(Assert.java:27)
+     [java] 	at j9vm.test.ddrext.junit.TestFindExt.testFindstackvalue(TestFindExt.java:153)
+```

@@ -1,0 +1,20 @@
+A new test target is introduced to run `pltest` on OSX in https://github.com/eclipse/openj9/pull/4504: `make _cmdLineTester_pltest_osx_0`. `pltest` runs properly. But, the test framework crashes while running `pltest`. `pltest` generates `SIGQUIT` in `j9process_testNewProcessGroupByTriggeringSignal`, which gets propagated to the test framework. [GUESS] I think the test framework needs to ignore `SIGQUIT` while running `pltest`.
+
+Output of running `pltest` on OSX:
+```
+---TEST RESULTS---
+Number of PASSED tests: 1 out of 1
+Number of FAILED tests: 0 out of 1
+
+cmdLineTester_pltest_osx_0_PASSED
+
+/bin/sh: line 1: 24901 Quit: 3                 /Users/sbabneet@ca.ibm.com/Xcode9/Xcode.app/Contents/Developer/usr/bin/make -C pltest -f autoGen.mk cmdLineTester_pltest_osx_0
+make[3]: *** [cmdLineTester_pltest_osx_0-pltest] Error 131
+/bin/sh: line 1: 24883 Quit: 3                 /Users/sbabneet@ca.ibm.com/Xcode9/Xcode.app/Contents/Developer/usr/bin/make -C cmdLineTests -f autoGen.mk cmdLineTester_pltest_osx_0
+make[2]: *** [cmdLineTester_pltest_osx_0-cmdLineTests] Error 131
+/bin/sh: line 1: 24847 Quit: 3                 /Users/sbabneet@ca.ibm.com/Xcode9/Xcode.app/Contents/Developer/usr/bin/make -C functional -f autoGen.mk cmdLineTester_pltest_osx_0
+make[1]: *** [cmdLineTester_pltest_osx_0-functional] Error 131
+/bin/sh: line 1: 24844 Quit: 3                 /Users/sbabneet@ca.ibm.com/Xcode9/Xcode.app/Contents/Developer/usr/bin/make -C .. -f autoGen.mk cmdLineTester_pltest_osx_0
+make: *** [cmdLineTester_pltest_osx_0-..] Error 131
+Quit: 3
+```

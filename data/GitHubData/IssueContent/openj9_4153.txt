@@ -1,0 +1,113 @@
+Not sure if this is the correct project to report this problem.
+
+I am testing OpenJ9 (downloaded from AdoptOpenJDK) on an application that we usually run with OpenJDK.
+By now the only problem we have found is related to an weird usage of Unsafe.
+J9 crashes immediatelly with a `Unhandled exception Type=Segmentation error vmState=0x00000000`.
+
+The following program reproduces the problem:
+```java
+import java.lang.reflect.Field;
+import sun.misc.Unsafe;
+import java.util.Random;
+
+public class OddObject {
+
+    public static void main(final String[] args)
+    throws Exception {
+        final int writeOffset = Integer.parseInt(args[0]);
+        final int readOffset = Integer.parseInt(args[1]);
+        final Random rnd = new Random();
+        final long init = offset(NodeLong.class, "x");
+        System.out.println("Init " + init);
+        for (long i = 0; ; i++) {
+            final NodeLong node = new NodeLong();
+            theUnsafe.putLong(node, init+writeOffset, rnd.nextLong());
+            System.out.println(theUnsafe.getLong(node, init+readOffset));
+        }
+    }
+
+    public static final sun.misc.Unsafe theUnsafe;
+    static {
+        try {
+            theUnsafe = (Unsafe) staticObject(
+                sun.misc.Unsafe.class, "theUnsafe");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected static Object staticObject(final Class klass, final String field)
+    throws IllegalAccessException, NoSuchFieldException {
+        final Field f = klass.getDeclaredField(field);
+        f.setAccessible(true);
+        return f.get(null);
+    }
+
+    protected static long offset(final Class klass, final String field)
+    throws Exception {
+        return theUnsafe.objectFieldOffset(klass.getDeclaredField(field));
+    }
+
+    public static class NodeLong {
+        public long x;
+        public long y;
+    }
+}
+```
+When called with *even* arguments, it runs without errors.
+But if any argument is *odd*, it fails with the following error:
+```
+$ java OddObject 1 0
+Offset 8
+Unhandled exception
+Type=Segmentation error vmState=0x00000000
+J9Generic_Signal_Number=00000004 Signal_Number=0000000b Error_Value=00000000 Signal_Code=00000001
+Handler1=00007F0DE5E33370 Handler2=00007F0DE572CCB0 InaccessibleAddress=0000000000000048
+RDI=0000000001A67968 RSI=00007F0D6401DD5F RAX=0000000000000004 RBX=0000000000000000
+RCX=00007F0DE6D908C0 RDX=0000000000000000 R8=0000000000000000 R9=0000000000000000
+R10=00007F0DE009BA80 R11=0000000000000002 R12=0000000001979A00 R13=2577F23AB86CD4B5
+R14=00007F0DE000F2F0 R15=00007F0DE658D380
+RIP=00007F0DE5DBF732 GS=0000 FS=0000 RSP=00007F0DE6D90530
+EFlags=0000000000010246 CS=0033 RBP=0000000000000009 ERR=0000000000000004
+TRAPNO=000000000000000E OLDMASK=0000000000000000 CR2=0000000000000048
+xmm0 0000000000000000 (f: 0,000000, d: 0,000000e+00)
+xmm1 6b646a5f6176614a (f: 1635148160,000000, d: 2,097430e+209)
+xmm2 00007f0de6d908f0 (f: 3872983296,000000, d: 6,901983e-310)
+xmm3 ffffffffffffff00 (f: 4294967040,000000, d: -nan)
+xmm4 00007f0de6d908f0 (f: 3872983296,000000, d: 6,901983e-310)
+xmm5 bcbc000000000000 (f: 0,000000, d: -3,885781e-16)
+xmm6 4c5f5f676e6f4c74 (f: 1852787840,000000, d: 7,877178e+59)
+xmm7 0000000000000000 (f: 0,000000, d: 0,000000e+00)
+xmm8 402f230a7349222b (f: 1934172672,000000, d: 1,556844e+01)
+xmm9 3be2f6aed68c0614 (f: 3599500800,000000, d: 3,212560e-20)
+xmm10 3fd4618bc21c5ec2 (f: 3256639232,000000, d: 3,184537e-01)
+xmm11 0000000049d70a38 (f: 1238829568,000000, d: 6,120632e-315)
+xmm12 000000004689a022 (f: 1183424512,000000, d: 5,846894e-315)
+xmm13 0000000047ac082f (f: 1202456576,000000, d: 5,940925e-315)
+xmm14 0000000048650dc0 (f: 1214582272,000000, d: 6,000833e-315)
+xmm15 0000000046b73e38 (f: 1186414080,000000, d: 5,861665e-315)
+Module=/opt/java.d/j9/jdk-11.0.1+13/lib/compressedrefs/libj9vm29.so
+Module_base_address=00007F0DE5D91000
+Target=2_90_20181020_70 (Linux 4.9.134-1-MANJARO)
+CPU=amd64 (8 logical CPUs) (0x7d193b000 RAM)
+----------- Stack Backtrace -----------
+(0x00007F0DE5DBF732 [libj9vm29.so+0x2e732])
+(0x00007F0DE5DA9D60 [libj9vm29.so+0x18d60])
+(0x00007F0DE5E6DF22 [libj9vm29.so+0xdcf22])
+---------------------------------------
+JVMDUMP039I Processing dump event "gpf", detail "" at 2018/12/28 14:40:15 - please wait.
+```
+
+OS and OpenJ9 versions:
+```
+$ uname -a
+Linux pgote 4.9.134-1-MANJARO #1 SMP PREEMPT Thu Oct 18 19:23:24 UTC 2018 x86_64 GNU/Linux
+
+$ java -version
+openjdk version "11.0.1" 2018-10-16
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.1+13)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.11.0, JRE 11 Linux amd64-64-Bit Compressed References 20181020_70 (JIT enabled, AOT enabled)
+OpenJ9   - 090ff9dc
+OMR      - ea548a66
+JCL      - f62696f378 based on jdk-11.0.1+13)
+```

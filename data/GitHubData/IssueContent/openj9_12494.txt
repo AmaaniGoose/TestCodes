@@ -1,0 +1,3 @@
+There exists code to perform a compilation on an application thread - this means that the java thread will stop running java code, start executing code in the libj9jit dll, compile the method, and then start executing said method. However, this does not happen by default and therefore is highly untested.
+
+I'm opening this issue to discuss whether there is any real benefit to keeping this code around.

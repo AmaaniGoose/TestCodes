@@ -1,0 +1,6 @@
+This issue is to track the items to be completed on top of #10690 
+
+- [ ] Add impl for `Java_java_lang_invoke_MethodHandleNatives_getNamedCon` to support Java assertion
+- [ ] use `registerNatives` for function export rather than uma and cmake export
+- [ ] add support for HCR update for `J9JNIFieldID/J9JNIMethodID` pointers in MemberName object
+- [ ] The heavy string allocation and copying should be looked at again to see if there's a better way to solve this. Given the other up-calls to the VM, I'd be tempted to implement this in Java and cache the signature per MT to make this cleaner.

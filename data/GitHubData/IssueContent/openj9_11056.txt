@@ -1,0 +1,42 @@
+While looking into other issues, I seem to have discovered a case where dead trees elimination will unanchor a volatile load incorrectly, resulting in the first occurrences of two volatile loads being siblings in the same tree. Since the order of evaluation of children under a node is undefined, this can result in the volatile loads occurring in either order, which would violate the Java memory model. Here's a sample class file that can demonstrate the problem:
+
+```java
+class Test {
+        public static volatile int x;
+        public static volatile int y;
+
+        public static void test() {
+                int z = x - y;
+                x = z;
+        }
+
+        public static void main(String[] args) {
+                for (int i = 0; i < 1000000; i++)
+                        test();
+        }
+}
+```
+
+I've uploaded a [full compile log](https://github.com/eclipse/openj9/files/5465671/compile.log) for the `test()` method, but in short: prior to the problematic pass of dead trees elimination (optimization id 79) the trees in question appear as follows:
+
+```
+n4n       treetop                                                                             [    0x7fff7c1c46a0] bci=[-1,0,6] rc=0 vc=106 vn=- li=- udi=- nc=1
+n3n         iload  Test.x I[#384  volatile Static] [flags 0x2303 0x0 ] (cannotOverflow )      [    0x7fff7c1c4650] bci=[-1,0,6] rc=2 vc=106 vn=- li=- udi=- nc=0 flg=0x1000
+n8n       treetop                                                                             [    0x7fff7c1c47e0] bci=[-1,7,6] rc=0 vc=106 vn=- li=- udi=1 nc=1
+n7n         isub                                                                              [    0x7fff7c1c4790] bci=[-1,6,6] rc=2 vc=106 vn=- li=- udi=- nc=2
+n3n           ==>iload
+n5n           iload  Test.y I[#385  volatile Static] [flags 0x2303 0x0 ] (cannotOverflow )    [    0x7fff7c1c46f0] bci=[-1,3,6] rc=1 vc=106 vn=- li=- udi=- nc=0 flg=0x1000
+n10n      istore  Test.x I[#384  volatile Static] [flags 0x2303 0x0 ]                         [    0x7fff7c1c4880] bci=[-1,9,7] rc=0 vc=106 vn=- li=- udi=- nc=1
+n7n         ==>isub
+```
+
+This is correct, since the load of `Test.x` is anchored and thus must occur before the load of `Test.y`. However, after dead trees elimination this is transformed into:
+
+```
+n10n      istore  Test.x I[#384  volatile Static] [flags 0x2303 0x0 ]                         [    0x7fff7c1c4880] bci=[-1,9,7] rc=0 vc=109 vn=- li=-1 udi=- nc=1
+n7n         isub                                                                              [    0x7fff7c1c4790] bci=[-1,6,6] rc=1 vc=109 vn=- li=- udi=- nc=2
+n3n           iload  Test.x I[#384  volatile Static] [flags 0x2303 0x0 ] (cannotOverflow )    [    0x7fff7c1c4650] bci=[-1,0,6] rc=1 vc=109 vn=- li=- udi=- nc=0 flg=0x1000
+n5n           iload  Test.y I[#385  volatile Static] [flags 0x2303 0x0 ] (cannotOverflow )    [    0x7fff7c1c46f0] bci=[-1,3,6] rc=1 vc=109 vn=- li=- udi=- nc=0 flg=0x1000
+```
+
+This IL is now incorrect, since the load of `Test.y` could now occur before the load of `Test.x`, which would be in violation of the Java memory model.

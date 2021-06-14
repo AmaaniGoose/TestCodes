@@ -1,0 +1,33 @@
+**Test Info**
+Test Name: dacapo-h2_0
+Test Duration: 5 min 6 sec
+Machine: test-marist-ubuntu1604-s390x-4
+TRSS link for the test output: https://trss.adoptopenjdk.net/output/test?id=5f92d86811d26031c130c041
+
+
+**Build Info**
+Build Name: Test_openjdk8_hs_sanity.perf_s390x_linux
+Jenkins Build start time: Oct 22 2020, 11:38 pm
+Jenkins Build URL: https://ci.adoptopenjdk.net/job/Test_openjdk8_hs_sanity.perf_s390x_linux/26/
+TRSS link for the build: https://trss.adoptopenjdk.net/allTestsInfo?buildId=5f92d7d911d26031c130bc19
+
+
+**Java Version**
+openjdk version "1.8.0_272"
+OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_272-b10)
+OpenJDK 64-Bit Zero VM (AdoptOpenJDK)(build 25.272-b10, interpreted mode)
+
+
+**This test has been failed 9 times since Oct 13 2020, 01:49 pm**
+**Java Version when the issue first seen**
+openjdk version "1.8.0_272"
+OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_272-202010131720-b09)
+OpenJDK 64-Bit Zero VM (AdoptOpenJDK)(build 25.272-b09, interpreted mode)
+Jenkins Build URL: https://ci.adoptopenjdk.net/job/Test_openjdk8_hs_sanity.perf_s390x_linux/18/
+
+The test failed on machine test-marist-ubuntu1604-s390x-4 2 times 
+The test failed on machine test-marist-ubuntu1604-s390x-3 2 times 
+The test failed on machine test-marist-ubuntu1604-s390x-2X 3 times 
+The test failed on machine test-marist-ubuntu1604-s390x-1 2 times 
+
+[Rerun in Grinder](https://ci.adoptopenjdk.net/job/Grinder/parambuild/?TARGET=dacapo-h2_0&amp;SDK_RESOURCE=upstream&amp;TEST_FLAG=&amp;UPSTREAM_TEST_JOB_NAME=&amp;DOCKER_REQUIRED=false&amp;ACTIVE_NODE_TIMEOUT=0&amp;EXTRA_DOCKER_ARGS=&amp;VENDOR_TEST_DIRS=&amp;TKG_OWNER_BRANCH=AdoptOpenJDK%3Amaster&amp;PLATFORM=s390x_linux&amp;KEEP_REPORTDIR=true&amp;PERSONAL_BUILD=false&amp;ADOPTOPENJDK_REPO=https%3A%2F%2Fgithub.com%2FAdoptOpenJDK%2Fopenjdk-tests.git&amp;LABEL=&amp;EXTRA_OPTIONS=&amp;CUSTOMIZED_SDK_URL=&amp;BUILD_IDENTIFIER=&amp;ADOPTOPENJDK_BRANCH=master&amp;ARTIFACTORY_SERVER=&amp;KEEP_WORKSPACE=false&amp;JDK_VERSION=8&amp;USER_CREDENTIALS_ID=&amp;ITERATIONS=1&amp;VENDOR_TEST_REPOS=&amp;JDK_REPO=https%3A%2F%2Fgithub.com%2Fadoptopenjdk%2Fopenjdk-jdk8u&amp;RELEASE_TAG=jdk8u272-b10&amp;OPENJ9_BRANCH=master&amp;OPENJ9_SHA=&amp;JCK_GIT_REPO=&amp;VENDOR_TEST_BRANCHES=&amp;UPSTREAM_JOB_NAME=build-scripts%2Fjobs%2Fjdk8u%2Fjdk8u-linux-s390x-hotspot&amp;OPENJ9_REPO=https%3A%2F%2Fgithub.com%2Feclipse%2Fopenj9.git&amp;CUSTOM_TARGET=&amp;VENDOR_TEST_SHAS=&amp;JDK_BRANCH=dev&amp;LABEL_ADDITION=&amp;ARTIFACTORY_REPO=&amp;ARTIFACTORY_ROOT_DIR=&amp;UPSTREAM_TEST_JOB_NUMBER=&amp;DOCKERIMAGE_TAG=&amp;JDK_IMPL=hotspot&amp;SSH_AGENT_CREDENTIAL=&amp;AUTO_DETECT=true&amp;TKG_SHA=&amp;CUSTOMIZED_SDK_URL_CREDENTIAL_ID=&amp;NUM_MACHINES=&amp;OPENJDK_SHA=&amp;BUILD_LIST=perf&amp;UPSTREAM_JOB_NUMBER=733&amp;TIME_LIMIT=10&amp;JVM_OPTIONS=&amp;PARALLEL=None)

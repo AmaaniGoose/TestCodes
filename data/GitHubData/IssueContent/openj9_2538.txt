@@ -1,0 +1,17 @@
+A DDR capabilities to identify nests on nestmates enabled JDKs
+
+Given a j9class it should printout the nest host and all the nestmembers.
+
+Eg.
+
+```
+!j9class 0xABCDE //some/pkg/InnerClass
+...
+
+!getnest 0xABCDE2
+NestHost:
+some/pkg/OuterClass !j9class 0xABCDE1
+NestMembers:
+some/pkg/InnerClass !j9class 0xABCDE2
+some/pkg/OtherInnerClass !j9class 0xABCDE3
+```

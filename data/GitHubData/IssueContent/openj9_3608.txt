@@ -1,0 +1,1 @@
+Given how infrequently wide bytecodes are used, there seems little point optimizing them in the interpreter. I suggest removing iloadw, etc and going back to "wide iload". This reclaims some space in the bytecode table at what will almost certainly be no performance cost (JITted code will be completely unaffected by this change).

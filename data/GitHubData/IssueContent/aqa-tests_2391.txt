@@ -1,0 +1,9 @@
+This issue is to list the set of PRs already completed to support the riscv platform and to close on any final items required for lifting up fully automated AQA testing at the project (using default list as defined in build pipelines).
+
+- [x] https://github.com/AdoptOpenJDK/openjdk-tests/pull/1832
+- [x] https://github.com/adoptium/TKG/pull/42
+- [x] https://github.com/adoptium/TKG/pull/83
+
+- [ ] https://github.com/adoptium/aqa-systemtest/pull/349
+- [ ] https://github.com/adoptium/STF/pull/78
+

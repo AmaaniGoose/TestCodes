@@ -1,0 +1,34 @@
+The openj9-staging branch of jdknext does not compile:
+```
+src/java.base/share/classes/java/lang/invoke/VarForm.java:37: error: cannot find symbol
+import static java.lang.invoke.MethodHandleNatives.Constants.REF_invokeStatic;
+                                                  ^
+  symbol:   class Constants
+  location: class MethodHandleNatives
+src/java.base/share/classes/java/lang/invoke/VarForm.java:37: error: static import only from classes and interfaces
+import static java.lang.invoke.MethodHandleNatives.Constants.REF_invokeStatic;
+^
+src/java.base/share/classes/java/lang/invoke/VarForm.java:74: error: cannot find symbol
+        Class<?> erasedValue = MethodTypeForm.canonicalize(value, MethodTypeForm.ERASE);
+                                                                                ^
+  symbol:   variable ERASE
+  location: class MethodTypeForm
+src/java.base/share/classes/java/lang/invoke/VarForm.java:75: error: cannot find symbol
+        Class<?>[] erasedCoordinates = MethodTypeForm.canonicalizeAll(coordinates, MethodTypeForm.ERASE);
+                                                                                                 ^
+  symbol:   variable ERASE
+  location: class MethodTypeForm
+src/java.base/share/classes/java/lang/invoke/VarForm.java:134: error: cannot find symbol
+            .resolveOrNull(REF_invokeStatic, implClass, methodName, type);
+                           ^
+  symbol:   variable REF_invokeStatic
+  location: class VarForm
+```
+I had hoped it was just a matter of defining some new stubs, but it seems that
+* 8265135: Reduce work initializing VarForms
+
+delays initialization of `VarForm.memberName_table` which leads to NPEs in the `VarHandle` constructor because (`setter` is null) here:
+```
+    this.fieldType = setter.parameterType(setter.parameterCount() - 1);
+```
+This will need help from someone more familiar with the interaction between openj9 and openjdk in this area.

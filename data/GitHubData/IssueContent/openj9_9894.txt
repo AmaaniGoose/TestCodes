@@ -1,0 +1,46 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_extended.system_x86-64_windows_Nightly/400
+SC_Softmx_JitAot_0
+16.jvm4.stderr
+```
+JVMJITM018W Async Compilation feature mismatch. Ignoring AOT code in shared class cache.
+03:59:32.630 0x20b8100    j9vm.225    *   ** ASSERTION FAILED ** at ObjectMonitor.cpp:331: (!(8 == (lock & (8 | 1))))
+03:59:32.630 0x20ce900    j9vm.225    *   ** ASSERTION FAILED ** at ObjectMonitor.cpp:331: (!(8 == (lock & (8 | 1))))
+03:59:32.630 0x20bf900    j9vm.225    *   ** ASSERTION FAILED ** at ObjectMonitor.cpp:331: (!(8 == (lock & (8 | 1))))
+JVMDUMP039I Processing dump event "traceassert", detail "" at 2020/06/15 22:59:32 - please wait.
+JVMDUMP039I Processing dump event "traceassert", detail "" at 2020/06/15 22:59:32 - please wait.
+JVMDUMP039I Processing dump event "traceassert", detail "" at 2020/06/15 22:59:32 - please wait.
+Unhandled exception
+Type=Segmentation error vmState=0x00000000
+Windows_ExceptionCode=c00000fd J9Generic_Signal=00000004 ExceptionAddress=00007FFF7FAEF087 ContextFlags=0010005f
+Handler1=00007FFF7FB8FC40 Handler2=00007FFF7FAD8900
+RDI=00007FFF7FA998D0 RSI=00007FFF7FCC8BB0 RAX=0000000000000010 RBX=0000000000EA3B50
+RCX=43309EF62D330000 RDX=0000000000000001 R8=0000000000000005 R9=0000000000000000
+R10=00000000020B7000 R11=0000000015133000 R12=0000000000F7EB10 R13=00000000020B73C0
+R14=00000000020B7470 R15=00000000020B7948
+RIP=00007FFF7FAEF087 RSP=00000000020B7308 RBP=00000000020B7350 GS=002B
+FS=0053 ES=002B DS=002B
+XMM0 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM1 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM2 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM3 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM4 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM5 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM6 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM7 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM8 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM9 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM10 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM11 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM12 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM13 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM14 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+XMM15 0000000000000000 (f: 0.000000, d: 0.000000e+000)
+Module=C:\Users\jenkins\workspace\Test_openjdk8_j9_extended.system_x86-64_windows_Nightly\openjdkbinary\j2sdk-image\jre\bin\compressedrefs\j9prt29.dll
+Module_base_address=00007FFF7FAB0000 Offset_in_DLL=000000000003f087
+Target=2_90_20200615_424 (Windows Server 2012 R2 6.3 build 9600)
+CPU=amd64 (8 logical CPUs) (0x1ffb9c000 RAM)
+----------- Stack Backtrace -----------
+---------------------------------------
+```
+
+I don't find any diagnostic files.

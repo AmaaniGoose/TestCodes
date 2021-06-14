@@ -1,0 +1,23 @@
+Hi.
+
+As part of my prep for AIX Playbook v2 #1583 I am looking at the current situation of system `build-osuosl-ppc64-aix-71-1`.
+
+a) does anyone actually look at the mails cronjobs are sending?
+```
+ 384 daemon            Sun Oct 18 00:00  32/1202 "Output from cron job /usr/lo"
+ N385 esaadmin          Sun Oct 18 03:01  17/875  "Electronic Service Agent not"
+ N386 daemon            Sun Oct 18 05:56  34/1276 "Output from cron job df -k /"
+ N387 daemon            Mon Oct 19 00:00  32/1202 "Output from cron job /usr/lo"
+```
+The jobs 384, 387 (and many earlier ones - everyday at midnight) is failing. Granted, it is an old script,
+```#!/usr/bin/ksh
+#>>>>>>>>>>>>>>>>>>>>>> (C) Copyright IBM Corporation 2008 <<<<<<<<<<<<<<<<<<<<```
+
+And, I can repair it. However, from memory I do not recall this script being part of the playbook.
+
+b) the jobs 385 (ESA agent report) is not relevant and 386 (unmount and mount of /ramdisk) is no longer needed.
+I'll just remove both of those. (* consider that done, and the mailq emptied - on this server).
+
+As to this issue:
+* where does the script /usr/local/bin/rotate_failedlogin come from originally?
+* If not in playbook - how should we address this? Specifically, do playbooks get 'rerun' on a regular basis. This is something that could run as a playbook and 'return' a fact, or maybe better, create/update local.d/facts (or is is facts/local.d).

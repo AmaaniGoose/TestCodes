@@ -1,0 +1,22 @@
+This item serves as a discussion platform for porting, building and enabling JIT-as-a-Service technology
+
+Building JITaaS: 
+
+One of the requirements for JITaaS is the inclusion of the protobuf library (used for serialization of data structures). To avoid the burden on developers that are not interested in JITaaS All, most of the JITaaS code will be protected by `#ifdef JITaaS` that will be enabled by a build configuration flag. 
+To help with the adoption of the technology we would like to have JITaaS builds at adoptopenjdk, so that openliberty docker containers can have the technology already included. In the first stage we will only target Java 8 with compressedrefs where most of the customer interest exists.
+The size of the protobuf shared library is ~27MB and this needs to be part of the JDK because it is unlikely that systems will have the right version already installed. A better approach is probably to statically link the protobuf library which induces a 3.7MB increase to the JIT dll.
+
+Enabling JITaaS at runtime:
+
+By default, JITaaS capable builds will operate in non-JITaaS mode like any other JDK. JITaaS funtionality should be enabled at runtime using command line options and environment variables. There have been discussions about making the JITaaS client mode the default and falling back to non-JITaaS, if a JITaaS server is not detected, but this approach requires more thought and experimentation (note that the JITaaS client is able to perform compilations locally if the server is not present or it has crashed)
+
+
+Porting JITaaS code to master branch:
+Porting of the code will be done in stages based on functionality.
+1) Porting the network communication infrastructure. This infrastructure is generic enough such that it could be done either in openj9 or in omr. We are seeking input as to what the best approach is.
+2) Porting generic infrastructure that will enable basic JITaaS functionality. This is probably the biggest piece and will probably require more than one PR.
+3) Porting CHTable related code
+4) Porting IProfiler related code
+5) Porting AOT compilation code
+
+Attn: @mstoodle @DanHeidinga @pshipton @0xdaryl @vijaysun-omr 

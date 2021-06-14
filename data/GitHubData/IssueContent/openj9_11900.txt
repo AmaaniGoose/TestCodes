@@ -1,0 +1,57 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk11_j9_special.system_ppc64le_linux_mixed_Nightly_testList_2/10/
+LambdaLoadTest_special_J9_5m_4
+variation: Mode112
+JVM_OPTIONS:  -Xgcpolicy:gencon -Xjit:count=0 -Xnocompressedrefs 
+```
+LT  01:36:20.583 - Test failed
+LT    Failure num.  = 1
+LT    Test number   = 7
+LT    Test details  = 'JUnit[net.adoptopenjdk.test.lambda.TestLambdaMethodReferences]'
+LT    Suite number  = 0
+LT    Thread number = 13
+LT  >>> Captured test output >>>
+LT  testStarted : testSuperMethodReference(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+LT  testFinished: testSuperMethodReference(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+LT  testStarted : testLocalStaticMethod(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+LT  testFinished: testLocalStaticMethod(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+LT  testStarted : testClassStaticMethodWithArgs(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+LT  testFinished: testClassStaticMethodWithArgs(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+LT  testStarted : testClassStaticMethod(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+LT  testFinished: testClassStaticMethod(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+LT  testStarted : testInstanceMethodSuperMethodReference(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+LT  testFinished: testInstanceMethodSuperMethodReference(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+LT  testStarted : testConstructorReference(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences)
+LT  testFailure: testConstructorReference(net.adoptopenjdk.test.lambda.TestLambdaMethodReferences): 57490:57490
+LT  junit.framework.AssertionFailedError: 57490:57490
+LT  	at junit.framework.Assert.fail(Assert.java:57)
+LT  	at junit.framework.Assert.assertTrue(Assert.java:22)
+LT  	at junit.framework.TestCase.assertTrue(TestCase.java:192)
+LT  	at net.adoptopenjdk.test.lambda.TestLambdaMethodReferences.testConstructorReference(TestLambdaMethodReferences.java:257)
+LT  	at junit.framework.TestResult.addFailure(TestResult.java:48)
+LT  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+LT  	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+LT  	at junit.framework.TestCase.runTest(TestCase.java:176)
+LT  	at junit.framework.TestCase.runBare(TestCase.java:141)
+LT  	at junit.framework.TestResult$1.protect(TestResult.java:122)
+LT  	at junit.framework.TestResult.runProtected(TestResult.java:142)
+LT  	at junit.framework.TestResult.run(TestResult.java:125)
+LT  	at junit.framework.TestCase.run(TestCase.java:129)
+LT  	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+LT  	at junit.framework.TestSuite.run(TestSuite.java:247)
+LT  	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+LT  	at org.junit.runners.Suite.runChild(Suite.java:128)
+LT  	at org.junit.runners.Suite.runChild(Suite.java:27)
+LT  	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+LT  	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+LT  	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+LT  	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+LT  	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+LT  	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+LT  	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+LT  	at net.adoptopenjdk.loadTest.adaptors.JUnitAdaptor.executeTest(JUnitAdaptor.java:130)
+LT  	at net.adoptopenjdk.loadTest.LoadTestRunner$2.run(LoadTestRunner.java:182)
+LT  	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+LT  	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+LT  	at java.base/java.lang.Thread.run(Thread.java:836)
+```

@@ -1,0 +1,85 @@
+As per the JVM specification https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-2.html#jvms-2.8.1, SIGFPE should be consumed by the JVM even if trap is enabled. Hotspot handles SIGFPE and provides Infinity for a divide-by-zero where as OpenJ9 crash.
+
+> The key differences between the floating-point arithmetic supported by the Java Virtual Machine and the IEEE 754 standard are:
+> 
+> **The floating-point operations of the Java Virtual Machine do not throw exceptions, trap, or otherwise signal the IEEE 754 exceptional conditions of invalid operation, division by zero, overflow, underflow, or inexact.** The Java Virtual Machine has no signaling NaN value.
+
+Please find below the test case to recreate the issue:
+[test_case.zip](https://github.com/eclipse/openj9/files/2388493/test_case.zip)
+
+### **Recreate step:**
+
+**With Hotspot:**
+```
+$ export JAVA_HOME=/home/enasser/openjdk/builds/hs/jdk-10.0.2+13/
+$ export LD_LIBRARY_PATH=$JAVA_HOME/lib/server
+$ c++ -Wl,--no-as-needed -ldl -I$JAVA_HOME/include -I$JAVA_HOME/include/linux -L$LD_LIBRARY_PATH -o invoke invoke.cpp -ljvm -lpthread
+invoke.cpp: In function ‘int main()’:
+invoke.cpp:27:30: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+     options[0].optionString = "-Djava.class.path=.";
+                             ^
+$ $JAVA_HOME/bin/javac Prog.java
+$ ./invoke
+Inverse of 0.0 is Infinity
+```
+ 
+**With J9:**
+
+```
+$ export JAVA_HOME=/home/enasser/openjdk/builds/j9/jdk-10.0.2+13/
+$ export LD_LIBRARY_PATH=$JAVA_HOME/lib/compressedrefs
+$ c++ -Wl,--no-as-needed -ldl -I$JAVA_HOME/include -I$JAVA_HOME/include/linux -L$LD_LIBRARY_PATH -o invoke invoke.cpp -ljvm
+invoke.cpp: In function ‘int main()’:
+invoke.cpp:27:30: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+     options[0].optionString = "-Djava.class.path=.";
+                             ^
+$ ./invoke
+Unhandled exception
+Type=Floating point error vmState=0x00000000
+J9Generic_Signal_Number=00040020 Signal_Number=00000008 Error_Value=00000000 Signal_Code=00000003
+Handler1=00007F292C408470 Handler2=00007F292BD0DC40
+RDI=000000000230C7B0 RSI=000000000230C7A0 RAX=000000000230C7A0 RBX=000000000230C7B0
+RCX=0000000000000000 RDX=000000000230C7B0 R8=0000000000000000 R9=0000000002261FE8
+R10=0000000002262100 R11=0000000000000000 R12=0000000002261FE8 R13=000000000230C7D0
+R14=000000000221EA00 R15=00000000023AAE58
+RIP=00007F292C446140 GS=0000 FS=0000 RSP=00007FFD6F5491F8
+EFlags=0000000000010202 CS=0033 RBP=00007F28FE232688 ERR=0000000000000000
+TRAPNO=0000000000000013 OLDMASK=0000000000000000 CR2=0000000000000000
+xmm0 3ff0000000000000 (f: 0.000000, d: 1.000000e+00)
+xmm1 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm2 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm3 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm4 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm5 402f2491c1246069 (f: 3240386560.000000, d: 1.557142e+01)
+xmm6 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm7 0000000000000000 (f: 0.000000, d: 0.000000e+00)
+xmm8 3bbcc86800000000 (f: 0.000000, d: 6.095003e-21)
+xmm9 3fd49ec4cd62d92f (f: 3445807360.000000, d: 3.221905e-01)
+xmm10 3d754b1c5ea09e82 (f: 1587584640.000000, d: 1.210390e-12)
+xmm11 402f2492450323c9 (f: 1157833728.000000, d: 1.557143e+01)
+xmm12 3cce000000000000 (f: 0.000000, d: 8.326673e-16)
+xmm13 bfd49ec4cd62d920 (f: 3445807360.000000, d: -3.221905e-01)
+xmm14 402e7f9c1e980d00 (f: 513281280.000000, d: 1.524924e+01)
+xmm15 bc69edf0f0de144d (f: 4041085952.000000, d: -1.124511e-17)
+Module=/home/enasser/openjdk/builds/j9/jdk-10.0.2+13//lib/compressedrefs/libj9vm29.so
+Module_base_address=00007F292C36F000
+Target=2_90_20180813_102 (Linux 4.15.0-33-generic)
+CPU=amd64 (8 logical CPUs) (0x3e5c88000 RAM)
+----------- Stack Backtrace -----------
+(0x00007F292C446140 [libj9vm29.so+0xd7140])
+(0x00007F292C446161 [libj9vm29.so+0xd7161])
+(0x00007F292C3982C1 [libj9vm29.so+0x292c1])
+(0x00007F292C387DCB [libj9vm29.so+0x18dcb])
+(0x00007F292C4434C2 [libj9vm29.so+0xd44c2])
+JVMDUMP039I Processing dump event "gpf", detail "" at 2018/09/16 14:28:59 - please wait.
+JVMDUMP032I JVM requested System dump using '/home/enasser/testpgm/jni/core.20180916.142859.23107.0001.dmp' in response to an event
+JVMPORT030W /proc/sys/kernel/core_pattern setting "|/usr/share/apport/apport %p %s %c %d %P" specifies that the core dump is to be piped to an external program.  Attempting to rename either core or core.23131.
+JVMDUMP010I System dump written to /home/enasser/testpgm/jni/core.20180916.142859.23107.0001.dmp
+JVMDUMP032I JVM requested Java dump using '/home/enasser/testpgm/jni/javacore.20180916.142859.23107.0002.txt' in response to an event
+JVMDUMP010I Java dump written to /home/enasser/testpgm/jni/javacore.20180916.142859.23107.0002.txt
+JVMDUMP032I JVM requested Snap dump using '/home/enasser/testpgm/jni/Snap.20180916.142859.23107.0003.trc' in response to an event
+JVMDUMP010I Snap dump written to /home/enasser/testpgm/jni/Snap.20180916.142859.23107.0003.trc
+JVMDUMP007I JVM Requesting JIT dump using '/home/enasser/testpgm/jni/jitdump.20180916.142859.23107.0004.dmp'
+JVMDUMP013I Processed dump event "gpf", detail "".
+```
+ 

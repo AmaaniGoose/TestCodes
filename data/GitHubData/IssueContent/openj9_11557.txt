@@ -1,0 +1,11 @@
+https://ci.eclipse.org/openj9/job/Test_openjdk8_j9_sanity.system_x86-64_linux_xl_Nightly_testList_1/29
+TestIBMJlmRemoteClassNoAuth_SE80_Linux_0
+I don't see anything useful in the diagnostics.
+```
+STF 00:38:22.479 - Killing processes: LT2
+STF 00:38:22.479 -   o Process LT2 pid 31070 stop()
+STF 00:38:32.483 -   o Process LT2 pid 31070 terminate()
+STF 00:38:42.490 -   o Process LT2 terminate() pid 31070 didn't work, manual cleanup required
+**FAILED** at step 8 (Stop LT2 process). Expected return value=0 Actual=1 at /home/jenkins/workspace/Test_openjdk8_j9_sanity.system_x86-64_linux_xl_Nightly_testList_1/openjdk-tests/TKG/../TKG/test_output_16097328052738/TestIBMJlmRemoteClassNoAuth_SE80_Linux_0/20210104-003753-TestIBMJlmRemoteClassNoAuth/execute.pl line 307.
+STF 00:38:42.698 - **FAILED** execute script failed. Expected return value=0 Actual=1
+```

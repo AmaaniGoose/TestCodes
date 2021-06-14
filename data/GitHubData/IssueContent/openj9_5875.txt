@@ -1,0 +1,66 @@
+## Java -version output
+
+openjdk version "1.8.0_212"
+OpenJDK Runtime Environment (build 1.8.0_212-b04)
+Eclipse OpenJ9 VM (build openj9-0.14.2, JRE 1.8.0 Linux amd64-64-Bit Compressed References 20190521_315 (JIT enabled, AOT enabled)
+OpenJ9   - 4b1df46fe
+OMR      - b56045d2
+JCL      - a8c217d402 based on jdk8u212-b04)
+
+
+## Summary of problem
+
+I am following of the simple examples explained [here](https://www.ibm.com/support/knowledgecenter/SSYKE2_7.1.0/com.ibm.java.lnx.71.doc/user/gpu_developing_sort.html) to use the GPU. 
+
+Here the example:
+
+```java
+import com.ibm.gpu.GPUConfigurationException;
+import com.ibm.gpu.GPUSortException;
+
+import java.util.Arrays;
+
+import com.ibm.gpu.CUDAManager;
+import com.ibm.gpu.Maths;
+
+/**
+ * How to run: java -Dcom.ibm.gpu.verbose HelloGPUIBM
+ */
+public class HelloGPU {
+    public static void main(String[] args) {
+        int[] toSort = { 5, 17, 12, 32, 2, 6, 3, 20 };
+		try {
+			Maths.sortArray(toSort);
+		} catch (GPUSortException e) {
+			e.printStackTrace();
+		} catch (GPUConfigurationException e) {
+			e.printStackTrace();
+        }
+        System.out.println(Arrays.toString(toSort));
+    }
+}
+```
+
+I am using the jdk8u212-b04 build.  When I run I get the following stack-trace:
+
+```bash
+../compiler/jdk8u212-b04/bin/java -Dcom.ibm.gpu.verbose HelloGPU
+[IBM GPU]: [time.ms=1558708407194]: Using device: 0 to sort int array; elements 0 to 8
+[IBM GPU]: [time.ms=1558708407209]: no CUDA-capable device is detected
+com.ibm.gpu.GPUConfigurationException: no CUDA-capable device is detected
+	at com.ibm.gpu.SortNetwork$LoadResult.get(SortNetwork.java:167)
+	at com.ibm.gpu.SortNetwork.load(SortNetwork.java:251)
+	at com.ibm.gpu.SortNetwork.sortArray(SortNetwork.java:337)
+	at com.ibm.gpu.Maths.sortArray(Maths.java:361)
+	at HelloGPU.main(HelloGPU.java:16)
+[5, 17, 12, 32, 2, 6, 3, 20]
+```
+
+I am using NVIDIA driver 430.14 with CUDA 10.0 on a CentOS 7.6 laptop. 
+
+Any poiner about what is happening? Also, where can I get more documentation about the GPU backend? GPU options and examples? Any pointers will be approciated. 
+
+I would like to see also the generated code if it is possible. 
+
+Thanks
+

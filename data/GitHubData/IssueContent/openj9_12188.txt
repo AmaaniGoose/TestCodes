@@ -1,0 +1,5 @@
+The RegDepCopyRemoval optimization is disabled on AArch64, seemingly because of work needed in the PassThru evaluator.  Given the similarity to Power, investigate and enable on AArch64.
+
+```
+   if (!cg()->supportsPassThroughCopyToNewVirtualRegister())
+```

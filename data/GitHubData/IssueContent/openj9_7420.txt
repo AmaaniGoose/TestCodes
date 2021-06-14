@@ -1,0 +1,3 @@
+The following build failed, but the diagnostic file is empty. I'd like an option to capture the build directory in the diagnostic file so the partial build can be diagnosed.
+
+https://ci.eclipse.org/openj9/job/Build_JDK13_ppc64_aix_Personal/23/

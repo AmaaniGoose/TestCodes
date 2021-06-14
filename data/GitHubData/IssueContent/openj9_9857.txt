@@ -1,0 +1,1 @@
+Following from the discussion in https://github.com/eclipse/openj9/pull/8922#pullrequestreview-385933891, the performance of the acmp implementation in the JIT will likely benefit from setting proper block frequencies (instead of just reusing the ones from existing blocks) and potentially moving cold blocks to the bottom of the method body.

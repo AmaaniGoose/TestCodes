@@ -1,0 +1,4 @@
+Man pages should be created for OpenJ9 executables when the man pages are not provided by OpenJDK. 
+
+OpenJDK supplies UNIX man pages for the executables it provides. OpenJ9 builds will remove the man pages for executables that aren't present with OpenJ9 or are not compatible.
+https://github.com/eclipse/openj9/issues/8732

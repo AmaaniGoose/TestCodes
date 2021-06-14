@@ -1,0 +1,172 @@
+extended.openjdk test javax/imageio/plugins/jpeg/JPEGsNotAcceleratedTest.java fails on the mac test machines with
+```
+12:53:20  java.awt.HeadlessException: 
+12:53:20  The application is not running in a desktop session,
+12:53:20  but this program performed an operation which requires it.
+```
+
+Example failing job link: https://ci.adoptopenjdk.net/job/Test_openjdk16_j9_extended.openjdk_x86-64_mac/9/consoleFull
+
+To rerun: https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=16&JDK_IMPL=openj9&JDK_VENDOR=adoptopenjdk&BUILD_LIST=openjdk&PLATFORM=x86-64_mac_mixed&TARGET=jdk_imageio_1
+https://ci.adoptopenjdk.net/job/Grinder/parambuild/?JDK_VERSION=16&JDK_IMPL=openj9&JDK_VENDOR=adoptopenjdk&BUILD_LIST=openjdk&PLATFORM=x86-64_mac_mixed&TARGET=jdk_imageio_1
+
+Full output of failing test:
+```
+12:52:24  ===============================================
+12:52:24  Running test jdk_imageio_0 ...
+12:52:24  ===============================================
+12:52:24  jdk_imageio_0 Start Time: Mon Mar  1 12:52:23 2021 Epoch Time (ms): 1614603143817
+12:52:24  "/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/..//bin/java" -Xshareclasses:destroyAll; "/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/..//bin/java" -Xshareclasses:groupAccess,destroyAll; echo "cache cleanup done";
+12:52:24  JVMSHRC005I No shared class caches available
+12:52:24  JVMSHRC005I No shared class caches available
+12:52:24  cache cleanup done
+12:52:24  variation: Mode150
+12:52:24  JVM_OPTIONS:  -XX:+UseCompressedOops 
+12:52:24  { itercnt=1; \
+12:52:24  	mkdir -p "/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/../TKG/output_16145971033558/jdk_imageio_0"; \
+12:52:24  	cd "/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/../TKG/output_16145971033558/jdk_imageio_0"; \
+12:52:24  	"/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/..//bin/java" -Xmx512m -jar "/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/../../jvmtest/openjdk/jtreg/lib/jtreg.jar" \
+12:52:24  	-agentvm -a -ea -esa -v:fail,error,time,nopass -retain:fail,error,*.dmp,javacore.*,heapdump.*,*.trc -ignore:quiet -timeoutFactor:8 -xml:verify -concurrency:4 -vmoptions:"-Xmx512m  -XX:+UseCompressedOops " \
+12:52:24  	-w ""/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/../TKG/output_16145971033558/jdk_imageio_0"/work" \
+12:52:24  	-r "/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/../../jvmtest/openjdk/report" \
+12:52:24  	-jdk:"/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/../" \
+12:52:24  	-exclude:"/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/../openjdk/openjdk-jdk/test/jdk/ProblemList.txt" \
+12:52:24  	-exclude:"/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/../../jvmtest/openjdk/ProblemList_openjdk16-openj9.txt" \
+12:52:24  	"/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/../openjdk/openjdk-jdk/test/jdk:jdk_imageio"; \
+12:52:24  	if [ $? -eq 0 ] ; then echo ""; echo "jdk_imageio_0""_PASSED"; echo ""; cd /Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/..;  else echo ""; echo "jdk_imageio_0""_FAILED"; echo ""; fi; } 2>&1 | tee -a "/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/../TKG/output_16145971033558/TestTargetResult";
+12:52:25  Directory "/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/../TKG/output_16145971033558/jdk_imageio_0/work" not found: creating
+12:52:31  XML output with verification to /Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/output_16145971033558/jdk_imageio_0/work
+12:53:20  --------------------------------------------------
+12:53:20  TEST: javax/imageio/plugins/jpeg/JPEGsNotAcceleratedTest.java
+12:53:20  TEST JDK: /Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/..
+12:53:20  
+12:53:20  ACTION: build -- Passed. Build successful
+12:53:20  REASON: Named class compiled on demand
+12:53:20  TIME:   2.148 seconds
+12:53:20  messages:
+12:53:20  command: build JPEGsNotAcceleratedTest
+12:53:20  reason: Named class compiled on demand
+12:53:20  Test directory:
+12:53:20    compile: JPEGsNotAcceleratedTest
+12:53:20  elapsed time (seconds): 2.148
+12:53:20  
+12:53:20  ACTION: compile -- Passed. Compilation successful
+12:53:20  REASON: .class file out of date or does not exist
+12:53:20  TIME:   2.148 seconds
+12:53:20  messages:
+12:53:20  command: compile /Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/jpeg/JPEGsNotAcceleratedTest.java
+12:53:20  reason: .class file out of date or does not exist
+12:53:20  Additional options from @modules: --add-modules java.desktop
+12:53:20  Mode: othervm
+12:53:20  elapsed time (seconds): 2.148
+12:53:20  configuration:
+12:53:20  javac compilation environment
+12:53:20    add modules: java.desktop
+12:53:20    source path: /Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/jpeg
+12:53:20    class path:  /Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/jpeg
+12:53:20                 /Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/output_16145971033558/jdk_imageio_0/work/classes/1/javax/imageio/plugins/jpeg/JPEGsNotAcceleratedTest.d
+12:53:20  
+12:53:20  rerun:
+12:53:20  cd /Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/output_16145971033558/jdk_imageio_0/work/javax/imageio/plugins/jpeg/JPEGsNotAcceleratedTest && \
+12:53:20  HOME=/Users/jenkins \
+12:53:20  PATH=/bin:/usr/bin:/usr/sbin \
+12:53:20      /Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/../bin/javac \
+12:53:20          -J-ea \
+12:53:20          -J-esa \
+12:53:20          -J-Xmx512m \
+12:53:20          -J-XX:+UseCompressedOops \
+12:53:20          -J-Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+12:53:20          -J-Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+12:53:20          -J-Dtest.compiler.opts= \
+12:53:20          -J-Dtest.java.opts= \
+12:53:20          -J-Dtest.jdk=/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/.. \
+12:53:20          -J-Dcompile.jdk=/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/.. \
+12:53:20          -J-Dtest.timeout.factor=8.0 \
+12:53:20          -J-Dtest.root=/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+12:53:20          -J-Dtest.name=javax/imageio/plugins/jpeg/JPEGsNotAcceleratedTest.java \
+12:53:20          -J-Dtest.file=/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/jpeg/JPEGsNotAcceleratedTest.java \
+12:53:20          -J-Dtest.src=/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/jpeg \
+12:53:20          -J-Dtest.src.path=/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/jpeg \
+12:53:20          -J-Dtest.classes=/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/output_16145971033558/jdk_imageio_0/work/classes/1/javax/imageio/plugins/jpeg/JPEGsNotAcceleratedTest.d \
+12:53:20          -J-Dtest.class.path=/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/output_16145971033558/jdk_imageio_0/work/classes/1/javax/imageio/plugins/jpeg/JPEGsNotAcceleratedTest.d \
+12:53:20          -J-Dtest.modules=java.desktop \
+12:53:20          --add-modules java.desktop \
+12:53:20          -d /Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/output_16145971033558/jdk_imageio_0/work/classes/1/javax/imageio/plugins/jpeg/JPEGsNotAcceleratedTest.d \
+12:53:20          -sourcepath /Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/jpeg \
+12:53:20          -classpath /Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/jpeg:/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/output_16145971033558/jdk_imageio_0/work/classes/1/javax/imageio/plugins/jpeg/JPEGsNotAcceleratedTest.d /Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/jpeg/JPEGsNotAcceleratedTest.java
+12:53:20  STDOUT:
+12:53:20  STDERR:
+12:53:20  
+12:53:20  ACTION: main -- Failed. Execution failed: `main' threw exception: java.awt.HeadlessException: The application is not running in a desktop session, but this program performed an operation which requires it.
+12:53:20  REASON: Assumed action based on file name: run main JPEGsNotAcceleratedTest 
+12:53:20  TIME:   0.385 seconds
+12:53:20  messages:
+12:53:20  command: main JPEGsNotAcceleratedTest
+12:53:20  reason: Assumed action based on file name: run main JPEGsNotAcceleratedTest 
+12:53:20  Mode: othervm
+12:53:20  Additional options from @modules: --add-modules java.desktop
+12:53:20  elapsed time (seconds): 0.385
+12:53:20  configuration:
+12:53:20  Boot Layer
+12:53:20    add modules: java.desktop
+12:53:20  
+12:53:20  STDOUT:
+12:53:20  STDERR:
+12:53:20  java.awt.HeadlessException: 
+12:53:20  The application is not running in a desktop session,
+12:53:20  but this program performed an operation which requires it.
+12:53:20  	at java.desktop/java.awt.GraphicsEnvironment.checkHeadless(GraphicsEnvironment.java:165)
+12:53:20  	at java.desktop/java.awt.Window.<init>(Window.java:549)
+12:53:20  	at java.desktop/java.awt.Frame.<init>(Frame.java:426)
+12:53:20  	at java.desktop/java.awt.Frame.<init>(Frame.java:391)
+12:53:20  	at JPEGsNotAcceleratedTest.main(JPEGsNotAcceleratedTest.java:307)
+12:53:20  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+12:53:20  	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+12:53:20  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+12:53:20  	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+12:53:20  	at com.sun.javatest.regtest.agent.MainWrapper$MainThread.run(MainWrapper.java:127)
+12:53:20  	at java.base/java.lang.Thread.run(Thread.java:853)
+12:53:20  
+12:53:20  JavaTest Message: Test threw exception: java.awt.HeadlessException: 
+12:53:20  The application is not running in a desktop session,
+12:53:20  but this program performed an operation which requires it.
+12:53:20  JavaTest Message: shutting down test
+12:53:20  
+12:53:20  STATUS:Failed.`main' threw exception: java.awt.HeadlessException: The application is not running in a desktop session, but this program performed an operation which requires it.
+12:53:20  rerun:
+12:53:20  cd /Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/output_16145971033558/jdk_imageio_0/work/javax/imageio/plugins/jpeg/JPEGsNotAcceleratedTest && \
+12:53:20  HOME=/Users/jenkins \
+12:53:20  PATH=/bin:/usr/bin:/usr/sbin \
+12:53:20  CLASSPATH=/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/output_16145971033558/jdk_imageio_0/work/classes/1/javax/imageio/plugins/jpeg/JPEGsNotAcceleratedTest.d:/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/jpeg:/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/jvmtest/openjdk/jtreg/lib/javatest.jar:/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/jvmtest/openjdk/jtreg/lib/jtreg.jar \
+12:53:20      /Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/../bin/java \
+12:53:20          -Dtest.vm.opts='-ea -esa -Xmx512m -XX:+UseCompressedOops' \
+12:53:20          -Dtest.tool.vm.opts='-J-ea -J-esa -J-Xmx512m -J-XX:+UseCompressedOops' \
+12:53:20          -Dtest.compiler.opts= \
+12:53:20          -Dtest.java.opts= \
+12:53:20          -Dtest.jdk=/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/.. \
+12:53:20          -Dcompile.jdk=/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdkbinary/j2sdk-image/Contents/Home/bin/.. \
+12:53:20          -Dtest.timeout.factor=8.0 \
+12:53:20          -Dtest.root=/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk \
+12:53:20          -Dtest.name=javax/imageio/plugins/jpeg/JPEGsNotAcceleratedTest.java \
+12:53:20          -Dtest.file=/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/jpeg/JPEGsNotAcceleratedTest.java \
+12:53:20          -Dtest.src=/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/jpeg \
+12:53:20          -Dtest.src.path=/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/openjdk/openjdk-jdk/test/jdk/javax/imageio/plugins/jpeg \
+12:53:20          -Dtest.classes=/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/output_16145971033558/jdk_imageio_0/work/classes/1/javax/imageio/plugins/jpeg/JPEGsNotAcceleratedTest.d \
+12:53:20          -Dtest.class.path=/Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/output_16145971033558/jdk_imageio_0/work/classes/1/javax/imageio/plugins/jpeg/JPEGsNotAcceleratedTest.d \
+12:53:20          -Dtest.modules=java.desktop \
+12:53:20          --add-modules java.desktop \
+12:53:20          -ea \
+12:53:20          -esa \
+12:53:20          -Xmx512m \
+12:53:20          -XX:+UseCompressedOops \
+12:53:20          com.sun.javatest.regtest.agent.MainWrapper /Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/output_16145971033558/jdk_imageio_0/work/javax/imageio/plugins/jpeg/JPEGsNotAcceleratedTest.d/main.0.jta
+12:53:20  
+12:53:20  TEST RESULT: Failed. Execution failed: `main' threw exception: java.awt.HeadlessException: The application is not running in a desktop session, but this program performed an operation which requires it.
+12:53:20  --------------------------------------------------
+12:55:44  Test results: passed: 194; failed: 1
+12:55:55  Report written to /Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/jvmtest/openjdk/report/html/report.html
+12:55:55  Results written to /Users/jenkins/workspace/Test_openjdk16_j9_extended.openjdk_x86-64_mac/openjdk-tests/TKG/output_16145971033558/jdk_imageio_0/work
+12:55:55  Error: Some tests failed or other problems occurred.
+12:55:55  
+12:55:55  jdk_imageio_0_FAILED
+```

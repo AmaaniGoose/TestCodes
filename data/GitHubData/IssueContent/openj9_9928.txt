@@ -1,0 +1,35 @@
+When we decide to vectorize a loop all nodes in the loop can be divided into two domains: the ones that are vectorized and the ones that are not. Vectorizing a node simply means replacing its opcode with its vector counterpart (e.g. `vloadi` instead of `iloadi`). All nodes that reference the loop induction variable (directly or in their children) are not vectorized. For example, induction variable increment, loop bound check and any address expression (by definition those should be linear functions of induction variable) are not vectorized. All other nodes are vectorized. These two domains are disjoint in a sense that nodes are never commoned across them. 
+
+However, when we introduced vectorization of the induction variable itself the above is not longer true. For example:
+
+```
+for (i=0; i< N; i++) {
+    a[i] = i;
+}
+```
+
+`i<N`,` i++`, and` [i] `are not vectorized. But` i `on the RHS  of the store can be vectorized by creating a new vector variable initialized to  `[0,1,2,3] `before the loop and incremented by `[1,1,1,1] `inside the loop.  Note that `i `on RHS can be commoned with `i `in `i<N`, `i++` and` [i]`.  Currently, we check if` i `on RHS has reference count > 1 and uncommon it. 
+
+The #9446 defect  happened due to this case:
+
+```
+for (i=0; i< N; i++) {
+    a[i] = i+1;
+}
+```
+
+In this case, it's not `i` that was commoned but` i+1` between `i++` and `i+1` on the RHS of the store. This becomes more difficult to check since in more general case we can have something like this:
+
+```
+for (i=0; i< N; i++) {
+    a[i*4 + C] = i*4 +C;
+    b[i] = i*4 + C;
+}
+```
+
+All 3 occurrences of `i*4 +C `are commoned and:
+
+1) a special effort needs to be made to detect that
+2) not all of them should be uncommoned. For example RHS of both stores can be commoned but the address expression should be uncommoned.
+
+This issue is to find a general solution for this problem. 

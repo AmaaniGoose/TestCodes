@@ -1,0 +1,27 @@
+I am using:
+
+```
+openjdk version "11.0.5" 2019-10-15
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.5+10)
+Eclipse OpenJ9 VM AdoptOpenJDK (build openj9-0.17.0, JRE 11 Windows 10 amd64-64-Bit 20191031_114 (JIT enabled, AOT enabled)
+OpenJ9   - 77c1cf708
+OMR      - 20db4fbc
+JCL      - 775c5eb03a based on jdk-11.0.5+10)
+```
+
+I am wondering if `-verbose:class` should report classes loaded for reflection.
+
+When running an application using reflection `jconsole` reports classes loaded for every request processed, but `-verbose:class` does not log these classes.
+
+By comparision `hotspot` JVM (version: `11.0.2`) logs these when `-verbose:class` is used, e.g.:
+
+```
+[27.167s][info][class,load] jdk.internal.reflect.GeneratedMethodAccessor298 source: __JVM_DefineClass__
+[27.170s][info][class,load] jdk.internal.reflect.GeneratedConstructorAccessor105 source: __JVM_DefineClass__
+```
+
+What do you think?
+
+Is there another ways to get this information from OpenJ9?
+
+By the way: Thank you very much for providing OpenJ9.

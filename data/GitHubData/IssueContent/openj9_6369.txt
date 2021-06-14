@@ -1,0 +1,5 @@
+Why is Power the only platform to define the stackwalker macro `J9SW_JIT_FLOATS_PASSED_AS_DOUBLES`?   I understand the effect in the stackwalker when it's defined (or at least I think I do), but it's not clear to me what the Power JIT is doing that's different from the other architectures that requires it to be defined.
+
+Any insight is appreciated.  It will probably turn out to be a "duh!" moment for me.  :-)
+
+@zl-wang @gita-omr @gacholio 

@@ -1,0 +1,50 @@
+The following infrastructure failure is seen when consecutively running builds in #7810:
+
+```
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] End of Pipeline
+java.io.IOException
+	at hudson.remoting.Channel.close(Channel.java:1449)
+	at hudson.remoting.Channel.close(Channel.java:1405)
+	at hudson.slaves.SlaveComputer.closeChannel(SlaveComputer.java:847)
+	at hudson.slaves.SlaveComputer.access$800(SlaveComputer.java:108)
+	at hudson.slaves.SlaveComputer$3.run(SlaveComputer.java:756)
+Caused: hudson.remoting.ChannelClosedException: Channel "unknown": Remote call on ub16x64j91 failed. The channel is closing down or has closed down
+	at hudson.remoting.Channel.call(Channel.java:950)
+	at hudson.Launcher$RemoteLauncher.launch(Launcher.java:1060)
+	at hudson.Launcher$ProcStarter.start(Launcher.java:455)
+	at com.cloudbees.jenkins.plugins.sshagent.exec.ExecRemoteAgent.stop(ExecRemoteAgent.java:130)
+	at com.cloudbees.jenkins.plugins.sshagent.SSHAgentStepExecution.cleanUp(SSHAgentStepExecution.java:198)
+	at com.cloudbees.jenkins.plugins.sshagent.SSHAgentStepExecution.access$000(SSHAgentStepExecution.java:24)
+	at com.cloudbees.jenkins.plugins.sshagent.SSHAgentStepExecution$Callback.finished(SSHAgentStepExecution.java:108)
+	at org.jenkinsci.plugins.workflow.steps.BodyExecutionCallback$TailCall.onSuccess(BodyExecutionCallback.java:118)
+	at org.jenkinsci.plugins.workflow.cps.CpsBodyExecution$SuccessAdapter.receive(CpsBodyExecution.java:377)
+	at com.cloudbees.groovy.cps.Outcome.resumeFrom(Outcome.java:73)
+	at com.cloudbees.groovy.cps.Continuable$1.call(Continuable.java:166)
+	at com.cloudbees.groovy.cps.Continuable$1.call(Continuable.java:163)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.use(GroovyCategorySupport.java:129)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport.use(GroovyCategorySupport.java:268)
+	at com.cloudbees.groovy.cps.Continuable.run0(Continuable.java:163)
+	at org.jenkinsci.plugins.workflow.cps.SandboxContinuable.access$001(SandboxContinuable.java:18)
+	at org.jenkinsci.plugins.workflow.cps.SandboxContinuable.run0(SandboxContinuable.java:51)
+	at org.jenkinsci.plugins.workflow.cps.CpsThread.runNextChunk(CpsThread.java:186)
+	at org.jenkinsci.plugins.workflow.cps.CpsThreadGroup.run(CpsThreadGroup.java:370)
+	at org.jenkinsci.plugins.workflow.cps.CpsThreadGroup.access$200(CpsThreadGroup.java:93)
+	at org.jenkinsci.plugins.workflow.cps.CpsThreadGroup$2.call(CpsThreadGroup.java:282)
+	at org.jenkinsci.plugins.workflow.cps.CpsThreadGroup$2.call(CpsThreadGroup.java:270)
+	at org.jenkinsci.plugins.workflow.cps.CpsVmExecutorService$2.call(CpsVmExecutorService.java:66)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at hudson.remoting.SingleLaneExecutorService$1.run(SingleLaneExecutorService.java:131)
+	at jenkins.util.ContextResettingExecutorService$1.run(ContextResettingExecutorService.java:28)
+	at jenkins.security.ImpersonatingExecutorService$1.run(ImpersonatingExecutorService.java:59)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Finished: FAILURE
+```
+
+Seems like a connection issue to ub16x64j91.

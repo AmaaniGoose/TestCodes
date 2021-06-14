@@ -1,0 +1,28 @@
+This is a subtask of https://github.com/eclipse/openj9/issues/529.
+
+A quick scan of the shows the following are used in the VM and will need to be kept:
+
+- j9sock_close
+- j9sock_connect
+- j9sock_free_network_interface_struct
+- j9sock_freeaddrinfo
+- j9sock_get_network_interfaces
+- j9sock_getaddrinfo
+- j9sock_getaddrinfo_address
+- j9sock_getaddrinfo_create_hints
+- j9sock_getaddrinfo_family
+- j9sock_getaddrinfo_length
+- j9sock_gethostname
+- j9sock_htonl
+- j9sock_htons
+- j9sock_inetntoa
+- j9sock_linger_init
+- j9sock_ntohl
+- j9sock_read
+- j9sock_setopt_linger
+- j9sock_sockaddr
+- j9sock_socket
+- j9sock_startup
+- j9sock_write
+
+Is there any thought of moving these to OMR? @charliegracie 

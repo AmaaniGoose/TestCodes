@@ -1,0 +1,1 @@
+The IL generator should make sure that the last block generated ends in a control-flow statement - eg we won't falloff the end. Currently it is possible for the last block to not end a control-flow statement for some malformed Java bytecode sequences which can result in undefined behviour - the method will not exit properly.

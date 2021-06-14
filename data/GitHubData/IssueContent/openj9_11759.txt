@@ -1,0 +1,5 @@
+With more and more projects using JVMCI / GraalVM / Truffle API to ensure portability is it possible to reconsider and add JVMCI / GraalVM / Truffle support. E.g. [TornadoVM](https://www.tornadovm.org/) and other projects uses JVMCI / GraalVM / Truffle API.
+
+What would be needed to support Graal / JVMCI / Truffle on OpenJ9 is to replace the HotSpot specific API within [JVMCI / GraalVM](http://lafo.ssw.uni-linz.ac.at/javadoc/graalvm/all/index.html?jdk/internal/jvmci/hotspot/package-summary.html) with OpenJ9 specific API or simulate Graal / JVMCI / Truffle API.
+
+Maybe some generalisation of the code also can be done and up-streamed so Graal / JVMCI / Truffle on OpenJ9 would be more maintainable. Also work with Oracle to make Graal / JVMCI / Truffle more portable, especially for OpenJ9 use cases,
