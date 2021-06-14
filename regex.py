@@ -5,11 +5,11 @@ from pathlib import Path
 if os.path.isfile('results/new.txt') :
     open('results/new.txt', "w").close()  ##Have to clear the file if it already exists before using it
 
-def store_on_fs(data, file_name):
+def store_on_files(data, file_name):
     ##Store data in file named `file_name`
     if data:
         try:
-            with open(file_name, "a") as f:
+            with open(file_name, "a", encoding='utf-8') as f:
                 f.write(str(data))
         except:
             return 
@@ -33,17 +33,24 @@ def regexify(s):
         except:
             return ' '
 
+issue_details = dict()
+
+def data_storage_func():
+    dir = './data/GitHubData/IssueContent' ##enter directory address
+    for filename in os.listdir(dir):
+        f = os.path.join(dir, filename)
+        if os.path.isfile(f):
+            with open(f,'r', encoding='utf-8') as file:
+                s=file.read()
+                res=regexify(s)
+                if res == 'None':
+                    issue_details['issue_content_console_path'] = 'N/A'
+                else:
+                    issue_details['issue_content_console_path'] = './results/new.txt'
+
+                store_on_files(res, 'results/new.txt') #Enter result file and use in loop to prevent unexplained behaviour
+                
 
 
-
-directory = 'text_files' ##enter directory address
-
-
-for filename in os.listdir(directory):
-    f = os.path.join(directory, filename)
-    if os.path.isfile(f):
-        with open(f,'r') as file:
-            s=file.read()
-            res=regexify(s)
-            print(res)
-            store_on_fs(res, 'results/new.txt') #Enter result file and use in loop to prevent unexplained behaviour
+if __name__ == '__main__':
+	data_storage_func()
